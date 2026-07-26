@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@import './fonts.css';
+@import './a11y.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* ---------------------------------------------------------------------------
+   Design-Tokens — übernommen aus dem freigegebenen Mockup (docs/KEIN-EINZELFALL_Mockup.html).
+   Farbwelt: warme Creme-/Sandtöne mit dunkelgrünem Akzent. Ruhig, warm, seriös.
+   Tiefe entsteht über 1px-Linien, nicht über Schatten.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Flächen */
+  --color-cream:      #F3ECDD;  /* Seitenhintergrund */
+  --color-cream-deep: #EAE1CC;
+  --color-card:       #FBF7EE;  /* Karten, abgesetzte Blöcke */
+
+  /* Text */
+  --color-ink:        #2C2620;  /* Fließtext */
+  --color-ink-soft:   #6B6255;  /* Sekundärtext, Navigation, Labels */
+
+  /* Akzent */
+  --color-green:      #2E4A3A;  /* Primärbutton, Icons, theme-color */
+  --color-green-deep: #233A2D;  /* Footer, CTA-Band, Links */
+  --color-green-mist: #DCE6DB;  /* Icon-Kacheln, Badges */
+
+  /* Auf dunkelgrünem Grund */
+  --color-on-green:      #EFE7D6;
+  --color-on-green-soft: #C9D9CC;
+  --color-on-green-hand: #B7D0BE;
+  --color-on-green-line: #3A5344;
+
+  /* Linien */
+  --color-line: #D9CDB2;
+
+  /* Warnung — einziger Rotton der Palette, ausschliesslich fuer den Notausgang.
+     Bewusst gedeckt: die Zielgruppe soll nicht zusaetzlich alarmiert werden. */
+  --color-alert: #8B3A2B;
+
+  /* Schriften */
+  --font-display: 'Fraunces', Georgia, serif;         /* Headlines, Zahlen */
+  --font-sans:    'Source Serif 4', Georgia, serif;   /* Body (Default) */
+  --font-hand:    'Caveat', cursive;                  /* emotionale Akzente */
+
+  /* Radien */
+  --radius-card: 0.875rem;  /* 14px */
+  --radius-band: 1.25rem;   /* 20px — CTA-Band */
+}
+
+/* ---------------------------------------------------------------------------
+   Barrierefreiheit — Fundament.
+   Alles skaliert ueber rem. Die Toolbar veraendert ausschliesslich diese
+   Custom Properties auf <html>, nie einzelne Elemente. Deshalb muessen
+   Komponenten konsequent rem/em verwenden — px bricht den Schriftgroessenregler.
+--------------------------------------------------------------------------- */
+:root {
+  --a11y-font-scale:     1;
+  --a11y-line-height:    1.7;
+  --a11y-letter-spacing: 0em;
+  --a11y-word-spacing:   0em;
+}
+
+html {
+  /* Basis 100% = Browser-Einstellung des Nutzers respektieren (WCAG 1.4.4).
+     Keine feste px-Angabe — sonst ueberschreiben wir die Nutzerpraeferenz. */
+  font-size: calc(100% * var(--a11y-font-scale));
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: var(--a11y-line-height);
+  letter-spacing: var(--a11y-letter-spacing);
+  word-spacing: var(--a11y-word-spacing);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sichtbarer Fokus. Im Mockup fehlt der komplett — hier nicht verhandelbar. */
+:focus-visible {
+  outline: 3px solid var(--color-green);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Nutzerpraeferenzen des Betriebssystems von Haus aus respektieren */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

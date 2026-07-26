@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+#
+# Startet die Seite zum Anschauen.
+#
+#   bin/start          Assets bauen und Server starten (Standard)
+#   bin/start --watch  zusätzlich Vite im Watch-Modus (Änderungen sofort sichtbar)
+#
+# Bindet bewusst an 0.0.0.0: im Docker-Container wäre 127.0.0.1 von außen
+# nicht erreichbar.
+
+set -euo pipefail
+
+# In einem Flatpak (z. B. das Terminal in VS Code) gibt es weder php noch npm —
+# die liegen auf dem Host. Dann dort neu starten statt mit "Kommando nicht
+# gefunden" abzubrechen.
+if [[ -f /.flatpak-info && -z "${KE_ON_HOST:-}" ]] && command -v flatpak-spawn >/dev/null 2>&1; then
+    echo "→ Flatpak-Sandbox erkannt, starte auf dem Host ..."
+    exec flatpak-spawn --host --env=KE_ON_HOST=1 --env=PORT="${PORT:-8000}" \
+        "$(cd "$(dirname "$0")" && pwd)/start" "$@"
+fi
+
+cd "$(dirname "$0")/.."
+
+PORT="${PORT:-8000}"
+WATCH=false
+[[ "${1:-}" == "--watch" ]] && WATCH=true
+
+env_wert() { grep -E "^$1=" .env 2>/dev/null | tail -1 | cut -d= -f2- | tr -d '"' | tr -d "'"; }
+
+# --- Datenbank -------------------------------------------------------------
+# MySQL/MariaDB startet weder im Container noch auf einem frisch installierten
+# Fedora automatisch mit.
+DB_CONNECTION=$(env_wert DB_CONNECTION)
+DB_PORT=$(env_wert DB_PORT); DB_PORT="${DB_PORT:-3306}"
+
+# Erreichbarkeit über den Port prüfen — genau so verbindet sich Laravel auch,
+# und es braucht keine Client-Programme.
+db_erreichbar() { (exec 3<>/dev/tcp/127.0.0.1/"$DB_PORT") 2>/dev/null; }
+
+if [[ "$DB_CONNECTION" == "mysql" || "$DB_CONNECTION" == "mariadb" ]]; then
+    if ! db_erreichbar; then
+        echo "→ MariaDB starten ..."
+        sudo -n systemctl start mariadb >/dev/null 2>&1 || \
+            sudo -n service mariadb start >/dev/null 2>&1 || \
+            sudo -n service mysql start   >/dev/null 2>&1 || true
+        for _ in $(seq 1 15); do
+            db_erreichbar && break
+            sleep 1
+        done
+    fi
+    if db_erreichbar; then
+        echo "✓ MariaDB läuft"
+    else
+        echo "✗ MariaDB antwortet nicht auf Port $DB_PORT — DB-Seiten werden Fehler zeigen"
+        echo "  Starten mit:  sudo systemctl enable --now mariadb"
+    fi
+elif [[ "$DB_CONNECTION" == "sqlite" ]]; then
+    DB_FILE=$(env_wert DB_DATABASE); DB_FILE="${DB_FILE:-database/database.sqlite}"
+    [[ -f "$DB_FILE" ]] || { echo "→ SQLite-Datei anlegen ..."; touch "$DB_FILE"; }
+    echo "✓ SQLite ($DB_FILE)"
+fi
+
+# --- Abhängigkeiten --------------------------------------------------------
+[[ -d vendor ]]       || { echo "→ composer install ..."; composer install --no-interaction -q; }
+[[ -d node_modules ]] || { echo "→ npm install ...";      npm install --silent; }
+[[ -f .env ]]         || { cp .env.example .env; php artisan key:generate -q; }
+
+php artisan migrate --force -q || echo "✗ Migrationen fehlgeschlagen — siehe Meldung oben"
+
+# --- Assets ----------------------------------------------------------------
+if $WATCH; then
+    echo "→ Vite im Watch-Modus ..."
+    npm run build -- --watch >/dev/null 2>&1 &
+    trap 'kill 0' EXIT
+    sleep 3
+else
+    echo "→ Assets bauen ..."
+    # Vite meldet für die selbst gehosteten Schriften "didn't resolve at build time".
+    # Das ist bei absoluten Pfaden aus public/ korrekt und erwartet — hier gefiltert,
+    # damit echte Fehler nicht darin untergehen.
+    npm run build 2>&1 | grep -viE "didn't resolve at build time|^\s*$" || true
+fi
+
+# --- Server ----------------------------------------------------------------
+IP=$(hostname -I 2>/dev/null | awk '{print $1}')
+cat <<EOF
+
+  Die Seite läuft:
+
+    http://localhost:${PORT}        ← zuerst probieren
+    http://${IP}:${PORT}     ← falls localhost nicht geht (Container-IP)
+
+  Startseite     /
+  Modul-Vorschau /module-demo
+
+  Beenden mit Strg+C
+
+EOF
+
+exec php artisan serve --host=0.0.0.0 --port="${PORT}"
