@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Inquiry;
+use App\Models\Page;
 use App\Notifications\NeueAnfrage;
+use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -58,7 +60,7 @@ class AnfrageTest extends TestCase
         $roh = DB::table('inquiries')->sole();
 
         foreach (['Maria Muster', 'maria@example.org', 'Sehr persönliches Anliegen',
-                  'Vertrauliche Schilderung eines Vorfalls.'] as $klartext) {
+            'Vertrauliche Schilderung eines Vorfalls.'] as $klartext) {
             $this->assertStringNotContainsString($klartext, json_encode($roh));
         }
 
@@ -107,7 +109,7 @@ class AnfrageTest extends TestCase
             $inhalt = json_encode($notification->toMail($notifiable)->toArray());
 
             foreach (['Maria Muster', 'maria@example.org', 'Sehr persönliches Anliegen',
-                      'Vertrauliche Schilderung'] as $geheim) {
+                'Vertrauliche Schilderung'] as $geheim) {
                 $this->assertStringNotContainsString($geheim, $inhalt);
             }
 
@@ -164,9 +166,9 @@ class AnfrageTest extends TestCase
     public function test_formular_steht_im_server_html_und_braucht_kein_javascript(): void
     {
         // Muss auch in gehärteten Browsern oder über Tor funktionieren.
-        $this->seed(\Database\Seeders\AltseiteSeeder::class);
+        $this->seed(AltseiteSeeder::class);
 
-        \App\Models\Page::where('slug', 'anfragen')->first()->blocks()->create([
+        Page::where('slug', 'anfragen')->first()->blocks()->create([
             'typ' => 'contact_form',
             'position' => 99,
             'data' => ['titel' => 'Schreib uns'],

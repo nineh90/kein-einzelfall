@@ -2,9 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
+use App\Models\Group;
+use App\Models\Language;
 use App\Models\Page;
+use App\Models\TeamMember;
 use App\Models\User;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,6 +26,87 @@ class AdminPanelTest extends TestCase
         parent::setUp();
         $this->seed(AltseiteSeeder::class);
         $this->redaktion = User::factory()->redaktion()->create();
+    }
+
+    public function test_verein_kann_eine_uebersetzung_anlegen(): void
+    {
+        // Der eigentliche Auftrag: Die Mehrsprachigkeit muss im Panel bedienbar
+        // sein, nicht nur im Code existieren.
+        $englisch = Language::finden('en');
+        $englisch->update(['aktiv' => true]);
+        Language::memoLeeren();
+
+        $deutsch = Page::where('locale', 'de')->where('slug', 'verein')->firstOrFail();
+
+        Livewire::actingAs($this->redaktion)
+            ->test(CreatePage::class)
+            ->fillForm([
+                'locale' => 'en',
+                'uebersetzungs_gruppe' => $deutsch->uebersetzungs_gruppe,
+                'titel' => 'About us',
+                'slug' => 'about-us',
+                'published_at' => now(),
+                // Der Baustein-Repeater bringt beim Anlegen einen leeren Eintrag
+                // mit. Hier geht es um die Sprachfelder, nicht um die Inhalte.
+                'blocks' => [],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $uebersetzung = Page::where('locale', 'en')->where('slug', 'about-us')->first();
+
+        $this->assertNotNull($uebersetzung);
+        $this->assertSame($deutsch->uebersetzungs_gruppe, $uebersetzung->uebersetzungs_gruppe);
+
+        // Und sie muss unter ihrer eigenen Adresse erreichbar sein.
+        $this->get('/en/about-us')->assertOk()->assertSee('About us');
+    }
+
+    public function test_slug_der_wie_eine_sprachkennung_aussieht_wird_abgelehnt(): void
+    {
+        // Sonst verschluckt die Sprach-Route die Seite, weil sie vor der
+        // Sammelroute /{slug} steht — und niemand käme auf die Idee, das zu
+        // vermuten.
+        Livewire::actingAs($this->redaktion)
+            ->test(CreatePage::class)
+            ->fillForm([
+                'locale' => 'de',
+                'titel' => 'Fragen und Antworten',
+                'slug' => 'fr',
+                'published_at' => now(),
+                // Der Baustein-Repeater bringt beim Anlegen einen leeren Eintrag
+                // mit. Hier geht es um die Sprachfelder, nicht um die Inhalte.
+                'blocks' => [],
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['slug']);
+    }
+
+    public function test_uebersetzung_darf_den_slug_des_originals_behalten(): void
+    {
+        $englisch = Language::finden('en');
+        $englisch->update(['aktiv' => true]);
+        Language::memoLeeren();
+
+        $deutsch = Page::where('locale', 'de')->where('slug', 'kontakt')->firstOrFail();
+
+        // Der frühere globale Unique-Index auf slug hätte das verhindert.
+        Livewire::actingAs($this->redaktion)
+            ->test(CreatePage::class)
+            ->fillForm([
+                'locale' => 'en',
+                'uebersetzungs_gruppe' => $deutsch->uebersetzungs_gruppe,
+                'titel' => 'Contact',
+                'slug' => 'kontakt',
+                'published_at' => now(),
+                // Der Baustein-Repeater bringt beim Anlegen einen leeren Eintrag
+                // mit. Hier geht es um die Sprachfelder, nicht um die Inhalte.
+                'blocks' => [],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame(2, Page::where('slug', 'kontakt')->count());
     }
 
     public function test_panel_ist_ohne_anmeldung_gesperrt(): void
@@ -88,8 +173,8 @@ class AdminPanelTest extends TestCase
         // Genau der Fall, der die 500er ausgelöst hat.
         $this->actingAs($this->redaktion);
 
-        \App\Models\Group::query()->delete();
-        \App\Models\TeamMember::query()->delete();
+        Group::query()->delete();
+        TeamMember::query()->delete();
 
         $this->get('/admin/groups')->assertOk();
         $this->get('/admin/team-members')->assertOk();

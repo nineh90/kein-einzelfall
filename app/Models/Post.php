@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -67,7 +68,7 @@ class Post extends Model
     /** Kurzfassung für Übersichtslisten — nimmt den Teaser, sonst den Textanfang. */
     public function anriss(int $zeichen = 180): string
     {
-        return \Illuminate\Support\Str::limit(
+        return Str::limit(
             $this->teaser ?: strip_tags($this->inhalt),
             $zeichen
         );

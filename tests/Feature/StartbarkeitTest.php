@@ -2,7 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 /**
@@ -204,14 +208,14 @@ class StartbarkeitTest extends TestCase
 
     public function test_verwaltungskonto_wird_angelegt_und_ist_freigeschaltet(): void
     {
-        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(AdminSeeder::class);
 
-        $konto = \App\Models\User::where('email', \Database\Seeders\AdminSeeder::EMAIL)->first();
+        $konto = User::where('email', AdminSeeder::EMAIL)->first();
 
         $this->assertNotNull($konto);
         $this->assertTrue($konto->panel_zugang);
-        $this->assertTrue(\Illuminate\Support\Facades\Hash::check(
-            \Database\Seeders\AdminSeeder::PASSWORT,
+        $this->assertTrue(Hash::check(
+            AdminSeeder::PASSWORT,
             $konto->password
         ));
 
@@ -221,10 +225,10 @@ class StartbarkeitTest extends TestCase
     public function test_verwaltungskonto_wird_nicht_doppelt_angelegt(): void
     {
         // Sonst käme bei jedem Start ein weiteres Konto dazu.
-        $this->seed(\Database\Seeders\AdminSeeder::class);
-        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(AdminSeeder::class);
+        $this->seed(AdminSeeder::class);
 
-        $this->assertSame(1, \App\Models\User::where('panel_zugang', true)->count());
+        $this->assertSame(1, User::where('panel_zugang', true)->count());
     }
 
     public function test_readme_nennt_die_zugangsdaten_die_wirklich_angelegt_werden(): void
@@ -233,15 +237,15 @@ class StartbarkeitTest extends TestCase
         // einer bestimmten Datenbank existierte.
         $readme = file_get_contents(base_path('README.md'));
 
-        $this->assertStringContainsString(\Database\Seeders\AdminSeeder::EMAIL, $readme);
-        $this->assertStringContainsString(\Database\Seeders\AdminSeeder::PASSWORT, $readme);
+        $this->assertStringContainsString(AdminSeeder::EMAIL, $readme);
+        $this->assertStringContainsString(AdminSeeder::PASSWORT, $readme);
     }
 
     public function test_alle_verlinkten_seiten_der_navigation_sind_erreichbar(): void
     {
         // Fängt tote Verweise in der Navigation ab — genau das war das
         // auffälligste Symptom.
-        $this->seed(\Database\Seeders\AltseiteSeeder::class);
+        $this->seed(AltseiteSeeder::class);
 
         $ziele = collect(config('navigation.main'))
             ->flatMap(fn ($p) => array_merge([$p['url']], array_column($p['children'] ?? [], 'url')))

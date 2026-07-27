@@ -41,7 +41,7 @@ class NeueAnfrage extends Notification
             ->line('Eingegangen am '.$this->anfrage->created_at->format('d.m.Y').
                    ' um '.$this->anfrage->created_at->format('H:i').' Uhr.')
             ->action('Anfrage im Verwaltungsbereich öffnen',
-                     url('/admin/inquiries/'.$this->anfrage->id.'/edit'))
+                url('/admin/inquiries/'.$this->anfrage->id.'/edit'))
             ->line('Der Inhalt der Anfrage steht bewusst nicht in dieser E-Mail: '
                   .'E-Mails werden unverschlüsselt übertragen. Die Nachricht liegt '
                   .'verschlüsselt in der Datenbank und ist nur nach Anmeldung einsehbar.')

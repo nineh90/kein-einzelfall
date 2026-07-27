@@ -48,7 +48,6 @@ class BlogTest extends TestCase
      * Suche und Filter laufen über GET-Parameter, damit jeder Stand eine
      * eigene teilbare Adresse hat und ohne JavaScript funktioniert — anders
      * als die per JavaScript erzeugte Navigation der Altseite.
-     *
      */
     public function test_suchformular_ist_ohne_javascript_bedienbar(): void
     {
@@ -63,7 +62,7 @@ class BlogTest extends TestCase
     {
         $this->beitrag(['titel' => 'Alles zur Erwerbsminderungsrente']);
         $this->beitrag(['titel' => 'Unauffaelliger Titel',
-                        'inhalt' => '<p>Im Text steht etwas zum Schwerbehindertenausweis.</p>']);
+            'inhalt' => '<p>Im Text steht etwas zum Schwerbehindertenausweis.</p>']);
         $this->beitrag(['titel' => 'Ganz anderes Thema']);
 
         $this->get('/aktuelles?suche=Erwerbsminderungsrente')

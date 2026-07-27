@@ -2,8 +2,13 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Models\Language;
+use App\Models\Page;
 use App\Models\PageBlock;
+use App\Rules\KollidiertNichtMitSprachpraefix;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -17,6 +22,44 @@ class PageForm
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
+
+            Section::make('Sprache')
+                ->description('Jede Sprachfassung ist eine eigene Seite mit eigener Adresse '
+                    .'und eigenen Bausteinen. Eine Übersetzung darf also anders aufgebaut sein '
+                    .'als das Original — das ist Absicht.')
+                ->columns(2)
+                ->schema([
+
+                    Select::make('locale')
+                        ->label('Sprache')
+                        ->options(fn () => Language::alle()->pluck('label_deutsch', 'code')->all())
+                        ->default(fn () => Language::standardCode())
+                        ->required()
+                        ->live()
+                        ->native(false)
+                        // Nachträglich die Sprache zu wechseln hiesse, eine
+                        // indexierte Adresse in eine andere Sprachfassung zu
+                        // schieben. Das ist kein Bedienschritt, das ist ein Umzug.
+                        ->disabledOn('edit')
+                        ->helperText('Nach dem Anlegen nicht mehr änderbar. '
+                            .'Neue Sprachen legst du unter „Sprachen“ an.'),
+
+                    Select::make('uebersetzungs_gruppe')
+                        ->label('Übersetzung von')
+                        ->options(fn () => Page::query()
+                            ->where('locale', Language::standardCode())
+                            ->orderBy('titel')
+                            ->pluck('titel', 'uebersetzungs_gruppe')
+                            ->all())
+                        ->searchable()
+                        ->native(false)
+                        // Nur bei Übersetzungen: Eine Seite in der Standardsprache
+                        // ist das Original und bildet ihre eigene Gruppe.
+                        ->visible(fn ($get) => $get('locale') && $get('locale') !== Language::standardCode())
+                        ->required(fn ($get) => $get('locale') && $get('locale') !== Language::standardCode())
+                        ->helperText('Welche deutsche Seite das hier übersetzt. '
+                            .'Darüber finden Sprachumschalter, hreflang und Menü zusammen.'),
+                ]),
 
             Section::make('Seite')
                 ->columns(2)
@@ -38,14 +81,22 @@ class PageForm
                     TextInput::make('slug')
                         ->label('Adresse (Slug)')
                         ->required()
-                        ->unique(ignoreRecord: true)
+                        // Eindeutig innerhalb der Sprache, nicht darüber hinaus:
+                        // /kontakt und /en/kontakt duerfen nebeneinander stehen.
+                        ->unique(ignoreRecord: true, modifyRuleUsing: fn ($rule, $get) => $rule
+                            ->where('locale', $get('locale') ?: Language::standardCode()))
                         ->rules(['regex:/^[a-z0-9-]+$/'])
-                        ->prefix(url('/').'/')
+                        ->rules([KollidiertNichtMitSprachpraefix::fuerSeitenSlug()])
+                        ->prefix(fn ($get) => rtrim(url(
+                            (Language::finden($get('locale') ?: Language::standardCode())
+                                ?? Language::standard())->praefix()
+                        ), '/').'/')
                         ->helperText('Nur Kleinbuchstaben, Ziffern und Bindestriche. '
                             .'Bei bestehenden Seiten möglichst nicht ändern — die Adresse '
-                            .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen.'),
+                            .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen. '
+                            .'Übersetzungen dürfen und sollen einen eigenen Slug bekommen.'),
 
-                    \Filament\Forms\Components\DateTimePicker::make('published_at')
+                    DateTimePicker::make('published_at')
                         ->label('Veröffentlicht am')
                         ->helperText('Leer lassen = Entwurf, für Besucher nicht sichtbar.')
                         ->seconds(false),
@@ -153,7 +204,7 @@ class PageForm
                                 ->collapsible()
                                 ->schema([
                                     TextInput::make('frage')->label('Frage')->required(),
-                                    \Filament\Forms\Components\RichEditor::make('antwort')
+                                    RichEditor::make('antwort')
                                         ->label('Antwort')
                                         ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList']),
                                 ]),

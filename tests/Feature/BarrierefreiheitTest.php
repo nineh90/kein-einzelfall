@@ -73,7 +73,7 @@ class BarrierefreiheitTest extends TestCase
             // Erlaubt: die eigene Domain und Ziele von Verweisen
             // (Social-Profile, Notausgang, vertraglich zugesagte Umsetzer-Nennung).
             $erlaubt = [$eigenerHost, 'www.wetter.com', 'nils-digital.de',
-                        'www.instagram.com', 'www.facebook.com', 'www.tiktok.com'];
+                'www.instagram.com', 'www.facebook.com', 'www.tiktok.com'];
 
             $this->assertContains(
                 $host,

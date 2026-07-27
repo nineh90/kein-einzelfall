@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Group extends Model
 {
@@ -69,11 +71,11 @@ class Group extends Model
      * unbegrenzt Datensätze erzeugen, die jemand pflegen müsste. Fällt ein
      * einzelnes Treffen aus, gehört das als Einzelveranstaltung erfasst.
      *
-     * @return \Illuminate\Support\Collection<int, \Carbon\CarbonImmutable>
+     * @return Collection<int, CarbonImmutable>
      */
-    public function naechsteTermine(int $anzahl = 3, ?\Carbon\CarbonImmutable $ab = null): \Illuminate\Support\Collection
+    public function naechsteTermine(int $anzahl = 3, ?CarbonImmutable $ab = null): Collection
     {
-        $ab ??= \Carbon\CarbonImmutable::now();
+        $ab ??= CarbonImmutable::now();
         $termine = collect();
 
         if ($this->wiederholung === 'keine' || ! $this->wochentag) {
@@ -81,10 +83,10 @@ class Group extends Model
         }
 
         $zeit = $this->beginn_zeit
-            ? \Carbon\CarbonImmutable::parse($this->beginn_zeit)
+            ? CarbonImmutable::parse($this->beginn_zeit)
             : null;
 
-        $setzeZeit = fn (\Carbon\CarbonImmutable $t) => $zeit
+        $setzeZeit = fn (CarbonImmutable $t) => $zeit
             ? $t->setTime((int) $zeit->format('H'), (int) $zeit->format('i'))
             : $t->startOfDay();
 
@@ -117,7 +119,7 @@ class Group extends Model
         return $termine;
     }
 
-    private function nterWochentagImMonat(\Carbon\CarbonImmutable $monat): ?\Carbon\CarbonImmutable
+    private function nterWochentagImMonat(CarbonImmutable $monat): ?CarbonImmutable
     {
         $tage = collect();
         $tag = $monat->startOfMonth();

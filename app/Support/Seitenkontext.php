@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use App\Models\Language;
+
 /**
  * Ordnet eine Seite in die Navigation ein.
  *
@@ -29,7 +31,7 @@ class Seitenkontext
      */
     private function eigeneAdresse(): string
     {
-        return \App\Models\Language::aktuell()->pfad('/'.$this->slug);
+        return Language::aktuell()->pfad('/'.$this->slug);
     }
 
     /** Der Navigationspunkt, unter dem diese Seite hängt. */
@@ -108,7 +110,7 @@ class Seitenkontext
     {
         $krumen = [[
             'label' => __('rahmen.start'),
-            'url' => \App\Models\Language::aktuell()->pfad('/'),
+            'url' => Language::aktuell()->pfad('/'),
         ]];
 
         if ($bereich = $this->bereich()) {

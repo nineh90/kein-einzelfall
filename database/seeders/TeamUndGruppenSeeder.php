@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Page;
 use App\Models\TeamMember;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 /**
  * Überführt Vorstand und Gruppen aus dem Fliesstext in eigene Datensätze.
@@ -99,7 +100,7 @@ class TeamUndGruppenSeeder extends Seeder
                 'rolle' => array_key_exists('rolle', $sonder) ? $sonder['rolle'] : $person['rolle'],
                 'untertitel' => $person['untertitel'],
                 // Erster Absatz als Kurzfassung, der Rest als aufklappbarer Text
-                'kurzprofil' => \Illuminate\Support\Str::limit($person['absaetze'][0], 260),
+                'kurzprofil' => Str::limit($person['absaetze'][0], 260),
                 'profil' => collect($person['absaetze'])
                     ->map(fn ($a) => '<p>'.e($a).'</p>')
                     ->implode("\n"),

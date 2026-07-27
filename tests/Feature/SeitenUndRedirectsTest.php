@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\SchraegstrichEntfernen;
 use App\Models\Page;
 use App\Models\Redirect;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 /**
@@ -47,11 +49,11 @@ class SeitenUndRedirectsTest extends TestCase
         // üblichen Test-Helfer nicht abbilden lässt: $this->get('/verein/') trimmt
         // den Schrägstrich schon in prepareUrlForRequest(), und `php artisan serve`
         // entfernt ihn ebenfalls. Unter Apache/nginx kommt er dagegen an.
-        $middleware = new \App\Http\Middleware\SchraegstrichEntfernen;
+        $middleware = new SchraegstrichEntfernen;
 
         foreach (['/verein/' => '/verein', '/spenden/' => '/spenden'] as $von => $nach) {
             $antwort = $middleware->handle(
-                \Illuminate\Http\Request::create($von, 'GET'),
+                Request::create($von, 'GET'),
                 fn () => response('sollte nicht durchlaufen')
             );
 
@@ -62,11 +64,11 @@ class SeitenUndRedirectsTest extends TestCase
 
     public function test_schraegstrich_umleitung_erhaelt_query_parameter_und_laesst_startseite_in_ruhe(): void
     {
-        $middleware = new \App\Http\Middleware\SchraegstrichEntfernen;
+        $middleware = new SchraegstrichEntfernen;
 
         // Filter- und Suchparameter dürfen nicht verloren gehen
         $mitParametern = $middleware->handle(
-            \Illuminate\Http\Request::create('/wissen/?kategorie=recht&seite=2', 'GET'),
+            Request::create('/wissen/?kategorie=recht&seite=2', 'GET'),
             fn () => response('x')
         );
         $this->assertSame(301, $mitParametern->getStatusCode());
@@ -74,7 +76,7 @@ class SeitenUndRedirectsTest extends TestCase
 
         // Die Startseite ist "/" — die darf nicht zu "" werden
         $start = $middleware->handle(
-            \Illuminate\Http\Request::create('/', 'GET'),
+            Request::create('/', 'GET'),
             fn () => response('durchgelaufen')
         );
         $this->assertSame('durchgelaufen', $start->getContent());

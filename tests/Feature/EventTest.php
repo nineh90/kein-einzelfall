@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -71,7 +72,7 @@ class EventTest extends TestCase
     {
         // /veranstaltungen war eine gepflegte Inhaltsseite (443 Wörter).
         // Der Text soll durch den Kalender nicht verlorengehen.
-        $this->seed(\Database\Seeders\AltseiteSeeder::class);
+        $this->seed(AltseiteSeeder::class);
 
         $this->get('/veranstaltungen')
             ->assertOk()

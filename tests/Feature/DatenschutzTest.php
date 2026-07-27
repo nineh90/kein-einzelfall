@@ -142,8 +142,8 @@ class DatenschutzTest extends TestCase
             'position' => 99,
             'data' => [
                 'bank' => ['institut' => 'Deutsche Skatbank',
-                           'iban' => 'DE79 8306 5408 0006 8893 10',
-                           'bic' => 'GENODEF1SLR'],
+                    'iban' => 'DE79 8306 5408 0006 8893 10',
+                    'bic' => 'GENODEF1SLR'],
                 'projekte' => [[
                     'titel' => 'Onlinepräsenz',
                     'widget' => 'https://project-widget.betterplace.org/projects/170775?l=de',

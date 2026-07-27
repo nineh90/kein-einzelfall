@@ -8,6 +8,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -67,7 +68,7 @@ class GroupForm
                     ->native(false)
                     ->visible(fn ($get) => $get('wiederholung') === 'monatlich_nter_wochentag'),
 
-                \Filament\Forms\Components\TimePicker::make('beginn_zeit')->label('Beginn (Uhrzeit)')
+                TimePicker::make('beginn_zeit')->label('Beginn (Uhrzeit)')
                     ->seconds(false)
                     ->visible(fn ($get) => $get('wiederholung') !== 'keine'),
 

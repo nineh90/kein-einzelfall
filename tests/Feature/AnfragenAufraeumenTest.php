@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Inquiry;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -71,7 +72,7 @@ class AnfragenAufraeumenTest extends TestCase
     public function test_aufraeumen_ist_taeglich_eingeplant(): void
     {
         // Ohne Eintrag im Zeitplan läuft das Löschkonzept nie.
-        $eingeplant = collect(app(\Illuminate\Console\Scheduling\Schedule::class)->events())
+        $eingeplant = collect(app(Schedule::class)->events())
             ->contains(fn ($e) => str_contains($e->command ?? '', 'anfragen:aufraeumen'));
 
         $this->assertTrue($eingeplant, 'anfragen:aufraeumen ist nicht im Zeitplan eingetragen');

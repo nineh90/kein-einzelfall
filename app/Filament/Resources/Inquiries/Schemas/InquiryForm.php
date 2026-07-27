@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Inquiries\Schemas;
 
 use App\Models\Inquiry;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,7 +33,7 @@ class InquiryForm
                         ))
                         ->live(),
 
-                    \Filament\Forms\Components\DateTimePicker::make('erledigt_at')
+                    DateTimePicker::make('erledigt_at')
                         ->label('Erledigt am')
                         ->seconds(false)
                         ->helperText('Ab hier läuft die Aufbewahrungsfrist.'),

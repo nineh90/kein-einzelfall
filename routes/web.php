@@ -5,7 +5,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SpracheSetzen;
+use App\Models\Language;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,7 +85,7 @@ $oeffentlicheRouten = function () {
  * nicht dieses Muster — sonst bräuchte jede neue Sprache ein `route:clear`.
  */
 Route::prefix('{locale}')
-    ->where(['locale' => \App\Models\Language::ADRESS_MUSTER])
+    ->where(['locale' => Language::ADRESS_MUSTER])
     ->middleware(SpracheSetzen::class)
     ->name('sprache.')
     ->group($oeffentlicheRouten);
@@ -115,7 +117,7 @@ Route::get('/module-demo', function () {
  * gegenseitig über xhtml:link — ohne das zählt Google Übersetzungen als
  * doppelten Inhalt.
  */
-Route::get('/sitemap.xml', \App\Http\Controllers\SitemapController::class)->name('sitemap');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 /* Die Standardsprache: unveränderte Adressen, unveränderte Routennamen. */
 Route::middleware(SpracheSetzen::class)->group($oeffentlicheRouten);

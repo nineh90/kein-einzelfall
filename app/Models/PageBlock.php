@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class PageBlock extends Model
 {
@@ -65,6 +66,6 @@ class PageBlock extends Model
     {
         $titel = $this->data['titel'] ?? null;
 
-        return $titel ? 'abschnitt-'.\Illuminate\Support\Str::slug($titel) : null;
+        return $titel ? 'abschnitt-'.Str::slug($titel) : null;
     }
 }

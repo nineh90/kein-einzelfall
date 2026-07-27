@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\SchraegstrichEntfernen;
+use App\Http\Middleware\SicherheitsHeader;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,11 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Muss ganz vorne laufen: /verein/ und /verein sind für Laravel dieselbe
         // Route, für Suchmaschinen aber doppelter Inhalt.
-        $middleware->prepend(\App\Http\Middleware\SchraegstrichEntfernen::class);
+        $middleware->prepend(SchraegstrichEntfernen::class);
 
         // Setzt die Sicherheits-Header und stellt das CSP-Nonce für die
         // Inline-Skripte bereit. Muss vor dem Rendern laufen.
-        $middleware->web(append: \App\Http\Middleware\SicherheitsHeader::class);
+        $middleware->web(append: SicherheitsHeader::class);
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {

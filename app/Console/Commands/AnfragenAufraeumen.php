@@ -44,7 +44,7 @@ class AnfragenAufraeumen extends Command
         $anzahlOffen = $unerledigt->count();
 
         if ($this->option('probe')) {
-            $this->info("Probelauf — es würde gelöscht:");
+            $this->info('Probelauf — es würde gelöscht:');
             $this->line("  {$anzahlErledigt} erledigte (älter als {$tageErledigt} Tage nach Abschluss)");
             $this->line("  {$anzahlOffen} unerledigte (älter als {$tageOffen} Tage)");
 
