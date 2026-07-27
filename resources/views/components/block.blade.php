@@ -21,16 +21,13 @@
     @php \Log::warning('Unbekannter Blocktyp', ['typ' => $block->typ, 'page_id' => $block->page_id]) @endphp
 
 @elseif ($block->typ === 'text')
-    {{-- Text ist der einzige Typ mit Fließtext-Inhalt: die Absätze gehen als
-         Slot hinein, nicht als Attribut. --}}
+    {{-- Absätze als Daten statt als Slot: Nur so kann der Baustein selbst
+         entscheiden, ab wo er einklappt. --}}
     <x-blocks.text
         :titel="$data['titel'] ?? null"
         :auf="$data['auf'] ?? $flaeche ?? 'cream'"
-        :anker="$block->anker()">
-        @foreach ($data['absaetze'] ?? [] as $absatz)
-            <p>{{ $absatz }}</p>
-        @endforeach
-    </x-blocks.text>
+        :anker="$block->anker()"
+        :absaetze="$data['absaetze'] ?? []" />
 
 @else
     <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($data)" />

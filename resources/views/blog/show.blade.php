@@ -57,8 +57,10 @@
         @endif
 
         @if ($beitrag->bild_pfad)
+            {{-- Kein loading="lazy": Das Beitragsbild steht im ersten
+                 Sichtbereich, verzögertes Laden würde es nur langsamer machen. --}}
             <img src="{{ $beitrag->bild_pfad }}" alt="{{ $beitrag->bild_alt }}"
-                 class="mt-6 w-full rounded-card">
+                 decoding="async" class="mt-6 w-full rounded-card">
         @endif
 
         {{-- Zeilenlänge begrenzt: lange Zeilen sind für Menschen mit Lese- oder

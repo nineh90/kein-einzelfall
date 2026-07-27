@@ -15,21 +15,32 @@ class StartbarkeitTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Das Panel darf nicht allein von der Stilvorlage abhängen.
+     * Das Panel darf weder von der Stilvorlage allein abhängen noch durch die
+     * Absicherung unbedienbar werden.
      *
-     * Ohne gebaute Assets fehlt die Regel [x-cloak]{display:none} — das Panel
-     * stand dann offen und liess sich mangels Alpine auch nicht schliessen.
-     * Ein zusätzliches style="display:none" schliesst das aus; Alpine
-     * überschreibt es beim ersten x-show selbst.
+     * Erst fehlte die Absicherung: Ohne gebaute Assets griff [x-cloak] nicht,
+     * das Panel stand offen und liess sich mangels Alpine nicht schliessen.
+     * Dann kollidierte ein zusätzliches style="display:none" mit x-show —
+     * Alpine verwaltete denselben Inline-Stil, der Knopf tat nichts mehr.
+     *
+     * Lösung: das HTML-Attribut `hidden`. Es wirkt auch ohne Stilvorlage, und
+     * Alpine setzt es über :hidden, statt am display herumzuschreiben.
      */
-    public function test_einstellungs_panel_ist_auch_ohne_stilvorlage_zu(): void
+    public function test_einstellungs_panel_ist_zu_und_bleibt_bedienbar(): void
     {
         $html = $this->get('/')->getContent();
 
-        $this->assertMatchesRegularExpression(
-            '/<div id="a11y-panel"[^>]*style="display:none"/',
-            $html,
-            'Das Panel ist nur per CSS versteckt — ohne Assets stünde es offen.'
+        preg_match('/<div id="a11y-panel"(.*?)>/s', $html, $treffer);
+        $panel = $treffer[1] ?? '';
+
+        $this->assertStringContainsString('hidden', $panel, 'Panel wäre ohne Stilvorlage offen');
+        $this->assertStringContainsString(':hidden=', $panel, 'Alpine kann das Panel nicht öffnen');
+
+        // Genau das hat den Knopf lahmgelegt:
+        $this->assertStringNotContainsString(
+            'style="display:none"',
+            $panel,
+            'Inline-display kollidiert mit Alpine — der Knopf reagiert dann nicht'
         );
     }
 

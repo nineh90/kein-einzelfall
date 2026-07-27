@@ -9,6 +9,10 @@
 /* Alpine: Elemente mit x-show erst nach dem Initialisieren zeigen */
 [x-cloak] { display: none !important; }
 
+/* Versteckte Elemente bleiben versteckt, auch wenn eine Utility-Klasse
+   display setzt. Ohne das könnte `hidden` von `flex` o.ä. überstimmt werden. */
+[hidden] { display: none !important; }
+
 /* --- Gut lesbare Schrift ---------------------------------------------------
    Die Serifen der Hausschrift sind schön, aber nicht für jeden gut lesbar. */
 html.a11y-lesbar,

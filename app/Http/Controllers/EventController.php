@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Group;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,6 +36,11 @@ class EventController extends Controller
                 ->with('blocks')
                 ->where('slug', 'veranstaltungen')
                 ->first(),
+
+            // Die regelmäßigen Gruppentreffen gehören in denselben Kalender.
+            // Vorher standen sie nur auf den Gruppenseiten — wer wissen wollte,
+            // wann das nächste Treffen ist, musste die Seite durchsuchen.
+            'gruppentermine' => $zeigeVergangene ? collect() : $this->gruppentermine(),
         ]);
     }
 
@@ -43,6 +49,29 @@ class EventController extends Controller
         $termin = Event::veroeffentlicht()->where('slug', $slug)->firstOrFail();
 
         return view('events.show', compact('termin'));
+    }
+
+    /**
+     * Die nächsten Treffen aller Gruppen mit festem Rhythmus.
+     *
+     * Berechnet statt gespeichert — ein monatlicher Termin würde sonst
+     * unbegrenzt Datensätze erzeugen. Nach Datum sortiert, damit sie sich mit
+     * den Einzelveranstaltungen zu einer Liste mischen lassen.
+     */
+    private function gruppentermine()
+    {
+        return Group::veroeffentlicht()
+            ->where('status', 'offen')
+            ->whereNot('wiederholung', 'keine')
+            ->orderBy('name')
+            ->get()
+            ->flatMap(fn (Group $gruppe) => $gruppe->naechsteTermine(2)
+                ->map(fn ($zeitpunkt) => [
+                    'gruppe' => $gruppe,
+                    'zeitpunkt' => $zeitpunkt,
+                ]))
+            ->sortBy('zeitpunkt')
+            ->values();
     }
 
     /**
@@ -56,7 +85,9 @@ class EventController extends Controller
     {
         $termine = Event::veroeffentlicht()->kommend()->oldest('beginnt_am')->get();
 
-        return response($this->icalInhalt($termine), 200, [
+        // Die regelmässigen Gruppentreffen gehören mit in den Export — sonst
+        // fehlt im eigenen Kalender genau das, was am häufigsten stattfindet.
+        return response($this->icalInhalt($termine, $this->gruppentermine()), 200, [
             'Content-Type' => 'text/calendar; charset=utf-8',
             'Content-Disposition' => 'attachment; filename="kein-einzelfall-termine.ics"',
         ]);
@@ -73,7 +104,7 @@ class EventController extends Controller
         ]);
     }
 
-    private function icalInhalt($termine): string
+    private function icalInhalt($termine, $gruppentermine = null): string
     {
         $zeilen = [
             'BEGIN:VCALENDAR',
@@ -87,6 +118,13 @@ class EventController extends Controller
 
         foreach ($termine as $termin) {
             $zeilen = array_merge($zeilen, $this->vevent($termin));
+        }
+
+        foreach ($gruppentermine ?? [] as $eintrag) {
+            $zeilen = array_merge($zeilen, $this->veventGruppe(
+                $eintrag['gruppe'],
+                $eintrag['zeitpunkt']
+            ));
         }
 
         $zeilen[] = 'END:VCALENDAR';
@@ -129,6 +167,41 @@ class EventController extends Controller
         }
 
         $zeilen[] = 'URL:'.route('events.show', $termin->slug);
+        $zeilen[] = 'END:VEVENT';
+
+        return $zeilen;
+    }
+
+    /**
+     * Ein berechnetes Gruppentreffen als Kalendereintrag.
+     *
+     * Die Kennung enthält das Datum, weil es keinen Datensatz je Termin gibt.
+     * Dadurch erkennt das Kalenderprogramm jedes Treffen als eigenen Eintrag
+     * und legt beim erneuten Import keine Dubletten an.
+     */
+    private function veventGruppe(Group $gruppe, $beginn): array
+    {
+        $ende = $beginn->addMinutes($gruppe->dauer_minuten ?: 120);
+
+        $zeilen = [
+            'BEGIN:VEVENT',
+            'UID:gruppe-'.$gruppe->id.'-'.$beginn->format('Ymd').'@kein-einzelfall.de',
+            'DTSTAMP:'.$gruppe->updated_at->utc()->format('Ymd\THis\Z'),
+            'DTSTART:'.$beginn->utc()->format('Ymd\THis\Z'),
+            'DTEND:'.$ende->utc()->format('Ymd\THis\Z'),
+            'SUMMARY:'.$this->maskieren($gruppe->name),
+        ];
+
+        if ($gruppe->teaser) {
+            $zeilen[] = 'DESCRIPTION:'.$this->maskieren(strip_tags($gruppe->teaser));
+        }
+
+        $ort = $gruppe->online ? ($gruppe->ort ?: 'Online') : $gruppe->ort;
+        if ($ort) {
+            $zeilen[] = 'LOCATION:'.$this->maskieren($ort);
+        }
+
+        $zeilen[] = 'URL:'.url('/selbsthilfegruppen');
         $zeilen[] = 'END:VEVENT';
 
         return $zeilen;

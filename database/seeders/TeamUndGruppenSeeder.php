@@ -132,6 +132,9 @@ class TeamUndGruppenSeeder extends Seeder
                 'teaser' => 'Erfahrungsaustausch zu Anträgen, Fristen & Verfahren',
                 'rhythmus' => 'Jeden 4. Mittwoch im Monat', 'uhrzeit' => '19:00 Uhr',
                 'ort' => 'online via Teams', 'online' => true, 'status' => 'offen',
+                // Strukturiert, damit die Termine im Kalender erscheinen
+                'wiederholung' => 'monatlich_nter_wochentag', 'wochentag' => 3,
+                'woche_im_monat' => 4, 'beginn_zeit' => '19:00', 'dauer_minuten' => 120,
             ],
             [
                 'slug' => 'seelenfarben', 'typ' => 'selbsthilfe',
@@ -139,6 +142,8 @@ class TeamUndGruppenSeeder extends Seeder
                 'teaser' => 'Wenn Farben mehr als 1.000 Worte sagen',
                 'rhythmus' => 'Jeden 1. Freitag im Monat', 'uhrzeit' => '10:00 Uhr',
                 'ort' => 'online via Teams', 'online' => true, 'status' => 'offen',
+                'wiederholung' => 'monatlich_nter_wochentag', 'wochentag' => 5,
+                'woche_im_monat' => 1, 'beginn_zeit' => '10:00', 'dauer_minuten' => 120,
             ],
             [
                 'slug' => 'wir-sind-nicht-mehr-stumm', 'typ' => 'selbsthilfe',

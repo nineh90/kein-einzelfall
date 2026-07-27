@@ -426,3 +426,55 @@ bleiben** — sie gehören nicht in die Aufzählung, sondern drumherum.
 Der Abgleich läuft über die Namen der angelegten Datensätze, mit Mindestlänge
 gegen Fehltreffer: Ein kurzer Name wie „Team" käme sonst in halben
 Überschriften vor.
+
+## 11. Kalender, Weiterlesen, Ladeverhalten (27.07.2026)
+
+### Gruppentermine im Kalender
+
+Die regelmässigen Treffen standen bisher nur als Freitext auf den Gruppenseiten
+(„Jeden 4. Mittwoch im Monat"). Wer wissen wollte, wann das nächste Treffen ist,
+musste die Seite durchsuchen. Jetzt erscheinen sie unter `/veranstaltungen`
+über den Einzelveranstaltungen — sie finden am häufigsten statt und werden am
+häufigsten gesucht.
+
+Dafür hat `groups` zusätzliche Felder: `wiederholung`, `wochentag` (ISO 1–7),
+`woche_im_monat` (1–5, wobei 5 „der letzte" bedeutet), `beginn_zeit`,
+`dauer_minuten`. Der **Freitext bleibt** — er ist die verbindliche Anzeige, die
+strukturierten Felder nur die Grundlage der Berechnung. Passt ein Rhythmus nicht
+ins Schema, stimmt der Text trotzdem; dann entfallen nur die berechneten Termine.
+
+**Berechnet statt gespeichert.** Ein wöchentlicher Termin würde sonst unbegrenzt
+Datensätze erzeugen, die jemand pflegen müsste. Fällt ein einzelnes Treffen aus,
+gehört das als Einzelveranstaltung erfasst.
+
+Im iCal-Export sind sie ebenfalls enthalten, mit datumsbezogener Kennung
+(`UID:gruppe-3-20260826@…`) — sonst legte jeder erneute Import Dubletten an.
+
+> Stolperstein: `Carbon::next()` zählt 0 = Sonntag bis 6 = Samstag, gespeichert
+> ist ISO-8601 (1 = Montag). Ein deutscher Wochentagsname wirft dort eine
+> Ausnahme.
+
+### Weiterlesen bei langen Abschnitten
+
+Textbausteine mit mehr als fünf Absätzen zeigen die ersten vier und klappen den
+Rest ein. Natives `<details>`: ohne JavaScript bedienbar, und der Text bleibt im
+Dokument — Suchmaschinen und die Seitensuche des Browsers finden ihn trotzdem.
+Auf `/datenschutz` betrifft das vier Abschnitte.
+
+### Ladeverhalten
+
+Alle Bilder unterhalb des ersten Sichtbereichs laden verzögert
+(`loading="lazy"`). **Nicht** verzögert wird das Beitragsbild im Blog — es steht
+ganz oben, dort würde verzögertes Laden die Anzeige nur bremsen. Das Logo im
+Kopfbereich ebenso.
+
+### Behobener Fehler: Einstellungsknopf reagierte nicht
+
+Die Absicherung aus dem letzten Schritt (`style="display:none"` gegen fehlende
+Stilvorlagen) kollidierte mit Alpines `x-show` — beide verwalteten denselben
+Inline-Stil, das Panel liess sich nicht mehr öffnen.
+
+Jetzt über das HTML-Attribut `hidden` und `:hidden`. Das deckt alle drei Fälle
+sauber ab: ohne JavaScript bleibt es zu, ohne Stilvorlage versteckt der Browser
+`[hidden]` von sich aus, und Alpine setzt das Attribut statt am `display`
+herumzuschreiben.

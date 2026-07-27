@@ -7,7 +7,8 @@
             {{-- Das Logo ist schwarz auf transparent und auf dunklem Grund unsichtbar.
                  Bis eine helle Vektor-Variante vorliegt: cremefarbenes Badge als Träger. --}}
             <span class="flex h-13 w-13 items-center justify-center rounded-full bg-cream p-2.5">
-                <img src="/img/logo.png" alt="" width="52" height="52" class="h-full w-full object-contain">
+                <img src="/img/logo.png" alt="" width="52" height="52" loading="lazy" decoding="async"
+                     class="h-full w-full object-contain">
             </span>
             <span class="font-display text-lg">KE!N EINZELFALL e.V.</span>
         </div>

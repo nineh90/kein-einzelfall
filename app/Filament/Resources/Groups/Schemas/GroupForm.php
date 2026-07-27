@@ -47,10 +47,29 @@ class GroupForm
             ]),
 
             Section::make('Termin und Ort')->columns(2)->schema([
-                TextInput::make('rhythmus')->label('Wie oft')
-                    ->helperText('z.B. „Jeden 4. Mittwoch im Monat“'),
+                TextInput::make('rhythmus')->label('Wie oft (Anzeigetext)')
+                    ->helperText('z.B. „Jeden 4. Mittwoch im Monat“. Dieser Text erscheint auf der Seite.'),
 
-                TextInput::make('uhrzeit')->label('Uhrzeit')->helperText('z.B. „19:00 Uhr“'),
+                TextInput::make('uhrzeit')->label('Uhrzeit (Anzeigetext)')->helperText('z.B. „19:00 Uhr“'),
+
+                // Damit die Treffen im Kalender erscheinen, braucht es die Angabe
+                // zusätzlich in maschinenlesbarer Form.
+                Select::make('wiederholung')->label('Rhythmus für den Kalender')
+                    ->options(Group::WIEDERHOLUNGEN)->default('keine')->native(false)->live()
+                    ->helperText('Nur mit dieser Angabe erscheinen die Treffen im Veranstaltungskalender.'),
+
+                Select::make('wochentag')->label('Wochentag')
+                    ->options(Group::WOCHENTAGE)->native(false)
+                    ->visible(fn ($get) => $get('wiederholung') !== 'keine'),
+
+                Select::make('woche_im_monat')->label('Welche Woche im Monat')
+                    ->options([1 => 'erste', 2 => 'zweite', 3 => 'dritte', 4 => 'vierte', 5 => 'letzte'])
+                    ->native(false)
+                    ->visible(fn ($get) => $get('wiederholung') === 'monatlich_nter_wochentag'),
+
+                \Filament\Forms\Components\TimePicker::make('beginn_zeit')->label('Beginn (Uhrzeit)')
+                    ->seconds(false)
+                    ->visible(fn ($get) => $get('wiederholung') !== 'keine'),
 
                 Toggle::make('online')->label('Findet online statt')->live(),
 
