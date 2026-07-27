@@ -92,9 +92,12 @@ danach Entscheidungen über Anträge und Fristen.
       Schlüssel verloren, sind alle Anfragen unwiederbringlich weg.
 - [ ] **`SESSION_SECURE_COOKIE=true`** setzen. Steht derzeit auf `NULL`, damit ginge
       das Session-Cookie auch über HTTP raus.
-- [ ] **Admin-Passwort ändern.** `kevin@nils-digital.de` / `ke-admin-2026` ist im
-      README dokumentiert — für lokal in Ordnung, für Produktion nicht.
-- [ ] **Beispieldaten löschen:** zwei Blogbeiträge, drei Termine, die Testanfrage.
+- [ ] **Admin-Konto von Hand anlegen.** Lokal legt `bin/start` per `AdminSeeder`
+      `admin@kein-einzelfall.test` / `kein-einzelfall` an. Der Seeder überspringt
+      sich in Produktion selbst — dort also `php artisan make:filament-user` und
+      anschliessend `panel_zugang` setzen (siehe README).
+- [ ] **Beispieldaten löschen:** aktuell zwei Termine. Blogbeiträge und Anfragen
+      sind derzeit keine im Bestand — vor dem Go-Live gegenprüfen.
 - [ ] **`/module-demo` entfernen** (interne Vorschau).
 - [ ] **`MAIL_ANFRAGEN_AN`** setzen, sonst kommt keine Benachrichtigung an.
 - [ ] **Scheduler einrichten** (`* * * * * php artisan schedule:run`), sonst laufen
