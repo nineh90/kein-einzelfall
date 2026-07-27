@@ -130,6 +130,10 @@ class AltseiteSeeder extends Seeder
             );
         }
 
+        // Nicht Teil des Altbestands, aber im Footer und in der Toolbar
+        // verlinkt — ohne sie liefe der Verweis ins Leere.
+        $this->call(BarrierefreiheitSeeder::class);
+
         $this->command->info("{$angelegt} Seiten und ".Redirect::count().' Weiterleitungen eingepflegt.');
     }
 }

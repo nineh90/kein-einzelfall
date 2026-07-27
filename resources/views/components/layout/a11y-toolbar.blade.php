@@ -17,14 +17,19 @@
 
         {{-- Zähler zeigt, dass Einstellungen aktiv sind — sonst wundert man sich
              auf einem fremden Gerät über das veränderte Aussehen. --}}
-        <span x-show="$store.a11y.anzahl > 0" x-cloak x-text="$store.a11y.anzahl"
+        <span x-show="$store.a11y.anzahl > 0" x-cloak style="display:none" x-text="$store.a11y.anzahl"
               class="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center
                      rounded-full bg-green px-1 text-[0.625rem] text-on-green"></span>
     </button>
 
+    {{-- style="display:none" zusätzlich zu x-cloak: Fehlt die Stilvorlage (etwa
+         weil die Assets nicht gebaut wurden), wäre das Panel sonst dauerhaft
+         geöffnet und mangels Alpine auch nicht schliessbar. Alpine überschreibt
+         das display beim ersten x-show selbst. --}}
     <div id="a11y-panel"
          x-show="$store.a11y.offen"
          x-cloak
+         style="display:none"
          @click.outside="$store.a11y.offen = false"
          @keydown.escape.window="$store.a11y.offen = false"
          role="dialog"

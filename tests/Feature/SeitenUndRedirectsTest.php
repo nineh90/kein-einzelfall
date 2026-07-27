@@ -29,7 +29,9 @@ class SeitenUndRedirectsTest extends TestCase
 
     public function test_alle_seiten_der_altseite_sind_erreichbar(): void
     {
-        $this->assertSame(23, Page::count());
+        // 23 aus dem Altbestand plus die Seite „Barrierefreiheit", die es dort
+        // nicht gab, auf die aber Footer und Einstellungs-Panel verweisen.
+        $this->assertSame(24, Page::count());
 
         foreach (Page::pluck('slug') as $slug) {
             $this->get("/{$slug}")->assertOk();

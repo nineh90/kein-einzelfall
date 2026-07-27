@@ -67,6 +67,16 @@ fi
 
 php artisan migrate --force -q || echo "✗ Migrationen fehlgeschlagen — siehe Meldung oben"
 
+# --- Inhalte ---------------------------------------------------------------
+# Frisch migriert ist die Datenbank leer — dann sind sämtliche Links tot, weil
+# es die Seiten schlicht nicht gibt. Einmalig einpflegen, wenn nichts da ist.
+SEITEN=$(php artisan tinker --execute='echo App\Models\Page::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+if [[ "${SEITEN:-0}" -eq 0 ]]; then
+    echo "→ Datenbank ist leer, Inhalte der Altseite einpflegen ..."
+    php artisan db:seed --class=AltseiteSeeder --force 2>&1 | tail -1
+    SEITEN=$(php artisan tinker --execute='echo App\Models\Page::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+fi
+
 # --- Assets ----------------------------------------------------------------
 if $WATCH; then
     echo "→ Vite im Watch-Modus ..."
@@ -78,11 +88,33 @@ else
     # Vite meldet für die selbst gehosteten Schriften "didn't resolve at build time".
     # Das ist bei absoluten Pfaden aus public/ korrekt und erwartet — hier gefiltert,
     # damit echte Fehler nicht darin untergehen.
+    #
+    # PIPESTATUS statt "|| true": Ein fehlgeschlagener Build darf nicht
+    # durchrutschen. Ohne Assets fehlen Gestaltung UND Bedienung — die Seite
+    # sieht dann kaputt aus, ohne dass klar wäre, warum.
     npm run build 2>&1 | grep -viE "didn't resolve at build time|^\s*$" || true
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        echo
+        echo "✗ Der Asset-Build ist fehlgeschlagen."
+        echo "  Ohne Assets ist die Seite unbedienbar (Menü und Einstellungen brauchen JavaScript)."
+        echo "  Versuch es mit:  rm -rf node_modules && npm install && npm run build"
+        exit 1
+    fi
+fi
+
+# Gegenprobe: Sind die Dateien wirklich da, auf die das Layout zeigt?
+if [[ ! -f public/build/manifest.json ]]; then
+    echo
+    echo "✗ public/build/manifest.json fehlt — die Seite würde ohne Gestaltung laden."
+    echo "  (public/build liegt bewusst nicht im Git und muss lokal gebaut werden.)"
+    exit 1
 fi
 
 # --- Server ----------------------------------------------------------------
 IP=$(hostname -I 2>/dev/null | awk '{print $1}')
+BEITRAEGE=$(php artisan tinker --execute='echo App\Models\Post::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+TERMINE=$(php artisan tinker --execute='echo App\Models\Event::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+
 cat <<EOF
 
   Die Seite läuft:
@@ -90,8 +122,11 @@ cat <<EOF
     http://localhost:${PORT}        ← zuerst probieren
     http://${IP}:${PORT}     ← falls localhost nicht geht (Container-IP)
 
-  Startseite     /
-  Modul-Vorschau /module-demo
+  Inhalt:  ${SEITEN:-0} Seiten · ${BEITRAEGE:-0} Beiträge · ${TERMINE:-0} Termine
+  Assets:  gebaut
+
+  Startseite  /          Aktuelles  /aktuelles
+  Termine     /veranstaltungen      Verwaltung /admin
 
   Beenden mit Strg+C
 
