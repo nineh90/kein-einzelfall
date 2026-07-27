@@ -150,6 +150,69 @@ class MehrsprachigkeitTest extends TestCase
         }
     }
 
+    public function test_deutsche_seiten_enthalten_keine_kyrillischen_zeichen(): void
+    {
+        // Der Sprachumschalter steht auf jeder Seite. Stünde dort dauerhaft
+        // „Русский“, lüde jede deutsche Seite die kyrillischen Schriftschnitte
+        // mit — gemessen 137 KB, die die Hauptzielgruppe auf dem Mobilfunknetz
+        // bezahlen würde, ohne sie je zu sehen.
+        $this->englischFreischalten();
+        Language::finden('ru')->update(['aktiv' => true]);
+        Language::memoLeeren();
+
+        $html = $this->get('/verein')->assertOk()->getContent();
+
+        // Ausgenommen ist das aufklappbare Mobilmenü: Wer dort gezielt seine
+        // Sprache sucht, erkennt nur die Eigenbezeichnung. Zugeklappt lädt der
+        // Browser die Schrift nicht.
+        $ohneMenue = preg_replace('/<details.*?<\/details>/s', '', $html);
+
+        $this->assertSame(
+            0,
+            preg_match('/\p{Cyrillic}/u', $ohneMenue),
+            'Kyrillische Zeichen ausserhalb des Mobilmenues ziehen die kyrillischen '
+            .'Schriftschnitte auch auf deutschen Seiten mit.'
+        );
+    }
+
+    public function test_kyrillische_schriftschnitte_liegen_vor(): void
+    {
+        // Fraunces hat keine kyrillischen Zeichen (geprüft gegen die
+        // Google-Fonts-API: latin, latin-ext, vietnamese). Ohne Ersatz fielen
+        // auf Russisch alle Überschriften auf eine Systemschrift zurück.
+        foreach ([
+            'literata-cyrillic',
+            'literata-cyrillic-ext',
+            'source-serif-4-cyrillic',
+            'caveat-cyrillic',
+        ] as $datei) {
+            $this->assertFileExists(public_path("fonts/{$datei}.woff2"));
+        }
+
+        $css = file_get_contents(resource_path('css/fonts.css'));
+
+        // Jede eingebundene Datei muss auch existieren. Variable Fonts liefern
+        // für mehrere Schnitte dieselbe Datei — wer nach Schnitt statt nach URL
+        // dedupliziert, schreibt Regeln auf Dateien, die es nie gab.
+        preg_match_all('#url\(/fonts/([^)]+\.woff2)\)#', $css, $treffer);
+        $this->assertNotEmpty($treffer[1]);
+
+        foreach (array_unique($treffer[1]) as $datei) {
+            $this->assertFileExists(public_path('fonts/'.$datei));
+        }
+
+        // Kein Request an Google — DSGVO-Anforderung des Projekts.
+        $this->assertStringNotContainsString('googleapis', $css);
+        $this->assertStringNotContainsString('gstatic', $css);
+
+        // Literata muss im Schriftstapel hinter Fraunces stehen, nicht statt ihr.
+        $app = file_get_contents(resource_path('css/app.css'));
+        $this->assertMatchesRegularExpression(
+            "/--font-display:\s*'Fraunces',\s*'Literata'/",
+            $app
+        );
+    }
+
     public function test_genau_eine_sprache_ist_standard(): void
     {
         Language::finden('en')->update(['ist_standard' => true]);

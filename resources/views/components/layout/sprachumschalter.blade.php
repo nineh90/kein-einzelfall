@@ -59,6 +59,8 @@
                            'flex min-h-11 items-center px-3 text-[0.9375rem]' => $variant === 'menue',
                        ])>
                         @if ($variant === 'menue')
+                            {{-- Im Menü die Eigenbezeichnung: Dort sucht jemand
+                                 gezielt seine Sprache und erkennt nur sie. --}}
                             {{ $sprache->label }}
                         @else
                             {{-- In der Kopfzeile nur das Kürzel: Der Platz neben
@@ -71,8 +73,8 @@
                              welche Sprache gerade gilt. --}}
                         <span class="sr-only">
                             {{ $istAktuell
-                                ? __('rahmen.sprache.aktuell', ['sprache' => $sprache->label])
-                                : __('rahmen.sprache.wechseln_zu', ['sprache' => $sprache->label]) }}
+                                ? __('rahmen.sprache.aktuell', ['sprache' => $sprache->bezeichnung()])
+                                : __('rahmen.sprache.wechseln_zu', ['sprache' => $sprache->bezeichnung()]) }}
                         </span>
                     </a>
                 </li>

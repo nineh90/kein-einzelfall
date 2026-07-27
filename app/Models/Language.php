@@ -169,6 +169,29 @@ class Language extends Model
     }
 
     /**
+     * Name dieser Sprache, geschrieben in der Sprache der aktuellen Seite.
+     *
+     * Zwei Gründe, das nicht immer die Eigenbezeichnung sein zu lassen:
+     *
+     *  - Vorlesehilfen. „Русский“ in einem deutschen Satz spricht eine deutsche
+     *    Stimme nicht aus. „Sprache wechseln zu Russisch“ schon.
+     *  - Gewicht. Die Ansage steht im Umschalter auf *jeder* Seite. Stünde dort
+     *    dauerhaft ein kyrillisches Wort, lüde jede deutsche Seite die
+     *    kyrillischen Schriftschnitte mit — gemessen 137 KB, die die
+     *    Hauptzielgruppe auf dem Mobilfunknetz bezahlen würde, ohne sie je zu
+     *    sehen.
+     *
+     * Sichtbar bleibt im Umschalter das Sprachkürzel; wer die Seite nicht lesen
+     * kann, erkennt „RU“ ohnehin eher als ein deutsches Wort.
+     */
+    public function bezeichnung(): string
+    {
+        return app()->getLocale() === self::standardCode()
+            ? $this->label_deutsch
+            : $this->label;
+    }
+
+    /**
      * Sprachangabe für Open Graph — dort gilt „de_DE“, nicht „de“.
      *
      * Ohne gepflegte Länderangabe wird der Sprachcode verdoppelt (de → de_DE,

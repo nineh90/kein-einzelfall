@@ -41,7 +41,11 @@
   --color-alert: #8B3A2B;
 
   /* Schriften */
-  --font-display: 'Fraunces', Georgia, serif;         /* Headlines, Zahlen */
+  /* Literata steht hinter Fraunces, nicht statt ihr: Fraunces deckt per
+     unicode-range nur Latein ab, kyrillische Zeichen fallen automatisch
+     eine Stufe weiter. Ein russischer Titel und der lateinische
+     Vereinsname im selben Satz bekommen so jeweils die richtige Schrift. */
+  --font-display: 'Fraunces', 'Literata', Georgia, serif;  /* Headlines, Zahlen */
   --font-sans:    'Source Serif 4', Georgia, serif;   /* Body (Default) */
   --font-hand:    'Caveat', cursive;                  /* emotionale Akzente */
 
