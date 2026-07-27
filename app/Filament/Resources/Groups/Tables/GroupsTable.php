@@ -21,7 +21,7 @@ class GroupsTable
 
                 TextColumn::make('name')->label('Name')->searchable()->sortable()
                     ->weight('medium')->wrap()
-                    ->description(fn ($r) => $r->wannUndWo() ?: null),
+                    ->description(fn ($r) => $r?->wannUndWo() ?: null),
 
                 TextColumn::make('typ')->label('Art')->badge()
                     ->formatStateUsing(fn ($s) => Group::TYPEN[$s] ?? $s),
@@ -35,7 +35,7 @@ class GroupsTable
                     }),
 
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($r) => $r->published_at?->isPast() === true),
+                    ->getStateUsing(fn ($r) => $r?->published_at?->isPast() === true),
             ])
             ->defaultSort('position')
             ->reorderable('position')

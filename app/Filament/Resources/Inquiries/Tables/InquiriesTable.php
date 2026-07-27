@@ -21,7 +21,7 @@ class InquiriesTable
                     ->label('Eingegangen')
                     ->dateTime('d.m.Y H:i')
                     ->sortable()
-                    ->description(fn ($record) => $record->created_at->diffForHumans()),
+                    ->description(fn ($record) => $record?->created_at?->diffForHumans()),
 
                 // Betreff und Nachricht sind verschlüsselt: nicht sortierbar und
                 // nicht durchsuchbar. In der Liste nur angerissen — der volle
@@ -36,11 +36,11 @@ class InquiriesTable
                     ->label('Antwort möglich')
                     ->alignCenter()
                     ->boolean()
-                    ->getStateUsing(fn ($record) => ! $record->istAnonym())
+                    ->getStateUsing(fn ($record) => $record !== null && ! $record->istAnonym())
                     ->trueIcon('heroicon-o-envelope')
                     ->falseIcon('heroicon-o-no-symbol')
                     ->falseColor('gray')
-                    ->tooltip(fn ($record) => $record->istAnonym()
+                    ->tooltip(fn ($record) => $record?->istAnonym()
                         ? 'Ohne Absender eingegangen'
                         : 'Absender vorhanden'),
 

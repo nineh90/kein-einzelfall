@@ -22,7 +22,7 @@ class PagesTable
                     ->searchable()
                     ->sortable()
                     ->weight('medium')
-                    ->description(fn ($record) => '/'.$record->slug),
+                    ->description(fn ($record) => '/'.$record?->slug),
 
                 TextColumn::make('blocks_count')
                     ->label('Bausteine')
@@ -33,7 +33,7 @@ class PagesTable
                     ->label('Sichtbar')
                     ->alignCenter()
                     ->boolean()
-                    ->getStateUsing(fn ($record) => $record->published_at !== null
+                    ->getStateUsing(fn ($record) => $record?->published_at !== null
                         && $record->published_at->isPast()),
 
                 IconColumn::make('noindex')
@@ -73,7 +73,7 @@ class PagesTable
                 Action::make('ansehen')
                     ->label('Ansehen')
                     ->icon('heroicon-o-arrow-top-right-on-square')
-                    ->url(fn ($record) => url('/'.$record->slug))
+                    ->url(fn ($record) => url('/'.$record?->slug))
                     ->openUrlInNewTab(),
                 EditAction::make(),
             ])

@@ -18,17 +18,17 @@ class EventsTable
         return $table
             ->columns([
                 TextColumn::make('beginnt_am')->label('Beginn')->sortable()
-                    ->formatStateUsing(fn ($record) => $record->zeitraum())
-                    ->description(fn ($record) => $record->beginnt_am->isPast()
-                        ? 'vorbei' : $record->beginnt_am->diffForHumans()),
+                    ->formatStateUsing(fn ($record) => $record?->zeitraum())
+                    ->description(fn ($record) => $record?->beginnt_am?->isPast()
+                        ? 'vorbei' : $record?->beginnt_am?->diffForHumans()),
 
                 TextColumn::make('titel')->label('Titel')->searchable()->wrap()
-                    ->description(fn ($record) => $record->online ? 'Online' : $record->ort),
+                    ->description(fn ($record) => $record?->online ? 'Online' : $record?->ort),
 
                 TextColumn::make('art')->label('Art')->badge()->placeholder('—'),
 
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($record) => $record->published_at?->isPast() === true),
+                    ->getStateUsing(fn ($record) => $record?->published_at?->isPast() === true),
             ])
             ->defaultSort('beginnt_am', 'desc')
             ->filters([
@@ -39,9 +39,9 @@ class EventsTable
             ->recordActions([
                 Action::make('ansehen')->label('Ansehen')
                     ->icon('heroicon-o-arrow-top-right-on-square')
-                    ->url(fn ($record) => url('/veranstaltungen/'.$record->slug))
+                    ->url(fn ($record) => url('/veranstaltungen/'.$record?->slug))
                     ->openUrlInNewTab()
-                    ->visible(fn ($record) => $record->published_at?->isPast() === true),
+                    ->visible(fn ($record) => $record?->published_at?->isPast() === true),
                 EditAction::make(),
             ])
             ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])])

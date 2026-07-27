@@ -27,6 +27,26 @@ WATCH=false
 
 env_wert() { grep -E "^$1=" .env 2>/dev/null | tail -1 | cut -d= -f2- | tr -d '"' | tr -d "'"; }
 
+# --- PHP-Erweiterungen -----------------------------------------------------
+# Fehlt eine davon, läuft die Seite scheinbar — bis an einer beliebigen Stelle
+# eine Ausnahme fliegt. Bei intl war das die Seitenliste im Panel:
+# „The intl PHP extension is required to use the [format] method."
+# Lieber hier abbrechen als später an unerwarteter Stelle.
+FEHLEND=""
+for EXT in intl mbstring pdo_mysql curl xml zip; do
+    php -m 2>/dev/null | grep -qix "$EXT" || FEHLEND="$FEHLEND $EXT"
+done
+
+if [[ -n "$FEHLEND" ]]; then
+    echo "✗ Diese PHP-Erweiterungen fehlen:$FEHLEND"
+    echo
+    echo "  Fedora/Nobara:  sudo dnf install$(printf ' php-%s' $FEHLEND)"
+    echo "  Debian/Ubuntu:  sudo apt install$(printf ' php8.3-%s' $FEHLEND)"
+    echo
+    echo "  Danach diesen Befehl erneut ausführen."
+    exit 1
+fi
+
 # --- Datenbank -------------------------------------------------------------
 # MySQL/MariaDB startet weder im Container noch auf einem frisch installierten
 # Fedora automatisch mit.

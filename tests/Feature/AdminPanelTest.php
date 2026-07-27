@@ -58,6 +58,43 @@ class AdminPanelTest extends TestCase
         $this->get('/admin/redirects')->assertOk();
     }
 
+    public function test_alle_bereiche_des_panels_laden(): void
+    {
+        // Zwei Bereiche warfen einen 500er: Bei sortierbaren Tabellen ruft
+        // Filament die Spalten-Closures einmal ohne Datensatz auf, und
+        // „$record->rolle" lief dann gegen null. Dieser Test geht alle
+        // Bereiche durch, statt auf Zufallsfunde zu warten.
+        $this->actingAs($this->redaktion);
+
+        $bereiche = [
+            '/admin',
+            '/admin/pages',
+            '/admin/groups',
+            '/admin/team-members',
+            '/admin/events',
+            '/admin/posts',
+            '/admin/categories',
+            '/admin/inquiries',
+            '/admin/redirects',
+        ];
+
+        foreach ($bereiche as $pfad) {
+            $this->get($pfad)->assertOk("Panel-Bereich {$pfad} lädt nicht");
+        }
+    }
+
+    public function test_tabellen_vertragen_einen_fehlenden_datensatz(): void
+    {
+        // Genau der Fall, der die 500er ausgelöst hat.
+        $this->actingAs($this->redaktion);
+
+        \App\Models\Group::query()->delete();
+        \App\Models\TeamMember::query()->delete();
+
+        $this->get('/admin/groups')->assertOk();
+        $this->get('/admin/team-members')->assertOk();
+    }
+
     public function test_seitenliste_zeigt_den_bestand(): void
     {
         Livewire::actingAs($this->redaktion)

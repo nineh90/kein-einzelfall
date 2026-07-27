@@ -17,13 +17,13 @@ class TeamMembersTable
             ->columns([
                 TextColumn::make('position')->label('#')->sortable()->alignCenter(),
                 TextColumn::make('name')->label('Name')->searchable()->sortable()->weight('medium')
-                    ->description(fn ($r) => $r->rolle),
+                    ->description(fn ($r) => $r?->rolle),
                 TextColumn::make('bereich')->label('Bereich')->badge()->placeholder('—'),
                 IconColumn::make('profil')->label('Ausführlich')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($r) => $r->hatProfil())
+                    ->getStateUsing(fn ($r) => $r?->hatProfil() ?? false)
                     ->tooltip('Hat einen aufklappbaren Text'),
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($r) => $r->published_at?->isPast() === true),
+                    ->getStateUsing(fn ($r) => $r?->published_at?->isPast() === true),
             ])
             ->defaultSort('position')
             ->reorderable('position')

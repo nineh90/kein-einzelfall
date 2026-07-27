@@ -98,6 +98,38 @@ class SeitengestaltungTest extends TestCase
         $this->get('/verein')->assertSee(mb_substr($ersterAbsatz, 0, 60), false);
     }
 
+    public function test_uebersichtsseiten_verwenden_einheitliche_breiten(): void
+    {
+        // Auf /veranstaltungen lag ein eigener Container mit px-4 um die Seite,
+        // während die eingebetteten Bausteine denselben Rand nochmal mitbrachten.
+        // Das Padding addierte sich, die Breite wechselte zwischen max-w-4xl und
+        // max-w-6xl — die Seite wirkte dadurch unruhig.
+        foreach (['/veranstaltungen', '/aktuelles', '/verein'] as $pfad) {
+            $html = $this->get($pfad)->getContent();
+            $inhalt = preg_match('/<main[^>]*>(.*?)<\/main>/s', $html, $m) ? $m[1] : '';
+
+            preg_match_all('/mx-auto max-w-(\w+)/', $inhalt, $treffer);
+            $breiten = array_unique($treffer[1]);
+
+            $this->assertContains('6xl', $breiten, "Hauptcontainer fehlt auf {$pfad}");
+            $this->assertNotContains('4xl', $breiten, "Abweichende Breite auf {$pfad}");
+        }
+    }
+
+    public function test_seitenrand_wird_nicht_doppelt_gesetzt(): void
+    {
+        // Ein Baustein mit px-4 innerhalb eines Containers mit px-4 ergibt den
+        // doppelten Abstand — genau das sprang auf /veranstaltungen ins Auge.
+        $html = $this->get('/veranstaltungen')->getContent();
+        $inhalt = preg_match('/<main[^>]*>(.*?)<\/main>/s', $html, $m) ? $m[1] : '';
+
+        $this->assertSame(
+            0,
+            preg_match_all('/<div class="px-4[^"]*lg:px-10[^"]*">\s*<div class="mx-auto max-w-4xl"/', $inhalt),
+            'Verschachtelter Seitenrand gefunden'
+        );
+    }
+
     public function test_jede_seite_hat_weiterhin_genau_eine_h1(): void
     {
         // Der Seitenkopf bringt eine eigene Überschrift mit — es darf keine

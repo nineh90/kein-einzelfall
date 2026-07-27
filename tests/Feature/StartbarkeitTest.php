@@ -78,6 +78,27 @@ class StartbarkeitTest extends TestCase
         );
     }
 
+    public function test_benoetigte_php_erweiterungen_sind_dokumentiert(): void
+    {
+        // Ohne intl wirft Filament beim Öffnen der Seitenliste:
+        // „The intl PHP extension is required to use the [format] method."
+        // Ohne Eintrag in composer.json fällt das erst im Betrieb auf.
+        $composer = json_decode(file_get_contents(base_path('composer.json')), true);
+
+        $this->assertArrayHasKey('ext-intl', $composer['require']);
+        $this->assertArrayHasKey('ext-mbstring', $composer['require']);
+    }
+
+    public function test_startskript_prueft_die_php_erweiterungen(): void
+    {
+        // Lieber beim Start abbrechen als später an unerwarteter Stelle.
+        $skript = file_get_contents(base_path('bin/start'));
+
+        $this->assertStringContainsString('intl', $skript);
+        $this->assertStringContainsString('php -m', $skript);
+        $this->assertStringContainsString('dnf install', $skript, 'Hinweis für Fedora fehlt');
+    }
+
     public function test_startskript_legt_ein_verwaltungskonto_an(): void
     {
         // Das Konto wurde früher von Hand erzeugt und existierte damit auf
