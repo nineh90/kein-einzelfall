@@ -52,7 +52,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('anfrage.senden') }}" class="flex flex-col gap-5">
+        <form method="POST" action="{{ sprachlink('anfrage.senden') }}" class="flex flex-col gap-5">
             @csrf
             <input type="hidden" name="herkunft" value="{{ $herkunft ?? request()->path() }}">
 

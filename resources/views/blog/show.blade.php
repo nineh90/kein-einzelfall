@@ -18,7 +18,7 @@
         'description' => $beitrag->meta_description ?: $beitrag->anriss(155),
         'author' => ['@type' => 'Organization', 'name' => 'KE!N EINZELFALL e.V.'],
         'publisher' => ['@type' => 'Organization', 'name' => 'KE!N EINZELFALL e.V.'],
-        'mainEntityOfPage' => route('blog.show', $beitrag->slug),
+        'mainEntityOfPage' => sprachlink('blog.show', $beitrag->slug),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
 @endphp
 
@@ -34,10 +34,10 @@
 
         <x-ui.brotkrumen :krumen="array_filter([
             ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Aktuelles', 'url' => route('blog.index')],
+            ['label' => 'Aktuelles', 'url' => sprachlink('blog.index')],
             $beitrag->category
                 ? ['label' => $beitrag->category->name,
-                   'url' => route('blog.index', ['kategorie' => $beitrag->category->slug])]
+                   'url' => sprachlink('blog.index', ['kategorie' => $beitrag->category->slug])]
                 : null,
             ['label' => $beitrag->titel, 'url' => null],
         ])" />
@@ -80,7 +80,7 @@
                 <ul class="flex flex-col gap-3">
                     @foreach ($weitere as $andere)
                         <li>
-                            <a href="{{ route('blog.show', $andere->slug) }}"
+                            <a href="{{ sprachlink('blog.show', $andere->slug) }}"
                                class="flex items-baseline gap-3 no-underline">
                                 <time datetime="{{ $andere->published_at->toDateString() }}"
                                       class="shrink-0 text-xs text-ink-soft">

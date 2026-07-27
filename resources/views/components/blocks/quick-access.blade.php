@@ -9,8 +9,12 @@
         <x-ui.section-head :titel="$titel" :sub="$sub" />
 
         {{-- Mobil zweispaltig wie im Mockup: die vier Einstiege sollen ohne
-             Scrollen erfassbar sein. --}}
-        <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+             Scrollen erfassbar sein.
+
+             Unterhalb von 380 px aber einspaltig: Bei 320 px — der Untergrenze
+             aus WCAG 1.4.10 — liefen zwei Spalten um 22 px ueber und erzwangen
+             waagerechtes Scrollen. Gemessen mit axe-core, nicht geschaetzt. --}}
+        <ul class="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             @foreach ($karten as $karte)
                 <li class="flex">
                     {{-- Die ganze Karte ist der Link — größere Trefferfläche,

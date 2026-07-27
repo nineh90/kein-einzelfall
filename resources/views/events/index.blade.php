@@ -43,7 +43,7 @@
                     <nav aria-label="Zeitraum">
                         <ul class="flex gap-2">
                             <li>
-                                <a href="{{ route('events.index') }}"
+                                <a href="{{ sprachlink('events.index') }}"
                                    @if (! $zeigeVergangene) aria-current="page" @endif
                                    class="inline-block rounded-full border border-line px-4 py-1.5 text-sm no-underline
                                           text-ink-soft hover:bg-card
@@ -53,7 +53,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('events.index', ['zeitraum' => 'vergangen']) }}"
+                                <a href="{{ sprachlink('events.index', ['zeitraum' => 'vergangen']) }}"
                                    @if ($zeigeVergangene) aria-current="page" @endif
                                    class="inline-block rounded-full border border-line px-4 py-1.5 text-sm no-underline
                                           text-ink-soft hover:bg-card
@@ -71,7 +71,7 @@
                 @if ($anzahlKommend > 0 || $gruppentermine->isNotEmpty())
                     {{-- Die Altseite bietet einen iCal-Export an; die Möglichkeit
                          soll nicht verloren gehen. --}}
-                    <a href="{{ route('events.ical') }}"
+                    <a href="{{ sprachlink('events.ical') }}"
                        class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2
                               text-sm text-ink-soft no-underline hover:bg-card">
                         <x-ui.icon name="arrow-right" :size="16" />
@@ -208,7 +208,7 @@
                                         </div>
 
                                         <h3 class="mt-1 font-display text-lg font-semibold text-ink">
-                                            <a href="{{ route('events.show', $termin->slug) }}"
+                                            <a href="{{ sprachlink('events.show', $termin->slug) }}"
                                                class="text-ink no-underline hover:underline">
                                                 {{ $termin->titel }}
                                             </a>

@@ -43,11 +43,17 @@
                 @foreach ($gruppen as $gruppe)
                     <li class="flex">
                         <article @class([
-                            'flex flex-1 flex-col rounded-card border bg-cream p-5',
-                            'border-line' => $gruppe->istOffen(),
+                            'flex flex-1 flex-col rounded-card border p-5',
+                            'border-line bg-cream' => $gruppe->istOffen(),
                             // Geplante und geschlossene Gruppen treten optisch zurück,
                             // damit klar ist, wo man tatsächlich mitmachen kann.
-                            'border-line opacity-75' => ! $gruppe->istOffen(),
+                            //
+                            // Über den Hintergrund und nicht über opacity: opacity-75
+                            // hat den Text auf 3,1:1 gedrückt und damit WCAG 1.4.3
+                            // gerissen — ausgerechnet bei dem Satz, der erklärt, warum
+                            // man sich hier nicht anmelden kann. Zurücktreten darf eine
+                            // Karte, unlesbar werden nicht.
+                            'border-line/70 bg-card' => ! $gruppe->istOffen(),
                         ])>
                             <div class="mb-2 flex flex-wrap items-center gap-2">
                                 @if ($gruppe->kuerzel)

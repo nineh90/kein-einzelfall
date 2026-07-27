@@ -62,4 +62,20 @@ return [
         'hinweis' => 'Diese Seite liegt noch nicht auf :ziel vor. '
             .'Sie wird auf :quelle angezeigt.',
     ],
+
+    'fehler' => [
+        'titel_404' => 'Diese Seite gibt es nicht',
+        'lead_404' => 'Vielleicht hat sich die Adresse geändert, oder es hat sich ein Tippfehler '
+            .'eingeschlichen. Hier sind ein paar Wege weiter.',
+        'titel_500' => 'Da ist bei uns etwas schiefgegangen',
+        'lead_500' => 'Der Fehler liegt nicht bei dir. Versuch es bitte in ein paar Minuten noch '
+            .'einmal — die Nummern unten erreichst du davon unabhängig.',
+        'titel_503' => 'Wir sind gleich zurück',
+        'lead_503' => 'An der Seite wird gerade gearbeitet. Die Nummern unten erreichst du '
+            .'davon unabhängig.',
+        'suche' => 'Beiträge durchsuchen',
+        'suche_knopf' => 'Suchen',
+        'wohin' => 'Wohin möchtest du?',
+        'zur_startseite' => 'Zur Startseite',
+    ],
 ];

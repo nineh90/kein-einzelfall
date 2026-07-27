@@ -84,6 +84,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Dekoratives Wasserzeichen im Hinweisband.
+
+   Als Pseudoelement und nicht als Textknoten im Markup: Als echter Text war es
+   ein gemeldeter Kontrastverstoss (1,08:1). Reine Dekoration ist von WCAG 1.4.3
+   ausgenommen, aber das kann ein Pruefwerkzeug nicht erkennen — und Dekoration
+   gehoert ohnehin in die CSS und nicht ins HTML. */
+[data-wasserzeichen]::after {
+  content: var(--wasserzeichen, '');
+}
+
 /* Sichtbarer Fokus. Im Mockup fehlt der komplett — hier nicht verhandelbar. */
 :focus-visible {
   outline: 3px solid var(--color-green);

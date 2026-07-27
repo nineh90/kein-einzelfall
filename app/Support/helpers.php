@@ -14,7 +14,7 @@ if (! function_exists('sprachlink')) {
      * `route()` direkt aufzurufen wäre nicht falsch, aber immer deutsch — und
      * das fällt erst auf, wenn jemand auf /ru/ plötzlich auf /aktuelles landet.
      */
-    function sprachlink(string $name, array $parameter = [], ?string $locale = null): string
+    function sprachlink(string $name, mixed $parameter = [], ?string $locale = null): string
     {
         $sprache = $locale ? (Language::finden($locale) ?? Language::standard()) : Language::aktuell();
 
@@ -22,6 +22,14 @@ if (! function_exists('sprachlink')) {
             return route($name, $parameter);
         }
 
+        // `route()` nimmt auch einen einzelnen Wert statt eines Arrays
+        // (`route('blog.show', $slug)`). Der Helfer muss das genauso können,
+        // sonst wäre er an den Aufrufstellen die unangenehmere Variante — und
+        // dann schreibt jemand wieder `route()` und die Sprache geht verloren.
+        $parameter = is_array($parameter) ? $parameter : [$parameter];
+
+        // Der Sprachcode zuerst und benannt: Laravel füllt benannte Parameter
+        // zuerst und verteilt den Rest der Reihe nach.
         return route('sprache.'.$name, ['locale' => $sprache->code] + $parameter);
     }
 }

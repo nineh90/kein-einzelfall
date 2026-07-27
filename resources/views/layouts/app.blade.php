@@ -6,7 +6,10 @@
 
     // $page kommt aus page.blade.php. Blade reicht die Daten der Kindansicht an
     // das Layout durch — feste Seiten wie die Startseite haben keine.
-    $fassungen = Sprachfassungen::fuer(request(), $page ?? null)->adressen();
+    //
+    // ??= statt =: Fehlerseiten setzen die Liste bewusst auf leer. hreflang auf
+    // einer 404 zeigte auf Adressen, die es in keiner Sprache gibt.
+    $fassungen ??= Sprachfassungen::fuer(request(), $page ?? null)->adressen();
 @endphp
 <!DOCTYPE html>
 {{-- dir wird von Anfang an mitgeführt, obwohl DE/EN/RU alle ltr sind: für einen
@@ -23,8 +26,13 @@
     <meta name="description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
 
     {{-- Kanonische Adresse ohne Query-Parameter. Die Altseite setzt sie auf jeder
-         Seite; ohne sie würden wir beim Umzug SEO-Substanz verlieren. --}}
-    <link rel="canonical" href="{{ url()->current() }}">
+         Seite; ohne sie würden wir beim Umzug SEO-Substanz verlieren.
+
+         Nicht auf Fehlerseiten: Eine kanonische Adresse, die es nicht gibt,
+         ist eine Aussage über eine Seite, die es nicht gibt. --}}
+    @unless ($istFehlerseite ?? false)
+        <link rel="canonical" href="{{ url()->current() }}">
+    @endunless
 
     {{-- Sprachfassungen verweisen gegenseitig aufeinander. Ohne das wertet
          Google Übersetzungen als doppelten Inhalt — und „SEO darf nicht

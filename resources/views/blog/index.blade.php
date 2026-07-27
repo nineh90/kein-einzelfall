@@ -17,7 +17,7 @@
         {{-- Suche und Filter als ganz normales GET-Formular: Jeder Stand hat
              eine eigene Adresse, die man teilen und speichern kann, und die
              ohne JavaScript funktioniert. --}}
-        <form method="GET" action="{{ route('blog.index') }}" role="search"
+        <form method="GET" action="{{ sprachlink('blog.index') }}" role="search"
               class="mt-6 flex flex-wrap items-end gap-3">
             <div class="min-w-56 flex-1">
                 <label for="suche" class="mb-1.5 block text-sm font-medium text-ink">
@@ -38,7 +38,7 @@
             </button>
 
             @if ($suchbegriff || $aktiveKategorie)
-                <a href="{{ route('blog.index') }}"
+                <a href="{{ sprachlink('blog.index') }}"
                    class="rounded-full border border-line px-5 py-2.5 text-ink-soft no-underline hover:bg-card">
                     Zurücksetzen
                 </a>
@@ -49,7 +49,7 @@
             <nav aria-label="Kategorien" class="mt-4">
                 <ul class="flex flex-wrap gap-2">
                     <li>
-                        <a href="{{ route('blog.index', $suchbegriff ? ['suche' => $suchbegriff] : []) }}"
+                        <a href="{{ sprachlink('blog.index', $suchbegriff ? ['suche' => $suchbegriff] : []) }}"
                            @if (! $aktiveKategorie) aria-current="page" @endif
                            class="inline-block rounded-full border border-line px-4 py-1.5 text-sm no-underline
                                   text-ink-soft hover:bg-card
@@ -60,7 +60,7 @@
                     </li>
                     @foreach ($kategorien as $kategorie)
                         <li>
-                            <a href="{{ route('blog.index', array_filter([
+                            <a href="{{ sprachlink('blog.index', array_filter([
                                     'kategorie' => $kategorie->slug,
                                     'suche' => $suchbegriff ?: null,
                                ])) }}"
@@ -97,7 +97,7 @@
                 @if ($suchbegriff || $aktiveKategorie)
                     <p class="mt-2 text-sm text-ink-soft">
                         Versuch es mit einem anderen Stichwort oder
-                        <a href="{{ route('blog.index') }}" class="text-green-deep underline">zeig alle Beiträge</a>.
+                        <a href="{{ sprachlink('blog.index') }}" class="text-green-deep underline">zeig alle Beiträge</a>.
                     </p>
                 @endif
             </div>
@@ -124,7 +124,7 @@
                                 <h2 class="mt-1.5 font-display text-lg font-semibold text-ink">
                                     {{-- Der Link umfasst nur die Überschrift: „Weiterlesen“ dreimal
                                          auf einer Seite wäre für Screenreader nicht unterscheidbar. --}}
-                                    <a href="{{ route('blog.show', $beitrag->slug) }}"
+                                    <a href="{{ sprachlink('blog.show', $beitrag->slug) }}"
                                        class="text-ink no-underline hover:underline">
                                         {{ $beitrag->titel }}
                                     </a>

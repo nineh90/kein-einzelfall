@@ -10,12 +10,19 @@
     <div class="relative mx-auto max-w-6xl overflow-hidden rounded-band bg-green-deep px-6 py-8 lg:px-10 lg:py-11">
 
         {{-- Dekoratives Wasserzeichen. Auf schmalen Viewports ausgeblendet:
-             dort würde es den Text nur unruhig machen. --}}
-        <span aria-hidden="true"
+             dort würde es den Text nur unruhig machen.
+
+             Als CSS-Dekoration und nicht als Textknoten: Als <span> mit Inhalt
+             war es echter Text mit 1,08:1 Kontrast und damit ein gemeldeter
+             WCAG-Verstoss. Reine Dekoration ist von 1.4.3 zwar ausgenommen, aber
+             das kann eine Maschine nicht wissen — und ein Prüfbericht mit einem
+             erklärungsbedürftigen roten Punkt ist bei diesem Auftrag das
+             schlechtere Ergebnis. In der CSS ist es ausserdem ehrlicher
+             einsortiert: Dekoration gehört nicht ins Markup. --}}
+        <span aria-hidden="true" data-wasserzeichen
+              style="--wasserzeichen: '{{ $wasserzeichen }}'"
               class="pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2
-                     select-none font-hand text-[9.375rem] leading-none text-[#2B4536] opacity-50 lg:block">
-            {{ $wasserzeichen }}
-        </span>
+                     select-none font-hand text-[9.375rem] leading-none text-[#2B4536] opacity-50 lg:block"></span>
 
         <div class="relative grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>

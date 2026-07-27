@@ -18,7 +18,7 @@
         'eventStatus' => 'https://schema.org/EventScheduled',
         'description' => $termin->teaser,
         'location' => $termin->online
-            ? ['@type' => 'VirtualLocation', 'url' => route('events.show', $termin->slug)]
+            ? ['@type' => 'VirtualLocation', 'url' => sprachlink('events.show', $termin->slug)]
             : array_filter([
                 '@type' => 'Place',
                 'name' => $termin->ort,
@@ -44,7 +44,7 @@
 
         <x-ui.brotkrumen :krumen="[
             ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Veranstaltungen', 'url' => route('events.index')],
+            ['label' => 'Veranstaltungen', 'url' => sprachlink('events.index')],
             ['label' => $termin->titel, 'url' => null],
         ]" />
 
@@ -85,7 +85,7 @@
         </dl>
 
         <div class="mt-4 flex flex-wrap gap-3">
-            <x-ui.button :href="route('events.ical.einzeln', $termin->slug)" variant="ghost" size="sm">
+            <x-ui.button :href="sprachlink('events.ical.einzeln', $termin->slug)" variant="ghost" size="sm">
                 In meinen Kalender eintragen
             </x-ui.button>
 

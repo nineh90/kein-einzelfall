@@ -51,4 +51,19 @@ return [
         'hinweis' => 'This page is not available in :ziel yet. '
             .'It is shown in :quelle.',
     ],
+
+    'fehler' => [
+        'titel_404' => 'This page does not exist',
+        'lead_404' => 'The address may have changed, or there may be a typo. '
+            .'Here are a few ways to carry on.',
+        'titel_500' => 'Something went wrong on our side',
+        'lead_500' => 'This is not your fault. Please try again in a few minutes — '
+            .'the numbers below can be reached regardless.',
+        'titel_503' => 'We will be back shortly',
+        'lead_503' => 'The site is being worked on. The numbers below can be reached regardless.',
+        'suche' => 'Search articles',
+        'suche_knopf' => 'Search',
+        'wohin' => 'Where would you like to go?',
+        'zur_startseite' => 'To the home page',
+    ],
 ];

@@ -150,6 +150,26 @@ lag ein Fehler, der lange unentdeckt blieb — Details in
 [`docs/Komponenten.md`](docs/Komponenten.md), Abschnitt „Behobener Fehler:
 Einstellungsknopf reagierte nicht".
 
+### WCAG 2.1 AA messen
+
+```bash
+npm run test:a11y                 # Server muss laufen
+```
+
+Prüft mit **axe-core** neun repräsentative Seiten in jeder freigeschalteten
+Sprache, dazu die vier Zustände der Darstellungs-Einstellungen (Panel offen,
+hoher Kontrast, Dunkelmodus, größte Schrift) und den Reflow bei 320 px.
+
+„Maximal barrierefrei" ist die zentrale Zusage dieses Auftrags — ohne Messung
+ist sie nicht abnahmefähig. Der erste Lauf fand neun Verstöße, darunter einen
+Fußbereich, den ausgerechnet der Modus „hoher Kontrast" unlesbar machte.
+
+**Ein grüner Lauf heißt nicht „barrierefrei".** axe-core findet je nach Quelle
+30–50 % der Verstöße: fehlende Alternativtexte, zu schwache Kontraste, falsche
+ARIA-Rollen. Es sieht nicht, ob ein Alternativtext etwas Sinnvolles sagt, ob die
+Reihenfolge logisch ist oder ob die Sprache verständlich bleibt. Der manuelle
+Durchgang und ein Test mit einer echten Vorlesehilfe bleiben nötig.
+
 ---
 
 ## Stack

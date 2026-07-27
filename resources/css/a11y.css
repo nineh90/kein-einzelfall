@@ -96,6 +96,15 @@ html[data-kontrast='dunkel'] {
   --color-line: #4A4235;
   --color-on-green: #14120D;
   --color-alert: #E8907E;
+
+  /* Der Fussbereich liegt auf --color-green-deep. Im Dunkelmodus wird der
+     hell, die Schrift darauf muss also dunkel werden. Ohne diese drei Zeilen
+     blieb sie auf dem hellen Grund hell — gemessen 1,4:1 statt der geforderten
+     4,5:1. Ausgerechnet die Barrierefreiheits-Einstellung machte den
+     Fussbereich damit unlesbar. */
+  --color-on-green-soft: #2B2519;
+  --color-on-green-hand: #14120D;
+  --color-on-green-line: #8D8577;
 }
 
 /* Hoher Kontrast: reines Schwarz/Weiß, maximale Trennschärfe */
@@ -111,12 +120,23 @@ html[data-kontrast='hoch'] {
   --color-line: #FFFFFF;
   --color-on-green: #000000;
   --color-alert: #FF6B4A;
+
+  /* Gleiche Ursache wie im Dunkelmodus: Der Fussbereich wird gelb, die Schrift
+     darauf muss schwarz sein. */
+  --color-on-green-soft: #000000;
+  --color-on-green-hand: #000000;
+  --color-on-green-line: #000000;
 }
 html[data-kontrast='hoch'] :is(a, button) {
   text-decoration: underline;
 }
 html[data-kontrast='hoch'] :is(.border, [class*='border-']) {
   border-color: #FFFFFF !important;
+}
+/* Ausser im Fussbereich: Der liegt auf Gelb, dort ist Weiss die falsche
+   Trennfarbe. Die Regel oben zielt auf Karten vor schwarzem Grund. */
+html[data-kontrast='hoch'] footer :is(.border, [class*='border-']) {
+  border-color: #000000 !important;
 }
 
 /* Graustufen */
