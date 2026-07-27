@@ -165,7 +165,7 @@ Verein → Über uns, Satzung, Istanbul-Konvention, Kinderkodex, Mitgliedschaft
 |---|---|---|
 | Backend | **Laravel 12** (PHP 8.3+) | Aktuell, Support bis 2027 |
 | Datenbank | **MySQL / MariaDB** | Geändert am 27.07.2026 (vorher PostgreSQL vorgesehen). Lokal ohne Zusatzinstallation verfügbar; der Altbestand des Vereins ist ohnehin MySQL, das spart eine Konvertierungsstufe beim Import; und beim Hoster ist es der Standardfall |
-| Frontend | **Blade + Tailwind 4 + Alpine.js** | Mobile-First |
+| Frontend | **Blade + Tailwind 4**, kein JS-Framework | Mobile-First. Alpine war vorgesehen und ist am 27.07.2026 wieder entfallen: Es wertet seine Attribute zur Laufzeit über `new Function()` aus, was unsere CSP ohne `'unsafe-eval'` verbietet — die Bedienelemente waren dadurch lautlos tot. Übrig blieben zwei Stellen, die 60 Zeilen eigenes JavaScript brauchen |
 | Blog-Filter/Suche | **Kein Livewire — serverseitig via GET-Parameter** | Livewire-Filter sind für Crawler unsichtbar und für Screenreader schlechter. Genau der Fehler, den die Altseite mit der JS-Navigation macht. `?kategorie=…&seite=2` ist SEO-sicher, A11y-sicher und cachebar |
 | Admin-Panel | **Filament 4** | Schlank, kein Full-CMS. Rollen/Rechte über Policies |
 | Rollen/Rechte | `spatie/laravel-permission` | Standard, gut geprüft |

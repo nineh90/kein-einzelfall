@@ -15,16 +15,12 @@ class StartbarkeitTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Das Panel darf weder von der Stilvorlage allein abhängen noch durch die
-     * Absicherung unbedienbar werden.
+     * Das Panel startet zugeklappt und hängt dabei nicht an der Stilvorlage.
      *
-     * Erst fehlte die Absicherung: Ohne gebaute Assets griff [x-cloak] nicht,
-     * das Panel stand offen und liess sich mangels Alpine nicht schliessen.
-     * Dann kollidierte ein zusätzliches style="display:none" mit x-show —
-     * Alpine verwaltete denselben Inline-Stil, der Knopf tat nichts mehr.
-     *
-     * Lösung: das HTML-Attribut `hidden`. Es wirkt auch ohne Stilvorlage, und
-     * Alpine setzt es über :hidden, statt am display herumzuschreiben.
+     * Zwei Fehlversuche stecken darin: Ohne Absicherung stand das Panel bei
+     * fehlenden Assets offen und liess sich nicht schliessen; ein zusätzliches
+     * style="display:none" legte anschliessend den Knopf lahm. Geblieben ist
+     * das HTML-Attribut `hidden` — der Browser versteht es auch ohne CSS.
      */
     public function test_einstellungs_panel_ist_zu_und_bleibt_bedienbar(): void
     {
@@ -34,14 +30,102 @@ class StartbarkeitTest extends TestCase
         $panel = $treffer[1] ?? '';
 
         $this->assertStringContainsString('hidden', $panel, 'Panel wäre ohne Stilvorlage offen');
-        $this->assertStringContainsString(':hidden=', $panel, 'Alpine kann das Panel nicht öffnen');
 
-        // Genau das hat den Knopf lahmgelegt:
         $this->assertStringNotContainsString(
             'style="display:none"',
             $panel,
-            'Inline-display kollidiert mit Alpine — der Knopf reagiert dann nicht'
+            'Inline-display kollidiert mit dem Umschalten — der Knopf reagiert dann nicht'
         );
+
+        // Der Knopf muss das Panel benennen, sonst weiss ein Screenreader nicht,
+        // was sich da öffnet.
+        $this->assertMatchesRegularExpression('/<button[^>]*aria-controls="a11y-panel"/s', $html);
+    }
+
+    /**
+     * Der Fehler, der dreimal gemeldet wurde: Der Knopf neben dem Notausgang
+     * liess sich nicht drücken — ohne Fehlermeldung, ohne sichtbare Ursache.
+     *
+     * Grund war Alpine. Es wertet den Inhalt von @click, x-show, x-text … zur
+     * Laufzeit über new Function() aus. Unsere CSP erlaubt kein 'unsafe-eval',
+     * also blockierte der Browser jede dieser Auswertungen. Am HTML war davon
+     * nichts zu erkennen; gemeldet wurde es nur in der Entwicklerkonsole.
+     *
+     * Entweder ohne solche Attribute arbeiten oder die CSP öffnen — dieser Test
+     * hält fest, dass wir uns für Ersteres entschieden haben.
+     */
+    public function test_keine_bedienung_haengt_an_zur_laufzeit_ausgewertetem_quelltext(): void
+    {
+        foreach (['/', '/verein', '/aktuelles', '/veranstaltungen'] as $pfad) {
+            $html = $this->get($pfad)->getContent();
+
+            // Skript- und Stilblöcke raus: Dort ist Quelltext erlaubt und
+            // erwartet, geprüft werden nur die HTML-Attribute.
+            $markup = preg_replace('/<(script|style)\b.*?<\/\1>/is', '', $html);
+
+            preg_match_all('/\s(x-[a-z:._-]+|@[a-z]+|:[a-z-]+)=/i', $markup, $treffer);
+            $gefunden = array_values(array_unique($treffer[1]));
+
+            $this->assertSame([], $gefunden,
+                "Auswertbare Attribute auf {$pfad}: ".implode(', ', $gefunden)
+                ." — die CSP verbietet 'unsafe-eval', solche Ausdrücke laufen im Browser nie.");
+        }
+    }
+
+    public function test_die_csp_erlaubt_weiterhin_kein_unsafe_eval(): void
+    {
+        // Die naheliegende „Lösung" für den toten Knopf wäre gewesen, hier
+        // 'unsafe-eval' einzutragen. Bei einer Seite, auf der Menschen über
+        // erlebte Straftaten schreiben, ist das der falsche Handel.
+        $csp = $this->get('/')->headers->get('Content-Security-Policy');
+
+        $this->assertStringNotContainsString('unsafe-eval', $csp);
+        $this->assertStringNotContainsString("script-src 'self' 'unsafe-inline'", $csp);
+    }
+
+    /**
+     * Das Panel wurde früher per JavaScript aus einer Liste im Bundle
+     * zusammengebaut. Vor dem Ausführen des Skripts war es damit gar nicht
+     * vorhanden — ausgerechnet bei den Barrierefreiheits-Einstellungen.
+     */
+    public function test_die_darstellungs_optionen_stehen_im_ausgelieferten_html(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        foreach (config('darstellung.optionen') as $schluessel => $opt) {
+            // e(): „Kontrast & Farben" steht im HTML als „Kontrast &amp; Farben".
+            $this->assertStringContainsString(e($opt['label']), $html, "Beschriftung „{$opt['label']}\" fehlt");
+
+            foreach ($opt['werte'] ?? [] as $eintrag) {
+                $this->assertMatchesRegularExpression(
+                    '/data-a11y-setzen="'.$schluessel.'"\s+data-a11y-wert="'.preg_quote($eintrag['wert'], '/').'"/',
+                    $html,
+                    "Schaltfläche {$schluessel}={$eintrag['wert']} fehlt"
+                );
+            }
+        }
+    }
+
+    public function test_mobilmenue_kommt_ohne_javascript_aus(): void
+    {
+        // Erster Versuch war ein per JavaScript umgeschaltetes `hidden` plus
+        // eine <noscript>-Regel, die es wieder aufhebt. Die griff nicht:
+        // Tailwinds [hidden]-Regel liegt in einem CSS-Layer, und bei
+        // !important gewinnt die Layer-Regel gegen eine ungelayerte — die
+        // Navigation blieb ohne JavaScript unerreichbar.
+        //
+        // Jetzt natives <details> wie überall sonst im Projekt. Kein Zustand,
+        // der davon abhängt, ob ein Bundle geladen hat.
+        $html = $this->get('/')->getContent();
+
+        $this->assertMatchesRegularExpression(
+            '/<details[^>]*>\s*<summary.*?Hauptnavigation \(mobil\)/s',
+            $html,
+            'Mobil-Navigation hängt nicht mehr an <details>'
+        );
+
+        $this->assertStringNotContainsString('<noscript>', $html,
+            'Wenn es ohne JavaScript funktioniert, braucht es keine Ausnahmeregel');
     }
 
     public function test_startskript_pflegt_inhalte_ein_wenn_die_datenbank_leer_ist(): void

@@ -6,11 +6,9 @@
    auch für Komponenten, die es heute noch gar nicht gibt.
 --------------------------------------------------------------------------- */
 
-/* Alpine: Elemente mit x-show erst nach dem Initialisieren zeigen */
-[x-cloak] { display: none !important; }
-
 /* Versteckte Elemente bleiben versteckt, auch wenn eine Utility-Klasse
-   display setzt. Ohne das könnte `hidden` von `flex` o.ä. überstimmt werden. */
+   display setzt. Ohne das könnte `hidden` von `flex` o.ä. überstimmt werden.
+   Daran hängen das Mobil-Menü und das Einstellungs-Panel. */
 [hidden] { display: none !important; }
 
 /* --- Gut lesbare Schrift ---------------------------------------------------

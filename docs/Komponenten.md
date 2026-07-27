@@ -260,8 +260,13 @@ beiden notwendigen Inline-Skripte (Notausgang, Darstellungs-Einstellungen)
 **und** die von Vite erzeugten Tags: `'strict-dynamic'` setzt `'self'` ausser
 Kraft, ein Tag ohne Nonce würde blockiert. Dafür sorgt `Vite::useCspNonce()`.
 
-Bei Stilen bleibt `'unsafe-inline'` vorerst nötig — Alpine setzt `style`-Attribute
-und die Darstellungs-Einstellungen schreiben Custom Properties auf `<html>`.
+`'unsafe-eval'` steht bewusst **nicht** in der Richtlinie. Das ist der Grund,
+warum die Seite kein JavaScript-Framework benutzt: Alpine wertet den Inhalt von
+`@click`, `x-show`, `x-text` … zur Laufzeit über `new Function()` aus, und genau
+das blockiert die CSP. Siehe „Behobener Fehler" weiter unten.
+
+Bei Stilen bleibt `'unsafe-inline'` vorerst nötig: Tailwind-Utilities und die
+Darstellungs-Einstellungen schreiben Custom Properties auf `<html>`.
 
 ### Zwei-Klick-Einbettung
 
@@ -470,11 +475,48 @@ Kopfbereich ebenso.
 
 ### Behobener Fehler: Einstellungsknopf reagierte nicht
 
-Die Absicherung aus dem letzten Schritt (`style="display:none"` gegen fehlende
-Stilvorlagen) kollidierte mit Alpines `x-show` — beide verwalteten denselben
-Inline-Stil, das Panel liess sich nicht mehr öffnen.
+Dreimal gemeldet, zweimal falsch repariert. Die Ursache lag nicht dort, wo sie
+zu vermuten war.
 
-Jetzt über das HTML-Attribut `hidden` und `:hidden`. Das deckt alle drei Fälle
-sauber ab: ohne JavaScript bleibt es zu, ohne Stilvorlage versteckt der Browser
-`[hidden]` von sich aus, und Alpine setzt das Attribut statt am `display`
-herumzuschreiben.
+**Fehlversuch 1.** Ohne gebaute Assets griff `[x-cloak]` nicht, das Panel stand
+offen und liess sich nicht schliessen. Gegenmassnahme: `style="display:none"`.
+
+**Fehlversuch 2.** Dieser Inline-Stil kollidierte mit Alpines `x-show` — beide
+verwalteten dieselbe Eigenschaft, der Knopf reagierte gar nicht mehr.
+Gegenmassnahme: das HTML-Attribut `hidden` samt `:hidden`.
+
+**Die eigentliche Ursache.** Der Knopf war nie funktionsfähig. Alpine wertet den
+Inhalt seiner Attribute zur Laufzeit über `new Function()` aus; unsere CSP
+erlaubt kein `'unsafe-eval'`, der Browser blockierte also jede einzelne
+Auswertung. Betroffen war die gesamte Bedienoberfläche, nicht nur dieser Knopf —
+am Desktop fiel nur er auf, weil das Mobil-Menü dort ausgeblendet ist. Im HTML
+war nichts Auffälliges zu sehen und alle PHPUnit-Tests waren grün: Der Browser
+meldet das ausschliesslich in der Entwicklerkonsole.
+
+**Die Entscheidung.** Zur Wahl standen `'unsafe-eval'` in die CSP aufnehmen,
+Alpines CSP-Build verwenden (der genau die dynamischen Ausdrücke verbietet, für
+die Alpine hier überhaupt eingesetzt war) — oder Alpine aufgeben. Bei einer
+Seite, auf der Menschen über erlebte Straftaten schreiben, ist das Aufweichen
+der CSP der falsche Handel; und für zwei Bedienelemente lohnt kein Framework:
+
+- Das **Mobil-Menü** ist jetzt ein natives `<details>`, wie alle anderen
+  Aufklapper im Projekt. Es braucht überhaupt kein JavaScript mehr.
+- Das **Einstellungs-Panel** wird serverseitig aus `config/darstellung.php`
+  gerendert; ~60 Zeilen eigenes JavaScript verdrahten es über `data`-Attribute.
+  Nebeneffekt: Die Beschriftungen stehen jetzt im ausgelieferten HTML. Vorher
+  baute Alpine das Panel per `x-for` zusammen — ausgerechnet die
+  Barrierefreiheits-Einstellungen existierten also vor dem Ausführen des
+  Skripts gar nicht.
+
+Das Bundle ist dadurch von rund 45 KB auf **1,6 KB** geschrumpft.
+
+**Konsequenz für die Absicherung.** Dieser Fehler war für PHPUnit prinzipiell
+unsichtbar: Das ausgelieferte HTML war korrekt, nur der Browser führte es nicht
+aus. Dazugekommen sind deshalb zwei Prüfungen:
+
+- `StartbarkeitTest` schlägt fehl, sobald im ausgelieferten HTML wieder ein
+  Attribut auftaucht, dessen Inhalt zur Laufzeit ausgewertet werden müsste
+  (`x-…`, `@…`, `:…`) — und ebenso, wenn `'unsafe-eval'` in der CSP landet.
+- `npm run test:browser` (`tests/Browser/bedienung.mjs`) bedient die Seite in
+  einem echten Chromium: mit und ohne JavaScript, mit Maus und nur mit der
+  Tastatur, und wertet dabei die Browser-Konsole mit aus.

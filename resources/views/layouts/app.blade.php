@@ -25,20 +25,53 @@
 
     {{-- Gespeicherte Darstellungs-Einstellungen anwenden, bevor der Browser zeichnet.
          Sonst blitzt bei jedem Seitenaufruf kurz die Standardansicht auf — für
-         Menschen, die den Kontrastmodus brauchen, ist das kein Schönheitsfehler. --}}
+         Menschen, die den Kontrastmodus brauchen, ist das kein Schönheitsfehler.
+
+         Deshalb muss das hier stehen und nicht im Bundle: Das Bundle lädt erst
+         nach dem ersten Zeichnen. Die Toolbar im Header greift später auf
+         dieselben drei Funktionen zu, statt sie ein zweites Mal zu schreiben —
+         vorher stand die Wertetabelle an beiden Stellen und konnte auseinanderlaufen. --}}
     <script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
-    (function () {
-        try {
-            var w = JSON.parse(localStorage.getItem('ke-a11y')) || {};
+    window.keDarstellung = (function () {
+        var REGELN = @json(config('darstellung.anwendung'));
+        var SCHLUESSEL = @json(config('darstellung.speicher'));
+
+        function lesen() {
+            try {
+                return JSON.parse(localStorage.getItem(SCHLUESSEL)) || {};
+            } catch (e) {
+                return {};   // defekte Daten dürfen die Seite nicht mitreissen
+            }
+        }
+
+        function speichern(werte) {
+            try {
+                localStorage.setItem(SCHLUESSEL, JSON.stringify(werte));
+            } catch (e) {
+                /* Privater Modus o.ä. — dann gilt die Einstellung eben nur für diese Sitzung. */
+            }
+        }
+
+        /* Angefasst wird ausschliesslich <html>. Dadurch wirkt jede Einstellung
+           automatisch auch auf Bausteine, die es heute noch nicht gibt. */
+        function anwenden(werte) {
             var el = document.documentElement;
-            el.style.setProperty('--a11y-font-scale', [1, 1.15, 1.3, 1.5][w.schrift || 0]);
-            el.style.setProperty('--a11y-line-height', [1.7, 2, 2.3][w.zeilen || 0]);
-            el.style.setProperty('--a11y-letter-spacing', ['0em', '0.05em', '0.1em'][w.zeichen || 0]);
-            el.dataset.kontrast = w.kontrast || '';
-            ['lesbar','dyslexie','leselinie','links','cursor','ruhe','bilder'].forEach(function (n) {
-                if (w[n]) el.classList.add('a11y-' + n);
+
+            for (var name in REGELN.variablen) {
+                var regel = REGELN.variablen[name];
+                el.style.setProperty(regel[0], regel[1][werte[name] || 0]);
+            }
+            REGELN.datensaetze.forEach(function (n) {
+                el.dataset[n] = werte[n] || '';
             });
-        } catch (e) {}
+            REGELN.klassen.forEach(function (n) {
+                el.classList.toggle('a11y-' + n, !!werte[n]);
+            });
+        }
+
+        anwenden(lesen());
+
+        return { lesen: lesen, speichern: speichern, anwenden: anwenden };
     })();
     </script>
 

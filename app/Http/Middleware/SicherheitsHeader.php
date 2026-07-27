@@ -35,7 +35,7 @@ class SicherheitsHeader
 
         // Auch die von Vite erzeugten Script-Tags brauchen das Nonce:
         // 'strict-dynamic' setzt 'self' ausser Kraft, ein Tag ohne Nonce würde
-        // also blockiert — und damit Alpine und die gesamte Bedienoberfläche.
+        // also blockiert — und damit die gesamte Bedienoberfläche.
         Vite::useCspNonce($nonce);
 
         $response = $next($request);
@@ -92,11 +92,19 @@ class SicherheitsHeader
 
             // Nonce für die notwendigen Inline-Skripte. 'strict-dynamic' erlaubt
             // dem gebündelten Skript, weitere eigene Module nachzuladen.
+            //
+            // 'unsafe-eval' fehlt hier bewusst — und das hat Folgen für die
+            // Auswahl der Werkzeuge: Bibliotheken wie Alpine oder Vue werten den
+            // Inhalt von HTML-Attributen zur Laufzeit über new Function() aus
+            // und sind damit hier ohne Funktion. Der Browser meldet das nur in
+            // der Entwicklerkonsole; für den Benutzer reagieren die Knöpfe
+            // einfach nicht mehr. Genau das ist im Juli 2026 passiert, siehe
+            // docs/Komponenten.md. Die Seite kommt deshalb ohne JS-Framework aus.
             "script-src 'self' 'nonce-{$nonce}' 'strict-dynamic'",
 
-            // Für Stile bleibt 'unsafe-inline' vorerst nötig: Alpine setzt
-            // style-Attribute (x-show, x-cloak) und die Darstellungs-Einstellungen
-            // schreiben Custom Properties direkt auf <html>.
+            // Für Stile bleibt 'unsafe-inline' vorerst nötig: Tailwind-Utilities
+            // und die Darstellungs-Einstellungen schreiben Custom Properties
+            // direkt auf <html>.
             "style-src 'self' 'unsafe-inline'",
 
             // Schriften liegen ausschliesslich lokal — genau das soll so bleiben.

@@ -1,102 +1,125 @@
 /*
- * Barrierefreiheits-Einstellungen.
+ * Bedienung der Darstellungs-Toolbar.
  *
  * Ersetzt das OneTap-WordPress-Plugin der Altseite. Kuratiert statt vollständig:
  * die Funktionen mit echtem Nutzen, ohne die ~200 KB Inline-Ballast pro Seite.
  *
- * Speicherung in localStorage. Das ist technisch notwendige Funktionalität auf
- * ausdrücklichen Nutzerwunsch — kein Consent nötig, gehört aber in die
- * Datenschutzerklärung.
+ * Das Panel kommt fertig aus Blade (config/darstellung.php) — hier wird nur
+ * verdrahtet. Gearbeitet wird ausschliesslich über data-Attribute und echte
+ * Event-Listener, nie über Ausdrücke in HTML-Attributen: Unsere CSP verbietet
+ * 'unsafe-eval', und jede Bibliothek, die Attributinhalte zur Laufzeit als Code
+ * auswertet, ist damit still ausser Betrieb.
  *
- * Die Werte werden ausschließlich als Attribute/Klassen auf <html> gesetzt.
- * Kein Element wird einzeln angefasst — das hält die Sache vorhersehbar und
- * macht sie über CSS-Custom-Properties skalierbar.
+ * Lesen, Speichern und Anwenden liegen in window.keDarstellung. Das wird vom
+ * Inline-Skript im <head> bereitgestellt, damit gespeicherte Einstellungen schon
+ * vor dem ersten Zeichnen greifen — sonst blitzt bei jedem Seitenaufruf kurz die
+ * Standardansicht auf. Für Menschen, die den Kontrastmodus brauchen, ist das
+ * kein Schönheitsfehler.
  */
 
-export const SPEICHER_SCHLUESSEL = 'ke-a11y'
+export function toolbarVerdrahten() {
+    const knopf = document.querySelector('[data-a11y-oeffnen]')
+    const panel = document.getElementById('a11y-panel')
+    const api = window.keDarstellung
 
-export const EINSTELLUNGEN = {
-    schrift: {
-        label: 'Schriftgröße',
-        typ: 'stufen',
-        stufen: [
-            { wert: 0, label: 'Standard' },
-            { wert: 1, label: 'Groß' },
-            { wert: 2, label: 'Größer' },
-            { wert: 3, label: 'Sehr groß' },
-        ],
-    },
-    zeilen: {
-        label: 'Zeilenabstand',
-        typ: 'stufen',
-        stufen: [
-            { wert: 0, label: 'Standard' },
-            { wert: 1, label: 'Weit' },
-            { wert: 2, label: 'Sehr weit' },
-        ],
-    },
-    zeichen: {
-        label: 'Buchstabenabstand',
-        typ: 'stufen',
-        stufen: [
-            { wert: 0, label: 'Standard' },
-            { wert: 1, label: 'Weit' },
-            { wert: 2, label: 'Sehr weit' },
-        ],
-    },
-    kontrast: {
-        label: 'Kontrast & Farben',
-        typ: 'auswahl',
-        optionen: [
-            { wert: '', label: 'Standard' },
-            { wert: 'dunkel', label: 'Dunkel' },
-            { wert: 'hoch', label: 'Hoher Kontrast' },
-            { wert: 'monochrom', label: 'Graustufen' },
-        ],
-    },
-    lesbar: { label: 'Gut lesbare Schrift', typ: 'schalter' },
-    dyslexie: { label: 'Schrift für Legasthenie', typ: 'schalter' },
-    leselinie: { label: 'Leselinie', typ: 'schalter' },
-    links: { label: 'Links hervorheben', typ: 'schalter' },
-    cursor: { label: 'Großer Mauszeiger', typ: 'schalter' },
-    ruhe: { label: 'Bewegung stoppen', typ: 'schalter' },
-    bilder: { label: 'Bilder ausblenden', typ: 'schalter' },
-}
+    if (!knopf || !panel || !api) return
 
-/** Gespeicherte Werte lesen. Defekte Daten dürfen die Seite nicht mitreißen. */
-export function lesen() {
-    try {
-        return JSON.parse(localStorage.getItem(SPEICHER_SCHLUESSEL)) || {}
-    } catch {
-        return {}
+    let werte = api.lesen()
+
+    // --- Öffnen und Schliessen ---------------------------------------------
+
+    const zeigen = (offen) => {
+        panel.hidden = !offen
+        knopf.setAttribute('aria-expanded', offen ? 'true' : 'false')
     }
-}
 
-export function speichern(werte) {
-    try {
-        localStorage.setItem(SPEICHER_SCHLUESSEL, JSON.stringify(werte))
-    } catch {
-        /* Privater Modus o.ä. — dann gilt die Einstellung eben nur für diese Sitzung. */
+    knopf.addEventListener('click', () => zeigen(panel.hidden))
+
+    panel.querySelector('[data-a11y-schliessen]')?.addEventListener('click', () => {
+        zeigen(false)
+        knopf.focus()
+    })
+
+    // Klick daneben schliesst. Der Knopf selbst ist ausgenommen, sonst würde
+    // sein eigener Klick das gerade geöffnete Panel sofort wieder zumachen.
+    document.addEventListener('click', (e) => {
+        if (!panel.hidden && !panel.contains(e.target) && !knopf.contains(e.target)) {
+            zeigen(false)
+        }
+    })
+
+    // Escape schliesst. Stört den Notausgang nicht: der zählt seine drei
+    // Tastendrücke unabhängig davon in einem eigenen Listener.
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !panel.hidden) {
+            zeigen(false)
+            knopf.focus()
+        }
+    })
+
+    // --- Einstellungen ------------------------------------------------------
+
+    const uebernehmen = () => {
+        api.anwenden(werte)
+        api.speichern(werte)
+        spiegeln()
     }
+
+    /** Den gespeicherten Stand in die Bedienelemente zurückschreiben. */
+    const spiegeln = () => {
+        for (const el of panel.querySelectorAll('[data-a11y-setzen]')) {
+            const schluessel = el.dataset.a11ySetzen
+            const zahl = el.hasAttribute('data-a11y-zahl')
+            const aktuell = werte[schluessel] ?? (zahl ? 0 : '')
+
+            el.setAttribute('aria-pressed', String(aktuell) === el.dataset.a11yWert ? 'true' : 'false')
+        }
+
+        for (const el of panel.querySelectorAll('[data-a11y-umschalten]')) {
+            el.setAttribute('aria-pressed', werte[el.dataset.a11yUmschalten] ? 'true' : 'false')
+        }
+
+        const zaehler = document.querySelector('[data-a11y-zaehler]')
+        if (zaehler) {
+            const anzahl = Object.values(werte).filter(Boolean).length
+            zaehler.textContent = String(anzahl)
+            zaehler.hidden = anzahl < 1
+        }
+    }
+
+    panel.addEventListener('click', (e) => {
+        const setzen = e.target.closest('[data-a11y-setzen]')
+        if (setzen) {
+            const roh = setzen.dataset.a11yWert
+            werte[setzen.dataset.a11ySetzen] = setzen.hasAttribute('data-a11y-zahl') ? Number(roh) : roh
+            return uebernehmen()
+        }
+
+        const umschalten = e.target.closest('[data-a11y-umschalten]')
+        if (umschalten) {
+            const schluessel = umschalten.dataset.a11yUmschalten
+            werte[schluessel] = !werte[schluessel]
+            return uebernehmen()
+        }
+
+        if (e.target.closest('[data-a11y-zuruecksetzen]')) {
+            werte = {}
+            return uebernehmen()
+        }
+    })
+
+    spiegeln()
 }
 
 /**
- * Werte auf <html> übertragen.
- * Wird an zwei Stellen aufgerufen: hier bei jeder Änderung und als Inline-Kopie
- * im <head>, damit beim Laden nichts aufblitzt.
+ * Leselinie folgt dem Zeiger. Der Listener hängt immer, das Element ist per CSS
+ * nur sichtbar, wenn die Option gesetzt ist.
  */
-export function anwenden(werte) {
-    const el = document.documentElement
+export function leselinieVerdrahten() {
+    const linie = document.getElementById('leselinie')
+    if (!linie) return
 
-    // Schriftgröße skaliert über die rem-Basis -> alles skaliert mit.
-    const skalen = [1, 1.15, 1.3, 1.5]
-    el.style.setProperty('--a11y-font-scale', skalen[werte.schrift || 0])
-    el.style.setProperty('--a11y-line-height', [1.7, 2, 2.3][werte.zeilen || 0])
-    el.style.setProperty('--a11y-letter-spacing', ['0em', '0.05em', '0.1em'][werte.zeichen || 0])
-
-    el.dataset.kontrast = werte.kontrast || ''
-
-    for (const name of ['lesbar', 'dyslexie', 'leselinie', 'links', 'cursor', 'ruhe', 'bilder']) {
-        el.classList.toggle(`a11y-${name}`, !!werte[name])
-    }
+    document.addEventListener('mousemove', (e) => {
+        linie.style.top = `${e.clientY}px`
+    })
 }

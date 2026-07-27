@@ -102,8 +102,17 @@ class BarrierefreiheitTest extends TestCase
 
     public function test_darstellungseinstellungen_greifen_vor_dem_ersten_paint(): void
     {
-        // Ohne dieses Inline-Script blitzt bei jedem Aufruf die Standardansicht auf.
-        $this->get('/')->assertSee("localStorage.getItem('ke-a11y')", false);
+        // Ohne dieses Inline-Script blitzt bei jedem Aufruf kurz die
+        // Standardansicht auf, bevor das Bundle geladen ist.
+        $html = $this->get('/')->getContent();
+
+        $this->assertStringContainsString('window.keDarstellung', $html);
+        $this->assertStringContainsString(config('darstellung.speicher'), $html);
+
+        // Die Einstellungen müssen tatsächlich schon im <head> angewandt werden
+        // und nicht erst, wenn die Toolbar sie später einmal abruft.
+        $kopf = preg_match('/<head\b.*?<\/head>/s', $html, $t) ? $t[0] : '';
+        $this->assertStringContainsString('anwenden(lesen())', $kopf);
     }
 
     public function test_umsetzer_wird_im_footer_genannt(): void

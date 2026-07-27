@@ -2,7 +2,7 @@
     Notausgang-Verhalten.
 
     Bewusst als Inline-Script ganz oben im <head> und ohne jede Abhängigkeit:
-    weder Alpine noch das Vite-Bundle dürfen hier im Weg stehen. Wenn JavaScript
+    auch das Vite-Bundle darf hier nicht im Weg stehen. Wenn JavaScript
     ausfällt, bleibt der Button ein normaler Link und funktioniert trotzdem —
     genau das kann die Altseite nicht, dort wird der Button per JS erzeugt.
 

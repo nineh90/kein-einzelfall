@@ -134,11 +134,27 @@ Die Tests in `tests/Feature/BarrierefreiheitTest.php` sichern das ab, was für d
 Zielgruppe nicht verhandelbar ist: Navigation im Server-HTML, Notausgang ohne
 JavaScript, keine externen Requests, saubere Überschriften-Gliederung.
 
+### Im echten Browser
+
+```bash
+npx playwright install chromium   # einmalig
+npm run test:browser              # Server muss laufen
+```
+
+Bedient die Seite in einem echten Chromium — mit und ohne JavaScript, mit Maus
+und nur mit der Tastatur — und liest dabei die Browser-Konsole mit.
+
+Das ist kein Luxus: `php artisan test` prüft das ausgelieferte HTML und kann
+prinzipiell nicht sehen, ob ein Knopf im Browser auch etwas bewirkt. Genau dort
+lag ein Fehler, der lange unentdeckt blieb — Details in
+[`docs/Komponenten.md`](docs/Komponenten.md), Abschnitt „Behobener Fehler:
+Einstellungsknopf reagierte nicht".
+
 ---
 
 ## Stack
 
-Laravel 12 · PHP 8.3 · MySQL/MariaDB · Blade · Tailwind 4 · Alpine.js
+Laravel 12 · PHP 8.2–8.4 · MySQL/MariaDB · Blade · Tailwind 4 · kein JS-Framework
 
 Bewusste Entscheidungen:
 
