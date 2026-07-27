@@ -377,3 +377,52 @@ eine ausgeschriebene Liste; ein Test prüft alle Titel.
 weil PHPUnit die Tests als „risky" markierte — hätte im Betrieb zu schwer
 auffindbaren Fehlern führen können. Seiten ohne gepflegte Beschreibung
 bekommen jetzt den Titel als Notbehelf.
+
+## 10. Vorstand und Gruppen als eigene Daten (27.07.2026)
+
+Zwei Bereiche, die vorher als Fliesstext auf Seiten standen, sind jetzt eigene
+Datensätze — pflegbar im Panel, einheitlich dargestellt, an mehreren Stellen
+einbindbar.
+
+### `team_grid` — Vorstand und Team
+
+Die Seite umfasste 2.441 Wörter: drei Personen mit **18 bis 19 Absätzen**
+Selbstvorstellung, hintereinander weg. Jetzt: Kurzangaben sichtbar, der
+ausführliche Text über natives `<details>` aufklappbar. Ohne JavaScript
+bedienbar, und der Volltext bleibt für Suchmaschinen im Dokument.
+
+Personen ohne Foto bekommen **Initialen**, kein Platzhalter-Gesicht — ein
+Symbol, das eine Person darstellen soll, die es so nicht gibt, wäre unehrlich.
+
+Die Zuordnung aus dem Fliesstext folgt dem Muster der Altseite: Überschrift
+ohne Text = Rolle, nächste = Name, dann die Vorstellung. **Eine Stelle liegt
+daneben** und ist ausdrücklich korrigiert: „Herr und Frau Unbekannt" ist ein
+stellvertretendes Porträt für die Menschen im Hintergrund, kein
+Vorstandsmitglied — die darüberstehende Überschrift „Gemeinsam KE!N EINZELFALL"
+ist entsprechend keine Rollenbezeichnung.
+
+### `group_list` — Selbsthilfe- und Arbeitsgruppen
+
+10 Gruppen: 4 Selbsthilfegruppen (eine davon „in Planung"), 6 Arbeitsgruppen
+mit Kürzeln. Termin, Rhythmus und Ort stehen als eigene Felder statt im
+Fließtext.
+
+Geplante und geschlossene Gruppen treten optisch zurück und bekommen **keinen
+Anfrage-Knopf** — er würde Erwartungen wecken, die niemand einlösen kann.
+
+> ⚠️ **Bewusst keine Anmeldeverwaltung.** Wer sich zu einer Selbsthilfegruppe
+> anmeldet, offenbart damit eine Angabe nach Art. 9 DSGVO. Das braucht ein
+> eigenes Konzept mit Löschfristen und Zugriffsregelung und gehört nicht
+> nebenbei in eine Gruppenübersicht. Der Weg führt über das Kontaktformular,
+> dessen Daten verschlüsselt liegen. Ein Test hält fest, dass auf den
+> Gruppenseiten kein Formular steht.
+
+### Wie die Seiten neu zusammengesetzt werden
+
+`TeamUndGruppenSeeder` ersetzt genau die Textabschnitte, deren Überschrift
+eine Gruppe oder Person benennt. **Einleitung, Teilnahmeregeln und Dokumente
+bleiben** — sie gehören nicht in die Aufzählung, sondern drumherum.
+
+Der Abgleich läuft über die Namen der angelegten Datensätze, mit Mindestlänge
+gegen Fehltreffer: Ein kurzer Name wie „Team" käme sonst in halben
+Überschriften vor.

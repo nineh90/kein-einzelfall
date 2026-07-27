@@ -156,6 +156,10 @@ class AltseiteSeeder extends Seeder
         // verlinkt — ohne sie liefe der Verweis ins Leere.
         $this->call(BarrierefreiheitSeeder::class);
 
+        // Vorstand und Gruppen aus dem Fliesstext in eigene Datensaetze
+        // ueberfuehren und die betroffenen Seiten neu zusammensetzen.
+        $this->call(TeamUndGruppenSeeder::class);
+
         $this->command->info("{$angelegt} Seiten und ".Redirect::count().' Weiterleitungen eingepflegt.');
     }
 }

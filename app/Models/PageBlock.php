@@ -26,6 +26,8 @@ class PageBlock extends Model
         'schritte' => 'Ablauf in Schritten',
         'accordion' => 'Fragen und Antworten',
         'hinweis' => 'Hervorgehobener Hinweis',
+        'team_grid' => 'Vorstand und Team',
+        'group_list' => 'Gruppen-Übersicht',
         'hero' => 'Aufmacher',
         'quick_access' => 'Einstiegskarten',
         'topic_list' => 'Themenliste',
