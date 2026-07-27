@@ -87,6 +87,14 @@ class StartbarkeitTest extends TestCase
 
         $this->assertArrayHasKey('ext-intl', $composer['require']);
         $this->assertArrayHasKey('ext-mbstring', $composer['require']);
+
+        // zip braucht nur Composer, nicht die laufende Anwendung. Es zur
+        // Startbedingung zu machen hiesse, unnötig Pakete zu verlangen.
+        $this->assertArrayNotHasKey('ext-zip', $composer['require']);
+
+        // Laravel 12 ist auf PHP 8.2 bis 8.4 getestet — 8.5 nicht
+        // stillschweigend zulassen.
+        $this->assertStringContainsString('<8.6', $composer['require']['php']);
     }
 
     public function test_startskript_prueft_die_php_erweiterungen(): void
@@ -97,6 +105,10 @@ class StartbarkeitTest extends TestCase
         $this->assertStringContainsString('intl', $skript);
         $this->assertStringContainsString('php -m', $skript);
         $this->assertStringContainsString('dnf install', $skript, 'Hinweis für Fedora fehlt');
+
+        // Auf Nobara scheitert dnf gern an fehlenden Signaturschlüsseln —
+        // ohne Hinweis steht man davor und weiss nicht weiter.
+        $this->assertStringContainsString('fedora.gpg', $skript);
     }
 
     public function test_startskript_legt_ein_verwaltungskonto_an(): void

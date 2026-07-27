@@ -28,20 +28,32 @@ WATCH=false
 env_wert() { grep -E "^$1=" .env 2>/dev/null | tail -1 | cut -d= -f2- | tr -d '"' | tr -d "'"; }
 
 # --- PHP-Erweiterungen -----------------------------------------------------
-# Fehlt eine davon, läuft die Seite scheinbar — bis an einer beliebigen Stelle
-# eine Ausnahme fliegt. Bei intl war das die Seitenliste im Panel:
+# Nur was die laufende Anwendung wirklich braucht. `zip` steht bewusst nicht
+# hier: Das benötigt nur Composer beim Installieren, nicht die Seite selbst —
+# es zur Startbedingung zu machen hiesse, unnötig Pakete zu verlangen.
+#
+# intl ist dagegen unverzichtbar: Filament formatiert damit Zahlen in jeder
+# Tabelle. Ohne die Erweiterung liefert /admin/pages einen 500er mit
 # „The intl PHP extension is required to use the [format] method."
-# Lieber hier abbrechen als später an unerwarteter Stelle.
+# Geprüft: ohne intl brechen sämtliche Listen im Panel ab.
 FEHLEND=""
-for EXT in intl mbstring pdo_mysql curl xml zip; do
+for EXT in intl mbstring pdo_mysql curl xml; do
     php -m 2>/dev/null | grep -qix "$EXT" || FEHLEND="$FEHLEND $EXT"
 done
+
+# Passende Paketnamen zur tatsächlich laufenden PHP-Version vorschlagen.
+PHP_KURZ=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;' 2>/dev/null || echo '8.3')
 
 if [[ -n "$FEHLEND" ]]; then
     echo "✗ Diese PHP-Erweiterungen fehlen:$FEHLEND"
     echo
     echo "  Fedora/Nobara:  sudo dnf install$(printf ' php-%s' $FEHLEND)"
-    echo "  Debian/Ubuntu:  sudo apt install$(printf ' php8.3-%s' $FEHLEND)"
+    echo "  Debian/Ubuntu:  sudo apt install$(printf " php${PHP_KURZ}-%s" $FEHLEND)"
+    echo
+    echo "  Schlägt dnf mit „Verifizierung der Signatur fehlgeschlagen“ fehl,"
+    echo "  fehlt der Signaturschlüssel der Fedora-Version, aus der das Paket"
+    echo "  stammt. Alle Fedora-Schlüssel holen:"
+    echo "      sudo rpm --import https://fedoraproject.org/fedora.gpg"
     echo
     echo "  Danach diesen Befehl erneut ausführen."
     exit 1

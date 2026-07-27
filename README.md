@@ -60,6 +60,39 @@ Der Zugang muss ausdrücklich erteilt werden. Sobald Vereinsmitglieder eigene
 Konten bekommen, liegen sie in derselben Tabelle wie die Redaktion — ohne diesen
 Riegel käme jedes Mitglied an die Anfragen.
 
+### Voraussetzungen
+
+PHP **8.2 bis 8.4** mit den Erweiterungen `intl`, `mbstring`, `pdo_mysql`,
+`curl`, `xml`. `bin/start` prüft das und nennt den passenden Befehl.
+
+`intl` ist nicht verhandelbar: Filament formatiert damit die Zahlen in jeder
+Tabelle. Ohne die Erweiterung liefert jede Liste im Panel einen Fehler.
+
+<details>
+<summary>dnf meldet „Verifizierung der Signatur fehlgeschlagen"</summary>
+
+Dann fehlt der Signaturschlüssel der Fedora-Version, aus der das Paket stammt —
+auf Nobara kommen Pakete oft aus einer neueren Fedora-Generation als das
+installierte System.
+
+```bash
+sudo rpm --import https://fedoraproject.org/fedora.gpg
+```
+
+**Vorher prüfen, was dnf sonst noch mitnimmt.** Wenn in der Liste `php-cli`
+mit einer höheren Nebenversion steht (etwa 8.4 → 8.5), wird die PHP-Version
+mit angehoben. Laravel 12 ist auf 8.2 bis 8.4 getestet, deshalb begrenzt
+`composer.json` die Spanne. Nur die Erweiterung nachziehen, ohne PHP zu
+aktualisieren:
+
+```bash
+sudo dnf install --setopt=install_weak_deps=False php-intl-$(php -r 'echo PHP_VERSION;')
+```
+
+Geht das nicht, ist ein Container die ruhigere Lösung als ein PHP-Upgrade
+mitten im Projekt.
+</details>
+
 ### Nach einem `git pull`
 
 **`bin/start` neu starten.** Neuer Code bringt oft neue Datenbanktabellen mit;
