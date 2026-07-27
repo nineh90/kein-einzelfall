@@ -99,13 +99,81 @@ class PageForm
                                 ->label('Überschrift')
                                 ->helperText('Erscheint als Zwischenüberschrift und im Inhaltsverzeichnis.'),
 
+                            Textarea::make('data.einleitung')
+                                ->label('Einleitung')
+                                ->rows(2)
+                                ->visible(fn ($get) => in_array($get('typ'), ['schritte', 'accordion'], true))
+                                ->helperText('Kurzer Text über der Liste. Kann leer bleiben.'),
+
                             Repeater::make('data.absaetze')
                                 ->label('Absätze')
                                 ->addActionLabel('Absatz hinzufügen')
-                                ->visible(fn ($get) => $get('typ') === 'text')
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true))
                                 ->simple(
                                     Textarea::make('absatz')->label('')->rows(4)->required()
                                 ),
+
+                            // --- Text mit Bild ---
+                            TextInput::make('data.bild')
+                                ->label('Bild (Pfad oder Adresse)')
+                                ->visible(fn ($get) => $get('typ') === 'text_media')
+                                ->helperText('Leer lassen zeigt eine Platzhalterfläche.'),
+
+                            TextInput::make('data.bild_alt')
+                                ->label('Bildbeschreibung')
+                                ->visible(fn ($get) => $get('typ') === 'text_media')
+                                ->helperText('Was auf dem Bild zu sehen ist — wird Menschen vorgelesen, '
+                                    .'die es nicht sehen können. Bei rein schmückenden Bildern leer lassen.'),
+
+                            Select::make('data.bild_seite')
+                                ->label('Bild steht')
+                                ->options(['rechts' => 'rechts', 'links' => 'links'])
+                                ->default('rechts')
+                                ->native(false)
+                                ->visible(fn ($get) => $get('typ') === 'text_media'),
+
+                            // --- Ablauf in Schritten ---
+                            Repeater::make('data.schritte')
+                                ->label('Schritte')
+                                ->addActionLabel('Schritt hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'schritte')
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->collapsible()
+                                ->schema([
+                                    TextInput::make('titel')->label('Überschrift des Schritts')->required(),
+                                    Textarea::make('text')->label('Beschreibung')->rows(3),
+                                ]),
+
+                            // --- Fragen und Antworten ---
+                            Repeater::make('data.eintraege')
+                                ->label('Fragen')
+                                ->addActionLabel('Frage hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'accordion')
+                                ->itemLabel(fn (array $state) => $state['frage'] ?? null)
+                                ->collapsible()
+                                ->schema([
+                                    TextInput::make('frage')->label('Frage')->required(),
+                                    \Filament\Forms\Components\RichEditor::make('antwort')
+                                        ->label('Antwort')
+                                        ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList']),
+                                ]),
+
+                            // --- Hervorgehobener Hinweis ---
+                            Select::make('data.art')
+                                ->label('Art des Hinweises')
+                                ->options([
+                                    'hinweis' => 'Gut zu wissen (neutral)',
+                                    'wichtig' => 'Wichtig (grün hervorgehoben)',
+                                    'frist' => 'Frist beachten (mit Warnfarbe)',
+                                ])
+                                ->default('hinweis')
+                                ->native(false)
+                                ->visible(fn ($get) => $get('typ') === 'hinweis'),
+
+                            Textarea::make('data.text')
+                                ->label('Text des Hinweises')
+                                ->rows(3)
+                                ->visible(fn ($get) => $get('typ') === 'hinweis'),
 
                             Repeater::make('data.dokumente')
                                 ->label('Dokumente')

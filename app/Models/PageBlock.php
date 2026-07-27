@@ -22,6 +22,10 @@ class PageBlock extends Model
      */
     public const TYPEN = [
         'text' => 'Text',
+        'text_media' => 'Text mit Bild',
+        'schritte' => 'Ablauf in Schritten',
+        'accordion' => 'Fragen und Antworten',
+        'hinweis' => 'Hervorgehobener Hinweis',
         'hero' => 'Aufmacher',
         'quick_access' => 'Einstiegskarten',
         'topic_list' => 'Themenliste',

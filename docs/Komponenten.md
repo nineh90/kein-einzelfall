@@ -345,3 +345,35 @@ als Zwei-Klick-Einbettung, und die Spendenbescheinigung per E-Mail.
 - [ ] `hilfe_box`, `inhalts_hinweis`, `leichte_sprache`: gewünscht? (mit Verein klären)
 - [ ] Bildmaterial: das Mockup nutzt Platzhalter. Fotos stellt der Verein
 - [ ] Logo als Vektor + helle Variante für dunkle Flächen
+
+## 9. Bausteine für Unterseiten (27.07.2026)
+
+Vier zusätzliche Block-Typen, damit sich Unterseiten im Panel abwechslungsreich
+zusammenstellen lassen statt nur aus Textblöcken zu bestehen.
+
+| Baustein | Wofür | Besonderheit |
+|---|---|---|
+| `schritte` | Antragswege, Widerspruchsverfahren, „was passiert wann" | Als `<ol>` ausgezeichnet — Screenreader sagen „1 von 5" an. Sichtbare Ziffern sind `aria-hidden`, sonst käme die Nummer doppelt |
+| `accordion` | Häufige Fragen | Natives `<details>`: ohne JavaScript bedienbar, Inhalt bleibt für Suchmaschinen sichtbar. Bringt **FAQ-Auszeichnung** mit — Fragen können direkt im Suchergebnis erscheinen |
+| `hinweis` | Fristen, wichtige Ausnahmen | Drei Stufen (neutral / wichtig / Frist). Bewusst **zurückhaltend eingefärbt**: grelle Warnflächen erzeugen bei belasteten Menschen Druck |
+| `text_media` | Text mit Bild | Zeigt eine Platzhalterfläche in der Farbwelt der Seite, solange kein Foto hinterlegt ist — die Seite sieht auch ohne Bildmaterial fertig aus |
+
+Alle vier sind im Filament-Panel pflegbar; die Felder erscheinen je nach
+gewähltem Baustein-Typ.
+
+### Zwei Fehler, die dabei aufgefallen sind
+
+**Dokumentenliste lief über die volle Fensterbreite.** Ihr fehlte der
+Seitencontainer, dadurch fiel sie aus dem Satzspiegel. Jetzt im selben Rahmen
+wie die Textbausteine und als abgesetzte Karte statt randloser Liste.
+
+**Vier Seitentitel schrieben Umlaute aus** — „Ueber Uns Vorstand Und Team".
+Wo die Altseite keine Überschrift ausweist, wurde der Titel aus dem Slug
+abgeleitet, und Slugs kennen keine Umlaute. Jetzt gibt es in `AltseiteSeeder`
+eine ausgeschriebene Liste; ein Test prüft alle Titel.
+
+**Ausgabepuffer-Leck in `page.blade.php`.** `@section('description', null)`
+öffnet einen Puffer, den mangels `@endsection` niemand schliesst. Fiel nur auf,
+weil PHPUnit die Tests als „risky" markierte — hätte im Betrieb zu schwer
+auffindbaren Fehlern führen können. Seiten ohne gepflegte Beschreibung
+bekommen jetzt den Titel als Notbehelf.

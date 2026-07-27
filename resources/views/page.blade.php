@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('title', $page->titel)
-@section('description', $page->meta_description)
+
+{{-- Nie null übergeben: @section mit null als Inhalt öffnet einen
+     Ausgabepuffer, der mangels @endsection nie geschlossen wird. Seiten ohne
+     gepflegte Beschreibung erhalten deshalb den Seitentitel als Notbehelf —
+     besser als ein leeres description-Feld im Quelltext. --}}
+@section('description', $page->meta_description ?: $page->titel.' — KE!N EINZELFALL e.V.')
 
 @if ($page->noindex)
     @push('head')

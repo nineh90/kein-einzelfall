@@ -24,14 +24,22 @@
     - Kein target="_blank": ungefragte neue Tabs sind desorientierend. Wer will,
       öffnet selbst in einem neuen Tab.
 --}}
-<section @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="Dokumente zum Herunterladen" @endif>
-    @if ($titel)
-        <h2 id="dl-{{ Str::slug($titel) }}" class="mb-4 font-display text-2xl font-medium text-ink">
-            {{ $titel }}
-        </h2>
-    @endif
+{{-- Derselbe Rahmen wie die Textbausteine: Ohne Container lief die Liste über
+     die volle Fensterbreite und fiel aus dem Satzspiegel der Seite. --}}
+<section class="px-4 py-8 lg:px-10 lg:py-12"
+         @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="Dokumente zum Herunterladen" @endif>
+    <div class="mx-auto max-w-6xl">
+        <div class="max-w-prose">
+            @if ($titel)
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green"></span>
+                <h2 id="dl-{{ Str::slug($titel) }}" class="mb-4 font-display text-2xl font-medium text-ink lg:text-3xl">
+                    {{ $titel }}
+                </h2>
+            @endif
 
-    <ul class="flex flex-col divide-y divide-line border-y border-line">
+            {{-- Als abgesetzte Karte statt randloser Liste — sonst wirkt der
+                 Abschnitt wie ein loses Anhängsel unter dem Fließtext. --}}
+            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line bg-card">
         @foreach ($dokumente as $dok)
             @php
                 $typ = strtoupper($dok['typ'] ?? pathinfo($dok['url'], PATHINFO_EXTENSION) ?: 'PDF');
@@ -43,22 +51,25 @@
             <li>
                 <a href="{{ $dok['url'] }}"
                    download
-                   class="group flex items-center gap-4 py-4 no-underline hover:bg-card">
-                    <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg
-                                 bg-green-mist font-display text-[0.6875rem] font-semibold text-green-deep">
+                   class="group flex items-center gap-4 px-4 py-3.5 no-underline hover:bg-green-mist">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
+                                 bg-green-mist font-display text-[0.625rem] font-semibold text-green-deep
+                                 group-hover:bg-cream">
                         {{ $typ }}
                     </span>
 
                     <span class="flex-1">
-                        <span class="block text-ink group-hover:underline">{{ $dok['titel'] }}</span>
+                        <span class="block text-[0.9375rem] text-ink group-hover:underline">{{ $dok['titel'] }}</span>
                         <span class="mt-0.5 block text-xs text-ink-soft">{{ $meta }}</span>
                     </span>
 
-                    <span class="shrink-0 text-ink-soft">
+                    <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5">
                         <x-ui.icon name="arrow-right" :size="18" />
                     </span>
                 </a>
             </li>
-        @endforeach
-    </ul>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 </section>

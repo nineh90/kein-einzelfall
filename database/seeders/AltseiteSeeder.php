@@ -31,6 +31,26 @@ class AltseiteSeeder extends Seeder
     /** Diese Seiten haben eine eigene Route und werden nicht als Page angelegt. */
     private const EIGENE_ROUTE = ['/'];
 
+    /**
+     * Titel für Seiten, auf denen die Altseite keine Überschrift ausweist.
+     *
+     * Aus dem Slug abgeleitet wäre der Titel „Ueber Uns Vorstand Und Team" —
+     * Slugs kennen keine Umlaute. Auf einer deutschen Seite sieht das schlicht
+     * falsch aus, deshalb hier ausgeschrieben. Die Schreibweise folgt der
+     * Navigation, damit Menüpunkt und Überschrift zusammenpassen.
+     */
+    private const TITEL = [
+        'ueber-uns-vorstand-und-team' => 'Über uns – Vorstand und Team',
+        'buerokratie-labyrinth' => 'Das Bürokratie-Labyrinth',
+        'traumafolgestoerungen-verstehen' => 'Traumafolgestörungen verstehen',
+        'unterstuetzung' => 'Unterstützung',
+        'fsm-erweitertes-hilfesystem' => 'FSM – Erweitertes Hilfesystem',
+        'kein-einzelfall-im-dialog' => 'KE!N EINZELFALL im Dialog',
+        'trauma-bindung-und-beziehung' => 'Trauma, Bindung und Beziehung',
+        'das-hilfesystem' => 'Das Hilfesystem',
+        'istanbul-konvention' => 'Istanbul-Konvention',
+    ];
+
     public function run(): void
     {
         $datei = base_path('docs/altseite-inhalt.json');
@@ -55,7 +75,9 @@ class AltseiteSeeder extends Seeder
             $slug = self::SLUG_ANPASSUNG[$altSlug] ?? $altSlug;
 
             $page = Page::updateOrCreate(['slug' => $slug], [
-                'titel' => $daten['titel'] ?: Str::headline($slug),
+                // Reihenfolge: Überschrift der Altseite, sonst unsere Liste,
+                // erst zuletzt der aus dem Slug abgeleitete Notbehelf.
+                'titel' => $daten['titel'] ?: (self::TITEL[$slug] ?? Str::headline($slug)),
                 'meta_title' => $daten['meta_title'],
                 'meta_description' => $daten['meta_description'],
                 'published_at' => now(),

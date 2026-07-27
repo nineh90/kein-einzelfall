@@ -57,6 +57,47 @@
         </section>
 
         <section>
+            <h2 class="mb-3 font-display text-sm uppercase tracking-wide text-ink-soft">schritte</h2>
+            <x-blocks.schritte
+                titel="So läuft ein Antrag ab"
+                einleitung="Beispieldaten zur Ansicht des Bausteins."
+                :schritte="[
+                    ['titel' => 'Antrag stellen', 'text' => 'Formlos beim zuständigen Amt — schriftlich und mit Datum.'],
+                    ['titel' => 'Unterlagen nachreichen', 'text' => 'Atteste, Befunde und Nachweise sammeln.'],
+                    ['titel' => 'Bescheid abwarten', 'text' => 'Die Bearbeitung dauert oft mehrere Monate.'],
+                    ['titel' => 'Widerspruch prüfen', 'text' => 'Bei Ablehnung bleibt ein Monat Zeit.'],
+                ]" />
+        </section>
+
+        <section>
+            <h2 class="mb-3 font-display text-sm uppercase tracking-wide text-ink-soft">hinweis (drei Arten)</h2>
+            <x-blocks.hinweis art="hinweis" text="Alle Angebote des Vereins sind kostenfrei." />
+            <x-blocks.hinweis art="wichtig" titel="Kostenfrei und unabhängig"
+                text="Die Selbsthilfegruppen sind nicht an eine Mitgliedschaft gebunden." />
+            <x-blocks.hinweis art="frist"
+                text="Gegen einen ablehnenden Bescheid kann innerhalb eines Monats Widerspruch eingelegt werden." />
+        </section>
+
+        <section>
+            <h2 class="mb-3 font-display text-sm uppercase tracking-wide text-ink-soft">accordion</h2>
+            <x-blocks.accordion
+                titel="Häufige Fragen"
+                :eintraege="[
+                    ['frage' => 'Muss ich Mitglied sein, um teilzunehmen?',
+                     'antwort' => '<p>Nein. Die Selbsthilfegruppen sind kostenfrei und nicht an eine Mitgliedschaft gebunden.</p>'],
+                    ['frage' => 'Kann ich anonym bleiben?',
+                     'antwort' => '<p>Ja. Beim Kontaktformular sind Name und E-Mail-Adresse freiwillig.</p>'],
+                ]" />
+        </section>
+
+        <section>
+            <h2 class="mb-3 font-display text-sm uppercase tracking-wide text-ink-soft">text_media</h2>
+            <x-blocks.text-media
+                titel="Wer wir sind"
+                :absaetze="['Beispieltext zur Ansicht. Solange kein Foto hinterlegt ist, erscheint eine Platzhalterfläche in der Farbwelt der Seite.']" />
+        </section>
+
+        <section>
             <h2 class="mb-3 font-display text-sm uppercase tracking-wide text-ink-soft">
                 download_list — echte Dokumente der Altseite
             </h2>
