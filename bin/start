@@ -65,17 +65,48 @@ fi
 [[ -d node_modules ]] || { echo "→ npm install ...";      npm install --silent; }
 [[ -f .env ]]         || { cp .env.example .env; php artisan key:generate -q; }
 
-php artisan migrate --force -q || echo "✗ Migrationen fehlgeschlagen — siehe Meldung oben"
+# --- Datenbankstand --------------------------------------------------------
+# Ausstehende Migrationen sind der häufigste Grund für Fehler nach einem
+# `git pull`: Der Code erwartet Tabellen, die es lokal noch nicht gibt. Das
+# darf nicht stillschweigend durchlaufen — vorher wurde der Fehler nur
+# ausgegeben und der Server startete trotzdem.
+OFFEN=$(php artisan migrate:status 2>/dev/null | grep -ci 'pending' || true)
+if [[ "${OFFEN:-0}" -gt 0 ]]; then
+    echo "→ ${OFFEN} ausstehende Migration(en) werden ausgeführt ..."
+fi
+
+if ! php artisan migrate --force -q; then
+    echo
+    echo "✗ Die Migrationen sind fehlgeschlagen."
+    echo "  Ohne sie fehlen Tabellen und Seiten brechen mit einem SQL-Fehler ab."
+    echo "  Vollständige Meldung mit:  php artisan migrate --force"
+    exit 1
+fi
 
 # --- Inhalte ---------------------------------------------------------------
 # Frisch migriert ist die Datenbank leer — dann sind sämtliche Links tot, weil
 # es die Seiten schlicht nicht gibt. Einmalig einpflegen, wenn nichts da ist.
-SEITEN=$(php artisan tinker --execute='echo App\Models\Page::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+zaehle() { php artisan tinker --execute="echo $1;" 2>/dev/null | tail -1 | tr -dc '0-9'; }
+
+SEITEN=$(zaehle 'App\Models\Page::count()')
 if [[ "${SEITEN:-0}" -eq 0 ]]; then
     echo "→ Datenbank ist leer, Inhalte der Altseite einpflegen ..."
     php artisan db:seed --class=AltseiteSeeder --force 2>&1 | tail -1
-    SEITEN=$(php artisan tinker --execute='echo App\Models\Page::count();' 2>/dev/null | tail -1 | tr -dc '0-9')
+    SEITEN=$(zaehle 'App\Models\Page::count()')
 fi
+
+# Gruppen und Vorstand kamen später dazu. Wer eine ältere Datenbank hat,
+# bekommt sie hier nachgereicht, ohne alles neu aufbauen zu müssen.
+GRUPPEN=$(zaehle 'App\Models\Group::count()')
+if [[ "${GRUPPEN:-0}" -eq 0 ]]; then
+    echo "→ Gruppen und Vorstand nachtragen ..."
+    php artisan db:seed --class=TeamUndGruppenSeeder --force 2>&1 | tail -1
+    GRUPPEN=$(zaehle 'App\Models\Group::count()')
+fi
+
+# Ohne Konto kommt niemand in die Verwaltung. Das Konto wurde früher von Hand
+# angelegt — und existierte damit auf genau einem Rechner.
+php artisan db:seed --class=AdminSeeder --force 2>&1 | grep -i 'konto' || true
 
 # --- Assets ----------------------------------------------------------------
 if $WATCH; then

@@ -37,8 +37,16 @@ PORT=8080 bin/start    # anderer Port
 
 ### Verwaltung
 
-`/admin` — angelegtes Konto: `kevin@nils-digital.de` / `ke-admin-2026`
-(nur lokal; vor dem Go-Live ändern).
+`/admin` — `bin/start` legt beim ersten Lauf ein Konto an, falls noch keines
+existiert:
+
+| | |
+|---|---|
+| E-Mail | `admin@kein-einzelfall.test` |
+| Passwort | `kein-einzelfall` |
+
+Nur für die lokale Entwicklung. In Produktion wird das erste Konto von Hand
+angelegt (der Seeder überspringt sich dort selbst).
 
 Weitere Konten:
 
@@ -51,6 +59,16 @@ php artisan tinker --execute='App\Models\User::where("email","…")->update(["pa
 Der Zugang muss ausdrücklich erteilt werden. Sobald Vereinsmitglieder eigene
 Konten bekommen, liegen sie in derselben Tabelle wie die Redaktion — ohne diesen
 Riegel käme jedes Mitglied an die Anfragen.
+
+### Nach einem `git pull`
+
+**`bin/start` neu starten.** Neuer Code bringt oft neue Datenbanktabellen mit;
+ein laufender Server führt keine Migrationen aus. Symptome sonst: SQL-Fehler
+wie „Table … doesn't exist", fehlende Inhalte oder Bedienelemente, die nicht
+reagieren, weil die Assets noch die alten sind.
+
+`bin/start` führt ausstehende Migrationen aus, trägt fehlende Inhalte nach und
+baut die Assets neu — und bricht ab, wenn dabei etwas schiefgeht.
 
 ### Inhalte neu von der Altseite holen
 

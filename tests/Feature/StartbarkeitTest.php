@@ -63,6 +63,63 @@ class StartbarkeitTest extends TestCase
         $this->assertStringContainsString('manifest.json', $skript);
     }
 
+    public function test_startskript_fuehrt_ausstehende_migrationen_hart_aus(): void
+    {
+        // Vorher lief das Skript bei einem Migrationsfehler einfach weiter.
+        // Ergebnis: Der Server startete, und Seiten brachen mit einem
+        // SQL-Fehler ab („Table 'groups' doesn't exist").
+        $skript = file_get_contents(base_path('bin/start'));
+
+        $this->assertStringContainsString('migrate:status', $skript);
+        $this->assertMatchesRegularExpression(
+            '/if ! php artisan migrate --force -q; then.*?exit 1/s',
+            $skript,
+            'Migrationsfehler müssen den Start abbrechen'
+        );
+    }
+
+    public function test_startskript_legt_ein_verwaltungskonto_an(): void
+    {
+        // Das Konto wurde früher von Hand erzeugt und existierte damit auf
+        // genau einem Rechner — während das README behauptete, es gäbe eines.
+        $this->assertStringContainsString('AdminSeeder', file_get_contents(base_path('bin/start')));
+    }
+
+    public function test_verwaltungskonto_wird_angelegt_und_ist_freigeschaltet(): void
+    {
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+
+        $konto = \App\Models\User::where('email', \Database\Seeders\AdminSeeder::EMAIL)->first();
+
+        $this->assertNotNull($konto);
+        $this->assertTrue($konto->panel_zugang);
+        $this->assertTrue(\Illuminate\Support\Facades\Hash::check(
+            \Database\Seeders\AdminSeeder::PASSWORT,
+            $konto->password
+        ));
+
+        $this->actingAs($konto)->get('/admin')->assertOk();
+    }
+
+    public function test_verwaltungskonto_wird_nicht_doppelt_angelegt(): void
+    {
+        // Sonst käme bei jedem Start ein weiteres Konto dazu.
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+
+        $this->assertSame(1, \App\Models\User::where('panel_zugang', true)->count());
+    }
+
+    public function test_readme_nennt_die_zugangsdaten_die_wirklich_angelegt_werden(): void
+    {
+        // Genau hier lag der Fehler: Das README nannte ein Konto, das nur in
+        // einer bestimmten Datenbank existierte.
+        $readme = file_get_contents(base_path('README.md'));
+
+        $this->assertStringContainsString(\Database\Seeders\AdminSeeder::EMAIL, $readme);
+        $this->assertStringContainsString(\Database\Seeders\AdminSeeder::PASSWORT, $readme);
+    }
+
     public function test_alle_verlinkten_seiten_der_navigation_sind_erreichbar(): void
     {
         // Fängt tote Verweise in der Navigation ab — genau das war das
