@@ -32,6 +32,7 @@ return [
                 ['label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
                 ['label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
                 ['label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
+                ['label' => 'Aktuelles',                 'url' => '/aktuelles'],
                 ['label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
             ],
         ],

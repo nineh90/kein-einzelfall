@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnfrageController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,33 @@ Route::get('/module-demo', function () {
 Route::post('/anfrage', [AnfrageController::class, 'store'])
     ->middleware('throttle:5,10')
     ->name('anfrage.senden');
+
+/*
+ * Blog / Aktuelles.
+ *
+ * Suche und Kategoriefilter laufen über GET-Parameter statt über Livewire:
+ * Jeder Stand hat eine eigene Adresse, die man teilen und als Lesezeichen
+ * speichern kann und die eine Suchmaschine erfasst.
+ */
+Route::get('/aktuelles', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/aktuelles/{slug}', [BlogController::class, 'show'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('blog.show');
+
+/*
+ * Veranstaltungen. Ersetzt das WordPress-Plugin "The Events Calendar".
+ *
+ * /veranstaltungen war auf der Altseite eine Inhaltsseite — der Text bleibt
+ * als Einleitung erhalten und wird über den Kalender gestellt.
+ */
+Route::get('/veranstaltungen', [EventController::class, 'index'])->name('events.index');
+Route::get('/veranstaltungen/kalender.ics', [EventController::class, 'ical'])->name('events.ical');
+Route::get('/veranstaltungen/{slug}', [EventController::class, 'show'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('events.show');
+Route::get('/veranstaltungen/{slug}/kalender.ics', [EventController::class, 'icalEinzeln'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('events.ical.einzeln');
 
 /*
  * Inhaltsseiten aus der Datenbank. Steht bewusst am Ende: die Route fängt

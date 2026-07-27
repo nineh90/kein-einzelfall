@@ -274,6 +274,53 @@ Zugelassene Anbieter stehen in `config/embeds.php` und fliessen in `frame-src`
 ein. Was dort nicht steht, lädt nicht — auch dann nicht, wenn jemand
 versehentlich einen Einbettungscode in einen Textbaustein kopiert.
 
+## 8. Blog und Veranstaltungen (27.07.2026)
+
+Angebotspositionen 2 und 3. Damit sind alle sieben Positionen technisch abgedeckt.
+
+### Blog — `/aktuelles`
+
+Die Altseite hat **null Beiträge**, der Blog wird also neu aufgebaut. Die drei
+bestehenden Kategorien sind übernommen, `/vereins-news` leitet auf `/aktuelles`.
+
+Suche, Kategoriefilter und Blättern laufen über **GET-Parameter**: jeder Stand hat
+eine eigene teilbare Adresse und funktioniert ohne JavaScript. `withQueryString()`
+sorgt dafür, dass Filter und Suchbegriff beim Blättern erhalten bleiben.
+
+> **Warum LIKE statt Volltextindex?** Der MySQL-Index klingt naheliegender, hat hier
+> aber drei Nachteile ohne Gegenwert: Er greift erst ab vier Zeichen (fände „OEG"
+> also nicht — ausgerechnet eines der wichtigsten Kürzel dieser Seite), ignoriert
+> Stoppwörter stillschweigend, und er sieht keine Daten aus offenen Transaktionen.
+> Da Laravel jeden Test in eine Transaktion legt — auch mit `DatabaseTruncation`,
+> das wurde geprüft — liesse sich die Suche gar nicht testen. Ungetestete Suche auf
+> einer Seite, auf der Menschen nach Hilfe suchen, ist keine gute Idee.
+> LIKE erzwingt einen Tabellendurchlauf; bei einigen hundert Beiträgen nicht messbar.
+
+### Veranstaltungen — `/veranstaltungen`
+
+Ersetzt „The Events Calendar". Dessen Umfang wird bewusst nicht nachgebaut: auf der
+Altseite steht dort genau **ein** Eintrag und es gibt keine kommenden Termine.
+
+- **Der Bestandstext bleibt.** `/veranstaltungen` war eine gepflegte Inhaltsseite
+  (443 Wörter) — der Text steht jetzt als Einleitung über dem Kalender, statt
+  verworfen zu werden.
+- Kommend/vergangen umschaltbar. Massgeblich ist das **Ende**, nicht der Beginn:
+  eine mehrtägige Veranstaltung gilt am zweiten Tag noch als laufend.
+- **iCal-Export** unter `/veranstaltungen/kalender.ics` und je Termin — die Altseite
+  bietet das unter `/events/?ical=1` an, die Möglichkeit sollte nicht verlorengehen.
+  Sonderzeichen sind nach RFC 5545 maskiert, sonst zerfällt die Datei.
+- **Keine Anmeldeverwaltung**, nur ein Link. Anmeldungen zu Selbsthilfegruppen sind
+  Art.-9-Daten und gehören in die Gruppenverwaltung mit eigenem Konzept — nicht
+  nebenbei in den Kalender.
+
+### Strukturierte Daten
+
+`Article` für Beiträge, `Event` für Termine — beides fehlt der Altseite komplett.
+Damit können Suchmaschinen Termine direkt im Ergebnis anzeigen.
+
+> Blade-Fallstrick: `@json()` mit mehrzeiligem Array bricht beim Kompilieren
+> („Unclosed '['"). Deshalb wird das JSON in einem `@php`-Block vorbereitet.
+
 ### Spendenseite
 
 `x-blocks.donation-options` mit den echten Angaben: Überweisung (Deutsche
