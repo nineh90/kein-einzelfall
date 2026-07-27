@@ -9,37 +9,86 @@
     @endpush
 @endif
 
-@section('content')
-
 @php
-    // Sprungmarken aus den Abschnittsüberschriften. Die Komponente blendet sich
-    // selbst aus, wenn es weniger als vier gibt — kurze Seiten brauchen kein
-    // Inhaltsverzeichnis.
-    $sprungpunkte = $page->blocks
+    use App\Support\Seitenkontext;
+
+    $kontext = Seitenkontext::fuer($page->slug);
+
+    $bloecke = $page->blocks;
+
+    // Der erste Absatz wandert als Vorspann in den Seitenkopf — aber nur, wenn
+    // der erste Baustein ein Text ohne eigene Überschrift ist. Sonst risse man
+    // einen Abschnitt auseinander.
+    $lead = null;
+    $ersterBlock = $bloecke->first();
+
+    if ($ersterBlock
+        && $ersterBlock->typ === 'text'
+        && blank($ersterBlock->data['titel'] ?? null)
+        && filled($ersterBlock->data['absaetze'] ?? [])) {
+
+        $absaetze = $ersterBlock->data['absaetze'];
+        $lead = array_shift($absaetze);
+
+        if ($absaetze === []) {
+            // Der Baustein bestand nur aus diesem einen Absatz
+            $bloecke = $bloecke->slice(1);
+        } else {
+            $gekuerzt = clone $ersterBlock;
+            $gekuerzt->data = array_merge($ersterBlock->data, ['absaetze' => $absaetze]);
+            $bloecke = $bloecke->slice(1)->prepend($gekuerzt);
+        }
+    }
+
+    // Sprungmarken für lange Seiten
+    $sprungpunkte = $bloecke
         ->filter(fn ($b) => $b->anker() && ($b->data['titel'] ?? null))
         ->map(fn ($b) => ['anker' => $b->anker(), 'titel' => $b->data['titel']])
         ->values()
         ->all();
 @endphp
 
-    {{-- Seitentitel. Die h1 steht hier und nicht im Block, damit sie garantiert
-         genau einmal vorkommt — egal wie die Blöcke zusammengesetzt sind. --}}
-    <div class="px-4 pt-8 lg:px-10 lg:pt-14">
-        <div class="mx-auto max-w-6xl">
-            <h1 class="max-w-prose font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-4xl">
-                {{ $page->titel }}
-            </h1>
+@section('content')
 
-            @if (count($sprungpunkte) >= 4)
-                <div class="mt-6 max-w-prose">
+    <x-layout.seitenkopf
+        :titel="$page->titel"
+        :bereich="$kontext->bereichName()"
+        :krumen="$kontext->brotkrumen($page->titel)"
+        :lead="$lead" />
+
+    @if (count($sprungpunkte) >= 4)
+        <div class="px-4 pt-8 lg:px-10">
+            <div class="mx-auto max-w-6xl">
+                <div class="max-w-prose">
                     <x-ui.sprungmarken :punkte="$sprungpunkte" />
                 </div>
-            @endif
+            </div>
         </div>
-    </div>
+    @endif
 
-    @foreach ($page->blocks as $block)
-        <x-block :block="$block" />
+    @foreach ($bloecke as $block)
+        {{-- Textbausteine wechseln die Fläche. Ohne das laufen zehn Abschnitte
+             optisch ununterscheidbar ineinander; der Wechsel gibt der Seite
+             Rhythmus und macht Abschnittsgrenzen sichtbar. --}}
+        <x-block :block="$block" :flaeche="$loop->index % 2 === 1 ? 'card' : 'cream'" />
     @endforeach
+
+    <x-layout.weiterlesen
+        :seiten="$kontext->geschwister()"
+        :bereich="$kontext->istBereichsUebersicht() ? $page->titel : $kontext->bereichName()" />
+
+    {{-- Gemeinsamer Abschluss: Auf jeder Unterseite soll der Weg zu uns
+         genauso nah sein wie auf der Startseite. Ausgenommen sind Rechtstexte —
+         unter einer Datenschutzerklärung wirkt eine Gesprächseinladung
+         deplatziert. --}}
+    @unless ($kontext->istRechtstext())
+        <x-blocks.contact-close
+            titel="Fragen zu diesem Thema?"
+            text="Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?"
+            :ctas="[
+                ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
+                ['label' => 'Kontakt', 'url' => '/kontakt', 'variant' => 'ghost'],
+            ]" />
+    @endunless
 
 @endsection

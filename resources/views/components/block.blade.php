@@ -1,4 +1,9 @@
-@props(['block'])
+@props([
+    'block',
+    // Vorgabe der Seite, damit aufeinanderfolgende Textbausteine die Fläche
+    // wechseln können. Eine im Baustein hinterlegte Fläche hat Vorrang.
+    'flaeche' => null,
+])
 
 @php
     use App\Models\PageBlock;
@@ -20,7 +25,7 @@
          Slot hinein, nicht als Attribut. --}}
     <x-blocks.text
         :titel="$data['titel'] ?? null"
-        :auf="$data['auf'] ?? 'cream'"
+        :auf="$data['auf'] ?? $flaeche ?? 'cream'"
         :anker="$block->anker()">
         @foreach ($data['absaetze'] ?? [] as $absatz)
             <p>{{ $absatz }}</p>

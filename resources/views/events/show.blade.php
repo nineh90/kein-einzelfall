@@ -42,11 +42,11 @@
 <article class="px-4 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-3xl">
 
-        <nav aria-label="Brotkrumen" class="mb-6 text-sm">
-            <a href="{{ route('events.index') }}" class="text-green-deep no-underline hover:underline">
-                Veranstaltungen
-            </a>
-        </nav>
+        <x-ui.brotkrumen :krumen="[
+            ['label' => 'Start', 'url' => '/'],
+            ['label' => 'Veranstaltungen', 'url' => route('events.index')],
+            ['label' => $termin->titel, 'url' => null],
+        ]" />
 
         <div class="flex flex-wrap items-center gap-2">
             @if ($termin->art)

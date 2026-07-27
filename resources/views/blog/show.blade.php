@@ -32,18 +32,15 @@
 <article class="px-4 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-3xl">
 
-        <nav aria-label="Brotkrumen" class="mb-6 text-sm text-ink-soft">
-            <a href="{{ route('blog.index') }}" class="text-green-deep no-underline hover:underline">
-                Aktuelles
-            </a>
-            @if ($beitrag->category)
-                <span aria-hidden="true"> › </span>
-                <a href="{{ route('blog.index', ['kategorie' => $beitrag->category->slug]) }}"
-                   class="text-green-deep no-underline hover:underline">
-                    {{ $beitrag->category->name }}
-                </a>
-            @endif
-        </nav>
+        <x-ui.brotkrumen :krumen="array_filter([
+            ['label' => 'Start', 'url' => '/'],
+            ['label' => 'Aktuelles', 'url' => route('blog.index')],
+            $beitrag->category
+                ? ['label' => $beitrag->category->name,
+                   'url' => route('blog.index', ['kategorie' => $beitrag->category->slug])]
+                : null,
+            ['label' => $beitrag->titel, 'url' => null],
+        ])" />
 
         <p class="text-xs uppercase tracking-[0.04em] text-ink-soft">
             <time datetime="{{ $beitrag->published_at->toDateString() }}">
