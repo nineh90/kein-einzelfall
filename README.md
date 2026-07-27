@@ -14,7 +14,7 @@ WordPress → Laravel. Umsetzung: [Nils-Digital](https://nils-digital.de).
 bin/start
 ```
 
-Kümmert sich um alles: PostgreSQL starten, fehlende Abhängigkeiten nachziehen,
+Kümmert sich um alles: MariaDB starten, fehlende Abhängigkeiten nachziehen,
 Migrationen laufen lassen, Assets bauen, Server starten.
 
 Dann im Browser: **http://localhost:8000**
@@ -31,7 +31,33 @@ PORT=8080 bin/start    # anderer Port
 | Pfad | Inhalt |
 |---|---|
 | `/` | Startseite aus Blöcken |
+| `/verein`, `/spenden`, … | die 23 Inhaltsseiten aus der Datenbank |
+| `/admin` | Verwaltung (Filament) |
 | `/module-demo` | Vorschau der Inhaltsmodule (`noindex`, fliegt später raus) |
+
+### Verwaltung
+
+`/admin` — angelegtes Konto: `kevin@nils-digital.de` / `ke-admin-2026`
+(nur lokal; vor dem Go-Live ändern).
+
+Weitere Konten:
+
+```bash
+php artisan make:filament-user
+# danach freischalten — Zugang ist standardmäßig gesperrt:
+php artisan tinker --execute='App\Models\User::where("email","…")->update(["panel_zugang" => true]);'
+```
+
+Der Zugang muss ausdrücklich erteilt werden. Sobald Vereinsmitglieder eigene
+Konten bekommen, liegen sie in derselben Tabelle wie die Redaktion — ohne diesen
+Riegel käme jedes Mitglied an die Anfragen.
+
+### Inhalte neu von der Altseite holen
+
+```bash
+php artisan altseite:holen                    # Bestand → docs/altseite-inhalt.json
+php artisan db:seed --class=AltseiteSeeder    # JSON → Datenbank
+```
 
 ### Selbst ausprobieren
 
@@ -61,7 +87,7 @@ JavaScript, keine externen Requests, saubere Überschriften-Gliederung.
 
 ## Stack
 
-Laravel 12 · PHP 8.3 · PostgreSQL · Blade · Tailwind 4 · Alpine.js
+Laravel 12 · PHP 8.3 · MySQL/MariaDB · Blade · Tailwind 4 · Alpine.js
 
 Bewusste Entscheidungen:
 
@@ -94,5 +120,13 @@ storage/app/migration/   gesicherter Bestand der Altseite (nicht im Git)
 ### Datenbank
 
 Lokal: `kein_einzelfall`, Benutzer `ke_dev`. Zugangsdaten in `.env`
-(nicht im Git). PostgreSQL startet im Container nicht automatisch mit —
-`bin/start` erledigt das.
+(nicht im Git). MariaDB startet weder im Container noch auf einem frisch
+installierten System automatisch mit — `bin/start` erledigt das.
+
+Für Tests wird eine zweite Datenbank `kein_einzelfall_test` genutzt (siehe
+`phpunit.xml`). Anlegen:
+
+```sql
+CREATE DATABASE kein_einzelfall_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL PRIVILEGES ON kein_einzelfall_test.* TO 'ke_dev'@'localhost';
+```

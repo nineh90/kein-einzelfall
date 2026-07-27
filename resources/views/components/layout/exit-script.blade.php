@@ -17,9 +17,10 @@
       Deshalb steht auf /barrierefreiheit ein Hinweis auf privates Fenster und
       Verlauf löschen. Alles andere wäre ein Sicherheitsversprechen ohne Deckung.
 
-    Hinweis für später: Sobald eine CSP steht, braucht dieses Script ein nonce.
+    Das nonce stammt aus App\Http\Middleware\SicherheitsHeader — ohne es würde
+    die Content-Security-Policy ausgerechnet den Notausgang blockieren.
 --}}
-<script>
+<script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
 (function () {
     var ZIEL = @json(config('navigation.exit_url'));
 

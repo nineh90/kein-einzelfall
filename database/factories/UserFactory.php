@@ -42,4 +42,15 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Konto mit Zugang zur Verwaltung.
+     *
+     * Bewusst nicht der Standard: ein normal erzeugtes Konto darf nicht ins
+     * Panel. So fällt in Tests auf, wenn eine Berechtigungsprüfung fehlt.
+     */
+    public function redaktion(): static
+    {
+        return $this->state(fn () => ['panel_zugang' => true]);
+    }
 }

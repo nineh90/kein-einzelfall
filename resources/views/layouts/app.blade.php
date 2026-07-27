@@ -9,13 +9,24 @@
     <title>@yield('title', 'Startseite') - Kein Einzelfall e.V.</title>
     <meta name="description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
 
+    {{-- Kanonische Adresse ohne Query-Parameter. Die Altseite setzt sie auf jeder
+         Seite; ohne sie würden wir beim Umzug SEO-Substanz verlieren. --}}
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="KE!N EINZELFALL e.V.">
+    <meta property="og:title" content="@yield('title', 'Startseite')">
+    <meta property="og:description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+
     {{-- Notausgang zuerst: muss auch dann funktionieren, wenn alles Weitere scheitert. --}}
     <x-layout.exit-script />
 
     {{-- Gespeicherte Darstellungs-Einstellungen anwenden, bevor der Browser zeichnet.
          Sonst blitzt bei jedem Seitenaufruf kurz die Standardansicht auf — für
          Menschen, die den Kontrastmodus brauchen, ist das kein Schönheitsfehler. --}}
-    <script>
+    <script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
     (function () {
         try {
             var w = JSON.parse(localStorage.getItem('ke-a11y')) || {};

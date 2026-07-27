@@ -164,13 +164,13 @@ Verein → Über uns, Satzung, Istanbul-Konvention, Kinderkodex, Mitgliedschaft
 | Thema | Entscheidung | Begründung |
 |---|---|---|
 | Backend | **Laravel 12** (PHP 8.3+) | Aktuell, Support bis 2027 |
-| Datenbank | **PostgreSQL 16** | Konsistent zu bisherigen Projekten. MySQL-Altbestand wird per Import-Skript übernommen |
+| Datenbank | **MySQL / MariaDB** | Geändert am 27.07.2026 (vorher PostgreSQL vorgesehen). Lokal ohne Zusatzinstallation verfügbar; der Altbestand des Vereins ist ohnehin MySQL, das spart eine Konvertierungsstufe beim Import; und beim Hoster ist es der Standardfall |
 | Frontend | **Blade + Tailwind 4 + Alpine.js** | Mobile-First |
 | Blog-Filter/Suche | **Kein Livewire — serverseitig via GET-Parameter** | Livewire-Filter sind für Crawler unsichtbar und für Screenreader schlechter. Genau der Fehler, den die Altseite mit der JS-Navigation macht. `?kategorie=…&seite=2` ist SEO-sicher, A11y-sicher und cachebar |
 | Admin-Panel | **Filament 4** | Schlank, kein Full-CMS. Rollen/Rechte über Policies |
 | Rollen/Rechte | `spatie/laravel-permission` | Standard, gut geprüft |
 | Mailversand | **SMTP über den eigenen Hoster** | Jeder externe Maildienst wäre ein zusätzlicher Auftragsverarbeiter für Art.-9-Daten. Weniger Dienste = weniger Angriffsfläche, weniger AVV |
-| Suche | **PostgreSQL Full-Text (`tsvector`)** | Kein Meilisearch/Algolia — kein weiterer Dienst, kein weiterer AVV |
+| Suche | **MySQL Full-Text-Index** (`FULLTEXT`, Modus `IN NATURAL LANGUAGE`) | Kein Meilisearch/Algolia — kein weiterer Dienst, kein weiterer AVV. Reicht für ~20 Seiten und einen jungen Blog deutlich aus |
 | Hosting | **VPS in Deutschland** + AVV (Hostinger/Hetzner) | Shared Hosting trägt Laravel mit Queue/Scheduler nicht sinnvoll. *Noch zu entscheiden* |
 | Analytics | **keins** (optional self-hosted Matomo, cookiefrei) | Bestand hat kein Tracking — dieser Vorteil sollte nicht leichtfertig aufgegeben werden |
 
@@ -377,7 +377,7 @@ Persistenz über `localStorage` — technisch notwendige Funktionalität auf aus
 | # | Inhalt | grob |
 |---|---|---|
 | 0 | **Vorarbeit ohne Code:** DB-Zugriff und WP-Export anfordern, Search-Console sichern, offene Punkte klären | — |
-| 1 | Setup: PHP 8.3/Composer, Laravel 12, PostgreSQL, Tailwind, CI | 1 Tag |
+| 1 | Setup: PHP 8.3/Composer, Laravel 12, MySQL/MariaDB, Tailwind, CI | 1 Tag |
 | 2 | Design-System: Tokens aus dem Mockup, **px → rem**, self-hosted Fonts, UI-Komponenten | 3–4 Tage |
 | 3 | Layout + serverseitige Navigation + Footer (mit nils-digital.de) + **Mobile-Menü** | 2 Tage |
 | 4 | **A11y-Toolbar + Notausgang** — früh, weil es alles andere beeinflusst | 3–4 Tage |

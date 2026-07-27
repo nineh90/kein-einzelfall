@@ -1,6 +1,7 @@
 @props([
-    'titel' => 'Melde dich — in deinem Tempo.',
+    'titel',
     'text' => null,
+    'hinweis' => null,   // Bedienhinweis, klar abgesetzt vom Inhaltstext
     'ctas' => [],
 ])
 
@@ -27,6 +28,10 @@
                     </x-ui.button>
                 @endforeach
             </div>
+        @endif
+
+        @if ($hinweis)
+            <p class="mx-auto mt-5 max-w-prose text-sm text-ink-soft">{{ $hinweis }}</p>
         @endif
 
         {{-- Vertrauenssignale. Die Aussagen müssen stimmen — der Notausgang ist

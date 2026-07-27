@@ -71,7 +71,7 @@ Am 26.07.2026 beauftragt und gebaut.
 | `inhalts_hinweis` | ✅ | Vorwarnung vor belastenden Inhalten. Natives `<details>` — ohne JS bedienbar, Screenreader kennen das Muster, Inhalt bleibt indexierbar |
 | `leichte_sprache` | ✅ | Zusammenfassung nach WCAG AAA (3.1.5). Steht oben auf der Seite, nicht unten. Typografie: größere Schrift, Zeilenabstand 2, Flattersatz, max. 55 Zeichen |
 | `download_list` | ✅ | Titel statt Dateiname, Typ + Größe vorab (WCAG 2.4.4 / 3.2.5), kein `target="_blank"` |
-| `sprungmarken` | 🔨 | Inhaltsverzeichnis für lange Seiten |
+| `sprungmarken` | ✅ | Inhaltsverzeichnis, erscheint automatisch ab 4 Abschnitten. Anker leiten sich vom Titel ab, nicht von der ID — geteilte Links überleben ein Neu-Einpflegen |
 
 **Noch zu klären:**
 - Notfallnummern in `config/hilfe.php` vom Verein gegenprüfen lassen (Zuständigkeiten ändern sich)
@@ -133,11 +133,153 @@ alte `/wp-content/uploads/…`-URL per 301 darauf mappen.
 Gefunden beim Inventarisieren: Tippfehler im Linktext auf `/mitgliedschaft/`
 („Hlfe zum Ausfüllen") — beim Einpflegen korrigieren.
 
-## 5. Admin (Filament)
+## 4b. Seiten-System (27.07.2026)
+
+Die 23 Inhaltsseiten liegen in der Datenbank und sind durchklickbar.
+
+**Ablauf, bewusst zweistufig:**
+
+```bash
+php artisan altseite:holen              # Bestand → docs/altseite-inhalt.json
+php artisan db:seed --class=AltseiteSeeder   # JSON → pages + page_blocks
+```
+
+Der Abzug ist getrennt vom Einpflegen, damit man ihn prüfen und am git-Diff
+sehen kann, was der Verein zwischenzeitlich geändert hat.
+
+**Zum Extrahieren:** Elementor markiert den Seiteninhalt mit
+`data-elementor-type="wp-page"`, das Theme schließt mit `<!-- #page -->`.
+Alles danach ist Footer und OneTap-Widget — letzteres allein bringt 42
+Sprachlisten mit Flaggenbildern mit und würde jede Auswertung unbrauchbar machen.
+
+### Weiterleitungen
+
+| Fall | Beispiel |
+|---|---|
+| WordPress-Schrägstrich | `/verein/` → `/verein` (301) |
+| Slug bereinigt | `/impressum-2` → `/impressum` |
+| Auf der Altseite kaputt | `/selbsthilfegruppen-2` → `/selbsthilfegruppen`, `/kontaktformular` → `/anfragen` |
+
+Die Schrägstrich-Umleitung ist kein Detail: die Altseite veröffentlicht
+**ausschließlich** Adressen mit Schrägstrich, es betrifft also jede indexierte URL.
+`redirects.treffer` zählt mit, welche Regel nach dem Go-Live tatsächlich greift.
+
+> ⚠️ `php artisan serve` entfernt abschließende Schrägstriche selbst, bevor Laravel
+> sie sieht — dort lässt sich das Verhalten nicht prüfen. Unter Apache/nginx kommt
+> der Pfad unverändert an. Deshalb testet `SeitenUndRedirectsTest` die Middleware
+> direkt; auch `$this->get('/verein/')` trimmt sonst schon in `prepareUrlForRequest()`.
+
+## 5. Admin (Filament 4)
+
+Erreichbar unter `/admin`. Oberfläche auf Deutsch, Hausfarbe `#2E4A3A`.
+
+**Zugang ist ausdrücklich, nicht stillschweigend.** `users.panel_zugang` steht
+standardmäßig auf „nein"; `User::canAccessPanel()` prüft genau dieses Kennzeichen.
+Das ist keine Formsache: Sobald Vereinsmitglieder eigene Konten bekommen, liegen
+sie in derselben Tabelle wie die Redaktion — ohne den Riegel käme jedes
+angemeldete Mitglied an die Anfragen und damit an Art.-9-Daten.
+`User::factory()->redaktion()` erzeugt ein freigeschaltetes Konto; ein normal
+erzeugtes Konto darf bewusst **nicht** ins Panel, damit fehlende
+Berechtigungsprüfungen in Tests auffallen.
 
 | Bereich | Status |
 |---|---|
-| Seiten + Block-Editor | 🔨 |
+| Seiten + Block-Editor | ✅ Bausteine per Ziehen sortierbar, Typ-Auswahl aus `PageBlock::TYPEN`, Direktlink „Ansehen" auf die echte Seite |
+| Weiterleitungen | ✅ inkl. Trefferzähler — nach dem Go-Live die wichtigste Spalte: eine Regel mit 0 Aufrufen ist überflüssig oder falsch geschrieben |
+| Anfragen | ✅ Zähler offener Anfragen in der Navigation, Inhalte schreibgeschützt, Status setzt automatisch den Abschlusszeitpunkt (= Beginn der Aufbewahrungsfrist) |
+
+## 6. Kontaktformular und Anfragen (27.07.2026)
+
+Angebotsposition 4. Der Teil mit dem größten DSGVO-Gewicht — Menschen schreiben
+hier über erlebte Straftaten und ihre Gesundheit (Art. 9 DSGVO).
+
+**Getroffene Entscheidungen:**
+
+| Entscheidung | Warum |
+|---|---|
+| Name und E-Mail **freiwillig** | Auf der Altseite sind beide Pflicht. Anonyme Kontaktaufnahme ist bei dieser Zielgruppe ein echtes Bedürfnis. Die Rückmeldung sagt ehrlich, dass ohne Adresse keine Antwort möglich ist |
+| Felder **verschlüsselt** (`encrypted` Cast) | Ein Datenbankabzug — Backup, Hoster-Panel, offenes phpMyAdmin — zeigt keinen Klartext. Preis: kein `WHERE`, `LIKE` oder `ORDER BY` auf diesen Feldern |
+| Benachrichtigung **ohne Inhalt** | E-Mail ist unverschlüsselt und bleibt jahrelang in Postfächern. Der Hinweis enthält nur Eingangszeit und einen Link ins Panel. **Der wirksamste einzelne Hebel im ganzen Projekt** |
+| **Keine IP-Adresse**, kein User-Agent | Was nicht gespeichert wird, kann nicht abfließen |
+| Honigtopf + Zeitfalle statt CAPTCHA | Ein CAPTCHA wäre eine zusätzliche Hürde ausgerechnet für Menschen, die ohnehin Mühe haben. Auch kein reCAPTCHA — kein Drittdienst |
+| Formular **ohne JavaScript** nutzbar | Muss auch in gehärteten Browsern und über Tor funktionieren |
+
+**Löschkonzept:** `php artisan anfragen:aufraeumen`, täglich um 3:30 Uhr
+(`routes/console.php`). Erledigte Anfragen 90 Tage nach Abschluss, unbearbeitete
+365 Tage nach Eingang — bewusst länger, damit niemandem die Nachricht gelöscht
+wird, bevor sie überhaupt jemand gelesen hat. `--probe` zeigt an, ohne zu löschen.
+
+> ⚠️ **Vor dem Go-Live zu klären:** Die Fristen in `config/anfragen.php` sind ein
+> Vorschlag, kein Rechtsrat. Der Verein stellt dafür eigene Anwälte zur Verfügung.
+> Zu klären ist insbesondere, ob Anfragen mit Bezug zu laufenden Verfahren länger
+> aufbewahrt werden müssen — dann braucht es dafür ein ausdrückliches Kennzeichen
+> statt einer pauschal längeren Frist.
+
+> ⚠️ **`APP_KEY` gehört in die Sicherung.** Die Verschlüsselung hängt daran.
+> Geht der Schlüssel verloren, sind alle Anfragen unwiederbringlich weg.
+
+## 7. Sicherheits-Header und Einbettungen (27.07.2026)
+
+### Kein Zustimmungsbanner nötig — und das ist ein Ergebnis, keine Nachlässigkeit
+
+Ein Banner ist nur dann Pflicht, wenn nicht notwendige Cookies gesetzt oder
+Fremdinhalte ungefragt geladen werden. Gemessen wird auf dieser Seite gesetzt:
+
+| Cookie | Zweck | Einordnung |
+|---|---|---|
+| `XSRF-TOKEN` | Schutz vor Fremdanfragen beim Formular | technisch notwendig |
+| `kein-einzelfall-session` | Sitzung, Formular-Fehlermeldungen | technisch notwendig |
+
+Kein Tracking, keine Analyse, keine Fremdinhalte ohne Zustimmung. Damit greift
+§ 25 Abs. 2 TDDDG und es braucht keine Einwilligung. Der Test
+`test_seite_setzt_nur_technisch_notwendige_cookies` schlägt an, sobald das
+jemals nicht mehr stimmt.
+
+Zum Vergleich: Die Altseite **hat** einen Banner (`hu-manity.co`) — konfiguriert
+mit `"blocking":false`, er blockiert also nichts, und die betterplace-Rahmen
+laden trotzdem ungefragt. Ein Banner, der nichts verhindert, ist schlechter als
+keiner: Er suggeriert Kontrolle, die es nicht gibt.
+
+### Header
+
+Gesetzt von `App\Http\Middleware\SicherheitsHeader` — die Altseite liefert
+**keinen einzigen** davon aus.
+
+| Header | Wert |
+|---|---|
+| `Content-Security-Policy` | siehe unten |
+| `X-Content-Type-Options` | `nosniff` |
+| `X-Frame-Options` | `DENY` |
+| `Referrer-Policy` | `no-referrer` — wichtig für den Notausgang: die Zielseite erfährt die Herkunft nicht |
+| `Permissions-Policy` | Kamera, Mikrofon, Standort, Zahlung, USB aus |
+| `Strict-Transport-Security` | nur über HTTPS gesendet |
+
+**Zur CSP:** Skripte laufen über ein **Nonce pro Antwort**, nicht über
+`'unsafe-inline'` — das würde den Schutz weitgehend aufheben. Betroffen sind die
+beiden notwendigen Inline-Skripte (Notausgang, Darstellungs-Einstellungen)
+**und** die von Vite erzeugten Tags: `'strict-dynamic'` setzt `'self'` ausser
+Kraft, ein Tag ohne Nonce würde blockiert. Dafür sorgt `Vite::useCspNonce()`.
+
+Bei Stilen bleibt `'unsafe-inline'` vorerst nötig — Alpine setzt `style`-Attribute
+und die Darstellungs-Einstellungen schreiben Custom Properties auf `<html>`.
+
+### Zwei-Klick-Einbettung
+
+`x-blocks.embed`. Der Rahmen steckt in einem `<template>` und existiert vor der
+Zustimmung **nicht im Dokument** — es geht also kein einziger Aufruf an den
+Anbieter. Beim Zuklappen wird er wieder entfernt, damit im Hintergrund nichts
+weiterläuft. Als natives `<details>` umgesetzt: ohne JavaScript bedienbar.
+
+Zugelassene Anbieter stehen in `config/embeds.php` und fliessen in `frame-src`
+ein. Was dort nicht steht, lädt nicht — auch dann nicht, wenn jemand
+versehentlich einen Einbettungscode in einen Textbaustein kopiert.
+
+### Spendenseite
+
+`x-blocks.donation-options` mit den echten Angaben: Überweisung (Deutsche
+Skatbank), PayPal als reiner Link (kein eingebettetes Skript — solange niemand
+klickt, erfährt PayPal nichts von diesem Besuch), die beiden betterplace-Projekte
+als Zwei-Klick-Einbettung, und die Spendenbescheinigung per E-Mail.
 | Blog, Kategorien | 🔨 |
 | Events | 🔨 |
 | Gruppen | 🔨 |

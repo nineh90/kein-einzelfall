@@ -115,4 +115,21 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Benachrichtigung über neue Anfragen
+    |--------------------------------------------------------------------------
+    |
+    | Wohin der Hinweis geht, dass eine Anfrage vorliegt. Diese E-Mail enthält
+    | KEINEN Inhalt der Anfrage, nur Eingangszeit und einen Link ins Panel —
+    | siehe App\Notifications\NeueAnfrage.
+    |
+    | Leer lassen schaltet die Benachrichtigung ab; die Anfrage wird trotzdem
+    | gespeichert.
+    |
+    */
+
+    'anfragen_an' => env('MAIL_ANFRAGEN_AN'),
+
 ];
