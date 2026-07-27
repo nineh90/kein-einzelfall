@@ -520,3 +520,165 @@ aus. Dazugekommen sind deshalb zwei Prüfungen:
 - `npm run test:browser` (`tests/Browser/bedienung.mjs`) bedient die Seite in
   einem echten Chromium: mit und ohne JavaScript, mit Maus und nur mit der
   Tastatur, und wertet dabei die Browser-Konsole mit aus.
+
+---
+
+## Mehrsprachigkeit
+
+### Warum Sprachen in der Datenbank stehen und nicht in einer Config
+
+Der Verein soll weitere Sprachen selbst anlegen können, ohne dass jemand eine
+Datei anfasst und neu ausrollt. Die Tabelle `languages` führt `code` (zugleich
+das Adresspräfix), `label` (Eigenbezeichnung), `label_deutsch`, `richtung`,
+`aktiv`, `position`, `ist_standard` und `fallback_code`.
+
+`richtung` wird von Anfang an mitgeführt, obwohl DE/EN/RU alle `ltr` sind. Für
+einen Opferhilfeverein in Hamburg sind Arabisch oder Farsi realistische spätere
+Wünsche, und RTL nachträglich einzuziehen ist teuer. Das `dir`-Attribut steht
+bereits am `<html>` und an jedem Inhaltsbereich mit abweichender Sprache; ein
+vollständiger RTL-Durchgang der CSS steht noch aus und ist erst nötig, wenn
+wirklich eine RTL-Sprache dazukommt.
+
+### Warum Übersetzungen eigene Seiten sind und keine JSON-Spalten
+
+`pages` hat `locale` und `uebersetzungs_gruppe`. Jede Sprachfassung ist eine
+eigene Zeile mit eigenem Slug und eigenen Bausteinen. Gründe:
+
+- Eine Übersetzung darf eine **andere Baustein-Struktur** haben. Das ist hier
+  kein Randfall: Die Zielgruppen-Module (`leichte_sprache`, `hilfe_box`,
+  `inhalts_hinweis`) und die Notfallnummern sind sprach- und länderabhängig.
+- Slugs müssen übersetzbar sein, sonst verschenkt man SEO.
+- „Noch nicht übersetzt" ist ein natürlicher Zustand statt eines leeren Feldes.
+- Der Renderer bleibt unangetastet — `page_blocks` hängt an `page_id`.
+
+Ein Paket mit JSON-Spalten pro Feld (`spatie/laravel-translatable`) hätte
+bedeutet, JSON in JSON zu schachteln: `page_blocks.data` ist bereits JSON.
+
+Der Unique-Index wanderte dabei von `slug` auf `(locale, slug)`. Ohne diesen
+Schritt könnte `/en/kontakt` nicht neben `/kontakt` stehen.
+
+### Warum Deutsch kein Präfix bekommt
+
+`/verein`, `/en/about-us`, `/ru/…`. Das ist die wichtigste Einzelentscheidung:
+Nur so bleiben die 24 bestehenden Adressen und die 26 Weiterleitungen
+unverändert. „SEO darf nicht schlechter werden" ist ausdrücklicher Kundenwunsch.
+`/de/verein` leitet dauerhaft (301) auf `/verein` um, damit kein Inhalt unter
+zwei Adressen erreichbar ist.
+
+Die öffentlichen Routen stehen **einmal** in einer Closure in `routes/web.php`
+und werden **zweimal** registriert: präfixlos unter den bisherigen Namen und
+mit Präfix unter `sprache.…`. Der Helfer `sprachlink()` wählt in den Views die
+passende Variante. Ein einziger Satz Routen mit optionalem Präfix ging nicht:
+Das erzeugt für die Standardsprache Adressen mit doppeltem Schrägstrich, und
+`URL::defaults()` würde Deutsch ein Präfix verpassen.
+
+Welche Sprachcodes gültig sind, entscheidet die **Datenbank in der Middleware**
+und nicht das Routen-Muster. Stünde die Liste im Muster, bräuchte jede neue
+Sprache ein `route:clear` — das ist niemandem zumutbar, der kein Terminal hat.
+
+### Die Falle, die dabei fast aufgegangen wäre
+
+Das Adressmuster für Sprachpräfixe steht im Routing **vor** der Sammelroute
+`/{slug}`. Alles, was auf das Muster passt, wird als Sprache gelesen. Eine
+deutsche Seite mit dem Slug `ru` — oder auch nur `ab-cd` — wäre damit
+unerreichbar gewesen, ohne dass irgendetwas eine Fehlermeldung geworfen hätte.
+
+Zwei Gegenmassnahmen:
+
+1. Das Muster ist bewusst eng: zwei Buchstaben als Grundform, optionale
+   Zusätze (`pt-br`, `de-x-leicht`). Drei Buchstaben wären auch üblich
+   (ISO 639-3), würden aber Slugs wie `faq` blockieren — die sind
+   wahrscheinlicher als eine Sprache ohne zweibuchstabige Kennung.
+2. `App\Rules\KollidiertNichtMitSprachpraefix` lehnt beim Speichern in beide
+   Richtungen ab: einen Seiten-Slug, der wie eine Sprachkennung aussieht, und
+   einen Sprachcode, der eine bestehende Seitenadresse belegt.
+
+Ein Test prüft zusätzlich den gesamten Bestand.
+
+### Sichtbarer Rückfall statt 404
+
+Fehlt eine Übersetzung, zeigt die Seite die Standardsprache — mit einem ruhigen
+Hinweis in der gewählten Sprache. Nicht 404: Es geht um Opferrechte, Fristen
+und Notfallnummern. Eine Seite, die still verschwindet, ist für diese Zielgruppe
+schlechter als eine Seite in einer anderen Sprache mit dem Hinweis, dass sie
+noch nicht übersetzt ist.
+
+Der Inhaltsbereich trägt dann `lang="de"` (WCAG 3.1.2). Das ist nicht
+kosmetisch: Ohne diese Auszeichnung spräche eine Vorlesehilfe den deutschen Text
+mit russischer Aussprache aus.
+
+### Fraunces kann kein Kyrillisch
+
+Geprüft gegen die Google-Fonts-API: Fraunces liefert `latin`, `latin-ext`,
+`vietnamese`. Auf Russisch wären also **alle** Überschriften auf eine
+Systemschrift zurückgefallen.
+
+Ersatz ist **Literata**, ausgewählt aus vier Kandidaten (Literata, Vollkorn,
+Alegreya, Playfair Display), nebeneinander gerendert und verglichen: Sie kommt
+Gewicht und Wärme von Fraunces am nächsten. Playfair Display wäre
+kontrastreicher, aber Haarstriche sind für sehbeeinträchtigte Leser die
+schlechtere Wahl — und genau die sind hier Zielgruppe.
+
+Literata steht **hinter** Fraunces im Stapel, nicht statt ihr: Fraunces deckt
+per `unicode-range` nur Latein ab, kyrillische Zeichen fallen automatisch eine
+Stufe weiter. Ein russischer Titel und der lateinische Vereinsname im selben
+Satz bekommen so jeweils die richtige Schrift.
+
+Beim Nachladen wird **nach URL dedupliziert, nicht nach Schriftschnitt** —
+Variable Fonts liefern für mehrere Schnitte dieselbe Datei. 14 `@font-face`,
+6 Dateien.
+
+### Behobener Fehler: der Umschalter zog Kyrillisch auf jede Seite
+
+Der Sprachumschalter trug „Русский" als Vorlesetext auf *jeder* Seite, auch auf
+deutschen. Damit lud jede deutsche Seite die kyrillischen Schriftschnitte mit —
+gemessen 137 KB, die die Hauptzielgruppe auf dem Mobilfunknetz bezahlt hätte,
+ohne sie je zu sehen.
+
+Die Ansage steht jetzt in der Sprache der jeweiligen Seite („Sprache wechseln
+zu Russisch"). Nebeneffekt: Eine deutsche Vorlesestimme kann das überhaupt
+aussprechen. Ein Test hält deutsche Seiten frei von kyrillischen Zeichen.
+
+### Behobener Fehler: die Kopfzeile passte nicht mehr
+
+Der Umschalter hat die Kopfzeile bei 360 px auf 451 px aufgezogen und
+Notausgang und Menüknopf aus dem Bild geschoben — genau das, was er nicht tun
+durfte. Er steht dort jetzt erst ab `sm` und darunter im aufgeklappten Menü,
+dasselbe Muster, das der Notausgang selbst schon nutzt.
+
+Beim Nachmessen fielen zwei Dinge auf, die **schon vorher** kaputt waren:
+
+- Bei **320 px** lief die Kopfzeile auf 340 px über — waagerechtes Scrollen,
+  WCAG 1.4.10. Die Wortmarke darf dort jetzt schrumpfen.
+- Bei **1024 px** passte die Desktop-Navigation nicht (1115 px deutsch). Sie
+  brach still um und zog die Kopfzeile auf 133 px; auf Russisch wurde daraus
+  ein dreizeiliger Menüpunkt. Sie ist jetzt ab `xl` sichtbar statt ab `lg` —
+  zwischen 1024 und 1280 greift das Burger-Menü, das ohnehin vollständig
+  bedienbar ist. **Das ist eine sichtbare Designänderung für Deutsch.**
+
+---
+
+## Barrierefreiheit messen
+
+`npm run test:a11y` prüft mit axe-core neun repräsentative Seiten in jeder
+freigeschalteten Sprache, dazu die vier Zustände der Darstellungs-Einstellungen
+(Panel offen, hoher Kontrast, Dunkelmodus, grösste Schrift) und den Reflow bei
+320 px. 36 Durchläufe.
+
+Der erste Lauf fand neun echte Verstösse. Der schwerwiegendste: Im Modus
+**„hoher Kontrast"** und im **Dunkelmodus** lag der Fussbereich bei 1,36:1 statt
+4,5:1. Ursache war, dass `--color-on-green-soft/-hand/-line` in den beiden Modi
+nicht mit umdefiniert wurden — der Fussbereich wurde gelb, seine Schrift blieb
+hellgrün. Ausgerechnet die Barrierefreiheits-Einstellung machte damit einen Teil
+der Seite unlesbar. Das ist der schlimmste Fall: Wer sie einschaltet, braucht sie.
+
+Weiter gefunden und behoben: geplante Gruppen standen auf `opacity-75` und lagen
+damit bei 3,1:1 — betroffen war der Satz, der erklärt, warum man sich nicht
+anmelden kann. Die Einstiegskarten der Startseite liefen bei 320 px über. Das
+dekorative Wasserzeichen im Hinweisband war ein echter Textknoten mit 1,08:1 und
+liegt jetzt als Pseudoelement in der CSS.
+
+**Ein grüner Lauf heisst nicht „barrierefrei".** axe-core findet je nach Quelle
+30–50 % der Verstösse. Es sieht nicht, ob ein Alternativtext etwas Sinnvolles
+sagt, ob die Reihenfolge logisch ist oder ob die Sprache verständlich bleibt.
+Der manuelle Durchgang und ein Test mit einer echten Vorlesehilfe bleiben nötig.

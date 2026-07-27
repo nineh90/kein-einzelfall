@@ -1,6 +1,6 @@
 # Wichtige Punkte — für Kevin und Tatjana
 
-Stand 27.07.2026. Alles, was vor dem Go-Live entschieden, geprüft oder besorgt
+Stand 27.07.2026 (nach der Mehrsprachigkeits-Session). Alles, was vor dem Go-Live entschieden, geprüft oder besorgt
 werden muss. Sortiert nach Dringlichkeit.
 
 ---
@@ -71,7 +71,34 @@ Erwerbsminderung, Widerspruchsfristen) **muss der Verein gegenlesen**.
 „Vereinfacht" und „falsch" liegen dort dicht beieinander, und die Leute treffen
 danach Entscheidungen über Anträge und Fristen.
 
-### A6 · Weitere offene Punkte
+### A6 · Mehrsprachigkeit — Inhalte und Gegenlesen
+
+Struktur, Adressen, Umschalter und Schriften stehen. **Übersetzt ist nur die
+Bedienoberfläche** — Knöpfe, Vorlesehilfen, Wegweiser. Alles Inhaltliche fehlt
+noch, und zwar bewusst:
+
+- **Die Inhalte liefert der Verein.** Es geht um Opferrechte, Fristen und
+  Notfallnummern. Eine maschinelle Übersetzung kann hier realen Schaden
+  anrichten, deshalb ist keine gemacht worden. Auch die Menüpunkte sind zum
+  grossen Teil Seitentitel und damit Fachbegriffe des Sozialrechts
+  („Erwerbsminderungsrente", „FSM – Erweitertes Hilfesystem") — sie erscheinen
+  automatisch in der Fremdsprache, sobald die zugehörige Seite übersetzt ist.
+- **Welche Seiten zuerst?** Alle 24 zu übersetzen ist viel. Vorschlag für eine
+  erste Runde: Startseite, Anfragen & Austausch, Selbsthilfegruppen, Kontakt,
+  Das Hilfesystem. Der Rest fällt sichtbar auf Deutsch zurück, mit Hinweis in
+  der jeweiligen Sprache — das ist ein regulärer Zustand, kein Fehler.
+- **Notfallnummern je Sprache** — siehe A1. Dieselbe Frage, jetzt dringender:
+  Was zeigen wir russisch- oder englischsprachigen Besuchern? Gibt es
+  mehrsprachige Hotlines? Das „Hilfetelefon Gewalt gegen Frauen" (116 016)
+  nennt selbst 18 Sprachen; das gehört geprüft und, wo zutreffend, in die
+  jeweilige Sprachfassung übernommen.
+- **Muttersprachliches Gegenlesen.** Die englischen und russischen
+  Bedientexte in `lang/en/` und `lang/ru/` sind noch von niemandem geprüft
+  worden, der die Sprache spricht. Beide Sprachen stehen deshalb auf
+  **nicht sichtbar** und erscheinen in keinem Umschalter. Erst nach dem
+  Gegenlesen im Panel unter „Sprachen" freischalten.
+
+### A7 · Weitere offene Punkte
 - **Bestehende Datenbank:** Wir haben weiterhin keinen Zugriff. Vor der
   Aufwandsschätzung für die Bereinigung unbedingt Einsicht nehmen.
 - **Google Search Console:** Zugang sichern, **bevor** am Altsystem etwas geändert
@@ -127,7 +154,7 @@ danach Entscheidungen über Anträge und Fristen.
 
 ## C. Kaufmännisch (Kevin)
 
-### C1 · Zwei Positionen fehlen im Angebot
+### C1 · Drei Positionen fehlen im Angebot
 - **Content-Migration.** „Keine Content-Erstellung" heißt nicht „kein Aufwand".
   23 Seiten und über 100 Dokumente einzupflegen ist erhebliche Arbeit und in
   keiner Position bepreist.
@@ -135,12 +162,26 @@ danach Entscheidungen über Anträge und Fristen.
   und war in der gekürzten Fassung verschwunden. Gegen einen ausdrücklich
   unbekannten („wirren") Altbestand stehen 1.299 € pauschal — das größte
   kaufmännische Risiko im Projekt.
+- **Mehrsprachigkeit.** Steht in **keiner** Position von AN-268. Drei Sprachen
+  bedeuten dreifachen Pflegeaufwand, dreifache Qualitätssicherung, eine
+  zusätzliche Displayschrift (Fraunces kann kein Kyrillisch) und einen
+  erweiterten Barrierefreiheits-Durchlauf je Sprache. Das technische
+  Grundgerüst steht; der laufende Aufwand beginnt erst danach. **Vor der
+  Abnahme mit Tatjana klären.**
 
 ### C2 · Barrierefreiheit braucht einen Maßstab
 „Maximal" und „gleichwertig oder besser" sind nicht abnahmefähig. Vorschlag:
 **WCAG 2.1 AA vertraglich zusichern**, AAA als Ziel ohne Zusage. Dazu ein
-Prüfverfahren vereinbaren (axe-core und Lighthouse in der CI, manueller
-Screenreader-Test, Tastatur-Durchlauf). Sonst wird „ist das barrierefrei genug?"
+Prüfverfahren vereinbaren. **Der messbare Teil steht inzwischen:**
+`npm run test:a11y` prüft mit axe-core neun Seiten je Sprache, die vier
+Zustände der Darstellungs-Einstellungen und den Reflow bei 320 px — 36
+Durchläufe, aktuell ohne Befund. Der erste Lauf fand neun echte Verstösse,
+darunter einen Fussbereich, den ausgerechnet der Modus „hoher Kontrast"
+unlesbar machte.
+
+Das ersetzt die Abnahme nicht: axe-core findet 30–50 % der Verstösse. Es fehlen
+weiterhin der manuelle Screenreader-Test, der Tastatur-Durchlauf und eine CI,
+die den Lauf bei jedem Commit auslöst. Sonst wird „ist das barrierefrei genug?"
 eine endlose Abnahme-Diskussion.
 
 ### C3 · Budget-Einschätzung unverändert
