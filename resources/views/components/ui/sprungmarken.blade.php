@@ -1,4 +1,6 @@
-@props(['punkte' => [], 'titel' => 'Auf dieser Seite'])
+@props(['punkte' => [], 'titel' => null])
+
+@php $titel ??= __('rahmen.auf_dieser_seite'); @endphp
 
 @if (count($punkte) >= 4)
     {{--

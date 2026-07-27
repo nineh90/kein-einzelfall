@@ -8,10 +8,10 @@
     pb-[env(safe-area-inset-bottom)] hält die Bar über der Home-Indicator-Leiste
     auf iPhones, sonst liegt der Exit-Button unter dem Systembalken.
 --}}
-<nav aria-label="Schnellzugriff"
+<nav aria-label="{{ __('rahmen.schnellzugriff') }}"
      class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] lg:hidden">
     <ul class="flex items-stretch justify-around">
-        @foreach (config('navigation.mobile_bar') as $item)
+        @foreach (\App\Support\Navigation::mobilLeiste() as $item)
             <li class="flex-1">
                 <a href="{{ $item['url'] }}"
                    @if (request()->is(ltrim($item['url'], '/') ?: '/')) aria-current="page" @endif

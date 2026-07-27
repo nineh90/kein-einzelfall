@@ -19,13 +19,26 @@ class Seitenkontext
         return new self($slug);
     }
 
+    /**
+     * Die eigene Adresse, so wie sie auch in der Navigation steht.
+     *
+     * Navigation::haupt() liefert Adressen mit Sprachpräfix. Ohne dieselbe
+     * Schreibweise fände sich eine Seite in einer Fremdsprache in keinem
+     * Bereich wieder — und verlöre stillschweigend Brotkrumen, Bereichsangabe
+     * und Geschwisterseiten.
+     */
+    private function eigeneAdresse(): string
+    {
+        return \App\Models\Language::aktuell()->pfad('/'.$this->slug);
+    }
+
     /** Der Navigationspunkt, unter dem diese Seite hängt. */
     public function bereich(): ?array
     {
-        foreach (config('navigation.main') as $punkt) {
+        foreach (Navigation::haupt() as $punkt) {
             $urls = array_column($punkt['children'] ?? [], 'url');
 
-            if (in_array('/'.$this->slug, $urls, true)) {
+            if (in_array($this->eigeneAdresse(), $urls, true)) {
                 return $punkt;
             }
         }
@@ -39,8 +52,8 @@ class Seitenkontext
      */
     public function istBereichsUebersicht(): ?array
     {
-        foreach (config('navigation.main') as $punkt) {
-            if ($punkt['url'] === '/'.$this->slug && ! empty($punkt['children'])) {
+        foreach (Navigation::haupt() as $punkt) {
+            if ($punkt['url'] === $this->eigeneAdresse() && ! empty($punkt['children'])) {
                 return $punkt;
             }
         }
@@ -71,7 +84,7 @@ class Seitenkontext
         }
 
         return collect($bereich['children'] ?? [])
-            ->reject(fn ($kind) => $kind['url'] === '/'.$this->slug)
+            ->reject(fn ($kind) => $kind['url'] === $this->eigeneAdresse())
             // Die Übersichtsseite des Bereichs steht schon in den Brotkrumen
             ->reject(fn ($kind) => $kind['url'] === $bereich['url'])
             ->take($hoechstens)
@@ -93,7 +106,10 @@ class Seitenkontext
     /** Brotkrumen: Start › Bereich › aktuelle Seite. */
     public function brotkrumen(string $seitentitel): array
     {
-        $krumen = [['label' => 'Start', 'url' => '/']];
+        $krumen = [[
+            'label' => __('rahmen.start'),
+            'url' => \App\Models\Language::aktuell()->pfad('/'),
+        ]];
 
         if ($bereich = $this->bereich()) {
             $krumen[] = ['label' => $bereich['label'], 'url' => $bereich['url']];

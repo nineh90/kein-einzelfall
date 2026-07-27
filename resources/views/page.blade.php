@@ -55,6 +55,10 @@
 
 @section('content')
 
+    {{-- Steht ganz oben und nicht am Seitenende: Wer die Sprache nicht
+         liest, soll es erfahren, bevor er zu lesen anfängt. --}}
+    <x-layout.sprachrueckfall :quelle="$ersatzsprache ?? null" />
+
     <x-layout.seitenkopf
         :titel="$page->titel"
         :bereich="$kontext->bereichName()"

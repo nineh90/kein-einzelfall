@@ -15,50 +15,55 @@ return [
 
     'main' => [
         [
+            'schluessel' => 'bereich_verein',
             'label' => 'Verein',
             'url' => '/verein',
             'children' => [
-                ['label' => 'Über uns – Vorstand und Team', 'url' => '/ueber-uns-vorstand-und-team'],
-                ['label' => 'Satzung',                      'url' => '/satzung'],
-                ['label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
-                ['label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
-                ['label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
+                ['schluessel' => 'ueber_uns_vorstand_und_team', 'label' => 'Über uns – Vorstand und Team', 'url' => '/ueber-uns-vorstand-und-team'],
+                ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],
+                ['schluessel' => 'mitgliedschaft', 'label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
+                ['schluessel' => 'istanbul_konvention', 'label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
+                ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
             ],
         ],
         [
+            'schluessel' => 'bereich_gruppen_termine',
             'label' => 'Gruppen & Termine',
             'url' => '/selbsthilfegruppen',
             'children' => [
-                ['label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
-                ['label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
-                ['label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
-                ['label' => 'Aktuelles',                 'url' => '/aktuelles'],
-                ['label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
+                ['schluessel' => 'selbsthilfegruppen', 'label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
+                ['schluessel' => 'arbeitsgruppen', 'label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
+                ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
+                ['schluessel' => 'aktuelles', 'label' => 'Aktuelles',                 'url' => '/aktuelles'],
+                ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
             ],
         ],
         [
+            'schluessel' => 'bereich_wissen',
             'label' => 'Wissen',
             'url' => '/wissen',
             'children' => [
-                ['label' => 'Das Hilfesystem',               'url' => '/das-hilfesystem'],
-                ['label' => 'FSM – Erweitertes Hilfesystem', 'url' => '/fsm-erweitertes-hilfesystem'],
-                ['label' => 'Erwerbsminderungsrente',        'url' => '/erwerbsminderungsrente'],
-                ['label' => 'Das Bürokratie-Labyrinth',      'url' => '/buerokratie-labyrinth'],
-                ['label' => 'Traumafolgestörungen verstehen','url' => '/traumafolgestoerungen-verstehen'],
-                ['label' => 'Trauma, Bindung und Beziehung', 'url' => '/trauma-bindung-und-beziehung'],
-                ['label' => 'Unterstützung',                 'url' => '/unterstuetzung'],
+                ['schluessel' => 'das_hilfesystem', 'label' => 'Das Hilfesystem',               'url' => '/das-hilfesystem'],
+                ['schluessel' => 'fsm_erweitertes_hilfesystem', 'label' => 'FSM – Erweitertes Hilfesystem', 'url' => '/fsm-erweitertes-hilfesystem'],
+                ['schluessel' => 'erwerbsminderungsrente', 'label' => 'Erwerbsminderungsrente',        'url' => '/erwerbsminderungsrente'],
+                ['schluessel' => 'buerokratie_labyrinth', 'label' => 'Das Bürokratie-Labyrinth',      'url' => '/buerokratie-labyrinth'],
+                ['schluessel' => 'traumafolgestoerungen_verstehen', 'label' => 'Traumafolgestörungen verstehen','url' => '/traumafolgestoerungen-verstehen'],
+                ['schluessel' => 'trauma_bindung_und_beziehung', 'label' => 'Trauma, Bindung und Beziehung', 'url' => '/trauma-bindung-und-beziehung'],
+                ['schluessel' => 'unterstuetzung', 'label' => 'Unterstützung',                 'url' => '/unterstuetzung'],
             ],
         ],
         [
+            'schluessel' => 'bereich_spenden',
             'label' => 'Spenden',
             'url' => '/spenden',
         ],
         [
+            'schluessel' => 'bereich_kontakt',
             'label' => 'Kontakt',
             'url' => '/kontakt',
             'children' => [
-                ['label' => 'Kontakt',              'url' => '/kontakt'],
-                ['label' => 'Anfragen & Austausch', 'url' => '/anfragen'],
+                ['schluessel' => 'kontakt', 'label' => 'Kontakt',              'url' => '/kontakt'],
+                ['schluessel' => 'anfragen', 'label' => 'Anfragen & Austausch', 'url' => '/anfragen'],
             ],
         ],
     ],
@@ -66,12 +71,12 @@ return [
     'footer' => [
         'kontakt' => [
             ['label' => 'kontakt@kein-einzelfall.de', 'url' => 'mailto:kontakt@kein-einzelfall.de'],
-            ['label' => 'Anfragen & Austausch',       'url' => '/anfragen'],
+            ['schluessel' => 'anfragen', 'label' => 'Anfragen & Austausch',       'url' => '/anfragen'],
         ],
         'informationen' => [
-            ['label' => 'Impressum',   'url' => '/impressum'],
-            ['label' => 'Datenschutz', 'url' => '/datenschutz'],
-            ['label' => 'Barrierefreiheit', 'url' => '/barrierefreiheit'],
+            ['schluessel' => 'impressum', 'label' => 'Impressum',   'url' => '/impressum'],
+            ['schluessel' => 'datenschutz', 'label' => 'Datenschutz', 'url' => '/datenschutz'],
+            ['schluessel' => 'barrierefreiheit', 'label' => 'Barrierefreiheit', 'url' => '/barrierefreiheit'],
         ],
         'social' => [
             ['label' => 'Instagram', 'url' => 'https://www.instagram.com/kein_einzelfall_opferhilfe'],
@@ -85,9 +90,9 @@ return [
      * Situationen die primäre Navigation, da zählt Eindeutigkeit vor Vollständigkeit.
      */
     'mobile_bar' => [
-        ['label' => 'Start',    'url' => '/',                  'icon' => 'home'],
-        ['label' => 'Gruppen',  'url' => '/selbsthilfegruppen','icon' => 'users'],
-        ['label' => 'Anfrage',  'url' => '/anfragen',          'icon' => 'message'],
+        ['schluessel' => 'leiste_start', 'label' => 'Start',    'url' => '/',                  'icon' => 'home'],
+        ['schluessel' => 'leiste_gruppen', 'label' => 'Gruppen',  'url' => '/selbsthilfegruppen','icon' => 'users'],
+        ['schluessel' => 'leiste_anfrage', 'label' => 'Anfrage',  'url' => '/anfragen',          'icon' => 'message'],
     ],
 
     /*

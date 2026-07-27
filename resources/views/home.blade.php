@@ -19,6 +19,10 @@
 
 @section('content')
 
+    {{-- Steht ganz oben und nicht am Seitenende: Wer die Sprache nicht
+         liest, soll es erfahren, bevor er zu lesen anfängt. --}}
+    <x-layout.sprachrueckfall :quelle="$ersatzsprache ?? null" />
+
     <x-blocks.hero
         eyebrow="Opferhilfe für soziale Gerechtigkeit"
         titel="KE!N EINZELFALL e.V."

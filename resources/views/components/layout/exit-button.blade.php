@@ -20,6 +20,6 @@
     ])
 >
     <x-ui.icon name="exit" :size="$variant === 'bar' ? 22 : 14" />
-    <span>{{ $variant === 'bar' ? 'Exit' : 'Notausgang' }}</span>
-    <span class="sr-only">– verlässt diese Seite sofort</span>
+    <span>{{ $variant === 'bar' ? __('rahmen.notausgang.leiste') : __('rahmen.notausgang.kopf') }}</span>
+    <span class="sr-only">{{ __('rahmen.notausgang.erklaerung') }}</span>
 </a>

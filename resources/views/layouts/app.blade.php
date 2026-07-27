@@ -1,5 +1,18 @@
+@php
+    use App\Models\Language;
+    use App\Support\Sprachfassungen;
+
+    $sprache = Language::aktuell();
+
+    // $page kommt aus page.blade.php. Blade reicht die Daten der Kindansicht an
+    // das Layout durch — feste Seiten wie die Startseite haben keine.
+    $fassungen = Sprachfassungen::fuer(request(), $page ?? null)->adressen();
+@endphp
 <!DOCTYPE html>
-<html lang="de">
+{{-- dir wird von Anfang an mitgeführt, obwohl DE/EN/RU alle ltr sind: für einen
+     Opferhilfeverein in Hamburg sind Arabisch oder Farsi realistische spätere
+     Wünsche, und nachträglich ist rtl teuer. --}}
+<html lang="{{ $sprache->code }}" dir="{{ $sprache->richtung }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,8 +26,23 @@
          Seite; ohne sie würden wir beim Umzug SEO-Substanz verlieren. --}}
     <link rel="canonical" href="{{ url()->current() }}">
 
+    {{-- Sprachfassungen verweisen gegenseitig aufeinander. Ohne das wertet
+         Google Übersetzungen als doppelten Inhalt — und „SEO darf nicht
+         schlechter werden“ ist ausdrücklicher Kundenwunsch.
+
+         x-default zeigt auf die Standardsprache: Sie gilt für alle, deren
+         Sprache wir nicht anbieten. --}}
+    @if (count($fassungen) > 1)
+        @foreach ($fassungen as $code => $adresse)
+            <link rel="alternate" hreflang="{{ $code }}" href="{{ url($adresse) }}">
+        @endforeach
+        @isset($fassungen[Language::standardCode()])
+            <link rel="alternate" hreflang="x-default" href="{{ url($fassungen[Language::standardCode()]) }}">
+        @endisset
+    @endif
+
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="de_DE">
+    <meta property="og:locale" content="{{ $sprache->ogLocale() }}">
     <meta property="og:site_name" content="KE!N EINZELFALL e.V.">
     <meta property="og:title" content="@yield('title', 'Startseite')">
     <meta property="og:description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
@@ -86,12 +114,25 @@
     <a href="#inhalt"
        class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50
               focus:rounded-lg focus:bg-green focus:px-4 focus:py-2 focus:text-on-green">
-        Zum Inhalt springen
+        {{ __('rahmen.sprunglink') }}
     </a>
 
-    <x-layout.header />
+    <x-layout.header :fassungen="$fassungen" />
 
-    <main id="inhalt" tabindex="-1" class="flex-1">
+    {{--
+        Fällt eine Seite mangels Übersetzung auf die Standardsprache zurück,
+        steht hier deutscher Text unter lang="ru" oder lang="en".
+
+        Für eine Vorlesehilfe ist das nicht kosmetisch: Sie spräche den
+        deutschen Text mit russischer Aussprache — unverständlich. WCAG 3.1.2
+        („Sprache von Teilen“) verlangt die Auszeichnung genau dafür.
+        Der Hinweis darüber bleibt in der gewählten Sprache und setzt sein
+        lang-Attribut selbst.
+    --}}
+    <main id="inhalt" tabindex="-1" class="flex-1"
+          @if (! empty($ersatzsprache))
+              lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}"
+          @endif>
         {{ $slot ?? '' }}
         @yield('content')
     </main>

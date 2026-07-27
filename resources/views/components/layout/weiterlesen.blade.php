@@ -16,7 +16,9 @@
            aria-labelledby="weiterlesen-titel">
         <div class="mx-auto max-w-6xl">
             <h2 id="weiterlesen-titel" class="mb-5 font-display text-xl font-medium text-ink">
-                {{ $bereich ? "Mehr zu „{$bereich}“" : 'Das könnte dich auch interessieren' }}
+                {{ $bereich
+                    ? __('rahmen.weiterlesen.mehr_zu', ['bereich' => $bereich])
+                    : __('rahmen.weiterlesen.auch_interessant') }}
             </h2>
 
             <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

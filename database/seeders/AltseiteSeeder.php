@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Language;
 use App\Models\Page;
 use App\Models\Redirect;
 use Illuminate\Database\Seeder;
@@ -53,6 +54,11 @@ class AltseiteSeeder extends Seeder
 
     public function run(): void
     {
+        // Muss vor den Seiten laufen: jede Seite braucht eine Sprache, und
+        // ohne Standardsprache stünde nicht fest, welche das ist.
+        $this->call(SprachenSeeder::class);
+        $standard = Language::standardCode();
+
         $datei = base_path('docs/altseite-inhalt.json');
 
         if (! file_exists($datei)) {
@@ -74,7 +80,10 @@ class AltseiteSeeder extends Seeder
             $altSlug = trim($altPfad, '/');
             $slug = self::SLUG_ANPASSUNG[$altSlug] ?? $altSlug;
 
-            $page = Page::updateOrCreate(['slug' => $slug], [
+            // Die Sprache gehört in den Suchschlüssel: Slugs sind nur noch
+            // innerhalb einer Sprache eindeutig, und der Altbestand ist
+            // ausnahmslos die deutsche Fassung.
+            $page = Page::updateOrCreate(['slug' => $slug, 'locale' => $standard], [
                 // Reihenfolge: Überschrift der Altseite, sonst unsere Liste,
                 // erst zuletzt der aus dem Slug abgeleitete Notbehelf.
                 'titel' => $daten['titel'] ?: (self::TITEL[$slug] ?? Str::headline($slug)),

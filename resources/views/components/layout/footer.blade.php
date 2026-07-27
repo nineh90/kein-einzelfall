@@ -1,4 +1,4 @@
-@php $footer = config('navigation.footer'); @endphp
+@php $footer = \App\Support\Navigation::fusszeile(); @endphp
 
 <footer class="bg-green-deep px-4 pb-8 pt-10 text-on-green lg:px-10">
     <div class="mx-auto max-w-6xl">
@@ -22,7 +22,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-base">Kontakt</h2>
+                <h2 class="mb-3 font-display text-base">{{ __('rahmen.fusszeile.kontakt') }}</h2>
                 <ul class="flex flex-col gap-2">
                     @foreach ($footer['kontakt'] as $link)
                         <li>
@@ -36,7 +36,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-base">Informationen</h2>
+                <h2 class="mb-3 font-display text-base">{{ __('rahmen.fusszeile.informationen') }}</h2>
                 <ul class="flex flex-col gap-2">
                     @foreach ($footer['informationen'] as $link)
                         <li>
@@ -50,14 +50,14 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-base">Social Media</h2>
+                <h2 class="mb-3 font-display text-base">{{ __('rahmen.fusszeile.social') }}</h2>
                 <ul class="flex flex-col gap-2">
                     @foreach ($footer['social'] as $link)
                         <li>
                             <a href="{{ $link['url'] }}" rel="noopener noreferrer" target="_blank"
                                class="text-sm text-on-green-soft no-underline hover:text-on-green hover:underline">
                                 {{ $link['label'] }}
-                                <span class="sr-only">(öffnet in neuem Tab)</span>
+                                <span class="sr-only">{{ __('rahmen.neuer_tab') }}</span>
                             </a>
                         </li>
                     @endforeach
@@ -70,7 +70,7 @@
             <span>&copy; {{ date('Y') }} KE!N EINZELFALL e.V.</span>
             {{-- Vertraglich zugesagt: Nils-Digital muss im Footer erwähnt werden. --}}
             <span>
-                Umsetzung:
+                {{ __('rahmen.fusszeile.umsetzung') }}
                 <a href="https://nils-digital.de" rel="noopener" target="_blank"
                    class="text-on-green underline">Nils-Digital</a>
             </span>

@@ -1,2 +1,8 @@
 User-agent: *
 Disallow:
+
+# Interne Modul-Vorschau, kein Kundeninhalt.
+Disallow: /module-demo
+
+# Kennt alle Sprachfassungen und verweist sie über xhtml:link gegenseitig.
+Sitemap: https://kein-einzelfall.de/sitemap.xml

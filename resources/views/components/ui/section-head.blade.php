@@ -2,9 +2,11 @@
     'titel',
     'sub' => null,
     'alleUrl' => null,
-    'alleLabel' => 'Alle ansehen',
+    'alleLabel' => null,
     'stufe' => 'h2',
 ])
+
+@php $alleLabel ??= __('rahmen.alle_ansehen'); @endphp
 
 <div class="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
     <div>
