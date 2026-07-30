@@ -6,6 +6,7 @@
     'anker' => null,       // Sprungziel für das Inhaltsverzeichnis
     'absaetze' => [],      // wenn gesetzt, wird ab einer Länge eingeklappt
     'ab_absatz' => 4,      // ab dem wievielten Absatz eingeklappt wird
+    'hand' => null,        // handschriftlicher Nachsatz, z. B. ein Leitsatz
 ])
 
 @php
@@ -85,6 +86,14 @@
                         @endforeach
                     </div>
                 </details>
+            @endif
+
+            {{-- Der handschriftliche Nachsatz ist Teil der Bildsprache des
+                 Mockups: ein Leitsatz, der wie mit der Hand danebengeschrieben
+                 wirkt. Bewusst als normaler Absatz und nicht als Bild — er
+                 gehört zum Text und muss vorlesbar und übersetzbar bleiben. --}}
+            @if ($hand)
+                <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
             @endif
 
             @if ($cta)

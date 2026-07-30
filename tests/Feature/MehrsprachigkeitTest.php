@@ -37,8 +37,9 @@ class MehrsprachigkeitTest extends TestCase
     public function test_deutsche_adressen_bleiben_ohne_praefix(): void
     {
         // Der Kern der Zusage: die 24 Adressen der Altseite ändern sich nicht.
-        foreach (Page::where('locale', 'de')->pluck('slug') as $slug) {
-            $this->get('/'.$slug)->assertOk();
+        // Über pfad() statt über den Slug — die Startseite liegt unter „/“.
+        foreach (Page::where('locale', 'de')->get() as $seite) {
+            $this->get($seite->pfad())->assertOk();
         }
 
         $this->get('/')->assertOk();

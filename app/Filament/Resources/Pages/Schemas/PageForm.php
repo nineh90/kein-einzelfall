@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -121,17 +122,35 @@ class PageForm
                             ->where('fassung', $get('fassung') ?: Page::FASSUNG_STANDARD))
                         ->rules(['regex:/^[a-z0-9-]+$/'])
                         ->rules([KollidiertNichtMitSprachpraefix::fuerSeitenSlug()])
-                        ->prefix(function ($get) {
+                        ->prefix(function ($get, $record) {
                             $sprache = Language::finden($get('locale') ?: Language::standardCode())
                                 ?? Language::standard();
+
+                            if ($record?->istStartseite()) {
+                                return rtrim(url($sprache->praefix()), '/');
+                            }
+
                             $fassung = Page::FASSUNGEN[$get('fassung') ?: Page::FASSUNG_STANDARD] ?? '';
 
                             return rtrim(url($sprache->praefix()), '/').'/'.($fassung ? $fassung.'/' : '');
                         })
-                        ->helperText('Nur Kleinbuchstaben, Ziffern und Bindestriche. '
-                            .'Bei bestehenden Seiten möglichst nicht ändern — die Adresse '
-                            .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen. '
-                            .'Übersetzungen dürfen und sollen einen eigenen Slug bekommen.'),
+                        /*
+                         * Die Startseite behält ihren Slug. Er taucht in keiner
+                         * Adresse auf — die Seite liegt unter „/“ —, aber der
+                         * Aufruf der Startseite sucht genau danach. Wer ihn hier
+                         * ändern könnte, machte damit die Adresse der Website zu
+                         * einem 404, ohne dass am Formular etwas darauf hindeutet.
+                         */
+                        ->disabled(fn ($record) => (bool) $record?->istStartseite())
+                        // Ohne dies käme ein abgeschaltetes Feld leer zurück und
+                        // scheiterte an der eigenen Pflichtangabe.
+                        ->dehydrated()
+                        ->helperText(fn ($record) => $record?->istStartseite()
+                            ? 'Die Startseite liegt unter „/“ — ihre Adresse ist nicht änderbar.'
+                            : 'Nur Kleinbuchstaben, Ziffern und Bindestriche. '
+                                .'Bei bestehenden Seiten möglichst nicht ändern — die Adresse '
+                                .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen. '
+                                .'Übersetzungen dürfen und sollen einen eigenen Slug bekommen.'),
 
                     DateTimePicker::make('published_at')
                         ->label('Veröffentlicht am')
@@ -163,7 +182,9 @@ class PageForm
                 ->description('Die Seite besteht aus Bausteinen. Reihenfolge lässt sich per Ziehen ändern.')
                 ->schema([
                     Repeater::make('blocks')
-                        ->label('')
+                        // Ohne dies steht „Blocks“ über der Liste — englisch,
+                        // und die Überschrift der Sektion sagt es schon.
+                        ->hiddenLabel()
                         ->relationship()
                         ->orderColumn('position')
                         ->reorderable()
@@ -183,9 +204,26 @@ class PageForm
                                 ->live()
                                 ->native(false),
 
+                            // Steht im Formular vor der Überschrift, weil sie auf
+                            // der Seite darüber steht.
+                            TextInput::make('data.eyebrow')
+                                ->label('Überzeile')
+                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'cta_band'], true))
+                                ->helperText('Kleine Zeile über der Überschrift, in Grossbuchstaben. '
+                                    .'Kann leer bleiben.'),
+
                             TextInput::make('data.titel')
-                                ->label('Überschrift')
-                                ->helperText('Erscheint als Zwischenüberschrift und im Inhaltsverzeichnis.'),
+                                ->label(fn ($get) => $get('typ') === 'hero' ? 'Überschrift der Seite' : 'Überschrift')
+                                // Das Hinweisband trägt keine Überschrift, sondern
+                                // einen Leitsatz. Ein Titel darin erzeugte einen
+                                // Eintrag im Inhaltsverzeichnis, der auf nichts
+                                // Sichtbares zeigt.
+                                ->hidden(fn ($get) => $get('typ') === 'cta_band')
+                                ->helperText(fn ($get) => $get('typ') === 'hero'
+                                    ? 'Die grosse Überschrift ganz oben. Ein Teil davon kann die '
+                                        .'handgezeichnete Linie bekommen: dazu *Sternchen* darum setzen, '
+                                        .'zum Beispiel Keiner soll mehr sagen müssen: *„Ich hab es nicht gewusst!“*'
+                                    : 'Erscheint als Zwischenüberschrift und im Inhaltsverzeichnis.'),
 
                             Textarea::make('data.einleitung')
                                 ->label('Einleitung')
@@ -258,10 +296,17 @@ class PageForm
                                 ->native(false)
                                 ->visible(fn ($get) => $get('typ') === 'hinweis'),
 
+                            // Derselbe Schlüssel für drei Bausteine: der Fliesstext
+                            // unter der Überschrift. Getrennte Felder je Baustein
+                            // hiessen drei Namen für dieselbe Sache.
                             Textarea::make('data.text')
-                                ->label('Text des Hinweises')
+                                ->label(fn ($get) => $get('typ') === 'hinweis' ? 'Text des Hinweises' : 'Text')
                                 ->rows(3)
-                                ->visible(fn ($get) => $get('typ') === 'hinweis'),
+                                ->visible(fn ($get) => in_array(
+                                    $get('typ'),
+                                    ['hinweis', 'hero', 'contact_close'],
+                                    true,
+                                )),
 
                             Repeater::make('data.dokumente')
                                 ->label('Dokumente')
@@ -279,8 +324,180 @@ class PageForm
                                     TextInput::make('bytes')->label('Größe in Bytes')->numeric()
                                         ->helperText('Für den Hinweis „PDF, 180 KB“.'),
                                 ]),
+
+                            // --- Aufmacher ---
+                            TextInput::make('data.hand')
+                                ->label('Handschriftlicher Zusatz')
+                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text'], true))
+                                ->helperText('Ein kurzer Leitsatz, der wie mit der Hand '
+                                    .'danebengeschrieben aussieht. Kann leer bleiben.'),
+
+                            // --- Einstiegskarten ---
+                            TextInput::make('data.sub')
+                                ->label('Unterzeile')
+                                ->visible(fn ($get) => $get('typ') === 'quick_access')
+                                ->helperText('Steht unter der Überschrift. Kann leer bleiben.'),
+
+                            Repeater::make('data.karten')
+                                ->label('Karten')
+                                ->addActionLabel('Karte hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'quick_access')
+                                ->collapsible()
+                                ->columns(2)
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->helperText('Vier Karten passen in eine Reihe. Karten ohne '
+                                    .'Überschrift oder Ziel werden auf der Seite ausgelassen — '
+                                    .'die ganze Karte ist ein Link und dürfte sonst ins Leere führen.')
+                                ->schema([
+                                    TextInput::make('titel')->label('Überschrift')->required(),
+                                    Select::make('icon')
+                                        ->label('Zeichen')
+                                        ->options(self::ZEICHEN)
+                                        ->default('info')
+                                        ->native(false),
+                                    Textarea::make('text')->label('Text')->rows(4)->columnSpanFull(),
+                                    TextInput::make('url')->label('Ziel')->required()
+                                        ->helperText('Zum Beispiel /spenden'),
+                                    TextInput::make('link')
+                                        ->label('Beschriftung des Verweises')
+                                        ->helperText('„Zu den Selbsthilfegruppen“ statt „mehr“ — '
+                                            .'Screenreader lesen Links auch aus dem Zusammenhang gerissen vor.'),
+                                ]),
+
+                            // --- Hinweisband ---
+                            Textarea::make('data.zitat')
+                                ->label('Leitsatz')
+                                ->rows(2)
+                                ->visible(fn ($get) => $get('typ') === 'cta_band')
+                                ->required(fn ($get) => $get('typ') === 'cta_band')
+                                ->helperText('Der grosse Satz auf dem grünen Band.'),
+
+                            TextInput::make('data.notiz')
+                                ->label('Kleingedrucktes')
+                                ->visible(fn ($get) => $get('typ') === 'cta_band')
+                                ->helperText('Kleine Zeile unter den Knöpfen. Kann leer bleiben.'),
+
+                            // --- Kontakt-Abschluss ---
+                            Textarea::make('data.hinweis')
+                                ->label('Bedienhinweis')
+                                ->rows(2)
+                                ->visible(fn ($get) => $get('typ') === 'contact_close')
+                                ->helperText('Abgesetzt vom Text — für Hinweise zur Bedienung, '
+                                    .'etwa zum Notausgang.'),
+
+                            // --- Hilfe-Nummern ---
+                            Toggle::make('data.kompakt')
+                                ->label('Nur die zwei wichtigsten Nummern')
+                                ->visible(fn ($get) => $get('typ') === 'hilfe_box')
+                                ->helperText('Für Stellen mitten auf einer Seite. Die Nummern '
+                                    .'selbst stehen in der Anwendung und sind hier nicht änderbar.'),
+
+                            // --- Knöpfe ---
+                            self::knopf('data.cta')
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true)),
+
+                            Repeater::make('data.ctas')
+                                ->label('Knöpfe')
+                                ->addActionLabel('Knopf hinzufügen')
+                                ->visible(fn ($get) => in_array(
+                                    $get('typ'),
+                                    ['hero', 'cta_band', 'contact_close'],
+                                    true,
+                                ))
+                                ->maxItems(2)
+                                ->columns(3)
+                                ->itemLabel(fn (array $state) => $state['label'] ?? null)
+                                ->helperText('Höchstens zwei — bei drei Knöpfen nebeneinander '
+                                    .'entscheidet sich niemand mehr.')
+                                ->schema(self::knopffelder()),
                         ]),
                 ]),
         ]);
+    }
+
+    /**
+     * Zeichen für die Einstiegskarten.
+     *
+     * Nur die, die zu den Themen des Vereins passen — die Auswahl stammt aus
+     * `components/ui/icon.blade.php`. Ein Name, den es dort nicht gibt, ergäbe
+     * eine leere Fläche auf der Seite, deshalb eine Liste und kein Textfeld.
+     */
+    private const ZEICHEN = [
+        'users' => 'Menschen (Gruppen)',
+        'message' => 'Sprechblase (Austausch)',
+        'shield' => 'Schild (Schutz, Recht)',
+        'heart' => 'Herz (Spenden, Unterstützung)',
+        'info' => 'Info',
+        'lock' => 'Schloss (Vertraulichkeit)',
+        'accessibility' => 'Barrierefreiheit',
+        'home' => 'Haus',
+    ];
+
+    /**
+     * Aussehen eines Knopfes.
+     *
+     * „light“ und „outline“ sind für dunkle Flächen gemacht; auf Creme wären
+     * sie fast unsichtbar. Deshalb steht der Einsatzort in der Beschriftung —
+     * eine Auswahl je Baustein zu filtern hiesse, dass derselbe Knopf beim
+     * Verschieben in einen anderen Baustein still sein Aussehen verliert.
+     */
+    private const KNOPF_AUSSEHEN = [
+        'primary' => 'Gefüllt (grün)',
+        'ghost' => 'Umrandet',
+        'light' => 'Hell — nur auf dem grünen Band',
+        'outline' => 'Hell umrandet — nur auf dem grünen Band',
+    ];
+
+    /**
+     * Ein einzelner Knopf, als Feldgruppe eingebettet.
+     *
+     * Die Namen tragen den Pfad selbst, damit die drei Werte unter `data.cta`
+     * landen und nicht daneben.
+     */
+    private static function knopf(string $name): Fieldset
+    {
+        return Fieldset::make('Knopf')
+            ->columns(3)
+            ->schema([
+                TextInput::make($name.'.label')
+                    ->label('Beschriftung')
+                    ->helperText('Leer lassen heisst: kein Knopf.'),
+
+                TextInput::make($name.'.url')
+                    ->label('Ziel')
+                    ->helperText('Zum Beispiel /spenden oder https://…'),
+
+                Select::make($name.'.variant')
+                    ->label('Aussehen')
+                    ->options(self::KNOPF_AUSSEHEN)
+                    ->default('primary')
+                    ->native(false),
+            ]);
+    }
+
+    /**
+     * Beschriftung, Ziel und Aussehen — für das Wiederholfeld, dort sind die
+     * Namen relativ zum Eintrag.
+     *
+     * @return array<int, TextInput|Select>
+     */
+    private static function knopffelder(): array
+    {
+        return [
+            TextInput::make('label')
+                ->label('Beschriftung')
+                ->required(),
+
+            TextInput::make('url')
+                ->label('Ziel')
+                ->required()
+                ->helperText('Zum Beispiel /spenden oder https://…'),
+
+            Select::make('variant')
+                ->label('Aussehen')
+                ->options(self::KNOPF_AUSSEHEN)
+                ->default('primary')
+                ->native(false),
+        ];
     }
 }

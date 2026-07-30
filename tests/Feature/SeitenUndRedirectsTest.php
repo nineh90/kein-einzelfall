@@ -55,13 +55,23 @@ class SeitenUndRedirectsTest extends TestCase
 
     public function test_alle_seiten_der_altseite_sind_erreichbar(): void
     {
-        // 23 aus dem Altbestand plus die Seite „Barrierefreiheit", die es dort
-        // nicht gab, auf die aber Footer und Einstellungs-Panel verweisen.
-        $this->assertSame(24, Page::count());
+        // 23 aus dem Altbestand, die Seite „Barrierefreiheit" (die es dort nicht
+        // gab, auf die aber Footer und Einstellungs-Panel verweisen) und die
+        // Startseite, die inzwischen ebenfalls ein Datensatz ist.
+        $this->assertSame(25, Page::count());
 
-        foreach (Page::pluck('slug') as $slug) {
-            $this->get("/{$slug}")->assertOk();
+        // Über pfad() und nicht über den Slug: Die Startseite liegt unter „/“.
+        foreach (Page::all() as $seite) {
+            $this->get($seite->pfad())->assertOk();
         }
+    }
+
+    public function test_die_startseite_hat_genau_eine_adresse(): void
+    {
+        // Derselbe Inhalt unter „/“ und „/startseite“ wäre doppelter Inhalt —
+        // genau das, was dem Kunden zu vermeiden zugesagt ist.
+        $this->get('/')->assertOk();
+        $this->get('/'.Page::STARTSEITE_SLUG)->assertRedirect('/')->assertStatus(301);
     }
 
     public function test_wordpress_urls_mit_schraegstrich_leiten_dauerhaft_um(): void
@@ -139,12 +149,12 @@ class SeitenUndRedirectsTest extends TestCase
 
     public function test_jede_seite_hat_genau_eine_h1(): void
     {
-        foreach (Page::pluck('slug') as $slug) {
-            $html = $this->get("/{$slug}")->getContent();
+        foreach (Page::all() as $seite) {
+            $html = $this->get($seite->pfad())->getContent();
             $this->assertSame(
                 1,
                 preg_match_all('/<h1[^>]*>/', $html),
-                "Seite /{$slug} hat nicht genau eine h1"
+                "Seite {$seite->pfad()} hat nicht genau eine h1"
             );
         }
     }

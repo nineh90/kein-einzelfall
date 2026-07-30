@@ -13,7 +13,12 @@ class EditPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            // Die Startseite lässt sich nicht löschen. Sie ist die Adresse der
+            // Website; ohne ihren Datensatz liefert „/“ ein 404, und
+            // wiederherstellen liesse sie sich im Panel nicht. Andere Seiten
+            // darf die Redaktion löschen — für die gibt es Weiterleitungen.
+            DeleteAction::make()
+                ->hidden(fn ($record) => $record->istStartseite()),
         ];
     }
 }

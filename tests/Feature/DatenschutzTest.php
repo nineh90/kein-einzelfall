@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Page;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\StartseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,6 +15,15 @@ use Tests\TestCase;
 class DatenschutzTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Die Startseite ist ein Datensatz. Ohne ihn liefert `/` ein 404 und
+        // dieser Test prüfte die Fehlerseite statt der Startseite.
+        $this->seed(StartseiteSeeder::class);
+    }
 
     public function test_sicherheitsheader_werden_gesetzt(): void
     {

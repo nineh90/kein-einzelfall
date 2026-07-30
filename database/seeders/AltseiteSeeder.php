@@ -30,7 +30,14 @@ class AltseiteSeeder extends Seeder
         'impressum-2' => 'impressum',
     ];
 
-    /** Diese Seiten haben eine eigene Route und werden nicht als Page angelegt. */
+    /**
+     * Seiten, die dieser Seeder überspringt.
+     *
+     * Die Startseite ist inzwischen ebenfalls ein Datensatz, aber ihre
+     * Bausteine sind Aufmacher, Einstiegskarten und Hinweisband — nicht der
+     * Fliesstext, den `altseite-inhalt.json` für `/` hergibt. Sie kommt
+     * deshalb aus dem `StartseiteSeeder`.
+     */
     private const EIGENE_ROUTE = ['/'];
 
     /**
@@ -167,6 +174,10 @@ class AltseiteSeeder extends Seeder
                 ['nach' => $nach, 'status' => 301, 'notiz' => 'War auf der Altseite ein 404']
             );
         }
+
+        // Die Startseite. Eigener Seeder, weil sie aus Bausteinen besteht und
+        // nicht aus dem Fliesstext der Altseite.
+        $this->call(StartseiteSeeder::class);
 
         // Nicht Teil des Altbestands, aber im Footer und in der Toolbar
         // verlinkt — ohne sie liefe der Verweis ins Leere.

@@ -28,6 +28,21 @@ class Page extends Model
         self::FASSUNG_LEICHTE_SPRACHE => 'leichte-sprache',
     ];
 
+    /**
+     * Slug der Startseite.
+     *
+     * Die Startseite liegt unter `/` und hat trotzdem einen Slug: Ohne ihn
+     * hätte sie keinen Eintrag in der Seitenliste des Panels, keine
+     * Übersetzungsgruppe und keine Fassung in Leichter Sprache — sie wäre
+     * genau das wieder, was sie bis hierher war: ein Sonderfall ausserhalb
+     * des CMS.
+     *
+     * Sichtbar wird der Slug nie. `pfad()` liefert `/`, und die Sammelroute
+     * leitet `/startseite` dauerhaft dorthin um, damit derselbe Inhalt nicht
+     * unter zwei Adressen steht.
+     */
+    public const STARTSEITE_SLUG = 'startseite';
+
     protected $fillable = [
         'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel',
         'meta_title', 'meta_description', 'noindex', 'published_at',
@@ -87,6 +102,18 @@ class Page extends Model
     public function istLeichteSprache(): bool
     {
         return $this->fassung === self::FASSUNG_LEICHTE_SPRACHE;
+    }
+
+    /**
+     * Die Startseite ihrer Sprache.
+     *
+     * Nur die Standardfassung: Die Startseite in Leichter Sprache ist eine
+     * gewöhnliche Seite unter `/leichte-sprache/startseite`. Sie an die Wurzel
+     * zu legen hiesse, `/` doppelt zu belegen.
+     */
+    public function istStartseite(): bool
+    {
+        return $this->slug === self::STARTSEITE_SLUG && ! $this->istLeichteSprache();
     }
 
     /** Die Fassung in Leichter Sprache zu dieser Seite — oder null. */
@@ -150,6 +177,13 @@ class Page extends Model
     /** Öffentlicher Pfad inklusive Sprach- und Fassungspräfix. */
     public function pfad(): string
     {
+        // Die Startseite wohnt an der Wurzel, nicht unter ihrem Slug. Ohne
+        // diesen Zweig stünde sie in Sitemap, hreflang und Sprachumschalter
+        // als /startseite — einer Adresse, die es nur als Weiterleitung gibt.
+        if ($this->istStartseite()) {
+            return $this->sprache()->pfad('/');
+        }
+
         $fassung = self::FASSUNGEN[$this->fassung] ?? '';
 
         return $this->sprache()->pfad('/'.($fassung ? $fassung.'/' : '').$this->slug);

@@ -6,6 +6,34 @@
     'ctas' => [],            // [['label'=>, 'url'=>, 'variant'=>], ...]
 ])
 
+@php
+    // Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php
+    $knoepfe = knoepfe($ctas);
+
+    /*
+     * Die handgezeichnete Linie aus dem Mockup.
+     *
+     * Der Verein markiert im Panel den Teil der Überschrift, der sie bekommen
+     * soll — mit *Sternchen*, wie beim Fettschreiben in einer Nachricht. Das ist
+     * bewusst kein zweites Titelfeld: Die Linie kann so am Anfang, in der Mitte
+     * oder am Ende des Satzes sitzen, ohne dass jemand die Reihenfolge zweier
+     * Felder im Kopf zusammensetzen muss.
+     *
+     * Erst maskieren, dann ersetzen: `e()` lässt Sternchen unangetastet, und die
+     * einzige rohe Ausgabe danach ist unser eigenes Markup — ein Titel mit
+     * <script> darin bleibt damit harmlos.
+     *
+     * Gezeichnet wird die Linie in der CSS (`.swash` in app.css). Dort ist sie
+     * ein Hintergrundbild und überlebt damit den Zeilenumbruch, den eine lange
+     * Überschrift auf dem Handy immer hat.
+     */
+    $ueberschrift = preg_replace_callback(
+        '/\*([^*]+)\*/u',
+        fn (array $treffer) => '<span class="swash">'.$treffer[1].'</span>',
+        e($titel),
+    );
+@endphp
+
 <section class="px-4 pt-8 lg:px-10 lg:pt-16">
     <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
 
@@ -15,8 +43,9 @@
                 <x-ui.eyebrow class="mb-4">{{ $eyebrow }}</x-ui.eyebrow>
             @endif
 
-            <h1 class="font-display text-[1.75rem] font-medium leading-[1.18] text-ink lg:text-[2.75rem]">
-                {{ $titel }}
+            {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. --}}
+            <h1 class="pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink lg:text-[2.75rem]">
+                {!! $ueberschrift !!}
             </h1>
 
             @if ($text)
@@ -25,9 +54,9 @@
                 </p>
             @endif
 
-            @if ($ctas)
+            @if ($knoepfe)
                 <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    @foreach ($ctas as $cta)
+                    @foreach ($knoepfe as $cta)
                         <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'primary'">
                             {{ $cta['label'] }}
                         </x-ui.button>

@@ -191,7 +191,21 @@ Abgleich — was in der Liste steht und auf der Seite fehlt (z.B. Assistenzhund,
 Fallmanager, Helfernetzwerk, Opferanwalt, Persönliches Budget, §109 SGG,
 KFZ-Hilfe), muss der Verein liefern.
 
-### A8 · Weitere offene Punkte
+### A8 · Unterzeile über den Einstiegskarten der Startseite
+
+Die Überschrift der Startseite lautet seit dem 30.07.2026 „Keiner soll mehr
+sagen müssen: „Ich hab es nicht gewusst!"" — wie im freigegebenen Mockup, mit
+der handgezeichneten Linie unter dem Zitat.
+
+Genau dieser Satz stand vorher als Unterzeile über den vier Einstiegskarten.
+Damit er nicht zweimal auf derselben Seite steht, ist die Unterzeile **vorerst
+leer**. Das ist so abgesprochen und sieht nicht falsch aus — die Überschrift
+„Unsere Aufgabe" steht weiterhin darüber.
+
+**Frage an den Verein:** Soll dort etwas anderes stehen? Das Feld heisst im
+Panel „Unterzeile" und liegt im Baustein „Einstiegskarten" der Startseite.
+
+### A9 · Weitere offene Punkte
 - **Bestehende Datenbank:** Wir haben weiterhin keinen Zugriff. Vor der
   Aufwandsschätzung für die Bereinigung unbedingt Einsicht nehmen.
 - **Google Search Console:** Zugang sichern, **bevor** am Altsystem etwas geändert

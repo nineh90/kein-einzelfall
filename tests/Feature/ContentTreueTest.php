@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\StartseiteSeeder;
 use Tests\TestCase;
 
 /**
@@ -40,6 +41,15 @@ class ContentTreueTest extends TestCase
         'Vier Wege',
         'Melde dich — in deinem Tempo',
     ];
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Die Startseite ist ein Datensatz. Ohne ihn liefert `/` ein 404 und
+        // dieser Test prüfte die Fehlerseite statt der Startseite.
+        $this->seed(StartseiteSeeder::class);
+    }
 
     public function test_startseite_gibt_den_bestand_wieder(): void
     {

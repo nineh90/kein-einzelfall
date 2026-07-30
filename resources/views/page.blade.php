@@ -49,9 +49,15 @@
         }
     }
 
-    // Sprungmarken für lange Seiten
+    // Sprungmarken für lange Seiten.
+    //
+    // Nur Textbausteine: Sie sind die einzigen, die ihre Überschrift mit einem
+    // Sprungziel versehen. Ein Einstiegskarten-Baustein mit Überschrift stand
+    // sonst zwar im Verzeichnis, sprang aber nirgendwohin — und das fällt
+    // ausgerechnet dem auf, der das Verzeichnis benutzt, weil er nicht scrollen
+    // kann oder will.
     $sprungpunkte = $bloecke
-        ->filter(fn ($b) => $b->anker() && ($b->data['titel'] ?? null))
+        ->filter(fn ($b) => $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null))
         ->map(fn ($b) => ['anker' => $b->anker(), 'titel' => $b->data['titel']])
         ->values()
         ->all();

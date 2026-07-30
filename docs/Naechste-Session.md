@@ -1,6 +1,6 @@
 # Auftrag für die nächste Session
 
-Kopiervorlage. Stand: 27.07.2026, nach der Mehrsprachigkeits-Session.
+Kopiervorlage. Stand: 30.07.2026, nach der Startseiten-Session.
 
 ---
 
@@ -16,13 +16,14 @@ Umsetzung Nils-Digital (Kevin). Lies zuerst:
 - `README.md` — Start, Tests, Voraussetzungen
 
 **Stand:** Meilensteine 1–9 fertig, Mehrsprachigkeit im Grundgerüst fertig.
-24 Seiten, 10 Gruppen, 26 Weiterleitungen. **161 Tests / 1145 Assertions.**
+25 Seiten (die Startseite ist seit 30.07.2026 eine davon), 10 Gruppen,
+26 Weiterleitungen. **199 Tests / 1365 Assertions.**
 Starten mit `bin/start`. Drei Testläufe:
 
 ```bash
-php artisan test          # 161 Tests
+php artisan test          # 199 Tests
 npm run test:browser      # Bedienung im echten Chromium
-npm run test:a11y         # axe-core, WCAG 2.1 AA, 36 Durchläufe
+npm run test:a11y         # axe-core, WCAG 2.1 AA, 18 Durchläufe
 ```
 
 **Vier Rahmenbedingungen, die nicht verhandelbar sind:**
@@ -37,9 +38,24 @@ npm run test:a11y         # axe-core, WCAG 2.1 AA, 36 Durchläufe
 
 ---
 
-## Was in der letzten Session entstanden ist
+## Was in der letzten Session entstanden ist (30.07.2026)
 
-Vier Commits, alle Tests grün. Kurzfassung:
+Anlass: Der Verein wollte die Überschrift der Startseite ändern und fand sie im
+Panel nicht.
+
+- **Die Startseite ist ein Datensatz.** Sie war die einzige der 25 Seiten ohne —
+  eine feste Blade-Datei. Sie liegt weiterhin unter `/`; `/startseite` leitet mit
+  301 dorthin um.
+- **Fünf Bausteine sind pflegbar geworden** (`hero`, `quick_access`, `cta_band`,
+  `contact_close`, `hilfe_box`) — der erste Teil von A3.
+- **Die handgezeichnete Linie** aus dem Mockup unter dem Titelteil, den der
+  Verein mit `*Sternchen*` markiert.
+- Neue Überschrift laut Mockup; die Unterzeile über den Einstiegskarten ist
+  dafür leer und **wartet auf eine Entscheidung des Vereins**.
+
+Begründungen in `docs/Komponenten.md`, Abschnitt 12.
+
+## Die Session davor (27.07.2026, Mehrsprachigkeit)
 
 - **Sprachen als Tabelle** (`languages`) mit Filament-Resource. `richtung` (ltr/rtl)
   von Anfang an mitgeführt. Der Verein kann selbst Sprachen anlegen.
@@ -94,27 +110,40 @@ Offen, nach Nutzen sortiert:
 3. **`components/blocks/*`** — `embed` (8), `download-list` (5), `group-list` (4),
    `hilfe-box` (4), `inhalts-hinweis` (4), `donation-options` (12).
 4. **`config/hilfe.php`** (16 Strings) — hängt an der Notfallnummern-Frage, siehe A4.
-5. **`home.blade.php`** (39 Strings) und `page.blade.php` — das ist **Vereinsinhalt**,
-   kein UI. Nicht in `lang/` schieben, sondern abwarten: Diese Texte sollen laut
-   Datei-Kommentar ohnehin nach `pages`/`page_blocks` wandern. Dann sind sie über
-   die normale Übersetzung erledigt.
+5. ~~**`home.blade.php`** (39 Strings)~~ — **erledigt am 30.07.2026.** Die Texte
+   der Startseite stehen in `pages`/`page_blocks` und sind über die normale
+   Übersetzung mit abgedeckt. In `page.blade.php` steht noch der angehängte
+   Kontaktabschluss („Fragen zu diesem Thema?") fest verdrahtet.
 6. Deutsche Datums- und Zahlformate: `format('d.m.Y')` in `blog/index:117` und
    `blog/show:87`, `->locale('de')` in `events/index:106,128,187`, `number_format`
    in `download-list:10-11`. Alle vier auf die aktive Sprache umstellen.
 7. `Group::TYPEN` und `Group::STATUS` liefern deutsche Labels aus dem Model ins Template.
 
-### A3 · Nur 8 von 20 Baustein-Typen haben Felder im Filament
+### A3 · Baustein-Typen ohne Felder im Filament — zur Hälfte erledigt
 
 Das ist der grösste Einzelposten und **kein Mehrsprachigkeits-Problem** — es gilt
-schon auf Deutsch. Für `hero`, `quick_access`, `topic_list`, `cta_band`,
-`contact_close`, `contact_form`, `donation_options`, `embed`, `hilfe_box`,
-`inhalts_hinweis`, `leichte_sprache`, `stat_strip`, `team_grid` und `group_list`
-gibt es ausser `typ` und `data.titel` kein einziges Eingabefeld; sie sind nur per
-Seeder befüllbar.
+schon auf Deutsch. Ein Baustein ohne Eingabefelder ist nur per Seeder befüllbar;
+der Verein kann ihn weder auf Deutsch noch in einer Übersetzung pflegen.
 
-Solange das so ist, kann der Verein diese Bausteine weder auf Deutsch noch in einer
-Übersetzung pflegen. „Alle pflegbaren Texte sind im Panel je Sprache pflegbar" ist
-damit **nicht eingelöst**. Das gehört vor die Abnahme.
+**Am 30.07.2026 nachgeholt**, nämlich die Bausteine der Startseite: `hero`,
+`quick_access`, `cta_band`, `contact_close`, `hilfe_box`, dazu Überzeile,
+handschriftlicher Zusatz und ein Knopf für `text`. Im selben Zug ist die
+Startseite ein Datensatz geworden — sie war die einzige Seite ohne. Begründungen
+in `docs/Komponenten.md`, Abschnitt 12.
+
+**Weiterhin offen:** `topic_list`, `team_grid`, `group_list`, `embed`,
+`donation_options`, `inhalts_hinweis`, `leichte_sprache`, `stat_strip`,
+`contact_form`. „Alle pflegbaren Texte sind im Panel je Sprache pflegbar" ist
+damit noch **nicht vollständig eingelöst**. Das gehört vor die Abnahme.
+
+Zwei Muster, die dabei entstanden sind und für den Rest gelten:
+
+- Jeder Schlüssel, den ein Seeder schreibt, **braucht ein Feld im Formular** —
+  sonst wirft ihn das nächste Speichern im Panel still weg. Das ist der
+  Fallstrick bei genau dieser Aufgabe. `AdminPanelTest` fängt ihn ab.
+- Halb ausgefüllte Wiederholfelder gehören beim Rendern aussortiert
+  (`knoepfe()` in `app/Support/helpers.php`), sonst entstehen Links ohne Ziel
+  und Namen.
 
 ### A4 · Eine Frage, die vor dem Weiterbauen geklärt sein sollte
 

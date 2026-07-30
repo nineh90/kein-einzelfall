@@ -16,6 +16,49 @@ class PageBlock extends Model
     }
 
     /**
+     * Leere Felder gar nicht erst speichern.
+     *
+     * Das Formular im Panel schickt jedes sichtbare Feld mit, auch die
+     * unausgefüllten. Ohne diese Bereinigung sammelte jeder Baustein bei jedem
+     * Speichern Schlüssel mit `null` an. Das ist kein Schönheitsfehler: Die
+     * Bausteindaten werden von Hand gelesen und übersetzt, und jedes Speichern
+     * sähe im Vergleich zweier Stände wie eine inhaltliche Änderung aus.
+     *
+     * `false` und `0` bleiben stehen — das sind Angaben, keine Leerstellen.
+     */
+    protected static function booted(): void
+    {
+        static::saving(function (self $block) {
+            $block->data = self::ohneLeere($block->data ?? []);
+        });
+    }
+
+    /**
+     * @param  array<string|int, mixed>  $daten
+     * @return array<string|int, mixed>
+     */
+    private static function ohneLeere(array $daten): array
+    {
+        $gefiltert = [];
+
+        foreach ($daten as $schluessel => $wert) {
+            if (is_array($wert)) {
+                $wert = self::ohneLeere($wert);
+            }
+
+            if ($wert === null || $wert === '' || $wert === []) {
+                continue;
+            }
+
+            $gefiltert[$schluessel] = $wert;
+        }
+
+        // Listen dürfen keine Lücken behalten: Aus einer Liste mit Loch wird in
+        // JSON ein Objekt, und darüber läuft keine @foreach-Schleife mehr.
+        return array_is_list($daten) ? array_values($gefiltert) : $gefiltert;
+    }
+
+    /**
      * Erlaubte Blocktypen — kuratiert, kein freier Page-Builder.
      * Jeder Eintrag entspricht einer Komponente unter resources/views/components/blocks/.
      *

@@ -80,6 +80,87 @@ class BausteineTest extends TestCase
         $this->assertStringContainsString('"@type":"Question"', $html);
     }
 
+    public function test_aufmacher_unterlegt_den_markierten_teil_mit_der_linie(): void
+    {
+        // Die handgezeichnete Linie aus dem Mockup. Der Verein markiert den
+        // Teil, der sie bekommt, mit Sternchen.
+        $html = $this->seiteMitBaustein('hero', [
+            'titel' => 'Keiner soll mehr sagen müssen: *Ich hab es nicht gewusst!*',
+        ]);
+
+        $this->assertStringContainsString('<span class="swash">', $html);
+
+        // Der Text steht vollständig da — und die Sternchen sind weg, nicht
+        // etwa mitgelesen.
+        $this->assertStringContainsString('Ich hab es nicht gewusst!', $html);
+        $this->assertStringNotContainsString('*Ich hab', $html);
+    }
+
+    public function test_aufmacher_ohne_markierung_bleibt_ohne_linie(): void
+    {
+        $html = $this->seiteMitBaustein('hero', ['titel' => 'Ganz ohne Linie']);
+
+        $this->assertStringContainsString('Ganz ohne Linie', $html);
+        $this->assertStringNotContainsString('swash', $html);
+    }
+
+    public function test_markierung_im_titel_kann_kein_html_einschleusen(): void
+    {
+        // Der Titel kommt aus dem Panel. Die Auszeichnung ist der einzige Weg,
+        // aus einem Titel Markup zu machen — alles andere bleibt Text.
+        $html = $this->seiteMitBaustein('hero', [
+            'titel' => 'Harmlos *<script>alert(1)</script>*',
+        ]);
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $html);
+        $this->assertStringContainsString('&lt;script&gt;', $html);
+    }
+
+    public function test_leere_knoepfe_und_karten_landen_nicht_auf_der_seite(): void
+    {
+        // Im Panel entstehen sie mit einem Klick: Eintrag hinzufügen, Felder
+        // leer lassen. Ein <a href=""> wäre ein Link ohne Namen und Ziel —
+        // ein Stolperstopp für die Tastatur und ein WCAG-Verstoss.
+        $html = $this->seiteMitBaustein('hero', [
+            'titel' => 'Mit einem halben Knopf',
+            'ctas' => [
+                ['label' => 'Echter Knopf', 'url' => '/spenden'],
+                ['label' => 'Ohne Ziel', 'url' => null],
+                ['label' => null, 'url' => '/verein'],
+            ],
+        ]);
+
+        $this->assertStringContainsString('Echter Knopf', $html);
+        $this->assertStringNotContainsString('Ohne Ziel', $html);
+        $this->assertStringNotContainsString('href=""', $html);
+    }
+
+    public function test_inhaltsverzeichnis_nennt_nur_bausteine_mit_sprungziel(): void
+    {
+        // Nur Textbausteine setzen ein id-Attribut. Stünde ein anderer Baustein
+        // im Verzeichnis, führte sein Eintrag ins Nichts.
+        $seite = Page::create(['slug' => 'lang', 'titel' => 'Lang', 'published_at' => now()]);
+
+        foreach (['Eins', 'Zwei', 'Drei', 'Vier'] as $i => $titel) {
+            $seite->blocks()->create([
+                'typ' => 'text',
+                'position' => $i,
+                'data' => ['titel' => $titel, 'absaetze' => ['Text.']],
+            ]);
+        }
+
+        $seite->blocks()->create([
+            'typ' => 'quick_access',
+            'position' => 4,
+            'data' => ['titel' => 'Einstiege ohne Sprungziel', 'karten' => []],
+        ]);
+
+        $html = $this->get('/lang')->getContent();
+
+        $this->assertStringContainsString('#abschnitt-eins', $html);
+        $this->assertStringNotContainsString('#abschnitt-einstiege-ohne-sprungziel', $html);
+    }
+
     public function test_hinweis_kennt_verschiedene_dringlichkeiten(): void
     {
         $frist = $this->seiteMitBaustein('hinweis', [

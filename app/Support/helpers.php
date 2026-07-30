@@ -2,6 +2,30 @@
 
 use App\Models\Language;
 
+if (! function_exists('knoepfe')) {
+    /**
+     * Nur die Knöpfe, die irgendwohin führen.
+     *
+     * Seit die Knöpfe im Panel gepflegt werden, entstehen leere: Es reicht, im
+     * Wiederholfeld einmal auf „Hinzufügen“ zu tippen und die Felder leer zu
+     * lassen. Ungefiltert ergäbe das ein <a href=""> — für die Tastatur ein
+     * Stolperstopp, für einen Screenreader ein Link ohne Namen und damit ein
+     * echter WCAG-Verstoss (2.4.4).
+     *
+     * @param  array<int, array<string, mixed>>  $ctas
+     * @return array<int, array<string, mixed>>
+     */
+    function knoepfe(array $ctas): array
+    {
+        return array_values(array_filter(
+            $ctas,
+            fn ($cta) => is_array($cta)
+                && filled($cta['label'] ?? null)
+                && filled($cta['url'] ?? null),
+        ));
+    }
+}
+
 if (! function_exists('sprachlink')) {
     /**
      * Adresse einer benannten Route in der aktuellen (oder einer bestimmten) Sprache.

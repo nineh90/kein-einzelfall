@@ -4,6 +4,17 @@
     'karten' => [],   // [['icon'=>, 'titel'=>, 'text'=>, 'url'=>, 'link'=>], ...]
 ])
 
+@php
+    // Die ganze Karte ist ein Link. Eine Karte ohne Ziel wäre damit ein Link
+    // ins Leere — im Panel entsteht so etwas, sobald jemand eine Karte anlegt
+    // und nicht fertig ausfüllt. Hier fällt sie raus, statt als toter Kasten
+    // auf der Seite zu landen.
+    $karten = array_values(array_filter(
+        $karten,
+        fn ($karte) => filled($karte['titel'] ?? null) && filled($karte['url'] ?? null),
+    ));
+@endphp
+
 <section class="px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="qa-titel">
     <div class="mx-auto max-w-6xl">
         <x-ui.section-head :titel="$titel" :sub="$sub" />

@@ -139,6 +139,24 @@ html[data-kontrast='hoch'] footer :is(.border, [class*='border-']) {
   border-color: #000000 !important;
 }
 
+/* Die handgezeichnete Linie unter der Ueberschrift (.swash in app.css).
+
+   Sie ist ein Hintergrundbild mit eingebauter Farbe — eine Custom Property
+   laesst sich in eine data-URI nicht einsetzen. Deshalb steht der Umriss hier
+   ein zweites und drittes Mal, je Modus mit der passenden Farbe. Die Alternative
+   waere, ihn in diesen Modi verschwinden zu lassen; dann verloere die
+   Ueberschrift ihre Betonung ausgerechnet fuer die Menschen, die diese
+   Einstellungen brauchen.
+
+   Dunkel: das aufgehellte Gruen des Modus. Hoch: Gelb wie jeder andere Akzent,
+   Vereinsgruen haette auf Schwarz 1,7:1. */
+html[data-kontrast='dunkel'] .swash {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%239FC4AA' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+html[data-kontrast='hoch'] .swash {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%23FFFF00' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
 /* Graustufen */
 html[data-kontrast='monochrom'] {
   filter: grayscale(1);

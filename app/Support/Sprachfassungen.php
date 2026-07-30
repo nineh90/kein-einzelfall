@@ -64,6 +64,15 @@ class Sprachfassungen
     private function adresseIn(Language $sprache): ?string
     {
         if ($this->page) {
+            /*
+             * Die Startseite heisst in jeder Sprache `/` — ihr Slug taucht in
+             * keiner Adresse auf. Ohne diesen Zweig verwiesen Umschalter und
+             * hreflang auf `/en/startseite`, wo nur eine Weiterleitung steht.
+             */
+            if ($this->page->istStartseite()) {
+                return $sprache->pfad('/');
+            }
+
             $fassung = $this->page->inSprache($sprache->code);
 
             /*

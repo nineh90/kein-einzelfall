@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\StartseiteSeeder;
 use Tests\TestCase;
 
 /**
@@ -11,6 +12,15 @@ use Tests\TestCase;
  */
 class BarrierefreiheitTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Die Startseite ist ein Datensatz. Ohne ihn liefert `/` ein 404 und
+        // dieser Test prüfte die Fehlerseite statt der Startseite.
+        $this->seed(StartseiteSeeder::class);
+    }
+
     public function test_seite_hat_sprache_hauptbereich_und_sprunglink(): void
     {
         $r = $this->get('/');

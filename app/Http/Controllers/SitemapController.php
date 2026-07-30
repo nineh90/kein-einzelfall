@@ -80,12 +80,17 @@ class SitemapController extends Controller
      *
      * Sie existieren in jeder freigeschalteten Sprache, weil die Route sie in
      * jeder Sprache ausliefert — auch wenn die Inhalte darunter noch deutsch sind.
+     *
+     * Die Startseite steht hier nicht mehr: Sie ist ein Datensatz und kommt
+     * über `seiten()`. Beides zusammen ergäbe denselben Eintrag zweimal. Ihre
+     * hreflang-Verweise nennen jetzt ausserdem die Übersetzungen, die es
+     * wirklich gibt, statt der Sprachen, die die Route theoretisch ausliefert.
      */
     private function uebersichten(): array
     {
         $sprachen = Language::aktive();
 
-        return collect(['start', 'blog.index', 'events.index'])
+        return collect(['blog.index', 'events.index'])
             ->map(fn (string $route) => $sprachen->map(fn (Language $s) => [
                 'url' => url(sprachlink($route, [], $s->code)),
                 'geaendert' => null,

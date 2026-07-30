@@ -5,6 +5,9 @@
     'ctas' => [],
 ])
 
+{{-- Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php --}}
+@php $knoepfe = knoepfe($ctas); @endphp
+
 <section class="px-4 py-10 text-center lg:px-10 lg:py-14" aria-labelledby="kontakt-titel">
     <div class="mx-auto max-w-2xl">
         <span class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full
@@ -20,9 +23,9 @@
             <p class="mx-auto mt-3 max-w-prose text-ink-soft">{{ $text }}</p>
         @endif
 
-        @if ($ctas)
+        @if ($knoepfe)
             <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-                @foreach ($ctas as $cta)
+                @foreach ($knoepfe as $cta)
                     <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'primary'">
                         {{ $cta['label'] }}
                     </x-ui.button>

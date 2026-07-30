@@ -111,6 +111,33 @@ body {
   content: var(--wasserzeichen, '');
 }
 
+/* Handgezeichnete Linie unter einem Teil der Ueberschrift ("swash").
+
+   Das Erkennungszeichen aus dem Mockup. Der Verein markiert im Panel den Teil
+   der Ueberschrift, der sie bekommen soll.
+
+   Als Hintergrundbild und nicht als eingebettetes <svg>: Ein absolut
+   positioniertes SVG haengt am ersten Zeilenfragment. Sobald die Ueberschrift
+   umbricht — auf dem Handy ist das der Normalfall — sass die Linie als kurzer
+   Haken hinter dem letzten Wort. Mit box-decoration-break bekommt stattdessen
+   jede Zeile ihre eigene Linie, ohne eine Zeile JavaScript.
+
+   Der Umriss ist zudem reine Dekoration: Als Hintergrund ist er fuer
+   Screenreader von vornherein nicht vorhanden und braucht kein aria-hidden.
+
+   Die Farbe ist die Vereinsfarbe (--color-green-brand, #009640); in einer
+   data-URI laesst sich keine Custom Property einsetzen, deshalb steht sie hier
+   ausgeschrieben. Aendert sich die Vereinsfarbe, aendert sie sich auch hier. */
+.swash {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%23009640' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.3em;
+  padding-bottom: 0.18em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 /* Typografie der Leichten Sprache.
 
    Das Regelwerk verlangt mehr als einfache Woerter: groessere Schrift, weiter

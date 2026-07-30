@@ -6,6 +6,9 @@
     'wasserzeichen' => 'KE!N',
 ])
 
+{{-- Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php --}}
+@php $knoepfe = knoepfe($ctas); @endphp
+
 <section class="px-4 py-8 lg:px-10 lg:py-12">
     <div class="relative mx-auto max-w-6xl overflow-hidden rounded-band bg-green-deep px-6 py-8 lg:px-10 lg:py-11">
 
@@ -39,9 +42,9 @@
                 @endif
             </div>
 
-            @if ($ctas)
+            @if ($knoepfe)
                 <div class="flex flex-col gap-3">
-                    @foreach ($ctas as $cta)
+                    @foreach ($knoepfe as $cta)
                         <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'light'">
                             {{ $cta['label'] }}
                         </x-ui.button>

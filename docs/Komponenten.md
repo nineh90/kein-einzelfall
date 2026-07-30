@@ -34,15 +34,15 @@ Status: ✅ gebaut · 🔨 geplant · 💭 zu klären
 
 | Block | Status | Verwendet auf |
 |---|---|---|
-| `hero` | 🔨 | Startseite |
-| `stat_strip` | 🔨 | Startseite |
-| `quick_access` | 🔨 | Startseite |
-| `text_media` | 🔨 | „Wer wir sind" |
-| `topic_list` | 🔨 | Wissen |
+| `hero` | ✅ | Startseite — im Panel pflegbar, inkl. Linie unter dem markierten Titelteil |
+| `stat_strip` | 🔨 | Startseite — gebaut, aber ohne Felder im Panel |
+| `quick_access` | ✅ | Startseite — im Panel pflegbar |
+| `text_media` | ✅ | „Wer wir sind" |
+| `topic_list` | 🔨 | Wissen — gebaut, aber ohne Felder im Panel |
 | `event_teaser` | 🔨 | Startseite |
 | `news_teaser` | 🔨 | Startseite |
-| `cta_band` | 🔨 | Startseite |
-| `contact_close` | 🔨 | Startseite, Kontakt |
+| `cta_band` | ✅ | Startseite — im Panel pflegbar |
+| `contact_close` | ✅ | Startseite, Kontakt — im Panel pflegbar |
 
 ## 3. Module, die das Mockup **nicht** zeigt
 
@@ -727,3 +727,101 @@ liegt jetzt als Pseudoelement in der CSS.
 30–50 % der Verstösse. Es sieht nicht, ob ein Alternativtext etwas Sinnvolles
 sagt, ob die Reihenfolge logisch ist oder ob die Sprache verständlich bleibt.
 Der manuelle Durchgang und ein Test mit einer echten Vorlesehilfe bleiben nötig.
+
+---
+
+## 12. Die Startseite wird pflegbar (30.07.2026)
+
+Der Verein wollte die Überschrift der Startseite ändern und fand sie im Panel
+nicht. Zu Recht: Die Startseite war die einzige der 25 Seiten ohne Datensatz —
+eine feste Blade-Datei. Zwei Dinge fehlten dafür.
+
+### Sie ist jetzt ein Datensatz wie jede andere
+
+`pages` hat eine Zeile mit dem Slug `startseite`; `PageController::start()` holt
+sie wie jede andere Seite, inklusive des sichtbaren Rückfalls auf die
+Standardsprache. Angelegt wird sie vom `StartseiteSeeder` — und zwar nur, wenn
+es sie noch nicht gibt: Nach dem ersten Lauf gehört sie der Redaktion, und ein
+zweiter Lauf darf ihr nicht dazwischenfunken.
+
+Drei Stellen, an denen der Slug **nicht** auftauchen darf:
+
+- `Page::pfad()` liefert für sie `/`, nicht `/startseite`. Sonst stünde sie
+  unter der falschen Adresse in Sitemap, hreflang und Sprachumschalter.
+- `/startseite` leitet mit 301 auf `/` um. Ohne das gäbe es denselben Inhalt
+  unter zwei Adressen — genau der doppelte Inhalt, dessen Vermeidung dem Kunden
+  zugesagt ist.
+- Aus der Sitemap-Liste der festen Übersichten ist `start` entfernt. Sie kommt
+  jetzt aus dem Datensatz; beides zusammen wäre derselbe Eintrag zweimal. Als
+  Nebeneffekt nennt hreflang nun die Übersetzungen, die es wirklich gibt, statt
+  aller Sprachen, die die Route theoretisch ausliefert.
+
+`home.blade.php` gibt es weiterhin, aber nur noch als Rahmen: Sie rendert die
+Bausteine ohne Seitenkopf, ohne Brotkrumen und ohne angehängten Kontaktschluss.
+Der Seitenkopf muss weg, weil die Überschrift im Aufmacher steht — sonst hätte
+die Startseite zwei `<h1>`.
+
+Fehlt der Datensatz, ist `/` ein 404. Bewusst kein stiller Rückfall auf die
+alten fest verdrahteten Texte: Der gäbe der Startseite wieder zwei Quellen, und
+niemand sähe, welche gerade gilt.
+
+### Fünf Bausteine haben Eingabefelder bekommen
+
+Ein Datensatz allein hätte nichts genützt — `hero` und die anderen Bausteine der
+Startseite hatten ausser `typ` und `titel` kein einziges Feld im Panel
+(offener Punkt A3). Nachgeholt für die fünf, aus denen die Startseite besteht:
+
+| Baustein | Neue Felder |
+|---|---|
+| `hero` | Überzeile, Überschrift, Text, handschriftlicher Zusatz, bis zu zwei Knöpfe |
+| `quick_access` | Unterzeile, Karten (Zeichen, Überschrift, Text, Ziel, Linktext) |
+| `cta_band` | Überzeile, Leitsatz, Kleingedrucktes, Knöpfe |
+| `contact_close` | Text, Bedienhinweis, Knöpfe |
+| `hilfe_box` | Überschrift, „nur die zwei wichtigsten Nummern" |
+| `text` | zusätzlich Überzeile, handschriftlicher Zusatz, ein Knopf |
+
+Offen bleiben `topic_list`, `team_grid`, `group_list`, `embed`,
+`donation_options`, `inhalts_hinweis`, `leichte_sprache`, `stat_strip` und
+`contact_form` — sie kommen auf der Startseite nicht vor.
+
+### Die handgezeichnete Linie
+
+Das Erkennungszeichen aus dem Mockup: ein Schwung unter einem Teil der
+Überschrift. Der Verein markiert diesen Teil mit `*Sternchen*`, wie beim
+Fettschreiben in einer Nachricht. Ein zweites Titelfeld wäre die naheliegende
+Alternative gewesen; dann müsste die Redaktion aber im Kopf zusammensetzen,
+welches Feld vorne steht, und die Linie könnte nie in der Mitte eines Satzes
+sitzen.
+
+Gezeichnet wird sie in der CSS (`.swash` in `app.css`), als Hintergrundbild mit
+`box-decoration-break: clone`. Der erste Versuch war ein absolut positioniertes
+`<svg>` wie im Mockup — das hängt am ersten Zeilenfragment und sass, sobald die
+Überschrift umbrach, als kurzer Haken hinter dem letzten Wort. Auf dem Handy ist
+der Umbruch der Normalfall. Als Hintergrund bekommt jede Zeile ihre eigene
+Linie, ohne eine Zeile JavaScript, und ein Screenreader stolpert nicht darüber.
+
+In `a11y.css` steht der Umriss ein zweites und drittes Mal — in einer `data`-URI
+lässt sich keine Custom Property einsetzen, und Vereinsgrün hätte im Modus
+„hoher Kontrast" 1,7:1 auf Schwarz. Dunkelmodus bekommt das aufgehellte Grün,
+hoher Kontrast Gelb wie jeder andere Akzent dort.
+
+### Was nebenbei aufgefallen ist
+
+**Leere Felder wuchsen bei jedem Speichern mit.** Das Panel schickt jedes
+sichtbare Feld mit, auch die unausgefüllten. Ohne Gegenmassnahme sammelte jeder
+Baustein Schlüssel mit `null` an, und jedes Speichern sähe beim Vergleich zweier
+Stände wie eine inhaltliche Änderung aus. `PageBlock` räumt beim Speichern auf —
+an einer Stelle, für alle Schreibwege. `false` und `0` bleiben stehen, das sind
+Angaben.
+
+**Halb ausgefüllte Knöpfe und Karten.** Im Panel entsteht so etwas mit einem
+Klick: Eintrag hinzufügen, Felder leer lassen. Ergebnis wäre ein `<a href="">` —
+für die Tastatur ein Stolperstopp, für einen Screenreader ein Link ohne Namen
+und damit ein Verstoss gegen WCAG 2.4.4. Der Helfer `knoepfe()` sortiert sie
+aus, die Einstiegskarten filtern sich selbst.
+
+**Tote Sprungmarken.** Das Inhaltsverzeichnis langer Seiten listete jeden
+Baustein mit Überschrift, obwohl nur Textbausteine ein Sprungziel setzen.
+Solange nur Textbausteine pflegbar waren, fiel das nicht auf. Jetzt filtert
+`page.blade.php` darauf — ein Verzeichnis, das ins Leere springt, fällt
+ausgerechnet dem auf, der es benutzt, weil er nicht scrollen kann.

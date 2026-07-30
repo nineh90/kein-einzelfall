@@ -30,7 +30,7 @@ PORT=8080 bin/start    # anderer Port
 
 | Pfad | Inhalt |
 |---|---|
-| `/` | Startseite aus Blöcken |
+| `/` | Startseite — seit 30.07.2026 ebenfalls ein Datensatz, im Panel pflegbar |
 | `/verein`, `/spenden`, … | die 23 Inhaltsseiten aus der Datenbank |
 | `/admin` | Verwaltung (Filament) |
 | `/module-demo` | Vorschau der Inhaltsmodule (`noindex`, fliegt später raus) |

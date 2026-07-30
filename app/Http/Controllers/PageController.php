@@ -12,20 +12,46 @@ class PageController extends Controller
     /**
      * Startseite.
      *
-     * Noch eine feste Blade-Datei und kein Datensatz — die Texte stammen wörtlich
-     * vom Verein und wandern später in `pages`. Bis dahin greift für andere
-     * Sprachen derselbe sichtbare Rückfall wie bei jeder anderen Seite.
+     * Seit sie ein Datensatz ist, gilt hier dieselbe Mechanik wie für jede
+     * andere Seite — inklusive des sichtbaren Rückfalls, wenn es die
+     * Sprachfassung noch nicht gibt. Eigen ist nur die Ansicht: Die Startseite
+     * trägt ihre Überschrift im Aufmacher und braucht weder Seitenkopf noch
+     * Brotkrumen.
+     *
+     * Fehlt der Datensatz, ist das ein 404 wie überall sonst. Bewusst kein
+     * stiller Rückfall auf fest verdrahtete Texte — der gäbe der Startseite auf
+     * Dauer wieder zwei Quellen, und genau das war der Zustand vorher.
      */
     public function start()
     {
-        return view('home', [
-            'ersatzsprache' => Language::aktuell()->istStandard() ? null : Language::standard(),
-        ]);
+        $sprache = Language::aktuell();
+
+        if ($page = $this->startseite($sprache->code)) {
+            return view('home', ['page' => $page, 'ersatzsprache' => null]);
+        }
+
+        if ($rueckfall = $sprache->fallback()) {
+            if ($page = $this->startseite($rueckfall->code)) {
+                return view('home', ['page' => $page, 'ersatzsprache' => $rueckfall]);
+            }
+        }
+
+        throw new NotFoundHttpException;
     }
 
     public function show(string $slug)
     {
         $sprache = Language::aktuell();
+
+        /*
+         * Die Startseite wohnt unter `/`. Ihr Slug bleibt trotzdem erreichbar —
+         * als Weiterleitung, nicht als zweite Adresse: Derselbe Inhalt unter
+         * `/` und `/startseite` wäre genau der doppelte Inhalt, den zu vermeiden
+         * dem Kunden zugesagt ist.
+         */
+        if ($slug === Page::STARTSEITE_SLUG) {
+            return redirect($sprache->pfad('/'), 301);
+        }
 
         $page = $this->seite($sprache->code, $slug);
 
@@ -74,6 +100,11 @@ class PageController extends Controller
         }
 
         return view('page', ['page' => $page, 'ersatzsprache' => null]);
+    }
+
+    private function startseite(string $locale): ?Page
+    {
+        return $this->seite($locale, Page::STARTSEITE_SLUG);
     }
 
     private function seite(
