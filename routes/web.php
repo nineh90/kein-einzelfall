@@ -67,6 +67,21 @@ $oeffentlicheRouten = function () {
         ->name('events.ical.einzeln');
 
     /*
+     * Leichte Sprache.
+     *
+     * Eine eigene Adresse und kein aufklappbarer Kasten: Nur so ist die Fassung
+     * verlinkbar, als Lesezeichen speicherbar und für Suchmaschinen auffindbar.
+     * BITV 2.0 § 4 erwartet genau das — einen eigenen, von der Startseite aus
+     * erreichbaren Bereich.
+     *
+     * Sie ist *keine* Sprache: Das lang-Attribut bleibt `de`, es gibt kein
+     * hreflang dafür. Begründung in der Migration `add_fassung_to_pages_table`.
+     */
+    Route::get('/leichte-sprache/{slug}', [PageController::class, 'leichteSprache'])
+        ->where('slug', '[a-z0-9-]+')
+        ->name('leichte-sprache');
+
+    /*
      * Inhaltsseiten aus der Datenbank. Steht bewusst am Ende: die Route fängt
      * alles ab, was oben nicht gepasst hat.
      *

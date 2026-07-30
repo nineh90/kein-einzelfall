@@ -62,9 +62,18 @@ speichern").
 > darin personenbezogene Daten stehen. Nicht-Verlinken ist kein Zugriffsschutz.
 
 ### A5 · Texte für Leichte Sprache
-Der Baustein ist gebaut, die Texte fehlen. Leichte Sprache ist eine eigene
-Disziplin mit Regelwerk und wird idealerweise von einer Prüfgruppe aus der
-Zielgruppe abgenommen.
+**Die technische Frage ist entschieden:** Leichte Sprache ist jetzt eine eigene
+**Fassung** einer Seite, keine eigene Sprache. Sie bekommt eine eigene Adresse
+unter `/leichte-sprache/…`, wird von der Hauptfassung aus sichtbar verlinkt und
+ist damit verlinkbar, als Lesezeichen speicherbar und auffindbar (BITV 2.0 § 4).
+Sie bleibt `lang="de"` und bekommt kein `hreflang` — sie *ist* Deutsch. Im Panel
+wählt man beim Anlegen einer Seite die Fassung. Der alte Baustein-Typ
+`leichte_sprache` bleibt für kurze Zusammenfassungen innerhalb einer schweren
+Seite bestehen; beides ist üblich und nebeneinander sinnvoll.
+
+Was bleibt: **die Texte fehlen.** Leichte Sprache ist eine eigene Disziplin mit
+Regelwerk und wird idealerweise von einer Prüfgruppe aus der Zielgruppe
+abgenommen.
 
 Wir können Entwürfe liefern — aber bei den Rechtsthemen (OEG/SGB XIV, GdB,
 Erwerbsminderung, Widerspruchsfristen) **muss der Verein gegenlesen**.

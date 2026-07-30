@@ -94,6 +94,39 @@ body {
   content: var(--wasserzeichen, '');
 }
 
+/* Typografie der Leichten Sprache.
+
+   Das Regelwerk verlangt mehr als einfache Woerter: groessere Schrift, weiter
+   Zeilenabstand, Flattersatz statt Blocksatz, kurze Zeilen, keine Kursivschrift,
+   keine Trennstriche. Wer Leichte Sprache braucht, dem hilft ein leichter Text
+   im engen Satzspiegel wenig.
+
+   Am Container statt an jedem Baustein, damit es automatisch auch fuer
+   Bausteine gilt, die es heute noch nicht gibt.
+
+   font-size und line-height muessen direkt auf den Textelementen stehen und mit
+   !important: Die Bausteine bringen eigene Tailwind-Utilities mit (leading-relaxed,
+   text-[1.0625rem] auf dem ersten Absatz), deren Selektoren hoehere Spezifitaet
+   haben als eine Container-Regel. Leichte Sprache ist eine verbindliche
+   Darstellungsregel, kein Vorschlag — genau wie die Kontrast- und Schrift-
+   einstellungen in a11y.css, die aus demselben Grund mit !important arbeiten. */
+[data-fassung='leichte-sprache'] {
+  text-align: left;
+  hyphens: none;
+}
+[data-fassung='leichte-sprache'] :is(p, li, h2, h3, summary) {
+  font-size: 1.125rem !important;
+  line-height: 1.9 !important;
+}
+[data-fassung='leichte-sprache'] p,
+[data-fassung='leichte-sprache'] li {
+  max-width: 55ch;
+}
+[data-fassung='leichte-sprache'] :is(em, i) {
+  font-style: normal;
+  font-weight: 600;
+}
+
 /* Sichtbarer Fokus. Im Mockup fehlt der komplett — hier nicht verhandelbar. */
 :focus-visible {
   outline: 3px solid var(--color-green);

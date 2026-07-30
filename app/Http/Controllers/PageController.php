@@ -54,11 +54,37 @@ class PageController extends Controller
         return $this->weiterleitenOder404($slug, $sprache);
     }
 
-    private function seite(string $locale, string $slug): ?Page
+    /**
+     * Seite in Leichter Sprache.
+     *
+     * Eigene Adresse statt aufklappbarer Kasten: Nur so ist sie verlinkbar,
+     * als Lesezeichen speicherbar und auffindbar. Kein Rückfall auf die schwere
+     * Fassung — wer hier landet, braucht Leichte Sprache. Ihm stattdessen den
+     * schweren Text zu zeigen wäre schlechter als ein ehrliches 404 mit den
+     * Auswegen der Fehlerseite.
+     */
+    public function leichteSprache(string $slug)
     {
+        $sprache = Language::aktuell();
+
+        $page = $this->seite($sprache->code, $slug, Page::FASSUNG_LEICHTE_SPRACHE);
+
+        if (! $page) {
+            throw new NotFoundHttpException;
+        }
+
+        return view('page', ['page' => $page, 'ersatzsprache' => null]);
+    }
+
+    private function seite(
+        string $locale,
+        string $slug,
+        string $fassung = Page::FASSUNG_STANDARD,
+    ): ?Page {
         return Page::veroeffentlicht()
             ->with('blocks')
             ->where('locale', $locale)
+            ->where('fassung', $fassung)
             ->where('slug', $slug)
             ->first();
     }

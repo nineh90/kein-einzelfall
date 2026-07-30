@@ -55,6 +55,18 @@ class KollidiertNichtMitSprachpraefix implements ValidationRule
             return;
         }
 
+        // Erst die festen Adressteile: „leichte-sprache“ ist das Praefix der
+        // gleichnamigen Fassung. Eine Seite mit diesem Slug waere von der Route
+        // verdeckt und im Panel nicht als Ursache erkennbar.
+        $reserviert = array_filter(Page::FASSUNGEN);
+
+        if (in_array($wert, $reserviert, true)) {
+            $fail("„{$wert}“ ist als Adresse reserviert — darunter liegen die Seiten "
+                .'in Leichter Sprache. Bitte einen anderen Slug wählen.');
+
+            return;
+        }
+
         // Slug einer Seite. Geprüft wird nicht gegen die vorhandenen Sprachen,
         // sondern gegen das Adressmuster selbst: Die Sprach-Routen stehen vor
         // der Sammelroute /{slug}. Eine Seite, deren Slug wie ein Sprachpräfix

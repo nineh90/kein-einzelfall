@@ -132,6 +132,9 @@ class Navigation
         $standard = Language::standardCode();
 
         $gruppen = Page::veroeffentlicht()
+            // Nur die schweren Fassungen: Eine Seite in Leichter Sprache, die
+            // sich ins Menue schiebt, waere ein Fehler, den niemand sucht.
+            ->standardfassung()
             ->whereIn('locale', [$standard, $locale])
             ->get(['locale', 'slug', 'titel', 'uebersetzungs_gruppe'])
             ->groupBy('uebersetzungs_gruppe');

@@ -78,4 +78,18 @@ return [
         'wohin' => 'Wohin möchtest du?',
         'zur_startseite' => 'Zur Startseite',
     ],
+
+    /*
+     * Leichte Sprache.
+     *
+     * Die Beschriftungen folgen den Regeln der Leichten Sprache: kurze Saetze,
+     * keine Fremdwoerter, aktive Formulierung. „Alltagssprache“ statt
+     * „Standardfassung“ — „Standard“ ist selbst ein schweres Wort.
+     */
+    'leichte_sprache' => [
+        'name' => 'Leichte Sprache',
+        'zu_leichter_sprache' => 'Diese Seite in Leichter Sprache',
+        'zur_standardfassung' => 'Diese Seite in Alltags-Sprache',
+        'hinweis' => 'Sie lesen die Seite in Leichter Sprache.',
+    ],
 ];

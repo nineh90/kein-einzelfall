@@ -656,6 +656,51 @@ Beim Nachmessen fielen zwei Dinge auf, die **schon vorher** kaputt waren:
   zwischen 1024 und 1280 greift das Burger-Menü, das ohnehin vollständig
   bedienbar ist. **Das ist eine sichtbare Designänderung für Deutsch.**
 
+### Leichte Sprache — Fassung, nicht Sprache
+
+Leichte Sprache ist eine **Fassung** einer Seite (`pages.fassung`), keine Sprache
+in der `languages`-Tabelle. Die Unterscheidung ist die ganze Entscheidung:
+
+- Sie **ist** Deutsch. Das `lang`-Attribut bleibt `de`, sonst liest eine
+  Vorlesehilfe den Text falsch aus. Es gibt kein `hreflang` dafür: `de-x-leicht`
+  ist ein Private-Use-Subtag nach BCP 47, den Google als Fehler meldet statt
+  versteht.
+- Sie bekommt trotzdem eine **eigene Adresse** unter `/leichte-sprache/…`. Als
+  blosser Baustein wäre sie nicht verlinkbar, nicht als Lesezeichen speicherbar
+  und nicht auffindbar. BITV 2.0 § 4 erwartet einen eigenen, von der Startseite
+  aus erreichbaren Bereich — kein aufklappbarer Kasten auf Seite drei.
+
+Umgesetzt über dieselbe Übersetzungsgruppe wie die Sprachfassungen: schwere und
+leichte Fassung teilen `uebersetzungs_gruppe` und dürfen denselben Slug tragen
+(Unique-Index jetzt auf `(locale, fassung, slug)`). Von der schweren Fassung
+führt ein sichtbarer Hinweis ganz oben zur leichten und zurück. Fehlt die leichte
+Fassung, ist die Adresse ein ehrliches 404 mit den Auswegen der Fehlerseite —
+**kein** Rückfall auf den schweren Text, denn wer Leichte Sprache braucht, dem
+hilft der schwere Text nicht.
+
+Die Typografie (grössere Schrift, Zeilenabstand 1,9, Flattersatz, keine
+Trennung, keine Kursivschrift) hängt an `[data-fassung='leichte-sprache']` am
+`<main>` und gilt so automatisch für alle Bausteine — auch für die, die es heute
+noch nicht gibt. Sie steht mit `!important`, weil die Bausteine eigene
+Tailwind-Utilities mitbringen (`leading-relaxed`, `text-[1.0625rem]`), deren
+Selektoren höhere Spezifität haben. Das ist konsistent mit `a11y.css`: Leichte
+Sprache ist eine verbindliche Darstellungsregel, kein Vorschlag.
+
+Der alte Baustein-Typ `leichte_sprache` bleibt bestehen — eine kurze
+Zusammenfassung *innerhalb* einer schweren Seite ist etwas anderes als eine
+vollständige Fassung, und beides ist üblich.
+
+### Behobener Fehler: gepflegter `meta_title` blieb wirkungslos
+
+Das Feld `meta_title` gab es im Panel seit Anfang an — es landete nur nie im
+`<title>`. Das Layout hängte pauschal „ - Kein Einzelfall e.V." an den
+Seitentitel, `Page::seiteTitel()` wurde von keiner öffentlichen View benutzt.
+Aufgefallen ist das lange nicht, weil **alle 24 Altseiten** zufällig genau dieses
+Suffix im `meta_title` tragen — sichtbar wäre der Fehler erst geworden, sobald der
+Verein das Feld einmal ändert. Jetzt setzt eine Seite mit gepflegtem `meta_title`
+den Titel vollständig (Blade-Section `vollertitel`); ohne bleibt das Muster der
+Altseite erhalten, damit sich die Suchergebnisse beim Umzug nicht verändern.
+
 ---
 
 ## Barrierefreiheit messen

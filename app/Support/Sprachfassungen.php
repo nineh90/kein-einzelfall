@@ -40,6 +40,16 @@ class Sprachfassungen
      */
     public function adressen(): array
     {
+        /*
+         * Leichte Sprache bekommt keine hreflang-Angaben. Sie ist Deutsch, nur
+         * anders geschrieben — ein eigener Sprachcode dafür existiert nicht, und
+         * ein Private-Use-Subtag wie `de-x-leicht` würde von Google als Fehler
+         * gemeldet statt verstanden.
+         */
+        if ($this->page?->istLeichteSprache()) {
+            return [];
+        }
+
         $adressen = [];
 
         foreach (Language::aktive() as $sprache) {

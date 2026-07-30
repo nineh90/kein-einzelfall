@@ -66,4 +66,11 @@ return [
         'wohin' => 'Where would you like to go?',
         'zur_startseite' => 'To the home page',
     ],
+
+    'leichte_sprache' => [
+        'name' => 'Easy Read',
+        'zu_leichter_sprache' => 'This page in Easy Read',
+        'zur_standardfassung' => 'This page in standard language',
+        'hinweis' => 'You are reading the Easy Read version of this page.',
+    ],
 ];

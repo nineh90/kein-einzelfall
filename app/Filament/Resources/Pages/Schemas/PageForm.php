@@ -19,16 +19,48 @@ use Illuminate\Support\Str;
 
 class PageForm
 {
+    /**
+     * Eine Übersetzungsgruppe braucht alles, was nicht die deutsche
+     * Hauptfassung ist — also jede Fremdsprache und jede Fassung in Leichter
+     * Sprache. Nur die deutsche Hauptfassung ist das Original und bildet ihre
+     * eigene Gruppe.
+     */
+    private static function brauchtGruppe($get): bool
+    {
+        return ($get('locale') && $get('locale') !== Language::standardCode())
+            || $get('fassung') === Page::FASSUNG_LEICHTE_SPRACHE;
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
 
-            Section::make('Sprache')
+            Section::make('Sprache und Fassung')
                 ->description('Jede Sprachfassung ist eine eigene Seite mit eigener Adresse '
                     .'und eigenen Bausteinen. Eine Übersetzung darf also anders aufgebaut sein '
                     .'als das Original — das ist Absicht.')
                 ->columns(2)
                 ->schema([
+
+                    Select::make('fassung')
+                        ->label('Fassung')
+                        ->options([
+                            Page::FASSUNG_STANDARD => 'Alltags-Sprache (normal)',
+                            Page::FASSUNG_LEICHTE_SPRACHE => 'Leichte Sprache',
+                        ])
+                        ->default(Page::FASSUNG_STANDARD)
+                        ->required()
+                        ->live()
+                        ->native(false)
+                        // Nachträglich zu wechseln hiesse, eine indexierte
+                        // Adresse in einen anderen Bereich zu schieben.
+                        ->disabledOn('edit')
+                        ->helperText('Leichte Sprache ist keine eigene Sprache, sondern eine '
+                            .'zweite Fassung derselben Seite auf Deutsch. Sie bekommt eine '
+                            .'eigene Adresse unter /leichte-sprache/ und wird von der '
+                            .'Hauptfassung aus verlinkt. Die Texte schreibt der Verein — '
+                            .'Leichte Sprache hat ein eigenes Regelwerk und gehört von einer '
+                            .'Prüfgruppe aus der Zielgruppe abgenommen.'),
 
                     Select::make('locale')
                         ->label('Sprache')
@@ -55,10 +87,11 @@ class PageForm
                         ->native(false)
                         // Nur bei Übersetzungen: Eine Seite in der Standardsprache
                         // ist das Original und bildet ihre eigene Gruppe.
-                        ->visible(fn ($get) => $get('locale') && $get('locale') !== Language::standardCode())
-                        ->required(fn ($get) => $get('locale') && $get('locale') !== Language::standardCode())
-                        ->helperText('Welche deutsche Seite das hier übersetzt. '
-                            .'Darüber finden Sprachumschalter, hreflang und Menü zusammen.'),
+                        ->visible(fn ($get) => self::brauchtGruppe($get))
+                        ->required(fn ($get) => self::brauchtGruppe($get))
+                        ->helperText('Zu welcher Seite das hier gehört. Darüber finden '
+                            .'Sprachumschalter, hreflang, Menü und der Wechsel zwischen '
+                            .'Alltags-Sprache und Leichter Sprache zusammen.'),
                 ]),
 
             Section::make('Seite')
@@ -84,13 +117,17 @@ class PageForm
                         // Eindeutig innerhalb der Sprache, nicht darüber hinaus:
                         // /kontakt und /en/kontakt duerfen nebeneinander stehen.
                         ->unique(ignoreRecord: true, modifyRuleUsing: fn ($rule, $get) => $rule
-                            ->where('locale', $get('locale') ?: Language::standardCode()))
+                            ->where('locale', $get('locale') ?: Language::standardCode())
+                            ->where('fassung', $get('fassung') ?: Page::FASSUNG_STANDARD))
                         ->rules(['regex:/^[a-z0-9-]+$/'])
                         ->rules([KollidiertNichtMitSprachpraefix::fuerSeitenSlug()])
-                        ->prefix(fn ($get) => rtrim(url(
-                            (Language::finden($get('locale') ?: Language::standardCode())
-                                ?? Language::standard())->praefix()
-                        ), '/').'/')
+                        ->prefix(function ($get) {
+                            $sprache = Language::finden($get('locale') ?: Language::standardCode())
+                                ?? Language::standard();
+                            $fassung = Page::FASSUNGEN[$get('fassung') ?: Page::FASSUNG_STANDARD] ?? '';
+
+                            return rtrim(url($sprache->praefix()), '/').'/'.($fassung ? $fassung.'/' : '');
+                        })
                         ->helperText('Nur Kleinbuchstaben, Ziffern und Bindestriche. '
                             .'Bei bestehenden Seiten möglichst nicht ändern — die Adresse '
                             .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen. '

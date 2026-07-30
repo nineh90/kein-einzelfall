@@ -116,15 +116,17 @@ Solange das so ist, kann der Verein diese Bausteine weder auf Deutsch noch in ei
 Übersetzung pflegen. „Alle pflegbaren Texte sind im Panel je Sprache pflegbar" ist
 damit **nicht eingelöst**. Das gehört vor die Abnahme.
 
-### A4 · Zwei Fragen, die vor dem Weiterbauen geklärt sein sollten
+### A4 · Eine Frage, die vor dem Weiterbauen geklärt sein sollte
 
 - **Notfallnummern je Sprache.** `config/hilfe.php` enthält deutsche Nummern. Was
   zeigen wir russisch- oder englischsprachigen Besuchern? Das „Hilfetelefon Gewalt
   gegen Frauen" (116 016) nennt selbst 18 Sprachen — das gehört geprüft. Steht als
   A6 auf der Übergabe-Checkliste. **Nichts davon selbst recherchieren und einsetzen.**
-- **Leichte Sprache.** Derzeit ein Baustein-Typ, keine Sprache. Meine Empfehlung
-  war und ist: fürs Erste trennen. Die `languages`-Tabelle kann `de-x-leicht` aber
-  ohne Migration aufnehmen, falls Kevin das anders will. **Noch nicht entschieden.**
+
+**Erledigt:** Leichte Sprache ist entschieden — als eigene **Fassung** (`/leichte-sprache/…`),
+nicht als Sprache. Bleibt `lang="de"`, kein hreflang, eigene Adresse, im Panel über
+das Feld „Fassung" pflegbar. Details in `docs/Komponenten.md`. Was fehlt, sind nur
+noch die Texte (siehe A2, gehört dem Verein).
 
 ### A5 · Kleinere offene Enden
 

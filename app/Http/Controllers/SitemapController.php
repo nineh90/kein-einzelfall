@@ -46,14 +46,24 @@ class SitemapController extends Controller
     {
         $seiten = Page::veroeffentlicht()
             ->where('noindex', false)
-            ->get(['id', 'locale', 'slug', 'uebersetzungs_gruppe', 'updated_at']);
+            ->get(['id', 'locale', 'fassung', 'slug', 'uebersetzungs_gruppe', 'updated_at']);
 
-        // Nach Übersetzungsgruppe bündeln: alle Fassungen einer Seite verweisen
-        // gegenseitig aufeinander.
-        $nachGruppe = $seiten->groupBy('uebersetzungs_gruppe');
+        // Nach Übersetzungsgruppe bündeln: alle Sprachfassungen einer Seite
+        // verweisen gegenseitig aufeinander.
+        $nachGruppe = $seiten
+            ->where('fassung', Page::FASSUNG_STANDARD)
+            ->groupBy('uebersetzungs_gruppe');
 
         return $seiten->map(function (Page $seite) use ($nachGruppe) {
-            $geschwister = $nachGruppe[$seite->uebersetzungs_gruppe] ?? collect();
+            /*
+             * Leichte Sprache gehört in die Sitemap — sie soll gefunden werden —
+             * aber ohne alternate-Verweise: Sie ist Deutsch, nur anders
+             * geschrieben. Ein Private-Use-Subtag wie `de-x-leicht` würde von
+             * Google als Fehler gemeldet statt verstanden.
+             */
+            $geschwister = $seite->istLeichteSprache()
+                ? collect()
+                : ($nachGruppe[$seite->uebersetzungs_gruppe] ?? collect());
 
             return [
                 'url' => url($seite->pfad()),
