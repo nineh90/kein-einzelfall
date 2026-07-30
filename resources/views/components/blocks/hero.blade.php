@@ -48,7 +48,7 @@
 
                 <div class="relative flex flex-col items-center -space-y-1.5">
                     @foreach ([
-                        ['w' => 'w-11', 'h' => 'h-5',  'bg' => 'from-[#3C5C48] to-[#2E4A3A]'],
+                        ['w' => 'w-11', 'h' => 'h-5',  'bg' => 'from-[#009640] to-[#00702F]'],
                         ['w' => 'w-16', 'h' => 'h-7',  'bg' => 'from-[#EFE4CC] to-[#D9C7A2]'],
                         ['w' => 'w-24', 'h' => 'h-9',  'bg' => 'from-[#E7DCC2] to-[#C3AE83]'],
                         ['w' => 'w-32', 'h' => 'h-11', 'bg' => 'from-[#EFE4CC] to-[#C3AE83]'],

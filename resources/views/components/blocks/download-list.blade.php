@@ -31,7 +31,7 @@
     <div class="mx-auto max-w-6xl">
         <div class="max-w-prose">
             @if ($titel)
-                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green"></span>
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 <h2 id="dl-{{ Str::slug($titel) }}" class="mb-4 font-display text-2xl font-medium text-ink lg:text-3xl">
                     {{ $titel }}
                 </h2>

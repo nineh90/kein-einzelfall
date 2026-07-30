@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             // Hausfarbe des Vereins statt Filament-Standard — die Redaktion soll
             // sich im Panel wiederfinden.
             ->colors([
-                'primary' => Color::hex('#2E4A3A'),
+                'primary' => Color::hex('#00702F'),
             ])
             ->maxContentWidth('full')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')

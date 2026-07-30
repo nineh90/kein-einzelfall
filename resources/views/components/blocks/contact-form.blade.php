@@ -134,7 +134,7 @@
             <div class="rounded-card border border-line bg-card px-5 py-4">
                 <label for="f-einwilligung" class="flex items-start gap-3">
                     <input type="checkbox" name="einwilligung" id="f-einwilligung" value="1"
-                           required class="mt-1 h-5 w-5 shrink-0 rounded border-line accent-[#2E4A3A]"
+                           required class="mt-1 h-5 w-5 shrink-0 rounded border-line accent-[#00702F]"
                            @if ($errors->has('einwilligung')) aria-invalid="true" @endif>
                     <span class="text-sm text-ink">
                         Ich bin damit einverstanden, dass meine Angaben zur Bearbeitung

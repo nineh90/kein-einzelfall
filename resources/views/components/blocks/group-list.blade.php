@@ -28,7 +28,7 @@
     ]) aria-labelledby="gruppen-{{ $typ }}-titel">
         <div class="mx-auto max-w-6xl">
             @if ($titel)
-                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green"></span>
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 <h2 id="gruppen-{{ $typ }}-titel"
                     class="mb-4 font-display text-2xl font-medium text-ink lg:text-3xl">
                     {{ $titel }}

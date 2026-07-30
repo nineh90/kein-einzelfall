@@ -22,16 +22,33 @@
   --color-ink:        #2C2620;  /* Fließtext */
   --color-ink-soft:   #6B6255;  /* Sekundärtext, Navigation, Labels */
 
-  /* Akzent */
-  --color-green:      #2E4A3A;  /* Primärbutton, Icons, theme-color */
-  --color-green-deep: #233A2D;  /* Footer, CTA-Band, Links */
-  --color-green-mist: #DCE6DB;  /* Icon-Kacheln, Badges */
+  /* Akzent — Vereinsfarbe.
+
+     Das Corporate-Grün des Vereins ist #009640 (RGB 0/150/64, CMYK 100/0/57/41).
+     Es steht hier als --color-green-brand und wird überall dort eingesetzt, wo
+     ein Kontrast von 3:1 genügt: Logo, Icons, Rahmen, Zierlinien, sehr grosse
+     Displayschrift.
+
+     Für Fliesstext und Knopfflächen ist es NICHT verwendbar. Gemessen:
+     als Text auf Creme 3,28:1, als Knopf mit heller Schrift 3,86:1 — WCAG 2.1 AA
+     verlangt 4,5:1. Bei diesem Auftrag ist Barrierefreiheit nicht das Feature,
+     sondern der Kern; die Zielgruppe liest oft auf dem Handy und in Ausnahme-
+     situationen. Deshalb sind --color-green und --color-green-deep abgedunkelte
+     Varianten *desselben Farbtons* (145,6°, Sättigung 100 %). Die Seite liest
+     sich damit durchgehend als die Farbe des Vereins, ohne unlesbar zu werden.
+
+     Alle Werte sind gerechnet, nicht geschätzt — siehe Test
+     `FarbkontrastTest`, der jede real vorkommende Kombination nachprüft. */
+  --color-green-brand: #009640;  /* CI-Farbe: Logo, Icons, Rahmen, Zierlinien */
+  --color-green:       #00702F;  /* Primärbutton, Icons, theme-color */
+  --color-green-deep:  #005725;  /* Footer, CTA-Band, Links */
+  --color-green-mist:  #D7E9DC;  /* Icon-Kacheln, Badges, Hinweisbänder */
 
   /* Auf dunkelgrünem Grund */
   --color-on-green:      #EFE7D6;
   --color-on-green-soft: #C9D9CC;
   --color-on-green-hand: #B7D0BE;
-  --color-on-green-line: #3A5344;
+  --color-on-green-line: #2E7A47;
 
   /* Linien */
   --color-line: #D9CDB2;

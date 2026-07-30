@@ -19,7 +19,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#2E4A3A">
+    {{-- Vereinsfarbe, abgedunkelt auf den Wert, der auch als Knopfflaeche
+         barrierefrei ist. Siehe Farbkommentar in resources/css/app.css. --}}
+    <meta name="theme-color" content="#00702F">
     <link rel="icon" href="/img/logo.png" type="image/png">
 
     {{-- Zwei Wege zum Titel:
