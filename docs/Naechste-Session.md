@@ -17,11 +17,11 @@ Umsetzung Nils-Digital (Kevin). Lies zuerst:
 
 **Stand:** Meilensteine 1–9 fertig, Mehrsprachigkeit im Grundgerüst fertig.
 25 Seiten (die Startseite ist seit 30.07.2026 eine davon), 10 Gruppen,
-26 Weiterleitungen. **199 Tests / 1365 Assertions.**
+26 Weiterleitungen. **202 Tests / 1370 Assertions.**
 Starten mit `bin/start`. Drei Testläufe:
 
 ```bash
-php artisan test          # 199 Tests
+php artisan test          # 202 Tests
 npm run test:browser      # Bedienung im echten Chromium
 npm run test:a11y         # axe-core, WCAG 2.1 AA, 18 Durchläufe
 ```
@@ -144,6 +144,14 @@ Zwei Muster, die dabei entstanden sind und für den Rest gelten:
 - Halb ausgefüllte Wiederholfelder gehören beim Rendern aussortiert
   (`knoepfe()` in `app/Support/helpers.php`), sonst entstehen Links ohne Ziel
   und Namen.
+- **Neue Inhalte brauchen eine Migration, nicht nur einen Seeder.** Seeder
+  laufen bei uns nur bei leerer Datenbank (`bin/start`), auf dem Server gar
+  nicht — dort läuft ausschliesslich `migrate`. Ein neuer Seeder erreicht also
+  keine einzige bestehende Installation. Genau daran ist die Startseite beim
+  ersten Anlauf gescheitert: Auf allen eingerichteten Rechnern und auf der Demo
+  lieferte `/` ein 404. Muster in
+  `2026_07_30_120000_startseite_als_datensatz_anlegen.php` — die Migration ruft
+  den Seeder auf, der Inhalt steht weiterhin nur an einer Stelle.
 
 ### A4 · Eine Frage, die vor dem Weiterbauen geklärt sein sollte
 

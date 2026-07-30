@@ -30,6 +30,12 @@ class StartseiteTest extends TestCase
         return Page::where('slug', Page::STARTSEITE_SLUG)->firstOrFail();
     }
 
+    /** Die Migration, die die Startseite auf bestehenden Datenbanken nachträgt. */
+    private function migration(): object
+    {
+        return require database_path('migrations/2026_07_30_120000_startseite_als_datensatz_anlegen.php');
+    }
+
     public function test_startseite_ist_ein_datensatz_und_liegt_unter_dem_wurzelpfad(): void
     {
         $this->assertSame('/', $this->startseite()->pfad());
@@ -133,6 +139,48 @@ class StartseiteTest extends TestCase
     {
         // „Start › Startseite“ wäre ein Weg, der im Kreis führt.
         $this->get('/')->assertDontSee('aria-label="'.__('rahmen.sie_sind_hier').'"', false);
+    }
+
+    public function test_eine_bestehende_datenbank_bekommt_die_startseite_nachgetragen(): void
+    {
+        /*
+         * Der Fehler, der nach dem Umbau auf jedem eingerichteten Rechner
+         * auftrat: Seeder laufen nur bei leerer Datenbank, auf dem Server gar
+         * nicht. Wer die 24 Seiten schon hatte, bekam die Startseite nie — und
+         * damit ein 404 auf „/“.
+         *
+         * Die Migration trägt sie nach. Hier der Zustand von vorher, echt
+         * nachgestellt: Seiten da, Startseite weg.
+         */
+        Page::where('slug', Page::STARTSEITE_SLUG)->delete();
+        $this->get('/')->assertNotFound();
+
+        // Direkt und nicht über `artisan migrate`: In der Testdatenbank sind
+        // alle Migrationen schon gelaufen, der Befehl hätte nichts zu tun.
+        $this->migration()->up();
+
+        $this->get('/')->assertOk()->assertSee('Keiner soll mehr sagen müssen', false);
+    }
+
+    public function test_das_nachtragen_laeuft_zweimal_ohne_schaden(): void
+    {
+        // Auf einer Datenbank, die die Startseite schon hat, darf die Migration
+        // keine zweite anlegen — sonst stünden zwei Seiten auf demselben Slug.
+        $this->migration()->up();
+
+        $this->assertSame(1, Page::where('slug', Page::STARTSEITE_SLUG)->count());
+    }
+
+    public function test_das_nachtragen_ueberschreibt_keine_gepflegten_texte(): void
+    {
+        // Ein zweiter Lauf darf nicht zurücksetzen, was der Verein im Panel
+        // geändert hat. Nach dem ersten Mal gehört die Seite der Redaktion.
+        $aufmacher = $this->startseite()->blocks()->where('typ', 'hero')->firstOrFail();
+        $aufmacher->update(['data' => [...$aufmacher->data, 'titel' => 'Vom Verein geändert']]);
+
+        $this->seed(StartseiteSeeder::class);
+
+        $this->get('/')->assertSee('Vom Verein geändert');
     }
 
     public function test_ohne_datensatz_faellt_die_startseite_nicht_auf_alte_texte_zurueck(): void
