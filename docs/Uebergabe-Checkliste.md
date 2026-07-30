@@ -73,15 +73,53 @@ alten `/wp-content/`-Adressen leiten dauerhaft weiter. Die **übrigen 90 sind
 bewusst nicht geholt** — genau wegen der Frage oben. Sobald der Verein je Reihe
 freigibt: `php artisan dokumente:holen --alle`.
 
-> **Einmal hinsehen, bitte:** **7 der 31 übernommenen Dateien sind
-> Behörden-Schriftwechsel**, alle verlinkt auf `/fsm-erweitertes-hilfesystem`:
-> „Betreff Unzumutbare Abwicklungsprozesse", zwei „Nachfrage", eine Antwort,
-> eine „Blanco-FSM-Antwort" und zwei Stellungnahmen. Sie sind **heute schon
-> öffentlich** auf der Altseite verlinkt — wir geben also nichts Neues preis
-> und haben sie deshalb mit übernommen. Vor dem Go-Live sollte trotzdem jemand
-> vom Verein einmal hineinsehen, ob darin Namen von Betroffenen stehen. Der
-> Dateiname „Blanco" deutet darauf hin, dass zumindest eine bewusst
-> geschwärzt wurde — bei den übrigen sechs ist das nicht erkennbar.
+**Wichtiger Befund vom 30.07.2026 — die rote Markierung hilft hier nicht weiter.**
+
+Die Dateinamen des Medienbestands tragen die VVT-Nummer (116 von 121). Damit
+liess sich die rote Markierung direkt auf echte Dateien abbilden. Ergebnis:
+
+| | |
+|---|---|
+| Dateien unter rot markierten Ästen | **7** — und die sind längst geholt |
+| Dateien unter *nicht* markierten Ästen | **90** |
+
+Die 90 unverlinkten Dateien liegen fast vollständig in **Abschnitt 6**, und
+**Abschnitt 6 ist an keiner Stelle rot markiert**:
+
+| Ast | Anz. | Bezeichnung |
+|---|---|---|
+| 6.5 | **62** | Infoblätter (Atteste, Grad der Behinderung, Kfz-Hilfe) |
+| 6.2 | 14 | Kontakt mit Bundesministerien |
+| 6.1 | 8 | Kontakt mit uns |
+| sonstige | 6 | ohne VVT-Nummer |
+
+Zwei Dinge folgen daraus:
+
+1. **Die rot markierten Dokumente existieren gröstenteils noch nicht als Datei.**
+   Dokumentenvollmacht, Schweigepflichtsentbindung, Vollmachtserklärung und die
+   übrigen Musterformulare sind im Medienbestand nicht auffindbar. Sie muss der
+   Verein liefern.
+2. **Die 62 Infoblätter sind weiterhin unentschieden.** Genau die nennt A4 „den
+   grössten inhaltlichen Hebel im Projekt". Sie sind vorhanden, geschwärzt und
+   freigegeben — sie stehen nur auf keiner Liste, die sagt: bitte veröffentlichen.
+
+**Die eine Frage, die das auflöst:** Sollen die 62 Infoblätter aus 6.5 auf die
+Website? Wenn ja, ist es ein Befehl und ein Nachmittag Zuordnungsarbeit.
+
+Nebenbei aufgefallen: Dieselben Musterformulare stehen in der VVT **zweimal** —
+rot unter 1.5.3–1.5.5 / 1.5.21 / 1.5.22 (Verwaltung) und ein zweites Mal
+unmarkiert unter **6.1.3 „Formulare"** als Teil von „Kontakt mit uns". Inhaltlich
+dasselbe, nur anders einsortiert. Für die Website ist die Nummer egal — gemeint
+sind dieselben Dokumente.
+
+> ✅ **Geklärt am 30.07.2026 (Kevin):** Die Dokumente sind **alle geschwärzt
+> und dürfen von uns genutzt werden.** Damit ist der Datenschutz-Vorbehalt für
+> den gesamten Medienbestand erledigt — auch für die sieben
+> Behörden-Schriftwechsel auf `/fsm-erweitertes-hilfesystem`.
+>
+> **Was damit *nicht* beantwortet ist:** welche der 90 bisher unverlinkten
+> Dokumente **veröffentlicht werden sollen**. Das ist keine Datenschutz-, sondern
+> eine redaktionelle Frage — siehe den Kasten unten.
 
 ### A5 · Texte für Leichte Sprache
 **Die technische Frage ist entschieden:** Leichte Sprache ist jetzt eine eigene
