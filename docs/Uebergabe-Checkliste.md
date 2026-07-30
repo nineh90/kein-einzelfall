@@ -56,6 +56,12 @@ Zu klären: Welche Reihen sollen öffentlich sein? Manches sieht nach internen
 Formularen aus („Verschwiegenheitserklärung", „Einverständnis Daten/Akten
 speichern").
 
+> **Teilweise beantwortet durch A7:** Tatjana hat genau diese beiden in der
+> VVT-Liste rot markiert (1.5.5 und 1.5.6). Sie sind also **Musterdokumente
+> zum Ausfüllen**, keine ausgefüllten Akten — und gehören damit öffentlich.
+> Das entschärft die Frage für diese Gruppe; die Warnung unten gilt für die
+> Behörden-Schriftwechsel unverändert.
+
 > ⚠️ **Sicherheitshinweis:** Diese Dateien sind **heute schon öffentlich abrufbar**,
 > nur nicht verlinkt. Ich habe sie ohne jede Zugangsdaten herunterladen können.
 > Bei den Behörden-Schriftwechseln und Stellungnahmen muss geprüft werden, ob
@@ -107,7 +113,31 @@ noch, und zwar bewusst:
   **nicht sichtbar** und erscheinen in keinem Umschalter. Erst nach dem
   Gegenlesen im Panel unter „Sprachen" freischalten.
 
-### A7 · Weitere offene Punkte
+### A7 · VVT-Liste — vier Rückfragen vor dem Einpflegen
+
+Tatjana hat in der VVT-Liste (Stand 29.07.26) 32 Äste rot markiert, zusammen
+127 Positionen. Die vollständige Zuordnung zu Zielseiten steht in
+[`docs/VVT-Zuordnung.md`](VVT-Zuordnung.md). Überwiegend sind es
+Musterdokumente zum Herunterladen — vier Äste passen aber nicht in dieses
+Muster und brauchen eine Antwort, **bevor** etwas veröffentlicht wird:
+
+1. **5.4 Adressdatenbank** — öffentliches Verzeichnis von Anlaufstellen oder
+   interne Kontaktliste? Bei Letzterem wäre eine Veröffentlichung ein
+   meldepflichtiger Datenschutzvorfall. **Höchste Priorität.**
+2. **1.10.7–1.10.11** (E-Mail/Logo/Name, M365-Lizenz, IT-Nutzungsregeln) —
+   Formulare für Mitglieder und Ehrenamt, nicht für Betroffene. Öffentlich
+   oder in den Mitgliederbereich, den es noch nicht gibt?
+3. **1.5.9 Dienstleister Daten/Akten** und **1.10.5 DSGVO** — Musterformular
+   oder internes Verzeichnis?
+4. **1.5.7 FZ-Befreiung** — steht FZ für Führungszeugnis?
+
+Ausserdem: Die Äste 4.1, 4.2, 4.3, 4.5 und 5.2.2 sind keine Dokumente, sondern
+Inhaltsbereiche, für die es bereits Seiten gibt. Dort geht es um einen
+Abgleich — was in der Liste steht und auf der Seite fehlt (z.B. Assistenzhund,
+Fallmanager, Helfernetzwerk, Opferanwalt, Persönliches Budget, §109 SGG,
+KFZ-Hilfe), muss der Verein liefern.
+
+### A8 · Weitere offene Punkte
 - **Bestehende Datenbank:** Wir haben weiterhin keinen Zugriff. Vor der
   Aufwandsschätzung für die Bereinigung unbedingt Einsicht nehmen.
 - **Google Search Console:** Zugang sichern, **bevor** am Altsystem etwas geändert

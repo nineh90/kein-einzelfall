@@ -1,0 +1,891 @@
+[
+ {
+  "zeile": 5,
+  "tiefe": 2,
+  "nr": "1.1",
+  "titel": "Satzung",
+  "rot": true
+ },
+ {
+  "zeile": 6,
+  "tiefe": 3,
+  "nr": "1.1.1",
+  "titel": "Satzung aktuell",
+  "rot": false
+ },
+ {
+  "zeile": 7,
+  "tiefe": 3,
+  "nr": "1.1.2",
+  "titel": "Satzung alt",
+  "rot": false
+ },
+ {
+  "zeile": 8,
+  "tiefe": 2,
+  "nr": "1.2",
+  "titel": "Geschäftsordnung",
+  "rot": true
+ },
+ {
+  "zeile": 9,
+  "tiefe": 3,
+  "nr": "1.2.1",
+  "titel": "Geschäftsordnung aktuell",
+  "rot": false
+ },
+ {
+  "zeile": 10,
+  "tiefe": 3,
+  "nr": "1.2.2",
+  "titel": "Geschäftsordnung alt",
+  "rot": false
+ },
+ {
+  "zeile": 11,
+  "tiefe": 2,
+  "nr": "1.3",
+  "titel": "Mitglieds. u. Beitragsordnung",
+  "rot": true
+ },
+ {
+  "zeile": 12,
+  "tiefe": 3,
+  "nr": "1.3.1",
+  "titel": "Mitglieds. u. Beitragsordnung aktuell",
+  "rot": false
+ },
+ {
+  "zeile": 13,
+  "tiefe": 3,
+  "nr": "1.3.2",
+  "titel": "Mitglieds. u. Beitragsordnung alt",
+  "rot": false
+ },
+ {
+  "zeile": 25,
+  "tiefe": 3,
+  "nr": "1.5.1",
+  "titel": "Mitgliedsantrag",
+  "rot": true
+ },
+ {
+  "zeile": 26,
+  "tiefe": 4,
+  "nr": "1.5.1.1",
+  "titel": "Ausfüllhilfe Mitgliedsantrag",
+  "rot": false
+ },
+ {
+  "zeile": 27,
+  "tiefe": 3,
+  "nr": "1.5.2",
+  "titel": "Mitgliedsbescheinigung",
+  "rot": true
+ },
+ {
+  "zeile": 28,
+  "tiefe": 3,
+  "nr": "1.5.3",
+  "titel": "Dokumentenvollmacht",
+  "rot": true
+ },
+ {
+  "zeile": 29,
+  "tiefe": 3,
+  "nr": "1.5.4",
+  "titel": "Vollmacht für Sachstandsanfragen und Akteneinsicht",
+  "rot": true
+ },
+ {
+  "zeile": 30,
+  "tiefe": 3,
+  "nr": "1.5.5",
+  "titel": "Einverständniserklärung zur Nutzung & Speicherung von Daten/Akten",
+  "rot": true
+ },
+ {
+  "zeile": 31,
+  "tiefe": 3,
+  "nr": "1.5.6",
+  "titel": "Teilnahme u. Verschwiegenheit",
+  "rot": true
+ },
+ {
+  "zeile": 32,
+  "tiefe": 4,
+  "nr": "1.5.6.1",
+  "titel": "Mitglieder",
+  "rot": false
+ },
+ {
+  "zeile": 33,
+  "tiefe": 4,
+  "nr": "1.5.6.2",
+  "titel": "ohne Mitgliederschaft",
+  "rot": false
+ },
+ {
+  "zeile": 34,
+  "tiefe": 4,
+  "nr": "1.5.6.3",
+  "titel": "Arbeitsgruppen",
+  "rot": false
+ },
+ {
+  "zeile": 35,
+  "tiefe": 4,
+  "nr": "1.5.6.4",
+  "titel": "Selbsthilfegruppen",
+  "rot": false
+ },
+ {
+  "zeile": 36,
+  "tiefe": 4,
+  "nr": "1.5.6.5",
+  "titel": "Veranstaltungen",
+  "rot": false
+ },
+ {
+  "zeile": 37,
+  "tiefe": 4,
+  "nr": "1.5.6.6",
+  "titel": "Veranstaltung ohne",
+  "rot": false
+ },
+ {
+  "zeile": 38,
+  "tiefe": 4,
+  "nr": "1.5.6.7",
+  "titel": "Referenten",
+  "rot": false
+ },
+ {
+  "zeile": 39,
+  "tiefe": 3,
+  "nr": "1.5.7",
+  "titel": "FZ-Befreiung",
+  "rot": true
+ },
+ {
+  "zeile": 40,
+  "tiefe": 3,
+  "nr": "1.5.8",
+  "titel": "Gruppenregeln/Veranstaltungsregeln",
+  "rot": true
+ },
+ {
+  "zeile": 41,
+  "tiefe": 3,
+  "nr": "1.5.9",
+  "titel": "Dienstleister Daten/Akten",
+  "rot": true
+ },
+ {
+  "zeile": 47,
+  "tiefe": 3,
+  "nr": "1.5.12",
+  "titel": "Leitfäden",
+  "rot": true
+ },
+ {
+  "zeile": 48,
+  "tiefe": 4,
+  "nr": "1.5.12.1",
+  "titel": "Leitfaden AG",
+  "rot": false
+ },
+ {
+  "zeile": 49,
+  "tiefe": 4,
+  "nr": "1.5.12.2",
+  "titel": "Leitfaden SHG",
+  "rot": false
+ },
+ {
+  "zeile": 50,
+  "tiefe": 4,
+  "nr": "1.5.12.3",
+  "titel": "Leitfaden Aufnahme von Mitgliedern",
+  "rot": false
+ },
+ {
+  "zeile": 51,
+  "tiefe": 4,
+  "nr": "1.5.12.4",
+  "titel": "Leitfaden Kontaktaufnahme Betroffene",
+  "rot": false
+ },
+ {
+  "zeile": 58,
+  "tiefe": 3,
+  "nr": "1.5.19",
+  "titel": "Must Haves und Red Flaggs",
+  "rot": true
+ },
+ {
+  "zeile": 59,
+  "tiefe": 4,
+  "nr": "1.5.19.1",
+  "titel": "Für Mitarbeiter",
+  "rot": false
+ },
+ {
+  "zeile": 60,
+  "tiefe": 4,
+  "nr": "1.5.19.2",
+  "titel": "für Betroffene",
+  "rot": false
+ },
+ {
+  "zeile": 62,
+  "tiefe": 3,
+  "nr": "1.5.21",
+  "titel": "Schweigepfllichtsentbindung",
+  "rot": true
+ },
+ {
+  "zeile": 63,
+  "tiefe": 3,
+  "nr": "1.5.22",
+  "titel": "Vollmachtserklärung",
+  "rot": true
+ },
+ {
+  "zeile": 108,
+  "tiefe": 2,
+  "nr": "1.7",
+  "titel": "Beschwerdemanagement",
+  "rot": true
+ },
+ {
+  "zeile": 109,
+  "tiefe": 3,
+  "nr": "1.7.1",
+  "titel": "interne Beschwerden",
+  "rot": false
+ },
+ {
+  "zeile": 110,
+  "tiefe": 3,
+  "nr": "1.7.2",
+  "titel": "externe Beschwerden",
+  "rot": false
+ },
+ {
+  "zeile": 124,
+  "tiefe": 3,
+  "nr": "1.10.5",
+  "titel": "DSGVO",
+  "rot": true
+ },
+ {
+  "zeile": 126,
+  "tiefe": 3,
+  "nr": "1.10.7",
+  "titel": "Antrag auf Nutzung E-Mail, Logo, Name",
+  "rot": true
+ },
+ {
+  "zeile": 127,
+  "tiefe": 3,
+  "nr": "1.10.8",
+  "titel": "Antrag auf M365 Lizenz",
+  "rot": true
+ },
+ {
+  "zeile": 128,
+  "tiefe": 3,
+  "nr": "1.10.9",
+  "titel": "IT Nutzungsregeln",
+  "rot": true
+ },
+ {
+  "zeile": 129,
+  "tiefe": 3,
+  "nr": "1.10.10",
+  "titel": "Nutzungsvereinbarung E-Mail, Logo, Name",
+  "rot": true
+ },
+ {
+  "zeile": 130,
+  "tiefe": 3,
+  "nr": "1.10.11",
+  "titel": "Nutzungsvereinbarung M365 Lizenz",
+  "rot": true
+ },
+ {
+  "zeile": 136,
+  "tiefe": 3,
+  "nr": "1.12.1",
+  "titel": "ANUAS e.V.",
+  "rot": true
+ },
+ {
+  "zeile": 137,
+  "tiefe": 3,
+  "nr": "1.12.2",
+  "titel": "Der Paritätische",
+  "rot": true
+ },
+ {
+  "zeile": 138,
+  "tiefe": 2,
+  "nr": "1.13",
+  "titel": "Jahresberichte/Tätigkeitsberichte",
+  "rot": true
+ },
+ {
+  "zeile": 221,
+  "tiefe": 2,
+  "nr": "4.1",
+  "titel": "Arbeitsgruppen",
+  "rot": true
+ },
+ {
+  "zeile": 222,
+  "tiefe": 3,
+  "nr": "4.1.1",
+  "titel": "AG NR.1: SER (OEG/SGB XIV) vs. Misstände u. Best Practice",
+  "rot": false
+ },
+ {
+  "zeile": 223,
+  "tiefe": 4,
+  "nr": "4.1.1.1",
+  "titel": "Mini Projekt aus unserer Sicht",
+  "rot": false
+ },
+ {
+  "zeile": 224,
+  "tiefe": 3,
+  "nr": "4.1.2",
+  "titel": "AG NR.2: IFG vs. Offene Fragen",
+  "rot": false
+ },
+ {
+  "zeile": 225,
+  "tiefe": 3,
+  "nr": "4.1.3",
+  "titel": "AG NR. 3: Veranstaltungen",
+  "rot": false
+ },
+ {
+  "zeile": 226,
+  "tiefe": 3,
+  "nr": "4.1.4",
+  "titel": "AG Nr. 4: Soziale Medien",
+  "rot": false
+ },
+ {
+  "zeile": 227,
+  "tiefe": 3,
+  "nr": "4.1.5",
+  "titel": "AG Nr. 5: Öffentlichkeitsarbeit",
+  "rot": false
+ },
+ {
+  "zeile": 228,
+  "tiefe": 3,
+  "nr": "4.1.6",
+  "titel": "AG Nr. 6: Datenbanken",
+  "rot": false
+ },
+ {
+  "zeile": 229,
+  "tiefe": 3,
+  "nr": "4.1.7",
+  "titel": "AG Nr. 7: App Entwicklung",
+  "rot": false
+ },
+ {
+  "zeile": 230,
+  "tiefe": 2,
+  "nr": "4.2",
+  "titel": "Selbsthilfegruppen",
+  "rot": true
+ },
+ {
+  "zeile": 231,
+  "tiefe": 3,
+  "nr": "4.2.1",
+  "titel": "KISS",
+  "rot": false
+ },
+ {
+  "zeile": 232,
+  "tiefe": 3,
+  "nr": "4.2.2",
+  "titel": "Organisatiorisches",
+  "rot": false
+ },
+ {
+  "zeile": 233,
+  "tiefe": 4,
+  "nr": "4.2.2.1",
+  "titel": "Doku Schriftverkehr",
+  "rot": false
+ },
+ {
+  "zeile": 234,
+  "tiefe": 4,
+  "nr": "4.2.2.2",
+  "titel": "Zugangslinks",
+  "rot": false
+ },
+ {
+  "zeile": 235,
+  "tiefe": 4,
+  "nr": "4.2.2.3",
+  "titel": "Gruppenregeln",
+  "rot": false
+ },
+ {
+  "zeile": 236,
+  "tiefe": 4,
+  "nr": "4.2.2.4",
+  "titel": "Teilnahme u.Verschwiegenheit",
+  "rot": false
+ },
+ {
+  "zeile": 237,
+  "tiefe": 4,
+  "nr": "4.2.2.5",
+  "titel": "Antwort auf Anfrage",
+  "rot": false
+ },
+ {
+  "zeile": 238,
+  "tiefe": 3,
+  "nr": "4.2.3",
+  "titel": "Wir sind nicht mehr Stumm -  Folgeschädigen durch schädigende Ereignisse",
+  "rot": false
+ },
+ {
+  "zeile": 239,
+  "tiefe": 3,
+  "nr": "4.2.4",
+  "titel": "Bürokratie Labyrinth - Gefangen im Dschungel der Behörden",
+  "rot": false
+ },
+ {
+  "zeile": 240,
+  "tiefe": 3,
+  "nr": "4.2.5",
+  "titel": "Seelenfarben-Wenn Farben mehr als 1.000 Worte sagen",
+  "rot": false
+ },
+ {
+  "zeile": 241,
+  "tiefe": 3,
+  "nr": "4.2.6",
+  "titel": "Skillen me Softley - Trigger und Skills",
+  "rot": false
+ },
+ {
+  "zeile": 242,
+  "tiefe": 3,
+  "nr": "4.2.7",
+  "titel": "Schreibwerkstatt \"zwischen den Zeilen\"",
+  "rot": false
+ },
+ {
+  "zeile": 243,
+  "tiefe": 2,
+  "nr": "4.3",
+  "titel": "Verantaltungen",
+  "rot": true
+ },
+ {
+  "zeile": 244,
+  "tiefe": 3,
+  "nr": "4.3.1",
+  "titel": "FSM",
+  "rot": false
+ },
+ {
+  "zeile": 245,
+  "tiefe": 4,
+  "nr": "4.3.1.1",
+  "titel": "Info-Veranstaltung",
+  "rot": false
+ },
+ {
+  "zeile": 246,
+  "tiefe": 4,
+  "nr": "4.3.1.2",
+  "titel": "Ausfüllhilfe-Veranstaltung",
+  "rot": false
+ },
+ {
+  "zeile": 247,
+  "tiefe": 3,
+  "nr": "4.3.2",
+  "titel": "Assistenzhund",
+  "rot": false
+ },
+ {
+  "zeile": 248,
+  "tiefe": 3,
+  "nr": "4.3.3",
+  "titel": "Fallmanager",
+  "rot": false
+ },
+ {
+  "zeile": 249,
+  "tiefe": 3,
+  "nr": "4.3.4",
+  "titel": "Helfernetzwerk",
+  "rot": false
+ },
+ {
+  "zeile": 250,
+  "tiefe": 3,
+  "nr": "4.3.5",
+  "titel": "Dr. Lena Hofer",
+  "rot": false
+ },
+ {
+  "zeile": 251,
+  "tiefe": 3,
+  "nr": "4.3.6",
+  "titel": "Sozialrat Deutschland",
+  "rot": false
+ },
+ {
+  "zeile": 252,
+  "tiefe": 3,
+  "nr": "4.3.7",
+  "titel": "Open Tabel",
+  "rot": false
+ },
+ {
+  "zeile": 253,
+  "tiefe": 4,
+  "nr": "4.3.7.1",
+  "titel": "Quartal I-26",
+  "rot": false
+ },
+ {
+  "zeile": 254,
+  "tiefe": 4,
+  "nr": "4.3.7.2",
+  "titel": "Quartal II-26",
+  "rot": false
+ },
+ {
+  "zeile": 255,
+  "tiefe": 4,
+  "nr": "4.3.7.3",
+  "titel": "Quartal III-26",
+  "rot": false
+ },
+ {
+  "zeile": 256,
+  "tiefe": 4,
+  "nr": "4.3.7.4",
+  "titel": "Quartal IV-26",
+  "rot": false
+ },
+ {
+  "zeile": 281,
+  "tiefe": 2,
+  "nr": "4.5",
+  "titel": "Sonstige Projekte",
+  "rot": true
+ },
+ {
+  "zeile": 282,
+  "tiefe": 3,
+  "nr": "4.5.1",
+  "titel": "Abkürzungen",
+  "rot": false
+ },
+ {
+  "zeile": 283,
+  "tiefe": 3,
+  "nr": "4.5.2",
+  "titel": "Anfragen u. Austauschservice",
+  "rot": false
+ },
+ {
+  "zeile": 284,
+  "tiefe": 3,
+  "nr": "4.5.3",
+  "titel": "Anschlagsopfer",
+  "rot": false
+ },
+ {
+  "zeile": 285,
+  "tiefe": 4,
+  "nr": "4.5.3.1",
+  "titel": "Anschalgsopfer Facebookgruppe",
+  "rot": false
+ },
+ {
+  "zeile": 286,
+  "tiefe": 4,
+  "nr": "4.5.3.2",
+  "titel": "Brief Magdeburger Theater",
+  "rot": false
+ },
+ {
+  "zeile": 287,
+  "tiefe": 3,
+  "nr": "4.5.4",
+  "titel": "Aus unserer Sicht",
+  "rot": false
+ },
+ {
+  "zeile": 288,
+  "tiefe": 4,
+  "nr": "4.5.4.1",
+  "titel": "AG SER",
+  "rot": false
+ },
+ {
+  "zeile": 289,
+  "tiefe": 4,
+  "nr": "4.5.4.2",
+  "titel": "Fachtag: Workshop",
+  "rot": false
+ },
+ {
+  "zeile": 290,
+  "tiefe": 4,
+  "nr": "4.5.4.3",
+  "titel": "Mini Projekt 2025, Sept. Bis Dez.",
+  "rot": false
+ },
+ {
+  "zeile": 291,
+  "tiefe": 3,
+  "nr": "4.5.5",
+  "titel": "Bundesarbeitskooperation gegen Missbrauch",
+  "rot": false
+ },
+ {
+  "zeile": 292,
+  "tiefe": 3,
+  "nr": "4.5.6",
+  "titel": "BVPG (Bundesverein Prävention und Gesundheitsförderung)",
+  "rot": false
+ },
+ {
+  "zeile": 293,
+  "tiefe": 3,
+  "nr": "4.5.7",
+  "titel": "Fonds Sexueller Missbrauch",
+  "rot": false
+ },
+ {
+  "zeile": 294,
+  "tiefe": 4,
+  "nr": "4.5.7.1",
+  "titel": "Fonds Sexueller Missbrauch BMBFSFJ",
+  "rot": false
+ },
+ {
+  "zeile": 295,
+  "tiefe": 4,
+  "nr": "4.5.7.2",
+  "titel": "BAG Forsa",
+  "rot": false
+ },
+ {
+  "zeile": 296,
+  "tiefe": 4,
+  "nr": "4.5.7.3",
+  "titel": "BKSF",
+  "rot": false
+ },
+ {
+  "zeile": 297,
+  "tiefe": 4,
+  "nr": "4.5.7.4",
+  "titel": "Kooperation Tour 41 u. Gegen Missbrauch",
+  "rot": false
+ },
+ {
+  "zeile": 298,
+  "tiefe": 4,
+  "nr": "4.5.7.5",
+  "titel": "Fonds Sexueller Missbrauch LipSinc",
+  "rot": false
+ },
+ {
+  "zeile": 299,
+  "tiefe": 3,
+  "nr": "4.5.8",
+  "titel": "Istanbuler Konventionen",
+  "rot": false
+ },
+ {
+  "zeile": 300,
+  "tiefe": 3,
+  "nr": "4.5.9",
+  "titel": "Kinderkodex",
+  "rot": false
+ },
+ {
+  "zeile": 301,
+  "tiefe": 3,
+  "nr": "4.5.10",
+  "titel": "Landesbeirat für Menschen mit Behinderung Berlin/Brandenburg",
+  "rot": false
+ },
+ {
+  "zeile": 302,
+  "tiefe": 3,
+  "nr": "4.5.11",
+  "titel": "Opferanwalt",
+  "rot": false
+ },
+ {
+  "zeile": 303,
+  "tiefe": 3,
+  "nr": "4.5.12",
+  "titel": "Opferrechte Gruppe ANUAS",
+  "rot": false
+ },
+ {
+  "zeile": 304,
+  "tiefe": 3,
+  "nr": "4.5.13",
+  "titel": "Sozialrat Deutschland",
+  "rot": false
+ },
+ {
+  "zeile": 305,
+  "tiefe": 3,
+  "nr": "4.5.14",
+  "titel": "Tilda Fonds",
+  "rot": false
+ },
+ {
+  "zeile": 306,
+  "tiefe": 3,
+  "nr": "4.5.15",
+  "titel": "Traumasensibles Antragsverfahren",
+  "rot": false
+ },
+ {
+  "zeile": 307,
+  "tiefe": 3,
+  "nr": "4.5.16",
+  "titel": "Ehrenamtsmesse",
+  "rot": false
+ },
+ {
+  "zeile": 308,
+  "tiefe": 4,
+  "nr": "4.5.16.1",
+  "titel": "Infomaterial",
+  "rot": false
+ },
+ {
+  "zeile": 309,
+  "tiefe": 4,
+  "nr": "4.5.16.2",
+  "titel": "Berlin",
+  "rot": false
+ },
+ {
+  "zeile": 310,
+  "tiefe": 4,
+  "nr": "4.5.16.3",
+  "titel": "Schleswig Holstein",
+  "rot": false
+ },
+ {
+  "zeile": 311,
+  "tiefe": 3,
+  "nr": "4.5.17",
+  "titel": "ANUAS Themenwoche",
+  "rot": false
+ },
+ {
+  "zeile": 312,
+  "tiefe": 3,
+  "nr": "4.5.18",
+  "titel": "Podcast",
+  "rot": false
+ },
+ {
+  "zeile": 313,
+  "tiefe": 3,
+  "nr": "4.5.19",
+  "titel": "IFG vs KK",
+  "rot": false
+ },
+ {
+  "zeile": 314,
+  "tiefe": 3,
+  "nr": "4.5.20",
+  "titel": "Landesämter",
+  "rot": false
+ },
+ {
+  "zeile": 315,
+  "tiefe": 3,
+  "nr": "4.5.21",
+  "titel": "§109 SGG",
+  "rot": false
+ },
+ {
+  "zeile": 316,
+  "tiefe": 3,
+  "nr": "4.5.22",
+  "titel": "KFZ Hilfe",
+  "rot": false
+ },
+ {
+  "zeile": 317,
+  "tiefe": 3,
+  "nr": "4.5.23",
+  "titel": "DSGVO Verstöße",
+  "rot": false
+ },
+ {
+  "zeile": 318,
+  "tiefe": 3,
+  "nr": "4.5.24",
+  "titel": "Persönliches Budget",
+  "rot": false
+ },
+ {
+  "zeile": 319,
+  "tiefe": 3,
+  "nr": "4.5.25",
+  "titel": "Schutzkonzept",
+  "rot": false
+ },
+ {
+  "zeile": 320,
+  "tiefe": 3,
+  "nr": "4.5.26",
+  "titel": "Blog",
+  "rot": false
+ },
+ {
+  "zeile": 321,
+  "tiefe": 3,
+  "nr": "4.5.27",
+  "titel": "Dein Stimme",
+  "rot": false
+ },
+ {
+  "zeile": 344,
+  "tiefe": 3,
+  "nr": "5.2.2",
+  "titel": "Artikel",
+  "rot": true
+ },
+ {
+  "zeile": 346,
+  "tiefe": 2,
+  "nr": "5.4",
+  "titel": "Adressdatenbank",
+  "rot": true
+ }
+]
