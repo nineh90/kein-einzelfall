@@ -8,6 +8,7 @@ use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SpracheSetzen;
 use App\Models\Language;
+use App\Support\Dokument;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,6 +127,25 @@ Route::get('/module-demo', function () {
 
     return view('module-demo', compact('dokumente'));
 });
+
+/*
+ * Dokument-Adressen der WordPress-Altseite.
+ *
+ * Sie sind indexiert, extern verlinkt und stehen in PDFs, die der Verein
+ * verschickt hat — sie duerfen nicht sterben. Eine Regel statt 121 Zeilen in
+ * der Weiterleitungstabelle: Dort waeren sie nur Rauschen fuer die Redaktion.
+ *
+ * Kein Schrägstrich-Wildcard im Ziel ohne Pruefung: Der Pfad kommt aus der
+ * Adresszeile und wird gegen den Dokumentordner geprueft, bevor irgendetwas
+ * ausgeliefert wird.
+ */
+Route::get('/wp-content/uploads/{pfad}', function (string $pfad) {
+    $ziel = Dokument::pfad('/wp-content/uploads/'.$pfad);
+
+    abort_unless(Dokument::vorhanden('/wp-content/uploads/'.$pfad), 404);
+
+    return redirect($ziel, 301);
+})->where('pfad', '.*')->name('altdokument');
 
 /*
  * Suchmaschinen-Wegweiser. Kennt alle Sprachfassungen und verweist sie

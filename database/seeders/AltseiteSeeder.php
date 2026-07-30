@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Redirect;
+use App\Support\Dokument;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -120,8 +121,14 @@ class AltseiteSeeder extends Seeder
 
                     return [
                         'titel' => $pdf['titel'] ?: ($bekannt['titel'] ?? basename($pdf['url'])),
-                        'url' => $pdf['url'],
-                        'bytes' => $bekannt['bytes'] ?? null,
+                        // Auf unsere eigene Adresse zeigen, nicht mehr auf die
+                        // Altseite. Solange die Datei noch nicht geholt ist,
+                        // blendet der Baustein den Eintrag aus — ein toter
+                        // Download-Knopf ist schlechter als keiner.
+                        'url' => Dokument::pfad($pdf['url']),
+                        // Die tatsaechliche Groesse schlaegt das Manifest: Wenn
+                        // die Datei bei uns liegt, gilt was auf der Platte steht.
+                        'bytes' => Dokument::groesse($pdf['url']) ?? $bekannt['bytes'] ?? null,
                     ];
                 })->unique('url')->values()->all();
 

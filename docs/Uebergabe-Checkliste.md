@@ -67,6 +67,22 @@ speichern").
 > Bei den Behörden-Schriftwechseln und Stellungnahmen muss geprüft werden, ob
 > darin personenbezogene Daten stehen. Nicht-Verlinken ist kein Zugriffsschutz.
 
+**Stand:** Die **31 verlinkten Dokumente sind übernommen** und liegen unter
+`public/dokumente/`; alle 32 Verweise auf der neuen Seite funktionieren, die
+alten `/wp-content/`-Adressen leiten dauerhaft weiter. Die **übrigen 90 sind
+bewusst nicht geholt** — genau wegen der Frage oben. Sobald der Verein je Reihe
+freigibt: `php artisan dokumente:holen --alle`.
+
+> **Einmal hinsehen, bitte:** **7 der 31 übernommenen Dateien sind
+> Behörden-Schriftwechsel**, alle verlinkt auf `/fsm-erweitertes-hilfesystem`:
+> „Betreff Unzumutbare Abwicklungsprozesse", zwei „Nachfrage", eine Antwort,
+> eine „Blanco-FSM-Antwort" und zwei Stellungnahmen. Sie sind **heute schon
+> öffentlich** auf der Altseite verlinkt — wir geben also nichts Neues preis
+> und haben sie deshalb mit übernommen. Vor dem Go-Live sollte trotzdem jemand
+> vom Verein einmal hineinsehen, ob darin Namen von Betroffenen stehen. Der
+> Dateiname „Blanco" deutet darauf hin, dass zumindest eine bewusst
+> geschwärzt wurde — bei den übrigen sechs ist das nicht erkennbar.
+
 ### A5 · Texte für Leichte Sprache
 **Die technische Frage ist entschieden:** Leichte Sprache ist jetzt eine eigene
 **Fassung** einer Seite, keine eigene Sprache. Sie bekommt eine eigene Adresse

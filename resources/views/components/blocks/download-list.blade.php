@@ -4,6 +4,25 @@
 ])
 
 @php
+    /*
+     * Eintraege ohne vorhandene Datei fliegen raus.
+     *
+     * Ein Download-Knopf, der ins Leere fuehrt, ist fuer diese Zielgruppe
+     * schlechter als kein Knopf: Wer nach einer Straftat ein Formular sucht und
+     * auf einen 404 laeuft, sucht kein zweites Mal. Externe Adressen bleiben
+     * unangetastet — die koennen wir nicht pruefen.
+     */
+    $dokumente = collect($dokumente)
+        ->filter(function ($d) {
+            $url = $d['url'] ?? '';
+
+            return $url !== ''
+                && (! str_starts_with($url, '/'.\App\Support\Dokument::ORDNER.'/')
+                    || is_file(public_path(ltrim($url, '/'))));
+        })
+        ->values()
+        ->all();
+
     $groesse = function (?int $b): string {
         if (! $b) return '';
         return $b >= 1048576

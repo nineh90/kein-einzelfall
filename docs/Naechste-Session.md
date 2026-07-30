@@ -157,10 +157,12 @@ noch die Texte (siehe A2, gehört dem Verein).
 
 **Bewusst liegen lassen:**
 
-- **Die ~120 PDFs.** 32 Dokument-Links in 8 Bausteinen zeigen auf
-  `/wp-content/uploads/…` und laufen lokal ins Leere. Das ist Meilenstein 10 und
-  wartet auf die Anzahlung. **Ohne diesen Schritt ist die Seite nicht live-fähig** —
-  bitte nicht übersehen, nur weil sonst alles fertig aussieht.
+- **Die restlichen 90 Dokumente.** Die **31 verlinkten sind geholt** und liegen
+  unter `public/dokumente/` — alle 32 Verweise funktionieren. Der Medienbestand
+  hat aber 121 Dateien. Die übrigen 90 sind bewusst *nicht* übernommen: Laut A4
+  der Übergabe-Checkliste sind darunter Behörden-Schriftwechsel, bei denen erst
+  geprüft werden muss, ob personenbezogene Daten darin stehen. Sobald der Verein
+  freigibt: `php artisan dokumente:holen --alle`.
 - **Datenschutzerklärung.** Die übernommene beschreibt OneTap, hu-manity und Google
   Fonts — nichts davon setzen wir ein. Gehört zu den Anwälten des Vereins.
   **Sie muss um die Mehrsprachigkeit ergänzt werden**, sobald sie neu geschrieben ist:

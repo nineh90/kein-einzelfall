@@ -172,6 +172,29 @@ Durchgang und ein Test mit einer echten Vorlesehilfe bleiben nötig.
 
 ---
 
+## Dokumente der Altseite
+
+```bash
+php artisan dokumente:holen            # nur die verlinkten (31 Dateien, 7,3 MB)
+php artisan dokumente:holen --pruefen  # nichts laden, nur berichten was fehlt
+php artisan dokumente:holen --alle     # kompletter Bestand (121 Dateien, 26 MB)
+```
+
+Lädt die PDFs von der WordPress-Altseite nach `public/dokumente/` und prüft
+dabei Größe und Dateityp gegen `docs/dokumente-manifest.json`. Der Lauf ist
+wiederholbar — was vollständig vorliegt, wird übersprungen.
+
+**Standard sind nur die verlinkten Dateien.** Der Medienbestand enthält 121
+Dokumente, verlinkt sind 31. Unter den übrigen sind laut Übergabe-Checkliste
+(A4) auch Behörden-Schriftwechsel, bei denen erst zu prüfen ist, ob
+personenbezogene Daten darin stehen. Etwas zu übernehmen, das niemand
+angefordert hat, ist bei dieser Zielgruppe das falsche Standardverhalten.
+
+Die alten Adressen `/wp-content/uploads/…` leiten dauerhaft (301) auf die neuen
+weiter — sie sind indexiert und stehen in PDFs, die der Verein verschickt hat.
+
+---
+
 ## Stack
 
 Laravel 12 · PHP 8.2–8.4 · MySQL/MariaDB · Blade · Tailwind 4 · kein JS-Framework
