@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $beitrag->titel)
+@section('vollertitel', $beitrag->seiteTitel())
 @section('description', $beitrag->meta_description ?: $beitrag->anriss(155))
 
 @php

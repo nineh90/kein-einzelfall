@@ -2,6 +2,10 @@
 
 @section('title', $page->titel)
 
+{{-- Der gepflegte meta_title schlaegt den Seitentitel. Ohne diese Zeile wuerde
+     das Feld im Panel nichts bewirken. --}}
+@section('vollertitel', $page->seiteTitel())
+
 {{-- Nie null übergeben: @section mit null als Inhalt öffnet einen
      Ausgabepuffer, der mangels @endsection nie geschlossen wird. Seiten ohne
      gepflegte Beschreibung erhalten deshalb den Seitentitel als Notbehelf —
@@ -58,6 +62,10 @@
     {{-- Steht ganz oben und nicht am Seitenende: Wer die Sprache nicht
          liest, soll es erfahren, bevor er zu lesen anfängt. --}}
     <x-layout.sprachrueckfall :quelle="$ersatzsprache ?? null" />
+
+    {{-- Ebenfalls oben: Wer Leichte Sprache braucht, soll den Hinweis finden,
+         bevor er anfaengt zu lesen. --}}
+    <x-layout.fassungswechsel :page="$page" />
 
     <x-layout.seitenkopf
         :titel="$page->titel"

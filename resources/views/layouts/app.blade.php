@@ -22,7 +22,19 @@
     <meta name="theme-color" content="#2E4A3A">
     <link rel="icon" href="/img/logo.png" type="image/png">
 
-    <title>@yield('title', 'Startseite') - Kein Einzelfall e.V.</title>
+    {{-- Zwei Wege zum Titel:
+
+         `vollertitel` setzt eine Seite, die einen gepflegten meta_title hat —
+         der ersetzt den Titel vollständig, samt Suffix. Ohne ihn blieb das Feld
+         im Panel wirkungslos: Der Verein konnte es ausfüllen, und im Quelltext
+         änderte sich nichts. Aufgefallen ist das erst beim Nachzählen —
+         alle 24 Altseiten tragen zufällig genau das Suffix, das das Layout
+         ohnehin angehängt hat.
+
+         Ohne `vollertitel` gilt weiterhin das Muster der Altseite
+         („%Seite% - Kein Einzelfall e.V.“), damit sich die Suchergebnisse beim
+         Umzug nicht verändern. --}}
+    <title>@hasSection('vollertitel')@yield('vollertitel')@else@yield('title', 'Startseite') - Kein Einzelfall e.V.@endif</title>
     <meta name="description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
 
     {{-- Kanonische Adresse ohne Query-Parameter. Die Altseite setzt sie auf jeder
@@ -137,7 +149,14 @@
         Der Hinweis darüber bleibt in der gewählten Sprache und setzt sein
         lang-Attribut selbst.
     --}}
+    {{-- data-fassung statt einer Klasse an jedem Baustein: So gelten die
+         typografischen Regeln der Leichten Sprache automatisch auch fuer
+         Bausteine, die es heute noch nicht gibt. Dasselbe Muster wie bei den
+         Darstellungs-Einstellungen.
+
+         Kein abweichendes lang-Attribut: Leichte Sprache *ist* Deutsch. --}}
     <main id="inhalt" tabindex="-1" class="flex-1"
+          @if (($page ?? null)?->istLeichteSprache()) data-fassung="leichte-sprache" @endif
           @if (! empty($ersatzsprache))
               lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}"
           @endif>

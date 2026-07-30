@@ -29,6 +29,30 @@ class SeitenUndRedirectsTest extends TestCase
         $this->seed(AltseiteSeeder::class);
     }
 
+    public function test_gepflegter_meta_title_landet_im_seitentitel(): void
+    {
+        // Das Feld gibt es im Panel seit Anfang an — es hat nur nichts bewirkt.
+        // Aufgefallen ist das lange nicht, weil alle 24 Altseiten zufaellig
+        // genau das Suffix tragen, das das Layout ohnehin anhaengt.
+        $seite = Page::where('slug', 'verein')->firstOrFail();
+        $seite->update(['meta_title' => 'Der Verein KE!N EINZELFALL — Opferhilfe Hamburg']);
+
+        $this->get('/verein')
+            ->assertOk()
+            ->assertSee('<title>Der Verein KE!N EINZELFALL — Opferhilfe Hamburg</title>', false);
+    }
+
+    public function test_ohne_meta_title_bleibt_das_muster_der_altseite(): void
+    {
+        // „%Seite% - Kein Einzelfall e.V.“ — damit sich die Suchergebnisse beim
+        // Umzug nicht veraendern.
+        Page::where('slug', 'verein')->update(['meta_title' => null]);
+
+        $this->get('/verein')
+            ->assertOk()
+            ->assertSee('<title>Verein - Kein Einzelfall e.V.</title>', false);
+    }
+
     public function test_alle_seiten_der_altseite_sind_erreichbar(): void
     {
         // 23 aus dem Altbestand plus die Seite „Barrierefreiheit", die es dort
