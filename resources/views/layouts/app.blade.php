@@ -139,6 +139,12 @@
         {{ __('rahmen.sprunglink') }}
     </a>
 
+    {{-- Fixes Barrierefreiheits-Tab am linken Rand, auf jeder Seite erreichbar.
+         Bewusst hier statt im Header: als zweiter Tab-Stopp (gleich nach dem
+         Sprunglink) für die Tastatur früh erreichbar, und als seitenweites
+         schwebendes Bedienelement, das nicht an der Kopfzeile klebt. --}}
+    <x-layout.a11y-toolbar />
+
     <x-layout.header :fassungen="$fassungen" />
 
     {{--

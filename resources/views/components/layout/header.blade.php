@@ -89,11 +89,17 @@
                  und die ist Teil seiner Verlässlichkeit. --}}
             <x-layout.sprachumschalter :fassungen="$fassungen ?? []" />
 
-            <x-layout.a11y-toolbar />
+            {{-- Die Darstellungs-/Barrierefreiheits-Einstellungen sind kein
+                 Kopfzeilen-Knopf mehr, sondern ein fixes Tab am linken Rand
+                 (siehe x-layout.a11y-toolbar, eingebunden im Layout gleich hinter
+                 dem Sprunglink).
 
-            <div class="hidden sm:block">
-                <x-layout.exit-button />
-            </div>
+                 Der Notausgang steht jetzt auf JEDER Größe im klebenden Kopf —
+                 vorher war er auf dem Handy nur unten in der Leiste und im Menü,
+                 was ihn dort versteckte. Platz dafür ist da, seit der a11y-Knopf
+                 aus der Reihe gewandert ist. Auf schmalen Geräten nur das Symbol,
+                 ab „380 px“ mit Beschriftung — die Logik sitzt im Exit-Button. --}}
+            <x-layout.exit-button />
 
             {{--
                 Burger und Mobil-Navigation als natives <details>.
@@ -146,12 +152,12 @@
                         @endforeach
                     </ul>
 
-                    {{-- Unterhalb „sm“ ist in der Kopfzeile kein Platz für beides.
-                         Notausgang und Sprachwahl wandern deshalb hierher — der
-                         Notausgang zuerst, seine Position ist Teil seiner
-                         Verlässlichkeit. --}}
-                    <div class="mt-3 flex flex-col gap-3 border-t border-line pt-3 sm:hidden">
-                        <x-layout.exit-button />
+                    {{-- Der Notausgang steht jetzt dauerhaft im Kopf (siehe oben)
+                         und in der unteren Leiste — hier im Menü wäre er ein
+                         dritter, versteckter Ort. Die Sprachwahl bleibt: In der
+                         Kopfzeile ist sie erst ab „sm“ sichtbar, unterhalb also
+                         nur hier. --}}
+                    <div class="mt-3 border-t border-line pt-3 sm:hidden">
                         <x-layout.sprachumschalter :fassungen="$fassungen ?? []" variant="menue" />
                     </div>
                 </nav>

@@ -23,21 +23,29 @@
     Die Bedienung sitzt jetzt in resources/js/a11y.js und arbeitet ausschliesslich
     über data-Attribute — kein zur Laufzeit ausgewerteter Quelltext, keine
     Aufweichung der CSP nötig.
+
+    Der Knopf ist ein fest an den linken Bildschirmrand geheftetes, senkrecht
+    mittiges Tab — dieselbe Stelle wie auf der Altseite, auf jeder Seite und in
+    jeder Scrollposition erreichbar. Bewusst links: rechts oben und unten sitzt
+    der Notausgang, dessen Position Teil seiner Verlässlichkeit ist. Im Quelltext
+    steht das Tab gleich hinter dem Sprunglink — damit ist es der zweite
+    Tab-Stopp und für die Tastatur früh erreichbar, was zu seinem Zweck passt.
 --}}
-<div class="relative">
+<div>
     <button type="button"
             data-a11y-oeffnen
             aria-expanded="false"
             aria-controls="a11y-panel"
-            class="relative flex h-10 w-10 items-center justify-center rounded-full border
-                   border-line bg-card text-green hover:bg-green-mist">
+            class="fixed left-0 top-1/2 z-40 flex h-12 w-11 -translate-y-1/2 items-center justify-center
+                   rounded-r-xl border border-l-0 border-line bg-card text-green shadow-md
+                   transition-colors hover:bg-green-mist">
         <span class="sr-only">Darstellung und Barrierefreiheit einstellen</span>
-        <x-ui.icon name="accessibility" :size="18" />
+        <x-ui.icon name="accessibility" :size="20" />
 
         {{-- Zähler zeigt, dass Einstellungen aktiv sind — sonst wundert man sich
              auf einem fremden Gerät über das veränderte Aussehen. --}}
         <span data-a11y-zaehler hidden
-              class="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center
+              class="absolute -right-1.5 -top-1.5 flex h-4 min-w-4 items-center justify-center
                      rounded-full bg-green px-1 text-[0.625rem] text-on-green"></span>
     </button>
 
@@ -52,9 +60,9 @@
          hidden
          role="dialog"
          aria-labelledby="a11y-titel"
-         class="fixed inset-x-2 top-20 z-50 max-h-[75vh] overflow-y-auto rounded-card border
-                border-line bg-card p-4 shadow-lg
-                sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-80">
+         class="fixed left-2 right-2 top-1/2 z-50 max-h-[85vh] -translate-y-1/2 overflow-y-auto
+                rounded-card border border-line bg-card p-4 shadow-lg
+                sm:right-auto sm:w-80">
 
         <div class="mb-3 flex items-center justify-between gap-4">
             {{-- Bewusst kein <h2>: Die Toolbar steht im Quelltext vor der <h1> der
