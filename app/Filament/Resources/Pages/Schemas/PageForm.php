@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Models\Group;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\PageBlock;
+use App\Models\TeamMember;
 use App\Rules\KollidiertNichtMitSprachpraefix;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
@@ -466,7 +468,7 @@ class PageForm
                             // Hier wird nur gewählt, welche gezeigt werden.
                             Select::make('data.bereich')
                                 ->label('Nur ein Bereich')
-                                ->options(fn () => \App\Models\TeamMember::query()
+                                ->options(fn () => TeamMember::query()
                                     ->whereNotNull('bereich')
                                     ->distinct()
                                     ->orderBy('bereich')
@@ -482,7 +484,7 @@ class PageForm
                             // Zieht die Gruppen aus der Verwaltung „Gruppen“.
                             Select::make('data.typ')
                                 ->label('Welche Gruppen')
-                                ->options(\App\Models\Group::TYPEN)
+                                ->options(Group::TYPEN)
                                 ->default('selbsthilfe')
                                 ->native(false)
                                 ->required(fn ($get) => $get('typ') === 'group_list')

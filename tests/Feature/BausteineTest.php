@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Group;
 use App\Models\Page;
 use App\Models\PageBlock;
+use App\Models\TeamMember;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -293,11 +295,11 @@ class BausteineTest extends TestCase
         // Diese beiden Bausteine tragen keinen eigenen Inhalt — sie zeigen, was
         // unter „Vorstand & Team“ und „Gruppen“ gepflegt ist. Im Panel wird nur
         // gewählt, welcher Ausschnitt.
-        \App\Models\TeamMember::create([
+        TeamMember::create([
             'name' => 'Alex Beispiel', 'bereich' => 'Vorstand',
             'kurzprofil' => 'Gründungsmitglied.', 'published_at' => now(),
         ]);
-        \App\Models\Group::create([
+        Group::create([
             'slug' => 'montagsgruppe', 'name' => 'Montagsgruppe', 'typ' => 'selbsthilfe',
             'teaser' => 'Offener Austausch.', 'status' => 'offen', 'published_at' => now(),
         ]);

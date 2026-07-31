@@ -852,3 +852,126 @@ Baustein mit Überschrift, obwohl nur Textbausteine ein Sprungziel setzen.
 Solange nur Textbausteine pflegbar waren, fiel das nicht auf. Jetzt filtert
 `page.blade.php` darauf — ein Verzeichnis, das ins Leere springt, fällt
 ausgerechnet dem auf, der es benutzt, weil er nicht scrollen kann.
+
+## 14. Demo-Übersetzungen für Englisch und Russisch (31.07.2026)
+
+Für Vorführungen sollen Deutsch, Englisch und Russisch auswählbar sein und
+Inhalt zeigen. Zwei getrennte Probleme dahinter.
+
+### „Unter Sprachen steht nichts“
+
+Dieselbe Ursache wie bei der Startseite: Der `SprachenSeeder` legt de/en/ru an,
+läuft aber nur bei leerer Datenbank (über den `AltseiteSeeder`) und auf dem
+Server gar nicht. Eine bestehende Datenbank bekam die Sprachtabelle nie — das
+Panel zeigte unter „Sprachen“ eine leere Liste, der Umschalter hatte nichts
+anzubieten.
+
+Behoben mit der Migration `2026_07_31_120000_sprachen_sicherstellen`. Sie legt
+die drei Sprachzeilen an, idempotent, auch auf dem Server. Bewusst **ohne**
+Freischaltung: Englisch und Russisch bleiben `aktiv = false`. Das ist die
+Sicherheitslinie — eine Sprache wird erst sichtbar, wenn ihre Inhalte
+freigegeben sind.
+
+### Die Inhalte: maschinell, für die Demo, ungeprüft
+
+Der `UebersetzungenSeeder` legt englische und russische Fassungen der Kernseiten
+an — **Startseite, Verein, Anfragen, Spenden** — und schaltet en/ru frei. Die
+Texte stehen in `database/seeders/data/uebersetzungen.json`.
+
+> ⚠️ **Maschinelle Übersetzung.** Ein Entwurf, damit der Umschalter etwas zeigt.
+> Der Verein prüft und korrigiert im Panel — besonders Russisch, das niemand von
+> uns gegenlesen kann.
+
+Deshalb hängt der Seeder an **keiner** Migration und läuft **nicht** beim
+Deploy. Er wird von Hand nur auf der Demo-Datenbank ausgeführt:
+
+```bash
+php artisan db:seed --class=UebersetzungenSeeder
+```
+
+So landet kein ungeprüfter Text versehentlich live.
+
+**Warum nur vier Seiten und nicht alle 24:** Eine halb übersetzte Seite sieht
+kaputt aus. Eine fehlende dagegen fällt sauber auf den eingebauten, sichtbaren
+Rückfall zurück — deutscher Inhalt mit einem Hinweis in der Zielsprache, genau
+für diese Zielgruppe so vorgesehen. Lieber wenige Seiten ganz als viele halb.
+Weitere Seiten sind später ein Eintrag mehr im Wörterbuch plus ein Slug in
+`UebersetzungenSeeder::KERN`.
+
+**Wie übersetzt wird:** Der Seeder klont jede deutsche Seite — gleiche
+Bausteine, gleiche Reihenfolge, gleiche Adresse mit Sprachpräfix (`/en/verein`).
+Übersetzt werden nur bekannte Textfelder (`titel`, `text`, `absaetze`, `label`
+…). Alles andere bleibt: `url`, `icon`, `variant`, IBAN, E-Mail-Adressen. Ein
+übersetzter Link wäre ein toter Link, eine „übersetzte“ IBAN schlicht falsch.
+Kennt das Wörterbuch einen Satz nicht, bleibt er deutsch stehen — sichtbar
+unübersetzt ist ehrlicher als falsch.
+
+**Notrufnummern** werden nicht erfunden. Die deutschen Nummern (110, 116 006 …)
+gelten in Deutschland unabhängig von der Sprache; nur ihre Beschriftungen sind
+übersetzt.
+
+## 15. Sprachumschalter im jw.org-Stil (31.07.2026)
+
+Die alte Linkliste (》DE EN RU《 als Pillen) sah schlicht aus und **skaliert
+nicht**: Bei zwanzig Sprachen sprengt sie die Kopfzeile. Vorbild ist jetzt der
+Umschalter von jw.org — ein **Weltkugel-Knopf**, der ein Panel mit allen Sprachen
+öffnet, mit **Suchfeld** und scrollbarer Liste.
+
+Die beiden nicht verhandelbaren Zusagen bleiben eingelöst:
+
+- **Ohne JavaScript bedienbar.** Der Aufklapper ist ein natives `<details>` —
+  dasselbe Muster wie Mobilmenü und Akkordeon. Auf/Zu, Tastatur und
+  Screenreader-Ansage kommen vom Browser. Das **Suchfeld ist reine Verbesserung**:
+  Es steht als `hidden` im HTML und wird erst von einem kleinen, per CSP-nonce
+  erlaubten Skript eingeblendet. Ohne Skript sieht man die volle Liste, nur
+  ungefiltert. Die Suche filtert über Eigenbezeichnung, deutschen Namen und
+  Kürzel — 》Русский《, 》Russisch《 und 》ru《 finden alle dieselbe Zeile.
+- **Kyrillisch lädt nur, wo es gebraucht wird.** Die Eigenbezeichnungen stehen im
+  Panel, also innerhalb des `<details>`. Auf einer deutschen Seite trägt der Knopf
+  selbst nur die aktuelle Sprache (》Deutsch《). `test_deutsche_seiten_enthalten_
+  keine_kyrillischen_zeichen` bewacht das: kyrillische Zeichen ausserhalb der
+  Aufklapper zögen die kyrillischen Schriftschnitte auf jede deutsche Seite.
+
+Zwei Varianten aus einer Datei: Im Kopf das Weltkugel-Dropdown (`<details>`,
+Escape/Aussenklick schliesst, Suche fokussiert beim Öffnen). Im Mobilmenü — das
+selbst schon ein `<details>` ist — eine flache, beschriftete Liste ohne zweiten
+Aufklapper (kein verschachteltes `<details>`, sonst bräche der Kyrillisch-Test).
+Beide teilen sich Suche, Liste und Leermeldung; dasselbe Skript verbessert beide.
+
+Der Browser-A11y-Test liest die freigeschalteten Sprachen aus
+`header nav[aria-label] a[hreflang]` — die Struktur (Landmarke + hreflang-Links)
+bleibt deshalb erhalten, auch wenn die Liste jetzt in einem Aufklapper steckt.
+
+**Vor dem Namen steht ein Sprachkürzel-Badge (》DE《 》EN《 》RU《), keine Flagge.**
+Das war eine bewusste Entscheidung, kurz mit Flaggen gebaut und wieder verworfen.
+Flaggen stehen für Länder, nicht für Sprachen — und bei dieser Zielgruppe ist das
+heikel: Russischsprachige Besucher kommen oft gerade *nicht* aus Russland
+(ukrainische Geflüchtete, aus Russland Geflohene); die russische Flagge im Menü
+kann abweisend bis verletzend wirken, ausgerechnet für die Menschen, die der
+Verein erreichen will. jw.org — das Vorbild — nutzt aus demselben Grund keine
+Flaggen. Das Kürzel ist länderneutral, eindeutig und skaliert auf jede Sprache
+ohne ein einziges Bild. **Bitte nicht „hilfreich“ auf Flaggen zurückbauen.**
+
+## 16. Notausgang: mobil immer im Kopf (31.07.2026)
+
+Rückmeldung von Kevin: Auf dem Handy kam man an den Notausgang nur über das Menü
+— unpraktisch. Ursache war die alte Platzaufteilung: In der Kopfzeile war der
+Notausgang `hidden sm:block`, also unterhalb von 640 px ausgeblendet. Auf dem
+Handy blieb er nur in der unteren Leiste (dort als kurzes rotes „Exit", leicht zu
+übersehen und nicht als *Notausgang* erkennbar) und im aufgeklappten Burger-Menü.
+
+Jetzt steht er auf **jeder** Größe im klebenden Kopf, oben rechts, ohne dass man
+etwas aufklappen muss — wie die prominente Platzierung auf der Altseite. Platz
+dafür ist da, seit der Barrierefreiheits-Knopf als fixes Tab an den linken Rand
+gewandert ist (Abschnitt 15 … eigentlich der a11y-Teil): Die Kopfzeile hat einen
+Slot frei bekommen.
+
+Der Exit-Button (`variant="header"`) ist dafür responsiv geworden: unterhalb von
+380 px ein 40-px-Kreis nur mit Symbol (voller Tap, kein Umbruch), ab 380 px die
+Pille mit Beschriftung „Notausgang". Die Vorlesehilfe bekommt den Namen weiterhin
+aus dem sr-only-Text, auch im Symbol-Zustand.
+
+Aus dem Burger-Menü ist der Notausgang entfernt — er wäre dort ein dritter,
+versteckter Ort. Geblieben sind zwei bewusste Stellen: der klebende Kopf (immer
+im Blick) und die untere Leiste (Daumenreichweite in akuten Situationen). Die
+Position beider ist fest — Verlässlichkeit vor Eleganz.

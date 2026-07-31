@@ -175,9 +175,16 @@ noch die Texte (siehe A2, gehört dem Verein).
   `dir` am `<html>` und an Rückfall-Inhaltsbereichen. Ein vollständiger RTL-Durchgang
   der CSS (logische Eigenschaften statt `left`/`right`) fehlt und ist erst nötig,
   wenn wirklich Arabisch oder Farsi dazukommt.
-- **`lang/en/` und `lang/ru/` sind ungeprüft.** Beide Sprachen stehen deshalb auf
-  `aktiv = false` und erscheinen in keinem Umschalter. Erst nach muttersprachlichem
-  Gegenlesen freischalten.
+- **`lang/en/` und `lang/ru/` (Rahmen-Oberfläche) sind ungeprüft.** Fuss, Kopf,
+  Fehlerseiten usw. Muttersprachlich gegenlesen, bevor es live geht.
+- **Demo-Übersetzungen der Inhalte (31.07.2026).** Für Vorführungen sind
+  Startseite, Verein, Anfragen und Spenden maschinell nach en/ru übersetzt
+  (`UebersetzungenSeeder`, Texte in `database/seeders/data/uebersetzungen.json`),
+  und en/ru sind freigeschaltet. **Ungeprüft, besonders Russisch** — der Verein
+  korrigiert im Panel. Läuft bewusst nur von Hand auf der Demo-DB, nicht auf dem
+  Server (`php artisan db:seed --class=UebersetzungenSeeder`). Die übrigen 20
+  Seiten fallen sichtbar auf Deutsch zurück. Weitere Seiten: Wörterbuch ergänzen
+  + Slug in `KERN` aufnehmen. Details in `docs/Komponenten.md`, Abschnitt 14.
 - **Der Blog kennt noch keine Sprachfilterung.** `/ru/aktuelles` zeigt aktuell alle
   Beiträge. Fällt mit A1 zusammen.
 
