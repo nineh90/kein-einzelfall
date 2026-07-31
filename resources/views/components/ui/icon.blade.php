@@ -16,6 +16,10 @@
         'lock'          => '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
         'shield'        => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
         'info'          => '<circle cx="12" cy="12" r="9"/><path d="M12 11.5v4.5"/><circle cx="12" cy="7.9" r="0.9" fill="currentColor" stroke="none"/>',
+        // Weltkugel für den Sprachumschalter — Meridiane und Äquator.
+        'globe'         => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>',
+        // Häkchen für die aktuell gewählte Sprache.
+        'check'         => '<path d="M20 6 9 17l-5-5"/>',
     ];
 @endphp
 

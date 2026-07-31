@@ -46,6 +46,9 @@ return [
 
     'sprache' => [
         'auswahl' => 'Sprache',
+        'waehlen' => 'Sprache wählen',
+        'suchen' => 'Sprache suchen',
+        'keine_treffer' => 'Keine Sprache gefunden.',
         'wechseln_zu' => 'Sprache wechseln zu :sprache',
         'aktuell' => 'Aktuelle Sprache: :sprache',
     ],

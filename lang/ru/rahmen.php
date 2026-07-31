@@ -44,6 +44,9 @@ return [
 
     'sprache' => [
         'auswahl' => 'Язык',
+        'waehlen' => 'Выбрать язык',
+        'suchen' => 'Поиск языка',
+        'keine_treffer' => 'Язык не найден.',
         'wechseln_zu' => 'Переключить язык на :sprache',
         'aktuell' => 'Текущий язык: :sprache',
     ],
