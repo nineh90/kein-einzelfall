@@ -119,24 +119,28 @@ Offen, nach Nutzen sortiert:
    in `download-list:10-11`. Alle vier auf die aktive Sprache umstellen.
 7. `Group::TYPEN` und `Group::STATUS` liefern deutsche Labels aus dem Model ins Template.
 
-### A3 · Baustein-Typen ohne Felder im Filament — zur Hälfte erledigt
+### A3 · Baustein-Typen ohne Felder im Filament — erledigt (31.07.2026)
 
-Das ist der grösste Einzelposten und **kein Mehrsprachigkeits-Problem** — es gilt
-schon auf Deutsch. Ein Baustein ohne Eingabefelder ist nur per Seeder befüllbar;
-der Verein kann ihn weder auf Deutsch noch in einer Übersetzung pflegen.
+War der grösste Einzelposten und **kein Mehrsprachigkeits-Problem** — es galt
+schon auf Deutsch. Ein Baustein ohne Eingabefelder ist nur per Seeder befüllbar.
 
-**Am 30.07.2026 nachgeholt**, nämlich die Bausteine der Startseite: `hero`,
-`quick_access`, `cta_band`, `contact_close`, `hilfe_box`, dazu Überzeile,
-handschriftlicher Zusatz und ein Knopf für `text`. Im selben Zug ist die
-Startseite ein Datensatz geworden — sie war die einzige Seite ohne. Begründungen
-in `docs/Komponenten.md`, Abschnitt 12.
+**Alle inhaltstragenden Bausteine haben jetzt Felder.** Am 30.07. die der
+Startseite (`hero`, `quick_access`, `cta_band`, `contact_close`, `hilfe_box`,
+plus Felder für `text`), am 31.07. der Rest: `topic_list`, `stat_strip`,
+`inhalts_hinweis`, `embed`, `donation_options`, `team_grid`, `group_list`.
+Begründungen in `docs/Komponenten.md`, Abschnitt 12.
 
-**Weiterhin offen:** `topic_list`, `team_grid`, `group_list`, `embed`,
-`donation_options`, `inhalts_hinweis`, `leichte_sprache`, `stat_strip`,
-`contact_form`. „Alle pflegbaren Texte sind im Panel je Sprache pflegbar" ist
-damit noch **nicht vollständig eingelöst**. Das gehört vor die Abnahme.
+`contact_form` hat ausser Titel keinen pflegbaren Inhalt; `leichte_sprache` ist
+die Fassungs-Mechanik, kein Seiten-Baustein. Damit ist „Alle pflegbaren Texte
+sind im Panel je Sprache pflegbar" **eingelöst**.
 
-Zwei Muster, die dabei entstanden sind und für den Rest gelten:
+> ⚠️ **Noch nicht verifiziert:** Die Felder vom 31.07. sind geschrieben, aber
+> `php artisan test` konnte in der Session nicht laufen (PHP war aus der
+> Umgebung verschwunden). Vor der Abnahme einmal `php artisan test` und einen
+> Blick ins Panel — die neuen Tests stehen in `BausteineTest` und
+> `AdminPanelTest` (`test_alle_baustein_typen_ueberstehen_das_speichern_im_panel`).
+
+Zwei Muster, die dabei entstanden sind und für Erweiterungen gelten:
 
 - Jeder Schlüssel, den ein Seeder schreibt, **braucht ein Feld im Formular** —
   sonst wirft ihn das nächste Speichern im Panel still weg. Das ist der

@@ -214,11 +214,21 @@ class PageForm
 
                             TextInput::make('data.titel')
                                 ->label(fn ($get) => $get('typ') === 'hero' ? 'Überschrift der Seite' : 'Überschrift')
-                                // Das Hinweisband trägt keine Überschrift, sondern
-                                // einen Leitsatz. Ein Titel darin erzeugte einen
-                                // Eintrag im Inhaltsverzeichnis, der auf nichts
-                                // Sichtbares zeigt.
-                                ->hidden(fn ($get) => $get('typ') === 'cta_band')
+                                // Nicht jeder Baustein trägt eine Überschrift:
+                                // Das Hinweisband hat einen Leitsatz, die
+                                // Kennzahlen-Leiste gar keinen Text, und der
+                                // Inhaltshinweis benennt statt einer Überschrift
+                                // ein Thema (eigenes Feld weiter unten). Ein
+                                // Titelfeld, das nichts bewirkt, ist eine Falle.
+                                ->hidden(fn ($get) => in_array(
+                                    $get('typ'),
+                                    ['cta_band', 'stat_strip', 'inhalts_hinweis'],
+                                    true,
+                                ))
+                                // Der Aufmacher-Rahmen der Zwei-Klick-Einbettung
+                                // braucht eine Beschriftung, sonst steht dort nur
+                                // ein leerer Aufklapper.
+                                ->required(fn ($get) => $get('typ') === 'embed')
                                 ->helperText(fn ($get) => $get('typ') === 'hero'
                                     ? 'Die grosse Überschrift ganz oben. Ein Teil davon kann die '
                                         .'handgezeichnete Linie bekommen: dazu *Sternchen* darum setzen, '
@@ -228,7 +238,11 @@ class PageForm
                             Textarea::make('data.einleitung')
                                 ->label('Einleitung')
                                 ->rows(2)
-                                ->visible(fn ($get) => in_array($get('typ'), ['schritte', 'accordion'], true))
+                                ->visible(fn ($get) => in_array(
+                                    $get('typ'),
+                                    ['schritte', 'accordion', 'team_grid', 'group_list'],
+                                    true,
+                                ))
                                 ->helperText('Kurzer Text über der Liste. Kann leer bleiben.'),
 
                             Repeater::make('data.absaetze')
@@ -332,10 +346,11 @@ class PageForm
                                 ->helperText('Ein kurzer Leitsatz, der wie mit der Hand '
                                     .'danebengeschrieben aussieht. Kann leer bleiben.'),
 
-                            // --- Einstiegskarten ---
+                            // Unterzeile teilen sich Einstiegskarten und
+                            // Themenliste — beide zeigen sie unter der Überschrift.
                             TextInput::make('data.sub')
                                 ->label('Unterzeile')
-                                ->visible(fn ($get) => $get('typ') === 'quick_access')
+                                ->visible(fn ($get) => in_array($get('typ'), ['quick_access', 'topic_list'], true))
                                 ->helperText('Steht unter der Überschrift. Kann leer bleiben.'),
 
                             Repeater::make('data.karten')
@@ -391,6 +406,166 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'hilfe_box')
                                 ->helperText('Für Stellen mitten auf einer Seite. Die Nummern '
                                     .'selbst stehen in der Anwendung und sind hier nicht änderbar.'),
+
+                            // --- Themenliste ---
+                            Repeater::make('data.themen')
+                                ->label('Themen')
+                                ->addActionLabel('Thema hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'topic_list')
+                                ->columns(3)
+                                ->itemLabel(fn (array $state) => $state['label'] ?? null)
+                                ->helperText('Einträge ohne Beschriftung oder Ziel werden auf der '
+                                    .'Seite ausgelassen — jeder ist ein Link.')
+                                ->schema([
+                                    TextInput::make('label')->label('Beschriftung')->required(),
+                                    TextInput::make('url')->label('Ziel')->required()
+                                        ->helperText('Zum Beispiel /erwerbsminderungsrente'),
+                                    Select::make('icon')->label('Zeichen')
+                                        ->options(self::ZEICHEN)->default('arrow-right')->native(false),
+                                ]),
+
+                            TextInput::make('data.alleUrl')
+                                ->label('Verweis „alles anzeigen“ — Ziel')
+                                ->visible(fn ($get) => $get('typ') === 'topic_list')
+                                ->helperText('Führt zur Übersichtsseite, z.B. /wissen. Kann leer bleiben.'),
+
+                            TextInput::make('data.alleLabel')
+                                ->label('Verweis „alles anzeigen“ — Beschriftung')
+                                ->visible(fn ($get) => $get('typ') === 'topic_list')
+                                ->helperText('Nur wirksam, wenn oben ein Ziel steht. Vorgabe: „Zum Wissensbereich“.'),
+
+                            // --- Kennzahlen ---
+                            Repeater::make('data.stats')
+                                ->label('Kennzahlen')
+                                ->addActionLabel('Kennzahl hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'stat_strip')
+                                ->columns(2)
+                                ->itemLabel(fn (array $state) => $state['wert'] ?? null)
+                                ->helperText('Die Zahlen bestätigt der Verein. Nichts hier ist geschätzt.')
+                                ->schema([
+                                    TextInput::make('wert')->label('Wert')->required()
+                                        ->helperText('z.B. „1.000+“ oder „2024“'),
+                                    TextInput::make('label')->label('Bezeichnung')->required()
+                                        ->helperText('z.B. „erreichte Menschen“'),
+                                ]),
+
+                            // --- Inhaltshinweis ---
+                            TextInput::make('data.thema')
+                                ->label('Thema des Hinweises')
+                                ->visible(fn ($get) => $get('typ') === 'inhalts_hinweis')
+                                ->helperText('Wird als „Hinweis zum Inhalt: …“ angezeigt. '
+                                    .'Vorgabe: „belastende Inhalte“.'),
+
+                            Toggle::make('data.offen')
+                                ->label('Schon aufgeklappt zeigen')
+                                ->visible(fn ($get) => $get('typ') === 'inhalts_hinweis')
+                                ->helperText('Sonst entscheidet die lesende Person selbst, ob sie aufklappt.'),
+
+                            // --- Vorstand und Team ---
+                            // Zieht die Personen aus der Verwaltung „Vorstand & Team“.
+                            // Hier wird nur gewählt, welche gezeigt werden.
+                            Select::make('data.bereich')
+                                ->label('Nur ein Bereich')
+                                ->options(fn () => \App\Models\TeamMember::query()
+                                    ->whereNotNull('bereich')
+                                    ->distinct()
+                                    ->orderBy('bereich')
+                                    ->pluck('bereich', 'bereich')
+                                    ->all())
+                                ->native(false)
+                                ->placeholder('Alle Personen zeigen')
+                                ->visible(fn ($get) => $get('typ') === 'team_grid')
+                                ->helperText('Leer = alle. Sonst nur der gewählte Bereich, z.B. Vorstand. '
+                                    .'Die Personen selbst pflegst du unter „Vorstand & Team“.'),
+
+                            // --- Gruppen-Übersicht ---
+                            // Zieht die Gruppen aus der Verwaltung „Gruppen“.
+                            Select::make('data.typ')
+                                ->label('Welche Gruppen')
+                                ->options(\App\Models\Group::TYPEN)
+                                ->default('selbsthilfe')
+                                ->native(false)
+                                ->required(fn ($get) => $get('typ') === 'group_list')
+                                ->visible(fn ($get) => $get('typ') === 'group_list')
+                                ->helperText('Die Gruppen selbst pflegst du unter „Gruppen“.'),
+
+                            // --- Eingebetteter Inhalt (Zwei-Klick) ---
+                            TextInput::make('data.anbieter')
+                                ->label('Anbieter')
+                                ->visible(fn ($get) => $get('typ') === 'embed')
+                                ->required(fn ($get) => $get('typ') === 'embed')
+                                ->helperText('Wird der lesenden Person vor dem Laden genannt — sie soll '
+                                    .'wissen, wessen Inhalt sie lädt. Derzeit freigeschaltet: betterplace.org. '
+                                    .'Weitere Anbieter müssen erst technisch freigegeben werden (Sicherheitsregel), '
+                                    .'sonst bleibt der Rahmen auch nach der Zustimmung leer.'),
+
+                            TextInput::make('data.src')
+                                ->label('Adresse des Inhalts')
+                                ->visible(fn ($get) => $get('typ') === 'embed')
+                                ->required(fn ($get) => $get('typ') === 'embed')
+                                ->helperText('Die Einbett-Adresse (das „src“ des iframe). '
+                                    .'Muss zu einem freigeschalteten Anbieter gehören.'),
+
+                            Textarea::make('data.beschreibung')
+                                ->label('Beschreibung')
+                                ->rows(2)
+                                ->visible(fn ($get) => $get('typ') === 'embed')
+                                ->helperText('Was die Person zu sehen bekommt, wenn sie lädt. Kann leer bleiben.'),
+
+                            TextInput::make('data.direktlink')
+                                ->label('Direktlink')
+                                ->visible(fn ($get) => $get('typ') === 'embed')
+                                ->helperText('Adresse zum Öffnen beim Anbieter — für alle, die nicht einbetten wollen.'),
+
+                            TextInput::make('data.datenschutz_url')
+                                ->label('Datenschutz des Anbieters')
+                                ->visible(fn ($get) => $get('typ') === 'embed')
+                                ->helperText('Link zur Datenschutzerklärung des Anbieters. Kann leer bleiben.'),
+
+                            TextInput::make('data.hoehe')
+                                ->label('Höhe in Pixeln')
+                                ->numeric()
+                                ->default(320)
+                                ->visible(fn ($get) => $get('typ') === 'embed'),
+
+                            // --- Spendenmöglichkeiten ---
+                            Fieldset::make('Überweisung')
+                                ->columns(3)
+                                ->visible(fn ($get) => $get('typ') === 'donation_options')
+                                ->schema([
+                                    TextInput::make('data.bank.institut')->label('Bank'),
+                                    TextInput::make('data.bank.iban')->label('IBAN'),
+                                    TextInput::make('data.bank.bic')->label('BIC'),
+                                ]),
+
+                            Fieldset::make('PayPal')
+                                ->columns(2)
+                                ->visible(fn ($get) => $get('typ') === 'donation_options')
+                                ->schema([
+                                    TextInput::make('data.paypal.empfaenger')->label('Empfänger'),
+                                    TextInput::make('data.paypal.url')->label('PayPal-Adresse'),
+                                ]),
+
+                            Repeater::make('data.projekte')
+                                ->label('Projekte auf betterplace.org')
+                                ->addActionLabel('Projekt hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'donation_options')
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->collapsible()
+                                ->schema([
+                                    TextInput::make('titel')->label('Titel des Projekts')->required(),
+                                    TextInput::make('widget')->label('Einbett-Adresse des Widgets')->required()
+                                        ->helperText('Wird als Zwei-Klick-Einbettung geladen, nicht ungefragt.'),
+                                    TextInput::make('url')->label('Direktlink zum Projekt'),
+                                ]),
+
+                            Fieldset::make('Spendenbescheinigung')
+                                ->columns(1)
+                                ->visible(fn ($get) => $get('typ') === 'donation_options')
+                                ->schema([
+                                    Textarea::make('data.bescheinigung.text')->label('Hinweis')->rows(2),
+                                    TextInput::make('data.bescheinigung.email')->label('E-Mail für Anfragen'),
+                                ]),
 
                             // --- Knöpfe ---
                             self::knopf('data.cta')

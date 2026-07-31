@@ -35,10 +35,10 @@ Status: ✅ gebaut · 🔨 geplant · 💭 zu klären
 | Block | Status | Verwendet auf |
 |---|---|---|
 | `hero` | ✅ | Startseite — im Panel pflegbar, inkl. Linie unter dem markierten Titelteil |
-| `stat_strip` | 🔨 | Startseite — gebaut, aber ohne Felder im Panel |
+| `stat_strip` | ✅ | im Panel pflegbar |
 | `quick_access` | ✅ | Startseite — im Panel pflegbar |
 | `text_media` | ✅ | „Wer wir sind" |
-| `topic_list` | 🔨 | Wissen — gebaut, aber ohne Felder im Panel |
+| `topic_list` | ✅ | Wissen — im Panel pflegbar |
 | `event_teaser` | 🔨 | Startseite |
 | `news_teaser` | 🔨 | Startseite |
 | `cta_band` | ✅ | Startseite — im Panel pflegbar |
@@ -780,9 +780,36 @@ Startseite hatten ausser `typ` und `titel` kein einziges Feld im Panel
 | `hilfe_box` | Überschrift, „nur die zwei wichtigsten Nummern" |
 | `text` | zusätzlich Überzeile, handschriftlicher Zusatz, ein Knopf |
 
-Offen bleiben `topic_list`, `team_grid`, `group_list`, `embed`,
-`donation_options`, `inhalts_hinweis`, `leichte_sprache`, `stat_strip` und
-`contact_form` — sie kommen auf der Startseite nicht vor.
+### Die restlichen Bausteine, nachgezogen (31.07.2026)
+
+Damit sind alle inhaltstragenden Bausteine im Panel pflegbar — der Rest von A3.
+
+| Baustein | Neue Felder |
+|---|---|
+| `topic_list` | Unterzeile, Themen (Beschriftung, Ziel, Zeichen), Verweis „alles anzeigen“ |
+| `stat_strip` | Kennzahlen (Wert, Bezeichnung) |
+| `inhalts_hinweis` | Thema, „schon aufgeklappt zeigen“ |
+| `embed` | Anbieter, Adresse, Beschreibung, Direktlink, Datenschutz-Link, Höhe |
+| `donation_options` | Bankverbindung, PayPal, betterplace-Projekte, Spendenbescheinigung |
+| `team_grid` | Bereichsauswahl (leer = alle) |
+| `group_list` | Auswahl Selbsthilfe- / Arbeitsgruppen |
+
+Zwei Bausteine tragen **keinen eigenen Inhalt**: `team_grid` und `group_list`
+zeigen, was unter „Vorstand & Team“ und „Gruppen“ gepflegt ist. Im Seiten-Panel
+wird nur der Ausschnitt gewählt — die Personen und Gruppen selbst haben ihre
+eigene Verwaltung. Ein Feld „Bereich“ ist deshalb eine Auswahl aus den real
+vorhandenen Bereichen, kein Freitext: Ein Tippfehler ergäbe sonst eine leere
+Fläche.
+
+`contact_form` bleibt bei Titel und (automatischer) Herkunft — es hat keinen
+weiteren pflegbaren Inhalt. `leichte_sprache` ist kein Seiten-Baustein mehr,
+sondern die Fassungs-Mechanik (siehe Mehrsprachigkeit).
+
+**Der camelCase-Fallstrick:** `topic_list` hat die Prop `alleUrl`. Der
+Feldschlüssel muss exakt so heissen — Blade zieht die Prop zwar auch aus
+`alle-url`, aber der Datensatz speichert genau den Schlüssel, den das Feld
+schreibt. Ein Rendering-Test hält fest, dass `alleUrl` bei der Komponente
+ankommt.
 
 ### Die handgezeichnete Linie
 

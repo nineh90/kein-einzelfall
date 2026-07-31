@@ -224,6 +224,71 @@ class AdminPanelTest extends TestCase
         $this->assertSame($vorherTexte, $seite->blocks()->pluck('data')->toJson(), 'Texte verändert');
     }
 
+    /**
+     * Der eigentliche Prüfstein für die nachgerüsteten Baustein-Felder.
+     *
+     * Filament füllt das Formular aus dem `data`-JSON und schreibt beim
+     * Speichern nur zurück, was ein Feld hat. Ein Schlüssel ohne Feld geht
+     * dabei still verloren — genau das war der Grund, warum diese Bausteine
+     * vorher „nicht pflegbar“ waren. Der Test legt je Typ einen Baustein an,
+     * speichert einmal über das echte Panel und prüft, dass die Werte noch da
+     * sind. Fehlt für einen Schlüssel ein Feld, fällt er hier heraus.
+     */
+    public function test_alle_baustein_typen_ueberstehen_das_speichern_im_panel(): void
+    {
+        $seite = Page::create(['slug' => 'feldprobe', 'titel' => 'Feldprobe', 'published_at' => now()]);
+
+        $bausteine = [
+            ['typ' => 'topic_list', 'data' => [
+                'titel' => 'Wissen', 'sub' => 'Untertitel',
+                'alleUrl' => '/wissen', 'alleLabel' => 'Zum Wissensbereich',
+                'themen' => [['label' => 'Rente', 'url' => '/rente', 'icon' => 'shield']],
+            ]],
+            ['typ' => 'stat_strip', 'data' => [
+                'stats' => [['wert' => '2024', 'label' => 'gegründet']],
+            ]],
+            ['typ' => 'inhalts_hinweis', 'data' => ['thema' => 'Gewaltdarstellung', 'offen' => true]],
+            ['typ' => 'embed', 'data' => [
+                'titel' => 'Spendenprojekt', 'anbieter' => 'betterplace.org',
+                'src' => 'https://project-widget.betterplace.org/w', 'hoehe' => 320,
+            ]],
+            ['typ' => 'donation_options', 'data' => [
+                'titel' => 'Spenden',
+                'bank' => ['institut' => 'GLS Bank', 'iban' => 'DE00', 'bic' => 'GENODEM1GLS'],
+                'projekte' => [['titel' => 'Beratungsstelle', 'widget' => 'https://betterplace/w']],
+                'bescheinigung' => ['email' => 'spenden@kein-einzelfall.de'],
+            ]],
+            ['typ' => 'group_list', 'data' => ['typ' => 'selbsthilfe', 'titel' => 'Gruppen']],
+            ['typ' => 'team_grid', 'data' => ['bereich' => 'Vorstand', 'titel' => 'Vorstand']],
+        ];
+
+        foreach ($bausteine as $i => $baustein) {
+            $seite->blocks()->create(['typ' => $baustein['typ'], 'position' => $i, 'data' => $baustein['data']]);
+        }
+
+        Livewire::actingAs($this->redaktion)
+            ->test(EditPage::class, ['record' => $seite->getKey()])
+            ->call('save')
+            ->assertHasNoErrors();
+
+        // JSON_UNESCAPED_UNICODE, sonst schreibt json die Umlaute als \uXXXX
+        // und die Suche nach dem Klartext („gegründet“) schlägt fehl, obwohl
+        // der Wert erhalten ist.
+        $json = json_encode($seite->fresh()->blocks()->pluck('data')->all(), JSON_UNESCAPED_UNICODE);
+
+        foreach ([
+            'Zum Wissensbereich', 'alleUrl', 'Rente',       // Themenliste, camelCase-Schlüssel
+            '2024', 'gegründet',                             // Kennzahlen
+            'Gewaltdarstellung',                             // Inhaltshinweis
+            'betterplace.org', 'project-widget',             // Einbettung
+            'GLS Bank', 'GENODEM1GLS', 'Beratungsstelle',    // Spenden (verschachtelt)
+            'spenden@kein-einzelfall.de',
+            'selbsthilfe', 'Vorstand',                       // Gruppen, Team
+        ] as $erwartet) {
+            $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
+        }
+    }
+
     public function test_reihenfolge_der_bausteine_bleibt_erhalten(): void
     {
         $seite = Page::where('slug', 'arbeitsgruppen')->first();

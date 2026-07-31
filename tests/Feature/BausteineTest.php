@@ -212,6 +212,108 @@ class BausteineTest extends TestCase
         $this->assertStringContainsString('PDF-Datei, 100 KB', $abschnitt);
     }
 
+    public function test_themenliste_zeigt_eintraege_und_laesst_leere_aus(): void
+    {
+        // Der Feldname im Panel ist „alleUrl“ (camelCase). Dieser Test hält fest,
+        // dass genau dieser Schlüssel bei der Komponente ankommt — kebab-case
+        // käme still nicht an, und der Verweis fehlte ohne Fehlermeldung.
+        $html = $this->seiteMitBaustein('topic_list', [
+            'titel' => 'Wissen',
+            'alleUrl' => '/wissen',
+            'alleLabel' => 'Zum Wissensbereich',
+            'themen' => [
+                ['label' => 'Erwerbsminderungsrente', 'url' => '/erwerbsminderungsrente', 'icon' => 'shield'],
+                ['label' => '', 'url' => ''],   // halb leer → fällt raus
+            ],
+        ]);
+
+        $this->assertStringContainsString('Erwerbsminderungsrente', $html);
+        $this->assertStringContainsString('/wissen', $html);
+        $this->assertStringContainsString('Zum Wissensbereich', $html);
+        $this->assertStringNotContainsString('href=""', $html);
+    }
+
+    public function test_kennzahlen_erscheinen_als_wert_und_bezeichnung(): void
+    {
+        $html = $this->seiteMitBaustein('stat_strip', [
+            'stats' => [
+                ['wert' => '2024', 'label' => 'gegründet'],
+                ['wert' => '1.000+', 'label' => 'erreichte Menschen'],
+            ],
+        ]);
+
+        $this->assertStringContainsString('2024', $html);
+        $this->assertStringContainsString('erreichte Menschen', $html);
+    }
+
+    public function test_inhaltshinweis_nennt_das_thema(): void
+    {
+        $html = $this->seiteMitBaustein('inhalts_hinweis', ['thema' => 'Schilderung von Gewalt']);
+
+        $this->assertStringContainsString('Hinweis zum Inhalt: Schilderung von Gewalt', $html);
+        // Natives <details>, ohne JavaScript bedienbar.
+        $this->assertStringContainsString('<details', $html);
+    }
+
+    public function test_eingebetteter_inhalt_laedt_erst_nach_zustimmung(): void
+    {
+        $html = $this->seiteMitBaustein('embed', [
+            'titel' => 'Unser Spendenprojekt',
+            'anbieter' => 'betterplace.org',
+            'src' => 'https://project-widget.betterplace.org/de/projects/12345/widget',
+        ]);
+
+        // Der Anbieter wird vorher genannt …
+        $this->assertStringContainsString('betterplace.org', $html);
+
+        // … aber der Rahmen steckt im <template>, das der Browser nicht lädt.
+        // Ausserhalb davon darf keine Anbieter-Adresse stehen — dasselbe Muster
+        // wie im DatenschutzTest.
+        $ohneTemplate = preg_replace('/<template[^>]*>.*?<\/template>/s', '', $html);
+        $this->assertStringNotContainsString('<iframe', $ohneTemplate);
+        $this->assertStringNotContainsString('project-widget.betterplace.org', $ohneTemplate);
+    }
+
+    public function test_spendenmoeglichkeiten_zeigen_die_angaben_des_vereins(): void
+    {
+        $html = $this->seiteMitBaustein('donation_options', [
+            'titel' => 'Jetzt spenden',
+            'bank' => ['institut' => 'GLS Bank', 'iban' => 'DE00 0000 0000 0000 0000 00', 'bic' => 'GENODEM1GLS'],
+            'bescheinigung' => ['email' => 'spenden@kein-einzelfall.de'],
+        ]);
+
+        $this->assertStringContainsString('GLS Bank', $html);
+        $this->assertStringContainsString('spenden@kein-einzelfall.de', $html);
+        // Nur die E-Mail gepflegt, kein Hinweistext — darf keine Fehlermeldung geben.
+        $this->assertStringContainsString('Spendenbescheinigung', $html);
+    }
+
+    public function test_vorstand_und_gruppen_ziehen_aus_der_verwaltung(): void
+    {
+        // Diese beiden Bausteine tragen keinen eigenen Inhalt — sie zeigen, was
+        // unter „Vorstand & Team“ und „Gruppen“ gepflegt ist. Im Panel wird nur
+        // gewählt, welcher Ausschnitt.
+        \App\Models\TeamMember::create([
+            'name' => 'Alex Beispiel', 'bereich' => 'Vorstand',
+            'kurzprofil' => 'Gründungsmitglied.', 'published_at' => now(),
+        ]);
+        \App\Models\Group::create([
+            'slug' => 'montagsgruppe', 'name' => 'Montagsgruppe', 'typ' => 'selbsthilfe',
+            'teaser' => 'Offener Austausch.', 'status' => 'offen', 'published_at' => now(),
+        ]);
+
+        // Beide Bausteine auf einer Seite — der Helfer legt sonst zweimal
+        // denselben Slug an.
+        $seite = Page::create(['slug' => 'uebersicht', 'titel' => 'Übersicht', 'published_at' => now()]);
+        $seite->blocks()->create(['typ' => 'team_grid', 'position' => 0, 'data' => ['bereich' => 'Vorstand']]);
+        $seite->blocks()->create(['typ' => 'group_list', 'position' => 1, 'data' => ['typ' => 'selbsthilfe']]);
+
+        $html = $this->get('/uebersicht')->getContent();
+
+        $this->assertStringContainsString('Alex Beispiel', $html);
+        $this->assertStringContainsString('Montagsgruppe', $html);
+    }
+
     public function test_seitentitel_verwenden_umlaute(): void
     {
         // Aus dem Slug abgeleitet hiesse die Seite „Ueber Uns Vorstand Und Team".

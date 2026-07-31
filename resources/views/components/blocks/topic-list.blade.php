@@ -6,6 +6,16 @@
     'themen' => [],   // [['label'=>, 'url'=>, 'icon'=>], ...]
 ])
 
+@php
+    // Jeder Eintrag ist ein Link. Halb ausgefüllte fallen raus, statt als
+    // Link ohne Ziel oder Beschriftung auf der Seite zu landen — dieselbe
+    // Vorsicht wie bei den Einstiegskarten.
+    $themen = array_values(array_filter(
+        $themen,
+        fn ($thema) => filled($thema['label'] ?? null) && filled($thema['url'] ?? null),
+    ));
+@endphp
+
 {{-- Abgesetzte Fläche in --card, mit Linien oben/unten statt Schatten. --}}
 <section class="border-y border-line bg-card px-4 py-8 lg:px-10 lg:py-12"
          aria-labelledby="themen-titel">

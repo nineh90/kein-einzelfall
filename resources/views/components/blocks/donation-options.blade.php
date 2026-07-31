@@ -88,7 +88,9 @@
             @if ($bescheinigung)
                 <div class="rounded-card border border-line bg-card px-5 py-5">
                     <h3 class="mb-2 font-display text-lg text-ink">Spendenbescheinigung</h3>
-                    <p class="text-sm text-ink-soft">{{ $bescheinigung['text'] }}</p>
+                    {{-- ?? '', falls im Panel nur die E-Mail gepflegt wurde:
+                         der leere Text wird beim Speichern entfernt. --}}
+                    <p class="text-sm text-ink-soft">{{ $bescheinigung['text'] ?? '' }}</p>
                     @if (!empty($bescheinigung['email']))
                         <p class="mt-3">
                             <a href="mailto:{{ $bescheinigung['email'] }}"
