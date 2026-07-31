@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Language;
 use App\Models\Page;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\UebersetzungenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -262,5 +263,124 @@ class MehrsprachigkeitTest extends TestCase
         Page::where('locale', 'de')->where('slug', 'verein')->update(['noindex' => true]);
 
         $this->get('/sitemap.xml')->assertOk()->assertDontSee(url('/verein').'<');
+    }
+
+    // --- Demo-Übersetzungen (UebersetzungenSeeder) ------------------------------
+
+    /** Die Migration füllt die Sprachtabelle auf einer bestehenden Datenbank. */
+    private function sprachenMigration(): object
+    {
+        return require database_path('migrations/2026_07_31_120000_sprachen_sicherstellen.php');
+    }
+
+    public function test_migration_fuellt_eine_leere_sprachtabelle(): void
+    {
+        // Der gemeldete Zustand: bestehende DB, „Sprachen“ im Panel leer. Der
+        // Seeder lief nie, weil er nur auf frischer Datenbank läuft.
+        Language::query()->delete();
+        Language::memoLeeren();
+        $this->assertSame(0, Language::query()->count());
+
+        $this->sprachenMigration()->up();
+        Language::memoLeeren();
+
+        $this->assertEqualsCanonicalizing(
+            ['de', 'en', 'ru'],
+            Language::query()->pluck('code')->all(),
+        );
+    }
+
+    public function test_demo_seeder_schaltet_englisch_und_russisch_frei(): void
+    {
+        // Vorher inaktiv, deshalb nicht erreichbar.
+        $this->get('/en')->assertNotFound();
+
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->assertTrue(Language::finden('en')->aktiv);
+        $this->assertTrue(Language::finden('ru')->aktiv);
+        $this->assertCount(3, Language::aktive());
+    }
+
+    public function test_kernseiten_liegen_auf_englisch_und_russisch_vor(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        // Englische Startseite unter „/en“ — die Startseite behält den Wurzelpfad.
+        $this->get('/en')
+            ->assertOk()
+            ->assertSee('No one should ever have to say', false)
+            ->assertSee('<html lang="en"', false);
+
+        // Russische Fassung des Vereins.
+        $this->get('/ru/verein')
+            ->assertOk()
+            ->assertSee('основано в 2024 году', false)
+            ->assertSee('<html lang="ru"', false);
+    }
+
+    public function test_der_umschalter_bietet_nach_dem_seeden_drei_sprachen(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        $html = $this->get('/verein')->assertOk()->getContent();
+
+        // Alle drei Sprachfassungen des Vereins sind verlinkt.
+        $this->assertStringContainsString('hreflang="de"', $html);
+        $this->assertStringContainsString('hreflang="en"', $html);
+        $this->assertStringContainsString('hreflang="ru"', $html);
+    }
+
+    public function test_seite_ausserhalb_des_kerns_faellt_weiter_sichtbar_zurueck(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        // „satzung“ ist nicht im Kern-Set — Englisch ist trotzdem freigeschaltet.
+        // Kein 404, sondern der deutsche Inhalt mit dem Hinweis in der Zielsprache.
+        $this->get('/en/satzung')
+            ->assertOk()
+            ->assertSee('not available in English yet', false)
+            ->assertSee('lang="de"', false);
+    }
+
+    public function test_uebersetzung_laesst_adressen_und_kontodaten_unangetastet(): void
+    {
+        // Nur Textfelder werden übersetzt. Ein übersetzter Link wäre ein toter
+        // Link, eine „übersetzte“ IBAN schlicht falsch.
+        $this->seed(UebersetzungenSeeder::class);
+
+        // Die Bankverbindung steht wörtlich auch auf der englischen Spendenseite.
+        $this->get('/en/spenden')
+            ->assertOk()
+            ->assertSee('DE79 8306 5408 0006 8893 10');
+
+        // Der Knopf der englischen Startseite zeigt weiter auf die interne Adresse.
+        $this->get('/en')->assertOk()->assertSee('href="/anfragen"', false);
+    }
+
+    public function test_demo_seeder_laeuft_zweimal_ohne_dubletten(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->assertSame(1, Page::where('locale', 'en')->where('slug', 'verein')->count());
+    }
+
+    public function test_demo_seeder_ueberschreibt_gepflegte_uebersetzungen_nicht(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        // Der Verein korrigiert eine maschinelle Übersetzung im Panel …
+        Page::where('locale', 'en')->where('slug', 'verein')
+            ->firstOrFail()
+            ->update(['titel' => 'About us — reviewed']);
+
+        // … ein erneuter Lauf darf das nicht zurücksetzen.
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->assertSame(
+            'About us — reviewed',
+            Page::where('locale', 'en')->where('slug', 'verein')->value('titel'),
+        );
     }
 }
