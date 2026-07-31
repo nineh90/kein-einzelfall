@@ -125,7 +125,10 @@ console.log('\nOhne JavaScript')
     const menue = mobil.locator('nav[aria-label="Hauptnavigation (mobil)"]')
 
     pruefe('Mobil-Menü startet zugeklappt', !(await menue.isVisible()))
-    await mobil.locator('summary').first().click()
+    // Gezielt das <details> des Mobilmenüs, nicht einfach das erste <summary>:
+    // seit dem Weltkugel-Umschalter gibt es weiter oben im Kopf einen zweiten
+    // Aufklapper (mobil ausgeblendet), sonst klickte der Test daneben.
+    await mobil.locator('details', { has: menue }).locator('summary').first().click()
     pruefe('Mobil-Menü lässt sich öffnen', await menue.isVisible(),
         'natives <details> — darf nicht an JavaScript hängen')
 
