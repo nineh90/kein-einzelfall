@@ -18,6 +18,13 @@
  * Inline-Script im <head>. Wenn Vite hier ausfällt, muss er trotzdem funktionieren.
  */
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
+import { triggerWarnungVerdrahten } from './trigger-warnung'
 
 toolbarVerdrahten()
 leselinieVerdrahten()
+
+// Steht bewusst zuletzt. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
+// Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.
+// Andersherum bliebe bei einem Fehler die Darstellungs-Toolbar unverdrahtet,
+// und die brauchen manche Menschen, um überhaupt lesen zu können.
+triggerWarnungVerdrahten()

@@ -143,16 +143,22 @@ class PageForm
                          * ändern könnte, machte damit die Adresse der Website zu
                          * einem 404, ohne dass am Formular etwas darauf hindeutet.
                          */
-                        ->disabled(fn ($record) => (bool) $record?->istStartseite())
+                        ->disabled(fn ($record) => (bool) ($record?->istStartseite() || $record?->istTriggerwarnung()))
                         // Ohne dies käme ein abgeschaltetes Feld leer zurück und
                         // scheiterte an der eigenen Pflichtangabe.
                         ->dehydrated()
-                        ->helperText(fn ($record) => $record?->istStartseite()
-                            ? 'Die Startseite liegt unter „/“ — ihre Adresse ist nicht änderbar.'
-                            : 'Nur Kleinbuchstaben, Ziffern und Bindestriche. '
+                        ->helperText(fn ($record) => match (true) {
+                            (bool) $record?->istStartseite() => 'Die Startseite liegt unter „/“ — ihre Adresse ist nicht änderbar.',
+                            // Das Layout sucht die Warnung über genau diesen Slug.
+                            (bool) $record?->istTriggerwarnung() => 'Diese Seite ist der Hinweis, der auf jeder Seite '
+                                .'vorgeschaltet erscheint. Ihre Adresse ist deshalb nicht änderbar. '
+                                .'Zum Abschalten das Datum unter „Veröffentlicht am“ leeren — dann '
+                                .'entfällt der Hinweis überall.',
+                            default => 'Nur Kleinbuchstaben, Ziffern und Bindestriche. '
                                 .'Bei bestehenden Seiten möglichst nicht ändern — die Adresse '
                                 .'ist bei Suchmaschinen bekannt. Falls doch: Weiterleitung anlegen. '
-                                .'Übersetzungen dürfen und sollen einen eigenen Slug bekommen.'),
+                                .'Übersetzungen dürfen und sollen einen eigenen Slug bekommen.',
+                        }),
 
                     DateTimePicker::make('published_at')
                         ->label('Veröffentlicht am')
@@ -242,7 +248,7 @@ class PageForm
                                 ->rows(2)
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['schritte', 'accordion', 'team_grid', 'group_list'],
+                                    ['schritte', 'accordion', 'team_grid', 'group_list', 'partner_logos'],
                                     true,
                                 ))
                                 ->helperText('Kurzer Text über der Liste. Kann leer bleiben.'),
@@ -336,9 +342,23 @@ class PageForm
                                         ->columnSpanFull()
                                         ->helperText('Was die Besucherin liest — nicht der Dateiname. '
                                             .'Screenreader lesen genau diesen Text vor.'),
-                                    TextInput::make('url')->label('Adresse der Datei')->required(),
+                                    TextInput::make('url')
+                                        ->label('Adresse')
+                                        ->required()
+                                        ->helperText('Entweder eine eigene Datei (/dokumente/…) oder '
+                                            .'die Adresse bei der Behörde (https://…). '
+                                            .'Antragsformulare gehören verlinkt, nicht hierher kopiert — '
+                                            .'Ämter ändern ihre Vordrucke, und eine veraltete Fassung '
+                                            .'kostet die Antragstellerin Zeit, die sie oft nicht hat.'),
                                     TextInput::make('bytes')->label('Größe in Bytes')->numeric()
-                                        ->helperText('Für den Hinweis „PDF, 180 KB“.'),
+                                        ->helperText('Nur für eigene Dateien — für den Hinweis „PDF, 180 KB“.'),
+                                    TextInput::make('quelle')
+                                        ->label('Name der fremden Seite')
+                                        ->columnSpanFull()
+                                        ->helperText('Nur bei Verweisen nach draußen, z.B. '
+                                            .'„Bundesagentur für Arbeit“. Steht dann unter der '
+                                            .'Bezeichnung, damit vor dem Antippen klar ist, wohin es geht. '
+                                            .'Leer lassen zeigt die Adresse der fremden Seite.'),
                                 ]),
 
                             // --- Aufmacher ---
@@ -463,6 +483,47 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'inhalts_hinweis')
                                 ->helperText('Sonst entscheidet die lesende Person selbst, ob sie aufklappt.'),
 
+                            // --- Partner und Unterstützer ---
+                            Repeater::make('data.partner')
+                                ->label('Partner')
+                                ->addActionLabel('Partner hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'partner_logos')
+                                ->collapsible()
+                                ->columns(2)
+                                ->itemLabel(fn (array $state) => $state['name'] ?? null)
+                                ->helperText('Für Kooperationen, Netzwerke, Förderer, '
+                                    .'Schirmherrschaften und Botschafter — je einen Baustein '
+                                    .'pro Gruppe, mit passender Überschrift darüber. '
+                                    .'Einträge ohne Namen werden ausgelassen.')
+                                ->schema([
+                                    TextInput::make('name')
+                                        ->label('Name')
+                                        ->required()
+                                        ->helperText('Steht als Text unter dem Logo — auch für alle, '
+                                            .'die das Logo nicht sehen können.'),
+                                    TextInput::make('rolle')
+                                        ->label('Rolle')
+                                        ->helperText('Kleine Zeile darunter, z.B. „Förderer seit 2025“ '
+                                            .'oder „Schirmherrin“. Kann leer bleiben.'),
+                                    TextInput::make('url')
+                                        ->label('Ziel')
+                                        ->helperText('Adresse der Partnerseite. Leer lassen heisst: '
+                                            .'Der Eintrag wird gezeigt, ist aber kein Link.'),
+                                    TextInput::make('logo')
+                                        ->label('Logo (Pfad oder Adresse)')
+                                        ->helperText('Leer lassen ist in Ordnung — dann steht nur der '
+                                            .'Name da. Logos bitte hier ablegen und nicht beim Partner '
+                                            .'verlinken: Ein fremd geladenes Bild überträgt die '
+                                            .'IP-Adresse unserer Besucherinnen dorthin.'),
+                                    TextInput::make('logo_alt')
+                                        ->label('Bildbeschreibung des Logos')
+                                        ->columnSpanFull()
+                                        ->helperText('In aller Regel leer lassen. Der Name steht schon '
+                                            .'daneben — eine Wiederholung wird Menschen, die vorlesen '
+                                            .'lassen, zweimal angesagt. Nur ausfüllen, wenn das Logo '
+                                            .'etwas zeigt, das der Name nicht sagt.'),
+                                ]),
+
                             // --- Vorstand und Team ---
                             // Zieht die Personen aus der Verwaltung „Vorstand & Team“.
                             // Hier wird nur gewählt, welche gezeigt werden.
@@ -538,6 +599,23 @@ class PageForm
                                     TextInput::make('data.bank.institut')->label('Bank'),
                                     TextInput::make('data.bank.iban')->label('IBAN'),
                                     TextInput::make('data.bank.bic')->label('BIC'),
+                                    /*
+                                     * Die drei Felder darunter füttern den
+                                     * QR-Code. Eine Banking-App übernimmt genau
+                                     * das, was hier steht — ein Tippfehler im
+                                     * Empfängernamen führt also zu einer
+                                     * Überweisung, die zurückkommt.
+                                     */
+                                    TextInput::make('data.bank.empfaenger')
+                                        ->label('Kontoinhaber')
+                                        ->columnSpan(2)
+                                        ->helperText('Wie er bei der Bank hinterlegt ist. Steht so im '
+                                            .'QR-Code und damit im Überweisungsformular der spendenden '
+                                            .'Person. Leer lassen setzt „KE!N EINZELFALL e.V.“.'),
+                                    TextInput::make('data.bank.verwendungszweck')
+                                        ->label('Verwendungszweck')
+                                        ->helperText('Wird im QR-Code vorausgefüllt, z.B. „Spende“. '
+                                            .'Kann leer bleiben.'),
                                 ]),
 
                             Fieldset::make('PayPal')

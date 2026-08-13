@@ -260,6 +260,14 @@ class AdminPanelTest extends TestCase
             ]],
             ['typ' => 'group_list', 'data' => ['typ' => 'selbsthilfe', 'titel' => 'Gruppen']],
             ['typ' => 'team_grid', 'data' => ['bereich' => 'Vorstand', 'titel' => 'Vorstand']],
+            ['typ' => 'partner_logos', 'data' => [
+                'titel' => 'Kooperationen', 'einleitung' => 'Mit wem wir zusammenarbeiten.',
+                'partner' => [[
+                    'name' => 'Aktion Mensch', 'rolle' => 'Förderer',
+                    'url' => 'https://www.aktion-mensch.de',
+                    'logo' => '/img/partner/aktion-mensch.svg', 'logo_alt' => '',
+                ]],
+            ]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -284,6 +292,7 @@ class AdminPanelTest extends TestCase
             'GLS Bank', 'GENODEM1GLS', 'Beratungsstelle',    // Spenden (verschachtelt)
             'spenden@kein-einzelfall.de',
             'selbsthilfe', 'Vorstand',                       // Gruppen, Team
+            'Aktion Mensch', 'Förderer', 'aktion-mensch.svg', // Partner
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

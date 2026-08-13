@@ -43,6 +43,20 @@ class Page extends Model
      */
     public const STARTSEITE_SLUG = 'startseite';
 
+    /**
+     * Slug der Trigger-Warnung.
+     *
+     * Sie ist eine ganz normale Seite — mit Titel, Bausteinen, Übersetzungen
+     * und einer Fassung in Leichter Sprache. Nur wird sie zusätzlich vom
+     * Layout gelesen und auf jeder Seite als vorgeschalteter Hinweis gezeigt.
+     *
+     * Warum eine Seite und keine eigene Tabelle: Der Verein soll den Wortlaut
+     * selbst ändern können, in jeder Sprache, ohne dass wir dafür ein zweites
+     * Redaktionswerkzeug bauen. Und wer den Hinweis später noch einmal lesen
+     * will, findet ihn unter seiner eigenen Adresse wieder.
+     */
+    public const TRIGGER_SLUG = 'trigger-warnung';
+
     protected $fillable = [
         'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel',
         'meta_title', 'meta_description', 'noindex', 'published_at',
@@ -114,6 +128,17 @@ class Page extends Model
     public function istStartseite(): bool
     {
         return $this->slug === self::STARTSEITE_SLUG && ! $this->istLeichteSprache();
+    }
+
+    /**
+     * Die Seite, deren Text als vorgeschaltete Warnung auf jeder Seite steht.
+     *
+     * Das Layout sucht sie über ihren Slug. Wer ihn änderte, schaltete den
+     * Hinweis unbemerkt ab — deshalb ist er im Panel gesperrt.
+     */
+    public function istTriggerwarnung(): bool
+    {
+        return $this->slug === self::TRIGGER_SLUG;
     }
 
     /** Die Fassung in Leichter Sprache zu dieser Seite — oder null. */

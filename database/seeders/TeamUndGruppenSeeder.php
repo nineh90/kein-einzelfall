@@ -126,7 +126,29 @@ class TeamUndGruppenSeeder extends Seeder
      */
     private function gruppen(): void
     {
-        $gruppen = [
+        foreach (self::gruppenliste() as $i => $gruppe) {
+            Group::updateOrCreate(
+                ['slug' => $gruppe['slug']],
+                array_merge($gruppe, ['position' => $i, 'published_at' => now()])
+            );
+        }
+
+        $this->command?->info(count(self::gruppenliste()).' Gruppen übernommen.');
+    }
+
+    /**
+     * Der Gruppenbestand als Daten.
+     *
+     * Öffentlich und statisch, damit eine Migration einzelne fehlende Gruppen
+     * nachtragen kann, ohne den ganzen Seeder laufen zu lassen: Der schreibt
+     * mit `updateOrCreate` und überschriebe damit jede Änderung, die der
+     * Verein im Panel an einer bestehenden Gruppe gemacht hat.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function gruppenliste(): array
+    {
+        return [
             [
                 'slug' => 'buerokratie-labyrinth', 'typ' => 'selbsthilfe',
                 'name' => 'Das Bürokratie-Labyrinth',
@@ -155,6 +177,23 @@ class TeamUndGruppenSeeder extends Seeder
             [
                 'slug' => 'schreibwerkstatt', 'typ' => 'selbsthilfe',
                 'name' => 'Schreibwerkstatt',
+                'status' => 'geplant',
+                'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
+            ],
+            /*
+             * Aus dem Strukturpapier des Vereins, auf der Altseite noch nicht
+             * vorhanden. Status „geplant“, weil uns kein Termin genannt wurde —
+             * eine Gruppe als offen auszuweisen, zu der niemand kommen kann,
+             * wäre bei dieser Zielgruppe die schlechtere Auskunft.
+             *
+             * ⚠️ Schreibweise: Im Strukturpapier steht „Killen me Softly“. Wir
+             * gehen von „Killing me Softly“ aus — steht als Rückfrage auf der
+             * Übergabe-Checkliste.
+             */
+            [
+                'slug' => 'killing-me-softly', 'typ' => 'selbsthilfe',
+                'name' => 'Killing me Softly',
+                'teaser' => 'Umgang mit Trigger und Skills',
                 'status' => 'geplant',
                 'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
             ],
@@ -194,16 +233,19 @@ class TeamUndGruppenSeeder extends Seeder
                 'teaser' => 'Aktuell: Strukturierte Sammlung von Rechtsprechung und Wissen',
                 'status' => 'offen',
             ],
+            /*
+             * AG 07 aus dem Strukturpapier. Laut Besprechung vom 02.08.2026
+             * steht das Projekt hinten an: Erst muss ein Konzept stehen und
+             * eine Förderung beantragt sein.
+             */
+            [
+                'slug' => 'ag-07-traumabegleiter', 'typ' => 'arbeits', 'kuerzel' => 'AG 07',
+                'name' => 'Erstellung einer App „Traumabegleiter“',
+                'teaser' => 'Konzept und Förderantrag für eine App zur Begleitung im Alltag',
+                'status' => 'geplant',
+                'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
+            ],
         ];
-
-        foreach ($gruppen as $i => $gruppe) {
-            Group::updateOrCreate(
-                ['slug' => $gruppe['slug']],
-                array_merge($gruppe, ['position' => $i, 'published_at' => now()])
-            );
-        }
-
-        $this->command?->info(count($gruppen).' Gruppen übernommen.');
     }
 
     /**

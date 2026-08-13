@@ -15,6 +15,7 @@ return [
     'bereich_gruppen_termine' => 'Группы и встречи',
     'bereich_kontakt' => 'Контакты',
 
+    'glossar' => 'Глоссарий',
     'leiste_start' => 'Главная',
     'leiste_gruppen' => 'Группы',
     'leiste_anfrage' => 'Запрос',

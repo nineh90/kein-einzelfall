@@ -975,3 +975,168 @@ Aus dem Burger-Menü ist der Notausgang entfernt — er wäre dort ein dritter,
 versteckter Ort. Geblieben sind zwei bewusste Stellen: der klebende Kopf (immer
 im Blick) und die untere Leiste (Daumenreichweite in akuten Situationen). Die
 Position beider ist fest — Verlässlichkeit vor Eleganz.
+
+---
+
+## 17. Paket 1 aus dem Besprechungs-Abgleich (05.08.2026)
+
+Grundlage: `docs/Abgleich-Besprechung-2026-08-02.md` — der Abgleich zwischen dem
+Strukturpapier des Vereins, dem Protokoll der Besprechung vom 02.08.2026 und dem
+Code-Stand. Umgesetzt wurde das darin als „Paket 1" bezeichnete Bündel.
+
+### 17.1 Trigger-Warnung — die eine Entscheidung, die zählt
+
+Erste Zeile im Strukturpapier: ein vorgeschalteter Hinweis, den man wegklicken
+kann (kommt beim nächsten Besuch wieder) oder dauerhaft abbestellt.
+
+Der Hinweis steht als **`<dialog open>` im Server-HTML** und wird von JavaScript
+per `showModal()` zum echten Dialog hochgestuft. Das ist die ganze Konstruktion,
+und die Richtung ist der Punkt:
+
+- **Ohne JavaScript** ist ein `<dialog open>` ein gewöhnlicher Block im
+  Seitenfluss — der Hinweis steht sichtbar über allem.
+- **Mit JavaScript** kommen Fokusfalle, abgedunkelter Hintergrund und ESC vom
+  Browser, nicht von uns.
+
+Andersherum wäre es fahrlässig: Ein Overlay, das erst JavaScript aufbaut, gibt
+bei jedem Skriptfehler und in jedem Browser mit abgeschaltetem JavaScript den
+Inhalt **ungewarnt** frei. Bei dieser Zielgruppe ist das der eine Fehler, den man
+nicht machen darf.
+
+Drei Dinge, die sonst leicht danebengehen:
+
+1. **Kein `<h2>` im Dialog.** Er steht im Quelltext vor dem Seiteninhalt; eine
+   Überschrift dort führte die Gliederung an, bevor die `h1` der Seite kommt —
+   genau der Fehler, den die A11y-Toolbar an derselben Stelle schon einmal
+   gemacht hat. Der Name kommt über `aria-labelledby` von einem `<p>`. Auch
+   Überschriften aus den Bausteinen werden beim Rendern im Dialog verworfen,
+   damit das nicht über das Panel wieder hereinkommt.
+2. **Die Knöpfe erscheinen erst, wenn sie verdrahtet sind** (`ke-trigger-bereit`
+   an `<html>`), nicht schon dann, wenn JavaScript grundsätzlich läuft. Ein
+   abgebrochenes Bundle ist sonst genau der Fall, der durchrutscht und tote
+   Knöpfe hinterlässt.
+3. **Versteckt wird vor dem ersten Zeichnen**, über ein Inline-Skript im `<head>`
+   — dasselbe Muster wie bei den Darstellungs-Einstellungen. Wer den Hinweis
+   abbestellt hat, soll ihn nicht bei jedem Seitenaufruf kurz aufblitzen sehen.
+
+Gespeichert wird an zwei Orten, und das ist der Unterschied, den der Verein
+gefordert hat: `sessionStorage` für „weggeklickt" (kommt beim nächsten Besuch
+wieder), `localStorage` für „nicht mehr anzeigen". Beides ist eine Einstellung
+auf ausdrücklichen Wunsch und damit einwilligungsfrei; an den Server geht nichts.
+
+**Der Inhalt ist eine ganz normale Seite** (`Page::TRIGGER_SLUG`, `/trigger-warnung`)
+— mit Übersetzungen, Leichter Sprache und Pflege im Panel. Ausschalten heisst:
+Seite auf Entwurf setzen. Kein Deployment nötig.
+
+> ⚠️ Der Wortlaut ist ein Vorschlag und bewusst nüchtern gehalten — er beschreibt,
+> worum es auf dieser Website geht, und trifft keine Aussage im Namen des Vereins.
+> Steht als Rückfrage auf der Übergabe-Checkliste.
+
+**Folgen für die Tests:** Ein modaler Dialog hält den Fokus fest und macht den
+Rest des Dokuments inert. Beide Browser-Testläufe bestellen den Hinweis deshalb
+vorab ab (`localStorage`), sonst prüfte axe auf jeder Seite immer wieder denselben
+Dialog und nie die Seite darunter — der Lauf wäre grün und sagte nichts. Der
+Dialog selbst bekommt einen eigenen axe-Lauf und einen eigenen Abschnitt in
+`bedienung.mjs`, der „wegklicken" und „nie wieder" wirklich durchspielt.
+
+### 17.2 Glossar
+
+Eigene Tabelle (`glossary_terms`), eigene Adresse (`/glossar`), Filament-Resource.
+Alphabetisch, mit Buchstabenleiste aus echten Ankern — ohne JavaScript bedienbar,
+und ein Filter ist es bewusst nicht: Die vollständige Liste bleibt sichtbar, damit
+`Strg+F` alles findet.
+
+**Jeder Eintrag hat ein eigenes Sprungziel** (`/glossar#gdb`). Genau das steht in
+einer Antwort des Vereins auf eine Anfrage — ein Glossar, aus dem man keinen
+einzelnen Begriff verlinken kann, ist nur die halbe Hilfe.
+
+Einsortiert wird nach der **Abkürzung**, nicht nach dem ausgeschriebenen Begriff:
+Wer „SGB XIV" im Bescheid liest, sucht unter S. Umlaute bekommen kein eigenes
+Fach (`Ö` → `O`) — ein Fach zwischen U und V lässt Einträge verschwinden, die
+dort niemand sucht.
+
+> ⚠️ Vom Startbestand sind nur die Einträge veröffentlicht, deren Text sich auf
+> eine Aussage des Vereins selbst stützt (OEG und SGB XIV stehen wörtlich im
+> Protokoll; SER und IFG sind Auflösungen von Abkürzungen aus den eigenen
+> AG-Namen). GdB, Pflegegrad und Persönliches Budget liegen als **Entwurf** in
+> der Datenbank. Was hier steht, liest jemand, der danach über eine Frist
+> entscheidet — Rechtsauskünfte schreiben wir nicht. Der Verein hat für solche
+> Fälle eigene Anwälte zugesagt.
+
+### 17.3 Dokumentenliste mit Verweisen nach draußen
+
+Umsetzung der Entscheidung aus der Besprechung: Antragsformulare werden nicht mehr
+selbst gehostet, sondern bei der Behörde verlinkt — Ämter ändern ihre Vordrucke,
+und wer einen veralteten Antrag einreicht, verliert Zeit, die er oft nicht hat.
+
+Ein externer Eintrag bekommt statt „PDF-Datei, 180 KB" die **Herkunft** in den
+Linktext („Öffnet Deutsche Rentenversicherung") und kein `download`-Attribut —
+der Browser ignoriert das bei fremder Herkunft ohnehin, es verspricht nur etwas.
+Unter der Liste steht einmal, warum verlinkt statt abgelegt wird; je Zeile
+wiederholt wäre es Rauschen.
+
+### 17.4 Baustein `partner_logos`
+
+Ein Baustein für vier Kategorien des Strukturpapiers (1.9 Kooperationen,
+1.10 Schirmherrschaften, 1.11 Botschafter, 7.1 Förderungen). Sie unterscheiden
+sich in der Überschrift darüber, nicht in der Darstellung — vier fast gleiche
+Bausteine wären vier Stellen, an denen später etwas auseinanderläuft.
+
+**Das Logo ist dekorativ (`alt=""`), der Name steht als Text daneben.** Ein Logo
+mit `alt="Aktion Mensch Logo"` liest sich vorgelesen als „Aktion Mensch Logo Link
+Aktion Mensch" — die Doppelung stört genau die Menschen, für die der
+Alternativtext gedacht ist. Ohne Logo trägt der Name allein: Der Verein soll
+Partner eintragen können, bevor er eine Bilddatei hat.
+
+### 17.5 Girocode (QR-Code für die Überweisung)
+
+`App\Support\Girocode` erzeugt einen EPC069-12-Datensatz und rendert ihn als
+Inline-SVG. **Lokal, ohne Fremddienst** — es gibt genug Anbieter, die so einen
+Code „kostenlos" ausliefern und dabei mitlesen, wer ihn ansieht.
+
+Die Bibliothek (`chillerlan/php-qrcode`) lag ohnehin im Projekt, weil Filament sie
+für die Zwei-Faktor-Anmeldung nutzt. Sie steht seitdem **ausdrücklich in der
+`composer.json`**, damit sie nicht mit einem Filament-Update verschwindet.
+
+Zwei Festlegungen, die nicht verhandelbar sind:
+
+- **Fehlerkorrektur M.** Schreibt EPC069-12 vor; bei einer anderen Stufe
+  verweigern Banking-Apps den Code.
+- **Fest schwarz auf weiss**, gegen die sonstige Regel dieses Projekts. Ein
+  QR-Code ist kein Text, sondern etwas, das eine Kamera lesen muss — Dunkelmodus
+  oder invertierte Farben machen ihn für einen Teil der Scanner unbrauchbar. Die
+  IBAN daneben ist der Weg, der ohne Kamera, ohne App und ohne Smartphone
+  funktioniert; sie bleibt deshalb gleichberechtigt stehen.
+
+Bei unvollständiger IBAN entsteht **kein** Code. Ein QR-Code auf eine halbe IBAN
+führte eine Spende ins Leere.
+
+### 17.6 Nachgetragene Datensätze und neue Bereiche
+
+- Selbsthilfegruppe **„Killing me Softly"** und **AG 07 („Traumabegleiter"-App)**,
+  beide mit Status „geplant" — uns wurde kein Termin genannt, und eine Gruppe als
+  offen auszuweisen, zu der niemand kommen kann, ist bei dieser Zielgruppe die
+  schlechtere Auskunft.
+- **Schutzkonzept, Beschwerdemanagement, Projekte, Publikationen** als **Entwurf**.
+  Sie sind leer, und das ist der Punkt: Ein Schutzkonzept ist eine
+  Selbstverpflichtung — was darin steht, muss der Verein einhalten können. Wir
+  legen Adresse und Struktur an, den Text schreibt er. Ins Menü kommen sie erst
+  nach dem Freigeben; ein Menüpunkt auf einen Entwurf wäre ein 404.
+
+Die Zwischenüberschriften von „Projekte" und „Publikationen" stammen wörtlich aus
+dem Strukturpapier (5.1/5.2 und 12). Wo dort nur der Bereichsname steht, steht
+auch hier nur ein leerer Abschnitt.
+
+### 17.7 Zwei Dinge am Rande, die dabei aufgefallen sind
+
+**`bin/start` hätte auf einem frisch eingerichteten Rechner nur zwei Seiten
+angelegt.** Die Prüfung lautete `Page::count() == 0` — aber die Migrationen legen
+Startseite und (jetzt) Trigger-Warnung *vor* dieser Prüfung an. Damit war die
+Zahl nie 0, und der `AltseiteSeeder` mit den 23 Inhaltsseiten lief nie. Gezählt
+werden jetzt nur die Inhaltsseiten.
+
+**YouTube fehlt weiterhin im Fuß.** Der Kanal wurde in der Besprechung genannt,
+seine Adresse aber nicht. Eine geratene Adresse führt entweder ins Leere oder,
+schlimmer, zu einem fremden Kanal. Die Zeile steht auskommentiert in
+`config/navigation.php`; es fehlt nur die Adresse. Discord fehlt bewusst — der
+Verein hat die Plattform in derselben Besprechung selbst infrage gestellt.

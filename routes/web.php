@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnfrageController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GlossarController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SitemapController;
@@ -66,6 +67,15 @@ $oeffentlicheRouten = function () {
     Route::get('/veranstaltungen/{slug}/kalender.ics', [EventController::class, 'icalEinzeln'])
         ->where('slug', '[a-z0-9-]+')
         ->name('events.ical.einzeln');
+
+    /*
+     * Glossar. Steht vor der Sammelroute, sonst griffe /{slug}.
+     *
+     * Eine eigene Adresse und keine Aufklapper auf einer Inhaltsseite: Nur so
+     * lässt sich ein einzelner Begriff verlinken — „siehe /glossar#gdb“ ist
+     * genau das, was in einer Antwort des Vereins auf eine Anfrage steht.
+     */
+    Route::get('/glossar', [GlossarController::class, 'index'])->name('glossar');
 
     /*
      * Leichte Sprache.

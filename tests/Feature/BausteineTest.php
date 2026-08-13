@@ -214,6 +214,155 @@ class BausteineTest extends TestCase
         $this->assertStringContainsString('PDF-Datei, 100 KB', $abschnitt);
     }
 
+    public function test_dokumentenliste_kennzeichnet_verweise_auf_behoerdenseiten(): void
+    {
+        /*
+         * Entscheidung aus der Besprechung vom 02.08.2026: Antragsformulare
+         * werden nicht mehr selbst gehostet, sondern bei der Behörde verlinkt —
+         * Ämter ändern ihre Vordrucke, und eine veraltete Kopie kostet die
+         * Antragstellerin Zeit, die sie oft nicht hat.
+         *
+         * Ein Verweis nach draußen muss aber vor dem Antippen als solcher zu
+         * erkennen sein (WCAG 3.2.5).
+         */
+        $html = $this->seiteMitBaustein('download_list', [
+            'titel' => 'Anträge',
+            'dokumente' => [
+                ['titel' => 'Antrag auf Erwerbsminderungsrente', 'url' => 'https://www.deutsche-rentenversicherung.de/formular', 'quelle' => 'Deutsche Rentenversicherung'],
+                ['titel' => 'Merkblatt des Vereins', 'url' => '/test.pdf', 'bytes' => 102400],
+            ],
+        ]);
+
+        $this->assertStringContainsString('Öffnet Deutsche Rentenversicherung', $html);
+        $this->assertStringContainsString('Anträge und Formulare verlinken wir', $html);
+
+        // Die eigene Datei bleibt ein Download und behält ihre Größenangabe.
+        $this->assertStringContainsString('PDF-Datei, 100 KB', $html);
+    }
+
+    public function test_dokumentenliste_nennt_ohne_gepflegten_namen_die_adresse(): void
+    {
+        $html = $this->seiteMitBaustein('download_list', [
+            'dokumente' => [['titel' => 'Antrag', 'url' => 'https://www.arbeitsagentur.de/formular']],
+        ]);
+
+        // „www.“ fällt weg: Es sagt niemandem etwas und macht die Zeile länger.
+        $this->assertStringContainsString('Öffnet arbeitsagentur.de', $html);
+    }
+
+    public function test_dokumentenliste_bietet_fremde_ziele_nicht_als_download_an(): void
+    {
+        $html = $this->seiteMitBaustein('download_list', [
+            'dokumente' => [['titel' => 'Antrag', 'url' => 'https://www.arbeitsagentur.de/formular']],
+        ]);
+
+        preg_match('/<a href="https:\/\/www\.arbeitsagentur\.de\/formular"[^>]*>/', $html, $m);
+        $link = $m[0] ?? '';
+
+        $this->assertNotSame('', $link);
+
+        // download an einem fremden Ziel tut nichts und verspricht trotzdem
+        // etwas — der Browser ignoriert es bei fremder Herkunft schlicht.
+        $this->assertStringNotContainsString('download', $link);
+        $this->assertStringContainsString('noreferrer', $link);
+    }
+
+    public function test_spendenblock_bringt_einen_qr_code_fuer_die_ueberweisung_mit(): void
+    {
+        /*
+         * Wunsch aus der Besprechung vom 02.08.2026. 22 Stellen IBAN abzutippen
+         * ist fehleranfällig — und für Menschen mit Konzentrations- oder
+         * Sehschwierigkeiten eine echte Hürde.
+         */
+        $html = $this->seiteMitBaustein('donation_options', [
+            'bank' => [
+                'institut' => 'Deutsche Skatbank',
+                'iban' => 'DE79 8306 5408 0006 8893 10',
+                'bic' => 'GENODEF1SLR',
+            ],
+        ]);
+
+        // Der Code steht als SVG im Dokument. Kein <img src="https://…">:
+        // Ein fremd geladener QR-Code verriete dem Anbieter, wer spenden will.
+        $this->assertStringContainsString('svg', $html);
+        $this->assertStringContainsString('girocode', $html);
+        $this->assertStringNotContainsString('api.qrserver.com', $html);
+
+        // Die Angaben zum Abtippen bleiben — ohne Kamera, ohne App, ohne
+        // Smartphone muss man genauso weit kommen.
+        $this->assertStringContainsString('DE79 8306 5408 0006 8893 10', $html);
+    }
+
+    public function test_unvollstaendige_bankverbindung_erzeugt_keinen_qr_code(): void
+    {
+        // Ein Code auf eine halbe IBAN führte eine Spende ins Leere. Lieber
+        // keiner — die Angaben daneben stehen ja weiterhin da.
+        $html = $this->seiteMitBaustein('donation_options', [
+            'bank' => ['institut' => 'Deutsche Skatbank', 'iban' => 'DE79 8306'],
+        ]);
+
+        $this->assertStringNotContainsString('girocode', $html);
+        $this->assertStringContainsString('Deutsche Skatbank', $html);
+    }
+
+    public function test_der_qr_code_sagt_vorlesehilfen_was_er_ist(): void
+    {
+        // Ein QR-Code ist für eine Vorlesehilfe eine Fläche und sonst nichts.
+        $html = $this->seiteMitBaustein('donation_options', [
+            'bank' => ['iban' => 'DE79830654080006889310'],
+        ]);
+
+        $this->assertStringContainsString('role="img"', $html);
+        $this->assertStringContainsString('QR-Code mit der Bankverbindung', $html);
+    }
+
+    public function test_partner_stehen_auch_ohne_logo_da(): void
+    {
+        // Der Verein soll Kooperationen eintragen können, bevor er von jedem
+        // eine Bilddatei hat. Sonst bleibt der Bereich monatelang leer.
+        $html = $this->seiteMitBaustein('partner_logos', [
+            'titel' => 'Kooperationen',
+            'partner' => [
+                ['name' => 'Aktion Mensch', 'url' => 'https://www.aktion-mensch.de'],
+                ['name' => 'Der Paritätische', 'rolle' => 'Dachverband'],
+                ['name' => ''],   // leerer Eintrag, fliegt raus
+            ],
+        ]);
+
+        $this->assertStringContainsString('Aktion Mensch', $html);
+        $this->assertStringContainsString('Der Paritätische', $html);
+        $this->assertStringContainsString('Dachverband', $html);
+    }
+
+    public function test_partner_ohne_ziel_wird_kein_link(): void
+    {
+        // Ein <a> ohne href ist für die Tastatur nicht erreichbar und
+        // verspricht trotzdem einen Klick.
+        $html = $this->seiteMitBaustein('partner_logos', [
+            'partner' => [['name' => 'ANUAS e.V.']],
+        ]);
+
+        $this->assertStringContainsString('ANUAS e.V.', $html);
+        $this->assertDoesNotMatchRegularExpression('/<a(?![^>]*href)[^>]*>\s*ANUAS/s', $html);
+    }
+
+    public function test_partnerlogo_ist_dekorativ_und_wiederholt_den_namen_nicht(): void
+    {
+        /*
+         * Vorgelesen würde ein Logo mit alt="Aktion Mensch Logo" neben dem
+         * Namen zu „Aktion Mensch Logo Link Aktion Mensch". Die Doppelung
+         * stört genau die Menschen, für die der Alternativtext gedacht ist.
+         */
+        $html = $this->seiteMitBaustein('partner_logos', [
+            'partner' => [['name' => 'Aktion Mensch', 'logo' => '/img/partner/aktion-mensch.svg']],
+        ]);
+
+        preg_match('/<img[^>]*aktion-mensch[^>]*>/', $html, $m);
+
+        $this->assertNotEmpty($m, 'Das Logo fehlt');
+        $this->assertStringContainsString('alt=""', $m[0]);
+    }
+
     public function test_themenliste_zeigt_eintraege_und_laesst_leere_aus(): void
     {
         // Der Feldname im Panel ist „alleUrl“ (camelCase). Dieser Test hält fest,

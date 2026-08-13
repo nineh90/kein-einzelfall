@@ -50,6 +50,7 @@ return [
                 ['schluessel' => 'traumafolgestoerungen_verstehen', 'label' => 'Traumafolgestörungen verstehen', 'url' => '/traumafolgestoerungen-verstehen'],
                 ['schluessel' => 'trauma_bindung_und_beziehung', 'label' => 'Trauma, Bindung und Beziehung', 'url' => '/trauma-bindung-und-beziehung'],
                 ['schluessel' => 'unterstuetzung', 'label' => 'Unterstützung',                 'url' => '/unterstuetzung'],
+                ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
             ],
         ],
         [
@@ -78,10 +79,29 @@ return [
             ['schluessel' => 'datenschutz', 'label' => 'Datenschutz', 'url' => '/datenschutz'],
             ['schluessel' => 'barrierefreiheit', 'label' => 'Barrierefreiheit', 'url' => '/barrierefreiheit'],
         ],
+        /*
+         * Reine Links, keine eingebetteten Zeitleisten oder Zählwerke: Solange
+         * niemand klickt, erfährt keine dieser Plattformen etwas von diesem
+         * Besuch.
+         *
+         * Discord fehlt bewusst. In der Besprechung vom 02.08.2026 hat der
+         * Verein die Plattform selbst infrage gestellt — die Ausweis-
+         * verifizierung widerspricht dem Anonymitätsanspruch. Erst entscheiden,
+         * dann verlinken.
+         */
         'social' => [
             ['label' => 'Instagram', 'url' => 'https://www.instagram.com/kein_einzelfall_opferhilfe'],
             ['label' => 'Facebook',  'url' => 'https://www.facebook.com/profile.php?id=61563326728055'],
             ['label' => 'TikTok',    'url' => 'https://www.tiktok.com/@kein_einzelfall.de'],
+            /*
+             * YouTube fehlt noch. Der Kanal wurde in der Besprechung genannt,
+             * seine Adresse aber nicht — und eine geratene Adresse ist
+             * schlechter als keine: Sie führt entweder ins Leere oder, im
+             * schlimmeren Fall, zu einem fremden Kanal. Steht als Rückfrage auf
+             * der Übergabe-Checkliste; hier nur die Zeile eintragen:
+             *
+             * ['label' => 'YouTube', 'url' => 'https://www.youtube.com/@…'],
+             */
         ],
     ],
 

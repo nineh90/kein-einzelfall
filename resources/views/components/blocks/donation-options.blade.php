@@ -16,6 +16,26 @@
         <div class="flex flex-col gap-4">
 
             @if ($bank)
+                @php
+                    /*
+                     * QR-Code für die Überweisung („Girocode“). Fast jede
+                     * Banking-App in Deutschland liest ihn und füllt damit das
+                     * Formular aus — eine IBAN abzutippen ist fehleranfällig,
+                     * und die 22 Stellen sind für Menschen mit Konzentrations-
+                     * oder Sehschwierigkeiten eine echte Hürde.
+                     *
+                     * Er ergänzt die Angaben und ersetzt sie nicht: Wer keine
+                     * Kamera, keine App oder kein Smartphone hat, muss
+                     * genauso weit kommen.
+                     */
+                    $girocode = \App\Support\Girocode::svg(
+                        $bank['empfaenger'] ?? 'KE!N EINZELFALL e.V.',
+                        $bank['iban'] ?? '',
+                        $bank['bic'] ?? null,
+                        $bank['verwendungszweck'] ?? null,
+                    );
+                @endphp
+
                 <div class="rounded-card border border-line bg-card px-5 py-5">
                     <h3 class="mb-3 font-display text-lg text-ink">
                         Überweisung
@@ -26,24 +46,54 @@
                         @endif
                     </h3>
 
-                    {{-- IBAN in einer <dl>: Screenreader lesen Bezeichnung und Wert
-                         als Paar. Die Ziffern in Vierergruppen und mit
-                         font-variant-numeric: tabular-nums sind beim Abtippen
-                         deutlich leichter zu verfolgen. --}}
-                    <dl class="flex flex-col gap-2 text-sm">
-                        <div class="flex flex-wrap gap-x-3">
-                            <dt class="w-16 shrink-0 text-ink-soft">IBAN</dt>
-                            <dd class="font-mono text-base tracking-wide text-ink [font-variant-numeric:tabular-nums]">
-                                {{ $bank['iban'] }}
-                            </dd>
-                        </div>
-                        @if (!empty($bank['bic']))
+                    <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                        {{-- IBAN in einer <dl>: Screenreader lesen Bezeichnung und Wert
+                             als Paar. Die Ziffern in Vierergruppen und mit
+                             font-variant-numeric: tabular-nums sind beim Abtippen
+                             deutlich leichter zu verfolgen. --}}
+                        <dl class="flex flex-col gap-2 text-sm">
                             <div class="flex flex-wrap gap-x-3">
-                                <dt class="w-16 shrink-0 text-ink-soft">BIC</dt>
-                                <dd class="font-mono text-base text-ink">{{ $bank['bic'] }}</dd>
+                                <dt class="w-16 shrink-0 text-ink-soft">IBAN</dt>
+                                <dd class="font-mono text-base tracking-wide text-ink [font-variant-numeric:tabular-nums]">
+                                    {{ $bank['iban'] }}
+                                </dd>
                             </div>
+                            @if (!empty($bank['bic']))
+                                <div class="flex flex-wrap gap-x-3">
+                                    <dt class="w-16 shrink-0 text-ink-soft">BIC</dt>
+                                    <dd class="font-mono text-base text-ink">{{ $bank['bic'] }}</dd>
+                                </div>
+                            @endif
+                        </dl>
+
+                        @if ($girocode)
+                            {{-- Als <figure> mit Bildunterschrift statt als nacktes
+                                 Bild: Der Code selbst ist für eine Vorlesehilfe
+                                 nichts als eine Fläche. Was er ist und wofür er
+                                 gut ist, muss danebenstehen — und steht damit
+                                 gleich für alle da. --}}
+                            <figure class="shrink-0 sm:w-40">
+                                {{-- Der einzige Ort auf dieser Seite mit fest
+                                     eingebauten Farben, und das mit Absicht: Ein
+                                     QR-Code ist kein Text, sondern etwas, das
+                                     eine Kamera lesen muss. Dunkelmodus,
+                                     Monochrom oder invertierte Farben machen ihn
+                                     für manche Scanner unbrauchbar. Die
+                                     Darstellungs-Einstellungen greifen deshalb
+                                     hier bewusst nicht — die Angaben daneben
+                                     sind der Weg, der für alle funktioniert. --}}
+                                <div class="girocode-flaeche rounded-lg border border-line p-3"
+                                     role="img"
+                                     aria-label="QR-Code mit der Bankverbindung des Vereins zum Einlesen in einer Banking-App">
+                                    {!! $girocode !!}
+                                </div>
+                                <figcaption class="mt-2 text-xs text-ink-soft">
+                                    Mit der Banking-App scannen — die Überweisung ist dann
+                                    schon ausgefüllt. Den Betrag gibst du selbst ein.
+                                </figcaption>
+                            </figure>
                         @endif
-                    </dl>
+                    </div>
                 </div>
             @endif
 

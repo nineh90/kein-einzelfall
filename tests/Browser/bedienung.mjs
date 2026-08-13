@@ -35,12 +35,25 @@ function pruefe(name, bedingung, zusatz = '') {
 const browser = await chromium.launch()
 const meldungen = []
 
-/** Seite öffnen und dabei jede Browser-Meldung mitschneiden. */
-async function oeffnen({ js = true, breite = 1400, pfad = '/' } = {}) {
+/**
+ * Seite öffnen und dabei jede Browser-Meldung mitschneiden.
+ *
+ * `trigger: false` bestellt die vorgeschaltete Trigger-Warnung vorab ab —
+ * so, wie es jemand tut, der sie einmal weggeklickt hat. Das ist für fast
+ * alle Prüfungen hier der richtige Ausgangszustand: Der Hinweis ist ein
+ * modaler Dialog, hält den Fokus fest und läge sonst vor jedem Knopf, um den
+ * es in diesem Test geht. Die Warnung selbst wird weiter unten eigens geprüft.
+ */
+async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false } = {}) {
     const kontext = await browser.newContext({
         javaScriptEnabled: js,
         viewport: { width: breite, height: 900 },
     })
+
+    if (!trigger && js) {
+        await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
+    }
+
     const seite = await kontext.newPage()
     seite.on('pageerror', (e) => meldungen.push(`[js=${js} ${breite}px] ${e.message}`))
     seite.on('console', (m) => m.type() === 'error' && meldungen.push(`[js=${js} ${breite}px] ${m.text()}`))
@@ -144,6 +157,72 @@ console.log('\nOhne JavaScript')
         await desktop.locator('nav[aria-label="Hauptnavigation"]').isVisible())
     pruefe('Mobil-Menü bleibt auf dem Desktop verborgen',
         !(await desktop.locator('nav[aria-label="Hauptnavigation (mobil)"]').isVisible()))
+}
+
+// --- Trigger-Warnung --------------------------------------------------------
+// Ausdrücklicher Wunsch des Vereins: ein vorgeschalteter Hinweis, den man
+// wegklicken kann (kommt beim nächsten Besuch wieder) oder dauerhaft abbestellt.
+// Der Unterschied zwischen "diesmal" und "nie wieder" ist der ganze Punkt —
+// deshalb wird er hier auch wirklich durchgespielt und nicht nur der Klick.
+
+console.log('\nTrigger-Warnung')
+{
+    const seite = await oeffnen({ trigger: true })
+    const dialog = seite.locator('#trigger-warnung')
+
+    pruefe('Warnung erscheint beim ersten Besuch', await dialog.isVisible())
+
+    pruefe('ist ein echter modaler Dialog',
+        await seite.evaluate(() => document.getElementById('trigger-warnung')?.matches(':modal')),
+        'ohne showModal() gäbe es weder Fokusfalle noch abgedunkelten Hintergrund')
+
+    // Der Fokus muss im Dialog liegen. Sonst tabbte man hinter dem Hinweis
+    // durch die Seite, die man noch gar nicht sehen sollte.
+    await seite.keyboard.press('Tab')
+    pruefe('der Fokus bleibt im Dialog',
+        await seite.evaluate(() => document.getElementById('trigger-warnung')?.contains(document.activeElement)))
+
+    pruefe('der Notausgang steht im Dialog',
+        await dialog.locator('a[data-notausgang]').isVisible())
+
+    await dialog.locator('[data-trigger-weiter]').click()
+    pruefe('„weiterlesen“ schliesst den Hinweis', !(await dialog.isVisible()))
+
+    // Weggeklickt heisst: für diesen Besuch erledigt.
+    await seite.reload({ waitUntil: 'networkidle' })
+    pruefe('bleibt im selben Besuch weg',
+        !(await seite.locator('#trigger-warnung').isVisible()))
+
+    // … aber nur für diesen. Ein neuer Kontext ist ein neuer Besuch.
+    const wiederkehr = await oeffnen({ trigger: true })
+    pruefe('kommt beim nächsten Besuch wieder',
+        await wiederkehr.locator('#trigger-warnung').isVisible(),
+        'genau der Unterschied, den der Verein gefordert hat')
+
+    await wiederkehr.locator('#trigger-warnung [data-trigger-nie]').click()
+    await wiederkehr.reload({ waitUntil: 'networkidle' })
+    pruefe('„nicht mehr anzeigen“ hält dauerhaft',
+        !(await wiederkehr.locator('#trigger-warnung').isVisible()))
+}
+
+console.log('\nTrigger-Warnung ohne JavaScript')
+{
+    // Der wichtigste Fall überhaupt: Ein Overlay, das erst JavaScript aufbaut,
+    // gibt bei jedem Skriptfehler den Inhalt ungewarnt frei.
+    const seite = await oeffnen({ js: false, trigger: true })
+    const dialog = seite.locator('#trigger-warnung')
+
+    pruefe('Warnung ist trotzdem sichtbar', await dialog.isVisible())
+
+    pruefe('der Notausgang funktioniert trotzdem',
+        await dialog.locator('a[data-notausgang]').isVisible())
+
+    // Sie könnten nichts speichern und täten auf Druck nichts.
+    pruefe('die Knöpfe zum Wegklicken bleiben verborgen',
+        !(await dialog.locator('[data-trigger-weiter]').isVisible()))
+
+    pruefe('stattdessen steht da, warum',
+        await dialog.locator('[data-trigger-ohne-js]').isVisible())
 }
 
 // --- Auswertung -------------------------------------------------------------

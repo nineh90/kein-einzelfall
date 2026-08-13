@@ -90,7 +90,7 @@ class SitemapController extends Controller
     {
         $sprachen = Language::aktive();
 
-        return collect(['blog.index', 'events.index'])
+        return collect(['blog.index', 'events.index', 'glossar'])
             ->map(fn (string $route) => $sprachen->map(fn (Language $s) => [
                 'url' => url(sprachlink($route, [], $s->code)),
                 'geaendert' => null,

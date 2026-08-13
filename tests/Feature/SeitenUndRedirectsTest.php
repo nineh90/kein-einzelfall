@@ -53,16 +53,45 @@ class SeitenUndRedirectsTest extends TestCase
             ->assertSee('<title>Verein - Kein Einzelfall e.V.</title>', false);
     }
 
-    public function test_alle_seiten_der_altseite_sind_erreichbar(): void
+    public function test_alle_veroeffentlichten_seiten_sind_erreichbar(): void
     {
-        // 23 aus dem Altbestand, die Seite „Barrierefreiheit" (die es dort nicht
-        // gab, auf die aber Footer und Einstellungs-Panel verweisen) und die
-        // Startseite, die inzwischen ebenfalls ein Datensatz ist.
-        $this->assertSame(25, Page::count());
+        /*
+         * 23 aus dem Altbestand, die Seite „Barrierefreiheit" (die es dort nicht
+         * gab, auf die aber Footer und Einstellungs-Panel verweisen), die
+         * Startseite, die inzwischen ebenfalls ein Datensatz ist, und die
+         * Trigger-Warnung.
+         *
+         * Dazu vier Entwürfe: Schutzkonzept, Beschwerdemanagement, Projekte und
+         * Publikationen stehen im Strukturpapier des Vereins, haben aber noch
+         * keinen Text. Sie sind angelegt, damit sie im Panel als Arbeitsliste
+         * stehen — und unveröffentlicht, damit auf der Website nichts Leeres
+         * erscheint. Sie gehören deshalb in die Gesamtzahl, aber nicht in den
+         * Durchlauf darunter.
+         */
+        $this->assertSame(30, Page::count());
+        $this->assertSame(4, Page::whereNull('published_at')->count());
 
         // Über pfad() und nicht über den Slug: Die Startseite liegt unter „/“.
-        foreach (Page::all() as $seite) {
+        foreach (Page::veroeffentlicht()->get() as $seite) {
             $this->get($seite->pfad())->assertOk();
+        }
+    }
+
+    public function test_die_neuen_bereiche_liegen_als_entwurf_bereit(): void
+    {
+        /*
+         * Ein Schutzkonzept ist eine Selbstverpflichtung — was darin steht,
+         * muss der Verein einhalten können. Wir legen die Seite an und die
+         * Struktur, den Text schreibt er selbst.
+         */
+        foreach (['schutzkonzept', 'beschwerdemanagement', 'projekte', 'publikationen'] as $slug) {
+            $seite = Page::where('slug', $slug)->first();
+
+            $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");
+            $this->assertNull($seite->published_at, "'{$slug}' darf noch nicht veröffentlicht sein");
+
+            // Entwürfe sind für Besucher nicht sichtbar.
+            $this->get('/'.$slug)->assertNotFound();
         }
     }
 

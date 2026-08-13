@@ -29,6 +29,27 @@ return [
         'erklaerung' => '– leaves this site immediately',
     ],
 
+    'trigger' => [
+        'eyebrow' => 'Before you read on',
+        'weiter' => 'Understood – continue',
+        'nie_mehr' => 'Do not show this notice again',
+        'verlassen' => 'Leave this site now',
+        'ohne_js' => 'This notice can only be dismissed with JavaScript enabled — '
+            .'it remembers your choice in the browser. You can simply read on.',
+    ],
+
+    'dokumente' => [
+        'bereich' => 'Documents to download',
+        'extern' => 'Opens :quelle',
+        'warum_extern' => 'We link applications and forms at the responsible authority rather '
+            .'than hosting them here, so you always get the current version.',
+    ],
+
+    'partner' => [
+        'bereich' => 'Partners and supporters',
+        'fremde_seite' => '(opens an external site)',
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Contact',
         'informationen' => 'Information',

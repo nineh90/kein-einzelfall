@@ -119,8 +119,21 @@ function pfad(code, standard, seitenpfad) {
     return seitenpfad === '/' ? `/${code}` : `/${code}${seitenpfad}`
 }
 
-async function pruefen(titel, url, vorbereiten = null, breite = 1400) {
+async function pruefen(titel, url, vorbereiten = null, breite = 1400, trigger = false) {
     const kontext = await browser.newContext({ viewport: { width: breite, height: 900 } })
+
+    /*
+     * Die vorgeschaltete Trigger-Warnung wird für die Seitenläufe abbestellt.
+     *
+     * Nicht aus Bequemlichkeit: Ein offener modaler Dialog macht den Rest des
+     * Dokuments inert. axe prüfte dann bei jeder der Seiten immer wieder
+     * denselben Dialog und nie die Seite darunter — der Lauf wäre grün und
+     * sagte nichts. Der Dialog selbst bekommt weiter unten einen eigenen Lauf.
+     */
+    if (!trigger) {
+        await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
+    }
+
     const seite = await kontext.newPage()
 
     // 404 ist für die Fehlerseite der erwartete Status — kein Abbruchgrund.
@@ -182,11 +195,22 @@ for (const [titel, p] of [['Startseite', '/'], ['Inhaltsseite', '/verein']]) {
     await pruefen(`${titel} mobil`, BASIS + p, null, 390)
 }
 
+// Die Trigger-Warnung ist das Erste, was jemand von dieser Website sieht — und
+// das Einzige, was er sieht, solange sie offen ist. Sie bekommt deshalb einen
+// eigenen Lauf, auf dem Desktop und auf dem Handy.
+console.log('\nTrigger-Warnung (offener Dialog)')
+for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
+    await pruefen(`Trigger-Warnung ${titel}`, BASIS + '/', null, breite, true)
+}
+
 // 320 px ist die Untergrenze aus WCAG 1.4.10: Ab hier darf nicht waagerecht
 // gescrollt werden müssen. axe prüft das nicht, deshalb hier von Hand.
 console.log('\nReflow (320 px, WCAG 1.4.10)')
 {
     const kontext = await browser.newContext({ viewport: { width: 320, height: 800 } })
+    // Gemessen wird die Seite, nicht der Dialog davor — der deckt sie ab und
+    // verdeckte damit auch jeden Überlauf darunter.
+    await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
     const seite = await kontext.newPage()
 
     for (const [titel, p] of [['Startseite', '/'], ['Inhaltsseite', '/verein'], ['Anfrage', '/anfragen']]) {

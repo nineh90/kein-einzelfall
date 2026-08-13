@@ -32,6 +32,8 @@ PORT=8080 bin/start    # anderer Port
 |---|---|
 | `/` | Startseite — seit 30.07.2026 ebenfalls ein Datensatz, im Panel pflegbar |
 | `/verein`, `/spenden`, … | die 23 Inhaltsseiten aus der Datenbank |
+| `/glossar` | Abkürzungen und Fachbegriffe, im Panel pflegbar |
+| `/trigger-warnung` | der Hinweis, der auf jeder Seite vorgeschaltet erscheint |
 | `/admin` | Verwaltung (Filament) |
 | `/module-demo` | Vorschau der Inhaltsmodule (`noindex`, fliegt später raus) |
 
@@ -112,8 +114,13 @@ php artisan db:seed --class=AltseiteSeeder    # JSON → Datenbank
 
 ### Selbst ausprobieren
 
+- **Trigger-Warnung** — kommt beim ersten Aufruf. „Weiterlesen" schliesst sie für
+  diesen Besuch, „nicht mehr anzeigen" dauerhaft. Wieder herbeiholen: im Browser
+  `localStorage.removeItem('ke.trigger.aus'); sessionStorage.clear()` und neu laden.
+  Ohne JavaScript steht sie als Block oben auf der Seite — genau so soll es sein.
 - **Notausgang** — Button oben rechts, in der Mobil-Leiste unten, oder **3× ESC**.
-  Führt auf wetter.com und ersetzt den History-Eintrag.
+  Führt auf wetter.com und ersetzt den History-Eintrag. Steht auch im Dialog der
+  Trigger-Warnung.
 - **Darstellung** — das runde Symbol neben „Notausgang": Schriftgröße, 4 Kontrastmodi,
   Leselinie, Legasthenie-Schrift und mehr. Bleibt über Seitenwechsel erhalten.
 - **Nur mit der Tastatur** — Tab drücken: erst kommt „Zum Inhalt springen", dann

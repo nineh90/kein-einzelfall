@@ -32,6 +32,46 @@ return [
         'erklaerung' => '– verlässt diese Seite sofort',
     ],
 
+    /*
+     * Vorgeschalteter Hinweis auf belastende Inhalte.
+     *
+     * Die Überschrift und der Text gehören dem Verein und stehen als Seite in
+     * der Datenbank. Hier stehen nur die Beschriftungen der Bedienelemente —
+     * die beschreiben die Bedienung und gehören uns.
+     *
+     * „Nicht mehr anzeigen“ ist bewusst nüchtern und ohne Ausrufezeichen:
+     * Der Hinweis soll nicht wie eine Hürde wirken, die man wegdrücken muss.
+     */
+    'trigger' => [
+        'eyebrow' => 'Bevor du weiterliest',
+        'weiter' => 'Verstanden – weiterlesen',
+        'nie_mehr' => 'Diesen Hinweis nicht mehr anzeigen',
+        'verlassen' => 'Seite sofort verlassen',
+        'ohne_js' => 'Dieser Hinweis lässt sich nur mit eingeschaltetem JavaScript '
+            .'ausblenden — er merkt sich die Entscheidung im Browser. Du kannst '
+            .'trotzdem einfach weiterlesen.',
+    ],
+
+    /*
+     * Dokumentenlisten.
+     *
+     * „extern“ heisst hier: Der Verweis führt zur Behörde selbst. Der Verein
+     * hostet Antragsformulare bewusst nicht mehr — Ämter aktualisieren ihre
+     * Vordrucke, und wer einen veralteten Antrag einreicht, verliert Zeit,
+     * die er oft nicht hat. Entschieden in der Besprechung vom 02.08.2026.
+     */
+    'dokumente' => [
+        'bereich' => 'Dokumente zum Herunterladen',
+        'extern' => 'Öffnet :quelle',
+        'warum_extern' => 'Anträge und Formulare verlinken wir bei der zuständigen Stelle, '
+            .'statt sie hier abzulegen. So bekommst du immer die aktuelle Fassung.',
+    ],
+
+    'partner' => [
+        'bereich' => 'Partner und Unterstützer',
+        'fremde_seite' => '(öffnet eine fremde Seite)',
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Kontakt',
         'informationen' => 'Informationen',

@@ -18,6 +18,7 @@ return [
     'bereich_gruppen_termine' => 'Groups & events',
     'bereich_kontakt' => 'Contact',
 
+    'glossar' => 'Glossary',
     'leiste_start' => 'Home',
     'leiste_gruppen' => 'Groups',
     'leiste_anfrage' => 'Enquiry',

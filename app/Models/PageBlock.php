@@ -83,6 +83,10 @@ class PageBlock extends Model
         'embed' => 'Eingebetteter Inhalt (2-Klick)',
         'hilfe_box' => 'Hilfe-Nummern',
         'inhalts_hinweis' => 'Inhaltshinweis',
+        // Ein Baustein für Kooperationen, Netzwerke, Förderer,
+        // Schirmherrschaften und Botschafter. Sie unterscheiden sich im Text
+        // darüber, nicht in der Darstellung.
+        'partner_logos' => 'Partner und Unterstützer',
         'leichte_sprache' => 'Leichte Sprache',
         'stat_strip' => 'Kennzahlen',
     ];

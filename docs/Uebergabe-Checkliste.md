@@ -217,6 +217,54 @@ Panel „Unterzeile" und liegt im Baustein „Einstiegskarten" der Startseite.
 - **Inhaltshinweise:** Auf welchen Seiten sollen sie stehen? Vorschlag:
   Trauma/Bindung, Traumafolgestörungen, FSM.
 
+### A10 · Rückfragen aus Paket 1 (05.08.2026)
+
+Alles hier gehört zu dem, was am 05.08.2026 aus dem Besprechungs-Abgleich gebaut
+wurde (`docs/Abgleich-Besprechung-2026-08-02.md`, `docs/Komponenten.md` Abschnitt 17).
+Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
+
+- [ ] **Wortlaut der Trigger-Warnung.** Der Text unter `/trigger-warnung` ist ein
+  Vorschlag von uns und bewusst nüchtern: Er beschreibt, worum es auf der Website
+  geht, und sagt nichts im Namen des Vereins. **Er ist veröffentlicht und damit
+  auf jeder Seite sichtbar** — bitte gegenlesen und ändern oder bestätigen. Im
+  Panel unter „Seiten → Hinweis zu den Inhalten dieser Website".
+- [ ] **Wie oft soll die Warnung kommen?** Gebaut ist: einmal pro Besuch. Wer sie
+  wegklickt, sieht sie beim nächsten Besuch wieder; wer „nicht mehr anzeigen"
+  wählt, nie wieder. Alternative wäre: auf jeder einzelnen Seite erneut. Das
+  wäre für Menschen, die viel lesen, schnell zermürbend — deshalb der Vorschlag
+  so. Bitte bestätigen.
+- [ ] **Glossar: die drei Entwürfe freigeben.** GdB, Pflegegrad und Persönliches
+  Budget liegen im Panel als Entwurf und sind auf der Website unsichtbar. Der
+  Text beginnt jeweils mit „ENTWURF — bitte prüfen". Wir schreiben dazu bewusst
+  keine verbindliche Fassung: Wer das liest, entscheidet danach womöglich über
+  eine Frist. **Das ist ein Fall für die Anwälte des Vereins.** Weitere Begriffe
+  legt der Verein selbst an — je Eintrag reichen zwei, drei Sätze.
+- [ ] **Schreibweise „Killing me Softly".** Im Strukturpapier steht „Killen me
+  Softly". Wir sind von einem Tippfehler ausgegangen. Falls nicht: im Panel unter
+  „Gruppen" ändern.
+- [ ] **Adresse des YouTube-Kanals.** Er wurde in der Besprechung genannt, die
+  Adresse nicht. Wir raten sie nicht — eine falsche Adresse führt entweder ins
+  Leere oder zu einem fremden Kanal. Sobald sie da ist, ist es eine Zeile in
+  `config/navigation.php` (steht dort auskommentiert bereit).
+- [ ] **Partnerliste mit Logos.** Aktion Mensch, Der Paritätische, ANUAS und die
+  Stiftungen, die gefördert haben. Gebraucht werden: Name, gewünschte Rolle
+  („Förderer seit 2025"), Adresse der Website und die Logodatei. Steht bereits
+  als Aktion im Protokoll. Der Baustein „Partner und Unterstützer" wartet darauf.
+  **Logos bitte als Datei, nicht als Link zum Partner** — ein fremd geladenes
+  Bild überträgt die IP-Adresse unserer Besucherinnen dorthin.
+- [ ] **Kontoinhaber für den Spenden-QR-Code.** Genau so, wie er bei der Bank
+  hinterlegt ist. Er landet im Überweisungsformular der spendenden Person; weicht
+  er ab, kommt die Überweisung zurück. Im Panel im Baustein „Spendenmöglichkeiten".
+- [ ] **Die vier neuen Seiten füllen:** Schutzkonzept, Beschwerdemanagement,
+  Projekte, Publikationen. Sie liegen im Panel als Entwurf bereit, mit Adresse und
+  Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
+  haben. **Beim Beschwerdemanagement zusätzlich zu klären:** eigener Kontaktweg,
+  getrennt vom normalen Anfragen-Postfach? Beschwerden über den Verein sollten
+  nicht dort landen, wo sie die Betroffenen selbst lesen.
+- [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
+  Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
+  Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").
+
 ---
 
 ## B. Technisch vor dem Go-Live (Kevin)
@@ -260,6 +308,24 @@ Panel „Unterzeile" und liegt im Baustein „Einstiegskarten" der Startseite.
 ---
 
 ## C. Kaufmännisch (Kevin)
+
+### C0 · Neu aus der Besprechung vom 02.08.2026 — vor der nächsten Rechnung klären
+
+Aus dem Strukturpapier und der Besprechung kommen Wünsche, die in **keiner**
+Position von AN-268 stehen. Die vollständige Einordnung steht in
+`docs/Abgleich-Besprechung-2026-08-02.md`, Abschnitt 6. Kurz:
+
+- **Paket 1 ist am 05.08.2026 gebaut** — Trigger-Warnung, Glossar, externe
+  Formularverweise, Partner-Baustein, Spenden-QR-Code, vier neue Bereiche. Das
+  ist im Rahmen vertretbar, **wenn** der Rest sauber bepreist wird. Es sollte
+  sichtbar als Geste benannt und nicht stillschweigend verbucht werden.
+- **Eigene Position nötig:** Bibliothek/Wissensdatenbank (Urteile, Gutachten,
+  Gesetze, Infopool), Anmeldeverfahren für Gruppen und Veranstaltungen,
+  seitenweite Suche.
+- **Eigenes Projekt:** Mitgliederbereich mit Login, KI-Suche, Video-Archiv,
+  Merchandise/Shop.
+- **Vor der Schätzung der Bibliothek**: Franziskas Excel-Tabellen einsehen. Ohne
+  sie ist jede Zahl geraten.
 
 ### C1 · Drei Positionen fehlen im Angebot
 - **Content-Migration.** „Keine Content-Erstellung" heißt nicht „kein Aufwand".

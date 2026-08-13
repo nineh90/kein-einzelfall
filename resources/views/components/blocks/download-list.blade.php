@@ -1,6 +1,6 @@
 @props([
     'titel' => null,
-    'dokumente' => [],   // [['titel' =>, 'url' =>, 'bytes' =>, 'typ' =>], ...]
+    'dokumente' => [],   // [['titel' =>, 'url' =>, 'bytes' =>, 'typ' =>, 'quelle' =>], ...]
 ])
 
 @php
@@ -29,6 +29,22 @@
             ? number_format($b / 1048576, 1, ',', '.').' MB'
             : number_format($b / 1024, 0, ',', '.').' KB';
     };
+
+    /*
+     * Fremde Adresse oder eigene Datei?
+     *
+     * Das ist keine Kosmetik, sondern die Umsetzung einer Entscheidung aus der
+     * Besprechung vom 02.08.2026: Behoerdenformulare werden nicht mehr selbst
+     * gehostet, sondern verlinkt — Aemter aendern ihre Vordrucke, und eine
+     * Kopie bei uns waere irgendwann die falsche Fassung. Wer einen veralteten
+     * Antrag einreicht, verliert Zeit, die er oft nicht hat.
+     *
+     * Ein Verweis nach draussen muss aber als solcher erkennbar sein, bevor
+     * jemand ihn antippt (WCAG 3.2.5): Er verlaesst unsere Seite, wir haben
+     * keinen Einfluss auf das, was dort passiert, und er tut auch nicht das,
+     * was ein Download-Symbol verspricht.
+     */
+    $istExtern = fn (array $d): bool => (bool) preg_match('#^https?://#i', $d['url'] ?? '');
 @endphp
 
 {{--
@@ -40,13 +56,15 @@
       für niemanden.
     - Dateityp und Größe stehen im Linktext (WCAG 3.2.5): wer über Mobilfunk liest,
       soll vor dem Tippen wissen, was auf ihn zukommt.
+    - Bei fremden Adressen steht stattdessen die Herkunft dort — sie ist die
+      Angabe, die vor dem Tippen zählt.
     - Kein target="_blank": ungefragte neue Tabs sind desorientierend. Wer will,
       öffnet selbst in einem neuen Tab.
 --}}
 {{-- Derselbe Rahmen wie die Textbausteine: Ohne Container lief die Liste über
      die volle Fensterbreite und fiel aus dem Satzspiegel der Seite. --}}
 <section class="px-4 py-8 lg:px-10 lg:py-12"
-         @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="Dokumente zum Herunterladen" @endif>
+         @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>
     <div class="mx-auto max-w-6xl">
         <div class="max-w-prose">
             @if ($titel)
@@ -61,20 +79,40 @@
             <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line bg-card">
         @foreach ($dokumente as $dok)
             @php
-                $typ = strtoupper($dok['typ'] ?? pathinfo($dok['url'], PATHINFO_EXTENSION) ?: 'PDF');
-                $gr = $groesse($dok['bytes'] ?? null);
-                // Zusammengesetzt in PHP: eine @if-Direktive direkt an Text geklebt
-                // ("...Datei@if") erkennt Blade nicht als Direktive.
-                $meta = $gr ? "{$typ}-Datei, {$gr}" : "{$typ}-Datei";
+                $extern = $istExtern($dok);
+
+                if ($extern) {
+                    // Die Herkunft steht so da, wie sie in der Adresszeile
+                    // erscheint. Ein gepflegter Name („Bundesagentur für Arbeit“)
+                    // hat Vorrang — nur muss er dann auch stimmen, deshalb ist
+                    // die Adresse der Rückfall und nicht umgekehrt.
+                    $herkunft = $dok['quelle'] ?? preg_replace(
+                        '/^www\./', '', parse_url($dok['url'], PHP_URL_HOST) ?: ''
+                    );
+                    $meta = __('rahmen.dokumente.extern', ['quelle' => $herkunft]);
+                } else {
+                    $typ = strtoupper($dok['typ'] ?? pathinfo($dok['url'], PATHINFO_EXTENSION) ?: 'PDF');
+                    $gr = $groesse($dok['bytes'] ?? null);
+                    // Zusammengesetzt in PHP: eine @if-Direktive direkt an Text geklebt
+                    // ("...Datei@if") erkennt Blade nicht als Direktive.
+                    $meta = $gr ? "{$typ}-Datei, {$gr}" : "{$typ}-Datei";
+                }
             @endphp
             <li>
+                {{-- download und rel="noreferrer" schliessen sich gegenseitig aus:
+                     Das eine gilt nur für eigene Dateien, das andere nur für
+                     fremde Ziele. --}}
                 <a href="{{ $dok['url'] }}"
-                   download
+                   @if ($extern) rel="noreferrer noopener" @else download @endif
                    class="group flex items-center gap-4 px-4 py-3.5 no-underline hover:bg-green-mist">
                     <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
                                  bg-green-mist font-display text-[0.625rem] font-semibold text-green-deep
                                  group-hover:bg-cream">
-                        {{ $typ }}
+                        @if ($extern)
+                            <x-ui.icon name="external" :size="18" />
+                        @else
+                            {{ $typ }}
+                        @endif
                     </span>
 
                     <span class="flex-1">
@@ -83,12 +121,19 @@
                     </span>
 
                     <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5">
-                        <x-ui.icon name="arrow-right" :size="18" />
+                        <x-ui.icon :name="$extern ? 'external' : 'arrow-right'" :size="18" />
                     </span>
                 </a>
             </li>
                 @endforeach
             </ul>
+
+            {{-- Ein Satz unter der Liste statt eines Hinweises je Eintrag: Die
+                 Begründung gilt für alle fremden Verweise gleichermaßen, und in
+                 jeder Zeile wiederholt wäre sie nur Rauschen. --}}
+            @if (collect($dokumente)->contains($istExtern))
+                <p class="mt-3 text-sm text-ink-soft">{{ __('rahmen.dokumente.warum_extern') }}</p>
+            @endif
         </div>
     </div>
 </section>

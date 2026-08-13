@@ -120,7 +120,12 @@ fi
 # es die Seiten schlicht nicht gibt. Einmalig einpflegen, wenn nichts da ist.
 zaehle() { php artisan tinker --execute="echo $1;" 2>/dev/null | tail -1 | tr -dc '0-9'; }
 
-SEITEN=$(zaehle 'App\Models\Page::count()')
+# Gezählt werden nur die Inhaltsseiten. Startseite und Trigger-Warnung legt je
+# eine Migration an — die stehen also schon in der Datenbank, wenn wir hier
+# ankommen. Auf `Page::count()` zu prüfen hiesse deshalb: "eine Seite ist da,
+# dann wird schon alles da sein" — und die 23 Seiten der Altseite kämen auf
+# einem frisch eingerichteten Rechner nie an.
+SEITEN=$(zaehle "App\Models\Page::whereNotIn('slug', ['startseite', 'trigger-warnung'])->count()")
 if [[ "${SEITEN:-0}" -eq 0 ]]; then
     echo "→ Datenbank ist leer, Inhalte der Altseite einpflegen ..."
     php artisan db:seed --class=AltseiteSeeder --force 2>&1 | tail -1

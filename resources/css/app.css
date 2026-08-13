@@ -187,3 +187,104 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Trigger-Warnung — der vorgeschaltete Hinweis auf belastende Inhalte.
+
+   Das Element ist ein <dialog open>. Ohne JavaScript ist das ein gewoehnlicher
+   Block ganz oben im Seitenfluss; mit JavaScript stuft showModal() ihn zum
+   echten Dialog hoch. Beide Zustaende brauchen unterschiedliche Regeln, und
+   der Browser unterscheidet sie selbst ueber :modal — deshalb steht hier keine
+   zusaetzliche Klasse.
+
+   Die UA-Vorgaben fuer <dialog> (weisser Grund, schwarze Schrift, Rahmen,
+   fit-content) muessen dabei komplett zurueckgesetzt werden: Sie stammen aus
+   einer Zeit vor Design-Tokens und ignorieren jede Kontrasteinstellung.
+--------------------------------------------------------------------------- */
+#trigger-warnung {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  background: transparent;
+  color: inherit;
+}
+
+/* Ohne JavaScript: normaler Block im Seitenfluss. Die UA-Vorgabe waere
+   position: absolute — der Hinweis laege dann ueber der Kopfzeile. */
+#trigger-warnung[open]:not(:modal) {
+  position: static;
+  padding: 1rem;
+}
+
+/* Mit JavaScript: fuellt den Bildschirm und scrollt, statt zu zentrieren.
+   Zentriert man vertikal, schneiden alle Browser bei langem Text den Anfang
+   ab — und der Anfang ist bei einer Warnung genau das Wichtige. */
+#trigger-warnung:modal {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+
+#trigger-warnung::backdrop {
+  background: rgb(44 38 32 / 0.75);
+}
+
+/* Vom Kopf-Skript gesetzt, bevor der Browser zeichnet: Wer den Hinweis
+   weggeklickt hat, soll ihn nicht kurz aufblitzen sehen. */
+html.ke-trigger-aus #trigger-warnung {
+  display: none;
+}
+
+/* Wegklicken und "nicht mehr anzeigen" sind gespeicherte Zustaende und ohne
+   JavaScript nicht moeglich. Die Knoepfe erscheinen deshalb erst, wenn das
+   Skript sie wirklich verdrahtet hat — nicht schon dann, wenn JavaScript
+   grundsaetzlich eingeschaltet ist. Ein Knopf, der auf Druck nichts tut, ist
+   bei dieser Zielgruppe schlimmer als kein Knopf. */
+html:not(.ke-trigger-bereit) [data-trigger-braucht-js] {
+  display: none !important;
+}
+
+html.ke-trigger-bereit [data-trigger-ohne-js] {
+  display: none;
+}
+
+/* Die Bausteine der Warnungsseite sitzen hier in einer Karte, nicht im
+   Seitenraster: ihre Seitenabstaende und Maximalbreiten wuerden den Dialog
+   sonst doppelt einruecken. An einer Stelle geregelt, damit kein Bausteintyp
+   von diesem Ort wissen muss. */
+.trigger-warnung-inhalt > * {
+  padding: 0;
+}
+.trigger-warnung-inhalt > *:not(:first-child) {
+  margin-top: 1rem;
+}
+/* Die Begrenzung der Zeilenlaenge (max-w-prose) bleibt bewusst stehen: Sie ist
+   keine Layoutzier, sondern eine Lesehilfe — und gilt im Dialog genauso. */
+
+/* ---------------------------------------------------------------------------
+   Girocode — der QR-Code fuer die Ueberweisung.
+
+   Fest schwarz auf weiss, und das gegen die sonstige Regel dieses Projekts.
+   Ein QR-Code ist kein Text, sondern etwas, das eine Kamera lesen muss:
+   Dunkelmodus, Monochrom-Filter oder invertierte Farben machen ihn fuer einen
+   Teil der Scanner unbrauchbar. Wer die Darstellung umstellt, braucht ihn
+   trotzdem lesbar — und die IBAN daneben ist ohnehin der Weg, der ohne Kamera,
+   ohne App und ohne Smartphone funktioniert.
+--------------------------------------------------------------------------- */
+.girocode-flaeche {
+  background: #FFFFFF;
+  color: #000000;
+}
+svg.girocode {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+svg.girocode path {
+  fill: currentColor;
+}

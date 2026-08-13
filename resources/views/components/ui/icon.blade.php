@@ -20,6 +20,12 @@
         'globe'         => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>',
         // Häkchen für die aktuell gewählte Sprache.
         'check'         => '<path d="M20 6 9 17l-5-5"/>',
+        // Pfeil aus dem Kasten heraus: führt auf eine fremde Seite. Nur dort
+        // einsetzen, wo das auch im Text steht — ein Symbol allein sagt
+        // niemandem etwas, der es nicht sieht.
+        'external'      => '<path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+        // Buch für die Wissens-/Glossarbereiche.
+        'book'          => '<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5z"/><path d="M18 17H6a2 2 0 0 0-2 2"/>',
     ];
 @endphp
 

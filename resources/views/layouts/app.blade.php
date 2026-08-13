@@ -125,6 +125,30 @@
     })();
     </script>
 
+    {{-- Entscheidet vor dem ersten Zeichnen, ob die Trigger-Warnung zu zeigen ist.
+
+         Muss hier oben stehen und nicht im Bundle: Wer den Hinweis dauerhaft
+         abbestellt hat, soll ihn nicht bei jedem Seitenaufruf kurz aufblitzen
+         sehen. Dasselbe Muster wie bei den Darstellungs-Einstellungen darüber —
+         und aus demselben Grund kein Schönheitsthema.
+
+         Hier wird nur versteckt, nie gezeigt: Das Verdrahten übernimmt
+         resources/js/trigger-warnung.js, sichtbar ist der Hinweis schon aus dem
+         Server-HTML heraus. --}}
+    <script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
+    (function () {
+        try {
+            if (localStorage.getItem('ke.trigger.aus') === '1'
+                || sessionStorage.getItem('ke.trigger.gesehen') === '1') {
+                document.documentElement.classList.add('ke-trigger-aus');
+            }
+        } catch (e) {
+            /* Privater Modus o.ä. — dann wird der Hinweis eben gezeigt.
+               Im Zweifel warnen ist bei dieser Zielgruppe die richtige Richtung. */
+        }
+    })();
+    </script>
+
     <link rel="preload" href="/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -138,6 +162,19 @@
               focus:rounded-lg focus:bg-green focus:px-4 focus:py-2 focus:text-on-green">
         {{ __('rahmen.sprunglink') }}
     </a>
+
+    {{-- Vorgeschalteter Hinweis auf belastende Inhalte.
+
+         Steht direkt hinter dem Sprunglink und vor allem anderen: Ohne
+         JavaScript ist er ein Block im Seitenfluss, und dann muss er auch
+         wirklich vor dem Inhalt stehen — sonst hätte jemand den Inhalt schon
+         gelesen, bevor die Warnung kommt.
+
+         Der Sprunglink bleibt trotzdem der erste Tabstopp. Wer den Hinweis
+         nicht braucht, kommt mit einem Tastendruck daran vorbei. --}}
+    <x-layout.trigger-warnung
+        :seite="$triggerwarnung"
+        :ersatzsprache="$triggerwarnungErsatz" />
 
     {{-- Fixes Barrierefreiheits-Tab am linken Rand, auf jeder Seite erreichbar.
          Bewusst hier statt im Header: als zweiter Tab-Stopp (gleich nach dem
