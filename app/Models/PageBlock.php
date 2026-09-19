@@ -87,6 +87,10 @@ class PageBlock extends Model
         // Schirmherrschaften und Botschafter. Sie unterscheiden sich im Text
         // darüber, nicht in der Darstellung.
         'partner_logos' => 'Partner und Unterstützer',
+        // Zeigt, was die Seite im Browser ablegt, und setzt es zurück. Der
+        // Inhalt kommt aus config/speicher.php und ist nicht im Panel pflegbar —
+        // eine von Hand gepflegte Liste liefe der echten hinterher.
+        'speicher_uebersicht' => 'Gespeicherte Einstellungen',
         'leichte_sprache' => 'Leichte Sprache',
         'stat_strip' => 'Kennzahlen',
     ];

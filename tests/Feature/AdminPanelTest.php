@@ -260,6 +260,9 @@ class AdminPanelTest extends TestCase
             ]],
             ['typ' => 'group_list', 'data' => ['typ' => 'selbsthilfe', 'titel' => 'Gruppen']],
             ['typ' => 'team_grid', 'data' => ['bereich' => 'Vorstand', 'titel' => 'Vorstand']],
+            ['typ' => 'speicher_uebersicht', 'data' => [
+                'titel' => 'Gespeicherte Einstellungen', 'einleitung' => 'Was im Browser liegt.',
+            ]],
             ['typ' => 'partner_logos', 'data' => [
                 'titel' => 'Kooperationen', 'einleitung' => 'Mit wem wir zusammenarbeiten.',
                 'partner' => [[
@@ -293,6 +296,7 @@ class AdminPanelTest extends TestCase
             'spenden@kein-einzelfall.de',
             'selbsthilfe', 'Vorstand',                       // Gruppen, Team
             'Aktion Mensch', 'Förderer', 'aktion-mensch.svg', // Partner
+            'Was im Browser liegt.',                         // Gespeicherte Einstellungen
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

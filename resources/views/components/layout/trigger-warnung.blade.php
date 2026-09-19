@@ -16,14 +16,14 @@
     JavaScript den Inhalt ungewarnt frei. Bei dieser Zielgruppe ist das der
     eine Fehler, den man nicht machen darf.
 
-    ── Warum die beiden Knöpfe „data-trigger-braucht-js“ tragen ────────────────
+    ── Warum Knopf und Kästchen „data-trigger-braucht-js“ tragen ───────────────
 
     Wegklicken und „nicht mehr anzeigen“ brauchen zwingend JavaScript — beides
-    ist ein gespeicherter Zustand im Browser. Ohne JavaScript blieben es Knöpfe,
-    die auf Druck nichts tun. Die CSS blendet sie deshalb aus, bis das Skript
-    sie wirklich verdrahtet hat — nicht schon dann, wenn JavaScript bloss
-    grundsätzlich eingeschaltet ist. Ein abgebrochenes Bundle ist sonst genau
-    der Fall, der durchrutscht.
+    ist ein gespeicherter Zustand im Browser. Ohne JavaScript wären es ein Knopf
+    und ein Kästchen, die auf Druck nichts tun. Die CSS blendet sie deshalb aus,
+    bis das Skript sie wirklich verdrahtet hat — nicht schon dann, wenn
+    JavaScript bloss grundsätzlich eingeschaltet ist. Ein abgebrochenes Bundle
+    ist sonst genau der Fall, der durchrutscht.
 
     Der Notausgang ist davon ausgenommen: Er ist ein echtes <a href> und
     funktioniert immer.
@@ -85,37 +85,66 @@
             @endforeach
         </div>
 
-        {{-- Reihenfolge der Knöpfe ist eine Haltung: „weiterlesen“ steht vorn,
-             weil es der Normalfall ist. Der Notausgang steht sichtbar abgesetzt
-             am Ende und nicht dazwischen — er soll auffindbar sein, ohne wie
-             die naheliegende Antwort auszusehen. --}}
-        <div class="mt-6 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:flex-wrap sm:items-center">
+        <div class="mt-8 border-t border-line pt-6">
 
-            <x-ui.button type="button" data-trigger-weiter data-trigger-braucht-js>
-                {{ __('rahmen.trigger.weiter') }}
-            </x-ui.button>
+            {{-- „Nicht mehr anzeigen“ ist ein Kontrollkästchen und kein Knopf.
 
-            <x-ui.button type="button" variant="ghost" size="sm" data-trigger-nie data-trigger-braucht-js>
-                {{ __('rahmen.trigger.nie_mehr') }}
-            </x-ui.button>
+                 Der Verein hat es selbst so beschrieben: „…oder aber auch
+                 auswählen kann ‚diese Meldung nicht mehr anzeigen‘“. Auswählen,
+                 nicht drücken — und das trifft die Sache: Es ist eine
+                 Einstellung, keine Handlung. Als dritter Knopf neben zwei
+                 Handlungen stand es gleichrangig da und zwang zu einer
+                 Entscheidung, die niemand treffen wollte.
 
-            <a href="{{ config('navigation.exit_url') }}"
-               data-notausgang
-               rel="noreferrer noopener"
-               class="inline-flex items-center justify-center gap-2 rounded-full border border-alert
-                      px-4 py-2 text-sm text-alert no-underline hover:bg-alert hover:text-cream
-                      sm:ms-auto">
-                <x-ui.icon name="exit" :size="18" />
-                {{ __('rahmen.trigger.verlassen') }}
-            </a>
+                 Als Kontrollkästchen bleiben unten genau zwei Wege: weiterlesen
+                 oder gehen. --}}
+            <label class="mb-6 flex cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-soft"
+                   data-trigger-braucht-js>
+                {{-- Natives <input>: Tastaturbedienung, Vorlesehilfe und der
+                     Zustand „ausgewählt“ kommen vom Browser. Ein nachgebautes
+                     Kästchen aus <div>s ist genau die Sorte Eigenbau, die auf
+                     dieser Seite nichts zu suchen hat. --}}
+                <input type="checkbox"
+                       data-trigger-nie
+                       class="h-5 w-5 shrink-0 rounded border-line accent-green">
+                <span>{{ __('rahmen.trigger.nie_mehr') }}</span>
+            </label>
+
+            {{-- Zwei Wege, gleiche Größe, gleiche Höhe — beide über dieselbe
+                 Knopf-Komponente, damit sie nicht wieder auseinanderlaufen.
+                 „Weiterlesen“ steht vorn, weil es der Normalfall ist; der
+                 Notausgang daneben, sichtbar unterschieden durch die Warnfarbe,
+                 ohne wie die naheliegende Antwort auszusehen.
+
+                 Auf schmalen Geräten untereinander und über die volle Breite:
+                 Wer in einer angespannten Lage tippt, trifft eine ganze Zeile
+                 zuverlässiger als eine halbe. --}}
+            <div class="flex flex-col gap-3 sm:flex-row">
+
+                <x-ui.button type="button"
+                             class="w-full sm:w-auto"
+                             data-trigger-weiter
+                             data-trigger-braucht-js>
+                    {{ __('rahmen.trigger.weiter') }}
+                </x-ui.button>
+
+                <x-ui.button :href="config('navigation.exit_url')"
+                             variant="alert"
+                             class="w-full sm:w-auto"
+                             rel="noreferrer noopener"
+                             data-notausgang>
+                    <x-ui.icon name="exit" :size="18" />
+                    {{ __('rahmen.trigger.verlassen') }}
+                </x-ui.button>
+            </div>
+
+            {{-- Steht nur da, solange JavaScript nicht übernommen hat. Ohne
+                 diesen Satz wirkt der Hinweis wie ein Kasten, den man nicht
+                 loswird — und niemand weiss, warum. --}}
+            <p class="mt-5 text-sm text-ink-soft" data-trigger-ohne-js>
+                {{ __('rahmen.trigger.ohne_js') }}
+            </p>
         </div>
-
-        {{-- Steht nur da, solange JavaScript nicht übernommen hat. Ohne diesen
-             Satz wirkt der Hinweis wie ein Kasten, den man nicht loswird —
-             und niemand weiss, warum. --}}
-        <p class="mt-4 text-sm text-ink-soft" data-trigger-ohne-js>
-            {{ __('rahmen.trigger.ohne_js') }}
-        </p>
     </div>
 </dialog>
 @endif

@@ -17,6 +17,8 @@
  * kein Schönheitsfehler.
  */
 
+import { speicherKomplettLeeren } from './speicher'
+
 export function toolbarVerdrahten() {
     const knopf = document.querySelector('[data-a11y-oeffnen]')
     const panel = document.getElementById('a11y-panel')
@@ -104,7 +106,23 @@ export function toolbarVerdrahten() {
 
         if (e.target.closest('[data-a11y-zuruecksetzen]')) {
             werte = {}
-            return uebernehmen()
+            uebernehmen()
+
+            /*
+             * Der Knopf heisst „Alles zurücksetzen“, also muss er das auch tun.
+             *
+             * Solange es nur die Darstellungs-Einstellungen gab, stimmte die
+             * Beschriftung von selbst. Mit der Trigger-Warnung kam ein zweiter
+             * gespeicherter Wert dazu, und sie wurde stillschweigend falsch —
+             * genau die Sorte Halbwahrheit, die man einer Zielgruppe nicht
+             * zumuten sollte, die auf verlässliche Auskünfte angewiesen ist.
+             *
+             * Welche Schlüssel es gibt, steht in config/speicher.php und liegt
+             * als window.keSpeicher auf jeder Seite bereit.
+             */
+            speicherKomplettLeeren()
+
+            return
         }
     })
 

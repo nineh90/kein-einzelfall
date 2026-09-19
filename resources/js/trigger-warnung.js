@@ -12,7 +12,7 @@
  * Gespeichert wird an zwei Orten, und das ist der Unterschied, den der Verein
  * ausdrücklich wollte:
  *   sessionStorage — weggeklickt: kommt beim nächsten Besuch wieder
- *   localStorage   — "nicht mehr anzeigen": bleibt weg
+ *   localStorage   — Kästchen "nicht mehr anzeigen" war angekreuzt: bleibt weg
  *
  * Beides ist eine Einstellung auf ausdrücklichen Wunsch der lesenden Person und
  * damit einwilligungsfrei (§ 25 Abs. 2 Nr. 2 TDDDG). Es geht keine einzige
@@ -49,25 +49,29 @@ export function triggerWarnungVerdrahten() {
     const weiter = dialog.querySelector('[data-trigger-weiter]')
     const nie = dialog.querySelector('[data-trigger-nie]')
 
-    // Erst jetzt: Die Knöpfe werden sichtbar, wenn sie verdrahtet sind — nicht
-    // schon dann, wenn JavaScript grundsätzlich läuft. Die Regel dazu steht in
-    // app.css.
+    // Erst jetzt: Knopf und Kästchen werden sichtbar, wenn sie verdrahtet sind —
+    // nicht schon dann, wenn JavaScript grundsätzlich läuft. Die Regel dazu
+    // steht in app.css.
     wurzel.classList.add('ke-trigger-bereit')
 
     /*
-     * Schliessen deckt jeden Weg ab: die beiden Knöpfe, ESC und alles, was der
-     * Browser sonst noch anbietet. Deshalb hängt das Merken am close-Ereignis
-     * und nicht am Klick — sonst käme der Hinweis nach einem ESC auf der
-     * nächsten Seite sofort wieder.
+     * Alles hängt am close-Ereignis, nicht am Klick.
+     *
+     * Schliessen geht auf mehreren Wegen: über den Knopf, über ESC und über
+     * alles, was der Browser sonst noch anbietet. Am Klick zu horchen hiesse,
+     * dass ein ESC nichts merkt — der Hinweis käme auf der nächsten Seite
+     * sofort wieder. Und wer das Kästchen ankreuzt und dann ESC drückt, hat
+     * seine Entscheidung genauso getroffen wie jemand, der den Knopf trifft.
      */
-    dialog.addEventListener('close', () => merken(sessionStorage, SPEICHER_SITZUNG))
+    dialog.addEventListener('close', () => {
+        if (nie?.checked) {
+            merken(localStorage, SPEICHER_DAUERHAFT)
+        }
+
+        merken(sessionStorage, SPEICHER_SITZUNG)
+    })
 
     weiter?.addEventListener('click', () => dialog.close())
-
-    nie?.addEventListener('click', () => {
-        merken(localStorage, SPEICHER_DAUERHAFT)
-        dialog.close()
-    })
 
     /*
      * Vom Block zum Dialog. showModal() verlangt, dass das Element nicht schon

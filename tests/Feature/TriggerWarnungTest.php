@@ -76,14 +76,66 @@ class TriggerWarnungTest extends TestCase
         $html = $this->get('/')->getContent();
 
         /*
-         * Beides sind gespeicherte Zustände im Browser. Die Knöpfe tragen
-         * deshalb ein Merkmal, über das die CSS sie ausblendet, solange das
-         * Skript sie nicht verdrahtet hat — ein Knopf, der auf Druck nichts
-         * tut, ist schlimmer als kein Knopf.
+         * Beides sind gespeicherte Zustände im Browser. Knopf und Kästchen
+         * tragen deshalb ein Merkmal, über das die CSS sie ausblendet, solange
+         * das Skript sie nicht verdrahtet hat — ein Bedienelement, das auf
+         * Druck nichts tut, ist schlimmer als gar keines.
          */
         $this->assertStringContainsString('data-trigger-braucht-js', $html);
         $this->assertStringContainsString('data-trigger-weiter', $html);
         $this->assertStringContainsString('data-trigger-nie', $html);
+    }
+
+    public function test_nicht_mehr_anzeigen_ist_ein_kontrollkaestchen(): void
+    {
+        /*
+         * Der Verein hat es selbst so beschrieben: „…oder aber auch auswählen
+         * kann ‚diese Meldung nicht mehr anzeigen‘“. Auswählen, nicht drücken —
+         * es ist eine Einstellung und keine Handlung. Als dritter Knopf stand
+         * es gleichrangig neben zwei Handlungen und zwang zu einer Entscheidung,
+         * die niemand treffen wollte.
+         *
+         * Und es muss ein natives <input> sein: Tastaturbedienung, Vorlesehilfe
+         * und der Zustand „ausgewählt“ kommen dann vom Browser.
+         */
+        $html = $this->get('/')->getContent();
+
+        $this->assertMatchesRegularExpression(
+            '/<input[^>]+type="checkbox"[^>]*data-trigger-nie/',
+            $html
+        );
+    }
+
+    public function test_beide_wege_aus_dem_dialog_sind_gleich_gebaut(): void
+    {
+        /*
+         * Erste Fassung: drei Bedienelemente in drei Größen, eines per ms-auto
+         * an den Rand geschoben. Jetzt kommen beide aus derselben
+         * Knopf-Komponente — dieselbe Polsterung, dieselbe Schriftgröße.
+         *
+         * Die Maße prüft der Browser-Test; hier steht nur, dass niemand wieder
+         * eigene Klassen danebenschreibt.
+         */
+        // Erst den Dialog herausschneiden: Der Notausgang im Seitenkopf trägt
+        // dieselbe Kennzeichnung und hat mit gutem Grund ein anderes Format.
+        preg_match('/<dialog[^>]*id="trigger-warnung".*?<\/dialog>/s', $this->get('/')->getContent(), $d);
+        $dialog = $d[0] ?? '';
+
+        $this->assertNotSame('', $dialog, 'Der Dialog fehlt');
+
+        preg_match('/<button[^>]*data-trigger-weiter[^>]*>/', $dialog, $weiter);
+        preg_match('/<a[^>]*data-notausgang[^>]*>/', $dialog, $exit);
+
+        $this->assertNotEmpty($weiter, 'Knopf „weiterlesen“ fehlt');
+        $this->assertNotEmpty($exit, 'Notausgang im Dialog fehlt');
+
+        // Die gemeinsame Geometrie der Knopf-Komponente, Größe „base“ — samt
+        // Rahmen, der bei der gefüllten Variante durchsichtig ist. Ohne ihn
+        // wäre der umrandete Knopf 2 px höher.
+        foreach (['px-6', 'py-3', 'text-base', 'rounded-full', 'border'] as $klasse) {
+            $this->assertStringContainsString($klasse, $weiter[0], "Knopf ohne {$klasse}");
+            $this->assertStringContainsString($klasse, $exit[0], "Notausgang ohne {$klasse}");
+        }
     }
 
     public function test_entwurf_schaltet_die_warnung_ab(): void

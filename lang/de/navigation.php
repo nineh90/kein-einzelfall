@@ -29,6 +29,7 @@ return [
     'datenschutz' => 'Datenschutz',
     'erwerbsminderungsrente' => 'Erwerbsminderungsrente',
     'fsm_erweitertes_hilfesystem' => 'FSM – Erweitertes Hilfesystem',
+    'gespeicherte_einstellungen' => 'Gespeicherte Einstellungen',
     'glossar' => 'Glossar',
     'impressum' => 'Impressum',
     'istanbul_konvention' => 'Istanbul-Konvention',

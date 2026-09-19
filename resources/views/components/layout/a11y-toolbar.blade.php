@@ -117,6 +117,11 @@
             </div>
         @endforeach
 
+        {{-- „Alles“ heisst seit dem 05.08.2026 wirklich alles: Der Knopf räumt
+             auch den Hinweis zu belastenden Inhalten ab und alles Weitere, was
+             in config/speicher.php steht. Vorher war nur die Darstellung
+             gemeint, und die Beschriftung wurde still falsch, als der zweite
+             gespeicherte Wert dazukam. --}}
         <button type="button" data-a11y-zuruecksetzen
                 class="mt-3 w-full rounded-full border border-line py-2 text-sm text-ink-soft hover:bg-green-mist">
             Alles zurücksetzen
@@ -124,7 +129,8 @@
 
         <p class="mt-3 text-xs text-ink-soft">
             Die Einstellungen bleiben auf diesem Gerät gespeichert.
-            <a href="/barrierefreiheit" class="text-green-deep underline">Mehr zur Barrierefreiheit</a>
+            <a href="/barrierefreiheit#gespeicherte-einstellungen"
+               class="text-green-deep underline">Was gespeichert wird</a>
         </p>
     </div>
 </div>

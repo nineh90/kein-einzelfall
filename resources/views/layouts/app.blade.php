@@ -125,17 +125,37 @@
     })();
     </script>
 
-    {{-- Entscheidet vor dem ersten Zeichnen, ob die Trigger-Warnung zu zeigen ist.
+    {{-- Was diese Seite im Browser ablegt — und was davor zu geschehen hat.
 
-         Muss hier oben stehen und nicht im Bundle: Wer den Hinweis dauerhaft
-         abbestellt hat, soll ihn nicht bei jedem Seitenaufruf kurz aufblitzen
-         sehen. Dasselbe Muster wie bei den Darstellungs-Einstellungen darüber —
-         und aus demselben Grund kein Schönheitsthema.
+         Zwei Dinge, beide bewusst hier oben und nicht im Bundle:
+
+         1. `window.keSpeicher` ist die vollständige Liste der Schlüssel aus
+            config/speicher.php. Sie steht auf *jeder* Seite, damit „Alles
+            zurücksetzen“ in der Darstellungs-Toolbar auch wirklich alles
+            abräumt und nicht nur die eigenen Werte. Genau das war der Zustand,
+            als der zweite gespeicherte Wert dazukam.
+
+         2. Die Trigger-Warnung wird versteckt, bevor der Browser zeichnet. Wer
+            sie dauerhaft abbestellt hat, soll sie nicht bei jedem Seitenaufruf
+            kurz aufblitzen sehen — dasselbe Muster wie bei den
+            Darstellungs-Einstellungen darüber, und aus demselben Grund kein
+            Schönheitsthema.
 
          Hier wird nur versteckt, nie gezeigt: Das Verdrahten übernimmt
          resources/js/trigger-warnung.js, sichtbar ist der Hinweis schon aus dem
          Server-HTML heraus. --}}
+    @php
+        // Nicht direkt in @json(): Die Direktive trennt ihre Argumente am
+        // Komma und zerlegt damit den Closure-Ausdruck.
+        $speicherKarte = collect(config('speicher.eintraege', []))
+            ->mapWithKeys(fn ($e) => [$e['schluessel'] => [
+                'local' => $e['local'] ?? [],
+                'session' => $e['session'] ?? [],
+            ]]);
+    @endphp
     <script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
+    window.keSpeicher = @json($speicherKarte);
+
     (function () {
         try {
             if (localStorage.getItem('ke.trigger.aus') === '1'

@@ -171,6 +171,26 @@ body {
   font-weight: 600;
 }
 
+/* Zeigefinger auf allem, was man druecken kann.
+
+   <a> bringt ihn vom Browser mit, <button> nicht — eine alte UA-Eigenheit, keine
+   Absicht. Im Projekt hatte deshalb jedes <summary> die Klasse `cursor-pointer`
+   einzeln bekommen und jedes <button> gar keine: der Knopf im Trigger-Dialog,
+   die Schalter der Darstellungs-Toolbar, "Absenden" im Kontaktformular und
+   "Suchen" im Blog. Aufgefallen ist es an einem davon.
+
+   Deshalb eine Regel statt vier Klassen — der naechste Knopf soll ihn
+   automatisch haben.
+
+   Abgeschaltete Knoepfe bleiben aussen vor; dort waere der Zeigefinger die
+   falsche Auskunft. Der grosse Mauszeiger aus den Darstellungs-Einstellungen
+   ueberschreibt das hier mit !important, und das ist so gewollt: Wer ihn
+   einschaltet, will ihn ueberall. */
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']) {
+  cursor: pointer;
+}
+
 /* Sichtbarer Fokus. Im Mockup fehlt der komplett — hier nicht verhandelbar. */
 :focus-visible {
   outline: 3px solid var(--color-green);

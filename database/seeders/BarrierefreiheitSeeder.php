@@ -39,7 +39,40 @@ class BarrierefreiheitSeeder extends Seeder
             ]);
         }
 
+        self::speicherUebersichtAnhaengen($seite);
+
         $this->command?->info('Seite „Barrierefreiheit" angelegt.');
+    }
+
+    /**
+     * Die Übersicht über das, was die Seite im Browser ablegt — mit Knöpfen zum
+     * Zurücksetzen.
+     *
+     * Steht am Ende der Seite und nicht im Text darüber: Die Erklärung, *was*
+     * gespeichert wird, gehört in den Fliesstext; der Weg, es *loszuwerden*,
+     * gehört ans Ende, wo man ihn ansteuern kann. Der Fuss verlinkt direkt auf
+     * den Anker.
+     *
+     * Eigene Methode und öffentlich, damit die Migration sie auf bestehenden
+     * Installationen nachziehen kann, ohne den ganzen Seeder laufen zu lassen —
+     * der löscht die Bausteine der Seite und nähme dem Verein damit jede
+     * Änderung daran.
+     */
+    public static function speicherUebersichtAnhaengen(Page $seite): bool
+    {
+        if ($seite->blocks()->where('typ', 'speicher_uebersicht')->exists()) {
+            return false;
+        }
+
+        $seite->blocks()->create([
+            'typ' => 'speicher_uebersicht',
+            'position' => (int) $seite->blocks()->max('position') + 1,
+            // Ohne Daten: Überschrift und Einleitung kommen aus den
+            // Übersetzungen, die Liste selbst aus config/speicher.php.
+            'data' => [],
+        ]);
+
+        return true;
     }
 
     private function abschnitte(): array

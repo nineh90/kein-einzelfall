@@ -97,6 +97,9 @@ class FarbkontrastTest extends TestCase
             ['Badge: Fliesstext auf hellgruen', $p['ink'], $p['green-mist'], 4.5],
             ['Badge: Akzenttext auf hellgruen', $p['green-deep'], $p['green-mist'], 4.5],
             ['Notausgang: Schrift auf Warnfarbe', $p['card'], $p['alert'], 4.5],
+            // Der umrandete Notausgang im Dialog der Trigger-Warnung: Warnton
+            // als Schrift und als Rahmen auf der Kartenflaeche.
+            ['Notausgang umrandet: Warnfarbe auf Karte', $p['alert'], $p['card'], 4.5],
 
             // Die CI-Farbe selbst wird nur dort eingesetzt, wo 3:1 genuegt:
             // Zierlinien, Icons, Rahmen, Logo.

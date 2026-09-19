@@ -115,9 +115,13 @@ php artisan db:seed --class=AltseiteSeeder    # JSON → Datenbank
 ### Selbst ausprobieren
 
 - **Trigger-Warnung** — kommt beim ersten Aufruf. „Weiterlesen" schliesst sie für
-  diesen Besuch, „nicht mehr anzeigen" dauerhaft. Wieder herbeiholen: im Browser
-  `localStorage.removeItem('ke.trigger.aus'); sessionStorage.clear()` und neu laden.
-  Ohne JavaScript steht sie als Block oben auf der Seite — genau so soll es sein.
+  diesen Besuch, das Kästchen „nicht mehr anzeigen" dauerhaft. Ohne JavaScript
+  steht sie als Block oben auf der Seite — genau so soll es sein.
+- **Gespeicherte Einstellungen** — im Fuß, oder direkt
+  `/barrierefreiheit#gespeicherte-einstellungen`. Zeigt, was im Browser liegt,
+  und setzt es einzeln oder komplett zurück. Danach ist die Trigger-Warnung
+  wieder da. Was gespeichert wird, steht in `config/speicher.php` — **wer etwas
+  Neues speichert, trägt es dort ein.**
 - **Notausgang** — Button oben rechts, in der Mobil-Leiste unten, oder **3× ESC**.
   Führt auf wetter.com und ersetzt den History-Eintrag. Steht auch im Dialog der
   Trigger-Warnung.

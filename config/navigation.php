@@ -78,6 +78,24 @@ return [
             ['schluessel' => 'impressum', 'label' => 'Impressum',   'url' => '/impressum'],
             ['schluessel' => 'datenschutz', 'label' => 'Datenschutz', 'url' => '/datenschutz'],
             ['schluessel' => 'barrierefreiheit', 'label' => 'Barrierefreiheit', 'url' => '/barrierefreiheit'],
+            /*
+             * Der Weg zurück.
+             *
+             * Diese Seite legt zwei Einstellungen im Browser ab (siehe
+             * config/speicher.php). Wer eine davon gewählt hat — vor allem
+             * „Hinweis nicht mehr anzeigen“ —, muss sie auch wieder loswerden
+             * können, ohne die Browser-Einstellungen zu durchsuchen. Auf einem
+             * geteilten Gerät ist das kein theoretisches Problem.
+             *
+             * Springt in den Abschnitt am Ende von /barrierefreiheit statt auf
+             * eine eigene Seite: Dort steht schon, was die Website tut, und die
+             * Auskunft gehört zusammen mit dem Schalter dazu an einen Ort.
+             */
+            [
+                'schluessel' => 'gespeicherte_einstellungen',
+                'label' => 'Gespeicherte Einstellungen',
+                'url' => '/barrierefreiheit#gespeicherte-einstellungen',
+            ],
         ],
         /*
          * Reine Links, keine eingebetteten Zeitleisten oder Zählwerke: Solange

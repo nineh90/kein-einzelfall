@@ -254,7 +254,12 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Bild überträgt die IP-Adresse unserer Besucherinnen dorthin.
 - [ ] **Kontoinhaber für den Spenden-QR-Code.** Genau so, wie er bei der Bank
   hinterlegt ist. Er landet im Überweisungsformular der spendenden Person; weicht
-  er ab, kommt die Überweisung zurück. Im Panel im Baustein „Spendenmöglichkeiten".
+  er ab, kommt die Überweisung zurück. Im Panel im Baustein „Spendenmöglichkeiten"
+  auf der Startseite (Feld „Kontoinhaber"); leer heisst „KE!N EINZELFALL e.V.".
+- [ ] **PayPal-Spendenlink bestätigen.** Auf der Startseite steht der Link der
+  Altseite (`paypal.com/donate?business=paypal@kein-einzelfall.de`). Falls der
+  Verein inzwischen einen PayPal.me-Link oder eine Spendenkampagne hat, im
+  Panel im Baustein „Spendenmöglichkeiten" ersetzen.
 - [ ] **Die vier neuen Seiten füllen:** Schutzkonzept, Beschwerdemanagement,
   Projekte, Publikationen. Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
@@ -293,6 +298,11 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
       Altseite und beschreibt deren Tools (OneTap, hu-manity-Banner, Google Fonts) —
       nichts davon setzen wir ein. Was wir tatsächlich verarbeiten, steht in
       `docs/Komponenten.md` Abschnitt 6 und 7.
+      **Für den Abschnitt „Speicherung im Browser“ ist `config/speicher.php` die
+      Vorlage** — dort steht jeder Schlüssel, den die Seite ablegt, mit einer
+      verständlichen Beschreibung. Die Liste ist bewusst die einzige Quelle;
+      wächst sie, wächst der Abschnitt mit. Rechtlich einwilligungsfrei
+      (§ 25 Abs. 2 Nr. 2 TDDDG), aber nennen muss man es.
 
 ### B2 · Sollte
 - [ ] Hosting entscheiden (VPS Deutschland) + **AVV mit dem Hoster**

@@ -18,10 +18,14 @@
  * Inline-Script im <head>. Wenn Vite hier ausfällt, muss er trotzdem funktionieren.
  */
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
+import { speicherVerdrahten } from './speicher'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
 
 toolbarVerdrahten()
 leselinieVerdrahten()
+
+// Nur auf /barrierefreiheit vorhanden; steigt sonst sofort wieder aus.
+speicherVerdrahten()
 
 // Steht bewusst zuletzt. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.

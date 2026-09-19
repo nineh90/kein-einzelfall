@@ -53,6 +53,11 @@ const SEITEN = [
     ['Blog-Übersicht', '/aktuelles'],
     ['Veranstaltungen', '/veranstaltungen'],
     ['Rechtstext', '/impressum'],
+    // Trägt die Übersicht der gespeicherten Einstellungen samt Zurücksetzen —
+    // ausgerechnet die Seite, auf der Barrierefreiheit versprochen wird, sollte
+    // ungeprüft nicht bleiben.
+    ['Barrierefreiheit', '/barrierefreiheit'],
+    ['Glossar', '/glossar'],
     ['Fehlerseite', '/diese-seite-gibt-es-nicht'],
 ]
 

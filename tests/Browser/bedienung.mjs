@@ -199,10 +199,57 @@ console.log('\nTrigger-Warnung')
         await wiederkehr.locator('#trigger-warnung').isVisible(),
         'genau der Unterschied, den der Verein gefordert hat')
 
-    await wiederkehr.locator('#trigger-warnung [data-trigger-nie]').click()
+    // „Nicht mehr anzeigen“ ist ein Kontrollkästchen: ankreuzen, dann schliessen.
+    await wiederkehr.locator('#trigger-warnung [data-trigger-nie]').check()
+    await wiederkehr.locator('#trigger-warnung [data-trigger-weiter]').click()
     await wiederkehr.reload({ waitUntil: 'networkidle' })
     pruefe('„nicht mehr anzeigen“ hält dauerhaft',
         !(await wiederkehr.locator('#trigger-warnung').isVisible()))
+
+    // Ankreuzen und dann ESC ist dieselbe Entscheidung. Sie hing früher am
+    // Klick und wäre auf diesem Weg verlorengegangen.
+    const perEsc = await oeffnen({ trigger: true })
+    await perEsc.locator('#trigger-warnung [data-trigger-nie]').check()
+    await perEsc.keyboard.press('Escape')
+    await perEsc.reload({ waitUntil: 'networkidle' })
+    pruefe('gilt auch, wenn der Dialog per Escape geschlossen wird',
+        !(await perEsc.locator('#trigger-warnung').isVisible()))
+}
+
+console.log('\nTrigger-Warnung: Aussehen der Bedienelemente')
+{
+    /*
+     * Kevins Rückmeldung zur ersten Fassung: „Die Buttons gehen gar nicht.“
+     * Sie waren unterschiedlich groß und einer per ms-auto an den Rand
+     * geschoben. Jetzt kommen beide aus derselben Knopf-Komponente — dieser
+     * Test hält fest, dass sie nicht wieder auseinanderlaufen.
+     */
+    const seite = await oeffnen({ trigger: true })
+    const dialog = seite.locator('#trigger-warnung')
+
+    const weiter = await dialog.locator('[data-trigger-weiter]').boundingBox()
+    const exit = await dialog.locator('a[data-notausgang]').boundingBox()
+
+    pruefe('beide Knöpfe sind gleich hoch',
+        Math.abs(weiter.height - exit.height) < 1,
+        `weiterlesen ${Math.round(weiter.height)} px, Notausgang ${Math.round(exit.height)} px`)
+
+    pruefe('beide Knöpfe stehen auf einer Linie',
+        Math.abs(weiter.y - exit.y) < 1,
+        'kein ms-auto, kein Umbruch')
+
+    // Auf dem Handy über die volle Breite: Wer in einer angespannten Lage
+    // tippt, trifft eine ganze Zeile zuverlässiger als eine halbe.
+    const mobil = await oeffnen({ trigger: true, breite: 390 })
+    const mDialog = mobil.locator('#trigger-warnung')
+    const mWeiter = await mDialog.locator('[data-trigger-weiter]').boundingBox()
+    const mExit = await mDialog.locator('a[data-notausgang]').boundingBox()
+
+    pruefe('mobil sind beide gleich breit',
+        Math.abs(mWeiter.width - mExit.width) < 1,
+        `${Math.round(mWeiter.width)} px vs. ${Math.round(mExit.width)} px`)
+
+    pruefe('mobil stehen sie untereinander', mExit.y > mWeiter.y + mWeiter.height - 1)
 }
 
 console.log('\nTrigger-Warnung ohne JavaScript')
@@ -218,11 +265,73 @@ console.log('\nTrigger-Warnung ohne JavaScript')
         await dialog.locator('a[data-notausgang]').isVisible())
 
     // Sie könnten nichts speichern und täten auf Druck nichts.
-    pruefe('die Knöpfe zum Wegklicken bleiben verborgen',
+    pruefe('der Knopf zum Wegklicken bleibt verborgen',
         !(await dialog.locator('[data-trigger-weiter]').isVisible()))
+
+    pruefe('das Kästchen „nicht mehr anzeigen“ bleibt verborgen',
+        !(await dialog.locator('[data-trigger-nie]').isVisible()))
 
     pruefe('stattdessen steht da, warum',
         await dialog.locator('[data-trigger-ohne-js]').isVisible())
+}
+
+// --- Gespeicherte Einstellungen zurücksetzen --------------------------------
+// Der Weg zurück. Wer „Hinweis nicht mehr anzeigen“ gewählt hat, muss das
+// widerrufen können, ohne die Browser-Einstellungen zu durchsuchen — auf einem
+// geteilten Gerät ist das kein theoretisches Problem.
+
+console.log('\nGespeicherte Einstellungen')
+{
+    // Erst etwas speichern: Hinweis dauerhaft abbestellen.
+    const erst = await oeffnen({ trigger: true })
+    await erst.locator('#trigger-warnung [data-trigger-nie]').check()
+    await erst.locator('#trigger-warnung [data-trigger-weiter]').click()
+
+    await erst.goto(BASIS + '/barrierefreiheit', { waitUntil: 'networkidle' })
+    const zeile = erst.locator('[data-speicher-eintrag="trigger"]')
+
+    pruefe('die Übersicht zeigt den gespeicherten Zustand',
+        (await zeile.locator('[data-speicher-status]').textContent()).trim().length > 0)
+
+    pruefe('der Zurücksetzen-Knopf ist bedienbar, solange etwas gespeichert ist',
+        await zeile.locator('[data-speicher-loeschen]').isEnabled())
+
+    await zeile.locator('[data-speicher-loeschen]').click()
+
+    pruefe('nach dem Zurücksetzen ist der Speicher leer',
+        await erst.evaluate(() => localStorage.getItem('ke.trigger.aus') === null))
+
+    pruefe('der Knopf schaltet sich danach ab',
+        !(await zeile.locator('[data-speicher-loeschen]').isEnabled()),
+        'sonst drückt man ins Leere')
+
+    // Und der Hinweis ist wirklich zurück — das ist der Punkt der Übung.
+    await erst.goto(BASIS + '/', { waitUntil: 'networkidle' })
+    pruefe('der Hinweis erscheint danach wieder',
+        await erst.locator('#trigger-warnung').isVisible())
+}
+
+console.log('\n„Alles zurücksetzen“ in der Darstellungs-Toolbar')
+{
+    /*
+     * Der Knopf heisst „Alles zurücksetzen“ und räumte lange nur die
+     * Darstellung ab. Mit der Trigger-Warnung kam ein zweiter gespeicherter
+     * Wert dazu, und die Beschriftung wurde stillschweigend falsch.
+     */
+    const seite = await oeffnen({ trigger: true })
+    await seite.locator('#trigger-warnung [data-trigger-nie]').check()
+    await seite.locator('#trigger-warnung [data-trigger-weiter]').click()
+
+    await seite.locator('button[aria-controls="a11y-panel"]').click()
+    await seite.locator('[data-a11y-setzen="kontrast"][data-a11y-wert="hoch"]').click()
+    await seite.locator('[data-a11y-zuruecksetzen]').click()
+
+    pruefe('räumt die Darstellung ab',
+        await seite.evaluate(() => document.documentElement.dataset.kontrast) === '')
+
+    pruefe('räumt auch den Hinweis ab',
+        await seite.evaluate(() => localStorage.getItem('ke.trigger.aus') === null),
+        '„Alles“ muss alles heissen')
 }
 
 // --- Auswertung -------------------------------------------------------------

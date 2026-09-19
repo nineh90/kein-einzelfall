@@ -1011,10 +1011,10 @@ Drei Dinge, die sonst leicht danebengehen:
    gemacht hat. Der Name kommt über `aria-labelledby` von einem `<p>`. Auch
    Überschriften aus den Bausteinen werden beim Rendern im Dialog verworfen,
    damit das nicht über das Panel wieder hereinkommt.
-2. **Die Knöpfe erscheinen erst, wenn sie verdrahtet sind** (`ke-trigger-bereit`
-   an `<html>`), nicht schon dann, wenn JavaScript grundsätzlich läuft. Ein
-   abgebrochenes Bundle ist sonst genau der Fall, der durchrutscht und tote
-   Knöpfe hinterlässt.
+2. **Knopf und Kästchen erscheinen erst, wenn sie verdrahtet sind**
+   (`ke-trigger-bereit` an `<html>`), nicht schon dann, wenn JavaScript
+   grundsätzlich läuft. Ein abgebrochenes Bundle ist sonst genau der Fall, der
+   durchrutscht und tote Bedienelemente hinterlässt.
 3. **Versteckt wird vor dem ersten Zeichnen**, über ein Inline-Skript im `<head>`
    — dasselbe Muster wie bei den Darstellungs-Einstellungen. Wer den Hinweis
    abbestellt hat, soll ihn nicht bei jedem Seitenaufruf kurz aufblitzen sehen.
@@ -1023,6 +1023,35 @@ Gespeichert wird an zwei Orten, und das ist der Unterschied, den der Verein
 gefordert hat: `sessionStorage` für „weggeklickt" (kommt beim nächsten Besuch
 wieder), `localStorage` für „nicht mehr anzeigen". Beides ist eine Einstellung
 auf ausdrücklichen Wunsch und damit einwilligungsfrei; an den Server geht nichts.
+
+**Die Bedienelemente wurden am 05.08.2026 überarbeitet** — Rückmeldung von Kevin
+zur ersten Fassung: „Die Buttons gehen gar nicht." Sie waren zu Recht bemängelt:
+drei Elemente in drei Größen, eines per `ms-auto` an den Rand geschoben.
+
+Jetzt gilt:
+
+- **„Nicht mehr anzeigen" ist ein Kontrollkästchen, kein Knopf.** Der Verein hat
+  es selbst so beschrieben: „…oder aber auch *auswählen* kann". Auswählen, nicht
+  drücken — es ist eine Einstellung und keine Handlung. Als dritter Knopf stand
+  es gleichrangig neben zwei Handlungen und zwang zu einer Entscheidung, die
+  niemand treffen wollte. Als Kästchen bleiben unten genau zwei Wege:
+  weiterlesen oder gehen.
+- **Beide Wege kommen aus `x-ui.button`**, in derselben Größe. Eigene Klassen
+  danebenzuschreiben ist genau der Weg, auf dem sie beim ersten Mal
+  auseinandergelaufen sind.
+- **Jede Knopf-Variante trägt jetzt einen Rahmen**, die gefüllten einen
+  durchsichtigen. Ohne das ist ein umrandeter Knopf 2 px höher als ein gefüllter
+  daneben, weil der Rahmen zur Höhe dazukommt — das betraf bisher **jedes** Paar
+  aus `primary` und `ghost` im ganzen Projekt, nicht nur diesen Dialog.
+- Neue Variante **`alert`** (umrandet, Warnfarbe), ausschliesslich für den
+  Notausgang. Bewusst **nicht** in `PageForm::KNOPF_AUSSEHEN`: Im Panel soll
+  niemand versehentlich einen roten Spendenknopf bauen können.
+
+Gemerkt wird beim `close`-Ereignis und nicht beim Klick. Wer das Kästchen
+ankreuzt und dann ESC drückt, hat seine Entscheidung genauso getroffen — am
+Klick zu horchen hätte diesen Weg verschluckt. `bedienung.mjs` spielt beide
+Wege durch und misst zusätzlich, dass die zwei Knöpfe gleich hoch sind und auf
+einer Linie stehen.
 
 **Der Inhalt ist eine ganz normale Seite** (`Page::TRIGGER_SLUG`, `/trigger-warnung`)
 — mit Übersetzungen, Leichter Sprache und Pflege im Panel. Ausschalten heisst:
@@ -1140,3 +1169,65 @@ seine Adresse aber nicht. Eine geratene Adresse führt entweder ins Leere oder,
 schlimmer, zu einem fremden Kanal. Die Zeile steht auskommentiert in
 `config/navigation.php`; es fehlt nur die Adresse. Discord fehlt bewusst — der
 Verein hat die Plattform in derselben Besprechung selbst infrage gestellt.
+
+## 18. Gespeicherte Einstellungen — der Weg zurück (05.08.2026)
+
+Anlass: Kevins Einwand, dass jede Einstellung, die im Browser landet, auch
+wieder rückgängig zu machen sein muss. Sein Vorschlag war ein Fusszeilen-Link,
+der die Trigger-Warnung erneut öffnet.
+
+**Die Idee stimmt, der Weg hatte zwei Haken.** Man müsste ausgerechnet das
+Fenster aufrufen, das man abbestellt hat, um es wieder zu bestellen. Und sie
+trägt genau einen Fall: Beim zweiten gespeicherten Wert bräuchte es einen
+zweiten Link, beim dritten einen dritten. Der Verein sagt selbst, dass später
+mehr dazukommt.
+
+### Was gebaut ist
+
+**`config/speicher.php` ist die eine Liste.** Dort steht jeder Schlüssel, den
+diese Website im Browser ablegt. Drei Stellen lesen daraus, keine schreibt eine
+eigene Liste:
+
+- der Baustein `speicher_uebersicht` am Ende von `/barrierefreiheit`
+- der Knopf „Alles zurücksetzen“ in der Darstellungs-Toolbar
+- die Datenschutzerklärung — sie **muss** diese Liste nennen
+
+Der Fuss bekommt einen Link „Gespeicherte Einstellungen“, der auf den Anker
+`#gespeicherte-einstellungen` springt. Kevins Fusszeilen-Link also, nur mit
+einem Ziel, das mitwächst.
+
+Die Übersicht zeigt je Eintrag den tatsächlichen Zustand („Auf diesem Gerät
+gespeichert“ / „Nichts gespeichert“), einen Knopf zum Zurücksetzen und darunter
+einen für alles zusammen. Der Zustand steht in einem `aria-live="polite"` —
+sonst passiert beim Drücken für eine Vorlesehilfe sichtbar nichts. Ist nichts
+gespeichert, wird der Knopf abgeschaltet statt entfernt: Verschwände er, wanderte
+bei jedem Klick die halbe Zeile und die Tastaturreihenfolge mit ihr.
+
+### Der Fehler, den das nebenbei behebt
+
+**„Alles zurücksetzen“ in der Darstellungs-Toolbar räumte nicht alles ab.**
+
+Solange es nur die Darstellungs-Einstellungen gab, stimmte die Beschriftung von
+selbst. Mit der Trigger-Warnung kam ein zweiter gespeicherter Wert dazu, und sie
+wurde stillschweigend falsch — der Knopf löschte weiterhin nur seinen eigenen
+Schlüssel. Genau die Sorte Halbwahrheit, die man einer Zielgruppe nicht zumuten
+sollte, die auf verlässliche Auskünfte angewiesen ist.
+
+Der Knopf bedient sich jetzt aus derselben Liste. Damit das von jeder Seite aus
+geht, liegt sie als `window.keSpeicher` im Kopf jeder Seite — dasselbe Muster
+wie `window.keDarstellung` daneben.
+
+### Für später
+
+> ⚠️ **Wer künftig etwas im Browser speichert, trägt es in `config/speicher.php`
+> ein.** Sonst lässt es sich nicht zurücksetzen, und die Datenschutzerklärung
+> wird unvollständig. Zwei Tests in `SpeicherTest` halten das in beide
+> Richtungen fest: Ein wörtlich im Code stehender Schlüssel muss in der Liste
+> sein, und ein Eintrag der Liste, den niemand mehr schreibt, fliegt auf.
+
+Rechtlich ist alles davon eine Einstellung auf ausdrücklichen Wunsch und damit
+einwilligungsfrei (§ 25 Abs. 2 Nr. 2 TDDDG): kein Tracking, keine Kennung,
+nichts geht an den Server. Erwähnt werden muss es trotzdem — die
+Datenschutzerklärung wird ohnehin neu geschrieben, und diese Liste ist die
+Vorlage für den entsprechenden Abschnitt.
+
