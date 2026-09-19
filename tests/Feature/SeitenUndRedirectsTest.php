@@ -53,6 +53,24 @@ class SeitenUndRedirectsTest extends TestCase
             ->assertSee('<title>Verein - Kein Einzelfall e.V.</title>', false);
     }
 
+    public function test_seiten_ohne_vollertitel_bekommen_einen_echten_titel(): void
+    {
+        /*
+         * Regression: Vom 30.07. bis 19.09.2026 stand auf jeder Seite, die nur
+         * `title` und kein `vollertitel` setzt, wörtlich „@yield('title', …)“
+         * im <title> — die Direktiven-Kette im Layout war für Blade an einer
+         * Stelle unlesbar. Betroffen: Glossar, Aktuelles, Veranstaltungen,
+         * Fehlerseiten. Aufgefallen ist es nur im ModuleTest, und dort an der
+         * falschen Assertion.
+         */
+        foreach (['/glossar', '/aktuelles', '/veranstaltungen', '/gibt-es-nicht'] as $pfad) {
+            $html = $this->get($pfad)->getContent();
+
+            $this->assertStringNotContainsString('@yield', $html, "Unkompilierte Direktive auf {$pfad}");
+            $this->assertMatchesRegularExpression('#<title>[^<@]+ - Kein Einzelfall e\.V\.</title>#', $html, $pfad);
+        }
+    }
+
     public function test_alle_veroeffentlichten_seiten_sind_erreichbar(): void
     {
         /*

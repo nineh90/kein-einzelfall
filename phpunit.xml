@@ -18,6 +18,10 @@
         </include>
     </source>
     <php>
+        <!-- Der ganze Lauf braucht rund 125 MB, PHP erlaubt in der CLI 128 MB:
+             Ein Baustein mehr im Panel-Formular, und `php artisan test` stirbt
+             mitten in Filament mit „Allowed memory size exhausted“. -->
+        <ini name="memory_limit" value="512M"/>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>

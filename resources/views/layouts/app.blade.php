@@ -35,8 +35,19 @@
 
          Ohne `vollertitel` gilt weiterhin das Muster der Altseite
          („%Seite% - Kein Einzelfall e.V.“), damit sich die Suchergebnisse beim
-         Umzug nicht verändern. --}}
-    <title>@hasSection('vollertitel')@yield('vollertitel')@else@yield('title', 'Startseite') - Kein Einzelfall e.V.@endif</title>
+         Umzug nicht verändern.
+
+         Als Ausdruck und nicht als Direktiven-Kette: `@else@yield(…)` ohne
+         Leerzeichen dazwischen erkennt Blade nicht — nach dem „e“ von else ist
+         kein Wortende, wie es die Direktiven-Regel verlangt — und gab auf jeder
+         Seite ohne `vollertitel` (Glossar, Aktuelles, Veranstaltungen,
+         Fehlerseiten) wörtlich „@yield('title', …)“ als Titel aus.
+         Leerzeichen dazwischen ginge auch, landete aber im Titel selbst.
+         Die Abschnitte sind schon maskiert (Blade maskiert Inline-Sections),
+         darum {!! !!}. --}}
+    <title>{!! View::hasSection('vollertitel')
+        ? View::yieldContent('vollertitel')
+        : View::yieldContent('title', 'Startseite').' - Kein Einzelfall e.V.' !!}</title>
     <meta name="description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
 
     {{-- Kanonische Adresse ohne Query-Parameter. Die Altseite setzt sie auf jeder

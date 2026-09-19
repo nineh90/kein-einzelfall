@@ -39,7 +39,9 @@ class MehrsprachigkeitTest extends TestCase
     {
         // Der Kern der Zusage: die 24 Adressen der Altseite ändern sich nicht.
         // Über pfad() statt über den Slug — die Startseite liegt unter „/“.
-        foreach (Page::where('locale', 'de')->get() as $seite) {
+        // Nur veröffentlichte: Die vier neuen Bereiche liegen als Entwurf
+        // ohne Text vor und antworten mit 404, bis der Verein sie freigibt.
+        foreach (Page::where('locale', 'de')->veroeffentlicht()->get() as $seite) {
             $this->get($seite->pfad())->assertOk();
         }
 

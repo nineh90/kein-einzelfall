@@ -15,6 +15,19 @@ use Tests\TestCase;
  */
 class GlossarTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /*
+         * Leer anfangen. Die Migration `glossar_startbestand_anlegen` füllt
+         * das Glossar beim Anlegen des Schemas — auch in der Testdatenbank.
+         * Diese Tests beschreiben ihre Einträge selbst (welche Buchstaben
+         * belegt sind, wie sortiert wird), und „GdB“ stünde sonst zweimal da.
+         */
+        GlossaryTerm::query()->delete();
+    }
+
     private function eintrag(array $daten = []): GlossaryTerm
     {
         return GlossaryTerm::create(array_merge([

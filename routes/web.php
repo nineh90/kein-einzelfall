@@ -127,10 +127,14 @@ Route::get('/module-demo', function () {
     $dokumente = collect($manifest)
         ->filter(fn ($d) => in_array('/erwerbsminderungsrente/', $d['verlinkt_auf']))
         ->sortBy('titel')
+        // Wie der AltseiteSeeder: die eigene Kopie unter /dokumente, nicht
+        // mehr die Altseite. Mit der externen Adresse zeigte die Vorschau
+        // „von kein-einzelfall.de“ statt Dateityp und Grösse — also nicht
+        // das, was auf den echten Seiten steht.
         ->map(fn ($d) => [
             'titel' => $d['titel'],
-            'url' => 'https://kein-einzelfall.de'.$d['alt_url'],
-            'bytes' => $d['bytes'],
+            'url' => Dokument::pfad($d['alt_url']),
+            'bytes' => Dokument::groesse($d['alt_url']) ?? $d['bytes'],
         ])
         ->values()
         ->all();
