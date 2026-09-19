@@ -5,7 +5,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Artisan;
 
 /**
- * Legt die drei Sprachen (Deutsch, Englisch, Russisch) an, falls sie fehlen.
+ * Legt die Sprachen des Startbestands an, falls sie fehlen (bis zum
+ * 19.09.2026 Deutsch, Englisch, Russisch; seitdem ohne Russisch — siehe
+ * SprachenSeeder und die Migration `russisch_entfernen`).
  *
  * Dieselbe Ursache wie bei der Startseite: Der `SprachenSeeder` läuft nur bei
  * leerer Datenbank (über den `AltseiteSeeder`), auf dem Server gar nicht. Wer
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Artisan;
  * „Sprachen“ nichts, und der Sprachumschalter hatte nichts anzubieten.
  *
  * Bewusst nur die Sprach-*Zeilen*, kein Inhalt und keine Freischaltung:
- * Englisch und Russisch bleiben `aktiv = false`. Das ist die Sicherheitslinie
+ * Englisch bleibt `aktiv = false`. Das ist die Sicherheitslinie
  * aus dem Projekt — eine Sprache wird erst sichtbar, wenn der Verein ihre
  * Inhalte freigegeben hat. Die maschinellen Demo-Übersetzungen schaltet ein
  * eigener Seeder frei, der bewusst *nicht* automatisch auf dem Server läuft.

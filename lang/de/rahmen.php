@@ -179,8 +179,7 @@ return [
      *
      * Die Beschriftungen des Bausteins — nicht die Angaben des Vereins (IBAN,
      * Empfänger, Einleitung), die kommen aus dem Datensatz. Der Baustein steht
-     * seit KEV-10 auf der Startseite, und die gibt es auch auf Englisch und
-     * Russisch.
+     * seit KEV-10 auf der Startseite, und die gibt es auch auf Englisch.
      */
     'spenden' => [
         'ueberweisung' => 'Überweisung',

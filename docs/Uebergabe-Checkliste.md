@@ -161,11 +161,14 @@ noch, und zwar bewusst:
   mehrsprachige Hotlines? Das „Hilfetelefon Gewalt gegen Frauen" (116 016)
   nennt selbst 18 Sprachen; das gehört geprüft und, wo zutreffend, in die
   jeweilige Sprachfassung übernommen.
-- **Muttersprachliches Gegenlesen.** Die englischen und russischen
-  Bedientexte in `lang/en/` und `lang/ru/` sind noch von niemandem geprüft
-  worden, der die Sprache spricht. Beide Sprachen stehen deshalb auf
-  **nicht sichtbar** und erscheinen in keinem Umschalter. Erst nach dem
-  Gegenlesen im Panel unter „Sprachen" freischalten.
+- **Muttersprachliches Gegenlesen.** Die englischen Bedientexte in `lang/en/`
+  sind noch von niemandem geprüft worden, der die Sprache spricht. Englisch
+  steht deshalb auf **nicht sichtbar** und erscheint in keinem Umschalter.
+  Erst nach dem Gegenlesen im Panel unter „Sprachen" freischalten.
+  Russisch gibt es seit dem 19.09.2026 nicht mehr (Entscheidung Kevin: nie
+  gepflegt, niemand konnte es gegenlesen). Wird es doch gewünscht, legt der
+  Verein es im Panel an — die Bedientexte (`lang/ru/`) müssten dann neu
+  entstehen.
 
 ### A7 · VVT-Liste — vier Rückfragen vor dem Einpflegen
 
@@ -353,10 +356,10 @@ Position von AN-268 stehen. Die vollständige Einordnung steht in
   und war in der gekürzten Fassung verschwunden. Gegen einen ausdrücklich
   unbekannten („wirren") Altbestand stehen 1.299 € pauschal — das größte
   kaufmännische Risiko im Projekt.
-- **Mehrsprachigkeit.** Steht in **keiner** Position von AN-268. Drei Sprachen
-  bedeuten dreifachen Pflegeaufwand, dreifache Qualitätssicherung, eine
-  zusätzliche Displayschrift (Fraunces kann kein Kyrillisch) und einen
-  erweiterten Barrierefreiheits-Durchlauf je Sprache. Das technische
+- **Mehrsprachigkeit.** Steht in **keiner** Position von AN-268. Jede weitere
+  Sprache bedeutet zusätzlichen Pflegeaufwand, zusätzliche Qualitätssicherung
+  und einen erweiterten Barrierefreiheits-Durchlauf — bei anderen Alphabeten
+  auch eigene Schriftschnitte (Fraunces kann z.B. kein Kyrillisch). Das technische
   Grundgerüst steht; der laufende Aufwand beginnt erst danach. **Vor der
   Abnahme mit Tatjana klären.**
 

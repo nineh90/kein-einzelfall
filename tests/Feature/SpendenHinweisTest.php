@@ -109,7 +109,7 @@ class SpendenHinweisTest extends TestCase
 
     public function test_die_texte_liegen_in_jeder_sprache_vor(): void
     {
-        foreach (['de', 'en', 'ru'] as $locale) {
+        foreach (['de', 'en'] as $locale) {
             foreach (['eyebrow', 'titel', 'text', 'knopf', 'spaeter', 'schliessen'] as $feld) {
                 $this->assertNotSame(
                     "rahmen.spendenhinweis.{$feld}",

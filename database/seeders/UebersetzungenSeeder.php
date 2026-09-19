@@ -7,12 +7,14 @@ use App\Models\Page;
 use Illuminate\Database\Seeder;
 
 /**
- * Englische und russische Fassungen der Kernseiten — für die Vorführung.
+ * Englische Fassungen der Kernseiten — für die Vorführung.
  *
  * ⚠️ MASCHINELLE ÜBERSETZUNG. Die Texte in database/seeders/data/uebersetzungen.json
  * sind ein Entwurf, damit der Sprachumschalter etwas zu zeigen hat. Der Verein
- * prüft und korrigiert sie anschliessend im Panel — besonders die russische
- * Fassung, die niemand von uns gegenlesen kann.
+ * prüft und korrigiert sie anschliessend im Panel.
+ *
+ * Russisch gab es hier bis zum 19.09.2026 ebenfalls — gestrichen, weil es
+ * niemand gegenlesen konnte (Migration `russisch_entfernen`).
  *
  * Deshalb läuft dieser Seeder **nicht** automatisch beim Deploy und hängt an
  * keiner Migration. Er wird von Hand ausgeführt, bewusst nur auf der Demo-
@@ -50,7 +52,7 @@ class UebersetzungenSeeder extends Seeder
         'link', 'bild_alt',
     ];
 
-    /** @var array<string, array{en: string, ru: string}> */
+    /** @var array<string, array{en: string}> */
     private array $woerterbuch = [];
 
     public function run(): void
@@ -79,7 +81,7 @@ class UebersetzungenSeeder extends Seeder
                 continue;
             }
 
-            foreach (['en', 'ru'] as $locale) {
+            foreach (['en'] as $locale) {
                 // Idempotent: eine schon vorhandene Übersetzung nicht anfassen —
                 // der Verein könnte sie inzwischen von Hand korrigiert haben.
                 $vorhanden = Page::query()
@@ -100,10 +102,10 @@ class UebersetzungenSeeder extends Seeder
         // Erst jetzt freischalten: Vorher hätte der Umschalter auf leere
         // Fassungen gezeigt. Nach dem Anlegen der Kernseiten ist der Rückfall
         // für den Rest ein regulärer, sichtbarer Zustand.
-        Language::whereIn('code', ['en', 'ru'])->update(['aktiv' => true]);
+        Language::where('code', 'en')->update(['aktiv' => true]);
         Language::memoLeeren();
 
-        $this->command?->info("{$angelegt} Übersetzungen angelegt, Englisch und Russisch freigeschaltet.");
+        $this->command?->info("{$angelegt} Übersetzungen angelegt, Englisch freigeschaltet.");
         $this->command?->warn('Hinweis: maschinelle Übersetzungen — vor dem Livegang vom Verein prüfen lassen.');
     }
 

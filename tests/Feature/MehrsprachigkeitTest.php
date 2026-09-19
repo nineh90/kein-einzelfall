@@ -154,14 +154,25 @@ class MehrsprachigkeitTest extends TestCase
         }
     }
 
-    public function test_deutsche_seiten_enthalten_keine_kyrillischen_zeichen(): void
+    public function test_deutsche_seiten_enthalten_keine_fremden_schriftzeichen(): void
     {
-        // Der Sprachumschalter steht auf jeder Seite. Stünde dort dauerhaft
-        // „Русский“, lüde jede deutsche Seite die kyrillischen Schriftschnitte
-        // mit — gemessen 137 KB, die die Hauptzielgruppe auf dem Mobilfunknetz
-        // bezahlen würde, ohne sie je zu sehen.
+        /*
+         * Der Sprachumschalter steht auf jeder Seite. Stünde dort dauerhaft
+         * eine Eigenbezeichnung in fremder Schrift, lüde jede deutsche Seite
+         * die passenden Schriftschnitte mit — für Kyrillisch waren das
+         * gemessen 137 KB, die die Hauptzielgruppe auf dem Mobilfunknetz
+         * bezahlt hätte, ohne sie je zu sehen.
+         *
+         * Russisch gibt es seit dem 19.09.2026 nicht mehr; die Regel gilt für
+         * jede Sprache, die der Verein einmal im Panel anlegt. Deshalb legt der
+         * Test sich selbst eine an.
+         */
         $this->englischFreischalten();
-        Language::finden('ru')->update(['aktiv' => true]);
+        Language::create([
+            'code' => 'uk', 'label' => 'Українська', 'label_deutsch' => 'Ukrainisch',
+            'richtung' => 'ltr', 'aktiv' => true, 'position' => 9,
+            'ist_standard' => false, 'fallback_code' => 'de',
+        ]);
         Language::memoLeeren();
 
         $html = $this->get('/verein')->assertOk()->getContent();
@@ -174,25 +185,13 @@ class MehrsprachigkeitTest extends TestCase
         $this->assertSame(
             0,
             preg_match('/\p{Cyrillic}/u', $ohneMenue),
-            'Kyrillische Zeichen ausserhalb des Mobilmenues ziehen die kyrillischen '
+            'Kyrillische Zeichen ausserhalb des Mobilmenues zögen fremde '
             .'Schriftschnitte auch auf deutschen Seiten mit.'
         );
     }
 
-    public function test_kyrillische_schriftschnitte_liegen_vor(): void
+    public function test_jede_eingebundene_schrift_liegt_vor(): void
     {
-        // Fraunces hat keine kyrillischen Zeichen (geprüft gegen die
-        // Google-Fonts-API: latin, latin-ext, vietnamese). Ohne Ersatz fielen
-        // auf Russisch alle Überschriften auf eine Systemschrift zurück.
-        foreach ([
-            'literata-cyrillic',
-            'literata-cyrillic-ext',
-            'source-serif-4-cyrillic',
-            'caveat-cyrillic',
-        ] as $datei) {
-            $this->assertFileExists(public_path("fonts/{$datei}.woff2"));
-        }
-
         $css = file_get_contents(resource_path('css/fonts.css'));
 
         // Jede eingebundene Datei muss auch existieren. Variable Fonts liefern
@@ -209,12 +208,12 @@ class MehrsprachigkeitTest extends TestCase
         $this->assertStringNotContainsString('googleapis', $css);
         $this->assertStringNotContainsString('gstatic', $css);
 
-        // Literata muss im Schriftstapel hinter Fraunces stehen, nicht statt ihr.
-        $app = file_get_contents(resource_path('css/app.css'));
-        $this->assertMatchesRegularExpression(
-            "/--font-display:\s*'Fraunces',\s*'Literata'/",
-            $app
-        );
+        // Und umgekehrt keine Datei ohne Regel: Die kyrillischen Schnitte sind
+        // mit Russisch gegangen — was liegen bliebe, wäre totes Gewicht im Repo.
+        foreach (glob(public_path('fonts/*.woff2')) as $datei) {
+            $this->assertStringContainsString('/fonts/'.basename($datei), $css,
+                basename($datei).' liegt vor, wird aber von keiner @font-face-Regel genutzt.');
+        }
     }
 
     public function test_genau_eine_sprache_ist_standard(): void
@@ -287,12 +286,12 @@ class MehrsprachigkeitTest extends TestCase
         Language::memoLeeren();
 
         $this->assertEqualsCanonicalizing(
-            ['de', 'en', 'ru'],
+            ['de', 'en'],
             Language::query()->pluck('code')->all(),
         );
     }
 
-    public function test_demo_seeder_schaltet_englisch_und_russisch_frei(): void
+    public function test_demo_seeder_schaltet_englisch_frei(): void
     {
         // Vorher inaktiv, deshalb nicht erreichbar.
         $this->get('/en')->assertNotFound();
@@ -300,11 +299,10 @@ class MehrsprachigkeitTest extends TestCase
         $this->seed(UebersetzungenSeeder::class);
 
         $this->assertTrue(Language::finden('en')->aktiv);
-        $this->assertTrue(Language::finden('ru')->aktiv);
-        $this->assertCount(3, Language::aktive());
+        $this->assertCount(2, Language::aktive());
     }
 
-    public function test_kernseiten_liegen_auf_englisch_und_russisch_vor(): void
+    public function test_kernseiten_liegen_auf_englisch_vor(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
@@ -314,23 +312,87 @@ class MehrsprachigkeitTest extends TestCase
             ->assertSee('No one should ever have to say', false)
             ->assertSee('<html lang="en"', false);
 
-        // Russische Fassung des Vereins.
-        $this->get('/ru/verein')
+        $this->get('/en/verein')
             ->assertOk()
-            ->assertSee('основано в 2024 году', false)
-            ->assertSee('<html lang="ru"', false);
+            ->assertSee('<html lang="en"', false);
     }
 
-    public function test_der_umschalter_bietet_nach_dem_seeden_drei_sprachen(): void
+    public function test_der_umschalter_bietet_nach_dem_seeden_beide_sprachen(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
         $html = $this->get('/verein')->assertOk()->getContent();
 
-        // Alle drei Sprachfassungen des Vereins sind verlinkt.
+        // Beide Sprachfassungen des Vereins sind verlinkt.
         $this->assertStringContainsString('hreflang="de"', $html);
         $this->assertStringContainsString('hreflang="en"', $html);
-        $this->assertStringContainsString('hreflang="ru"', $html);
+    }
+
+    /**
+     * Russisch ist am 19.09.2026 gestrichen worden — es war eine maschinell
+     * übersetzte Vorführung, die niemand gegenlesen konnte. Die Migration
+     * räumt bestehende Datenbanken auf, aber nur, solange dort niemand
+     * gearbeitet hat.
+     */
+    public function test_russisch_wird_auf_bestehenden_datenbanken_entfernt(): void
+    {
+        $this->russischAnlegen();
+
+        $this->russischMigration()->up();
+        Language::memoLeeren();
+
+        $this->assertNull(Language::finden('ru'));
+        $this->assertSame(0, Page::where('locale', 'ru')->count());
+        $this->get('/ru/verein')->assertNotFound();
+        // Das Deutsche bleibt unberührt.
+        $this->get('/verein')->assertOk();
+    }
+
+    public function test_russisch_wird_nur_abgeschaltet_wenn_jemand_daran_gearbeitet_hat(): void
+    {
+        $this->russischAnlegen();
+
+        // Eine Bearbeitung im Panel, deutlich nach dem Anlegen.
+        $seite = Page::where('locale', 'ru')->firstOrFail();
+        $seite->timestamps = false;
+        $seite->forceFill(['titel' => 'Vom Verein geändert', 'updated_at' => now()->addHour()])->save();
+
+        $this->russischMigration()->up();
+        Language::memoLeeren();
+
+        $this->assertNotNull(Language::finden('ru'), 'Bearbeitete Fassungen dürfen nicht gelöscht werden');
+        $this->assertFalse(Language::finden('ru')->aktiv);
+        $this->assertSame(1, Page::where('locale', 'ru')->count());
+        // Abgeschaltet heisst: nicht mehr öffentlich.
+        $this->get('/ru/verein')->assertNotFound();
+    }
+
+    public function test_das_entfernen_laeuft_ohne_russisch_ins_leere(): void
+    {
+        // Auf einer Datenbank ohne Russisch — jede neue — gibt es nichts zu tun.
+        $this->russischMigration()->up();
+
+        $this->assertEqualsCanonicalizing(['de', 'en'], Language::query()->pluck('code')->all());
+    }
+
+    /** Der Zustand jeder Installation vor dem 19.09.2026: Russisch aktiv, mit Seite. */
+    private function russischAnlegen(): void
+    {
+        Language::create([
+            'code' => 'ru', 'label' => 'Русский', 'label_deutsch' => 'Russisch',
+            'richtung' => 'ltr', 'aktiv' => true, 'position' => 2,
+            'ist_standard' => false, 'fallback_code' => 'de',
+        ]);
+        $verein = Page::where('locale', 'de')->where('slug', 'verein')->firstOrFail();
+        $verein->replicate()->fill(['locale' => 'ru', 'uebersetzungs_gruppe' => $verein->uebersetzungs_gruppe])->save();
+        Language::memoLeeren();
+
+        $this->get('/ru/verein')->assertOk();
+    }
+
+    private function russischMigration(): object
+    {
+        return require database_path('migrations/2026_09_19_130000_russisch_entfernen.php');
     }
 
     public function test_seite_ausserhalb_des_kerns_faellt_weiter_sichtbar_zurueck(): void

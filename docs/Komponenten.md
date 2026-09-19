@@ -610,6 +610,11 @@ mit russischer Aussprache aus.
 
 ### Fraunces kann kein Kyrillisch
 
+> **Stand 19.09.2026: erledigt durch Wegfall.** Russisch ist gestrichen
+> (Abschnitt 21), die kyrillischen Schnitte und Literata sind aus dem Projekt
+> raus. Der Abschnitt bleibt als Befund stehen — für die nächste Sprache mit
+> anderem Alphabet gilt er wieder.
+
 Geprüft gegen die Google-Fonts-API: Fraunces liefert `latin`, `latin-ext`,
 `vietnamese`. Auf Russisch wären also **alle** Überschriften auf eine
 Systemschrift zurückgefallen.
@@ -1358,4 +1363,41 @@ CSS-Regel griff.
 `SpeicherTest` kennt das neue Skript, `bedienung.mjs` (Zählen, Wegklicken,
 Ruhe, Trigger-Warnung), `barrierefreiheit.mjs` (axe mit sichtbarem Kasten,
 Desktop und mobil).
+
+---
+
+## 21. Russisch entfernt (19.09.2026)
+
+Russisch war seit dem 31.07.2026 die dritte Sprache: Sprachzeile inaktiv,
+Bedientexte in `lang/ru/`, vier Kernseiten als maschinelle Übersetzung auf
+der Demo, kyrillische Schriftschnitte (Literata als Ersatz für Fraunces).
+Kevin hat sie gestrichen — niemand im Team konnte sie gegenlesen, und der
+Verein hatte nie eine russische Seite angefasst. Bedingung war: Solange
+niemand daran gearbeitet hat, kann es komplett raus; sonst nur abschalten.
+
+**Genau so entscheidet die Migration `russisch_entfernen` selbst:** Liegt
+`updated_at` einer russischen Seite mehr als eine Minute nach `created_at`,
+wird die Sprache nur deaktiviert und eine Warnung geloggt; sonst gehen Seiten
+(samt Bausteinen), russische Glossareinträge und die Sprachzeile. Auf einer
+Datenbank ohne Russisch tut sie nichts. Drei Tests in `MehrsprachigkeitTest`.
+
+**Aus dem Code raus:** `lang/ru/`, der ru-Eintrag im `SprachenSeeder` (die
+alte Migration `sprachen_sicherstellen` ruft den Seeder und legt damit auf
+frischen Datenbanken nur noch de/en an), die ru-Werte in
+`uebersetzungen.json` (72 Einträge; die Datei ist dabei neu formatiert
+worden), `UebersetzungenSeeder` klont nur noch Englisch, die sechs
+`*-cyrillic*.woff2` samt ihren 14 `@font-face`-Regeln, Literata im
+`--font-display`-Stapel.
+
+**Was bleibt:** das Grundgerüst der Mehrsprachigkeit (Sprachen im Panel
+anlegbar, Präfix-Routing, hreflang, Rückfall). Der Test, dass deutsche Seiten
+keine fremden Schriftzeichen ausserhalb des Mobilmenüs enthalten, legt sich
+jetzt selbst eine Sprache an — die Regel gilt für jede, die einmal kommt. Ein
+neuer Test hält fest, dass keine Schriftdatei ohne `@font-face`-Regel im
+Repository liegt.
+
+**Achtung, Widerspruch zum Protokoll vom 02.08.2026:** Dort stand „Russisch
+vorbereiten, nicht freischalten". Die Streichung ist Kevins Entscheidung vom
+19.09.; falls der Verein Russisch weiterhin erwartet, ist das eine Rückfrage
+(Übergabe-Checkliste A6).
 
