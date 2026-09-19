@@ -128,6 +128,16 @@ return [
         'schliessen' => 'Close notice',
     ],
 
+    'embed' => [
+        'vorher' => 'This content comes from :anbieter. If you display it, data is sent to '
+            .':anbieter — including your IP address. Nothing happens before that.',
+        'geladen' => 'Content from :anbieter is being displayed. Select again to hide it.',
+        'anzeigen' => 'Show content this once',
+        'ohne_js' => 'JavaScript is required to display this content.',
+        'ohne_js_direkt' => 'You can also open it directly at :anbieter.',
+        'direkt' => 'Open directly at :anbieter instead',
+    ],
+
     'spenden' => [
         'ueberweisung' => 'Bank transfer',
         'empfaenger' => 'Recipient',

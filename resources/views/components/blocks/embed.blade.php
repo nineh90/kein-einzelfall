@@ -36,13 +36,13 @@
                 <div class="flex-1">
                     <p class="font-medium text-ink">{{ $titel }}</p>
 
+                    {{-- Die Texte kommen aus rahmen.embed: Der Baustein steht seit
+                         KEV-5 auf der Spendenseite, und die gibt es auch auf Englisch. --}}
                     <p class="mt-1 text-sm text-ink-soft group-open:hidden">
-                        Dieser Inhalt kommt von <strong class="font-medium">{{ $anbieter }}</strong>.
-                        Wenn du ihn anzeigst, werden Daten an {{ $anbieter }} übertragen —
-                        unter anderem deine IP-Adresse. Vorher passiert nichts.
+                        {!! __('rahmen.embed.vorher', ['anbieter' => '<strong class="font-medium">'.e($anbieter).'</strong>']) !!}
                     </p>
                     <p class="mt-1 hidden text-sm text-ink-soft group-open:block">
-                        Inhalt von {{ $anbieter }} wird angezeigt. Zum Ausblenden erneut auswählen.
+                        {{ __('rahmen.embed.geladen', ['anbieter' => $anbieter]) }}
                     </p>
 
                     @if ($beschreibung)
@@ -51,7 +51,7 @@
 
                     <span class="mt-3 inline-flex items-center gap-2 rounded-full bg-green px-4 py-2
                                  text-sm text-on-green group-open:hidden">
-                        Inhalt einmalig anzeigen
+                        {{ __('rahmen.embed.anzeigen') }}
                     </span>
                 </div>
             </div>
@@ -72,9 +72,9 @@
 
             <noscript>
                 <p class="text-sm text-ink-soft">
-                    Zum Anzeigen dieses Inhalts wird JavaScript benötigt.
+                    {{ __('rahmen.embed.ohne_js') }}
                     @if ($direktlink)
-                        Du kannst ihn auch direkt bei {{ $anbieter }} öffnen.
+                        {{ __('rahmen.embed.ohne_js_direkt', ['anbieter' => $anbieter]) }}
                     @endif
                 </p>
             </noscript>
@@ -85,8 +85,8 @@
         <p class="border-t border-line px-5 py-3 text-sm">
             <a href="{{ $direktlink }}" target="_blank" rel="noopener noreferrer"
                class="text-green-deep underline">
-                Stattdessen direkt bei {{ $anbieter }} öffnen
-                <span class="sr-only">(öffnet in neuem Tab)</span>
+                {{ __('rahmen.embed.direkt', ['anbieter' => $anbieter]) }}
+                <span class="sr-only">{{ __('rahmen.neuer_tab') }}</span>
             </a>
         </p>
     @endif

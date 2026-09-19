@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Page;
 use Database\Seeders\AltseiteSeeder;
 use Database\Seeders\StartseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -84,9 +83,10 @@ class DatenschutzTest extends TestCase
     public function test_eingebettete_inhalte_laden_erst_nach_zustimmung(): void
     {
         // Auf der Altseite laden zwei betterplace-Rahmen auf /spenden/ ungefragt,
-        // obwohl dort ein Cookie-Banner steht.
+        // obwohl dort ein Cookie-Banner steht. Seit KEV-5 bringt der Seeder
+        // die echte Spendenseite samt beiden Projekten mit — geprüft wird
+        // also die Seite, die auch ausgeliefert wird.
         $this->seed(AltseiteSeeder::class);
-        $this->spendenBlockAnlegen();
 
         $html = $this->get('/spenden')->getContent();
 
@@ -119,7 +119,6 @@ class DatenschutzTest extends TestCase
     public function test_spendenseite_zeigt_die_angaben_des_vereins(): void
     {
         $this->seed(AltseiteSeeder::class);
-        $this->spendenBlockAnlegen();
 
         $this->get('/spenden')
             ->assertSee('DE79 8306 5408 0006 8893 10')
@@ -143,23 +142,5 @@ class DatenschutzTest extends TestCase
                 "Unerwartetes Cookie: {$cookie->getName()}"
             );
         }
-    }
-
-    private function spendenBlockAnlegen(): void
-    {
-        Page::where('slug', 'spenden')->first()->blocks()->create([
-            'typ' => 'donation_options',
-            'position' => 99,
-            'data' => [
-                'bank' => ['institut' => 'Deutsche Skatbank',
-                    'iban' => 'DE79 8306 5408 0006 8893 10',
-                    'bic' => 'GENODEF1SLR'],
-                'projekte' => [[
-                    'titel' => 'Onlinepräsenz',
-                    'widget' => 'https://project-widget.betterplace.org/projects/170775?l=de',
-                ]],
-                'bescheinigung' => ['text' => 'Schreib uns.', 'email' => 'verwaltung@kein-einzelfall.de'],
-            ],
-        ]);
     }
 }

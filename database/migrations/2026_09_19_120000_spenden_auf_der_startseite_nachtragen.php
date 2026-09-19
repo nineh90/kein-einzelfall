@@ -27,9 +27,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Page::where('slug', Page::STARTSEITE_SLUG)
-            ->get()
-            ->each(fn (Page $seite) => StartseiteSeeder::spendenAnhaengen($seite));
+        // foreach, nicht ->each(): Der Rückgabewert false („steht schon da“)
+        // würde each() abbrechen — hat die deutsche Startseite den Baustein
+        // schon, bekäme ihn die englische nie.
+        foreach (Page::where('slug', Page::STARTSEITE_SLUG)->get() as $seite) {
+            StartseiteSeeder::spendenAnhaengen($seite);
+        }
     }
 
     public function down(): void

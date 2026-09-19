@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Language;
 use App\Models\Page;
+use App\Support\Spenden;
 use Illuminate\Database\Seeder;
 
 /**
@@ -119,9 +120,9 @@ class StartseiteSeeder extends Seeder
     }
 
     /**
-     * Konto und PayPal wie auf der Spendenseite (Bestand der Altseite, Stand
-     * 26.07.2026). Die Einleitung ist der Text der Einstiegskarte „Spenden“ —
-     * ebenfalls Wortlaut des Vereins, nicht neu.
+     * Konto und PayPal aus App\Support\Spenden (Bestand der Altseite). Die
+     * Einleitung ist der Text der Einstiegskarte „Spenden“ — ebenfalls
+     * Wortlaut des Vereins, nicht neu.
      *
      * betterplace und die Spendenbescheinigung bleiben der Spendenseite: Auf
      * der Startseite soll die Möglichkeit sichtbar sein, nicht die ganze
@@ -138,20 +139,9 @@ class StartseiteSeeder extends Seeder
                 .'leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform '
                 .'aufzustellen und ein Netzwerk zu bilden.',
             'kompakt' => true,
-            'bank' => [
-                'institut' => 'Deutsche Skatbank',
-                'iban' => 'DE79 8306 5408 0006 8893 10',
-                'bic' => 'GENODEF1SLR',
-                // Der Kontoinhaber ist offen (Übergabe-Checkliste): Leer heisst
-                // „KE!N EINZELFALL e.V.“ — der Vereinsname, wie er im Impressum
-                // steht.
-                'verwendungszweck' => 'Spende',
-            ],
-            'paypal' => [
-                'empfaenger' => 'paypal@kein-einzelfall.de',
-                // Der Spendenlink der Altseite, ohne deren HTML-kodiertes „&“.
-                'url' => 'https://www.paypal.com/donate?business=paypal@kein-einzelfall.de&currency_code=EUR',
-            ],
+            // Dieselbe Quelle wie die Spendenseite — eine IBAN, eine Stelle.
+            'bank' => Spenden::konto(),
+            'paypal' => Spenden::paypal(),
             'mehr' => ['label' => 'Alle Spendenmöglichkeiten und Spendenbescheinigung', 'url' => '/spenden'],
         ];
     }

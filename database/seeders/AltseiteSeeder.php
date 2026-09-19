@@ -6,6 +6,7 @@ use App\Models\Language;
 use App\Models\Page;
 use App\Models\Redirect;
 use App\Support\Dokument;
+use App\Support\Spenden;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -117,6 +118,15 @@ class AltseiteSeeder extends Seeder
                         'absaetze' => $block['absaetze'],
                     ],
                 ]);
+            }
+
+            // Die Spendenseite: Konto und PayPal standen auf der Altseite als
+            // Fliesstext, betterplace als iframes, die der Abzug gar nicht
+            // erst mitnimmt. Daraus wird der Spenden-Baustein — dieselbe
+            // Umstellung, die die Migration auf bestehenden Datenbanken macht.
+            if ($slug === 'spenden') {
+                Spenden::spendenseiteUmstellen($page);
+                $position = (int) $page->blocks()->max('position') + 1;
             }
 
             // Verlinkte Dokumente als eigener Block ans Seitenende.

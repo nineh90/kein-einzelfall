@@ -1286,10 +1286,8 @@ Panel, zeigt der Baustein nur den Empfänger und keinen Knopf ins Leere.
 - **Spenden in der mobilen Leiste** — die Frage aus dem Abgleich (welcher der
   drei Einträge weicht?) ist weiter beim Verein. Bis dahin: Menü und der
   Abschnitt auf der Startseite.
-- **`/spenden` selbst** nutzt für Konto und PayPal noch den Textbaustein der
-  Altseite — ohne QR-Code. Sobald der Verein die Seite freigibt, den
-  `donation_options`-Baustein (ohne `kompakt`) dort einsetzen; die Daten stehen
-  in `StartseiteSeeder::spendenBaustein()`.
+- ~~`/spenden` selbst nutzt für Konto und PayPal noch den Textbaustein~~ —
+  erledigt mit KEV-5 (Abschnitt 22).
 - **Kontoinhaber für den QR-Code** — siehe Übergabe-Checkliste.
 
 ---
@@ -1400,4 +1398,57 @@ Repository liegt.
 vorbereiten, nicht freischalten". Die Streichung ist Kevins Entscheidung vom
 19.09.; falls der Verein Russisch weiterhin erwartet, ist das eine Rückfrage
 (Übergabe-Checkliste A6).
+
+---
+
+## 22. Spendenseite: PayPal und betterplace wie auf der Altseite (19.09.2026, KEV-5)
+
+Die Altseite hatte auf /spenden/ PayPal (Donate-Link) und zwei
+betterplace-Projekte (iframes, ungefragt geladen). Der Import vom Juli hatte
+Konto und PayPal als Fliesstext übernommen („IBAN: DE79 …“) und die iframes gar
+nicht — das war Absicht (Projektplan, Punkt 5: Drittanbieter-Embed ohne
+Consent), aber damit fehlte betterplace auf der neuen Seite komplett.
+
+### Was jetzt steht
+
+Der `donation_options`-Baustein an der Stelle des Textblocks: Konto mit
+QR-Code, PayPal als Link, die beiden betterplace-Projekte als Zwei-Klick-
+Einbettung mit Direktlink, Spendenbescheinigung. Vor dem Klick steht kein
+`<iframe>` und keine betterplace-Adresse ausserhalb eines `<template>` im
+Dokument — gemessen: 0 Requests an betterplace vor der Zustimmung, das
+Widget danach.
+
+**Eine Quelle für die Angaben: `App\Support\Spenden`.** Konto, PayPal,
+Projekte und Bescheinigung stehen dort einmal; Startseite (KEV-10) und
+Spendenseite bedienen sich beide. Ein Test hält fest, dass die IBAN auf beiden
+Seiten dieselbe ist. „WirWunder" nennt die Altseite nur im Titel — kein Widget,
+kein Link, nichts zu übernehmen.
+
+**Umstellung: `Spenden::spendenseiteUmstellen()`**, vom `AltseiteSeeder` auf
+frischer Datenbank und von der Migration
+`spendenseite_auf_den_baustein_umstellen` auf bestehenden. Gefunden wird der
+Kontoblock über die IBAN im Text, nicht über die Überschrift — die englische
+Fassung heisst „Donate now". Der Text der Spendenbescheinigung kommt aus dem
+vorhandenen Block der Seite, in dessen Sprache. Fehlt der Kontoblock, hat
+jemand die Seite umgebaut, und sie bleibt unangetastet.
+
+**Die Zwei-Klick-Texte** („Dieser Inhalt kommt von …", „Inhalt einmalig
+anzeigen") kommen jetzt aus `rahmen.embed` statt fest deutsch aus dem Blade —
+die Spendenseite gibt es auch auf Englisch.
+
+### Nebenbei gefunden: `->each()` bricht bei `false` ab
+
+Beide Nachtrag-Methoden (`spendenAnhaengen`, `spendenseiteUmstellen`) geben
+`false` zurück, wenn nichts zu tun war. `Collection::each()` wertet das als
+„aufhören" — hatte die deutsche Seite den Baustein schon, bekam ihn die
+englische nie. Betraf auch die KEV-10-Migration, dort nur deshalb nicht
+sichtbar, weil beim ersten Lauf noch keine Seite fertig war. Beide Migrationen
+nutzen jetzt `foreach`; zwei Tests stellen den Fall nach.
+
+### Tests
+
+`SpendenseiteTest` (Inhalt, Ersetzung statt Ergänzung, gleiche Quelle wie die
+Startseite, Migration, Idempotenz, bearbeitete Seite, englische Fassung),
+`DatenschutzTest` prüft jetzt die echte Seite statt eines Testblocks,
+`barrierefreiheit.mjs` mit /spenden (de/en) und geöffneter Einbettung.
 

@@ -48,6 +48,8 @@ const SEITEN = [
     ['Startseite', '/'],
     ['Inhaltsseite', '/verein'],
     ['Seite mit Kontaktformular', '/anfragen'],
+    // Spenden-Baustein: QR-Code als role="img", Zwei-Klick-Einbettungen.
+    ['Spendenseite', '/spenden'],
     ['Vorstand und Team', '/ueber-uns-vorstand-und-team'],
     ['Gruppen', '/selbsthilfegruppen'],
     ['Blog-Übersicht', '/aktuelles'],
@@ -203,6 +205,14 @@ for (const [titel, p] of [['Startseite', '/'], ['Inhaltsseite', '/verein']]) {
 // Der Spendenhinweis erscheint erst nach mehreren Aufrufen — für axe wird der
 // Zähler vorgestellt und die Seite neu geladen. Desktop und Handy, weil er auf
 // dem Handy über der Leiste sitzt und dort ein anderes Layout hat.
+// Mit geöffneter Einbettung: Dann steht der Rahmen im Dokument, und axe
+// prüft seinen Titel und was um ihn herum steht.
+console.log('\nSpendenseite mit geöffneter Einbettung')
+await pruefen('Einbettung offen', BASIS + '/spenden', async (seite) => {
+    await seite.locator('details:has(template[data-embed]) summary').first().click()
+    await seite.waitForTimeout(500)
+})
+
 console.log('\nSpendenhinweis (sichtbar)')
 for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
     await pruefen(`Spendenhinweis ${titel}`, BASIS + '/verein', async (seite) => {

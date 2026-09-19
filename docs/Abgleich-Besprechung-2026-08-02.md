@@ -113,7 +113,7 @@ Empfehlung: eigenes Modell, sonst wird `groups` zum Sammelbecken.
 | Wunsch | Stand | Anmerkung |
 |---|---|---|
 | 7.1 **Förderungen / Stiftungen** | ❌ | Deckt sich mit 1.9 — derselbe Logo-Baustein |
-| 7.2 Spendenmöglichkeiten | ✅ | `donation_options`-Baustein: Konto, PayPal, Betterplace (Betterplace als 2-Klick-Lösung, lädt nicht ungefragt) |
+| 7.2 Spendenmöglichkeiten | ✅ | `donation_options`-Baustein: Konto, PayPal, Betterplace (Betterplace als 2-Klick-Lösung, lädt nicht ungefragt). Seit KEV-5 (19.09.2026) tatsächlich auf `/spenden` im Einsatz — vorher stand dort nur der Fliesstext der Altseite, betterplace fehlte |
 | **QR-Code für Bankverbindung** | ✅ | Wunsch von Franziska. EPC-QR-Code („Girocode") wird lokal erzeugt, kein externer Dienst — im `donation_options`-Baustein, seit KEV-10 auch auf der Startseite |
 | **Spendenbescheinigung anfordern** | 🟡 | Steht als E-Mail-Adresse drin; ein eigener kleiner Formularweg wäre besser |
 | **Spenden auf der Startseite verankern** | ✅ | KEV-10 (19.09.2026): `donation_options` kompakt auf der Startseite — Konto mit QR-Code, PayPal, Verweis auf die vollständige Seite. Das CTA-Band bleibt darunter |

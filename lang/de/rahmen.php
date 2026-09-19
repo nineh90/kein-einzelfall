@@ -175,6 +175,20 @@ return [
     ],
 
     /*
+     * Zwei-Klick-Einbettung (components/blocks/embed.blade.php).
+     * :anbieter ist der Name des Fremdanbieters, z.B. „betterplace.org“.
+     */
+    'embed' => [
+        'vorher' => 'Dieser Inhalt kommt von :anbieter. Wenn du ihn anzeigst, werden Daten an '
+            .':anbieter übertragen — unter anderem deine IP-Adresse. Vorher passiert nichts.',
+        'geladen' => 'Inhalt von :anbieter wird angezeigt. Zum Ausblenden erneut auswählen.',
+        'anzeigen' => 'Inhalt einmalig anzeigen',
+        'ohne_js' => 'Zum Anzeigen dieses Inhalts wird JavaScript benötigt.',
+        'ohne_js_direkt' => 'Du kannst ihn auch direkt bei :anbieter öffnen.',
+        'direkt' => 'Stattdessen direkt bei :anbieter öffnen',
+    ],
+
+    /*
      * Spendenmöglichkeiten.
      *
      * Die Beschriftungen des Bausteins — nicht die Angaben des Vereins (IBAN,

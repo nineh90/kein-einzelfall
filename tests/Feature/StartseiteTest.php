@@ -238,6 +238,20 @@ class StartseiteTest extends TestCase
         $this->assertSame($positionen, array_values(array_unique($positionen)));
     }
 
+    public function test_das_nachtragen_erreicht_auch_die_zweite_sprachfassung(): void
+    {
+        // Die deutsche Startseite hat den Baustein schon; die englische nicht.
+        // Ein ->each() in der Migration brach hier nach der ersten Seite ab.
+        $de = $this->startseite();
+        $en = $de->replicate()->fill(['locale' => 'en', 'uebersetzungs_gruppe' => $de->uebersetzungs_gruppe]);
+        $en->save();
+        $en->blocks()->create(['typ' => 'cta_band', 'position' => 0, 'data' => ['zitat' => 'Band']]);
+
+        $this->spendenMigration()->up();
+
+        $this->assertSame(['donation_options', 'cta_band'], $en->fresh()->blocks()->pluck('typ')->all());
+    }
+
     public function test_das_nachtragen_der_spendenmoeglichkeit_laeuft_zweimal_ohne_schaden(): void
     {
         $this->spendenMigration()->up();
