@@ -140,7 +140,7 @@ class SpeicherTest extends TestCase
         $html = $this->get('/barrierefreiheit')->getContent();
 
         $this->assertStringContainsString('data-speicher-loeschen', $html);
-        $this->assertStringContainsString('data-trigger-braucht-js', $html);
+        $this->assertStringContainsString('data-speicher-braucht-js', $html);
         $this->assertStringContainsString('Ohne JavaScript speichert diese Seite nichts', $html);
     }
 

@@ -78,7 +78,7 @@
                                      size="sm"
                                      class="shrink-0"
                                      data-speicher-loeschen="{{ $eintrag['schluessel'] }}"
-                                     data-trigger-braucht-js>
+                                     data-speicher-braucht-js>
                             {{ __('rahmen.speicher.zuruecksetzen') }}
                         </x-ui.button>
                     </li>
@@ -89,15 +89,17 @@
                 <x-ui.button type="button"
                              class="w-full sm:w-auto"
                              data-speicher-alles
-                             data-trigger-braucht-js>
+                             data-speicher-braucht-js>
                     {{ __('rahmen.speicher.alles') }}
                 </x-ui.button>
             </div>
 
             {{-- Steht nur, solange das Skript nicht übernommen hat. Dasselbe
-                 Merkmal wie bei der Trigger-Warnung: Ein Knopf, der nichts
-                 bewirkt, ist schlimmer als kein Knopf. --}}
-            <p class="mt-4 text-sm text-ink-soft" data-trigger-ohne-js>
+                 Muster wie bei der Trigger-Warnung, aber mit eigenem Merkmal:
+                 Deren Klasse `ke-trigger-bereit` kommt nur, wenn der Dialog
+                 auch gezeigt wird — wer ihn abbestellt hat, sah hier gar keine
+                 Knöpfe. Ausgerechnet die Person, die sie braucht. --}}
+            <p class="mt-4 text-sm text-ink-soft" data-speicher-ohne-js>
                 {{ __('rahmen.speicher.ohne_js') }}
             </p>
         </div>

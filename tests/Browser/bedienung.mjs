@@ -141,7 +141,15 @@ console.log('\nOhne JavaScript')
     // Gezielt das <details> des Mobilmenüs, nicht einfach das erste <summary>:
     // seit dem Weltkugel-Umschalter gibt es weiter oben im Kopf einen zweiten
     // Aufklapper (mobil ausgeblendet), sonst klickte der Test daneben.
-    await mobil.locator('details', { has: menue }).locator('summary').first().click()
+    //
+    // Erst an den oberen Rand scrollen: Ohne JavaScript steht die
+    // Trigger-Warnung als Block über dem Kopf, und Playwright holt den Knopf
+    // sonst an den *unteren* Rand — genau dorthin, wo die fixe Mobil-Leiste
+    // liegt und den Klick abfängt. `instant`, weil die Seite sonst weich
+    // scrollt und Playwright den Knopf währenddessen für „nicht stabil“ hält.
+    const burger = mobil.locator('details', { has: menue }).locator('summary').first()
+    await burger.evaluate((el) => el.scrollIntoView({ block: 'start', behavior: 'instant' }))
+    await burger.click()
     pruefe('Mobil-Menü lässt sich öffnen', await menue.isVisible(),
         'natives <details> — darf nicht an JavaScript hängen')
 

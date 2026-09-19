@@ -59,6 +59,10 @@ export function speicherVerdrahten() {
     const registratur = window.keSpeicher
     if (!registratur) return
 
+    // Erst jetzt werden die Knöpfe sichtbar — wenn sie wirklich verdrahtet
+    // sind, nicht schon, wenn JavaScript grundsätzlich läuft (app.css).
+    document.documentElement.classList.add('ke-speicher-bereit')
+
     const texte = {
         gespeichert: wurzel.dataset.speicherTextGespeichert,
         leer: wurzel.dataset.speicherTextLeer,

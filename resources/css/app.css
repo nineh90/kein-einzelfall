@@ -273,6 +273,17 @@ html.ke-trigger-bereit [data-trigger-ohne-js] {
   display: none;
 }
 
+/* Dasselbe fuer die Uebersicht der gespeicherten Einstellungen — mit eigener
+   Klasse, denn `ke-trigger-bereit` gibt es nur, wenn der Dialog auch gezeigt
+   wird. Wer ihn abbestellt hat, haette sonst keine Knoepfe zum Zuruecksetzen. */
+html:not(.ke-speicher-bereit) [data-speicher-braucht-js] {
+  display: none !important;
+}
+
+html.ke-speicher-bereit [data-speicher-ohne-js] {
+  display: none;
+}
+
 /* Die Bausteine der Warnungsseite sitzen hier in einer Karte, nicht im
    Seitenraster: ihre Seitenabstaende und Maximalbreiten wuerden den Dialog
    sonst doppelt einruecken. An einer Stelle geregelt, damit kein Bausteintyp
@@ -308,3 +319,4 @@ svg.girocode {
 svg.girocode path {
   fill: currentColor;
 }
+
