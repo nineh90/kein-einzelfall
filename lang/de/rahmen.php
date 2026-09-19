@@ -82,7 +82,7 @@ return [
      */
     'speicher' => [
         'titel' => 'Gespeicherte Einstellungen',
-        'einleitung' => 'Diese Website merkt sich nur zwei Dinge, und zwar in deinem Browser '
+        'einleitung' => 'Diese Website merkt sich nur, was in dieser Liste steht, und zwar in deinem Browser '
             .'auf diesem Gerät. Nichts davon geht an uns, nichts davon sagt uns, wer du bist. '
             .'Du kannst jede Einstellung hier wieder zurücksetzen.',
         'zuruecksetzen' => 'Zurücksetzen',
@@ -101,6 +101,11 @@ return [
             'label' => 'Hinweis zu belastenden Inhalten',
             'text' => 'Ob der Hinweis beim Öffnen der Seite erscheint — und ob du ihn '
                 .'dauerhaft abbestellt hast.',
+        ],
+        'spendenhinweis' => [
+            'label' => 'Spendenhinweis',
+            'text' => 'Wie oft du Seiten aufgerufen hast — der Hinweis kommt erst nach ein paar '
+                .'Aufrufen — und ob du ihn weggeklickt hast. Dann bleibt er eine Weile weg.',
         ],
     ],
 
@@ -152,6 +157,21 @@ return [
         'suche_knopf' => 'Suchen',
         'wohin' => 'Wohin möchtest du?',
         'zur_startseite' => 'Zur Startseite',
+    ],
+
+    /*
+     * Spendenhinweis für wiederkehrende Besucherinnen (config/spendenhinweis.php).
+     *
+     * Der Wortlaut ist ein Vorschlag von uns und steht auf der
+     * Übergabe-Checkliste — er ist eine Bitte des Vereins, nicht unsere.
+     */
+    'spendenhinweis' => [
+        'eyebrow' => 'Du bist öfter hier',
+        'titel' => 'Hilft dir, was du hier findest?',
+        'text' => 'Dann hilf uns, es kostenfrei zu halten — mit einer Spende, egal wie klein.',
+        'knopf' => 'Zum Spenden',
+        'spaeter' => 'Jetzt nicht',
+        'schliessen' => 'Hinweis schliessen',
     ],
 
     /*

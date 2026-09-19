@@ -1287,3 +1287,75 @@ Panel, zeigt der Baustein nur den Empfänger und keinen Knopf ins Leere.
   in `StartseiteSeeder::spendenBaustein()`.
 - **Kontoinhaber für den QR-Code** — siehe Übergabe-Checkliste.
 
+---
+
+## 20. Spendenhinweis für wiederkehrende Besucherinnen (19.09.2026, KEV-6)
+
+Wunsch aus der Besprechung vom 02.08.2026: keine „Battle-Buttons", kein Aufruf
+beim ersten Besuch — sondern ein Hinweis, der erst kommt, wenn jemand die Seite
+schon ein paarmal genutzt hat, und der nach dem Wegklicken längere Zeit Ruhe
+gibt. Abgleich-Punkt „Spenden-Popup ab 5–10 Seitenaufrufen".
+
+### Was es ist — und was nicht
+
+Ein kleiner Kasten unten rechts (`<aside>`, benannter Landmark), der weder den
+Fokus an sich zieht noch die Seite verdeckt oder sperrt. Kein `<dialog>`, keine
+Fokusfalle, kein Abdunkeln. Wer liest, liest weiter. Ein modaler Dialog wäre bei
+dieser Zielgruppe das Gegenteil von unaufdringlich — und läge im schlimmsten
+Fall über jemandem, der gerade eine Anfrage schreibt.
+
+Deshalb auch **kein ESC zum Schliessen**: Dreimal ESC ist der Notausgang, und
+ein Hinweis, der auf ESC reagiert, stünde dem im Weg. Geschlossen wird über
+„Jetzt nicht" oder das X; beides gibt dieselbe Ruhe. Der Knopf „Zum Spenden"
+ebenfalls — wer auf der Spendenseite war, braucht keinen Hinweis mehr.
+
+### Wo er steht und wo nicht
+
+Die Entscheidung fällt auf dem Server (`App\Support\SpendenHinweis`): Auf einer
+ausgenommenen Seite steht der Kasten gar nicht erst im HTML. Erlaubt sind die
+öffentlichen Inhaltsrouten (Start, Seiten, Leichte Sprache, Glossar, Blog,
+Veranstaltungen) — eine Liste dessen, was erlaubt ist, damit eine neue Route
+erst einmal ohne Hinweis ist. Ausgenommen per Slug: `spenden` (überflüssig),
+`anfragen` und `kontakt` (wer eine Anfrage schreibt, wird nicht um Geld gebeten
+— das ist der Unterschied zwischen Opferhilfe und Vertrieb), `trigger-warnung`.
+Fehlerseiten setzen den Abschnitt `ohne-spendenhinweis`.
+
+Ist die Trigger-Warnung offen, wartet der Kasten auf deren `close`.
+
+### Zählen und Ruhe
+
+`resources/js/spendenhinweis.js`, zwei Schlüssel in `localStorage`
+(`ke.spenden.aufrufe`, `ke.spenden.ruhe`), beide in `config/speicher.php` und
+damit in der Übersicht auf /barrierefreiheit und per „Alles zurücksetzen"
+abräumbar. Schwellen aus `config/spendenhinweis.php`, als data-Attribute am
+Kasten — kein Asset-Build bei Änderung. Läuft die Ruhe ab, beginnt der Zähler
+neu; der Hinweis kommt also nicht am Tag 31 sofort wieder.
+
+Ohne JavaScript gibt es den Kasten nicht (`hidden` im Server-HTML). Richtig so:
+Ohne Skript gäbe es keinen Zähler, also kein „wiederkehrend". Im privaten
+Modus dasselbe — lieber nie fragen als jedes Mal.
+
+**Rechtlich** der Eintrag in `config/speicher.php`, der am genauesten hinzusehen
+verlangt: Die Ruhezeit ist ein ausdrücklicher Wunsch der lesenden Person, der
+Zähler davor nicht. Er speichert eine Zahl ohne Kennung, nichts verlässt den
+Browser, und seine einzige Wirkung ist, dass der Hinweis *seltener* erscheint.
+Das ist Frequenzbegrenzung im Interesse der lesenden Person — genannt werden
+muss er in der Datenschutzerklärung trotzdem (Übergabe-Checkliste).
+
+### Nebenbei behoben
+
+Die Knöpfe der Übersicht „Gespeicherte Einstellungen" hingen an
+`data-trigger-braucht-js`. Die Klasse `ke-trigger-bereit` setzt das
+Trigger-Skript aber nur, wenn der Dialog auch gezeigt wird — wer ihn abbestellt
+hatte, sah auf /barrierefreiheit keine Knöpfe. Ausgerechnet die Person, die sie
+braucht. Die Übersicht hat jetzt ihr eigenes Merkmal (`ke-speicher-bereit`).
+Aufgefallen im Browser-Test, nicht in PHPUnit: Das HTML war korrekt, nur die
+CSS-Regel griff.
+
+### Tests
+
+`SpendenHinweisTest` (Server: wo, wie, mit welchen Schwellen),
+`SpeicherTest` kennt das neue Skript, `bedienung.mjs` (Zählen, Wegklicken,
+Ruhe, Trigger-Warnung), `barrierefreiheit.mjs` (axe mit sichtbarem Kasten,
+Desktop und mobil).
+

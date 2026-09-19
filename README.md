@@ -122,6 +122,10 @@ php artisan db:seed --class=AltseiteSeeder    # JSON → Datenbank
   und setzt es einzeln oder komplett zurück. Danach ist die Trigger-Warnung
   wieder da. Was gespeichert wird, steht in `config/speicher.php` — **wer etwas
   Neues speichert, trägt es dort ein.**
+- **Spendenhinweis** — kommt ab dem 5. Seitenaufruf als Kasten unten rechts
+  (nicht auf Spenden, Anfragen, Kontakt). „Jetzt nicht" bringt 30 Tage Ruhe.
+  Zum Ausprobieren im Browser `localStorage.setItem('ke.spenden.aufrufe', '9')`
+  und neu laden; zurücksetzen unter „Gespeicherte Einstellungen".
 - **Notausgang** — Button oben rechts, in der Mobil-Leiste unten, oder **3× ESC**.
   Führt auf wetter.com und ersetzt den History-Eintrag. Steht auch im Dialog der
   Trigger-Warnung.

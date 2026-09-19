@@ -16,6 +16,10 @@
 @endphp
 
 @section('title', __("rahmen.fehler.titel_{$status}"))
+
+{{-- Wer auf einer Fehlerseite landet, hat gerade etwas nicht gefunden. Das ist
+     kein Moment für eine Spendenbitte. --}}
+@section('ohne-spendenhinweis', '1')
 @section('description', __("rahmen.fehler.lead_{$status}"))
 
 {{-- Fehlerseiten gehören nicht in den Suchindex. --}}

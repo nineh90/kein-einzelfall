@@ -19,6 +19,7 @@
  */
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
 import { speicherVerdrahten } from './speicher'
+import { spendenHinweisVerdrahten } from './spendenhinweis'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
 
 toolbarVerdrahten()
@@ -27,8 +28,14 @@ leselinieVerdrahten()
 // Nur auf /barrierefreiheit vorhanden; steigt sonst sofort wieder aus.
 speicherVerdrahten()
 
-// Steht bewusst zuletzt. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
+// Steht bewusst hinter der Toolbar. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.
 // Andersherum bliebe bei einem Fehler die Darstellungs-Toolbar unverdrahtet,
 // und die brauchen manche Menschen, um überhaupt lesen zu können.
 triggerWarnungVerdrahten()
+
+// Nach der Trigger-Warnung, mit Absicht: Der Hinweis muss wissen, ob der
+// Dialog gerade offen ist, und wartet dann auf dessen Schliessen. Scheitert
+// etwas davor, fehlt schlimmstenfalls eine Spendenbitte — das ist von allem
+// hier das Verzichtbarste.
+spendenHinweisVerdrahten()

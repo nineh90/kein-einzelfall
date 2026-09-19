@@ -342,6 +342,74 @@ console.log('\n„Alles zurücksetzen“ in der Darstellungs-Toolbar')
         '„Alles“ muss alles heissen')
 }
 
+// --- Spendenhinweis ---------------------------------------------------------
+
+console.log('\nSpendenhinweis für wiederkehrende Besucherinnen')
+{
+    /*
+     * Der Kasten steht auf jeder erlaubten Seite im HTML, aber versteckt.
+     * Erst der fünfte Aufruf holt ihn hervor; „Jetzt nicht“ bringt Ruhe.
+     * Die Schwelle liest der Test vom Element ab, nicht aus der Config —
+     * geprüft wird, was die Seite tatsächlich verspricht.
+     */
+    const seite = await oeffnen({ pfad: '/verein' })
+    const kasten = seite.locator('#spendenhinweis')
+    const ab = parseInt(await kasten.getAttribute('data-ab'), 10)
+
+    pruefe('ist beim ersten Besuch nicht zu sehen', !(await kasten.isVisible()))
+
+    for (let i = 2; i < ab; i++) {
+        await seite.goto(BASIS + '/verein', { waitUntil: 'networkidle' })
+    }
+    pruefe(`bleibt bis zum ${ab - 1}. Aufruf weg`, !(await kasten.isVisible()))
+
+    await seite.goto(BASIS + '/verein', { waitUntil: 'networkidle' })
+    pruefe(`erscheint beim ${ab}. Aufruf`, await kasten.isVisible())
+
+    pruefe('zieht den Fokus nicht an sich',
+        await seite.evaluate(() => !document.getElementById('spendenhinweis').contains(document.activeElement)),
+        'wer liest, liest weiter')
+
+    // Der Kasten ist ein Landmark mit Namen — so findet ihn eine Vorlesehilfe,
+    // ohne dass er sie unterbricht.
+    pruefe('ist ein benannter Landmark',
+        await seite.evaluate(() => {
+            const k = document.getElementById('spendenhinweis')
+            return k.tagName === 'ASIDE' && !!document.getElementById(k.getAttribute('aria-labelledby'))
+        }))
+
+    await seite.locator('[data-spendenhinweis-schliessen]').first().click()
+    pruefe('verschwindet bei „Jetzt nicht“', !(await kasten.isVisible()))
+
+    await seite.goto(BASIS + '/verein', { waitUntil: 'networkidle' })
+    pruefe('bleibt danach weg', !(await kasten.isVisible()))
+
+    // Auf der Spendenseite gibt es ihn gar nicht — auch nicht mit Zähler.
+    await seite.evaluate(() => { localStorage.removeItem('ke.spenden.ruhe'); localStorage.setItem('ke.spenden.aufrufe', '99') })
+    await seite.goto(BASIS + '/spenden', { waitUntil: 'networkidle' })
+    pruefe('steht nicht auf der Spendenseite', (await seite.locator('#spendenhinweis').count()) === 0)
+
+    await seite.context().close()
+}
+
+console.log('\nSpendenhinweis wartet auf die Trigger-Warnung')
+{
+    // Wer die Warnung noch liest, wird nicht daneben um Geld gebeten.
+    const kontext = await browser.newContext({ viewport: { width: 1400, height: 900 } })
+    await kontext.addInitScript(() => localStorage.setItem('ke.spenden.aufrufe', '99'))
+    const seite = await kontext.newPage()
+    seite.on('pageerror', (e) => meldungen.push(`[trigger+hinweis] ${e.message}`))
+    await seite.goto(BASIS + '/verein', { waitUntil: 'networkidle' })
+
+    pruefe('bleibt hinter dem offenen Dialog verborgen', !(await seite.locator('#spendenhinweis').isVisible()))
+
+    await seite.locator('#trigger-warnung [data-trigger-weiter]').click()
+    await seite.waitForTimeout(100)
+    pruefe('kommt, sobald der Dialog zu ist', await seite.locator('#spendenhinweis').isVisible())
+
+    await kontext.close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

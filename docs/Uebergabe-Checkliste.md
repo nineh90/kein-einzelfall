@@ -256,6 +256,14 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   hinterlegt ist. Er landet im Überweisungsformular der spendenden Person; weicht
   er ab, kommt die Überweisung zurück. Im Panel im Baustein „Spendenmöglichkeiten"
   auf der Startseite (Feld „Kontoinhaber"); leer heisst „KE!N EINZELFALL e.V.".
+- [ ] **Spendenhinweis abnehmen.** Der Kasten für wiederkehrende Besucherinnen
+  (KEV-6) erscheint ab dem 5. Seitenaufruf und gibt nach dem Wegklicken 30 Tage
+  Ruhe — beides unser Vorschlag, die Besprechung nannte „5 bis 10". Der Wortlaut
+  („Hilft dir, was du hier findest? …") ist ebenfalls von uns; er ist eine Bitte
+  des Vereins und sollte in dessen Worten stehen. Zahlen in
+  `config/spendenhinweis.php`, Texte in `lang/*/rahmen.php` unter `spendenhinweis`.
+  Der Zähler steht in `config/speicher.php` und gehört damit in den Abschnitt
+  „Speicherung im Browser" der Datenschutzerklärung.
 - [ ] **PayPal-Spendenlink bestätigen.** Auf der Startseite steht der Link der
   Altseite (`paypal.com/donate?business=paypal@kein-einzelfall.de`). Falls der
   Verein inzwischen einen PayPal.me-Link oder eine Spendenkampagne hat, im

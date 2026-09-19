@@ -200,6 +200,17 @@ for (const [titel, p] of [['Startseite', '/'], ['Inhaltsseite', '/verein']]) {
     await pruefen(`${titel} mobil`, BASIS + p, null, 390)
 }
 
+// Der Spendenhinweis erscheint erst nach mehreren Aufrufen — für axe wird der
+// Zähler vorgestellt und die Seite neu geladen. Desktop und Handy, weil er auf
+// dem Handy über der Leiste sitzt und dort ein anderes Layout hat.
+console.log('\nSpendenhinweis (sichtbar)')
+for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
+    await pruefen(`Spendenhinweis ${titel}`, BASIS + '/verein', async (seite) => {
+        await seite.evaluate(() => localStorage.setItem('ke.spenden.aufrufe', '99'))
+        await seite.reload({ waitUntil: 'networkidle' })
+    }, breite)
+}
+
 // Die Trigger-Warnung ist das Erste, was jemand von dieser Website sieht — und
 // das Einzige, was er sieht, solange sie offen ist. Sie bekommt deshalb einen
 // eigenen Lauf, auf dem Desktop und auf dem Handy.

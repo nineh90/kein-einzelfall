@@ -320,3 +320,20 @@ svg.girocode path {
   fill: currentColor;
 }
 
+/* ---------------------------------------------------------------------------
+   Spendenhinweis — der Kasten unten rechts für wiederkehrende Besucherinnen.
+
+   Nur die Höhe steht hier, nicht das Aussehen: Sie hängt von der mobilen
+   Leiste ab (3.5rem plus Systembalken auf iPhones), und die kennt Tailwind
+   nicht. Ab „lg“ gibt es die Leiste nicht, dann reicht ein fester Abstand.
+--------------------------------------------------------------------------- */
+.spendenhinweis {
+  bottom: calc(3.5rem + env(safe-area-inset-bottom) + 0.75rem);
+}
+
+@media (min-width: 64rem) {
+  .spendenhinweis {
+    bottom: 1.5rem;
+  }
+}
+

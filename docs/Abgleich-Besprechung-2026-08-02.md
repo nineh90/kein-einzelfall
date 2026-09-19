@@ -118,7 +118,7 @@ Empfehlung: eigenes Modell, sonst wird `groups` zum Sammelbecken.
 | **Spendenbescheinigung anfordern** | 🟡 | Steht als E-Mail-Adresse drin; ein eigener kleiner Formularweg wäre besser |
 | **Spenden auf der Startseite verankern** | ✅ | KEV-10 (19.09.2026): `donation_options` kompakt auf der Startseite — Konto mit QR-Code, PayPal, Verweis auf die vollständige Seite. Das CTA-Band bleibt darunter |
 | **Spenden mobil dauerhaft sichtbar** | ❌ | Die mobile Leiste hat drei Einträge (Start, Gruppen, Anfrage). Spenden fehlt — bewusst, weil Eindeutigkeit vorging. **Muss mit dem Verein entschieden werden** |
-| **Spenden-Popup ab 5–10 Seitenaufrufen** | ❌ | Neubau, siehe Abschnitt 4 |
+| **Spenden-Popup ab 5–10 Seitenaufrufen** | ✅ | KEV-6 (19.09.2026): Kasten unten am Rand ab dem 5. Seitenaufruf, 30 Tage Ruhe nach dem Wegklicken, nie auf Spenden/Anfragen/Kontakt/Fehlerseiten. Zahlen in `config/spendenhinweis.php`, vom Verein zu bestätigen |
 
 ### 8. Kontakt
 
@@ -356,7 +356,8 @@ Vor Paket 2 zu klären:
 7. **Franziskas Excel-Tabellen einsehen** (Gerichtsurteile, Gutachten, Adresslisten,
    Literatur). Ohne die ist die Bibliothek nicht schätzbar.
 8. **Nach wie vielen Seitenaufrufen** soll das Spenden-Banner erscheinen? Und wie lange
-   ist Ruhe, wenn jemand es wegklickt?
+   ist Ruhe, wenn jemand es wegklickt? — *Umgesetzt mit 5 Aufrufen und 30 Tagen
+   (`config/spendenhinweis.php`); beides bleibt eine Rückfrage an den Verein.*
 
 Vor Paket 3/4 zu klären:
 

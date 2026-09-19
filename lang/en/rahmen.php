@@ -52,7 +52,7 @@ return [
 
     'speicher' => [
         'titel' => 'Saved settings',
-        'einleitung' => 'This website remembers only two things, and it does so in your browser '
+        'einleitung' => 'This website remembers only what is in this list, and it does so in your browser '
             .'on this device. None of it reaches us, none of it tells us who you are. '
             .'You can reset every setting here.',
         'zuruecksetzen' => 'Reset',
@@ -70,6 +70,11 @@ return [
             'label' => 'Notice about distressing content',
             'text' => 'Whether the notice appears when you open the site — and whether you have '
                 .'dismissed it for good.',
+        ],
+        'spendenhinweis' => [
+            'label' => 'Donation notice',
+            'text' => 'How many pages you have opened — the notice only appears after a few — '
+                .'and whether you have dismissed it. It then stays away for a while.',
         ],
     ],
 
@@ -112,6 +117,15 @@ return [
         'suche_knopf' => 'Search',
         'wohin' => 'Where would you like to go?',
         'zur_startseite' => 'To the home page',
+    ],
+
+    'spendenhinweis' => [
+        'eyebrow' => 'You come here often',
+        'titel' => 'Is what you find here helping you?',
+        'text' => 'Then help us keep it free of charge — with a donation, however small.',
+        'knopf' => 'Donate',
+        'spaeter' => 'Not now',
+        'schliessen' => 'Close notice',
     ],
 
     'spenden' => [

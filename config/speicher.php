@@ -54,5 +54,28 @@ return [
             'session' => ['ke.trigger.gesehen'],
         ],
 
+        /*
+         * Der Spendenhinweis (config/spendenhinweis.php): ein Zähler der
+         * Seitenaufrufe und der Zeitpunkt, bis zu dem nach dem Wegklicken
+         * Ruhe ist.
+         *
+         * Rechtlich der Eintrag, der am genauesten hinzusehen verlangt: Die
+         * Ruhezeit ist der ausdrückliche Wunsch der lesenden Person („nicht
+         * mehr zeigen“) — der Zähler davor nicht. Er speichert eine einzelne
+         * Zahl ohne jede Kennung, und seine einzige Wirkung ist, dass der
+         * Hinweis *seltener* erscheint als ohne ihn. Das ist Frequenzbegrenzung
+         * im Interesse der lesenden Person, kein Tracking: Nichts davon
+         * verlässt den Browser, und nichts davon sagt uns, wer da liest.
+         * Genannt werden muss er trotzdem — in der Übersicht und in der
+         * Datenschutzerklärung.
+         */
+        [
+            'schluessel' => 'spendenhinweis',
+            'label' => 'rahmen.speicher.spendenhinweis.label',
+            'text' => 'rahmen.speicher.spendenhinweis.text',
+            'local' => ['ke.spenden.aufrufe', 'ke.spenden.ruhe'],
+            'session' => [],
+        ],
+
     ],
 ];

@@ -243,6 +243,14 @@
     <x-layout.footer />
     <x-layout.mobile-bar />
 
+    {{-- Spendenhinweis für wiederkehrende Besucherinnen. Nur auf den Seiten,
+         die App\Support\SpendenHinweis erlaubt, und nie auf Fehlerseiten
+         (die setzen den Abschnitt `ohne-spendenhinweis`). Sichtbar wird er
+         erst durch das Skript, wenn der Zähler im Browser so weit ist. --}}
+    @if (! View::hasSection('ohne-spendenhinweis') && \App\Support\SpendenHinweis::erlaubtAuf(request()))
+        <x-layout.spendenhinweis />
+    @endif
+
     {{-- Wird nur sichtbar, wenn die Leselinie eingeschaltet ist. --}}
     <div id="leselinie" aria-hidden="true"></div>
 
