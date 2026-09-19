@@ -81,9 +81,11 @@ class BarrierefreiheitTest extends TestCase
             $host = parse_url($url, PHP_URL_HOST);
 
             // Erlaubt: die eigene Domain und Ziele von Verweisen
-            // (Social-Profile, Notausgang, vertraglich zugesagte Umsetzer-Nennung).
+            // (Social-Profile, Notausgang, vertraglich zugesagte Umsetzer-Nennung,
+            // der PayPal-Spendenlink — ein Link, kein eingebettetes Skript).
             $erlaubt = [$eigenerHost, 'www.wetter.com', 'nils-digital.de',
-                'www.instagram.com', 'www.facebook.com', 'www.tiktok.com'];
+                'www.instagram.com', 'www.facebook.com', 'www.tiktok.com',
+                'www.paypal.com'];
 
             $this->assertContains(
                 $host,

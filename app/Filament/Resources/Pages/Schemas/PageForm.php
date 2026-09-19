@@ -216,7 +216,11 @@ class PageForm
                             // der Seite darüber steht.
                             TextInput::make('data.eyebrow')
                                 ->label('Überzeile')
-                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'cta_band'], true))
+                                ->visible(fn ($get) => in_array(
+                                    $get('typ'),
+                                    ['hero', 'text', 'cta_band', 'donation_options'],
+                                    true,
+                                ))
                                 ->helperText('Kleine Zeile über der Überschrift, in Grossbuchstaben. '
                                     .'Kann leer bleiben.'),
 
@@ -248,10 +252,15 @@ class PageForm
                                 ->rows(2)
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['schritte', 'accordion', 'team_grid', 'group_list', 'partner_logos'],
+                                    ['schritte', 'accordion', 'team_grid', 'group_list', 'partner_logos',
+                                        'speicher_uebersicht'],
                                     true,
                                 ))
-                                ->helperText('Kurzer Text über der Liste. Kann leer bleiben.'),
+                                ->helperText(fn ($get) => $get('typ') === 'speicher_uebersicht'
+                                    ? 'Kurzer Text über der Liste. Leer lassen nimmt den vorgegebenen '
+                                        .'Text — die Liste selbst führt die Anwendung, damit sie nicht '
+                                        .'hinter dem zurückbleibt, was wirklich gespeichert wird.'
+                                    : 'Kurzer Text über der Liste. Kann leer bleiben.'),
 
                             Repeater::make('data.absaetze')
                                 ->label('Absätze')
@@ -326,7 +335,7 @@ class PageForm
                                 ->rows(3)
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['hinweis', 'hero', 'contact_close'],
+                                    ['hinweis', 'hero', 'contact_close', 'donation_options'],
                                     true,
                                 )),
 
@@ -422,12 +431,21 @@ class PageForm
                                 ->helperText('Abgesetzt vom Text — für Hinweise zur Bedienung, '
                                     .'etwa zum Notausgang.'),
 
-                            // --- Hilfe-Nummern ---
+                            // --- Hilfe-Nummern / Spendenmöglichkeiten ---
+                            // Ein Feld für beide Bausteine: Zwei Schalter auf
+                            // demselben Datenpfad hielten sich gegenseitig
+                            // den Zustand streitig.
                             Toggle::make('data.kompakt')
-                                ->label('Nur die zwei wichtigsten Nummern')
-                                ->visible(fn ($get) => $get('typ') === 'hilfe_box')
-                                ->helperText('Für Stellen mitten auf einer Seite. Die Nummern '
-                                    .'selbst stehen in der Anwendung und sind hier nicht änderbar.'),
+                                ->label(fn ($get) => $get('typ') === 'hilfe_box'
+                                    ? 'Nur die zwei wichtigsten Nummern'
+                                    : 'Kompakt, mit Einleitung daneben')
+                                ->visible(fn ($get) => in_array($get('typ'), ['hilfe_box', 'donation_options'], true))
+                                ->helperText(fn ($get) => $get('typ') === 'hilfe_box'
+                                    ? 'Für Stellen mitten auf einer Seite. Die Nummern '
+                                        .'selbst stehen in der Anwendung und sind hier nicht änderbar.'
+                                    : 'Die Fassung der Startseite: Text links, Konto und PayPal rechts '
+                                        .'daneben. Ausgeschaltet stehen die Kästen untereinander — '
+                                        .'die Fassung für die Spendenseite selbst.'),
 
                             // --- Themenliste ---
                             Repeater::make('data.themen')
@@ -645,6 +663,23 @@ class PageForm
                                 ->schema([
                                     Textarea::make('data.bescheinigung.text')->label('Hinweis')->rows(2),
                                     TextInput::make('data.bescheinigung.email')->label('E-Mail für Anfragen'),
+                                ]),
+
+                            /*
+                             * Auf der Startseite stehen nur Konto und PayPal;
+                             * betterplace und die Spendenbescheinigung bleiben
+                             * der Spendenseite. Dieser Verweis führt dorthin.
+                             */
+                            Fieldset::make('Verweis auf alle Spendenmöglichkeiten')
+                                ->columns(2)
+                                ->visible(fn ($get) => $get('typ') === 'donation_options')
+                                ->schema([
+                                    TextInput::make('data.mehr.label')
+                                        ->label('Beschriftung')
+                                        ->helperText('Leer lassen heisst: kein Verweis.'),
+                                    TextInput::make('data.mehr.url')
+                                        ->label('Ziel')
+                                        ->helperText('Zum Beispiel /spenden'),
                                 ]),
 
                             // --- Knöpfe ---

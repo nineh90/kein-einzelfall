@@ -1,19 +1,62 @@
 @props([
+    'eyebrow' => null,
     'titel' => 'Jetzt spenden',
+    'text' => null,        // Einleitung — auf der Startseite: warum spenden
     'bank' => null,        // ['institut'=>, 'iban'=>, 'bic'=>]
     'paypal' => null,      // ['empfaenger'=>, 'url'=>]
     'projekte' => [],      // [['titel'=>, 'widget'=>, 'url'=>], ...]
     'bescheinigung' => null,
+    'mehr' => null,        // ['label'=>, 'url'=>] — Verweis auf alle Spendenmöglichkeiten
+    /*
+     * Kompakt = die Fassung für die Startseite: Einleitung links, die
+     * Möglichkeiten rechts daneben, volle Seitenbreite wie die übrigen
+     * Bausteine dort. Ohne „kompakt“ stehen die Kästen untereinander in einer
+     * Textspalte — die Fassung für die Spendenseite selbst.
+     */
+    'kompakt' => false,
 ])
 
-<section class="px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="spenden-titel">
-    <div class="mx-auto max-w-3xl">
+@php
+    // Ein Verweis ohne Beschriftung oder Ziel — siehe knoepfe() in helpers.php.
+    $mehr = knoepfe([$mehr])[0] ?? null;
+@endphp
 
-        <h2 id="spenden-titel" class="mb-6 font-display text-2xl font-medium text-ink">
-            {{ $titel }}
-        </h2>
+{{-- id="spenden": Sprungziel für Kopf, Band oder geteilte Links („…/#spenden“). --}}
+<section id="spenden" class="scroll-mt-24 px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="spenden-titel">
+    <div @class(['mx-auto', 'max-w-6xl' => $kompakt, 'max-w-3xl' => ! $kompakt])>
 
-        <div class="flex flex-col gap-4">
+        <div @class(['grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12' => $kompakt])>
+
+            <div>
+                @if ($eyebrow)
+                    <x-ui.eyebrow class="mb-3">{{ $eyebrow }}</x-ui.eyebrow>
+                @endif
+
+                {{-- Derselbe kurze Strich wie über jeder Abschnittsüberschrift. --}}
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+                <h2 id="spenden-titel" @class([
+                    'font-display font-medium text-ink',
+                    'mb-4 text-2xl lg:text-3xl' => $kompakt,
+                    'mb-6 text-2xl' => ! $kompakt,
+                ])>
+                    {{ $titel }}
+                </h2>
+
+                @if ($text)
+                    <p class="max-w-prose leading-relaxed text-ink-soft">{{ $text }}</p>
+                @endif
+
+                @if ($mehr)
+                    {{-- Ein Link, kein Knopf: Die Handlung auf dieser Fläche ist das
+                         Spenden selbst; der Weg zur vollständigen Seite (betterplace,
+                         Spendenbescheinigung) ist der Nebenweg. --}}
+                    <p class="mt-4">
+                        <a href="{{ $mehr['url'] }}" class="text-green-deep underline">{{ $mehr['label'] }}</a>
+                    </p>
+                @endif
+            </div>
+
+            <div class="flex flex-col gap-4">
 
             @if ($bank)
                 @php
@@ -38,7 +81,7 @@
 
                 <div class="rounded-card border border-line bg-card px-5 py-5">
                     <h3 class="mb-3 font-display text-lg text-ink">
-                        Überweisung
+                        {{ __('rahmen.spenden.ueberweisung') }}
                         @if (!empty($bank['institut']))
                             <span class="font-sans text-sm font-normal text-ink-soft">
                                 ({{ $bank['institut'] }})
@@ -72,7 +115,7 @@
                                  nichts als eine Fläche. Was er ist und wofür er
                                  gut ist, muss danebenstehen — und steht damit
                                  gleich für alle da. --}}
-                            <figure class="shrink-0 sm:w-40">
+                            <figure class="w-40 shrink-0">
                                 {{-- Der einzige Ort auf dieser Seite mit fest
                                      eingebauten Farben, und das mit Absicht: Ein
                                      QR-Code ist kein Text, sondern etwas, das
@@ -84,12 +127,11 @@
                                      sind der Weg, der für alle funktioniert. --}}
                                 <div class="girocode-flaeche rounded-lg border border-line p-3"
                                      role="img"
-                                     aria-label="QR-Code mit der Bankverbindung des Vereins zum Einlesen in einer Banking-App">
+                                     aria-label="{{ __('rahmen.spenden.qr_label') }}">
                                     {!! $girocode !!}
                                 </div>
                                 <figcaption class="mt-2 text-xs text-ink-soft">
-                                    Mit der Banking-App scannen — die Überweisung ist dann
-                                    schon ausgefüllt. Den Betrag gibst du selbst ein.
+                                    {{ __('rahmen.spenden.qr_hinweis') }}
                                 </figcaption>
                             </figure>
                         @endif
@@ -102,24 +144,28 @@
                     <h3 class="mb-2 font-display text-lg text-ink">PayPal</h3>
                     @if (!empty($paypal['empfaenger']))
                         <p class="mb-4 text-sm text-ink-soft">
-                            Empfänger: {{ $paypal['empfaenger'] }}
+                            {{ __('rahmen.spenden.empfaenger') }}: {{ $paypal['empfaenger'] }}
                         </p>
                     @endif
                     {{-- Reiner Link, kein eingebettetes Skript: Solange niemand
-                         klickt, erfährt PayPal nichts von diesem Besuch. --}}
-                    <x-ui.button :href="$paypal['url']" variant="primary" size="sm"
-                                 target="_blank" rel="noopener noreferrer">
-                        Bei PayPal spenden
-                        <span class="sr-only">(öffnet in neuem Tab)</span>
-                    </x-ui.button>
+                         klickt, erfährt PayPal nichts von diesem Besuch.
+                         Ohne Adresse bleibt der Empfänger darüber stehen — ein
+                         Knopf ins Leere wäre schlimmer als keiner. --}}
+                    @if (!empty($paypal['url']))
+                        <x-ui.button :href="$paypal['url']" variant="primary" size="sm"
+                                     target="_blank" rel="noopener noreferrer">
+                            {{ __('rahmen.spenden.paypal_knopf') }}
+                            <span class="sr-only">{{ __('rahmen.neuer_tab') }}</span>
+                        </x-ui.button>
+                    @endif
                 </div>
             @endif
 
             @if ($projekte)
                 <div class="rounded-card border border-line bg-card px-5 py-5">
-                    <h3 class="mb-1 font-display text-lg text-ink">Projekte auf betterplace.org</h3>
+                    <h3 class="mb-1 font-display text-lg text-ink">{{ __('rahmen.spenden.projekte') }}</h3>
                     <p class="mb-4 text-sm text-ink-soft">
-                        Für ein bestimmtes Vorhaben spenden.
+                        {{ __('rahmen.spenden.projekte_hinweis') }}
                     </p>
 
                     <div class="flex flex-col gap-3">
@@ -137,7 +183,7 @@
 
             @if ($bescheinigung)
                 <div class="rounded-card border border-line bg-card px-5 py-5">
-                    <h3 class="mb-2 font-display text-lg text-ink">Spendenbescheinigung</h3>
+                    <h3 class="mb-2 font-display text-lg text-ink">{{ __('rahmen.spenden.bescheinigung') }}</h3>
                     {{-- ?? '', falls im Panel nur die E-Mail gepflegt wurde:
                          der leere Text wird beim Speichern entfernt. --}}
                     <p class="text-sm text-ink-soft">{{ $bescheinigung['text'] ?? '' }}</p>
@@ -149,6 +195,8 @@
                     @endif
                 </div>
             @endif
+
+            </div>
         </div>
     </div>
 </section>

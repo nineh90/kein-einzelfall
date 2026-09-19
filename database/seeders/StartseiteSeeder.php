@@ -69,9 +69,97 @@ class StartseiteSeeder extends Seeder
     }
 
     /**
+     * Die Spendenmöglichkeit auf der Startseite (KEV-10).
+     *
+     * Beschluss der Besprechung vom 02.08.2026: Die Spendenoption wird direkt
+     * auf der Startseite verankert, nicht nur verlinkt — samt QR-Code für die
+     * Überweisung (Wunsch von Franziska). Bis dahin gab es auf der Startseite
+     * drei Links auf /spenden, aber nirgends die Möglichkeit selbst.
+     *
+     * Sie kommt vor das Hinweisband: Das Band fasst danach beide Wege der
+     * Unterstützung zusammen — Spenden und Mitgliedschaft — und führt zur
+     * vollständigen Spendenseite mit betterplace und Spendenbescheinigung.
+     *
+     * Öffentlich und statisch, damit die Migration sie auf bestehenden
+     * Installationen nachziehen kann, ohne den ganzen Seeder laufen zu lassen
+     * — der legt die Startseite nur auf leerer Datenbank an.
+     *
+     * @return bool true, wenn eingefügt; false, wenn schon vorhanden
+     */
+    public static function spendenAnhaengen(Page $seite): bool
+    {
+        if ($seite->blocks()->where('typ', 'donation_options')->exists()) {
+            return false;
+        }
+
+        /*
+         * Vor dem Hinweisband; fehlt es, vor dem Kontaktabschluss; fehlt auch
+         * der, ans Ende. Die Bausteine dahinter rücken eine Position weiter —
+         * sonst hätten zwei dieselbe, und die Reihenfolge wäre Zufall.
+         */
+        $vorgaenger = $seite->blocks()
+            ->whereIn('typ', ['cta_band', 'contact_close'])
+            ->orderByRaw("typ = 'cta_band' desc")
+            ->orderBy('position')
+            ->first();
+
+        $position = $vorgaenger
+            ? $vorgaenger->position
+            : (int) $seite->blocks()->max('position') + 1;
+
+        $seite->blocks()->where('position', '>=', $position)->increment('position');
+
+        $seite->blocks()->create([
+            'typ' => 'donation_options',
+            'position' => $position,
+            'data' => self::spendenBaustein(),
+        ]);
+
+        return true;
+    }
+
+    /**
+     * Konto und PayPal wie auf der Spendenseite (Bestand der Altseite, Stand
+     * 26.07.2026). Die Einleitung ist der Text der Einstiegskarte „Spenden“ —
+     * ebenfalls Wortlaut des Vereins, nicht neu.
+     *
+     * betterplace und die Spendenbescheinigung bleiben der Spendenseite: Auf
+     * der Startseite soll die Möglichkeit sichtbar sein, nicht die ganze
+     * Seite noch einmal. Der Verweis darunter führt hin.
+     *
+     * @return array<string, mixed>
+     */
+    public static function spendenBaustein(): array
+    {
+        return [
+            'eyebrow' => 'Spenden',
+            'titel' => 'Jetzt spenden',
+            'text' => 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu '
+                .'leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform '
+                .'aufzustellen und ein Netzwerk zu bilden.',
+            'kompakt' => true,
+            'bank' => [
+                'institut' => 'Deutsche Skatbank',
+                'iban' => 'DE79 8306 5408 0006 8893 10',
+                'bic' => 'GENODEF1SLR',
+                // Der Kontoinhaber ist offen (Übergabe-Checkliste): Leer heisst
+                // „KE!N EINZELFALL e.V.“ — der Vereinsname, wie er im Impressum
+                // steht.
+                'verwendungszweck' => 'Spende',
+            ],
+            'paypal' => [
+                'empfaenger' => 'paypal@kein-einzelfall.de',
+                // Der Spendenlink der Altseite, ohne deren HTML-kodiertes „&“.
+                'url' => 'https://www.paypal.com/donate?business=paypal@kein-einzelfall.de&currency_code=EUR',
+            ],
+            'mehr' => ['label' => 'Alle Spendenmöglichkeiten und Spendenbescheinigung', 'url' => '/spenden'],
+        ];
+    }
+
+    /**
      * Die Struktur folgt dem Bestand der Altseite:
      * Aufmacher · Hilfe-Nummern · Unsere Aufgabe · Vereinsarbeit · Mitglieder ·
-     * Spendenaufruf · Kontaktabschluss.
+     * Spendenmöglichkeit · Spendenaufruf · Kontaktabschluss.
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
@@ -187,6 +275,12 @@ class StartseiteSeeder extends Seeder
                     ],
                     'cta' => ['label' => 'Mitglied werden', 'url' => '/mitgliedschaft', 'variant' => 'primary'],
                 ],
+            ],
+
+            // Siehe spendenAnhaengen(): dieselbe Stelle, dieselben Daten.
+            [
+                'typ' => 'donation_options',
+                'data' => self::spendenBaustein(),
             ],
 
             [

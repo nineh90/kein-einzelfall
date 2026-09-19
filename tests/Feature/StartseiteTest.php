@@ -183,6 +183,89 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('Vom Verein geändert');
     }
 
+    /**
+     * KEV-10: Die Spendenmöglichkeit steht auf der Startseite selbst.
+     *
+     * Vorher gab es dort drei Links auf /spenden, aber nirgends Konto oder
+     * PayPal — wer spenden wollte, musste erst die Unterseite finden.
+     */
+    public function test_startseite_zeigt_die_spendenmoeglichkeit_selbst(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        $this->assertStringContainsString('DE79 8306 5408 0006 8893 10', $html, 'IBAN fehlt');
+        $this->assertStringContainsString('paypal.com/donate', $html, 'PayPal-Link fehlt');
+        // Der QR-Code für die Banking-App — Wunsch aus der Besprechung vom 02.08.2026.
+        $this->assertMatchesRegularExpression('/<div class="girocode-flaeche[^>]*role="img"/', $html);
+        // Und der Weg zur vollständigen Seite (betterplace, Spendenbescheinigung).
+        $this->assertStringContainsString('Alle Spendenmöglichkeiten', $html);
+    }
+
+    public function test_spendenmoeglichkeit_steht_vor_dem_hinweisband(): void
+    {
+        // Das Band fasst danach beide Wege zusammen — Spenden und Mitgliedschaft.
+        $typen = $this->startseite()->blocks()->pluck('typ')->all();
+
+        $this->assertLessThan(
+            array_search('cta_band', $typen, true),
+            array_search('donation_options', $typen, true),
+        );
+    }
+
+    public function test_eine_bestehende_startseite_bekommt_die_spendenmoeglichkeit_nachgetragen(): void
+    {
+        /*
+         * Der Zustand jeder eingerichteten Installation vor KEV-10: Startseite
+         * da, Spendenbaustein nicht. Der Seeder rührt sie nicht mehr an — die
+         * Migration muss es tun, und zwar an derselben Stelle wie der Seeder.
+         */
+        $seite = $this->startseite();
+        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $this->get('/')->assertDontSee('DE79 8306', false);
+
+        $this->spendenMigration()->up();
+
+        $this->get('/')->assertSee('DE79 8306', false);
+
+        $typen = $seite->fresh()->blocks()->pluck('typ')->all();
+        $this->assertSame(
+            ['hero', 'hilfe_box', 'quick_access', 'text', 'text', 'donation_options', 'cta_band', 'contact_close'],
+            $typen,
+        );
+        // Keine zwei Bausteine auf derselben Position — sonst wäre die
+        // Reihenfolge Zufall. Lückenlos müssen sie nicht sein.
+        $positionen = $seite->fresh()->blocks()->pluck('position')->all();
+        $this->assertSame($positionen, array_values(array_unique($positionen)));
+    }
+
+    public function test_das_nachtragen_der_spendenmoeglichkeit_laeuft_zweimal_ohne_schaden(): void
+    {
+        $this->spendenMigration()->up();
+        $this->spendenMigration()->up();
+
+        $this->assertSame(1, $this->startseite()->blocks()->where('typ', 'donation_options')->count());
+    }
+
+    public function test_das_nachtragen_landet_ohne_hinweisband_vor_dem_kontaktabschluss(): void
+    {
+        // Der Verein kann das Band im Panel löschen. Dann darf der Baustein
+        // trotzdem nicht ans Ende hinter den Kontaktabschluss rutschen.
+        $seite = $this->startseite();
+        $seite->blocks()->whereIn('typ', ['donation_options', 'cta_band'])->delete();
+
+        $this->spendenMigration()->up();
+
+        $typen = $seite->fresh()->blocks()->pluck('typ')->all();
+        $this->assertSame('contact_close', end($typen));
+        $this->assertSame('donation_options', prev($typen));
+    }
+
+    /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
+    private function spendenMigration(): object
+    {
+        return require database_path('migrations/2026_09_19_120000_spenden_auf_der_startseite_nachtragen.php');
+    }
+
     public function test_ohne_datensatz_faellt_die_startseite_nicht_auf_alte_texte_zurueck(): void
     {
         // Ein stiller Rückfall auf fest verdrahtete Texte hiesse: Die Startseite

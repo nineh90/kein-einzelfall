@@ -50,6 +50,29 @@ return [
         'fremde_seite' => '(opens an external site)',
     ],
 
+    'speicher' => [
+        'titel' => 'Saved settings',
+        'einleitung' => 'This website remembers only two things, and it does so in your browser '
+            .'on this device. None of it reaches us, none of it tells us who you are. '
+            .'You can reset every setting here.',
+        'zuruecksetzen' => 'Reset',
+        'alles' => 'Reset all settings',
+        'zustand_gespeichert' => 'Saved on this device',
+        'zustand_leer' => 'Nothing saved',
+        'zustand_erledigt' => 'Reset. The default applies again on your next page view.',
+        'ohne_js' => 'Without JavaScript this site saves nothing — so there is nothing to reset here.',
+        'darstellung' => [
+            'label' => 'Display',
+            'text' => 'Font size, contrast, line spacing and the other settings from the button '
+                .'on the left edge.',
+        ],
+        'trigger' => [
+            'label' => 'Notice about distressing content',
+            'text' => 'Whether the notice appears when you open the site — and whether you have '
+                .'dismissed it for good.',
+        ],
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Contact',
         'informationen' => 'Information',
@@ -89,6 +112,18 @@ return [
         'suche_knopf' => 'Search',
         'wohin' => 'Where would you like to go?',
         'zur_startseite' => 'To the home page',
+    ],
+
+    'spenden' => [
+        'ueberweisung' => 'Bank transfer',
+        'empfaenger' => 'Recipient',
+        'paypal_knopf' => 'Donate via PayPal',
+        'qr_label' => 'QR code with the association’s bank details, to scan with a banking app',
+        'qr_hinweis' => 'Scan with your banking app — the transfer is then already filled in. '
+            .'You enter the amount yourself.',
+        'projekte' => 'Projects on betterplace.org',
+        'projekte_hinweis' => 'Donate to a specific project.',
+        'bescheinigung' => 'Donation receipt',
     ],
 
     'leichte_sprache' => [

@@ -72,6 +72,38 @@ return [
         'fremde_seite' => '(öffnet eine fremde Seite)',
     ],
 
+    /*
+     * Was die Seite im Browser ablegt — und wie man es wieder loswird.
+     *
+     * Die Liste selbst kommt aus config/speicher.php. Hier stehen nur die
+     * Beschriftungen. „Zurücksetzen“ statt „Löschen“: Es geht um eine
+     * Einstellung, die man wieder herstellen kann, nicht um etwas, das
+     * unwiederbringlich weg ist.
+     */
+    'speicher' => [
+        'titel' => 'Gespeicherte Einstellungen',
+        'einleitung' => 'Diese Website merkt sich nur zwei Dinge, und zwar in deinem Browser '
+            .'auf diesem Gerät. Nichts davon geht an uns, nichts davon sagt uns, wer du bist. '
+            .'Du kannst jede Einstellung hier wieder zurücksetzen.',
+        'zuruecksetzen' => 'Zurücksetzen',
+        'alles' => 'Alle Einstellungen zurücksetzen',
+        'zustand_gespeichert' => 'Auf diesem Gerät gespeichert',
+        'zustand_leer' => 'Nichts gespeichert',
+        'zustand_erledigt' => 'Zurückgesetzt. Beim nächsten Seitenaufruf gilt wieder die Voreinstellung.',
+        'ohne_js' => 'Ohne JavaScript speichert diese Seite nichts — dann gibt es hier auch '
+            .'nichts zurückzusetzen.',
+        'darstellung' => [
+            'label' => 'Darstellung',
+            'text' => 'Schriftgröße, Kontrast, Zeilenabstand und die übrigen Einstellungen '
+                .'aus dem Knopf am linken Rand.',
+        ],
+        'trigger' => [
+            'label' => 'Hinweis zu belastenden Inhalten',
+            'text' => 'Ob der Hinweis beim Öffnen der Seite erscheint — und ob du ihn '
+                .'dauerhaft abbestellt hast.',
+        ],
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Kontakt',
         'informationen' => 'Informationen',
@@ -120,6 +152,26 @@ return [
         'suche_knopf' => 'Suchen',
         'wohin' => 'Wohin möchtest du?',
         'zur_startseite' => 'Zur Startseite',
+    ],
+
+    /*
+     * Spendenmöglichkeiten.
+     *
+     * Die Beschriftungen des Bausteins — nicht die Angaben des Vereins (IBAN,
+     * Empfänger, Einleitung), die kommen aus dem Datensatz. Der Baustein steht
+     * seit KEV-10 auf der Startseite, und die gibt es auch auf Englisch und
+     * Russisch.
+     */
+    'spenden' => [
+        'ueberweisung' => 'Überweisung',
+        'empfaenger' => 'Empfänger',
+        'paypal_knopf' => 'Bei PayPal spenden',
+        'qr_label' => 'QR-Code mit der Bankverbindung des Vereins zum Einlesen in einer Banking-App',
+        'qr_hinweis' => 'Mit der Banking-App scannen — die Überweisung ist dann schon ausgefüllt. '
+            .'Den Betrag gibst du selbst ein.',
+        'projekte' => 'Projekte auf betterplace.org',
+        'projekte_hinweis' => 'Für ein bestimmtes Vorhaben spenden.',
+        'bescheinigung' => 'Spendenbescheinigung',
     ],
 
     /*

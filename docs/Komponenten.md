@@ -42,6 +42,7 @@ Status: ✅ gebaut · 🔨 geplant · 💭 zu klären
 | `event_teaser` | 🔨 | Startseite |
 | `news_teaser` | 🔨 | Startseite |
 | `cta_band` | ✅ | Startseite — im Panel pflegbar |
+| `donation_options` | ✅ | Startseite (kompakt), Spenden — im Panel pflegbar |
 | `contact_close` | ✅ | Startseite, Kontakt — im Panel pflegbar |
 
 ## 3. Module, die das Mockup **nicht** zeigt
@@ -56,7 +57,7 @@ Abgeleitet aus dem tatsächlichen Bestand:
 | `accordion` / FAQ | Bürokratie-Labyrinth, Hilfesystem | + JSON-LD `FAQPage` |
 | `group_list` | Selbsthilfegruppen, Arbeitsgruppen | Aus `groups`, mit Terminen und Anmeldestatus |
 | `event_list` / Kalender | Veranstaltungen | Eigenbau (Position 2). Listen- und Monatsansicht, iCal |
-| `donation_options` | Spenden | IBAN + PayPal + betterplace. **betterplace nur als 2-Klick** |
+| `donation_options` | Spenden, Startseite (kompakt, seit KEV-10) | IBAN + Girocode + PayPal + betterplace. **betterplace nur als 2-Klick** |
 | `contact_form` | Kontakt, Anfragen | Art.-9-Daten, verschlüsselt, anonym möglich |
 | `legal_text` | Datenschutz (2.243 W.), Impressum, Satzung | Lange Prosa + Sprungmarken-Inhaltsverzeichnis |
 | `embed` | ggf. Videos | 2-Klick-Lösung, nie direkt laden |
@@ -1230,4 +1231,59 @@ einwilligungsfrei (§ 25 Abs. 2 Nr. 2 TDDDG): kein Tracking, keine Kennung,
 nichts geht an den Server. Erwähnt werden muss es trotzdem — die
 Datenschutzerklärung wird ohnehin neu geschrieben, und diese Liste ist die
 Vorlage für den entsprechenden Abschnitt.
+
+---
+
+## 19. Spendenmöglichkeit auf der Startseite (19.09.2026, KEV-10)
+
+Auf der Startseite führten drei Wege zu `/spenden` — Menü, Einstiegskarte,
+Hinweisband —, aber nirgends stand die Möglichkeit selbst. Wer spenden wollte,
+musste erst die Unterseite finden. In der Besprechung vom 02.08.2026 war
+beschlossen worden, die Spendenoption direkt auf der Startseite zu verankern,
+samt QR-Code für die Überweisung; im Abgleich stand der Punkt seither auf 🟡.
+
+### Was sich geändert hat
+
+**`donation_options` kann jetzt kompakt.** Neue Felder `eyebrow`, `text`,
+`mehr` (Verweis auf die vollständige Seite) und der Schalter `kompakt`. Kompakt
+heisst: Einleitung links, Konto und PayPal rechts daneben, volle Seitenbreite
+wie die übrigen Bausteine der Startseite. Ohne den Schalter bleibt es die
+einspaltige Fassung für die Spendenseite. Der Abschnitt trägt `id="spenden"`,
+damit Kopf, Band oder geteilte Links dorthin springen können.
+
+**Die Beschriftungen des Bausteins kommen aus `rahmen.spenden`** (de/en/ru):
+„Überweisung", „Bei PayPal spenden", der Hinweis unter dem QR-Code. Vorher
+standen sie fest deutsch im Blade — auf der englischen und russischen
+Startseite wäre das aufgefallen. Die Angaben des Vereins (IBAN, Empfänger,
+Einleitung) bleiben Inhalt und damit im Datensatz.
+
+**Auf der Startseite steht der Baustein vor dem Hinweisband:** Aufmacher ·
+Hilfe-Nummern · Unsere Aufgabe · Vereinsarbeit · Mitglieder · **Spenden** ·
+Hinweisband · Kontaktabschluss. Das Band fasst danach beide Wege der
+Unterstützung zusammen und führt zur vollständigen Spendenseite (betterplace,
+Spendenbescheinigung). Inhalt: Konto und PayPal wie auf der Spendenseite, als
+Einleitung der Text der Einstiegskarte „Spenden" — alles Wortlaut des Vereins.
+
+**Bestehende Datenbanken** bekommen den Baustein per Migration
+(`2026_09_19_120000_spenden_auf_der_startseite_nachtragen`), auf allen
+Sprachfassungen der Startseite. `StartseiteSeeder::spendenAnhaengen()` fügt
+ihn vor dem Hinweisband ein (fehlt es: vor dem Kontaktabschluss; fehlt auch
+der: ans Ende) und rückt die Bausteine dahinter eine Position weiter. Zweimal
+laufen ist unschädlich; gepflegte Texte bleiben unangetastet.
+
+**PayPal-Link:** `https://www.paypal.com/donate?business=paypal@kein-einzelfall.de&currency_code=EUR`
+— der Spendenlink der Altseite. Ein reiner Link, kein Skript; `BarrierefreiheitTest`
+kennt `www.paypal.com` deshalb als erlaubtes Linkziel. Fehlt die Adresse im
+Panel, zeigt der Baustein nur den Empfänger und keinen Knopf ins Leere.
+
+### Offen
+
+- **Spenden in der mobilen Leiste** — die Frage aus dem Abgleich (welcher der
+  drei Einträge weicht?) ist weiter beim Verein. Bis dahin: Menü und der
+  Abschnitt auf der Startseite.
+- **`/spenden` selbst** nutzt für Konto und PayPal noch den Textbaustein der
+  Altseite — ohne QR-Code. Sobald der Verein die Seite freigibt, den
+  `donation_options`-Baustein (ohne `kompakt`) dort einsetzen; die Daten stehen
+  in `StartseiteSeeder::spendenBaustein()`.
+- **Kontoinhaber für den QR-Code** — siehe Übergabe-Checkliste.
 
