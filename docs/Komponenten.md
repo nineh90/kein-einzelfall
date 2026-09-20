@@ -1493,13 +1493,16 @@ Der Aufmacher hat jetzt unten denselben Abstand wie jeder Abschnitt: Der
 Baustein danach steht auf der Karte, und ohne Luft klebte die Karte an den
 Knöpfen.
 
-### Nicht gelöst, bewusst
+### Terminliste und Glossar
 
-Zwischen zwei festen Flächen geht der Wechsel nur bei gerader Zahl
-dazwischenliegender Bausteine auf. Betrifft praktisch nur `/veranstaltungen`
-(Seitenkopf `card` → Einleitung → Terminliste `cream`): mit derzeit sechs
-Textbausteinen passt es, mit fünf stünden Einleitung und Liste beide hell.
-Wer dort Bausteine entfernt, sieht es sofort — der Test unten wird rot.
+Auf `/veranstaltungen` und `/glossar` folgt auf die Einleitungsbausteine die
+eigentliche Liste. Sie nimmt die Gegenfläche des letzten Bausteins, ihre
+Karten stehen dann auf der jeweils anderen — sonst ging der Wechsel nur bei
+gerader Zahl Einleitungsbausteine auf. Genau das trat ein, als der korrigierte
+Abzug der Altseite (Abschnitt 24) der Veranstaltungsseite einen siebten
+Textbaustein brachte.
+
+### Nicht gelöst, bewusst
 
 `embed` und `inhalts_hinweis` haben als Seitenbausteine keinen eigenen Rahmen
 (`px-4`, `max-w-6xl`) und liefen über die volle Breite. Beide sind auf keiner
@@ -1512,3 +1515,105 @@ geht über alle veröffentlichten deutschen Seiten plus `/veranstaltungen` und
 prüft die obersten Kinder von `<main>` — Seitenkopf bis Kontakt-Abschluss —
 paarweise. Auf dem alten Stand meldet er als Erstes die Startseite
 (`cream > cream > cream > card > cream > cream > cream > cream`).
+
+## 24. Bilder der Altseite, und was der Importer dabei verschluckt hatte (20.09.2026)
+
+Aufgefallen war: Auf der Teamseite fehlten die Fotos. Beim Nachsehen stellte
+sich heraus, dass nicht nur die Fotos fehlten.
+
+### Was die Altseite an Bildern hat
+
+Die komplette WordPress-Mediathek (`/wp-json/wp/v2/media?media_type=image`)
+umfasst **15 Bilder**: sieben Porträts der Teamseite, den QR-Code der
+Spendenseite (den erzeugen wir selbst, siehe 17.5), fünf Logo-Varianten
+(unser `public/img/logo.png` deckt das ab) und eine Datei
+`w2sx8a07e0l.php_.jpg` ohne Bildmaße — steht als Warnung auf der
+Übergabe-Checkliste. Auf den Seiten selbst stehen nur die Porträts und der
+QR-Code; alle anderen Seiten sind reine Textseiten. **Es gibt also nichts
+weiter zu übernehmen** — die Platzhalterflächen von `text_media` und dem
+Aufmacher bleiben, bis der Verein Bildmaterial liefert.
+
+### Der Importer-Fehler
+
+`AltseiteHolen::bloecke()` las Überschriften und Absätze mit dem Muster
+`<(h[1-6]|p)[^>]*>` — ohne Wortgrenze hinter dem Tagnamen. Damit passte es
+auch auf `<path …>` der SVG-Icons und las von dort bis zum nächsten `</p>`.
+Auf der Teamseite steckt so ein Icon im Kontaktknopf jeder Person: Von
+Tatjana Belmars Knopf bis zum ersten `</p>` in Franziska Künstlers
+Vorstellung — Rolle, Name, Foto, Kurzangaben von Franziska, alles im Bauch
+eines vermeintlichen Absatzes. **Vier von sieben Personen fehlten**, und ihre
+Texte standen im Profil der jeweils vorigen: Tatjana „sprach" über ihr
+Abimotto und ihre Arbeit als Kassenwartin, Nicole Khalil über 17 Jahre
+Strafverteidigung.
+
+Zweiter Fehler im selben Muster: `<li>` wurde nie gelesen. Aufzählungen
+fehlen deshalb auf neun Seiten (Notfallnummern, Referent/Datum/Ort der
+Veranstaltungen, „Warum spenden", Betroffenenrechte). Steht als eigener
+Punkt auf der Übergabe-Checkliste — die Seiten sind inzwischen bearbeitet,
+ein Neu-Import überschriebe das.
+
+Behoben: `\b` hinter dem Tagnamen, `<li>` als Absatz, und der Inhalt eines
+Absatzes darf kein weiteres `<p>`/`<li>`/`<h…>` enthalten. Bilder werden als
+`bild` (Quelle, Beschreibung) an den Block gehängt, in dem sie stehen. Für
+Elementor-Vorschaubilder (`elementor/thumbs/NAME-<hash>.jpg`, ohne Verweis
+aufs Original) wird das Original einmalig über die Mediathek per Dateiname
+aufgelöst.
+
+**Nicht gebaut:** zerrissene Absätze zusammenfügen. Andrés erster Satz steht
+auf der Altseite in zwei `<p>`; eine Regel „endet ohne Satzzeichen → mit dem
+nächsten verbinden" klebte auf zwölf Seiten Adressen, Linklisten und
+Zwischenzeilen zusammen. André ist ein benannter Sonderfall im Seeder.
+
+### Bilder holen
+
+```bash
+php artisan bilder:holen            # fehlende holen
+php artisan bilder:holen --pruefen  # nur Bericht
+```
+
+Ablage unter `public/img/altseite/DATEINAME.jpg` (versioniert). Fotos werden
+auf 800 px längste Kante verkleinert und als JPEG gespeichert — gezeigt
+werden sie 80 px gross; ein 2.000-Pixel-Original wäre ein Megabyte, das
+nichts zeigt. Kleine Grafiken bleiben unverändert (ein neu kodierter QR-Code
+wird unscharf). EXIF-Drehung wird beachtet. `App\Support\Bild::lokal()`
+sagt, ob und wo ein Bild liegt; der Seeder setzt nur Pfade zu Dateien, die
+es gibt.
+
+Braucht die PHP-Erweiterung `gd`. Auf dem Entwicklungsrechner (Nobara) gibt
+es `php-gd` nur noch für PHP 8.5 — die Dateien im Repo sind deshalb einmalig
+mit Pillow nach denselben Regeln erzeugt worden. Der Bericht funktioniert
+ohne `gd`.
+
+### Teamseite
+
+`TeamUndGruppenSeeder::teamAusAbzug()` liest Personen samt Foto und löst die
+Überleitungen der Seite („Darüber hinaus gibt es viele Menschen …",
+„Zusätzlich arbeiten im Hintergrund …") aus den Profilen heraus. Bereiche
+folgen der Gliederung der Altseite: **Vorstand** (Vorstandsamt in der Rolle),
+**Team** (Landesstelle, Beauftragte, Ehrenamtliche), **Im Hintergrund** (das
+stellvertretende Porträt). `teamseiteAufbauen()` setzt die Seite so
+zusammen: Einleitung · Vorstand · Überleitung · Team · Hinweis · Porträt.
+`team_grid` bekommt dafür je Bereich eine eigene Landmarken-Kennung.
+
+Das Kurzprofil ist der erste Absatz, der mit Satzzeichen endet — Franziska
+Künstlers Vorstellung beginnt mit drei Stichpunkten.
+
+Migration `team_vervollstaendigen` zieht bestehende Datenbanken nach. Sie
+schreibt bewusst über den Bestand (die Profile waren falsch, nicht bloss
+unvollständig) und baut die Seite nur um, wenn sie noch im Seeder-Zustand
+ist (ein `team_grid` ohne Einstellungen).
+
+### Nebenbei
+
+Die Altseite hat seit dem Abzug vom Juli auf `/veranstaltungen` einen
+Aufzeichnungshinweis, zwei neue Dokumente (Teilnahmevereinbarung,
+Gruppenregeln) und einen geänderten Vortragstitel („Von der Krise zur
+Stärke"). Die Teilnahmevereinbarung ist im Dokumentenmanifest nachgetragen
+und geholt; der Text ist im Abzug, in der Datenbank noch nicht — gehört zum
+Checklistenpunkt oben.
+
+### Tests
+
+`TeamUndGruppenTest`: sieben Personen, Biografien nicht vermischt,
+Kurzprofil beginnt mit ganzem Satz, Gliederung der Seite, Porträts vorhanden
+und eingebunden, Initialen ohne Foto. `ModuleTest` kennt das 122. Dokument.

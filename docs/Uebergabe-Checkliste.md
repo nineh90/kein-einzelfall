@@ -280,6 +280,16 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").
+- [ ] **Teamseite abnehmen (20.09.2026).** Jetzt alle sieben Personen mit Foto,
+  gegliedert wie auf der Altseite (Vorstand · Team · Im Hintergrund). Bitte
+  Rollen, Reihenfolge und die Bereichsnamen prüfen — „Team" und „Im Hintergrund"
+  sind unsere Wörter, die Altseite hat dort keine Überschriften. Die
+  Kontakt-Mailadressen je Person (belmar@, kuenstler@, …) stehen auf der
+  Altseite unter jedem Profil; bei uns gibt es dafür noch kein Feld. Gewünscht?
+- [ ] **Verdächtige Datei in der WordPress-Mediathek.** Dort liegt seit Juli
+  2026 `w2sx8a07e0l.php_.jpg` — kein Bild (keine Maße), ein Dateiname wie aus
+  einem Upload-Angriff. Bitte im WordPress-Admin ansehen und löschen; falls
+  sie niemand aus dem Verein hochgeladen hat, Passwörter der Altseite wechseln.
 
 ---
 
@@ -300,6 +310,13 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 - [ ] **`MAIL_ANFRAGEN_AN`** setzen, sonst kommt keine Benachrichtigung an.
 - [ ] **Scheduler einrichten** (`* * * * * php artisan schedule:run`), sonst laufen
       die Löschfristen nie.
+- [ ] **Aufzählungen der Altseite nachtragen.** Der Importer hat bis 20.09.2026
+      keine `<li>` gelesen (siehe `docs/Komponenten.md`, Abschnitt 24). Auf neun
+      Seiten fehlen deshalb Listen — unter anderem die Notfallnummern auf
+      `/anfragen`, Referent/Datum/Ort auf den Veranstaltungsseiten, die
+      „Warum spenden"-Punkte, die Betroffenenrechte im Datenschutz. Der frische
+      Abzug enthält sie; nachgetragen wird pro Seite von Hand, nicht per
+      Neu-Import, weil die Seiten inzwischen bearbeitet sind. Eigenes Ticket.
 - [ ] **Impressum und Datenschutz gegenlesen.** Beim Übernehmen aus Elementor sind
       aus 21 Roh-Blöcken 13 geworden (der Rest waren Layout-Reste ohne Text). Beim
       Impressum sind es 8 Blöcke mit zusammen nur 40 Wörtern — sieht nach

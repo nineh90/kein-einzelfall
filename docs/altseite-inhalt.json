@@ -6,16 +6,52 @@
         "bloecke": [
             {
                 "typ": "text",
-                "titel": null,
+                "titel": "Unsere Aufgabe",
                 "absaetze": [
-                    "Unsere Aufgabe Keiner soll mehr sagen müssen: „Ich hab es nicht gewusst!“",
-                    "Wir schaffen eine Austausch – und Informationsplattform für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Ein zentrales Netzwerk aus Expertise im Betroffenenkontext, Austausch auf Augenhöhe. Wir leisten Aufklärung und geben Betroffenen eine Stimme. Für mehr Sichtbarkeit und Gehör.",
-                    "Vereinsarbeit Der KE!N EINZELFALL e.V. wurde 2024 gegründet – aus einer persönlichen Betroffenheit heraus und mit dem Ziel, von schädigenden Taten betroffene Menschen nicht länger allein zu lassen.Opferhilfe für soziale Gerechtigkeit!",
-                    "Mitglieder Jede Mitgliedschaft stärkt unsere Arbeit. Mit jeder Mitgliedschaft wächst unsere Chance auf Veränderung.Sei auch Du Teil unseres ständig wachsenden Netzwerks und unterstütze unsere Vision, indem Du Mitglied wirst.",
-                    "Selbsthilfegruppen Der Austausch in unseren Selbsthilfegruppen soll Dir genau da helfen, wo Du Hilfe benötigst, und er soll Dir aufzeigen, dass Du endlich nicht mehr alleine bist, denn wir sind KE!N EINZELFALL! Die Selbsthilfegruppen sind kostenfrei und nicht an eine Mitgliedschaft gebunden.",
-                    "Arbeitsgruppen Um unsere Arbeit weiter zu professionalisieren und gezielt Wirkung zu entfalten, gründen wir immer wieder Arbeitsgruppen – und laden Dich herzlich ein, Teil davon zu werden. Ein Quereinstieg ist möglich, Du kannst jederzeit dazu kommen. Ob mit Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen!",
-                    "Anfragen & Austausch Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?",
-                    "Spenden Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform aufzustellen und ein Netzwerk zu bilden.",
+                    "Keiner soll mehr sagen müssen: „Ich hab es nicht gewusst!“",
+                    "Wir schaffen eine Austausch – und Informationsplattform für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Ein zentrales Netzwerk aus Expertise im Betroffenenkontext, Austausch auf Augenhöhe. Wir leisten Aufklärung und geben Betroffenen eine Stimme. Für mehr Sichtbarkeit und Gehör."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Vereinsarbeit",
+                "absaetze": [
+                    "Der KE!N EINZELFALL e.V. wurde 2024 gegründet – aus einer persönlichen Betroffenheit heraus und mit dem Ziel, von schädigenden Taten betroffene Menschen nicht länger allein zu lassen.Opferhilfe für soziale Gerechtigkeit!"
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Mitglieder",
+                "absaetze": [
+                    "Jede Mitgliedschaft stärkt unsere Arbeit. Mit jeder Mitgliedschaft wächst unsere Chance auf Veränderung.Sei auch Du Teil unseres ständig wachsenden Netzwerks und unterstütze unsere Vision, indem Du Mitglied wirst."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Selbsthilfegruppen",
+                "absaetze": [
+                    "Der Austausch in unseren Selbsthilfegruppen soll Dir genau da helfen, wo Du Hilfe benötigst, und er soll Dir aufzeigen, dass Du endlich nicht mehr alleine bist, denn wir sind KE!N EINZELFALL! Die Selbsthilfegruppen sind kostenfrei und nicht an eine Mitgliedschaft gebunden."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Arbeitsgruppen",
+                "absaetze": [
+                    "Um unsere Arbeit weiter zu professionalisieren und gezielt Wirkung zu entfalten, gründen wir immer wieder Arbeitsgruppen – und laden Dich herzlich ein, Teil davon zu werden. Ein Quereinstieg ist möglich, Du kannst jederzeit dazu kommen. Ob mit Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen!"
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Anfragen & Austausch",
+                "absaetze": [
+                    "Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?"
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Spenden",
+                "absaetze": [
+                    "Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform aufzustellen und ein Netzwerk zu bilden.",
                     "Sei Du dabei, jede Unterstützung zählt, egal wie gering!"
                 ]
             }
@@ -74,7 +110,11 @@
             {
                 "typ": "text",
                 "titel": "Tatjana Belmar",
-                "absaetze": []
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2025/04/FOTO-1.-Vorsitzende.png",
+                    "alt": "Tatjana Belmar"
+                }
             },
             {
                 "typ": "text",
@@ -87,18 +127,61 @@
                     "Ein besonderes Anliegen ist mir der achtsame Umgang mit der Verletzlichkeit von Menschen im Kontakt mit bürokratischen Strukturen. Antragsverfahren sollten unterstützen – nicht zusätzlich belasten oder retraumatisieren. Dafür setze ich mich ein, mit Klarheit und mit Empathie.",
                     "Die schädigenden Ereignisse und Gewalttaten, die ich erlebt habe, konnte ich erst Jahrzehnte später benennen, und erst rund 33 Jahre nach den Taten war ich – begleitet von Unwissenheit sowie tiefen Schuld- und Schamgefühlen – in der Lage, einen Antrag auf Leistungen nach dem Opferentschädigungsgesetz zu stellen. Seit 2013 befinde ich mich in einem bis heute andauernden Antragsverfahren. Dieses ist unter anderem geprägt von Glaubwürdigkeitszweifeln, fehlenden Zeugen und verjährten Aufbewahrungsfristen. Die langjährige Auseinandersetzung hat viele Spuren hinterlassen und ging mit gesundheitlichen und psychischen Folgebelastungen einher. Mit meiner Sichtbarkeit möchte ich anderen Mut machen, denn durch den intensiven Austausch mit anderen Betroffenen wurde mir zunehmend bewusst: Ich bin nicht allein damit. Ich bin KE!N EINZELFALL.",
                     "Aus dieser Erkenntnis entstand der Wunsch, etwas zu verändern – mehr Sichtbarkeit zu schaffen, Räume für Austausch zu öffnen und Betroffenen eine Stimme zu geben, aber gleichzeitig auch Informationen für Angehörige und Fachpersonen direkt von Betroffenen bereitzustellen, um mit Vorurteilen und Missverständnissen aufzuräumen.",
-                    "Dieses Anliegen war ein wesentlicher Beweggrund für die Mitgründung des Vereins KE!N EINZELFALL e. V. Mit meiner fachlichen Ausbildung, meiner persönlichen Geschichte und meiner Haltung stehe ich dem Verein sowie Betroffenen, Angehörigen, Interessierten und Fachpersonen empathisch, reflektiert, engagiert und vor allem wertschätzend auf Augenhöhe zur Seite.",
-                    "belmar@kein-einzelfall.de 2. Vorsitzende Franziska Künstler Gründungsmitglied, Jahrgang 1979, geb. in Merseburg Über mich Betroffene in verschiedenen außerfamiliären Kontextenduales Studium an der Fachhochschule des Bundes für öffentliche Verwaltung in Berlin, FB Sozialversicherung – Schwerpunkt RentenrechtBeteiligung an bundesweiter Petition zu Verbesserungen im sozialen Entschädigungsrecht (Initiatorin Gudrun Stifter) in Sachsen-AnhaltMeine Motivation für das Engagement in der Opferhilfe resultiert aus der eigenen Betroffenheit und der Tatsache, dass ich – wie viele andere auch – nur zufällig vom sozialen Entschädigungsrecht erfahren habe.",
+                    "Dieses Anliegen war ein wesentlicher Beweggrund für die Mitgründung des Vereins KE!N EINZELFALL e. V. Mit meiner fachlichen Ausbildung, meiner persönlichen Geschichte und meiner Haltung stehe ich dem Verein sowie Betroffenen, Angehörigen, Interessierten und Fachpersonen empathisch, reflektiert, engagiert und vor allem wertschätzend auf Augenhöhe zur Seite."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "2. Vorsitzende",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "Franziska Künstler",
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/01/Franzi_Foto.jpg",
+                    "alt": "Franziska Künstler"
+                }
+            },
+            {
+                "typ": "text",
+                "titel": "Gründungsmitglied, Jahrgang 1979, geb. in Merseburg",
+                "absaetze": [
+                    "Betroffene in verschiedenen außerfamiliären Kontexten",
+                    "duales Studium an der Fachhochschule des Bundes für öffentliche Verwaltung in Berlin, FB Sozialversicherung – Schwerpunkt Rentenrecht",
+                    "Beteiligung an bundesweiter Petition zu Verbesserungen im sozialen Entschädigungsrecht (Initiatorin Gudrun Stifter) in Sachsen-Anhalt",
+                    "Meine Motivation für das Engagement in der Opferhilfe resultiert aus der eigenen Betroffenheit und der Tatsache, dass ich – wie viele andere auch – nur zufällig vom sozialen Entschädigungsrecht erfahren habe.",
                     "Dass Folgen eines schädigenden Ereignisses im Sozialrecht anerkannt werden, sei es als GdB oder GdS, ist leider keine Selbstverständlichkeit, sondern meist ein langer Kampf. Und dieser endet auch nicht mit der Anerkennung, sondern führt zu weiteren Streitigkeiten um Leistungen, die eigentlich klar zustehen, dann aber doch kaum gewährt werden.",
                     "Mein Abimotto „Leben und leben lassen“ reichte mir irgendwann nicht mehr, und wenn mich heute jemand fragt, warum ich mich in unserem Verein gegen Ungerechtigkeit einsetze, dann ist die Antwort einfach:",
                     "Es geht nicht darum, ob ich Anspruch auf Leistungen habe, sondern es geht ums Prinzip. Ich möchte mich nicht auf meinem Status ausruhen, sondern dabei helfen, dass auch andere zu ihren Ansprüchen kommen.",
                     "Im Rahmen dessen, was meine eigene Biografie und Traumafolgestörungen zulassen, setze ich mich für Verbesserungen im Antragsverfahren, Sichtbarkeit und Verständnis aus Betroffenensicht ein.",
                     "So individuell jeder Fall auch ist, weder das OEG noch das SGB XIV sind Nischengesetze, die kaum Anwendung finden. Die jährliche Statistik des Weissen Ringes zeigt, dass Hürden im Antragsverfahren in vielen Fällen zu Ablehnungen führen.",
-                    "Das sind keine Einzelfälle, sondern sie haben bedauerlicherweise oft Methode.",
-                    "kuenstler@kein-einzelfall.de Kassenwartin Petra Hildebrandt Gründungsmitglied, Jahrgang 1967, geb. in Hamburg Über mich Als Angehörige einer Betroffenen liegt mir das Engagement für Menschen, die Gewalt erfahren haben, sehr am Herzen. Darum möchte ich meine jahrelange berufliche Erfahrung als Industriekauffrau in die Arbeit von KE!N EINZELFALL e.V. einbringen.",
+                    "Das sind keine Einzelfälle, sondern sie haben bedauerlicherweise oft Methode."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Kassenwartin",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "Petra Hildebrandt",
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/01/Hildebrandt-Petra.jpg",
+                    "alt": "Petra Hildebrandt"
+                }
+            },
+            {
+                "typ": "text",
+                "titel": "Gründungsmitglied, Jahrgang 1967, geb. in Hamburg",
+                "absaetze": [
+                    "Als Angehörige einer Betroffenen liegt mir das Engagement für Menschen, die Gewalt erfahren haben, sehr am Herzen. Darum möchte ich meine jahrelange berufliche Erfahrung als Industriekauffrau in die Arbeit von KE!N EINZELFALL e.V. einbringen.",
                     "Seit der Gründung unterstütze ich den KE!N EINZELFALL e.V. als Kassenwartin durch eine verlässliche und transparente Finanzverwaltung. Mein Ziel ist es, sicherzustellen, dass alle Mittel verantwortungsvoll eingesetzt werden, um die Arbeit des Vereins und die Unterstützung bestmöglich zu fördern.",
                     "Ich freue mich, als Kassenwartin Teil dieses engagierten Teams zu sein und mit meiner Arbeit einen kleinen, aber wichtigen Beitrag leisten zu können. Gemeinsam mit dem Team möchte ich dafür sorgen, dass jede Spende und jeder Euro verantwortungsvoll dort eingesetzt werden, wo sie gebraucht werden – für mehr Hilfe, Sichtbarkeit und Informationen.",
-                    "finanzen@kein-einzelfall.de Darüber hinaus gibt es viele Menschen, die uns an den unterschiedlichsten Punkten unterstützen und den Verein mitgestalten.",
+                    "Darüber hinaus gibt es viele Menschen, die uns an den unterschiedlichsten Punkten unterstützen und den Verein mitgestalten.",
                     "Ohne die Gründungsmitglieder, die zum Teil auch unsere Landesstellen vertreten, würde es unseren Verein nicht geben. Sie sorgen – zusammen mit weiteren Ehrenamtlichen – zum Beispiel in Interessensvertretungen oder Arbeitsgruppen für die Sichtbarkeit des Vereins und unserer Anliegen."
                 ]
             },
@@ -110,7 +193,11 @@
             {
                 "typ": "text",
                 "titel": "Nicole Khalil",
-                "absaetze": []
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/05/NicoleKhalil.jpeg",
+                    "alt": "Nicole Khalil"
+                }
             },
             {
                 "typ": "text",
@@ -125,18 +212,58 @@
                     "Diese Erfahrungen fließen in mein Engagement ein – mit Respekt vor der jeweiligen Lebensgeschichte und ohne vorschnelle Bewertungen.Ein besonderes Anliegen ist mir der achtsame Umgang mit Menschen, die mit Behörden, Leistungssystemen und formalen Verfahren konfrontiert sind.",
                     "Bürokratische Prozesse dürfen nicht zusätzlich verletzen oder belasten. Sie sollten Halt geben, nicht Ohnmacht verstärken. Dafür setze ich mich ein – klar, parteilich für Betroffene und mit einer Haltung, die den Menschen in den Mittelpunkt stellt.",
                     "Ich bin Gründungsmitglied von KE!N EINZELFALL e. V. und Vertretung der 1. Vorsitzenden. In Berlin bin ich außerdem als Landesbeiratsbeauftragte für Menschen mit Behinderung für den Verein tätig. In dieser Rolle bringe ich meine Erfahrungen, meine Perspektivenvielfalt und meine Vernetzung ein, um Betroffenen, Angehörigen und Fachpersonen Gehör zu verschaffen und nachhaltige Veränderung mitzugestalten.",
-                    "Mein Engagement lebt aus der Überzeugung, dass niemand allein ist mit seiner Geschichte. Dass Betroffenheit viele Gesichter hat. Und dass Sichtbarkeit, Austausch und gegenseitige Anerkennung entscheidende Schritte sind auf dem Weg zu mehr Gerechtigkeit, Inklusion und Menschlichkeit.Mit meiner Haltung, meiner Lebens- und Erfahrungskompetenz stehe ich Betroffenen, Angehörigen, Mitbetroffenen, Interessierten und Fachpersonen wertschätzend, engagiert und auf Augenhöhe zur Seite. Denn eines ist mir wichtig: Wir sind KE!N EINZELFALL",
-                    "khalil@kein-einzelfall.de Datenschutzbeauftragte Tanja Häfner Gründungsmitglied, Jahrgang 1969, geb. in Wuppertal Über mich Über 17 Jahre habe ich im Bereich der Strafverteidigung gearbeitet und das System aus einer Perspektive erlebt, die der von Betroffenen entgegengesetzt gegenübersteht. Ich habe gesehen, wie Verfahren geführt werden, wie gesprochen wird, welche Dynamiken entstehen – und irgendwann wurde mir immer klarer, wie groß die Distanz zwischen System und Betroffenen tatsächlich ist.",
+                    "Mein Engagement lebt aus der Überzeugung, dass niemand allein ist mit seiner Geschichte. Dass Betroffenheit viele Gesichter hat. Und dass Sichtbarkeit, Austausch und gegenseitige Anerkennung entscheidende Schritte sind auf dem Weg zu mehr Gerechtigkeit, Inklusion und Menschlichkeit.Mit meiner Haltung, meiner Lebens- und Erfahrungskompetenz stehe ich Betroffenen, Angehörigen, Mitbetroffenen, Interessierten und Fachpersonen wertschätzend, engagiert und auf Augenhöhe zur Seite. Denn eines ist mir wichtig: Wir sind KE!N EINZELFALL"
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Datenschutzbeauftragte",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "Tanja Häfner",
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/06/TanjaHaefner.jpeg",
+                    "alt": "Tanja Häfner"
+                }
+            },
+            {
+                "typ": "text",
+                "titel": "Gründungsmitglied, Jahrgang 1969, geb. in Wuppertal",
+                "absaetze": [
+                    "Über 17 Jahre habe ich im Bereich der Strafverteidigung gearbeitet und das System aus einer Perspektive erlebt, die der von Betroffenen entgegengesetzt gegenübersteht. Ich habe gesehen, wie Verfahren geführt werden, wie gesprochen wird, welche Dynamiken entstehen – und irgendwann wurde mir immer klarer, wie groß die Distanz zwischen System und Betroffenen tatsächlich ist.",
                     "Für mich kam ein Punkt, an dem ich gemerkt habe: Ich möchte das nicht mehr.Ich wollte mein Wissen nicht länger auf dieser Seite einsetzen, sondern bewusst einen Perspektivwechsel vollziehen – hin zu den Menschen, die Unterstützung, Orientierung und Schutz brauchen.Seit nunmehr über 12 Jahren arbeite ich jetzt im öffentlichen Dienst und kenne nun auch diese Seite der Strukturen, der Abläufe und der Grenzen. Gerade diese Erfahrungen zeigen mir, wie wichtig es ist, Räume zu schaffen, die anders funktionieren: zugänglich, verständlich und traumasensibel.",
                     "Heute ist es mir ein Anliegen, all mein Wissen weiterzugeben und für Betroffene nutzbar zu machen. Ich möchte dazu beitragen, dass sie sich im System besser zurechtfinden, dass sie verstehen, was passiert – und dass sie sich nicht länger ausgeliefert fühlen.",
                     "Bei KE!N EINZELFALL e. V. bin ich als Datenschutzbeauftragte tätig. Für mich bedeutet Datenschutz weit mehr als gesetzliche Vorgaben – es ist die Grundlage von Vertrauen. Menschen, die zu uns kommen, müssen sich darauf verlassen können, dass ihre Informationen geschützt sind, dass ihre Geschichte da bleibt, wo sie sie wollen und dass sie selbst entscheiden dürfen, wie sichtbar sie sein wollen. Darum setze ich mich dafür ein, dass unsere Plattform ein geschützter Raum ist – technisch, strukturell und menschlich. Ein Raum, in dem Anonymität möglich ist, in dem keine Angst vor Bewertung oder Konsequenzen bestehen muss und in dem Menschen sich öffnen können, wenn sie dazu bereit sind.",
-                    "Ich habe beide Seiten des Systems kennengelernt – und ich habe mich bewusst entschieden, auf der Seite der Betroffenen zu stehen. Ich möchte Barrieren abbauen, Sicherheit schaffen und Räume gestalten, in denen deutlich wird: Gemeinsam KE!N EINZELFALL!",
-                    "datenschutz@kein-einzelfall.de Social Media André Bauer Ehrenamtlicher, Arbeitsgruppe Soziale Medien Über mich Ich engagiere mich ehrenamtlich bei",
+                    "Ich habe beide Seiten des Systems kennengelernt – und ich habe mich bewusst entschieden, auf der Seite der Betroffenen zu stehen. Ich möchte Barrieren abbauen, Sicherheit schaffen und Räume gestalten, in denen deutlich wird: Gemeinsam KE!N EINZELFALL!"
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Social Media",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "André Bauer",
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/06/Andre_Bauer.jpg",
+                    "alt": "André Bauer"
+                }
+            },
+            {
+                "typ": "text",
+                "titel": "Ehrenamtlicher, Arbeitsgruppe Soziale Medien",
+                "absaetze": [
+                    "Ich engagiere mich ehrenamtlich bei",
                     "KE!N EINZELFALL e.V., weil ich dazu beitragen möchte, dass Betroffene, Mit-Betroffene und Angehörige mehr Gehör und Unterstützung finden. Viele Erfahrungen bleiben lange im Verborgenen oder werden erst dann wahrgenommen, wenn jemand sie erzählt, einordnet und weiterträgt.",
                     "In der Social-Media-Arbeit des Vereins sehe ich die Möglichkeit, genau dafür Räume zu schaffen. Beiträge können Betroffenenstimmen sichtbar machen, Wissen vermitteln, praktische Tipps geben, auf Austauschmöglichkeiten hinweisen und wichtige Entwicklungen einordnen. So kann Social Media mehr sein als reine Öffentlichkeitsarbeit: Es kann Menschen Orientierung geben, sie entlasten und ihnen zeigen, dass sie mit ihren Erfahrungen nicht allein sind.",
                     "Beruflich habe ich viel mit Kommunikation, Text, Bild und digitalen Medien zu tun. Diesen Hintergrund bringe ich in die Social-Media-Arbeit des Vereins ein, um Inhalte verständlich, respektvoll und sorgfältig aufzubereiten — immer mit dem Ziel, die Themen und Stimmen von Betroffenen stärker in den Mittelpunkt zu rücken.",
                     "Ich freue mich, Teil dieses engagierten Teams zu sein und mit meiner Arbeit einen kleinen, aber wichtigen Beitrag leisten zu können — für mehr Aufklärung, Orientierung und Mitgefühl. Damit irgendwann niemand mehr sagen muss: „Ich habe es nicht gewusst.“",
-                    "kontakt@kein-einzelfall.de Zusätzlich arbeiten im Hintergrund viele Ehrenamtliche, die aus den verschiedensten Gründen nicht auf der Website genannt werden können. Dennoch engagieren sie sich zum Beispiel in Arbeitsgruppen oder in der Öffentlichkeitsarbeit und der Vernetzung."
+                    "Zusätzlich arbeiten im Hintergrund viele Ehrenamtliche, die aus den verschiedensten Gründen nicht auf der Website genannt werden können. Dennoch engagieren sie sich zum Beispiel in Arbeitsgruppen oder in der Öffentlichkeitsarbeit und der Vernetzung."
                 ]
             },
             {
@@ -147,7 +274,11 @@
             {
                 "typ": "text",
                 "titel": "Herr und Frau Unbekannt",
-                "absaetze": []
+                "absaetze": [],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/06/anonym.jpeg",
+                    "alt": "Anonyme Person"
+                }
             },
             {
                 "typ": "text",
@@ -180,7 +311,7 @@
                 "absaetze": [
                     "Hier kannst du unsere Satzung vollständig einsehen.",
                     "Solltest du Fragen zur Satzung haben oder eine barrierefreie Version benötigen, melde dich gerne bei uns.",
-                    "Satzung Gemeinsam für eine gerechtere Zukunft."
+                    "Gemeinsam für eine gerechtere Zukunft."
                 ]
             }
         ],
@@ -254,18 +385,40 @@
                 "absaetze": [
                     "Unsere Gruppen werden gemeinsam von allen Teilnehmenden gestaltet. Jeder bringt das ein, was möglich ist – nur zuzuhören ist ebenfalls erlaubt. Du entscheidest, ob du mit oder ohne Bild/Ton teilnimmst. Du kannst während der Gruppe dazukommen oder gehen – eine vorherige Anmeldung ist erforderlich.",
                     "Haftungsausschluss: Wir sprechen offen über sensible Themen. Für die Teilnahme setzen wir Therapieerfahrung und eine gute Selbstfürsorge voraus – insbesondere, falls du getriggert wirst. Alles geschieht in eigener Verantwortung. Die Teilnahme ersetzt keine rechtliche oder medizinische Beratung!",
-                    "Die Selbsthilfegruppen erfolgen online via Microsoft Teams – einer kostenfreien Kommunikationssoftware, die auf nahezu allen Systemen läuft. Die kostenfreie Grundversion reicht für die Teilnahme aus. Der Teams-Link, den du per E-Mail erhältst, gilt für alle weiteren Treffen.Bitte installiere Teams rechtzeitig und teste Kamera/Mikrofon. Bei Problemen melde dich frühzeitig – wir versuchen zu unterstützen.",
-                    "Teams downloaden Teilnahmebedingungen & Gruppenregeln Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.",
-                    "Für den besseren Umgang untereinander und zu deiner Sicherheit haben wir Teilnahmebedingungen und Gruppenregeln aufgestellt. Bitte lies beides vor deiner ersten Teilnahme – mit dem Beitritt akzeptierst du sie.",
-                    "Teilnahmebedingungen Gruppenregeln Kontakt & Anmeldung Offene Fragen oder Interesse? Schreib uns eine kurze E-Mail und nenne das Thema der Selbsthilfegruppe, die dich interessiert. Wir melden uns umgehend bei dir",
+                    "Die Selbsthilfegruppen erfolgen online via Microsoft Teams – einer kostenfreien Kommunikationssoftware, die auf nahezu allen Systemen läuft. Die kostenfreie Grundversion reicht für die Teilnahme aus. Der Teams-Link, den du per E-Mail erhältst, gilt für alle weiteren Treffen.Bitte installiere Teams rechtzeitig und teste Kamera/Mikrofon. Bei Problemen melde dich frühzeitig – wir versuchen zu unterstützen."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Teilnahmebedingungen & Gruppenregeln",
+                "absaetze": [
+                    "Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.",
+                    "Für den besseren Umgang untereinander und zu deiner Sicherheit haben wir Teilnahmebedingungen und Gruppenregeln aufgestellt. Bitte lies beides vor deiner ersten Teilnahme – mit dem Beitritt akzeptierst du sie."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Kontakt & Anmeldung",
+                "absaetze": [
+                    "Offene Fragen oder Interesse? Schreib uns eine kurze E-Mail und nenne das Thema der Selbsthilfegruppe, die dich interessiert. Wir melden uns umgehend bei dir",
                     "Zur Sicherheit aller nehmen wir nach deiner Anfrage per E-Mail Kontakt mit dir auf und teilen dir die wichtigsten Infos mit. Du entscheidest, ob du Teil der Selbsthilfegruppe werden möchtest."
                 ]
             },
             {
                 "typ": "text",
                 "titel": "Du möchtest uns unterstützen?",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "Gruppenübersicht",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "Wir sind nicht mehr stumm! – Folgestörungen nach schädigenden Ereignissen & Gewalttaten",
                 "absaetze": [
-                    "Mitglied werden Besuche unsere Spendenseite Gruppenübersicht Wir sind nicht mehr stumm! – Folgestörungen nach schädigenden Ereignissen & Gewalttaten Jeden 2. Mittwoch im Monat – 19:00 Uhr – online via Teams",
+                    "Jeden 2. Mittwoch im Monat – 19:00 Uhr – online via Teams",
                     "Ziel dieser Selbsthilfegruppe ist es, dass wir Betroffene – trotz Schuld- und Schamgefühlen – mit unserer Vergangenheit aufräumen. Wir äußern klar: Das schädigende Ereignis oder die Gewalttat endet nicht mit dem eigentlichen Akt, sondern hinterlässt Folgeschäden, die oft Jahre oder ein Leben lang belasten.",
                     "Diese Folgeschäden werden noch immer tabuisiert. Wir wollen, dass Erkrankungen als Folgen anerkannt werden – von Familie, Gesellschaft, Ärzten, Gutachtern, Behörden u. a. Gemeinsam finden wir Stärke und unterstützen uns auf unserem Weg.",
                     "Diese Gruppe ist ausschließlich Betroffenen vorbehalten!"
@@ -331,7 +484,22 @@
                 "typ": "text",
                 "titel": "So bist Du dabei:",
                 "absaetze": [
-                    "Download - Gruppenregeln Download - Teilnahmevereinbarung Aktuelle Arbeitsgruppen AG 01 – SER (OEG/SGB XIV) vs. Missstände & Best Practice Anonymisierte, bundeslandspezifische Auswertung von Missständen & Best Practices",
+                    "Du kannst jederzeit dazukommen.",
+                    "Schreibe eine formlose E-Mail an: arbeitsgruppe@kein-einzelfall.de!",
+                    "Kennung: Nenne die Nummer der Arbeitsgruppe (siehe unten)!",
+                    "Du erhältst anschließend weitere Informationen und den Zugangslink."
+                ]
+            },
+            {
+                "typ": "text",
+                "titel": "Aktuelle Arbeitsgruppen",
+                "absaetze": []
+            },
+            {
+                "typ": "text",
+                "titel": "AG 01 – SER (OEG/SGB XIV) vs. Missstände & Best Practice",
+                "absaetze": [
+                    "Anonymisierte, bundeslandspezifische Auswertung von Missständen & Best Practices",
                     "Ziel: Wir erfassen anonymisiert und bundeslandspezifisch strukturelle Missstände sowie Best Practices in der Umsetzung des SER (OEG/SGB XIV). Von Fristen bis Gutachten – im Fokus stehen Muster, die auf systemische Probleme hinweisen.Wichtig: Es geht nicht um Einzelfallberatung, sondern um die systematische Dokumentation von Strukturen.",
                     "Wirkung & Adressaten: Die gebündelten Erkenntnisse werden gezielt an Opferbeauftragte, Landesamtsleitungen sowie die zuständigen Bundesministerien weitergegeben – mit dem Ziel, konkrete Verbesserungen anzustoßen und Best Practices zu fördern.",
                     "Die AG richtet sich an Opfer, Mitopfer, Fachkräfte, Aktivisten und Interessierte."
@@ -422,7 +590,12 @@
                 "absaetze": [
                     "Alle Veranstaltungen des KE!N EINZELFALL e.V. finden online über Microsoft Teams statt.",
                     "Damit jede und jeder so teilnehmen kann, wie es sich richtig anfühlt, bieten wir bei allen Veranstaltungen:",
-                    "Je nach Veranstaltungsformat können Veranstaltungen aufgezeichnet werden. Darüber informieren wir selbstverständlich transparent im Vorfeld."
+                    "Anonyme Teilnahme ohne Klarnamen",
+                    "Freiwillige Nutzung von Kamera und Mikrofon",
+                    "Die Möglichkeit, einfach nur zuzuhören",
+                    "Eine Chatfunktion und/oder Frage & Antwort Funktion, falls die Worte fehlen oder Fragen lieber schriftlich gestellt werden möchten",
+                    "Die Veranstaltungen werden in der Regel mit Bild und Ton aufgezeichnet. Die Aufzeichnungen dienen insbesondere der Dokumentation sowie der späteren Bereitstellung für Personen, die nicht live teilnehmen konnten.",
+                    "Selbsthilfegruppen und Arbeitsgruppen werden nicht aufgezeichnet."
                 ]
             },
             {
@@ -430,6 +603,9 @@
                 "titel": "Teilnahme",
                 "absaetze": [
                     "Alle Veranstaltungen des KE!N EINZELFALL e.V. sind kostenfrei und nicht an eine Mitgliedschaft gebunden.",
+                    "Damit wir einen sicheren und respektvollen Rahmen für alle Teilnehmenden schaffen können, ist bei der Anmeldung die Zustimmung zu unserer Teilnahmevereinbarung und den Gruppenregeln erforderlich.",
+                    "TEILNAHMEVEREINBARUNG",
+                    "GRUPPENREGELN",
                     "Wenn du unsere Arbeit unterstützen möchtest, freuen wir uns über einen freiwilligen Energieausgleich – zum Beispiel durch eine Mitgliedschaft (ab 36 € im Jahr) oder eine Spende an paypal@kein-einzelfall.de bzw. an eines unserer betterplace-Projekte.",
                     "Mit deiner Unterstützung hilfst du uns, auch in Zukunft kostenfreie Veranstaltungen und Angebote für Betroffene, Angehörige, Fachpersonen und Interessierte anzubieten."
                 ]
@@ -438,8 +614,7 @@
                 "typ": "text",
                 "titel": "Anmeldung",
                 "absaetze": [
-                    "Die Anmeldung erfolgt per E-Mail an:",
-                    "Nach deiner Anmeldung erhältst du unsere Verschwiegenheitserklärung mit Teilnahmevereinbarung sowie die Gruppen- und Veranstaltungsregeln. Bitte lies dir die Unterlagen in Ruhe durch und sende uns anschließend die unterzeichnete Teilnahmevereinbarung zurück.Hast du die Unterlagen bereits bei einer früheren Veranstaltung unterzeichnet, genügt eine kurze Nachricht. In beiden Fällen erhältst du anschließend deinen persönlichen Zugangslink."
+                    "Lies dir zuerst die Teilnahmevereinbarungen und Gruppenregeln durch und gehe erst dann auf die Veranstaltung, die du besuchen möchtest. Dort findest du den Anmeldelink."
                 ]
             },
             {
@@ -458,8 +633,17 @@
                 ]
             }
         ],
-        "pdfs": [],
-        "woerter": 443
+        "pdfs": [
+            {
+                "url": "/wp-content/uploads/2026/07/1.5.6.6.-Tu.V-VA-aktuell-ohne.docx-Google-Docs.pdf",
+                "titel": "TEILNAHMEVEREINBARUNG"
+            },
+            {
+                "url": "/wp-content/uploads/2026/03/1.5.8.-Gruppenregeln-0126.pdf",
+                "titel": "GRUPPENREGELN"
+            }
+        ],
+        "woerter": 449
     },
     "/anfragen/": {
         "meta_title": "Anfragen - Kein Einzelfall e.V.",
@@ -483,13 +667,20 @@
             {
                 "typ": "text",
                 "titel": "Für den Notfall",
-                "absaetze": []
+                "absaetze": [
+                    "Polizei: 110",
+                    "Notruf: 112 (bei Personenschäden oder akuter Gefahr)"
+                ]
             },
             {
                 "typ": "text",
                 "titel": "Krisendienste",
                 "absaetze": [
-                    "Diese Stellen stehen dir jederzeit zur Verfügung:"
+                    "Diese Stellen stehen dir jederzeit zur Verfügung:",
+                    "Krisendienst: 0800 / 6553000 – rund um die Uhr erreichbar",
+                    "Hilfetelefon Gewalt gegen Frauen: 08000 / 116 016 – 24/7, anonym und in vielen Sprachen",
+                    "Hilfetelefon sexueller Missbrauch: 0800 / 22 55 530 – kostenlos & anonym, bundesweit",
+                    "Weitere Hotline sexueller Missbrauch: 0800 / 22 55 530 – Mo, Mi, Fr 9:00–14:00 Uhr und Di, Do 15:00–20:00 Uhr"
                 ]
             },
             {
@@ -599,6 +790,12 @@
                     "Opferhilfe für soziale Gerechtigkeit.",
                     "Wir geben Betroffenen eine Stimme, bieten Räume zum Austausch, leisten Aufklärungsarbeit, schaffen Vernetzung, teilen Wissen und kämpfen für strukturelle Veränderungen. Dabei geht es um Einzelschicksale, die KE!N EINZELFALL sind, und um ein System, das wir gemeinsam verändern können.",
                     "Wofür wir Spenden einsetzen:",
+                    "Kostenfreies Wissen, Recht und Aufklärung für Opfer, Mitopfer und Interessierte – z. B. über Webinare, Infoveranstaltungen, soziale Medien und Aufklärungskampagnen",
+                    "Stärkung unserer Öffentlichkeitsarbeit, um Tabus zu brechen und Sichtbarkeit zu schaffen",
+                    "Finanzierung kostenfreier Angebote für Betroffene und Interessierte",
+                    "Aufbau und Pflege helfender Netzwerke",
+                    "Kostenfreie Selbsthilfegruppen, die für Empowerment (Selbstermächtigung) stehen",
+                    "Strukturelle Arbeiten & Kampagnen, die Missstände und Best Practices im System sichtbar machen",
                     "Jede Spende ist ein Zeichen für Unterstützung und Vernetzung. Mit deiner Spende hilfst du nicht nur einem Menschen, sondern vielen.",
                     "Denn wir sind KE!N EINZELFALL."
                 ]
@@ -612,7 +809,11 @@
                     "BIC: GENO DEF1 SLR",
                     "Per PayPal",
                     "Empfänger: paypal@kein-einzelfall.de"
-                ]
+                ],
+                "bild": {
+                    "src": "/wp-content/uploads/2026/02/QR-Code_Skatkonto.png",
+                    "alt": "QR-Code Bankverbindung Verein"
+                }
             },
             {
                 "typ": "text",
@@ -637,13 +838,12 @@
         "bloecke": [
             {
                 "typ": "text",
-                "titel": "Unterstützung, Selbstfürsorge und Resilienz",
+                "titel": "Von der Krise zur Stärke",
                 "absaetze": [
                     "Wer hilft eigentlich, wenn das Leben aus dem Gleichgewicht gerät? Welche Unterstützung gibt es – und warum fühlt sich der Weg dorthin manchmal so schwer an?",
                     "Nach einer traumatischen Erfahrung stehen viele Betroffene und Angehörige vor der Herausforderung, sich im Hilfesystem zurechtzufinden. Gleichzeitig geraten die eigenen Bedürfnisse häufig in den Hintergrund. Dabei sind Selbstfürsorge, gegenseitige Unterstützung und ein gutes Netzwerk wichtige Bausteine auf dem Weg zu mehr Stabilität und Selbstwirksamkeit.",
                     "Mit unserer Veranstaltungsreihe „KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung“ möchten wir wissenschaftliche Erkenntnisse und gelebte Erfahrung miteinander verbinden. Gemeinsam schaffen wir einen Raum, in dem Fragen gestellt, Zusammenhänge verständlich erklärt und unterschiedliche Perspektiven sichtbar werden.",
-                    "Wir freuen uns sehr, Quen Winter als Referentin begrüßen zu dürfen. Als Autorin des Buches „Das Helfernetzwerk“ beschäftigt sie sich intensiv mit der Frage, welche Unterstützung Menschen in belastenden Lebenssituationen benötigen und wie hilfreiche Netzwerke entstehen können.",
-                    "In ihrem Impulsvortrag spricht sie über die Bedeutung von Selbstfürsorge, den Umgang mit Unterstützungsangeboten, die Rolle von Angehörigen und darüber, wie Resilienz wachsen kann.",
+                    "Wir freuen uns sehr, Quendolin Winter als Referentin begrüßen zu dürfen. Als Autorin des Buches „Das Helfernetzwerk“ beschäftigt sie sich intensiv mit der Frage, welche Unterstützung Menschen in belastenden Lebenssituationen benötigen und wie hilfreiche Netzwerke entstehen können. In ihrem Impulsvortrag spricht sie über die Bedeutung von Selbstfürsorge, den Umgang mit Unterstützungsangeboten, die Rolle von Angehörigen und darüber, wie Resilienz wachsen kann.",
                     "Anschließend möchten wir gemeinsam ins Gespräch kommen. Dabei greifen wir sowohl Fragen aus dem Publikum als auch im Vorfeld eingereichte Fragen auf.",
                     "Die Veranstaltung richtet sich an Betroffene, Angehörige, Fachpersonen und alle Interessierten, die sich Orientierung im Hilfesystem wünschen und erfahren möchten, welche Möglichkeiten der Unterstützung es gibt."
                 ]
@@ -651,27 +851,34 @@
             {
                 "typ": "text",
                 "titel": "Die Veranstaltung auf einen Blick",
-                "absaetze": []
+                "absaetze": [
+                    "Referent: Quen Winter",
+                    "Datum: 25. November 2026",
+                    "Uhrzeit: 18:00–20:00 Uhr",
+                    "Ort: Online über Microsoft Teams",
+                    "Teilnahme: Kostenfrei"
+                ]
             },
             {
                 "typ": "text",
                 "titel": "Teilnahme",
                 "absaetze": [
-                    "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat gestellt werden."
+                    "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat oder über die Frage & Antwort Funktion gestellt werden.",
+                    "Die Veranstaltungen des KE!N EINZELFALL e.V. werden aufgezeichnet. Bei der Anmeldung müssen die Teilnahmevereinbarungen und Gruppenregeln akzeptiert werden. Diese findest du unter: Veranstaltungen"
                 ]
             },
             {
                 "typ": "text",
                 "titel": "Anmeldung",
                 "absaetze": [
-                    "Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an:",
+                    "Die Veranstaltung findet bei Teams statt:",
                     "Wir freuen uns auf einen Abend, der Orientierung gibt, Mut macht und zeigt, dass Hilfe viele Gesichter haben kann.",
                     "KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung."
                 ]
             }
         ],
         "pdfs": [],
-        "woerter": 348
+        "woerter": 373
     },
     "/unterstuetzung/": {
         "meta_title": "Unterstützung - Kein Einzelfall e.V.",
@@ -805,7 +1012,14 @@
             {
                 "typ": "text",
                 "titel": "Die Veranstaltung auf einen Blick",
-                "absaetze": []
+                "absaetze": [
+                    "Referent: Tatjana Belmar, weitere Referenten willkommen",
+                    "Datum: coming soon",
+                    "Uhrzeit: 18:00–20:00 Uhr",
+                    "Ort: Online über Microsoft Teams",
+                    "Teilnahme: Kostenfrei",
+                    "Anmeldung: veranstaltung@kein-einzelfall.de"
+                ]
             },
             {
                 "typ": "text",
@@ -844,7 +1058,7 @@
                 "titel": "Zu den einzelnen Veranstaltungen:",
                 "absaetze": [
                     "10.08.2026: Trauma, Bindung und Beziehung",
-                    "25.11.2026: Das Hilfesystem – Unterstützung, Selbstfürsorge und Resilienz",
+                    "25.11.2026: Das Hilfesystem – Von der Krise zur Stärke",
                     "geplant: Traumafolgestörungen verstehen – Diagnosen, Therapien und neue Perspektiven",
                     "geplant: Bürokratie-Labyrinth – Wenn Hilfe kompliziert wird"
                 ]
@@ -873,26 +1087,33 @@
             {
                 "typ": "text",
                 "titel": "Die Veranstaltung auf einen Blick",
-                "absaetze": []
+                "absaetze": [
+                    "Referent: Lutz-Ulrich Besser",
+                    "Datum: 10. August 2026",
+                    "Uhrzeit: 18:00–20:00 Uhr",
+                    "Ort: Online über Microsoft Teams",
+                    "Teilnahme: Kostenfrei"
+                ]
             },
             {
                 "typ": "text",
                 "titel": "Teilnahme",
                 "absaetze": [
-                    "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat gestellt werden."
+                    "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat oder über die Frage & Antwort Funktion gestellt werden.",
+                    "Die Veranstaltungen des KE!N EINZELFALL e.V. werden aufgezeichnet. Bei der Anmeldung müssen die Teilnahmevereinbarungen und Gruppenregeln akzeptiert werden. Diese findest du unter: Veranstaltungen"
                 ]
             },
             {
                 "typ": "text",
                 "titel": "Anmeldung",
                 "absaetze": [
-                    "Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an:",
+                    "Die Veranstaltung findet bei Teams statt:",
                     "Wir freuen uns auf einen Abend, der Wissen vermittelt, Verständnis fördert und zeigt, dass niemand mit seinen Fragen und Erfahrungen allein ist. Denn genau dafür steht KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung."
                 ]
             }
         ],
         "pdfs": [],
-        "woerter": 336
+        "woerter": 361
     },
     "/traumafolgestoerungen-verstehen/": {
         "meta_title": "Traumafolgestörungen verstehen - Kein Einzelfall e.V.",
@@ -914,7 +1135,14 @@
             {
                 "typ": "text",
                 "titel": "Die Veranstaltung auf einen Blick",
-                "absaetze": []
+                "absaetze": [
+                    "REFERENT GESUCHT",
+                    "Datum: coming soon",
+                    "Uhrzeit: coming soon",
+                    "Ort: Online über Microsoft Teams",
+                    "Teilnahme: Kostenfrei",
+                    "Anmeldung: veranstaltung@kein-einzelfall.de"
+                ]
             },
             {
                 "typ": "text",
@@ -1234,6 +1462,10 @@
                 "titel": "Recht auf Einschränkung der Verarbeitung",
                 "absaetze": [
                     "Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Das Recht besteht insbesondere dann, wenn:",
+                    "Sie die Richtigkeit Ihrer gespeicherten personenbezogenen Daten bestreiten (für die Dauer der Prüfung),",
+                    "die Verarbeitung unrechtmäßig ist und Sie statt Löschung die Einschränkung verlangen,",
+                    "wir die Daten nicht mehr benötigen, Sie diese jedoch zur Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen,",
+                    "Sie Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben und noch nicht feststeht, wessen Interessen überwiegen.",
                     "Wenn die Verarbeitung eingeschränkt wurde, dürfen diese Daten – von der Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden."
                 ]
             },
@@ -1268,6 +1500,9 @@
                 "titel": "Kontaktformular",
                 "absaetze": [
                     "Auf unserer Internetseite ist ein Kontaktformular vorhanden, das für die elektronische Kontaktaufnahme genutzt werden kann. Nehmen Sie diese Möglichkeit wahr, so werden die in der Eingabemaske eingegebenen Daten an uns übermittelt und gespeichert. Diese Daten sind insbesondere:",
+                    "Ihr Name",
+                    "Ihre E-Mail-Adresse",
+                    "Ihre IP-Adresse in den Logfiles unseres Systems",
                     "Die mit der E-Mail übermittelten personenbezogenen Daten des Nutzers werden zur Beantwortung und Bearbeitung der Anfrage gespeichert. Danach werden die Daten gelöscht, es sei denn, wir sind aus rechtlichen Gründen zu einer weiteren Speicherung verpflichtet oder zur Durchsetzung rechtlicher Ansprüche berechtigt. Es erfolgt keine Weitergabe an Dritte, sofern wir nicht aufgrund gesetzlicher Bestimmungen oder eines Gerichtsbeschlusses hierzu verpflichtet sind. Diese Daten werden ausschließlich zum Zweck der Verarbeitung der Konversation verwendet.",
                     "Rechtsgrundlage für die DatenverarbeitungBei Vorliegen einer Einwilligung des Nutzers: Art. 6 Abs. 1 lit. a DSGVO. Bei Übersendung einer E-Mail: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Bearbeitung der Anfrage). Zielt der E-Mail-Kontakt auf den Abschluss eines Vertrags ab, zusätzlich Art. 6 Abs. 1 lit. b DSGVO.",
                     "Zweck der DatenverarbeitungDie Verarbeitung Ihrer personenbezogenen Daten aus der Eingabemaske dient allein zur Bearbeitung der Kontaktaufnahme. Die während des Absendevorgangs verarbeiteten Daten dienen der Missbrauchsprävention und der Sicherheit unserer IT-Systeme.",

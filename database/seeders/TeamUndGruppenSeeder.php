@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Group;
 use App\Models\Page;
 use App\Models\TeamMember;
+use App\Support\Bild;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -24,9 +25,7 @@ class TeamUndGruppenSeeder extends Seeder
 {
     public function run(): void
     {
-        $inhalt = json_decode(file_get_contents(base_path('docs/altseite-inhalt.json')), true);
-
-        $this->team($inhalt['/ueber-uns-vorstand-und-team/'] ?? null);
+        $this->team();
         $this->gruppen();
         $this->seitenNeuAufbauen();
     }
@@ -35,19 +34,76 @@ class TeamUndGruppenSeeder extends Seeder
      * Vorstand und Team.
      *
      * Erkennungsmuster: Ein Block ohne Absätze ist eine Rollenangabe
-     * („1. Vorsitzende"), der folgende Block ohne Absätze der Name, der
-     * nächste mit Absätzen die Vorstellung samt Kurzangaben als Titel.
+     * („1. Vorsitzende"), der folgende Block ohne Absätze der Name — an ihm
+     * hängt das Porträt —, der nächste mit Absätzen die Vorstellung samt
+     * Kurzangaben als Titel.
+     *
+     * Öffentlich, damit eine Migration den Bestand nachziehen kann: Der Abzug
+     * vom Juli hatte durch einen Fehler im Importer vier von sieben Personen
+     * verloren und deren Texte den übrigen zugeschlagen (siehe
+     * AltseiteHolen::bloecke). `updateOrCreate` über den Namen bereinigt das
+     * — und überschreibt damit auch, was im Panel an einer Person geändert
+     * wurde. Für diese Bereinigung ist das richtig; danach gehört das Panel
+     * wieder dem Verein.
      */
-    private function team(?array $seite): void
+    public function team(): void
     {
-        if (! $seite) {
-            return;
+        ['personen' => $personen] = self::teamAusAbzug();
+
+        foreach ($personen as $i => $person) {
+            // Nur Fotos, die tatsächlich geholt wurden (`bilder:holen`). Ein
+            // Pfad ins Leere zeigte ein kaputtes Bild statt der Initialen.
+            $foto = isset($person['bild']['src']) ? Bild::lokal($person['bild']['src']) : null;
+
+            TeamMember::updateOrCreate(['name' => $person['name']], [
+                'rolle' => $person['rolle'],
+                'untertitel' => $person['untertitel'],
+                'foto_pfad' => $foto,
+                'foto_alt' => $foto ? ($person['bild']['alt'] ?: $person['name']) : null,
+                // Der erste ganze Satz als Kurzfassung — nicht ein Stichpunkt
+                // wie „Betroffene in verschiedenen Kontexten", mit dem
+                // Franziska Künstlers Vorstellung auf der Altseite beginnt.
+                // Stichpunkte enden ohne Satzzeichen.
+                'kurzprofil' => Str::limit(
+                    collect($person['absaetze'])->first(fn ($a) => preg_match('/[.!?…“"]$/u', $a)) ?? $person['absaetze'][0],
+                    260
+                ),
+                'profil' => collect($person['absaetze'])
+                    ->map(fn ($a) => '<p>'.e($a).'</p>')
+                    ->implode("\n"),
+                'bereich' => $person['bereich'],
+                'position' => $i,
+                'published_at' => now(),
+            ]);
         }
 
-        $bloecke = $seite['bloecke'];
+        $this->command?->info(count($personen).' Personen übernommen.');
+    }
+
+    /**
+     * Personen und Zwischentexte der Teamseite aus dem Abzug.
+     *
+     * Die Altseite gliedert in drei Gruppen, ohne sie zu überschreiben: den
+     * Vorstand, dann — nach einer Überleitung — die weiteren
+     * Gründungsmitglieder und Ehrenamtlichen, zuletzt das stellvertretende
+     * Porträt für die Menschen im Hintergrund. Die Überleitungen stehen als
+     * Absätze zwischen den Personen; der Importer kann sie nur der vorigen
+     * Person zuschlagen. Hier werden sie wieder herausgelöst, als Text der
+     * Seite, der nach dieser Person kommt — sonst spräche Petra Hildebrandt
+     * in ihrem Profil über „viele Menschen, die uns unterstützen".
+     *
+     * @return array{personen: list<array<string, mixed>>, zwischentexte: array<string, list<string>>}
+     */
+    public static function teamAusAbzug(): array
+    {
+        $inhalt = json_decode((string) @file_get_contents(base_path('docs/altseite-inhalt.json')), true);
+        $bloecke = $inhalt['/ueber-uns-vorstand-und-team/']['bloecke'] ?? [];
+
         $personen = [];
+        $zwischentexte = [];
         $rolle = null;
         $name = null;
+        $bild = null;
 
         foreach ($bloecke as $block) {
             $titel = trim((string) ($block['titel'] ?? ''));
@@ -63,6 +119,7 @@ class TeamUndGruppenSeeder extends Seeder
                     $rolle = $titel;
                 } else {
                     $name = $titel;
+                    $bild = $block['bild'] ?? null;
                 }
 
                 continue;
@@ -70,14 +127,24 @@ class TeamUndGruppenSeeder extends Seeder
 
             // Überschrift mit Text: die Vorstellung der zuletzt genannten Person
             if ($name !== null) {
+                [$eigene, $seitentext] = self::seitentextAbtrennen($absaetze);
+
                 $personen[] = [
                     'name' => $name,
                     'rolle' => $rolle,
                     'untertitel' => $titel,
-                    'absaetze' => $absaetze,
+                    'absaetze' => $eigene,
+                    'bild' => $bild,
+                    'bereich' => self::bereich($rolle),
                 ];
+
+                if ($seitentext !== []) {
+                    $zwischentexte[$name] = $seitentext;
+                }
+
                 $rolle = null;
                 $name = null;
+                $bild = null;
             }
         }
 
@@ -89,31 +156,117 @@ class TeamUndGruppenSeeder extends Seeder
          * keine Rollenbezeichnung. Ausdrücklich korrigiert statt die Heuristik
          * zu verbiegen — im Panel lässt sich beides jederzeit ändern.
          */
-        $sonderfaelle = [
-            'Herr und Frau Unbekannt' => ['rolle' => null, 'bereich' => 'Team'],
+        foreach ($personen as &$person) {
+            if ($person['name'] === 'Herr und Frau Unbekannt') {
+                $person['rolle'] = null;
+                $person['bereich'] = self::BEREICH_HINTERGRUND;
+            }
+
+            // André Bauers erster Satz steht auf der Altseite in zwei <p>
+            // („Ich engagiere mich ehrenamtlich bei" / „KE!N EINZELFALL e.V.,
+            // weil …") — ein Umbruch, kein Absatz. Zusammengefügt, damit die
+            // Kurzfassung nicht mitten im Satz beginnt. Keine allgemeine
+            // Regel: Die Altseite setzt auch Adressen und Listen als kurze <p>.
+            if ($person['name'] === 'André Bauer'
+                && str_ends_with($person['absaetze'][0] ?? '', ' bei')
+                && count($person['absaetze']) > 1) {
+                $person['absaetze'] = [
+                    $person['absaetze'][0].' '.$person['absaetze'][1],
+                    ...array_slice($person['absaetze'], 2),
+                ];
+            }
+        }
+        unset($person);
+
+        return ['personen' => $personen, 'zwischentexte' => $zwischentexte];
+    }
+
+    public const BEREICH_VORSTAND = 'Vorstand';
+
+    public const BEREICH_TEAM = 'Team';
+
+    public const BEREICH_HINTERGRUND = 'Im Hintergrund';
+
+    /**
+     * Vorstand ist, wer ein Vorstandsamt trägt. Alle anderen — Landesstellen,
+     * Beauftragte, Ehrenamtliche — sind „Team": Die Altseite trennt genau so,
+     * mit der Überleitung „Darüber hinaus gibt es viele Menschen …".
+     */
+    private static function bereich(?string $rolle): string
+    {
+        return preg_match('/vorsitzende|kassenwart|schriftf|beisitz/iu', (string) $rolle)
+            ? self::BEREICH_VORSTAND
+            : self::BEREICH_TEAM;
+    }
+
+    /**
+     * Absätze, die auf der Altseite zwischen den Personen stehen — und nicht
+     * zur Person darüber gehören.
+     *
+     * @param  list<string>  $absaetze
+     * @return array{list<string>, list<string>}  [eigene Absätze, Seitentext]
+     */
+    private static function seitentextAbtrennen(array $absaetze): array
+    {
+        $anfaenge = [
+            'Darüber hinaus gibt es viele Menschen, die uns',
+            'Ohne die Gründungsmitglieder, die zum Teil auch unsere Landesstellen',
+            'Zusätzlich arbeiten im Hintergrund viele Ehrenamtliche',
         ];
 
-        foreach ($personen as $i => $person) {
-            $sonder = $sonderfaelle[$person['name']] ?? [];
+        $istSeitentext = fn ($a) => collect($anfaenge)->contains(fn ($s) => str_starts_with($a, $s));
 
-            TeamMember::updateOrCreate(['name' => $person['name']], [
-                'rolle' => array_key_exists('rolle', $sonder) ? $sonder['rolle'] : $person['rolle'],
-                'untertitel' => $person['untertitel'],
-                // Erster Absatz als Kurzfassung, der Rest als aufklappbarer Text
-                'kurzprofil' => Str::limit($person['absaetze'][0], 260),
-                'profil' => collect($person['absaetze'])
-                    ->map(fn ($a) => '<p>'.e($a).'</p>')
-                    ->implode("\n"),
-                'bereich' => $sonder['bereich']
-                    ?? (str_contains(mb_strtolower($person['rolle'] ?? ''), 'landesstelle')
-                        ? 'Landesstellen'
-                        : 'Vorstand'),
-                'position' => $i,
-                'published_at' => now(),
-            ]);
+        return [
+            array_values(array_filter($absaetze, fn ($a) => ! $istSeitentext($a))),
+            array_values(array_filter($absaetze, $istSeitentext)),
+        ];
+    }
+
+    /**
+     * Die Teamseite so zusammensetzen, wie die Altseite gliedert: Einleitung,
+     * Vorstand, Überleitung, Team, Hinweis auf die Ehrenamtlichen, das
+     * stellvertretende Porträt. Ein einzelner Baustein mit allen Personen
+     * hätte für die Überleitungen keinen Platz.
+     *
+     * Öffentlich für die Migration. Die Einleitung bleibt, wie sie in der
+     * Datenbank steht — sie kann im Panel bearbeitet worden sein.
+     */
+    public function teamseiteAufbauen(): void
+    {
+        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
+
+        if (! $seite) {
+            return;
         }
 
-        $this->command?->info(count($personen).' Personen übernommen.');
+        ['personen' => $personen, 'zwischentexte' => $zwischentexte] = self::teamAusAbzug();
+
+        $einleitung = $seite->blocks()->where('typ', 'text')->orderBy('position')->first();
+
+        $neu = [];
+        if ($einleitung) {
+            $neu[] = ['typ' => 'text', 'data' => $einleitung->data];
+        }
+
+        // Bereiche in der Reihenfolge ihres ersten Auftretens; die
+        // Überleitung folgt auf die Gruppe, in der sie auf der Altseite steht.
+        $gruppen = collect($personen)->groupBy('bereich');
+
+        foreach ($gruppen as $bereich => $mitglieder) {
+            $neu[] = ['typ' => 'team_grid', 'data' => ['bereich' => $bereich]];
+
+            foreach ($mitglieder as $person) {
+                if (isset($zwischentexte[$person['name']])) {
+                    $neu[] = ['typ' => 'text', 'data' => ['absaetze' => $zwischentexte[$person['name']]]];
+                }
+            }
+        }
+
+        $seite->blocks()->delete();
+
+        foreach ($neu as $position => $block) {
+            $seite->blocks()->create($block + ['position' => $position]);
+        }
     }
 
     /**
@@ -256,8 +409,10 @@ class TeamUndGruppenSeeder extends Seeder
      */
     private function seitenNeuAufbauen(): void
     {
-        // Ohne eigenen Titel: Der Einleitungsblock der Seite trägt ihn bereits.
+        // Erst die Personenabschnitte durch einen Baustein ersetzen, dann die
+        // Seite nach der Gliederung der Altseite zusammensetzen.
         $this->seiteUmbauen('ueber-uns-vorstand-und-team', 'team_grid', []);
+        $this->teamseiteAufbauen();
 
         $this->seiteUmbauen('selbsthilfegruppen', 'group_list', [
             'titel' => 'Unsere Selbsthilfegruppen',

@@ -30,17 +30,24 @@
         ]"
         lead="Abkürzungen und Fachbegriffe, wie sie in Bescheiden und Formularen vorkommen — kurz erklärt." />
 
-    @if ($einleitung)
-        {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber
-             ist eine Karte. --}}
-        @php $flaechen = \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card'); @endphp
+    {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber ist
+         eine Karte. Das Verzeichnis nimmt die Gegenfläche des letzten
+         Bausteins — seine Einträge stehen dann auf der jeweils anderen. --}}
+    @php
+        $flaechen = $einleitung
+            ? \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card')
+            : [];
+        $listeAuf = \App\Models\PageBlock::gegenflaeche(end($flaechen) ?: 'card');
+        $karte = $listeAuf === 'card' ? 'bg-cream' : 'bg-card';
+    @endphp
 
+    @if ($einleitung)
         @foreach ($einleitung->blocks as $block)
             <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
         @endforeach
     @endif
 
-    <div class="px-4 py-8 lg:px-10 lg:py-12"
+    <div @class(['px-4 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])
          @if ($ersatzsprache) lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}" @endif>
         <div class="mx-auto max-w-6xl">
 
@@ -86,7 +93,7 @@
                         <dl class="grid gap-4 md:grid-cols-2">
                             @foreach ($eintraege as $eintrag)
                                 <div id="{{ $eintrag->slug }}"
-                                     class="scroll-mt-24 rounded-card border border-line bg-card px-5 py-4">
+                                     class="scroll-mt-24 rounded-card border border-line {{ $karte }} px-5 py-4">
 
                                     <dt class="font-display text-lg text-ink">
                                         @if ($eintrag->kuerzel)

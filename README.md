@@ -199,6 +199,18 @@ Lädt die PDFs von der WordPress-Altseite nach `public/dokumente/` und prüft
 dabei Größe und Dateityp gegen `docs/dokumente-manifest.json`. Der Lauf ist
 wiederholbar — was vollständig vorliegt, wird übersprungen.
 
+## Bilder der Altseite
+
+```bash
+php artisan bilder:holen            # fehlende holen (braucht php-gd)
+php artisan bilder:holen --pruefen  # nur berichten
+```
+
+Die Altseite hat nur eine Handvoll Bilder — die Porträts der Teamseite und
+den QR-Code der Spendenseite. Sie liegen versioniert unter
+`public/img/altseite/`, verkleinert auf 800 px. Zugeordnet werden sie vom
+`TeamUndGruppenSeeder`; Details in `docs/Komponenten.md`, Abschnitt 24.
+
 **Standard sind nur die verlinkten Dateien.** Der Medienbestand enthält 121
 Dokumente, verlinkt sind 31. Unter den übrigen sind laut Übergabe-Checkliste
 (A4) auch Behörden-Schriftwechsel, bei denen erst zu prüfen ist, ob

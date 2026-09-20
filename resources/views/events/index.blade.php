@@ -29,17 +29,24 @@
 
     {{-- Bestandstext der Altseite. Die Bausteine bringen ihren eigenen Rand
          mit, deshalb stehen sie ausserhalb jedes weiteren Containers. --}}
-    @if ($einleitung)
-        {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber
-             ist eine Karte. --}}
-        @php $flaechen = \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card'); @endphp
+    {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber ist
+         eine Karte. Die Terminliste nimmt die Gegenfläche des letzten
+         Bausteins — ihre Karten stehen dann auf der jeweils anderen. --}}
+    @php
+        $flaechen = $einleitung
+            ? \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card')
+            : [];
+        $listeAuf = \App\Models\PageBlock::gegenflaeche(end($flaechen) ?: 'card');
+        $karte = $listeAuf === 'card' ? 'bg-cream' : 'bg-card';
+    @endphp
 
+    @if ($einleitung)
         @foreach ($einleitung->blocks as $block)
             <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
         @endforeach
     @endif
 
-    <div class="px-4 py-8 lg:px-10 lg:py-12">
+    <div @class(['px-4 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])>
         <div class="mx-auto max-w-6xl">
 
             <div class="flex flex-wrap items-center justify-between gap-4">
@@ -50,7 +57,7 @@
                                 <a href="{{ sprachlink('events.index') }}"
                                    @if (! $zeigeVergangene) aria-current="page" @endif
                                    class="inline-block rounded-full border border-line px-4 py-1.5 text-sm no-underline
-                                          text-ink-soft hover:bg-card
+                                          text-ink-soft {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}
                                           aria-[current=page]:border-green aria-[current=page]:bg-green
                                           aria-[current=page]:text-on-green">
                                     Kommende ({{ $anzahlKommend }})
@@ -60,7 +67,7 @@
                                 <a href="{{ sprachlink('events.index', ['zeitraum' => 'vergangen']) }}"
                                    @if ($zeigeVergangene) aria-current="page" @endif
                                    class="inline-block rounded-full border border-line px-4 py-1.5 text-sm no-underline
-                                          text-ink-soft hover:bg-card
+                                          text-ink-soft {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}
                                           aria-[current=page]:border-green aria-[current=page]:bg-green
                                           aria-[current=page]:text-on-green">
                                     Vergangene ({{ $anzahlVergangen }})
@@ -77,7 +84,7 @@
                          soll nicht verloren gehen. --}}
                     <a href="{{ sprachlink('events.ical') }}"
                        class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2
-                              text-sm text-ink-soft no-underline hover:bg-card">
+                              text-sm text-ink-soft no-underline {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}">
                         <x-ui.icon name="arrow-right" :size="16" />
                         Alle Termine in den eigenen Kalender
                     </a>
@@ -100,10 +107,10 @@
                             @php($gruppe = $eintrag['gruppe'])
                             @php($zeit = $eintrag['zeitpunkt'])
                             <li>
-                                <article class="flex items-center gap-4 rounded-card border border-line bg-card p-3 sm:p-4">
+                                <article class="flex items-center gap-4 rounded-card border border-line {{ $karte }} p-3 sm:p-4">
                                     <div class="shrink-0 overflow-hidden rounded-xl border border-line text-center"
                                          aria-hidden="true">
-                                        <div class="bg-cream px-3 py-1 font-display text-lg font-medium text-ink">
+                                        <div class="{{ $listeAuf === 'card' ? 'bg-card' : 'bg-cream' }} px-3 py-1 font-display text-lg font-medium text-ink">
                                             {{ $zeit->format('d') }}
                                         </div>
                                         <div class="px-3 py-0.5 text-[0.625rem] uppercase tracking-[0.1em] text-ink-soft">
@@ -156,7 +163,7 @@
                 </h2>
 
                 @if ($termine->isEmpty())
-                    <div class="rounded-card border border-line bg-card px-6 py-10 text-center">
+                    <div class="rounded-card border border-line {{ $karte }} px-6 py-10 text-center">
                         <p class="text-ink">
                             {{ $zeigeVergangene
                                 ? 'Es sind keine vergangenen Termine hinterlegt.'
@@ -175,7 +182,7 @@
                         @foreach ($termine as $termin)
                             <li>
                                 <article @class([
-                                    'flex gap-4 rounded-card border bg-card p-4 sm:p-5',
+                                    'flex gap-4 rounded-card border p-4 sm:p-5', $karte,
                                     'border-line' => ! $termin->laeuftGerade(),
                                     'border-green' => $termin->laeuftGerade(),
                                 ])>
@@ -184,7 +191,7 @@
                                          der Screenreader es doppelt. --}}
                                     <div class="shrink-0 overflow-hidden rounded-xl border border-line text-center"
                                          aria-hidden="true">
-                                        <div class="bg-cream px-3 py-1.5 font-display text-xl font-medium text-ink">
+                                        <div class="{{ $listeAuf === 'card' ? 'bg-card' : 'bg-cream' }} px-3 py-1.5 font-display text-xl font-medium text-ink">
                                             {{ $termin->beginnt_am->format('d') }}
                                         </div>
                                         <div class="px-3 py-1 text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">

@@ -73,7 +73,9 @@ class AltseiteHolen extends Command
                 $pfad,
                 count($seite['bloecke']),
                 $seite['woerter'],
-                $seite['pdfs'] ? '  '.count($seite['pdfs']).' PDFs' : ''
+                ($seite['pdfs'] ? '  '.count($seite['pdfs']).' PDFs' : '')
+                    .(($bilder = count(array_filter($seite['bloecke'], fn ($b) => isset($b['bild']))))
+                        ? "  {$bilder} Bilder" : '')
             ));
         }
 
@@ -134,12 +136,40 @@ class AltseiteHolen extends Command
      */
     private function bloecke(string $html): array
     {
-        preg_match_all('/<(h[1-6]|p)[^>]*>(.*?)<\/\1>/s', $html, $treffer, PREG_SET_ORDER);
+        // \b hinter dem Tagnamen: Ohne die Wortgrenze passte das Muster auch
+        // auf <path …> der SVG-Icons und las von dort bis zum nächsten </p> —
+        // samt allem dazwischen. Auf der Teamseite steckt so ein Icon im
+        // Kontaktknopf jeder Person, und jede zweite Person verschwand im
+        // Bauch der vorigen: Vier von sieben fehlten im Abzug vom Juli, ohne
+        // dass es jemandem auffiel.
+        //
+        // Der Inhalt darf ausserdem kein weiteres <p>, <li> oder <h…>
+        // enthalten — sonst überbrückte ein einzelnes ungeschlossenes <p> die
+        // nächsten Abschnitte genauso.
+        //
+        // <li> zählt als Absatz: Die Kurzangaben einer Person stehen auf der
+        // Altseite als Aufzählung und fielen sonst weg. Bilder gehören zum
+        // Block, in dem sie stehen — auf der Teamseite ist das der Name.
+        preg_match_all(
+            '/<(h[1-6]|p|li)\b[^>]*>((?:(?!<(?:h[1-6]|p|li)\b).)*?)<\/\1>|<(img)\b([^>]*)>/s',
+            $html, $treffer, PREG_SET_ORDER
+        );
 
         $bloecke = [];
         $aktuell = null;
 
-        foreach ($treffer as [$_, $tag, $roh]) {
+        foreach ($treffer as $t) {
+            if (($t[3] ?? '') === 'img') {
+                $bild = $this->bild($t[4]);
+
+                if ($bild && $aktuell && ! isset($aktuell['bild'])) {
+                    $aktuell['bild'] = $bild;
+                }
+
+                continue;
+            }
+
+            [$_, $tag, $roh] = $t;
             $text = $this->text($roh);
             if ($text === '' || mb_strlen($text) < 3) {
                 continue;
@@ -161,6 +191,11 @@ class AltseiteHolen extends Command
             if (! $aktuell) {
                 $aktuell = ['typ' => 'text', 'titel' => null, 'absaetze' => []];
             }
+
+            // Bewusst nicht zusammengefügt, wenn ein <p> mitten im Satz endet:
+            // Die Altseite setzt Adressen, Linklisten und Zwischenzeilen als
+            // einzelne <p>, und eine solche Regel klebte sie auf zwölf Seiten
+            // zusammen. Wo es wirklich ein Umbruch ist, richtet es der Seeder.
             $aktuell['absaetze'][] = $text;
         }
 
@@ -189,6 +224,91 @@ class AltseiteHolen extends Command
         }
 
         return $pdfs;
+    }
+
+    /**
+     * Quelle und Beschreibung eines Bildes im Inhalt — oder null, wenn es
+     * kein Inhaltsbild ist (Emoji-Grafiken, eingebettete Daten).
+     *
+     * Elementor liefert für Porträts nur eine Vorschaugröße unter
+     * `elementor/thumbs/NAME-<hash>.jpg`, ohne Verweis auf das Original. Das
+     * Original steht in der Mediathek; sie wird einmal über die
+     * WordPress-Schnittstelle geholt und über den Dateinamen abgeglichen.
+     *
+     * @return array{src: string, alt: string}|null
+     */
+    private function bild(string $attribute): ?array
+    {
+        if (! preg_match('/\ssrc="([^"]+)"/', $attribute, $m)) {
+            return null;
+        }
+
+        $src = html_entity_decode($m[1]);
+
+        if (str_starts_with($src, 'data:') || str_contains($src, '/emoji/')) {
+            return null;
+        }
+
+        $alt = preg_match('/\salt="([^"]*)"/', $attribute, $a) ? $this->text($a[1]) : '';
+
+        return [
+            'src' => str_replace(self::BASIS, '', $this->original($src)),
+            'alt' => $alt,
+        ];
+    }
+
+    /** @var array<string, string>|null Dateiname ohne Endung → Adresse des Originals */
+    private ?array $mediathek = null;
+
+    private function original(string $src): string
+    {
+        $datei = pathinfo(parse_url($src, PHP_URL_PATH) ?: '', PATHINFO_FILENAME);
+
+        // Elementor-Vorschau: NAME-<hash>; WordPress-Größen: NAME-300x200
+        $stamm = preg_replace(['/-[a-z0-9]{20,}$/', '/-\d+x\d+$/'], '', $datei);
+
+        return $this->mediathek()[$stamm] ?? $src;
+    }
+
+    /** @return array<string, string> */
+    private function mediathek(): array
+    {
+        if ($this->mediathek !== null) {
+            return $this->mediathek;
+        }
+
+        $this->mediathek = [];
+
+        for ($seite = 1; $seite <= 10; $seite++) {
+            try {
+                $antwort = Http::withHeaders(['User-Agent' => 'NilsDigital-Migration/1.0'])
+                    ->timeout(30)
+                    ->get(self::BASIS.'/wp-json/wp/v2/media', [
+                        'media_type' => 'image', 'per_page' => 100, 'page' => $seite,
+                    ]);
+            } catch (\Throwable) {
+                break;
+            }
+
+            $eintraege = $antwort->successful() ? $antwort->json() : [];
+
+            if (! is_array($eintraege) || $eintraege === []) {
+                break;
+            }
+
+            foreach ($eintraege as $medium) {
+                $url = $medium['source_url'] ?? null;
+                if ($url) {
+                    $this->mediathek[pathinfo($url, PATHINFO_FILENAME)] = $url;
+                }
+            }
+
+            if (count($eintraege) < 100) {
+                break;
+            }
+        }
+
+        return $this->mediathek;
     }
 
     private function text(string $html): string

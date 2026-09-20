@@ -49,11 +49,13 @@ class ModuleTest extends TestCase
     {
         $manifest = json_decode(file_get_contents(base_path('docs/dokumente-manifest.json')), true);
 
-        // Vollbestand der WP-Medienbibliothek, nicht nur die verlinkten.
-        $this->assertCount(121, $manifest);
+        // Vollbestand der WP-Medienbibliothek vom 26.07.2026 (121), plus die
+        // Teilnahmevereinbarung, die der Verein am 27.07. hochgeladen und auf
+        // /veranstaltungen verlinkt hat (nachgetragen 20.09.2026).
+        $this->assertCount(122, $manifest);
 
         $verlinkt = array_filter($manifest, fn ($d) => ! empty($d['verlinkt_auf']));
-        $this->assertCount(31, $verlinkt, 'Auf Seiten verlinkte Dokumente');
+        $this->assertCount(32, $verlinkt, 'Auf Seiten verlinkte Dokumente');
 
         foreach ($manifest as $dok) {
             $this->assertNotEmpty($dok['titel']);
