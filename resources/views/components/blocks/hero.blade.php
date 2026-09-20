@@ -34,7 +34,9 @@
     );
 @endphp
 
-<section class="px-4 pt-8 lg:px-10 lg:pt-16">
+{{-- Unten derselbe Abstand wie bei jedem Abschnitt: Der nächste Baustein
+     steht auf der Karte, und ohne Luft klebte die Karte an den Knöpfen. --}}
+<section class="px-4 pb-8 pt-8 lg:px-10 lg:pb-12 lg:pt-16">
     <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup. --}}

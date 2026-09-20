@@ -1,7 +1,14 @@
 @props([
     'titel' => null,
     'einleitung' => null,
+    'auf' => 'cream',    // cream | card
 ])
+
+@php
+    // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
+    // auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 @php
     $eintraege = config('speicher.eintraege', []);
@@ -35,7 +42,10 @@
     überhaupt etwas zu speichern. Die Erklärung bleibt trotzdem lesbar — sie
     gehört zur Auskunft darüber, was die Seite tut.
 --}}
-<section class="px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="{{ $anker }}">
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+]) aria-labelledby="{{ $anker }}">
     <div class="mx-auto max-w-6xl">
         <div class="max-w-prose"
              data-speicher
@@ -55,7 +65,7 @@
                 {{ $einleitung ?: __('rahmen.speicher.einleitung') }}
             </p>
 
-            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line bg-card">
+            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line {{ $innen }}">
                 @foreach ($eintraege as $eintrag)
                     <li class="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
                         data-speicher-eintrag="{{ $eintrag['schluessel'] }}">

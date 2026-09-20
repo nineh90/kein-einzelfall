@@ -1,7 +1,8 @@
 @props([
     'block',
-    // Vorgabe der Seite, damit aufeinanderfolgende Textbausteine die Fläche
-    // wechseln können. Eine im Baustein hinterlegte Fläche hat Vorrang.
+    // Vorgabe der Seite, damit aufeinanderfolgende Bausteine die Fläche
+    // wechseln — berechnet mit PageBlock::flaechenFuer(), das eine im
+    // Baustein hinterlegte Fläche bereits berücksichtigt.
     'flaeche' => null,
 ])
 
@@ -16,6 +17,9 @@
 
     // Ein Knopf ohne Beschriftung oder Ziel — siehe knoepfe() in helpers.php.
     $cta = knoepfe([$data['cta'] ?? null])[0] ?? null;
+
+    // Ohne Vorgabe (etwa in der Trigger-Warnung) gilt die helle Seitenfläche.
+    $auf = $flaeche ?? $data['auf'] ?? 'cream';
 @endphp
 
 @if (! $erlaubt || ! View::exists('components.'.$komponente))
@@ -29,7 +33,7 @@
     <x-blocks.text
         :eyebrow="$data['eyebrow'] ?? null"
         :titel="$data['titel'] ?? null"
-        :auf="$data['auf'] ?? $flaeche ?? 'cream'"
+        :auf="$auf"
         :anker="$block->anker()"
         :absaetze="$data['absaetze'] ?? []"
         :hand="$data['hand'] ?? null"
@@ -40,7 +44,10 @@
          in der Fehlerseite und in engeren Spalten. Als eigenständiger Baustein
          auf einer Seite bekommt sie den Rahmen deshalb hier — sonst klebte sie
          am Bildschirmrand. --}}
-    <div class="px-4 py-6 lg:px-10">
+    <div @class([
+        'px-4 py-6 lg:px-10',
+        'bg-card border-y border-line' => $auf === 'card',
+    ])>
         <div class="mx-auto max-w-6xl">
             <x-blocks.hilfe-box
                 :titel="$data['titel'] ?? 'Du brauchst jetzt Hilfe?'"
@@ -49,5 +56,10 @@
     </div>
 
 @else
-    <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($data)" />
+    {{-- Die Fläche nur an Bausteine geben, die sie als Prop kennen — bei
+         allen anderen landete sie als Attribut auf-="…" im HTML. --}}
+    @php
+        $attribute = $block->nimmtFlaeche() ? ['auf' => $auf] + $data : $data;
+    @endphp
+    <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($attribute)" />
 @endif

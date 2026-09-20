@@ -1452,3 +1452,63 @@ Startseite, Migration, Idempotenz, bearbeitete Seite, englische Fassung),
 `DatenschutzTest` prüft jetzt die echte Seite statt eines Testblocks,
 `barrierefreiheit.mjs` mit /spenden (de/en) und geöffneter Einbettung.
 
+
+## 23. Flächenwechsel der Abschnitte (20.09.2026, KEV-20)
+
+Aufeinanderfolgende Abschnitte sollen sich abheben — helle Seitenfläche
+(`cream`) und Karte (`card`) im Wechsel. Das galt bislang nur auf dem Papier:
+Die Seite hat nach Positionsnummer gewechselt (`$loop->index % 2`), aber nur
+der Textbaustein hat die Vorgabe umgesetzt. Alles andere stand fest auf
+`cream`, und Seitenkopf, „Weiterlesen" und Kontakt-Abschluss wurden gar nicht
+mitgezählt. Ergebnis: auf `/selbsthilfegruppen` drei helle Abschnitte
+hintereinander, auf `/verein` eine Text-Karte direkt über der Karte
+„Weiterlesen", auf der Startseite fünf helle Abschnitte am Stück.
+
+### Eine Regel statt einer Zählung
+
+**`PageBlock::FLAECHEN`** sagt für jeden Bausteintyp, wie er sich verhält:
+
+| Verhalten | Bausteine |
+|---|---|
+| `wechselnd` — Gegenfläche des Abschnitts davor | `text`, `text_media`, `schritte`, `accordion`, `team_grid`, `group_list`, `quick_access`, `download_list`, `cta_band`, `contact_close`, `contact_form`, `donation_options`, `hilfe_box`, `partner_logos`, `speicher_uebersicht` |
+| `anschliessend` — bleibt auf der Fläche davor | `hinweis` (ein Kasten, der zum Text darüber gehört; auf der Karte deckt er deren untere Linie ab, damit keine Naht entsteht) |
+| fest | `hero` (`cream`, eigener Verlauf), `topic_list` (`card`, eigene Linien), `stat_strip`, `embed`, `inhalts_hinweis` (`cream`) |
+
+**`PageBlock::flaechenFuer($bloecke, davor: …)`** läuft einmal über die
+Bausteinfolge und bestimmt jede Fläche relativ zum tatsächlichen Vorgänger.
+`davor` ist, was über dem ersten Baustein steht — auf Inhaltsseiten der
+Seitenkopf (`card`), auf der Startseite die Kopfzeile (`cream`). Eine im
+Baustein hinterlegte Fläche (`data['auf']`) hat weiterhin Vorrang.
+`page.blade.php` rechnet daraus auch die Fläche von „Weiterlesen" und dem
+Kontakt-Abschluss: beide nehmen die Gegenfläche dessen, was zuletzt stand.
+
+Die neu wechselnden Bausteine bekamen dafür die Prop `auf`. Kästen darin
+(Dokumentenliste, Spendenkästen, Einstiegskarten, Formularfelder, …) stehen auf
+der jeweils *anderen* Fläche — sonst verschwämmen sie auf der Karte mit dem
+Hintergrund. `block.blade.php` reicht `auf` nur an Bausteine weiter, die die
+Prop kennen (`nimmtFlaeche()`); bei allen anderen landete sie sonst als
+Attribut `auf="…"` im HTML.
+
+Der Aufmacher hat jetzt unten denselben Abstand wie jeder Abschnitt: Der
+Baustein danach steht auf der Karte, und ohne Luft klebte die Karte an den
+Knöpfen.
+
+### Nicht gelöst, bewusst
+
+Zwischen zwei festen Flächen geht der Wechsel nur bei gerader Zahl
+dazwischenliegender Bausteine auf. Betrifft praktisch nur `/veranstaltungen`
+(Seitenkopf `card` → Einleitung → Terminliste `cream`): mit derzeit sechs
+Textbausteinen passt es, mit fünf stünden Einleitung und Liste beide hell.
+Wer dort Bausteine entfernt, sieht es sofort — der Test unten wird rot.
+
+`embed` und `inhalts_hinweis` haben als Seitenbausteine keinen eigenen Rahmen
+(`px-4`, `max-w-6xl`) und liefen über die volle Breite. Beide sind auf keiner
+Seite im Einsatz; sie bleiben, wie sie sind, bis jemand sie braucht.
+
+### Tests
+
+`SeitengestaltungTest::test_benachbarte_abschnitte_stehen_nie_auf_derselben_flaeche`
+geht über alle veröffentlichten deutschen Seiten plus `/veranstaltungen` und
+prüft die obersten Kinder von `<main>` — Seitenkopf bis Kontakt-Abschluss —
+paarweise. Auf dem alten Stand meldet er als Erstes die Startseite
+(`cream > cream > cream > card > cream > cream > cream > cream`).

@@ -4,12 +4,16 @@
     'notiz' => null,
     'ctas' => [],
     'wasserzeichen' => 'KE!N',
+    'auf' => 'cream',    // cream | card
 ])
 
 {{-- Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php --}}
 @php $knoepfe = knoepfe($ctas); @endphp
 
-<section class="px-4 py-8 lg:px-10 lg:py-12">
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+])>
     <div class="relative mx-auto max-w-6xl overflow-hidden rounded-band bg-green-deep px-6 py-8 lg:px-10 lg:py-11">
 
         {{-- Dekoratives Wasserzeichen. Auf schmalen Viewports ausgeblendet:

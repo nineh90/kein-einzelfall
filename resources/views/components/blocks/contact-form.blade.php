@@ -1,7 +1,14 @@
 @props([
     'titel' => 'Schreib uns',
     'herkunft' => null,
+    'auf' => 'cream',    // cream | card
 ])
+
+@php
+    // Felder und Kästen stehen auf der jeweils anderen Fläche, sonst
+    // verschwämmen sie auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 {{--
     Kontaktformular.
@@ -16,7 +23,10 @@
       - eingegebene Werte bleiben nach einem Fehler erhalten (old())
       - Pflichtfelder sind im Text benannt, nicht nur durch ein Sternchen
 --}}
-<section class="px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="formular-titel">
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+]) aria-labelledby="formular-titel">
     <div class="mx-auto max-w-2xl">
 
         <h2 id="formular-titel" class="mb-2 font-display text-2xl font-medium text-ink">
@@ -42,7 +52,7 @@
 
         @if ($errors->any())
             <div role="alert"
-                 class="mb-6 rounded-card border-2 border-alert bg-card px-5 py-4">
+                 class="mb-6 rounded-card border-2 border-alert {{ $innen }} px-5 py-4">
                 <p class="font-medium text-alert">Bitte prüfe noch einmal:</p>
                 <ul class="mt-2 list-disc pl-5 text-sm text-ink">
                     @foreach ($errors->all() as $fehler)
@@ -72,7 +82,7 @@
                 </label>
                 <input type="text" name="name" id="f-name" value="{{ old('name') }}"
                        autocomplete="name" maxlength="120"
-                       @class(['w-full rounded-lg border bg-card px-4 py-3 text-ink',
+                       @class(['w-full rounded-lg border px-4 py-3 text-ink', $innen,
                                'border-line' => ! $errors->has('name'),
                                'border-alert' => $errors->has('name')])
                        @if ($errors->has('name')) aria-describedby="f-name-fehler" aria-invalid="true" @endif>
@@ -88,7 +98,7 @@
                 <input type="email" name="email" id="f-email" value="{{ old('email') }}"
                        autocomplete="email" maxlength="180"
                        aria-describedby="f-email-hinweis{{ $errors->has('email') ? ' f-email-fehler' : '' }}"
-                       @class(['w-full rounded-lg border bg-card px-4 py-3 text-ink',
+                       @class(['w-full rounded-lg border px-4 py-3 text-ink', $innen,
                                'border-line' => ! $errors->has('email'),
                                'border-alert' => $errors->has('email')])
                        @if ($errors->has('email')) aria-invalid="true" @endif>
@@ -107,7 +117,7 @@
                 </label>
                 <input type="text" name="betreff" id="f-betreff" value="{{ old('betreff') }}"
                        required maxlength="200"
-                       @class(['w-full rounded-lg border bg-card px-4 py-3 text-ink',
+                       @class(['w-full rounded-lg border px-4 py-3 text-ink', $innen,
                                'border-line' => ! $errors->has('betreff'),
                                'border-alert' => $errors->has('betreff')])
                        @if ($errors->has('betreff')) aria-describedby="f-betreff-fehler" aria-invalid="true" @endif>
@@ -121,7 +131,7 @@
                     Deine Nachricht <span class="font-normal text-ink-soft">(muss ausgefüllt werden)</span>
                 </label>
                 <textarea name="nachricht" id="f-nachricht" rows="8" required maxlength="8000"
-                          @class(['w-full rounded-lg border bg-card px-4 py-3 text-ink',
+                          @class(['w-full rounded-lg border px-4 py-3 text-ink', $innen,
                                   'border-line' => ! $errors->has('nachricht'),
                                   'border-alert' => $errors->has('nachricht')])
                           @if ($errors->has('nachricht')) aria-describedby="f-nachricht-fehler" aria-invalid="true" @endif
@@ -131,7 +141,7 @@
                 @enderror
             </div>
 
-            <div class="rounded-card border border-line bg-card px-5 py-4">
+            <div class="rounded-card border border-line {{ $innen }} px-5 py-4">
                 <label for="f-einwilligung" class="flex items-start gap-3">
                     <input type="checkbox" name="einwilligung" id="f-einwilligung" value="1"
                            required class="mt-1 h-5 w-5 shrink-0 rounded border-line accent-[#00702F]"

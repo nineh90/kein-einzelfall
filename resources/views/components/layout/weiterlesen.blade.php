@@ -1,6 +1,7 @@
 @props([
     'seiten' => [],
     'bereich' => null,
+    'auf' => 'card',   // cream | card — die Gegenfläche des letzten Bausteins
 ])
 
 @if (count($seiten) > 0)
@@ -12,7 +13,10 @@
         Die Einträge stammen aus der Navigation — nichts davon ist zusätzlich
         gepflegter Inhalt.
     --}}
-    <aside class="border-t border-line bg-card px-4 py-8 lg:px-10 lg:py-10"
+    <aside @class([
+               'border-t border-line px-4 py-8 lg:px-10 lg:py-10',
+               'bg-card' => $auf === 'card',
+           ])
            aria-labelledby="weiterlesen-titel">
         <div class="mx-auto max-w-6xl">
             <h2 id="weiterlesen-titel" class="mb-5 font-display text-xl font-medium text-ink">
@@ -24,9 +28,13 @@
             <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($seiten as $seite)
                     <li class="flex">
+                        {{-- Die Karten stehen auf der jeweils anderen Fläche,
+                             sonst verschwämmen sie mit dem Hintergrund. --}}
                         <a href="{{ $seite['url'] }}"
-                           class="group flex flex-1 items-center gap-3 rounded-card border border-line
-                                  bg-cream px-4 py-3.5 no-underline hover:border-green">
+                           @class(['group flex flex-1 items-center gap-3 rounded-card border border-line',
+                                   'px-4 py-3.5 no-underline hover:border-green',
+                                   'bg-cream' => $auf === 'card',
+                                   'bg-card' => $auf !== 'card'])>
                             <span class="flex-1 text-[0.9375rem] text-ink group-hover:underline">
                                 {{ $seite['label'] }}
                             </span>

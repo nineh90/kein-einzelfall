@@ -2,7 +2,14 @@
     'titel' => 'Wie wir helfen',
     'sub' => null,
     'karten' => [],   // [['icon'=>, 'titel'=>, 'text'=>, 'url'=>, 'link'=>], ...]
+    'auf' => 'cream', // cream | card
 ])
+
+@php
+    // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
+    // auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 @php
     // Die ganze Karte ist ein Link. Eine Karte ohne Ziel wäre damit ein Link
@@ -15,7 +22,10 @@
     ));
 @endphp
 
-<section class="px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="qa-titel">
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+]) aria-labelledby="qa-titel">
     <div class="mx-auto max-w-6xl">
         <x-ui.section-head :titel="$titel" :sub="$sub" />
 
@@ -31,7 +41,7 @@
                     {{-- Die ganze Karte ist der Link — größere Trefferfläche,
                          nur ein Tab-Stopp statt zwei. --}}
                     <a href="{{ $karte['url'] }}"
-                       class="group flex flex-1 flex-col rounded-card border border-line bg-card
+                       class="group flex flex-1 flex-col rounded-card border border-line {{ $innen }}
                               p-4 no-underline hover:border-green lg:p-5">
                         <span class="mb-3 text-green">
                             <x-ui.icon :name="$karte['icon']" :size="28" />

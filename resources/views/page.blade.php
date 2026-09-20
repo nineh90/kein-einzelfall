@@ -19,6 +19,7 @@
 @endif
 
 @php
+    use App\Models\PageBlock;
     use App\Support\Seitenkontext;
 
     $kontext = Seitenkontext::fuer($page->slug);
@@ -61,6 +62,18 @@
         ->map(fn ($b) => ['anker' => $b->anker(), 'titel' => $b->data['titel']])
         ->values()
         ->all();
+
+    // Flächenwechsel von Abschnitt zu Abschnitt. Ohne ihn laufen zehn
+    // Abschnitte optisch ununterscheidbar ineinander; der Wechsel gibt der
+    // Seite Rhythmus und macht Abschnittsgrenzen sichtbar. Der Seitenkopf ist
+    // eine Karte, also beginnt der Inhalt hell — und was nach dem letzten
+    // Baustein kommt, hebt sich ebenfalls von ihm ab.
+    $flaechen = PageBlock::flaechenFuer($bloecke, davor: 'card');
+    $zuletzt = end($flaechen) ?: 'card';
+
+    $geschwister = $kontext->geschwister();
+    $weiterlesenAuf = PageBlock::gegenflaeche($zuletzt);
+    $kontaktAuf = PageBlock::gegenflaeche(count($geschwister) > 0 ? $weiterlesenAuf : $zuletzt);
 @endphp
 
 @section('content')
@@ -90,14 +103,12 @@
     @endif
 
     @foreach ($bloecke as $block)
-        {{-- Textbausteine wechseln die Fläche. Ohne das laufen zehn Abschnitte
-             optisch ununterscheidbar ineinander; der Wechsel gibt der Seite
-             Rhythmus und macht Abschnittsgrenzen sichtbar. --}}
-        <x-block :block="$block" :flaeche="$loop->index % 2 === 1 ? 'card' : 'cream'" />
+        <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
     @endforeach
 
     <x-layout.weiterlesen
-        :seiten="$kontext->geschwister()"
+        :seiten="$geschwister"
+        :auf="$weiterlesenAuf"
         :bereich="$kontext->istBereichsUebersicht() ? $page->titel : $kontext->bereichName()" />
 
     {{-- Gemeinsamer Abschluss: Auf jeder Unterseite soll der Weg zu uns
@@ -106,6 +117,7 @@
          deplatziert. --}}
     @unless ($kontext->istRechtstext())
         <x-blocks.contact-close
+            :auf="$kontaktAuf"
             titel="Fragen zu diesem Thema?"
             text="Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?"
             :ctas="[

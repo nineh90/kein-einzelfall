@@ -1,7 +1,14 @@
 @props([
     'titel' => null,
     'dokumente' => [],   // [['titel' =>, 'url' =>, 'bytes' =>, 'typ' =>, 'quelle' =>], ...]
+    'auf' => 'cream',    // cream | card
 ])
+
+@php
+    // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
+    // auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 @php
     /*
@@ -63,7 +70,10 @@
 --}}
 {{-- Derselbe Rahmen wie die Textbausteine: Ohne Container lief die Liste über
      die volle Fensterbreite und fiel aus dem Satzspiegel der Seite. --}}
-<section class="px-4 py-8 lg:px-10 lg:py-12"
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+])
          @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>
     <div class="mx-auto max-w-6xl">
         <div class="max-w-prose">
@@ -76,7 +86,7 @@
 
             {{-- Als abgesetzte Karte statt randloser Liste — sonst wirkt der
                  Abschnitt wie ein loses Anhängsel unter dem Fließtext. --}}
-            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line bg-card">
+            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line {{ $innen }}">
         @foreach ($dokumente as $dok)
             @php
                 $extern = $istExtern($dok);

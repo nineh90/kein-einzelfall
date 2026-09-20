@@ -95,6 +95,95 @@ class PageBlock extends Model
         'stat_strip' => 'Kennzahlen',
     ];
 
+    /**
+     * Welche Fläche ein Bausteintyp einnimmt.
+     *
+     * Aufeinanderfolgende Abschnitte sollen sich voneinander abheben — helle
+     * Seitenfläche (cream) und Kartenfläche (card) im Wechsel. Sonst laufen
+     * Bausteine, die inhaltlich nichts miteinander zu tun haben, optisch
+     * ineinander.
+     *
+     *   wechselnd     nimmt die Gegenfläche des vorigen Abschnitts
+     *   anschliessend bleibt auf der Fläche des vorigen Abschnitts — für
+     *                 Kästen, die zum Text davor gehören
+     *   cream / card  feste Fläche; für die Nachbarn nur der Bezugspunkt
+     */
+    public const FLAECHEN = [
+        'text' => 'wechselnd',
+        'text_media' => 'wechselnd',
+        'schritte' => 'wechselnd',
+        'accordion' => 'wechselnd',
+        'team_grid' => 'wechselnd',
+        'group_list' => 'wechselnd',
+        'quick_access' => 'wechselnd',
+        'download_list' => 'wechselnd',
+        'cta_band' => 'wechselnd',
+        'contact_close' => 'wechselnd',
+        'contact_form' => 'wechselnd',
+        'donation_options' => 'wechselnd',
+        'hilfe_box' => 'wechselnd',
+        'partner_logos' => 'wechselnd',
+        'speicher_uebersicht' => 'wechselnd',
+        'hinweis' => 'anschliessend',
+        // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
+        // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
+        // eigenen Linien.
+        'hero' => 'cream',
+        'topic_list' => 'card',
+        'stat_strip' => 'cream',
+        'embed' => 'cream',
+        'inhalts_hinweis' => 'cream',
+        'leichte_sprache' => 'cream',
+    ];
+
+    /**
+     * Fläche für jeden Baustein einer Folge — jeweils bezogen auf das, was
+     * tatsächlich davor steht, nicht auf die Positionsnummer.
+     *
+     * Bis September 2026 wurde stur nach Position gewechselt, und nur der
+     * Textbaustein hat die Vorgabe überhaupt umgesetzt. Ergebnis: drei helle
+     * Abschnitte hintereinander, oder eine Karte direkt auf der Karte des
+     * Seitenkopfs.
+     *
+     * @param  iterable<self>  $bloecke
+     * @param  string  $davor  Fläche des Elements über dem ersten Baustein
+     * @return list<string>  'cream' oder 'card', in der Reihenfolge der Bausteine
+     */
+    public static function flaechenFuer(iterable $bloecke, string $davor = 'card'): array
+    {
+        $flaechen = [];
+
+        foreach ($bloecke as $block) {
+            $flaechen[] = $davor = $block->flaeche($davor);
+        }
+
+        return $flaechen;
+    }
+
+    /** Die Fläche dieses Bausteins, wenn davor die Fläche $davor steht. */
+    public function flaeche(string $davor): string
+    {
+        $art = self::FLAECHEN[$this->typ] ?? 'cream';
+
+        return match ($art) {
+            // Eine im Baustein hinterlegte Fläche hat Vorrang
+            'wechselnd' => $this->data['auf'] ?? self::gegenflaeche($davor),
+            'anschliessend' => $davor,
+            default => $art,
+        };
+    }
+
+    /** Ob der Baustein die Fläche von der Seite entgegennimmt (Prop `auf`). */
+    public function nimmtFlaeche(): bool
+    {
+        return in_array(self::FLAECHEN[$this->typ] ?? null, ['wechselnd', 'anschliessend'], true);
+    }
+
+    public static function gegenflaeche(string $flaeche): string
+    {
+        return $flaeche === 'card' ? 'cream' : 'card';
+    }
+
     public function page(): BelongsTo
     {
         return $this->belongsTo(Page::class);

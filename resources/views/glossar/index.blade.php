@@ -31,8 +31,12 @@
         lead="Abkürzungen und Fachbegriffe, wie sie in Bescheiden und Formularen vorkommen — kurz erklärt." />
 
     @if ($einleitung)
+        {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber
+             ist eine Karte. --}}
+        @php $flaechen = \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card'); @endphp
+
         @foreach ($einleitung->blocks as $block)
-            <x-block :block="$block" :flaeche="$loop->index % 2 === 1 ? 'card' : 'cream'" />
+            <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
         @endforeach
     @endif
 

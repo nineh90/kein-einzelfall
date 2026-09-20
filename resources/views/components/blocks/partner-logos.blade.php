@@ -2,7 +2,14 @@
     'titel' => null,
     'einleitung' => null,
     'partner' => [],   // [['name' =>, 'rolle' =>, 'url' =>, 'logo' =>, 'logo_alt' =>], ...]
+    'auf' => 'cream',  // cream | card
 ])
+
+@php
+    // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
+    // auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 @php
     /*
@@ -33,7 +40,10 @@
       können, bevor er eine Bilddatei hat.
     - Verweise nach draußen sind als solche gekennzeichnet.
 --}}
-<section class="px-4 py-8 lg:px-10 lg:py-12"
+<section @class([
+    'px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+])
          @if ($titel) aria-labelledby="partner-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.partner.bereich') }}" @endif>
     <div class="mx-auto max-w-6xl">
 
@@ -71,7 +81,7 @@
                             @if ($extern) rel="noreferrer noopener" @endif
                         @endif
                         class="flex h-full flex-col items-center justify-center gap-3 rounded-card
-                               border border-line bg-card px-4 py-6 text-center no-underline
+                               border border-line {{ $innen }} px-4 py-6 text-center no-underline
                                @if ($hatZiel) hover:border-green-brand hover:bg-green-mist @endif">
 
                         @if (! empty($p['logo']))

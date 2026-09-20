@@ -42,21 +42,84 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('href="/"', $krumen);
     }
 
+    /**
+     * Die Flächen der Abschnitte einer Seite in Dokumentreihenfolge — vom
+     * Seitenkopf bis zum Kontakt-Abschluss, so wie sie untereinander stehen.
+     *
+     * @return list<string>
+     */
+    private function flaechen(string $pfad): array
+    {
+        $html = $this->get($pfad)->getContent();
+        $inhalt = preg_match('/<main[^>]*>(.*?)<\/main>/s', $html, $m) ? $m[1] : '';
+
+        // Nur die obersten Kinder von <main>: Kästen innerhalb eines
+        // Abschnitts tragen selbst bg-card und zählen nicht als Abschnitt.
+        $dom = new \DOMDocument;
+        @$dom->loadHTML('<?xml encoding="utf-8"?><main>'.$inhalt.'</main>');
+        $main = $dom->getElementsByTagName('main')->item(0);
+
+        $flaechen = [];
+        foreach ($main->childNodes as $kind) {
+            if (! $kind instanceof \DOMElement || ! in_array($kind->tagName, ['header', 'section', 'aside', 'div'], true)) {
+                continue;
+            }
+
+            // Ein Abschnitt hat oben und unten Luft (py-…). Was nur oben Luft
+            // hat — die Sprungmarken-Leiste — gehört zum Abschnitt darunter.
+            $klassen = $kind->getAttribute('class');
+            if ($kind->tagName === 'div' && ! preg_match('/\bpy-/', $klassen)) {
+                continue;
+            }
+
+            $flaechen[] = str_contains($klassen, 'bg-card') ? 'card' : 'cream';
+        }
+
+        return $flaechen;
+    }
+
     public function test_aufeinanderfolgende_textbausteine_wechseln_die_flaeche(): void
     {
         // Ohne Wechsel laufen zehn Abschnitte optisch ununterscheidbar ineinander.
-        $html = $this->get('/datenschutz')->getContent();
-        $inhalt = preg_match('/<main[^>]*>(.*?)<\/main>/s', $html, $m) ? $m[1] : '';
-
-        preg_match_all('/<section[^>]*class="([^"]*)"/', $inhalt, $treffer);
-        $flaechen = array_map(
-            fn ($k) => str_contains($k, 'bg-card') ? 'card' : 'cream',
-            $treffer[1]
-        );
+        $flaechen = $this->flaechen('/datenschutz');
 
         $this->assertGreaterThan(3, count($flaechen));
         $this->assertContains('card', $flaechen);
         $this->assertContains('cream', $flaechen);
+    }
+
+    /**
+     * Keine zwei benachbarten Abschnitte auf derselben Fläche — auf keiner Seite.
+     *
+     * Bis September 2026 wurde stur nach Position gewechselt, und nur der
+     * Textbaustein hat mitgemacht: Auf /selbsthilfegruppen standen drei helle
+     * Abschnitte hintereinander, auf /verein eine Karte direkt über der Karte
+     * „Weiterlesen". Bausteine, die nichts miteinander zu tun haben, sahen
+     * aus, als gehörten sie zusammen.
+     */
+    public function test_benachbarte_abschnitte_stehen_nie_auf_derselben_flaeche(): void
+    {
+        $pfade = Page::veroeffentlicht()
+            ->where('locale', 'de')
+            ->pluck('slug')
+            ->map(fn ($slug) => $slug === 'startseite' ? '/' : '/'.$slug)
+            ->push('/veranstaltungen')
+            ->unique();
+
+        foreach ($pfade as $pfad) {
+            $flaechen = $this->flaechen($pfad);
+
+            foreach ($flaechen as $i => $flaeche) {
+                if ($i === 0) {
+                    continue;
+                }
+
+                $this->assertNotSame(
+                    $flaechen[$i - 1], $flaeche,
+                    "{$pfad}: Abschnitt {$i} steht auf derselben Fläche wie sein Vorgänger (".implode(' > ', $flaechen).')'
+                );
+            }
+        }
     }
 
     public function test_seiten_fuehren_zu_verwandten_seiten_statt_in_eine_sackgasse(): void

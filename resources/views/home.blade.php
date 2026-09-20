@@ -45,8 +45,12 @@
          bevor er anfängt zu lesen. --}}
     <x-layout.fassungswechsel :page="$page" />
 
+    {{-- Flächenwechsel von Abschnitt zu Abschnitt, siehe PageBlock::FLAECHEN.
+         Über dem ersten Baustein steht nur die helle Kopfzeile. --}}
+    @php $flaechen = \App\Models\PageBlock::flaechenFuer($page->blocks, davor: 'cream'); @endphp
+
     @foreach ($page->blocks as $block)
-        <x-block :block="$block" :flaeche="$loop->index % 2 === 1 ? 'card' : 'cream'" />
+        <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
     @endforeach
 
 @endsection

@@ -3,12 +3,16 @@
     'text' => null,
     'hinweis' => null,   // Bedienhinweis, klar abgesetzt vom Inhaltstext
     'ctas' => [],
+    'auf' => 'cream',    // cream | card
 ])
 
 {{-- Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php --}}
 @php $knoepfe = knoepfe($ctas); @endphp
 
-<section class="px-4 py-10 text-center lg:px-10 lg:py-14" aria-labelledby="kontakt-titel">
+<section @class([
+    'px-4 py-10 text-center lg:px-10 lg:py-14',
+    'bg-card border-y border-line' => $auf === 'card',
+]) aria-labelledby="kontakt-titel">
     <div class="mx-auto max-w-2xl">
         <span class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full
                      bg-green-mist text-green-deep">

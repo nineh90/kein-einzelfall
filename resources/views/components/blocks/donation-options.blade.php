@@ -14,7 +14,14 @@
      * Textspalte — die Fassung für die Spendenseite selbst.
      */
     'kompakt' => false,
+    'auf' => 'cream',      // cream | card
 ])
+
+@php
+    // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
+    // auf der Karte mit dem Hintergrund.
+    $innen = $auf === 'card' ? 'bg-cream' : 'bg-card';
+@endphp
 
 @php
     // Ein Verweis ohne Beschriftung oder Ziel — siehe knoepfe() in helpers.php.
@@ -22,7 +29,10 @@
 @endphp
 
 {{-- id="spenden": Sprungziel für Kopf, Band oder geteilte Links („…/#spenden“). --}}
-<section id="spenden" class="scroll-mt-24 px-4 py-8 lg:px-10 lg:py-12" aria-labelledby="spenden-titel">
+<section id="spenden" @class([
+    'scroll-mt-24 px-4 py-8 lg:px-10 lg:py-12',
+    'bg-card border-y border-line' => $auf === 'card',
+]) aria-labelledby="spenden-titel">
     <div @class(['mx-auto', 'max-w-6xl' => $kompakt, 'max-w-3xl' => ! $kompakt])>
 
         <div @class(['grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12' => $kompakt])>
@@ -79,7 +89,7 @@
                     );
                 @endphp
 
-                <div class="rounded-card border border-line bg-card px-5 py-5">
+                <div class="rounded-card border border-line {{ $innen }} px-5 py-5">
                     <h3 class="mb-3 font-display text-lg text-ink">
                         {{ __('rahmen.spenden.ueberweisung') }}
                         @if (!empty($bank['institut']))
@@ -140,7 +150,7 @@
             @endif
 
             @if ($paypal)
-                <div class="rounded-card border border-line bg-card px-5 py-5">
+                <div class="rounded-card border border-line {{ $innen }} px-5 py-5">
                     <h3 class="mb-2 font-display text-lg text-ink">PayPal</h3>
                     @if (!empty($paypal['empfaenger']))
                         <p class="mb-4 text-sm text-ink-soft">
@@ -162,7 +172,7 @@
             @endif
 
             @if ($projekte)
-                <div class="rounded-card border border-line bg-card px-5 py-5">
+                <div class="rounded-card border border-line {{ $innen }} px-5 py-5">
                     <h3 class="mb-1 font-display text-lg text-ink">{{ __('rahmen.spenden.projekte') }}</h3>
                     <p class="mb-4 text-sm text-ink-soft">
                         {{ __('rahmen.spenden.projekte_hinweis') }}
@@ -182,7 +192,7 @@
             @endif
 
             @if ($bescheinigung)
-                <div class="rounded-card border border-line bg-card px-5 py-5">
+                <div class="rounded-card border border-line {{ $innen }} px-5 py-5">
                     <h3 class="mb-2 font-display text-lg text-ink">{{ __('rahmen.spenden.bescheinigung') }}</h3>
                     {{-- ?? '', falls im Panel nur die E-Mail gepflegt wurde:
                          der leere Text wird beim Speichern entfernt. --}}
