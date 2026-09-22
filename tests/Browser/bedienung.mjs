@@ -410,6 +410,49 @@ console.log('\nSpendenhinweis wartet auf die Trigger-Warnung')
     await kontext.close()
 }
 
+// --- Vereinsname im Hinweisband ---------------------------------------------
+//
+// Der handschriftliche Schriftzug muss auf jeder Breite vollstaendig in den
+// Kasten passen. Abgeschnitten waere er wieder nur „angedeutet" — und genau
+// das war der Anlass fuer KEV-15.
+//
+// Warum als Browser-Test und nicht in PHP: Es ist eine reine Layout-Frage, die
+// erst beim Rendern entsteht. Der Kasten hat `overflow-hidden`, ein Ueberlauf
+// erzeugt also weder horizontalen Scroll noch einen axe-Verstoss — er faellt
+// stillschweigend nur optisch auf. Beim ersten Entwurf lief der Name auf 320px
+// um 68px heraus, ohne dass ein einziger Test rot wurde.
+//
+// Der Text ist im Panel pflegbar. Wer ihn verlaengert, soll es hier merken.
+
+console.log('\nVereinsname im Hinweisband')
+{
+    for (const breite of [320, 390, 768, 1400]) {
+        const seite = await oeffnen({ breite })
+
+        const mass = await seite.evaluate(() => {
+            const schrift = document.querySelector('[data-wasserzeichen]')
+            if (! schrift) return null
+            if (getComputedStyle(schrift).display === 'none') return 'ausgeblendet'
+
+            const a = schrift.getBoundingClientRect()
+            const kasten = schrift.parentElement.getBoundingClientRect()
+
+            return { links: Math.round(a.left - kasten.left), rechts: Math.round(kasten.right - a.right) }
+        })
+
+        if (mass === null || mass === 'ausgeblendet') {
+            pruefe(`${breite}px: Schriftzug vorhanden`, false, 'nicht gefunden')
+            await seite.context().close()
+            continue
+        }
+
+        pruefe(`${breite}px: bleibt im Kasten`, mass.rechts >= 4 && mass.links >= 0,
+            `Luft links ${mass.links}px, rechts ${mass.rechts}px`)
+
+        await seite.context().close()
+    }
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

@@ -3,7 +3,7 @@
     'zitat',
     'notiz' => null,
     'ctas' => [],
-    'wasserzeichen' => 'KE!N EINZELFALL',
+    'wasserzeichen' => 'KE!N EINZELFALL e.V.',
     'auf' => 'cream',    // cream | card
 ])
 
@@ -37,7 +37,11 @@
 
              Auch auf dem Handy sichtbar, nur kleiner — „komplett lesbar" gilt
              dort genauso. Die Schriftgrösse skaliert mit der Breite, damit der
-             Name nie umbricht und nie über den Rand läuft.
+             Name nie umbricht und nie über den Rand läuft: Abgeschnitten wäre
+             er wieder nur angedeutet, und genau das war der Anlass für KEV-15.
+             Die 9,5vw sind an der schmalsten Breite gemessen, die wir stützen
+             (320px, die Vorgabe aus WCAG 1.4.10) — dort bleibt neben dem
+             längsten Namen, den das Panel vorgibt, noch etwas Luft.
 
              Als CSS-Dekoration und nicht als Textknoten: Als <span> mit Inhalt
              war es echter Text mit zu geringem Kontrast und damit ein
@@ -50,7 +54,7 @@
         <span aria-hidden="true" data-wasserzeichen
               style="--wasserzeichen: '{{ $wasserzeichen }}'"
               class="pointer-events-none absolute bottom-3 left-6 select-none whitespace-nowrap
-                     font-hand text-[clamp(2.5rem,8.5vw,5.25rem)] leading-none
+                     font-hand text-[clamp(1.75rem,9.5vw,5.25rem)] leading-none
                      text-on-green-hand opacity-25 lg:left-10 lg:bottom-4"></span>
 
         <div class="relative grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">

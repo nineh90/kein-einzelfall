@@ -722,7 +722,7 @@ class PageForm
                              */
                             TextInput::make('data.wasserzeichen')
                                 ->label('Schriftzug im Hintergrund')
-                                ->placeholder('KE!N EINZELFALL')
+                                ->placeholder('KE!N EINZELFALL e.V.')
                                 ->visible(fn ($get) => $get('typ') === 'cta_band')
                                 ->helperText('Handschriftlich und bewusst zurückhaltend. Leer '
                                     .'lassen nimmt den Vereinsnamen. Lange Zeilen werden '

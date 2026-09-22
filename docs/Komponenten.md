@@ -1683,8 +1683,18 @@ Vorrang.
 
 **Auch auf dem Handy.** Vorher war der Schriftzug unter `lg` ausgeblendet;
 „komplett lesbar" gilt dort genauso. Die Grösse skaliert mit
-`clamp(2.5rem, 8.5vw, 5.25rem)`, damit der Name nie umbricht und nie über den
-Rand läuft.
+`clamp(1.75rem, 9.5vw, 5.25rem)`, damit der Name nie umbricht und nie über den
+Rand läuft — abgeschnitten wäre er wieder nur angedeutet, und genau das war der
+Anlass für KEV-15.
+
+Der vw-Wert ist an der schmalsten gestützten Breite gemessen (320px, Vorgabe
+aus WCAG 1.4.10) und nicht geschätzt: Mit dem ersten Entwurf (`8.5vw` bei einer
+Untergrenze von `2.5rem`) lief „KE!N EINZELFALL e.V." dort 68px über den Rand,
+weil unterhalb von ~470px die Untergrenze griff und die Schrift gar nicht mehr
+mitskalierte. Auffällig war das nicht: Der Kasten hat `overflow-hidden`, es gab
+also keinen horizontalen Scroll und keinen Testfehler — nur einen abgeschnitten
+Vereinsnamen. Gemessen wird deshalb die tatsächliche Breite des Schriftzugs
+gegen die des Kastens.
 
 **Bei hohem Kontrast blendet `a11y.css` ihn aus.** Dort wird das Band gelb, und
 der gedämpfte Schriftzug läge als trübe Fläche darin. Dieser Modus ist für
