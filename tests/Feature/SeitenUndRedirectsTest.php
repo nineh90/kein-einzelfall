@@ -8,6 +8,7 @@ use App\Models\Redirect;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 /**
@@ -250,5 +251,112 @@ class SeitenUndRedirectsTest extends TestCase
         $this->get('/impressum-2');
 
         $this->assertSame(1, Redirect::where('von', 'impressum-2')->first()->treffer);
+    }
+
+    public function test_seiten_ohne_ueberschrift_bekommen_den_ausgeschriebenen_titel(): void
+    {
+        /*
+         * Neun Seiten der Altseite weisen keine Überschrift aus — der Importer
+         * findet dort kein <h1>. Für sie hat der Seeder eine Liste
+         * ausgeschriebener Titel; fehlt dort ein Eintrag, greift der Notbehelf
+         * aus dem Slug, und der kennt keine Umlaute: „Ueber Uns Vorstand Und
+         * Team". Vom ersten Import bis zum 22.09.2026 stand genau das auf acht
+         * Seiten — als Überschrift, im Brotkrumenpfad und im Reiter des
+         * Browsers.
+         *
+         * Geprüft wird gegen die Liste und nicht gegen Str::headline(): Bei
+         * „das-hilfesystem" ist der richtige Titel zufällig wortgleich mit dem
+         * Notbehelf, ein Vergleich mit ihm schlüge dort grundlos an.
+         */
+        $titel = (new \ReflectionClass(AltseiteSeeder::class))->getConstant('TITEL');
+
+        foreach ($titel as $slug => $ausgeschrieben) {
+            $seite = Page::where('slug', $slug)->where('locale', 'de')->first();
+
+            if (! $seite) {
+                continue;   // Slug der Altseite, den es nicht mehr gibt
+            }
+
+            $this->assertSame(
+                $ausgeschrieben,
+                $seite->titel,
+                "Die Seite /{$slug} traegt nicht ihren ausgeschriebenen Titel."
+            );
+        }
+    }
+
+    public function test_der_notbehelf_aus_dem_slug_erreicht_keine_seite_mehr(): void
+    {
+        // Die Gegenprobe zum Test darüber: Kein Titel im Bestand sieht aus wie
+        // aus dem Slug gebaut — also keiner ohne Umlaute, wo welche hingehören.
+        foreach (Page::where('locale', 'de')->get() as $seite) {
+            if ($seite->titel === Str::headline($seite->slug)) {
+                // Zulässig, wenn der Slug den Titel wirklich hergibt
+                // („spenden" → „Spenden"). Verdächtig wird es erst, wenn im
+                // Slug ein umschriebener Umlaut steckt.
+                $this->assertDoesNotMatchRegularExpression(
+                    '/(ae|oe|ue)/i',
+                    $seite->slug,
+                    "Der Titel von /{$seite->slug} ist aus dem Slug gebaut und hat deshalb keine Umlaute."
+                );
+            }
+        }
+    }
+
+    public function test_titel_aus_dem_panel_werden_nicht_ueberschrieben(): void
+    {
+        /*
+         * Die Nachzieh-Methode läuft aus einer Migration, also auch auf einer
+         * Datenbank, in der der Verein längst redigiert hat. Sie darf nur den
+         * Notbehelf ersetzen — ein Titel aus dem Panel ist eine redaktionelle
+         * Entscheidung und schlägt jede Liste im Code.
+         */
+        $seite = Page::where('slug', 'das-hilfesystem')->where('locale', 'de')->firstOrFail();
+        $seite->update(['titel' => 'Wegweiser durchs Hilfesystem']);
+
+        AltseiteSeeder::titelNachziehen();
+
+        $this->assertSame('Wegweiser durchs Hilfesystem', $seite->fresh()->titel);
+    }
+
+    public function test_seitentitel_und_menuepunkt_sind_wortgleich(): void
+    {
+        /*
+         * Wer im Menü „Über uns – Vorstand und Team" anklickt und dann unter
+         * einer anders lautenden Überschrift landet, zweifelt, ob er richtig
+         * ist. Für Menschen, die sich ohnehin schwer orientieren, ist das
+         * keine Kleinigkeit — deshalb geprüft und nicht bloss angenommen.
+         */
+        $menue = [];
+        $sammeln = function (array $eintraege) use (&$sammeln, &$menue): void {
+            foreach ($eintraege as $eintrag) {
+                if (! empty($eintrag['url'])) {
+                    $menue[trim($eintrag['url'], '/')] = $eintrag['label'] ?? null;
+                }
+
+                $sammeln($eintrag['children'] ?? []);
+            }
+        };
+
+        // exit_url ist ein einzelner Wert, kein Menuebereich.
+        foreach (config('navigation') as $bereich) {
+            if (is_array($bereich)) {
+                $sammeln($bereich);
+            }
+        }
+
+        $titel = (new \ReflectionClass(AltseiteSeeder::class))->getConstant('TITEL');
+
+        foreach ($titel as $slug => $ausgeschrieben) {
+            if (! isset($menue[$slug])) {
+                continue;   // nicht jede Seite hängt im Hauptmenü
+            }
+
+            $this->assertSame(
+                $menue[$slug],
+                $ausgeschrieben,
+                "Menuepunkt und Seitentitel von /{$slug} lauten unterschiedlich."
+            );
+        }
     }
 }

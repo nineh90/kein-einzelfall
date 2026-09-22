@@ -293,6 +293,31 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   einem Upload-Angriff. Bitte im WordPress-Admin ansehen und löschen; falls
   sie niemand aus dem Verein hochgeladen hat, Passwörter der Altseite wechseln.
 
+### A11 · Neun Seitentitel stammen von uns
+
+Neun Seiten der Altseite haben gar keine Überschrift — WordPress gibt dort kein
+`<h1>` aus. Weil ein Titel ohne Alternative aus dem Slug gebaut wird und Slugs
+keine Umlaute kennen, stand über der Teamseite bis zum 22.09.2026 wörtlich
+„Ueber Uns Vorstand Und Team". Seither tragen sie ausgeschriebene Titel,
+wortgleich mit dem jeweiligen Menüpunkt:
+
+| Seite | Titel |
+|---|---|
+| `/ueber-uns-vorstand-und-team` | Über uns – Vorstand und Team |
+| `/das-hilfesystem` | Das Hilfesystem |
+| `/fsm-erweitertes-hilfesystem` | FSM – Erweitertes Hilfesystem |
+| `/buerokratie-labyrinth` | Das Bürokratie-Labyrinth |
+| `/kein-einzelfall-im-dialog` | KE!N EINZELFALL im Dialog |
+| `/trauma-bindung-und-beziehung` | Trauma, Bindung und Beziehung |
+| `/traumafolgestoerungen-verstehen` | Traumafolgestörungen verstehen |
+| `/istanbul-konvention` | Istanbul-Konvention |
+| `/unterstuetzung` | Unterstützung |
+
+**Frage an den Verein:** Vertraglich stellt der Verein die Inhalte — diese neun
+Titel sind die einzige Ausnahme, weil die Altseite schlicht keine hergibt. Bitte
+einmal durchsehen. Ändern lässt sich jeder im Panel im Feld „Titel"; was dort
+steht, wird von keinem Update überschrieben.
+
 ---
 
 ## B. Technisch vor dem Go-Live (Kevin)

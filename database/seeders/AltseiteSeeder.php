@@ -61,6 +61,44 @@ class AltseiteSeeder extends Seeder
         'istanbul-konvention' => 'Istanbul-Konvention',
     ];
 
+    /**
+     * Zieht die ausgeschriebenen Titel in einer bestehenden Datenbank nach.
+     *
+     * Die Liste oben kam erst nach dem ersten Import dazu. Der Seeder läuft
+     * bei uns nur bei leerer Datenbank und auf dem Server gar nicht — die
+     * Seiten trugen deshalb weiter den Notbehelf aus dem Slug, sichtbar als
+     * Überschrift („Ueber Uns Vorstand Und Team"), im Brotkrumenpfad und im
+     * Reitertitel des Browsers.
+     *
+     * Angefasst wird nur, was noch exakt der Notbehelf ist. Hat der Verein
+     * einen Titel im Panel gepflegt, bleibt er stehen — ein „besser gemeinter"
+     * Titel aus dem Code darf keine redaktionelle Entscheidung überschreiben.
+     *
+     * Nur die Standardsprache: Übersetzungen haben eigene Titel, und ein
+     * deutscher Titel auf einer englischen Seite wäre schlimmer als ein
+     * holpriger.
+     *
+     * @return list<string> die Slugs, die geändert wurden
+     */
+    public static function titelNachziehen(): array
+    {
+        $standard = Language::standardCode();
+        $geaendert = [];
+
+        foreach (self::TITEL as $slug => $titel) {
+            $seite = Page::where('slug', $slug)->where('locale', $standard)->first();
+
+            if (! $seite || $seite->titel !== Str::headline($slug)) {
+                continue;
+            }
+
+            $seite->update(['titel' => $titel]);
+            $geaendert[] = $slug;
+        }
+
+        return $geaendert;
+    }
+
     public function run(): void
     {
         // Muss vor den Seiten laufen: jede Seite braucht eine Sprache, und
