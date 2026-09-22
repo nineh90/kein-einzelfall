@@ -153,8 +153,26 @@ weil die Betroffenen und ihre Verfahren ohnehin bei ihm zusammenlaufen.
 ein solcher Verweis inhaltlich ebenfalls hingehörte — Schwerbehindertenausweis,
 GdB, Merkzeichen — gibt es noch nicht. `/das-hilfesystem` und
 `/buerokratie-labyrinth` klingen danach, sind aber Ankündigungen der Reihe
-„KE!N EINZELFALL im Dialog". Kommen die Themenseiten, gehört je ein Verweis
-dazu.
+„KE!N EINZELFALL im Dialog".
+
+**Gegengeprüft an der Altseite** (`page-sitemap.xml` von kein-einzelfall.de,
+Stand 22.09.2026): Sie führt exakt dieselben 24 Seiten wie unser Import — kein
+Importverlust, die Themenseiten fehlen dort genauso.
+
+**Geplant sind sie aber.** Das Strukturpapier listet unter *6. Unterstützung →
+6.2. Anträge und Formulare*:
+
+| | Bereich |
+|---|---|
+| 6.2.1 | OEG |
+| 6.2.2 | SER |
+| **6.2.3** | **GdB** ← hierhin gehört der REHADAT-Verweis |
+| 6.2.4 | Pflegegrad |
+| 6.2.5 | Persönliches Budget |
+
+Sobald 6.2.3 existiert, gehört der Verweis dorthin — dort sucht jemand, der
+gerade einen GdB-Bescheid in der Hand hält. Auf `/wissen` findet ihn nur, wer
+ohnehin stöbert.
 
 ## Offen, bevor gebaut wird
 

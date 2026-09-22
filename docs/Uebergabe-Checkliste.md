@@ -471,3 +471,11 @@ sauberer Technik, keine Nachlässigkeit.
   Word-Dateien gehören nicht ins Web — sie transportieren Metadaten und oft
   Änderungsverfolgung. Als PDF exportieren oder entfernen.
 - 10 Dubletten im Medienbestand (WordPress-`-1`-Varianten derselben Datei)
+- **Drei tote Adressen in der Sitemap der Altseite** (geprüft 22.09.2026):
+  `/vereins-news/`, `/hello-world-6/` und der Termin
+  `/event/selbsthilfegruppe-retraumatisierung-durch-antragsstellung/` stehen in
+  `post-sitemap.xml` bzw. `tribe_events-sitemap.xml`, liefern aber alle 404.
+  Google bekommt diese Sitemap — tote Adressen darin kosten Vertrauen. Aus
+  unserer Sicht heisst das zugleich: Es gibt auf der Altseite **keinen**
+  Blogbeitrag und **keinen** Termin zu übernehmen; unser Bestand ist nicht
+  unvollständig, sondern korrekt leer.
