@@ -390,7 +390,9 @@ Position von AN-268 stehen. Die vollständige Einordnung steht in
 - **Eigenes Projekt:** Mitgliederbereich mit Login, KI-Suche, Video-Archiv,
   Merchandise/Shop.
 - **Vor der Schätzung der Bibliothek**: Franziskas Excel-Tabellen einsehen. Ohne
-  sie ist jede Zahl geraten.
+  sie ist jede Zahl geraten. Das Datenmodell ist in `docs/KEV-4-REHADAT.md`
+  vorbereitet — dort steht auch, warum der Schwerpunkt auf dem Sozialen
+  Entschädigungsrecht liegen sollte und nicht auf dem Schwerbehindertenrecht.
 
 ### C1 · Drei Positionen fehlen im Angebot
 - **Content-Migration.** „Keine Content-Erstellung" heißt nicht „kein Aufwand".
