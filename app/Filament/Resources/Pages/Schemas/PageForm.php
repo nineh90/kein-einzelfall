@@ -682,6 +682,27 @@ class PageForm
                                         ->helperText('Zum Beispiel /spenden'),
                                 ]),
 
+                            /*
+                             * Ein Hinweis darf weiterführen — auf eine eigene
+                             * Seite oder nach draussen, etwa zu einer
+                             * Fachdatenbank. Bewusst ein Verweis und kein
+                             * Knopf: Der Kasten steht am Rand des Textes, die
+                             * Handlung der Seite ist eine andere.
+                             */
+                            Fieldset::make('Weiterführender Verweis')
+                                ->columns(2)
+                                ->visible(fn ($get) => $get('typ') === 'hinweis')
+                                ->schema([
+                                    TextInput::make('data.link.label')
+                                        ->label('Beschriftung')
+                                        ->helperText('Leer lassen heisst: kein Verweis.'),
+                                    TextInput::make('data.link.url')
+                                        ->label('Ziel')
+                                        ->helperText('Eigene Seite als Pfad (/wissen) oder volle '
+                                            .'Adresse (https://…). Eine fremde Adresse öffnet in '
+                                            .'einem neuen Tab und wird angesagt.'),
+                                ]),
+
                             // --- Knöpfe ---
                             self::knopf('data.cta')
                                 ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true)),

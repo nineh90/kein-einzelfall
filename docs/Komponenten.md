@@ -361,7 +361,7 @@ zusammenstellen lassen statt nur aus Textblöcken zu bestehen.
 |---|---|---|
 | `schritte` | Antragswege, Widerspruchsverfahren, „was passiert wann" | Als `<ol>` ausgezeichnet — Screenreader sagen „1 von 5" an. Sichtbare Ziffern sind `aria-hidden`, sonst käme die Nummer doppelt |
 | `accordion` | Häufige Fragen | Natives `<details>`: ohne JavaScript bedienbar, Inhalt bleibt für Suchmaschinen sichtbar. Bringt **FAQ-Auszeichnung** mit — Fragen können direkt im Suchergebnis erscheinen |
-| `hinweis` | Fristen, wichtige Ausnahmen | Drei Stufen (neutral / wichtig / Frist). Bewusst **zurückhaltend eingefärbt**: grelle Warnflächen erzeugen bei belasteten Menschen Druck |
+| `hinweis` | Fristen, wichtige Ausnahmen | Drei Stufen (neutral / wichtig / Frist). Bewusst **zurückhaltend eingefärbt**: grelle Warnflächen erzeugen bei belasteten Menschen Druck. Optional ein weiterführender Verweis (siehe 21.) |
 | `text_media` | Text mit Bild | Zeigt eine Platzhalterfläche in der Farbwelt der Seite, solange kein Foto hinterlegt ist — die Seite sieht auch ohne Bildmaterial fertig aus |
 
 Alle vier sind im Filament-Panel pflegbar; die Felder erscheinen je nach
@@ -1633,3 +1633,25 @@ Checklistenpunkt oben.
 `TeamUndGruppenTest`: sieben Personen, Biografien nicht vermischt,
 Kurzprofil beginnt mit ganzem Satz, Gliederung der Seite, Porträts vorhanden
 und eingebunden, Initialen ohne Foto. `ModuleTest` kennt das 122. Dokument.
+
+## 21. Weiterführender Verweis im Hinweis-Baustein (22.09.2026, KEV-4)
+
+Der `hinweis`-Baustein kann seit KEV-4 einen Verweis tragen: `data.link` mit
+`label` und `url`, im Panel als Feldgruppe „Weiterführender Verweis".
+
+**Link statt Knopf.** Der Kasten steht am Rand des Textes; die Handlung, um die
+es auf der Seite geht, ist eine andere. Ein Knopf zöge mehr Aufmerksamkeit auf
+sich als der Text, zu dem er gehört.
+
+**Fremde Ziele werden angesagt.** Beginnt die Adresse mit `http`, bekommt der
+Link `target="_blank"`, `rel="noopener noreferrer"` und einen `sr-only`-Zusatz
+„(öffnet in neuem Tab)". Ein Sprung in einen neuen Tab ohne Vorwarnung kostet
+mit Screenreader oder Tastatur spürbar Orientierung. Geprüft wird auf `http`
+und nicht auf den eigenen Hostnamen — im Panel steht entweder ein Pfad oder
+eine volle Adresse.
+
+Erster Einsatz: der Verweis von `/wissen` auf REHADAT-Recht. Die Begründung
+steht in `docs/KEV-4-REHADAT.md` — kurz: Beim Schwerbehindertenrecht ist
+REHADAT erschöpfend, eine eigene Sammlung daneben wäre Doppelarbeit. Beim
+Sozialen Entschädigungsrecht ist REHADAT dünn, dort entsteht später die eigene
+Bibliothek.

@@ -3,6 +3,7 @@
     'text' => null,
     'art' => 'hinweis',   // hinweis | frist | wichtig
     'auf' => 'cream',     // cream | card — die Fläche des Abschnitts davor
+    'link' => null,       // ['label'=>, 'url'=>] — weiterführender Verweis
 ])
 
 @php
@@ -12,6 +13,15 @@
     // eine grosse rote Fläche.
     // Der Kasten steht auf der jeweils anderen Fläche als der Abschnitt.
     $kasten = $auf === 'card' ? 'bg-cream' : 'bg-card';
+
+    // Verweis ohne Beschriftung oder Ziel aussortieren, siehe helpers.php.
+    $verweis = knoepfe([$link])[0] ?? null;
+
+    // Ein Ziel ausserhalb der Seite kündigen wir an: Ein Sprung in einen neuen
+    // Tab ohne Vorwarnung kostet mit Screenreader oder Tastatur spürbar
+    // Orientierung. `str_starts_with` statt einer Prüfung auf den eigenen
+    // Hostnamen — im Panel steht entweder ein Pfad oder eine volle Adresse.
+    $nachDraussen = $verweis && str_starts_with($verweis['url'], 'http');
 
     $stil = match ($art) {
         'frist' => ['icon' => 'lock', 'rahmen' => 'border-alert', 'flaeche' => $kasten,
@@ -48,6 +58,23 @@
 
                     @if ($text)
                         <p class="mt-1.5 leading-relaxed text-ink">{{ $text }}</p>
+                    @endif
+
+                    @if ($verweis)
+                        {{-- Link und kein Knopf: Der Kasten ist ein Hinweis am
+                             Rand, nicht die Handlung, um die es auf der Seite
+                             geht. Ein Knopf zöge mehr Aufmerksamkeit auf sich
+                             als der Text, zu dem er gehört. --}}
+                        <p class="mt-3">
+                            <a href="{{ $verweis['url'] }}"
+                               class="text-green-deep underline"
+                               @if ($nachDraussen) target="_blank" rel="noopener noreferrer" @endif>
+                                {{ $verweis['label'] }}
+                                @if ($nachDraussen)
+                                    <span class="sr-only">{{ __('rahmen.neuer_tab') }}</span>
+                                @endif
+                            </a>
+                        </p>
                     @endif
 
                     {{ $slot }}

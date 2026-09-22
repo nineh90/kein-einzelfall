@@ -139,13 +139,30 @@ weil die Betroffenen und ihre Verfahren ohnehin bei ihm zusammenlaufen.
    ist, ist der Versuch wert — Kooperationen waren laut Protokoll ohnehin als
    Pfeiler der Außendarstellung definiert.
 
+## Entschieden am 22.09.2026 (Kevin)
+
+- **Der Protokollwortlaut gilt, nicht das Ticket.** Struktur ableiten, nicht
+  Inhalte übernehmen. Der Ticket-Text wird nicht weiter berücksichtigt.
+- **Struktur und Urteilstexte übernehmen wir** — die Texte aus den amtlichen
+  Quellen, nicht aus REHADAT.
+- **Verlinken statt nachbauen, erstmal.** Umgesetzt: `/wissen` trägt einen
+  Hinweis-Kasten mit Verweis auf REHADAT-Recht (Migration
+  `2026_09_22_140000_rehadat_verweis_auf_wissen`).
+
+`/wissen` ist derzeit die **einzige** passende Stelle. Die Seiten, auf denen
+ein solcher Verweis inhaltlich ebenfalls hingehörte — Schwerbehindertenausweis,
+GdB, Merkzeichen — gibt es noch nicht. `/das-hilfesystem` und
+`/buerokratie-labyrinth` klingen danach, sind aber Ankündigungen der Reihe
+„KE!N EINZELFALL im Dialog". Kommen die Themenseiten, gehört je ein Verweis
+dazu.
+
 ## Offen, bevor gebaut wird
 
 - [ ] **Franziskas Excel-Tabellen einsehen.** Steht schon als Punkt B in der
       Übergabe-Checkliste. Ohne die tatsächlichen Spalten ist jedes Schema
-      geraten — und ihre Struktur schlägt im Zweifel REHADATs.
-- [ ] **Bestätigen lassen, dass „Strukturen ableiten" gemeint war.** Das Ticket
-      sagt etwas anderes als das Protokoll; das gehört geklärt, bevor jemand
-      Aufwand schätzt.
+      geraten — und ihre Struktur schlägt im Zweifel REHADATs. **Der einzige
+      echte Blocker für die Bibliothek**; Kevin holt sie nach.
+- [x] ~~Bestätigen lassen, dass „Strukturen ableiten" gemeint war.~~ Am
+      22.09.2026 entschieden: Protokoll gilt.
 - [ ] **Rechtliche Einschätzung, falls doch Inhalte übernommen werden sollen.**
       Die Bewertung hier ist nach bestem Wissen, aber keine Rechtsberatung.

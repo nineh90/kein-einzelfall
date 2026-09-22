@@ -318,6 +318,18 @@ Titel sind die einzige Ausnahme, weil die Altseite schlicht keine hergibt. Bitte
 einmal durchsehen. Ändern lässt sich jeder im Panel im Feld „Titel"; was dort
 steht, wird von keinem Update überschrieben.
 
+### A12 · Verweis auf REHADAT (Text von uns)
+
+Auf `/wissen` steht seit dem 22.09.2026 ein Hinweis-Kasten „Urteile zum
+Schwerbehindertenrecht" mit Verweis auf REHADAT-Recht. Hintergrund in
+`docs/KEV-4-REHADAT.md`: REHADAT ist dort erschöpfend, eine eigene Sammlung
+daneben wäre Doppelarbeit — beim Sozialen Entschädigungsrecht dagegen ist
+REHADAT dünn, dort entsteht später die eigene Bibliothek.
+
+**Frage an den Verein:** Der Text stammt von uns. Bitte gegenlesen — und sagen,
+ob der Verweis so gewollt ist. Er ist im Panel unter `/wissen` im letzten
+Baustein änder- oder löschbar.
+
 ---
 
 ## B. Technisch vor dem Go-Live (Kevin)
