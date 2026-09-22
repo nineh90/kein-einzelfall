@@ -168,6 +168,17 @@ class PageForm
                     Toggle::make('noindex')
                         ->label('Von Suchmaschinen ausschließen')
                         ->helperText('Nur setzen, wenn die Seite bewusst nicht gefunden werden soll.'),
+
+                    /*
+                     * Für Seiten, deren Text von uns vorbereitet wurde. Sie
+                     * tragen dann ganz oben einen sichtbaren Vermerk. Nach dem
+                     * Gegenlesen hier das Häkchen entfernen — und gleich mit
+                     * „Von Suchmaschinen ausschließen" darüber.
+                     */
+                    Toggle::make('ungeprueft')
+                        ->label('Noch nicht vom Verein geprüft')
+                        ->helperText('Zeigt oben auf der Seite einen Vermerk, dass der Text '
+                            .'vorbereitet und noch nicht gegengelesen ist.'),
                 ]),
 
             Section::make('Suchmaschinen')

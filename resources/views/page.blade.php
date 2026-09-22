@@ -86,6 +86,11 @@
          bevor er anfaengt zu lesen. --}}
     <x-layout.fassungswechsel :page="$page" />
 
+    {{-- Und noch davor im Rang: Wenn der Text dieser Seite von uns stammt und
+         der Verein ihn noch nicht freigegeben hat, gehört das vor die erste
+         Zeile — nicht in eine Fussnote. --}}
+    <x-layout.entwurfsvermerk :page="$page" />
+
     <x-layout.seitenkopf
         :titel="$page->titel"
         :bereich="$kontext->bereichName()"

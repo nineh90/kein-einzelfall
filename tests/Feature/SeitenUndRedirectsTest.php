@@ -86,9 +86,24 @@ class SeitenUndRedirectsTest extends TestCase
          * stehen — und unveröffentlicht, damit auf der Website nichts Leeres
          * erscheint. Sie gehören deshalb in die Gesamtzahl, aber nicht in den
          * Durchlauf darunter.
+         *
+         * Und fünf aus Abschnitt 6.2 des Strukturpapiers (OEG, SER, GdB,
+         * Pflegegrad, Persönliches Budget). Anders als die vier oben haben sie
+         * Text — geltendes Recht aus amtlichen Quellen, nicht Aussagen des
+         * Vereins. Sie sind deshalb veröffentlicht und müssen erreichbar sein,
+         * tragen aber `ungeprueft` und `noindex`, bis der Verein sie freigibt.
          */
-        $this->assertSame(30, Page::count());
+        $this->assertSame(35, Page::count());
         $this->assertSame(4, Page::whereNull('published_at')->count());
+        $this->assertSame(5, Page::where('ungeprueft', true)->count());
+
+        // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
+        // Google fände, käme ohne den Vermerk an und läse ihn als verbindlich.
+        $this->assertSame(
+            0,
+            Page::where('ungeprueft', true)->where('noindex', false)->count(),
+            'Eine ungepruefte Seite ist fuer Suchmaschinen freigegeben.'
+        );
 
         // Über pfad() und nicht über den Slug: Die Startseite liegt unter „/“.
         foreach (Page::veroeffentlicht()->get() as $seite) {

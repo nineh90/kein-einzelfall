@@ -138,6 +138,11 @@ return [
      * Fristen und Notfallnummern; wer nicht merkt, dass er eine unübersetzte
      * Fassung liest, kann darauf falsche Schlüsse ziehen.
      */
+    'entwurf' => [
+        'titel' => 'Entwurf — noch nicht vom Verein geprüft.',
+        'text' => 'Diese Seite wurde vorbereitet und ist noch nicht gegengelesen. Die Angaben stammen aus amtlichen Quellen, ersetzen aber keine Beratung — verbindlich ist, was die zuständige Stelle in deinem Fall entscheidet.',
+    ],
+
     'rueckfall' => [
         'hinweis' => 'Diese Seite liegt noch nicht auf :ziel vor. '
             .'Sie wird auf :quelle angezeigt.',

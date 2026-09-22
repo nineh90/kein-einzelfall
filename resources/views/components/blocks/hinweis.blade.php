@@ -43,7 +43,11 @@
      einen neuen Abschnitt aufzumachen. Auf der Karte rückt er deshalb um
      einen Pixel nach oben und deckt die untere Linie des Abschnitts ab —
      die Karte läuft ohne Naht weiter und schließt erst unter dem Hinweis. --}}
-<section @class(['px-4 py-4 lg:px-10', 'relative -mt-px border-b border-line bg-card' => $auf === 'card'])>
+{{-- data-anschliessend: Dieser Abschnitt ist keiner. Er gehört zum Text
+     darüber und teilt bewusst dessen Fläche — der Flächenwechsel überspringt
+     ihn deshalb, und der Test, der ihn bewacht, ebenso. --}}
+<section data-anschliessend
+         @class(['px-4 py-4 lg:px-10', 'relative -mt-px border-b border-line bg-card' => $auf === 'card'])>
     <div class="mx-auto max-w-6xl">
         <aside class="max-w-prose rounded-card border-2 {{ $stil['rahmen'] }} {{ $stil['flaeche'] }} px-5 py-4">
             <div class="flex gap-3">

@@ -72,6 +72,22 @@ class SeitengestaltungTest extends TestCase
                 continue;
             }
 
+            /*
+             * Bausteine, die als `anschliessend` eingestuft sind, bleiben
+             * absichtlich auf der Fläche des Abschnitts davor, weil sie zu ihm
+             * gehören — der Hinweis-Kasten deckt auf der Karte sogar deren
+             * untere Linie ab, damit keine Naht entsteht. Sie sind kein
+             * eigener Abschnitt und dürfen hier nicht als einer zählen.
+             *
+             * Aufgefallen am 22.09.2026: Bis dahin gab es keinen einzigen
+             * Hinweis-Baustein im Bestand, der Fall kam also nie vor. Der
+             * erste — der REHADAT-Verweis auf /wissen — hätte den Test
+             * eigentlich sofort brechen müssen.
+             */
+            if ($kind->hasAttribute('data-anschliessend')) {
+                continue;
+            }
+
             $flaechen[] = str_contains($klassen, 'bg-card') ? 'card' : 'cream';
         }
 

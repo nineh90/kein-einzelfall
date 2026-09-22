@@ -330,6 +330,39 @@ REHADAT dünn, dort entsteht später die eigene Bibliothek.
 ob der Verweis so gewollt ist. Er ist im Panel unter `/wissen` im letzten
 Baustein änder- oder löschbar.
 
+### A13 · Fünf Seiten aus Abschnitt 6.2 — Text von uns, bitte gegenlesen
+
+Die Punkte 6.2.1 bis 6.2.5 des Strukturpapiers („Anträge und Formulare") gab es
+weder auf der Altseite noch bei uns. Sie sind jetzt angelegt und mit Text
+gefüllt — **das ist die Ausnahme von der Regel**, dass der Verein die Inhalte
+stellt. Möglich war es, weil diese Seiten geltendes Recht beschreiben und nicht
+den Verein; die Angaben stammen aus amtlichen Quellen, jede Seite nennt ihre.
+
+| Seite | Inhalt |
+|---|---|
+| `/opferentschaedigungsgesetz` | Wegweiser: Das OEG ist seit 01.01.2024 im SGB XIV aufgegangen |
+| `/soziales-entschaedigungsrecht` | SGB XIV, Traumaambulanz, Antrag |
+| `/grad-der-behinderung` | GdB, Schwerbehindertenausweis, Feststellungsverfahren |
+| `/pflegegrad` | Pflegegrade 1–5, Begutachtung, 25-Arbeitstage-Frist |
+| `/persoenliches-budget` | § 29 SGB IX, Zielvereinbarung |
+
+Solange sie ungeprüft sind, gilt dreifacher Schutz: ein **sichtbarer Vermerk**
+ganz oben auf jeder Seite, **`noindex`** (ungeprüfte Rechtsauskunft gehört
+nicht in eine Suchmaschine) und **kein Menüeintrag**. Erreichbar sind sie über
+die Adressen oben.
+
+**Frage an den Verein:** Bitte fachlich gegenlesen. Danach im Panel je Seite
+das Häkchen „Noch nicht vom Verein geprüft" entfernen, „Von Suchmaschinen
+ausschließen" abschalten und die Seiten in `config/navigation.php` ins Menü
+nehmen (macht Kevin).
+
+**Inhaltliche Rückfrage:** 6.2.1 (OEG) und 6.2.2 (SER) sind derselbe
+Rechtsbereich in zwei Zeitschichten — das OEG ist seit dem 1. Januar 2024 im
+SGB XIV aufgegangen. Deshalb ist die OEG-Seite bewusst kurz und führt auf die
+SER-Seite weiter, statt dasselbe zweimal zu erzählen. Der Begriff „OEG" ist
+aber so eingeführt, dass die Seite bleiben sollte: Danach wird gesucht. Ist das
+so recht, oder sollen die beiden zu einer Seite werden?
+
 ---
 
 ## B. Technisch vor dem Go-Live (Kevin)

@@ -59,7 +59,7 @@ class Page extends Model
 
     protected $fillable = [
         'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel',
-        'meta_title', 'meta_description', 'noindex', 'published_at',
+        'meta_title', 'meta_description', 'noindex', 'ungeprueft', 'published_at',
     ];
 
     protected function casts(): array
@@ -67,6 +67,7 @@ class Page extends Model
         return [
             'noindex' => 'boolean',
             'published_at' => 'datetime',
+            'ungeprueft' => 'boolean',
         ];
     }
 

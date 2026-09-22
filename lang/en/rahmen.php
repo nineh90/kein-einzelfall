@@ -99,6 +99,11 @@ return [
         'aktuell' => 'Current language: :sprache',
     ],
 
+    'entwurf' => [
+        'titel' => 'Draft — not yet reviewed by the association.',
+        'text' => 'This page has been prepared and has not been proofread yet. The information comes from official sources but does not replace advice — what the responsible authority decides in your case is what counts.',
+    ],
+
     'rueckfall' => [
         'hinweis' => 'This page is not available in :ziel yet. '
             .'It is shown in :quelle.',
