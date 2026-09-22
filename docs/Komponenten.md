@@ -817,14 +817,30 @@ Feldschlüssel muss exakt so heissen — Blade zieht die Prop zwar auch aus
 schreibt. Ein Rendering-Test hält fest, dass `alleUrl` bei der Komponente
 ankommt.
 
-### Die handgezeichnete Linie
+### Der handschriftliche Teil der Überschrift
 
-Das Erkennungszeichen aus dem Mockup: ein Schwung unter einem Teil der
-Überschrift. Der Verein markiert diesen Teil mit `*Sternchen*`, wie beim
-Fettschreiben in einer Nachricht. Ein zweites Titelfeld wäre die naheliegende
-Alternative gewesen; dann müsste die Redaktion aber im Kopf zusammensetzen,
-welches Feld vorne steht, und die Linie könnte nie in der Mitte eines Satzes
-sitzen.
+Das Erkennungszeichen aus dem Mockup: ein Teil der Überschrift in Handschrift,
+mit einem Schwung darunter. Der Verein markiert diesen Teil mit `*Sternchen*`,
+wie beim Fettschreiben in einer Nachricht. Ein zweites Titelfeld wäre die
+naheliegende Alternative gewesen; dann müsste die Redaktion aber im Kopf
+zusammensetzen, welches Feld vorne steht, und der Akzent könnte nie in der Mitte
+eines Satzes sitzen.
+
+Die Schrift ist `--font-hand` (Caveat) — dieselbe wie die handschriftlichen
+Leitsätze der Textbausteine („Opferhilfe für soziale Gerechtigkeit!" unter der
+Vereinsarbeit). Beauftragt in KEV-16: Das Zitat der Startseite und der Leitsatz
+sind dieselbe Stimme und sollen darum gleich aussehen. Caveat baut deutlich
+kleiner als Fraunces, deshalb `font-size: 1.2em` — sonst sähe der markierte Teil
+neben dem Rest der Zeile geschrumpft aus. Die Zeilenhöhe wächst mit: Die
+Überschrift gibt sie unbenannt weiter (`leading-[1.18]`), ein unbenannter Wert
+ist ein Faktor und wird auf die größere Schrift gerechnet — die Ober- und
+Unterlängen der Handschrift bekommen damit von selbst ihren Platz, auch beim
+Umbruch auf dem Handy.
+
+Im Modus „Gut lesbare Schrift" ersetzt `a11y.css` die Schrift per `!important`
+durch die System-Sans; die Regel greift auf `span` und damit automatisch hier.
+Das ist Absicht — wer die Serifen nicht lesen kann, kann eine Schreibschrift
+erst recht nicht. Die Linie bleibt, die Betonung geht also nicht verloren.
 
 Gezeichnet wird sie in der CSS (`.swash` in `app.css`), als Hintergrundbild mit
 `box-decoration-break: clone`. Der erste Versuch war ein absolut positioniertes

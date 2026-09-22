@@ -157,6 +157,15 @@ html[data-kontrast='hoch'] .swash {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%23FFFF00' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
+/* Der markierte Teil steht sonst in der Handschrift und dafuer 1,2x groesser
+   (Caveat baut kleiner als Fraunces). Ersetzt "Gut lesbare Schrift" die Schrift
+   oben durch die System-Sans, faellt der Grund fuer die Vergroesserung weg — die
+   Ueberschrift bekaeme sonst mitten im Satz einen Sprung. Die Linie bleibt, der
+   Teil ist also weiter als der betonte erkennbar. */
+html.a11y-lesbar .swash {
+  font-size: 1em;
+}
+
 /* Graustufen */
 html[data-kontrast='monochrom'] {
   filter: grayscale(1);

@@ -11,11 +11,12 @@
     $knoepfe = knoepfe($ctas);
 
     /*
-     * Die handgezeichnete Linie aus dem Mockup.
+     * Der handschriftliche Teil der Überschrift aus dem Mockup: Handschrift plus
+     * handgezeichnete Linie darunter.
      *
-     * Der Verein markiert im Panel den Teil der Überschrift, der sie bekommen
+     * Der Verein markiert im Panel den Teil der Überschrift, der ihn bekommen
      * soll — mit *Sternchen*, wie beim Fettschreiben in einer Nachricht. Das ist
-     * bewusst kein zweites Titelfeld: Die Linie kann so am Anfang, in der Mitte
+     * bewusst kein zweites Titelfeld: Der Akzent kann so am Anfang, in der Mitte
      * oder am Ende des Satzes sitzen, ohne dass jemand die Reihenfolge zweier
      * Felder im Kopf zusammensetzen muss.
      *
@@ -23,9 +24,9 @@
      * einzige rohe Ausgabe danach ist unser eigenes Markup — ein Titel mit
      * <script> darin bleibt damit harmlos.
      *
-     * Gezeichnet wird die Linie in der CSS (`.swash` in app.css). Dort ist sie
-     * ein Hintergrundbild und überlebt damit den Zeilenumbruch, den eine lange
-     * Überschrift auf dem Handy immer hat.
+     * Schrift und Linie stehen in der CSS (`.swash` in app.css). Die Linie ist
+     * dort ein Hintergrundbild und überlebt damit den Zeilenumbruch, den eine
+     * lange Überschrift auf dem Handy immer hat.
      */
     $ueberschrift = preg_replace_callback(
         '/\*([^*]+)\*/u',
@@ -45,7 +46,8 @@
                 <x-ui.eyebrow class="mb-4">{{ $eyebrow }}</x-ui.eyebrow>
             @endif
 
-            {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. --}}
+            {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. Die
+                 Unterlängen der Handschrift brauchen sie ebenfalls. --}}
             <h1 class="pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink lg:text-[2.75rem]">
                 {!! $ueberschrift !!}
             </h1>

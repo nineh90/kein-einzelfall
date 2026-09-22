@@ -107,10 +107,29 @@ body {
   content: var(--wasserzeichen, '');
 }
 
-/* Handgezeichnete Linie unter einem Teil der Ueberschrift ("swash").
+/* Handschriftlicher Teil der Ueberschrift mit handgezeichneter Linie ("swash").
 
    Das Erkennungszeichen aus dem Mockup. Der Verein markiert im Panel den Teil
-   der Ueberschrift, der sie bekommen soll.
+   der Ueberschrift, der ihn bekommen soll.
+
+   Der markierte Teil steht in der Handschrift (--font-hand) — dieselbe Schrift
+   wie die handschriftlichen Leitsaetze der Textbausteine ("Opferhilfe fuer
+   soziale Gerechtigkeit!" unter der Vereinsarbeit). Von Kevin so beauftragt
+   (KEV-16): Das Zitat der Startseite und der Leitsatz sind dieselbe Stimme und
+   sollen darum auch gleich aussehen.
+
+   Caveat baut deutlich kleiner als Fraunces — bei gleicher Schriftgroesse saehe
+   der markierte Teil neben dem Rest der Zeile geschrumpft aus. Die 1,2em heben
+   ihn auf ungefaehr dieselbe Versalhoehe. Die Zeilenhoehe waechst mit: Die
+   Ueberschrift gibt sie unbenannt (leading-[1.18]) weiter, ein unbenannter Wert
+   ist ein Faktor und wird hier auf die groessere Schrift gerechnet — die langen
+   Ober- und Unterlaengen der Handschrift bekommen damit von selbst ihren Platz,
+   auch wenn die Ueberschrift auf dem Handy umbricht.
+
+   Im Modus "Gut lesbare Schrift" ersetzt a11y.css die Schrift per !important
+   durch die System-Sans (die Regel greift auf span). Das ist Absicht: Wer die
+   Serifen nicht lesen kann, kann eine Schreibschrift erst recht nicht. Die
+   Linie bleibt, die Betonung geht also nicht verloren.
 
    Als Hintergrundbild und nicht als eingebettetes <svg>: Ein absolut
    positioniertes SVG haengt am ersten Zeilenfragment. Sobald die Ueberschrift
@@ -125,6 +144,8 @@ body {
    data-URI laesst sich keine Custom Property einsetzen, deshalb steht sie hier
    ausgeschrieben. Aendert sich die Vereinsfarbe, aendert sie sich auch hier. */
 .swash {
+  font-family: var(--font-hand);
+  font-size: 1.2em;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%23009640' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 0 100%;

@@ -198,7 +198,9 @@ KFZ-Hilfe), muss der Verein liefern.
 
 Die Überschrift der Startseite lautet seit dem 30.07.2026 „Keiner soll mehr
 sagen müssen: „Ich hab es nicht gewusst!"" — wie im freigegebenen Mockup, mit
-der handgezeichneten Linie unter dem Zitat.
+der handgezeichneten Linie unter dem Zitat. Das Zitat selbst steht seit dem
+22.09.2026 (KEV-16) in der Handschrift des Vereins — derselben wie beim Leitsatz
+„Opferhilfe für soziale Gerechtigkeit!" unter der Vereinsarbeit.
 
 Genau dieser Satz stand vorher als Unterzeile über den vier Einstiegskarten.
 Damit er nicht zweimal auf derselben Seite steht, ist die Unterzeile **vorerst
