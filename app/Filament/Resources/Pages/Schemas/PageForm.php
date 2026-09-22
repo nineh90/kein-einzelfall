@@ -714,6 +714,20 @@ class PageForm
                                             .'einem neuen Tab und wird angesagt.'),
                                 ]),
 
+                            /*
+                             * Der handschriftliche Schriftzug im Hintergrund
+                             * des Bandes. Pflegbar, weil genau er in KEV-15
+                             * zur Diskussion stand — so kann der Verein selbst
+                             * probieren, statt es bestellen zu müssen.
+                             */
+                            TextInput::make('data.wasserzeichen')
+                                ->label('Schriftzug im Hintergrund')
+                                ->placeholder('KE!N EINZELFALL')
+                                ->visible(fn ($get) => $get('typ') === 'cta_band')
+                                ->helperText('Handschriftlich und bewusst zurückhaltend. Leer '
+                                    .'lassen nimmt den Vereinsnamen. Lange Zeilen werden '
+                                    .'kleiner gesetzt, damit sie nicht umbrechen.'),
+
                             // --- Knöpfe ---
                             self::knopf('data.cta')
                                 ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true)),

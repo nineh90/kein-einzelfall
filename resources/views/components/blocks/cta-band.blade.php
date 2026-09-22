@@ -3,7 +3,7 @@
     'zitat',
     'notiz' => null,
     'ctas' => [],
-    'wasserzeichen' => 'KE!N',
+    'wasserzeichen' => 'KE!N EINZELFALL',
     'auf' => 'cream',    // cream | card
 ])
 
@@ -14,22 +14,44 @@
     'px-4 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ])>
-    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-band bg-green-deep px-6 py-8 lg:px-10 lg:py-11">
+    {{-- Unten mehr Luft als oben: Dort liegt der Schriftzug, und er soll eine
+         eigene Zone haben statt hinter Text und Knöpfen zu verschwinden. --}}
+    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-band bg-green-deep
+                px-6 pb-24 pt-8 lg:px-10 lg:pb-28 lg:pt-11">
 
-        {{-- Dekoratives Wasserzeichen. Auf schmalen Viewports ausgeblendet:
-             dort würde es den Text nur unruhig machen.
+        {{-- Der Vereinsname als handschriftlicher Hintergrund (KEV-15).
+
+             Vorher stand hier nur „KE!N", rechts aus dem Kasten herauslaufend
+             und zur Hälfte hinter den Knöpfen — angedeutet, wie der Verein es
+             beschrieb, aber es sah eher nach einem Fehler aus als nach
+             Absicht. Jetzt steht der Name vollständig da.
+
+             Unten links und nicht quer hinter allem: Quer über die Mitte
+             kreuzte er Zitat und Knöpfe, und beides verlor. Unten hat er eine
+             eigene Zone, überlagert nichts und bleibt trotzdem Hintergrund.
+
+             Hell statt dunkel (--color-on-green-hand, dieselbe Farbe wie die
+             Übertitel auf Grün): Ein dunkler Schriftzug auf dunklem Grün wirkt
+             wie ein Schatten, ein heller wie mit Kreide geschrieben. Die
+             niedrige Deckkraft hält ihn hinter dem Zitat zurück.
+
+             Auch auf dem Handy sichtbar, nur kleiner — „komplett lesbar" gilt
+             dort genauso. Die Schriftgrösse skaliert mit der Breite, damit der
+             Name nie umbricht und nie über den Rand läuft.
 
              Als CSS-Dekoration und nicht als Textknoten: Als <span> mit Inhalt
-             war es echter Text mit 1,08:1 Kontrast und damit ein gemeldeter
-             WCAG-Verstoss. Reine Dekoration ist von 1.4.3 zwar ausgenommen, aber
-             das kann eine Maschine nicht wissen — und ein Prüfbericht mit einem
-             erklärungsbedürftigen roten Punkt ist bei diesem Auftrag das
-             schlechtere Ergebnis. In der CSS ist es ausserdem ehrlicher
-             einsortiert: Dekoration gehört nicht ins Markup. --}}
+             war es echter Text mit zu geringem Kontrast und damit ein
+             gemeldeter WCAG-Verstoss. Reine Dekoration ist von 1.4.3 zwar
+             ausgenommen, aber das kann eine Maschine nicht wissen — und ein
+             Prüfbericht mit einem erklärungsbedürftigen roten Punkt ist bei
+             diesem Auftrag das schlechtere Ergebnis. Der Vereinsname steht
+             ohnehin im Kopf und im Fuss jeder Seite; als Hintergrund trägt er
+             keine Information, die sonst verloren ginge. --}}
         <span aria-hidden="true" data-wasserzeichen
               style="--wasserzeichen: '{{ $wasserzeichen }}'"
-              class="pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2
-                     select-none font-hand text-[9.375rem] leading-none text-[#2B4536] opacity-50 lg:block"></span>
+              class="pointer-events-none absolute bottom-3 left-6 select-none whitespace-nowrap
+                     font-hand text-[clamp(2.5rem,8.5vw,5.25rem)] leading-none
+                     text-on-green-hand opacity-25 lg:left-10 lg:bottom-4"></span>
 
         <div class="relative grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>

@@ -166,6 +166,18 @@ html.a11y-lesbar .swash {
   font-size: 1em;
 }
 
+/* Der handschriftliche Vereinsname im Hinweisband ist reine Dekoration.
+
+   Im Dunkelmodus traegt er sich selbst: Das Band wird dort hell, der Schriftzug
+   steht ruhig darauf. Bei hohem Kontrast wird das Band gelb, und der gedaempfte
+   Schriftzug liegt als truebe Flaeche darin — dieser Modus ist fuer Menschen
+   da, die jede Unschaerfe stoert, und Zierrat arbeitet dort gegen den Zweck.
+   Anders als die Linie unter der Ueberschrift betont er nichts; er kann gehen,
+   ohne dass Information verloren geht. */
+html[data-kontrast='hoch'] [data-wasserzeichen] {
+  display: none;
+}
+
 /* Graustufen */
 html[data-kontrast='monochrom'] {
   filter: grayscale(1);

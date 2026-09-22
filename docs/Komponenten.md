@@ -1655,3 +1655,43 @@ steht in `docs/KEV-4-REHADAT.md` — kurz: Beim Schwerbehindertenrecht ist
 REHADAT erschöpfend, eine eigene Sammlung daneben wäre Doppelarbeit. Beim
 Sozialen Entschädigungsrecht ist REHADAT dünn, dort entsteht später die eigene
 Bibliothek.
+
+## 22. Vereinsname im Hinweisband (22.09.2026, KEV-15)
+
+Das Band trug bisher ein „KE!N", rechts aus dem Kasten herauslaufend und zur
+Hälfte hinter den Knöpfen. Im Mockup war das als Andeutung gedacht; auf der
+gebauten Seite sah es aus wie ein Fehler. Der Verein wollte den Namen
+**vollständig lesbar** im Hintergrund.
+
+Ausprobiert und verworfen:
+
+| Variante | Warum nicht |
+|---|---|
+| Voller Schriftzug quer hinter allem | Kreuzt Zitat und Knöpfe, beide verlieren |
+| Dasselbe als Umriss | Lesbarer, aber unruhiger statt ruhiger |
+| Unten angeschnitten durchlaufend | Wieder nur angedeutet — das war ja der Anlass |
+| Handschrift-Signatur unter dem Zitat | Schön, aber Vordergrund und nicht Hintergrund |
+
+Geworden ist es: **unten links, in einer eigenen Zone.** Das Band hat unten
+mehr Luft als oben (`pb-24 lg:pb-28`), dort liegt der Schriftzug und überlagert
+nichts.
+
+**Hell statt dunkel.** Vorher `#2B4536` auf `#005725` — dunkel auf dunkel wirkt
+wie ein Schatten. Jetzt `--color-on-green-hand` bei 25 % Deckkraft: wie mit
+Kreide geschrieben, vollständig lesbar, und das Zitat darüber behält seinen
+Vorrang.
+
+**Auch auf dem Handy.** Vorher war der Schriftzug unter `lg` ausgeblendet;
+„komplett lesbar" gilt dort genauso. Die Grösse skaliert mit
+`clamp(2.5rem, 8.5vw, 5.25rem)`, damit der Name nie umbricht und nie über den
+Rand läuft.
+
+**Bei hohem Kontrast blendet `a11y.css` ihn aus.** Dort wird das Band gelb, und
+der gedämpfte Schriftzug läge als trübe Fläche darin. Dieser Modus ist für
+Menschen da, die jede Unschärfe stört. Anders als die Linie unter der
+Überschrift betont der Name nichts — er kann gehen, ohne dass Information
+verloren geht. Im Dunkelmodus bleibt er: Das Band wird dort hell, er steht
+ruhig darauf.
+
+Der Text ist im Panel pflegbar (Feld „Schriftzug im Hintergrund"), weil genau
+er zur Diskussion stand. Leer lassen nimmt den Vereinsnamen.
