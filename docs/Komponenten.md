@@ -1705,3 +1705,76 @@ ruhig darauf.
 
 Der Text ist im Panel pflegbar (Feld „Schriftzug im Hintergrund"), weil genau
 er zur Diskussion stand. Leer lassen nimmt den Vereinsnamen.
+
+## 23. Suche (22.09.2026, KEV-23)
+
+Das Ticket hiess zunächst „Chatbot, der bei der Navigation hilft". Geworden ist
+es ein Suchfeld mit Trefferliste — dasselbe Ergebnis, aber ohne JavaScript
+bedienbar, mit Vorlesehilfe ein seit Jahrzehnten gelöstes Muster, und ohne
+Gesprächsverlauf, den jemand später findet.
+
+### Das Fundament sucht ohne Sprachmodell
+
+`App\Support\Suche` arbeitet vollständig lokal und deterministisch. Das ist
+keine Sparmassnahme: Wer hier sucht, sitzt womöglich vor einer Frist. Eine
+Suche, die ausfällt, weil eine fremde Schnittstelle langsam ist oder ein
+Guthaben leer, ist für diesen Menschen wertlos — und er erfährt nie, warum.
+
+Ein Sprachmodell kann später als **zweite Schicht** darüber die Reihenfolge
+verbessern. Fällt es aus, wird die Sortierung gröber, mehr nicht.
+
+Kein FULLTEXT: Der Bestand ist klein genug für den Arbeitsspeicher, und eigene
+Bewertung kann, was MySQL nicht kann — deutsche Komposita („Schwerbehinderten­
+ausweis" enthält „Ausweis"), Umlaut-Toleranz und die Synonymliste.
+
+### Die Synonymliste ist das Herzstück
+
+Wer zum ersten Mal mit dem Sozialrecht zu tun hat, kennt die Wörter nicht, die
+auf unseren Seiten stehen. Er schreibt „Brief vom Amt", nicht „Bescheid", und
+„die glauben mir nicht", nicht „Glaubhaftmachung". Ohne die Liste in
+`Suche::SYNONYME` findet eine Volltextsuche für genau die Menschen nichts, für
+die die Seite gemacht ist.
+
+### Gemessen statt geschätzt
+
+`SucheTest::anfragen()` enthält 18 Anfragen in Laiensprache mit erwarteter
+Zielseite. Eine Suche lässt sich nicht daran beurteilen, ob sie „läuft" — sie
+läuft immer. Aktueller Stand: **alle 18 im Top-3, 17 davon auf Platz 1.**
+
+Neue Fälle gehören dort dazu, sobald jemand eine Anfrage sieht, die ins Leere
+lief. Das ist die einzige Stelle, an der die Suche wirklich besser wird.
+
+### Zwei Entscheidungen zur Zielgruppe
+
+**Krisenwendungen gehen vor.** Wer „ich kann nicht mehr" in ein Suchfeld tippt,
+bekommt zuerst die Hilfe-Nummern. Die Trefferliste bleibt darunter stehen —
+vielleicht war es doch die Formulierung und nicht die Lage; entschieden wird
+das hier nicht, angeboten schon.
+
+**Nichts wird protokolliert.** Kein Log, keine Statistik, kein „meistgesucht".
+Was jemand hier eintippt, verrät mehr über ihn als jede andere Zeile dieser
+Website. Ein Test wacht darüber, dass keine Tabelle mit „such" im Namen
+entsteht.
+
+Ehrlich bleibt dabei: Die Anfrage steht danach in der Adresszeile und im
+Verlauf. Der Notausgang kann das **nicht** heilen — aus einer Webseite heraus
+lässt sich kein Verlauf löschen. Deshalb steht unter dem Suchfeld ein leiser
+Hinweis mit Verweis auf `/barrierefreiheit`. Ein Sicherheitsversprechen ohne
+Deckung wäre hier gefährlicher als gar keins.
+
+### `noindex` schliesst nicht aus
+
+Das Kennzeichen heisst „nicht bei Google", nicht „unauffindbar". Die Seiten zu
+GdB, Pflegegrad und Entschädigungsrecht tragen es, weil ihr Text noch nicht
+gegengelesen ist — es sind aber genau die Seiten, die Betroffene suchen. Wer
+eine Seite wirklich verbergen will, nimmt sie auf Entwurf.
+
+### Barrierefreiheit
+
+`role="search"`, ein echtes sichtbares `<label>` (kein Platzhalter — der
+verschwindet beim Tippen, und genau dann braucht ihn jemand mit
+Konzentrationsschwierigkeiten noch), Treffer in einer `<ol data-treffer>` mit
+echten Links, `aria-live` an der Trefferzahl. **Kein Autofokus**: Er reisst
+Screenreader-Nutzer aus der Seitenstruktur, bevor sie die Überschrift gehört
+haben. axe ist auf allen vier Zuständen sauber (leer, Treffer, keine Treffer,
+Krise), der Browser-Test prüft Tastaturbedienung und den JS-freien Fall.

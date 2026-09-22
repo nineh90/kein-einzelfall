@@ -24,6 +24,8 @@
         // einsetzen, wo das auch im Text steht — ein Symbol allein sagt
         // niemandem etwas, der es nicht sieht.
         'external'      => '<path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+        // Lupe für die Suche.
+        'search'        => '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
         // Buch für die Wissens-/Glossarbereiche.
         'book'          => '<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5z"/><path d="M18 17H6a2 2 0 0 0-2 2"/>',
     ];

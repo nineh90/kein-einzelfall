@@ -7,6 +7,7 @@ use App\Http\Controllers\GlossarController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SucheController;
 use App\Http\Middleware\SpracheSetzen;
 use App\Models\Language;
 use App\Support\Dokument;
@@ -67,6 +68,14 @@ $oeffentlicheRouten = function () {
     Route::get('/veranstaltungen/{slug}/kalender.ics', [EventController::class, 'icalEinzeln'])
         ->where('slug', '[a-z0-9-]+')
         ->name('events.ical.einzeln');
+
+    /*
+     * Suche (KEV-23). Steht vor der Sammelroute, sonst griffe /{slug}.
+     *
+     * GET, damit die Anfrage in der Adresszeile steht und weitergegeben werden
+     * kann. Begründung und was bewusst nicht protokolliert wird: SucheController.
+     */
+    Route::get('/suche', SucheController::class)->name('suche');
 
     /*
      * Glossar. Steht vor der Sammelroute, sonst griffe /{slug}.

@@ -453,6 +453,75 @@ console.log('\nVereinsname im Hinweisband')
     }
 }
 
+// --- Suche (KEV-23) ---------------------------------------------------------
+//
+// Geprueft wird, was ein PHP-Test nicht sehen kann: dass das Formular ohne
+// JavaScript abschickt, dass es mit der Tastatur allein bedienbar ist und dass
+// der Weg vom Kopf der Seite bis zum Treffer funktioniert.
+
+console.log('\nSuche')
+{
+    /*
+     * Ohne JavaScript — der wichtigste Fall. Wer mit Screenreader, altem Geraet
+     * oder abgeschaltetem JS kommt, muss suchen koennen.
+     *
+     * Geprueft wird die Ergebnisseite und nicht der Klick auf „Suchen": Ohne JS
+     * steht die Trigger-Warnung offen ueber der Seite und laesst sich nicht
+     * wegklicken (das braucht JS, so ist sie gebaut). Das Absenden selbst ist
+     * ohnehin natives Browserverhalten — was wir wissen muessen, ist, dass die
+     * Zieladresse ohne eine Zeile JavaScript vollstaendige Treffer liefert.
+     * Dass Enter im Feld abschickt, prueft der Tastatur-Fall darunter.
+     */
+    const ohne = await oeffnen({ js: false, pfad: '/suche?q=pflegegrad' })
+
+    pruefe('liefert Treffer ohne JavaScript',
+        (await ohne.locator('[data-treffer] li').count()) > 0)
+
+    pruefe('Treffer sind echte Links',
+        (await ohne.locator('[data-treffer] li a[href]').count()) > 0)
+
+    pruefe('Suchfeld traegt die Anfrage weiter',
+        (await ohne.locator('#suchfeld').inputValue()) === 'pflegegrad')
+
+    await ohne.context().close()
+
+    // Mit Tastatur allein: Feld anspringen, tippen, Enter.
+    const seite = await oeffnen({ pfad: '/suche' })
+    await seite.locator('#suchfeld').focus()
+    await seite.keyboard.type('gdb')
+    await seite.keyboard.press('Enter')
+
+    // waitForURL und nicht waitForLoadState: Die Navigation startet erst nach
+    // dem Tastendruck. „networkidle" waere in dem Moment schon erfuellt — vom
+    // alten Seitenzustand — und der Test liefe gegen die vorige Adresse.
+    await seite.waitForURL(/[?&]q=/, { timeout: 5000 }).catch(() => {})
+
+    pruefe('Enter im Feld schickt ab', seite.url().includes('q=gdb'), seite.url())
+
+    const ersterTreffer = seite.locator('[data-treffer] li a').first()
+    pruefe('erster Treffer ist die passende Seite',
+        (await ersterTreffer.getAttribute('href') || '').includes('grad-der-behinderung'),
+        await ersterTreffer.getAttribute('href'))
+
+    await seite.context().close()
+
+    // Der Weg von irgendeiner Seite zur Suche.
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/verein' })
+        const knopf = s.locator('header a[href$="/suche"]')
+
+        pruefe(`${breite}px: Suche ist vom Kopf aus erreichbar`, await knopf.isVisible())
+
+        // Auch wenn nur die Lupe zu sehen ist, muss eine Vorlesehilfe den
+        // Zweck kennen — sonst ist es ein Knopf ohne Namen.
+        const name = (await knopf.innerText()).trim() || (await knopf.getAttribute('aria-label')) || ''
+        const versteckt = await knopf.locator('.sr-only').count()
+        pruefe(`${breite}px: Suche hat einen lesbaren Namen`, name.length > 0 || versteckt > 0, name)
+
+        await s.context().close()
+    }
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

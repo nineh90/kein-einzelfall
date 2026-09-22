@@ -85,6 +85,30 @@
         </nav>
 
         <div class="flex shrink-0 items-center gap-2">
+            {{-- Suche (KEV-23).
+
+                 Ein Link und kein aufklappbares Feld im Kopf: Ein Eingabefeld
+                 zwischen Sprachumschalter und Notausgang wäre auf dem Handy
+                 nicht unterzubringen, ohne einem von beiden Platz zu nehmen —
+                 und der Notausgang behält seine Position, die ist Teil seiner
+                 Verlässlichkeit. Der Link führt auf die Suchseite, wo das Feld
+                 gross und mit sichtbarer Beschriftung steht.
+
+                 Beschriftung ab „sm" sichtbar, darunter nur die Lupe mit
+                 sr-only-Text — ein Symbol allein sagt niemandem etwas, der es
+                 nicht sieht. --}}
+            <a href="{{ url('/suche') }}"
+               @class([
+                   'inline-flex items-center gap-2 rounded-full border border-line px-3 py-2',
+                   'text-sm text-ink hover:bg-card',
+                   'bg-card' => request()->is('suche'),
+               ])
+               @if (request()->is('suche')) aria-current="page" @endif>
+                <x-ui.icon name="search" :size="18" />
+                <span class="hidden sm:inline">Suche</span>
+                <span class="sr-only sm:hidden">Suche</span>
+            </a>
+
             {{-- Steht vor dem Notausgang: Der Notausgang behält seine Position,
                  und die ist Teil seiner Verlässlichkeit. --}}
             <x-layout.sprachumschalter :fassungen="$fassungen ?? []" />
