@@ -11,7 +11,7 @@
 @php $knoepfe = knoepfe($ctas); @endphp
 
 <section @class([
-    'px-4 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ])>
     {{-- Unten mehr Luft als oben: Dort liegt der Schriftzug, und er soll eine
@@ -73,7 +73,10 @@
             </div>
 
             @if ($knoepfe)
-                <div class="flex flex-col gap-3">
+                {{-- Nebeneinander ab „sm“, untereinander erst wieder in der
+                     schmalen rechten Spalte ab „lg“. Dazwischen liefen die
+                     Knöpfe über die ganze Bandbreite — 700 px für ein Wort. --}}
+                <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-col">
                     @foreach ($knoepfe as $cta)
                         <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'light'">
                             {{ $cta['label'] }}

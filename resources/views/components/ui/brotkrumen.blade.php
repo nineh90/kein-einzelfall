@@ -4,7 +4,9 @@
     {{-- Orientierung: Wo bin ich, und wie komme ich eine Ebene zurück?
          Der letzte Eintrag ist die aktuelle Seite und deshalb kein Link. --}}
     <nav aria-label="{{ __('rahmen.sie_sind_hier') }}" class="mb-4">
-        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-soft">
+        {{-- py-1 an den Links: Trefferfläche mindestens 24 px hoch (WCAG 2.5.8).
+             Mit dem Finger sind die Krumen sonst kaum zu treffen. --}}
+        <ol class="flex flex-wrap items-center gap-x-2 text-sm text-ink-soft">
             @foreach ($krumen as $krume)
                 <li class="flex items-center gap-2">
                     @if (! $loop->first)
@@ -13,7 +15,7 @@
 
                     @if ($krume['url'] && ! $loop->last)
                         <a href="{{ $krume['url'] }}"
-                           class="text-ink-soft no-underline hover:text-green-deep hover:underline">
+                           class="inline-block py-1 text-ink-soft no-underline hover:text-green-deep hover:underline">
                             {{ $krume['label'] }}
                         </a>
                     @else

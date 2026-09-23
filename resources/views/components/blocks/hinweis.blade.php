@@ -47,7 +47,7 @@
      darüber und teilt bewusst dessen Fläche — der Flächenwechsel überspringt
      ihn deshalb, und der Test, der ihn bewacht, ebenso. --}}
 <section data-anschliessend
-         @class(['px-4 py-4 lg:px-10', 'relative -mt-px border-b border-line bg-card' => $auf === 'card'])>
+         @class(['px-4 md:px-8 py-4 lg:px-10', 'relative -mt-px border-b border-line bg-card' => $auf === 'card'])>
     <div class="mx-auto max-w-6xl">
         <aside class="max-w-prose rounded-card border-2 {{ $stil['rahmen'] }} {{ $stil['flaeche'] }} px-5 py-4">
             <div class="flex gap-3">

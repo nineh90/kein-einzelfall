@@ -18,6 +18,8 @@ return [
     'hauptnavigation' => 'Hauptnavigation',
     'hauptnavigation_mobil' => 'Hauptnavigation (mobil)',
     'schnellzugriff' => 'Schnellzugriff',
+    // Beschriftung des Barrierefreiheits-Knopfs in der unteren Leiste (KEV-26).
+    'darstellung_leiste' => 'Darstellung',
     'sie_sind_hier' => 'Sie sind hier',
     'start' => 'Start',
     'auf_dieser_seite' => 'Auf dieser Seite',

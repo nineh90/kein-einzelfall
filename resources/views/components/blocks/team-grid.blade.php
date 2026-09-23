@@ -25,7 +25,7 @@
         Volltext bleibt im Dokument und damit für Suchmaschinen sichtbar.
     --}}
     <section @class([
-        'px-4 py-8 lg:px-10 lg:py-12',
+        'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
         'bg-card border-y border-line' => $auf === 'card',
     ])
     {{-- Mehrere Raster auf einer Seite (Vorstand, Team, …) brauchen
@@ -52,8 +52,13 @@
                                  class="flex flex-1 scroll-mt-24 flex-col overflow-hidden rounded-card
                                         border border-line bg-cream">
 
-                            <div class="flex gap-4 p-5">
-                                <div class="shrink-0">
+                            {{-- Auf dem Handy steht das Kurzprofil unter Foto und Name
+                                 über die volle Kartenbreite (KEV-26). Neben dem Foto
+                                 blieben dort rund 190 px, und ein Absatz lief über
+                                 zwanzig Zeilen. Ab „sm“ wieder rechts neben dem Foto. --}}
+                            <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 p-5
+                                        sm:items-start sm:gap-y-2">
+                                <div class="shrink-0 sm:row-span-2">
                                     @if ($person->foto_pfad)
                                         <img src="{{ $person->foto_pfad }}" alt="{{ $person->foto_alt }}"
                                              loading="lazy"
@@ -73,9 +78,12 @@
                                     @endif
                                 </div>
 
-                                <div class="flex-1">
+                                <div>
                                     @if ($person->rolle)
-                                        <p class="text-xs uppercase tracking-[0.1em] text-green">
+                                        {{-- Auf dem Handy etwas kleiner und enger gesperrt:
+                                             „DATENSCHUTZBEAUFTRAGTE“ passte sonst nicht neben
+                                             das Foto und brach vor dem letzten Buchstaben um. --}}
+                                        <p class="hyphens-auto text-[0.6875rem] uppercase tracking-[0.06em] text-green sm:text-xs sm:tracking-[0.1em]">
                                             {{ $person->rolle }}
                                         </p>
                                     @endif
@@ -87,13 +95,13 @@
                                     @if ($person->untertitel)
                                         <p class="mt-0.5 text-sm text-ink-soft">{{ $person->untertitel }}</p>
                                     @endif
-
-                                    @if ($person->kurzprofil)
-                                        <p class="mt-2 text-sm leading-relaxed text-ink-soft">
-                                            {{ $person->kurzprofil }}
-                                        </p>
-                                    @endif
                                 </div>
+
+                                @if ($person->kurzprofil)
+                                    <p class="col-span-2 text-sm leading-relaxed text-ink-soft sm:col-span-1 sm:col-start-2">
+                                        {{ $person->kurzprofil }}
+                                    </p>
+                                @endif
                             </div>
 
                             @if ($person->hatProfil())

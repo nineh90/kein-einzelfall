@@ -17,7 +17,7 @@
 @endphp
 
 {{-- Abgesetzte Fläche in --card, mit Linien oben/unten statt Schatten. --}}
-<section class="border-y border-line bg-card px-4 py-8 lg:px-10 lg:py-12"
+<section class="border-y border-line bg-card px-4 md:px-8 py-8 lg:px-10 lg:py-12"
          aria-labelledby="themen-titel">
     <div class="mx-auto max-w-6xl">
         <x-ui.section-head :titel="$titel" :sub="$sub"

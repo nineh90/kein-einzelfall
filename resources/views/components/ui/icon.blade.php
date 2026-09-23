@@ -3,7 +3,11 @@
 @php
     // Pfade im Lucide-/Feather-Stil, stroke-width 1.8 — konsistent zum Mockup.
     $paths = [
-        'accessibility' => '<circle cx="12" cy="4" r="1.6" fill="currentColor" stroke="none"/><path d="M5 8h14M12 8v5M8 21l3-8M16 21l-3-8M7 12l5 1 5-1"/>',
+        // Das international übliche Symbol für Barrierefreiheit („Universal
+        // Access“, Vereinte Nationen 2015): Figur mit ausgebreiteten Armen im
+        // Kreis. Bis KEV-26 stand hier dieselbe Figur ohne Kreis, und die wurde
+        // eher als „Person“ oder „Profil“ gelesen denn als Einstellungen.
+        'accessibility' => '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="6.9" r="1.6" fill="currentColor" stroke="none"/><path d="M6.8 9.8c1.8.5 3.5.7 5.2.7s3.4-.2 5.2-.7M12 10.5v3.6M12 14.1l-2.3 4.4M12 14.1l2.3 4.4"/>',
         'exit'          => '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
         'home'          => '<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1V10"/>',
         'users'         => '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>',

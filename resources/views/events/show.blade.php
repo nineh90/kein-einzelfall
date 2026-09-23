@@ -39,7 +39,7 @@
 @endpush
 
 @section('content')
-<article class="px-4 py-8 lg:px-10 lg:py-12">
+<article class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="[

@@ -14,7 +14,7 @@
     Inhalte erfunden werden müssten: Bereich und Brotkrumen stammen aus der
     Navigation, der Vorspann ist der erste Absatz der Seite.
 --}}
-<header class="relative overflow-hidden border-b border-line bg-card px-4 pb-8 pt-6 lg:px-10 lg:pb-12 lg:pt-8">
+<header class="relative overflow-hidden border-b border-line bg-card px-4 md:px-8 pb-8 pt-6 lg:px-10 lg:pb-12 lg:pt-8">
 
     {{-- Zurückhaltende Fläche im Hintergrund. Dieselbe Bildsprache wie der
          Aufmacher der Startseite, nur deutlich leiser. --}}

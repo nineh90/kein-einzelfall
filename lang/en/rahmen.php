@@ -17,6 +17,8 @@ return [
     'hauptnavigation' => 'Main navigation',
     'hauptnavigation_mobil' => 'Main navigation (mobile)',
     'schnellzugriff' => 'Quick access',
+    // Beschriftung des Barrierefreiheits-Knopfs in der unteren Leiste (KEV-26).
+    'darstellung_leiste' => 'Display',
     'sie_sind_hier' => 'You are here',
     'start' => 'Home',
     'auf_dieser_seite' => 'On this page',

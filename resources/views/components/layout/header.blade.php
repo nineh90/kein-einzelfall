@@ -14,7 +14,7 @@
 @endphp
 
 <header class="sticky top-0 z-40 border-b border-line bg-cream">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 lg:px-10 lg:py-5">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5">
 
         {{-- Wortmarke.
 
@@ -28,8 +28,13 @@
         <a href="{{ \App\Models\Language::aktuell()->pfad('/') }}"
            class="flex min-w-0 items-center gap-2 no-underline sm:min-w-fit sm:shrink-0 sm:gap-2.5">
             <img src="/img/logo.png" alt="" width="36" height="36" class="h-9 w-9 shrink-0 object-contain">
-            <span class="truncate font-display text-[0.9375rem] font-medium tracking-[0.01em] text-ink sm:text-base">
-                KE!N EINZELFALL e.V.
+            {{-- Unterhalb von „sm“ steht „e.V.“ klein in einer zweiten Zeile
+                 (KEV-26). In einer Zeile braucht der Name 167 px, auf gängigen
+                 Handys (360–390 px) blieben neben Suche, Notausgang und Menü
+                 aber nur 136–166 px, und er wurde abgeschnitten. Gestapelt
+                 passt er ab 360 px vollständig. --}}
+            <span class="truncate font-display text-[0.9375rem] font-medium leading-tight tracking-[0.01em] text-ink sm:text-base">
+                KE!N EINZELFALL<span class="max-sm:block max-sm:text-[0.6875rem] max-sm:font-normal max-sm:tracking-[0.14em] max-sm:text-ink-soft"> e.V.</span>
             </span>
         </a>
 
@@ -84,7 +89,7 @@
             </ul>
         </nav>
 
-        <div class="flex shrink-0 items-center gap-2">
+        <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
             {{-- Suche (KEV-23).
 
                  Ein Link und kein aufklappbares Feld im Kopf: Ein Eingabefeld
@@ -122,7 +127,7 @@
                  vorher war er auf dem Handy nur unten in der Leiste und im Menü,
                  was ihn dort versteckte. Platz dafür ist da, seit der a11y-Knopf
                  aus der Reihe gewandert ist. Auf schmalen Geräten nur das Symbol,
-                 ab „380 px“ mit Beschriftung — die Logik sitzt im Exit-Button. --}}
+                 ab „sm“ mit Beschriftung — die Logik sitzt im Exit-Button. --}}
             <x-layout.exit-button />
 
             {{--

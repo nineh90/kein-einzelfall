@@ -41,7 +41,7 @@
     - Verweise nach draußen sind als solche gekennzeichnet.
 --}}
 <section @class([
-    'px-4 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ])
          @if ($titel) aria-labelledby="partner-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.partner.bereich') }}" @endif>

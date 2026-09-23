@@ -20,32 +20,47 @@
 import { speicherKomplettLeeren } from './speicher'
 
 export function toolbarVerdrahten() {
-    const knopf = document.querySelector('[data-a11y-oeffnen]')
+    // Zwei Knöpfe öffnen dasselbe Panel (KEV-26): das Tab am linken Rand ab
+    // „lg“ und der Eintrag in der unteren Leiste darunter. Sichtbar ist je
+    // Breite nur einer, verdrahtet werden beide.
+    const knoepfe = [...document.querySelectorAll('[data-a11y-oeffnen]')]
     const panel = document.getElementById('a11y-panel')
     const api = window.keDarstellung
 
-    if (!knopf || !panel || !api) return
+    if (!knoepfe.length || !panel || !api) return
+
+    // Der Eintrag in der Leiste steht mit hidden im HTML: Ohne dieses Skript
+    // wäre er ein Knopf, der nichts tut.
+    document.querySelectorAll('[data-a11y-leiste]').forEach((el) => { el.hidden = false })
 
     let werte = api.lesen()
 
     // --- Öffnen und Schliessen ---------------------------------------------
 
+    // Der Knopf, der das Panel geöffnet hat — dorthin kehrt der Fokus zurück.
+    let ausloeser = knoepfe[0]
+
     const zeigen = (offen) => {
         panel.hidden = !offen
-        knopf.setAttribute('aria-expanded', offen ? 'true' : 'false')
+        for (const k of knoepfe) k.setAttribute('aria-expanded', offen ? 'true' : 'false')
     }
 
-    knopf.addEventListener('click', () => zeigen(panel.hidden))
+    for (const k of knoepfe) {
+        k.addEventListener('click', () => {
+            ausloeser = k
+            zeigen(panel.hidden)
+        })
+    }
 
     panel.querySelector('[data-a11y-schliessen]')?.addEventListener('click', () => {
         zeigen(false)
-        knopf.focus()
+        ausloeser.focus()
     })
 
-    // Klick daneben schliesst. Der Knopf selbst ist ausgenommen, sonst würde
-    // sein eigener Klick das gerade geöffnete Panel sofort wieder zumachen.
+    // Klick daneben schliesst. Die Knöpfe selbst sind ausgenommen, sonst würde
+    // ihr eigener Klick das gerade geöffnete Panel sofort wieder zumachen.
     document.addEventListener('click', (e) => {
-        if (!panel.hidden && !panel.contains(e.target) && !knopf.contains(e.target)) {
+        if (!panel.hidden && !panel.contains(e.target) && !knoepfe.some((k) => k.contains(e.target))) {
             zeigen(false)
         }
     })
@@ -55,7 +70,7 @@ export function toolbarVerdrahten() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !panel.hidden) {
             zeigen(false)
-            knopf.focus()
+            ausloeser.focus()
         }
     })
 
@@ -81,9 +96,8 @@ export function toolbarVerdrahten() {
             el.setAttribute('aria-pressed', werte[el.dataset.a11yUmschalten] ? 'true' : 'false')
         }
 
-        const zaehler = document.querySelector('[data-a11y-zaehler]')
-        if (zaehler) {
-            const anzahl = Object.values(werte).filter(Boolean).length
+        const anzahl = Object.values(werte).filter(Boolean).length
+        for (const zaehler of document.querySelectorAll('[data-a11y-zaehler]')) {
             zaehler.textContent = String(anzahl)
             zaehler.hidden = anzahl < 1
         }

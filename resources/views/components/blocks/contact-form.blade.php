@@ -24,7 +24,7 @@
       - Pflichtfelder sind im Text benannt, nicht nur durch ein Sternchen
 --}}
 <section @class([
-    'px-4 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ]) aria-labelledby="formular-titel">
     <div class="mx-auto max-w-2xl">

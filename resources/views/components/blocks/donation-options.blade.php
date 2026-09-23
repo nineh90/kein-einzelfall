@@ -35,7 +35,7 @@
 
 {{-- id="spenden": Sprungziel für Kopf, Band oder geteilte Links („…/#spenden“). --}}
 <section id="spenden" @class([
-    'scroll-mt-24 px-4 py-10 lg:px-10 lg:py-16',
+    'scroll-mt-24 px-4 md:px-8 py-10 lg:px-10 lg:py-16',
     'bg-card border-y border-line' => $auf === 'card',
 ]) aria-labelledby="spenden-titel">
     <div class="mx-auto max-w-6xl">

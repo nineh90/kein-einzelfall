@@ -10,7 +10,7 @@
 @php $knoepfe = knoepfe($ctas); @endphp
 
 <section @class([
-    'px-4 py-10 text-center lg:px-10 lg:py-14',
+    'px-4 md:px-8 py-10 text-center lg:px-10 lg:py-14',
     'bg-card border-y border-line' => $auf === 'card',
 ]) aria-labelledby="kontakt-titel">
     <div class="mx-auto max-w-2xl">

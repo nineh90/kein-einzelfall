@@ -2,7 +2,7 @@
 
 {{-- Kennzahlen-Leiste. Mobil horizontal scrollbar; die Liste bekommt deshalb
      tabindex="0", damit sie auch per Tastatur gescrollt werden kann (WCAG 2.1.1). --}}
-<section class="border-y border-line px-4 py-5 lg:px-10" aria-label="Der Verein in Zahlen">
+<section class="border-y border-line px-4 md:px-8 py-5 lg:px-10" aria-label="Der Verein in Zahlen">
     <ul tabindex="0"
         class="mx-auto flex max-w-6xl gap-8 overflow-x-auto lg:justify-start lg:gap-12">
         @foreach ($stats as $stat)

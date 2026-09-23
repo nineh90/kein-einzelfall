@@ -72,14 +72,14 @@ const ZUSTAENDE = [
     {
         name: 'Einstellungs-Panel offen',
         vorbereiten: async (seite) => {
-            await seite.locator('button[aria-controls="a11y-panel"]').click()
+            await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
             await seite.locator('#a11y-panel').waitFor({ state: 'visible' })
         },
     },
     {
         name: 'Hoher Kontrast',
         vorbereiten: async (seite) => {
-            await seite.locator('button[aria-controls="a11y-panel"]').click()
+            await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
             await seite.locator('[data-a11y-setzen="kontrast"][data-a11y-wert="hoch"]').click()
             await seite.keyboard.press('Escape')
         },
@@ -87,7 +87,7 @@ const ZUSTAENDE = [
     {
         name: 'Dunkelmodus',
         vorbereiten: async (seite) => {
-            await seite.locator('button[aria-controls="a11y-panel"]').click()
+            await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
             await seite.locator('[data-a11y-setzen="kontrast"][data-a11y-wert="dunkel"]').click()
             await seite.keyboard.press('Escape')
         },
@@ -95,7 +95,7 @@ const ZUSTAENDE = [
     {
         name: 'Größte Schrift',
         vorbereiten: async (seite) => {
-            await seite.locator('button[aria-controls="a11y-panel"]').click()
+            await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
             await seite.locator('[data-a11y-setzen="schrift"][data-a11y-wert="3"]').click()
             await seite.keyboard.press('Escape')
         },

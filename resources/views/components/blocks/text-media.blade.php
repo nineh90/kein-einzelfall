@@ -20,7 +20,7 @@
     statt einen Dateinamen vorzulesen.
 --}}
 <section @class([
-    'px-4 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ])>
     <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-2 lg:gap-12">

@@ -71,7 +71,7 @@
 {{-- Derselbe Rahmen wie die Textbausteine: Ohne Container lief die Liste über
      die volle Fensterbreite und fiel aus dem Satzspiegel der Seite. --}}
 <section @class([
-    'px-4 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ])
          @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>

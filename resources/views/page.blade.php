@@ -98,7 +98,7 @@
         :lead="$lead" />
 
     @if (count($sprungpunkte) >= 4)
-        <div class="px-4 pt-8 lg:px-10">
+        <div class="px-4 md:px-8 pt-8 lg:px-10">
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose">
                     <x-ui.sprungmarken :punkte="$sprungpunkte" />

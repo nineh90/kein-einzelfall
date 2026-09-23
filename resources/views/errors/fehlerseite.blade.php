@@ -40,7 +40,7 @@
         Die Nummern stehen bewusst oben und nicht unten: Sie sind der einzige
         Inhalt hier, der in einer akuten Lage zählt.
     --}}
-    <div class="mx-auto max-w-6xl px-4 py-10 lg:px-10 lg:py-14">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-10 lg:px-10 lg:py-14">
 
         <p class="mb-2 font-display text-sm tracking-[0.08em] text-ink-soft">{{ $status }}</p>
 
@@ -52,7 +52,10 @@
             {{ __("rahmen.fehler.lead_{$status}") }}
         </p>
 
-        <div class="grid gap-8 lg:grid-cols-2 lg:gap-10">
+        {{-- minmax(0,1fr) auch einspaltig: Eine automatische Spalte wächst mit
+             ihrem breitesten Inhalt, und bei 320 px zog sie die Seite um 12 px
+             über den Rand. --}}
+        <div class="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-2 lg:gap-10">
 
             <x-blocks.hilfe-box />
 
@@ -68,7 +71,7 @@
                     </label>
                     <div class="flex gap-2">
                         <input type="search" id="fehler-suche" name="suche"
-                               class="min-h-11 flex-1 rounded-lg border border-line bg-card px-3 text-ink">
+                               class="min-h-11 min-w-0 flex-1 rounded-lg border border-line bg-card px-3 text-ink">
                         <x-ui.button type="submit" variant="primary">
                             {{ __('rahmen.fehler.suche_knopf') }}
                         </x-ui.button>
@@ -79,17 +82,17 @@
                     <h2 id="fehler-wohin" class="mb-3 font-display text-base font-medium text-ink">
                         {{ __('rahmen.fehler.wohin') }}
                     </h2>
-                    <ul class="flex flex-col gap-2">
+                    <ul class="flex flex-col gap-0.5">
                         <li>
                             <a href="{{ $sprache->pfad('/') }}"
-                               class="text-green-deep no-underline hover:underline">
+                               class="inline-block py-1 text-green-deep no-underline hover:underline">
                                 {{ __('rahmen.fehler.zur_startseite') }}
                             </a>
                         </li>
                         @foreach (Navigation::haupt() as $punkt)
                             <li>
                                 <a href="{{ $punkt['url'] }}"
-                                   class="text-green-deep no-underline hover:underline">
+                                   class="inline-block py-1 text-green-deep no-underline hover:underline">
                                     {{ $punkt['label'] }}
                                 </a>
                             </li>

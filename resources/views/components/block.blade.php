@@ -45,7 +45,7 @@
          auf einer Seite bekommt sie den Rahmen deshalb hier — sonst klebte sie
          am Bildschirmrand. --}}
     <div @class([
-        'px-4 py-6 lg:px-10',
+        'px-4 md:px-8 py-6 lg:px-10',
         'bg-card border-y border-line' => $auf === 'card',
     ])>
         <div class="mx-auto max-w-6xl">

@@ -37,18 +37,20 @@
 
 {{-- Unten derselbe Abstand wie bei jedem Abschnitt: Der nächste Baustein
      steht auf der Karte, und ohne Luft klebte die Karte an den Knöpfen. --}}
-<section class="px-4 pb-8 pt-8 lg:px-10 lg:pb-12 lg:pt-16">
-    <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+<section class="px-4 md:px-8 pb-8 pt-8 lg:px-10 lg:pb-12 lg:pt-16">
+    <div class="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
 
-        {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup. --}}
-        <div class="order-2 lg:order-1">
+        {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
+             Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
+             sonst allein über einer halbleeren Zeile. --}}
+        <div class="order-2 md:order-1">
             @if ($eyebrow)
                 <x-ui.eyebrow class="mb-4">{{ $eyebrow }}</x-ui.eyebrow>
             @endif
 
             {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. Die
                  Unterlängen der Handschrift brauchen sie ebenfalls. --}}
-            <h1 class="pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink lg:text-[2.75rem]">
+            <h1 class="pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:text-[2.75rem]">
                 {!! $ueberschrift !!}
             </h1>
 
@@ -69,17 +71,19 @@
             @endif
         </div>
 
-        <div class="order-1 lg:order-2">
+        <div class="order-1 md:order-2">
             {{-- Der Steinstapel aus dem Mockup: rein aus CSS, keine Bilddatei.
                  Dekorativ, deshalb aria-hidden — er trägt keine Information. --}}
-            <div class="relative mx-auto flex h-56 w-full max-w-sm items-end justify-center
-                        lg:h-[22.5rem]"
+            {{-- Auf dem Handy kleiner: Dort schob der Stapel Überschrift und
+                 Knöpfe fast aus dem ersten Bildschirm. --}}
+            <div class="relative mx-auto flex h-40 w-full max-w-sm items-end justify-center
+                        sm:h-56 lg:h-[22.5rem]"
                  aria-hidden="true">
                 <div class="absolute inset-0 m-auto h-48 w-48 rounded-full
                             bg-[radial-gradient(circle,rgb(220_230_219/.9)_0%,transparent_70%)]
-                            lg:h-72 lg:w-72"></div>
+                            max-sm:h-36 max-sm:w-36 lg:h-72 lg:w-72"></div>
 
-                <div class="relative flex flex-col items-center -space-y-1.5">
+                <div class="relative flex origin-bottom scale-75 flex-col items-center -space-y-1.5 sm:scale-100">
                     @foreach ([
                         ['w' => 'w-11', 'h' => 'h-5',  'bg' => 'from-[#009640] to-[#00702F]'],
                         ['w' => 'w-16', 'h' => 'h-7',  'bg' => 'from-[#EFE4CC] to-[#D9C7A2]'],

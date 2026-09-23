@@ -68,7 +68,9 @@ async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false }
 console.log('\nDarstellungs-Toolbar (Desktop)')
 {
     const seite = await oeffnen()
-    const knopf = seite.locator('button[aria-controls="a11y-panel"]')
+    // Zwei Knöpfe öffnen das Panel (KEV-26): das Tab am Rand ab „lg“ und
+    // der Eintrag in der unteren Leiste darunter. Je Breite ist einer sichtbar.
+    const knopf = seite.locator('button[aria-controls="a11y-panel"]:visible')
     const panel = seite.locator('#a11y-panel')
 
     pruefe('Panel startet zugeklappt', !(await panel.isVisible()))
@@ -90,18 +92,45 @@ console.log('\nDarstellungs-Toolbar (Desktop)')
     pruefe('Schalter greift',
         await seite.evaluate(() => document.documentElement.classList.contains('a11y-leselinie')))
 
-    pruefe('Zähler am Knopf stimmt', await seite.locator('[data-a11y-zaehler]').textContent() === '3')
+    pruefe('Zähler am Knopf stimmt', await seite.locator('[data-a11y-zaehler]:visible').textContent() === '3')
 
     // Der eigentliche Zweck der Einstellungen: Sie müssen bleiben.
     await seite.goto(BASIS + '/wissen', { waitUntil: 'networkidle' })
     pruefe('überlebt den Seitenwechsel',
         await seite.evaluate(() => document.documentElement.dataset.kontrast) === 'hoch')
 
-    await seite.locator('button[aria-controls="a11y-panel"]').click()
+    await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
     await seite.locator('[data-a11y-zuruecksetzen]').click()
     pruefe('Zurücksetzen räumt alles ab',
         await seite.evaluate(() => document.documentElement.dataset.kontrast) === ''
         && !(await seite.evaluate(() => document.documentElement.classList.contains('a11y-leselinie'))))
+}
+
+console.log('\nDarstellungs-Toolbar (Handy, KEV-26)')
+{
+    const seite = await oeffnen({ breite: 375 })
+    const tab = seite.locator('button.fixed[aria-controls="a11y-panel"]')
+    const leiste = seite.locator('nav [data-a11y-oeffnen]')
+    const panel = seite.locator('#a11y-panel')
+
+    pruefe('kein Tab am Rand, das über dem Text liegt', !(await tab.isVisible()))
+    pruefe('der Knopf steht in der unteren Leiste', await leiste.isVisible())
+
+    await leiste.click()
+    pruefe('er öffnet das Panel', await panel.isVisible())
+    pruefe('aria-expanded wird mitgeführt', await leiste.getAttribute('aria-expanded') === 'true')
+
+    // Das Panel darf die Leiste nicht verdecken: Der Notausgang liegt darin.
+    const p = await panel.boundingBox()
+    const l = await seite.locator('nav[aria-label] >> nth=-1').boundingBox()
+    const exit = await seite.locator('nav [data-notausgang]').boundingBox()
+    pruefe('das Panel lässt den Notausgang frei', p.y + p.height <= exit.y + 1, JSON.stringify({ p, exit, l }))
+
+    await seite.keyboard.press('Escape')
+    pruefe('Escape schliesst', !(await panel.isVisible()))
+    pruefe('der Fokus kehrt zum Knopf in der Leiste zurück',
+        await seite.evaluate(() => document.activeElement?.closest('nav') !== null
+            && document.activeElement.hasAttribute('data-a11y-oeffnen')))
 }
 
 // --- Nur mit der Tastatur ---------------------------------------------------
@@ -159,6 +188,9 @@ console.log('\nOhne JavaScript')
         if (await ausgaenge.nth(i).isVisible()) sichtbar++
     }
     pruefe('Notausgang ist erreichbar', sichtbar > 0)
+    // Ohne Skript öffnet der Knopf nichts, also steht er gar nicht erst da.
+    pruefe('Darstellungs-Knopf in der Leiste bleibt verborgen',
+        !(await mobil.locator('nav [data-a11y-oeffnen]').isVisible()))
 
     const desktop = await oeffnen({ js: false, breite: 1400 })
     pruefe('Hauptnavigation steht im HTML',
@@ -330,7 +362,7 @@ console.log('\n„Alles zurücksetzen“ in der Darstellungs-Toolbar')
     await seite.locator('#trigger-warnung [data-trigger-nie]').check()
     await seite.locator('#trigger-warnung [data-trigger-weiter]').click()
 
-    await seite.locator('button[aria-controls="a11y-panel"]').click()
+    await seite.locator('button[aria-controls="a11y-panel"]:visible').click()
     await seite.locator('[data-a11y-setzen="kontrast"][data-a11y-wert="hoch"]').click()
     await seite.locator('[data-a11y-zuruecksetzen]').click()
 

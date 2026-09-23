@@ -95,6 +95,12 @@ body {
   letter-spacing: var(--a11y-letter-spacing);
   word-spacing: var(--a11y-word-spacing);
   -webkit-font-smoothing: antialiased;
+  /* Lange Wörter und Adressen brechen um, statt die Seite aufzuziehen.
+     Anlass (KEV-26): eine URL in der Datenschutzerklärung schob bei 320 px
+     die ganze Seite auf 376 px Breite — waagerechtes Scrollen, das WCAG
+     1.4.10 genau bei dieser Breite verbietet. break-word greift nur, wenn
+     ein Wort sonst nicht passt; normaler Text bleibt unberührt. */
+  overflow-wrap: break-word;
 }
 
 /* Dekoratives Wasserzeichen im Hinweisband.

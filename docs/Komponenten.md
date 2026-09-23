@@ -1812,3 +1812,41 @@ Zeile nicht streckt, ist die zweite Rasterzeile `1fr`.
 Die Daten des Bausteins haben sich nicht geändert, eine Migration ist nicht
 nötig.
 
+
+---
+
+## 26. Responsive-Durchgang und Barrierefreiheits-Symbol (23.09.2026, KEV-26)
+
+Alle Seiten der Sitemap plus Suche, Glossar, Aktuelles, Termine, 404 und
+`/en/` wurden bei 320, 360, 375, 768, 1024, 1280 und 1440 px automatisch
+geprüft (waagerechter Überlauf, Trefferflächen unter 24 px) und die
+Handy- und Tablet-Fassungen zusätzlich am Screenshot angesehen.
+
+**Barrierefreiheits-Knopf.** Das Symbol ist jetzt das international übliche
+„Universal Access“ (Figur mit ausgebreiteten Armen im Kreis). Die Figur ohne
+Kreis wurde eher als „Person“ gelesen. Unterhalb von `lg` gibt es das Tab am
+linken Rand nicht mehr, denn es lag dort über dem Text. Stattdessen steht ein
+Eintrag „Darstellung“ in der unteren Leiste, vor dem Notausgang, damit der
+ganz rechts bleibt. Das Panel öffnet sich auf dem Handy als Blatt über der
+Leiste und lässt den Notausgang frei. `a11y.js` verdrahtet alle Knöpfe mit
+`data-a11y-oeffnen`, der Fokus kehrt zu dem zurück, der geöffnet hat. Der
+Eintrag in der Leiste steht mit `hidden` im HTML und erscheint erst mit
+Skript.
+
+**Gefundene Fehler**
+
+| Wo | Problem | Lösung |
+|---|---|---|
+| `/datenschutz`, 320 px | eine URL im Text zog die Seite auf 376 px | `overflow-wrap: break-word` am `body` |
+| 404, 320 px | Suchfeld und Raster zogen die Seite auf 332 px | `min-w-0` am Feld, `minmax(0,1fr)` im Raster |
+| Kopf, 360–390 px | Vereinsname abgeschnitten | „e.V.“ unter `sm` klein in zweiter Zeile; Notausgang-Beschriftung im Kopf erst ab `sm` (unten steht er beschriftet in der Leiste) |
+| Fusszeile | E-Mail brach mitten im Wort, heller Streifen unter dem Grün | vier Spalten erst ab `lg`, Adresse/Kontakt mobil volle Breite; Ausgleich für die Leiste als Innenabstand des Fusses |
+| Fusszeile, Brotkrumen, Sprungmarken, Suchtreffer, 404-Links | Trefferflächen 16–23 px | `py-1` bzw. `py-0.5` am Link (WCAG 2.5.8) |
+| Teamkarten, Handy | Kurzprofil in 190 px schmaler Spalte neben dem Foto | Kurzprofil unter Foto und Name über die volle Breite, ab `sm` wie bisher |
+| Hero | auf dem Handy schob der Steinstapel die Überschrift aus dem ersten Bildschirm, auf dem Tablet stand er allein | mobil kleiner (`scale-75`), zweispaltig ab `md` |
+| CTA-Band, Tablet | zwei Knöpfe über die volle Breite gezogen | nebeneinander ab `sm`, untereinander erst wieder ab `lg` |
+| alle Abschnitte, Tablet | 16 px Seitenrand bei 768 px | `md:px-8` zwischen `px-4` und `lg:px-10` |
+
+`tests/Browser/bedienung.mjs` prüft neu die Handy-Fassung der Toolbar (kein
+Tab, Knopf in der Leiste, Panel lässt den Notausgang frei, Fokus kehrt
+zurück) und dass der Leisten-Knopf ohne JavaScript verborgen bleibt.

@@ -4,7 +4,7 @@
 @section('description', 'Neuigkeiten und Beiträge des KE!N EINZELFALL e.V.')
 
 @section('content')
-<div class="px-4 py-8 lg:px-10 lg:py-12">
+<div class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-6xl">
 
         <h1 class="font-display text-[1.75rem] font-medium text-ink lg:text-4xl">

@@ -14,7 +14,7 @@
         gepflegter Inhalt.
     --}}
     <aside @class([
-               'border-t border-line px-4 py-8 lg:px-10 lg:py-10',
+               'border-t border-line px-4 md:px-8 py-8 lg:px-10 lg:py-10',
                'bg-card' => $auf === 'card',
            ])
            aria-labelledby="weiterlesen-titel">

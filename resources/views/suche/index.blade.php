@@ -45,7 +45,7 @@
         ]"
         lead="Beschreibe mit eigenen Worten, was du suchst. Du musst die Fachbegriffe nicht kennen." />
 
-    <section class="px-4 py-8 lg:px-10 lg:py-10">
+    <section class="px-4 md:px-8 py-8 lg:px-10 lg:py-10">
         <div class="mx-auto max-w-6xl">
 
             {{-- action ohne Parameter, Methode GET: Der Browser hängt `q` selbst
@@ -99,7 +99,7 @@
          es doch die Formulierung und nicht die Lage. Entschieden wird das hier
          nicht, angeboten schon. --}}
     @if ($krise)
-        <section class="px-4 pb-2 lg:px-10" aria-labelledby="krisenhinweis">
+        <section class="px-4 md:px-8 pb-2 lg:px-10" aria-labelledby="krisenhinweis">
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose rounded-card border-2 border-green bg-green-mist px-5 py-4">
                     <p id="krisenhinweis" class="font-display text-base font-medium text-green-deep">
@@ -117,7 +117,7 @@
         </section>
     @endif
 
-    <section class="px-4 pb-10 lg:px-10 lg:pb-14" aria-labelledby="trefferzahl">
+    <section class="px-4 md:px-8 pb-10 lg:px-10 lg:pb-14" aria-labelledby="trefferzahl">
         <div class="mx-auto max-w-6xl">
 
             @if ($anfrage === '')
@@ -166,7 +166,7 @@
                     @foreach ($treffer as $eintrag)
                         <li class="rounded-card border border-line bg-card px-5 py-4">
                             <a href="{{ $eintrag['url'] }}"
-                               class="font-display text-lg text-green-deep underline">
+                               class="inline-block py-0.5 font-display text-lg text-green-deep underline">
                                 {{ $eintrag['titel'] }}
                             </a>
 

@@ -13,7 +13,7 @@
     zwischen max-w-4xl und max-w-6xl. Deshalb wirkte die Seite unruhig.
 
     Regel für alle Übersichtsseiten: aussen kein Rand, jeder Abschnitt setzt
-    `px-4 lg:px-10` und `max-w-6xl` selbst.
+    `px-4 md:px-8 lg:px-10` und `max-w-6xl` selbst.
 --}}
 
 @section('content')
@@ -46,7 +46,7 @@
         @endforeach
     @endif
 
-    <div @class(['px-4 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])>
+    <div @class(['px-4 md:px-8 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])>
         <div class="mx-auto max-w-6xl">
 
             <div class="flex flex-wrap items-center justify-between gap-4">
