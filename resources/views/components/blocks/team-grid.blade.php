@@ -45,7 +45,9 @@
                 <p class="mb-8 max-w-prose leading-relaxed text-ink-soft">{{ $einleitung }}</p>
             @endif
 
-            <ul class="grid gap-5 md:grid-cols-2">
+            {{-- team-raster: Öffnet sich eine Karte, streckt sich die Nachbarin
+                 in derselben Zeile nicht mit (KEV-21, Regel in app.css). --}}
+            <ul class="team-raster grid gap-5 md:grid-cols-2">
                 @foreach ($personen as $person)
                     <li class="flex">
                         <article id="{{ $person->anker() }}"
@@ -105,7 +107,9 @@
                             </div>
 
                             @if ($person->hatProfil())
-                                <details class="group border-t border-line">
+                                {{-- mt-auto: In einer gleich hohen Zeile stehen die
+                                     „Mehr über …“-Links beider Karten auf einer Linie. --}}
+                                <details class="group mt-auto border-t border-line">
                                     <summary class="flex cursor-pointer items-center gap-2 px-5 py-3
                                                     text-sm text-green-deep marker:content-none
                                                     [&::-webkit-details-marker]:hidden">

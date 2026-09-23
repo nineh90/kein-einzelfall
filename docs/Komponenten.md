@@ -1968,3 +1968,21 @@ Dazu `text-balance` an der H1: Auf dem Handy blieb sonst „müssen:“ allein
 in der zweiten Zeile („Keiner soll mehr / sagen müssen:“ statt „Keiner
 soll mehr sagen / müssen:“). Bei 320 px bricht das Zitat selbst noch
 einmal um. Das geht bei dieser Schriftgröße nicht anders.
+
+---
+
+## 32. Teamkarten: nur die aufgeklappte wird größer (23.09.2026, KEV-21)
+
+Auf „Über uns – Vorstand und Team“ stehen die Karten ab `md` zu zweit
+nebeneinander, und das Raster streckt die Karten einer Zeile auf gleiche
+Höhe. Klappte man „Mehr über … lesen“ auf, wuchs die ganze Zeile, und die
+Nachbarkarte wurde leer mitgezogen.
+
+Jetzt streckt sich eine Karte nicht mehr, solange sie selbst oder ihre
+Nachbarin in derselben Zeile offen ist (`.team-raster` in `app.css`, über
+`:has(details[open])`). Die übrigen Zeilen bleiben gleich hoch. Dazu
+`mt-auto` am Aufklapper: In geschlossenen Zeilen stehen die „Mehr über …“-
+Links beider Karten auf einer Linie.
+
+Gemessen (1440 px): geschlossen 254/254, rechte Karte offen 254/1009. Auf
+dem Handy stehen die Karten untereinander, dort war nichts zu tun.

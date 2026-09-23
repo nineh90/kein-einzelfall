@@ -161,6 +161,25 @@ body {
   box-decoration-break: clone;
 }
 
+/* Teamkarten (x-blocks.team-grid): Nur die aufgeklappte Karte wird größer.
+
+   Im zweispaltigen Raster werden die Karten einer Zeile auf gleiche Höhe
+   gestreckt. Das ist richtig, solange alle zu sind. Öffnete man eine, wuchs
+   die ganze Zeile, und die Nachbarin wurde leer mitgezogen (KEV-21). Solange
+   eine Karte offen ist, strecken sich deshalb weder sie noch ihre Nachbarin
+   in derselben Zeile. Die übrigen Zeilen bleiben unberührt.
+
+   Die Nachbarin ergibt sich aus der Spaltenzahl (zwei ab „md“): links steht
+   eine ungerade Karte, rechts die folgende. Ohne :has() (sehr alte Browser)
+   bleibt es beim alten Verhalten, benutzbar ist es trotzdem. */
+@media (width >= 48rem) {
+  .team-raster > li:has(details[open]),
+  .team-raster > li:nth-child(odd):has(details[open]) + li,
+  .team-raster > li:nth-child(odd):has(+ li details[open]) {
+    align-self: start;
+  }
+}
+
 /* Typografie der Leichten Sprache.
 
    Das Regelwerk verlangt mehr als einfache Woerter: groessere Schrift, weiter
