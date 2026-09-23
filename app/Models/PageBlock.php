@@ -160,6 +160,71 @@ class PageBlock extends Model
         return $flaechen;
     }
 
+    /**
+     * Die Bausteine einer Seite als Abschnitte: Aufeinanderfolgende
+     * Textbausteine bilden einen gemeinsamen Abschnitt, jeder andere
+     * Baustein einen eigenen.
+     *
+     * Vorher war jeder Textbaustein ein eigenes Band mit eigener Fläche und
+     * Linien. Zwei davon hintereinander sahen aus wie zwei leere Kästen,
+     * egal wie man den Text darin anordnete (Abnahme 23.09.2026). Jetzt
+     * zeigt die Seite sie als einen Artikel (x-blocks.artikel) bzw. auf der
+     * Startseite als Spalten (x-blocks.nebeneinander). Im Panel bleiben es
+     * einzelne Bausteine.
+     *
+     * Die Fläche wechselt von Abschnitt zu Abschnitt, genau wie vorher von
+     * Baustein zu Baustein (flaechenFuer).
+     *
+     * @param  iterable<self>  $bloecke
+     * @param  string  $davor  Fläche des Elements über dem ersten Baustein
+     * @return list<array{bloecke: list<self>, flaeche: string}>
+     */
+    public static function abschnitte(iterable $bloecke, string $davor = 'card'): array
+    {
+        $abschnitte = [];
+
+        foreach ($bloecke as $block) {
+            $letzter = array_key_last($abschnitte);
+
+            if ($block->typ === 'text' && $letzter !== null
+                && $abschnitte[$letzter]['bloecke'][0]->typ === 'text') {
+                $abschnitte[$letzter]['bloecke'][] = $block;
+
+                continue;
+            }
+
+            $davor = $block->flaeche($davor);
+            $abschnitte[] = ['bloecke' => [$block], 'flaeche' => $davor];
+        }
+
+        return $abschnitte;
+    }
+
+    /**
+     * Kurz genug, um auf der Startseite neben einem anderen Abschnitt zu
+     * stehen: höchstens drei Absätze. Längere Texte in einer Drittel- oder
+     * halben Spalte liefen zu weit nach unten.
+     */
+    public function istKurzerText(): bool
+    {
+        return $this->typ === 'text' && count($this->data['absaetze'] ?? []) <= 3;
+    }
+
+    /** Die Angaben eines Textbausteins für x-blocks.text-inhalt. */
+    public function textAngaben(): array
+    {
+        $data = $this->data ?? [];
+
+        return [
+            'eyebrow' => $data['eyebrow'] ?? null,
+            'titel' => $data['titel'] ?? null,
+            'anker' => $this->anker(),
+            'absaetze' => $data['absaetze'] ?? [],
+            'hand' => $data['hand'] ?? null,
+            'cta' => knoepfe([$data['cta'] ?? null])[0] ?? null,
+        ];
+    }
+
     /** Die Fläche dieses Bausteins, wenn davor die Fläche $davor steht. */
     public function flaeche(string $davor): string
     {

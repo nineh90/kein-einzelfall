@@ -3,7 +3,7 @@
 {{-- Unten der Ausgleich für die feste Leiste auf dem Handy (4 rem plus die
      Home-Leiste des iPhones). Bis KEV-26 stand dafür ein eigener Streifen
      unter dem Fuss — als heller Balken unter dem Grün. --}}
-<footer class="bg-green-deep px-4 md:px-8 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 text-on-green lg:px-10 lg:pb-8">
+<footer class="bg-green-deep px-4 md:px-8 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 text-on-green lg:px-10 xl:pb-8">
     <div class="mx-auto max-w-6xl">
 
         <div class="mb-8 flex items-center gap-3">

@@ -1824,7 +1824,7 @@ Handy- und Tablet-Fassungen zusätzlich am Screenshot angesehen.
 
 **Barrierefreiheits-Knopf.** Das Symbol ist jetzt das international übliche
 „Universal Access“ (Figur mit ausgebreiteten Armen im Kreis). Die Figur ohne
-Kreis wurde eher als „Person“ gelesen. Unterhalb von `lg` gibt es das Tab am
+Kreis wurde eher als „Person“ gelesen. Unterhalb von `xl` (siehe Abschnitt 27) gibt es das Tab am
 linken Rand nicht mehr, denn es lag dort über dem Text. Stattdessen steht ein
 Eintrag „Darstellung“ in der unteren Leiste, vor dem Notausgang, damit der
 ganz rechts bleibt. Das Panel öffnet sich auf dem Handy als Blatt über der
@@ -1850,3 +1850,48 @@ Skript.
 `tests/Browser/bedienung.mjs` prüft neu die Handy-Fassung der Toolbar (kein
 Tab, Knopf in der Leiste, Panel lässt den Notausgang frei, Fokus kehrt
 zurück) und dass der Leisten-Knopf ohne JavaScript verborgen bleibt.
+
+---
+
+## 27. Textabschnitte als Artikel bzw. nebeneinander (23.09.2026)
+
+Abschnitte, in denen nur Text steht, wirkten auf dem Desktop unfertig, vor
+allem zwei hintereinander. Der eigentliche Grund: Jeder Textbaustein war ein
+eigenes Band mit eigener Fläche und Linien, also sahen zwei davon aus wie
+zwei leere Kästen. Zwei Zwischenstände wurden in der Abnahme verworfen:
+Überschrift links und Text rechts, dann dasselbe im Zickzack. Beides hat nur
+den Inhalt der Kästen umsortiert. Bilder hätten nur einzelne Stellen
+gerettet (gut 100 Textabschnitte), und KI-Bilder von Menschen passen nicht
+zu einer Opferhilfe.
+
+**Lösung: Aufeinanderfolgende Textbausteine bilden einen Abschnitt.**
+`PageBlock::abschnitte()` fasst sie beim Anzeigen zusammen. Im Panel bleiben
+es einzelne Bausteine. Die Fläche wechselt von Abschnitt zu Abschnitt, wie
+vorher von Baustein zu Baustein. `x-bloecke` entscheidet, wie ein Abschnitt
+dargestellt wird:
+
+| Abschnitt | Darstellung |
+|---|---|
+| ein einzelner Baustein | wie bisher (`x-block`) |
+| mehrere Textbausteine, Startseite, höchstens drei mit je höchstens drei Absätzen | `x-blocks.nebeneinander`: gleichwertige Spalten auf einer Fläche, feine Linie dazwischen, Knöpfe unten auf einer Linie |
+| sonst | `x-blocks.artikel`: ein durchgehender Artikel, Überschriften im Textfluss |
+
+**Artikel mit Seitenleiste.** Hat die Seite mindestens zwei Sprungziele,
+steht ab `lg` links „Auf dieser Seite“. Es klebt beim Scrollen und markiert
+den Abschnitt, in dem man gerade liest (`resources/js/inhaltsverzeichnis.js`,
+`aria-current="true"`). Die Spalten teilen sich wie beim Spendenblock (4:8,
+ab `xl` 5:7), sodass die Textkante seitenweit fluchtet. Nur der erste
+Artikel einer Seite bekommt die Leiste. Der Verzeichnis-Kasten über dem
+Inhalt bleibt für Handy und Tablet (`lg:hidden`, wenn es die Leiste gibt).
+Ins Verzeichnis kommt neu auch der Spendenblock (`#spenden`).
+
+Der Inhalt eines Textabschnitts steht jetzt in `x-blocks.text-inhalt`, weil
+ihn drei Hüllen brauchen (`text`, `artikel`, `nebeneinander`).
+`PageBlock::textAngaben()` liefert die Angaben dafür.
+
+**Nebenbei korrigiert:** Das Barrierefreiheits-Tab am Rand und die untere
+Leiste wechseln jetzt bei `xl` statt bei `lg`. Zwischen 1024 und 1279 px ist
+der Seitenrand (40 px) schmaler als das Tab (44 px), und es lag über dem
+Text. Bis 1280 px gibt es ohnehin nur das Burger-Menü.
+
+Auf dem Handy stehen die Abschnitte wie vorher untereinander.

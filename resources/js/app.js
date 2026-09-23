@@ -18,6 +18,7 @@
  * Inline-Script im <head>. Wenn Vite hier ausfällt, muss er trotzdem funktionieren.
  */
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
+import { inhaltsverzeichnisVerdrahten } from './inhaltsverzeichnis'
 import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
@@ -31,6 +32,9 @@ speicherVerdrahten()
 
 // Nur wo ein Spendenbaustein steht (IBAN kopieren).
 kopierenVerdrahten()
+
+// Nur wo ein Artikel mit Seitenleiste steht.
+inhaltsverzeichnisVerdrahten()
 
 // Steht bewusst hinter der Toolbar. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.

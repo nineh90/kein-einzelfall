@@ -31,8 +31,9 @@
     steht das Tab gleich hinter dem Sprunglink — damit ist es der zweite
     Tab-Stopp und für die Tastatur früh erreichbar, was zu seinem Zweck passt.
 
-    Unterhalb von „lg“ gibt es das Tab nicht (KEV-26): Auf dem Handy lag es
-    mitten über dem Text — Überschriften und erste Zeichen jedes Absatzes
+    Unterhalb von „xl“ gibt es das Tab nicht (KEV-26): Auf dem Handy lag es
+    mitten über dem Text, und zwischen 1024 und 1279 px ist der Seitenrand
+    (40 px) schmaler als das Tab (44 px) — Überschriften und erste Zeichen jedes Absatzes
     verschwanden dahinter. Dort sitzt derselbe Knopf in der unteren Leiste
     (x-layout.mobile-bar), und das Panel öffnet sich als Blatt direkt darüber.
     a11y.js verdrahtet alle Knöpfe mit data-a11y-oeffnen.
@@ -42,7 +43,7 @@
             data-a11y-oeffnen
             aria-expanded="false"
             aria-controls="a11y-panel"
-            class="fixed left-0 top-1/2 z-40 hidden h-12 w-11 -translate-y-1/2 items-center justify-center lg:flex
+            class="fixed left-0 top-1/2 z-40 hidden h-12 w-11 -translate-y-1/2 items-center justify-center xl:flex
                    rounded-r-xl border border-l-0 border-line bg-card text-green shadow-md
                    transition-colors hover:bg-green-mist">
         <span class="sr-only">Darstellung und Barrierefreiheit einstellen</span>
@@ -69,7 +70,7 @@
          class="fixed inset-x-2 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-50 max-h-[70vh]
                 overflow-y-auto rounded-card border border-line bg-card p-4 shadow-lg
                 sm:left-auto sm:right-2 sm:w-80
-                lg:bottom-auto lg:left-2 lg:right-auto lg:top-1/2 lg:max-h-[85vh] lg:-translate-y-1/2">
+                xl:bottom-auto xl:left-2 xl:right-auto xl:top-1/2 xl:max-h-[85vh] xl:-translate-y-1/2">
 
         <div class="mb-3 flex items-center justify-between gap-4">
             {{-- Bewusst kein <h2>: Die Toolbar steht im Quelltext vor der <h1> der

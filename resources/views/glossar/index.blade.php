@@ -34,17 +34,15 @@
          eine Karte. Das Verzeichnis nimmt die Gegenfläche des letzten
          Bausteins — seine Einträge stehen dann auf der jeweils anderen. --}}
     @php
-        $flaechen = $einleitung
-            ? \App\Models\PageBlock::flaechenFuer($einleitung->blocks, davor: 'card')
+        $abschnitte = $einleitung
+            ? \App\Models\PageBlock::abschnitte($einleitung->blocks, davor: 'card')
             : [];
-        $listeAuf = \App\Models\PageBlock::gegenflaeche(end($flaechen) ?: 'card');
+        $listeAuf = \App\Models\PageBlock::gegenflaeche($abschnitte ? end($abschnitte)['flaeche'] : 'card');
         $karte = $listeAuf === 'card' ? 'bg-cream' : 'bg-card';
     @endphp
 
     @if ($einleitung)
-        @foreach ($einleitung->blocks as $block)
-            <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
-        @endforeach
+        <x-bloecke :abschnitte="$abschnitte" art="artikel" />
     @endif
 
     <div @class(['px-4 md:px-8 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])

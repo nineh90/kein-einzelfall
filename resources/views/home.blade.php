@@ -47,10 +47,9 @@
 
     {{-- Flächenwechsel von Abschnitt zu Abschnitt, siehe PageBlock::FLAECHEN.
          Über dem ersten Baustein steht nur die helle Kopfzeile. --}}
-    @php $flaechen = \App\Models\PageBlock::flaechenFuer($page->blocks, davor: 'cream'); @endphp
-
-    @foreach ($page->blocks as $block)
-        <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
-    @endforeach
+    {{-- Kurze Textabschnitte hintereinander stehen hier als Spalten
+         nebeneinander (x-blocks.nebeneinander). --}}
+    <x-bloecke :abschnitte="\App\Models\PageBlock::abschnitte($page->blocks, davor: 'cream')"
+               art="nebeneinander" />
 
 @endsection

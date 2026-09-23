@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Page;
+use App\Models\PageBlock;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -94,14 +95,46 @@ class SeitengestaltungTest extends TestCase
         return $flaechen;
     }
 
-    public function test_aufeinanderfolgende_textbausteine_wechseln_die_flaeche(): void
+    /**
+     * Textbausteine hintereinander bilden einen Artikel: eine Fläche, keine
+     * Bänder dazwischen (Abnahme 23.09.2026). Bis dahin stand hier der
+     * gegenteilige Test — jeder Textbaustein wechselte die Fläche, und genau
+     * das liess zwei Abschnitte wie zwei leere Kästen aussehen.
+     */
+    public function test_aufeinanderfolgende_textbausteine_bilden_einen_artikel(): void
     {
-        // Ohne Wechsel laufen zehn Abschnitte optisch ununterscheidbar ineinander.
-        $flaechen = $this->flaechen('/datenschutz');
+        $block = fn (string $typ) => new PageBlock(['typ' => $typ, 'data' => ['titel' => 'T']]);
 
-        $this->assertGreaterThan(3, count($flaechen));
-        $this->assertContains('card', $flaechen);
-        $this->assertContains('cream', $flaechen);
+        $abschnitte = PageBlock::abschnitte([
+            $block('text'), $block('text'), $block('text'),
+            $block('cta_band'),
+            $block('text'),
+            $block('donation_options'),
+            $block('text'), $block('text'),
+        ]);
+
+        $this->assertSame([3, 1, 1, 1, 2], array_map(fn ($a) => count($a['bloecke']), $abschnitte));
+    }
+
+    public function test_lange_seiten_bekommen_ein_mitlaufendes_verzeichnis(): void
+    {
+        $html = $this->get('/kontakt')->assertOk()->getContent();
+
+        // Seitenleiste im Artikel, der Kasten oben nur noch unterhalb von „lg“.
+        $this->assertStringContainsString('data-verzeichnis', $html);
+        $this->assertMatchesRegularExpression('/lg:hidden[^>]*>\s*<div class="mx-auto max-w-6xl">\s*<div class="max-w-prose">\s*<nav/', $html);
+
+        // Alle fünf Abschnitte stehen in einem einzigen Artikel.
+        $this->assertSame(1, substr_count($html, 'data-verzeichnis'));
+    }
+
+    public function test_kurze_abschnitte_der_startseite_stehen_nebeneinander(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        // „Vereinsarbeit“ und „Mitglieder“ in einem gemeinsamen Raster.
+        $this->assertMatchesRegularExpression(
+            '/md:grid-cols-2[^"]*">(?:(?!<section).)*Vereinsarbeit(?:(?!<section).)*Mitglieder/s', $html);
     }
 
     /**

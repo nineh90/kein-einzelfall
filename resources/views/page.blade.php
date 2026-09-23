@@ -57,9 +57,17 @@
     // sonst zwar im Verzeichnis, sprang aber nirgendwohin — und das fällt
     // ausgerechnet dem auf, der das Verzeichnis benutzt, weil er nicht scrollen
     // kann oder will.
+    //
+    // Dazu der Spendenblock: Er trägt mit id="spenden" ein festes Sprungziel.
     $sprungpunkte = $bloecke
-        ->filter(fn ($b) => $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null))
-        ->map(fn ($b) => ['anker' => $b->anker(), 'titel' => $b->data['titel']])
+        ->map(fn ($b) => match (true) {
+            $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null)
+                => ['anker' => $b->anker(), 'titel' => $b->data['titel']],
+            $b->typ === 'donation_options'
+                => ['anker' => 'spenden', 'titel' => $b->data['titel'] ?? 'Jetzt spenden'],
+            default => null,
+        })
+        ->filter()
         ->values()
         ->all();
 
@@ -68,8 +76,17 @@
     // Seite Rhythmus und macht Abschnittsgrenzen sichtbar. Der Seitenkopf ist
     // eine Karte, also beginnt der Inhalt hell — und was nach dem letzten
     // Baustein kommt, hebt sich ebenfalls von ihm ab.
-    $flaechen = PageBlock::flaechenFuer($bloecke, davor: 'card');
-    $zuletzt = end($flaechen) ?: 'card';
+    //
+    // Aufeinanderfolgende Textbausteine bilden dabei einen Abschnitt (ein
+    // Artikel, siehe PageBlock::abschnitte), und die Fläche wechselt von
+    // Abschnitt zu Abschnitt.
+    $abschnitte = PageBlock::abschnitte($bloecke, davor: 'card');
+    $zuletzt = $abschnitte ? end($abschnitte)['flaeche'] : 'card';
+
+    // Steht ein Artikel mit Seitenleiste auf der Seite, trägt die ab „lg“ das
+    // Verzeichnis. Der Kasten oben wäre dort doppelt.
+    $mitSeitenleiste = count($sprungpunkte) >= 2
+        && collect($abschnitte)->contains(fn ($a) => count($a['bloecke']) > 1);
 
     $geschwister = $kontext->geschwister();
     $weiterlesenAuf = PageBlock::gegenflaeche($zuletzt);
@@ -98,7 +115,7 @@
         :lead="$lead" />
 
     @if (count($sprungpunkte) >= 4)
-        <div class="px-4 md:px-8 pt-8 lg:px-10">
+        <div @class(['px-4 md:px-8 pt-8 lg:px-10', 'lg:hidden' => $mitSeitenleiste])>
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose">
                     <x-ui.sprungmarken :punkte="$sprungpunkte" />
@@ -107,9 +124,8 @@
         </div>
     @endif
 
-    @foreach ($bloecke as $block)
-        <x-block :block="$block" :flaeche="$flaechen[$loop->index]" />
-    @endforeach
+    <x-bloecke :abschnitte="$abschnitte" art="artikel"
+               :verzeichnis="$mitSeitenleiste ? $sprungpunkte : []" />
 
     <x-layout.weiterlesen
         :seiten="$geschwister"

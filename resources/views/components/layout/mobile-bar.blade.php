@@ -7,9 +7,13 @@
 
     pb-[env(safe-area-inset-bottom)] hält die Bar über der Home-Indicator-Leiste
     auf iPhones, sonst liegt der Exit-Button unter dem Systembalken.
+
+    Sichtbar bis „xl“, nicht nur bis „lg“ (KEV-26): Bis 1280 px gibt es ohnehin
+    nur das Burger-Menü, und das Barrierefreiheits-Tab am Rand erscheint erst
+    ab dort. Dazwischen hätte es sonst keinen Weg zur Darstellung gegeben.
 --}}
 <nav aria-label="{{ __('rahmen.schnellzugriff') }}"
-     class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] lg:hidden">
+     class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] xl:hidden">
     <ul class="flex items-stretch justify-around">
         @foreach (\App\Support\Navigation::mobilLeiste() as $item)
             <li class="flex-1">
