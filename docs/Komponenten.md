@@ -1986,3 +1986,9 @@ Links beider Karten auf einer Linie.
 
 Gemessen (1440 px): geschlossen 254/254, rechte Karte offen 254/1009. Auf
 dem Handy stehen die Karten untereinander, dort war nichts zu tun.
+
+Nachtrag: Der Knopf hiess bei „Herr und Frau Unbekannt“ „Mehr über Herr
+lesen“, weil stur das erste Wort genommen wurde. `TeamMember::rufname()`
+nimmt jetzt den ganzen Namen, wenn er mit einer Anrede (Herr, Frau, Dr.,
+Prof.) beginnt oder mehrere Personen nennt („und“, „&“), sonst weiter den
+Vornamen.

@@ -29,6 +29,23 @@ class TeamMember extends Model
         return filled($this->profil);
     }
 
+    /**
+     * Wie die Person im Knopf „Mehr über … lesen“ heisst.
+     *
+     * Normalerweise der Vorname („Mehr über Tatjana lesen“). Das erste Wort
+     * passt aber nicht immer: Aus „Herr und Frau Unbekannt“ wurde „Mehr über
+     * Herr lesen“. Beginnt der Name mit einer Anrede oder nennt er mehrere
+     * Personen („und“, „&“), steht deshalb der ganze Name da.
+     */
+    public function rufname(): string
+    {
+        $name = trim($this->name);
+        $anrede = preg_match('/^(Herr|Frau|Dr\.|Prof\.)\s/u', $name);
+        $mehrere = preg_match('/\s(und|&)\s/u', $name);
+
+        return $anrede || $mehrere ? $name : Str::before($name, ' ');
+    }
+
     /** Sprungziel, damit sich einzelne Profile verlinken lassen. */
     public function anker(): string
     {

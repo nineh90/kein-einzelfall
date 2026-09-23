@@ -114,7 +114,7 @@
                                                     text-sm text-green-deep marker:content-none
                                                     [&::-webkit-details-marker]:hidden">
                                         <span class="flex-1">
-                                            <span class="group-open:hidden">Mehr über {{ Str::before($person->name, ' ') }} lesen</span>
+                                            <span class="group-open:hidden">Mehr über {{ $person->rufname() }} lesen</span>
                                             <span class="hidden group-open:inline">Weniger anzeigen</span>
                                         </span>
                                         <span class="transition-transform group-open:rotate-180">
