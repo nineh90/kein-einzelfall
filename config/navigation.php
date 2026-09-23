@@ -124,11 +124,15 @@ return [
     ],
 
     /*
-     * Mobile Sticky-Bar. Bewusst genau vier Einträge — die Bar ist in akuten
+     * Mobile Sticky-Bar. Bewusst wenige Einträge — die Bar ist in akuten
      * Situationen die primäre Navigation, da zählt Eindeutigkeit vor Vollständigkeit.
+     *
+     * Zusammen mit „Darstellung“ und dem Notausgang (beide fest in
+     * mobile-bar.blade.php) sind es vier. „Start“ ist seit KEV-28 raus: Mit
+     * fünf Symbolen wurde die Leiste auf kleinen Handys eng, und zur
+     * Startseite führt ohnehin das Logo oben links, auf jeder Seite.
      */
     'mobile_bar' => [
-        ['schluessel' => 'leiste_start', 'label' => 'Start',    'url' => '/',                  'icon' => 'home'],
         ['schluessel' => 'leiste_gruppen', 'label' => 'Gruppen',  'url' => '/selbsthilfegruppen', 'icon' => 'users'],
         ['schluessel' => 'leiste_anfrage', 'label' => 'Anfrage',  'url' => '/anfragen',          'icon' => 'message'],
     ],

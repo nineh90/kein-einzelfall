@@ -20,7 +20,6 @@ return [
 
     'gespeicherte_einstellungen' => 'Saved settings',
     'glossar' => 'Glossary',
-    'leiste_start' => 'Home',
     'leiste_gruppen' => 'Groups',
     'leiste_anfrage' => 'Enquiry',
 ];

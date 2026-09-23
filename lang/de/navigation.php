@@ -11,7 +11,7 @@
  * meisten Einträge sind Seitentitel und damit Fachbegriffe des Sozialrechts.
  * Sie kommen automatisch aus der übersetzten Seite, sobald der Verein sie
  * angelegt hat (siehe App\Support\Navigation). Nur die Beschriftungen, die
- * reine Bedienung sind, stehen in en/ru — das sind die drei „leiste_“-Einträge
+ * reine Bedienung sind, stehen in en — das sind die „leiste_“-Einträge
  * und die Bereichsnamen ohne eigene Seite.
  */
 return [
@@ -38,7 +38,6 @@ return [
     'kontakt' => 'Kontakt',
     'leiste_anfrage' => 'Anfrage',
     'leiste_gruppen' => 'Gruppen',
-    'leiste_start' => 'Start',
     'mitgliedschaft' => 'Mitgliedschaft',
     'satzung' => 'Satzung',
     'selbsthilfegruppen' => 'Selbsthilfegruppen',

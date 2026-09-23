@@ -1921,3 +1921,13 @@ Der Kopf trägt `data-anschliessend`, weil er zum Abschnitt darunter gehört.
 Die Hinweisleisten darüber (Entwurf, Sprachrückfall, Leichte Sprache)
 tragen `data-hinweisleiste`. Beides überspringt der Flächentest in
 `SeitengestaltungTest`.
+
+---
+
+## 29. Untere Leiste ohne „Start“ (23.09.2026, KEV-28)
+
+Seit „Darstellung“ in der unteren Leiste steht (KEV-26), waren es fünf
+Symbole, und auf kleinen Handys wurde es eng (64 px je Eintrag bei 320 px).
+„Start“ ist raus. Zur Startseite führt auf jeder Seite das Logo oben links.
+Die Leiste hat jetzt vier Einträge: Gruppen, Anfrage, Darstellung,
+Notausgang (je 80 px bei 320 px). Der Notausgang bleibt ganz rechts.
