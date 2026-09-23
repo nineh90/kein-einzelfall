@@ -1778,3 +1778,37 @@ echten Links, `aria-live` an der Trefferzahl. **Kein Autofokus**: Er reisst
 Screenreader-Nutzer aus der Seitenstruktur, bevor sie die Überschrift gehört
 haben. axe ist auf allen vier Zuständen sauber (leer, Treffer, keine Treffer,
 Krise), der Browser-Test prüft Tastaturbedienung und den JS-freien Fall.
+
+---
+
+## 25. Spendenbereich auf dem Desktop (23.09.2026, KEV-25)
+
+Auf breiten Bildschirmen hatte der Baustein `donation_options` viel leere
+Fläche. Auf der Startseite war die Überweisungskarte nur wegen der langen
+QR-Bildunterschrift so hoch, und unter IBAN und BIC blieb ein Loch. Auf `/spenden`
+stand er als schmale, mittige Spalte (`max-w-3xl`) mit vier gestapelten Kästen
+und fluchtete nicht mit den Textblöcken darüber.
+
+**Ein Raster für beide Fassungen** (`max-w-6xl`, wie die übrigen Bausteine):
+links Überschrift und Einleitung, rechts **eine** Karte mit Überweisung und
+PayPal, getrennt durch eine Linie — zwei Wege zum selben Ziel. PayPal steht
+als eine Zeile mit dem Knopf rechts. Zwischen `lg` und `xl` bekommt die rechte
+Spalte mehr Anteil (4:8 statt 5:7), sonst bricht die IBAN neben dem QR-Code um.
+
+**Überweisung:** neu die Zeile „Empfänger" (derselbe Wert, der im QR-Code
+steckt, siehe Übergabe-Checkliste) und ein Knopf **„IBAN kopieren"**
+(`resources/js/kopieren.js`). Der Knopf steht mit `hidden` im HTML und wird
+nur sichtbar, wenn der Browser die Zwischenablage anbietet. Die Rückmeldung
+„Kopiert" läuft über ein `role="status"`. Die Bildunterschrift am QR-Code ist
+kürzer geworden.
+
+**Nur auf der Spendenseite (ohne `kompakt`):** Die betterplace-Projekte
+bekommen die volle Breite unter dem Raster, zwei nebeneinander. Die
+Spendenbescheinigung rückt auf dem Desktop als Randnotiz unter die
+Überschrift, also dorthin, wo sonst nur leere Fläche wäre. Im Quelltext und
+auf dem Handy bleibt sie am Ende. Damit die hohe rechte Spalte die erste
+Zeile nicht streckt, ist die zweite Rasterzeile `1fr`.
+
+Die Daten des Bausteins haben sich nicht geändert, eine Migration ist nicht
+nötig.
+

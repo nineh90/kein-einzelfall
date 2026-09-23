@@ -205,8 +205,9 @@ return [
         'empfaenger' => 'Empfänger',
         'paypal_knopf' => 'Bei PayPal spenden',
         'qr_label' => 'QR-Code mit der Bankverbindung des Vereins zum Einlesen in einer Banking-App',
-        'qr_hinweis' => 'Mit der Banking-App scannen — die Überweisung ist dann schon ausgefüllt. '
-            .'Den Betrag gibst du selbst ein.',
+        'qr_hinweis' => 'Mit der Banking-App scannen — nur noch den Betrag eingeben.',
+        'iban_kopieren' => 'IBAN kopieren',
+        'iban_kopiert' => 'Kopiert',
         'projekte' => 'Projekte auf betterplace.org',
         'projekte_hinweis' => 'Für ein bestimmtes Vorhaben spenden.',
         'bescheinigung' => 'Spendenbescheinigung',

@@ -261,6 +261,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   hinterlegt ist. Er landet im Überweisungsformular der spendenden Person; weicht
   er ab, kommt die Überweisung zurück. Im Panel im Baustein „Spendenmöglichkeiten"
   auf der Startseite (Feld „Kontoinhaber"); leer heisst „KE!N EINZELFALL e.V.".
+  Seit KEV-25 steht er auch sichtbar als „Empfänger" über der IBAN — für alle,
+  die von Hand überweisen.
 - [ ] **Spendenhinweis abnehmen.** Der Kasten für wiederkehrende Besucherinnen
   (KEV-6) erscheint ab dem 5. Seitenaufruf und gibt nach dem Wegklicken 30 Tage
   Ruhe — beides unser Vorschlag, die Besprechung nannte „5 bis 10". Der Wortlaut

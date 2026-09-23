@@ -18,6 +18,7 @@
  * Inline-Script im <head>. Wenn Vite hier ausfällt, muss er trotzdem funktionieren.
  */
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
+import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
@@ -27,6 +28,9 @@ leselinieVerdrahten()
 
 // Nur auf /barrierefreiheit vorhanden; steigt sonst sofort wieder aus.
 speicherVerdrahten()
+
+// Nur wo ein Spendenbaustein steht (IBAN kopieren).
+kopierenVerdrahten()
 
 // Steht bewusst hinter der Toolbar. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.

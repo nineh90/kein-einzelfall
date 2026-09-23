@@ -24,6 +24,8 @@
         // einsetzen, wo das auch im Text steht — ein Symbol allein sagt
         // niemandem etwas, der es nicht sieht.
         'external'      => '<path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+        // Zwei versetzte Blätter: in die Zwischenablage kopieren (IBAN).
+        'copy'          => '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>',
         // Lupe für die Suche.
         'search'        => '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
         // Buch für die Wissens-/Glossarbereiche.

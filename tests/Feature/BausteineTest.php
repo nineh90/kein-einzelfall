@@ -293,6 +293,19 @@ class BausteineTest extends TestCase
         $this->assertStringContainsString('DE79 8306 5408 0006 8893 10', $html);
     }
 
+    public function test_iban_kopieren_erscheint_erst_mit_javascript(): void
+    {
+        // Ohne Skript bliebe ein Knopf, der nichts tut. Kopiert wird ohne
+        // Leerzeichen — das nehmen alle Überweisungsformulare an.
+        $html = $this->seiteMitBaustein('donation_options', [
+            'bank' => ['iban' => 'DE79 8306 5408 0006 8893 10'],
+        ]);
+
+        $this->assertMatchesRegularExpression('/data-kopieren-bereich hidden/', $html);
+        $this->assertStringContainsString('data-kopieren="DE79830654080006889310"', $html);
+        $this->assertMatchesRegularExpression('/role="status"[^>]*data-kopieren-status/', $html);
+    }
+
     public function test_unvollstaendige_bankverbindung_erzeugt_keinen_qr_code(): void
     {
         // Ein Code auf eine halbe IBAN führte eine Spende ins Leere. Lieber

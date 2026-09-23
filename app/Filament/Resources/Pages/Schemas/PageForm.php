@@ -454,9 +454,9 @@ class PageForm
                                 ->helperText(fn ($get) => $get('typ') === 'hilfe_box'
                                     ? 'Für Stellen mitten auf einer Seite. Die Nummern '
                                         .'selbst stehen in der Anwendung und sind hier nicht änderbar.'
-                                    : 'Die Fassung der Startseite: Text links, Konto und PayPal rechts '
-                                        .'daneben. Ausgeschaltet stehen die Kästen untereinander — '
-                                        .'die Fassung für die Spendenseite selbst.'),
+                                    : 'Die Fassung der Startseite: betterplace-Projekte bleiben in der '
+                                        .'rechten Spalte. Ausgeschaltet bekommen sie die volle Breite '
+                                        .'darunter — die Fassung für die Spendenseite selbst.'),
 
                             // --- Themenliste ---
                             Repeater::make('data.themen')

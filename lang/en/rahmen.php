@@ -148,8 +148,9 @@ return [
         'empfaenger' => 'Recipient',
         'paypal_knopf' => 'Donate via PayPal',
         'qr_label' => 'QR code with the association’s bank details, to scan with a banking app',
-        'qr_hinweis' => 'Scan with your banking app — the transfer is then already filled in. '
-            .'You enter the amount yourself.',
+        'qr_hinweis' => 'Scan with your banking app — just enter the amount.',
+        'iban_kopieren' => 'Copy IBAN',
+        'iban_kopiert' => 'Copied',
         'projekte' => 'Projects on betterplace.org',
         'projekte_hinweis' => 'Donate to a specific project.',
         'bescheinigung' => 'Donation receipt',
