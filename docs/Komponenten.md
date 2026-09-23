@@ -1953,3 +1953,18 @@ hat seit KEV-28 bewusst nur vier Einträge, weil fünf zu eng waren.
 Gemessen bei 320–1440 px, Deutsch und Englisch: nirgends waagerechter
 Überlauf, die Kopfzeile bleibt einzeilig (65 px mobil).
 
+---
+
+## 31. Zitat im Hero in eigener Zeile (23.09.2026, KEV-24)
+
+Der handschriftlich markierte Teil der Hero-Überschrift (`*…*` im Panel)
+beginnt jetzt in einer eigenen Zeile, wenn davor noch Text steht. Direkt
+hinter „müssen:“ hing „Ich hab es nicht gewusst!“ je nach Breite mal am
+Zeilenende, mal halb in der nächsten Zeile. Umgesetzt als `<br>` beim
+Ersetzen der Sternchen in `hero.blade.php`, der Leerraum davor entfällt.
+Beginnt eine Überschrift mit dem Akzent, gibt es keinen Umbruch.
+
+Dazu `text-balance` an der H1: Auf dem Handy blieb sonst „müssen:“ allein
+in der zweiten Zeile („Keiner soll mehr / sagen müssen:“ statt „Keiner
+soll mehr sagen / müssen:“). Bei 320 px bricht das Zitat selbst noch
+einmal um. Das geht bei dieser Schriftgröße nicht anders.

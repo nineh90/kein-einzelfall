@@ -27,11 +27,19 @@
      * Schrift und Linie stehen in der CSS (`.swash` in app.css). Die Linie ist
      * dort ein Hintergrundbild und überlebt damit den Zeilenumbruch, den eine
      * lange Überschrift auf dem Handy immer hat.
+     *
+     * Steht vor dem markierten Teil noch Text, beginnt er in einer eigenen
+     * Zeile (KEV-24). Direkt hinter „müssen:“ hing das Zitat mal am Zeilenende,
+     * mal halb in der nächsten Zeile, je nach Bildschirmbreite. So steht es
+     * immer für sich. Der Leerraum davor fällt dabei weg, sonst stünde am
+     * Ende der ersten Zeile ein unsichtbares Leerzeichen.
      */
     $ueberschrift = preg_replace_callback(
-        '/\*([^*]+)\*/u',
-        fn (array $treffer) => '<span class="swash">'.$treffer[1].'</span>',
+        '/(\s*)\*([^*]+)\*/u',
+        fn (array $treffer) => ($treffer[0][1] > 0 ? '<br>' : $treffer[1][0])
+            .'<span class="swash">'.$treffer[2][0].'</span>',
         e($titel),
+        flags: PREG_OFFSET_CAPTURE,
     );
 @endphp
 
@@ -50,7 +58,9 @@
 
             {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. Die
                  Unterlängen der Handschrift brauchen sie ebenfalls. --}}
-            <h1 class="pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:text-[2.75rem]">
+            {{-- text-balance: Auf dem Handy blieb sonst „müssen:“ allein in
+                 der zweiten Zeile stehen. --}}
+            <h1 class="text-balance pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:text-[2.75rem]">
                 {!! $ueberschrift !!}
             </h1>
 
