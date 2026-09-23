@@ -22,7 +22,7 @@
     aber niemanden aus dem Lesefluss reissen.
 --}}
 @if ($page->ungeprueft ?? false)
-    <div class="border-b border-line bg-cream px-4 md:px-8 py-3 lg:px-10">
+    <div data-hinweisleiste class="border-b border-line bg-cream px-4 md:px-8 py-3 lg:px-10">
         <p role="status"
            class="mx-auto flex max-w-6xl items-start gap-2.5 text-sm text-ink">
             <x-ui.icon name="info" :size="18" class="mt-0.5 shrink-0 text-green-deep" />

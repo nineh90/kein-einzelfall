@@ -23,7 +23,7 @@
 @if ($quelle && $quelle->code !== $ziel->code)
     {{-- Eigenes lang: Der Hinweis ist in der gewählten Sprache, der Inhalt
          darunter nicht. Ohne das läse ihn eine Vorlesehilfe falsch aus. --}}
-    <div lang="{{ $ziel->code }}" dir="{{ $ziel->richtung }}"
+    <div data-hinweisleiste lang="{{ $ziel->code }}" dir="{{ $ziel->richtung }}"
          class="border-b border-line bg-green-mist px-4 md:px-8 py-3 lg:px-10">
         <p role="status"
            class="mx-auto flex max-w-6xl items-start gap-2.5 text-sm text-ink">

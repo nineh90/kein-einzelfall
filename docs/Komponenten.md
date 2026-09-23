@@ -1895,3 +1895,29 @@ der Seitenrand (40 px) schmaler als das Tab (44 px), und es lag über dem
 Text. Bis 1280 px gibt es ohnehin nur das Burger-Menü.
 
 Auf dem Handy stehen die Abschnitte wie vorher untereinander.
+
+---
+
+## 28. Schlanker Seitenkopf (23.09.2026)
+
+Der Seitenkopf war eine eigene Karte mit Linie darunter, und das Größte
+darin war ein einzelnes Wort wie „Spenden“ in 40 px. Über dem neuen Artikel
+mit Verzeichnis (Abschnitt 27) wirkte das wie ein zusätzliches Band, das
+den Inhalt nach unten schiebt.
+
+Den Kopf ganz zu entfernen, wurde verworfen. Die H1 ist die Stelle, auf die
+Vorlesehilfen springen, um zu erfahren, wo man ist, und sie nennt
+Suchmaschinen das Thema der Seite. Mit dem Kopf verschwänden außerdem die
+Brotkrumen.
+
+**Jetzt:** kein eigenes Band und keine Linie. Brotkrumen, Bereich und H1
+stehen auf der Fläche des ersten Abschnitts (Prop `auf`, auf Inhaltsseiten
+aus `PageBlock::abschnitte()`), und der Inhalt beginnt direkt darunter. Die
+H1 ist kleiner (28/36 statt 28/40 px), steht aber immer eine Stufe über den
+Abschnittsüberschriften (24/30 px). Der dekorative Kreis oben rechts ist
+entfallen.
+
+Der Kopf trägt `data-anschliessend`, weil er zum Abschnitt darunter gehört.
+Die Hinweisleisten darüber (Entwurf, Sprachrückfall, Leichte Sprache)
+tragen `data-hinweisleiste`. Beides überspringt der Flächentest in
+`SeitengestaltungTest`.

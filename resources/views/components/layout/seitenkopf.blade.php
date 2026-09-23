@@ -3,6 +3,8 @@
     'bereich' => null,
     'krumen' => [],
     'lead' => null,
+    // Fläche des ersten Abschnitts darunter: Der Kopf steht auf ihr.
+    'auf' => 'cream',      // cream | card
 ])
 
 {{--
@@ -14,22 +16,34 @@
     Inhalte erfunden werden müssten: Bereich und Brotkrumen stammen aus der
     Navigation, der Vorspann ist der erste Absatz der Seite.
 --}}
-<header class="relative overflow-hidden border-b border-line bg-card px-4 md:px-8 pb-8 pt-6 lg:px-10 lg:pb-12 lg:pt-8">
+{{--
+    Seit dem 23.09.2026 schlank und ohne eigenes Band (Abnahme): Vorher war
+    der Kopf eine eigene Karte mit Linie darunter, und das Größte darin war
+    ein einzelnes Wort wie „Spenden“ in 40 px. Jetzt stehen Brotkrumen und
+    Titel auf der Fläche des ersten Abschnitts, ohne Trennlinie, und der
+    Inhalt beginnt direkt darunter.
 
-    {{-- Zurückhaltende Fläche im Hintergrund. Dieselbe Bildsprache wie der
-         Aufmacher der Startseite, nur deutlich leiser. --}}
-    <div aria-hidden="true"
-         class="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full
-                bg-[radial-gradient(circle,rgb(220_230_219/.55)_0%,transparent_70%)]"></div>
+    Die H1 bleibt: Vorlesehilfen springen auf sie, um zu erfahren, wo man ist,
+    und sie ist das Thema der Seite für Suchmaschinen. Sie ist nur kleiner.
 
-    <div class="relative mx-auto max-w-6xl">
+    data-anschliessend: Der Kopf gehört zum Abschnitt darunter und ist kein
+    eigener Abschnitt im Flächenwechsel (SeitengestaltungTest).
+--}}
+<header data-anschliessend @class([
+    'px-4 md:px-8 pt-6 lg:px-10 lg:pt-10',
+    'bg-card' => $auf === 'card',
+])>
+    <div class="mx-auto max-w-6xl">
         <x-ui.brotkrumen :krumen="$krumen" />
 
         @if ($bereich)
-            <x-ui.eyebrow class="mb-3">{{ $bereich }}</x-ui.eyebrow>
+            <x-ui.eyebrow class="mb-2">{{ $bereich }}</x-ui.eyebrow>
         @endif
 
-        <h1 class="max-w-3xl font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-[2.5rem]">
+        {{-- Kleiner als früher (40 px), aber immer eine Stufe über den
+             Abschnittsüberschriften (24/30 px): Eine H1 in derselben Größe
+             wie die H2 darunter kehrt die Rangordnung optisch um. --}}
+        <h1 class="max-w-3xl font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-[2.25rem]">
             {{ $titel }}
         </h1>
 

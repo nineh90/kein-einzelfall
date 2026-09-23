@@ -24,7 +24,7 @@
     was BITV 2.0 § 4 verlangt und was ein aufklappbarer Kasten nicht leistet.
 --}}
 @if ($ziel)
-    <div class="border-b border-line bg-green-mist px-4 md:px-8 py-3 lg:px-10">
+    <div data-hinweisleiste class="border-b border-line bg-green-mist px-4 md:px-8 py-3 lg:px-10">
         <div class="mx-auto flex max-w-6xl items-center gap-2.5">
             <x-ui.icon name="accessibility" :size="20" class="shrink-0 text-green-deep" />
 

@@ -89,6 +89,14 @@ class SeitengestaltungTest extends TestCase
                 continue;
             }
 
+            // Hinweisleisten über dem Kopf (Entwurf, Sprachrückfall, Leichte
+            // Sprache) sind kein Inhaltsabschnitt: schmale Streifen mit
+            // eigener Linie. Seit der Seitenkopf kein eigenes Band mehr ist
+            // (23.09.2026), steht direkt darunter der erste Abschnitt.
+            if ($kind->hasAttribute('data-hinweisleiste')) {
+                continue;
+            }
+
             $flaechen[] = str_contains($klassen, 'bg-card') ? 'card' : 'cream';
         }
 

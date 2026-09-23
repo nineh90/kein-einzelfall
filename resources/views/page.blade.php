@@ -83,6 +83,10 @@
     $abschnitte = PageBlock::abschnitte($bloecke, davor: 'card');
     $zuletzt = $abschnitte ? end($abschnitte)['flaeche'] : 'card';
 
+    // Der Seitenkopf steht ohne eigenes Band auf der Fläche des ersten
+    // Abschnitts (seit 23.09.2026).
+    $ersteFlaeche = $abschnitte[0]['flaeche'] ?? 'cream';
+
     // Steht ein Artikel mit Seitenleiste auf der Seite, trägt die ab „lg“ das
     // Verzeichnis. Der Kasten oben wäre dort doppelt.
     $mitSeitenleiste = count($sprungpunkte) >= 2
@@ -112,10 +116,11 @@
         :titel="$page->titel"
         :bereich="$kontext->bereichName()"
         :krumen="$kontext->brotkrumen($page->titel)"
-        :lead="$lead" />
+        :lead="$lead"
+        :auf="$ersteFlaeche" />
 
     @if (count($sprungpunkte) >= 4)
-        <div @class(['px-4 md:px-8 pt-8 lg:px-10', 'lg:hidden' => $mitSeitenleiste])>
+        <div @class(['px-4 md:px-8 pt-8 lg:px-10', 'lg:hidden' => $mitSeitenleiste, 'bg-card' => $ersteFlaeche === 'card'])>
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose">
                     <x-ui.sprungmarken :punkte="$sprungpunkte" />
