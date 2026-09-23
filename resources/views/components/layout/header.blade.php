@@ -18,23 +18,21 @@
 
         {{-- Wortmarke.
 
-             Darf nur auf sehr schmalen Geräten schrumpfen: Bei 320 px
-             Fensterbreite — dem Wert, ab dem WCAG 1.4.10 waagerechtes Scrollen
-             verbietet — hat sie die Kopfzeile auf 340 px aufgezogen und
-             Einstellungsknopf und Menü aus dem Bild geschoben.
+             Unter „md“ nur das Logo, etwas grösser (KEV-27). Ab „sm“ kommen
+             Sprachwahl und die Beschriftung „Suche“ dazu, mit Name wurde die
+             Zeile zwischen 640 und 767 px zu breit.
+             Der Name passte dort neben Suche, Notausgang und Menü nie ganz
+             hin: erst abgeschnitten, dann auf zwei Zeilen gestapelt. Der frei
+             gewordene Platz geht an den Notausgang, der jetzt auch auf dem
+             Handy beschriftet ist.
 
-             Ab „sm“ wieder shrink-0: Dort ist Platz, und ein abgeschnittener
-             Vereinsname ist kein akzeptabler Dauerzustand. --}}
+             Der Name bleibt für Vorlesehilfen im Link (sr-only), sonst hiesse
+             der Link zur Startseite nur „Link, Bild“. --}}
         <a href="{{ \App\Models\Language::aktuell()->pfad('/') }}"
-           class="flex min-w-0 items-center gap-2 no-underline sm:min-w-fit sm:shrink-0 sm:gap-2.5">
-            <img src="/img/logo.png" alt="" width="36" height="36" class="h-9 w-9 shrink-0 object-contain">
-            {{-- Unterhalb von „sm“ steht „e.V.“ klein in einer zweiten Zeile
-                 (KEV-26). In einer Zeile braucht der Name 167 px, auf gängigen
-                 Handys (360–390 px) blieben neben Suche, Notausgang und Menü
-                 aber nur 136–166 px, und er wurde abgeschnitten. Gestapelt
-                 passt er ab 360 px vollständig. --}}
-            <span class="truncate font-display text-[0.9375rem] font-medium leading-tight tracking-[0.01em] text-ink sm:text-base">
-                KE!N EINZELFALL<span class="max-sm:block max-sm:text-[0.6875rem] max-sm:font-normal max-sm:tracking-[0.14em] max-sm:text-ink-soft"> e.V.</span>
+           class="flex shrink-0 items-center gap-2.5 no-underline">
+            <img src="/img/logo.png" alt="" width="40" height="40" class="h-10 w-10 shrink-0 object-contain md:h-9 md:w-9">
+            <span class="sr-only font-display text-base font-medium tracking-[0.01em] text-ink md:not-sr-only md:whitespace-nowrap">
+                KE!N EINZELFALL e.V.
             </span>
         </a>
 
@@ -89,7 +87,7 @@
             </ul>
         </nav>
 
-        <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <div class="flex shrink-0 items-center gap-2">
             {{-- Suche (KEV-23).
 
                  Ein Link und kein aufklappbares Feld im Kopf: Ein Eingabefeld
@@ -98,6 +96,9 @@
                  und der Notausgang behält seine Position, die ist Teil seiner
                  Verlässlichkeit. Der Link führt auf die Suchseite, wo das Feld
                  gross und mit sichtbarer Beschriftung steht.
+
+                 Bleibt im Kopf und wandert nicht in die untere Leiste (KEV-27):
+                 Die hat seit KEV-28 bewusst nur vier Einträge.
 
                  Beschriftung ab „sm" sichtbar, darunter nur die Lupe mit
                  sr-only-Text — ein Symbol allein sagt niemandem etwas, der es
@@ -127,7 +128,7 @@
                  vorher war er auf dem Handy nur unten in der Leiste und im Menü,
                  was ihn dort versteckte. Platz dafür ist da, seit der a11y-Knopf
                  aus der Reihe gewandert ist. Auf schmalen Geräten nur das Symbol,
-                 ab „sm“ mit Beschriftung — die Logik sitzt im Exit-Button. --}}
+                 ab 360 px mit Beschriftung — die Logik sitzt im Exit-Button. --}}
             <x-layout.exit-button />
 
             {{--

@@ -1931,3 +1931,25 @@ Symbole, und auf kleinen Handys wurde es eng (64 px je Eintrag bei 320 px).
 „Start“ ist raus. Zur Startseite führt auf jeder Seite das Logo oben links.
 Die Leiste hat jetzt vier Einträge: Gruppen, Anfrage, Darstellung,
 Notausgang (je 80 px bei 320 px). Der Notausgang bleibt ganz rechts.
+
+---
+
+## 30. Kopfzeile auf dem Handy nur mit Logo (23.09.2026, KEV-27)
+
+Unter `md` (768 px) steht im Kopf nur das Logo, etwas größer (40 statt
+36 px). Der Name passte dort nie richtig: Erst wurde er abgeschnitten, dann
+auf zwei Zeilen gestapelt (KEV-26). Für Vorlesehilfen bleibt er als
+`sr-only` im Link zur Startseite. Ab `md` steht er wieder sichtbar daneben.
+Erst ab `md` und nicht ab `sm`, weil ab `sm` Sprachwahl und die Beschriftung
+„Suche“ dazukommen und die Zeile zwischen 640 und 767 px sonst zu breit wird.
+
+Den frei gewordenen Platz bekommt der **Notausgang**. Er ist jetzt schon ab
+360 px beschriftet statt erst ab 640 px. Ein beschrifteter Notausgang ist
+eindeutiger als ein Symbol. Unter 360 px bleibt es beim Symbol.
+
+Die **Suche bleibt im Kopf** und wandert nicht in die untere Leiste. Die
+hat seit KEV-28 bewusst nur vier Einträge, weil fünf zu eng waren.
+
+Gemessen bei 320–1440 px, Deutsch und Englisch: nirgends waagerechter
+Überlauf, die Kopfzeile bleibt einzeilig (65 px mobil).
+
