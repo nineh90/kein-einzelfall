@@ -11,6 +11,17 @@
         ->orderBy('position')
         ->orderBy('name')
         ->get();
+
+    // Wo man mitmachen kann, steht oben; was noch nicht losgeht, darunter.
+    [$offene, $spaetere] = $gruppen->partition->istOffen();
+
+    // Zwischenüberschriften nur, wenn es beides gibt. Sonst stünde über
+    // allen Karten ein Satz, der nichts unterscheidet.
+    $geteilt = $offene->isNotEmpty() && $spaetere->isNotEmpty();
+
+    $spaeterTitel = $spaetere->every(fn ($g) => $g->status === 'geplant')
+        ? \App\Models\Group::STATUS['geplant']
+        : 'Geplant oder zurzeit pausiert';
 @endphp
 
 @if ($gruppen->isNotEmpty())
@@ -39,76 +50,30 @@
                 <p class="mb-8 max-w-prose leading-relaxed text-ink-soft">{{ $einleitung }}</p>
             @endif
 
-            <ul class="grid gap-4 lg:grid-cols-2">
-                @foreach ($gruppen as $gruppe)
-                    <li class="flex">
-                        <article @class([
-                            'flex flex-1 flex-col rounded-card border p-5',
-                            'border-line bg-cream' => $gruppe->istOffen(),
-                            // Geplante und geschlossene Gruppen treten optisch zurück,
-                            // damit klar ist, wo man tatsächlich mitmachen kann.
-                            //
-                            // Über den Hintergrund und nicht über opacity: opacity-75
-                            // hat den Text auf 3,1:1 gedrückt und damit WCAG 1.4.3
-                            // gerissen — ausgerechnet bei dem Satz, der erklärt, warum
-                            // man sich hier nicht anmelden kann. Zurücktreten darf eine
-                            // Karte, unlesbar werden nicht.
-                            'border-line/70 bg-card' => ! $gruppe->istOffen(),
-                        ])>
-                            <div class="mb-2 flex flex-wrap items-center gap-2">
-                                @if ($gruppe->kuerzel)
-                                    <span class="rounded-full bg-green-mist px-2.5 py-0.5
-                                                 font-display text-[0.6875rem] font-semibold text-green-deep">
-                                        {{ $gruppe->kuerzel }}
-                                    </span>
-                                @endif
+            @foreach ([[$offene, \App\Models\Group::STATUS['offen']], [$spaetere, $spaeterTitel]] as [$liste, $zwischentitel])
+                @continue($liste->isEmpty())
 
-                                @unless ($gruppe->istOffen())
-                                    <span class="rounded-full border border-line px-2.5 py-0.5
-                                                 text-[0.6875rem] text-ink-soft">
-                                        {{ \App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status }}
-                                    </span>
-                                @endunless
+                @if ($geteilt)
+                    <h3 @class([
+                        'mb-4 flex items-center gap-2.5 font-display text-lg font-medium text-ink',
+                        'mt-12' => ! $loop->first,
+                    ])>
+                        @if ($loop->first)
+                            {{-- Grüner Punkt: hier kann man mitmachen --}}
+                            <span aria-hidden="true" class="size-2 rounded-full bg-green-brand"></span>
+                        @endif
+                        {{ $zwischentitel }}
+                    </h3>
+                @endif
 
-                                @if ($gruppe->online)
-                                    <span class="rounded-full border border-line px-2.5 py-0.5
-                                                 text-[0.6875rem] text-ink-soft">Online</span>
-                                @endif
-                            </div>
-
-                            <h3 class="font-display text-lg font-semibold text-ink">{{ $gruppe->name }}</h3>
-
-                            @if ($gruppe->teaser)
-                                <p class="mt-1.5 flex-1 text-sm leading-relaxed text-ink-soft">
-                                    {{ $gruppe->teaser }}
-                                </p>
-                            @endif
-
-                            @if ($gruppe->wannUndWo())
-                                {{-- Als <dl> statt loser Zeile: Screenreader lesen
-                                     „Termin: Jeden 4. Mittwoch …" als Paar. --}}
-                                <dl class="mt-3 flex gap-2 border-t border-line pt-3 text-sm">
-                                    <dt class="shrink-0 text-ink-soft">Termin</dt>
-                                    <dd class="text-ink">{{ $gruppe->wannUndWo() }}</dd>
-                                </dl>
-                            @endif
-
-                            @if ($gruppe->anmeldung_hinweis)
-                                <p class="mt-3 text-sm text-ink-soft">{{ $gruppe->anmeldung_hinweis }}</p>
-                            @endif
-
-                            @if ($gruppe->istOffen())
-                                <div class="mt-4">
-                                    <x-ui.button href="/anfragen" variant="ghost" size="sm">
-                                        Zu dieser Gruppe anfragen
-                                        <span class="sr-only">– {{ $gruppe->name }}</span>
-                                    </x-ui.button>
-                                </div>
-                            @endif
-                        </article>
-                    </li>
-                @endforeach
-            </ul>
+                <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($liste as $gruppe)
+                        <li>
+                            <x-blocks.gruppen-karte :gruppe="$gruppe" :auf="$auf" :ebene="$geteilt ? 'h4' : 'h3'" :status_sichtbar="$geteilt" />
+                        </li>
+                    @endforeach
+                </ul>
+            @endforeach
         </div>
     </section>
 @endif

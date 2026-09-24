@@ -413,8 +413,16 @@ ist entsprechend keine Rollenbezeichnung.
 mit Kürzeln. Termin, Rhythmus und Ort stehen als eigene Felder statt im
 Fließtext.
 
-Geplante und geschlossene Gruppen treten optisch zurück und bekommen **keinen
-Anfrage-Knopf** — er würde Erwartungen wecken, die niemand einlösen kann.
+Geplante und geschlossene Gruppen bekommen **keinen Anfrage-Knopf** — er
+würde Erwartungen wecken, die niemand einlösen kann.
+
+Seit 24.09.2026 sehen alle Karten gleich aus (`x-blocks.gruppen-karte`). Der
+Status steht nicht mehr in der Hintergrundfarbe, sondern in der Gliederung:
+oben „Offen für neue Teilnehmende“, darunter „In Planung“, je mit
+Zwischenüberschrift, sobald es beides gibt. Vorher waren offene Gruppen
+cremefarben und geplante weiß, und ausgerechnet die geplanten stachen heraus.
+Jede Karte hat denselben Aufbau, Termin und Knopf stehen unten auf einer
+Linie; bis zu drei Karten nebeneinander.
 
 > ⚠️ **Bewusst keine Anmeldeverwaltung.** Wer sich zu einer Selbsthilfegruppe
 > anmeldet, offenbart damit eine Angabe nach Art. 9 DSGVO. Das braucht ein
