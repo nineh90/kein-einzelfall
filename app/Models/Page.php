@@ -58,7 +58,7 @@ class Page extends Model
     public const TRIGGER_SLUG = 'trigger-warnung';
 
     protected $fillable = [
-        'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel',
+        'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel', 'titelbild', 'titelbild_alt', 'untertitel',
         'meta_title', 'meta_description', 'noindex', 'ungeprueft', 'published_at',
     ];
 

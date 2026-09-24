@@ -32,7 +32,11 @@
     $lead = null;
     $ersterBlock = $bloecke->first();
 
-    if ($ersterBlock
+    // Mit Titelbild nicht: Auf dem Bild steht statt eines ganzen Absatzes
+    // immer nur die kurze Unterzeile, damit alle Köpfe gleich gebaut sind.
+    // Der Absatz bleibt dann, wo er ist, als Einstieg in den Inhalt.
+    if (! $page->titelbild
+        && $ersterBlock
         && $ersterBlock->typ === 'text'
         && blank($ersterBlock->data['titel'] ?? null)
         && filled($ersterBlock->data['absaetze'] ?? [])) {
@@ -46,6 +50,19 @@
         } else {
             $gekuerzt = clone $ersterBlock;
             $gekuerzt->data = array_merge($ersterBlock->data, ['absaetze' => $absaetze]);
+            $bloecke = $bloecke->slice(1)->prepend($gekuerzt);
+        }
+    }
+
+    // Die Unterzeile auf dem Titelbild ist oft der erste Satz der Seite
+    // („Raum für deine Geschichte …“). Dann stünde er direkt darunter gleich
+    // noch einmal; im Inhalt fällt er deshalb weg.
+    if ($page->titelbild && $page->untertitel && $ersterBlock?->typ === 'text') {
+        $absaetze = $bloecke->first()->data['absaetze'] ?? [];
+
+        if (trim($absaetze[0] ?? '') === trim($page->untertitel)) {
+            $gekuerzt = clone $bloecke->first();
+            $gekuerzt->data = array_merge($gekuerzt->data, ['absaetze' => array_slice($absaetze, 1)]);
             $bloecke = $bloecke->slice(1)->prepend($gekuerzt);
         }
     }
@@ -117,6 +134,9 @@
         :bereich="$kontext->bereichName()"
         :krumen="$kontext->brotkrumen($page->titel)"
         :lead="$lead"
+        :untertitel="$page->titelbild ? $page->untertitel : null"
+        :bild="$page->titelbild"
+        :bild_alt="$page->titelbild_alt"
         :auf="$ersteFlaeche" />
 
     @if (count($sprungpunkte) >= 4)

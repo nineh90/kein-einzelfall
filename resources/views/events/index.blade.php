@@ -25,7 +25,9 @@
             ['label' => 'Start', 'url' => '/'],
             ['label' => 'Veranstaltungen', 'url' => null],
         ]"
-        lead="Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen." />
+        lead="Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen."
+        untertitel="Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen."
+        :bild="\App\Support\Titelbilder::fuer('veranstaltungen')" />
 
     {{-- Bestandstext der Altseite. Die Bausteine bringen ihren eigenen Rand
          mit, deshalb stehen sie ausserhalb jedes weiteren Containers. --}}

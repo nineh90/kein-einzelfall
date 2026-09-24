@@ -7,6 +7,7 @@ use App\Models\Page;
 use App\Models\Redirect;
 use App\Support\Dokument;
 use App\Support\Spenden;
+use App\Support\Titelbilder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -234,6 +235,10 @@ class AltseiteSeeder extends Seeder
         // Vorstand und Gruppen aus dem Fliesstext in eigene Datensaetze
         // ueberfuehren und die betroffenen Seiten neu zusammensetzen.
         $this->call(TeamUndGruppenSeeder::class);
+
+        // Titelbilder im Seitenkopf. Die Migration dafür lief schon, als die
+        // Datenbank noch leer war, und hat nichts gefunden.
+        Titelbilder::setzen();
 
         $this->command->info("{$angelegt} Seiten und ".Redirect::count().' Weiterleitungen eingepflegt.');
     }

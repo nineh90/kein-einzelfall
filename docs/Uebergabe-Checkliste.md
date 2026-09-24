@@ -367,6 +367,30 @@ so recht, oder sollen die beiden zu einer Seite werden?
 
 ---
 
+### A14 · Titelbilder und Unterzeilen — bitte ansehen und gegenlesen
+
+Auf Taddis Wunsch (WhatsApp, 24.09.2026) haben 17 Seiten und die
+Terminübersicht ein Titelbild bekommen, KI-erzeugt nach ihrer Bildvorgabe
+(siehe `docs/Bildsprache.md`). Auf dem Bild stehen immer Bereich, Titel und
+eine kurze Unterzeile. Die meisten Unterzeilen sind Sätze des Vereins, diese
+stammen von uns:
+
+| Seite | Unterzeile |
+|---|---|
+| `/ueber-uns-vorstand-und-team` | Die Menschen hinter unserer Arbeit. |
+| `/unterstuetzung` | Wichtiges über Rechte, Anträge und unsere Arbeit. |
+| `/anfragen` | Persönlicher Austausch zu Entschädigung, Schwerbehinderung und Pflegegrad. |
+| `/wissen` | Rechte, Anträge und Hilfesysteme verständlich erklärt. |
+| `/kein-einzelfall-im-dialog` | Wissenschaftliche Erkenntnisse und gelebte Erfahrung im Austausch. |
+| `/soziales-entschaedigungsrecht` | Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden. |
+| `/traumafolgestoerungen-verstehen` | Was eine Traumafolgestörung ist – und wie man passende Hilfe findet. |
+| `/projekte`, `/publikationen` (noch Entwurf) | Woran wir gerade arbeiten. / Umfragen und Veröffentlichungen des Vereins. |
+
+**Frage an den Verein:** Passen Bilder und Unterzeilen? Beides lässt sich je
+Seite im Panel unter „Titelbild“ ändern.
+
+---
+
 ## B. Technisch vor dem Go-Live (Kevin)
 
 ### B1 · Muss

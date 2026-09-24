@@ -121,6 +121,10 @@ class UebersetzungenSeeder extends Seeder
             // eindeutig ist der Slug je Sprache.
             'slug' => $deutsch->slug,
             'titel' => $this->tr($deutsch->titel, $locale),
+            // Das Titelbild zeigt keinen Text, es gilt für jede Sprache.
+            'titelbild' => $deutsch->titelbild,
+            'titelbild_alt' => $this->tr($deutsch->titelbild_alt, $locale),
+            'untertitel' => $this->tr($deutsch->untertitel, $locale),
             'meta_title' => $this->tr($deutsch->meta_title, $locale),
             'meta_description' => $this->tr($deutsch->meta_description, $locale),
             'published_at' => now(),

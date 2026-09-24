@@ -181,6 +181,31 @@ class PageForm
                             .'vorbereitet und noch nicht gegengelesen ist.'),
                 ]),
 
+            Section::make('Titelbild')
+                ->description('Das Bild im Seitenkopf, mit Titel und Unterzeile darauf. Leer lassen = kein Bild.')
+                ->columns(2)
+                ->collapsed()
+                ->schema([
+                    TextInput::make('titelbild')
+                        ->label('Bild (Pfad oder Adresse)')
+                        ->maxLength(255)
+                        ->helperText('Querformat 16:9, z. B. /img/titelbilder/verein.webp. '
+                            .'Neue Bilder nach der Bildvorgabe in docs/Bildsprache.md.'),
+
+                    TextInput::make('untertitel')
+                        ->label('Unterzeile')
+                        ->maxLength(90)
+                        ->columnSpanFull()
+                        ->helperText('Steht auf dem Bild unter dem Titel. Ein kurzer Satz, '
+                            .'höchstens zwei Zeilen — wie „Raum für deine Geschichte – ohne Druck oder Bewertung“.'),
+
+                    TextInput::make('titelbild_alt')
+                        ->label('Bildbeschreibung')
+                        ->maxLength(255)
+                        ->helperText('Nur, wenn das Bild etwas aussagt. Die Stimmungsbilder sind '
+                            .'reiner Schmuck — dann leer lassen, sonst liest die Vorlesehilfe es vor.'),
+                ]),
+
             Section::make('Suchmaschinen')
                 ->description('Was bei Google in den Trefferlisten steht. Leer lassen übernimmt den Titel.')
                 ->collapsed()

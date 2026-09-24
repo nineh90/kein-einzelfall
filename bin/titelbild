@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""
+Erzeugt ein Titelbild nach der Bildvorgabe des Vereins (docs/Bildsprache.md).
+
+    FAL_KEY=... bin/titelbild <slug> "<Thema>" "<Motiv>"
+
+Thema und Motiv auf Englisch, das Modell folgt englischen Angaben deutlich
+genauer. Legt public/img/titelbilder/<slug>.webp an (2000 px breit),
+dazu <slug>-1000.webp, und überschreibt vorhandene. Das Original bleibt unter /tmp liegen.
+Das Bild danach ansehen: Motiv links, keine Schrift im Bild?
+"""
+import json, os, subprocess, sys, urllib.request
+from pathlib import Path
+
+WURZEL = Path(__file__).resolve().parent.parent
+MODELL = 'fal-ai/flux-pro/v1.1-ultra'
+
+if len(sys.argv) != 4 or 'FAL_KEY' not in os.environ:
+    sys.exit(__doc__)
+
+slug, thema, motiv = sys.argv[1:]
+vorlage = (WURZEL / 'docs/bildvorlage-en.txt').read_text()
+prompt = vorlage.replace('{THEMA}', thema).replace('{MOTIV}', motiv)
+
+anfrage = urllib.request.Request(
+    f'https://fal.run/{MODELL}',
+    data=json.dumps({'prompt': prompt, 'aspect_ratio': '16:9', 'output_format': 'jpeg'}).encode(),
+    headers={'Authorization': 'Key ' + os.environ['FAL_KEY'], 'Content-Type': 'application/json'},
+)
+antwort = json.load(urllib.request.urlopen(anfrage, timeout=300))
+
+original = Path(f'/tmp/titelbild-{slug}.jpg')
+urllib.request.urlretrieve(antwort['images'][0]['url'], original)
+
+# Groß für das Band über die volle Breite, klein für Tablet und Handy (srcset).
+for breite, qualitaet, name in [(2000, 72, f'{slug}.webp'), (1000, 74, f'{slug}-1000.webp')]:
+    ziel = WURZEL / 'public/img/titelbilder' / name
+    subprocess.run(['magick', str(original), '-resize', f'{breite}x', '-strip', '-quality', str(qualitaet), str(ziel)], check=True)
+    print(ziel.relative_to(WURZEL))
+print(f'Original: {original}')

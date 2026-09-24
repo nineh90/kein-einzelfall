@@ -43,6 +43,69 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('href="/"', $krumen);
     }
 
+    public function test_titelbild_steht_im_seitenkopf_als_schmuck(): void
+    {
+        $html = $this->get('/verein')->getContent();
+        preg_match('/<header data-anschliessend.*?<\/header>/s', $html, $kopf);
+
+        $this->assertStringContainsString('src="/img/titelbilder/verein.webp"', $kopf[0]);
+        // Stimmungsbild ohne Aussage: leeres alt, Vorlesehilfen überspringen es.
+        $this->assertStringContainsString('alt=""', $kopf[0]);
+        $this->assertFileExists(public_path('img/titelbilder/verein.webp'));
+        // Kleine Fassung für schmale Bildschirme
+        $this->assertStringContainsString('/img/titelbilder/verein-1000.webp 1000w', $kopf[0]);
+    }
+
+    public function test_titelbild_kopf_ist_immer_gleich_gebaut(): void
+    {
+        foreach (['/spenden', '/kontakt', '/wissen', '/selbsthilfegruppen'] as $pfad) {
+            preg_match('/<header data-anschliessend.*?<\/header>/s', $this->get($pfad)->getContent(), $kopf);
+            $kopf = $kopf[0];
+
+            // Grüne Zeile, Titel, Unterzeile — in dieser Reihenfolge und auf jeder Seite
+            $this->assertMatchesRegularExpression(
+                '/<img .*?<p class="[^"]*uppercase[^"]*">\s*\S.*?<h1.*?<\/h1>\s*<p[^>]*>\s*\S/s',
+                $kopf,
+                "{$pfad}: grüne Zeile, Titel oder Unterzeile fehlt",
+            );
+
+            // Die Brotkrumen stehen unter dem Bild, nicht darauf
+            $this->assertGreaterThan(strpos($kopf, '</h1>'), strpos($kopf, 'aria-label="Sie sind hier"'), $pfad);
+        }
+    }
+
+    public function test_unterzeile_steht_nicht_gleich_darunter_noch_einmal(): void
+    {
+        $html = $this->get('/selbsthilfegruppen')->getContent();
+
+        $text = preg_replace('/\s+/', ' ', $html);
+
+        $this->assertSame(1, substr_count($text, '> Raum für deine Geschichte – ohne Druck oder Bewertung </p>')
+            + substr_count($text, '>Raum für deine Geschichte – ohne Druck oder Bewertung</p>'));
+    }
+
+    public function test_terminuebersicht_nimmt_das_titelbild_der_gleichnamigen_seite(): void
+    {
+        $this->assertStringContainsString(
+            '/img/titelbilder/veranstaltungen.webp',
+            $this->get('/veranstaltungen')->getContent(),
+        );
+    }
+
+    public function test_rechtstexte_haben_kein_titelbild(): void
+    {
+        $this->assertStringNotContainsString('/img/titelbilder/', $this->get('/impressum')->getContent());
+    }
+
+    public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void
+    {
+        Page::whereNotNull('titelbild')->pluck('titelbild')->each(
+            fn ($pfad) => $this->assertFileExists(public_path(ltrim($pfad, '/')))
+        );
+
+        $this->assertGreaterThan(10, Page::whereNotNull('titelbild')->count());
+    }
+
     /**
      * Die Flächen der Abschnitte einer Seite in Dokumentreihenfolge — vom
      * Seitenkopf bis zum Kontakt-Abschluss, so wie sie untereinander stehen.
