@@ -1873,7 +1873,7 @@ dargestellt wird:
 | Abschnitt | Darstellung |
 |---|---|
 | ein einzelner Baustein | wie bisher (`x-block`) |
-| mehrere Textbausteine, Startseite, höchstens drei mit je höchstens drei Absätzen | `x-blocks.nebeneinander`: gleichwertige Spalten auf einer Fläche, feine Linie dazwischen, Knöpfe unten auf einer Linie |
+| mehrere Textbausteine, Startseite, höchstens drei mit je höchstens drei Absätzen | `x-blocks.nebeneinander`: gleichwertige Spalten auf einer Fläche, ohne Trennlinie und ohne Strich über den Überschriften; Leitsatz und Knopf unten auf einer Höhe (KEV-32) |
 | sonst | `x-blocks.artikel`: ein durchgehender Artikel, Überschriften im Textfluss |
 
 **Artikel mit Seitenleiste.** Hat die Seite mindestens zwei Sprungziele,

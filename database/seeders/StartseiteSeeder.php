@@ -260,9 +260,10 @@ class StartseiteSeeder extends Seeder
                     'absaetze' => [
                         'Jede Mitgliedschaft stärkt unsere Arbeit. Mit jeder Mitgliedschaft wächst '
                         .'unsere Chance auf Veränderung.',
-                        'Sei auch Du Teil unseres ständig wachsenden Netzwerks und unterstütze '
-                        .'unsere Vision, indem Du Mitglied wirst.',
                     ],
+                    // Gekürzt, damit er neben „Opferhilfe für soziale
+                    // Gerechtigkeit!“ als Leitsatz stehen kann (KEV-32).
+                    'hand' => 'Werde Teil unseres Netzwerks!',
                     'cta' => ['label' => 'Mitglied werden', 'url' => '/mitgliedschaft', 'variant' => 'primary'],
                 ],
             ],

@@ -15,6 +15,9 @@
     // Nebeneinander (Startseite): Der Knopf rückt an das untere Ende der
     // Spalte, damit die Knöpfe benachbarter Spalten auf einer Linie stehen.
     'fuellen' => false,
+    // Kurzer Strich über der Überschrift. Nebeneinander aus: Dort sind es
+    // zwei Teaser, kein Artikel mit Abschnittsanfängen (KEV-32).
+    'strich' => true,
 ])
 
 @php
@@ -44,7 +47,9 @@
              scroll-mt hält die Überschrift beim Anspringen unter dem
              klebenden Kopfbereich sichtbar. --}}
         <div @if ($anker) id="{{ $anker }}" @endif class="scroll-mt-24">
-            <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+            @if ($strich)
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+            @endif
             <h2 class="mb-4 font-display text-2xl font-medium text-ink lg:text-3xl">
                 {{ $titel }}
             </h2>
@@ -92,15 +97,22 @@
          Mockups: ein Leitsatz, der wie mit der Hand danebengeschrieben
          wirkt. Bewusst als normaler Absatz und nicht als Bild — er
          gehört zum Text und muss vorlesbar und übersetzbar bleiben. --}}
-    @if ($hand)
-        <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
-    @endif
+    {{-- Nebeneinander rücken Leitsatz und Knopf zusammen an das untere Ende
+         der Spalte. So stehen in benachbarten Spalten beide auf einer Höhe,
+         auch wenn die Absätze darüber verschieden lang sind (KEV-32). --}}
+    @if ($hand || $cta)
+        <div @class(['mt-auto pt-4' => $fuellen])>
+            @if ($hand)
+                <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
+            @endif
 
-    @if ($cta)
-        <div @class(['mt-6' => ! $fuellen, 'mt-auto pt-6' => $fuellen])>
-            <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'primary'">
-                {{ $cta['label'] }}
-            </x-ui.button>
+            @if ($cta)
+                <div class="mt-6">
+                    <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'primary'">
+                        {{ $cta['label'] }}
+                    </x-ui.button>
+                </div>
+            @endif
         </div>
     @endif
 </div>

@@ -148,9 +148,14 @@ body {
 
    Die Farbe ist die Vereinsfarbe (--color-green-brand, #009640); in einer
    data-URI laesst sich keine Custom Property einsetzen, deshalb steht sie hier
-   ausgeschrieben. Aendert sich die Vereinsfarbe, aendert sie sich auch hier. */
+   ausgeschrieben. Aendert sich die Vereinsfarbe, aendert sie sich auch hier.
+
+   Die Schrift selbst ist gruen wie die Leitsaetze in Handschrift
+   („Opferhilfe fuer soziale Gerechtigkeit!“, text-green) — dasselbe dunklere
+   Gruen, nicht die Vereinsfarbe, damit der Kontrast reicht (KEV-32). */
 .swash {
   font-family: var(--font-hand);
+  color: var(--color-green);
   font-size: 1.2em;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 60 4, 120 18, 180 9 S 260 4, 298 12' stroke='%23009640' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
