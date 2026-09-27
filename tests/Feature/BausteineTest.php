@@ -82,7 +82,7 @@ class BausteineTest extends TestCase
         $this->assertStringContainsString('"@type":"Question"', $html);
     }
 
-    public function test_aufmacher_unterlegt_den_markierten_teil_mit_der_linie(): void
+    public function test_aufmacher_setzt_den_markierten_teil_als_eigenen_absatz(): void
     {
         // Die handgezeichnete Linie aus dem Mockup. Der Verein markiert den
         // Teil, der sie bekommt, mit Sternchen.
@@ -90,7 +90,10 @@ class BausteineTest extends TestCase
             'titel' => 'Keiner soll mehr sagen müssen: *Ich hab es nicht gewusst!*',
         ]);
 
-        $this->assertStringContainsString('<span class="swash">', $html);
+        // Mit Text davor als eigener Absatz (KEV-24, KEV-43), ohne <br>.
+        $this->assertStringContainsString('<span class="swash swash-absatz">', $html);
+        preg_match('/<h1.*?<\/h1>/s', $html, $h1);
+        $this->assertStringNotContainsString('<br>', $h1[0]);
 
         // Der Text steht vollständig da — und die Sternchen sind weg, nicht
         // etwa mitgelesen.

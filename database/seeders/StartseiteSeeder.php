@@ -164,11 +164,12 @@ class StartseiteSeeder extends Seeder
                     // Die Sternchen markieren den Teil mit der handgezeichneten
                     // Linie — im Mockup liegt sie unter dem Zitat.
                     'titel' => 'Keiner soll mehr sagen müssen: *„Ich hab es nicht gewusst!“*',
-                    'text' => 'Wir schaffen eine Austausch – und Informationsplattform für Opfer '
-                        .'und Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Ein zentrales '
-                        .'Netzwerk aus Expertise im Betroffenenkontext, Austausch auf Augenhöhe. '
-                        .'Wir leisten Aufklärung und geben Betroffenen eine Stimme. Für mehr '
-                        .'Sichtbarkeit und Gehör.',
+                    // Text von Taddi, 27.09.2026 (KEV-43).
+                    'text' => 'Du bist auf der Informations-, Austausch- und '
+                        .'Selbstwirksamkeitsplattform von KE!N EINZELFALL e.V. Ein zentrales '
+                        .'Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe. Für Opfer und '
+                        .'Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Für mehr '
+                        .'Sichtbarkeit, Gehör und Unterstützung!',
                     'ctas' => [
                         ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
                         ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],

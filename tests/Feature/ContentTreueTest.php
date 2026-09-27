@@ -18,8 +18,9 @@ class ContentTreueTest extends TestCase
     /** Wörtlich von https://kein-einzelfall.de/ (Stand 26.07.2026). */
     private const ORIGINAL = [
         'Keiner soll mehr sagen müssen',
-        'Wir schaffen eine Austausch',
-        'Ein zentrales Netzwerk aus Expertise im Betroffenenkontext',
+        // Seit KEV-43 ein neuer Aufmacher-Text von Taddi.
+        'Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform',
+        'Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe.',
         'Opferhilfe für soziale Gerechtigkeit',
         // Seit KEV-54 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.',

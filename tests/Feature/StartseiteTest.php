@@ -480,6 +480,22 @@ class StartseiteTest extends TestCase
         $this->assertSame('hilfe_box', $seite->fresh()->blocks()->pluck('typ')->all()[4]);
     }
 
+    /** KEV-43: neuer Aufmacher-Text von Taddi, auch in bestehenden Datenbanken. */
+    public function test_bestehende_startseite_bekommt_den_neuen_aufmachertext(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'hero')->first();
+        $block->update(['data' => array_replace($block->data, ['text' => 'Wir schaffen eine Austausch – '
+            .'und Informationsplattform für Opfer und Mit-Opfer, Angehörige, Interessierte und '
+            .'Fachpersonen. Ein zentrales Netzwerk aus Expertise im Betroffenenkontext, Austausch auf '
+            .'Augenhöhe. Wir leisten Aufklärung und geben Betroffenen eine Stimme. Für mehr '
+            .'Sichtbarkeit und Gehör.'])]);
+
+        $migration = require database_path('migrations/2026_09_27_210000_aufmacher_text_erneuern.php');
+        $migration->up();
+
+        $this->get('/')->assertSee('Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform');
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

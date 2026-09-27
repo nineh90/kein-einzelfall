@@ -11,8 +11,8 @@
     $knoepfe = knoepfe($ctas);
 
     /*
-     * Der handschriftliche Teil der Überschrift aus dem Mockup: Handschrift plus
-     * handgezeichnete Linie darunter.
+     * Der handschriftliche Teil der Überschrift aus dem Mockup, in Grün. Die
+     * handgezeichnete Linie darunter ist seit KEV-43 weg (Wunsch des Vereins).
      *
      * Der Verein markiert im Panel den Teil der Überschrift, der ihn bekommen
      * soll — mit *Sternchen*, wie beim Fettschreiben in einer Nachricht. Das ist
@@ -24,20 +24,21 @@
      * einzige rohe Ausgabe danach ist unser eigenes Markup — ein Titel mit
      * <script> darin bleibt damit harmlos.
      *
-     * Schrift und Linie stehen in der CSS (`.swash` in app.css). Die Linie ist
-     * dort ein Hintergrundbild und überlebt damit den Zeilenumbruch, den eine
-     * lange Überschrift auf dem Handy immer hat.
+     * Die Schrift steht in der CSS (`.swash` in app.css).
      *
-     * Steht vor dem markierten Teil noch Text, beginnt er in einer eigenen
-     * Zeile (KEV-24). Direkt hinter „müssen:“ hing das Zitat mal am Zeilenende,
-     * mal halb in der nächsten Zeile, je nach Bildschirmbreite. So steht es
-     * immer für sich. Der Leerraum davor fällt dabei weg, sonst stünde am
-     * Ende der ersten Zeile ein unsichtbares Leerzeichen.
+     * Steht vor dem markierten Teil noch Text, beginnt er als eigener Absatz
+     * (KEV-24, mit Abstand seit KEV-43). Direkt hinter „müssen:“ hing das
+     * Zitat mal am Zeilenende, mal halb in der nächsten Zeile, je nach
+     * Bildschirmbreite. So steht es immer für sich. Der Leerraum davor fällt
+     * dabei weg, sonst stünde am Ende der ersten Zeile ein unsichtbares
+     * Leerzeichen. Ein <span> mit display:block statt eines <br>, damit sich
+     * der Abstand setzen lässt; vorgelesen wird es wie bisher als ein Satz.
      */
     $ueberschrift = preg_replace_callback(
         '/(\s*)\*([^*]+)\*/u',
-        fn (array $treffer) => ($treffer[0][1] > 0 ? '<br>' : $treffer[1][0])
-            .'<span class="swash">'.$treffer[2][0].'</span>',
+        fn (array $treffer) => $treffer[0][1] > 0
+            ? '<span class="swash swash-absatz">'.$treffer[2][0].'</span>'
+            : $treffer[1][0].'<span class="swash">'.$treffer[2][0].'</span>',
         e($titel),
         flags: PREG_OFFSET_CAPTURE,
     );
@@ -56,8 +57,7 @@
                 <x-ui.eyebrow class="mb-4">{{ $eyebrow }}</x-ui.eyebrow>
             @endif
 
-            {{-- pb-1, damit die Linie unter der letzten Zeile Platz hat. Die
-                 Unterlängen der Handschrift brauchen sie ebenfalls. --}}
+            {{-- pb-1: Die Unterlängen der Handschrift brauchen den Platz. --}}
             {{-- text-balance: Auf dem Handy blieb sonst „müssen:“ allein in
                  der zweiten Zeile stehen. --}}
             <h1 class="text-balance pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:text-[2.75rem]">
