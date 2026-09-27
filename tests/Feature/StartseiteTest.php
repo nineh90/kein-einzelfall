@@ -323,6 +323,26 @@ class StartseiteTest extends TestCase
         $this->assertSame('Spenden', $block->fresh()->data['eyebrow']);
     }
 
+    /** KEV-55: neuer Mitglieder-Text von Taddi, Leitsatz und Knopf bleiben. */
+    public function test_bestehende_startseite_bekommt_den_neuen_mitgliedertext(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/mitgliedschaft');
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [
+            'Jede Mitgliedschaft stärkt unsere Arbeit. Mit jeder Mitgliedschaft wächst unsere Chance auf Veränderung.',
+        ]])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_09_27_140000_mitglieder_text_erneuern.php');
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertStringStartsWith('Du fühlst Dich mit unserer Vision verbunden?', $data['absaetze'][0]);
+        $this->assertSame('Werde Teil unseres Netzwerks!', $data['hand']);
+        // Reihenfolge bleibt, sonst meldete das Panel beim Speichern eine Änderung.
+        $this->assertSame($schluessel, array_keys($data));
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

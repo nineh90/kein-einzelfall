@@ -259,8 +259,13 @@ class StartseiteSeeder extends Seeder
                 'data' => [
                     'titel' => 'Mitglieder',
                     'absaetze' => [
-                        'Jede Mitgliedschaft stärkt unsere Arbeit. Mit jeder Mitgliedschaft wächst '
-                        .'unsere Chance auf Veränderung.',
+                        // Text von Taddi, 27.09.2026 (KEV-55).
+                        'Du fühlst Dich mit unserer Vision verbunden? Mit Deiner Mitgliedschaft '
+                        .'kannst Du zeigen, dass Du hinter KE!N EINZELFALL und unserer Arbeit '
+                        .'stehst. Wie viel Du Dich darüber hinaus einbringen möchtest, entscheidest '
+                        .'Du ganz für Dich – eine Mitgliedschaft braucht kein aktives Engagement. '
+                        .'Dein Mitgliedsbeitrag hilft uns gleichzeitig, unsere Arbeit verlässlich zu '
+                        .'finanzieren, Angebote kostenfrei zu halten und neue Ideen möglich zu machen.',
                     ],
                     // Gekürzt, damit er neben „Opferhilfe für soziale
                     // Gerechtigkeit!“ als Leitsatz stehen kann (KEV-32).
