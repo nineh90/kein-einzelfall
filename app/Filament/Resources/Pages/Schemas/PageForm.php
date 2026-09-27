@@ -476,7 +476,7 @@ class PageForm
                             // den Zustand streitig.
                             Toggle::make('data.kompakt')
                                 ->label(fn ($get) => $get('typ') === 'hilfe_box'
-                                    ? 'Nur die zwei wichtigsten Nummern'
+                                    ? 'Kurzfassung: vier Nummern in zwei Spalten'
                                     : 'Kompakt, mit Einleitung daneben')
                                 ->visible(fn ($get) => in_array($get('typ'), ['hilfe_box', 'donation_options'], true))
                                 ->helperText(fn ($get) => $get('typ') === 'hilfe_box'

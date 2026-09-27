@@ -17,6 +17,21 @@ class ModuleTest extends TestCase
             $r->assertSee($n['name']);
         }
         $r->assertSee('tel:110', false);
+        $r->assertSee('tel:112', false);
+    }
+
+    /** KEV-46: Kurzfassung in zwei Spalten, so wie Taddi sie aufgeteilt hat. */
+    public function test_kurzfassung_der_hilfe_box_hat_zwei_spalten(): void
+    {
+        $html = $this->get('/module-demo')->getContent();
+        $kurz = substr($html, strpos($html, 'Sofort jemanden erreichen'));
+        $kurz = substr($kurz, 0, strpos($kurz, '</section>'));
+
+        $this->assertStringContainsString('md:grid-cols-2', $kurz);
+        $this->assertMatchesRegularExpression(
+            '/116 016.*0800 123 99 00.*<\/ul>.*116 123.*116 006.*tel:110.*tel:112/s', $kurz);
+        // Die übrigen Nummern stehen nur in der ausführlichen Fassung.
+        $this->assertStringNotContainsString('116 111', $kurz);
     }
 
     public function test_inhaltshinweis_und_leichte_sprache_brauchen_kein_javascript(): void

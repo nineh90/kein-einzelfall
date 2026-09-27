@@ -9,55 +9,74 @@
  *
  * Vor Go-Live vom Verein gegenprüfen lassen — Zuständigkeiten und Nummern
  * ändern sich, und der Verein kennt die Landschaft besser als wir.
+ *
+ * Zuletzt an den Seiten der Träger geprüft am 27.09.2026 (KEV-46):
+ * hilfetelefon.de, maennerhilfetelefon.de, telefonseelsorge.de,
+ * weisser-ring.de.
  */
 return [
 
     /*
-     * Immer sichtbar in der Hilfe-Box. Reihenfolge = Priorität für die Zielgruppe:
-     * erst der auf Opfer spezialisierte Dienst, dann die allgemeinen.
+     * Alle Nummern, für die ausführliche Hilfe-Box (Fehlerseite, Bausteine
+     * ohne „kompakt“). Reihenfolge = Priorität für die Zielgruppe: erst der
+     * auf Opfer spezialisierte Dienst, dann die allgemeinen.
+     *
+     * „angaben“ steht unter dem Namen, mit „·“ verbunden.
      */
     'nummern' => [
-        [
+        'weisser-ring' => [
             'name' => 'Opfer-Telefon WEISSER RING',
             'nummer' => '116 006',
             'tel' => '+49116006',
-            'zeiten' => 'täglich 7–22 Uhr',
-            'hinweis' => 'kostenlos, auch anonym',
+            'angaben' => ['Für Betroffene von Straftaten', 'täglich 7–22 Uhr', 'kostenfrei'],
         ],
-        [
-            'name' => 'Telefonseelsorge',
-            'nummer' => '0800 111 0 111',
-            'tel' => '+498001110111',
-            'zeiten' => 'rund um die Uhr',
-            'hinweis' => 'kostenlos, anonym, vertraulich',
+        'telefonseelsorge' => [
+            'name' => 'TelefonSeelsorge',
+            'nummer' => '116 123',
+            'tel' => '+49116123',
+            'angaben' => ['Rund um die Uhr', 'kostenfrei', 'anonym'],
         ],
-        [
+        'frauen' => [
             'name' => 'Hilfetelefon Gewalt gegen Frauen',
             'nummer' => '116 016',
             'tel' => '+49116016',
-            'zeiten' => 'rund um die Uhr',
-            'hinweis' => 'kostenlos, in 18 Sprachen',
+            'angaben' => ['Rund um die Uhr', 'kostenfrei', 'anonym', 'mehrsprachig'],
         ],
-        [
+        'maenner' => [
+            // Offizieller Name „an Männern“. Anders als die übrigen nicht rund
+            // um die Uhr erreichbar, deshalb stehen die Zeiten dabei.
+            'name' => 'Hilfetelefon Gewalt an Männern',
+            'nummer' => '0800 123 99 00',
+            'tel' => '+498001239900',
+            'angaben' => ['Beratung für Männer, die Gewalt erlebt haben', 'Mo–Do 8–20 Uhr, Fr 8–15 Uhr', 'kostenfrei'],
+        ],
+        'missbrauch' => [
             'name' => 'Hilfetelefon Sexueller Missbrauch',
             'nummer' => '0800 22 55 530',
             'tel' => '+498002255530',
-            'zeiten' => 'Mo, Mi, Fr 9–14 Uhr · Di, Do 15–20 Uhr',
-            'hinweis' => 'kostenlos und anonym',
+            'angaben' => ['Mo, Mi, Fr 9–14 Uhr, Di, Do 15–20 Uhr', 'kostenfrei', 'anonym'],
         ],
-        [
+        'kummer' => [
             'name' => 'Nummer gegen Kummer (für Kinder und Jugendliche)',
             'nummer' => '116 111',
             'tel' => '+49116111',
-            'zeiten' => 'Mo–Sa 14–20 Uhr',
-            'hinweis' => 'kostenlos und anonym',
+            'angaben' => ['Mo–Sa 14–20 Uhr', 'kostenfrei', 'anonym'],
         ],
+    ],
+
+    /*
+     * Die Kurzfassung (Startseite): zwei Spalten, so vom Verein gewünscht
+     * (Taddi, KEV-46). Links die Hilfetelefone bei Gewalt, rechts die
+     * allgemeinen Stellen.
+     */
+    'kompakt' => [
+        'links' => ['frauen', 'maenner'],
+        'rechts' => ['telefonseelsorge', 'weisser-ring'],
     ],
 
     /* Bei unmittelbarer Gefahr — steht separat und optisch abgesetzt. */
     'notruf' => [
-        'name' => 'Polizei-Notruf',
-        'nummer' => '110',
-        'tel' => '110',
+        ['name' => 'Polizei-Notruf', 'nummer' => '110', 'tel' => '110'],
+        ['name' => 'Rettungsdienst/Feuerwehr', 'nummer' => '112', 'tel' => '112'],
     ],
 ];
