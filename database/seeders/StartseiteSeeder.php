@@ -120,9 +120,10 @@ class StartseiteSeeder extends Seeder
     }
 
     /**
-     * Konto und PayPal aus App\Support\Spenden (Bestand der Altseite). Die
-     * Einleitung ist der Text der Einstiegskarte „Spenden“ — ebenfalls
-     * Wortlaut des Vereins, nicht neu.
+     * Konto und PayPal aus App\Support\Spenden (Bestand der Altseite).
+     * Leitsatz und Einleitung hat Taddi am 27.09.2026 geschickt (KEV-56).
+     * Vorher stand hier der Text der Einstiegskarte „Spenden“, auf derselben
+     * Seite also zweimal.
      *
      * betterplace und die Spendenbescheinigung bleiben der Spendenseite: Auf
      * der Startseite soll die Möglichkeit sichtbar sein, nicht die ganze
@@ -133,11 +134,11 @@ class StartseiteSeeder extends Seeder
     public static function spendenBaustein(): array
     {
         return [
-            'eyebrow' => 'Spenden',
             'titel' => 'Jetzt spenden',
-            'text' => 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu '
-                .'leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform '
-                .'aufzustellen und ein Netzwerk zu bilden.',
+            'text' => 'Deine Spende hilft uns, Projekte umzusetzen, Wissen kostenfrei zugänglich '
+                .'zu machen, aufzuklären, Stimmen hörbar zu machen und KE!N EINZELFALL als '
+                .'Informations-, Austausch- und Selbstwirksamkeitsplattform weiter wachsen zu lassen.',
+            'hand' => 'Gute Ideen brauchen Rückenwind.',
             'kompakt' => true,
             // Dieselbe Quelle wie die Spendenseite — eine IBAN, eine Stelle.
             'bank' => Spenden::konto(),

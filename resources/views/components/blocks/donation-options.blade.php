@@ -2,6 +2,7 @@
     'eyebrow' => null,
     'titel' => 'Jetzt spenden',
     'text' => null,        // Einleitung — auf der Startseite: warum spenden
+    'hand' => null,        // handschriftlicher Leitsatz unter der Überschrift
     'bank' => null,        // ['institut'=>, 'iban'=>, 'bic'=>, 'empfaenger'=>]
     'paypal' => null,      // ['empfaenger'=>, 'url'=>]
     'projekte' => [],      // [['titel'=>, 'widget'=>, 'url'=>], ...]
@@ -50,15 +51,29 @@
         <div class="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:grid-rows-[auto_1fr_auto] lg:gap-x-10 lg:gap-y-10 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-x-16">
 
             <div class="lg:col-start-1 lg:row-start-1">
+                {{-- Entweder Dachzeile oder der kurze Strich, nicht beides: Die
+                     Dachzeile hat ihren eigenen Strich, und zwei grüne Striche
+                     übereinander sahen nach Versehen aus (KEV-56). --}}
                 @if ($eyebrow)
                     <x-ui.eyebrow class="mb-3">{{ $eyebrow }}</x-ui.eyebrow>
+                @else
+                    {{-- Derselbe kurze Strich wie über jeder Abschnittsüberschrift. --}}
+                    <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 @endif
 
-                {{-- Derselbe kurze Strich wie über jeder Abschnittsüberschrift. --}}
-                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
-                <h2 id="spenden-titel" class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
+                <h2 id="spenden-titel" @class([
+                    'font-display text-2xl font-medium text-green lg:text-3xl',
+                    'mb-4' => ! $hand,
+                ])>
                     {{ $titel }}
                 </h2>
+
+                {{-- Leitsatz in Handschrift wie „Opferhilfe für soziale
+                     Gerechtigkeit!“ bei „Vereinsarbeit“. Ein Absatz, keine
+                     Überschrift: Er gehört zu „Jetzt spenden“. --}}
+                @if ($hand)
+                    <p class="mb-4 mt-2 font-hand text-2xl text-green">{{ $hand }}</p>
+                @endif
 
                 @if ($text)
                     <p class="max-w-prose leading-relaxed text-ink-soft">{{ $text }}</p>

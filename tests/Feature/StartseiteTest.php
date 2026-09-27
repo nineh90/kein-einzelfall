@@ -274,6 +274,55 @@ class StartseiteTest extends TestCase
         $this->assertSame('donation_options', prev($typen));
     }
 
+    /**
+     * KEV-56: Text von Taddi mit Leitsatz in Handschrift, nur ein grüner
+     * Strich über „Jetzt spenden“, und nicht mehr derselbe Satz wie auf der
+     * Einstiegskarte „Spenden“ darüber.
+     */
+    public function test_spendenabschnitt_hat_eigenen_text_und_leitsatz(): void
+    {
+        $html = $this->get('/')->getContent();
+        $abschnitt = substr($html, strpos($html, 'id="spenden"'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+
+        $this->assertStringContainsString('Gute Ideen brauchen Rückenwind.', $abschnitt);
+        $this->assertStringContainsString('Deine Spende hilft uns, Projekte umzusetzen', $abschnitt);
+        $this->assertStringNotContainsString('Mit Deiner Spende hilfst Du uns', $abschnitt);
+        $this->assertSame(1, substr_count($abschnitt, 'bg-green-brand'), 'zwei Striche über der Überschrift');
+    }
+
+    public function test_bestehende_startseite_bekommt_den_neuen_spendentext(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'donation_options')->first();
+        // Stand vor KEV-56: Dachzeile, alter Text, kein Leitsatz.
+        $block->update(['data' => [
+            'eyebrow' => 'Spenden',
+            'text' => 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu leisten, '
+                .'Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform aufzustellen '
+                .'und ein Netzwerk zu bilden.',
+        ] + array_diff_key($block->data, ['hand' => 1])]);
+
+        $migration = require database_path('migrations/2026_09_27_130000_spendentext_startseite_erneuern.php');
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertArrayNotHasKey('eyebrow', $data);
+        $this->assertSame('Gute Ideen brauchen Rückenwind.', $data['hand']);
+        $this->assertStringStartsWith('Deine Spende hilft uns', $data['text']);
+    }
+
+    public function test_gepflegter_spendentext_bleibt_stehen(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'donation_options')->first();
+        $block->update(['data' => ['eyebrow' => 'Spenden', 'text' => 'Vom Verein geändert'] + $block->data]);
+
+        $migration = require database_path('migrations/2026_09_27_130000_spendentext_startseite_erneuern.php');
+        $migration->up();
+
+        $this->assertSame('Vom Verein geändert', $block->fresh()->data['text']);
+        $this->assertSame('Spenden', $block->fresh()->data['eyebrow']);
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

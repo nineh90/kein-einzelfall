@@ -409,7 +409,7 @@ class PageForm
                             // --- Aufmacher ---
                             TextInput::make('data.hand')
                                 ->label('Handschriftlicher Zusatz')
-                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'donation_options'], true))
                                 ->helperText('Ein kurzer Leitsatz, der wie mit der Hand '
                                     .'danebengeschrieben aussieht. Kann leer bleiben.'),
 
