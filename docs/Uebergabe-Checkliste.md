@@ -205,7 +205,7 @@ der handgezeichneten Linie unter dem Zitat. Das Zitat selbst steht seit dem
 Genau dieser Satz stand vorher als Unterzeile über den vier Einstiegskarten.
 Damit er nicht zweimal auf derselben Seite steht, ist die Unterzeile **vorerst
 leer**. Das ist so abgesprochen und sieht nicht falsch aus — die Überschrift
-„Unsere Aufgabe" steht weiterhin darüber.
+„Was wir gemeinsam bewegen" (bis 27.09.2026 „Unsere Aufgabe") steht weiterhin darüber.
 
 **Frage an den Verein:** Soll dort etwas anderes stehen? Das Feld heisst im
 Panel „Unterzeile" und liegt im Baustein „Einstiegskarten" der Startseite.

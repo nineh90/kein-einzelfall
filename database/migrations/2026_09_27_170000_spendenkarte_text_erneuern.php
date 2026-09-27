@@ -4,7 +4,7 @@ use App\Models\Page;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Startseite, „Unsere Aufgabe“: neuer Text der Karte „Spenden“ von Taddi,
+ * Startseite, „Was wir gemeinsam bewegen“: neuer Text der Karte „Spenden“ von Taddi,
  * die beiden von ihr markierten Sätze fett (KEV-52).
  *
  * Nur wo noch der alte Text steht. Die englische Fassung ist maschinell

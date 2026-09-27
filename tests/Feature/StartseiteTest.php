@@ -423,6 +423,18 @@ class StartseiteTest extends TestCase
             $block->fresh()->data['karten'][$i]['text']);
     }
 
+    /** „Was wir gemeinsam bewegen“ statt „Unsere Aufgabe“, auch in bestehenden Datenbanken. */
+    public function test_einstiegskarten_heissen_was_wir_gemeinsam_bewegen(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $block->update(['data' => array_replace($block->data, ['titel' => 'Unsere Aufgabe'])]);
+
+        $migration = require database_path('migrations/2026_09_27_180000_einstiegskarten_ueberschrift.php');
+        $migration->up();
+
+        $this->get('/')->assertSee('Was wir gemeinsam bewegen')->assertDontSee('Unsere Aufgabe');
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

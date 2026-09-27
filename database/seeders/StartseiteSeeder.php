@@ -149,7 +149,7 @@ class StartseiteSeeder extends Seeder
 
     /**
      * Die Struktur folgt dem Bestand der Altseite:
-     * Aufmacher · Hilfe-Nummern · Unsere Aufgabe · Vereinsarbeit · Mitglieder ·
+     * Aufmacher · Hilfe-Nummern · Was wir gemeinsam bewegen · Verein · Mitglieder ·
      * Spendenmöglichkeit · Spendenaufruf · Kontaktabschluss.
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
@@ -192,7 +192,8 @@ class StartseiteSeeder extends Seeder
             [
                 'typ' => 'quick_access',
                 'data' => [
-                    'titel' => 'Unsere Aufgabe',
+                    // Bis 27.09.2026 „Unsere Aufgabe“ (Wunsch von Taddi, KEV-52/53).
+                    'titel' => 'Was wir gemeinsam bewegen',
                     'sub' => null,
                     'karten' => [
                         [

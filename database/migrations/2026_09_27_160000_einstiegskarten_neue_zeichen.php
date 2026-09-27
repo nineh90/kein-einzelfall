@@ -4,7 +4,7 @@ use App\Models\Page;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Startseite, „Unsere Aufgabe“: die Lucide-Zeichen, die sich der Verein
+ * Startseite, „Was wir gemeinsam bewegen“: die Lucide-Zeichen, die sich der Verein
  * gewünscht hat (KEV-53). Zugeordnet über das Ziel der Karte, nicht über
  * den Titel, der je Sprache anders heißt.
  *

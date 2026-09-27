@@ -33,7 +33,7 @@
         // Lupe für die Suche.
         'search'        => '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
         // Lucide-Originale (lucide.dev, ISC-Lizenz), Wunsch des Vereins für die
-        // Einstiegskarten „Unsere Aufgabe“ (KEV-53). Nicht nachgezeichnet,
+        // Einstiegskarten „Was wir gemeinsam bewegen“ (KEV-53). Nicht nachgezeichnet,
         // sondern die Pfade aus lucide-static 1.48.
         'user-group'    => '<path d="M17 21v-1a2 2 0 00-2-2H9a2 2 0 00-2 2v1"/><path d="M19 10h1a2 2 0 012 2v1"/><path d="M5 10H4a2 2 0 00-2 2v1"/><circle cx="12" cy="11" r="3"/><circle cx="18" cy="4" r="2"/><circle cx="6" cy="4" r="2"/>',
         'network'       => '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>',
