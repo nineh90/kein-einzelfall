@@ -199,11 +199,12 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'user-group',
                             'titel' => 'Selbsthilfegruppen',
-                            'text' => 'Der Austausch in unseren Selbsthilfegruppen soll Dir genau '
-                                .'da helfen, wo Du Hilfe benötigst, und er soll Dir aufzeigen, dass '
-                                .'Du endlich nicht mehr alleine bist, denn wir sind KE!N EINZELFALL! '
-                                .'Die Selbsthilfegruppen sind kostenfrei und nicht an eine '
-                                .'Mitgliedschaft gebunden.',
+                            // Text von Taddi, 27.09.2026 (KEV-48), *fett* wie von ihr markiert.
+                            'text' => '*Manchmal tut es gut, Menschen zu treffen, die verstehen, ohne '
+                                .'dass Du viel erklären musst.* In unseren Selbsthilfegruppen kannst Du '
+                                .'Dich austauschen, Erfahrungen teilen und neue Perspektiven '
+                                .'kennenlernen. Du entscheidest selbst, ob Du erzählen, mitreden oder '
+                                .'erstmal einfach nur zuhören möchtest.',
                             'url' => '/selbsthilfegruppen',
                             'link' => 'Zu den Selbsthilfegruppen',
                         ],

@@ -435,6 +435,25 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('Was wir gemeinsam bewegen')->assertDontSee('Unsere Aufgabe');
     }
 
+    /** KEV-48: Selbsthilfe-Karte mit Taddis Text, der markierte Satz fett. */
+    public function test_bestehende_startseite_bekommt_den_neuen_selbsthilfekartentext(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/selbsthilfegruppen', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = 'Der Austausch in unseren Selbsthilfegruppen soll Dir genau da '
+            .'helfen, wo Du Hilfe benötigst, und er soll Dir aufzeigen, dass Du endlich nicht mehr '
+            .'alleine bist, denn wir sind KE!N EINZELFALL! Die Selbsthilfegruppen sind kostenfrei und '
+            .'nicht an eine Mitgliedschaft gebunden.';
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_09_27_190000_selbsthilfekarte_text_erneuern.php');
+        $migration->up();
+
+        $this->get('/')->assertSee('<strong class="font-semibold text-ink">Manchmal tut es gut, '
+            .'Menschen zu treffen, die verstehen, ohne dass Du viel erklären musst.</strong>', false);
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {
