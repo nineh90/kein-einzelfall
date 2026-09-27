@@ -61,7 +61,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 
 | Seite | Motiv |
 |---|---|
-| Verein | Teetasse auf gefalteter Leinenserviette |
+| Verein | Vereinslogo auf der Wand über leerem Tisch (siehe unten) |
 | Über uns – Vorstand und Team | zwei Keramikschalen nebeneinander |
 | Mitgliedschaft | Steinstapel (greift den Stapel der Startseite auf) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
@@ -85,3 +85,22 @@ Text, und zwanzig fast gleiche Schreibtischbilder machten die Reihe beliebig.
 
 Die Bilder sind KI-erzeugt und zeigen nichts Echtes aus dem Verein. Der
 Verein sollte sie einmal ansehen und freigeben.
+
+## Ausnahme: Verein mit Logo (KEV-57)
+
+Taddi, 27.09.2026: Auf der Vereinsseite keine Kaffeetassen und nichts, was
+nach Wellness aussieht, sondern das Logo des Vereins. Das widerspricht
+bewusst dem Satz „kein Logo“ aus der Vorgabe, der Wunsch kommt vom Verein
+selbst.
+
+Das Logo malt nicht die KI (sie verhunzt die Schrift). Stattdessen:
+
+1. Mit `bin/titelbild` eine leere Szene erzeugt: nur Wand, Tischkante, Licht,
+   „no objects at all“. Von drei Versuchen war nur einer wirklich leer.
+2. Das echte Logo (`Logo.jpg`, 486 × 434, von der Altseite unter
+   `wp-content/uploads/2024/09/`) mit Pillow multiplizierend auf die Wand
+   gelegt, 92 % Deckkraft. So verschwindet der weiße Grund, und Licht und
+   Schatten der Wand liegen über dem Logo, als wäre es aufgemalt.
+3. Größe und Lage: 25 % der Bildhöhe, 9 % vom linken Rand, Unterkante knapp
+   über der Tischkante (79 % der Höhe). Höher darf es nicht stehen: Bei
+   1920 px zeigt das Band nur die untere Bildhälfte.
