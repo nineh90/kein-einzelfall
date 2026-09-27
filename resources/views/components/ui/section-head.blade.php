@@ -10,7 +10,7 @@
 
 <div class="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
     <div>
-        <{{ $stufe }} class="font-display text-2xl font-semibold text-ink">{{ $titel }}</{{ $stufe }}>
+        <{{ $stufe }} class="font-display text-2xl font-semibold text-green">{{ $titel }}</{{ $stufe }}>
         @if ($sub)
             <p class="mt-1 text-sm text-ink-soft">{{ $sub }}</p>
         @endif

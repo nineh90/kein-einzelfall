@@ -44,7 +44,7 @@
 
         <p class="mb-2 font-display text-sm tracking-[0.08em] text-ink-soft">{{ $status }}</p>
 
-        <h1 class="mb-3 font-display text-3xl font-semibold text-ink lg:text-4xl">
+        <h1 class="mb-3 font-display text-3xl font-semibold text-green lg:text-4xl">
             {{ __("rahmen.fehler.titel_{$status}") }}
         </h1>
 
@@ -79,7 +79,7 @@
                 </form>
 
                 <nav aria-labelledby="fehler-wohin">
-                    <h2 id="fehler-wohin" class="mb-3 font-display text-base font-medium text-ink">
+                    <h2 id="fehler-wohin" class="mb-3 font-display text-base font-medium text-green">
                         {{ __('rahmen.fehler.wohin') }}
                     </h2>
                     <ul class="flex flex-col gap-0.5">

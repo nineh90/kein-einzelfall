@@ -49,7 +49,7 @@
             </time>
         </p>
 
-        <h1 class="mt-1.5 font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-4xl">
+        <h1 class="mt-1.5 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
             {{ $beitrag->titel }}
         </h1>
 
@@ -77,7 +77,7 @@
 
         @if ($weitere->isNotEmpty())
             <aside class="mt-12 border-t border-line pt-8" aria-labelledby="weitere-titel">
-                <h2 id="weitere-titel" class="mb-4 font-display text-xl text-ink">Weitere Beiträge</h2>
+                <h2 id="weitere-titel" class="mb-4 font-display text-xl text-green">Weitere Beiträge</h2>
                 <ul class="flex flex-col gap-3">
                     @foreach ($weitere as $andere)
                         <li>

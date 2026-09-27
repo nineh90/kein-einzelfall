@@ -19,7 +19,7 @@
             <x-ui.icon name="heart" :size="24" />
         </span>
 
-        <h2 id="kontakt-titel" class="font-display text-[1.3125rem] font-medium text-ink lg:text-[1.75rem]">
+        <h2 id="kontakt-titel" class="font-display text-[1.3125rem] font-medium text-green lg:text-[1.75rem]">
             {{ $titel }}
         </h2>
 

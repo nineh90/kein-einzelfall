@@ -94,7 +94,7 @@
                     <div class="md:ml-auto md:w-1/2 lg:w-[45%]">
                         <x-ui.eyebrow class="mb-3">{{ $zeile }}</x-ui.eyebrow>
 
-                        <h1 class="text-balance font-display text-[1.75rem] font-medium leading-tight text-ink md:text-[2.125rem] lg:text-[2.75rem]">
+                        <h1 class="text-balance font-display text-[1.75rem] font-medium leading-tight text-green md:text-[2.125rem] lg:text-[2.75rem]">
                             {{ $titel }}
                         </h1>
 
@@ -131,7 +131,7 @@
             {{-- Kleiner als früher (40 px), aber immer eine Stufe über den
                  Abschnittsüberschriften (24/30 px): Eine H1 in derselben Größe
                  wie die H2 darunter kehrt die Rangordnung optisch um. --}}
-            <h1 class="max-w-3xl font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-[2.25rem]">
+            <h1 class="max-w-3xl font-display text-[1.75rem] font-medium leading-tight text-green lg:text-[2.25rem]">
                 {{ $titel }}
             </h1>
 

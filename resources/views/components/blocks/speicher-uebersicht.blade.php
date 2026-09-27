@@ -57,7 +57,7 @@
 
             {{-- scroll-mt hält die Überschrift beim Anspringen aus dem Fuss
                  unter dem klebenden Kopfbereich sichtbar. --}}
-            <h2 id="{{ $anker }}" class="mb-4 scroll-mt-24 font-display text-2xl font-medium text-ink lg:text-3xl">
+            <h2 id="{{ $anker }}" class="mb-4 scroll-mt-24 font-display text-2xl font-medium text-green lg:text-3xl">
                 {{ $titel ?: __('rahmen.speicher.titel') }}
             </h2>
 

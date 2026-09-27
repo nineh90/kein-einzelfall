@@ -130,7 +130,7 @@
                      hat es schon mit eigenen Worten versucht — ihn jetzt mit
                      „nichts gefunden" stehen zu lassen, wäre das Gegenteil von
                      dem, was diese Seite sein will. --}}
-                <h2 id="trefferzahl" class="mb-3 font-display text-xl text-ink">
+                <h2 id="trefferzahl" class="mb-3 font-display text-xl text-green">
                     Dazu haben wir nichts gefunden
                 </h2>
 
@@ -150,7 +150,7 @@
                 </ul>
 
             @else
-                <h2 id="trefferzahl" aria-live="polite" class="mb-5 font-display text-xl text-ink">
+                <h2 id="trefferzahl" aria-live="polite" class="mb-5 font-display text-xl text-green">
                     {{ count($treffer) }}
                     {{ count($treffer) === 1 ? 'Treffer' : 'Treffer' }}
                     für „{{ $anfrage }}"

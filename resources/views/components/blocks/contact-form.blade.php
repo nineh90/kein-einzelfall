@@ -29,7 +29,7 @@
 ]) aria-labelledby="formular-titel">
     <div class="mx-auto max-w-2xl">
 
-        <h2 id="formular-titel" class="mb-2 font-display text-2xl font-medium text-ink">
+        <h2 id="formular-titel" class="mb-2 font-display text-2xl font-medium text-green">
             {{ $titel }}
         </h2>
 

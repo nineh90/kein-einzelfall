@@ -7,7 +7,7 @@
 <div class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-6xl">
 
-        <h1 class="font-display text-[1.75rem] font-medium text-ink lg:text-4xl">
+        <h1 class="font-display text-[1.75rem] font-medium text-green lg:text-4xl">
             {{ $aktiveKategorie?->name ?? 'Aktuelles' }}
         </h1>
         @if ($aktiveKategorie?->beschreibung)

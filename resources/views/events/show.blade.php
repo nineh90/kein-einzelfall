@@ -59,7 +59,7 @@
             @endif
         </div>
 
-        <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-ink lg:text-4xl">
+        <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
             {{ $termin->titel }}
         </h1>
 
