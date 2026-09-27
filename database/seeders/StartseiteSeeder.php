@@ -149,8 +149,8 @@ class StartseiteSeeder extends Seeder
 
     /**
      * Die Struktur folgt dem Bestand der Altseite:
-     * Aufmacher · Hilfe-Nummern · Was wir gemeinsam bewegen · Verein · Mitglieder ·
-     * Spendenmöglichkeit · Spendenaufruf · Kontaktabschluss.
+     * Aufmacher · Was wir gemeinsam bewegen · Verein · Mitglieder ·
+     * Hilfe-Nummern · Spendenmöglichkeit · Spendenaufruf · Kontaktabschluss.
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
@@ -173,16 +173,6 @@ class StartseiteSeeder extends Seeder
                         ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
                         ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
                     ],
-                ],
-            ],
-
-            // Von Kevin beauftragt, nicht im Altbestand. Steht bewusst weit
-            // oben: wer akut belastet ist, soll nicht scrollen müssen.
-            [
-                'typ' => 'hilfe_box',
-                'data' => [
-                    'titel' => 'Du brauchst sofort jemanden zum Reden?',
-                    'kompakt' => true,
                 ],
             ],
 
@@ -283,6 +273,17 @@ class StartseiteSeeder extends Seeder
             ],
 
             // Siehe spendenAnhaengen(): dieselbe Stelle, dieselben Daten.
+            // Von Kevin beauftragt, nicht im Altbestand. Stand bis 27.09.2026
+            // direkt unter dem Aufmacher; auf Wunsch des Vereins jetzt unter
+            // „Verein“ und „Mitglieder“, vor der Spendenmöglichkeit (KEV-45).
+            [
+                'typ' => 'hilfe_box',
+                'data' => [
+                    'titel' => 'Du brauchst sofort jemanden zum Reden?',
+                    'kompakt' => true,
+                ],
+            ],
+
             [
                 'typ' => 'donation_options',
                 'data' => self::spendenBaustein(),

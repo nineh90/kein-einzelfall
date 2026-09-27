@@ -1287,7 +1287,7 @@ Startseite wäre das aufgefallen. Die Angaben des Vereins (IBAN, Empfänger,
 Einleitung) bleiben Inhalt und damit im Datensatz.
 
 **Auf der Startseite steht der Baustein vor dem Hinweisband:** Aufmacher ·
-Hilfe-Nummern · Was wir gemeinsam bewegen · Verein · Mitglieder · **Spenden** ·
+Was wir gemeinsam bewegen · Verein · Mitglieder · Hilfe-Nummern · **Spenden** ·
 Hinweisband · Kontaktabschluss. Das Band fasst danach beide Wege der
 Unterstützung zusammen und führt zur vollständigen Spendenseite (betterplace,
 Spendenbescheinigung). Inhalt: Konto und PayPal wie auf der Spendenseite, als

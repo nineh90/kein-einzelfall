@@ -229,7 +229,7 @@ class StartseiteTest extends TestCase
 
         $typen = $seite->fresh()->blocks()->pluck('typ')->all();
         $this->assertSame(
-            ['hero', 'hilfe_box', 'quick_access', 'text', 'text', 'donation_options', 'cta_band', 'contact_close'],
+            ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'],
             $typen,
         );
         // Keine zwei Bausteine auf derselben Position — sonst wäre die
@@ -452,6 +452,32 @@ class StartseiteTest extends TestCase
 
         $this->get('/')->assertSee('<strong class="font-semibold text-ink">Manchmal tut es gut, '
             .'Menschen zu treffen, die verstehen, ohne dass Du viel erklären musst.</strong>', false);
+    }
+
+    /** KEV-45: Hilfe-Nummern unter „Verein“ und „Mitglieder“, vor der Spendenmöglichkeit. */
+    public function test_hilfe_box_rueckt_vor_die_spendenmoeglichkeit(): void
+    {
+        // Stand vor KEV-45: der Kasten direkt unter dem Aufmacher.
+        $seite = $this->startseite();
+        $bloecke = $seite->blocks()->orderBy('position')->get()->all();
+        $kasten = array_values(array_filter($bloecke, fn ($b) => $b->typ === 'hilfe_box'))[0];
+        $bloecke = array_values(array_filter($bloecke, fn ($b) => $b->typ !== 'hilfe_box'));
+        array_splice($bloecke, 1, 0, [$kasten]);
+        foreach ($bloecke as $position => $block) {
+            $block->update(['position' => $position]);
+        }
+
+        $migration = require database_path('migrations/2026_09_27_200000_hilfe_box_unter_mitglieder.php');
+        $migration->up();
+
+        $this->assertSame(
+            ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'],
+            $seite->fresh()->blocks()->pluck('typ')->all(),
+        );
+
+        // Ein zweiter Lauf ändert nichts mehr.
+        $migration->up();
+        $this->assertSame('hilfe_box', $seite->fresh()->blocks()->pluck('typ')->all()[4]);
     }
 
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
