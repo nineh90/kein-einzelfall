@@ -786,6 +786,10 @@ class PageForm
      * eine leere Fläche auf der Seite, deshalb eine Liste und kein Textfeld.
      */
     private const ZEICHEN = [
+        'user-group' => 'Gruppe (Selbsthilfe)',
+        'network' => 'Netzwerk (Arbeitsgruppen)',
+        'notebook-pen' => 'Notizbuch mit Stift (Anfragen)',
+        'hand-coins' => 'Hand mit Münzen (Spenden)',
         'users' => 'Menschen (Gruppen)',
         'message' => 'Sprechblase (Austausch)',
         'shield' => 'Schild (Schutz, Recht)',

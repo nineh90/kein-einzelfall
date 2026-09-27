@@ -375,6 +375,28 @@ class StartseiteTest extends TestCase
         $this->assertSame($schluessel, array_keys($data));
     }
 
+    /** KEV-53: Lucide-Zeichen auf den Einstiegskarten, auch in bestehenden Datenbanken. */
+    public function test_einstiegskarten_bekommen_die_neuen_zeichen(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $alt = ['users', 'message', 'shield', 'heart'];
+        $data = $block->data;
+        foreach ($data['karten'] as $i => $karte) {
+            $data['karten'][$i]['icon'] = $alt[$i];
+        }
+        // Eine Karte hat der Verein schon selbst umgestellt, die bleibt.
+        $data['karten'][3]['icon'] = 'info';
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_09_27_160000_einstiegskarten_neue_zeichen.php');
+        $migration->up();
+
+        $this->assertSame(
+            ['user-group', 'network', 'notebook-pen', 'info'],
+            array_column($block->fresh()->data['karten'], 'icon'),
+        );
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

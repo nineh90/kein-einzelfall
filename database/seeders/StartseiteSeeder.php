@@ -196,7 +196,7 @@ class StartseiteSeeder extends Seeder
                     'sub' => null,
                     'karten' => [
                         [
-                            'icon' => 'users',
+                            'icon' => 'user-group',
                             'titel' => 'Selbsthilfegruppen',
                             'text' => 'Der Austausch in unseren Selbsthilfegruppen soll Dir genau '
                                 .'da helfen, wo Du Hilfe benötigst, und er soll Dir aufzeigen, dass '
@@ -207,7 +207,7 @@ class StartseiteSeeder extends Seeder
                             'link' => 'Zu den Selbsthilfegruppen',
                         ],
                         [
-                            'icon' => 'message',
+                            'icon' => 'network',
                             'titel' => 'Arbeitsgruppen',
                             'text' => 'Um unsere Arbeit weiter zu professionalisieren und gezielt '
                                 .'Wirkung zu entfalten, gründen wir immer wieder Arbeitsgruppen – '
@@ -218,7 +218,7 @@ class StartseiteSeeder extends Seeder
                             'link' => 'Zu den Arbeitsgruppen',
                         ],
                         [
-                            'icon' => 'shield',
+                            'icon' => 'notebook-pen',
                             'titel' => 'Anfragen & Austausch',
                             'text' => 'Du wünschst einen persönlichen Austausch in Bezug auf das '
                                 .'Soziale Entschädigungsrecht (OEG/SGB XIV), den '
@@ -228,7 +228,7 @@ class StartseiteSeeder extends Seeder
                             'link' => 'Anfrage stellen',
                         ],
                         [
-                            'icon' => 'heart',
+                            'icon' => 'hand-coins',
                             'titel' => 'Spenden',
                             'text' => 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und '
                                 .'Aufklärung zu leisten, Sichtbarkeit und Gehör zu schaffen, sowie '
