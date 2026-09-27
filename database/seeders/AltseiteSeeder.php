@@ -63,6 +63,16 @@ class AltseiteSeeder extends Seeder
     ];
 
     /**
+     * Titel, die der Verein nach dem Umzug anders haben wollte als auf der
+     * Altseite. Sie schlagen deren Überschrift. Bestehende Datenbanken
+     * erreicht die Änderung über eine eigene Migration.
+     */
+    public const VORGABE_TITEL = [
+        // KEV-59, Wunsch von Taddi
+        'verein' => 'Gemeinnütziger Verein',
+    ];
+
+    /**
      * Zieht die ausgeschriebenen Titel in einer bestehenden Datenbank nach.
      *
      * Die Liste oben kam erst nach dem ersten Import dazu. Der Seeder läuft
@@ -132,9 +142,11 @@ class AltseiteSeeder extends Seeder
             // innerhalb einer Sprache eindeutig, und der Altbestand ist
             // ausnahmslos die deutsche Fassung.
             $page = Page::updateOrCreate(['slug' => $slug, 'locale' => $standard], [
-                // Reihenfolge: Überschrift der Altseite, sonst unsere Liste,
-                // erst zuletzt der aus dem Slug abgeleitete Notbehelf.
-                'titel' => $daten['titel'] ?: (self::TITEL[$slug] ?? Str::headline($slug)),
+                // Reihenfolge: Vorgabe des Vereins, dann Überschrift der
+                // Altseite, sonst unsere Liste, erst zuletzt der aus dem Slug
+                // abgeleitete Notbehelf.
+                'titel' => self::VORGABE_TITEL[$slug]
+                    ?? ($daten['titel'] ?: (self::TITEL[$slug] ?? Str::headline($slug))),
                 'meta_title' => $daten['meta_title'],
                 'meta_description' => $daten['meta_description'],
                 'published_at' => now(),

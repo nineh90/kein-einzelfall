@@ -51,7 +51,15 @@ class SeitenUndRedirectsTest extends TestCase
 
         $this->get('/verein')
             ->assertOk()
-            ->assertSee('<title>Verein - Kein Einzelfall e.V.</title>', false);
+            ->assertSee('<title>Gemeinnütziger Verein - Kein Einzelfall e.V.</title>', false);
+    }
+
+    public function test_vereinsseite_heisst_gemeinnuetziger_verein(): void
+    {
+        // KEV-59: Überschrift nach Wunsch des Vereins.
+        $this->get('/verein')
+            ->assertOk()
+            ->assertSee('Gemeinnütziger Verein');
     }
 
     public function test_seiten_ohne_vollertitel_bekommen_einen_echten_titel(): void
