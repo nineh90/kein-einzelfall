@@ -230,9 +230,12 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'hand-coins',
                             'titel' => 'Spenden',
-                            'text' => 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und '
-                                .'Aufklärung zu leisten, Sichtbarkeit und Gehör zu schaffen, sowie '
-                                .'eine Informationsplattform aufzustellen und ein Netzwerk zu bilden.',
+                            // Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert.
+                            'text' => '*Deine Spende macht unsere Arbeit möglich.* Sie hilft uns, '
+                                .'Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe '
+                                .'und Austausch zu ermöglichen und Projekte umzusetzen, die Betroffenen '
+                                .'eine Stimme geben. Danke, dass Du dabei bist. *Jeder Beitrag hilft '
+                                .'uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.*',
                             'url' => '/spenden',
                             'link' => 'Jetzt spenden',
                         ],

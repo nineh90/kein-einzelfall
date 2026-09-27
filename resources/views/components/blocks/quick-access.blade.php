@@ -62,7 +62,7 @@
                         </span>
                         @if (!empty($karte['text']))
                             <span class="mt-1.5 flex-1 text-[0.8125rem] leading-relaxed text-ink-soft">
-                                {{ $karte['text'] }}
+                                {{ hervorheben($karte['text']) }}
                             </span>
                         @endif
                         <span class="mt-3 text-[0.8125rem] text-green-deep">

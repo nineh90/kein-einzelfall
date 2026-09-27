@@ -439,7 +439,8 @@ class PageForm
                                         ->options(self::ZEICHEN)
                                         ->default('info')
                                         ->native(false),
-                                    Textarea::make('text')->label('Text')->rows(4)->columnSpanFull(),
+                                    Textarea::make('text')->label('Text')->rows(4)->columnSpanFull()
+                                        ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen.'),
                                     TextInput::make('url')->label('Ziel')->required()
                                         ->helperText('Zum Beispiel /spenden'),
                                     TextInput::make('link')

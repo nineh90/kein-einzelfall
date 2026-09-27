@@ -397,6 +397,32 @@ class StartseiteTest extends TestCase
         );
     }
 
+    /** KEV-52: Spendenkarte mit Taddis Text, die markierten Sätze fett. */
+    public function test_spendenkarte_zeigt_taddis_text_mit_fetten_saetzen(): void
+    {
+        $this->get('/')
+            ->assertSee('<strong class="font-semibold text-ink">Deine Spende macht unsere Arbeit möglich.</strong>', false)
+            ->assertSee('<strong class="font-semibold text-ink">Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.</strong>', false)
+            ->assertDontSee('*Deine Spende', false);
+    }
+
+    public function test_bestehende_startseite_bekommt_den_neuen_spendenkartentext(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/spenden', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = 'Mit Deiner Spende hilfst Du uns, kostenfreies Wissen und Aufklärung zu '
+            .'leisten, Sichtbarkeit und Gehör zu schaffen, sowie eine Informationsplattform aufzustellen '
+            .'und ein Netzwerk zu bilden.';
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_09_27_170000_spendenkarte_text_erneuern.php');
+        $migration->up();
+
+        $this->assertStringStartsWith('*Deine Spende macht unsere Arbeit möglich.*',
+            $block->fresh()->data['karten'][$i]['text']);
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

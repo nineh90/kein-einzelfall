@@ -27,7 +27,8 @@ class ContentTreueTest extends TestCase
         'Du fühlst Dich mit unserer Vision verbunden?',
         'Der Austausch in unseren Selbsthilfegruppen',
         'Um unsere Arbeit weiter zu professionalisieren',
-        'Mit Deiner Spende hilfst Du uns',
+        // Seit KEV-52 ein neuer Text von Taddi statt des Altseiten-Satzes.
+        'Deine Spende macht unsere Arbeit möglich.',
         'Sei Du dabei, jede Unterstützung zählt',
     ];
 
