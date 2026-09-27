@@ -57,3 +57,33 @@ if (! function_exists('sprachlink')) {
         return route('sprache.'.$name, ['locale' => $sprache->code] + $parameter);
     }
 }
+
+// Ein *markierter* Teil, nur am Wortrand (siehe hervorheben()).
+defined('HERVORHEBUNG_MUSTER')
+    || define('HERVORHEBUNG_MUSTER', '/(?<![\p{L}\p{N}*])\*(?=\S)([^*]+?)(?<=\S)\*(?![\p{L}\p{N}])/u');
+
+if (! function_exists('hervorheben')) {
+    /**
+     * *Sternchen* in einem Absatz werden fett, wie beim Fettschreiben in einer
+     * Nachricht (KEV-54). Dieselbe Markierung wie beim Aufmacher, nur ohne
+     * Handschrift: Im Fliesstext soll ein Satz herausstehen, nicht verzieren.
+     *
+     * Nur am Wortrand: „Mitarbeiter*innen und Kolleg*innen“ bleibt, wie es
+     * ist. Erst maskieren, dann ersetzen, die einzige rohe Ausgabe ist unser
+     * eigenes <strong>.
+     */
+    function hervorheben(string $text): \Illuminate\Support\HtmlString
+    {
+        return new \Illuminate\Support\HtmlString(preg_replace(
+            HERVORHEBUNG_MUSTER,
+            '<strong class="font-semibold text-ink">$1</strong>',
+            e($text),
+        ));
+    }
+
+    /** Derselbe Text ohne Sternchen, für Suche und Vorschautexte. */
+    function ohne_hervorhebung(string $text): string
+    {
+        return preg_replace(HERVORHEBUNG_MUSTER, '$1', $text);
+    }
+}

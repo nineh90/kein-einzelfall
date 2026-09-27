@@ -203,9 +203,10 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/')->assertOk()->getContent();
 
-        // „Vereinsarbeit“ und „Mitglieder“ in einem gemeinsamen Raster.
+        // „Verein“ (bis KEV-54 „Vereinsarbeit“) und „Mitglieder“ in einem
+        // gemeinsamen Raster. „Verein“ steht auch im Menü, deshalb die Überschrift.
         $this->assertMatchesRegularExpression(
-            '/md:grid-cols-2[^"]*">(?:(?!<section).)*Vereinsarbeit(?:(?!<section).)*Mitglieder/s', $html);
+            '/md:grid-cols-2[^"]*">(?:(?!<section).)*>\s*Verein\s*<\/h2>(?:(?!<section).)*Mitglieder/s', $html);
     }
 
     /**

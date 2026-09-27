@@ -302,6 +302,8 @@ class PageForm
                                 ->label('Absätze')
                                 ->addActionLabel('Absatz hinzufügen')
                                 ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true))
+                                ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen, '
+                                    .'wie beim Fettschreiben in einer Nachricht. Er erscheint dann fett.')
                                 ->simple(
                                     Textarea::make('absatz')->label('')->rows(4)->required()
                                 ),

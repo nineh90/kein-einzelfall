@@ -243,13 +243,16 @@ class StartseiteSeeder extends Seeder
             [
                 'typ' => 'text',
                 'data' => [
-                    'titel' => 'Vereinsarbeit',
+                    // Titel, Text und Leitsatz von Taddi, 27.09.2026 (KEV-54). Der
+                    // erste Satz steht in *Sternchen* und wird damit fett.
+                    'titel' => 'Verein',
                     'absaetze' => [
-                        'Der KE!N EINZELFALL e.V. wurde 2024 gegründet – aus einer persönlichen '
-                        .'Betroffenheit heraus und mit dem Ziel, von schädigenden Taten betroffene '
-                        .'Menschen nicht länger allein zu lassen.',
+                        '*KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus '
+                        .'gegründet.* Aus Erfahrung wurde Wissen und aus Wissen wurde '
+                        .'Betroffenenexpertise. Heute schaffen wir Räume für Austausch, teilen '
+                        .'Wissen und machen sichtbar, was Betroffene bewegt.',
                     ],
-                    'hand' => 'Opferhilfe für soziale Gerechtigkeit!',
+                    'hand' => 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.',
                     'cta' => ['label' => 'Mehr über den Verein', 'url' => '/verein', 'variant' => 'primary'],
                 ],
             ],

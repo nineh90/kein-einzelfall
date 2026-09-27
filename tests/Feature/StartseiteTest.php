@@ -343,6 +343,38 @@ class StartseiteTest extends TestCase
         $this->assertSame($schluessel, array_keys($data));
     }
 
+    /** KEV-54: „Verein“ statt „Vereinsarbeit“, erster Satz fett, neuer Leitsatz. */
+    public function test_vereinsabschnitt_zeigt_taddis_text(): void
+    {
+        $this->get('/')
+            ->assertSee('<strong class="font-semibold text-ink">KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.</strong>', false)
+            ->assertSee('Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.')
+            ->assertDontSee('Vereinsarbeit');
+    }
+
+    public function test_bestehende_startseite_bekommt_den_neuen_vereinsabschnitt(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/verein');
+        $block->update(['data' => array_replace($block->data, [
+            'titel' => 'Vereinsarbeit',
+            'absaetze' => ['Der KE!N EINZELFALL e.V. wurde 2024 gegründet – aus einer persönlichen '
+                .'Betroffenheit heraus und mit dem Ziel, von schädigenden Taten betroffene '
+                .'Menschen nicht länger allein zu lassen.'],
+            'hand' => 'Opferhilfe für soziale Gerechtigkeit!',
+        ])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_09_27_150000_verein_abschnitt_startseite_erneuern.php');
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame('Verein', $data['titel']);
+        $this->assertStringStartsWith('*KE!N EINZELFALL e.V. wurde 2024', $data['absaetze'][0]);
+        $this->assertSame('Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.', $data['hand']);
+        $this->assertSame($schluessel, array_keys($data));
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {

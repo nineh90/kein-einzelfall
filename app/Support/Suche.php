@@ -390,7 +390,8 @@ class Suche
             // `url` und `variant` sind Technik, kein Inhalt — ein Treffer in
             // einer Adresse wäre für Suchende nicht nachvollziehbar.
             if (is_string($wert) && ! in_array($schluessel, ['url', 'variant', 'icon', 'art', 'widget'], true)) {
-                $stuecke[] = $wert;
+                // *Markierungen* (Fettdruck im Absatz) gehören nicht in den Ausschnitt.
+                $stuecke[] = ohne_hervorhebung($wert);
             }
         });
 

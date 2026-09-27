@@ -21,7 +21,8 @@ class ContentTreueTest extends TestCase
         'Wir schaffen eine Austausch',
         'Ein zentrales Netzwerk aus Expertise im Betroffenenkontext',
         'Opferhilfe für soziale Gerechtigkeit',
-        'Der KE!N EINZELFALL e.V. wurde 2024 gegründet',
+        // Seit KEV-54 ein neuer Text von Taddi statt des Altseiten-Satzes.
+        'KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.',
         // Seit KEV-55 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'Du fühlst Dich mit unserer Vision verbunden?',
         'Der Austausch in unseren Selbsthilfegruppen',

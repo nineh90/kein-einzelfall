@@ -139,7 +139,7 @@
                 {{-- Erster Absatz größer gesetzt: gibt der Seite einen Einstieg und
                      hilft beim Einordnen, bevor der Fließtext beginnt. --}}
                 <p class="mt-4 max-w-prose text-lg leading-relaxed text-ink-soft">
-                    {{ $lead }}
+                    {{ hervorheben($lead) }}
                 </p>
             @endif
         </div>

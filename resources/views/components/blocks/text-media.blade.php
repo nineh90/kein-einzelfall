@@ -34,7 +34,7 @@
             <div class="flex flex-col gap-4 leading-relaxed text-ink-soft
                         [&>p:first-child]:text-[1.0625rem] [&>p:first-child]:text-ink">
                 @forelse ($absaetze as $absatz)
-                    <p>{{ $absatz }}</p>
+                    <p>{{ hervorheben($absatz) }}</p>
                 @empty
                     {{ $slot }}
                 @endforelse
