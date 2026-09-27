@@ -49,8 +49,9 @@
                         <p class="mt-1 text-sm text-ink-soft">{{ $beschreibung }}</p>
                     @endif
 
-                    <span class="mt-3 inline-flex items-center gap-2 rounded-full bg-green px-4 py-2
-                                 text-sm text-on-green group-open:hidden">
+                    {{-- Aussieht wie ein Knopf, also wie die Knöpfe (KEV-44). --}}
+                    <span class="mt-3 inline-flex items-center gap-2 rounded-full border border-green px-4 py-2
+                                 text-sm text-green group-hover:bg-green group-hover:text-on-green group-open:hidden">
                         {{ __('rahmen.embed.anzeigen') }}
                     </span>
                 </div>

@@ -11,13 +11,15 @@
     rel="noreferrer noopener"
     @class([
         'inline-flex items-center justify-center no-underline transition-colors',
-        // Header: dunkelgrüne Pille, ruhig — kein Alarmrot im Sichtfeld.
+        // Header: grüne Pille, ruhig — kein Alarmrot im Sichtfeld. Dasselbe
+        // Grün wie die Knöpfe; bis KEV-44 dunkler, und das sah nach Versehen
+        // aus. Als einzige Pille dauerhaft gefüllt, damit sie auffällt.
         // Ab 360 px die Pille mit Beschriftung, darunter nur das Symbol als
         // 40-px-Kreis (voller Tap). Seit KEV-27 steht auf dem Handy kein
         // Vereinsname mehr im Kopf, der Platz reicht also auch dort für die
         // Beschriftung — und ein beschrifteter Notausgang ist eindeutiger als
         // ein Symbol. Unter 360 px (sehr kleine Geräte) bleibt es beim Symbol.
-        'gap-2 rounded-full bg-green-deep text-sm text-on-green hover:bg-ink'
+        'gap-2 rounded-full bg-green text-sm text-on-green hover:bg-green-deep'
             .' h-10 w-10 min-[360px]:w-auto min-[360px]:px-4'
             => $variant === 'header',
         // Mobile-Bar: der einzige Ort, an dem die Warnfarbe eingesetzt wird

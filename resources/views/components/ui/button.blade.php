@@ -26,9 +26,20 @@
      * sieht man das sofort, und es sieht nach Unfall aus. Betraf bisher jedes
      * Paar aus primary und ghost.
      */
+    /*
+     * primary und ghost sehen seit KEV-44 gleich aus: grüner Rahmen, grüne
+     * Schrift, beim Überfahren oder Fokussieren grün gefüllt mit weißer
+     * Schrift. Wunsch des Vereins: einheitliche Knöpfe, und nur der
+     * Notausgang ist dauerhaft gefüllt. Beide Namen bleiben, weil sie in
+     * gepflegten Inhalten stehen. „Weiß“ ist on-green: fast weißes Creme, das
+     * sich im Dunkel- und Kontrastmodus mit umstellt (festes Weiß fiel dort durch).
+     */
+    $einheitlich = 'border border-green text-green hover:bg-green hover:text-on-green '
+        .'focus-visible:bg-green focus-visible:text-on-green';
+
     $variants = [
-        'primary' => 'border border-transparent bg-green text-on-green hover:bg-green-deep',
-        'ghost'   => 'border border-ink text-ink hover:bg-ink hover:text-cream',
+        'primary' => $einheitlich,
+        'ghost'   => $einheitlich,
         'light'   => 'border border-transparent bg-cream text-green-deep hover:bg-card',
         'outline' => 'border border-[#6E8A79] text-on-green hover:bg-[#2B4536]',
         /*

@@ -810,8 +810,10 @@ class PageForm
      * Verschieben in einen anderen Baustein still sein Aussehen verliert.
      */
     private const KNOPF_AUSSEHEN = [
-        'primary' => 'Gefüllt (grün)',
-        'ghost' => 'Umrandet',
+        // Seit KEV-44 sehen beide gleich aus (grün umrandet, beim Überfahren
+        // gefüllt). Beide bleiben wählbar, weil sie in Inhalten stehen.
+        'primary' => 'Grün umrandet (Standard)',
+        'ghost' => 'Grün umrandet (wie Standard)',
         'light' => 'Hell — nur auf dem grünen Band',
         'outline' => 'Hell umrandet — nur auf dem grünen Band',
     ];
