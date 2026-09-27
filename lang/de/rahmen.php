@@ -116,6 +116,7 @@ return [
         'informationen' => 'Informationen',
         'social' => 'Social Media',
         'umsetzung' => 'Umsetzung:',
+        'sofort_hilfe' => 'Sofort Hilfe',
     ],
 
     'weiterlesen' => [

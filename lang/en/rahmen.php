@@ -85,6 +85,7 @@ return [
         'informationen' => 'Information',
         'social' => 'Social media',
         'umsetzung' => 'Built by:',
+        'sofort_hilfe' => 'Immediate help',
     ],
 
     'weiterlesen' => [

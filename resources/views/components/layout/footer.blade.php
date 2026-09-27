@@ -16,6 +16,28 @@
             <span class="font-display text-lg">KE!N EINZELFALL e.V.</span>
         </div>
 
+        {{-- Notfall-Zeile auf jeder Seite (KEV-42). Das Hinweisfenster sagt „Die
+             Notfallnummern stehen am Ende jeder Seite“, und hier stehen sie.
+             Nummern aus config/hilfe.php, damit sie an jeder Stelle gleich sind.
+             Auf dem dunkelgrünen Grund in der hellen Schrift der Fusszeile,
+             nicht im Warnrot: Das hätte hier keinen Kontrast. --}}
+        @php
+            $alle = config('hilfe.nummern');
+            $sofort = array_values(array_filter(array_map(fn ($s) => $alle[$s] ?? null, config('hilfe.fusszeile', []))));
+            $sofort[] = config('hilfe.notruf')[0];
+        @endphp
+        <section aria-labelledby="sofort-hilfe-titel"
+                 class="mb-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-y border-on-green-line py-4 text-sm">
+            <h2 id="sofort-hilfe-titel" class="font-display text-base">{{ __('rahmen.fusszeile.sofort_hilfe') }}:</h2>
+            @foreach ($sofort as $n)
+                <a href="tel:{{ $n['tel'] }}"
+                   class="text-on-green no-underline hover:underline">
+                    <span class="font-display text-lg font-medium">{{ $n['nummer'] }}</span>
+                    <span class="text-on-green-soft">{{ $n['name'] }}</span>
+                </a>
+            @endforeach
+        </section>
+
         {{-- Vier Spalten erst ab „lg“: Bei 768 px blieben je 170 px, und die
              E-Mail-Adresse brach mitten im Wort. Auf dem Handy stehen Adresse
              und Kontakt über die volle Breite, die beiden Linklisten

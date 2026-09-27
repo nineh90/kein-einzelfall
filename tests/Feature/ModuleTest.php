@@ -85,4 +85,20 @@ class ModuleTest extends TestCase
             $this->assertNotEquals(basename($dok['datei']), $dok['titel']);
         }
     }
+
+    /**
+     * KEV-42: Das Hinweisfenster verspricht „Die Notfallnummern stehen am Ende
+     * jeder Seite“. Also stehen sie in der Fusszeile, auf jeder Seite.
+     */
+    public function test_notfallnummern_stehen_in_der_fusszeile_jeder_seite(): void
+    {
+        foreach (['/module-demo', '/suche', '/gibt-es-nicht'] as $pfad) {
+            $html = $this->get($pfad)->getContent();
+            $fuss = substr($html, strpos($html, '<footer'));
+
+            $this->assertStringContainsString('tel:+49116006', $fuss, $pfad);
+            $this->assertStringContainsString('tel:+49116123', $fuss, $pfad);
+            $this->assertStringContainsString('tel:110', $fuss, $pfad);
+        }
+    }
 }
