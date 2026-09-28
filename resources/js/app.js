@@ -23,6 +23,10 @@ import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
+import { kopfhoeheVerdrahten } from './kopfhoehe'
+
+// Zuerst: Der Aufmacher braucht die Höhe, bevor irgendetwas anderes zeichnet.
+kopfhoeheVerdrahten()
 
 toolbarVerdrahten()
 leselinieVerdrahten()

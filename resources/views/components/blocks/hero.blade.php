@@ -47,10 +47,11 @@
 
 {{-- Unten derselbe Abstand wie bei jedem Abschnitt: Der nächste Baustein
      steht auf der Karte, und ohne Luft klebte die Karte an den Knöpfen. --}}
-{{-- Füllt den ersten Bildschirm (KEV-36): Höhe des Fensters abzüglich
-     Kopfzeile (4 rem, ab „lg“ 5 rem) und, unter „xl“, der festen Leiste unten
-     (4 rem). svh statt vh, damit mobile Browserleisten nichts abschneiden.
-     Nur Mindesthöhe: Längere Texte dürfen den Aufmacher wachsen lassen. --}}
+{{-- Füllt den ersten Bildschirm (KEV-36, KEV-29): Höhe des Fensters abzüglich
+     Kopfzeile und, unter „xl“, der festen Leiste unten (4 rem). Die Kopfzeile
+     misst kopfhoehe.js und legt sie in --kopfhoehe ab; ohne JavaScript gelten
+     4 bzw. 5 rem. svh statt vh, damit mobile Browserleisten nichts
+     abschneiden. Nur Mindesthöhe: Längere Texte dürfen ihn wachsen lassen. --}}
 @php
     // bild.webp (2000 px) und bild-1000.webp, wie bei den Titelbildern.
     $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
@@ -61,7 +62,7 @@
 
 {{-- Spalte statt Zeile: Inhalt mittig (my-auto), das Band „Sofort verlassen“
      am unteren Rand (KEV-30). --}}
-<section class="relative isolate flex min-h-[calc(100svh-8rem)] flex-col overflow-hidden px-4 md:px-8 pb-6 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-8 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
+<section class="relative isolate flex min-h-[calc(100svh-var(--kopfhoehe,4rem)-4rem)] flex-col overflow-hidden px-4 md:px-8 pb-6 pt-8 lg:min-h-[calc(100svh-var(--kopfhoehe,5rem)-4rem)] lg:px-10 lg:pb-8 lg:pt-12 xl:min-h-[calc(100svh-var(--kopfhoehe,5rem))]">
     {{-- Hintergrundbild (KEV-35): eine ruhige, leere Wand mit Fensterlicht,
          ohne Motiv, darauf links der Text und rechts das Logo. Bis zum
          28.09.2026 war es ein Steinstapel; der Verein will auf der Startseite
@@ -79,7 +80,10 @@
         </div>
     @endif
 
-    <div class="mx-auto my-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+    {{-- Ab „lg“ bekommt der Text mehr Breite als das Logo (KEV-29): Die
+         Überschrift soll dort in zwei Zeilen stehen, „Keiner soll mehr sagen
+         müssen:“ und das Zitat je für sich. --}}
+    <div class="mx-auto my-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-10">
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
              Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
@@ -92,7 +96,10 @@
             {{-- pb-1: Die Unterlängen der Handschrift brauchen den Platz. --}}
             {{-- text-balance: Auf dem Handy blieb sonst „müssen:“ allein in
                  der zweiten Zeile stehen. --}}
-            <h1 class="text-balance pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:text-[2.75rem]">
+            {{-- Ab „lg“ ohne Umbruch: Jeder der beiden Teile steht in einer
+                 Zeile (KEV-29). Damit das auch bei 1024 px passt, wächst die
+                 Schrift dort mit der Breite, bis 2,75 rem. --}}
+            <h1 class="text-balance pb-1 font-display text-[1.75rem] font-medium leading-[1.18] text-ink md:text-[2.125rem] lg:whitespace-nowrap lg:text-[clamp(2.25rem,3.2vw,2.75rem)]">
                 {!! $ueberschrift !!}
             </h1>
 
@@ -122,7 +129,7 @@
                  Knöpfe im ersten Bildschirm bleiben. --}}
             <div class="hero-logo mx-auto flex w-full max-w-sm items-center justify-center">
                 <img src="/img/logo-gross.webp" alt="" width="479" height="432" fetchpriority="high"
-                     class="h-auto w-40 sm:w-56 lg:w-80">
+                     class="h-auto w-40 sm:w-56 lg:w-64 xl:w-80">
             </div>
 
             @if ($hand)
