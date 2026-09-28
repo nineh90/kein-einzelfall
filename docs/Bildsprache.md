@@ -65,7 +65,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Verein | Vereinslogo auf der Wand über leerem Tisch (siehe unten) |
 | Über uns – Vorstand und Team | zwei Keramikschalen nebeneinander |
 | Startseite (Aufmacher) | Steinstapel, bis 28.09.2026 das Bild der Mitgliedschaft (KEV-35) |
-| Mitgliedschaft | Bündel Halme mit Leinenband: viele zusammen (KEV-35) |
+| Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, oben ausgerichtet (siehe unten) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
@@ -120,3 +120,19 @@ Erzeugt direkt über fal.ai, **nicht** mit `bin/titelbild`: Die Vorlage
 verlangt ein Motiv links unten, und das Modell stellte dann trotz Verbot
 Tassen, Vasen oder Pflanzen hin. Tassen und „Wellness“ hat der Verein
 ausdrücklich abgelehnt (KEV-57, KEV-36).
+
+## Mitgliedschaft: Bild vom Verein (KEV-61)
+
+Taddi hat das Bild selbst geliefert: ein Mitgliedsantrag mit Stift. Es ist
+KI-erzeugt, und das Kleingedruckte stimmte nicht: falsche IBAN
+(„DE90 … 8589 10“ statt der echten), „Schlimmer Höhe“ statt „Schiffbeker
+Höhe“. Beides ist beim Hineinzoomen lesbar, und eine falsche IBAN auf der
+Mitgliedschaftsseite wäre ein echter Schaden. Deshalb sind der Fuß des
+Formulars (Kontakt, Bank, Steuernummer) und die Adresse oben weich
+gezeichnet; Überschrift und Formular bleiben scharf. Die Beiträge im
+Formular (12/24/36 €) hat der Verein gegenzuprüfen.
+
+Das Motiv reicht bis an den oberen Rand, anders als die Vorgabe es vorsieht.
+Es steht deshalb in `Titelbilder::FOKUS_OBEN` und wird im Kopf oben statt
+unten ausgerichtet.
+

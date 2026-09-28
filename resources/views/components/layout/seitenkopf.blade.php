@@ -75,6 +75,11 @@
             : null;
 
         $zeile = $bereich && $bereich !== $titel ? $bereich : 'KE!N EINZELFALL e.V.';
+
+        // Ausgerichtet wird auf die linke untere Ecke, dort sitzt laut
+        // Bildvorgabe das Motiv. Bilder, deren Motiv bis oben reicht, stehen
+        // in Titelbilder::FOKUS_OBEN und werden oben links ausgerichtet.
+        $fokus = \App\Support\Titelbilder::fokusOben($bild) ? 'object-[0%_0%]' : 'object-[0%_100%]';
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>
@@ -87,7 +92,7 @@
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
                 <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                      alt="{{ $bild_alt ?? '' }}" width="2000" height="1116" fetchpriority="high"
-                     class="h-full w-full object-cover object-[0%_100%]">
+                     class="h-full w-full object-cover {{ $fokus }}">
 
                 {{-- Schleier für die Lesbarkeit. Auf dem Handy steht der Text
                      oben, wo die Bilder laut Vorgabe freie Wand haben; das

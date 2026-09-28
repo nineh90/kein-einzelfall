@@ -104,6 +104,13 @@ class SeitengestaltungTest extends TestCase
         $this->assertSame(['startseite', 'trigger-warnung'], $ohne);
     }
 
+    /** KEV-61: Das Antragsbild reicht bis oben und wird dort ausgerichtet. */
+    public function test_bilder_mit_motiv_oben_werden_oben_ausgerichtet(): void
+    {
+        $this->assertStringContainsString('object-[0%_0%]', $this->get('/mitgliedschaft')->getContent());
+        $this->assertStringContainsString('object-[0%_100%]', $this->get('/spenden')->getContent());
+    }
+
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void
     {
         Page::whereNotNull('titelbild')->pluck('titelbild')->each(

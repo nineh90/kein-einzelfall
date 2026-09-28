@@ -73,6 +73,24 @@ class Titelbilder
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
 
     /**
+     * Bilder, die nicht nach der Bildvorgabe gebaut sind: Ihr Motiv reicht bis
+     * an den oberen Rand. Im Kopf werden sie oben statt unten ausgerichtet,
+     * sonst schnitte ein breiter Bildschirm genau das Wichtige ab.
+     *
+     * Mitgliedschaft: der Antrag, von Taddi geliefert (KEV-61). Oben steht
+     * „Antrag auf Mitgliedschaft“, unten nur das (weich gezeichnete)
+     * Kleingedruckte.
+     */
+    public const FOKUS_OBEN = [
+        self::ORDNER.'/mitgliedschaft.webp',
+    ];
+
+    public static function fokusOben(?string $bild): bool
+    {
+        return in_array($bild, self::FOKUS_OBEN, true);
+    }
+
+    /**
      * Setzt den Platzhalter, nur wo noch gar kein Titelbild steht. Ohne
      * Unterzeile: Die gehört zum eigenen Bild und kommt mit ihm.
      */
