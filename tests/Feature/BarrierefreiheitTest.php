@@ -83,7 +83,7 @@ class BarrierefreiheitTest extends TestCase
             // Erlaubt: die eigene Domain und Ziele von Verweisen
             // (Social-Profile, Notausgang, vertraglich zugesagte Umsetzer-Nennung,
             // der PayPal-Spendenlink — ein Link, kein eingebettetes Skript).
-            $erlaubt = [$eigenerHost, 'www.wetter.com', 'nils-digital.de',
+            $erlaubt = [$eigenerHost, 'www.google.de', 'nils-digital.de',
                 'www.instagram.com', 'www.facebook.com', 'www.tiktok.com',
                 'www.paypal.com'];
 

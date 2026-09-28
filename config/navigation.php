@@ -138,9 +138,14 @@ return [
     ],
 
     /*
-     * Notausgang. Ziel bewusst unverfänglich und schnell ladend.
-     * Die Altseite nutzt google.com; wetter.com ist plausibler als "was jemand
-     * gerade angeschaut hat" und verrät weniger als eine leere Suchmaske.
+     * Notausgang. Ziel bewusst unverfänglich und schnell ladend, und immer
+     * eine fremde Domain: Eine Seite unter kein-einzelfall.de verriete in
+     * Adresszeile und Verlauf, wo man war.
+     *
+     * Seit KEV-40 Google, Wunsch des Vereins (wie auf der Altseite). Vorher
+     * wetter.com. Gilt für alle Wege hinaus: Notausgang oben, „Exit“ in der
+     * unteren Leiste, „Seite sofort verlassen“ im Hinweisfenster und dreimal
+     * Esc (exit-script.blade.php).
      */
-    'exit_url' => 'https://www.wetter.com',
+    'exit_url' => 'https://www.google.de',
 ];
