@@ -313,8 +313,8 @@ class PageForm
                                 ->label('Bild (Pfad oder Adresse)')
                                 ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero'], true))
                                 ->helperText(fn ($get) => $get('typ') === 'hero'
-                                    ? 'Hintergrundbild, Motiv links unten, rechts freie Fläche für den Text. '
-                                        .'Leer lassen zeigt rechts das Vereinslogo.'
+                                    ? 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
+                                        .'(ruhige Wand). Leer lassen zeigt die helle Fläche.'
                                     : 'Leer lassen zeigt eine Platzhalterfläche.'),
 
                             TextInput::make('data.bild_alt')

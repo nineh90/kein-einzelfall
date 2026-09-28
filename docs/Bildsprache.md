@@ -64,7 +64,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 |---|---|
 | Verein | Vereinslogo auf der Wand über leerem Tisch (siehe unten) |
 | Über uns – Vorstand und Team | zwei Keramikschalen nebeneinander |
-| Startseite (Aufmacher) | Steinstapel, bis 28.09.2026 das Bild der Mitgliedschaft (KEV-35) |
+| Startseite (Aufmacher) | leere Wand mit Fensterlicht, ohne Motiv; davor das Logo (KEV-35/36). Kurz der Steinstapel der alten Mitgliedschaft, verworfen |
 | Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, oben ausgerichtet (siehe unten) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
 | Unterstützung | Keimling im Terrakottatopf |

@@ -164,7 +164,7 @@ class StartseiteSeeder extends Seeder
                     // Die Sternchen markieren den Teil mit der handgezeichneten
                     // Linie — im Mockup liegt sie unter dem Zitat.
                     'titel' => 'Keiner soll mehr sagen müssen: *„Ich hab es nicht gewusst!“*',
-                    // Bild der früheren Mitgliedschaftsseite, Wunsch von Taddi (KEV-35).
+                    // Ruhige Wand ohne Motiv, davor das Logo (KEV-35/36).
                     'bild' => '/img/titelbilder/startseite.webp',
                     // Text von Taddi, 27.09.2026 (KEV-43).
                     'text' => 'Du bist auf der Informations-, Austausch- und '

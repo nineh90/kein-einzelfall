@@ -5,9 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * Startseite: Der Aufmacher bekommt ein Hintergrundbild (KEV-35, Wunsch von
- * Taddi): das bisherige Bild der Mitgliedschaftsseite. Die Mitgliedschaft hat
- * unter demselben Dateinamen ein neues Bild bekommen, dafür braucht es keine
- * Datenbankänderung.
+ * Taddi): eine ruhige Wand ohne Motiv, davor steht das Logo (KEV-36).
  *
  * Nur wo der Aufmacher noch kein Bild hat. Alle Sprachfassungen, das Bild
  * zeigt keinen Text.
