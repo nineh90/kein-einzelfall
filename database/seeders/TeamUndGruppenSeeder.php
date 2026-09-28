@@ -256,8 +256,20 @@ class TeamUndGruppenSeeder extends Seeder
             $neu[] = ['typ' => 'team_grid', 'data' => ['bereich' => $bereich]];
 
             foreach ($mitglieder as $person) {
+                // Ein Absatz, auch wenn die Altseite ihn in zwei zerlegt hatte:
+                // So hat Taddi ihn für die Überleitung zum Team vorgegeben
+                // (KEV-66). Zwei Absätze setzte der Baustein ungleich, den
+                // ersten dunkler und grösser als Einstieg.
+                //
+                // Die Überleitung vor dem Team bekommt die Überschrift „Team“
+                // (KEV-66), damit der Abschnitt nicht namenlos zwischen den
+                // Karten steht. Erkannt am Anfang des Textes.
                 if (isset($zwischentexte[$person['name']])) {
-                    $neu[] = ['typ' => 'text', 'data' => ['absaetze' => $zwischentexte[$person['name']]]];
+                    $absatz = implode(' ', $zwischentexte[$person['name']]);
+                    $data = str_starts_with($absatz, 'Darüber hinaus gibt es viele Menschen')
+                        ? ['titel' => 'Team', 'absaetze' => [$absatz]]
+                        : ['absaetze' => [$absatz]];
+                    $neu[] = ['typ' => 'text', 'data' => $data];
                 }
             }
         }
