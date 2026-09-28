@@ -333,7 +333,11 @@ html.ke-speicher-bereit [data-speicher-ohne-js] {
   color: var(--color-ink);
 }
 /* Die Begrenzung der Zeilenlaenge (max-w-prose) bleibt bewusst stehen: Sie ist
-   keine Layoutzier, sondern eine Lesehilfe — und gilt im Dialog genauso. */
+   keine Layoutzier, sondern eine Lesehilfe — und gilt im Dialog genauso. Seit
+   KEV-41 steht der ganze Dialog mittig, also auch dieser Block. */
+.trigger-warnung-inhalt .max-w-prose {
+  margin-inline: auto;
+}
 
 /* ---------------------------------------------------------------------------
    Girocode — der QR-Code fuer die Ueberweisung.

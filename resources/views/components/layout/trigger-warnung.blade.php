@@ -33,7 +33,9 @@
         aria-labelledby="trigger-warnung-titel"
         @if ($ersatzsprache) lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}" @endif>
 
-    <div class="mx-auto w-full max-w-2xl rounded-card border border-line bg-card p-6 lg:p-8">
+    {{-- Alles mittig (KEV-41, Kevin): Links ausgerichtet blieb rechts neben
+         Text und Knöpfen viel leere Fläche. --}}
+    <div class="mx-auto w-full max-w-2xl rounded-card border border-line bg-card p-6 text-center lg:p-8">
 
         <p class="mb-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft">
             {{ __('rahmen.trigger.eyebrow') }}
@@ -97,8 +99,15 @@
                  Entscheidung, die niemand treffen wollte.
 
                  Als Kontrollkästchen bleiben unten genau zwei Wege: weiterlesen
-                 oder gehen. --}}
-            <label class="mb-6 flex cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-soft"
+                 oder gehen.
+
+                 Mittig über den beiden Knöpfen (KEV-41, Wunsch des Vereins):
+                 Kästchen und Knöpfe stehen in einem Rahmen, der ab „sm“ nur so
+                 breit ist wie die Knöpfe nebeneinander und selbst mittig im
+                 Fenster steht. Das Kästchen ist nur so breit wie sein Text,
+                 damit die anklickbare Fläche nicht bis an die Ränder reicht. --}}
+            <div class="sm:mx-auto sm:w-fit">
+            <label class="mx-auto mb-6 flex w-fit cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-soft"
                    data-trigger-braucht-js>
                 {{-- Natives <input>: Tastaturbedienung, Vorlesehilfe und der
                      Zustand „ausgewählt“ kommen vom Browser. Ein nachgebautes
@@ -136,6 +145,7 @@
                     <x-ui.icon name="exit" :size="18" />
                     {{ __('rahmen.trigger.verlassen') }}
                 </x-ui.button>
+            </div>
             </div>
 
             {{-- Steht nur da, solange JavaScript nicht übernommen hat. Ohne
