@@ -130,7 +130,8 @@
                                     <div class="border-t border-line px-5 py-4 text-sm leading-relaxed text-ink-soft
                                                 [&_a]:text-green-deep [&_a]:underline
                                                 [&_p]:mb-3 [&_p:last-child]:mb-0">
-                                        {!! $person->profil !!}
+                                        {{-- Ab dort, wo das Kurzprofil aufhört (KEV-63). --}}
+                                        {!! $person->profilFortsetzung() !!}
                                     </div>
                                 </details>
                             @endif
