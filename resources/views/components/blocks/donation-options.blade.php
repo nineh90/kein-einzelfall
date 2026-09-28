@@ -152,9 +152,13 @@
                             {{-- Kopieren gibt es nur mit JavaScript und Zwischenablage
                                  (kopieren.js nimmt das hidden weg). Ohne beides bliebe
                                  ein Knopf, der nichts tut. Kopiert wird ohne
-                                 Leerzeichen: Das nehmen alle Banking-Formulare an. --}}
+                                 Leerzeichen: Das nehmen alle Banking-Formulare an.
+
+                                 Auf dem Handy mittig, wie der QR-Code darunter (KEV-37):
+                                 Dort steht alles in einer Spalte, und links an den Rand
+                                 gerückt blieb rechts daneben nur leere Karte. --}}
                             @if (!empty($bank['iban']))
-                                <div class="mt-5 flex flex-wrap items-center gap-3" data-kopieren-bereich hidden>
+                                <div class="mt-5 flex flex-wrap items-center justify-center gap-3 sm:justify-start" data-kopieren-bereich hidden>
                                     <button type="button"
                                             data-kopieren="{{ str_replace(' ', '', $bank['iban']) }}"
                                             class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5
@@ -173,7 +177,9 @@
                             {{-- Der Code selbst ist für eine Vorlesehilfe nichts als
                                  eine Fläche. Was er ist und wofür er gut ist, steht
                                  deshalb sichtbar darunter — und damit gleich für alle. --}}
-                            <figure class="w-40 sm:w-36">
+                            {{-- Auf dem Handy mittig in der Karte (KEV-37), ab „sm“
+                                 rechts neben den Angaben wie bisher. --}}
+                            <figure class="mx-auto w-40 text-center sm:mx-0 sm:w-36 sm:text-left">
                                 {{-- Der einzige Ort auf dieser Seite mit fest
                                      eingebauten Farben, und das mit Absicht: Ein
                                      QR-Code ist kein Text, sondern etwas, das
