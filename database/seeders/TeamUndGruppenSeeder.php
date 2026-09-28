@@ -253,7 +253,11 @@ class TeamUndGruppenSeeder extends Seeder
         $gruppen = collect($personen)->groupBy('bereich');
 
         foreach ($gruppen as $bereich => $mitglieder) {
-            $neu[] = ['typ' => 'team_grid', 'data' => ['bereich' => $bereich]];
+            // „Vorstandsebene“ über den Vorstandskarten (KEV-65). Das Team hat
+            // seine Überschrift in der Überleitung davor (KEV-66).
+            $neu[] = ['typ' => 'team_grid', 'data' => $bereich === self::BEREICH_VORSTAND
+                ? ['titel' => 'Vorstandsebene', 'bereich' => $bereich]
+                : ['bereich' => $bereich]];
 
             foreach ($mitglieder as $person) {
                 // Ein Absatz, auch wenn die Altseite ihn in zwei zerlegt hatte:

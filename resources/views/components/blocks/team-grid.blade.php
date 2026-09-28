@@ -46,10 +46,15 @@
             @endif
 
             {{-- team-raster: Öffnet sich eine Karte, streckt sich die Nachbarin
-                 in derselben Zeile nicht mit (KEV-21, Regel in app.css). --}}
+                 in derselben Zeile nicht mit (KEV-21, Regel in app.css).
+
+                 Eine einzelne Karte in der letzten Zeile steht mittig unter
+                 den beiden darüber (KEV-65): links allein sah die Zeile leer
+                 aus. Sie behält die Breite einer Spalte (halbe Breite minus
+                 halber Abstand). --}}
             <ul class="team-raster grid gap-5 md:grid-cols-2">
                 @foreach ($personen as $person)
-                    <li class="flex">
+                    <li class="flex md:odd:last:col-span-2 md:odd:last:w-[calc(50%-0.625rem)] md:odd:last:justify-self-center">
                         <article id="{{ $person->anker() }}"
                                  class="flex flex-1 scroll-mt-24 flex-col overflow-hidden rounded-card
                                         border border-line bg-cream">
