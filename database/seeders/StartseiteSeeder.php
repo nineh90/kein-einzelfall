@@ -312,11 +312,8 @@ class StartseiteSeeder extends Seeder
                         .'Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder '
                         .'den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest '
                         .'uns etwas mitteilen?',
-                    // Kein Vereinsinhalt, sondern die Erklärung einer
-                    // Bedienfunktion — sonst weiß niemand, dass es den
-                    // Tastatur-Kurzbefehl gibt.
-                    'hinweis' => 'Du kannst diese Seite jederzeit sofort verlassen: über '
-                        .'„Notausgang“ oben rechts, in der Leiste unten, oder mit dreimal ESC.',
+                    // Der Hinweis zum sofortigen Verlassen steht seit KEV-30
+                    // im Band unten im Aufmacher, nicht mehr hier.
                     'ctas' => [
                         ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
                         ['label' => 'Kontakt', 'url' => '/kontakt', 'variant' => 'ghost'],

@@ -80,6 +80,15 @@ return [
         ],
     ],
 
+    'verlassen' => [
+        'titel' => 'Leave right away',
+        'gross' => 'You can leave this page at any time: via “Quick exit” at the top right or by pressing Esc three times.',
+        'klein' => 'You can leave this page at any time: via “Quick exit” at the top or “Exit” in the bar at the bottom.',
+        'tls' => 'TLS-encrypted',
+        'vertraulich' => 'Confidential & GDPR-compliant',
+        'notausgang' => 'Quick exit at any time',
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Contact',
         'informationen' => 'Information',

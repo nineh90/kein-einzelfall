@@ -60,6 +60,12 @@
          allen anderen landete sie als Attribut auf-="…" im HTML. --}}
     @php
         $attribute = $block->nimmtFlaeche() ? ['auf' => $auf] + $data : $data;
+
+        // Kontaktabschluss auf einer Seite mit Aufmacher: Dessen Band trägt
+        // die Vertrauenssignale schon (KEV-30).
+        if ($block->typ === 'contact_close' && $block->page?->blocks->contains('typ', 'hero')) {
+            $attribute['vertrauen'] = false;
+        }
     @endphp
     <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($attribute)" />
 @endif

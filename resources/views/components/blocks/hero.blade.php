@@ -59,7 +59,9 @@
         : null;
 @endphp
 
-<section class="relative isolate flex min-h-[calc(100svh-8rem)] items-center overflow-hidden px-4 md:px-8 pb-8 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-12 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
+{{-- Spalte statt Zeile: Inhalt mittig (my-auto), das Band „Sofort verlassen“
+     am unteren Rand (KEV-30). --}}
+<section class="relative isolate flex min-h-[calc(100svh-8rem)] flex-col overflow-hidden px-4 md:px-8 pb-6 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-8 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
     {{-- Hintergrundbild (KEV-35): eine ruhige, leere Wand mit Fensterlicht,
          ohne Motiv, darauf links der Text und rechts das Logo. Bis zum
          28.09.2026 war es ein Steinstapel; der Verein will auf der Startseite
@@ -77,7 +79,7 @@
         </div>
     @endif
 
-    <div class="mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+    <div class="mx-auto my-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
              Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
@@ -130,4 +132,6 @@
             @endif
         </div>
     </div>
+
+    <x-layout.verlassen-band />
 </section>

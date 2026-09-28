@@ -4,6 +4,9 @@
     'hinweis' => null,   // Bedienhinweis, klar abgesetzt vom Inhaltstext
     'ctas' => [],
     'auf' => 'cream',    // cream | card
+    // Auf der Startseite stehen die Vertrauenssignale seit KEV-30 im Band
+    // unten im Aufmacher; zweimal auf einer Seite wäre einmal zu viel.
+    'vertrauen' => true,
 ])
 
 {{-- Leere Knöpfe aus dem Panel aussortieren, siehe helpers.php --}}
@@ -44,17 +47,15 @@
         {{-- Vertrauenssignale. Die Aussagen müssen stimmen — der Notausgang ist
              umgesetzt, TLS ist Pflicht, die Verschlüsselung sensibler Felder kommt
              mit dem Kontaktformular. Nichts hier ist Dekoration. --}}
+        @if ($vertrauen)
         <ul class="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-ink-soft">
-            @foreach ([
-                ['icon' => 'lock',   'text' => 'TLS-verschlüsselt'],
-                ['icon' => 'shield', 'text' => 'Vertraulich & DSGVO-konform'],
-                ['icon' => 'exit',   'text' => 'Notausgang jederzeit'],
-            ] as $trust)
+            @foreach ([['lock', 'tls'], ['shield', 'vertraulich'], ['exit', 'notausgang']] as [$icon, $schluessel])
                 <li class="flex items-center gap-1.5">
-                    <x-ui.icon :name="$trust['icon']" :size="15" />
-                    {{ $trust['text'] }}
+                    <x-ui.icon :name="$icon" :size="15" />
+                    {{ __('rahmen.verlassen.'.$schluessel) }}
                 </li>
             @endforeach
         </ul>
+        @endif
     </div>
 </section>

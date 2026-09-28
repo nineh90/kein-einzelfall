@@ -111,6 +111,20 @@ return [
         ],
     ],
 
+    /*
+     * Band unten im Aufmacher der Startseite (KEV-30): wie man die Seite
+     * sofort verlässt, und die Vertrauenssignale. Auf dem Handy ohne Esc,
+     * dort gibt es keine Taste dafür.
+     */
+    'verlassen' => [
+        'titel' => 'Sofort verlassen',
+        'gross' => 'Du kannst diese Seite jederzeit sofort verlassen: über „Notausgang“ oben rechts oder mit dreimal Esc.',
+        'klein' => 'Du kannst diese Seite jederzeit sofort verlassen: über „Notausgang“ oben oder „Exit“ in der Leiste unten.',
+        'tls' => 'TLS-verschlüsselt',
+        'vertraulich' => 'Vertraulich & DSGVO-konform',
+        'notausgang' => 'Notausgang jederzeit',
+    ],
+
     'fusszeile' => [
         'kontakt' => 'Kontakt',
         'informationen' => 'Informationen',

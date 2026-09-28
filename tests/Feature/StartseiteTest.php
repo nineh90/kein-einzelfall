@@ -496,6 +496,25 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform');
     }
 
+    /**
+     * KEV-30: „Sofort verlassen“ steht als Band unten im Aufmacher, nicht mehr
+     * am Seitenende. Auf dem Handy ohne Esc, dort gibt es die Taste nicht.
+     */
+    public function test_hinweis_zum_verlassen_steht_im_aufmacher(): void
+    {
+        $html = $this->get('/')->getContent();
+        $aufmacher = substr($html, 0, strpos($html, '</section>', strpos($html, '<h1')));
+
+        $this->assertStringContainsString('oder mit dreimal Esc', $aufmacher);
+        $this->assertStringContainsString('„Exit“ in der Leiste unten', $aufmacher);
+        $this->assertStringContainsString('TLS-verschlüsselt', $aufmacher);
+
+        // Am Seitenende nicht noch einmal.
+        $ende = substr($html, strpos($html, 'id="kontakt-titel"'));
+        $this->assertStringNotContainsString('jederzeit sofort verlassen', $ende);
+        $this->assertStringNotContainsString('TLS-verschlüsselt', substr($ende, 0, strpos($ende, '<footer')));
+    }
+
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */
     private function spendenMigration(): object
     {
