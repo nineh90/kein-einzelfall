@@ -311,8 +311,11 @@ class PageForm
                             // --- Text mit Bild ---
                             TextInput::make('data.bild')
                                 ->label('Bild (Pfad oder Adresse)')
-                                ->visible(fn ($get) => $get('typ') === 'text_media')
-                                ->helperText('Leer lassen zeigt eine Platzhalterfläche.'),
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero'], true))
+                                ->helperText(fn ($get) => $get('typ') === 'hero'
+                                    ? 'Hintergrundbild, Motiv links unten, rechts freie Fläche für den Text. '
+                                        .'Leer lassen zeigt rechts das Vereinslogo.'
+                                    : 'Leer lassen zeigt eine Platzhalterfläche.'),
 
                             TextInput::make('data.bild_alt')
                                 ->label('Bildbeschreibung')

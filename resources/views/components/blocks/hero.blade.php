@@ -3,6 +3,7 @@
     'titel',
     'text' => null,
     'hand' => null,          // handschriftlicher Akzent unter der Grafik
+    'bild' => null,          // Hintergrundbild (KEV-35); ohne steht rechts das Logo
     'ctas' => [],            // [['label'=>, 'url'=>, 'variant'=>], ...]
 ])
 
@@ -50,13 +51,40 @@
      Kopfzeile (4 rem, ab „lg“ 5 rem) und, unter „xl“, der festen Leiste unten
      (4 rem). svh statt vh, damit mobile Browserleisten nichts abschneiden.
      Nur Mindesthöhe: Längere Texte dürfen den Aufmacher wachsen lassen. --}}
-<section class="flex min-h-[calc(100svh-8rem)] items-center px-4 md:px-8 pb-8 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-12 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
-    <div class="mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+@php
+    // bild.webp (2000 px) und bild-1000.webp, wie bei den Titelbildern.
+    $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
+    $srcset = $bild && $klein !== $bild && is_file(public_path(ltrim($klein, '/')))
+        ? "{$klein} 1000w, {$bild} 2000w"
+        : null;
+@endphp
+
+<section class="relative isolate flex min-h-[calc(100svh-8rem)] items-center overflow-hidden px-4 md:px-8 pb-8 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-12 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
+    {{-- Mit Bild (KEV-35, Wunsch des Vereins): Es füllt den Aufmacher, der
+         Text steht ab „md“ rechts auf der freien Wand, wie in den Köpfen der
+         Unterseiten. Die Bilder haben ihr Motiv links unten. Auf dem Handy
+         reicht der Text fast über das ganze Bild, dort trägt ein kräftigerer
+         Schleier die Lesbarkeit. Schmuck: alt="". --}}
+    @if ($bild)
+        <div class="absolute inset-0 -z-10">
+            <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
+                 alt="" width="2000" height="1116" fetchpriority="high"
+                 class="h-full w-full object-cover object-[0%_100%]">
+            <div aria-hidden="true" class="absolute inset-0 bg-cream/80 md:hidden"></div>
+            <div aria-hidden="true"
+                 class="absolute inset-0 hidden bg-linear-to-r from-transparent from-20% via-cream/75 via-50% to-cream/90 md:block"></div>
+        </div>
+    @endif
+
+    <div @class([
+        'mx-auto grid w-full max-w-6xl items-center gap-6',
+        'md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10' => ! $bild,
+    ])>
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
              Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
              sonst allein über einer halbleeren Zeile. --}}
-        <div class="order-2 md:order-1">
+        <div @class(['order-2 md:order-1' => ! $bild, 'md:ml-auto md:w-1/2 lg:w-[48%]' => $bild])>
             @if ($eyebrow)
                 <x-ui.eyebrow class="mb-4">{{ $eyebrow }}</x-ui.eyebrow>
             @endif
@@ -85,6 +113,7 @@
             @endif
         </div>
 
+        @unless ($bild)
         <div class="order-1 md:order-2">
             {{-- Das Vereinslogo statt des Steinstapels aus dem Mockup (KEV-36,
                  Wunsch des Vereins: keine Wellness-Steine). Freigestellt aus
@@ -103,5 +132,6 @@
                 </p>
             @endif
         </div>
+        @endunless
     </div>
 </section>
