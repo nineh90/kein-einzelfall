@@ -170,3 +170,13 @@ html[data-kontrast='hoch'] :focus-visible {
   outline: 3px solid #FFFF00 !important;
   outline-offset: 3px;
 }
+
+/* Das große Logo im Aufmacher der Startseite (KEV-36) ist schwarz und grün
+   auf transparentem Grund. Auf dem dunklen Grund dieser Modi verschwänden die
+   schwarzen Striche, deshalb steht es dort auf einer hellen Karte, wie das
+   kleine Logo in der Fusszeile. */
+html:is([data-kontrast='dunkel'], [data-kontrast='hoch']) .hero-logo img {
+  background: #F3ECDD;
+  border-radius: 1.5rem;
+  padding: 1rem;
+}

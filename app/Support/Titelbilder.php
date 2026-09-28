@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Schema;
  * ruhige Stillleben in Sand- und Cremetönen, Licht von links oben, Motiv links
  * unten. Vorlage und Motive stehen in docs/Bildsprache.md.
  *
- * Rechtstexte, Barrierefreiheit, die Trigger-Warnung und die Themenseiten
- * unter „Wissen“ bekommen bewusst keins: Dort geht es nur um den Text, und
- * zwanzig fast gleiche Schreibtischbilder machten die Reihe beliebig.
+ * Seit KEV-36 steht das Bild im Seitenkopf als Hintergrund, und jede Seite
+ * soll eins haben. Wo es noch kein eigenes gibt (Rechtstexte,
+ * Barrierefreiheit, Themenseiten unter „Wissen“), steht vorerst ein
+ * neutraler Platzhalter: leere Wand mit Fensterlicht, ohne Motiv. Die
+ * richtigen Bilder kommen in späteren Tickets. Nur die Trigger-Warnung (ein
+ * Dialog) und die Startseite (eigener Aufmacher) bleiben ohne.
  *
  * Gebraucht von der Migration (bestehende Datenbanken) und vom
  * AltseiteSeeder (frisch aufgebaute).
@@ -59,6 +62,42 @@ class Titelbilder
      *
      * Schon gepflegte Titelbilder bleiben stehen.
      */
+    /** Vorerst mit dem Platzhalter, bis eigene Bilder kommen (KEV-36). */
+    public const PLATZHALTER_SEITEN = [
+        'barrierefreiheit', 'buerokratie-labyrinth', 'das-hilfesystem', 'datenschutz',
+        'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
+        'impressum', 'istanbul-konvention', 'kinderkodex', 'opferentschaedigungsgesetz',
+        'persoenliches-budget', 'pflegegrad', 'satzung',
+    ];
+
+    public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
+
+    /**
+     * Setzt den Platzhalter, nur wo noch gar kein Titelbild steht. Ohne
+     * Unterzeile: Die gehört zum eigenen Bild und kommt mit ihm.
+     */
+    public static function platzhalterSetzen(): void
+    {
+        foreach (self::PLATZHALTER_SEITEN as $slug) {
+            $gruppe = Page::query()
+                ->where('slug', $slug)
+                ->where('locale', 'de')
+                ->where('fassung', Page::FASSUNG_STANDARD)
+                ->value('uebersetzungs_gruppe');
+
+            if ($gruppe) {
+                Page::where('uebersetzungs_gruppe', $gruppe)
+                    ->whereNull('titelbild')
+                    ->update(['titelbild' => self::PLATZHALTER]);
+            }
+        }
+    }
+
+    public static function platzhalterEntfernen(): void
+    {
+        Page::where('titelbild', self::PLATZHALTER)->update(['titelbild' => null]);
+    }
+
     public static function setzen(): void
     {
         $woerterbuch = json_decode(

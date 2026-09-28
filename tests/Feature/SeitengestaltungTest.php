@@ -92,9 +92,16 @@ class SeitengestaltungTest extends TestCase
         );
     }
 
-    public function test_rechtstexte_haben_kein_titelbild(): void
+    /**
+     * Seit KEV-36 hat jede Seite ein Titelbild. Wo es noch kein eigenes gibt,
+     * vorerst den Platzhalter; nur Startseite und Hinweisfenster bleiben ohne.
+     */
+    public function test_jede_seite_hat_ein_titelbild(): void
     {
-        $this->assertStringNotContainsString('/img/titelbilder/', $this->get('/impressum')->getContent());
+        $this->assertStringContainsString('/img/titelbilder/platzhalter.webp', $this->get('/impressum')->getContent());
+
+        $ohne = Page::whereNull('titelbild')->whereNotNull('published_at')->pluck('slug')->unique()->sort()->values()->all();
+        $this->assertSame(['startseite', 'trigger-warnung'], $ohne);
     }
 
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void

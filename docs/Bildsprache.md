@@ -46,8 +46,9 @@ Als Band über die volle Breite im Seitenkopf. Darauf steht ab Tablet-Breite
 in der rechten Hälfte immer dasselbe: grüne Zeile (Bereich, sonst der
 Vereinsname), Titel, eine kurze Unterzeile. Ein heller Schleier von rechts
 hält den Text lesbar. Die Brotkrumen stehen unter dem Bild, der erste Absatz
-der Seite bleibt im Inhalt. Auf dem Handy steht das Bild als flaches Band über
-dem Text. Bild und Unterzeile werden je Seite im Panel unter „Titelbild“
+der Seite bleibt im Inhalt. Seit KEV-36 ist das Bild auf jeder Breite der
+Hintergrund, der Kopf etwa halb so hoch wie das Fenster. Auf dem Handy steht
+der Text oben auf der freien Wand, mit hellem Schleier von oben. Bild und Unterzeile werden je Seite im Panel unter „Titelbild“
 gepflegt; welche Seiten eins haben, steht mit den Unterzeilen in
 `App\Support\Titelbilder`. /veranstaltungen ist eine eigene Übersicht, nimmt
 aber das Bild der gleichnamigen Seite.
@@ -104,3 +105,17 @@ Das Logo malt nicht die KI (sie verhunzt die Schrift). Stattdessen:
 3. Größe und Lage: 25 % der Bildhöhe, 9 % vom linken Rand, Unterkante knapp
    über der Tischkante (79 % der Höhe). Höher darf es nicht stehen: Bei
    1920 px zeigt das Band nur die untere Bildhälfte.
+
+## Platzhalter (KEV-36)
+
+Seit das Titelbild im Seitenkopf der Hintergrund ist, soll jede Seite eins
+haben. Wo noch kein eigenes existiert (Rechtstexte, Barrierefreiheit,
+Themenseiten unter „Wissen“), steht vorerst `platzhalter.webp`: leere warme
+Wand mit Fensterlicht, ohne Motiv. Liste in
+`App\Support\Titelbilder::PLATZHALTER_SEITEN`. Die richtigen Bilder kommen in
+späteren Tickets; wer eins setzt, ersetzt einfach den Platzhalter im Panel.
+
+Erzeugt direkt über fal.ai, **nicht** mit `bin/titelbild`: Die Vorlage
+verlangt ein Motiv links unten, und das Modell stellte dann trotz Verbot
+Tassen, Vasen oder Pflanzen hin. Tassen und „Wellness“ hat der Verein
+ausdrücklich abgelehnt (KEV-57, KEV-36).

@@ -60,8 +60,8 @@
     Höhe wächst mit der Breite (clamp), sonst schnitte ein 1920 px breiter
     Bildschirm das 16:9-Bild auf ein Viertel zu, und das Motiv wirkte riesig.
 
-    Auf dem Handy ist kein Platz für Text im Bild. Dort steht es als flaches
-    Band über dem Kopf, und der Text darunter.
+    Seit KEV-36 auch auf dem Handy: Bild als Hintergrund, Text oben darauf
+    (dort ist laut Bildvorgabe freie Wand), halbe Fensterhöhe.
 
     Ohne alt-Text ist es Schmuck (alt=""), Vorlesehilfen überspringen es.
 --}}
@@ -78,23 +78,35 @@
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>
-        <div class="relative isolate overflow-hidden">
-            <div class="relative h-44 sm:h-60 md:absolute md:inset-0 md:-z-10 md:h-auto">
+        {{-- Seit KEV-36 auf jeder Breite ein Hintergrundbild mit dem Text
+             darauf, etwa halbe Fensterhöhe (min-h, längere Titel dürfen
+             wachsen). Vorher stand das Bild auf dem Handy als Band über dem
+             Text. --}}
+        <div class="relative isolate flex min-h-[50svh] overflow-hidden">
+            <div class="absolute inset-0 -z-10">
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
                 <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                      alt="{{ $bild_alt ?? '' }}" width="2000" height="1116" fetchpriority="high"
                      class="h-full w-full object-cover object-[0%_100%]">
 
+                {{-- Schleier für die Lesbarkeit. Auf dem Handy steht der Text
+                     oben, wo die Bilder laut Vorgabe freie Wand haben; das
+                     Motiv links unten bleibt frei. Ab „md“ wie bisher von rechts. --}}
+                <div aria-hidden="true"
+                     class="absolute inset-0 bg-linear-to-b from-cream/95 from-35% via-cream/70 via-55% to-transparent to-80% md:hidden"></div>
                 <div aria-hidden="true"
                      class="absolute inset-0 hidden bg-linear-to-r from-transparent from-25% via-cream/70 via-50% to-cream/90 md:block"></div>
             </div>
 
-            <div class="px-4 pt-6 md:flex md:min-h-[22rem] md:items-center md:px-8 md:py-12 lg:min-h-[clamp(26rem,32vw,34rem)] lg:px-10 lg:py-16">
+            <div class="flex w-full px-4 pb-10 pt-6 md:items-center md:px-8 md:py-12 lg:px-10 lg:py-16">
                 <div class="mx-auto w-full max-w-6xl">
                     <div class="md:ml-auto md:w-1/2 lg:w-[45%]">
                         <x-ui.eyebrow class="mb-3">{{ $zeile }}</x-ui.eyebrow>
 
-                        <h1 class="text-balance font-display text-[1.75rem] font-medium leading-tight text-green md:text-[2.125rem] lg:text-[2.75rem]">
+                        {{-- hyphens-auto: Lange Fachbegriffe („Opferentschädigungsgesetz“)
+                             brachen in der halben Spalte sonst ohne Trennstrich
+                             mitten im Wort um. Die Seite trägt lang="de". --}}
+                        <h1 class="text-balance hyphens-auto break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[2.125rem] lg:text-[2.75rem]">
                             {{ $titel }}
                         </h1>
 

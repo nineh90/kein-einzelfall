@@ -251,6 +251,7 @@ class AltseiteSeeder extends Seeder
         // Titelbilder im Seitenkopf. Die Migration dafür lief schon, als die
         // Datenbank noch leer war, und hat nichts gefunden.
         Titelbilder::setzen();
+        Titelbilder::platzhalterSetzen();
 
         $this->command->info("{$angelegt} Seiten und ".Redirect::count().' Weiterleitungen eingepflegt.');
     }

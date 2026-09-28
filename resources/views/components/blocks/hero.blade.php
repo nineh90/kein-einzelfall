@@ -46,8 +46,12 @@
 
 {{-- Unten derselbe Abstand wie bei jedem Abschnitt: Der nächste Baustein
      steht auf der Karte, und ohne Luft klebte die Karte an den Knöpfen. --}}
-<section class="px-4 md:px-8 pb-8 pt-8 lg:px-10 lg:pb-12 lg:pt-16">
-    <div class="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+{{-- Füllt den ersten Bildschirm (KEV-36): Höhe des Fensters abzüglich
+     Kopfzeile (4 rem, ab „lg“ 5 rem) und, unter „xl“, der festen Leiste unten
+     (4 rem). svh statt vh, damit mobile Browserleisten nichts abschneiden.
+     Nur Mindesthöhe: Längere Texte dürfen den Aufmacher wachsen lassen. --}}
+<section class="flex min-h-[calc(100svh-8rem)] items-center px-4 md:px-8 pb-8 pt-8 lg:min-h-[calc(100svh-9rem)] lg:px-10 lg:pb-12 lg:pt-16 xl:min-h-[calc(100svh-5rem)]">
+    <div class="mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
              Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
@@ -82,30 +86,15 @@
         </div>
 
         <div class="order-1 md:order-2">
-            {{-- Der Steinstapel aus dem Mockup: rein aus CSS, keine Bilddatei.
-                 Dekorativ, deshalb aria-hidden — er trägt keine Information. --}}
-            {{-- Auf dem Handy kleiner: Dort schob der Stapel Überschrift und
-                 Knöpfe fast aus dem ersten Bildschirm. --}}
-            <div class="relative mx-auto flex h-40 w-full max-w-sm items-end justify-center
-                        sm:h-56 lg:h-[22.5rem]"
-                 aria-hidden="true">
-                <div class="absolute inset-0 m-auto h-48 w-48 rounded-full
-                            bg-[radial-gradient(circle,rgb(220_230_219/.9)_0%,transparent_70%)]
-                            max-sm:h-36 max-sm:w-36 lg:h-72 lg:w-72"></div>
-
-                <div class="relative flex origin-bottom scale-75 flex-col items-center -space-y-1.5 sm:scale-100">
-                    @foreach ([
-                        ['w' => 'w-11', 'h' => 'h-5',  'bg' => 'from-[#009640] to-[#00702F]'],
-                        ['w' => 'w-16', 'h' => 'h-7',  'bg' => 'from-[#EFE4CC] to-[#D9C7A2]'],
-                        ['w' => 'w-24', 'h' => 'h-9',  'bg' => 'from-[#E7DCC2] to-[#C3AE83]'],
-                        ['w' => 'w-32', 'h' => 'h-11', 'bg' => 'from-[#EFE4CC] to-[#C3AE83]'],
-                        ['w' => 'w-40', 'h' => 'h-12', 'bg' => 'from-[#E2D3B2] to-[#C3AE83]'],
-                    ] as $stein)
-                        <span class="{{ $stein['w'] }} {{ $stein['h'] }} rounded-[50%]
-                                     bg-gradient-to-b {{ $stein['bg'] }}
-                                     shadow-[0_7px_12px_-7px_rgb(44_38_32/.38),inset_0_-3px_6px_rgb(44_38_32/.12),inset_0_3px_5px_rgb(255_255_255/.4)]"></span>
-                    @endforeach
-                </div>
+            {{-- Das Vereinslogo statt des Steinstapels aus dem Mockup (KEV-36,
+                 Wunsch des Vereins: keine Wellness-Steine). Freigestellt aus
+                 dem Logo der Altseite, die weiße Schrift im grünen Band bleibt.
+                 Schmuck neben der Überschrift, die den Namen ohnehin trägt:
+                 deshalb alt="". Auf dem Handy kleiner, damit Überschrift und
+                 Knöpfe im ersten Bildschirm bleiben. --}}
+            <div class="hero-logo mx-auto flex w-full max-w-sm items-center justify-center">
+                <img src="/img/logo-gross.webp" alt="" width="479" height="432" fetchpriority="high"
+                     class="h-auto w-40 sm:w-56 lg:w-80">
             </div>
 
             @if ($hand)
