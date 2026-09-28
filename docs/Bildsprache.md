@@ -64,7 +64,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 |---|---|
 | Verein | Vereinslogo auf der Wand über leerem Tisch (siehe unten) |
 | Über uns – Vorstand und Team | Vereinslogo auf leerer Wand mit Fensterlicht, wie Verein (KEV-62, statt zwei Keramikschalen) |
-| Startseite (Aufmacher) | leere Wand mit goldenen Lichtstrahlen von oben rechts, ohne Motiv, vom Verein endgültig gewählt (KEV-29); davor das Logo. Vorher kurz Varianten mit Blätterschatten, Fensterlicht und Steinstapel |
+| Startseite (Aufmacher) | leere Wand mit goldenen Lichtstrahlen und Blätterschatten, ohne Motiv; davor das Logo. Nach KEV-29 kurz ohne Blätter, auf Wunsch des Vereins wieder mit (28.09.2026) |
 | Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, oben ausgerichtet (siehe unten) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
 | Unterstützung | Keimling im Terrakottatopf |
