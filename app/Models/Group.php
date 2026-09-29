@@ -14,6 +14,9 @@ class Group extends Model
         'arbeits' => 'Arbeitsgruppe',
     ];
 
+    /** Postfach der Arbeitsgruppen, so steht es in jedem AG-Text (KEV-74). */
+    public const AG_ADRESSE = 'arbeitsgruppe@kein-einzelfall.de';
+
     public const STATUS = [
         'offen' => 'Offen für neue Teilnehmende',
         'geplant' => 'In Planung',
@@ -32,7 +35,7 @@ class Group extends Model
     ];
 
     protected $fillable = [
-        'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung',
+        'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung', 'schlusssatz',
         'rhythmus', 'uhrzeit', 'ort', 'online', 'status',
         'anmeldung_hinweis', 'position', 'published_at',
         'wiederholung', 'wochentag', 'woche_im_monat', 'beginn_zeit', 'dauer_minuten',

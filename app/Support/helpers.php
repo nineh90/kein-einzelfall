@@ -70,14 +70,23 @@ if (! function_exists('hervorheben')) {
      *
      * Nur am Wortrand: „Mitarbeiter*innen und Kolleg*innen“ bleibt, wie es
      * ist. Erst maskieren, dann ersetzen, die einzige rohe Ausgabe ist unser
-     * eigenes <strong>.
+     * eigenes <strong> und <a>.
+     *
+     * E-Mail-Adressen im Text werden zum Link (KEV-74, „Schreib uns an
+     * arbeitsgruppe@…“). Ein Punkt am Satzende gehört nicht zur Adresse.
      */
     function hervorheben(string $text): \Illuminate\Support\HtmlString
     {
-        return new \Illuminate\Support\HtmlString(preg_replace(
+        $html = preg_replace(
             HERVORHEBUNG_MUSTER,
             '<strong class="font-semibold text-ink">$1</strong>',
             e($text),
+        );
+
+        return new \Illuminate\Support\HtmlString(preg_replace(
+            '/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/u',
+            '<a href="mailto:$0" class="text-green-deep underline">$0</a>',
+            $html,
         ));
     }
 

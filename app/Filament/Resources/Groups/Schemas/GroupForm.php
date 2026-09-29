@@ -34,7 +34,7 @@ class GroupForm
                     ->default('selbsthilfe')->required()->native(false),
 
                 TextInput::make('kuerzel')->label('Kürzel')
-                    ->helperText('z.B. „AG 01“. Nur bei Arbeitsgruppen üblich.'),
+                    ->helperText('z.B. „AG Nr. 1“. Nur bei Arbeitsgruppen üblich.'),
 
                 TextInput::make('position')->label('Reihenfolge')->numeric()->default(0),
             ]),
@@ -44,7 +44,11 @@ class GroupForm
                     ->helperText('Erscheint in der Übersicht.'),
 
                 RichEditor::make('beschreibung')->label('Ausführlich')
-                    ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList']),
+                    ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
+                    ->helperText('Auf der Karte aufklappbar.'),
+
+                TextInput::make('schlusssatz')->label('Schlusssatz')->maxLength(400)
+                    ->helperText('Steht in grüner Handschrift unter dem ausführlichen Text.'),
             ]),
 
             Section::make('Termin und Ort')->columns(2)->schema([

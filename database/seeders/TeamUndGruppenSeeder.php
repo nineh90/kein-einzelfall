@@ -341,6 +341,202 @@ class TeamUndGruppenSeeder extends Seeder
         $this->command?->info(count(self::gruppenliste()).' Gruppen übernommen.');
     }
 
+    /** Kontaktzeile am Ende jeder AG-Beschreibung. */
+    public const AG_KONTAKT = 'Du hast Interesse? Schreibe uns einfach kurz an: arbeitsgruppe@kein-einzelfall.de';
+
+    /** Woran die Arbeitsgruppen-Seite der Altseite zu erkennen ist. */
+    public const ARBEITSGRUPPEN_ALT = [
+        'alt_erster_absatz' => 'Mach mit – mit Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen.',
+        'alt_so_dabei' => 'So bist Du dabei:',
+    ];
+
+    /**
+     * Die Arbeitsgruppen, wie Taddi sie am 29.09.2026 geschickt hat (KEV-74).
+     *
+     * Der erste Satz jeder AG ist die Kurzbeschreibung auf der Karte, der
+     * letzte der handschriftliche Schlusssatz, dazwischen der aufklappbare
+     * Text. Korrigiert: „dazukommen“ zusammen, Komma vor „etwas zu
+     * verändern“, „IFG vs.“ mit Punkt.
+     *
+     * Die Slugs bleiben, wo es die AG schon gab. Die App war bis dahin
+     * AG 07 („Traumabegleiter“), jetzt AG Nr. 8.
+     */
+    public const ARBEITSGRUPPEN = [
+        [
+            'slug' => 'ag-01-ser', 'kuerzel' => 'AG Nr. 1',
+            'name' => 'SER (OEG/SGB XIV) vs. Best Practice und Worst Case',
+            'teaser' => 'Wie erleben Betroffene das Soziale Entschädigungsrecht wirklich?',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe schauen wir auf Erfahrungen aus Verfahren nach OEG und SGB XIV – auf das, was gut läuft, aber auch auf Hürden, Belastungen und wiederkehrende Probleme.',
+                'Dafür werden anonymisierte Erfahrungen und Verfahrensakten aus verschiedenen Bundesländern ausgewertet. So möchten wir sichtbar machen, wo gute Praxis funktioniert und wo Betroffene immer wieder an ähnliche Grenzen stoßen.',
+                'Uns geht es darum, aus einzelnen Erfahrungen ein größeres Bild entstehen zu lassen – damit Missstände nicht als Einzelfälle verschwinden und gute Lösungen dort sichtbar werden, wo sie bereits funktionieren.',
+                'Du kannst jederzeit dazukommen, egal ob mit Wissen, Erfahrung, Kreativität oder dem Wunsch, etwas zu verändern.',
+            ],
+            'schlusssatz' => 'Wir machen sichtbar, was sonst in einzelnen Akten verschwindet.',
+        ],
+        [
+            'slug' => 'ag-02-ifg', 'kuerzel' => 'AG Nr. 2',
+            'name' => 'IFG vs. offene Fragen zum SER',
+            'teaser' => 'Wir fragen nach, weil wir verstehen wollen.',
+            'absaetze' => [
+                'Im Sozialen Entschädigungsrecht bleiben für Betroffene viele Fragen offen. Abläufe sind schwer nachvollziehbar, Informationen fehlen oder unterscheiden sich – und oft ist unklar, warum Entscheidungen so getroffen werden, wie sie getroffen werden.',
+                'In dieser Arbeitsgruppe sammeln wir genau diese offenen Fragen und bringen sie strukturiert zusammen. Über Anfragen nach dem Informationsfreiheitsgesetz wollen wir Antworten bekommen, Zusammenhänge besser verstehen und sichtbar machen, wie das SER in der Praxis umgesetzt wird.',
+                'Aus den Antworten wollen wir herausarbeiten, wo gute Lösungen bereits funktionieren und wo Verfahren für Betroffene besonders belastend oder problematisch sind. So sollen nach und nach Best Practice und Worst Case sichtbar werden.',
+                'Mitmachen kannst du mit eigenen Fragen, Erfahrungen oder bei Recherche, Strukturierung und Auswertung.',
+                'Du kannst jederzeit dazukommen, egal ob mit Wissen, Erfahrung, Kreativität oder dem Wunsch, etwas zu verändern.',
+            ],
+            'schlusssatz' => 'Wir fragen nach, weil Verstehen der erste Schritt ist, um Unterschiede zu erkennen und Veränderung möglich zu machen.',
+        ],
+        [
+            'slug' => 'ag-03-online-veranstaltungen', 'kuerzel' => 'AG Nr. 3',
+            'name' => 'Veranstaltungsplanung',
+            'teaser' => 'Aus einer Idee wird ein Termin – und aus einem Termin ein Raum für Austausch, Wissen und Begegnung.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe planen und entwickeln wir die Veranstaltungen von KE!N EINZELFALL. Gemeinsam sammeln wir Themen, überlegen passende Formate, suchen Referentinnen und Referenten und kümmern uns um die vielen kleinen Schritte, die aus einer Idee eine gute Veranstaltung machen.',
+                'Ob Vortrag, Workshop, Gesprächsrunde, Infoabend oder neues Beteiligungsformat – hier darf mitgedacht, organisiert und ausprobiert werden. Dabei geht es nicht nur um den Ablauf, sondern auch darum, Veranstaltungen so zu gestalten, dass sie verständlich, zugänglich und möglichst angenehm für die Teilnehmenden sind.',
+                'Du kannst dich mit Ideen, Organisationstalent, Recherche, Technik, Moderation oder einfach mit Interesse einbringen.',
+                'Du kannst jederzeit dazukommen, egal ob mit Wissen, Erfahrung, Kreativität oder dem Wunsch, etwas zu verändern.',
+            ],
+            'schlusssatz' => 'Gute Veranstaltungen entstehen nicht einfach – sie wachsen aus vielen Ideen, Perspektiven und Menschen, die sie gemeinsam möglich machen.',
+        ],
+        [
+            'slug' => 'ag-04-soziale-medien', 'kuerzel' => 'AG Nr. 4',
+            'name' => 'Soziale Medien',
+            'teaser' => 'Sichtbarkeit entsteht nicht von allein.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe entwickeln wir gemeinsam die Inhalte für unsere Social-Media-Kanäle. Wir überlegen, welche Themen wichtig sind, wie wir sie verständlich aufbereiten und wie wir Betroffenenperspektiven, Wissen, Vereinsarbeit und aktuelle Entwicklungen sichtbar machen können.',
+                'Dabei entstehen Beiträge, Reels, Storys und neue Formate zu Themen wie Trauma, Selbsthilfe, Soziales Entschädigungsrecht, Pflege, GdB, Veranstaltungen, Vereinsnews und „Deine Stimme“.',
+                'Du kannst dich mit Ideen, Texten, Gestaltung, Recherche, Video, Planung oder einfach mit deinem Blick auf ein Thema einbringen.',
+                'Du kannst jederzeit dazukommen, egal ob mit Wissen, Erfahrung, Kreativität oder dem Wunsch, etwas zu verändern.',
+            ],
+            'schlusssatz' => 'Denn Sichtbarkeit beginnt dort, wo Erfahrungen, Wissen und Stimmen ihren Platz bekommen.',
+        ],
+        [
+            'slug' => 'ag-05-oeffentlichkeitsarbeit', 'kuerzel' => 'AG Nr. 5',
+            'name' => 'Öffentlichkeitsarbeit',
+            'teaser' => 'Damit sichtbar wird, wofür wir stehen und was wir bewegen.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe beschäftigen wir uns damit, wie KE!N EINZELFALL nach außen auftritt und Menschen erreicht. Wir entwickeln Ideen für Informationsmaterialien, Messeauftritte, Aktionen und andere Formen der öffentlichen Präsenz.',
+                'Dazu gehören zum Beispiel Flyer, Roll-ups, Visitenkarten, Infostände und die Vorbereitung auf Ehrenamtsmessen oder andere Veranstaltungen. Gemeinsam überlegen wir, wie wir unsere Themen verständlich, zugänglich und wiedererkennbar vermitteln können.',
+                'Du kannst jederzeit dazukommen. Du kannst dich mit Gestaltung, Text, Organisation, Planung, Recherche oder eigenen Ideen einbringen.',
+            ],
+            'schlusssatz' => 'Öffentlichkeitsarbeit heißt für uns: sichtbar machen, was wichtig ist – und Menschen miteinander ins Gespräch bringen.',
+        ],
+        [
+            'slug' => 'ag-06-datenbanken', 'kuerzel' => 'AG Nr. 6',
+            'name' => 'Datenbanken',
+            'teaser' => 'Wissen hilft nur dann weiter, wenn man es auch finden kann.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe sammeln, sortieren und strukturieren wir Informationen, die für Betroffene, Angehörige, Interessierte und Fachpersonen wichtig sein können. Unser Ziel ist es, Wissen nicht irgendwo verschwinden zu lassen, sondern so aufzubereiten, dass es später gezielt gefunden und genutzt werden kann.',
+                'Dabei entstehen nach und nach Datenbanken zu unterschiedlichen Themen – zum Beispiel mit Volltexturteilen, Netzwerken, Fachliteratur oder weiteren hilfreichen Informationen. Gemeinsam überlegen wir, welche Inhalte wirklich nützlich sind, wie sie sinnvoll gegliedert werden können und wie daraus eine verlässliche Wissenssammlung entsteht.',
+                'Du kannst jederzeit dazukommen. Du kannst dich mit Recherche, Sortierung, Strukturierung, Datenerfassung oder eigenen Ideen einbringen.',
+            ],
+            'schlusssatz' => 'Aus vielen einzelnen Informationen kann Orientierung entstehen.',
+        ],
+        [
+            'slug' => 'ag-07-glaubhaftigkeitsgutachten', 'kuerzel' => 'AG Nr. 7',
+            'name' => 'Glaubhaftigkeitsgutachten',
+            'teaser' => 'Wenn Erinnerungen bewertet werden, braucht es Wissen, Sorgfalt und einen genauen Blick.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe beschäftigen wir uns mit Glaubhaftigkeitsgutachten in Verfahren nach OEG und SGB XIV. Wir schauen darauf, nach welchen Kriterien Aussagen bewertet werden, welche Rolle Themen wie Erinnerung, Suggestion, Dissoziation oder Traumafolgen spielen und wo es aus Betroffenensicht immer wieder zu Problemen kommt.',
+                'Dabei wollen wir Gutachten, wissenschaftliche Grundlagen, gerichtliche Entscheidungen und Erfahrungen aus Verfahren zusammentragen und verständlich einordnen. Uns interessiert besonders, wie fachlich gearbeitet wird, wo Grenzen solcher Begutachtungen liegen und welche Aspekte bei komplexen Traumafolgen möglicherweise zu wenig berücksichtigt werden.',
+                'Ziel ist es, Wissen zu bündeln, Unterschiede sichtbar zu machen und Betroffenen eine bessere Orientierung in einem Bereich zu geben, der häufig schwer verständlich und sehr belastend ist.',
+                'Du kannst jederzeit dazukommen. Mitmachen kannst du mit eigener Erfahrung, Fachwissen, Recherche oder bei der Auswertung und Strukturierung von Materialien.',
+            ],
+            'schlusssatz' => 'Wo über Glaubhaftigkeit entschieden wird, darf Genauigkeit kein Nebenthema sein.',
+        ],
+        [
+            'slug' => 'ag-08-app', 'kuerzel' => 'AG Nr. 8',
+            'name' => 'Entwicklung einer App',
+            'teaser' => 'Wenn Unterstützung gebraucht wird, sollte sie möglichst schnell erreichbar sein.',
+            'absaetze' => [
+                'In dieser Arbeitsgruppe entwickeln wir gemeinsam die Idee für eine App, die Menschen im Alltag Orientierung und Unterstützung geben soll. Dabei überlegen wir, welche Funktionen wirklich hilfreich sind, welche Informationen schnell erreichbar sein müssen und wie die Anwendung möglichst einfach, verständlich und niedrigschwellig aufgebaut werden kann.',
+                'Im Mittelpunkt stehen die Erfahrungen der Menschen, die die App später nutzen sollen. Deshalb sammeln wir Ideen, prüfen Bedarfe, entwickeln Inhalte und denken gemeinsam darüber nach, wie aus vielen einzelnen Anforderungen eine Anwendung entstehen kann, die im richtigen Moment hilfreich ist.',
+                'Du kannst jederzeit dazukommen. Mitmachen kannst du mit eigener Erfahrung, Ideen, Recherche, technischem Wissen, Gestaltung oder beim Testen neuer Funktionen.',
+            ],
+            'schlusssatz' => 'Eine gute Idee wird dann wertvoll, wenn sie Menschen im richtigen Moment Orientierung geben kann.',
+        ],
+    ];
+
+    /**
+     * Die Seite /arbeitsgruppen oberhalb der Dokumente und Karten (KEV-74).
+     * Der erste Satz steht zugleich als Unterzeile auf dem Titelbild; die
+     * Seite blendet ihn dann im Text aus. „Betroffene“ statt „Betroffen“.
+     */
+    public const ARBEITSGRUPPEN_SEITE = [
+        'untertitel' => 'Du möchtest nicht nur zuschauen, sondern etwas mitgestalten?',
+        'meta_description' => 'Du möchtest nicht nur zuschauen, sondern etwas mitgestalten? In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, ihr Wissen, ihre Ideen und ganz unterschiedliche Fähigkeiten zusammen.',
+        'titel' => 'Die Arbeitsgruppen des KE!N EINZELFALL e.V.',
+        'absaetze' => [
+            'Du möchtest nicht nur zuschauen, sondern etwas mitgestalten?',
+            'In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, ihr Wissen, ihre Ideen und ganz unterschiedliche Fähigkeiten zusammen. Gemeinsam arbeiten wir an konkreten Themen, entwickeln Projekte weiter, sammeln Informationen, machen Missstände sichtbar und suchen nach Wegen, wie sich etwas verbessern lässt.',
+            'Dabei musst du kein Profi sein. Du kannst dich mit Fachwissen, Kreativität, Organisation, Recherche oder einfach mit deinem Interesse einbringen. Wie viel du beitragen möchtest, entscheidest du selbst.',
+            'Unsere Arbeitsgruppen arbeiten online, projektbezogen und auf Augenhöhe. Je nach Thema entstehen daraus zum Beispiel Auswertungen, Informationsmaterialien, Veranstaltungen, Social-Media-Inhalte, Datenbanken oder neue Projekte. Ein Einstieg ist jederzeit möglich.',
+            'An den Arbeitsgruppen können Betroffene, Angehörige, Interessierte und Fachpersonen teilnehmen. Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.',
+            'Du möchtest mitmachen oder hast selbst eine Idee für eine Arbeitsgruppe? Schreib uns an arbeitsgruppe@kein-einzelfall.de.',
+        ],
+        'hand' => 'Aus unterschiedlichen Perspektiven können gemeinsame Lösungen entstehen.',
+    ];
+
+    /** Absätze als HTML, wie der Editor im Panel sie speichert; Adressen als Link. */
+    public static function alsHtml(array $absaetze): string
+    {
+        return collect($absaetze)
+            ->map(fn ($a) => '<p>'.preg_replace(
+                '/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/u', '<a href="mailto:$0">$0</a>', e($a)
+            ).'</p>')
+            ->implode("\n");
+    }
+
+    /**
+     * Die Arbeitsgruppen-Seite nach KEV-74: Einleitung neu, der Block „So
+     * bist Du dabei:“ fällt weg. Er war Fliesstext der Altseite, in dem
+     * Downloads, Überschriften und die alte AG 01 zusammengelaufen waren.
+     * Dokumente und Karten bleiben.
+     *
+     * Öffentlich für die Migration. Gibt die geänderten Seiten zurück.
+     *
+     * @param  array<string, array<string, mixed>>  $fassungen  je Sprache: alte Einleitung → neue Seite
+     */
+    public static function arbeitsgruppenseiteAufbauen(array $fassungen): int
+    {
+        $geaendert = 0;
+
+        foreach (Page::where('slug', 'arbeitsgruppen')->get() as $seite) {
+            $f = $fassungen[$seite->locale] ?? null;
+            $einleitung = $seite->blocks()->where('typ', 'text')->orderBy('position')->first();
+
+            // Nur, wo noch die Einleitung der Altseite steht.
+            if (! $f || ! $einleitung || ($einleitung->data['absaetze'][0] ?? null) !== $f['alt_erster_absatz']) {
+                continue;
+            }
+
+            $einleitung->update(['data' => array_replace($einleitung->data, [
+                'titel' => $f['seite']['titel'],
+                'absaetze' => $f['seite']['absaetze'],
+                'hand' => $f['seite']['hand'],
+            ])]);
+
+            $seite->blocks()->where('typ', 'text')->get()
+                ->filter(fn ($b) => ($b->data['titel'] ?? null) === $f['alt_so_dabei'])
+                ->each->delete();
+
+            $seite->update([
+                'untertitel' => $f['seite']['untertitel'],
+                'meta_description' => $f['seite']['meta_description'],
+            ]);
+
+            // Lücken in den Positionen schliessen
+            foreach ($seite->blocks()->orderBy('position')->get()->values() as $i => $block) {
+                $block->update(['position' => $i]);
+            }
+
+            $geaendert++;
+        }
+
+        return $geaendert;
+    }
+
     /**
      * Der Gruppenbestand als Daten.
      *
@@ -403,53 +599,16 @@ class TeamUndGruppenSeeder extends Seeder
                 'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
             ],
 
-            [
-                'slug' => 'ag-01-ser', 'typ' => 'arbeits', 'kuerzel' => 'AG 01',
-                'name' => 'SER (OEG/SGB XIV) vs. Missstände & Best Practices',
-                'status' => 'offen',
-            ],
-            [
-                'slug' => 'ag-02-ifg', 'typ' => 'arbeits', 'kuerzel' => 'AG 02',
-                'name' => 'Informationsfreiheitsgesetz (IFG) vs. offene Fragen',
-                'teaser' => 'Entwicklung eines Fragenkatalogs für die Landesämter zur Verwaltungspraxis',
-                'status' => 'offen',
-            ],
-            [
-                'slug' => 'ag-03-online-veranstaltungen', 'typ' => 'arbeits', 'kuerzel' => 'AG 03',
-                'name' => 'Online-Veranstaltungen',
-                'teaser' => 'Planung & Organisation digitaler Veranstaltungen',
-                'status' => 'offen',
-            ],
-            [
-                'slug' => 'ag-04-soziale-medien', 'typ' => 'arbeits', 'kuerzel' => 'AG 04',
-                'name' => 'Soziale Medien',
-                'teaser' => 'Kreative Inhalte für unsere Kanäle',
-                'status' => 'offen',
-            ],
-            [
-                'slug' => 'ag-05-oeffentlichkeitsarbeit', 'typ' => 'arbeits', 'kuerzel' => 'AG 05',
-                'name' => 'Öffentlichkeitsarbeit',
-                'teaser' => 'Aktuell: Gestaltung & Entwurf eines Flyers (inkl. Signs to Help).',
-                'status' => 'offen',
-            ],
-            [
-                'slug' => 'ag-06-datenbanken', 'typ' => 'arbeits', 'kuerzel' => 'AG 06',
-                'name' => 'Aufbau von Datenbanken',
-                'teaser' => 'Aktuell: Strukturierte Sammlung von Rechtsprechung und Wissen',
-                'status' => 'offen',
-            ],
-            /*
-             * AG 07 aus dem Strukturpapier. Laut Besprechung vom 02.08.2026
-             * steht das Projekt hinten an: Erst muss ein Konzept stehen und
-             * eine Förderung beantragt sein.
-             */
-            [
-                'slug' => 'ag-07-traumabegleiter', 'typ' => 'arbeits', 'kuerzel' => 'AG 07',
-                'name' => 'Erstellung einer App „Traumabegleiter“',
-                'teaser' => 'Konzept und Förderantrag für eine App zur Begleitung im Alltag',
-                'status' => 'geplant',
-                'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
-            ],
+            // Die Arbeitsgruppen, Texte von Taddi (KEV-74).
+            ...array_map(fn ($ag) => [
+                'slug' => $ag['slug'], 'typ' => 'arbeits', 'kuerzel' => $ag['kuerzel'],
+                'name' => $ag['name'],
+                'teaser' => $ag['teaser'],
+                'beschreibung' => self::alsHtml([...$ag['absaetze'], self::AG_KONTAKT]),
+                'schlusssatz' => $ag['schlusssatz'],
+                // „Unsere Arbeitsgruppen arbeiten online“, jederzeit offen
+                'online' => true, 'status' => 'offen', 'anmeldung_hinweis' => null,
+            ], self::ARBEITSGRUPPEN),
         ];
     }
 
@@ -475,6 +634,7 @@ class TeamUndGruppenSeeder extends Seeder
             'titel' => 'Aktuelle Arbeitsgruppen',
             'typ' => 'arbeits',
         ]);
+        self::arbeitsgruppenseiteAufbauen(['de' => self::ARBEITSGRUPPEN_ALT + ['seite' => self::ARBEITSGRUPPEN_SEITE]]);
     }
 
     private function seiteUmbauen(string $slug, string $typ, array $daten): void

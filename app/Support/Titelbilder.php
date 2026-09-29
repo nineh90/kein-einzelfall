@@ -42,7 +42,7 @@ class Titelbilder
         'spenden' => 'Sei Du dabei, jede Unterstützung zählt, egal wie gering!',
         'unterstuetzung' => 'Wichtiges über Rechte, Anträge und unsere Arbeit.',                  // von uns
         'selbsthilfegruppen' => 'Raum für deine Geschichte – ohne Druck oder Bewertung',
-        'arbeitsgruppen' => 'Mach mit – mit Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen.',
+        'arbeitsgruppen' => 'Du möchtest nicht nur zuschauen, sondern etwas mitgestalten?',
         'anfragen' => 'Persönlicher Austausch zu Entschädigung, Schwerbehinderung und Pflegegrad.', // von uns
         'kontakt' => 'Alle Ansprechpartner, Landesstellen und Zuständigkeiten auf einen Blick',
         'wissen' => 'Rechte, Anträge und Hilfesysteme verständlich erklärt.',                     // von uns

@@ -49,8 +49,36 @@
         <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
     @endif
 
+    {{-- Der ausführliche Text aufklappbar, wie bei den Teamkarten: Acht AGs
+         mit je vier, fünf Absätzen erschlügen die Seite (KEV-74). Natives
+         <details>, also auch ohne JavaScript lesbar. --}}
+    @if (filled(strip_tags((string) $gruppe->beschreibung)))
+        <details class="group/mehr mt-3">
+            <summary class="inline-flex cursor-pointer items-center gap-1.5 text-sm text-green-deep
+                            marker:content-none [&::-webkit-details-marker]:hidden">
+                <span class="group-open/mehr:hidden">Mehr über die AG lesen</span>
+                <span class="hidden group-open/mehr:inline">Weniger anzeigen</span>
+                <span class="sr-only">– {{ $gruppe->name }}</span>
+                <span class="transition-transform group-open/mehr:rotate-180">
+                    <x-ui.icon name="chevron-down" :size="16" />
+                </span>
+            </summary>
+
+            <div class="mt-3 text-sm leading-relaxed text-ink-soft
+                        [&_a]:whitespace-nowrap [&_a]:text-green-deep [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0">
+                {!! $gruppe->beschreibung !!}
+            </div>
+
+            @if ($gruppe->schlusssatz)
+                <p class="mt-4 font-hand text-xl leading-snug text-green">{{ $gruppe->schlusssatz }}</p>
+            @endif
+        </details>
+    @endif
+
     <div class="mt-auto pt-4">
-        @if ($gruppe->wannUndWo())
+        {{-- Ohne Zeit und Ort nicht nur „Termin: online“: Das sagt das
+             Schild oben schon (die AGs haben keinen festen Termin). --}}
+        @if ($gruppe->rhythmus || $gruppe->uhrzeit || $gruppe->ort)
             {{-- Als <dl> statt loser Zeile: Screenreader lesen
                  „Termin: Jeden 4. Mittwoch …" als Paar. --}}
             <dl class="flex gap-2 border-t border-line pt-3 text-sm">
@@ -65,10 +93,20 @@
             @endif
 
             <div class="mt-4">
-                <x-ui.button href="/anfragen" variant="ghost" size="sm">
-                    Zu dieser Gruppe anfragen
-                    <span class="sr-only">– {{ $gruppe->name }}</span>
-                </x-ui.button>
+                @if ($gruppe->typ === 'arbeits')
+                    {{-- Die AGs laufen über ihr eigenes Postfach, so steht es
+                         in jedem AG-Text (KEV-74). Der Betreff nennt die AG. --}}
+                    <x-ui.button :href="'mailto:'.\App\Models\Group::AG_ADRESSE.'?subject='.rawurlencode(trim($gruppe->kuerzel.': '.$gruppe->name, ': '))"
+                                 variant="ghost" size="sm">
+                        Per E-Mail mitmachen
+                        <span class="sr-only">– {{ $gruppe->name }}</span>
+                    </x-ui.button>
+                @else
+                    <x-ui.button href="/anfragen" variant="ghost" size="sm">
+                        Zu dieser Gruppe anfragen
+                        <span class="sr-only">– {{ $gruppe->name }}</span>
+                    </x-ui.button>
+                @endif
             </div>
         @else
             {{-- Kein Anfrage-Knopf: Er weckte Erwartungen, die noch niemand
