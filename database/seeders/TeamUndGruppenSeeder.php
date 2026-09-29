@@ -77,8 +77,44 @@ class TeamUndGruppenSeeder extends Seeder
             ]);
         }
 
+        foreach (self::NEU_IM_TEAM as $j => $person) {
+            TeamMember::updateOrCreate(['name' => $person['name']], $person + [
+                'bereich' => self::BEREICH_TEAM,
+                'position' => count($personen) + $j,
+                'published_at' => now(),
+            ]);
+        }
+
         $this->command?->info(count($personen).' Personen übernommen.');
     }
+
+    /**
+     * Neu im Team, also nicht auf der Altseite. Stehen hinter den übernommenen
+     * Personen. Bestehende Datenbanken bekommen sie per Migration.
+     */
+    public const NEU_IM_TEAM = [
+        // KEV-67: Nils wollte den Eintrag als „IT und Webdesign“, Bild erst
+        // mal von der Homepage (das Logo).
+        [
+            'name' => 'Nils-Digital',
+            'rolle' => 'IT und Webdesign',
+            'foto_pfad' => '/img/team/nils-digital.png',
+            'foto_alt' => 'Logo von Nils-Digital',
+            'untertitel' => 'Umsetzung und technische Betreuung dieser Website',
+            'kurzprofil' => 'Wir sind Nils-Digital und haben die neue Website von KE!N EINZELFALL e.V. gebaut.',
+            // Text von Nils und Kevin, abgestimmt am 29.09.2026
+            'profil' => '<p>Wir sind Nils-Digital und haben die neue Website von KE!N EINZELFALL e.V. gebaut. '
+                .'Auch danach kümmern wir uns um die Technik dahinter.</p>'."\n"
+                .'<p>Eine Website für Betroffene muss mehr leisten als gut aussehen. Wer hier liest, soll sich '
+                .'sicher fühlen. Genauso wichtig ist uns, dass alle die Seite nutzen können und daher haben wir '
+                .'einen großen Wert auf Barrierefreiheit gesetzt.</p>'."\n"
+                .'<p>Hinter Nils-Digital stehen Nils Nehring und Kevin Herrmann. Wir entwickeln Websites, Apps und '
+                .'KI-Automatisierungen für Unternehmen, Selbstständige und Vereine. Jedes Projekt betreuen wir '
+                .'persönlich, mit kurzen Wegen und klaren Absprachen.</p>'."\n"
+                .'<p>Wir freuen uns, dass wir den Verein auf diesem Weg begleiten dürfen. Denn je leichter '
+                .'Betroffene hier finden, was sie suchen, desto eher merken sie: Sie sind kein Einzelfall.</p>',
+        ],
+    ];
 
     /**
      * Personen und Zwischentexte der Teamseite aus dem Abzug.

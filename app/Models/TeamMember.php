@@ -100,8 +100,11 @@ class TeamMember extends Model
             // Mitten in einem Absatz: den Rest dieses Absatzes zeigen.
             if ($rest !== '') {
                 $weiter = self::nachZeichen($knoten[$ende]->textContent, mb_strlen($rest));
+                // „…“ nur, wo das Kurzprofil selbst mit „…“ abbricht. Nach
+                // einem ganzen Satz geht es einfach mit dem nächsten weiter.
+                $abgebrochen = (bool) preg_match('/(\.\.\.|…)\s*$/u', (string) $this->kurzprofil);
                 if ($weiter !== '') {
-                    $teile[] = '<p>…'.e($weiter).'</p>';
+                    $teile[] = '<p>'.($abgebrochen ? '…' : '').e($weiter).'</p>';
                 }
                 $ende++;
             }
@@ -138,7 +141,11 @@ class TeamMember extends Model
 
         // Mitten im Wort abgeschnitten („entste...“): am Wortanfang weiter,
         // sonst begänne die Fortsetzung mit „…hen“.
-        while ($i > 0 && $i < $laenge && ! preg_match('/\s/u', mb_substr($text, $i - 1, 1))) {
+        // Endet das Kurzprofil an einer Wortgrenze (ganzer Satz), bleibt es
+        // dabei, sonst stünde das letzte Wort zweimal da.
+        $imWort = $i < $laenge && ! preg_match('/\s/u', mb_substr($text, $i, 1));
+
+        while ($imWort && $i > 0 && ! preg_match('/\s/u', mb_substr($text, $i - 1, 1))) {
             $i--;
         }
 
