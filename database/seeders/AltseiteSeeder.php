@@ -67,6 +67,18 @@ class AltseiteSeeder extends Seeder
      * Altseite. Sie schlagen deren Überschrift. Bestehende Datenbanken
      * erreicht die Änderung über eine eigene Migration.
      */
+    /**
+     * Blöcke der Altseite, die wir nicht übernehmen, je Seite nach Überschrift.
+     *
+     * „Mehr über:“ auf /verein war auf der Altseite eine Linkliste. Der Abzug
+     * nimmt nur den Text mit, übrig blieben fünf nicht klickbare Zeilen —
+     * direkt über den Karten „Mehr zu …“, die dieselben Seiten verlinken
+     * (KEV-70). Bestehende Datenbanken räumt eine eigene Migration auf.
+     */
+    public const WEGLASSEN = [
+        'verein' => ['Mehr über:'],
+    ];
+
     public const VORGABE_TITEL = [
         // KEV-59, Wunsch von Taddi
         'verein' => 'Gemeinnütziger Verein',
@@ -158,6 +170,10 @@ class AltseiteSeeder extends Seeder
             foreach ($daten['bloecke'] as $block) {
                 // Blöcke ohne Fließtext sind Layout-Reste aus Elementor
                 if (empty($block['absaetze'])) {
+                    continue;
+                }
+
+                if (in_array($block['titel'], self::WEGLASSEN[$slug] ?? [], true)) {
                     continue;
                 }
 

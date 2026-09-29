@@ -62,6 +62,16 @@ class SeitenUndRedirectsTest extends TestCase
             ->assertSee('Gemeinnütziger Verein');
     }
 
+    public function test_vereinsseite_ohne_tote_linkliste_mehr_ueber(): void
+    {
+        // KEV-70: Die Zeilen waren auf der Altseite Links, bei uns nur Text.
+        // Dieselben Ziele verlinken die Karten „Mehr zu …“ darunter.
+        $this->get('/verein')
+            ->assertOk()
+            ->assertDontSee('Mehr über:')
+            ->assertDontSee('Unser Team – wer steht hinter unserem Verein?');
+    }
+
     public function test_seiten_ohne_vollertitel_bekommen_einen_echten_titel(): void
     {
         /*
