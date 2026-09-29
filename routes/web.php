@@ -4,6 +4,7 @@ use App\Http\Controllers\AnfrageController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GlossarController;
+use App\Http\Controllers\GruppeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SitemapController;
@@ -68,6 +69,15 @@ $oeffentlicheRouten = function () {
     Route::get('/veranstaltungen/{slug}/kalender.ics', [EventController::class, 'icalEinzeln'])
         ->where('slug', '[a-z0-9-]+')
         ->name('events.ical.einzeln');
+
+    /*
+     * Eine Seite je Selbsthilfegruppe (KEV-73, Wunsch von Taddi). Unter
+     * /selbsthilfegruppen/ und nicht flach: /buerokratie-labyrinth ist schon
+     * die Seite zum gleichnamigen Vortragsabend.
+     */
+    Route::get('/selbsthilfegruppen/{slug}', [GruppeController::class, 'show'])
+        ->where('slug', '[a-z0-9-]+')
+        ->name('gruppen.show');
 
     /*
      * Suche (KEV-23). Steht vor der Sammelroute, sonst griffe /{slug}.

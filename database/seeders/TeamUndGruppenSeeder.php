@@ -341,6 +341,159 @@ class TeamUndGruppenSeeder extends Seeder
         $this->command?->info(count(self::gruppenliste()).' Gruppen übernommen.');
     }
 
+    /**
+     * Die Selbsthilfegruppen, wie Taddi sie am 29.09.2026 geschickt hat (KEV-73).
+     *
+     * Offen sind nur die ersten beiden. Die übrigen sind „grad inaktiv und
+     * müssen erst später wieder freigeschaltet werden“: Status „geplant“,
+     * damit sie ohne Termine im Kalender und ohne Anmeldung dastehen. Zum
+     * Freischalten im Panel auf „offen“ stellen.
+     *
+     * Aus „Killing me Softly“ (Strukturpapier: „Killen me Softly“) wird
+     * „Skillin me Softly“, so steht es in Taddis Überschrift und im Text.
+     * Korrigiert: Kommas bei „egal ob physisch, … oder digital,“, „welche
+     * Wege möglich sind, und“, „dabei zu sein, um zu malen“.
+     */
+    public const SELBSTHILFEGRUPPEN = [
+        [
+            'slug' => 'wir-sind-nicht-mehr-stumm', 'status' => 'offen',
+            'name' => 'Wir sind nicht mehr stumm',
+            'teaser' => 'Folgestörungen durch Missbrauch und andere schädigende Ereignisse',
+            'absaetze' => [
+                'Gewalt, Missbrauch, egal ob physisch, psychisch, sexuell oder digital, und andere schädigende Erfahrungen enden nicht immer mit dem eigentlichen Ereignis. Viele Betroffene leben noch lange danach mit seelischen oder körperlichen Folgen – oft begleitet von Scham, Schuldgefühlen und dem Gefühl, mit diesen Belastungen nicht ausreichend gesehen oder verstanden zu werden.',
+                'In unserer Selbsthilfegruppe „Wir sind nicht mehr stumm“ geht es darum, genau darüber sprechen zu dürfen. Wir möchten Erfahrungen teilen, uns gegenseitig stärken und sichtbar machen, dass Folgestörungen ernst genommen und als Teil der erlebten Gewalt verstanden werden müssen.',
+                'Die Gruppe ist ausschließlich für Betroffene gedacht und dient dem Erfahrungsaustausch auf Augenhöhe. Niemand muss mehr erzählen, als sich gerade richtig anfühlt – auch Zuhören ist völlig in Ordnung.',
+            ],
+            'schlusssatz' => 'Wir wollen das Schweigen gemeinsam brechen – denn wir sind nicht mehr stumm.',
+            'rhythmus' => 'Jeden 2. Mittwoch im Monat', 'uhrzeit' => '19:00 Uhr',
+            'wochentag' => 3, 'woche_im_monat' => 2, 'beginn_zeit' => '19:00',
+        ],
+        [
+            'slug' => 'buerokratie-labyrinth', 'status' => 'offen',
+            'name' => 'Bürokratie-Labyrinth',
+            'teaser' => 'Gefangen im Dschungel von Behörden, Anträgen und Verfahren',
+            'absaetze' => [
+                'Anträge, Fristen, lange Bearbeitungszeiten und schwer verständliche Schreiben können schnell überfordern – besonders dann, wenn ohnehin schon viel Kraft für andere Dinge gebraucht wird.',
+                'In unserer Selbsthilfegruppe „Bürokratie-Labyrinth – Gefangen im Dschungel der Behörden“ tauschen wir Erfahrungen rund um Behörden, Ämter, Anträge und Verfahren aus. Wir sprechen darüber, was geholfen hat, welche Wege möglich sind, und unterstützen uns gegenseitig beim Sortieren von Unterlagen, Ausfüllen von Formularen sowie beim Verfassen von Briefen und E-Mails.',
+                'Die Gruppe richtet sich an Betroffene und Angehörige. Sie ist keine Rechtsberatung und keine Informationsveranstaltung, sondern lebt vom gemeinsamen Erfahrungsaustausch.',
+            ],
+            'schlusssatz' => 'Gemeinsam finden wir Wege durch das Bürokratie-Labyrinth – Schritt für Schritt.',
+            'rhythmus' => 'Jeden 4. Mittwoch im Monat', 'uhrzeit' => '19:00 Uhr',
+            'wochentag' => 3, 'woche_im_monat' => 4, 'beginn_zeit' => '19:00',
+        ],
+        [
+            'slug' => 'seelenfarben', 'status' => 'geplant',
+            'name' => 'Seelenfarben',
+            'teaser' => 'Wenn Bilder mehr als 1.000 Worte sagen',
+            'absaetze' => [
+                'Manchmal lässt sich etwas leichter malen als aussprechen. In „Seelenfarben“ geht es darum, Gefühle, Gedanken und innere Prozesse kreativ sichtbar werden zu lassen – ganz ohne Leistungsdruck und ohne Bewertung.',
+                'Gemeinsam malen wir zu freien oder vorgegebenen Themen. Im Anschluss kann, wer möchte, das eigene Bild zeigen und erzählen, was dabei entstanden ist. Niemand muss erklären oder sprechen – auch einfach dabei zu sein, um zu malen, ist völlig in Ordnung.',
+                'Die Gruppe richtet sich an Menschen mit psychischen Belastungen, Trauma-Erfahrungen oder chronischen Erkrankungen sowie an Angehörige und Interessierte. Im Mittelpunkt stehen kreativer Ausdruck, Entlastung, Austausch und Selbststärkung.',
+            ],
+            'schlusssatz' => 'Was sich schwer in Worte fassen lässt, darf hier durch Farben sichtbar werden.',
+            'rhythmus' => 'Jeden 1. Freitag im Monat', 'uhrzeit' => '10:00 Uhr',
+            'wochentag' => 5, 'woche_im_monat' => 1, 'beginn_zeit' => '10:00',
+        ],
+        [
+            'slug' => 'skillin-me-softly', 'status' => 'geplant',
+            'name' => 'Skillin me Softly',
+            'teaser' => 'Trigger und Skills',
+            'absaetze' => [
+                'Manchmal reicht ein Geruch, ein Satz, eine Situation oder eine Erinnerung – und plötzlich ist die Anspannung da. Was in solchen Momenten hilft, ist von Mensch zu Mensch verschieden.',
+                'In „Skillin me Softly – Trigger und Skills“ tauschen wir uns darüber aus, was uns triggert und was bei hoher Anspannung hilft. Welche Skills funktionieren? Was haben andere ausprobiert? Und was könnte vielleicht auch für dich hilfreich sein?',
+                'Es geht nicht um die eine richtige Lösung, sondern um Erfahrungen teilen, voneinander lernen und neue Möglichkeiten kennenlernen. Du kannst erzählen, Fragen stellen, zuhören oder einfach nur dabei sein.',
+                'Die Gruppe ist ausschließlich für Betroffene gedacht.',
+            ],
+            'schlusssatz' => 'Manchmal kommt die Anspannung schneller, als Worte es erklären können – hier darfst du damit einfach sein.',
+            'rhythmus' => 'Jeden 3. Dienstag im Monat', 'uhrzeit' => '11:00 Uhr',
+            'wochentag' => 2, 'woche_im_monat' => 3, 'beginn_zeit' => '11:00',
+        ],
+        [
+            'slug' => 'schreibwerkstatt', 'status' => 'geplant',
+            'name' => 'Zwischen den Zeilen',
+            'teaser' => 'Die Schreibwerkstatt',
+            'absaetze' => [
+                'Gedanken, Gefühle und Erlebtes lassen sich nicht immer leicht aussprechen – auf dem Papier finden sie oft einen anderen Weg. „Zwischen den Zeilen“ soll Raum dafür schaffen, das, was gerade da ist, in Worte zu fassen.',
+                'Dabei geht es nicht darum, „gut“ schreiben zu können. Es geht darum, Gedanken zu sortieren, Gefühle in Worte zu fassen und dem Raum zu geben, was sonst vielleicht unausgesprochen bleibt.',
+                'Texte können geteilt werden – müssen aber nicht. Du entscheidest selbst, was du schreiben, zeigen oder lieber für dich behalten möchtest.',
+                'Die Schreibwerkstatt soll für alle offen sein und befindet sich derzeit noch in Vorbereitung.',
+            ],
+            'schlusssatz' => 'Das Wichtigste steht nicht immer in den großen Worten – sondern oft zwischen den Zeilen.',
+        ],
+    ];
+
+    /**
+     * Die Seite /selbsthilfegruppen (KEV-73). Taddis Text in fünf Absätzen:
+     * Ab dem sechsten klappt der Baustein ein, und Regeln und Kontakt
+     * gehören nicht hinter „Weiterlesen“. Reihenfolge wie bei ihr. Das
+     * Titelbild bleibt, samt Unterzeile.
+     */
+    public const SELBSTHILFE_SEITE = [
+        'titel' => 'Die Selbsthilfegruppen des KE!N EINZELFALL e.V.',
+        'absaetze' => [
+            'Manchmal tut es gut, mit Menschen zusammenzukommen, bei denen man sich nicht erst erklären muss, weil ähnliche Erfahrungen verbinden. Unsere Selbsthilfegruppen bieten Raum für Austausch, gegenseitiges Verständnis und neue Perspektiven.',
+            'Du entscheidest selbst, wie viel du erzählen möchtest – auch einfach nur zuzuhören ist vollkommen in Ordnung, egal ob mit oder ohne Bild. Du kannst dich über den Chat oder dein Mikro beteiligen. Die Gruppen werden gemeinsam von den Teilnehmenden gestaltet und finden online über Microsoft Teams statt. Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.',
+            'Wir sprechen offen über sensible Themen. Für die Teilnahme setzen wir Therapieerfahrung und eine gute Selbstfürsorge voraus – insbesondere, falls du getriggert wirst. Alles geschieht in eigener Verantwortung.',
+            'Für einen sicheren und respektvollen Rahmen gibt es Teilnahmebedingungen und Gruppenregeln. Du findest beides weiter unten auf dieser Seite. Bitte lies sie dir vor deiner ersten Teilnahme durch – mit dem Beitritt zur Gruppe akzeptierst du diese. Unsere Selbsthilfegruppen ersetzen keine Therapie, medizinische oder rechtliche Beratung. Bei sensiblen Themen ist es wichtig, gut auf die eigenen Grenzen zu achten und selbst zu entscheiden, was gerade möglich ist.',
+            'Du hast Fragen oder Interesse? Oder eine Idee für eine neue Selbsthilfegruppe? Schreib uns eine kurze E-Mail an selbsthilfe@kein-einzelfall.de. Wir melden uns umgehend bei dir.',
+        ],
+        'hand' => 'Das Team von KE!N EINZELFALL e.V.',
+        // So heisst das PDF „Tu.V-SHG“ bei Taddi
+        'dokument_umbenennen' => ['Teilnahmebedingungen' => 'Teilnahme- und Verschwiegenheitsvereinbarung'],
+    ];
+
+    /** Woran die Selbsthilfe-Seite der Altseite zu erkennen ist. */
+    public const SELBSTHILFE_ALT = [
+        'alt_erster_absatz' => 'Raum für deine Geschichte – ohne Druck oder Bewertung',
+    ];
+
+    /**
+     * Die Selbsthilfe-Seite nach KEV-73: Einleitung neu, die übrigen
+     * Fliesstext-Blöcke der Altseite fallen weg, dann die Gruppen, die
+     * Dokumente ans Ende („weiter unten auf dieser Seite“). Nur, wo noch
+     * die Einleitung der Altseite steht. Nur Deutsch, eine englische
+     * Fassung gibt es nicht.
+     */
+    public static function selbsthilfeseiteAufbauen(): bool
+    {
+        $seite = Page::where('slug', 'selbsthilfegruppen')->where('locale', 'de')->first();
+        $einleitung = $seite?->blocks()->where('typ', 'text')->orderBy('position')->first();
+
+        if (! $einleitung || ($einleitung->data['absaetze'][0] ?? null) !== self::SELBSTHILFE_ALT['alt_erster_absatz']) {
+            return false;
+        }
+
+        $neu = self::SELBSTHILFE_SEITE;
+        $einleitung->update(['data' => array_replace($einleitung->data, [
+            'titel' => $neu['titel'],
+            'absaetze' => $neu['absaetze'],
+            'hand' => $neu['hand'],
+        ])]);
+
+        // Taddis Text ersetzt den ganzen Fliesstext der Altseite. Welche
+        // Reste daneben stehen, hängt davon ab, wie die Datenbank entstanden
+        // ist („Voraussetzungen & Rahmen“, „Kontakt & Anmeldung“, …), also
+        // alle Textblöcke ausser der Einleitung.
+        $seite->blocks()->where('typ', 'text')->whereKeyNot($einleitung->getKey())->delete();
+
+        foreach ($seite->blocks()->where('typ', 'download_list')->get() as $block) {
+            $data = $block->data;
+            foreach ($data['dokumente'] ?? [] as $i => $dok) {
+                $data['dokumente'][$i]['titel'] = $neu['dokument_umbenennen'][$dok['titel']] ?? $dok['titel'];
+            }
+            $block->update(['data' => $data]);
+        }
+
+        // Einleitung, Gruppen, Dokumente
+        $rang = ['text' => 0, 'group_list' => 1, 'download_list' => 2];
+        $seite->blocks()->orderBy('position')->get()
+            ->sortBy(fn ($b) => [$rang[$b->typ] ?? 1, $b->position])
+            ->values()
+            ->each(fn ($b, $i) => $b->update(['position' => $i]));
+
+        return true;
+    }
+
     /** Kontaktzeile am Ende jeder AG-Beschreibung. */
     public const AG_KONTAKT = 'Du hast Interesse? Schreibe uns einfach kurz an: arbeitsgruppe@kein-einzelfall.de';
 
@@ -550,54 +703,23 @@ class TeamUndGruppenSeeder extends Seeder
     public static function gruppenliste(): array
     {
         return [
-            [
-                'slug' => 'buerokratie-labyrinth', 'typ' => 'selbsthilfe',
-                'name' => 'Das Bürokratie-Labyrinth',
-                'teaser' => 'Erfahrungsaustausch zu Anträgen, Fristen & Verfahren',
-                'rhythmus' => 'Jeden 4. Mittwoch im Monat', 'uhrzeit' => '19:00 Uhr',
-                'ort' => 'online via Teams', 'online' => true, 'status' => 'offen',
-                // Strukturiert, damit die Termine im Kalender erscheinen
-                'wiederholung' => 'monatlich_nter_wochentag', 'wochentag' => 3,
-                'woche_im_monat' => 4, 'beginn_zeit' => '19:00', 'dauer_minuten' => 120,
-            ],
-            [
-                'slug' => 'seelenfarben', 'typ' => 'selbsthilfe',
-                'name' => 'Seelenfarben',
-                'teaser' => 'Wenn Farben mehr als 1.000 Worte sagen',
-                'rhythmus' => 'Jeden 1. Freitag im Monat', 'uhrzeit' => '10:00 Uhr',
-                'ort' => 'online via Teams', 'online' => true, 'status' => 'offen',
-                'wiederholung' => 'monatlich_nter_wochentag', 'wochentag' => 5,
-                'woche_im_monat' => 1, 'beginn_zeit' => '10:00', 'dauer_minuten' => 120,
-            ],
-            [
-                'slug' => 'wir-sind-nicht-mehr-stumm', 'typ' => 'selbsthilfe',
-                'name' => 'Wir sind nicht mehr stumm!',
-                'teaser' => 'Folgestörungen nach schädigenden Ereignissen',
-                'online' => true, 'status' => 'offen',
-            ],
-            [
-                'slug' => 'schreibwerkstatt', 'typ' => 'selbsthilfe',
-                'name' => 'Schreibwerkstatt',
-                'status' => 'geplant',
-                'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
-            ],
-            /*
-             * Aus dem Strukturpapier des Vereins, auf der Altseite noch nicht
-             * vorhanden. Status „geplant“, weil uns kein Termin genannt wurde —
-             * eine Gruppe als offen auszuweisen, zu der niemand kommen kann,
-             * wäre bei dieser Zielgruppe die schlechtere Auskunft.
-             *
-             * ⚠️ Schreibweise: Im Strukturpapier steht „Killen me Softly“. Wir
-             * gehen von „Killing me Softly“ aus — steht als Rückfrage auf der
-             * Übergabe-Checkliste.
-             */
-            [
-                'slug' => 'killing-me-softly', 'typ' => 'selbsthilfe',
-                'name' => 'Killing me Softly',
-                'teaser' => 'Umgang mit Trigger und Skills',
-                'status' => 'geplant',
-                'anmeldung_hinweis' => 'In Planung – aktuell noch keine Anmeldung möglich',
-            ],
+            // Die Selbsthilfegruppen, Texte von Taddi (KEV-73).
+            ...array_map(fn ($g) => [
+                'slug' => $g['slug'], 'typ' => 'selbsthilfe', 'kuerzel' => null,
+                'name' => $g['name'],
+                'teaser' => $g['teaser'],
+                'beschreibung' => self::alsHtml($g['absaetze']),
+                'schlusssatz' => $g['schlusssatz'],
+                'rhythmus' => $g['rhythmus'] ?? null, 'uhrzeit' => $g['uhrzeit'] ?? null,
+                'ort' => 'online über Microsoft Teams', 'online' => true,
+                'status' => $g['status'], 'anmeldung_hinweis' => null,
+                // Strukturiert, damit „Nächster Termin“ und Kalender stimmen
+                'wiederholung' => isset($g['wochentag']) ? 'monatlich_nter_wochentag' : 'keine',
+                'wochentag' => $g['wochentag'] ?? null,
+                'woche_im_monat' => $g['woche_im_monat'] ?? null,
+                'beginn_zeit' => $g['beginn_zeit'] ?? null,
+                'dauer_minuten' => isset($g['wochentag']) ? 120 : null,
+            ], self::SELBSTHILFEGRUPPEN),
 
             // Die Arbeitsgruppen, Texte von Taddi (KEV-74).
             ...array_map(fn ($ag) => [
@@ -635,6 +757,7 @@ class TeamUndGruppenSeeder extends Seeder
             'typ' => 'arbeits',
         ]);
         self::arbeitsgruppenseiteAufbauen(['de' => self::ARBEITSGRUPPEN_ALT + ['seite' => self::ARBEITSGRUPPEN_SEITE]]);
+        self::selbsthilfeseiteAufbauen();
     }
 
     private function seiteUmbauen(string $slug, string $typ, array $daten): void

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Group;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Post;
@@ -29,6 +30,7 @@ class SitemapController extends Controller
             ...$this->uebersichten(),
             ...$this->beitraege(),
             ...$this->termine(),
+            ...$this->gruppen(),
         ];
 
         return response()
@@ -121,6 +123,19 @@ class SitemapController extends Controller
             ->map(fn (Event $termin) => [
                 'url' => url(sprachlink('events.show', ['slug' => $termin->slug], Language::standardCode())),
                 'geaendert' => $termin->updated_at?->toAtomString(),
+                'alternativen' => [],
+            ])
+            ->all();
+    }
+
+    /** Die Seiten der Selbsthilfegruppen (KEV-73). */
+    private function gruppen(): array
+    {
+        return Group::veroeffentlicht()->vomTyp('selbsthilfe')
+            ->get()
+            ->map(fn (Group $gruppe) => [
+                'url' => url(sprachlink('gruppen.show', ['slug' => $gruppe->slug], Language::standardCode())),
+                'geaendert' => $gruppe->updated_at?->toAtomString(),
                 'alternativen' => [],
             ])
             ->all();

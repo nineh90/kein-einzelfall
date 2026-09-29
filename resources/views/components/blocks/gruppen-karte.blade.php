@@ -22,8 +22,8 @@
 --}}
 @php $offen = $gruppe->istOffen(); @endphp
 
-<article @class([
-    'flex h-full flex-col rounded-card border border-line p-5 lg:p-6',
+<article id="{{ $gruppe->slug }}" @class([
+    'flex h-full scroll-mt-24 flex-col rounded-card border border-line p-5 lg:p-6',
     'bg-card' => $auf !== 'card',
     'bg-cream' => $auf === 'card',
 ])>
@@ -52,7 +52,8 @@
     {{-- Der ausführliche Text aufklappbar, wie bei den Teamkarten: Acht AGs
          mit je vier, fünf Absätzen erschlügen die Seite (KEV-74). Natives
          <details>, also auch ohne JavaScript lesbar. --}}
-    @if (filled(strip_tags((string) $gruppe->beschreibung)))
+    {{-- Nur bei AGs: Selbsthilfegruppen haben dafür ihre eigene Seite (KEV-73). --}}
+    @if ($gruppe->typ === 'arbeits' && filled(strip_tags((string) $gruppe->beschreibung)))
         <details class="group/mehr mt-3">
             <summary class="inline-flex cursor-pointer items-center gap-1.5 text-sm text-green-deep
                             marker:content-none [&::-webkit-details-marker]:hidden">
@@ -77,39 +78,34 @@
 
     <div class="mt-auto pt-4">
         {{-- Ohne Zeit und Ort nicht nur „Termin: online“: Das sagt das
-             Schild oben schon (die AGs haben keinen festen Termin). --}}
-        @if ($gruppe->rhythmus || $gruppe->uhrzeit || $gruppe->ort)
+             Schild oben schon (die AGs haben keinen festen Termin). Gruppen,
+             die noch nicht laufen, nennen keinen Rhythmus: Er läse sich wie
+             eine Einladung (KEV-73). --}}
+        @if ($offen && ($gruppe->rhythmus || $gruppe->uhrzeit || $gruppe->ort))
             {{-- Als <dl> statt loser Zeile: Screenreader lesen
                  „Termin: Jeden 4. Mittwoch …" als Paar. --}}
-            <dl class="flex gap-2 border-t border-line pt-3 text-sm">
-                <dt class="shrink-0 text-ink-soft">Termin</dt>
-                <dd class="text-ink">{{ $gruppe->wannUndWo() }}</dd>
+            <dl class="flex flex-col gap-1.5 border-t border-line pt-3 text-sm">
+                <div class="flex gap-2">
+                    <dt class="shrink-0 text-ink-soft">Termin</dt>
+                    <dd class="text-ink">{{ $gruppe->wannUndWo() }}</dd>
+                </div>
+                @if ($naechster = $gruppe->naechsterTermin())
+                    <div class="flex gap-2">
+                        <dt class="shrink-0 text-ink-soft">Nächster Termin</dt>
+                        <dd class="font-semibold text-ink">
+                            <time datetime="{{ $naechster->toIso8601String() }}">{{ $naechster->locale('de')->isoFormat('dd, D.M.YYYY') }}</time>
+                        </dd>
+                    </div>
+                @endif
             </dl>
         @endif
 
-        @if ($offen)
-            @if ($gruppe->anmeldung_hinweis)
-                <p class="mt-3 text-sm text-ink-soft">{{ $gruppe->anmeldung_hinweis }}</p>
-            @endif
+        @if ($offen && $gruppe->anmeldung_hinweis)
+            <p class="mt-3 text-sm text-ink-soft">{{ $gruppe->anmeldung_hinweis }}</p>
+        @endif
 
-            <div class="mt-4">
-                @if ($gruppe->typ === 'arbeits')
-                    {{-- Die AGs laufen über ihr eigenes Postfach, so steht es
-                         in jedem AG-Text (KEV-74). Der Betreff nennt die AG. --}}
-                    <x-ui.button :href="'mailto:'.\App\Models\Group::AG_ADRESSE.'?subject='.rawurlencode(trim($gruppe->kuerzel.': '.$gruppe->name, ': '))"
-                                 variant="ghost" size="sm">
-                        Per E-Mail mitmachen
-                        <span class="sr-only">– {{ $gruppe->name }}</span>
-                    </x-ui.button>
-                @else
-                    <x-ui.button href="/anfragen" variant="ghost" size="sm">
-                        Zu dieser Gruppe anfragen
-                        <span class="sr-only">– {{ $gruppe->name }}</span>
-                    </x-ui.button>
-                @endif
-            </div>
-        @else
-            {{-- Kein Anfrage-Knopf: Er weckte Erwartungen, die noch niemand
+        @unless ($offen)
+            {{-- Kein Anmelde-Knopf: Er weckte Erwartungen, die noch niemand
                  einlösen kann. Der Hinweis aus dem Panel („In Planung –
                  aktuell noch keine Anmeldung möglich“) sagte dasselbe wie die
                  Zwischenüberschrift darüber, deshalb steht hier ein
@@ -122,6 +118,27 @@
                     Noch keine Anmeldung möglich
                 @endunless
             </p>
+        @endunless
+
+        @if ($gruppe->typ === 'selbsthilfe')
+            {{-- Jede Selbsthilfegruppe hat ihre eigene Seite (KEV-73), auch
+                 die in Planung: Taddis Text steht dort schon. --}}
+            <div class="mt-4">
+                <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
+                    Mehr zur Gruppe
+                    <span class="sr-only">– {{ $gruppe->name }}</span>
+                </x-ui.button>
+            </div>
+        @elseif ($offen)
+            {{-- Die AGs laufen über ihr eigenes Postfach, so steht es
+                 in jedem AG-Text (KEV-74). Der Betreff nennt die AG. --}}
+            <div class="mt-4">
+                <x-ui.button :href="'mailto:'.\App\Models\Group::AG_ADRESSE.'?subject='.rawurlencode(trim($gruppe->kuerzel.': '.$gruppe->name, ': '))"
+                             variant="ghost" size="sm">
+                    Per E-Mail mitmachen
+                    <span class="sr-only">– {{ $gruppe->name }}</span>
+                </x-ui.button>
+            </div>
         @endif
     </div>
 </article>

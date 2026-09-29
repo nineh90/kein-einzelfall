@@ -244,9 +244,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   keine verbindliche Fassung: Wer das liest, entscheidet danach womöglich über
   eine Frist. **Das ist ein Fall für die Anwälte des Vereins.** Weitere Begriffe
   legt der Verein selbst an — je Eintrag reichen zwei, drei Sätze.
-- [ ] **Schreibweise „Killing me Softly".** Im Strukturpapier steht „Killen me
-  Softly". Wir sind von einem Tippfehler ausgegangen. Falls nicht: im Panel unter
-  „Gruppen" ändern.
+- [x] **Schreibweise „Killing me Softly".** Geklärt mit KEV-73 (29.09.2026):
+  Die Gruppe heißt „Skillin me Softly – Trigger und Skills".
 - [ ] **Adresse des YouTube-Kanals.** Er wurde in der Besprechung genannt, die
   Adresse nicht. Wir raten sie nicht — eine falsche Adresse führt entweder ins
   Leere oder zu einem fremden Kanal. Sobald sie da ist, ist es eine Zeile in

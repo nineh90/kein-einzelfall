@@ -5,7 +5,10 @@
     $istAktiv = function (array $item): bool {
         $urls = [$item['url'], ...array_column($item['children'] ?? [], 'url')];
         foreach ($urls as $url) {
-            if (request()->is(ltrim($url, '/')) || (($url === '/') && request()->is('/'))) {
+            // Unterseiten zählen mit: /selbsthilfegruppen/seelenfarben (KEV-73)
+            // gehört zu „Gruppen & Termine“, wie /veranstaltungen/….
+            $pfad = ltrim($url, '/');
+            if (request()->is($pfad) || ($pfad !== '' && request()->is($pfad.'/*')) || (($url === '/') && request()->is('/'))) {
                 return true;
             }
         }

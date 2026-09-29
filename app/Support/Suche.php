@@ -320,8 +320,9 @@ class Suche
                 $treffer[] = [
                     'art' => 'gruppe',
                     'titel' => $gruppe->name,
-                    'url' => '/selbsthilfegruppen#'.$gruppe->slug,
-                    'bereich' => 'Selbsthilfegruppen',
+                    // Bis KEV-73 auch für Arbeitsgruppen /selbsthilfegruppen#…
+                    'url' => $gruppe->url(),
+                    'bereich' => $gruppe->typ === 'selbsthilfe' ? 'Selbsthilfegruppen' : 'Arbeitsgruppen',
                     'ausschnitt' => Str::limit((string) $gruppe->teaser, 160),
                     'punkte' => $punkte,
                 ];

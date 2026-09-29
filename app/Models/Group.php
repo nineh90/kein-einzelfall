@@ -17,6 +17,9 @@ class Group extends Model
     /** Postfach der Arbeitsgruppen, so steht es in jedem AG-Text (KEV-74). */
     public const AG_ADRESSE = 'arbeitsgruppe@kein-einzelfall.de';
 
+    /** Postfach der Selbsthilfegruppen (KEV-73). */
+    public const SHG_ADRESSE = 'selbsthilfe@kein-einzelfall.de';
+
     public const STATUS = [
         'offen' => 'Offen für neue Teilnehmende',
         'geplant' => 'In Planung',
@@ -57,6 +60,23 @@ class Group extends Model
     public function scopeVomTyp(Builder $query, string $typ): Builder
     {
         return $query->where('typ', $typ);
+    }
+
+    /**
+     * Wohin ein Link auf diese Gruppe führt: Selbsthilfegruppen haben eine
+     * eigene Seite (KEV-73), Arbeitsgruppen stehen als Karte auf /arbeitsgruppen.
+     */
+    public function url(): string
+    {
+        return $this->typ === 'selbsthilfe'
+            ? sprachlink('gruppen.show', ['slug' => $this->slug])
+            : sprachlink('page', ['slug' => 'arbeitsgruppen']).'#'.$this->slug;
+    }
+
+    /** Der nächste Termin, nur bei offenen Gruppen mit festem Rhythmus. */
+    public function naechsterTermin(): ?CarbonImmutable
+    {
+        return $this->istOffen() ? $this->naechsteTermine(1)->first() : null;
     }
 
     public function istOffen(): bool

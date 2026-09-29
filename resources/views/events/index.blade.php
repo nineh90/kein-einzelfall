@@ -145,7 +145,7 @@
                                     </div>
 
                                     <div class="hidden shrink-0 sm:block">
-                                        <x-ui.button href="/selbsthilfegruppen" variant="ghost" size="sm">
+                                        <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
                                             Zur Gruppe
                                             <span class="sr-only">– {{ $gruppe->name }}</span>
                                         </x-ui.button>

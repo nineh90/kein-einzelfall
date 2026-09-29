@@ -201,7 +201,7 @@ class EventController extends Controller
             $zeilen[] = 'LOCATION:'.$this->maskieren($ort);
         }
 
-        $zeilen[] = 'URL:'.url('/selbsthilfegruppen');
+        $zeilen[] = 'URL:'.url($gruppe->url());
         $zeilen[] = 'END:VEVENT';
 
         return $zeilen;

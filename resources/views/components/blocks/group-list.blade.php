@@ -19,7 +19,7 @@
     // allen Karten ein Satz, der nichts unterscheidet.
     $geteilt = $offene->isNotEmpty() && $spaetere->isNotEmpty();
 
-    $mitText = $gruppen->contains(fn ($g) => filled(strip_tags((string) $g->beschreibung)));
+    $mitText = $typ === 'arbeits' && $gruppen->contains(fn ($g) => filled(strip_tags((string) $g->beschreibung)));
 
     $spaeterTitel = $spaetere->every(fn ($g) => $g->status === 'geplant')
         ? \App\Models\Group::STATUS['geplant']

@@ -52,6 +52,8 @@ const SEITEN = [
     ['Spendenseite', '/spenden'],
     ['Vorstand und Team', '/ueber-uns-vorstand-und-team'],
     ['Gruppen', '/selbsthilfegruppen'],
+    ['Seite einer Selbsthilfegruppe', '/selbsthilfegruppen/wir-sind-nicht-mehr-stumm'],
+    ['Arbeitsgruppen', '/arbeitsgruppen'],
     ['Blog-Übersicht', '/aktuelles'],
     ['Veranstaltungen', '/veranstaltungen'],
     ['Rechtstext', '/impressum'],
