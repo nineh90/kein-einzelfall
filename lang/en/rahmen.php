@@ -99,6 +99,7 @@ return [
 
     'weiterlesen' => [
         'mehr_zu' => 'More on “:bereich”',
+        'mehr_ueber_verein' => 'More about KE!N EINZELFALL e.V.',
         'auch_interessant' => 'You might also find this helpful',
     ],
 

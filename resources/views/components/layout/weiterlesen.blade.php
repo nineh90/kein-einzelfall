@@ -1,6 +1,7 @@
 @props([
     'seiten' => [],
     'bereich' => null,
+    'titel' => null,   // schlägt „Mehr zu „…““, wo ein Bereich anders heissen soll
     'auf' => 'card',   // cream | card — die Gegenfläche des letzten Bausteins
 ])
 
@@ -20,9 +21,9 @@
            aria-labelledby="weiterlesen-titel">
         <div class="mx-auto max-w-6xl">
             <h2 id="weiterlesen-titel" class="mb-5 font-display text-xl font-medium text-green">
-                {{ $bereich
+                {{ $titel ?? ($bereich
                     ? __('rahmen.weiterlesen.mehr_zu', ['bereich' => $bereich])
-                    : __('rahmen.weiterlesen.auch_interessant') }}
+                    : __('rahmen.weiterlesen.auch_interessant')) }}
             </h2>
 
             <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

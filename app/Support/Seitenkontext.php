@@ -63,6 +63,19 @@ class Seitenkontext
         return null;
     }
 
+    /**
+     * Gehört die Seite zum Bereich „Verein“ — als Übersicht oder Unterseite?
+     *
+     * Dort heisst die Weiterführung am Seitenende „Mehr über KE!N EINZELFALL
+     * e.V.“ statt „Mehr zu „Gemeinnütziger Verein““ (KEV-70, Wunsch von Taddi).
+     */
+    public function istVereinsbereich(): bool
+    {
+        $bereich = $this->istBereichsUebersicht() ?? $this->bereich();
+
+        return ($bereich['url'] ?? null) === Language::aktuell()->pfad('/verein');
+    }
+
     /** Name des Bereichs — erscheint als Überzeile über der Überschrift. */
     public function bereichName(): ?string
     {

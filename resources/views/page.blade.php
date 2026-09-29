@@ -155,6 +155,7 @@
     <x-layout.weiterlesen
         :seiten="$geschwister"
         :auf="$weiterlesenAuf"
+        :titel="$kontext->istVereinsbereich() ? __('rahmen.weiterlesen.mehr_ueber_verein') : null"
         :bereich="$kontext->istBereichsUebersicht() ? $page->titel : $kontext->bereichName()" />
 
     {{-- Gemeinsamer Abschluss: Auf jeder Unterseite soll der Weg zu uns

@@ -135,6 +135,7 @@ return [
 
     'weiterlesen' => [
         'mehr_zu' => 'Mehr zu „:bereich“',
+        'mehr_ueber_verein' => 'Mehr über KE!N EINZELFALL e.V.',
         'auch_interessant' => 'Das könnte dich auch interessieren',
     ],
 

@@ -72,6 +72,19 @@ class SeitenUndRedirectsTest extends TestCase
             ->assertDontSee('Unser Team – wer steht hinter unserem Verein?');
     }
 
+    public function test_vereinsbereich_endet_mit_mehr_ueber_den_verein(): void
+    {
+        // KEV-70: Übersicht und Unterseiten des Vereins, andere Bereiche nicht.
+        foreach (['/verein', '/satzung'] as $pfad) {
+            $this->get($pfad)
+                ->assertOk()
+                ->assertSee('Mehr über KE!N EINZELFALL e.V.')
+                ->assertDontSee('Mehr zu „Gemeinnütziger Verein“');
+        }
+
+        $this->get('/das-hilfesystem')->assertOk()->assertDontSee('Mehr über KE!N EINZELFALL e.V.');
+    }
+
     public function test_seiten_ohne_vollertitel_bekommen_einen_echten_titel(): void
     {
         /*
