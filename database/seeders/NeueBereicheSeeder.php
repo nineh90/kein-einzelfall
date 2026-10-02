@@ -85,6 +85,13 @@ class NeueBereicheSeeder extends Seeder
                 'titel' => 'Projekte',
                 'abschnitte' => ['Laufende Projekte', 'Abgeschlossene Projekte'],
             ],
+            // KEV-81: Seite fürs Gremium, Titel wie im Ticket. Text, Menüplatz
+            // und die ausgeschriebene Bezeichnung liefert der Verein.
+            [
+                'slug' => 'gremium-ukfb',
+                'titel' => 'Gremium UKFB',
+                'abschnitte' => [null],
+            ],
             [
                 'slug' => 'publikationen',
                 'titel' => 'Publikationen',

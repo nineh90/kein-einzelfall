@@ -116,7 +116,8 @@ class SeitenUndRedirectsTest extends TestCase
          * keinen Text. Sie sind angelegt, damit sie im Panel als Arbeitsliste
          * stehen — und unveröffentlicht, damit auf der Website nichts Leeres
          * erscheint. Sie gehören deshalb in die Gesamtzahl, aber nicht in den
-         * Durchlauf darunter.
+         * Durchlauf darunter. Seit KEV-81 ein fünfter: Gremium UKFB, mit
+         * Titelbild, aber ebenfalls noch ohne Text.
          *
          * Und fünf aus Abschnitt 6.2 des Strukturpapiers (OEG, SER, GdB,
          * Pflegegrad, Persönliches Budget). Anders als die vier oben haben sie
@@ -124,8 +125,8 @@ class SeitenUndRedirectsTest extends TestCase
          * Vereins. Sie sind deshalb veröffentlicht und müssen erreichbar sein,
          * tragen aber `ungeprueft` und `noindex`, bis der Verein sie freigibt.
          */
-        $this->assertSame(35, Page::count());
-        $this->assertSame(4, Page::whereNull('published_at')->count());
+        $this->assertSame(36, Page::count());
+        $this->assertSame(5, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -149,7 +150,7 @@ class SeitenUndRedirectsTest extends TestCase
          * muss der Verein einhalten können. Wir legen die Seite an und die
          * Struktur, den Text schreibt er selbst.
          */
-        foreach (['schutzkonzept', 'beschwerdemanagement', 'projekte', 'publikationen'] as $slug) {
+        foreach (['schutzkonzept', 'beschwerdemanagement', 'projekte', 'publikationen', 'gremium-ukfb'] as $slug) {
             $seite = Page::where('slug', $slug)->first();
 
             $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");

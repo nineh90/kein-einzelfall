@@ -35,6 +35,7 @@ class Titelbilder
      * mit „von uns“ markierten sind neu formuliert und stehen zum Gegenlesen
      * in der Übergabe-Checkliste (A14).
      */
+    /** @var array<string, ?string> */
     public const SEITEN = [
         'verein' => 'Opferhilfe für soziale Gerechtigkeit!',
         'ueber-uns-vorstand-und-team' => 'Die Menschen hinter unserer Arbeit.',                    // von uns
@@ -55,6 +56,9 @@ class Titelbilder
         'trauma-bindung-und-beziehung' => 'Warum ein Trauma Beziehungen verändert – und was dabei hilft.', // von uns
         // KEV-80, Bild von Taddi. Die Seite ist noch Entwurf, bis der Text kommt.
         'beschwerdemanagement' => 'Deine Rückmeldung hilft uns, besser zu werden.',                // von uns
+        // KEV-81, Bild von Taddi. Entwurf; Unterzeile erst, wenn klar ist,
+        // wofür das Gremium steht.
+        'gremium-ukfb' => null,
     ];
 
     /**
@@ -90,6 +94,9 @@ class Titelbilder
      *  - Beschwerdemanagement: Briefschlitz mit Umschlag, etwas über der
      *    Mitte (KEV-80). Bei 50 % fehlte auf breiten Bildschirmen der obere
      *    Rand des Schlitzes.
+     *  - Gremium UKFB: runder Tisch mit Stühlen im unteren Drittel (KEV-81).
+     *    Ganz unten ausgerichtet fiele auf breiten Bildschirmen die
+     *    Tischplatte weg, übrig blieben Stuhlbeine.
      *
      * @var array<string, int>
      */
@@ -97,6 +104,7 @@ class Titelbilder
         self::ORDNER.'/mitgliedschaft.webp' => 0,
         self::ORDNER.'/arbeitsgruppen.webp' => 50,
         self::ORDNER.'/beschwerdemanagement.webp' => 35,
+        self::ORDNER.'/gremium-ukfb.webp' => 70,
     ];
 
     /** Für object-position: links, in der Höhe nach FOKUS. */

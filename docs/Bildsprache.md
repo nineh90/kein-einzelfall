@@ -70,6 +70,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
 | Selbsthilfegruppe „Wir sind nicht mehr stumm“ | rissige Wand im Streiflicht, Risse links, rechts glatt; von Taddi geliefert (KEV-82). Gruppen tragen ihr Bild im Feld „Titelbild“ der Gruppe, Datei `gruppe-<slug>.webp` |
+| Gremium UKFB (Entwurf) | runder Holztisch mit sechs Polsterstühlen; von Taddi geliefert (KEV-81), ausgerichtet auf 70 % |
 | Beschwerdemanagement | Briefschlitz mit Umschlag an heller Putzwand; von Taddi geliefert (KEV-80), ausgerichtet auf 35 % |
 | Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %) |
 | Anfragen | Briefumschlag auf Holztisch |

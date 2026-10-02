@@ -275,7 +275,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Verein inzwischen einen PayPal.me-Link oder eine Spendenkampagne hat, im
   Panel im Baustein „Spendenmöglichkeiten" ersetzen.
 - [ ] **Die vier neuen Seiten füllen:** Schutzkonzept, Beschwerdemanagement,
-  Projekte, Publikationen. Sie liegen im Panel als Entwurf bereit, mit Adresse und
+  Projekte, Publikationen. Dazu seit KEV-81 **Gremium UKFB** (Titelbild von
+  Taddi ist drin). Dort zusätzlich offen: Wofür steht UKFB ausgeschrieben, und
+  unter welchem Menüpunkt soll die Seite stehen? Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben. **Beim Beschwerdemanagement zusätzlich zu klären:** eigener Kontaktweg,
   getrennt vom normalen Anfragen-Postfach? Beschwerden über den Verein sollten
