@@ -348,6 +348,14 @@ class TeamUndGruppenSeeder extends Seeder
             );
         }
 
+        // Titelbilder (KEV-82) nicht in gruppenliste(): Ältere Migrationen
+        // legen Gruppen darüber an, als es die Spalte noch nicht gab.
+        foreach (self::SELBSTHILFEGRUPPEN as $g) {
+            if (isset($g['titelbild'])) {
+                Group::where('slug', $g['slug'])->update(['titelbild' => $g['titelbild']]);
+            }
+        }
+
         $this->command?->info(count(self::gruppenliste()).' Gruppen übernommen.');
     }
 
@@ -368,6 +376,8 @@ class TeamUndGruppenSeeder extends Seeder
         [
             'slug' => 'wir-sind-nicht-mehr-stumm', 'status' => 'offen',
             'name' => 'Wir sind nicht mehr stumm',
+            // Von Taddi geliefert (KEV-82): rissige Wand im Streiflicht
+            'titelbild' => '/img/titelbilder/gruppe-wir-sind-nicht-mehr-stumm.webp',
             'teaser' => 'Folgestörungen durch Missbrauch und andere schädigende Ereignisse',
             'absaetze' => [
                 'Gewalt, Missbrauch, egal ob physisch, psychisch, sexuell oder digital, und andere schädigende Erfahrungen enden nicht immer mit dem eigentlichen Ereignis. Viele Betroffene leben noch lange danach mit seelischen oder körperlichen Folgen – oft begleitet von Scham, Schuldgefühlen und dem Gefühl, mit diesen Belastungen nicht ausreichend gesehen oder verstanden zu werden.',

@@ -45,10 +45,16 @@ class GroupForm
 
                 RichEditor::make('beschreibung')->label('Ausführlich')
                     ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
-                    ->helperText('Auf der Karte aufklappbar.'),
+                    ->helperText('Steht auf der Seite der Gruppe.'),
 
                 TextInput::make('schlusssatz')->label('Schlusssatz')->maxLength(400)
                     ->helperText('Steht in grüner Handschrift unter dem ausführlichen Text.'),
+
+                // Wie bei den Seiten (KEV-82): Mit Bild bekommt die Seite der
+                // Gruppe den Seitenkopf, Name und Kurzbeschreibung stehen darauf.
+                TextInput::make('titelbild')->label('Titelbild (Pfad oder Adresse)')->maxLength(255)
+                    ->helperText('Querformat 16:9, z. B. /img/titelbilder/gruppe-wir-sind-nicht-mehr-stumm.webp. '
+                        .'Leer lassen = Seite ohne Bild.'),
             ]),
 
             Section::make('Termin und Ort')->columns(2)->schema([

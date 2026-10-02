@@ -445,6 +445,12 @@ Handymenü unübersichtlich. Stattdessen: „Gruppen & Termine“ ist auf den
 Unterseiten als Bereich markiert, Brotkrumen führen zur Übersicht, die
 Weiterführung zu den Nachbargruppen.
 
+Eine Gruppe kann ein **Titelbild** haben (Feld „Titelbild“, KEV-82). Dann
+steht auf ihrer Seite der Seitenkopf wie auf den Inhaltsseiten, mit
+„Selbsthilfegruppe“, dem Namen und der Kurzbeschreibung auf dem Bild. Ohne
+Bild stehen Name und Kurzbeschreibung oben im Artikel. Bisher hat nur
+„Wir sind nicht mehr stumm“ eins.
+
 > ⚠️ **Bewusst keine Anmeldeverwaltung.** Wer sich zu einer Selbsthilfegruppe
 > anmeldet, offenbart damit eine Angabe nach Art. 9 DSGVO. Das braucht ein
 > eigenes Konzept mit Löschfristen und Zugriffsregelung und gehört nicht

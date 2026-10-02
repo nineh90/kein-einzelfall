@@ -9,6 +9,12 @@
     $adresse = \App\Models\Group::SHG_ADRESSE;
     $uebersicht = sprachlink('page', ['slug' => 'selbsthilfegruppen']);
 
+    $krumen = [
+        ['label' => 'Start', 'url' => '/'],
+        ['label' => 'Selbsthilfegruppen', 'url' => $uebersicht],
+        ['label' => $gruppe->name, 'url' => null],
+    ];
+
     // Die anderen Gruppen als Weiterführung am Seitenende
     $andere = \App\Models\Group::veroeffentlicht()->vomTyp('selbsthilfe')
         ->whereKeyNot($gruppe->getKey())
@@ -23,17 +29,30 @@
     erst das Wichtigste zum Mitmachen (Wann, nächster Termin, Wo, Kosten,
     Kontakt), dann Taddis Text mit dem Schlusssatz in Handschrift.
 --}}
-<article class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
+{{--
+    Mit Titelbild (KEV-82) der Seitenkopf wie auf den anderen Seiten: Name
+    und Kurzbeschreibung stehen auf dem Bild. Ohne Bild stehen sie im
+    Artikel. Die Brotkrumen bleiben immer im Artikel, in der schmalen
+    Spalte; im Kopf stünden sie in der breiten, versetzt zum Text.
+--}}
+@if ($gruppe->titelbild)
+    <x-layout.seitenkopf
+        :titel="$gruppe->name"
+        bereich="Selbsthilfegruppe"
+        :untertitel="$gruppe->teaser"
+        :bild="$gruppe->titelbild" />
+@endif
+
+<article @class(['px-4 md:px-8 pb-8 lg:px-10 lg:pb-12', 'pt-8 lg:pt-12' => ! $gruppe->titelbild, 'pt-6' => $gruppe->titelbild])>
     <div class="mx-auto max-w-3xl">
 
-        <x-ui.brotkrumen :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Selbsthilfegruppen', 'url' => $uebersicht],
-            ['label' => $gruppe->name, 'url' => null],
-        ]" />
+        <x-ui.brotkrumen :krumen="$krumen" />
 
         <div class="flex flex-wrap items-center gap-2">
-            <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">Selbsthilfegruppe</span>
+            {{-- Mit Titelbild steht „Selbsthilfegruppe“ schon darauf --}}
+            @unless ($gruppe->titelbild)
+                <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">Selbsthilfegruppe</span>
+            @endunless
             @if ($gruppe->online)
                 <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">Online</span>
             @endif
@@ -44,13 +63,15 @@
             @endunless
         </div>
 
-        <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
-            {{ $gruppe->name }}
-        </h1>
+        @unless ($gruppe->titelbild)
+            <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
+                {{ $gruppe->name }}
+            </h1>
 
-        @if ($gruppe->teaser)
-            <p class="mt-2 text-lg leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
-        @endif
+            @if ($gruppe->teaser)
+                <p class="mt-2 text-lg leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
+            @endif
+        @endunless
 
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             @if ($gruppe->rhythmus)

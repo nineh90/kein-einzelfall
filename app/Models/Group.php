@@ -38,7 +38,7 @@ class Group extends Model
     ];
 
     protected $fillable = [
-        'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung', 'schlusssatz',
+        'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung', 'schlusssatz', 'titelbild',
         'rhythmus', 'uhrzeit', 'ort', 'online', 'status',
         'anmeldung_hinweis', 'position', 'published_at',
         'wiederholung', 'wochentag', 'woche_im_monat', 'beginn_zeit', 'dauer_minuten',
