@@ -191,10 +191,14 @@ class TeamUndGruppenSeeder extends Seeder
          * darüberstehende Überschrift „Gemeinsam KE!N EINZELFALL" ist deshalb
          * keine Rollenbezeichnung. Ausdrücklich korrigiert statt die Heuristik
          * zu verbiegen — im Panel lässt sich beides jederzeit ändern.
+         *
+         * Die Überschrift bleibt trotzdem an der Karte stehen, an der Stelle
+         * der Rolle (KEV-85): Ohne sie fehlte Taddi die Zeile über dem Namen,
+         * die alle anderen Karten haben.
          */
         foreach ($personen as &$person) {
             if ($person['name'] === 'Herr und Frau Unbekannt') {
-                $person['rolle'] = null;
+                $person['rolle'] = self::UNBEKANNT_UEBERSCHRIFT;
                 $person['bereich'] = self::BEREICH_HINTERGRUND;
             }
 
@@ -216,6 +220,8 @@ class TeamUndGruppenSeeder extends Seeder
 
         return ['personen' => $personen, 'zwischentexte' => $zwischentexte];
     }
+
+    public const UNBEKANNT_UEBERSCHRIFT = 'Gemeinsam KE!N EINZELFALL';
 
     public const BEREICH_VORSTAND = 'Vorstand';
 
@@ -302,13 +308,17 @@ class TeamUndGruppenSeeder extends Seeder
                 // ersten dunkler und grösser als Einstieg.
                 //
                 // Die Überleitung vor dem Team bekommt die Überschrift „Team“
-                // (KEV-66), damit der Abschnitt nicht namenlos zwischen den
-                // Karten steht. Erkannt am Anfang des Textes.
+                // (KEV-66), die vor den Menschen im Hintergrund „Im
+                // Hintergrund“ (KEV-85), damit kein Abschnitt namenlos
+                // zwischen den Karten steht. Erkannt am Anfang des Textes.
                 if (isset($zwischentexte[$person['name']])) {
                     $absatz = implode(' ', $zwischentexte[$person['name']]);
-                    $data = str_starts_with($absatz, 'Darüber hinaus gibt es viele Menschen')
-                        ? ['titel' => 'Team', 'absaetze' => [$absatz]]
-                        : ['absaetze' => [$absatz]];
+                    $titel = match (true) {
+                        str_starts_with($absatz, 'Darüber hinaus gibt es viele Menschen') => 'Team',
+                        str_starts_with($absatz, 'Zusätzlich arbeiten im Hintergrund') => self::BEREICH_HINTERGRUND,
+                        default => null,
+                    };
+                    $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]];
                     $neu[] = ['typ' => 'text', 'data' => $data];
                 }
             }

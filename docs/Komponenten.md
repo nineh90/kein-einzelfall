@@ -405,7 +405,13 @@ ohne Text = Rolle, nächste = Name, dann die Vorstellung. **Eine Stelle liegt
 daneben** und ist ausdrücklich korrigiert: „Herr und Frau Unbekannt" ist ein
 stellvertretendes Porträt für die Menschen im Hintergrund, kein
 Vorstandsmitglied — die darüberstehende Überschrift „Gemeinsam KE!N EINZELFALL"
-ist entsprechend keine Rollenbezeichnung.
+ist entsprechend keine Rollenbezeichnung. Sie steht trotzdem im Feld „Rolle“
+und damit über dem Namen (KEV-85), sonst fehlte der Karte als einziger diese
+Zeile. Für den Bereich zählt sie nicht: Die Karte bleibt „Im Hintergrund“.
+
+Die drei Abschnitte der Seite haben je eine Überschrift: „Vorstandsebene“
+(Titel des ersten `team_grid`), „Team“ und „Im Hintergrund“ (Titel der
+Textblöcke davor, KEV-66 und KEV-85).
 
 ### `group_list` — Selbsthilfe- und Arbeitsgruppen
 
