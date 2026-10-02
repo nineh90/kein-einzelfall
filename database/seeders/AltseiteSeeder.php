@@ -79,6 +79,25 @@ class AltseiteSeeder extends Seeder
         'verein' => ['Mehr über:'],
     ];
 
+    /**
+     * Neue Texte des Vereins für Blöcke der Altseite, je Seite nach
+     * Überschrift. Sie ersetzen die Absätze des Abzugs. Bestehende
+     * Datenbanken erreicht die Änderung über eine eigene Migration.
+     */
+    public const NEUE_TEXTE = [
+        'ueber-uns-vorstand-und-team' => [
+            // KEV-64, Text von Taddi. Ohne Komma vor „und ein Raum“,
+            // „persönlichem“ statt „persönlichen“.
+            'Unser Team – mit Herz, Haltung und Vision' => [
+                'Hinter unserem Verein stehen Menschen mit unterschiedlichen Erfahrungen und Kompetenzen, '
+                .'die sich mit Überzeugung, fachlichem Know-how und großem persönlichem Engagement für die '
+                .'Opferhilfe und die Belange von Betroffenen einsetzen. Unsere Vorstandsebene gestaltet die '
+                .'Arbeit des Vereins, trifft verantwortungsvolle Entscheidungen und sorgt dafür, dass '
+                .'Unterstützung ankommt, Wissen vermittelt wird und ein Raum für Austausch entsteht.',
+            ],
+        ],
+    ];
+
     public const VORGABE_TITEL = [
         // KEV-59, Wunsch von Taddi
         'verein' => 'Gemeinnütziger Verein',
@@ -182,7 +201,7 @@ class AltseiteSeeder extends Seeder
                     'position' => $position++,
                     'data' => [
                         'titel' => $block['titel'],
-                        'absaetze' => $block['absaetze'],
+                        'absaetze' => self::NEUE_TEXTE[$slug][$block['titel']] ?? $block['absaetze'],
                     ],
                 ]);
             }
