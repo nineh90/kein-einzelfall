@@ -76,15 +76,11 @@
 
         $zeile = $bereich && $bereich !== $titel ? $bereich : 'KE!N EINZELFALL e.V.';
 
-        // Ausgerichtet wird auf die linke untere Ecke, dort sitzt laut
-        // Bildvorgabe das Motiv. Bilder, deren Motiv bis oben reicht, stehen
-        // in Titelbilder::FOKUS_OBEN und werden oben links ausgerichtet,
-        // solche mit dem Motiv auf halber Höhe in FOKUS_MITTE (KEV-83).
-        $fokus = match (true) {
-            \App\Support\Titelbilder::fokusOben($bild) => 'object-[0%_0%]',
-            \App\Support\Titelbilder::fokusMitte($bild) => 'object-[0%_50%]',
-            default => 'object-[0%_100%]',
-        };
+        // Ausgerichtet wird links unten, dort sitzt laut Bildvorgabe das
+        // Motiv. Ausnahmen mit ihrer Höhe stehen in Titelbilder::FOKUS.
+        // Als style, nicht als Klasse: Tailwind kennt nur Werte, die
+        // wörtlich in den Vorlagen stehen.
+        $fokus = \App\Support\Titelbilder::fokus($bild);
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>
@@ -97,7 +93,7 @@
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
                 <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                      alt="{{ $bild_alt ?? '' }}" width="2000" height="1116" fetchpriority="high"
-                     class="h-full w-full object-cover {{ $fokus }}">
+                     class="h-full w-full object-cover" style="object-position: {{ $fokus }}">
 
                 {{-- Schleier für die Lesbarkeit. Auf dem Handy steht der Text
                      oben, wo die Bilder laut Vorgabe freie Wand haben; das

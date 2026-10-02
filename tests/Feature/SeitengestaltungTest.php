@@ -107,8 +107,8 @@ class SeitengestaltungTest extends TestCase
     /** KEV-61: Das Antragsbild reicht bis oben und wird dort ausgerichtet. */
     public function test_bilder_mit_motiv_oben_werden_oben_ausgerichtet(): void
     {
-        $this->assertStringContainsString('object-[0%_0%]', $this->get('/mitgliedschaft')->getContent());
-        $this->assertStringContainsString('object-[0%_100%]', $this->get('/spenden')->getContent());
+        $this->assertStringContainsString('object-position: 0% 0%', $this->get('/mitgliedschaft')->getContent());
+        $this->assertStringContainsString('object-position: 0% 100%', $this->get('/spenden')->getContent());
     }
 
     /** KEV-83: Taddis Arbeitsgruppen-Bild hat das Motiv auf halber Höhe. */
@@ -117,7 +117,22 @@ class SeitengestaltungTest extends TestCase
         $html = $this->get('/arbeitsgruppen')->getContent();
 
         $this->assertStringContainsString('src="/img/titelbilder/arbeitsgruppen.webp"', $html);
-        $this->assertStringContainsString('object-[0%_50%]', $html);
+        $this->assertStringContainsString('object-position: 0% 50%', $html);
+    }
+
+    /** KEV-80: Bild von Taddi liegt bereit, die Seite bleibt Entwurf, bis der Text kommt. */
+    public function test_beschwerdemanagement_hat_titelbild_und_bleibt_entwurf(): void
+    {
+        $seite = Page::where('slug', 'beschwerdemanagement')->where('locale', 'de')->firstOrFail();
+
+        $this->assertSame('/img/titelbilder/beschwerdemanagement.webp', $seite->titelbild);
+        $this->assertNull($seite->published_at);
+        $this->get('/beschwerdemanagement')->assertNotFound();
+
+        $seite->update(['published_at' => now()->subMinute()]);
+        $this->get('/beschwerdemanagement')->assertOk()
+            ->assertSee('src="/img/titelbilder/beschwerdemanagement.webp"', false)
+            ->assertSee('object-position: 0% 35%', false);
     }
 
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void

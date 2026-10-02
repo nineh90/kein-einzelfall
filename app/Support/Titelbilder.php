@@ -53,6 +53,8 @@ class Titelbilder
         'soziales-entschaedigungsrecht' => 'Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden.', // von uns
         'traumafolgestoerungen-verstehen' => 'Was eine Traumafolgestörung ist – und wie man passende Hilfe findet.', // von uns
         'trauma-bindung-und-beziehung' => 'Warum ein Trauma Beziehungen verändert – und was dabei hilft.', // von uns
+        // KEV-80, Bild von Taddi. Die Seite ist noch Entwurf, bis der Text kommt.
+        'beschwerdemanagement' => 'Deine Rückmeldung hilft uns, besser zu werden.',                // von uns
     ];
 
     /**
@@ -73,38 +75,34 @@ class Titelbilder
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
 
     /**
-     * Bilder, die nicht nach der Bildvorgabe gebaut sind: Ihr Motiv reicht bis
-     * an den oberen Rand. Im Kopf werden sie oben statt unten ausgerichtet,
-     * sonst schnitte ein breiter Bildschirm genau das Wichtige ab.
+     * Wie hoch im Bild das Motiv sitzt, in Prozent von oben. Danach richtet
+     * der Seitenkopf das Bild aus (object-position), denn je nach Breite
+     * schneidet er oben oder unten etwas ab.
      *
-     * Mitgliedschaft: der Antrag, von Taddi geliefert (KEV-61). Oben steht
-     * „Antrag auf Mitgliedschaft“, unten nur das (weich gezeichnete)
-     * Kleingedruckte.
+     * Ohne Eintrag 100 %, also unten: Dort sitzt laut Bildvorgabe das Motiv,
+     * was wegfällt, ist leere Wand. Taddis eigene Bilder halten sich nicht
+     * immer daran:
+     *
+     *  - Mitgliedschaft: der Antrag (KEV-61). Oben steht „Antrag auf
+     *    Mitgliedschaft“, unten nur das (weich gezeichnete) Kleingedruckte.
+     *  - Arbeitsgruppen: Tisch mit Mappe, Karten und Stiften (KEV-83). Unten
+     *    steht nur eine unscharfe Stuhllehne.
+     *  - Beschwerdemanagement: Briefschlitz mit Umschlag, etwas über der
+     *    Mitte (KEV-80). Bei 50 % fehlte auf breiten Bildschirmen der obere
+     *    Rand des Schlitzes.
+     *
+     * @var array<string, int>
      */
-    public const FOKUS_OBEN = [
-        self::ORDNER.'/mitgliedschaft.webp',
+    public const FOKUS = [
+        self::ORDNER.'/mitgliedschaft.webp' => 0,
+        self::ORDNER.'/arbeitsgruppen.webp' => 50,
+        self::ORDNER.'/beschwerdemanagement.webp' => 35,
     ];
 
-    public static function fokusOben(?string $bild): bool
+    /** Für object-position: links, in der Höhe nach FOKUS. */
+    public static function fokus(?string $bild): string
     {
-        return in_array($bild, self::FOKUS_OBEN, true);
-    }
-
-    /**
-     * Bilder mit dem Motiv in der Mitte der Höhe. Unten ausgerichtet schnitte
-     * ein breiter Bildschirm das Motiv oben an, oben ausgerichtet fehlte der
-     * Tisch darunter.
-     *
-     * Arbeitsgruppen: Tisch mit Mappe, Karten und Stiften, von Taddi
-     * geliefert (KEV-83). Unten steht nur eine unscharfe Stuhllehne.
-     */
-    public const FOKUS_MITTE = [
-        self::ORDNER.'/arbeitsgruppen.webp',
-    ];
-
-    public static function fokusMitte(?string $bild): bool
-    {
-        return in_array($bild, self::FOKUS_MITTE, true);
+        return '0% '.(self::FOKUS[$bild] ?? 100).'%';
     }
 
     /**

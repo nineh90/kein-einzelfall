@@ -70,7 +70,8 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
 | Selbsthilfegruppe „Wir sind nicht mehr stumm“ | rissige Wand im Streiflicht, Risse links, rechts glatt; von Taddi geliefert (KEV-82). Gruppen tragen ihr Bild im Feld „Titelbild“ der Gruppe, Datei `gruppe-<slug>.webp` |
-| Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS_MITTE`) |
+| Beschwerdemanagement | Briefschlitz mit Umschlag an heller Putzwand; von Taddi geliefert (KEV-80), ausgerichtet auf 35 % |
+| Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %) |
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |
@@ -134,6 +135,12 @@ gezeichnet; Überschrift und Formular bleiben scharf. Die Beiträge im
 Formular (12/24/36 €) hat der Verein gegenzuprüfen.
 
 Das Motiv reicht bis an den oberen Rand, anders als die Vorgabe es vorsieht.
-Es steht deshalb in `Titelbilder::FOKUS_OBEN` und wird im Kopf oben statt
+Es steht deshalb in `Titelbilder::FOKUS` (0 %) und wird im Kopf oben statt
 unten ausgerichtet.
+
+**Ausrichtung allgemein:** Der Seitenkopf schneidet je nach Breite oben oder
+unten ab. Ohne Eintrag richtet er unten aus, wie die Bildvorgabe es vorsieht.
+Taddis eigene Bilder halten sich nicht immer daran. Für sie steht in
+`Titelbilder::FOKUS`, auf welcher Höhe (in Prozent von oben) das Motiv sitzt.
+Prüfen bei 1440 und 1920 px: Dort fällt am meisten weg.
 

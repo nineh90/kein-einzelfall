@@ -383,6 +383,7 @@ stammen von uns:
 | `/kein-einzelfall-im-dialog` | Wissenschaftliche Erkenntnisse und gelebte Erfahrung im Austausch. |
 | `/soziales-entschaedigungsrecht` | Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden. |
 | `/traumafolgestoerungen-verstehen` | Was eine Traumafolgestörung ist – und wie man passende Hilfe findet. |
+| `/beschwerdemanagement` (noch Entwurf, Bild von Taddi, KEV-80) | Deine Rückmeldung hilft uns, besser zu werden. |
 | `/projekte`, `/publikationen` (noch Entwurf) | Woran wir gerade arbeiten. / Umfragen und Veröffentlichungen des Vereins. |
 
 **Frage an den Verein:** Passen Bilder und Unterzeilen? Beides lässt sich je
