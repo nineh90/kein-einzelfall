@@ -63,14 +63,14 @@ class Group extends Model
     }
 
     /**
-     * Wohin ein Link auf diese Gruppe führt: Selbsthilfegruppen haben eine
-     * eigene Seite (KEV-73), Arbeitsgruppen stehen als Karte auf /arbeitsgruppen.
+     * Wohin ein Link auf diese Gruppe führt: Jede Gruppe hat eine eigene
+     * Seite, Selbsthilfegruppen seit KEV-73, Arbeitsgruppen seit KEV-84.
      */
-    public function url(): string
+    public function url(?string $sprache = null): string
     {
-        return $this->typ === 'selbsthilfe'
-            ? sprachlink('gruppen.show', ['slug' => $this->slug])
-            : sprachlink('page', ['slug' => 'arbeitsgruppen']).'#'.$this->slug;
+        $route = $this->typ === 'selbsthilfe' ? 'gruppen.show' : 'arbeitsgruppen.show';
+
+        return sprachlink($route, ['slug' => $this->slug], $sprache);
     }
 
     /** Der nächste Termin, nur bei offenen Gruppen mit festem Rhythmus. */

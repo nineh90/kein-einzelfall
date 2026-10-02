@@ -19,8 +19,6 @@
     // allen Karten ein Satz, der nichts unterscheidet.
     $geteilt = $offene->isNotEmpty() && $spaetere->isNotEmpty();
 
-    $mitText = $typ === 'arbeits' && $gruppen->contains(fn ($g) => filled(strip_tags((string) $g->beschreibung)));
-
     $spaeterTitel = $spaetere->every(fn ($g) => $g->status === 'geplant')
         ? \App\Models\Group::STATUS['geplant']
         : 'Geplant oder zurzeit pausiert';
@@ -68,14 +66,9 @@
                     </h3>
                 @endif
 
-                {{-- Mit ausführlichem Text zwei Spalten statt drei: Aufgeklappt
-                     wäre er in einem Drittel der Breite ein schmaler Turm.
-                     team-raster hält die Nachbarkarte dabei kurz (KEV-21). --}}
-                <ul @class([
-                    'grid gap-4 md:grid-cols-2',
-                    'team-raster' => $mitText,
-                    'lg:grid-cols-3' => ! $mitText,
-                ])>
+                {{-- Drei Spalten. Die AGs hatten bis KEV-84 zwei, weil ihr Text
+                     in der Karte aufklappte; der steht jetzt auf eigenen Seiten. --}}
+                <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     @foreach ($liste as $gruppe)
                         <li>
                             <x-blocks.gruppen-karte :gruppe="$gruppe" :auf="$auf" :ebene="$geteilt ? 'h4' : 'h3'" :status_sichtbar="$geteilt" />

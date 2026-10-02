@@ -430,6 +430,21 @@ cremefarben und geplante weiß, und ausgerechnet die geplanten stachen heraus.
 Jede Karte hat denselben Aufbau, Termin und Knopf stehen unten auf einer
 Linie; bis zu drei Karten nebeneinander.
 
+**Jede Gruppe hat eine eigene Seite**, die Karte führt mit „Mehr zur Gruppe“
+bzw. „Mehr zur AG“ dorthin: Selbsthilfegruppen unter
+`/selbsthilfegruppen/{slug}` (KEV-73, `gruppen/show`), Arbeitsgruppen unter
+`/arbeitsgruppen/{slug}` (KEV-84, `gruppen/arbeitsgruppe`). Dort stehen
+Eckdaten, Taddis Text, der Schlusssatz in Handschrift und die anderen Gruppen
+als Weiterführung. Die Karte behält ihren Anker (`#ag-02-ifg`), ältere Links
+auf die Übersicht funktionieren weiter. `Group::url()` liefert die Adresse für
+Karten, Suche, Kalender und Sitemap.
+
+Die Gruppenseiten stehen **nicht im Menü**. 13 Einträge als dritte Ebene unter
+„Gruppen & Termine“ machten das Aufklappmenü länger als den Bildschirm und das
+Handymenü unübersichtlich. Stattdessen: „Gruppen & Termine“ ist auf den
+Unterseiten als Bereich markiert, Brotkrumen führen zur Übersicht, die
+Weiterführung zu den Nachbargruppen.
+
 > ⚠️ **Bewusst keine Anmeldeverwaltung.** Wer sich zu einer Selbsthilfegruppe
 > anmeldet, offenbart damit eine Angabe nach Art. 9 DSGVO. Das braucht ein
 > eigenes Konzept mit Löschfristen und Zugriffsregelung und gehört nicht

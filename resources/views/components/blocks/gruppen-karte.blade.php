@@ -49,33 +49,6 @@
         <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
     @endif
 
-    {{-- Der ausführliche Text aufklappbar, wie bei den Teamkarten: Acht AGs
-         mit je vier, fünf Absätzen erschlügen die Seite (KEV-74). Natives
-         <details>, also auch ohne JavaScript lesbar. --}}
-    {{-- Nur bei AGs: Selbsthilfegruppen haben dafür ihre eigene Seite (KEV-73). --}}
-    @if ($gruppe->typ === 'arbeits' && filled(strip_tags((string) $gruppe->beschreibung)))
-        <details class="group/mehr mt-3">
-            <summary class="inline-flex cursor-pointer items-center gap-1.5 text-sm text-green-deep
-                            marker:content-none [&::-webkit-details-marker]:hidden">
-                <span class="group-open/mehr:hidden">Mehr über die AG lesen</span>
-                <span class="hidden group-open/mehr:inline">Weniger anzeigen</span>
-                <span class="sr-only">– {{ $gruppe->name }}</span>
-                <span class="transition-transform group-open/mehr:rotate-180">
-                    <x-ui.icon name="chevron-down" :size="16" />
-                </span>
-            </summary>
-
-            <div class="mt-3 text-sm leading-relaxed text-ink-soft
-                        [&_a]:whitespace-nowrap [&_a]:text-green-deep [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0">
-                {!! $gruppe->beschreibung !!}
-            </div>
-
-            @if ($gruppe->schlusssatz)
-                <p class="mt-4 font-hand text-xl leading-snug text-green">{{ $gruppe->schlusssatz }}</p>
-            @endif
-        </details>
-    @endif
-
     <div class="mt-auto pt-4">
         {{-- Ohne Zeit und Ort nicht nur „Termin: online“: Das sagt das
              Schild oben schon (die AGs haben keinen festen Termin). Gruppen,
@@ -120,25 +93,16 @@
             </p>
         @endunless
 
-        @if ($gruppe->typ === 'selbsthilfe')
-            {{-- Jede Selbsthilfegruppe hat ihre eigene Seite (KEV-73), auch
-                 die in Planung: Taddis Text steht dort schon. --}}
-            <div class="mt-4">
-                <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
-                    Mehr zur Gruppe
-                    <span class="sr-only">– {{ $gruppe->name }}</span>
-                </x-ui.button>
-            </div>
-        @elseif ($offen)
-            {{-- Die AGs laufen über ihr eigenes Postfach, so steht es
-                 in jedem AG-Text (KEV-74). Der Betreff nennt die AG. --}}
-            <div class="mt-4">
-                <x-ui.button :href="'mailto:'.\App\Models\Group::AG_ADRESSE.'?subject='.rawurlencode(trim($gruppe->kuerzel.': '.$gruppe->name, ': '))"
-                             variant="ghost" size="sm">
-                    Per E-Mail mitmachen
-                    <span class="sr-only">– {{ $gruppe->name }}</span>
-                </x-ui.button>
-            </div>
-        @endif
+        {{-- Jede Gruppe hat ihre eigene Seite, auch die in Planung: Taddis
+             Text steht dort schon. Selbsthilfegruppen seit KEV-73,
+             Arbeitsgruppen seit KEV-84; vorher klappte der AG-Text in der
+             Karte auf, und der Mail-Knopf stand hier. Beides steht jetzt
+             auf der AG-Seite. --}}
+        <div class="mt-4">
+            <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
+                {{ $gruppe->typ === 'arbeits' ? 'Mehr zur AG' : 'Mehr zur Gruppe' }}
+                <span class="sr-only">– {{ $gruppe->name }}</span>
+            </x-ui.button>
+        </div>
     </div>
 </article>

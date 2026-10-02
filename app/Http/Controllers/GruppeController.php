@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 
 /**
- * Die Seite einer Selbsthilfegruppe (KEV-73).
+ * Die Seite einer Selbsthilfegruppe (KEV-73) oder Arbeitsgruppe (KEV-84).
  *
  * Auf der Übersicht steht nur die Karte. Taddis Texte je Gruppe mit Wann,
  * Wo, Kosten und Kontakt sind dafür zu lang, und eine eigene Adresse lässt
@@ -22,5 +22,15 @@ class GruppeController extends Controller
             ->firstOrFail();
 
         return view('gruppen.show', ['gruppe' => $gruppe]);
+    }
+
+    public function arbeitsgruppe(string $slug)
+    {
+        $gruppe = Group::veroeffentlicht()
+            ->vomTyp('arbeits')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        return view('gruppen.arbeitsgruppe', ['gruppe' => $gruppe]);
     }
 }

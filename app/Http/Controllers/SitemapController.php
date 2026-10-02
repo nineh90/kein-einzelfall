@@ -128,13 +128,13 @@ class SitemapController extends Controller
             ->all();
     }
 
-    /** Die Seiten der Selbsthilfegruppen (KEV-73). */
+    /** Die Seiten der Selbsthilfegruppen (KEV-73) und Arbeitsgruppen (KEV-84). */
     private function gruppen(): array
     {
-        return Group::veroeffentlicht()->vomTyp('selbsthilfe')
+        return Group::veroeffentlicht()
             ->get()
             ->map(fn (Group $gruppe) => [
-                'url' => url(sprachlink('gruppen.show', ['slug' => $gruppe->slug], Language::standardCode())),
+                'url' => url($gruppe->url(Language::standardCode())),
                 'geaendert' => $gruppe->updated_at?->toAtomString(),
                 'alternativen' => [],
             ])

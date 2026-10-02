@@ -80,6 +80,15 @@ $oeffentlicheRouten = function () {
         ->name('gruppen.show');
 
     /*
+     * Eine Seite je Arbeitsgruppe (KEV-84), wie bei den Selbsthilfegruppen.
+     * Die Karte auf /arbeitsgruppen behält ihren Anker (#ag-01-ser), ältere
+     * Links dorthin funktionieren weiter.
+     */
+    Route::get('/arbeitsgruppen/{slug}', [GruppeController::class, 'arbeitsgruppe'])
+        ->where('slug', '[a-z0-9-]+')
+        ->name('arbeitsgruppen.show');
+
+    /*
      * Suche (KEV-23). Steht vor der Sammelroute, sonst griffe /{slug}.
      *
      * GET, damit die Anfrage in der Adresszeile steht und weitergegeben werden

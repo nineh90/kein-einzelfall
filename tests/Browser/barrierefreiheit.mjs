@@ -54,6 +54,7 @@ const SEITEN = [
     ['Gruppen', '/selbsthilfegruppen'],
     ['Seite einer Selbsthilfegruppe', '/selbsthilfegruppen/wir-sind-nicht-mehr-stumm'],
     ['Arbeitsgruppen', '/arbeitsgruppen'],
+    ['Seite einer Arbeitsgruppe', '/arbeitsgruppen/ag-02-ifg'],
     ['Blog-Übersicht', '/aktuelles'],
     ['Veranstaltungen', '/veranstaltungen'],
     ['Rechtstext', '/impressum'],
