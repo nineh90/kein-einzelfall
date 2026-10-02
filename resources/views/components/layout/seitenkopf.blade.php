@@ -78,8 +78,13 @@
 
         // Ausgerichtet wird auf die linke untere Ecke, dort sitzt laut
         // Bildvorgabe das Motiv. Bilder, deren Motiv bis oben reicht, stehen
-        // in Titelbilder::FOKUS_OBEN und werden oben links ausgerichtet.
-        $fokus = \App\Support\Titelbilder::fokusOben($bild) ? 'object-[0%_0%]' : 'object-[0%_100%]';
+        // in Titelbilder::FOKUS_OBEN und werden oben links ausgerichtet,
+        // solche mit dem Motiv auf halber Höhe in FOKUS_MITTE (KEV-83).
+        $fokus = match (true) {
+            \App\Support\Titelbilder::fokusOben($bild) => 'object-[0%_0%]',
+            \App\Support\Titelbilder::fokusMitte($bild) => 'object-[0%_50%]',
+            default => 'object-[0%_100%]',
+        };
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>

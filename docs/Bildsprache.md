@@ -69,7 +69,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
-| Arbeitsgruppen | Papier und Stifte, Vase, Leinen |
+| Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS_MITTE`) |
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |

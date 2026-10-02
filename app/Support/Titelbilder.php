@@ -91,6 +91,23 @@ class Titelbilder
     }
 
     /**
+     * Bilder mit dem Motiv in der Mitte der Höhe. Unten ausgerichtet schnitte
+     * ein breiter Bildschirm das Motiv oben an, oben ausgerichtet fehlte der
+     * Tisch darunter.
+     *
+     * Arbeitsgruppen: Tisch mit Mappe, Karten und Stiften, von Taddi
+     * geliefert (KEV-83). Unten steht nur eine unscharfe Stuhllehne.
+     */
+    public const FOKUS_MITTE = [
+        self::ORDNER.'/arbeitsgruppen.webp',
+    ];
+
+    public static function fokusMitte(?string $bild): bool
+    {
+        return in_array($bild, self::FOKUS_MITTE, true);
+    }
+
+    /**
      * Setzt den Platzhalter, nur wo noch gar kein Titelbild steht. Ohne
      * Unterzeile: Die gehört zum eigenen Bild und kommt mit ihm.
      */

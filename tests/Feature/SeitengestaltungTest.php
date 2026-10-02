@@ -111,6 +111,15 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('object-[0%_100%]', $this->get('/spenden')->getContent());
     }
 
+    /** KEV-83: Taddis Arbeitsgruppen-Bild hat das Motiv auf halber Höhe. */
+    public function test_bilder_mit_motiv_in_der_mitte_werden_mittig_ausgerichtet(): void
+    {
+        $html = $this->get('/arbeitsgruppen')->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/arbeitsgruppen.webp"', $html);
+        $this->assertStringContainsString('object-[0%_50%]', $html);
+    }
+
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void
     {
         Page::whereNotNull('titelbild')->pluck('titelbild')->each(
