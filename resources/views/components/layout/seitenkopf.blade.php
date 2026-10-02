@@ -81,6 +81,11 @@
         // Als style, nicht als Klasse: Tailwind kennt nur Werte, die
         // wörtlich in den Vorlagen stehen.
         $fokus = \App\Support\Titelbilder::fokus($bild);
+
+        // Auf dem Handy steht der Text sonst oben, auf der freien Wand. Bei
+        // Bildern mit dem Motiv oben läge er darüber (KEV-79: das Logo auf
+        // dem Ordner). Dort steht er unten, mit dem Schleier von unten.
+        $textUnten = \App\Support\Titelbilder::textUnten($bild);
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>
@@ -88,7 +93,13 @@
              darauf, etwa halbe Fensterhöhe (min-h, längere Titel dürfen
              wachsen). Vorher stand das Bild auf dem Handy als Band über dem
              Text. --}}
-        <div class="relative isolate flex min-h-[50svh] overflow-hidden">
+        {{-- Mit Text unten auf dem Handy etwas höher (60svh): Sonst rückte
+             der Titel bis an die Unterkante des Motivs. --}}
+        <div @class([
+            'relative isolate flex overflow-hidden',
+            'min-h-[50svh]' => ! $textUnten,
+            'min-h-[60svh] md:min-h-[50svh]' => $textUnten,
+        ])>
             <div class="absolute inset-0 -z-10">
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
                 <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
@@ -98,13 +109,21 @@
                 {{-- Schleier für die Lesbarkeit. Auf dem Handy steht der Text
                      oben, wo die Bilder laut Vorgabe freie Wand haben; das
                      Motiv links unten bleibt frei. Ab „md“ wie bisher von rechts. --}}
-                <div aria-hidden="true"
-                     class="absolute inset-0 bg-linear-to-b from-cream/95 from-35% via-cream/70 via-55% to-transparent to-80% md:hidden"></div>
+                {{-- Mit Text unten kürzer: Er braucht nur das untere Drittel,
+                     und das Motiv darüber soll nicht verblassen. --}}
+                <div aria-hidden="true" @class([
+                    'absolute inset-0 md:hidden',
+                    'bg-linear-to-b from-cream/95 from-35% via-cream/70 via-55% to-transparent to-80%' => ! $textUnten,
+                    'bg-linear-to-t from-cream/95 from-20% via-cream/70 via-30% to-transparent to-45%' => $textUnten,
+                ])></div>
                 <div aria-hidden="true"
                      class="absolute inset-0 hidden bg-linear-to-r from-transparent from-25% via-cream/70 via-50% to-cream/90 md:block"></div>
             </div>
 
-            <div class="flex w-full px-4 pb-10 pt-6 md:items-center md:px-8 md:py-12 lg:px-10 lg:py-16">
+            <div @class([
+                'flex w-full px-4 pb-10 pt-6 md:items-center md:px-8 md:py-12 lg:px-10 lg:py-16',
+                'items-end' => $textUnten,
+            ])>
                 <div class="mx-auto w-full max-w-6xl">
                     <div class="md:ml-auto md:w-1/2 lg:w-[45%]">
                         <x-ui.eyebrow class="mb-3">{{ $zeile }}</x-ui.eyebrow>

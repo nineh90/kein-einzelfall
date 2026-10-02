@@ -70,6 +70,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
 | Selbsthilfegruppe „Wir sind nicht mehr stumm“ | rissige Wand im Streiflicht, Risse links, rechts glatt; von Taddi geliefert (KEV-82). Gruppen tragen ihr Bild im Feld „Titelbild“ der Gruppe, Datei `gruppe-<slug>.webp` |
+| Istanbul-Konvention, Kinderkodex | ein Bild für beide: Ordner mit Registern, darauf das Vereinslogo; von Taddi geliefert (KEV-79, statt Platzhalter). Datei `ordner-mit-logo.webp`, ausgerichtet auf 42 %, auf dem Handy Text unten (`Titelbilder::TEXT_UNTEN`) |
 | Gremium UKFB (Entwurf) | runder Holztisch mit sechs Polsterstühlen; von Taddi geliefert (KEV-81), ausgerichtet auf 70 % |
 | Beschwerdemanagement | Briefschlitz mit Umschlag an heller Putzwand; von Taddi geliefert (KEV-80), ausgerichtet auf 35 % |
 | Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %) |
@@ -144,4 +145,13 @@ unten ab. Ohne Eintrag richtet er unten aus, wie die Bildvorgabe es vorsieht.
 Taddis eigene Bilder halten sich nicht immer daran. Für sie steht in
 `Titelbilder::FOKUS`, auf welcher Höhe (in Prozent von oben) das Motiv sitzt.
 Prüfen bei 1440 und 1920 px: Dort fällt am meisten weg.
+
+**Motiv oben, Handy (KEV-79):** Auf dem Handy steht der Text oben auf dem
+Bild, wo laut Vorgabe freie Wand ist. Sitzt das Motiv in der oberen Hälfte
+(das Logo auf dem Ordner), läge der Text darauf. Solche Bilder stehen in
+`Titelbilder::TEXT_UNTEN`: Auf dem Handy steht der Text dann unten, mit einem
+kürzeren Schleier von unten, und der Kopf ist 60 statt 50 % der Fensterhöhe
+hoch. Geprüft von 320 × 568 bis 767 × 900; ab „md“ steht der Text wie immer
+rechts. Teilen sich Seiten ein Bild, steht der Dateiname in
+`Titelbilder::DATEI`.
 

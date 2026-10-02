@@ -59,7 +59,26 @@ class Titelbilder
         // KEV-81, Bild von Taddi. Entwurf; Unterzeile erst, wenn klar ist,
         // wofür das Gremium steht.
         'gremium-ukfb' => null,
+        // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
+        // Unterzeile, der Verein hat keine geschickt.
+        'istanbul-konvention' => null,
+        'kinderkodex' => null,
     ];
+
+    /**
+     * Seiten, deren Bild nicht <slug>.webp heißt, weil sie es sich teilen.
+     *
+     * @var array<string, string>
+     */
+    public const DATEI = [
+        'istanbul-konvention' => 'ordner-mit-logo.webp',
+        'kinderkodex' => 'ordner-mit-logo.webp',
+    ];
+
+    public static function datei(string $slug): string
+    {
+        return self::ORDNER.'/'.(self::DATEI[$slug] ?? "{$slug}.webp");
+    }
 
     /**
      * Setzt die Bilder. Die Übersetzungen einer Seite bekommen dasselbe —
@@ -72,7 +91,7 @@ class Titelbilder
     public const PLATZHALTER_SEITEN = [
         'barrierefreiheit', 'buerokratie-labyrinth', 'das-hilfesystem', 'datenschutz',
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
-        'impressum', 'istanbul-konvention', 'kinderkodex', 'opferentschaedigungsgesetz',
+        'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad', 'satzung',
     ];
 
@@ -94,6 +113,9 @@ class Titelbilder
      *  - Beschwerdemanagement: Briefschlitz mit Umschlag, etwas über der
      *    Mitte (KEV-80). Bei 50 % fehlte auf breiten Bildschirmen der obere
      *    Rand des Schlitzes.
+     *  - Ordner mit Logo (Istanbul-Konvention, Kinderkodex, KEV-79): Das
+     *    Logo sitzt bei 28 bis 62 %. Unten ausgerichtet war es ab 1440 px
+     *    weg.
      *  - Gremium UKFB: runder Tisch mit Stühlen im unteren Drittel (KEV-81).
      *    Ganz unten ausgerichtet fiele auf breiten Bildschirmen die
      *    Tischplatte weg, übrig blieben Stuhlbeine.
@@ -105,7 +127,25 @@ class Titelbilder
         self::ORDNER.'/arbeitsgruppen.webp' => 50,
         self::ORDNER.'/beschwerdemanagement.webp' => 35,
         self::ORDNER.'/gremium-ukfb.webp' => 70,
+        self::ORDNER.'/ordner-mit-logo.webp' => 42,
     ];
+
+    /**
+     * Bilder mit dem Motiv in der oberen Hälfte. Auf dem Handy steht der
+     * Text sonst oben auf dem Bild und läge über dem Motiv; bei diesen
+     * steht er unten (KEV-79).
+     *
+     * Ordner mit Logo (Istanbul-Konvention, Kinderkodex): Das Logo sitzt
+     * zwischen 28 und 62 % der Höhe, darunter nur Ordnerkante und Tisch.
+     */
+    public const TEXT_UNTEN = [
+        self::ORDNER.'/ordner-mit-logo.webp',
+    ];
+
+    public static function textUnten(?string $bild): bool
+    {
+        return in_array($bild, self::TEXT_UNTEN, true);
+    }
 
     /** Für object-position: links, in der Höhe nach FOKUS. */
     public static function fokus(?string $bild): string
@@ -159,7 +199,7 @@ class Titelbilder
 
             Page::where('uebersetzungs_gruppe', $gruppe)
                 ->whereNull('titelbild')
-                ->update(['titelbild' => self::ORDNER."/{$slug}.webp"]);
+                ->update(['titelbild' => self::datei($slug)]);
 
             // Die Spalte kam später (Migration vom 24.09.2026, 14 Uhr). Läuft
             // die ältere Titelbild-Migration auf frischer Datenbank, gibt es

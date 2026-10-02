@@ -135,6 +135,26 @@ class SeitengestaltungTest extends TestCase
             ->assertSee('object-position: 0% 35%', false);
     }
 
+    /**
+     * KEV-79: Ein Bild für beide Seiten, das Logo sitzt oben. Ausgerichtet auf
+     * seine Höhe, auf dem Handy steht der Text darunter statt darauf.
+     */
+    public function test_istanbul_konvention_und_kinderkodex_mit_logo_bild(): void
+    {
+        foreach (['/istanbul-konvention', '/kinderkodex'] as $pfad) {
+            $html = $this->get($pfad)->assertOk()->getContent();
+
+            $this->assertStringContainsString('src="/img/titelbilder/ordner-mit-logo.webp"', $html, $pfad);
+            $this->assertStringNotContainsString('platzhalter.webp', $html, $pfad);
+            $this->assertStringContainsString('object-position: 0% 42%', $html, $pfad);
+            $this->assertStringContainsString('min-h-[60svh] md:min-h-[50svh]', $html, $pfad);
+            $this->assertStringContainsString('bg-linear-to-t', $html, $pfad);
+        }
+
+        // Andere Seiten behalten den Text oben
+        $this->assertStringNotContainsString('min-h-[60svh]', $this->get('/spenden')->getContent());
+    }
+
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void
     {
         Page::whereNotNull('titelbild')->pluck('titelbild')->each(
