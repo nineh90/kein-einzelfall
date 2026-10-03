@@ -49,6 +49,24 @@ class TriggerWarnungTest extends TestCase
         $this->assertStringContainsString('Auf dieser Website geht es um Straftaten', $html);
     }
 
+    /** Kevin, 03.10.2026: „Triggerwarnung“ grün zwischen Vorzeile und Titel. */
+    public function test_ueberschrift_triggerwarnung_steht_zwischen_vorzeile_und_titel(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $vorzeile = strpos($html, 'Bevor du weiterliest');
+        $ueberschrift = strpos($html, 'id="trigger-warnung-ueberschrift"');
+        $titel = strpos($html, 'Hinweis zu den Inhalten dieser Website');
+
+        $this->assertNotFalse($ueberschrift);
+        $this->assertTrue($vorzeile < $ueberschrift && $ueberschrift < $titel);
+        $this->assertMatchesRegularExpression(
+            '/id="trigger-warnung-ueberschrift"\s+class="[^"]*\btext-green\b[^"]*">\s*Triggerwarnung\s*</',
+            $html,
+        );
+        $this->assertStringContainsString('aria-labelledby="trigger-warnung-ueberschrift trigger-warnung-titel"', $html);
+    }
+
     public function test_warnung_steht_auf_jeder_seite(): void
     {
         $this->seed(AltseiteSeeder::class);

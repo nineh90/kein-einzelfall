@@ -46,6 +46,7 @@ return [
      */
     'trigger' => [
         'eyebrow' => 'Bevor du weiterliest',
+        'ueberschrift' => 'Triggerwarnung',
         'weiter' => 'Verstanden – weiterlesen',
         'nie_mehr' => 'Diesen Hinweis nicht mehr anzeigen',
         'verlassen' => 'Seite sofort verlassen',

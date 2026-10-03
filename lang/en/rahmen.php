@@ -33,6 +33,7 @@ return [
 
     'trigger' => [
         'eyebrow' => 'Before you read on',
+        'ueberschrift' => 'Trigger warning',
         'weiter' => 'Understood – continue',
         'nie_mehr' => 'Do not show this notice again',
         'verlassen' => 'Leave this site now',

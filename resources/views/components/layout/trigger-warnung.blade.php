@@ -30,7 +30,7 @@
 --}}
 <dialog id="trigger-warnung"
         open
-        aria-labelledby="trigger-warnung-titel"
+        aria-labelledby="trigger-warnung-ueberschrift trigger-warnung-titel"
         @if ($ersatzsprache) lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}" @endif>
 
     {{-- Alles mittig (KEV-41, Kevin): Links ausgerichtet blieb rechts neben
@@ -51,8 +51,17 @@
 
              Verloren geht dabei nichts: Ein modaler Dialog wird beim Öffnen mit
              seinem Namen angekündigt, und den liefert aria-labelledby. --}}
+        {{-- „Triggerwarnung“ als Überschrift im Vereinsgrün, wie die
+             Seitentitel (Kevin, 03.10.2026). Aus demselben Grund ein <p>. Der
+             Titel der Seite darunter wird zur Unterzeile, kleiner, damit nicht
+             zwei gleich große Zeilen untereinander stehen. --}}
+        <p id="trigger-warnung-ueberschrift"
+           class="mb-2 font-display text-3xl font-medium leading-tight text-green lg:text-4xl">
+            {{ __('rahmen.trigger.ueberschrift') }}
+        </p>
+
         <p id="trigger-warnung-titel"
-           class="mb-4 font-display text-2xl font-medium text-ink lg:text-3xl">
+           class="mb-4 font-display text-xl font-medium text-ink lg:text-2xl">
             {{ $seite->titel }}
         </p>
 
