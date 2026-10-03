@@ -277,7 +277,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 - [ ] **Die vier neuen Seiten füllen:** Schutzkonzept, Beschwerdemanagement,
   Projekte, Publikationen. Dazu seit KEV-81 **Gremium UKFB** (Titelbild von
   Taddi ist drin). Dort zusätzlich offen: Wofür steht UKFB ausgeschrieben, und
-  unter welchem Menüpunkt soll die Seite stehen? Sie liegen im Panel als Entwurf bereit, mit Adresse und
+  unter welchem Menüpunkt soll die Seite stehen? Seit KEV-78 außerdem
+  **Landesstellen** (Titelbild von Taddi ist drin, der Text kommt mit einem
+  eigenen Ticket; Menüplatz noch offen). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben. **Beim Beschwerdemanagement zusätzlich zu klären:** eigener Kontaktweg,
   getrennt vom normalen Anfragen-Postfach? Beschwerden über den Verein sollten

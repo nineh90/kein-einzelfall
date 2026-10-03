@@ -59,6 +59,8 @@ class Titelbilder
         // KEV-81, Bild von Taddi. Entwurf; Unterzeile erst, wenn klar ist,
         // wofür das Gremium steht.
         'gremium-ukfb' => null,
+        // KEV-78, Bild von Taddi. Entwurf; Unterzeile kommt mit dem Text.
+        'landesstellen' => null,
         // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
         // Unterzeile, der Verein hat keine geschickt.
         'istanbul-konvention' => null,
@@ -119,6 +121,9 @@ class Titelbilder
      *  - Gremium UKFB: runder Tisch mit Stühlen im unteren Drittel (KEV-81).
      *    Ganz unten ausgerichtet fiele auf breiten Bildschirmen die
      *    Tischplatte weg, übrig blieben Stuhlbeine.
+     *  - Landesstellen: Deutschlandkarte mit Holzkugeln, fast so hoch wie
+     *    das Bild (KEV-78). Unten ausgerichtet blieb auf breiten
+     *    Bildschirmen nur Süddeutschland übrig.
      *
      * @var array<string, int>
      */
@@ -127,6 +132,7 @@ class Titelbilder
         self::ORDNER.'/arbeitsgruppen.webp' => 50,
         self::ORDNER.'/beschwerdemanagement.webp' => 35,
         self::ORDNER.'/gremium-ukfb.webp' => 70,
+        self::ORDNER.'/landesstellen.webp' => 50,
         self::ORDNER.'/ordner-mit-logo.webp' => 42,
     ];
 

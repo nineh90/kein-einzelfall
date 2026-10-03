@@ -92,6 +92,13 @@ class NeueBereicheSeeder extends Seeder
                 'titel' => 'Gremium UKFB',
                 'abschnitte' => [null],
             ],
+            // KEV-78: Seite für die Landesstellen. Text und Menüplatz liefert
+            // der Verein in einem eigenen Ticket.
+            [
+                'slug' => 'landesstellen',
+                'titel' => 'Landesstellen',
+                'abschnitte' => [null],
+            ],
             [
                 'slug' => 'publikationen',
                 'titel' => 'Publikationen',
