@@ -17,6 +17,8 @@ return [
     'menue' => 'Menü',
     'hauptnavigation' => 'Hauptnavigation',
     'hauptnavigation_mobil' => 'Hauptnavigation (mobil)',
+    // Erster Unterpunkt im Mobilmenü: die Seite des Bereichs selbst.
+    'uebersicht' => 'Übersicht',
     'schnellzugriff' => 'Schnellzugriff',
     // Beschriftung des Barrierefreiheits-Knopfs in der unteren Leiste (KEV-26).
     'darstellung_leiste' => 'Darstellung',

@@ -46,6 +46,27 @@ class BarrierefreiheitTest extends TestCase
         $r->assertSee('Erwerbsminderungsrente');
     }
 
+    /**
+     * Mobilmenü als Akkordeon (03.10.2026): je Bereich ein natives <details>
+     * mit gemeinsamem `name`, offen nur der Bereich, in dem man ist. Die Seite
+     * des Bereichs steht als „Übersicht“ in seiner Liste.
+     */
+    public function test_mobilmenue_klappt_nur_den_aktuellen_bereich_auf(): void
+    {
+        $mobil = fn (string $html) => substr($html, strpos($html, 'aria-label="Hauptnavigation (mobil)"'));
+
+        $start = $mobil($this->get('/')->getContent());
+        $this->assertSame(4, substr_count($start, '<details name="mobilmenue"'));
+        $this->assertDoesNotMatchRegularExpression('#name="mobilmenue"[^>]*\bopen\b#', $start);
+        $this->assertStringContainsString('<a href="/wissen"', $start);
+        $this->assertStringContainsString('Übersicht', $start);
+
+        $hier = $mobil($this->get('/veranstaltungen')->getContent());
+        $this->assertSame(1, preg_match_all('#name="mobilmenue"[^>]*\bopen\b#', $hier));
+        $this->assertMatchesRegularExpression('#name="mobilmenue"[^>]*\bopen\s*>\s*<summary[^>]*>\s*Gruppen &amp; Veranstaltungen#', $hier);
+        $this->assertMatchesRegularExpression('#<a href="/veranstaltungen"\s+aria-current="page"#', $hier);
+    }
+
     public function test_notausgang_ist_ein_echter_link_und_funktioniert_ohne_javascript(): void
     {
         $r = $this->get('/');

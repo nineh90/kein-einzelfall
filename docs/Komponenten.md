@@ -538,6 +538,11 @@ der CSP der falsche Handel; und für zwei Bedienelemente lohnt kein Framework:
 
 - Das **Mobil-Menü** ist jetzt ein natives `<details>`, wie alle anderen
   Aufklapper im Projekt. Es braucht überhaupt kein JavaScript mehr.
+  Seit dem 03.10.2026 ist jeder Bereich darin selbst ein `<details>` mit
+  gemeinsamem `name="mobilmenue"`: ein Akkordeon, offen nur der Bereich, in
+  dem man ist; der Browser schliesst beim Öffnen den vorigen. Die Seite des
+  Bereichs steht als „Übersicht“ oben in seiner Liste, weil die Zeile selbst
+  jetzt aufklappt statt zu verlinken.
 - Das **Einstellungs-Panel** wird serverseitig aus `config/darstellung.php`
   gerendert; ~60 Zeilen eigenes JavaScript verdrahten es über `data`-Attribute.
   Nebeneffekt: Die Beschriftungen stehen jetzt im ausgelieferten HTML. Vorher

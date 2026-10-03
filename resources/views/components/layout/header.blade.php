@@ -165,27 +165,61 @@
                 <nav aria-label="{{ __('rahmen.hauptnavigation_mobil') }}"
                      class="absolute inset-x-0 top-full max-h-[70vh] overflow-y-auto border-t border-line
                             bg-card px-4 py-3">
+                    {{-- Bereiche als Akkordeon (03.10.2026, Wunsch des Vereins):
+                         Alle Unterpunkte offen waren über 25 Zeilen, das Menü
+                         wirkte riesig. Jetzt ist nur der Bereich offen, in dem
+                         man gerade ist. Wieder natives <details>, ohne
+                         JavaScript; `name` macht daraus ein echtes Akkordeon,
+                         der Browser schliesst beim Öffnen den vorigen Bereich.
+                         Ältere Browser ohne `name` lassen mehrere offen, mehr
+                         passiert nicht.
+
+                         Die Zeile des Bereichs klappt auf, sie führt nicht
+                         mehr auf seine Seite. Deshalb steht die (/verein,
+                         /wissen, …) als „Übersicht“ oben in der Liste, wenn sie
+                         nicht ohnehin dort steht (Kontakt). --}}
                     <ul class="flex flex-col gap-1">
                         @foreach ($nav as $item)
                             <li>
-                                <a href="{{ $item['url'] }}"
-                                   @if ($istAktiv($item)) aria-current="page" @endif
-                                   class="block rounded-lg px-3 py-2.5 font-medium no-underline text-ink
-                                          aria-[current=page]:bg-green-mist aria-[current=page]:text-green">
-                                    {{ $item['label'] }}
-                                </a>
-                                @isset($item['children'])
-                                    <ul class="mb-2 ml-3 border-l border-line pl-3">
-                                        @foreach ($item['children'] as $child)
-                                            <li>
-                                                <a href="{{ $child['url'] }}"
-                                                   class="block py-2 text-sm no-underline text-ink-soft">
-                                                    {{ $child['label'] }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endisset
+                                @if (empty($item['children']))
+                                    <a href="{{ $item['url'] }}"
+                                       @if ($istAktiv($item)) aria-current="page" @endif
+                                       class="block rounded-lg px-3 py-2.5 font-medium no-underline text-ink
+                                              aria-[current=page]:bg-green-mist aria-[current=page]:text-green">
+                                        {{ $item['label'] }}
+                                    </a>
+                                @else
+                                    @php
+                                        $aktiv = $istAktiv($item);
+                                        $kinder = in_array($item['url'], array_column($item['children'], 'url'), true)
+                                            ? $item['children']
+                                            : [['label' => __('rahmen.uebersicht'), 'url' => $item['url']], ...$item['children']];
+                                    @endphp
+                                    <details name="mobilmenue" class="group/bereich" @if ($aktiv) open @endif>
+                                        <summary @class([
+                                            'flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-3 py-2.5 font-medium [&::-webkit-details-marker]:hidden',
+                                            'text-ink' => ! $aktiv,
+                                            'bg-green-mist text-green' => $aktiv,
+                                        ])>
+                                            {{ $item['label'] }}
+                                            <x-ui.icon name="chevron-down" :size="18"
+                                                       class="shrink-0 transition-transform group-open/bereich:rotate-180" />
+                                        </summary>
+                                        <ul class="mb-2 ml-3 mt-1 border-l border-line pl-3">
+                                            @foreach ($kinder as $child)
+                                                @php $hier = request()->is(ltrim($child['url'], '/')); @endphp
+                                                <li>
+                                                    <a href="{{ $child['url'] }}"
+                                                       @if ($hier) aria-current="page" @endif
+                                                       class="block py-2 text-sm no-underline text-ink-soft
+                                                              aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                                        {{ $child['label'] }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </details>
+                                @endif
                             </li>
                         @endforeach
                     </ul>

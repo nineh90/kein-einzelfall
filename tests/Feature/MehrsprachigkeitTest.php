@@ -180,7 +180,13 @@ class MehrsprachigkeitTest extends TestCase
         // Ausgenommen ist das aufklappbare Mobilmenü: Wer dort gezielt seine
         // Sprache sucht, erkennt nur die Eigenbezeichnung. Zugeklappt lädt der
         // Browser die Schrift nicht.
-        $ohneMenue = preg_replace('/<details.*?<\/details>/s', '', $html);
+        // Von innen nach aussen: Seit dem Akkordeon (03.10.2026) stecken im
+        // Mobilmenü weitere <details>, ein einfaches .*? endete am ersten
+        // inneren </details> und liess den Rest des Menüs stehen.
+        $ohneMenue = $html;
+        do {
+            $ohneMenue = preg_replace('/<details\b(?:(?!<details\b).)*?<\/details>/s', '', $ohneMenue, -1, $treffer);
+        } while ($treffer > 0);
 
         $this->assertSame(
             0,
