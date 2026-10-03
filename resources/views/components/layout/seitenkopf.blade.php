@@ -86,6 +86,9 @@
         // Bildern mit dem Motiv oben läge er darüber (KEV-79: das Logo auf
         // dem Ordner). Dort steht er unten, mit dem Schleier von unten.
         $textUnten = \App\Support\Titelbilder::textUnten($bild);
+
+        // Das echte Vereinslogo als eigenes Element über dem Bild (KEV-75).
+        $logo = \App\Support\Titelbilder::logoDarauf($bild);
     @endphp
 
     <header data-anschliessend @class(['bg-card' => $auf === 'card'])>
@@ -95,10 +98,15 @@
              Text. --}}
         {{-- Mit Text unten auf dem Handy etwas höher (60svh): Sonst rückte
              der Titel bis an die Unterkante des Motivs. --}}
+        {{-- Mit aufgelegtem Logo auf dem Handy so hoch wie der Inhalt: Logo
+             und Text stehen untereinander im Fluss, eine Mindesthöhe nach
+             Fensterhöhe machte nur die Lücke dazwischen größer (Kevin,
+             03.10.2026). --}}
         <div @class([
             'relative isolate flex overflow-hidden',
             'min-h-[50svh]' => ! $textUnten,
-            'min-h-[60svh] md:min-h-[50svh]' => $textUnten,
+            'min-h-[60svh] md:min-h-[50svh]' => $textUnten && ! $logo,
+            'md:min-h-[50svh]' => $logo,
         ])>
             <div class="absolute inset-0 -z-10">
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
@@ -122,9 +130,25 @@
 
             <div @class([
                 'flex w-full px-4 pb-10 pt-6 md:items-center md:px-8 md:py-12 lg:px-10 lg:py-16',
-                'items-end' => $textUnten,
+                'items-end' => $textUnten && ! $logo,
             ])>
-                <div class="mx-auto w-full max-w-6xl">
+                {{-- Mit Logo: auf dem Handy Logo oben, darunter mit festem
+                     Abstand der Text, ab „md“ nebeneinander, Logo mittig in
+                     der linken Hälfte. --}}
+                <div @class([
+                    'mx-auto w-full max-w-6xl',
+                    'flex flex-col gap-8 md:flex-row md:items-center' => $logo,
+                ])>
+                    @if ($logo)
+                        {{-- Schmuck: Der Vereinsname steht in der grünen Zeile
+                             und im Titel, deshalb alt="". --}}
+                        <div class="flex md:w-1/2 md:justify-center">
+                            <img src="/img/logo-gross.webp" alt="" width="479" height="432" fetchpriority="high"
+                                 data-kopf-logo
+                                 class="h-auto w-44 md:w-52 lg:w-64 xl:w-72">
+                        </div>
+                    @endif
+
                     <div class="md:ml-auto md:w-1/2 lg:w-[45%]">
                         <x-ui.eyebrow class="mb-3">{{ $zeile }}</x-ui.eyebrow>
 

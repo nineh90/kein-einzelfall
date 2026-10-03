@@ -146,10 +146,31 @@ class Titelbilder
      *
      * Ordner mit Logo (Istanbul-Konvention, Kinderkodex): Das Logo sitzt
      * zwischen 28 und 62 % der Höhe, darunter nur Ordnerkante und Tisch.
+     *
+     * Verein: Oben steht das aufgelegte Logo (LOGO_DARAUF), der Text darunter.
      */
     public const TEXT_UNTEN = [
         self::ORDNER.'/ordner-mit-logo.webp',
+        self::ORDNER.'/verein.webp',
     ];
+
+    /**
+     * Bilder, auf die der Seitenkopf das echte Vereinslogo legt (KEV-75).
+     *
+     * Taddis Bild für /verein hatte das Logo eingebaut. Je nach Breite schnitt
+     * der Kopf es ab oder der Text lag darauf. Jetzt ist das Bild nur noch der
+     * Hintergrund (Logo herausgerechnet), und das Logo steht als eigenes
+     * Element darüber: ab „md“ links neben dem Text, auf dem Handy über ihm.
+     * Beide stehen im Seitenfluss und können sich so nicht überlagern.
+     */
+    public const LOGO_DARAUF = [
+        self::ORDNER.'/verein.webp',
+    ];
+
+    public static function logoDarauf(?string $bild): bool
+    {
+        return in_array($bild, self::LOGO_DARAUF, true);
+    }
 
     public static function textUnten(?string $bild): bool
     {

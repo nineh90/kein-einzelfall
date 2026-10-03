@@ -62,7 +62,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 
 | Seite | Motiv |
 |---|---|
-| Verein | Vereinslogo auf der Wand über leerem Tisch (siehe unten) |
+| Verein | warmes, unscharfes Licht von Taddi (KEV-75), das echte Logo liegt als eigenes Element darauf (`Titelbilder::LOGO_DARAUF`, siehe unten) |
 | Über uns – Vorstand und Team | Vereinslogo auf leerer Wand mit Fensterlicht, wie Verein (KEV-62, statt zwei Keramikschalen) |
 | Startseite (Aufmacher) | leere Wand mit goldenen Lichtstrahlen und Blätterschatten, ohne Motiv; davor das Logo. Nach KEV-29 kurz ohne Blätter, auf Wunsch des Vereins wieder mit (28.09.2026) |
 | Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, oben ausgerichtet (siehe unten) |
@@ -94,7 +94,26 @@ Text, und zwanzig fast gleiche Schreibtischbilder machten die Reihe beliebig.
 Die Bilder sind KI-erzeugt und zeigen nichts Echtes aus dem Verein. Der
 Verein sollte sie einmal ansehen und freigeben.
 
-## Ausnahme: Verein mit Logo (KEV-57)
+## Ausnahme: Verein mit Logo (KEV-57, KEV-75)
+
+**Seit KEV-75 (03.10.2026)** ist das Logo nicht mehr Teil des Bildes.
+Taddi hatte ein Bild mit großem Logo vor warmem Licht geliefert. Eingebaut
+schnitt der Kopf je nach Breite die Striche ab oder der Text lag auf dem
+Logo. Deshalb:
+
+1. Das Logo aus Taddis Bild herausgerechnet (Python, Maske aus dunklen und
+   grünen Pixeln, großzügig erweitert, Fläche aus der Umgebung aufgefüllt).
+   Der Hintergrund ist so weich, dass davon nichts zu sehen ist.
+2. Das echte Logo (`/img/logo-gross.webp`, freigestellt, wie auf der
+   Startseite) legt der Seitenkopf als eigenes `<img>` darauf, für jedes Bild
+   in `Titelbilder::LOGO_DARAUF`. Ab „md“ steht es mittig in der linken
+   Hälfte neben dem Text, auf dem Handy oben, der Text unten
+   (`Titelbilder::TEXT_UNTEN`). Beide stehen im Seitenfluss und können sich
+   nicht überlagern. Auf dem Handy hat das Logo eine feste Größe und der Kopf
+   keine Mindesthöhe: Sonst wuchs mit der Fensterhöhe nur die Lücke zwischen
+   Logo und Text. Geprüft von 320 bis 2560 px.
+
+Was folgt, ist die Geschichte des Vorgängerbilds.
 
 Taddi, 27.09.2026: Auf der Vereinsseite keine Kaffeetassen und nichts, was
 nach Wellness aussieht, sondern das Logo des Vereins. Das widerspricht

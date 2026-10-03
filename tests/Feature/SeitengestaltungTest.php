@@ -155,6 +155,26 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('min-h-[60svh]', $this->get('/spenden')->getContent());
     }
 
+    /**
+     * KEV-75: Das Bild ist nur noch Hintergrund, das echte Logo liegt als
+     * eigenes Element darauf. Auf dem Handy über dem Text, nicht darunter.
+     */
+    public function test_verein_traegt_das_echte_logo_auf_dem_titelbild(): void
+    {
+        $html = $this->get('/verein')->assertOk()->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/verein.webp"', $html);
+        $this->assertMatchesRegularExpression('#<img src="/img/logo-gross\.webp" alt=""[^>]*data-kopf-logo#', $html);
+
+        // Auf dem Handy so hoch wie der Inhalt, eine Mindesthöhe machte nur
+        // die Lücke zwischen Logo und Text größer. Erst ab md halbe Höhe.
+        $this->assertStringContainsString('relative isolate flex overflow-hidden md:min-h-[50svh]', $html);
+        $this->assertStringNotContainsString('min-h-[60svh]', $html);
+
+        // Nur dort: Andere Seiten haben ihr Motiv im Bild.
+        $this->assertStringNotContainsString('data-kopf-logo', $this->get('/spenden')->getContent());
+    }
+
     /** KEV-77: Taddis Bild statt Platzhalter, Motiv unten wie üblich. */
     public function test_satzung_hat_eigenes_titelbild(): void
     {
