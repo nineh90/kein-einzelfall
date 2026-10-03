@@ -18,6 +18,9 @@
     // Kurzer Strich über der Überschrift. Nebeneinander aus: Dort sind es
     // zwei Teaser, kein Artikel mit Abschnittsanfängen (KEV-32).
     'strich' => true,
+    // Zentriert (KEV-68): für kurze Abschnitte über etwas, das selbst mittig
+    // steht. Lange Texte bleiben linksbündig, die liest man leichter.
+    'mittig' => false,
 ])
 
 @php
@@ -36,7 +39,7 @@
     }
 @endphp
 
-<div {{ $attributes->class(['flex flex-col' => $fuellen]) }}>
+<div {{ $attributes->class(['flex flex-col' => $fuellen, 'mx-auto text-center' => $mittig]) }}>
     @if ($eyebrow)
         <x-ui.eyebrow class="mb-3">{{ $eyebrow }}</x-ui.eyebrow>
     @endif
@@ -48,7 +51,7 @@
              klebenden Kopfbereich sichtbar. --}}
         <div @if ($anker) id="{{ $anker }}" @endif class="scroll-mt-24">
             @if ($strich)
-                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+                <span aria-hidden="true" @class(['mb-4 block h-0.5 w-10 rounded-full bg-green-brand', 'mx-auto' => $mittig])></span>
             @endif
             <h2 class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
                 {{ $titel }}

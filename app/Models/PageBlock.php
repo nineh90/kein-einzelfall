@@ -222,6 +222,7 @@ class PageBlock extends Model
             'absaetze' => $data['absaetze'] ?? [],
             'hand' => $data['hand'] ?? null,
             'cta' => knoepfe([$data['cta'] ?? null])[0] ?? null,
+            'mittig' => (bool) ($data['mittig'] ?? false),
         ];
     }
 

@@ -308,6 +308,17 @@ class PageForm
                                     Textarea::make('absatz')->label('')->rows(4)->required()
                                 ),
 
+                            // KEV-68: über einer mittig stehenden Karte („Herr und
+                            // Frau Unbekannt“) sah linksbündiger Text verrutscht aus.
+                            Toggle::make('data.mittig')
+                                ->label('Mittig setzen')
+                                ->visible(fn ($get) => $get('typ') === 'text')
+                                // Nur gespeichert, wenn an: Sonst schriebe jedes
+                                // Speichern `mittig: false` in alle Textbausteine.
+                                ->dehydrated(fn ($state) => (bool) $state)
+                                ->helperText('Überschrift und Absätze stehen zentriert. Für kurze '
+                                    .'Abschnitte; lange Texte liest man linksbündig leichter.'),
+
                             // --- Text mit Bild ---
                             TextInput::make('data.bild')
                                 ->label('Bild (Pfad oder Adresse)')

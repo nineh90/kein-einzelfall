@@ -230,6 +230,13 @@ class TeamUndGruppenSeeder extends Seeder
     public const BEREICH_HINTERGRUND = 'Im Hintergrund';
 
     /**
+     * Überschrift über „Zusätzlich arbeiten im Hintergrund …“. Bis KEV-68 der
+     * Bereichsname „Im Hintergrund“ (KEV-85), jetzt wie Taddi es will der
+     * Name der Karte darunter. Der Abschnitt steht mittig über ihr.
+     */
+    public const HINTERGRUND_UEBERSCHRIFT = 'Herr und Frau Unbekannt';
+
+    /**
      * Vorstand ist, wer ein Vorstandsamt trägt. Alle anderen — Landesstellen,
      * Beauftragte, Ehrenamtliche — sind „Team": Die Altseite trennt genau so,
      * mit der Überleitung „Darüber hinaus gibt es viele Menschen …".
@@ -308,17 +315,20 @@ class TeamUndGruppenSeeder extends Seeder
                 // ersten dunkler und grösser als Einstieg.
                 //
                 // Die Überleitung vor dem Team bekommt die Überschrift „Team“
-                // (KEV-66), die vor den Menschen im Hintergrund „Im
-                // Hintergrund“ (KEV-85), damit kein Abschnitt namenlos
-                // zwischen den Karten steht. Erkannt am Anfang des Textes.
+                // (KEV-66), die vor den Menschen im Hintergrund „Herr und
+                // Frau Unbekannt“ (KEV-85, seit KEV-68 mittig), damit kein
+                // Abschnitt namenlos zwischen den Karten steht. Erkannt am
+                // Anfang des Textes.
                 if (isset($zwischentexte[$person['name']])) {
                     $absatz = implode(' ', $zwischentexte[$person['name']]);
+                    $hintergrund = str_starts_with($absatz, 'Zusätzlich arbeiten im Hintergrund');
                     $titel = match (true) {
                         str_starts_with($absatz, 'Darüber hinaus gibt es viele Menschen') => 'Team',
-                        str_starts_with($absatz, 'Zusätzlich arbeiten im Hintergrund') => self::BEREICH_HINTERGRUND,
+                        $hintergrund => self::HINTERGRUND_UEBERSCHRIFT,
                         default => null,
                     };
-                    $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]];
+                    $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]]
+                        + ($hintergrund ? ['mittig' => true] : []);
                     $neu[] = ['typ' => 'text', 'data' => $data];
                 }
             }

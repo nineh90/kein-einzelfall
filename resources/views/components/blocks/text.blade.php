@@ -7,6 +7,7 @@
     'absaetze' => [],      // wenn gesetzt, wird ab einer Länge eingeklappt
     'ab_absatz' => 4,      // ab dem wievielten Absatz eingeklappt wird
     'hand' => null,        // handschriftlicher Nachsatz, z. B. ein Leitsatz
+    'mittig' => false,     // zentriert, siehe text-inhalt
 ])
 
 {{-- Basis-Textblock. Prosa mit begrenzter Zeilenlänge (max-w-prose ≈ 65 Zeichen) —
@@ -22,7 +23,7 @@
     <div class="mx-auto max-w-6xl">
         <x-blocks.text-inhalt class="max-w-prose"
             :eyebrow="$eyebrow" :titel="$titel" :cta="$cta" :anker="$anker"
-            :absaetze="$absaetze" :ab_absatz="$ab_absatz" :hand="$hand">
+            :absaetze="$absaetze" :ab_absatz="$ab_absatz" :hand="$hand" :mittig="$mittig">
             {{ $slot }}
         </x-blocks.text-inhalt>
     </div>

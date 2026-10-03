@@ -37,6 +37,7 @@
         :anker="$block->anker()"
         :absaetze="$data['absaetze'] ?? []"
         :hand="$data['hand'] ?? null"
+        :mittig="(bool) ($data['mittig'] ?? false)"
         :cta="$cta" />
 
 @elseif ($block->typ === 'hilfe_box')

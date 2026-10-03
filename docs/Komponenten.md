@@ -1937,6 +1937,13 @@ Text. Bis 1280 px gibt es ohnehin nur das Burger-Menü.
 
 Auf dem Handy stehen die Abschnitte wie vorher untereinander.
 
+**Mittig (KEV-68, 03.10.2026).** Ein Textbaustein kann zentriert stehen
+(Schalter „Mittig setzen“ im Panel, Feld `mittig`): Überschrift, Strich und
+Absätze mittig, die Spalte bleibt so breit wie sonst. Gedacht für kurze
+Abschnitte über etwas, das selbst mittig steht, wie „Herr und Frau
+Unbekannt“ über der einzelnen Karte auf der Teamseite. Gespeichert wird das
+Feld nur, wenn es an ist.
+
 ---
 
 ## 28. Schlanker Seitenkopf (23.09.2026)

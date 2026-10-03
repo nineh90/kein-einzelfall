@@ -60,7 +60,7 @@
                 @php $t = $block->textAngaben(); @endphp
                 <x-blocks.text-inhalt
                     :eyebrow="$t['eyebrow']" :titel="$t['titel']" :anker="$t['anker']"
-                    :absaetze="$t['absaetze']" :hand="$t['hand']" :cta="$t['cta']" />
+                    :absaetze="$t['absaetze']" :hand="$t['hand']" :cta="$t['cta']" :mittig="$t['mittig']" />
             @endforeach
         </div>
     </div>
