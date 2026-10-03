@@ -125,8 +125,12 @@ class SeitenUndRedirectsTest extends TestCase
          * Text — geltendes Recht aus amtlichen Quellen, nicht Aussagen des
          * Vereins. Sie sind deshalb veröffentlicht und müssen erreichbar sein,
          * tragen aber `ungeprueft` und `noindex`, bis der Verein sie freigibt.
+         *
+         * Seit KEV-72 drei weitere, veröffentlicht: die Übersicht „Gruppen &
+         * Veranstaltungen“ mit Taddis Text, dazu Öffentlichkeitsarbeit und
+         * Rückblick, noch ohne Text, aber schon im Menü.
          */
-        $this->assertSame(37, Page::count());
+        $this->assertSame(40, Page::count());
         $this->assertSame(6, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

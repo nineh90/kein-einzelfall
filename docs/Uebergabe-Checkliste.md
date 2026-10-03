@@ -284,6 +284,13 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   haben. **Beim Beschwerdemanagement zusätzlich zu klären:** eigener Kontaktweg,
   getrennt vom normalen Anfragen-Postfach? Beschwerden über den Verein sollten
   nicht dort landen, wo sie die Betroffenen selbst lesen.
+- [ ] **Gruppen & Veranstaltungen (KEV-72).** Der Bereich heißt jetzt so und
+  hat eine Übersichtsseite mit Taddis Text. Neu im Menü: **Öffentlichkeitsarbeit**
+  und **Rückblick**. Beide sind veröffentlicht, aber noch ohne Text und für
+  Suchmaschinen gesperrt (`noindex`). Wenn der Text da ist, im Panel den Haken
+  „noindex“ entfernen. Alle drei tragen vorerst den Platzhalter, eigene Bilder
+  fehlen. Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
+  Menü bleiben? Taddis Gliederung nennt sie nicht, sie stehen vorerst dahinter.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

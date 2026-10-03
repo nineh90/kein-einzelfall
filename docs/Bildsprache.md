@@ -53,6 +53,13 @@ gepflegt; welche Seiten eins haben, steht mit den Unterzeilen in
 `App\Support\Titelbilder`. /veranstaltungen ist eine eigene Übersicht, nimmt
 aber das Bild der gleichnamigen Seite.
 
+**Breite der Textspalte (KEV-72):** Sie wächst mit dem Titel, von der halben
+Breite (ab 1024 px 45 %) bis höchstens 60 % (ab 1024 px 55 %). Kurze Titel
+stehen wie immer, lange wie „Gruppen & Veranstaltungen“ bleiben einzeilig und
+beginnen dafür weiter links. Zwischen 768 und 1279 px ist die Titelschrift
+eine Stufe kleiner. Nur wirklich lange Titel („Grad der Behinderung (GdB) und
+Schwerbehindertenausweis“) brechen noch um.
+
 **Daraus folgt für jedes neue Bild:** In der rechten Hälfte darf nichts
 stehen, sonst liegt es unter dem Titel. Im Motiv deshalb ausdrücklich „only
 in the left third of the frame“ verlangen und das Ergebnis in der Seite

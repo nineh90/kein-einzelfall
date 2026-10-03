@@ -15,7 +15,7 @@
  */
 return [
 
-    'bereich_gruppen_termine' => 'Groups & events',
+    'bereich_gruppen_veranstaltungen' => 'Groups & events',
     'bereich_kontakt' => 'Contact',
 
     'gespeicherte_einstellungen' => 'Saved settings',

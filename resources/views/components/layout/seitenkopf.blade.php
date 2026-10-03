@@ -149,13 +149,20 @@
                         </div>
                     @endif
 
-                    <div class="md:ml-auto md:w-1/2 lg:w-[45%]">
+                    {{-- Die Spalte wächst mit dem Titel (w-fit), von der halben
+                         Breite (ab „lg“ 45 %) bis 60 bzw. 55 %. Fest 45 % brachen
+                         „Gruppen & Veranstaltungen“, „Erwerbsminderungsrente“
+                         und neun weitere Titel um, obwohl rechts Platz war
+                         (Kevin, 03.10.2026, KEV-72). Kurze Titel stehen wie
+                         bisher. Dazu zwischen 768 und 1279 px die Titelschrift
+                         eine Stufe kleiner, sonst reicht es dort nicht. --}}
+                    <div class="md:ml-auto md:w-fit md:min-w-1/2 md:max-w-[60%] lg:min-w-[45%] lg:max-w-[55%]">
                         <x-ui.eyebrow class="mb-3">{{ $zeile }}</x-ui.eyebrow>
 
                         {{-- hyphens-auto: Lange Fachbegriffe („Opferentschädigungsgesetz“)
                              brachen in der halben Spalte sonst ohne Trennstrich
                              mitten im Wort um. Die Seite trägt lang="de". --}}
-                        <h1 class="text-balance hyphens-auto break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[2.125rem] lg:text-[2.75rem]">
+                        <h1 class="text-balance hyphens-auto break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[1.875rem] lg:text-[2.375rem] xl:text-[2.75rem]">
                             {{ $titel }}
                         </h1>
 

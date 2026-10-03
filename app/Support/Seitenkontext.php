@@ -102,7 +102,9 @@ class Seitenkontext
             ->reject(fn ($kind) => $kind['url'] === $this->eigeneAdresse())
             // Die Übersichtsseite des Bereichs steht schon in den Brotkrumen
             ->reject(fn ($kind) => $kind['url'] === $bereich['url'])
-            ->take($hoechstens)
+            // Auf der Übersicht selbst alle: Sie ist der Weg zu den
+            // Unterseiten, „Gruppen & Veranstaltungen“ hat sieben (KEV-72).
+            ->when(! $this->istBereichsUebersicht(), fn ($kinder) => $kinder->take($hoechstens))
             ->values()
             ->all();
     }

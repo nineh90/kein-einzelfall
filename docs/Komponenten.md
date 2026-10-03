@@ -440,8 +440,9 @@ auf die Übersicht funktionieren weiter. `Group::url()` liefert die Adresse für
 Karten, Suche, Kalender und Sitemap.
 
 Die Gruppenseiten stehen **nicht im Menü**. 13 Einträge als dritte Ebene unter
-„Gruppen & Termine“ machten das Aufklappmenü länger als den Bildschirm und das
-Handymenü unübersichtlich. Stattdessen: „Gruppen & Termine“ ist auf den
+„Gruppen & Veranstaltungen“ (bis KEV-72 „Gruppen & Termine“) machten das
+Aufklappmenü länger als den Bildschirm und das Handymenü unübersichtlich.
+Stattdessen: „Gruppen & Veranstaltungen“ ist auf den
 Unterseiten als Bereich markiert, Brotkrumen führen zur Übersicht, die
 Weiterführung zu den Nachbargruppen.
 

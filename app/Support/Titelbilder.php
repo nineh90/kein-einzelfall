@@ -98,6 +98,8 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
+        // KEV-72, bis Taddi Bilder schickt
+        'gruppen-und-veranstaltungen', 'oeffentlichkeitsarbeit', 'rueckblick',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

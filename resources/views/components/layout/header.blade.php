@@ -6,7 +6,7 @@
         $urls = [$item['url'], ...array_column($item['children'] ?? [], 'url')];
         foreach ($urls as $url) {
             // Unterseiten zählen mit: /selbsthilfegruppen/seelenfarben (KEV-73)
-            // gehört zu „Gruppen & Termine“, wie /veranstaltungen/….
+            // gehört zu „Gruppen & Veranstaltungen“, wie /veranstaltungen/….
             $pfad = ltrim($url, '/');
             if (request()->is($pfad) || ($pfad !== '' && request()->is($pfad.'/*')) || (($url === '/') && request()->is('/'))) {
                 return true;
@@ -17,7 +17,12 @@
 @endphp
 
 <header class="sticky top-0 z-40 border-b border-line bg-cream">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5">
+    {{-- Ab „xl“ breiter als der Inhalt (max-w-7xl statt 6xl): Wortmarke,
+         fünf Menüpunkte, Suche, Sprache und Notausgang brauchen 1190 px, der
+         Inhalt hat 1072. Mit „Gruppen & Veranstaltungen“ (KEV-72) lief die
+         Zeile bei 1280 px über den Fensterrand; schon vorher ragte sie 72 px
+         in den Seitenrand. --}}
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl">
 
         {{-- Wortmarke.
 
@@ -52,7 +57,7 @@
              wirklich passt. Zwischen 1024 und 1280 greift das Burger-Menü,
              das ohnehin vollständig bedienbar ist. --}}
         <nav aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:block">
-            <ul class="flex items-center gap-6">
+            <ul class="flex items-center gap-5">
                 @foreach ($nav as $item)
                     <li class="group relative">
                         <a href="{{ $item['url'] }}"

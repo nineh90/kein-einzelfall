@@ -20,7 +20,7 @@
 
     <x-layout.seitenkopf
         titel="Veranstaltungen"
-        bereich="Gruppen & Termine"
+        bereich="Gruppen & Veranstaltungen"
         :krumen="[
             ['label' => 'Start', 'url' => '/'],
             ['label' => 'Veranstaltungen', 'url' => null],

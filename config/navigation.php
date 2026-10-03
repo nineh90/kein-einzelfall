@@ -26,14 +26,23 @@ return [
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
             ],
         ],
+        /*
+         * KEV-72: „Gruppen & Termine“ heisst jetzt „Gruppen & Veranstaltungen“
+         * und hat eine eigene Übersichtsseite, wie „Wissen“. Vorher führte der
+         * Menüpunkt auf die Selbsthilfegruppen. Öffentlichkeitsarbeit und
+         * Rückblick sind neu, ihr Text folgt in eigenen Tickets. Reihenfolge
+         * wie bei Taddi, Aktuelles und „im Dialog“ dahinter wie bisher.
+         */
         [
-            'schluessel' => 'bereich_gruppen_termine',
-            'label' => 'Gruppen & Termine',
-            'url' => '/selbsthilfegruppen',
+            'schluessel' => 'bereich_gruppen_veranstaltungen',
+            'label' => 'Gruppen & Veranstaltungen',
+            'url' => '/gruppen-und-veranstaltungen',
             'children' => [
                 ['schluessel' => 'selbsthilfegruppen', 'label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
                 ['schluessel' => 'arbeitsgruppen', 'label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
                 ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
+                ['schluessel' => 'oeffentlichkeitsarbeit', 'label' => 'Öffentlichkeitsarbeit',     'url' => '/oeffentlichkeitsarbeit'],
+                ['schluessel' => 'rueckblick', 'label' => 'Rückblick',                 'url' => '/rueckblick'],
                 ['schluessel' => 'aktuelles', 'label' => 'Aktuelles',                 'url' => '/aktuelles'],
                 ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
             ],

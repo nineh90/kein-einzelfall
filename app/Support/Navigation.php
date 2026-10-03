@@ -70,7 +70,7 @@ class Navigation
      * Beschriftung eines Menüpunkts, in dieser Reihenfolge:
      *
      *  1. Übersetzungsschlüssel — für Beschriftungen, die *keine* Seitentitel
-     *     sind: „Gruppen & Termine“, „Start“, „Anfrage“. Die dürfen wir
+     *     sind: „Gruppen & Veranstaltungen“, „Start“, „Anfrage“. Die dürfen wir
      *     übersetzen, sie beschreiben die Bedienung.
      *  2. Titel der übersetzten Seite — für alles andere. „Erwerbsminderungs-
      *     rente“ oder „FSM – Erweitertes Hilfesystem“ sind Fachbegriffe des
