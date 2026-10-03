@@ -155,6 +155,16 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('min-h-[60svh]', $this->get('/spenden')->getContent());
     }
 
+    /** KEV-77: Taddis Bild statt Platzhalter, Motiv unten wie üblich. */
+    public function test_satzung_hat_eigenes_titelbild(): void
+    {
+        $html = $this->get('/satzung')->assertOk()->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/satzung.webp"', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('object-position: 0% 100%', $html);
+    }
+
     public function test_jedes_gesetzte_titelbild_gibt_es_als_datei(): void
     {
         Page::whereNotNull('titelbild')->pluck('titelbild')->each(

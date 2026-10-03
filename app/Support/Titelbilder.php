@@ -65,6 +65,9 @@ class Titelbilder
         // Unterzeile, der Verein hat keine geschickt.
         'istanbul-konvention' => null,
         'kinderkodex' => null,
+        // KEV-77: Bild von Taddi statt Platzhalter. Ohne Unterzeile, der
+        // Verein hat keine geschickt.
+        'satzung' => null,
     ];
 
     /**
@@ -94,7 +97,7 @@ class Titelbilder
         'barrierefreiheit', 'buerokratie-labyrinth', 'das-hilfesystem', 'datenschutz',
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
-        'persoenliches-budget', 'pflegegrad', 'satzung',
+        'persoenliches-budget', 'pflegegrad',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
