@@ -161,12 +161,15 @@
     {{-- Gemeinsamer Abschluss: Auf jeder Unterseite soll der Weg zu uns
          genauso nah sein wie auf der Startseite. Ausgenommen sind Rechtstexte —
          unter einer Datenschutzerklärung wirkt eine Gesprächseinladung
-         deplatziert. --}}
+         deplatziert.
+
+         Überschrift und Text seit KEV-71 von Taddi (vorher „Fragen zu diesem
+         Thema?“, ohne die Projektideen). --}}
     @unless ($kontext->istRechtstext())
         <x-blocks.contact-close
             :auf="$kontaktAuf"
-            titel="Fragen zu diesem Thema?"
-            text="Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?"
+            titel="Du möchtest uns etwas mitteilen?"
+            text="Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?"
             :ctas="[
                 ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
                 ['label' => 'Kontakt', 'url' => '/kontakt', 'variant' => 'ghost'],

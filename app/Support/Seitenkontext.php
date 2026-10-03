@@ -112,7 +112,7 @@ class Seitenkontext
     /**
      * Rechtstexte bekommen keinen Kontakt-Aufruf am Seitenende.
      *
-     * „Fragen zu diesem Thema?" unter einer Datenschutzerklärung wirkt
+     * „Du möchtest uns etwas mitteilen?" unter einer Datenschutzerklärung wirkt
      * unpassend — dort will niemand zu einem Gespräch eingeladen werden.
      */
     public function istRechtstext(): bool

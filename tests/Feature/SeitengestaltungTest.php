@@ -349,13 +349,16 @@ class SeitengestaltungTest extends TestCase
 
     public function test_rechtstexte_bekommen_keinen_kontakt_aufruf(): void
     {
-        // „Fragen zu diesem Thema?" unter einer Datenschutzerklärung wäre
-        // deplatziert.
-        $this->get('/datenschutz')->assertDontSee('Fragen zu diesem Thema');
-        $this->get('/impressum')->assertDontSee('Fragen zu diesem Thema');
+        // „Du möchtest uns etwas mitteilen?" unter einer Datenschutzerklärung
+        // wäre deplatziert.
+        $this->get('/datenschutz')->assertDontSee('Du möchtest uns etwas mitteilen?');
+        $this->get('/impressum')->assertDontSee('Du möchtest uns etwas mitteilen?');
 
-        // Inhaltsseiten dagegen schon
-        $this->get('/erwerbsminderungsrente')->assertSee('Fragen zu diesem Thema');
+        // Inhaltsseiten dagegen schon, mit Taddis Text (KEV-71)
+        $this->get('/erwerbsminderungsrente')
+            ->assertSee('Du möchtest uns etwas mitteilen?')
+            ->assertSee('oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?')
+            ->assertDontSee('Fragen zu diesem Thema');
     }
 
     public function test_erster_absatz_wird_zum_vorspann_ohne_verloren_zu_gehen(): void
