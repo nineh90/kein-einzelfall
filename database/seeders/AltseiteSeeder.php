@@ -113,6 +113,25 @@ class AltseiteSeeder extends Seeder
         ],
     ];
 
+    /**
+     * Überschrift über der Dokumentenliste, wo „Dokumente zum Herunterladen“
+     * nicht passt, weil dort nur ein Dokument liegt.
+     */
+    public const DOKUMENTE_TITEL = [
+        // KEV-100, Wunsch von Taddi
+        'kinderkodex' => 'Kinderkodex herunterladen',
+    ];
+
+    /**
+     * Beschreibung für Suchmaschinen, wo die der Altseite nicht mehr passt.
+     */
+    public const NEUE_BESCHREIBUNGEN = [
+        // KEV-100: Die alte war grammatisch schief („Die Mitglieder und seine
+        // Arbeitsgruppen“) und passte nicht mehr zu Taddis Text aus KEV-99.
+        'kinderkodex' => 'Der Kinderkodex von KE!N EINZELFALL e.V.: wie wir Kinder und Jugendliche '
+            .'schützen, Risiken vorbeugen und verantwortungsvoll handeln. Zum Herunterladen.',
+    ];
+
     public const VORGABE_TITEL = [
         // KEV-59, Wunsch von Taddi
         'verein' => 'Gemeinnütziger Verein',
@@ -194,7 +213,7 @@ class AltseiteSeeder extends Seeder
                 'titel' => self::VORGABE_TITEL[$slug]
                     ?? ($daten['titel'] ?: (self::TITEL[$slug] ?? Str::headline($slug))),
                 'meta_title' => $daten['meta_title'],
-                'meta_description' => $daten['meta_description'],
+                'meta_description' => self::NEUE_BESCHREIBUNGEN[$slug] ?? $daten['meta_description'],
                 'published_at' => now(),
             ]);
 
@@ -254,7 +273,7 @@ class AltseiteSeeder extends Seeder
                 $page->blocks()->create([
                     'typ' => 'download_list',
                     'position' => $position++,
-                    'data' => ['titel' => 'Dokumente zum Herunterladen', 'dokumente' => $liste],
+                    'data' => ['titel' => self::DOKUMENTE_TITEL[$slug] ?? 'Dokumente zum Herunterladen', 'dokumente' => $liste],
                 ]);
             }
 

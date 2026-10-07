@@ -162,8 +162,17 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Erwachsene, die hinsehen', $html);
         $this->assertStringNotContainsString('ein Versprechen, das wir jeden Tag einlösen', $html);
 
-        // Der Kodex zum Herunterladen bleibt direkt darunter.
+        // Der Kodex zum Herunterladen bleibt direkt darunter, seit KEV-100
+        // unter eigener Überschrift: Es ist nur ein Dokument.
         $this->assertStringContainsString('Kinderkodex-HP-29.03.26.pdf', $html);
+        $this->assertStringContainsString('Kinderkodex herunterladen', $html);
+        $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
+
+        $this->assertStringContainsString('content="Der Kinderkodex von KE!N EINZELFALL e.V.: wie wir Kinder', $html);
+        $this->assertStringNotContainsString('und seine Arbeitsgruppen', $html);
+
+        // Andere Seiten behalten die allgemeine Überschrift.
+        $this->assertStringContainsString('Dokumente zum Herunterladen', $this->get('/selbsthilfegruppen')->getContent());
     }
 
     /**
