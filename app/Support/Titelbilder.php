@@ -59,8 +59,9 @@ class Titelbilder
         // KEV-81, Bild von Taddi. Seit KEV-105 mit Text; die Unterzeile ist
         // der ausgeschriebene Name.
         'gremium-ukfb' => 'Unabhängiges Kuratorium für Betroffenenexpertise',                    // von uns
-        // KEV-78, Bild von Taddi. Entwurf; Unterzeile kommt mit dem Text.
-        'landesstellen' => null,
+        // KEV-78, Bild von Taddi. Seit KEV-104 mit Text; die Unterzeile ist
+        // dessen erster Satz.
+        'landesstellen' => 'KE!N EINZELFALL ist nicht nur an einem Ort zuhause.',
         // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
         // Unterzeile, der Verein hat keine geschickt.
         'istanbul-konvention' => null,

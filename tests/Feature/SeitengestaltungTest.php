@@ -217,6 +217,27 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-104: Landesstellen mit Text, je Bundesland ein Abschnitt, im Menü unter Kontakt. */
+    public function test_landesstellen(): void
+    {
+        $html = $this->get('/landesstellen')->assertOk()->getContent();
+
+        foreach (['Bayern', 'Berlin', 'Hamburg', 'Sachsen-Anhalt', 'Schleswig-Holstein'] as $land) {
+            $this->assertStringContainsString('id="abschnitt-landesstelle-'.\Illuminate\Support\Str::slug($land).'"', $html, $land);
+            $this->assertStringContainsString('href="mailto:LS-'.$land.'@kein-einzelfall.de"', $html, $land);
+        }
+
+        // Der erste Satz steht als Unterzeile auf dem Bild, im Text nicht noch einmal.
+        $this->assertSame(1, substr_count($html, 'ist nicht nur an einem Ort zuhause.'));
+        $this->assertStringContainsString('src="/img/titelbilder/landesstellen.webp"', $html);
+
+        $this->assertStringContainsString('Elke Redeker', $html);
+        $this->assertStringNotContainsString('Reedeker', $html);
+
+        $kontakt = collect(config('navigation.main'))->firstWhere('url', '/kontakt');
+        $this->assertContains('/landesstellen', array_column($kontakt['children'], 'url'));
+    }
+
     /** KEV-105: Gremium UKFB mit Text, veröffentlicht, Kontakt auf der echten Domain. */
     public function test_gremium_ukfb(): void
     {

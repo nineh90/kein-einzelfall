@@ -276,11 +276,20 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Panel im Baustein „Spendenmöglichkeiten" ersetzen.
 - [ ] **Die drei neuen Seiten füllen:** Schutzkonzept, Projekte, Publikationen
   (Beschwerdemanagement ist seit KEV-98 fertig, siehe nächster Punkt, Gremium
-  UKFB seit KEV-105). Seit KEV-78 außerdem
-  **Landesstellen** (Titelbild von Taddi ist drin, der Text kommt mit einem
-  eigenen Ticket; Menüplatz noch offen). Sie liegen im Panel als Entwurf bereit, mit Adresse und
+  UKFB seit KEV-105, Landesstellen seit KEV-104). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben.
+- [ ] **Landesstellen (KEV-104).** Mit Taddis Text veröffentlicht, je
+  Bundesland ein Abschnitt. Im Menü unter **Kontakt** (Platz stand nicht im
+  Ticket; die Kontaktseite verspricht im Bild schon „Alle Ansprechpartner,
+  Landesstellen …“). Bitte bestätigen:
+  - Name „Elke **Redeker**“ (Taddi schrieb „Reedeker“, die Adresse auf der
+    Kontaktseite lautet redeker@).
+  - Gibt es die neuen Postfächer **LS-Bayern@, LS-Berlin@, LS-Hamburg@,
+    LS-Sachsen-Anhalt@, LS-Schleswig-Holstein@** schon?
+  - Die **Kontaktseite** listet unter „Landesstellen“ noch die persönlichen
+    Adressen der Altseite (kuenstler@, redeker@, khalil@, posorske@). Sollen
+    dort die neuen LS-Adressen stehen, oder ein Verweis auf diese Seite?
 - [ ] **Gremium UKFB (KEV-105).** Mit Taddis Text veröffentlicht, im Menü
   „Verein“ als letzter Punkt (Platz stand nicht im Ticket). Bitte bestätigen:
   Taddi schrieb „kontakt@ufb.org“ und „ukf.org“. ufb.org steht zum Verkauf,

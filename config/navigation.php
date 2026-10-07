@@ -79,6 +79,9 @@ return [
             'url' => '/kontakt',
             'children' => [
                 ['schluessel' => 'kontakt', 'label' => 'Kontakt',              'url' => '/kontakt'],
+                // KEV-104: kein Platz im Ticket. Hier, weil die Kontaktseite
+                // „Alle Ansprechpartner, Landesstellen …“ verspricht.
+                ['schluessel' => 'landesstellen', 'label' => 'Landesstellen',        'url' => '/landesstellen'],
                 ['schluessel' => 'anfragen', 'label' => 'Anfragen & Austausch', 'url' => '/anfragen'],
             ],
         ],

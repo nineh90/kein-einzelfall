@@ -136,10 +136,11 @@ class SeitenUndRedirectsTest extends TestCase
          * Seit KEV-103 eine weitere, veröffentlicht: Tätigkeits- und
          * Jahresberichte mit Taddis Text, die Berichte selbst fehlen noch.
          *
-         * Seit KEV-105 ist auch Gremium UKFB veröffentlicht.
+         * Seit KEV-105 ist auch Gremium UKFB veröffentlicht, seit KEV-104 die
+         * Landesstellen.
          */
         $this->assertSame(41, Page::count());
-        $this->assertSame(4, Page::whereNull('published_at')->count());
+        $this->assertSame(3, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -164,8 +165,8 @@ class SeitenUndRedirectsTest extends TestCase
          * Struktur, den Text schreibt er selbst.
          */
         // Beschwerdemanagement fehlt seit KEV-98: Es hat Text und ist veröffentlicht.
-        // Gremium UKFB seit KEV-105 ebenfalls nicht mehr.
-        foreach (['schutzkonzept', 'projekte', 'publikationen', 'landesstellen'] as $slug) {
+        // Gremium UKFB (KEV-105) und Landesstellen (KEV-104) ebenfalls nicht mehr.
+        foreach (['schutzkonzept', 'projekte', 'publikationen'] as $slug) {
             $seite = Page::where('slug', $slug)->first();
 
             $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");
