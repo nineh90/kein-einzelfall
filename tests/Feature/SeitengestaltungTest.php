@@ -151,6 +151,21 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('min-h-[60svh]', $this->get('/spenden')->getContent());
     }
 
+    /** KEV-99: Text von Taddi statt des Altseiten-Absatzes, in drei Absätzen. */
+    public function test_kinderkodex_hat_den_neuen_text(): void
+    {
+        $html = $this->get('/kinderkodex')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Kinder und Jugendliche brauchen Schutz, Verlässlichkeit und Menschen', $html);
+        $this->assertStringContainsString('<p>Unser Kinderkodex beschreibt verbindlich', $html);
+        $this->assertStringContainsString('<p>Hier kannst du unseren Kinderkodex vollständig einsehen', $html);
+        $this->assertStringNotContainsString('Erwachsene, die hinsehen', $html);
+        $this->assertStringNotContainsString('ein Versprechen, das wir jeden Tag einlösen', $html);
+
+        // Der Kodex zum Herunterladen bleibt direkt darunter.
+        $this->assertStringContainsString('Kinderkodex-HP-29.03.26.pdf', $html);
+    }
+
     /**
      * KEV-75: Das Bild ist nur noch Hintergrund, das echte Logo liegt als
      * eigenes Element darauf. Auf dem Handy über dem Text, nicht darunter.

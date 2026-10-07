@@ -96,6 +96,21 @@ class AltseiteSeeder extends Seeder
                 .'Unterstützung ankommt, Wissen vermittelt wird und ein Raum für Austausch entsteht.',
             ],
         ],
+        'kinderkodex' => [
+            // KEV-99, Text von Taddi. Der Abschnitt hat keine Überschrift,
+            // der Schlüssel ist deshalb leer. Absätze von uns gesetzt.
+            '' => [
+                'Kinder und Jugendliche brauchen Schutz, Verlässlichkeit und Menschen, die Verantwortung '
+                .'übernehmen. Bei KE!N EINZELFALL e.V. möchten wir überall dort, wo wir wirken, sichere und '
+                .'respektvolle Räume schaffen – online wie offline. Kinder und Jugendliche sollen sich '
+                .'gesehen, ernst genommen und geschützt fühlen.',
+                'Unser Kinderkodex beschreibt verbindlich, wie wir diesem Anspruch gerecht werden. Er zeigt, '
+                .'wie wir Risiken vorbeugen, verantwortungsvoll handeln und sicherstellen, dass die Rechte, '
+                .'die Würde und die Sicherheit von Kindern und Jugendlichen jederzeit im Mittelpunkt stehen.',
+                'Hier kannst du unseren Kinderkodex vollständig einsehen – als verbindliche Grundlage für '
+                .'einen achtsamen und verantwortungsvollen Umgang.',
+            ],
+        ],
     ];
 
     public const VORGABE_TITEL = [
@@ -201,7 +216,8 @@ class AltseiteSeeder extends Seeder
                     'position' => $position++,
                     'data' => [
                         'titel' => $block['titel'],
-                        'absaetze' => self::NEUE_TEXTE[$slug][$block['titel']] ?? $block['absaetze'],
+                        // Abschnitt ohne Überschrift: Schlüssel '' (KEV-99).
+                        'absaetze' => self::NEUE_TEXTE[$slug][$block['titel'] ?? ''] ?? $block['absaetze'],
                     ],
                 ]);
             }
