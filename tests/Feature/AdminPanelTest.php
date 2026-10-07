@@ -271,6 +271,13 @@ class AdminPanelTest extends TestCase
                     'logo' => '/img/partner/aktion-mensch.svg', 'logo_alt' => '',
                 ]],
             ]],
+            // KEV-98: Beschwerdemanagement
+            ['typ' => 'formular_spalten', 'data' => [
+                'spalten' => [
+                    ['titel' => 'Externe Kritik', 'absaetze' => ['Kritikabsatz'], 'hand' => 'Handsatz', 'knopf' => 'Knopfsatz', 'art' => 'anfrage'],
+                    ['titel' => 'Interne Beschwerde', 'absaetze' => ['Beschwerdeabsatz'], 'art' => 'ombudsstelle'],
+                ],
+            ]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -297,6 +304,9 @@ class AdminPanelTest extends TestCase
             'selbsthilfe', 'Vorstand',                       // Gruppen, Team
             'Aktion Mensch', 'Förderer', 'aktion-mensch.svg', // Partner
             'Was im Browser liegt.',                         // Gespeicherte Einstellungen
+            'Kritikabsatz', 'Handsatz', 'Knopfsatz',         // Zwei Wege mit Formular
+            'Beschwerdeabsatz',
+            'ombudsstelle',
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

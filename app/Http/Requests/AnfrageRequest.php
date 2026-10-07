@@ -21,10 +21,34 @@ class AnfrageRequest extends FormRequest
 
             'herkunft' => ['nullable', 'string', 'max:120'],
 
+            // Welches Formular der Seite abgeschickt wurde (KEV-98: zwei auf
+            // /beschwerdemanagement). Landet als Sprungziel in der Adresse,
+            // deshalb nur Kleinbuchstaben, Ziffern und Bindestriche.
+            'formular' => ['nullable', 'string', 'max:60', 'regex:/^[a-z0-9-]+$/'],
+
             // Honigtopf: muss leer bleiben
             'webseite' => ['nullable', 'size:0'],
             'gestartet_um' => ['nullable', 'string'],
         ];
+    }
+
+    /**
+     * Nach einem Fehler zurück zum abgeschickten Formular springen. Steht es
+     * in einer Spalte weiter unten, sähe man nach dem Neuladen sonst nur den
+     * Seitenkopf und wüsste nicht, dass etwas fehlt.
+     */
+    protected function getRedirectUrl()
+    {
+        return self::mitSprungziel(parent::getRedirectUrl(), $this->input('formular'));
+    }
+
+    public static function mitSprungziel(string $adresse, mixed $formular): string
+    {
+        if (! is_string($formular) || ! preg_match('/^[a-z0-9-]{1,60}$/', $formular)) {
+            return $adresse;
+        }
+
+        return strtok($adresse, '#').'#formular-'.$formular;
     }
 
     public function attributes(): array

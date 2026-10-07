@@ -270,7 +270,7 @@ class PageForm
                                 // Titelfeld, das nichts bewirkt, ist eine Falle.
                                 ->hidden(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['cta_band', 'stat_strip', 'inhalts_hinweis'],
+                                    ['cta_band', 'stat_strip', 'inhalts_hinweis', 'formular_spalten'],
                                     true,
                                 ))
                                 // Der Aufmacher-Rahmen der Zwei-Klick-Einbettung
@@ -769,6 +769,45 @@ class PageForm
                                 ->helperText('Handschriftlich und bewusst zurückhaltend. Leer '
                                     .'lassen nimmt den Vereinsnamen. Lange Zeilen werden '
                                     .'kleiner gesetzt, damit sie nicht umbrechen.'),
+
+                            // --- Zwei Wege mit gemeinsamem Formular (KEV-98) ---
+                            Repeater::make('data.spalten')
+                                ->label('Spalten')
+                                ->addActionLabel('Spalte hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'formular_spalten')
+                                ->maxItems(2)
+                                ->collapsible()
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->schema([
+                                    TextInput::make('titel')->label('Überschrift')->required()
+                                        ->helperText('Steht auch als Auswahl im Formular unter den Spalten.'),
+                                    Repeater::make('absaetze')
+                                        ->label('Absätze')
+                                        ->addActionLabel('Absatz hinzufügen')
+                                        ->helperText('E-Mail-Adressen werden von selbst zu Links. '
+                                            .'*Sternchen* darum setzen schreibt fett.')
+                                        ->simple(Textarea::make('absatz')->label('')->rows(3)->required()),
+                                    TextInput::make('hand')
+                                        ->label('Leitsatz in Handschrift')
+                                        ->helperText('Grün, unter den Absätzen. Kann leer bleiben.'),
+                                    TextInput::make('knopf')
+                                        ->label('Beschriftung des Knopfs')
+                                        ->placeholder('Zum Formular')
+                                        ->helperText('Springt zum Formular und wählt diesen Weg schon aus.'),
+                                    Select::make('art')
+                                        ->label('Wohin die Nachricht geht')
+                                        ->options([
+                                            'anfrage' => 'In den Verwaltungsbereich (wie jede Anfrage)',
+                                            'ombudsstelle' => 'Per E-Mail an die Ombudsstelle, nichts gespeichert',
+                                        ])
+                                        ->default('anfrage')
+                                        ->required()
+                                        ->native(false)
+                                        ->helperText('Beschwerden über den Verein gehören an die Ombudsstelle: '
+                                            .'Im Verwaltungsbereich läsen die mit, um die es geht. Die '
+                                            .'Adresse der Ombudsstelle steht in der Server-Einstellung '
+                                            .'MAIL_OMBUDSSTELLE_AN, nicht hier.'),
+                                ]),
 
                             // --- Knöpfe ---
                             self::knopf('data.cta')

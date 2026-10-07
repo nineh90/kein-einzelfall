@@ -120,16 +120,12 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('object-position: 0% 50%', $html);
     }
 
-    /** KEV-80: Bild von Taddi liegt bereit, die Seite bleibt Entwurf, bis der Text kommt. */
-    public function test_beschwerdemanagement_hat_titelbild_und_bleibt_entwurf(): void
+    /** KEV-80: Bild von Taddi. Seit KEV-98 mit Text und veröffentlicht. */
+    public function test_beschwerdemanagement_hat_titelbild(): void
     {
         $seite = Page::where('slug', 'beschwerdemanagement')->where('locale', 'de')->firstOrFail();
 
         $this->assertSame('/img/titelbilder/beschwerdemanagement.webp', $seite->titelbild);
-        $this->assertNull($seite->published_at);
-        $this->get('/beschwerdemanagement')->assertNotFound();
-
-        $seite->update(['published_at' => now()->subMinute()]);
         $this->get('/beschwerdemanagement')->assertOk()
             ->assertSee('src="/img/titelbilder/beschwerdemanagement.webp"', false)
             ->assertSee('object-position: 0% 35%', false);

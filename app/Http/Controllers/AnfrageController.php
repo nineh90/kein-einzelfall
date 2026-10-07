@@ -12,23 +12,38 @@ class AnfrageController extends Controller
 {
     public function store(AnfrageRequest $request)
     {
+        $anfrage = $this->annehmen($request, $request->input('herkunft'));
+
+        return redirect(AnfrageRequest::mitSprungziel(url()->previous(), $request->input('formular')))
+            ->with('versendet_von', $request->input('formular'))
+            ->with('anfrage_versendet', self::bestaetigung($anfrage));
+    }
+
+    /**
+     * Anfrage verschlüsselt speichern und den Verein benachrichtigen.
+     * Auch für die Kritik aus dem Beschwerdeformular (BeschwerdeController).
+     */
+    public function annehmen(AnfrageRequest $request, ?string $herkunft): Inquiry
+    {
         $anfrage = Inquiry::create([
             'name' => $request->filled('name') ? $request->string('name')->trim()->value() : null,
             'email' => $request->filled('email') ? $request->string('email')->trim()->value() : null,
             'betreff' => $request->string('betreff')->trim()->value(),
             'nachricht' => $request->string('nachricht')->trim()->value(),
-            'herkunft' => $request->input('herkunft'),
+            'herkunft' => $herkunft,
         ]);
 
         $this->benachrichtigen($anfrage);
 
-        return back()->with(
-            'anfrage_versendet',
-            $anfrage->istAnonym()
-                ? 'Wir haben deine Nachricht erhalten. Da du keine E-Mail-Adresse angegeben '
-                  .'hast, können wir dir nicht direkt antworten.'
-                : 'Wir melden uns bei dir. Bitte hab etwas Geduld — wir sind ein kleines Team.'
-        );
+        return $anfrage;
+    }
+
+    public static function bestaetigung(Inquiry $anfrage): string
+    {
+        return $anfrage->istAnonym()
+            ? 'Wir haben deine Nachricht erhalten. Da du keine E-Mail-Adresse angegeben '
+              .'hast, können wir dir nicht direkt antworten.'
+            : 'Wir melden uns bei dir. Bitte hab etwas Geduld — wir sind ein kleines Team.';
     }
 
     /**

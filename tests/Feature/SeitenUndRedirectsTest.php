@@ -129,9 +129,12 @@ class SeitenUndRedirectsTest extends TestCase
          * Seit KEV-72 drei weitere, veröffentlicht: die Übersicht „Gruppen &
          * Veranstaltungen“ mit Taddis Text, dazu Öffentlichkeitsarbeit und
          * Rückblick, noch ohne Text, aber schon im Menü.
+         *
+         * Seit KEV-98 ist Beschwerdemanagement kein Entwurf mehr: Text und
+         * Formular mit zwei Wegen von Taddi, im Menü „Verein“ an Position 5.
          */
         $this->assertSame(40, Page::count());
-        $this->assertSame(6, Page::whereNull('published_at')->count());
+        $this->assertSame(5, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -155,7 +158,8 @@ class SeitenUndRedirectsTest extends TestCase
          * muss der Verein einhalten können. Wir legen die Seite an und die
          * Struktur, den Text schreibt er selbst.
          */
-        foreach (['schutzkonzept', 'beschwerdemanagement', 'projekte', 'publikationen', 'gremium-ukfb', 'landesstellen'] as $slug) {
+        // Beschwerdemanagement fehlt seit KEV-98: Es hat Text und ist veröffentlicht.
+        foreach (['schutzkonzept', 'projekte', 'publikationen', 'gremium-ukfb', 'landesstellen'] as $slug) {
             $seite = Page::where('slug', $slug)->first();
 
             $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");

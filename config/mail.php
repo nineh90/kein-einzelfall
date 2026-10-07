@@ -131,4 +131,23 @@ return [
 
     'anfragen_an' => env('MAIL_ANFRAGEN_AN'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Beschwerden über den Verein (KEV-98)
+    |--------------------------------------------------------------------------
+    |
+    | Wer auf /beschwerdemanagement „Interne Beschwerde“ wählt, schickt die
+    | Nachricht an die unabhängige Ombudsstelle, und zwar MIT Inhalt. Anders
+    | als bei den Anfragen geht es nicht über den Verwaltungsbereich: Dort
+    | lesen die Menschen mit, über die sich jemand beschweren will.
+    |
+    | Gespeichert wird nichts. Deshalb verweigert das Formular auf dem Server
+    | den Versand, solange MAIL_MAILER=log ist — der Inhalt stünde sonst im
+    | Klartext in storage/logs. Siehe App\Http\Controllers\BeschwerdeController.
+    |
+    */
+
+    // Leere Zeile in der .env zählt als nicht gesetzt.
+    'ombudsstelle_an' => env('MAIL_OMBUDSSTELLE_AN') ?: 'beschwerdemanagement@kein-einzelfall.de',
+
 ];

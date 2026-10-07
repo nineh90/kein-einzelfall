@@ -75,6 +75,10 @@ class NeueBereicheSeeder extends Seeder
                 'titel' => 'Schutzkonzept',
                 'abschnitte' => [null],
             ],
+            // KEV-98: Text und Formular kamen von Taddi, die Seite ist
+            // veröffentlicht (BeschwerdemanagementSeeder). Dieser Seeder würde
+            // sie wieder leeren, also nicht von Hand auf bestehende Daten laufen
+            // lassen; die Migration tut es ohnehin nur auf leerer Datenbank.
             [
                 'slug' => 'beschwerdemanagement',
                 'titel' => 'Beschwerdemanagement',

@@ -79,6 +79,9 @@ class PageBlock extends Model
         'cta_band' => 'Hinweisband',
         'contact_close' => 'Kontakt-Abschluss',
         'contact_form' => 'Kontaktformular',
+        // KEV-98: zwei Wege nebeneinander, darunter ein Formular mit Auswahl
+        // (Beschwerdemanagement: Kritik von außen, Beschwerde über den Verein).
+        'formular_spalten' => 'Zwei Wege mit gemeinsamem Formular',
         'donation_options' => 'Spendenmöglichkeiten',
         'embed' => 'Eingebetteter Inhalt (2-Klick)',
         'hilfe_box' => 'Hilfe-Nummern',
@@ -120,6 +123,7 @@ class PageBlock extends Model
         'cta_band' => 'wechselnd',
         'contact_close' => 'wechselnd',
         'contact_form' => 'wechselnd',
+        'formular_spalten' => 'wechselnd',
         'donation_options' => 'wechselnd',
         'hilfe_box' => 'wechselnd',
         'partner_logos' => 'wechselnd',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnfrageController;
+use App\Http\Controllers\BeschwerdeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GlossarController;
@@ -42,6 +43,15 @@ $oeffentlicheRouten = function () {
     Route::post('/anfrage', [AnfrageController::class, 'store'])
         ->middleware('throttle:5,10')
         ->name('anfrage.senden');
+
+    /*
+     * Formular auf /beschwerdemanagement (KEV-98): Kritik geht wie eine
+     * Anfrage in den Verwaltungsbereich, eine Beschwerde über den Verein per
+     * E-Mail an die unabhängige Ombudsstelle. Begründung im Controller.
+     */
+    Route::post('/beschwerde', [BeschwerdeController::class, 'store'])
+        ->middleware('throttle:5,10')
+        ->name('beschwerde.senden');
 
     /*
      * Blog / Aktuelles.

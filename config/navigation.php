@@ -23,6 +23,8 @@ return [
                 ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],
                 ['schluessel' => 'mitgliedschaft', 'label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
                 ['schluessel' => 'istanbul_konvention', 'label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
+                // KEV-98: an Position 5, Wunsch von Taddi.
+                ['schluessel' => 'beschwerdemanagement', 'label' => 'Beschwerdemanagement',         'url' => '/beschwerdemanagement'],
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
             ],
         ],

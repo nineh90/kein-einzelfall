@@ -219,6 +219,38 @@ wird, bevor sie überhaupt jemand gelesen hat. `--probe` zeigt an, ohne zu lösc
 > ⚠️ **`APP_KEY` gehört in die Sicherung.** Die Verschlüsselung hängt daran.
 > Geht der Schlüssel verloren, sind alle Anfragen unwiederbringlich weg.
 
+### Ein Formular, zwei Wege: Beschwerdemanagement (07.10.2026, KEV-98)
+
+Baustein `formular_spalten` („Zwei Wege mit gemeinsamem Formular“): oben zwei
+Spalten mit Überschrift, Absätzen, Leitsatz in Handschrift und einem Knopf,
+darunter **ein** Formular. Zuerst stand unter jedem Text ein eigenes,
+gleich aussehendes Formular; das wirkte doppelt (Kevin, 07.10.2026).
+
+Im Formular steht zuerst die Frage „Worum geht es?“ mit beiden Wegen als
+Auswahlkarten, jeweils mit dem Ziel der Nachricht. **Nichts ist
+vorausgewählt** und die Wahl ist Pflicht (`BeschwerdeRequest`): Eine
+Beschwerde über den Verein soll nicht aus Versehen beim Verein landen. Der
+Knopf unter jedem Text führt auf `?weg=<art>#formular-beschwerde` und wählt
+den Weg vor, ohne JavaScript. Die Felder kommen aus `x-ui.nachricht-formular`
+(Prop `wege`), die auch `contact_form` nutzt.
+
+| `weg` | Ziel | Gespeichert |
+|---|---|---|
+| `anfrage` (Externe Kritik) | wie jede Anfrage, Herkunft „beschwerdemanagement · Kritik“ | verschlüsselt im Panel |
+| `ombudsstelle` (Interne Beschwerde) | E-Mail **mit Inhalt** an `MAIL_OMBUDSSTELLE_AN` (leer: beschwerdemanagement@kein-einzelfall.de) | nirgends |
+
+Beide gehen an `POST /beschwerde` (`BeschwerdeController`), der verteilt.
+
+Warum die Beschwerde den Grundsatz „keine Inhalte per E-Mail“ bricht: Laut
+Taddis Text geht sie an eine **unabhängige** Ombudsstelle. Im Panel läsen die
+Menschen mit, über die sich jemand beschwert, und die Ombudsstelle hat dort
+keinen Zugang. Die E-Mail ist der einzige Ort, an dem die Nachricht existiert.
+Deshalb: nicht in die Warteschlange (Inhalt stünde in `jobs`), reiner Text,
+Antwortadresse ist die der Person. Mit `MAIL_MAILER=log` verweigert der Server
+(`APP_ENV=production`) den Versand, sonst stünde die Beschwerde im Klartext in
+`storage/logs`. Die Seite sagt dann ehrlich, dass es nicht ging, lässt den Text
+im Feld und nennt die Adresse.
+
 ## 7. Sicherheits-Header und Einbettungen (27.07.2026)
 
 ### Kein Zustimmungsbanner nötig — und das ist ein Ergebnis, keine Nachlässigkeit

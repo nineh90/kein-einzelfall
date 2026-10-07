@@ -48,6 +48,8 @@ const SEITEN = [
     ['Startseite', '/'],
     ['Inhaltsseite', '/verein'],
     ['Seite mit Kontaktformular', '/anfragen'],
+    // Formular mit Auswahl des Wegs (KEV-98): Fieldset, Auswahlkarten.
+    ['Beschwerdemanagement', '/beschwerdemanagement'],
     // Spenden-Baustein: QR-Code als role="img", Zwei-Klick-Einbettungen.
     ['Spendenseite', '/spenden'],
     ['Vorstand und Team', '/ueber-uns-vorstand-und-team'],

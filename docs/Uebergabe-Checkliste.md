@@ -274,16 +274,35 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Altseite (`paypal.com/donate?business=paypal@kein-einzelfall.de`). Falls der
   Verein inzwischen einen PayPal.me-Link oder eine Spendenkampagne hat, im
   Panel im Baustein „Spendenmöglichkeiten" ersetzen.
-- [ ] **Die vier neuen Seiten füllen:** Schutzkonzept, Beschwerdemanagement,
-  Projekte, Publikationen. Dazu seit KEV-81 **Gremium UKFB** (Titelbild von
+- [ ] **Die drei neuen Seiten füllen:** Schutzkonzept, Projekte, Publikationen
+  (Beschwerdemanagement ist seit KEV-98 fertig, siehe nächster Punkt). Dazu seit KEV-81 **Gremium UKFB** (Titelbild von
   Taddi ist drin). Dort zusätzlich offen: Wofür steht UKFB ausgeschrieben, und
   unter welchem Menüpunkt soll die Seite stehen? Seit KEV-78 außerdem
   **Landesstellen** (Titelbild von Taddi ist drin, der Text kommt mit einem
   eigenen Ticket; Menüplatz noch offen). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
-  haben. **Beim Beschwerdemanagement zusätzlich zu klären:** eigener Kontaktweg,
-  getrennt vom normalen Anfragen-Postfach? Beschwerden über den Verein sollten
-  nicht dort landen, wo sie die Betroffenen selbst lesen.
+  haben.
+- [ ] **Beschwerdemanagement (KEV-98) abnehmen.** Taddis Text in zwei Spalten,
+  im Menü „Verein“ an Position 5, darunter ein gemeinsames Formular. Darin
+  wählt man oben „Externe Kritik“ (landet wie jede Anfrage im
+  Verwaltungsbereich) oder „Interne Beschwerde“ (geht **per E-Mail mit
+  Inhalt** an die Ombudsstelle und wird nicht gespeichert, damit der Verein
+  Beschwerden über sich nicht selbst liest). Die Knöpfe „Kritik schreiben“ und
+  „Beschwerde schreiben“ sowie die Beschreibungen der beiden Wege sind von uns,
+  bitte gegenlesen. Zu klären:
+  - **Wer liest beschwerdemanagement@kein-einzelfall.de?** Unabhängig ist die
+    Ombudsstelle nur, wenn niemand aus dem Verein Zugriff auf dieses Postfach
+    hat (auch nicht über die Domainverwaltung). Sonst eine Adresse der
+    Ombudsstelle selbst eintragen (`MAIL_OMBUDSSTELLE_AN`).
+  - **Auf dem Server echten Mailversand einrichten** (SMTP). Solange
+    `MAIL_MAILER=log` gilt, lehnt das Formular ab und verweist auf die Adresse.
+  - **Datenschutzerklärung ergänzen:** Beschwerdeformular, Weitergabe per
+    E-Mail an die Ombudsstelle, keine Speicherung auf der Website.
+  - Taddis Text schrieb „beschwedemanagement@“, wir haben
+    „beschwerdemanagement@“ eingetragen. Bitte bestätigen, dass es das Postfach
+    so gibt. Ebenso **kritik@kein-einzelfall.de**.
+  - Die Unterzeile auf dem Titelbild („Deine Rückmeldung hilft uns, besser zu
+    werden.“) ist weiter von uns (A14).
 - [ ] **Gruppen & Veranstaltungen (KEV-72).** Der Bereich heißt jetzt so und
   hat eine Übersichtsseite mit Taddis Text. Neu im Menü: **Öffentlichkeitsarbeit**
   und **Rückblick**. Beide sind veröffentlicht, aber noch ohne Text und für
