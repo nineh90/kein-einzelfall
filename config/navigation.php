@@ -28,6 +28,8 @@ return [
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
                 // KEV-103: ohne Positionsangabe von Taddi, deshalb ans Ende.
                 ['schluessel' => 'taetigkeits_und_jahresberichte', 'label' => 'Tätigkeits- und Jahresberichte', 'url' => '/taetigkeits-und-jahresberichte'],
+                // KEV-105: Platz nicht genannt, deshalb ans Ende.
+                ['schluessel' => 'gremium_ukfb', 'label' => 'Gremium UKFB',                 'url' => '/gremium-ukfb'],
             ],
         ],
         /*

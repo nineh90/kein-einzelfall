@@ -217,7 +217,27 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
-    /** KEV-103: neue Seite unter Verein, am Ende des Menüs, mit Platzhalterbild. */
+    /** KEV-105: Gremium UKFB mit Text, veröffentlicht, Kontakt auf der echten Domain. */
+    public function test_gremium_ukfb(): void
+    {
+        $html = $this->get('/gremium-ukfb')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Assoziiertes Fachgremium – UKFB', $html);
+        $this->assertStringContainsString('Unabhängiges Kuratorium für Betroffenenexpertise', $html);
+        $this->assertStringContainsString('nimmt keinen Einfluss auf die inhaltliche Arbeit', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/gremium-ukfb.webp"', $html);
+
+        // Taddi schrieb ufb.org und ukf.org; ufb.org steht zum Verkauf.
+        $this->assertStringContainsString('href="mailto:kontakt@ukfb.org"', $html);
+        $this->assertStringContainsString('href="https://ukfb.org"', $html);
+        $this->assertStringNotContainsString('ufb.org"', $html);
+        $this->assertStringNotContainsString('ukf.org', $html);
+
+        $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
+        $this->assertSame('/gremium-ukfb', end($verein['children'])['url']);
+    }
+
+    /** KEV-103: neue Seite unter Verein, hinter dem Kinderkodex, mit Platzhalterbild. */
     public function test_taetigkeits_und_jahresberichte(): void
     {
         $html = $this->get('/taetigkeits-und-jahresberichte')->assertOk()->getContent();
@@ -227,8 +247,10 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Beginnend mit dem Jahr 2025 findest du hier unsere Berichte', $html);
         $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
 
+        // Hinter dem Kinderkodex (seit KEV-105 steht das Gremium UKFB dahinter).
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
-        $this->assertSame('/taetigkeits-und-jahresberichte', end($verein['children'])['url']);
+        $urls = array_column($verein['children'], 'url');
+        $this->assertSame(array_search('/kinderkodex', $urls) + 1, array_search('/taetigkeits-und-jahresberichte', $urls));
     }
 
     /**

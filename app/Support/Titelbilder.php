@@ -56,9 +56,9 @@ class Titelbilder
         'trauma-bindung-und-beziehung' => 'Warum ein Trauma Beziehungen verändert – und was dabei hilft.', // von uns
         // KEV-80, Bild von Taddi. Die Seite ist noch Entwurf, bis der Text kommt.
         'beschwerdemanagement' => 'Deine Rückmeldung hilft uns, besser zu werden.',                // von uns
-        // KEV-81, Bild von Taddi. Entwurf; Unterzeile erst, wenn klar ist,
-        // wofür das Gremium steht.
-        'gremium-ukfb' => null,
+        // KEV-81, Bild von Taddi. Seit KEV-105 mit Text; die Unterzeile ist
+        // der ausgeschriebene Name.
+        'gremium-ukfb' => 'Unabhängiges Kuratorium für Betroffenenexpertise',                    // von uns
         // KEV-78, Bild von Taddi. Entwurf; Unterzeile kommt mit dem Text.
         'landesstellen' => null,
         // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne

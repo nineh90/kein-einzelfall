@@ -275,13 +275,18 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Verein inzwischen einen PayPal.me-Link oder eine Spendenkampagne hat, im
   Panel im Baustein „Spendenmöglichkeiten" ersetzen.
 - [ ] **Die drei neuen Seiten füllen:** Schutzkonzept, Projekte, Publikationen
-  (Beschwerdemanagement ist seit KEV-98 fertig, siehe nächster Punkt). Dazu seit KEV-81 **Gremium UKFB** (Titelbild von
-  Taddi ist drin). Dort zusätzlich offen: Wofür steht UKFB ausgeschrieben, und
-  unter welchem Menüpunkt soll die Seite stehen? Seit KEV-78 außerdem
+  (Beschwerdemanagement ist seit KEV-98 fertig, siehe nächster Punkt, Gremium
+  UKFB seit KEV-105). Seit KEV-78 außerdem
   **Landesstellen** (Titelbild von Taddi ist drin, der Text kommt mit einem
   eigenen Ticket; Menüplatz noch offen). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben.
+- [ ] **Gremium UKFB (KEV-105).** Mit Taddis Text veröffentlicht, im Menü
+  „Verein“ als letzter Punkt (Platz stand nicht im Ticket). Bitte bestätigen:
+  Taddi schrieb „kontakt@ufb.org“ und „ukf.org“. ufb.org steht zum Verkauf,
+  ukf.org antwortete nicht; die Seite des Kuratoriums ist **ukfb.org** und nennt
+  dort selbst **kontakt@ukfb.org**. Das haben wir eingetragen. Die Unterzeile
+  auf dem Bild („Unabhängiges Kuratorium für Betroffenenexpertise“) ist von uns.
 - [ ] **Tätigkeits- und Jahresberichte (KEV-103).** Neue Seite unter „Verein“
   mit Taddis Text, im Menü als letzter Punkt (eine Position stand nicht im
   Ticket). Noch ohne Berichte: Der Text kündigt sie ab 2025 an. **Bitte den
