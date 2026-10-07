@@ -77,9 +77,10 @@ class StartseiteSeeder extends Seeder
      * Überweisung (Wunsch von Franziska). Bis dahin gab es auf der Startseite
      * drei Links auf /spenden, aber nirgends die Möglichkeit selbst.
      *
-     * Sie kommt vor das Hinweisband: Das Band fasst danach beide Wege der
-     * Unterstützung zusammen — Spenden und Mitgliedschaft — und führt zur
-     * vollständigen Spendenseite mit betterplace und Spendenbescheinigung.
+     * Sie kommt vor den Kontaktabschluss. Bis KEV-106 stand dort davor noch
+     * das Hinweisband „Unterstützung“; steht es noch da, kommt sie vor das
+     * Band, wie damals. Seit KEV-106 steht das Band unter „Verein“ und
+     * „Mitglieder“, sonst hiess es zweimal „Spenden“ untereinander.
      *
      * Öffentlich und statisch, damit die Migration sie auf bestehenden
      * Installationen nachziehen kann, ohne den ganzen Seeder laufen zu lassen
@@ -94,15 +95,17 @@ class StartseiteSeeder extends Seeder
         }
 
         /*
-         * Vor dem Hinweisband; fehlt es, vor dem Kontaktabschluss; fehlt auch
-         * der, ans Ende. Die Bausteine dahinter rücken eine Position weiter —
-         * sonst hätten zwei dieselbe, und die Reihenfolge wäre Zufall.
+         * Vor den Kontaktabschluss, oder vor das Band direkt davor; fehlt der
+         * Abschluss, ans Ende. Die Bausteine dahinter rücken eine Position
+         * weiter — sonst hätten zwei dieselbe, und die Reihenfolge wäre Zufall.
          */
-        $vorgaenger = $seite->blocks()
-            ->whereIn('typ', ['cta_band', 'contact_close'])
-            ->orderByRaw("typ = 'cta_band' desc")
-            ->orderBy('position')
-            ->first();
+        $bloecke = $seite->blocks()->orderBy('position')->get()->values();
+        $abschluss = $bloecke->search(fn ($b) => $b->typ === 'contact_close');
+        $vorgaenger = $abschluss === false ? null : $bloecke[$abschluss];
+
+        if ($abschluss !== false && $abschluss > 0 && $bloecke[$abschluss - 1]->typ === 'cta_band') {
+            $vorgaenger = $bloecke[$abschluss - 1];
+        }
 
         $position = $vorgaenger
             ? $vorgaenger->position
@@ -275,6 +278,21 @@ class StartseiteSeeder extends Seeder
                 ],
             ],
 
+            // Stand bis 07.10.2026 direkt unter der Spendenmöglichkeit, dort
+            // hiess es zweimal „Spenden“ untereinander. Auf Wunsch des
+            // Vereins jetzt unter „Verein“ und „Mitglieder“ (KEV-106).
+            [
+                'typ' => 'cta_band',
+                'data' => [
+                    'eyebrow' => 'Unterstützung',
+                    'zitat' => 'Sei Du dabei, jede Unterstützung zählt, egal wie gering!',
+                    'ctas' => [
+                        ['label' => 'Spenden', 'url' => '/spenden', 'variant' => 'light'],
+                        ['label' => 'Mitglied werden', 'url' => '/mitgliedschaft', 'variant' => 'outline'],
+                    ],
+                ],
+            ],
+
             // Siehe spendenAnhaengen(): dieselbe Stelle, dieselben Daten.
             // Von Kevin beauftragt, nicht im Altbestand. Stand bis 27.09.2026
             // direkt unter dem Aufmacher; auf Wunsch des Vereins jetzt unter
@@ -290,18 +308,6 @@ class StartseiteSeeder extends Seeder
             [
                 'typ' => 'donation_options',
                 'data' => self::spendenBaustein(),
-            ],
-
-            [
-                'typ' => 'cta_band',
-                'data' => [
-                    'eyebrow' => 'Unterstützung',
-                    'zitat' => 'Sei Du dabei, jede Unterstützung zählt, egal wie gering!',
-                    'ctas' => [
-                        ['label' => 'Spenden', 'url' => '/spenden', 'variant' => 'light'],
-                        ['label' => 'Mitglied werden', 'url' => '/mitgliedschaft', 'variant' => 'outline'],
-                    ],
-                ],
             ],
 
             [

@@ -201,15 +201,46 @@ class StartseiteTest extends TestCase
         $this->assertStringContainsString('Alle Spendenmöglichkeiten', $html);
     }
 
-    public function test_spendenmoeglichkeit_steht_vor_dem_hinweisband(): void
+    /**
+     * KEV-106: Das Band „Unterstützung“ steht unter „Verein“ und „Mitglieder“.
+     * Direkt unter der Spendenmöglichkeit hiess es zweimal „Spenden“
+     * untereinander.
+     */
+    public function test_hinweisband_steht_unter_verein_nicht_unter_den_spenden(): void
     {
-        // Das Band fasst danach beide Wege zusammen — Spenden und Mitgliedschaft.
-        $typen = $this->startseite()->blocks()->pluck('typ')->all();
+        $typen = $this->startseite()->blocks()->orderBy('position')->pluck('typ')->all();
 
-        $this->assertLessThan(
-            array_search('cta_band', $typen, true),
-            array_search('donation_options', $typen, true),
+        $this->assertSame(
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
+            $typen,
         );
+    }
+
+    public function test_band_rueckt_auf_bestehenden_startseiten_unter_verein(): void
+    {
+        // Stand vor KEV-106: das Band direkt hinter der Spendenmöglichkeit.
+        $seite = $this->startseite();
+        $reihenfolge = ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'];
+        $bloecke = $seite->blocks()->orderBy('position')->get()->all();
+        $band = array_values(array_filter($bloecke, fn ($b) => $b->typ === 'cta_band'))[0];
+        $bloecke = array_values(array_filter($bloecke, fn ($b) => $b->typ !== 'cta_band'));
+        array_splice($bloecke, array_search('donation_options', array_column($bloecke, 'typ'), true) + 1, 0, [$band]);
+        foreach ($bloecke as $position => $block) {
+            $block->update(['position' => $position]);
+        }
+
+        $migration = require database_path('migrations/2026_10_07_190000_unterstuetzung_unter_verein.php');
+        $migration->up();
+
+        $neu = ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'];
+        $this->assertSame($neu, $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
+
+        // Ein zweiter Lauf ändert nichts mehr.
+        $migration->up();
+        $this->assertSame($neu, $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
+
+        $migration->down();
+        $this->assertSame($reihenfolge, $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
     }
 
     public function test_eine_bestehende_startseite_bekommt_die_spendenmoeglichkeit_nachgetragen(): void
@@ -227,9 +258,10 @@ class StartseiteTest extends TestCase
 
         $this->get('/')->assertSee('DE79 8306', false);
 
-        $typen = $seite->fresh()->blocks()->pluck('typ')->all();
+        // Seit KEV-106 vor den Kontaktabschluss, das Band steht weiter oben.
+        $typen = $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all();
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'],
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
             $typen,
         );
         // Keine zwei Bausteine auf derselben Position — sonst wäre die
@@ -249,7 +281,9 @@ class StartseiteTest extends TestCase
 
         $this->spendenMigration()->up();
 
-        $this->assertSame(['donation_options', 'cta_band'], $en->fresh()->blocks()->pluck('typ')->all());
+        // Worum es geht: Die englische Fassung bekommt den Baustein auch. Wo er
+        // landet, prüfen die Tests darüber (ohne Kontaktabschluss: ans Ende).
+        $this->assertSame(1, $en->fresh()->blocks()->where('typ', 'donation_options')->count());
     }
 
     public function test_das_nachtragen_der_spendenmoeglichkeit_laeuft_zweimal_ohne_schaden(): void
@@ -470,14 +504,15 @@ class StartseiteTest extends TestCase
         $migration = require database_path('migrations/2026_09_27_200000_hilfe_box_unter_mitglieder.php');
         $migration->up();
 
+        // Das Band steht seit KEV-106 schon unter „Mitglieder“.
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'],
-            $seite->fresh()->blocks()->pluck('typ')->all(),
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
+            $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all(),
         );
 
         // Ein zweiter Lauf ändert nichts mehr.
         $migration->up();
-        $this->assertSame('hilfe_box', $seite->fresh()->blocks()->pluck('typ')->all()[4]);
+        $this->assertSame('hilfe_box', $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all()[5]);
     }
 
     /** KEV-43: neuer Aufmacher-Text von Taddi, auch in bestehenden Datenbanken. */
