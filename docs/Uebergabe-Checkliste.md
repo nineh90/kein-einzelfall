@@ -282,6 +282,11 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   eigenen Ticket; Menüplatz noch offen). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben.
+- [ ] **Tätigkeits- und Jahresberichte (KEV-103).** Neue Seite unter „Verein“
+  mit Taddis Text, im Menü als letzter Punkt (eine Position stand nicht im
+  Ticket). Noch ohne Berichte: Der Text kündigt sie ab 2025 an. **Bitte den
+  Bericht 2025 als PDF schicken**, oder im Panel selbst als Baustein
+  „Dokumente“ anhängen. Bis Taddi ein Bild schickt, steht der Platzhalter oben.
 - [ ] **Beschwerdemanagement (KEV-98) abnehmen.** Taddis Text in zwei Spalten,
   im Menü „Verein“ an Position 5, darunter ein gemeinsames Formular. Darin
   wählt man oben „Externe Kritik“ (landet wie jede Anfrage im

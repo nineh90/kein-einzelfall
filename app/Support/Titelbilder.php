@@ -100,6 +100,8 @@ class Titelbilder
         'persoenliches-budget', 'pflegegrad',
         // KEV-72, bis Taddi Bilder schickt
         'gruppen-und-veranstaltungen', 'oeffentlichkeitsarbeit', 'rueckblick',
+        // KEV-103, bis Taddi ein Bild schickt
+        'taetigkeits-und-jahresberichte',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

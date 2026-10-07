@@ -26,6 +26,8 @@ return [
                 // KEV-98: an Position 5, Wunsch von Taddi.
                 ['schluessel' => 'beschwerdemanagement', 'label' => 'Beschwerdemanagement',         'url' => '/beschwerdemanagement'],
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
+                // KEV-103: ohne Positionsangabe von Taddi, deshalb ans Ende.
+                ['schluessel' => 'taetigkeits_und_jahresberichte', 'label' => 'Tätigkeits- und Jahresberichte', 'url' => '/taetigkeits-und-jahresberichte'],
             ],
         ],
         /*

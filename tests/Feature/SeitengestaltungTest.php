@@ -175,6 +175,20 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Dokumente zum Herunterladen', $this->get('/selbsthilfegruppen')->getContent());
     }
 
+    /** KEV-103: neue Seite unter Verein, am Ende des Menüs, mit Platzhalterbild. */
+    public function test_taetigkeits_und_jahresberichte(): void
+    {
+        $html = $this->get('/taetigkeits-und-jahresberichte')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Tätigkeits- und Jahresberichte', $html);
+        $this->assertStringContainsString('Hinter jedem Jahr stehen Menschen, Begegnungen, Ideen', $html);
+        $this->assertStringContainsString('Beginnend mit dem Jahr 2025 findest du hier unsere Berichte', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+
+        $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
+        $this->assertSame('/taetigkeits-und-jahresberichte', end($verein['children'])['url']);
+    }
+
     /**
      * KEV-75: Das Bild ist nur noch Hintergrund, das echte Logo liegt als
      * eigenes Element darauf. Auf dem Handy über dem Text, nicht darunter.
