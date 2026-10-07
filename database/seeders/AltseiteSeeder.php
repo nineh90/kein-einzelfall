@@ -96,6 +96,27 @@ class AltseiteSeeder extends Seeder
                 .'Unterstützung ankommt, Wissen vermittelt wird und ein Raum für Austausch entsteht.',
             ],
         ],
+        'istanbul-konvention' => [
+            // KEV-101, Text von Taddi, Absätze von uns gesetzt. „Istanbul-
+            // Konvention“ mit Bindestrich wie im Seitentitel, Taddi schrieb
+            // es getrennt.
+            '' => [
+                'Gewalt gegen Frauen, Mädchen und alle von geschlechtsspezifischer Gewalt betroffenen Menschen ist '
+                .'kein Einzelfall – sie ist ein strukturelles Problem. Die Istanbul-Konvention ist das stärkste '
+                .'internationale Schutzinstrument, das Betroffene davor bewahren soll, übersehen, nicht gehört oder '
+                .'allein gelassen zu werden.',
+                'Als KE!N EINZELFALL e.V. erkennen wir die Istanbul-Konvention ausdrücklich an und verstehen ihre '
+                .'Grundsätze als zentrale Orientierung für unsere Arbeit. Sie stärkt die Rechte der Betroffenen, '
+                .'verpflichtet zu Schutz, Prävention, Unterstützung und Sensibilisierung – Werte, die tief in unserer '
+                .'Vereinsarbeit verankert sind.',
+                'Mit unserer öffentlichen Unterstützung der Istanbul-Konvention machen wir deutlich: Betroffene '
+                .'verdienen Schutz, Respekt, Sicherheit und verlässliche Hilfsstrukturen. Wir setzen uns dafür ein, '
+                .'Lücken im Hilfesystem sichtbar zu machen und überall dort zu füllen, wo staatliche Angebote noch '
+                .'fehlen oder unzureichend sind.',
+                'Hier findest du unsere Haltung zur Istanbul-Konvention und warum sie für unsere Arbeit so wichtig '
+                .'ist, sowie die Istanbul-Konvention.',
+            ],
+        ],
         'kinderkodex' => [
             // KEV-99, Text von Taddi. Der Abschnitt hat keine Überschrift,
             // der Schlüssel ist deshalb leer. Absätze von uns gesetzt.
@@ -117,15 +138,36 @@ class AltseiteSeeder extends Seeder
      * Überschrift über der Dokumentenliste, wo „Dokumente zum Herunterladen“
      * nicht passt, weil dort nur ein Dokument liegt.
      */
+    /**
+     * Einträge, die vor den Dokumenten der Altseite in die Liste kommen.
+     */
+    public const DOKUMENTE_DAVOR = [
+        // KEV-101, Wunsch von Taddi: die Konvention selbst vor „Unsere
+        // Haltung“. Verlinkt statt kopiert, Link von ihr.
+        'istanbul-konvention' => [[
+            'titel' => 'Die Istanbul-Konvention',
+            'url' => 'https://www.institut-fuer-menschenrechte.de/menschenrechtsschutz/europarat/'
+                .'menschenrechtsabkommen-des-europarats/istanbul-konvention',
+            'quelle' => 'Deutsches Institut für Menschenrechte',
+        ]],
+    ];
+
     public const DOKUMENTE_TITEL = [
         // KEV-100, Wunsch von Taddi
         'kinderkodex' => 'Kinderkodex herunterladen',
+        // KEV-101: Die Konvention ist ein Link auf eine fremde Seite, kein
+        // Download (Kevin, 07.10.2026).
+        'istanbul-konvention' => 'Zum Nachlesen',
     ];
 
     /**
      * Beschreibung für Suchmaschinen, wo die der Altseite nicht mehr passt.
      */
     public const NEUE_BESCHREIBUNGEN = [
+        // KEV-101: Die alte passte nicht zur Seite und war schief („Wir setzen
+        // uns … ein und fordert …“).
+        'istanbul-konvention' => 'Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt: unsere Haltung '
+            .'zum Schutz vor geschlechtsspezifischer Gewalt, dazu die Konvention selbst.',
         // KEV-100: Die alte war grammatisch schief („Die Mitglieder und seine
         // Arbeitsgruppen“) und passte nicht mehr zu Taddis Text aus KEV-99.
         'kinderkodex' => 'Der Kinderkodex von KE!N EINZELFALL e.V.: wie wir Kinder und Jugendliche '
@@ -269,6 +311,8 @@ class AltseiteSeeder extends Seeder
                         'bytes' => Dokument::groesse($pdf['url']) ?? $bekannt['bytes'] ?? null,
                     ];
                 })->unique('url')->values()->all();
+
+                $liste = [...self::DOKUMENTE_DAVOR[$slug] ?? [], ...$liste];
 
                 $page->blocks()->create([
                     'typ' => 'download_list',

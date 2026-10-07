@@ -175,6 +175,30 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Dokumente zum Herunterladen', $this->get('/selbsthilfegruppen')->getContent());
     }
 
+    /** KEV-101: Text von Taddi, die Konvention als Link vor „Unsere Haltung“. */
+    public function test_istanbul_konvention_nach_kev_101(): void
+    {
+        $html = $this->get('/istanbul-konvention')->assertOk()->getContent();
+
+        $this->assertStringContainsString('<p>Als KE!N EINZELFALL e.V. erkennen wir die Istanbul-Konvention', $html);
+        $this->assertStringContainsString('<p>Hier findest du unsere Haltung zur Istanbul-Konvention', $html);
+        $this->assertStringNotContainsString('unseren vollständigen Text zur Istanbul Konvention', $html);
+        $this->assertStringNotContainsString('gelassen zu werden.Als', $html);
+
+        // Die Konvention steht vor der Haltung.
+        $konvention = strpos($html, 'href="https://www.institut-fuer-menschenrechte.de/');
+        $haltung = strpos($html, 'Unsere Haltung zur Istanbul-Konvention');
+        $this->assertNotFalse($konvention);
+        $this->assertNotFalse($haltung);
+        $this->assertLessThan($haltung, $konvention);
+
+        // Ein Link ist kein Download.
+        $this->assertStringContainsString('Zum Nachlesen', $html);
+        $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
+
+        $this->assertStringContainsString('content="Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt', $html);
+    }
+
     /** KEV-103: neue Seite unter Verein, am Ende des Menüs, mit Platzhalterbild. */
     public function test_taetigkeits_und_jahresberichte(): void
     {
