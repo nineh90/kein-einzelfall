@@ -163,6 +163,32 @@ class AltseiteSeeder extends Seeder
     /**
      * Beschreibung für Suchmaschinen, wo die der Altseite nicht mehr passt.
      */
+    /**
+     * Neue Abschnitte, die es auf der Altseite nicht gab, je Seite hinter dem
+     * Abschnitt mit der Überschrift `nach`.
+     */
+    public const NEUE_ABSCHNITTE = [
+        'mitgliedschaft' => [[
+            // KEV-95, Text von Taddi („c)“ nach „Wir brauchen dich!“ und
+            // „Antrag auf Mitgliedschaft“). Absätze von uns gesetzt.
+            'nach' => 'Antrag auf Mitgliedschaft',
+            'titel' => 'Beitrags- und Mitgliederordnung',
+            'absaetze' => [
+                'Unsere Beitrags- und Mitgliederordnung ergänzt die Satzung und regelt die wichtigsten '
+                .'Rahmenbedingungen rund um die Mitgliedschaft bei KE!N EINZELFALL e.V. Darin findest du unter '
+                .'anderem Informationen zu den verschiedenen Mitgliedsformen, den Mitgliedsbeiträgen sowie zu '
+                .'Rechten, Pflichten und organisatorischen Abläufen innerhalb der Mitgliedschaft.',
+                'Mit der Veröffentlichung möchten wir transparent und nachvollziehbar darstellen, welche Regelungen '
+                .'für Mitglieder gelten und worauf sich eine Mitgliedschaft bei KE!N EINZELFALL e.V. stützt.',
+            ],
+        ]],
+    ];
+
+    /** Tippfehler in Linktexten der Altseite. */
+    public const DOKUMENT_KORREKTUREN = [
+        'Hlfe zum Ausfüllen' => 'Hilfe zum Ausfüllen', // KEV-95, Mitgliedschaft
+    ];
+
     public const NEUE_BESCHREIBUNGEN = [
         // KEV-101: Die alte passte nicht zur Seite und war schief („Wir setzen
         // uns … ein und fordert …“).
@@ -281,6 +307,16 @@ class AltseiteSeeder extends Seeder
                         'absaetze' => self::NEUE_TEXTE[$slug][$block['titel'] ?? ''] ?? $block['absaetze'],
                     ],
                 ]);
+
+                foreach (self::NEUE_ABSCHNITTE[$slug] ?? [] as $neu) {
+                    if ($neu['nach'] === $block['titel']) {
+                        $page->blocks()->create([
+                            'typ' => 'text',
+                            'position' => $position++,
+                            'data' => ['titel' => $neu['titel'], 'absaetze' => $neu['absaetze']],
+                        ]);
+                    }
+                }
             }
 
             // Die Spendenseite: Konto und PayPal standen auf der Altseite als
@@ -300,7 +336,8 @@ class AltseiteSeeder extends Seeder
                     $bekannt = $dokumente->firstWhere('alt_url', $pdf['url']);
 
                     return [
-                        'titel' => $pdf['titel'] ?: ($bekannt['titel'] ?? basename($pdf['url'])),
+                        'titel' => self::DOKUMENT_KORREKTUREN[$pdf['titel'] ?: ($bekannt['titel'] ?? '')]
+                            ?? ($pdf['titel'] ?: ($bekannt['titel'] ?? basename($pdf['url']))),
                         // Auf unsere eigene Adresse zeigen, nicht mehr auf die
                         // Altseite. Solange die Datei noch nicht geholt ist,
                         // blendet der Baustein den Eintrag aus — ein toter

@@ -199,6 +199,24 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('content="Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt', $html);
     }
 
+    /** KEV-95: Abschnitt zur Beitrags- und Mitgliederordnung, direkt über den Dokumenten. */
+    public function test_mitgliedschaft_erklaert_die_beitragsordnung(): void
+    {
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+
+        $antrag = strpos($html, 'Antrag auf Mitgliedschaft');
+        $ordnung = strpos($html, 'id="abschnitt-beitrags-und-mitgliederordnung"');
+        $dokumente = strpos($html, 'Dokumente zum Herunterladen');
+
+        $this->assertNotFalse($ordnung);
+        $this->assertTrue($antrag < $ordnung && $ordnung < $dokumente, 'Reihenfolge stimmt nicht');
+        $this->assertStringContainsString('Unsere Beitrags- und Mitgliederordnung ergänzt die Satzung', $html);
+        $this->assertStringContainsString('worauf sich eine Mitgliedschaft bei KE!N EINZELFALL e.V. stützt.', $html);
+
+        $this->assertStringContainsString('Hilfe zum Ausfüllen', $html);
+        $this->assertStringNotContainsString('Hlfe', $html);
+    }
+
     /** KEV-103: neue Seite unter Verein, am Ende des Menüs, mit Platzhalterbild. */
     public function test_taetigkeits_und_jahresberichte(): void
     {
