@@ -61,16 +61,17 @@
 
             <div class="flex flex-col gap-8">
 
-                {{-- Suche. Ein normales GET-Formular auf die Beitragsübersicht:
+                {{-- Suche. Ein normales GET-Formular auf die Seitensuche (bis
+                     08.10.2026 die Beitragsübersicht, die leer ist):
                      ohne JavaScript bedienbar, und das Ergebnis hat eine
                      Adresse, die man weitergeben kann. --}}
-                <form method="GET" action="{{ sprachlink('blog.index') }}" role="search"
+                <form method="GET" action="{{ sprachlink('suche') }}" role="search"
                       class="flex flex-col gap-2">
                     <label for="fehler-suche" class="font-display text-base font-medium text-ink">
                         {{ __('rahmen.fehler.suche') }}
                     </label>
                     <div class="flex gap-2">
-                        <input type="search" id="fehler-suche" name="suche"
+                        <input type="search" id="fehler-suche" name="q"
                                class="min-h-11 min-w-0 flex-1 rounded-lg border border-line bg-card px-3 text-ink">
                         <x-ui.button type="submit" variant="primary">
                             {{ __('rahmen.fehler.suche_knopf') }}

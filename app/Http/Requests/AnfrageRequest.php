@@ -39,7 +39,27 @@ class AnfrageRequest extends FormRequest
      */
     protected function getRedirectUrl()
     {
-        return self::mitSprungziel(parent::getRedirectUrl(), $this->input('formular'));
+        return self::zurueck($this);
+    }
+
+    /**
+     * Wohin es nach dem Absenden geht: auf die Seite, von der das Formular kam.
+     *
+     * Nicht `url()->previous()`: Wegen `Referrer-Policy: no-referrer` schickt
+     * der Browser keinen Referer, und Laravel nimmt dann die zuletzt geladene
+     * Seite der Sitzung. Hatte jemand in einem zweiten Tab weitergelesen, ging
+     * es dorthin, und Fehlermeldung und Text waren weg (Prüfung der Firma,
+     * 08.10.2026). Das Formular schickt seinen Pfad als `herkunft` mit.
+     */
+    public static function zurueck(\Illuminate\Http\Request $request): string
+    {
+        $herkunft = $request->input('herkunft');
+
+        $adresse = is_string($herkunft) && preg_match('#^/?[a-z0-9/-]{0,119}$#', $herkunft)
+            ? url('/'.ltrim($herkunft, '/'))
+            : url()->previous();
+
+        return self::mitSprungziel($adresse, $request->input('formular'));
     }
 
     public static function mitSprungziel(string $adresse, mixed $formular): string

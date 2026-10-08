@@ -209,4 +209,79 @@ class AnfrageTest extends TestCase
         // Kein „Anfrage stellen“ am Seitenende, das auf dieselbe Seite zeigt.
         $this->assertStringNotContainsString('Du möchtest uns etwas mitteilen?', $html);
     }
+
+    /**
+     * Prüfung der Firma (08.10.2026), Punkt 5: Nach dem Absenden zurück auf
+     * die Seite des Formulars, nicht auf die zuletzt geladene der Sitzung.
+     * Ohne Referer (no-referrer) war das sonst etwa ein zweiter Tab.
+     */
+    public function test_nach_dem_absenden_geht_es_zur_seite_des_formulars(): void
+    {
+        $this->from('/glossar')
+            ->post('/anfrage', $this->gueltig(['herkunft' => 'anfragen', 'formular' => 'f']))
+            ->assertRedirect('/anfragen#formular-f');
+
+        $this->from('/glossar')
+            ->post('/anfrage', $this->gueltig(['herkunft' => 'anfragen', 'betreff' => 'x']))
+            ->assertRedirect('/anfragen')
+            ->assertSessionHasErrors('betreff');
+    }
+
+    public function test_fremde_herkunft_wird_nicht_als_ziel_genommen(): void
+    {
+        $this->from('/anfragen')
+            ->post('/anfrage', $this->gueltig(['herkunft' => 'https://boese.example/']))
+            ->assertRedirect('/anfragen');
+    }
+
+    public function test_abgelaufene_sitzung_bringt_den_text_zurueck_ins_formular(): void
+    {
+        // Ausserhalb von „testing“ prüft Laravel das CSRF-Token wirklich.
+        $this->app['env'] = 'production';
+
+        $this->post('/anfrage', $this->gueltig([
+            'herkunft' => 'anfragen',
+            'formular' => 'f',
+            'nachricht' => 'Mein langer Text, an dem ich eine Stunde geschrieben habe.',
+        ]))
+            ->assertRedirect('/anfragen#formular-f')
+            ->assertSessionHasInput('nachricht', 'Mein langer Text, an dem ich eine Stunde geschrieben habe.')
+            ->assertSessionHas('formular_hinweis');
+
+        $this->assertSame(0, Inquiry::count());
+    }
+
+    public function test_nur_angenommene_nachrichten_zaehlen_fuer_die_bremse(): void
+    {
+        // Drei Fehlversuche zählen nicht mit.
+        for ($i = 0; $i < 3; $i++) {
+            $this->post('/anfrage', $this->gueltig(['betreff' => 'x']))->assertSessionHasErrors('betreff');
+        }
+
+        for ($i = 0; $i < 5; $i++) {
+            $this->post('/anfrage', $this->gueltig())->assertSessionHas('anfrage_versendet');
+        }
+        $this->assertSame(5, Inquiry::count());
+
+        // Die sechste: zurück zum Formular, mit Text und Hinweis statt einer 429.
+        $this->post('/anfrage', $this->gueltig(['herkunft' => 'anfragen', 'nachricht' => 'Noch eine Nachricht an euch.']))
+            ->assertRedirect('/anfragen')
+            ->assertSessionHasInput('nachricht', 'Noch eine Nachricht an euch.')
+            ->assertSessionHas('formular_hinweis', fn ($t) => str_contains($t, 'warte'));
+        $this->assertSame(5, Inquiry::count());
+    }
+
+    public function test_fehlerseiten_419_und_429_haben_notausgang_und_hilfe(): void
+    {
+        $this->seed(AltseiteSeeder::class);
+        \Illuminate\Support\Facades\Route::middleware('web')->get('/__probe/{code}', fn (int $code) => abort($code));
+
+        foreach ([419, 429] as $code) {
+            $this->get('/__probe/'.$code)
+                ->assertStatus($code)
+                ->assertSee('data-notausgang', false)
+                ->assertSee('tel:+49116006', false)
+                ->assertSee(__("rahmen.fehler.titel_{$code}"));
+        }
+    }
 }

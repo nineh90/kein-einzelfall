@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BeschwerdeRequest;
 use App\Mail\NachrichtAnOmbudsstelle;
+use App\Support\Formularbremse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,11 +29,16 @@ class BeschwerdeController extends Controller
     public function store(BeschwerdeRequest $request, AnfrageController $anfragen)
     {
         $formular = $request->input('formular');
-        $zurueck = BeschwerdeRequest::mitSprungziel(url()->previous(), $formular);
+        $zurueck = BeschwerdeRequest::zurueck($request);
+
+        if (Formularbremse::gesperrt($request, 'beschwerde')) {
+            return Formularbremse::zurueckZumFormular($request);
+        }
 
         if ($request->input('weg') === 'anfrage') {
             $herkunft = trim($request->string('herkunft')->limit(100, '')->value().' · Kritik', ' ·');
             $anfrage = $anfragen->annehmen($request, $herkunft);
+            Formularbremse::zaehlen($request, 'beschwerde');
 
             return redirect($zurueck)
                 ->with('versendet_von', $formular)
@@ -56,6 +62,8 @@ class BeschwerdeController extends Controller
 
             return $this->fehlgeschlagen($zurueck, $formular);
         }
+
+        Formularbremse::zaehlen($request, 'beschwerde');
 
         return redirect($zurueck)
             ->with('versendet_von', $formular)

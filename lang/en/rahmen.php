@@ -134,7 +134,12 @@ return [
             .'the numbers below can be reached regardless.',
         'titel_503' => 'We will be back shortly',
         'lead_503' => 'The site is being worked on. The numbers below can be reached regardless.',
-        'suche' => 'Search articles',
+        'titel_419' => 'The page was open for too long',
+        'lead_419' => 'For security reasons we could not accept this. Please go back and try again. If you had written something, it may still be in the form.',
+        'titel_429' => 'Please pause for a moment',
+        'lead_429' => 'A lot of requests came from your connection in a short time. Please try again in a few minutes. The numbers below can be reached regardless.',
+        // Seit 08.10.2026 die Seitensuche, vorher nur der (leere) Blog.
+        'suche' => 'Search the site',
         'suche_knopf' => 'Search',
         'wohin' => 'Where would you like to go?',
         'zur_startseite' => 'To the home page',

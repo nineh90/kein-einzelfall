@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AnfrageRequest;
 use App\Models\Inquiry;
 use App\Notifications\NeueAnfrage;
+use App\Support\Formularbremse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
@@ -12,9 +13,14 @@ class AnfrageController extends Controller
 {
     public function store(AnfrageRequest $request)
     {
-        $anfrage = $this->annehmen($request, $request->input('herkunft'));
+        if (Formularbremse::gesperrt($request, 'anfrage')) {
+            return Formularbremse::zurueckZumFormular($request);
+        }
 
-        return redirect(AnfrageRequest::mitSprungziel(url()->previous(), $request->input('formular')))
+        $anfrage = $this->annehmen($request, $request->input('herkunft'));
+        Formularbremse::zaehlen($request, 'anfrage');
+
+        return redirect(AnfrageRequest::zurueck($request))
             ->with('versendet_von', $request->input('formular'))
             ->with('anfrage_versendet', self::bestaetigung($anfrage));
     }

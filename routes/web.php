@@ -41,7 +41,9 @@ $oeffentlicheRouten = function () {
      * jemanden aussperren, der eine Nachricht noch einmal abschickt.
      */
     Route::post('/anfrage', [AnfrageController::class, 'store'])
-        ->middleware('throttle:5,10')
+        // Nur gegen Massenversand. Wie oft jemand eine Nachricht schicken
+        // kann, regelt App\Support\Formularbremse, und zwar freundlich.
+        ->middleware('throttle:30,10')
         ->name('anfrage.senden');
 
     /*
@@ -50,7 +52,7 @@ $oeffentlicheRouten = function () {
      * E-Mail an die unabhängige Ombudsstelle. Begründung im Controller.
      */
     Route::post('/beschwerde', [BeschwerdeController::class, 'store'])
-        ->middleware('throttle:5,10')
+        ->middleware('throttle:30,10')
         ->name('beschwerde.senden');
 
     /*

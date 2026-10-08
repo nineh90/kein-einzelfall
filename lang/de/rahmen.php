@@ -179,7 +179,12 @@ return [
         'titel_503' => 'Wir sind gleich zurück',
         'lead_503' => 'An der Seite wird gerade gearbeitet. Die Nummern unten erreichst du '
             .'davon unabhängig.',
-        'suche' => 'Beiträge durchsuchen',
+        'titel_419' => 'Die Seite war zu lange offen',
+        'lead_419' => 'Aus Sicherheitsgründen konnten wir das nicht annehmen. Geh bitte zurück und versuch es noch einmal. Hast du etwas geschrieben, ist es im Formular möglicherweise noch da.',
+        'titel_429' => 'Bitte einen Moment Pause',
+        'lead_429' => 'Von deinem Anschluss kamen in kurzer Zeit sehr viele Anfragen. Versuch es bitte in ein paar Minuten noch einmal. Die Nummern unten erreichst du davon unabhängig.',
+        // Seit 08.10.2026 die Seitensuche, vorher nur der (leere) Blog.
+        'suche' => 'Die Seite durchsuchen',
         'suche_knopf' => 'Suchen',
         'wohin' => 'Wohin möchtest du?',
         'zur_startseite' => 'Zur Startseite',

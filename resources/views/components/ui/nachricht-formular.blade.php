@@ -73,6 +73,16 @@
         </div>
     @endif
 
+    @if (session('formular_hinweis') && $meins(session('formular_hinweis_fuer')))
+        {{-- Abgelaufene Sitzung oder zu viele Nachrichten: Der Text steht
+             wieder in den Feldern (Formularbremse, bootstrap/app.php). --}}
+        <div role="alert"
+             class="mb-6 rounded-card border-2 border-alert {{ $innen }} px-5 py-4">
+            <p class="font-medium text-alert">Deine Nachricht ist noch nicht angekommen.</p>
+            <p class="mt-1 text-sm text-ink">{{ session('formular_hinweis') }}</p>
+        </div>
+    @endif
+
     @if (session('versand_fehlgeschlagen') === $kennung)
         {{-- Die Nachricht ist nirgends gespeichert, also muss der Weg
              daneben genau hier stehen. Der Text bleibt in den Feldern. --}}
@@ -220,6 +230,7 @@
             <label for="{{ $id('einwilligung') }}" class="flex items-start gap-3">
                 <input type="checkbox" name="einwilligung" id="{{ $id('einwilligung') }}" value="1"
                        required class="mt-1 h-5 w-5 shrink-0 rounded border-line accent-[#00702F]"
+                       @checked($alt('einwilligung'))
                        @if ($fehler->has('einwilligung')) aria-invalid="true" @endif>
                 <span class="text-sm text-ink">
                     @if ($auswahl)
