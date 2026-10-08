@@ -187,6 +187,38 @@ class AltseiteSeeder extends Seeder
         ]],
     ];
 
+    /**
+     * Reihenfolge in der Dokumentenliste, wo sie nicht der der Altseite
+     * folgt: diese Adressen zuerst, in dieser Folge, der Rest dahinter.
+     */
+    public const DOKUMENTE_REIHENFOLGE = [
+        // KEV-96, Wunsch von Taddi: erst der Antrag, dann die Ausfüllhilfe,
+        // dann die Ordnung.
+        'mitgliedschaft' => [
+            '/dokumente/2026/03/1.5.1.-MA-0126.pdf',
+            '/dokumente/2026/03/1.5.1.1.-MA-AH-0126.pdf',
+            '/dokumente/2026/05/1.3.1.-B-M-O-0126.pdf',
+        ],
+    ];
+
+    /**
+     * Sortiert eine Dokumentenliste nach DOKUMENTE_REIHENFOLGE.
+     *
+     * @param  list<array<string, mixed>>  $dokumente
+     * @return list<array<string, mixed>>
+     */
+    public static function dokumenteSortieren(string $slug, array $dokumente): array
+    {
+        $folge = array_flip(self::DOKUMENTE_REIHENFOLGE[$slug] ?? []);
+
+        // Stabil: Was nicht in der Liste steht, behält seine Reihenfolge.
+        return collect($dokumente)
+            ->values()
+            ->sortBy(fn ($d, $i) => [$folge[$d['url'] ?? ''] ?? count($folge), $i])
+            ->values()
+            ->all();
+    }
+
     public const DOKUMENTE_TITEL = [
         // KEV-100, Wunsch von Taddi
         'kinderkodex' => 'Kinderkodex herunterladen',
@@ -215,6 +247,8 @@ class AltseiteSeeder extends Seeder
                 .'Rechten, Pflichten und organisatorischen Abläufen innerhalb der Mitgliedschaft.',
                 'Mit der Veröffentlichung möchten wir transparent und nachvollziehbar darstellen, welche Regelungen '
                 .'für Mitglieder gelten und worauf sich eine Mitgliedschaft bei KE!N EINZELFALL e.V. stützt.',
+                // KEV-96, Nachtrag von Taddi
+                'Hier kannst du die Beitrags- und Mitgliederordnung vollständig einsehen.',
             ],
         ]],
     ];
@@ -410,7 +444,7 @@ class AltseiteSeeder extends Seeder
                     ];
                 })->unique('url')->values()->all();
 
-                $liste = [...self::DOKUMENTE_DAVOR[$slug] ?? [], ...$liste];
+                $liste = self::dokumenteSortieren($slug, [...self::DOKUMENTE_DAVOR[$slug] ?? [], ...$liste]);
 
                 $page->blocks()->create([
                     'typ' => 'download_list',

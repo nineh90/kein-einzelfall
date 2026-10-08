@@ -217,6 +217,22 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-96: Nachsatz zur Ordnung, Dokumente in Taddis Reihenfolge, Überschrift bleibt. */
+    public function test_mitgliedschaft_dokumente_in_taddis_reihenfolge(): void
+    {
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Hier kannst du die Beitrags- und Mitgliederordnung vollständig einsehen.', $html);
+        $this->assertStringContainsString('Dokumente zum Herunterladen', $html);
+
+        $antrag = strpos($html, '1.5.1.-MA-0126.pdf');
+        $hilfe = strpos($html, '1.5.1.1.-MA-AH-0126.pdf');
+        $ordnung = strpos($html, '1.3.1.-B-M-O-0126.pdf');
+
+        $this->assertNotFalse($antrag);
+        $this->assertTrue($antrag < $hilfe && $hilfe < $ordnung, 'Reihenfolge der Dokumente stimmt nicht');
+    }
+
     /** Prüfung der Firma (08.10.2026): Beim Import verlorene Knöpfe, Links und Beschriftungen. */
     public function test_verlorene_inhalte_der_altseite_sind_wieder_da(): void
     {
