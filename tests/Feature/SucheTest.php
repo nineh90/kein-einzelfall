@@ -173,11 +173,11 @@ class SucheTest extends TestCase
         /*
          * `noindex` schliesst nicht aus — das heisst „nicht bei Google", nicht
          * „unauffindbar". Wirklich verborgen ist nur, was nicht veröffentlicht
-         * ist: Schutzkonzept und Beschwerdemanagement haben noch keinen Text.
+         * ist: Projekte und Publikationen haben noch keinen Text.
          */
-        $urls = array_column(app(Suche::class)->suchen('schutzkonzept')['treffer'], 'url');
+        $urls = array_column(app(Suche::class)->suchen('publikationen')['treffer'], 'url');
 
-        $this->assertNotContains('/schutzkonzept', $urls);
+        $this->assertNotContains('/publikationen', $urls);
     }
 
     public function test_die_anfrage_wird_nirgends_gespeichert(): void

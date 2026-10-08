@@ -147,7 +147,8 @@ Themenseiten unter „Wissen“), steht vorerst `platzhalter.webp`: leere warme
 Wand mit Fensterlicht, ohne Motiv. Liste in
 `App\Support\Titelbilder::PLATZHALTER_SEITEN` (die Satzung ist seit KEV-77
 raus, Istanbul-Konvention und Kinderkodex seit KEV-79; neu dabei seit KEV-103
-die Tätigkeits- und Jahresberichte). Die richtigen Bilder kommen in
+die Tätigkeits- und Jahresberichte, seit KEV-97 Schutz- und Wertekonzept und
+Red Flags). Die richtigen Bilder kommen in
 späteren Tickets; wer eins setzt, ersetzt einfach den Platzhalter im Panel.
 
 Erzeugt direkt über fal.ai, **nicht** mit `bin/titelbild`: Die Vorlage

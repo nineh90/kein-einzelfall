@@ -73,11 +73,12 @@ class BeschwerdemanagementTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/value="anfrage"[^>]*checked/s', $html);
     }
 
-    public function test_steht_im_menue_verein_an_position_fuenf(): void
+    /** KEV-98 wollte Position 5, seit KEV-97 stehen davor Schutzkonzept und Red Flags. */
+    public function test_steht_im_menue_verein_an_position_sieben(): void
     {
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
 
-        $this->assertSame('/beschwerdemanagement', $verein['children'][4]['url']);
+        $this->assertSame('/beschwerdemanagement', $verein['children'][6]['url']);
     }
 
     public function test_ohne_auswahl_wird_nichts_verschickt(): void

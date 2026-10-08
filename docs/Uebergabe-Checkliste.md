@@ -319,6 +319,18 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   ukf.org antwortete nicht; die Seite des Kuratoriums ist **ukfb.org** und nennt
   dort selbst **kontakt@ukfb.org**. Das haben wir eingetragen. Die Unterzeile
   auf dem Bild („Unabhängiges Kuratorium für Betroffenenexpertise“) ist von uns.
+- [ ] **Schutz- und Wertekonzept und Red Flags (KEV-97).** Zwei Seiten unter
+  „Verein“ mit Taddis Text, im Menü an Position 4 und 5 (Red Flags als eigener
+  Punkt, wie gewünscht). Beschwerdemanagement rückt dadurch von 5 auf 7. Die
+  Seite ist der bisherige leere Entwurf „Schutzkonzept“, jetzt unter
+  /schutz-und-wertekonzept. Offen:
+  - **Bitte das Schutz- und Wertekonzept als PDF schicken.** Der letzte Satz
+    („Hier kannst du … einsehen“) zeigt bis dahin auf nichts. Im Panel als
+    Baustein „Dokumente“ anhängbar.
+  - Bei Red Flags hängt der Leitfaden der Altseite („6.1.2. Must haves u. Red
+    Flaggs für Betroffene“, Stand 01/26). Ist der im Drive neuer, bitte schicken.
+  - „Red Flags“ statt „Red Flaggs“ geschrieben, so steht es auch im PDF.
+  - Bilder liegen im Drive, bis dahin der Platzhalter.
 - [ ] **Tätigkeits- und Jahresberichte (KEV-103).** Neue Seite unter „Verein“
   mit Taddis Text, im Menü als letzter Punkt (eine Position stand nicht im
   Ticket). Noch ohne Berichte: Der Text kündigt sie ab 2025 an. **Bitte den

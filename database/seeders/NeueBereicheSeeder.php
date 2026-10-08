@@ -70,9 +70,11 @@ class NeueBereicheSeeder extends Seeder
     public static function seiten(): array
     {
         return [
+            // KEV-97: Text von Taddi, Titel und Adresse seitdem wie bei ihr
+            // (SchutzkonzeptSeeder füllt den Entwurf).
             [
-                'slug' => 'schutzkonzept',
-                'titel' => 'Schutzkonzept',
+                'slug' => 'schutz-und-wertekonzept',
+                'titel' => 'Schutz- und Wertekonzept',
                 'abschnitte' => [null],
             ],
             // KEV-98: Text und Formular kamen von Taddi, die Seite ist

@@ -303,6 +303,28 @@ class SeitengestaltungTest extends TestCase
         $this->assertSame('/gremium-ukfb', end($verein['children'])['url']);
     }
 
+    /** KEV-97: Schutz- und Wertekonzept und Red Flags, im Menü „Verein“ an Position 4 und 5. */
+    public function test_schutz_und_wertekonzept_und_red_flags(): void
+    {
+        $html = $this->get('/schutz-und-wertekonzept')->assertOk()->getContent();
+        $this->assertStringContainsString('Schutz, Würde und Selbstbestimmung sind Grundlagen unserer Arbeit.', $html);
+        $this->assertStringContainsString('Der Mensch steht vor dem Verfahren. Immer.', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+
+        $html = $this->get('/red-flags')->assertOk()->getContent();
+        $this->assertStringContainsString('Gemeinsam gelingt Zusammenarbeit am besten', $html);
+        $this->assertStringContainsString('Leitfaden herunterladen', $html);
+        $this->assertStringContainsString('6.1.2.-Must-haves-u.-Red-Flaggs-fuer-Betroffene.pdf', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+
+        // Der leere Entwurf ist gefüllt, nicht verdoppelt.
+        $this->assertFalse(Page::where('slug', 'schutzkonzept')->exists());
+
+        $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
+        $this->assertSame('/schutz-und-wertekonzept', $verein['children'][3]['url']);
+        $this->assertSame('/red-flags', $verein['children'][4]['url']);
+    }
+
     /** KEV-103: neue Seite unter Verein, hinter dem Kinderkodex, mit Platzhalterbild. */
     public function test_taetigkeits_und_jahresberichte(): void
     {

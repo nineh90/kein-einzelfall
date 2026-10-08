@@ -103,6 +103,8 @@ class Titelbilder
         'gruppen-und-veranstaltungen', 'oeffentlichkeitsarbeit', 'rueckblick',
         // KEV-103, bis Taddi ein Bild schickt
         'taetigkeits-und-jahresberichte',
+        // KEV-97, bis Taddi Bilder schickt
+        'schutz-und-wertekonzept', 'red-flags',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

@@ -138,9 +138,12 @@ class SeitenUndRedirectsTest extends TestCase
          *
          * Seit KEV-105 ist auch Gremium UKFB veröffentlicht, seit KEV-104 die
          * Landesstellen.
+         *
+         * KEV-97: Der Entwurf Schutzkonzept ist jetzt das veröffentlichte
+         * Schutz- und Wertekonzept, dazu neu Red Flags.
          */
-        $this->assertSame(41, Page::count());
-        $this->assertSame(3, Page::whereNull('published_at')->count());
+        $this->assertSame(42, Page::count());
+        $this->assertSame(2, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -165,8 +168,9 @@ class SeitenUndRedirectsTest extends TestCase
          * Struktur, den Text schreibt er selbst.
          */
         // Beschwerdemanagement fehlt seit KEV-98: Es hat Text und ist veröffentlicht.
-        // Gremium UKFB (KEV-105) und Landesstellen (KEV-104) ebenfalls nicht mehr.
-        foreach (['schutzkonzept', 'projekte', 'publikationen'] as $slug) {
+        // Gremium UKFB (KEV-105) und Landesstellen (KEV-104) ebenfalls nicht mehr,
+        // das Schutzkonzept seit KEV-97 auch nicht.
+        foreach (['projekte', 'publikationen'] as $slug) {
             $seite = Page::where('slug', $slug)->first();
 
             $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");
