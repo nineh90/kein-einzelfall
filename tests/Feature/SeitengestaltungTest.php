@@ -217,6 +217,17 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-93: neuer Text von Taddi unter „Wir brauchen dich!“. */
+    public function test_mitgliedschaft_wir_brauchen_dich_hat_den_neuen_text(): void
+    {
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Eigene Erfahrungen: Vielleicht bist du selbst betroffen', $html);
+        $this->assertStringContainsString('das aus Erfahrung Wissen und Veränderung entstehen lässt.', $html);
+        $this->assertStringNotContainsString('Einige Motivationen sind die folgenden.', $html);
+        $this->assertStringNotContainsString('Hilfe und Unterstützung leisten', $html);
+    }
+
     /** KEV-94: neuer Text von Taddi unter „Antrag auf Mitgliedschaft“. */
     public function test_mitgliedschaft_antrag_hat_den_neuen_text(): void
     {

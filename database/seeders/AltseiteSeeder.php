@@ -153,6 +153,33 @@ class AltseiteSeeder extends Seeder
             ],
         ],
         'mitgliedschaft' => [
+            // KEV-93, Text von Taddi: ohne „Einige Motivationen sind die
+            // folgenden.“ und ohne „Hilfe und Unterstützung leisten“, „Eigene
+            // Erfahrungen“ statt „… verarbeiten“, dazu der Schlusssatz. Dort
+            // ohne Komma nach „Erfahrung“, sonst fehlt „entstehen lässt“ das
+            // Objekt.
+            'Wir brauchen dich!' => [
+                'Warum solltest ausgerechnet DU bei uns im Verein Mitglied werden? Es gibt viele Gründe dafür, '
+                .'unserem Verein beizutreten.',
+                'Eigene Erfahrungen: Vielleicht bist du selbst betroffen und möchtest anderen helfen, indem du eigene '
+                .'Erfahrungen im Umgang mit der Betroffenheit teilst und Unterstützung anbietest, oder vielleicht '
+                .'brauchst du genau deswegen selbst Hilfe.',
+                'Gemeinschaft und Zusammenhalt: Du suchst nach einer Gemeinschaft von Gleichgesinnten/Betroffenen, um '
+                .'endlich nicht mehr allein mit deinen Problemen zu sein. Denn du bist KE!N EINZELFALL!',
+                'Persönliche Entwicklung: Durch die Arbeit bei uns im Verein kannst du für dich wertvolle Erfahrungen '
+                .'sammeln, neue Fähigkeiten erlernen und deine sozialen Kompetenzen stärken.',
+                'Netzwerk erweitern: Du hast die Möglichkeit, durch den Verein neue Kontakte zu knüpfen und dich mit '
+                .'anderen engagierten Menschen zu vernetzen, die sich für gleiche Ziele einsetzen und gemeinsam etwas '
+                .'bewirken möchten.',
+                'Neue Projekte ins Leben rufen: Du hast die Möglichkeit, durch den Verein und mit anderen Mitgliedern '
+                .'neue Projekte ins Leben zu rufen, um gemeinsam etwas bewirken zu können und mehr Sichtbarkeit zu '
+                .'schaffen.',
+                'Bewusstsein schaffen: Du möchtest dazu beitragen, das Bewusstsein für die Bedürfnisse und Rechte von '
+                .'Opfern zu erhöhen und gesellschaftliche Veränderungen anzustoßen, um so für mehr Sichtbarkeit und '
+                .'Anerkennung zu sorgen.',
+                'Mit deiner Mitgliedschaft wirst du Teil von etwas, das aus Erfahrung Wissen und Veränderung '
+                .'entstehen lässt.',
+            ],
             // KEV-94, Text von Taddi, Absätze von uns gesetzt. „eine
             // Ausfüllhilfe“ statt „einen“, „Wir“ am Satzanfang groß.
             'Antrag auf Mitgliedschaft' => [
