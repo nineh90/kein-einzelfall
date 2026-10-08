@@ -165,7 +165,9 @@
 
          Überschrift und Text seit KEV-71 von Taddi (vorher „Fragen zu diesem
          Thema?“, ohne die Projektideen). --}}
-    @unless ($kontext->istRechtstext())
+    {{-- Und nicht unter dem Kontaktformular selbst: Dort zeigte „Anfrage
+         stellen“ auf dieselbe Seite. --}}
+    @unless ($kontext->istRechtstext() || $page->blocks->contains('typ', 'contact_form'))
         <x-blocks.contact-close
             :auf="$kontaktAuf"
             titel="Du möchtest uns etwas mitteilen?"

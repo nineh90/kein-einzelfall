@@ -168,14 +168,12 @@ class AnfrageTest extends TestCase
         // Muss auch in gehärteten Browsern oder über Tor funktionieren.
         $this->seed(AltseiteSeeder::class);
 
-        Page::where('slug', 'anfragen')->first()->blocks()->create([
-            'typ' => 'contact_form',
-            'position' => 99,
-            'data' => ['titel' => 'Schreib uns'],
-        ]);
-
+        // Seit 08.10.2026 steht das Formular wirklich auf /anfragen. Vorher
+        // standen dort nur die Feldnamen der Altseite als Text, und dieser
+        // Test legte den Baustein selbst an — er bemerkte das Fehlen nicht.
         $this->get('/anfragen')
             ->assertSee('<form method="POST"', false)
+            ->assertSee('action="'.url('/anfrage').'"', false)
             ->assertSee('name="betreff"', false)
             ->assertSee('name="einwilligung"', false);
     }
@@ -190,5 +188,25 @@ class AnfrageTest extends TestCase
         foreach (['ip', 'ip_address', 'user_agent'] as $unerwuenscht) {
             $this->assertNotContains($unerwuenscht, $spalten);
         }
+    }
+
+    /**
+     * Prüfung der Firma (08.10.2026): Krisennummern auf /anfragen aus der
+     * geprüften Liste, nicht mehr aus dem Text der Altseite.
+     */
+    public function test_anfragen_zeigt_die_gepruefte_hilfeliste(): void
+    {
+        $this->seed(AltseiteSeeder::class);
+
+        $html = $this->get('/anfragen')->getContent();
+
+        $this->assertStringContainsString('href="tel:+498002255530"', $html);
+        $this->assertSame(1, substr_count($html, '0800 22 55 530'), 'Missbrauchs-Hotline steht doppelt');
+        $this->assertStringNotContainsString('6553000', $html, 'Krisendienst Bayern ohne Hinweis');
+        $this->assertStringNotContainsString('Deine E-Mail Adresse', $html);
+        $this->assertStringNotContainsString('Formular auf anderen Seiten', $html);
+
+        // Kein „Anfrage stellen“ am Seitenende, das auf dieselbe Seite zeigt.
+        $this->assertStringNotContainsString('Du möchtest uns etwas mitteilen?', $html);
     }
 }

@@ -42,10 +42,13 @@ return [
      *                      Geld gebeten. Das ist keine Höflichkeit, sondern
      *                      der Unterschied zwischen Opferhilfe und Vertrieb.
      *   trigger-warnung  — die Seite des Hinweises selbst
+     *   beschwerdemanagement — dort schreibt man Kritik oder eine Beschwerde
+     *                      über den Verein; eine Spendenbitte daneben wirkte
+     *                      wie Druck (Prüfung der Firma, 08.10.2026)
      *
      * Fehlerseiten sind ohnehin ausgenommen (siehe errors/fehlerseite.blade.php).
      */
-    'ausgenommen' => ['spenden', 'anfragen', 'kontakt', 'trigger-warnung'],
+    'ausgenommen' => ['spenden', 'anfragen', 'kontakt', 'trigger-warnung', 'beschwerdemanagement'],
 
     /* Wohin der Knopf führt. */
     'ziel' => '/spenden',

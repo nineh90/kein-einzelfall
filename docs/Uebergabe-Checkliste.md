@@ -8,20 +8,25 @@ werden muss. Sortiert nach Dringlichkeit.
 ## A. Fragen an den Verein (Tatjana)
 
 ### A1 · Notfallnummern gegenprüfen — vor Go-Live
-In `config/hilfe.php` stehen fünf Nummern, die auf der Startseite und den
-Trauma-Seiten prominent erscheinen:
+In `config/hilfe.php` stehen sechs Nummern. Sie erscheinen auf der Startseite,
+in der Fusszeile, auf der Fehlerseite und seit 08.10.2026 auch auf `/anfragen`
+(dort stand vorher eine eigene Liste der Altseite):
 
-| Dienst | Nummer |
-|---|---|
-| Opfer-Telefon WEISSER RING | 116 006 |
-| Telefonseelsorge | 0800 111 0 111 |
-| Hilfetelefon Gewalt gegen Frauen | 116 016 |
-| Hilfetelefon Sexueller Missbrauch | 0800 22 55 530 |
-| Nummer gegen Kummer | 116 111 |
+| Dienst | Nummer | Zeiten |
+|---|---|---|
+| Opfer-Telefon WEISSER RING | 116 006 | täglich 7–22 Uhr |
+| TelefonSeelsorge | 116 123 | rund um die Uhr |
+| Hilfetelefon Gewalt gegen Frauen | 116 016 | rund um die Uhr |
+| Hilfetelefon Gewalt an Männern | 0800 123 99 00 | Mo–Do 8–20, Fr 8–15 Uhr |
+| Hilfetelefon Sexueller Missbrauch | 0800 22 55 530 | Mo, Mi, Fr 9–14, Di, Do 15–20 Uhr |
+| Nummer gegen Kummer | 116 111 | Mo–Sa 14–20 Uhr |
 
 **Bitte auf Richtigkeit und Zeiten prüfen.** Der Verein kennt die Landschaft
 besser als wir. Eine falsche Nummer wäre hier ein echter Schaden.
-Fehlt ein Dienst, den ihr regelmäßig empfehlt?
+Fehlt ein Dienst, den ihr regelmäßig empfehlt? Die Altseite nannte auf
+`/anfragen` zusätzlich den **Krisendienst 0800 / 655 3000**. Das ist der
+Krisendienst **Bayern**, regional, deshalb steht er nicht mehr dabei. Soll er
+wieder rein, dann mit „(Bayern)“.
 
 ### A2 · Aufbewahrungsfristen für Anfragen — juristisch klären
 Vorschlag steht in `config/anfragen.php`: erledigte Anfragen 90 Tage nach

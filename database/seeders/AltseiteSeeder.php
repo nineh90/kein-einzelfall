@@ -361,6 +361,12 @@ class AltseiteSeeder extends Seeder
                 ]);
             }
 
+            // /anfragen: echtes Formular und geprüfte Hilfe-Nummern statt der
+            // Feldnamen und Krisenliste der Altseite (AnfragenSeiteSeeder).
+            if ($slug === 'anfragen') {
+                AnfragenSeiteSeeder::umbauen($page);
+            }
+
             // WordPress liefert jede Seite mit Schrägstrich am Ende aus.
             // Ohne diese Weiterleitung wäre jede indexierte URL ein 404.
             Redirect::updateOrCreate(
