@@ -152,6 +152,19 @@ class AltseiteSeeder extends Seeder
                 'Finanzen: finanzen@kein-einzelfall.de',
             ],
         ],
+        'mitgliedschaft' => [
+            // KEV-94, Text von Taddi, Absätze von uns gesetzt. „eine
+            // Ausfüllhilfe“ statt „einen“, „Wir“ am Satzanfang groß.
+            'Antrag auf Mitgliedschaft' => [
+                'Du möchtest Mitglied bei KE!N EINZELFALL e.V. werden? Dann beginnt dein Weg genau hier mit dem '
+                .'Mitgliedsantrag.',
+                'Im Antrag trägst du die für deine Mitgliedschaft notwendigen Angaben ein und wählst die passende '
+                .'Mitgliedsform aus. Sobald der Antrag vollständig bei uns eingegangen ist, kann deine Aufnahme in '
+                .'den Verein geprüft und bearbeitet werden. Weiter unten haben wir dir auch eine Ausfüllhilfe zur '
+                .'Verfügung gestellt.',
+                'Wir freuen uns, wenn du Teil von KE!N EINZELFALL wirst.',
+            ],
+        ],
         'kinderkodex' => [
             // KEV-99, Text von Taddi. Der Abschnitt hat keine Überschrift,
             // der Schlüssel ist deshalb leer. Absätze von uns gesetzt.

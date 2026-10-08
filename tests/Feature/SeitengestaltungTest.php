@@ -217,6 +217,17 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-94: neuer Text von Taddi unter „Antrag auf Mitgliedschaft“. */
+    public function test_mitgliedschaft_antrag_hat_den_neuen_text(): void
+    {
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Dann beginnt dein Weg genau hier mit dem Mitgliedsantrag.', $html);
+        $this->assertStringContainsString('Weiter unten haben wir dir auch eine Ausfüllhilfe zur Verfügung gestellt.', $html);
+        $this->assertStringContainsString('Wir freuen uns, wenn du Teil von KE!N EINZELFALL wirst.', $html);
+        $this->assertStringNotContainsString('Für alle zukünftigen Mitglieder und Interessierten', $html);
+    }
+
     /** KEV-96: Nachsatz zur Ordnung, Dokumente in Taddis Reihenfolge, Überschrift bleibt. */
     public function test_mitgliedschaft_dokumente_in_taddis_reihenfolge(): void
     {
