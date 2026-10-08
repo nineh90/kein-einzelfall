@@ -1,0 +1,44 @@
+{
+  "oeg": {
+    "begriff": "Victims’ Compensation Act (Opferentschädigungsgesetz)",
+    "kuerzel": "OEG",
+    "erklaerung": "The Victims’ Compensation Act expired on 31 December 2023 and was replaced by Book XIV of the Social Code on 1 January 2024. Both are still relevant: there are cases under the old law and under the new law.",
+    "mehr_label": null
+  },
+  "sgb-xiv": {
+    "begriff": "Social Code, Book Fourteen (Sozialgesetzbuch Vierzehntes Buch)",
+    "kuerzel": "SGB XIV",
+    "erklaerung": "Has governed social compensation since 1 January 2024, replacing the Victims’ Compensation Act. The old law may still apply to acts committed before that date.",
+    "mehr_label": "Go to the entry ‘OEG’"
+  },
+  "ser": {
+    "begriff": "Social compensation law (Soziales Entschädigungsrecht)",
+    "kuerzel": "SER",
+    "erklaerung": "Umbrella term for the rules under which the state compensates people who have been harmed by a violent act or by other events for which the state is responsible. The association works on this in working group AG 01.",
+    "mehr_label": "Go to the working groups"
+  },
+  "ifg": {
+    "begriff": "Freedom of Information Act (Informationsfreiheitsgesetz)",
+    "kuerzel": "IFG",
+    "erklaerung": "Gives everyone the right to request information from public authorities about the records they hold. The association uses it in working group AG 02 to bring administrative practice in social compensation law into the open.",
+    "mehr_label": "Go to the working groups"
+  },
+  "gdb": {
+    "begriff": "Degree of disability (Grad der Behinderung)",
+    "kuerzel": "GdB",
+    "erklaerung": "DRAFT — please check. A measure of how much a disability affects a person’s participation in society. It is given in steps of ten from 20 to 100. From 50 upwards, a person is considered severely disabled.",
+    "mehr_label": null
+  },
+  "pflegegrad": {
+    "begriff": "Care level (Pflegegrad)",
+    "kuerzel": null,
+    "erklaerung": "DRAFT — please check. A rating of how independently someone can manage their everyday life. There are five care levels; they determine which benefits the long-term care insurance covers.",
+    "mehr_label": null
+  },
+  "persoenliches-budget": {
+    "begriff": "Personal budget (Persönliches Budget)",
+    "kuerzel": null,
+    "erklaerung": "DRAFT — please check. Instead of a benefit in kind, money is paid out, which the entitled person uses to buy and organise the support they need themselves.",
+    "mehr_label": null
+  }
+}

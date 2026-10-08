@@ -434,12 +434,25 @@ class MehrsprachigkeitTest extends TestCase
         return require database_path('migrations/2026_09_19_130000_russisch_entfernen.php');
     }
 
-    public function test_seite_ausserhalb_des_kerns_faellt_weiter_sichtbar_zurueck(): void
+    public function test_seit_oktober_ist_jede_seite_uebersetzt(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
-        // „satzung“ ist nicht im Kern-Set — Englisch ist trotzdem freigeschaltet.
-        // Kein 404, sondern der deutsche Inhalt mit dem Hinweis in der Zielsprache.
+        // Bis 08.10.2026 fiel /en/satzung auf Deutsch zurück (nur fünf
+        // Kernseiten). Jetzt gibt es jede veröffentlichte Seite auf Englisch,
+        // gekennzeichnet als maschinelle, ungeprüfte Übersetzung.
+        $this->get('/en/satzung')
+            ->assertOk()
+            ->assertSee('lang="en"', false)
+            ->assertSee('Machine translation')
+            ->assertDontSee('not available in English yet', false);
+    }
+
+    public function test_fehlende_englische_seite_faellt_weiter_sichtbar_zurueck(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+        Page::where('locale', 'en')->where('slug', 'satzung')->each(fn ($p) => $p->delete());
+
         $this->get('/en/satzung')
             ->assertOk()
             ->assertSee('not available in English yet', false)
@@ -457,8 +470,10 @@ class MehrsprachigkeitTest extends TestCase
             ->assertOk()
             ->assertSee('DE79 8306 5408 0006 8893 10');
 
-        // Der Knopf der englischen Startseite zeigt weiter auf die interne Adresse.
-        $this->get('/en')->assertOk()->assertSee('href="/anfragen"', false);
+        // Eigene Seiten zeigen seit 08.10.2026 auf die englische Fassung,
+        // Dateien bleiben, wo sie sind.
+        $this->get('/en')->assertOk()->assertSee('href="/en/anfragen"', false);
+        $this->get('/en/mitgliedschaft')->assertOk()->assertSee('href="/dokumente/', false);
     }
 
     public function test_demo_seeder_laeuft_zweimal_ohne_dubletten(): void
@@ -469,14 +484,15 @@ class MehrsprachigkeitTest extends TestCase
         $this->assertSame(1, Page::where('locale', 'en')->where('slug', 'verein')->count());
     }
 
-    public function test_demo_seeder_ueberschreibt_gepflegte_uebersetzungen_nicht(): void
+    public function test_demo_seeder_ueberschreibt_gepruefte_uebersetzungen_nicht(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
-        // Der Verein korrigiert eine maschinelle Übersetzung im Panel …
+        // Der Verein korrigiert eine maschinelle Übersetzung im Panel und
+        // nimmt den Haken „ungeprüft“ heraus …
         Page::where('locale', 'en')->where('slug', 'verein')
             ->firstOrFail()
-            ->update(['titel' => 'About us — reviewed']);
+            ->update(['titel' => 'About us — reviewed', 'ungeprueft' => false]);
 
         // … ein erneuter Lauf darf das nicht zurücksetzen.
         $this->seed(UebersetzungenSeeder::class);
@@ -485,5 +501,33 @@ class MehrsprachigkeitTest extends TestCase
             'About us — reviewed',
             Page::where('locale', 'en')->where('slug', 'verein')->value('titel'),
         );
+    }
+
+    public function test_ungepruefte_uebersetzungen_werden_neu_aufgebaut(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        // Noch ungeprüft: Korrekturen am Wörterbuch sollen ankommen.
+        Page::where('locale', 'en')->where('slug', 'verein')->firstOrFail()->update(['titel' => 'Alt']);
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->assertSame('Non-profit association', Page::where('locale', 'en')->where('slug', 'verein')->value('titel'));
+    }
+
+    public function test_gruppen_und_team_lesen_sich_auf_englisch(): void
+    {
+        $this->seed(\Database\Seeders\TeamUndGruppenSeeder::class);
+        $this->seed(UebersetzungenSeeder::class);
+
+        $gruppe = \App\Models\Group::where('slug', 'wir-sind-nicht-mehr-stumm')->firstOrFail();
+        $deutsch = $gruppe->teaser;
+
+        app()->setLocale('en');
+        $this->assertNotSame($deutsch, $gruppe->teaser);
+        // Gespeichert bleibt das deutsche Original.
+        $this->assertSame($deutsch, $gruppe->getRawOriginal('teaser'));
+        app()->setLocale('de');
+
+        $this->get('/en/ueber-uns-vorstand-und-team')->assertOk()->assertSee('Chair');
     }
 }

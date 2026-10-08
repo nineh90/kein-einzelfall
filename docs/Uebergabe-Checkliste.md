@@ -284,6 +284,24 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   UKFB seit KEV-105, Landesstellen seit KEV-104). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben.
+- [ ] **Englische Fassung gegenlesen (seit 08.10.2026 die ganze Seite).**
+  Alles ist maschinell übersetzt, jede Seite trägt oben „Machine translation —
+  not yet reviewed“ und ist für Suchmaschinen gesperrt. Wer eine Seite geprüft
+  hat, nimmt im Panel den Haken „ungeprüft“ heraus; dann bleibt sie, wie sie
+  ist. Ändert der Verein den deutschen Text, bleibt die englische Seite beim
+  alten Stand, bis jemand die Übersetzung nachzieht. Bitte besonders prüfen:
+  - Begriffe: „Satzung“ = *Articles of Association*, „Beitrags- und
+    Mitgliederordnung“ = *Fee and Membership Regulations*, „Mitopfer“ =
+    *indirect victims*, „Opferbeauftragter“ (Rolle im Verein) = *Victims’
+    representative*, „Herr und Frau Unbekannt“ = *Mr and Mrs Anonymous*,
+    „Fonds Sexueller Missbrauch“ = *Sexual Abuse Fund* (keine amtliche
+    englische Bezeichnung bekannt).
+  - Wortspiel „KE!N EINZELFALL“: Der Name bleibt überall stehen („Because you
+    are KE!N EINZELFALL!“), das Wortspiel geht auf Englisch verloren.
+  - Fristen, Ansprüche und Zuständigkeiten auf den Wissensseiten.
+  - Aufgefallen beim Übersetzen: Der Referent heißt einmal „Quendolin
+    Winter“, einmal „Quen Winter“ (Das Hilfesystem). Welcher Name stimmt?
+    Das Glossar trägt noch den Vermerk „ENTWURF — bitte prüfen.“
 - [ ] **Landesstellen (KEV-104).** Mit Taddis Text veröffentlicht, je
   Bundesland ein Abschnitt. Im Menü unter **Kontakt** (Platz stand nicht im
   Ticket; die Kontaktseite verspricht im Bild schon „Alle Ansprechpartner,

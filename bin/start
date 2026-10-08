@@ -141,6 +141,15 @@ if [[ "${GRUPPEN:-0}" -eq 0 ]]; then
     GRUPPEN=$(zaehle 'App\Models\Group::count()')
 fi
 
+# Englische Fassung (seit 08.10.2026 die ganze Seite). Auf bestehenden
+# Datenbanken erledigt das die Migration `englisch_vollstaendig`; auf einer
+# frischen kommen die deutschen Inhalte erst oben, also hier hinterher.
+ENGLISCH=$(zaehle "App\Models\Page::where('locale', 'en')->count()")
+if [[ "${ENGLISCH:-0}" -eq 0 ]]; then
+    echo "→ Englische Fassung anlegen ..."
+    php artisan db:seed --class=UebersetzungenSeeder --force 2>&1 | head -1
+fi
+
 # Ohne Konto kommt niemand in die Verwaltung. Das Konto wurde früher von Hand
 # angelegt — und existierte damit auf genau einem Rechner.
 php artisan db:seed --class=AdminSeeder --force 2>&1 | grep -i 'konto' || true

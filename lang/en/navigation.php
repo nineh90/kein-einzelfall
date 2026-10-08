@@ -3,18 +3,23 @@
 /*
  * Englische Beschriftungen der Navigation.
  *
- * ABSICHTLICH UNVOLLSTÄNDIG. Hier stehen nur die Beschriftungen, die reine
- * Bedienung sind — Bereichsnamen und die Mobil-Leiste.
- *
- * Alle anderen Menüpunkte sind Seitentitel: „Erwerbsminderungsrente“,
- * „FSM – Erweitertes Hilfesystem“, „Istanbul-Konvention“. Das sind Fachbegriffe
- * des deutschen Sozialrechts. Eine unscharfe Übersetzung davon kann realen
- * Schaden anrichten, deshalb erfinden wir sie nicht. Sie erscheinen automatisch,
- * sobald der Verein die zugehörige Seite auf Englisch anlegt — bis dahin steht
- * dort der deutsche Titel, was ehrlicher ist als ein geratener englischer.
+ * Seit 08.10.2026 gibt es jede Seite auf Englisch; die meisten Menüpunkte
+ * nehmen den Titel der englischen Seite (App\Support\Navigation). Hier
+ * stehen nur Bereichsnamen, Punkte ohne eigene Seite (Aktuelles) und
+ * Kurzfassungen, wo der Seitentitel einen deutschen Begriff in Klammern trägt.
  */
 return [
 
+    // Bereichsnamen und Punkte ohne eigene Seite (seit 08.10.2026 ist jede
+    // Seite übersetzt, die übrigen Punkte nehmen deren Titel).
+    'bereich_verein' => 'Association',
+    'bereich_wissen' => 'Knowledge',
+    'bereich_spenden' => 'Donate',
+    'aktuelles' => 'News',
+    'anfragen' => 'Requests & exchange',
+    // Kürzer als der Seitentitel, der den deutschen Begriff in Klammern trägt.
+    'fsm_erweitertes_hilfesystem' => 'FSM – extended support system',
+    'erwerbsminderungsrente' => 'Reduced earning capacity pension',
     'bereich_gruppen_veranstaltungen' => 'Groups & events',
     'bereich_kontakt' => 'Contact',
 

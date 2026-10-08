@@ -91,7 +91,14 @@ class Navigation
 
         $pfad = 'navigation.'.$schluessel;
 
-        if (Lang::has($pfad)) {
+        // Ohne Rückfall auf Deutsch (08.10.2026): Lang::has() fand sonst die
+        // deutsche Beschriftung, und auf Englisch stand „Satzung“ statt des
+        // Titels der englischen Seite.
+        $vorhanden = app()->getLocale() === Language::standardCode()
+            ? Lang::has($pfad)
+            : Lang::hasForLocale($pfad);
+
+        if ($vorhanden) {
             return __($pfad);
         }
 

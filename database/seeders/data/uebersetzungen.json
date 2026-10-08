@@ -280,5 +280,1748 @@
   },
   "Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder Seite. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.": {
     "en": "If you need help right now: the emergency numbers are at the bottom of every page. TelefonSeelsorge (116 123) can be reached 24/7."
+  },
+  "Datenschutz": {
+    "en": "Privacy Policy"
+  },
+  "Datenschutz - Kein Einzelfall e.V.": {
+    "en": "Privacy Policy - Kein Einzelfall e.V."
+  },
+  "Datenschutz - Transparente Informationen zur Verarbeitung personenbezogener Daten auf unserer Website": {
+    "en": "Privacy Policy - Transparent information on the processing of personal data on our website"
+  },
+  "Transparente Informationen zur Verarbeitung personenbezogener Daten auf unserer Website.": {
+    "en": "Transparent information on the processing of personal data on our website."
+  },
+  "Allgemeine Hinweise": {
+    "en": "General information"
+  },
+  "Als Betreiber dieser Seiten nehmen wir den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den aktuellen und gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.": {
+    "en": "As the operator of this website, we take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the current statutory data protection regulations and this privacy policy."
+  },
+  "Wenn Sie diese Website benutzen, werden verschiedene personenbezogenen Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Diese Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das geschieht.": {
+    "en": "When you use this website, various personal data are collected. Personal data are data that can be used to identify you personally. This privacy policy explains which data we collect and what we use them for. It also explains how and for what purpose this is done."
+  },
+  "Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.": {
+    "en": "Please note that data transmission over the internet (e.g. when communicating by email) may be subject to security vulnerabilities. Complete protection of data against access by third parties is not possible."
+  },
+  "Wie erfassen wir Ihre Daten?": {
+    "en": "How do we collect your data?"
+  },
+  "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten sind:": {
+    "en": "Data processing on this website is carried out by the website operator, whose contact details are:"
+  },
+  "KE!N EINZELFALL e.V.": {
+    "en": "KE!N EINZELFALL e.V."
+  },
+  "Schiffbeker Höhe 30": {
+    "en": "Schiffbeker Höhe 30"
+  },
+  "22119 Hamburg": {
+    "en": "22119 Hamburg"
+  },
+  "Mobil: +49 (176) 622 08 645": {
+    "en": "Mobile: +49 (176) 622 08 645"
+  },
+  "E-Mail: kontakt@kein-einzelfall.de": {
+    "en": "Email: kontakt@kein-einzelfall.de"
+  },
+  "Internet: http://www.kein-einzelfall.de": {
+    "en": "Website: http://www.kein-einzelfall.de"
+  },
+  "Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen (z. B. Daten, die Sie in ein Kontaktformular eingeben).": {
+    "en": "On the one hand, your data are collected when you provide them to us (e.g. data you enter into a contact form)."
+  },
+  "Zum anderen werden Daten automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-System erfasst. Dies sind vor allem technische Daten, wie z. B. Art des genutzten Internetbrowsers, Betriebssystem, Uhrzeit und Erfolg des Seitenaufrufs. Die Erfassung dieser Daten erfolgt automatisch durch den Webserver unseres Webhosters, sobald Sie diese Website betreten.": {
+    "en": "On the other hand, data are collected automatically or after your consent by our IT systems when you visit the website. These are mainly technical data, such as the type of web browser used, operating system, time and success of the page request. These data are collected automatically by our web host's server as soon as you access this website."
+  },
+  "Welche Rechte haben Sie bezüglich Ihrer Daten?": {
+    "en": "What rights do you have regarding your data?"
+  },
+  "Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen.": {
+    "en": "You have the right at any time to receive information free of charge about the origin, recipients and purpose of your stored personal data. You also have the right to request the correction or deletion of these data. If you have given consent to data processing, you may withdraw this consent at any time with effect for the future."
+  },
+  "Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.": {
+    "en": "You also have the right, under certain circumstances, to request the restriction of the processing of your personal data. Furthermore, you have the right to lodge a complaint with the competent supervisory authority. You can contact us at any time regarding this and any other questions on the subject of data protection."
+  },
+  "Hosting": {
+    "en": "Hosting"
+  },
+  "Externes Hosting": {
+    "en": "External hosting"
+  },
+  "Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten handeln, die über eine Website generiert werden.": {
+    "en": "This website is hosted externally. The personal data collected on this website are stored on the hosting provider's servers. These may include, in particular, IP addresses, contact requests, meta and communication data, contract data, contact details, names, website access data and other data generated via a website."
+  },
+  "Das externe Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden/Mitgliedern (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG (z. B. Speicherung von Cookies oder Zugriff auf Informationen im Endgerät des Nutzers). Die Einwilligung ist jederzeit widerrufbar.": {
+    "en": "External hosting is carried out for the purpose of fulfilling contracts with our potential and existing customers/members (Art. 6(1)(b) of the General Data Protection Regulation, GDPR/DSGVO) and in the interest of a secure, fast and efficient provision of our online services by a professional provider (Art. 6(1)(f) GDPR). Where consent has been requested, processing is carried out exclusively on the basis of Art. 6(1)(a) GDPR and § 25(1) of the Telecommunications Digital Services Data Protection Act (Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz, TDDDG) (e.g. storage of cookies or access to information on the user's device). Consent can be withdrawn at any time."
+  },
+  "Unser(e) Hoster verarbeitet Ihre Daten nur insoweit, wie dies zur Erfüllung seiner Leistungspflichten erforderlich ist, und befolgt unsere Weisungen.": {
+    "en": "Our hosting provider(s) will process your data only to the extent necessary to fulfil its performance obligations and will follow our instructions."
+  },
+  "Eingesetzter Hoster": {
+    "en": "Hosting provider used"
+  },
+  "http://www.all-inkl.com": {
+    "en": "http://www.all-inkl.com"
+  },
+  "Allgemeine Hinweise und Pflichtinformationen": {
+    "en": "General information and mandatory information"
+  },
+  "Hinweis zur verantwortlichen Stelle": {
+    "en": "Information about the controller"
+  },
+  "Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. ä.) entscheidet.": {
+    "en": "The controller is the natural or legal person who, alone or jointly with others, determines the purposes and means of the processing of personal data (e.g. names, email addresses, etc.)."
+  },
+  "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung": {
+    "en": "General information on the legal bases for data processing"
+  },
+  "Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO (bei besonderen Kategorien personenbezogener Daten). Im Fall einer ausdrücklichen Einwilligung in die Übertragung personenbezogener Daten in Drittstaaten erfolgt die Verarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO.": {
+    "en": "If you have consented to data processing, we process your personal data on the basis of Art. 6(1)(a) GDPR or Art. 9(2)(a) GDPR (in the case of special categories of personal data). In the case of express consent to the transfer of personal data to third countries, processing is also carried out on the basis of Art. 49(1)(a) GDPR."
+  },
+  "Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar.": {
+    "en": "If you have consented to the storage of cookies or to access to information on your device (e.g. device fingerprinting), data processing is additionally carried out on the basis of § 25(1) TDDDG. Consent can be withdrawn at any time."
+  },
+  "Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern dies zur Erfüllung rechtlicher Verpflichtungen erforderlich ist, auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Verarbeitung kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen.": {
+    "en": "If your data are required for the performance of a contract or for pre-contractual measures, we process your data on the basis of Art. 6(1)(b) GDPR. Furthermore, we process your data where this is necessary to comply with legal obligations, on the basis of Art. 6(1)(c) GDPR. Processing may also be carried out on the basis of our legitimate interest pursuant to Art. 6(1)(f) GDPR."
+  },
+  "Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21 DSGVO)": {
+    "en": "Right to object to data collection in special cases and to direct marketing (Art. 21 GDPR)"
+  },
+  "Wenn die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, Widerspruch gegen die Verarbeitung Ihrer personenbezogenen Daten einzulegen; dies gilt auch für ein darauf gestütztes Profiling. Die jeweils einschlägige Rechtsgrundlage entnehmen Sie dieser Datenschutzerklärung.": {
+    "en": "If processing is based on Art. 6(1)(e) or (f) GDPR, you have the right to object to the processing of your personal data at any time on grounds relating to your particular situation; this also applies to profiling based on these provisions. The relevant legal basis for each processing operation can be found in this privacy policy."
+  },
+  "Im Falle des Widerspruchs verarbeiten wir die betroffenen personenbezogenen Daten nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen (Art. 21 Abs. 1 DSGVO).": {
+    "en": "If you object, we will no longer process the personal data concerned unless we can demonstrate compelling legitimate grounds for the processing which override your interests, rights and freedoms, or the processing serves the establishment, exercise or defence of legal claims (Art. 21(1) GDPR)."
+  },
+  "Werden Ihre personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung zum Zwecke derartiger Werbung einzulegen; dies gilt auch für Profiling, soweit es mit solcher Direktwerbung in Verbindung steht (Art. 21 Abs. 2 DSGVO).": {
+    "en": "If your personal data are processed for the purpose of direct marketing, you have the right to object at any time to the processing for the purpose of such marketing; this also applies to profiling to the extent that it is related to such direct marketing (Art. 21(2) GDPR)."
+  },
+  "Beschwerderecht bei der Aufsichtsbehörde": {
+    "en": "Right to lodge a complaint with the supervisory authority"
+  },
+  "Im Falle von Verstößen gegen die DSGVO steht Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde zu, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes. Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.": {
+    "en": "In the event of infringements of the GDPR, data subjects have the right to lodge a complaint with a supervisory authority, in particular in the member state of their habitual residence, their place of work or the place of the alleged infringement. The right to lodge a complaint is without prejudice to any other administrative or judicial remedies."
+  },
+  "Zuständig für unseren Verein:": {
+    "en": "The competent authority for our association is:"
+  },
+  "Der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit": {
+    "en": "The Hamburg Commissioner for Data Protection and Freedom of Information (Der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit)"
+  },
+  "Ludwig-Erhard-Straße 22": {
+    "en": "Ludwig-Erhard-Straße 22"
+  },
+  "20459 Hamburg": {
+    "en": "20459 Hamburg"
+  },
+  "Recht auf Einschränkung der Verarbeitung": {
+    "en": "Right to restriction of processing"
+  },
+  "Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Das Recht besteht insbesondere dann, wenn:": {
+    "en": "You have the right to request the restriction of the processing of your personal data. This right applies in particular if:"
+  },
+  "Sie die Richtigkeit Ihrer gespeicherten personenbezogenen Daten bestreiten (für die Dauer der Prüfung),": {
+    "en": "you contest the accuracy of your stored personal data (for the duration of the verification),"
+  },
+  "die Verarbeitung unrechtmäßig ist und Sie statt Löschung die Einschränkung verlangen,": {
+    "en": "the processing is unlawful and you request restriction instead of deletion,"
+  },
+  "wir die Daten nicht mehr benötigen, Sie diese jedoch zur Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen,": {
+    "en": "we no longer need the data, but you need them for the exercise, defence or establishment of legal claims,"
+  },
+  "Sie Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben und noch nicht feststeht, wessen Interessen überwiegen.": {
+    "en": "you have lodged an objection pursuant to Art. 21(1) GDPR and it has not yet been determined whose interests prevail."
+  },
+  "Wenn die Verarbeitung eingeschränkt wurde, dürfen diese Daten – von der Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden.": {
+    "en": "If processing has been restricted, these data – apart from their storage – may only be processed with your consent or for the establishment, exercise or defence of legal claims, for the protection of the rights of another person or for reasons of important public interest."
+  },
+  "Einwilligungstool (Real Cookie Banner)": {
+    "en": "Consent tool (Real Cookie Banner)"
+  },
+  "*Tool für die Einwilligung zum Setzen von Cookies*": {
+    "en": "*Tool for obtaining consent to the setting of cookies*"
+  },
+  "Zur Verwaltung der eingesetzten Cookies und ähnlichen Technologien (Tracking-Pixel, Web-Beacons etc.) sowie der diesbezüglichen Einwilligungen setzen wir das Consent-Tool „Real Cookie Banner“ ein. Details zur Funktionsweise finden Sie unter https://devowl.io/de/rcb/datenverarbeitung/.": {
+    "en": "To manage the cookies and similar technologies used (tracking pixels, web beacons, etc.) and the related consents, we use the consent tool ‘Real Cookie Banner’. Details on how it works can be found at https://devowl.io/de/rcb/datenverarbeitung/."
+  },
+  "Rechtsgrundlagen: Art. 6 Abs. 1 lit. c DSGVO und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Verwaltung der Einwilligungen und Technologien). Sofern Einwilligungen abgefragt werden, zusätzlich Art. 6 Abs. 1 lit. a DSGVO i. V. m. § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar.": {
+    "en": "Legal bases: Art. 6(1)(c) GDPR and Art. 6(1)(f) GDPR (legitimate interest in managing consents and technologies). Where consent is requested, additionally Art. 6(1)(a) GDPR in conjunction with § 25(1) TDDDG. Consent can be withdrawn at any time."
+  },
+  "Ohne Bereitstellung der erforderlichen personenbezogenen Daten können Einwilligungen nicht verwaltet werden; Funktionen und Darstellung der Website können beeinträchtigt sein.": {
+    "en": "Without the provision of the necessary personal data, consents cannot be managed; the functions and display of the website may be impaired."
+  },
+  "Sofern Sie Cookies ablehnen, setzt Ihr Browser aus technischen Gründen ein Cookie, das Ihre Entscheidung (365 Tage) speichert. Möchten Sie später zustimmen, löschen Sie dieses Cookie bitte in den Browser-Einstellungen und rufen die Seite erneut auf.": {
+    "en": "If you reject cookies, your browser will, for technical reasons, set a cookie that stores your decision (for 365 days). If you wish to give your consent later, please delete this cookie in your browser settings and reload the page."
+  },
+  "Cookies": {
+    "en": "Cookies"
+  },
+  "Unsere Website verwendet Cookies. Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) gespeichert. Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben gespeichert, bis Sie diese löschen oder eine automatische Löschung erfolgt.": {
+    "en": "Our website uses cookies. Cookies are small data packets and do not cause any damage to your device. They are stored either temporarily for the duration of a session (session cookies) or permanently (permanent cookies). Session cookies are automatically deleted at the end of your visit. Permanent cookies remain stored until you delete them or they are deleted automatically."
+  },
+  "Cookies können von uns (First-Party) oder von Drittunternehmen (Third-Party) stammen. Drittanbieter-Cookies ermöglichen z. B. die Einbindung externer Dienste. Cookies haben verschiedene Funktionen; viele sind technisch notwendig (z. B. Warenkorb, Videoanzeige), andere dienen der Statistik oder dem Marketing.": {
+    "en": "Cookies may originate from us (first-party) or from third-party companies (third-party). Third-party cookies enable, for example, the integration of external services. Cookies have various functions; many are technically necessary (e.g. shopping basket, video display), while others are used for statistics or marketing."
+  },
+  "Notwendige Cookies werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert. Sofern eine Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG; Einwilligungen können jederzeit widerrufen werden.": {
+    "en": "Necessary cookies are stored on the basis of Art. 6(1)(f) GDPR. Where consent has been requested, processing is carried out exclusively on the basis of Art. 6(1)(a) GDPR and § 25(1) TDDDG; consent can be withdrawn at any time."
+  },
+  "Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden, Cookies nur im Einzelfall erlauben, die Annahme für bestimmte Fälle oder generell ausschließen sowie die automatische Löschung beim Schließen des Browsers aktivieren. Bei Deaktivierung kann die Funktionalität der Website eingeschränkt sein.": {
+    "en": "You can set your browser so that you are informed about the setting of cookies, allow cookies only in individual cases, exclude their acceptance for certain cases or in general, and activate automatic deletion when closing the browser. If cookies are deactivated, the functionality of the website may be limited."
+  },
+  "Welche Cookies und Dienste auf dieser Website eingesetzt werden, können Sie dieser Datenschutzerklärung entnehmen.": {
+    "en": "You can find out which cookies and services are used on this website in this privacy policy."
+  },
+  "Auf unserer Internetseite ist ein Kontaktformular vorhanden, das für die elektronische Kontaktaufnahme genutzt werden kann. Nehmen Sie diese Möglichkeit wahr, so werden die in der Eingabemaske eingegebenen Daten an uns übermittelt und gespeichert. Diese Daten sind insbesondere:": {
+    "en": "Our website has a contact form that can be used to get in touch with us electronically. If you use this option, the data entered in the input form will be transmitted to us and stored. These data are in particular:"
+  },
+  "Ihr Name": {
+    "en": "Your name"
+  },
+  "Ihre E-Mail-Adresse": {
+    "en": "Your email address"
+  },
+  "Ihre IP-Adresse in den Logfiles unseres Systems": {
+    "en": "Your IP address in our system's log files"
+  },
+  "Die mit der E-Mail übermittelten personenbezogenen Daten des Nutzers werden zur Beantwortung und Bearbeitung der Anfrage gespeichert. Danach werden die Daten gelöscht, es sei denn, wir sind aus rechtlichen Gründen zu einer weiteren Speicherung verpflichtet oder zur Durchsetzung rechtlicher Ansprüche berechtigt. Es erfolgt keine Weitergabe an Dritte, sofern wir nicht aufgrund gesetzlicher Bestimmungen oder eines Gerichtsbeschlusses hierzu verpflichtet sind. Diese Daten werden ausschließlich zum Zweck der Verarbeitung der Konversation verwendet.": {
+    "en": "The user's personal data transmitted by email are stored for the purpose of answering and processing the enquiry. The data are then deleted unless we are legally obliged to store them for longer or entitled to do so in order to enforce legal claims. The data are not passed on to third parties unless we are obliged to do so by law or by court order. These data are used exclusively for the purpose of processing the conversation."
+  },
+  "*Rechtsgrundlage für die Datenverarbeitung*": {
+    "en": "*Legal basis for data processing*"
+  },
+  "Bei Vorliegen einer Einwilligung des Nutzers: Art. 6 Abs. 1 lit. a DSGVO. Bei Übersendung einer E-Mail: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Bearbeitung der Anfrage). Zielt der E-Mail-Kontakt auf den Abschluss eines Vertrags ab, zusätzlich Art. 6 Abs. 1 lit. b DSGVO.": {
+    "en": "Where the user has given consent: Art. 6(1)(a) GDPR. When an email is sent: Art. 6(1)(f) GDPR (legitimate interest in processing the enquiry). If the email contact is aimed at concluding a contract, additionally Art. 6(1)(b) GDPR."
+  },
+  "*Zweck der Datenverarbeitung*": {
+    "en": "*Purpose of data processing*"
+  },
+  "Die Verarbeitung Ihrer personenbezogenen Daten aus der Eingabemaske dient allein zur Bearbeitung der Kontaktaufnahme. Die während des Absendevorgangs verarbeiteten Daten dienen der Missbrauchsprävention und der Sicherheit unserer IT-Systeme.": {
+    "en": "The processing of your personal data from the input form serves solely to handle your enquiry. The data processed during the sending process serve to prevent misuse and to ensure the security of our IT systems."
+  },
+  "*Dauer der Speicherung*": {
+    "en": "*Storage period*"
+  },
+  "Die Daten werden gelöscht, sobald sie für die Erreichung des Zwecks ihrer Erhebung nicht mehr erforderlich sind – i. d. R. wenn die jeweilige Konversation mit dem Nutzer beendet ist. Zusätzlich erhobene personenbezogene Daten beim Absendevorgang werden spätestens nach sieben Tagen gelöscht.": {
+    "en": "The data are deleted as soon as they are no longer required to achieve the purpose for which they were collected – usually when the respective conversation with the user has ended. Additional personal data collected during the sending process are deleted after seven days at the latest."
+  },
+  "*Widerspruchs- und Beseitigungsmöglichkeit*": {
+    "en": "*Right to object and to have data removed*"
+  },
+  "Sie können Ihre Einwilligung zur Verarbeitung personenbezogener Daten jederzeit widerrufen. Bei Kontaktaufnahme per E-Mail können Sie der Speicherung Ihrer personenbezogenen Daten jederzeit widersprechen. In diesem Fall kann die Konversation nicht fortgeführt werden. Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden, werden dann gelöscht.": {
+    "en": "You can withdraw your consent to the processing of personal data at any time. If you contact us by email, you can object to the storage of your personal data at any time. In this case, the conversation cannot be continued. All personal data stored in the course of contacting us will then be deleted."
+  },
+  "Impressum": {
+    "en": "Legal Notice"
+  },
+  "Impressum - Kein Einzelfall e.V.": {
+    "en": "Legal Notice - Kein Einzelfall e.V."
+  },
+  "Impressum KE!N EINZELFALL e.V. Schiffbeker Höhe 30 22119 Hamburg": {
+    "en": "Legal notice KE!N EINZELFALL e.V. Schiffbeker Höhe 30 22119 Hamburg"
+  },
+  "Angaben gemäß § 5 DDG": {
+    "en": "Information pursuant to § 5 DDG (German Digital Services Act, Digitale-Dienste-Gesetz)"
+  },
+  "Vertreten durch": {
+    "en": "Represented by"
+  },
+  "Tatjana Belmar": {
+    "en": "Tatjana Belmar"
+  },
+  "Franziska Künstler": {
+    "en": "Franziska Künstler"
+  },
+  "Registereintrag": {
+    "en": "Register entry"
+  },
+  "Registergericht: Amtsgericht Hamburg": {
+    "en": "Register court: Amtsgericht Hamburg (Hamburg Local Court)"
+  },
+  "Registernummer: VR 25873": {
+    "en": "Register number: VR 25873"
+  },
+  "Bankverbindung": {
+    "en": "Bank details"
+  },
+  "Deutsche Skatbank": {
+    "en": "Deutsche Skatbank"
+  },
+  "IBAN: DE79 8306 5408 0006 8893 10": {
+    "en": "IBAN: DE79 8306 5408 0006 8893 10"
+  },
+  "BIC: GENODEF1SLR": {
+    "en": "BIC: GENODEF1SLR"
+  },
+  "PayPal": {
+    "en": "PayPal"
+  },
+  "paypal@kein-einzelfall.de": {
+    "en": "paypal@kein-einzelfall.de"
+  },
+  "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV": {
+    "en": "Responsible for the content pursuant to § 18(2) MStV (Interstate Media Treaty, Medienstaatsvertrag)"
+  },
+  "Bildnachweis": {
+    "en": "Image credits"
+  },
+  "Shutterstock": {
+    "en": "Shutterstock"
+  },
+  "Barrierefreiheit": {
+    "en": "Accessibility"
+  },
+  "Barrierefreiheit - Kein Einzelfall e.V.": {
+    "en": "Accessibility - Kein Einzelfall e.V."
+  },
+  "Wie diese Seite bedienbar ist: Darstellung anpassen, Tastaturbedienung und der Notausgang zum schnellen Verlassen.": {
+    "en": "How to use this site: adjusting the display, using the keyboard and the quick exit for leaving fast."
+  },
+  "Diese Seite schnell verlassen": {
+    "en": "Leave this site quickly"
+  },
+  "Oben rechts findest du den Knopf „Notausgang“. Auf dem Handy ist er unten in der Leiste immer erreichbar. Ein Druck bringt dich sofort auf eine unverfängliche Seite.": {
+    "en": "In the top right corner you'll find the ‘Quick exit’ button. On your phone, it's always within reach in the bar at the bottom. One tap takes you straight to a harmless-looking page."
+  },
+  "Du kannst auch dreimal hintereinander die Taste ESC drücken. Das funktioniert auf jeder Seite, ohne dass du erst etwas suchen musst.": {
+    "en": "You can also press the ESC key three times in a row. This works on every page, without you having to look for anything first."
+  },
+  "Ehrlich dazu: Der Notausgang bringt dich sofort weg und hinterlässt für diese eine Seite keinen Eintrag im Verlauf. Frühere Seiten bleiben aber im Browser-Verlauf stehen — das können wir von hier aus nicht löschen. Wenn niemand sehen soll, dass du hier warst, öffne die Seite am besten in einem privaten Fenster (oft Strg+Umschalt+N oder Strg+Umschalt+P) oder lösche den Verlauf danach selbst.": {
+    "en": "To be honest: the quick exit takes you away immediately and leaves no entry in your history for this one page. However, pages you visited earlier stay in your browser history — we can't delete them from here. If nobody should see that you were here, it's best to open the site in a private window (often Ctrl+Shift+N or Ctrl+Shift+P) or delete your history yourself afterwards."
+  },
+  "Darstellung anpassen": {
+    "en": "Adjust the display"
+  },
+  "Am linken Bildschirmrand findest du ein rundes Symbol, auf dem Handy heißt es „Darstellung“ in der Leiste unten. Dahinter kannst du die Seite so einstellen, wie du sie am besten lesen kannst:": {
+    "en": "On the left edge of the screen you'll find a round icon; on your phone it's called ‘Display’ in the bar at the bottom. There you can set up the page so that it's easiest for you to read:"
+  },
+  "Schriftgröße in vier Stufen, Zeilen- und Buchstabenabstand, eine gut lesbare Schriftart, eine Schrift für Menschen mit Legasthenie, vier Kontrast-Einstellungen einschließlich dunkler Ansicht und Graustufen, eine Leselinie, die dem Mauszeiger folgt, ein größerer Mauszeiger, hervorgehobene Links sowie die Möglichkeit, Bewegungen zu stoppen oder Bilder auszublenden.": {
+    "en": "Font size in four steps, line and letter spacing, an easy-to-read font, a font for people with dyslexia, four contrast settings including a dark view and greyscale, a reading line that follows the mouse pointer, a larger mouse pointer, highlighted links and the option to stop animations or hide images."
+  },
+  "Deine Einstellungen bleiben auf diesem Gerät gespeichert und gelten auch beim nächsten Besuch. Sie liegen nur bei dir im Browser — wir erfahren nichts davon.": {
+    "en": "Your settings are saved on this device and still apply on your next visit. They're only stored in your browser — we don't find out anything about them."
+  },
+  "Bedienung mit der Tastatur": {
+    "en": "Using the keyboard"
+  },
+  "Die ganze Seite lässt sich ohne Maus bedienen. Mit der Tabulator-Taste springst du von Element zu Element, mit der Eingabetaste wählst du aus.": {
+    "en": "The whole site can be used without a mouse. Use the Tab key to jump from element to element and the Enter key to select."
+  },
+  "Ganz am Anfang steht ein Sprunglink „Zum Inhalt springen“, mit dem du die Navigation überspringen kannst. Auf langen Seiten findest du oben ein Inhaltsverzeichnis.": {
+    "en": "Right at the beginning there's a ‘Skip to content’ link that lets you skip the navigation. On long pages you'll find a table of contents at the top."
+  },
+  "Was wir noch nicht geschafft haben": {
+    "en": "What we haven't managed yet"
+  },
+  "Wir arbeiten daran, mindestens die Stufe AA der Richtlinien für barrierefreie Webinhalte (WCAG 2.1) zu erfüllen, und gehen an vielen Stellen darüber hinaus.": {
+    "en": "We are working to meet at least level AA of the Web Content Accessibility Guidelines (WCAG 2.1), and go beyond it in many places."
+  },
+  "Noch offen: Texte in Leichter Sprache liegen bisher nur für einzelne Seiten vor. Auch Beschreibungen für alle Bilder sind noch nicht vollständig.": {
+    "en": "Still to do: texts in Easy Read (Leichte Sprache) are so far only available for some pages. Descriptions for all images are not yet complete either."
+  },
+  "Etwas funktioniert nicht?": {
+    "en": "Something not working?"
+  },
+  "Wenn dir etwas auffällt, das dich beim Lesen oder Bedienen behindert, sag uns bitte Bescheid. Wir bessern nach.": {
+    "en": "If you notice anything that makes reading or using the site difficult for you, please let us know. We'll fix it."
+  },
+  "Satzung": {
+    "en": "Articles of Association"
+  },
+  "Satzung - Kein Einzelfall e.V.": {
+    "en": "Articles of Association - Kein Einzelfall e.V."
+  },
+  "Die Satzung des KE!N EINZELFALL e.V. Unser Fundament: Werte, Ziele, Verantwortung & Miteinander.": {
+    "en": "The Articles of Association of KE!N EINZELFALL e.V. Our foundation: values, goals, responsibility & solidarity."
+  },
+  "Die Satzung des KE!N EINZELFALL e.V.": {
+    "en": "The Articles of Association of KE!N EINZELFALL e.V."
+  },
+  "Unser Fundament: Werte, Ziele, Verantwortung & Miteinander.": {
+    "en": "Our foundation: values, goals, responsibility & solidarity."
+  },
+  "Wir freuen uns, euch auf dieser Seite unsere Satzung vorstellen zu können. Was wir tun, warum wir es tun und wie wir gemeinsam Verantwortung übernehmen – all das steht in unserer Satzung. Sie ist das Fundament von KE!N EINZELFALL e.V. und spiegelt unsere Werte, Ziele und unser Selbstverständnis als Verein wider. Die Satzung regelt nicht nur formale Abläufe, sondern ist Ausdruck unserer politischen Haltung und unseres solidarischen Miteinanders.": {
+    "en": "We're pleased to present our Articles of Association to you on this page. What we do, why we do it and how we take responsibility together – it's all set out in our Articles of Association. They are the foundation of KE!N EINZELFALL e.V. and reflect our values, our goals and how we see ourselves as an association. The Articles of Association don't just govern formal procedures; they are also an expression of our political stance and of our solidarity with one another."
+  },
+  "Mit der Veröffentlichung unserer Satzung möchten wir Transparenz schaffen und zeigen, wie wir Opfer und Mitopfer stärken und gesellschaftliche Veränderung vorantreiben. Wer verstehen möchte, wie wir arbeiten und wofür wir stehen, findet hier alle Informationen – klar, verbindlich und offen für alle.": {
+    "en": "By publishing our Articles of Association, we want to create transparency and show how we empower victims and those affected alongside them, and drive social change. Anyone who wants to understand how we work and what we stand for will find all the information here – clear, binding and open to everyone."
+  },
+  "Satzung lesen": {
+    "en": "Read the Articles of Association"
+  },
+  "Hier kannst du unsere Satzung vollständig einsehen.": {
+    "en": "Here you can view our Articles of Association in full."
+  },
+  "Solltest du Fragen zur Satzung haben oder eine barrierefreie Version benötigen, melde dich gerne bei uns.": {
+    "en": "If you have any questions about the Articles of Association or need an accessible version, feel free to get in touch with us."
+  },
+  "Gemeinsam für eine gerechtere Zukunft.": {
+    "en": "Together for a fairer future."
+  },
+  "Dokumente zum Herunterladen": {
+    "en": "Documents to download"
+  },
+  "Opferentschädigungsgesetz (OEG)": {
+    "en": "Victim Compensation Act (Opferentschädigungsgesetz, OEG)"
+  },
+  "Opferentschädigungsgesetz (OEG) - Kein Einzelfall e.V.": {
+    "en": "Victim Compensation Act (Opferentschädigungsgesetz, OEG) - Kein Einzelfall e.V."
+  },
+  "Das OEG ist seit dem 1. Januar 2024 im SGB XIV aufgegangen. Was das für laufende Verfahren und alte Bescheide bedeutet.": {
+    "en": "Since 1 January 2024, the Victim Compensation Act (Opferentschädigungsgesetz, OEG) has been incorporated into Book XIV of the Social Code (SGB XIV). What this means for ongoing proceedings and old decisions."
+  },
+  "Das OEG gibt es so nicht mehr": {
+    "en": "The OEG no longer exists in this form"
+  },
+  "Das Opferentschädigungsgesetz wurde zum 1. Januar 2024 durch das Vierzehnte Buch Sozialgesetzbuch (SGB XIV) abgelöst. Seither heisst der Bereich Soziales Entschädigungsrecht, und alle neuen Anträge laufen darüber.": {
+    "en": "With effect from 1 January 2024, the Victim Compensation Act (Opferentschädigungsgesetz) was replaced by Book XIV of the Social Code (Vierzehntes Buch Sozialgesetzbuch, SGB XIV). Since then, this area has been called social compensation law (Soziales Entschädigungsrecht), and all new applications go through it."
+  },
+  "Der Begriff „OEG\" ist trotzdem geblieben — in Bescheiden, in Beratungsstellen und in den Köpfen. Wer ihn kennt, sucht auch danach. Deshalb steht hier, was er heute noch bedeutet.": {
+    "en": "Even so, the term “OEG” has stuck — in official decisions, at advice centres and in people’s minds. Anyone who knows it will also search for it. That is why this page explains what it still means today."
+  },
+  "Zum heutigen Recht: SGB XIV": {
+    "en": "Current law: SGB XIV"
+  },
+  "Wann das alte Recht noch gilt": {
+    "en": "When the old law still applies"
+  },
+  "Für Anträge, die vor dem 1. Januar 2024 gestellt wurden, wird weiterhin nach dem OEG geprüft. Ein laufendes Verfahren wechselt also nicht mitten im Lauf die Grundlage.": {
+    "en": "Applications made before 1 January 2024 continue to be assessed under the OEG. So an ongoing procedure does not switch its legal basis halfway through."
+  },
+  "Wer vor 2024 bereits Leistungen bezogen hat, wurde automatisch in das neue Recht überführt. Die Bescheide gelten weiter, die Zahlungen liefen ohne Unterbrechung weiter, und ein neuer Antrag war dafür nicht nötig.": {
+    "en": "Anyone who was already receiving benefits before 2024 was automatically transferred to the new law. The decisions remain valid, the payments continued without interruption, and no new application was needed for this."
+  },
+  "Ein Blick auf den alten Bescheid kann sich lohnen": {
+    "en": "It can be worth taking a look at your old decision"
+  },
+  "Das SGB XIV kennt Leistungen, die es im OEG nicht gab — allen voran die Traumaambulanz. Wer einen alten Bescheid hat, sollte prüfen lassen, ob die neuen Angebote infrage kommen.": {
+    "en": "SGB XIV provides benefits that did not exist under the OEG — above all the trauma outpatient clinic (Traumaambulanz). If you have an old decision, you should have someone check whether the new services could apply to you."
+  },
+  "Was das SGB XIV heute bietet": {
+    "en": "What SGB XIV offers today"
+  },
+  "Woher diese Angaben stammen": {
+    "en": "Where this information comes from"
+  },
+  "Zusammengetragen am 22. September 2026 aus der amtlichen Quelle. Rechtsstand und Zuständigkeiten ändern sich — im Zweifel gilt die Quelle und nicht diese Seite.": {
+    "en": "Compiled on 22 September 2026 from the official source. The legal position and responsibilities change — if in doubt, the source applies, not this page."
+  },
+  "Soziale Entschädigung beim BMAS": {
+    "en": "Social compensation (Soziale Entschädigung) at the BMAS (Federal Ministry of Labour and Social Affairs)"
+  },
+  "Soziales Entschädigungsrecht (SGB XIV)": {
+    "en": "Social compensation law (Soziales Entschädigungsrecht, SGB XIV)"
+  },
+  "Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden.": {
+    "en": "Help for people who have been harmed by an act of violence."
+  },
+  "Soziales Entschädigungsrecht (SGB XIV) - Kein Einzelfall e.V.": {
+    "en": "Social compensation law (Soziales Entschädigungsrecht, SGB XIV) - Kein Einzelfall e.V."
+  },
+  "Entschädigung nach einer Gewalttat: Wer Anspruch hat, was die Traumaambulanz leistet und wie der Antrag läuft.": {
+    "en": "Compensation after an act of violence: who is entitled, what the trauma outpatient clinic (Traumaambulanz) provides and how the application works."
+  },
+  "Worum es geht": {
+    "en": "What this is about"
+  },
+  "Wer durch eine Gewalttat gesundheitliche Schäden erlitten hat, kann Leistungen der Sozialen Entschädigung erhalten. Geregelt ist das seit dem 1. Januar 2024 im SGB XIV, das das Opferentschädigungsgesetz abgelöst hat.": {
+    "en": "Anyone who has suffered damage to their health as a result of an act of violence can receive social compensation benefits (Leistungen der Sozialen Entschädigung). Since 1 January 2024, this has been governed by Book XIV of the Social Code (SGB XIV), which replaced the Victim Compensation Act (Opferentschädigungsgesetz)."
+  },
+  "Der Gedanke dahinter: Der Staat konnte die Tat nicht verhindern und tritt deshalb für die Folgen ein. Es geht nicht um Schadenersatz von der Täterin oder dem Täter — dieser Weg bleibt davon unberührt.": {
+    "en": "The idea behind it: the state was unable to prevent the crime and therefore takes responsibility for its consequences. This is not about damages from the perpetrator — that route remains unaffected."
+  },
+  "Auch psychische Gewalt zählt": {
+    "en": "Psychological violence counts too"
+  },
+  "Das ist die wichtigste Neuerung gegenüber dem OEG. Das alte Recht verlangte einen tätlichen Angriff — also körperliche Gewalt. Das SGB XIV erfasst darüber hinaus auch schwerwiegende psychische Gewalt, etwa erhebliche Drohungen oder Nachstellungen mit gesundheitlichen Folgen.": {
+    "en": "This is the most important change compared with the OEG. The old law required a physical assault (tätlicher Angriff) — that is, physical violence. In addition, SGB XIV also covers serious psychological violence, such as significant threats or stalking (Nachstellungen) with consequences for health."
+  },
+  "Wer früher deshalb abgelehnt wurde oder gar nicht erst einen Antrag gestellt hat, sollte die Frage neu stellen.": {
+    "en": "If you were turned down for this reason in the past, or never applied in the first place, you should raise the question again."
+  },
+  "Die Traumaambulanz — Hilfe, bevor irgendetwas entschieden ist": {
+    "en": "The trauma outpatient clinic (Traumaambulanz) — help before anything has been decided"
+  },
+  "Die Traumaambulanz ist psychische Erste Hilfe und das Angebot, das am schnellsten greift. Sie setzt keinen bewilligten Antrag voraus: Es genügt eine überschlägige Prüfung, dass jemand betroffen sein könnte.": {
+    "en": "The trauma outpatient clinic (Traumaambulanz) is psychological first aid and the service that takes effect most quickly. It does not require an approved application: a rough preliminary check that someone could be affected is enough."
+  },
+  "Möglich sind bis zu 15 Sitzungen. Die erste soll innerhalb von zwölf Monaten nach der Tat stattfinden; liegt die Tat länger zurück, zählen zwölf Monate ab dem Auftreten der akuten Belastung. Fahrtkosten und Begleitpersonen werden übernommen.": {
+    "en": "Up to 15 sessions are possible. The first should take place within twelve months of the crime; if the crime was longer ago, the twelve months count from when the acute distress first appeared. Travel costs and accompanying persons are covered."
+  },
+  "Wird der Antrag später abgelehnt, musst du die Kosten der Traumaambulanz nicht zurückzahlen.": {
+    "en": "If the application is later rejected, you do not have to pay back the costs of the trauma outpatient clinic (Traumaambulanz)."
+  },
+  "Der Antrag": {
+    "en": "The application"
+  },
+  "Zuständig sind die Versorgungsbehörden der Bundesländer. Eine Antragsfrist gibt es nicht — die Tat darf also auch lange zurückliegen.": {
+    "en": "The pension offices of the federal states (Versorgungsbehörden der Bundesländer) are responsible. There is no deadline for applying — so the crime may also have happened a long time ago."
+  },
+  "Wichtig ist trotzdem der Zeitpunkt: Leistungen werden grundsätzlich erst ab dem Antrag erbracht, nicht rückwirkend. Wer überlegt, ob er einen Antrag stellt, verliert mit jedem Monat Wartezeit Leistungen, die er sonst bekommen hätte.": {
+    "en": "The timing still matters, though: benefits are generally only provided from the date of application, not retroactively. If you are thinking about whether to apply, every month you wait costs you benefits you would otherwise have received."
+  },
+  "Ein Monat für den Widerspruch": {
+    "en": "One month to lodge an objection (Widerspruch)"
+  },
+  "Gegen einen Bescheid kannst du innerhalb eines Monats nach seiner Bekanntgabe Widerspruch einlegen. Die Frist läuft auch dann, wenn du noch auf Unterlagen wartest — ein kurzer, fristwahrender Widerspruch reicht zunächst, die Begründung kannst du nachreichen.": {
+    "en": "You can lodge an objection (Widerspruch) against a decision within one month of being notified of it. The deadline runs even if you are still waiting for documents — a short objection that meets the deadline is enough at first; you can submit the reasons later."
+  },
+  "Du musst das nicht allein durchstehen": {
+    "en": "You don’t have to go through this alone"
+  },
+  "Ein Antragsverfahren im Entschädigungsrecht dauert oft Jahre und verlangt, die Tat immer wieder zu schildern. Genau dafür gibt es uns: für den Austausch mit Menschen, die dasselbe hinter sich haben, und für Orientierung, wenn der nächste Schritt unklar ist.": {
+    "en": "An application procedure under compensation law often takes years and requires you to describe the crime again and again. That is exactly why we exist: for sharing experiences with people who have been through the same thing, and for orientation when the next step is unclear."
+  },
+  "Fragen und Antworten beim BMAS": {
+    "en": "Questions and answers at the BMAS (Federal Ministry of Labour and Social Affairs)"
+  },
+  "Grad der Behinderung (GdB) und Schwerbehindertenausweis": {
+    "en": "Degree of disability (Grad der Behinderung, GdB) and severe disability card (Schwerbehindertenausweis)"
+  },
+  "Grad der Behinderung (GdB) und Schwerbehindertenausweis - Kein Einzelfall e.V.": {
+    "en": "Degree of disability (Grad der Behinderung, GdB) and severe disability card (Schwerbehindertenausweis) - Kein Einzelfall e.V."
+  },
+  "Wie der GdB festgestellt wird, wann es einen Schwerbehindertenausweis gibt und wie lange das dauert.": {
+    "en": "How the degree of disability (Grad der Behinderung, GdB) is determined, when you get a severe disability card (Schwerbehindertenausweis) and how long it takes."
+  },
+  "Was der GdB ist": {
+    "en": "What the GdB is"
+  },
+  "Der Grad der Behinderung beschreibt, wie stark sich gesundheitliche Beeinträchtigungen auf die Teilhabe am Leben in der Gesellschaft auswirken. Er wird in Zehnerschritten von 20 bis 100 festgestellt.": {
+    "en": "The degree of disability (Grad der Behinderung) describes how strongly health impairments affect participation in life in society. It is determined in steps of ten from 20 to 100."
+  },
+  "Ab einem GdB von 50 gilt man als schwerbehindert und bekommt einen Schwerbehindertenausweis. Daran hängen Nachteilsausgleiche — vom Kündigungsschutz bis zu steuerlichen Freibeträgen.": {
+    "en": "With a GdB of 50 or more, you are considered severely disabled and receive a severe disability card (Schwerbehindertenausweis). Compensatory entitlements (Nachteilsausgleiche) are linked to it — from protection against dismissal to tax allowances."
+  },
+  "Der GdB ist kein Prozentwert und keine Aussage über den Wert eines Menschen. Er ist eine Verwaltungsgrösse, an die Rechte geknüpft sind.": {
+    "en": "The GdB is not a percentage and says nothing about a person’s worth. It is an administrative measure to which rights are attached."
+  },
+  "Beantragt wird die Feststellung, nicht der Ausweis": {
+    "en": "What you apply for is the determination, not the card"
+  },
+  "Das klingt nach Wortklauberei, ist aber der Kern des Verfahrens: Beim Versorgungsamt beantragt man die Feststellung einer Behinderung nach § 152 SGB IX. Der Ausweis ist nur die Folge, wenn mindestens ein GdB von 50 herauskommt.": {
+    "en": "This sounds like splitting hairs, but it is the core of the procedure: at the pension office (Versorgungsamt), you apply for a determination of disability under Section 152 of Book IX of the Social Code (§ 152 SGB IX). The card only follows if the result is a GdB of at least 50."
+  },
+  "Das Amt fordert die Befunde bei den behandelnden Ärztinnen und Ärzten an und bewertet sie nach den Versorgungsmedizinischen Grundsätzen. Eine persönliche Untersuchung findet meist nicht statt.": {
+    "en": "The office requests the medical findings from your treating doctors and assesses them according to the Principles of Medical Care (Versorgungsmedizinische Grundsätze). A personal examination usually does not take place."
+  },
+  "Die Bearbeitung dauert je nach Bundesland und Fall in der Regel zwei bis sechs Monate. Die Feststellung wirkt auf den Monat der Antragstellung zurück — ein früher Antrag ist deshalb nie verkehrt.": {
+    "en": "Processing usually takes two to six months, depending on the federal state and the case. The determination applies retroactively to the month in which the application was made — so applying early is never a mistake."
+  },
+  "Wie andere Verfahren ausgegangen sind": {
+    "en": "How other cases have turned out"
+  },
+  "Ob sich ein Widerspruch lohnt, lässt sich leichter einschätzen, wenn man vergleichbare Fälle kennt. Zu GdB, Merkzeichen und Feststellungsverfahren sammelt REHADAT-Recht die Rechtsprechung — ein vom Bundesministerium für Arbeit und Soziales gefördertes Angebot mit über 16.000 Urteilen.": {
+    "en": "Whether an objection (Widerspruch) is worthwhile is easier to judge if you know of comparable cases. REHADAT-Recht collects case law on the GdB, special markings on the card (Merkzeichen) and determination procedures — a service funded by the Federal Ministry of Labour and Social Affairs (Bundesministerium für Arbeit und Soziales) with more than 16,000 judgments."
+  },
+  "Wichtige Entscheidungen sind dort zusätzlich in Einfacher Sprache erklärt. Ein Urteil zu einem ähnlichen Fall ist keine Zusage für den eigenen — aber es zeigt, worauf Gerichte geachtet haben.": {
+    "en": "Important decisions are also explained there in plain language (Einfache Sprache). A judgment in a similar case is no guarantee for your own — but it shows what the courts paid attention to."
+  },
+  "Zu REHADAT-Recht": {
+    "en": "Go to REHADAT-Recht"
+  },
+  "Feststellungsverfahren bei REHADAT-Recht": {
+    "en": "Determination procedures at REHADAT-Recht"
+  },
+  "Pflegegrad": {
+    "en": "Care level (Pflegegrad)"
+  },
+  "Pflegegrad - Kein Einzelfall e.V.": {
+    "en": "Care level (Pflegegrad) - Kein Einzelfall e.V."
+  },
+  "Antrag bei der Pflegekasse, Begutachtung durch den Medizinischen Dienst und die Frist von 25 Arbeitstagen.": {
+    "en": "Application to the long-term care insurance fund (Pflegekasse), assessment by the Medical Service (Medizinischer Dienst) and the 25-working-day deadline."
+  },
+  "Fünf Pflegegrade": {
+    "en": "Five care levels"
+  },
+  "Die Pflegeversicherung kennt die Pflegegrade 1 bis 5. Massstab ist nicht eine Diagnose, sondern die Selbstständigkeit: Was kann jemand noch allein, wobei braucht er Hilfe.": {
+    "en": "Long-term care insurance (Pflegeversicherung) has care levels (Pflegegrade) 1 to 5. The yardstick is not a diagnosis but independence: what can someone still do on their own, and what do they need help with?"
+  },
+  "Begutachtet werden dabei ausdrücklich auch psychische Beeinträchtigungen und Verhaltensweisen — nicht nur körperliche Einschränkungen. Das wird oft unterschätzt.": {
+    "en": "The assessment explicitly also covers psychological impairments and behaviours — not just physical limitations. This is often underestimated."
+  },
+  "Der Weg zum Bescheid": {
+    "en": "The path to a decision"
+  },
+  "Der Antrag geht an die Pflegekasse, die bei der eigenen Krankenkasse sitzt. Er ist formlos möglich — schriftlich, online, telefonisch oder persönlich. Ein Satz genügt für den Anfang.": {
+    "en": "The application goes to the long-term care insurance fund (Pflegekasse), which is based at your own health insurance fund (Krankenkasse). It can be made informally — in writing, online, by phone or in person. A single sentence is enough to start with."
+  },
+  "Die Pflegekasse beauftragt dann den Medizinischen Dienst mit der Begutachtung. Sie findet in der Regel zu Hause statt und schaut sich den Alltag an.": {
+    "en": "The long-term care insurance fund (Pflegekasse) then instructs the Medical Service (Medizinischer Dienst) to carry out the assessment. It usually takes place at home and looks at your everyday life."
+  },
+  "Von der Antragstellung bis zum Bescheid hat die Pflegekasse grundsätzlich 25 Arbeitstage Zeit. Zusammen mit dem Bescheid kannst du das Gutachten anfordern — wer widersprechen will, braucht es.": {
+    "en": "As a rule, the long-term care insurance fund (Pflegekasse) has 25 working days from the application to the decision. Together with the decision, you can request the assessment report — if you want to lodge an objection, you need it."
+  },
+  "Ein Pflegetagebuch hilft bei der Begutachtung": {
+    "en": "A care diary (Pflegetagebuch) helps with the assessment"
+  },
+  "Der Begutachtungstermin ist eine Momentaufnahme, und gerade an schlechten Tagen fällt es schwer, den eigenen Alltag zu schildern. Wer vorher ein bis zwei Wochen notiert, wobei er Hilfe brauchte und wie lange sie dauerte, hat etwas in der Hand.": {
+    "en": "The assessment appointment is a snapshot, and on bad days in particular it is hard to describe your own everyday life. If you spend one to two weeks beforehand noting down what you needed help with and how long it took, you have something concrete to go on."
+  },
+  "Wenn der Pflegegrad zu niedrig ausfällt": {
+    "en": "If the care level turns out too low"
+  },
+  "Das kommt vor, und es liegt nicht immer an der Begutachtung: Ein guter Tag, ein aufgeräumter Eindruck oder die Gewohnheit, sich nichts anmerken zu lassen, können das Bild verschieben.": {
+    "en": "This happens, and it is not always down to the assessment: a good day, a composed, orderly impression or the habit of not letting anything show can skew the picture."
+  },
+  "Fordere zuerst das Gutachten an und lies nach, was dort bewertet wurde. Oft findet sich eine Stelle, an der etwas fehlt oder zu gut eingeschätzt wurde — das ist der Ansatzpunkt für den Widerspruch.": {
+    "en": "First request the assessment report and read what was evaluated in it. There is often a point where something is missing or was assessed as better than it is — that is your starting point for the objection (Widerspruch)."
+  },
+  "Pflegebegutachtung beim Medizinischen Dienst": {
+    "en": "Care assessment at the Medical Service (Medizinischer Dienst)"
+  },
+  "Persönliches Budget": {
+    "en": "Personal budget (Persönliches Budget)"
+  },
+  "Persönliches Budget - Kein Einzelfall e.V.": {
+    "en": "Personal budget (Persönliches Budget) - Kein Einzelfall e.V."
+  },
+  "Teilhabeleistungen als Geldbetrag statt als Sachleistung — Antrag, Zielvereinbarung und zuständiger Träger.": {
+    "en": "Participation benefits as a sum of money instead of benefits in kind — application, target agreement (Zielvereinbarung) and the responsible agency (Träger)."
+  },
+  "Selbst entscheiden statt zugeteilt bekommen": {
+    "en": "Deciding for yourself instead of having things allocated to you"
+  },
+  "Leistungen zur Teilhabe bekommt man normalerweise als Sachleistung: Ein Träger sucht den Dienst aus und rechnet mit ihm ab. Beim Persönlichen Budget bekommt man stattdessen einen Geldbetrag und organisiert die Hilfe selbst.": {
+    "en": "Participation benefits (Leistungen zur Teilhabe) are normally provided as benefits in kind: an agency (Träger) chooses the service and settles the bill with it. With a personal budget (Persönliches Budget), you receive a sum of money instead and organise the support yourself."
+  },
+  "Geregelt ist das in § 29 SGB IX. Der Zweck steht im Gesetz ausdrücklich: ein möglichst selbstbestimmtes Leben in eigener Verantwortung.": {
+    "en": "This is governed by Section 29 of Book IX of the Social Code (§ 29 SGB IX). The law states the purpose explicitly: a life that is as self-determined as possible, under your own responsibility."
+  },
+  "Antrag und Zielvereinbarung": {
+    "en": "Application and target agreement (Zielvereinbarung)"
+  },
+  "Das Budget gibt es nur auf Antrag. Beteiligt sind je nach Bedarf die Rehabilitationsträger, die Pflegekassen und die Integrationsämter — zuständig für das Verfahren ist der leistende Rehabilitationsträger nach § 14 SGB IX.": {
+    "en": "The budget is only granted on application. Depending on need, the rehabilitation agencies (Rehabilitationsträger), the long-term care insurance funds (Pflegekassen) and the integration offices (Integrationsämter) are involved — the procedure is the responsibility of the rehabilitation agency providing the benefit (leistender Rehabilitationsträger) under Section 14 of Book IX of the Social Code (§ 14 SGB IX)."
+  },
+  "Vor der Bewilligung wird eine Zielvereinbarung geschlossen: Sie hält fest, wofür das Budget da ist und wie die Verwendung nachgewiesen wird. Sie gilt für den Bewilligungszeitraum.": {
+    "en": "Before approval, a target agreement (Zielvereinbarung) is concluded: it sets out what the budget is for and how its use is to be documented. It applies for the approval period."
+  },
+  "Das Budget bedeutet Freiheit und Verantwortung zugleich — wer damit Assistenz einkauft, wird unter Umständen zur Arbeitgeberin. Eine Beratung vorher ist keine Formalie.": {
+    "en": "The budget means freedom and responsibility at the same time — if you use it to pay for personal assistance, you may become an employer. Getting advice beforehand is not a mere formality."
+  },
+  "§ 29 SGB IX im Wortlaut": {
+    "en": "Full text of § 29 SGB IX (Book IX of the Social Code)"
+  },
+  "Erwerbsminderungsrente": {
+    "en": "Reduced earning capacity pension (Erwerbsminderungsrente)"
+  },
+  "Erwerbsminderungsrente - Kein Einzelfall e.V.": {
+    "en": "Reduced earning capacity pension (Erwerbsminderungsrente) - Kein Einzelfall e.V."
+  },
+  "Erwerbsminderungsrente - Wissenswertes zum Thema Erwerbsminderung, Voraussetzungen, Antragstellung und Fragen zum Verfahren": {
+    "en": "Reduced earning capacity pension (Erwerbsminderungsrente) - useful information on reduced earning capacity, eligibility requirements, applying and questions about the procedure"
+  },
+  "Erwerbsminderungsrente – Wenn die Gesundheit Grenzen setzt": {
+    "en": "Reduced earning capacity pension (Erwerbsminderungsrente) – when your health sets limits"
+  },
+  "Niemand träumt davon, eines Tages eine Erwerbsminderungsrente beantragen zu müssen. Oft liegt hinter diesem Schritt ein langer Weg voller Schmerzen, Erschöpfung, Rückschläge und der Hoffnung, dass doch alles wieder wird.": {
+    "en": "Nobody dreams of one day having to apply for a reduced earning capacity pension (Erwerbsminderungsrente). This step often comes at the end of a long road full of pain, exhaustion, setbacks and the hope that everything will be all right again after all."
+  },
+  "Sich einzugestehen, dass die eigene Gesundheit nicht mehr ausreicht, um dauerhaft arbeiten zu können, kostet Mut – und ist kein Zeichen von Schwäche!": {
+    "en": "Admitting to yourself that your health is no longer good enough for you to work on a lasting basis takes courage – and is not a sign of weakness!"
+  },
+  "Mit unseren Informationsmaterialien möchten wir dir Orientierung geben und dich auf diesem Weg begleiten. Vom ersten Überblick über die Antragstellung bis hin zu Begutachtung, Widerspruch oder Klage erklären wir die wichtigsten Schritte verständlich und alltagstauglich. Denn du sollst wissen, welche Rechte du hast, welche Möglichkeiten es gibt und dass du diesen Weg nicht allein gehen musst.": {
+    "en": "With our information materials, we want to give you orientation and accompany you along this path. From the first overview, through the application, to the medical assessment, objection (Widerspruch) or legal action (Klage), we explain the most important steps clearly and practically. Because you should know what rights you have, what options there are, and that you don’t have to go down this path alone."
+  },
+  "Für mehr Sichtbarkeit, Gehör und Unterstützung. Gemeinsam KE!N EINZELFALL.": {
+    "en": "For more visibility, for being heard and for support. Together, KE!N EINZELFALL."
+  },
+  "Allgemeines zur Erwerbsminderungsrente": {
+    "en": "General information on the reduced earning capacity pension (Erwerbsminderungsrente)"
+  },
+  "Infoblatt zur Erwerbsminderung – Grundsätzliches": {
+    "en": "Information sheet on reduced earning capacity (Erwerbsminderung) – the basics"
+  },
+  "Zuständigkeit – welcher Rentenversicherungsträger bearbeitet den Antrag?": {
+    "en": "Responsibility – which pension insurance provider (Rentenversicherungsträger) processes the application?"
+  },
+  "Infoblatt zur Erwerbsminderung – Antrag – was muss wie ausgefüllt werden?": {
+    "en": "Information sheet on reduced earning capacity (Erwerbsminderung) – the application – what needs to be filled in, and how?"
+  },
+  "Fragen rund um die Erwerbsminderungsrente - was ist eigentlich... / wie läuft eigentlich... ab?": {
+    "en": "Questions about the reduced earning capacity pension (Erwerbsminderungsrente) - what actually is... / how does... actually work?"
+  },
+  "Infoblatt – volle Erwerbsminderung": {
+    "en": "Information sheet – full reduction in earning capacity (volle Erwerbsminderung)"
+  },
+  "Infoblatt – teilweise Erwerbsminderung": {
+    "en": "Information sheet – partial reduction in earning capacity (teilweise Erwerbsminderung)"
+  },
+  "Infoblatt – Arbeitsmarktrente": {
+    "en": "Information sheet – labour market pension (Arbeitsmarktrente)"
+  },
+  "Infoblatt – Begutachtung": {
+    "en": "Information sheet – medical assessment (Begutachtung)"
+  },
+  "Infoblatt – Bewilligungszeitraum": {
+    "en": "Information sheet – approval period (Bewilligungszeitraum)"
+  },
+  "Infoblatt – Hinzuverdienst": {
+    "en": "Information sheet – additional earnings (Hinzuverdienst)"
+  },
+  "Infoblatt – Ergänzende Leistungen – wenn die Rente nicht reicht…": {
+    "en": "Information sheet – supplementary benefits – when the pension isn’t enough…"
+  },
+  "Wenn der Antrag abgelehnt wird...": {
+    "en": "If the application is rejected..."
+  },
+  "Infoblatt – Widerspruch": {
+    "en": "Information sheet – objection (Widerspruch)"
+  },
+  "Infoblatt – Klage beim Sozialgericht": {
+    "en": "Information sheet – legal action at the social court (Sozialgericht)"
+  },
+  "FSM – Erweitertes Hilfesystem": {
+    "en": "FSM – extended support system (Erweitertes Hilfesystem)"
+  },
+  "FSM – erweitertes Hilfesystem - Kein Einzelfall e.V.": {
+    "en": "FSM – extended support system (Erweitertes Hilfesystem) - Kein Einzelfall e.V."
+  },
+  "Informationen, Stellungnahmen und Musterwidersprüche zum Fonds Sexueller Missbrauch (FSM) - Kommunikation mit Behörden und Ministerien sowie Infoblätter": {
+    "en": "Information, statements and template objections on the Sexual Abuse Fund (Fonds Sexueller Missbrauch, FSM) - communication with authorities and ministries, plus information sheets"
+  },
+  "Fonds Sexueller Missbrauch – Informationen, Stellungnahmen und Musterwidersprüche": {
+    "en": "Sexual Abuse Fund (Fonds Sexueller Missbrauch) – information, statements and template objections"
+  },
+  "Die vergangenen Monate haben für viele Betroffene des Fonds Sexueller Missbrauch große Verunsicherung mit sich gebracht. Rückwirkende Friständerungen, lange Bearbeitungszeiten, abgelehnte Anträge und unklare Informationen haben bei vielen Menschen den Eindruck hinterlassen, mit ihren Fragen und Sorgen allein gelassen zu werden. Als KE!N EINZELFALL e.V. haben wir diese Entwicklungen von Beginn an begleitet. Wir haben den Dialog mit dem Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend gesucht, zahlreiche Fragen gestellt und bereits mehrere offizielle Antworten erhalten.": {
+    "en": "The past few months have brought great uncertainty for many affected people involved with the Sexual Abuse Fund (Fonds Sexueller Missbrauch). Retroactive changes to deadlines, long processing times, rejected applications and unclear information have left many people feeling that they have been left alone with their questions and worries. As KE!N EINZELFALL e.V., we have followed these developments from the very beginning. We sought dialogue with the Federal Ministry of Education, Family Affairs, Senior Citizens, Women and Youth (Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend), asked numerous questions and have already received several official replies."
+  },
+  "Auf Grundlage dieser Schreiben sowie der geltenden Richtlinien und Rechtsgrundlagen haben wir umfangreiche Informationsmaterialien, rechtliche Einordnungen, Stellungnahmen und Musterwidersprüche erstellt, um Betroffene bestmöglich zu unterstützen.": {
+    "en": "On the basis of these letters and the applicable guidelines and legal bases, we have produced extensive information materials, legal assessments, statements and template objections in order to support those affected as well as we possibly can."
+  },
+  "Wir werden diese Sammlung fortlaufend ergänzen, sobald neue Informationen oder weitere Antworten der zuständigen Stellen vorliegen. Unser Anliegen ist es, Betroffenen eine verlässliche Anlaufstelle zu bieten – mit verständlichen Informationen, nachvollziehbaren rechtlichen Einordnungen und konkreten Hilfestellungen.": {
+    "en": "We will keep adding to this collection as soon as new information or further replies from the responsible bodies become available. Our aim is to offer those affected a reliable point of contact – with understandable information, comprehensible legal assessments and concrete help."
+  },
+  "Wir schauen nicht weg. Wir geben nicht auf. Und wir lassen nicht locker.": {
+    "en": "We don’t look away. We don’t give up. And we don’t let up."
+  },
+  "Denn hinter jedem Antrag steht ein Mensch mit einer eigenen Geschichte, oft geprägt von jahrelangem Leid und dem Mut, überhaupt Hilfe zu beantragen. Für uns endet Unterstützung nicht mit einem Informationsblatt oder einer Stellungnahme. Wir wollen verstehen, warum Entscheidungen getroffen werden, rechtliche Zusammenhänge nachvollziehen und dort nachfragen, wo Antworten fehlen.": {
+    "en": "Because behind every application there is a person with their own story, often marked by years of suffering and by the courage it took to apply for help at all. For us, support does not end with an information sheet or a statement. We want to understand why decisions are made, follow the legal connections and ask questions where answers are missing."
+  },
+  "Unser Ziel ist nicht die Konfrontation, sondern Transparenz, Fairness und eine Behandlung, die den Betroffenen gerecht wird. Solange wichtige Fragen ungeklärt sind, bleiben wir an ihrer Seite – beharrlich, respektvoll und mit dem festen Willen, gemeinsam Lösungen zu finden.": {
+    "en": "Our goal is not confrontation, but transparency, fairness and treatment that does justice to those affected. As long as important questions remain unresolved, we will stay by their side – persistently, respectfully and with the firm determination to find solutions together."
+  },
+  "Alle veröffentlichten Informationen wurden sorgfältig anhand der geltenden Richtlinien, der offiziellen Schreiben des Bundesministeriums sowie weiterer öffentlich zugänglicher Quellen geprüft und nach bestem Wissen zusammengestellt.": {
+    "en": "All published information has been carefully checked against the applicable guidelines, the official letters from the Federal Ministry and other publicly available sources, and compiled to the best of our knowledge."
+  },
+  "Dokumente von uns für euch:": {
+    "en": "Documents from us for you:"
+  },
+  "Infoblatt zum Fonds Sexueller Missbrauch – allgemeine Informationen zum erweiterten Hilfesystem": {
+    "en": "Information sheet on the Sexual Abuse Fund (Fonds Sexueller Missbrauch) – general information on the extended support system (erweitertes Hilfesystem)"
+  },
+  "→ Unsere Stellungnahme zur rückwirkenden Änderung der Antragsfrist": {
+    "en": "→ Our statement on the retroactive change to the application deadline"
+  },
+  "Infoblatt zur rückwirkenden Änderung der Antragsfrist und Musterwiderspruch": {
+    "en": "Information sheet on the retroactive change to the application deadline, and template objection"
+  },
+  "→ Unsere Stellungnahme zum behinderungsbedingten Mehrbedarf": {
+    "en": "→ Our statement on disability-related additional needs (behinderungsbedingter Mehrbedarf)"
+  },
+  "Infoblatt zum behinderungsbedingten Mehrbedarf und Musterwiderspruch": {
+    "en": "Information sheet on disability-related additional needs (behinderungsbedingter Mehrbedarf), and template objection"
+  },
+  "Unser Kontakt zum Bundesministerium (chronologisch):": {
+    "en": "Our contact with the Federal Ministry (in chronological order):"
+  },
+  "→ Unsere 1. Anfrage zur Unzumutbarkeit der Abwicklungsprozesse vom 09.03.2026": {
+    "en": "→ Our 1st enquiry of 9 March 2026 on the unreasonable burden of the processing procedures"
+  },
+  "→ Unsere Nachfrage zur 1. Anfrage vom 18.04.2026": {
+    "en": "→ Our follow-up of 18 April 2026 on the 1st enquiry"
+  },
+  "Zwischenmitteilung vom 20.04.2026": {
+    "en": "Interim reply of 20 April 2026"
+  },
+  "→ Unsere Reaktion auf die Zwischenmitteilung vom 21.04.2026": {
+    "en": "→ Our response of 21 April 2026 to the interim reply"
+  },
+  "Antwortschreiben vom 03.06.2026": {
+    "en": "Letter of reply of 3 June 2026"
+  },
+  "Unsere Stellungnahme zur rückwirkenden Änderung der Antragsfrist": {
+    "en": "Our statement on the retroactive change to the application deadline"
+  },
+  "Unsere Stellungnahme zum behinderungsbedingten Mehrbedarf": {
+    "en": "Our statement on disability-related additional needs (behinderungsbedingter Mehrbedarf)"
+  },
+  "Unsere 1. Anfrage zur Unzumutbarkeit der Abwicklungsprozesse vom 09.03.2026": {
+    "en": "Our 1st enquiry of 9 March 2026 on the unreasonable burden of the processing procedures"
+  },
+  "Unsere Nachfrage zur 1. Anfrage vom 18.04.2026": {
+    "en": "Our follow-up of 18 April 2026 on the 1st enquiry"
+  },
+  "Unsere Reaktion auf die Zwischenmitteilung vom 21.04.2026": {
+    "en": "Our response of 21 April 2026 to the interim reply"
+  },
+  "Wissen": {
+    "en": "Knowledge"
+  },
+  "Rechte, Anträge und Hilfesysteme verständlich erklärt.": {
+    "en": "Rights, applications and support systems, clearly explained."
+  },
+  "Wissen - Kein Einzelfall e.V.": {
+    "en": "Knowledge - Kein Einzelfall e.V."
+  },
+  "Wissen - Informationen zu verschiedenen Themen, aktuelle Entwicklungen, Fragen und Antworten von Behörden, Ministerien und sonstigen Stellen": {
+    "en": "Knowledge - information on various topics, current developments, questions and answers from authorities, ministries and other bodies"
+  },
+  "Wir möchten informieren – über Rechte, Antragsmöglichkeiten oder einfach nur darüber, woran wir gerade arbeiten.": {
+    "en": "We want to keep you informed – about rights, ways to apply, or simply about what we are working on at the moment."
+  },
+  "In diesem Bereich sammeln wir deshalb allgemeine Informationen oder auch aktuelle Entwicklungen zu den verschiedensten Themen rund um den Bereich der Opferhilfe. Es handelt sich hierbei um eine stetig wachsende Seite, die um weitere Themen ergänzt wird, sobald Material und Kapazitäten vorhanden sind.": {
+    "en": "That is why, in this section, we collect general information as well as current developments on a wide range of topics related to victim support. This page is constantly growing and will be expanded with further topics as soon as material and capacity are available."
+  },
+  "Wichtig:": {
+    "en": "Important:"
+  },
+  "Diese Informationen stellen keine Beratung dar und erheben nicht den Anspruch, vollständig zu sein. Sie wurden von uns als Verein nach eigenen Erfahrungen und Auskünften, die uns verschiedene Stellen gegeben haben, zusammengetragen.": {
+    "en": "This information does not constitute advice and makes no claim to be complete. We compiled it as an association, based on our own experience and on information given to us by various bodies."
+  },
+  "Zu den einzelnen Kategorien:": {
+    "en": "The individual categories:"
+  },
+  "[Erwerbsminderungsrente](/erwerbsminderungsrente)": {
+    "en": "[Reduced earning capacity pension (Erwerbsminderungsrente)](/erwerbsminderungsrente)"
+  },
+  "[FSM – Fonds sexueller Missbrauch](/fsm-erweitertes-hilfesystem)": {
+    "en": "[FSM – Sexual Abuse Fund (Fonds Sexueller Missbrauch)](/fsm-erweitertes-hilfesystem)"
+  },
+  "Wichtiges über Rechte, Anträge und unsere Arbeit.": {
+    "en": "Important information about rights, applications and our work."
+  },
+  "Unterstützung - Kein Einzelfall e.V.": {
+    "en": "Support - Kein Einzelfall e.V."
+  },
+  "Unterstützung - Informationen zu verschiedenen Themen, Rechtsprechung, Gesetzesgrundlagen und mehr - wir befinden uns im Aufbau": {
+    "en": "Support - information on various topics, case law, legal bases and more - this section is still being built"
+  },
+  "Wir möchten euch unterstützen, indem wir verschiedene Informationen mit euch teilen. In den einzelnen Kategorien findet ihr Wichtiges über Rechte, Antragsmöglichkeiten oder einfach nur darüber, woran wir gerade arbeiten.": {
+    "en": "We want to support you by sharing a range of information with you. In the individual categories, you will find important information about rights, ways to apply, or simply about what we are working on at the moment."
+  },
+  "In diesem Bereich sammeln wir deshalb allgemeine Infos oder auch aktuelle Entwicklungen zu den verschiedensten Themen rund um den Bereich der Opferhilfe. Es handelt sich hierbei um eine stetig wachsende Seite, die um weitere Themen ergänzt wird, sobald Material und Kapazitäten vorhanden sind.": {
+    "en": "That is why, in this section, we collect general info as well as current developments on a wide range of topics related to victim support. This page is constantly growing and will be expanded with further topics as soon as material and capacity are available."
+  },
+  "[Wissen – Informationen zu verschiedenen Themen](/wissen)": {
+    "en": "[Knowledge – information on various topics](/wissen)"
+  },
+  "Veranstaltungen": {
+    "en": "Events"
+  },
+  "Wissen teilen. Erfahrungen verbinden. Gemeinsam Perspektiven schaffen.": {
+    "en": "Sharing knowledge. Connecting experiences. Creating perspectives together."
+  },
+  "Veranstaltungen - Kein Einzelfall e.V.": {
+    "en": "Events - Kein Einzelfall e.V."
+  },
+  "Veranstaltungen - Wissen teilen. Erfahrungen verbinden. Gemeinsam Perspektiven schaffen.": {
+    "en": "Events - Sharing knowledge. Connecting experiences. Creating perspectives together."
+  },
+  "Manchmal hilft ein fachlicher Impuls dabei, Zusammenhänge besser zu verstehen. Manchmal schenkt die Erfahrung eines anderen Menschen Hoffnung, weil sie zeigt: Du bist nicht allein.": {
+    "en": "Sometimes an expert input helps you understand how things connect. Sometimes another person's experience brings hope, because it shows you: you are not alone."
+  },
+  "Mit den Veranstaltungen des KE!N EINZELFALL e.V. schaffen wir Räume für Information, Austausch und Begegnung. Wir bringen Betroffene, Angehörige, Fachpersonen und Interessierte zusammen, um voneinander zu lernen, Erfahrungen sichtbar zu machen und miteinander ins Gespräch zu kommen. Wir sind überzeugt: Fachwissen und gelebte Erfahrung gehören zusammen. Wissenschaft hilft, Zusammenhänge zu verstehen. Erfahrungen machen sie greifbar. Erst im Dialog entsteht das Verständnis, das Menschen stärkt, verbindet und neue Perspektiven eröffnet.": {
+    "en": "With the events of KE!N EINZELFALL e.V., we create spaces for information, exchange and encounter. We bring together people affected, their families and friends, professionals and anyone interested, so that we can learn from one another, make experiences visible and talk with each other. We are convinced that expert knowledge and lived experience belong together. Science helps us understand how things connect. Experience makes it tangible. Only in dialogue does the understanding grow that strengthens people, connects them and opens up new perspectives."
+  },
+  "Ob Fachvortrag, Veranstaltungsreihe, Selbsthilfegruppe, Workshop oder Gesprächsrunde – jede Veranstaltung bietet die Möglichkeit, zuzuhören, Fragen zu stellen, Erfahrungen zu teilen oder einfach dabei zu sein. Denn jede Stimme zählt und jede Perspektive kann dazu beitragen, andere besser zu verstehen.": {
+    "en": "Whether it's an expert talk, an event series, a self-help group, a workshop or a discussion round – every event gives you the chance to listen, ask questions, share experiences or simply be there. Because every voice counts, and every perspective can help us understand others better."
+  },
+  "So finden unsere Veranstaltungen statt": {
+    "en": "How our events work"
+  },
+  "Alle Veranstaltungen des KE!N EINZELFALL e.V. finden online über Microsoft Teams statt.": {
+    "en": "All events of KE!N EINZELFALL e.V. take place online via Microsoft Teams."
+  },
+  "Damit jede und jeder so teilnehmen kann, wie es sich richtig anfühlt, bieten wir bei allen Veranstaltungen:": {
+    "en": "So that everyone can take part in the way that feels right for them, all our events offer:"
+  },
+  "Anonyme Teilnahme ohne Klarnamen": {
+    "en": "Anonymous participation without using your real name"
+  },
+  "Freiwillige Nutzung von Kamera und Mikrofon": {
+    "en": "Camera and microphone are optional"
+  },
+  "Die Möglichkeit, einfach nur zuzuhören": {
+    "en": "The option to simply listen"
+  },
+  "Eine Chatfunktion und/oder Frage & Antwort Funktion, falls die Worte fehlen oder Fragen lieber schriftlich gestellt werden möchten": {
+    "en": "A chat and/or Q&A function, in case words fail you or you'd rather ask your questions in writing"
+  },
+  "Die Veranstaltungen werden in der Regel mit Bild und Ton aufgezeichnet. Die Aufzeichnungen dienen insbesondere der Dokumentation sowie der späteren Bereitstellung für Personen, die nicht live teilnehmen konnten.": {
+    "en": "Events are usually recorded with sound and video. The recordings are mainly used for documentation and so that they can later be made available to people who could not attend live."
+  },
+  "Selbsthilfegruppen und Arbeitsgruppen werden nicht aufgezeichnet.": {
+    "en": "Self-help groups and working groups are not recorded."
+  },
+  "Teilnahme": {
+    "en": "Participation"
+  },
+  "Alle Veranstaltungen des KE!N EINZELFALL e.V. sind kostenfrei und nicht an eine Mitgliedschaft gebunden.": {
+    "en": "All events of KE!N EINZELFALL e.V. are free of charge, and you don't need to be a member to take part."
+  },
+  "Damit wir einen sicheren und respektvollen Rahmen für alle Teilnehmenden schaffen können, ist bei der Anmeldung die Zustimmung zu unserer Teilnahmevereinbarung und den Gruppenregeln erforderlich.": {
+    "en": "So that we can create a safe and respectful setting for everyone taking part, you need to agree to our participation agreement and group rules when you register."
+  },
+  "Beides findest du unten zum Herunterladen.": {
+    "en": "You can download both below."
+  },
+  "Wenn du unsere Arbeit unterstützen möchtest, freuen wir uns über einen freiwilligen Energieausgleich – zum Beispiel durch eine Mitgliedschaft (ab 36 € im Jahr) oder eine Spende an paypal@kein-einzelfall.de bzw. an eines unserer [betterplace-Projekte](https://www.betterplace.org/de/organisations/71526-ke-n-einzelfall-e-v).": {
+    "en": "If you'd like to support our work, we welcome a voluntary contribution – for example through a membership (from €36 a year) or a donation to paypal@kein-einzelfall.de or to one of our [betterplace projects](https://www.betterplace.org/de/organisations/71526-ke-n-einzelfall-e-v)."
+  },
+  "Mit deiner Unterstützung hilfst du uns, auch in Zukunft kostenfreie Veranstaltungen und Angebote für Betroffene, Angehörige, Fachpersonen und Interessierte anzubieten.": {
+    "en": "Your support helps us keep offering free events and services for people affected, their families and friends, professionals and anyone interested."
+  },
+  "Anmeldung": {
+    "en": "Registration"
+  },
+  "Lies dir zuerst die Teilnahmevereinbarungen und Gruppenregeln durch und gehe erst dann auf die Veranstaltung, die du besuchen möchtest. Dort findest du den Anmeldelink.": {
+    "en": "Please read the participation agreement and group rules first, then go to the event you'd like to attend. You'll find the registration link there."
+  },
+  "Deine Ideen sind willkommen": {
+    "en": "Your ideas are welcome"
+  },
+  "Du hast einen Themenvorschlag, kennst eine Referentin oder einen Referenten oder möchtest selbst einen Beitrag zu einer Veranstaltung leisten? Dann freuen wir uns auf deine Nachricht.": {
+    "en": "Do you have a topic to suggest, know a speaker, or would you like to contribute to an event yourself? Then we look forward to hearing from you."
+  },
+  "Das Team von KE!N EINZELFALL e.V.": {
+    "en": "The KE!N EINZELFALL e.V. team"
+  },
+  "Unsere Veranstaltungs-Reihen:": {
+    "en": "Our event series:"
+  },
+  "[KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung](/kein-einzelfall-im-dialog)": {
+    "en": "[KE!N EINZELFALL im Dialog – Knowledge meets experience](/kein-einzelfall-im-dialog)"
+  },
+  "Teilnahmevereinbarung": {
+    "en": "Participation agreement"
+  },
+  "Gruppenregeln": {
+    "en": "Group rules"
+  },
+  "Das Hilfesystem": {
+    "en": "The support system"
+  },
+  "Das Hilfesystem - Kein Einzelfall e.V.": {
+    "en": "The support system - Kein Einzelfall e.V."
+  },
+  "KE!N EINZELFALL im Dialog - Das Hilfesystem - Unterstützung, Selbstfürsorge und Resilienz - Veranstaltung am 25.11.2026": {
+    "en": "KE!N EINZELFALL im Dialog - The support system - Support, self-care and resilience - Event on 25 November 2026"
+  },
+  "Von der Krise zur Stärke": {
+    "en": "From crisis to strength"
+  },
+  "Wer hilft eigentlich, wenn das Leben aus dem Gleichgewicht gerät? Welche Unterstützung gibt es – und warum fühlt sich der Weg dorthin manchmal so schwer an?": {
+    "en": "Who actually helps when life loses its balance? What support is available – and why does the path to it sometimes feel so hard?"
+  },
+  "Nach einer traumatischen Erfahrung stehen viele Betroffene und Angehörige vor der Herausforderung, sich im Hilfesystem zurechtzufinden. Gleichzeitig geraten die eigenen Bedürfnisse häufig in den Hintergrund. Dabei sind Selbstfürsorge, gegenseitige Unterstützung und ein gutes Netzwerk wichtige Bausteine auf dem Weg zu mehr Stabilität und Selbstwirksamkeit.": {
+    "en": "After a traumatic experience, many people affected and their families and friends face the challenge of finding their way through the support system (Hilfesystem). At the same time, their own needs often fall by the wayside. Yet self-care, mutual support and a good network are important building blocks on the way to more stability and a sense of agency (Selbstwirksamkeit)."
+  },
+  "Mit unserer Veranstaltungsreihe „KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung“ möchten wir wissenschaftliche Erkenntnisse und gelebte Erfahrung miteinander verbinden. Gemeinsam schaffen wir einen Raum, in dem Fragen gestellt, Zusammenhänge verständlich erklärt und unterschiedliche Perspektiven sichtbar werden.": {
+    "en": "With our event series “KE!N EINZELFALL im Dialog – Knowledge meets experience”, we want to bring scientific findings and lived experience together. Together we create a space where questions can be asked, connections are explained clearly and different perspectives become visible."
+  },
+  "Wir freuen uns sehr, Quendolin Winter als Referentin begrüßen zu dürfen. Als Autorin des Buches „Das Helfernetzwerk“ beschäftigt sie sich intensiv mit der Frage, welche Unterstützung Menschen in belastenden Lebenssituationen benötigen und wie hilfreiche Netzwerke entstehen können. In ihrem Impulsvortrag spricht sie über die Bedeutung von Selbstfürsorge, den Umgang mit Unterstützungsangeboten, die Rolle von Angehörigen und darüber, wie Resilienz wachsen kann.": {
+    "en": "We are delighted to welcome Quendolin Winter as our speaker. As the author of the book “Das Helfernetzwerk” (“The helper network”), she explores in depth what support people need in stressful life situations and how helpful networks can develop. In her talk, she will speak about the importance of self-care, dealing with offers of support, the role of families and friends, and how resilience can grow."
+  },
+  "Anschließend möchten wir gemeinsam ins Gespräch kommen. Dabei greifen wir sowohl Fragen aus dem Publikum als auch im Vorfeld eingereichte Fragen auf.": {
+    "en": "Afterwards, we'd like to open up the conversation. We will take up questions from the audience as well as questions submitted in advance."
+  },
+  "Die Veranstaltung richtet sich an Betroffene, Angehörige, Fachpersonen und alle Interessierten, die sich Orientierung im Hilfesystem wünschen und erfahren möchten, welche Möglichkeiten der Unterstützung es gibt.": {
+    "en": "The event is aimed at people affected, their families and friends, professionals and anyone interested who would like guidance on the support system and to find out what kinds of support are available."
+  },
+  "Die Veranstaltung auf einen Blick": {
+    "en": "The event at a glance"
+  },
+  "Referentin: Quen Winter": {
+    "en": "Speaker: Quen Winter"
+  },
+  "Datum: 25. November 2026": {
+    "en": "Date: 25 November 2026"
+  },
+  "Uhrzeit: 18:00–20:00 Uhr": {
+    "en": "Time: 6:00–8:00 pm"
+  },
+  "Ort: Online über Microsoft Teams": {
+    "en": "Location: online via Microsoft Teams"
+  },
+  "Teilnahme: Kostenfrei": {
+    "en": "Participation: free of charge"
+  },
+  "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat oder über die Frage & Antwort Funktion gestellt werden.": {
+    "en": "You can take part anonymously if you wish. You don't need to switch on your camera or microphone. Of course, you can also ask questions via the chat or the Q&A function."
+  },
+  "Die Veranstaltungen des KE!N EINZELFALL e.V. werden aufgezeichnet. Bei der Anmeldung müssen die Teilnahmevereinbarungen und Gruppenregeln akzeptiert werden. Beides findest du auf der Seite Veranstaltungen.": {
+    "en": "Events of KE!N EINZELFALL e.V. are recorded. When registering, you must accept the participation agreement and group rules. You can find both on the Events page."
+  },
+  "Teilnahmevereinbarung und Gruppenregeln": {
+    "en": "Participation agreement and group rules"
+  },
+  "Die Veranstaltung findet bei Teams statt:": {
+    "en": "The event takes place on Teams:"
+  },
+  "Wir freuen uns auf einen Abend, der Orientierung gibt, Mut macht und zeigt, dass Hilfe viele Gesichter haben kann.": {
+    "en": "We look forward to an evening that offers guidance, gives encouragement and shows that help can come in many forms."
+  },
+  "KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung.": {
+    "en": "KE!N EINZELFALL im Dialog – Knowledge meets experience."
+  },
+  "Jetzt anmelden": {
+    "en": "Register now"
+  },
+  "Das Bürokratie-Labyrinth": {
+    "en": "The bureaucracy maze"
+  },
+  "Bürokratie-Labyrinth - Kein Einzelfall e.V.": {
+    "en": "Bureaucracy maze - Kein Einzelfall e.V."
+  },
+  "KE!N EINZELFALL im Dialog - Bürokratie-Labyrinth - Wenn Hilfe kompliziert wird": {
+    "en": "KE!N EINZELFALL im Dialog - Bureaucracy maze - When help gets complicated"
+  },
+  "Wenn Hilfe kompliziert wird": {
+    "en": "When help gets complicated"
+  },
+  "Warum ist es oft so schwer, die Unterstützung zu erhalten, die einem zusteht? Welche Rechte habe ich – und wie finde ich mich im Behördendschungel zurecht?": {
+    "en": "Why is it often so hard to get the support you are entitled to? What rights do I have – and how do I find my way through the jungle of authorities?"
+  },
+  "Für viele Betroffene stellen nicht nur die Folgen einer Traumatisierung eine große Belastung dar, sondern auch der Umgang mit Behörden, Anträgen und gesetzlichen Regelungen. Pflegegrad, Grad der Behinderung, Sozialleistungen oder Mitwirkungspflichten – wer Unterstützung benötigt, sieht sich häufig mit einem unübersichtlichen System konfrontiert.": {
+    "en": "For many people affected, it is not only the consequences of trauma that are a heavy burden, but also dealing with authorities, applications and legal regulations. Care level (Pflegegrad), degree of disability (Grad der Behinderung, GdB), social benefits or duties to cooperate (Mitwirkungspflichten) – anyone who needs support often finds themselves facing a confusing system."
+  },
+  "In dieser Veranstaltung informieren Expertinnen aus dem Betroffenenkontext über sozialrechtliche Ansprüche, Antragsverfahren und Unterstützungsmöglichkeiten. Gleichzeitig sprechen wir darüber, wie sich bürokratische Prozesse auf traumatisierte Menschen auswirken können und welche Strategien helfen, den Überblick zu behalten und die eigenen Rechte wahrzunehmen.": {
+    "en": "At this event, experts who have been affected themselves will provide information on entitlements under social law, application procedures and options for support. We will also talk about how bureaucratic processes can affect traumatised people and which strategies help you keep track and assert your rights."
+  },
+  "Im anschließenden Dialog greifen wir Fragen aus dem Publikum sowie bereits vorab eingereichte Fragen auf und schaffen Raum für den gemeinsamen Erfahrungsaustausch.": {
+    "en": "In the dialogue that follows, we will take up questions from the audience as well as questions submitted in advance, and make room for sharing experiences together."
+  },
+  "Die Veranstaltung richtet sich an Betroffene, Angehörige, Fachpersonen und alle Interessierten, die mehr Sicherheit im Umgang mit Behörden und Sozialleistungsträgern gewinnen möchten.": {
+    "en": "The event is aimed at people affected, their families and friends, professionals and anyone interested who would like to feel more confident dealing with authorities and social benefit agencies (Sozialleistungsträger)."
+  },
+  "Referentin: Tatjana Belmar, weitere Referentinnen und Referenten willkommen": {
+    "en": "Speaker: Tatjana Belmar, further speakers welcome"
+  },
+  "Datum: folgt": {
+    "en": "Date: to be announced"
+  },
+  "Anmeldung: veranstaltung@kein-einzelfall.de": {
+    "en": "Registration: veranstaltung@kein-einzelfall.de"
+  },
+  "Eine Teilnahme ist auf Wunsch anonym möglich. Kamera und Mikrofon müssen nicht eingeschaltet werden. Fragen können selbstverständlich auch über den Chat gestellt werden.": {
+    "en": "You can take part anonymously if you wish. You don't need to switch on your camera or microphone. Of course, you can also ask questions via the chat."
+  },
+  "Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an: veranstaltung@kein-einzelfall.de": {
+    "en": "To register, send an email stating the event to: veranstaltung@kein-einzelfall.de"
+  },
+  "Wir freuen uns auf einen Abend, der Orientierung schafft, Wissen verständlich vermittelt und zeigt, dass niemand den Weg durch das Bürokratie-Labyrinth allein gehen muss.": {
+    "en": "We look forward to an evening that offers guidance, explains things clearly and shows that nobody has to find their way through the bureaucracy maze alone."
+  },
+  "Trauma, Bindung und Beziehung": {
+    "en": "Trauma, attachment and relationships"
+  },
+  "Warum ein Trauma Beziehungen verändert – und was dabei hilft.": {
+    "en": "Why trauma changes relationships – and what helps."
+  },
+  "Trauma, Bindung und Beziehung - Kein Einzelfall e.V.": {
+    "en": "Trauma, attachment and relationships - Kein Einzelfall e.V."
+  },
+  "KE!N EINZELFALL im Dialog - Trauma, Bindung und Beziehung - Veranstaltung am 10.08.2026": {
+    "en": "KE!N EINZELFALL im Dialog - Trauma, attachment and relationships - Event on 10 August 2026"
+  },
+  "Warum verändert ein Trauma Beziehungen? Weshalb fällt Vertrauen oft so schwer? Und wie kann Verständnis dabei helfen, neue Wege zu finden?": {
+    "en": "Why does trauma change relationships? Why is trust often so difficult? And how can understanding help you find new ways forward?"
+  },
+  "Trauma betrifft nie nur einen Menschen. Es beeinflusst häufig das Erleben von Nähe, Vertrauen und Sicherheit – und wirkt sich damit auf Partnerschaften, Familien, Freundschaften und andere zwischenmenschliche Beziehungen aus. Viele Reaktionen, die für Außenstehende schwer nachvollziehbar erscheinen, sind aus traumatherapeutischer Sicht verständliche Folgen belastender Erfahrungen.": {
+    "en": "Trauma never affects just one person. It often shapes how closeness, trust and safety are experienced – and so it affects partnerships, families, friendships and other relationships. Many reactions that are hard for outsiders to understand are, from a trauma therapy perspective, understandable consequences of distressing experiences."
+  },
+  "In unserer Veranstaltungsreihe „KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung“ möchten wir wissenschaftliche Erkenntnisse und gelebte Erfahrung miteinander verbinden. Gemeinsam schaffen wir einen Raum, in dem Fragen gestellt, Zusammenhänge verständlich erklärt und unterschiedliche Perspektiven sichtbar werden.": {
+    "en": "In our event series “KE!N EINZELFALL im Dialog – Knowledge meets experience”, we want to bring scientific findings and lived experience together. Together we create a space where questions can be asked, connections are explained clearly and different perspectives become visible."
+  },
+  "Zum Auftakt freuen wir uns sehr, Lutz-Ulrich Besser als Referenten begrüßen zu dürfen. Als Facharzt für Psychiatrie und Psychotherapie sowie Gründer und Leiter des Zentrums für Psychotraumatologie und Traumatherapie Niedersachsen (zptn) gehört er zu den erfahrensten Experten im Bereich der Psychotraumatologie.": {
+    "en": "To open the series, we are delighted to welcome Lutz-Ulrich Besser as our speaker. As a specialist in psychiatry and psychotherapy and the founder and director of the Zentrum für Psychotraumatologie und Traumatherapie Niedersachsen (zptn), a centre for psychotraumatology and trauma therapy in Lower Saxony, he is one of the most experienced experts in the field of psychotraumatology."
+  },
+  "In seinem Impulsvortrag gibt er verständliche Einblicke in die Zusammenhänge zwischen Trauma, Bindung und Beziehung. Anschließend möchten wir gemeinsam ins Gespräch kommen. Dabei greifen wir sowohl Fragen aus dem Publikum als auch im Vorfeld eingereichte Fragen auf.": {
+    "en": "In his talk, he will offer clear insights into how trauma, attachment and relationships are connected. Afterwards, we'd like to open up the conversation. We will take up questions from the audience as well as questions submitted in advance."
+  },
+  "Die Veranstaltung richtet sich an Betroffene, Angehörige, Fachpersonen und alle Interessierten, die mehr über die Auswirkungen traumatischer Erfahrungen auf Beziehungen erfahren möchten.": {
+    "en": "The event is aimed at people affected, their families and friends, professionals and anyone interested who would like to learn more about how traumatic experiences affect relationships."
+  },
+  "Referent: Lutz-Ulrich Besser": {
+    "en": "Speaker: Lutz-Ulrich Besser"
+  },
+  "Datum: 10. August 2026": {
+    "en": "Date: 10 August 2026"
+  },
+  "Die Veranstaltung hat am 10. August 2026 bei Teams stattgefunden.": {
+    "en": "The event took place on Teams on 10 August 2026."
+  },
+  "Wir freuen uns auf einen Abend, der Wissen vermittelt, Verständnis fördert und zeigt, dass niemand mit seinen Fragen und Erfahrungen allein ist. Denn genau dafür steht KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung.": {
+    "en": "We look forward to an evening that shares knowledge, builds understanding and shows that nobody is alone with their questions and experiences. Because that is exactly what KE!N EINZELFALL im Dialog – Knowledge meets experience stands for."
+  },
+  "Traumafolgestörungen verstehen": {
+    "en": "Understanding trauma-related disorders"
+  },
+  "Was eine Traumafolgestörung ist – und wie man passende Hilfe findet.": {
+    "en": "What a trauma-related disorder is – and how to find the right help."
+  },
+  "Traumafolgestörungen verstehen - Kein Einzelfall e.V.": {
+    "en": "Understanding trauma-related disorders - Kein Einzelfall e.V."
+  },
+  "KE!N EINZELFALL im Dialog - Traumafolgestörungen verstehen - Diagnosen, Therapien und neue Perspektiven": {
+    "en": "KE!N EINZELFALL im Dialog - Understanding trauma-related disorders - Diagnoses, therapies and new perspectives"
+  },
+  "Diagnosen, Therapien und neue Perspektiven": {
+    "en": "Diagnoses, therapies and new perspectives"
+  },
+  "Was genau ist eine Traumafolgestörung? Warum erhalten manche Menschen unterschiedliche Diagnosen? Und wie findet man die passende Unterstützung?": {
+    "en": "What exactly is a trauma-related disorder (Traumafolgestörung)? Why do some people receive different diagnoses? And how do you find the right support?"
+  },
+  "Traumafolgestörungen können sich auf sehr unterschiedliche Weise zeigen und werden häufig erst spät erkannt oder falsch eingeordnet. Viele Betroffene erleben einen langen Weg bis zur richtigen Diagnose und passenden Behandlung. Gleichzeitig stellen sich zahlreiche Fragen rund um Therapien, Traumaambulanzen und den Umgang mit psychischen Belastungen.": {
+    "en": "Trauma-related disorders (Traumafolgestörungen) can show up in very different ways and are often recognised late or misclassified. Many people affected go a long way before getting the right diagnosis and suitable treatment. At the same time, there are many questions about therapies, trauma outpatient clinics (Traumaambulanzen) and dealing with psychological strain."
+  },
+  "In dieser Veranstaltung erhalten die Teilnehmenden einen verständlichen Überblick über Traumafolgestörungen, mögliche Diagnosen, therapeutische Angebote und die Bedeutung von Traumaambulanzen. Außerdem sprechen wir darüber, weshalb Fehldiagnosen entstehen können, welche Auswirkungen sie haben und wie Betroffene den für sie passenden Weg finden können.": {
+    "en": "At this event, you will get a clear overview of trauma-related disorders, possible diagnoses, therapy options and the role of trauma outpatient clinics (Traumaambulanzen). We will also talk about why misdiagnoses can happen, what effects they have and how people affected can find the path that is right for them."
+  },
+  "Im anschließenden Dialog greifen wir Fragen aus dem Publikum sowie bereits vorab eingereichte Fragen auf und schaffen Raum für einen offenen Austausch.": {
+    "en": "In the dialogue that follows, we will take up questions from the audience as well as questions submitted in advance, and make room for an open exchange."
+  },
+  "Die Veranstaltung richtet sich an Betroffene, Angehörige, Fachpersonen und alle Interessierten, die Traumafolgestörungen besser verstehen und sich über Diagnostik, Therapie und Unterstützung informieren möchten.": {
+    "en": "The event is aimed at people affected, their families and friends, professionals and anyone interested who would like to understand trauma-related disorders better and find out about diagnosis, therapy and support."
+  },
+  "Referentin oder Referent gesucht": {
+    "en": "Speaker wanted"
+  },
+  "Uhrzeit: folgt": {
+    "en": "Time: to be announced"
+  },
+  "Wir freuen uns auf einen Abend, der Wissen vermittelt, Orientierung gibt und Mut macht, den eigenen Weg mit mehr Verständnis zu gehen.": {
+    "en": "We look forward to an evening that shares knowledge, offers guidance and gives you the courage to walk your own path with more understanding."
+  },
+  "KE!N EINZELFALL im Dialog": {
+    "en": "KE!N EINZELFALL im Dialog"
+  },
+  "Wissenschaftliche Erkenntnisse und gelebte Erfahrung im Austausch.": {
+    "en": "Scientific findings and lived experience in conversation."
+  },
+  "KE!N EINZELFALL im Dialog - Kein Einzelfall e.V.": {
+    "en": "KE!N EINZELFALL im Dialog - Kein Einzelfall e.V."
+  },
+  "KE!N EINZELFALL im Dialog - Wissen trifft Erfahrung - Veranstaltungsreihe zu verschiedenen Themen": {
+    "en": "KE!N EINZELFALL im Dialog - Knowledge meets experience - Event series on various topics"
+  },
+  "Wissen trifft Erfahrung": {
+    "en": "Knowledge meets experience"
+  },
+  "Zu den einzelnen Veranstaltungen:": {
+    "en": "The individual events:"
+  },
+  "[10.08.2026: Trauma, Bindung und Beziehung](/trauma-bindung-und-beziehung)": {
+    "en": "[10 August 2026: Trauma, attachment and relationships](/trauma-bindung-und-beziehung)"
+  },
+  "[25.11.2026: Das Hilfesystem – Von der Krise zur Stärke](/das-hilfesystem)": {
+    "en": "[25 November 2026: The support system – From crisis to strength](/das-hilfesystem)"
+  },
+  "[geplant: Traumafolgestörungen verstehen – Diagnosen, Therapien und neue Perspektiven](/traumafolgestoerungen-verstehen)": {
+    "en": "[planned: Understanding trauma-related disorders – Diagnoses, therapies and new perspectives](/traumafolgestoerungen-verstehen)"
+  },
+  "[geplant: Bürokratie-Labyrinth – Wenn Hilfe kompliziert wird](/buerokratie-labyrinth)": {
+    "en": "[planned: Bureaucracy maze – When help gets complicated](/buerokratie-labyrinth)"
+  },
+  "Gruppen & Veranstaltungen": {
+    "en": "Groups & events"
+  },
+  "Gruppen & Veranstaltungen - Kein Einzelfall e.V.": {
+    "en": "Groups & events - Kein Einzelfall e.V."
+  },
+  "Selbsthilfegruppen, Arbeitsgruppen, Veranstaltungen und Öffentlichkeitsarbeit des KE!N EINZELFALL e.V. Wo du mitmachen kannst und was gerade passiert.": {
+    "en": "Self-help groups, working groups, events and public outreach of KE!N EINZELFALL e.V. Where you can get involved and what's happening right now."
+  },
+  "Wo Menschen zusammenkommen, Ideen wachsen und Erfahrungen geteilt werden.": {
+    "en": "Where people come together, ideas grow and experiences are shared."
+  },
+  "In diesem Bereich findest du unsere Selbsthilfegruppen und Arbeitsgruppen, aktuelle Veranstaltungen sowie Einblicke in unsere Öffentlichkeitsarbeit. Außerdem schauen wir zurück auf besondere Termine, Projekte und Begegnungen, die unsere Arbeit geprägt haben.": {
+    "en": "In this section, you'll find our self-help groups and working groups, current events and insights into our public outreach. We also look back on special dates, projects and encounters that have shaped our work."
+  },
+  "So entsteht ein Überblick darüber, wo du mitmachen kannst, was gerade passiert und was bereits entstanden ist.": {
+    "en": "This gives you an overview of where you can get involved, what's happening right now and what has already been achieved."
+  },
+  "Entdecke unsere Gruppen, Veranstaltungen und Rückblicke.": {
+    "en": "Discover our groups, events and reviews."
+  },
+  "Öffentlichkeitsarbeit": {
+    "en": "Public outreach"
+  },
+  "Öffentlichkeitsarbeit - Kein Einzelfall e.V.": {
+    "en": "Public outreach - Kein Einzelfall e.V."
+  },
+  "Rückblick": {
+    "en": "Review"
+  },
+  "Rückblick - Kein Einzelfall e.V.": {
+    "en": "Review - Kein Einzelfall e.V."
+  },
+  "Raum für deine Geschichte – ohne Druck oder Bewertung": {
+    "en": "Space for your story – without pressure or judgement"
+  },
+  "Selbsthilfegruppen - Kein Einzelfall e.V.": {
+    "en": "Self-help groups - Kein Einzelfall e.V."
+  },
+  "Selbsthilfegruppen - Raum für deine Geschichte – ohne Druck oder Bewertung Traumafolgestörungen - Bürokratie-Labyrinth - Seelenfarben": {
+    "en": "Self-help groups - Space for your story – without pressure or judgement Trauma-related disorders - Bureaucracy maze - Seelenfarben (Colours of the soul)"
+  },
+  "Die Selbsthilfegruppen des KE!N EINZELFALL e.V.": {
+    "en": "The self-help groups of KE!N EINZELFALL e.V."
+  },
+  "Manchmal tut es gut, mit Menschen zusammenzukommen, bei denen man sich nicht erst erklären muss, weil ähnliche Erfahrungen verbinden. Unsere Selbsthilfegruppen bieten Raum für Austausch, gegenseitiges Verständnis und neue Perspektiven.": {
+    "en": "Sometimes it does you good to be with people you don't have to explain yourself to first, because similar experiences connect you. Our self-help groups offer space for sharing, mutual understanding and new perspectives."
+  },
+  "Du entscheidest selbst, wie viel du erzählen möchtest – auch einfach nur zuzuhören ist vollkommen in Ordnung, egal ob mit oder ohne Bild. Du kannst dich über den Chat oder dein Mikro beteiligen. Die Gruppen werden gemeinsam von den Teilnehmenden gestaltet und finden online über Microsoft Teams statt. Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.": {
+    "en": "You decide how much you want to share – simply listening is perfectly fine too, with or without your camera on. You can take part via the chat or your microphone. The groups are shaped together by the people taking part and take place online via Microsoft Teams. Participation is free of charge, and you don't need to be a member of the association."
+  },
+  "Wir sprechen offen über sensible Themen. Für die Teilnahme setzen wir Therapieerfahrung und eine gute Selbstfürsorge voraus – insbesondere, falls du getriggert wirst. Alles geschieht in eigener Verantwortung.": {
+    "en": "We talk openly about sensitive topics. To take part, you should have experience of therapy and good self-care skills – especially in case you get triggered. You take part on your own responsibility."
+  },
+  "Für einen sicheren und respektvollen Rahmen gibt es Teilnahmebedingungen und Gruppenregeln. Du findest beides weiter unten auf dieser Seite. Bitte lies sie dir vor deiner ersten Teilnahme durch – mit dem Beitritt zur Gruppe akzeptierst du diese. Unsere Selbsthilfegruppen ersetzen keine Therapie, medizinische oder rechtliche Beratung. Bei sensiblen Themen ist es wichtig, gut auf die eigenen Grenzen zu achten und selbst zu entscheiden, was gerade möglich ist.": {
+    "en": "To ensure a safe and respectful setting, there are terms of participation and group rules. You'll find both further down this page. Please read them before you take part for the first time – by joining the group, you accept them. Our self-help groups are not a substitute for therapy or for medical or legal advice. With sensitive topics, it's important to pay close attention to your own limits and to decide for yourself what feels possible right now."
+  },
+  "Du hast Fragen oder Interesse? Oder eine Idee für eine neue Selbsthilfegruppe? Schreib uns eine kurze E-Mail an selbsthilfe@kein-einzelfall.de. Wir melden uns umgehend bei dir.": {
+    "en": "Do you have questions or are you interested? Or do you have an idea for a new self-help group? Send us a short email at selbsthilfe@kein-einzelfall.de. We'll get back to you as soon as possible."
+  },
+  "Unsere Selbsthilfegruppen": {
+    "en": "Our self-help groups"
+  },
+  "Teilnahme- und Verschwiegenheitsvereinbarung": {
+    "en": "Participation and confidentiality agreement"
+  },
+  "Du möchtest nicht nur zuschauen, sondern etwas mitgestalten?": {
+    "en": "Would you like to do more than watch and help shape something?"
+  },
+  "Arbeitsgruppen - Kein Einzelfall e.V.": {
+    "en": "Working groups - Kein Einzelfall e.V."
+  },
+  "Du möchtest nicht nur zuschauen, sondern etwas mitgestalten? In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, ihr Wissen, ihre Ideen und ganz unterschiedliche Fähigkeiten zusammen.": {
+    "en": "Would you like to do more than watch and help shape something? In our working groups, people bring together their experiences, knowledge, ideas and a wide range of skills."
+  },
+  "Die Arbeitsgruppen des KE!N EINZELFALL e.V.": {
+    "en": "The working groups of KE!N EINZELFALL e.V."
+  },
+  "In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, ihr Wissen, ihre Ideen und ganz unterschiedliche Fähigkeiten zusammen. Gemeinsam arbeiten wir an konkreten Themen, entwickeln Projekte weiter, sammeln Informationen, machen Missstände sichtbar und suchen nach Wegen, wie sich etwas verbessern lässt.": {
+    "en": "In our working groups, people bring together their experiences, knowledge, ideas and a wide range of skills. Together we work on specific issues, develop projects further, gather information, expose shortcomings and look for ways to improve things."
+  },
+  "Dabei musst du kein Profi sein. Du kannst dich mit Fachwissen, Kreativität, Organisation, Recherche oder einfach mit deinem Interesse einbringen. Wie viel du beitragen möchtest, entscheidest du selbst.": {
+    "en": "You don't need to be a professional. You can contribute expert knowledge, creativity, organisational skills, research or simply your interest. How much you want to contribute is up to you."
+  },
+  "Unsere Arbeitsgruppen arbeiten online, projektbezogen und auf Augenhöhe. Je nach Thema entstehen daraus zum Beispiel Auswertungen, Informationsmaterialien, Veranstaltungen, Social-Media-Inhalte, Datenbanken oder neue Projekte. Ein Einstieg ist jederzeit möglich.": {
+    "en": "Our working groups work online, on a project basis and as equals. Depending on the topic, this can lead to analyses, information materials, events, social media content, databases or new projects, for example. You can join at any time."
+  },
+  "An den Arbeitsgruppen können Betroffene, Angehörige, Interessierte und Fachpersonen teilnehmen. Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.": {
+    "en": "The working groups are open to people affected, their families and friends, anyone interested and professionals. Participation is free of charge, and you don't need to be a member of the association."
+  },
+  "Du möchtest mitmachen oder hast selbst eine Idee für eine Arbeitsgruppe? Schreib uns an arbeitsgruppe@kein-einzelfall.de.": {
+    "en": "Would you like to join in or do you have your own idea for a working group? Write to us at arbeitsgruppe@kein-einzelfall.de."
+  },
+  "Aus unterschiedlichen Perspektiven können gemeinsame Lösungen entstehen.": {
+    "en": "Different perspectives can lead to shared solutions."
+  },
+  "AG 01 – SER (OEG/SGB XIV) vs. Missstände & Best Practice": {
+    "en": "AG 01 – Social compensation law (SER, OEG/SGB XIV) vs. shortcomings & best practice"
+  },
+  "Anonymisierte, bundeslandspezifische Auswertung von Missständen & Best Practices": {
+    "en": "Anonymised, state-by-state analysis of shortcomings & best practices"
+  },
+  "Ziel: Wir erfassen anonymisiert und bundeslandspezifisch strukturelle Missstände sowie Best Practices in der Umsetzung des SER (OEG/SGB XIV). Von Fristen bis Gutachten – im Fokus stehen Muster, die auf systemische Probleme hinweisen. Wichtig: Es geht nicht um Einzelfallberatung, sondern um die systematische Dokumentation von Strukturen.": {
+    "en": "Aim: We record, anonymously and state by state, structural shortcomings as well as best practices in how social compensation law (Soziales Entschädigungsrecht, SER; formerly the Crime Victims Compensation Act, OEG, now Book XIV of the Social Code, SGB XIV) is applied. From deadlines to expert reports – the focus is on patterns that point to systemic problems. Important: this is not about advice on individual cases, but about systematically documenting structures."
+  },
+  "Wirkung & Adressaten: Die gebündelten Erkenntnisse werden gezielt an Opferbeauftragte, Landesamtsleitungen sowie die zuständigen Bundesministerien weitergegeben – mit dem Ziel, konkrete Verbesserungen anzustoßen und Best Practices zu fördern.": {
+    "en": "Impact & audience: The combined findings are passed on specifically to victims' commissioners (Opferbeauftragte), the heads of the state offices (Landesämter) and the relevant federal ministries – with the aim of prompting concrete improvements and promoting best practices."
+  },
+  "Die AG richtet sich an Opfer, Mitopfer, Fachkräfte, Aktivisten und Interessierte.": {
+    "en": "This working group is aimed at victims, indirect victims (Mitopfer), professionals, activists and anyone interested."
+  },
+  "AG 02 – Informationsfreiheitsgesetz (IFG) vs. offene Fragen": {
+    "en": "AG 02 – Freedom of Information Act (IFG) vs. open questions"
+  },
+  "Entwicklung eines Fragenkatalogs für die Landesämter zur Verwaltungspraxis": {
+    "en": "Developing a set of questions for the state offices on administrative practice"
+  },
+  "Ziel: Im Zentrum steht ein systematisch aufgebauter Fragenkatalog an die Landesämter zur Umsetzung, zu Verfahrensabläufen und zur Transparenz der OEG/SGB-XIV-Verfahren in den Bundesländern. Der Katalog wird durch einen Anwalt gemäß Informationsfreiheitsgesetz (IFG) an die zuständigen Landesämter versendet, um vergleichbare Informationen zu erhalten und einen realistischen Überblick über die tatsächliche Verwaltungspraxis zu gewinnen. Das Ergebnis fließt in die Arbeitsgruppe Nr. 1 „SER (OEG/SGB XIV) vs. Missstände & Best Practice“ ein. Es geht ausdrücklich nicht um Einzelfallberatung. Wir erheben strukturelle Daten, um die gesetzliche Umsetzung langfristig zu verbessern und gezielt politische Einflussnahme zu ermöglichen.": {
+    "en": "Aim: At the centre is a systematically developed set of questions to the state offices (Landesämter) about how OEG/SGB XIV procedures are implemented in the federal states, how they run and how transparent they are. A lawyer sends the questions to the relevant state offices under the Freedom of Information Act (Informationsfreiheitsgesetz, IFG), in order to obtain comparable information and gain a realistic overview of actual administrative practice. The results feed into working group no. 1, “SER (OEG/SGB XIV) vs. shortcomings & best practice”. This is explicitly not about advice on individual cases. We collect structural data in order to improve how the law is applied in the long term and to make targeted political influence possible."
+  },
+  "Adressaten: Die AG richtet sich an Opfer, Mitopfer, Fachkräfte, Aktivisten und Interessierte.": {
+    "en": "Audience: This working group is aimed at victims, indirect victims (Mitopfer), professionals, activists and anyone interested."
+  },
+  "AG 03 – Online-Veranstaltungen": {
+    "en": "AG 03 – Online events"
+  },
+  "Planung & Organisation digitaler Veranstaltungen": {
+    "en": "Planning & organising digital events"
+  },
+  "Ziel: Digitale Räume schaffen Zugang – unabhängig von Wohnort, Barrieren oder Hürden. Die AG widmet sich der Planung und Organisation von digitalen Formaten wie Infoabenden, Workshops, Diskussionsrunden, thematischen Gesprächsräumen und Webinaren. Wir wollen niedrigschwelligen Zugang zu Information, Austausch und Vernetzung schaffen. Die Veranstaltungen sollen Opfer, Mitopfer sowie Interessierten ermöglichen, sich zu orientieren, zu vernetzen und Wissen zu teilen. Im Fokus der AG stehen die technische Umsetzung (Plattformwahl, Tools, Barrierefreiheit), Moderation, Ablaufgestaltung, inhaltliche Konzeption, Themenfindung und zielgruppengerechte Ansprache.": {
+    "en": "Aim: Digital spaces create access – regardless of where you live, barriers or other obstacles. This working group focuses on planning and organising digital formats such as information evenings, workshops, discussion rounds, themed conversation spaces and webinars. We want to create low-threshold access to information, exchange and networking. The events are meant to help victims, indirect victims (Mitopfer) and anyone interested to find their bearings, connect with others and share knowledge. The working group focuses on technical implementation (choice of platform, tools, accessibility), moderation, running order, content design, choosing topics and addressing each target group appropriately."
+  },
+  "Adressaten: Alle, die sich aktiv an der Konzeption und Umsetzung digitaler Veranstaltungsformate von KE!N EINZELFALL e.V. beteiligen möchten – mit eigenen Erfahrungen, fachlichem Know-how oder dem Wunsch, etwas zu bewegen.": {
+    "en": "Audience: Anyone who would like to play an active part in designing and running digital event formats for KE!N EINZELFALL e.V. – with their own experience, professional know-how or the wish to make a difference."
+  },
+  "AG 06 – Aufbau von Datenbanken": {
+    "en": "AG 06 – Building databases"
+  },
+  "Aktuell: Strukturierte Sammlung von Rechtsprechung und Wissen": {
+    "en": "Current focus: a structured collection of case law and knowledge"
+  },
+  "Ziel:": {
+    "en": "Aim:"
+  },
+  "Wir entwickeln und pflegen eine zentrale, strukturierte Datenbank mit dem klaren Schwerpunkt auf der Sammlung von Volltexturteilen. Ergänzend werden themenspezifische Datenbanken aufgebaut, insbesondere Adressdatenbanken (z. B. Behörden, Ansprechpartner etc.) sowie Literatur- und Arbeitshilfendatenbanken. Ziel ist es, relevantes Wissen gebündelt, vergleichbar und schnell zugänglich zu machen. Die Datenbanken ermöglichen es, Entscheidungen transparent zu vergleichen, Muster zu erkennen und fundierte Argumentationsgrundlagen zu schaffen. Gleichzeitig erleichtern sie den Zugang zu wichtigen Kontakten und Fachwissen. So wird die Handlungsfähigkeit von Betroffenen, Fachkräften und Engagierten gestärkt und eine bessere Orientierung im komplexen System ermöglicht.": {
+    "en": "We develop and maintain a central, structured database with a clear focus on collecting full-text court decisions. In addition, we are building topic-specific databases, in particular address databases (e.g. authorities, contact persons) as well as databases of literature and practical guides. The aim is to make relevant knowledge available in one place, comparable and quickly accessible. The databases make it possible to compare decisions transparently, recognise patterns and build well-founded arguments. At the same time, they make it easier to reach important contacts and expert knowledge. This strengthens the ability of people affected, professionals and committed supporters to take action, and makes it easier to find your way around a complex system."
+  },
+  "Wichtig: Es geht ausdrücklich nicht um Einzelfallberatung, sondern um die strukturierte Aufbereitung und Bereitstellung von Informationen in übergeordneten Datenbanken.": {
+    "en": "Important: this is explicitly not about advice on individual cases, but about preparing information in a structured way and making it available in overarching databases."
+  },
+  "Adressaten: Die AG richtet sich an Opfer, Mitopfer, Fachkräfte, Aktivistinnen und Aktivisten sowie Interessierte, die sich am Aufbau, der Strukturierung und Pflege der verschiedenen Datenbanken beteiligen möchten.": {
+    "en": "Audience: This working group is aimed at victims, indirect victims (Mitopfer), professionals, activists and anyone interested who would like to help build, structure and maintain the various databases."
+  },
+  "Werde Teil einer Arbeitsgruppe, die nicht nur analysiert, sondern auch verändert.": {
+    "en": "Become part of a working group that doesn't just analyse, but also brings about change."
+  },
+  "Wir freuen uns auf Dich!": {
+    "en": "We look forward to welcoming you!"
+  },
+  "Gemeinsam für soziale Gerechtigkeit.": {
+    "en": "Together for social justice."
+  },
+  "Download - Gruppenregeln": {
+    "en": "Download - Group rules"
+  },
+  "Download - Teilnahmevereinbarung": {
+    "en": "Download - Participation agreement"
+  },
+  "Aktuelle Arbeitsgruppen": {
+    "en": "Current working groups"
+  },
+  "Über uns – Vorstand und Team": {
+    "en": "About us – board and team"
+  },
+  "Die Menschen hinter unserer Arbeit.": {
+    "en": "The people behind our work."
+  },
+  "Über uns – Vorstand und Team - Kein Einzelfall e.V.": {
+    "en": "About us – board and team - Kein Einzelfall e.V."
+  },
+  "Unser Team - Vorstand (Tatjana Belmar, Franziska Künstler, Petra Hildebrandt) und Ehrenamtliche (Nicole Khalil, Tanja Häfner, André Bauer)": {
+    "en": "Our team - board (Tatjana Belmar, Franziska Künstler, Petra Hildebrandt) and volunteers (Nicole Khalil, Tanja Häfner, André Bauer)"
+  },
+  "Unser Team – mit Herz, Haltung und Vision": {
+    "en": "Our team – with heart, conviction and vision"
+  },
+  "Hinter unserem Verein stehen Menschen mit unterschiedlichen Erfahrungen und Kompetenzen, die sich mit Überzeugung, fachlichem Know-how und großem persönlichem Engagement für die Opferhilfe und die Belange von Betroffenen einsetzen. Unsere Vorstandsebene gestaltet die Arbeit des Vereins, trifft verantwortungsvolle Entscheidungen und sorgt dafür, dass Unterstützung ankommt, Wissen vermittelt wird und ein Raum für Austausch entsteht.": {
+    "en": "Behind our association are people with a wide range of experience and skills who stand up for victim support and the concerns of those affected – with conviction, professional know-how and great personal commitment. Our board shapes the association’s work, makes responsible decisions and makes sure that support reaches people, knowledge is shared and a space for exchange is created."
+  },
+  "Vorstandsebene": {
+    "en": "Board"
+  },
+  "Team": {
+    "en": "Team"
+  },
+  "Darüber hinaus gibt es viele Menschen, die uns an den unterschiedlichsten Punkten unterstützen und den Verein mitgestalten. Ohne die Gründungsmitglieder, die zum Teil auch unsere Landesstellen vertreten, würde es unseren Verein nicht geben. Sie sorgen – zusammen mit weiteren Ehrenamtlichen – zum Beispiel in Interessensvertretungen oder Arbeitsgruppen für die Sichtbarkeit des Vereins und unserer Anliegen.": {
+    "en": "Beyond that, there are many people who support us in all sorts of ways and help shape the association. Without our founding members, some of whom also represent our state offices, our association would not exist. Together with other volunteers, they make the association and our concerns visible – for example in advocacy bodies or working groups."
+  },
+  "Herr und Frau Unbekannt": {
+    "en": "Mr and Mrs Anonymous"
+  },
+  "Zusätzlich arbeiten im Hintergrund viele Ehrenamtliche, die aus den verschiedensten Gründen nicht auf der Website genannt werden können. Dennoch engagieren sie sich zum Beispiel in Arbeitsgruppen oder in der Öffentlichkeitsarbeit und der Vernetzung.": {
+    "en": "In addition, many volunteers work behind the scenes who, for all sorts of reasons, cannot be named on the website. Even so, they are actively involved – for example in working groups, in public relations and in networking."
+  },
+  "Mitgliedschaft": {
+    "en": "Membership"
+  },
+  "Mitgliedschaft - Kein Einzelfall e.V.": {
+    "en": "Membership - Kein Einzelfall e.V."
+  },
+  "Antrag auf Mitgliedschaft": {
+    "en": "Apply for membership"
+  },
+  "Wir brauchen dich!": {
+    "en": "We need you!"
+  },
+  "Warum solltest ausgerechnet DU bei uns im Verein Mitglied werden? Es gibt viele Gründe dafür, unserem Verein beizutreten. Einige Motivationen sind die folgenden.": {
+    "en": "Why should YOU, of all people, become a member of our association? There are many reasons to join us. Here are some of them."
+  },
+  "Eigene Erfahrungen verarbeiten: Vielleicht bist du selbst betroffen und möchtest anderen helfen, indem du eigene Erfahrungen im Umgang mit der Betroffenheit teilst und Unterstützung anbietest, oder vielleicht brauchst du genau deswegen selbst Hilfe.": {
+    "en": "Process your own experiences: Perhaps you have been affected yourself and want to help others by sharing your own experience of coping with what happened and by offering support – or perhaps that is exactly why you need help yourself."
+  },
+  "Gemeinschaft und Zusammenhalt: Du suchst nach einer Gemeinschaft von Gleichgesinnten/Betroffenen, um endlich nicht mehr allein mit deinen Problemen zu sein. Denn du bist KE!N EINZELFALL!": {
+    "en": "Community and solidarity: You are looking for a community of like-minded people/people who have been affected, so that you finally no longer have to face your problems alone. Because you are KE!N EINZELFALL!"
+  },
+  "Persönliche Entwicklung: Durch die Arbeit bei uns im Verein kannst du für dich wertvolle Erfahrungen sammeln, neue Fähigkeiten erlernen und deine sozialen Kompetenzen stärken.": {
+    "en": "Personal development: Working with us in the association, you can gain valuable experience, learn new skills and strengthen your interpersonal skills."
+  },
+  "Netzwerk erweitern: Du hast die Möglichkeit, durch den Verein neue Kontakte zu knüpfen und dich mit anderen engagierten Menschen zu vernetzen, die sich für gleiche Ziele einsetzen und gemeinsam etwas bewirken möchten.": {
+    "en": "Expand your network: Through the association, you have the chance to make new contacts and connect with other committed people who are working towards the same goals and want to make a difference together."
+  },
+  "Neue Projekte ins Leben rufen: Du hast die Möglichkeit, durch den Verein und mit anderen Mitgliedern neue Projekte ins Leben zu rufen, um gemeinsam etwas bewirken zu können und mehr Sichtbarkeit zu schaffen.": {
+    "en": "Launch new projects: Through the association and together with other members, you have the chance to launch new projects so that you can make a difference together and create more visibility."
+  },
+  "Bewusstsein schaffen: Du möchtest dazu beitragen, das Bewusstsein für die Bedürfnisse und Rechte von Opfern zu erhöhen und gesellschaftliche Veränderungen anzustoßen, um so für mehr Sichtbarkeit und Anerkennung zu sorgen.": {
+    "en": "Raise awareness: You want to help raise awareness of the needs and rights of victims and set social change in motion, bringing about more visibility and recognition."
+  },
+  "Hilfe und Unterstützung leisten: Du möchtest Menschen in schwierigen Lebenssituationen aktiv unterstützen und ihnen helfen, ihre Erlebnisse zu verarbeiten und neue Perspektiven zu finden.": {
+    "en": "Offer help and support: You want to actively support people in difficult situations in life and help them process what they have been through and find new perspectives."
+  },
+  "Für alle zukünftigen Mitglieder und Interessierten: Hier findet ihr unsere Beitrags- und Mitgliederordnung. Denn mit dem Wunsch, Teil von KE!N EINZELFALL e.V. zu werden, beginnt mehr als nur eine Mitgliedschaft – es ist ein klares Zeichen für Solidarität, Haltung und aktives Mitgestalten. Damit dieser Weg für alle transparent und fair ist, haben wir unsere Beitrags- und Mitgliederordnung veröffentlicht und mit ihr eine Basis für unser gemeinsames Engagement geschaffen. Sie regelt alle wichtigen Fragen rund um die Mitgliedschaft, von den Voraussetzungen bis zu den Rechten, Pflichten und der Kündigung.": {
+    "en": "For all future members and anyone interested: here you’ll find our Fee and Membership Regulations. Wanting to become part of KE!N EINZELFALL e.V. is the start of more than just a membership – it is a clear sign of solidarity, conviction and active participation. To make this path transparent and fair for everyone, we have published our Fee and Membership Regulations, creating a basis for our shared commitment. They cover all the important questions around membership, from the requirements to rights, obligations and ending your membership."
+  },
+  "Jetzt mitmachen und ein Zeichen setzen!": {
+    "en": "Join now and take a stand!"
+  },
+  "Beitrags- und Mitgliederordnung": {
+    "en": "Fee and Membership Regulations"
+  },
+  "Unsere Beitrags- und Mitgliederordnung ergänzt die Satzung und regelt die wichtigsten Rahmenbedingungen rund um die Mitgliedschaft bei KE!N EINZELFALL e.V. Darin findest du unter anderem Informationen zu den verschiedenen Mitgliedsformen, den Mitgliedsbeiträgen sowie zu Rechten, Pflichten und organisatorischen Abläufen innerhalb der Mitgliedschaft.": {
+    "en": "Our Fee and Membership Regulations supplement the Articles of Association and set out the key conditions for membership of KE!N EINZELFALL e.V. Among other things, you’ll find information on the different types of membership, membership fees, and the rights, obligations and organisational procedures that come with membership."
+  },
+  "Mit der Veröffentlichung möchten wir transparent und nachvollziehbar darstellen, welche Regelungen für Mitglieder gelten und worauf sich eine Mitgliedschaft bei KE!N EINZELFALL e.V. stützt.": {
+    "en": "By publishing them, we want to show clearly and transparently which rules apply to members and what membership of KE!N EINZELFALL e.V. is based on."
+  },
+  "Mitgliedsantrag": {
+    "en": "Membership application form"
+  },
+  "Hilfe zum Ausfüllen": {
+    "en": "Help with filling it in"
+  },
+  "Alle Ansprechpartner, Landesstellen und Zuständigkeiten auf einen Blick": {
+    "en": "All contacts, state offices and responsibilities at a glance"
+  },
+  "Kontakt - Kein Einzelfall e.V.": {
+    "en": "Contact - Kein Einzelfall e.V."
+  },
+  "Kontaktmöglichkeiten des KE!N EINZELFALL e.V. Alle Ansprechpartner, Landesstellen und Zuständigkeiten auf einen Blick": {
+    "en": "How to contact KE!N EINZELFALL e.V. All contacts, state offices and responsibilities at a glance"
+  },
+  "Kontaktmöglichkeiten des KE!N EINZELFALL e.V.": {
+    "en": "How to contact KE!N EINZELFALL e.V."
+  },
+  "1. Vorsitzende: Tatjana Belmar, belmar@kein-einzelfall.de": {
+    "en": "Chair: Tatjana Belmar, belmar@kein-einzelfall.de"
+  },
+  "2. Vorsitzende: Franziska Künstler, kuenstler@kein-einzelfall.de": {
+    "en": "Deputy Chair: Franziska Künstler, kuenstler@kein-einzelfall.de"
+  },
+  "Kassenwartin: Petra Hildebrandt, hildebrandt@kein-einzelfall.de": {
+    "en": "Treasurer: Petra Hildebrandt, hildebrandt@kein-einzelfall.de"
+  },
+  "Kontakt & Geschäftssitz": {
+    "en": "Contact & registered office"
+  },
+  "Geschäftssitz: Hamburg": {
+    "en": "Registered office: Hamburg"
+  },
+  "Anschrift: Schiffbeker Höhe 30, 22119 Hamburg": {
+    "en": "Address: Schiffbeker Höhe 30, 22119 Hamburg"
+  },
+  "E-Mail: kontakt@kein-einzelfall.de, belmar@kein-einzelfall.de": {
+    "en": "Email: kontakt@kein-einzelfall.de, belmar@kein-einzelfall.de"
+  },
+  "Landesstellen": {
+    "en": "State offices"
+  },
+  "Bayern: kuenstler@kein-einzelfall.de": {
+    "en": "Bavaria: kuenstler@kein-einzelfall.de"
+  },
+  "Sachsen-Anhalt: redeker@kein-einzelfall.de": {
+    "en": "Saxony-Anhalt: redeker@kein-einzelfall.de"
+  },
+  "Berlin: khalil@kein-einzelfall.de": {
+    "en": "Berlin: khalil@kein-einzelfall.de"
+  },
+  "Schleswig-Holstein: posorske@kein-einzelfall.de": {
+    "en": "Schleswig-Holstein: posorske@kein-einzelfall.de"
+  },
+  "Zu den Landesstellen": {
+    "en": "Go to our state offices"
+  },
+  "Sachgebietsaufteilung": {
+    "en": "Areas of responsibility"
+  },
+  "Verwaltung: verwaltung@kein-einzelfall.de": {
+    "en": "Administration: verwaltung@kein-einzelfall.de"
+  },
+  "Anfragen: kontakt@kein-einzelfall.de": {
+    "en": "Enquiries: kontakt@kein-einzelfall.de"
+  },
+  "Selbsthilfegruppen: selbsthilfe@kein-einzelfall.de": {
+    "en": "Self-help groups: selbsthilfe@kein-einzelfall.de"
+  },
+  "Arbeitsgruppen: arbeitsgruppe@kein-einzelfall.de": {
+    "en": "Working groups: arbeitsgruppe@kein-einzelfall.de"
+  },
+  "Veranstaltungen: veranstaltung@kein-einzelfall.de": {
+    "en": "Events: veranstaltung@kein-einzelfall.de"
+  },
+  "Akten & Dokumente: dokumente@kein-einzelfall.de": {
+    "en": "Files & documents: dokumente@kein-einzelfall.de"
+  },
+  "Presse & Öffentlichkeitsarbeit: pressekontakt@kein-einzelfall.de": {
+    "en": "Press & public relations: pressekontakt@kein-einzelfall.de"
+  },
+  "Datenschutz: datenschutz@kein-einzelfall.de": {
+    "en": "Data protection: datenschutz@kein-einzelfall.de"
+  },
+  "Beschwerdemanagement: beschwerdemanagement@kein-einzelfall.de": {
+    "en": "Complaints: beschwerdemanagement@kein-einzelfall.de"
+  },
+  "Opferbeauftragter: opferbeauftragter@kein-einzelfall.de": {
+    "en": "Victims’ representative: opferbeauftragter@kein-einzelfall.de"
+  },
+  "Finanzen: finanzen@kein-einzelfall.de": {
+    "en": "Finance: finanzen@kein-einzelfall.de"
+  },
+  "Istanbul-Konvention - Kein Einzelfall e.V.": {
+    "en": "Istanbul Convention - Kein Einzelfall e.V."
+  },
+  "Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt: unsere Haltung zum Schutz vor geschlechtsspezifischer Gewalt, dazu die Konvention selbst.": {
+    "en": "Why KE!N EINZELFALL e.V. recognises the Istanbul Convention: our stance on protection from gender-based violence, plus the Convention itself."
+  },
+  "Gewalt gegen Frauen, Mädchen und alle von geschlechtsspezifischer Gewalt betroffenen Menschen ist kein Einzelfall – sie ist ein strukturelles Problem. Die Istanbul-Konvention ist das stärkste internationale Schutzinstrument, das Betroffene davor bewahren soll, übersehen, nicht gehört oder allein gelassen zu werden.": {
+    "en": "Violence against women, girls and everyone affected by gender-based violence is not an isolated case – it is a structural problem. The Istanbul Convention is the strongest international instrument of protection, designed to keep those affected from being overlooked, unheard or left alone."
+  },
+  "Als KE!N EINZELFALL e.V. erkennen wir die Istanbul-Konvention ausdrücklich an und verstehen ihre Grundsätze als zentrale Orientierung für unsere Arbeit. Sie stärkt die Rechte der Betroffenen, verpflichtet zu Schutz, Prävention, Unterstützung und Sensibilisierung – Werte, die tief in unserer Vereinsarbeit verankert sind.": {
+    "en": "As KE!N EINZELFALL e.V., we expressly recognise the Istanbul Convention and see its principles as a central guide for our work. It strengthens the rights of those affected and creates obligations to protect, prevent, support and raise awareness – values that are deeply rooted in our work as an association."
+  },
+  "Mit unserer öffentlichen Unterstützung der Istanbul-Konvention machen wir deutlich: Betroffene verdienen Schutz, Respekt, Sicherheit und verlässliche Hilfsstrukturen. Wir setzen uns dafür ein, Lücken im Hilfesystem sichtbar zu machen und überall dort zu füllen, wo staatliche Angebote noch fehlen oder unzureichend sind.": {
+    "en": "By publicly supporting the Istanbul Convention, we make it clear: those affected deserve protection, respect, safety and reliable support structures. We are committed to making gaps in the support system visible and filling them wherever state services are still missing or inadequate."
+  },
+  "Hier findest du unsere Haltung zur Istanbul-Konvention und warum sie für unsere Arbeit so wichtig ist, sowie die Istanbul-Konvention.": {
+    "en": "Here you’ll find our stance on the Istanbul Convention and why it matters so much for our work, as well as the Istanbul Convention itself."
+  },
+  "Zum Nachlesen": {
+    "en": "Further reading"
+  },
+  "Die Istanbul-Konvention": {
+    "en": "The Istanbul Convention"
+  },
+  "Unsere Haltung zur Istanbul-Konvention": {
+    "en": "Our stance on the Istanbul Convention"
+  },
+  "Kinderkodex - Kein Einzelfall e.V.": {
+    "en": "Children’s Code - Kein Einzelfall e.V."
+  },
+  "Der Kinderkodex von KE!N EINZELFALL e.V.: wie wir Kinder und Jugendliche schützen, Risiken vorbeugen und verantwortungsvoll handeln. Zum Herunterladen.": {
+    "en": "The Children’s Code of KE!N EINZELFALL e.V.: how we protect children and young people, prevent risks and act responsibly. Available to download."
+  },
+  "Kinder und Jugendliche brauchen Schutz, Verlässlichkeit und Menschen, die Verantwortung übernehmen. Bei KE!N EINZELFALL e.V. möchten wir überall dort, wo wir wirken, sichere und respektvolle Räume schaffen – online wie offline. Kinder und Jugendliche sollen sich gesehen, ernst genommen und geschützt fühlen.": {
+    "en": "Children and young people need protection, reliability and people who take responsibility. At KE!N EINZELFALL e.V., we want to create safe and respectful spaces wherever we are active – online and offline. Children and young people should feel seen, taken seriously and protected."
+  },
+  "Unser Kinderkodex beschreibt verbindlich, wie wir diesem Anspruch gerecht werden. Er zeigt, wie wir Risiken vorbeugen, verantwortungsvoll handeln und sicherstellen, dass die Rechte, die Würde und die Sicherheit von Kindern und Jugendlichen jederzeit im Mittelpunkt stehen.": {
+    "en": "Our Children’s Code sets out in binding terms how we live up to this commitment. It shows how we prevent risks, act responsibly and make sure that the rights, dignity and safety of children and young people are always at the centre of what we do."
+  },
+  "Hier kannst du unseren Kinderkodex vollständig einsehen – als verbindliche Grundlage für einen achtsamen und verantwortungsvollen Umgang.": {
+    "en": "Here you can read our Children’s Code in full – as the binding basis for treating one another with care and responsibility."
+  },
+  "Kinderkodex herunterladen": {
+    "en": "Download the Children’s Code"
+  },
+  "Kinderkodex des KE!N EINZELFALL e.V.": {
+    "en": "Children’s Code of KE!N EINZELFALL e.V."
+  },
+  "Beschwerdemanagement": {
+    "en": "Complaints procedure"
+  },
+  "Deine Rückmeldung hilft uns, besser zu werden.": {
+    "en": "Your feedback helps us get better."
+  },
+  "Beschwerdemanagement - Kein Einzelfall e.V.": {
+    "en": "Complaints procedure - Kein Einzelfall e.V."
+  },
+  "Kritik und Beschwerden: Hier erreichst du KE!N EINZELFALL e.V. mit deinem Anliegen, und mit einer Beschwerde über den Verein die unabhängige Ombudsstelle.": {
+    "en": "Criticism and complaints: here you can reach KE!N EINZELFALL e.V. with your concern – and, with a complaint about the association, the independent ombuds office."
+  },
+  "Externe Kritik": {
+    "en": "External criticism"
+  },
+  "Du kommst mit einem Anliegen nicht weiter, bist mit einer Bearbeitung oder Entscheidung unzufrieden oder fühlst dich nicht ernst genommen? Dann kannst du dich an uns wenden.": {
+    "en": "Are you getting nowhere with a concern, unhappy with how something was handled or decided, or do you feel you’re not being taken seriously? Then you can get in touch with us."
+  },
+  "Wir schauen uns gemeinsam mit dir an, worum es geht, ordnen den Sachverhalt und prüfen, welche nächsten Schritte möglich sind. Dabei möchten wir möglichst unkompliziert und transparent arbeiten.": {
+    "en": "Together with you, we look at what it’s about, sort out the facts and check which next steps are possible. We aim to keep things as straightforward and transparent as possible."
+  },
+  "Je nach Anliegen können wir Informationen verständlich machen, Möglichkeiten aufzeigen, beim weiteren Vorgehen unterstützen oder passende Stellen und Kontakte einbeziehen.": {
+    "en": "Depending on your concern, we can make information easier to understand, show you your options, support you with the next steps or bring in suitable organisations and contacts."
+  },
+  "Wichtig ist uns: Deine Kritik darf gehört werden.": {
+    "en": "What matters to us: your criticism deserves to be heard."
+  },
+  "Wenn du Unterstützung brauchst, melde dich bei uns: kritik@kein-einzelfall.de": {
+    "en": "If you need support, get in touch with us: kritik@kein-einzelfall.de"
+  },
+  "Du bist nicht allein. Gemeinsam KE!N EINZELFALL!": {
+    "en": "You are not alone. Together: KE!N EINZELFALL!"
+  },
+  "Kritik schreiben": {
+    "en": "Share your criticism"
+  },
+  "Interne Beschwerde": {
+    "en": "Internal complaint"
+  },
+  "Du hast ein Problem mit unserem Verein, unserem Umgang oder einer Entscheidung von KE!N EINZELFALL e.V.? Dann sag uns bitte Bescheid.": {
+    "en": "Do you have a problem with our association, the way we do things or a decision made by KE!N EINZELFALL e.V.? Then please let us know."
+  },
+  "Kritik, Beschwerden und Hinweise helfen uns, Verantwortung zu übernehmen, Fehler zu erkennen und unsere Arbeit weiterzuentwickeln. Du musst dein Anliegen dabei nicht perfekt formulieren oder schon eine Lösung haben.": {
+    "en": "Criticism, complaints and pointers help us take responsibility, recognise mistakes and develop our work further. You don’t have to put your concern perfectly into words or already have a solution."
+  },
+  "Deine Nachricht an beschwerdemanagement@kein-einzelfall.de geht an eine unabhängige Ombudsstelle, die dein Anliegen entgegennimmt und sich um die weitere Bearbeitung kümmert.": {
+    "en": "Your message to beschwerdemanagement@kein-einzelfall.de goes to an independent ombuds office, which receives your concern and takes care of how it is dealt with from there."
+  },
+  "Wichtig ist uns, dass Kritik möglich ist – auch dann, wenn sie unangenehm ist. Wenn etwas bei uns nicht gut läuft, möchten auch wir davon erfahren.": {
+    "en": "It matters to us that criticism is possible – even when it is uncomfortable. If something isn’t going well with us, we want to know about it too."
+  },
+  "Beschwerde schreiben": {
+    "en": "Submit a complaint"
+  },
+  "Gremium UKFB": {
+    "en": "UKFB committee"
+  },
+  "Unabhängiges Kuratorium für Betroffenenexpertise": {
+    "en": "Unabhängiges Kuratorium für Betroffenenexpertise (Independent Board for Lived-Experience Expertise)"
+  },
+  "Gremium UKFB - Kein Einzelfall e.V.": {
+    "en": "UKFB committee - Kein Einzelfall e.V."
+  },
+  "Das Unabhängige Kuratorium für Betroffenenexpertise (UKFB) ist als eigenständiges Fachgremium an KE!N EINZELFALL e.V. assoziiert und arbeitet unabhängig.": {
+    "en": "The Unabhängiges Kuratorium für Betroffenenexpertise (UKFB – Independent Board for Lived-Experience Expertise) is associated with KE!N EINZELFALL e.V. as a separate expert body and works independently."
+  },
+  "Assoziiertes Fachgremium – UKFB": {
+    "en": "Associated expert body – UKFB"
+  },
+  "Das Unabhängige Kuratorium für Betroffenenexpertise (UKFB) ist als eigenständiges und unabhängiges Fachgremium an KE!N EINZELFALL e.V. assoziiert.": {
+    "en": "The Unabhängiges Kuratorium für Betroffenenexpertise (UKFB) is associated with KE!N EINZELFALL e.V. as a separate and independent expert body."
+  },
+  "KE!N EINZELFALL e.V. nimmt keinen Einfluss auf die inhaltliche Arbeit, Positionen, Entscheidungen oder Bewertungen des UKFB. Das Kuratorium arbeitet unabhängig und in eigener Verantwortung.": {
+    "en": "KE!N EINZELFALL e.V. has no influence on the UKFB’s work, positions, decisions or assessments. The board works independently and on its own responsibility."
+  },
+  "Die Grundlagen dieser Zusammenarbeit sind in einer Assoziationsvereinbarung transparent geregelt.": {
+    "en": "The basis for this cooperation is set out transparently in an association agreement."
+  },
+  "Kontakt: kontakt@ukfb.org": {
+    "en": "Contact: kontakt@ukfb.org"
+  },
+  "Zur Website des UKFB": {
+    "en": "Visit the UKFB website"
+  },
+  "KE!N EINZELFALL ist nicht nur an einem Ort zuhause.": {
+    "en": "KE!N EINZELFALL is at home in more than one place."
+  },
+  "Landesstellen - Kein Einzelfall e.V.": {
+    "en": "State offices - Kein Einzelfall e.V."
+  },
+  "Die Landesstellen von KE!N EINZELFALL e.V. in Bayern, Berlin, Hamburg, Sachsen-Anhalt und Schleswig-Holstein: regionale Ansprechpartner und Kontakt.": {
+    "en": "The state offices of KE!N EINZELFALL e.V. in Bavaria, Berlin, Hamburg, Saxony-Anhalt and Schleswig-Holstein: regional contacts and how to reach them."
+  },
+  "Unsere Landesstellen": {
+    "en": "Our state offices"
+  },
+  "Mit unseren Landesstellen möchten wir näher an den Menschen vor Ort sein, regionale Strukturen besser kennen und Ansprechpartner schaffen, die wissen, welche Themen und Herausforderungen im jeweiligen Bundesland eine Rolle spielen.": {
+    "en": "With our state offices, we want to be closer to people locally, get to know regional structures better and create points of contact who know which issues and challenges matter in each federal state."
+  },
+  "Unsere Landesstellen bringen Erfahrungen, Kontakte und regionale Perspektiven in die Arbeit von KE!N EINZELFALL ein und helfen dabei, Informationen, Austausch und Unterstützung näher an die Menschen zu bringen.": {
+    "en": "Our state offices bring experience, contacts and regional perspectives to the work of KE!N EINZELFALL and help bring information, exchange and support closer to people."
+  },
+  "Hier findest du unsere Landesstellen und die jeweiligen Kontaktmöglichkeiten.": {
+    "en": "Here you’ll find our state offices and how to contact each of them."
+  },
+  "Bayern": {
+    "en": "Bavaria"
+  },
+  "Landesstelle Bayern": {
+    "en": "Bavaria state office"
+  },
+  "Die Landesstelle Bayern wird von Franziska Künstler, 2. Vorsitzende von KE!N EINZELFALL e.V., geleitet. Mit viel Erfahrung, einem offenen Ohr und einem Blick für die Besonderheiten vor Ort begleitet sie den Aufbau und die Weiterentwicklung unserer Arbeit in Bayern.": {
+    "en": "The Bavaria state office is led by Franziska Künstler, Deputy Chair of KE!N EINZELFALL e.V. With plenty of experience, a sympathetic ear and an eye for what makes the region special, she is guiding the building and further development of our work in Bavaria."
+  },
+  "Dabei geht es vor allem darum, Menschen miteinander zu verbinden, regionale Wege sichtbar zu machen und KE!N EINZELFALL auch vor Ort weiter wachsen zu lassen.": {
+    "en": "Above all, this is about bringing people together, making regional pathways visible and helping KE!N EINZELFALL keep growing locally as well."
+  },
+  "Kontakt der Landesstelle: LS-Bayern@kein-einzelfall.de": {
+    "en": "State office contact: LS-Bayern@kein-einzelfall.de"
+  },
+  "Berlin": {
+    "en": "Berlin"
+  },
+  "Landesstelle Berlin": {
+    "en": "Berlin state office"
+  },
+  "Unsere Landesstelle Berlin wird von Nicole Khalil, Gründungsmitglied von KE!N EINZELFALL e.V., geleitet. Sie vertritt KE!N EINZELFALL außerdem im Landesbeirat für Menschen mit Behinderung in Berlin und bringt dort Erfahrungen und Perspektiven aus unserer Arbeit ein.": {
+    "en": "Our Berlin state office is led by Nicole Khalil, a founding member of KE!N EINZELFALL e.V. She also represents KE!N EINZELFALL on the Landesbeirat für Menschen mit Behinderung (State Advisory Council for People with Disabilities) in Berlin, where she brings in experience and perspectives from our work."
+  },
+  "Damit verbindet die Landesstelle Berlin Vereinsarbeit vor Ort mit direkter Beteiligung an wichtigen Themen rund um Teilhabe und Barrierefreiheit.": {
+    "en": "In this way, the Berlin state office combines local association work with direct involvement in important issues around participation and accessibility."
+  },
+  "Kontakt der Landesstelle: LS-Berlin@kein-einzelfall.de": {
+    "en": "State office contact: LS-Berlin@kein-einzelfall.de"
+  },
+  "Hamburg": {
+    "en": "Hamburg"
+  },
+  "Landesstelle Hamburg": {
+    "en": "Hamburg state office"
+  },
+  "Unsere Landesstelle Hamburg wird von Tatjana Belmar, 1. Vorsitzende von KE!N EINZELFALL e.V., geleitet. Hamburg ist zugleich der Hauptsitz von KE!N EINZELFALL e.V. und der Ort, an dem der Verein im Vereinsregister eingetragen ist.": {
+    "en": "Our Hamburg state office is led by Tatjana Belmar, Chair of KE!N EINZELFALL e.V. Hamburg is also the headquarters of KE!N EINZELFALL e.V. and the place where the association is entered in the register of associations."
+  },
+  "Von hier aus laufen viele zentrale Fäden des Vereins zusammen – gleichzeitig soll auch die Arbeit vor Ort in Hamburg weiter sichtbar, erreichbar und vernetzt sein.": {
+    "en": "Many of the association’s key threads come together here – at the same time, our local work in Hamburg should also continue to be visible, easy to reach and well connected."
+  },
+  "Kontakt der Landesstelle: LS-Hamburg@kein-einzelfall.de": {
+    "en": "State office contact: LS-Hamburg@kein-einzelfall.de"
+  },
+  "Sachsen-Anhalt": {
+    "en": "Saxony-Anhalt"
+  },
+  "Landesstelle Sachsen-Anhalt": {
+    "en": "Saxony-Anhalt state office"
+  },
+  "Unsere Landesstelle Sachsen-Anhalt wird von Elke Redeker, Gründungsmitglied von KE!N EINZELFALL e.V., geleitet. Als Gründungsmitglied begleitet sie den Verein seit seinen Anfängen und bringt ihre Erfahrung in den Aufbau der Landesstelle ein.": {
+    "en": "Our Saxony-Anhalt state office is led by Elke Redeker, a founding member of KE!N EINZELFALL e.V. As a founding member, she has been with the association since its beginnings and brings her experience to building up the state office."
+  },
+  "In Sachsen-Anhalt soll so Schritt für Schritt eine verlässliche regionale Anlaufstelle entstehen, die KE!N EINZELFALL vor Ort sichtbar macht und weiter vernetzt.": {
+    "en": "In this way, a reliable regional point of contact is to be built up step by step in Saxony-Anhalt, making KE!N EINZELFALL visible locally and connecting it further."
+  },
+  "Kontakt der Landesstelle: LS-Sachsen-Anhalt@kein-einzelfall.de": {
+    "en": "State office contact: LS-Sachsen-Anhalt@kein-einzelfall.de"
+  },
+  "Schleswig-Holstein": {
+    "en": "Schleswig-Holstein"
+  },
+  "Landesstelle Schleswig-Holstein": {
+    "en": "Schleswig-Holstein state office"
+  },
+  "Unsere Landesstelle Schleswig-Holstein wird von Stefanie Posorske-Gerundt, Gründungsmitglied von KE!N EINZELFALL e.V., geleitet. Als Gründungsmitglied kennt sie die Entwicklung des Vereins von Anfang an und bringt diese Erfahrung in die Arbeit der Landesstelle ein.": {
+    "en": "Our Schleswig-Holstein state office is led by Stefanie Posorske-Gerundt, a founding member of KE!N EINZELFALL e.V. As a founding member, she has followed the association’s development from the very beginning and brings this experience to the work of the state office."
+  },
+  "In Schleswig-Holstein liegt ihr besonders am Herzen, Strukturen vor Ort mitzugestalten, Kontakte aufzubauen und die Arbeit von KE!N EINZELFALL regional weiter zu verankern.": {
+    "en": "In Schleswig-Holstein, she particularly cares about helping to shape local structures, building contacts and rooting the work of KE!N EINZELFALL more firmly in the region."
+  },
+  "Kontakt der Landesstelle: LS-Schleswig-Holstein@kein-einzelfall.de": {
+    "en": "State office contact: LS-Schleswig-Holstein@kein-einzelfall.de"
+  },
+  "Tätigkeits- und Jahresberichte": {
+    "en": "Activity and annual reports"
+  },
+  "Tätigkeits- und Jahresberichte - Kein Einzelfall e.V.": {
+    "en": "Activity and annual reports - Kein Einzelfall e.V."
+  },
+  "Die Tätigkeits- und Jahresberichte von KE!N EINZELFALL e.V.: Projekte, Angebote, Veranstaltungen und Entwicklungen des Vereins, ab 2025 fortlaufend.": {
+    "en": "The activity and annual reports of KE!N EINZELFALL e.V.: the association’s projects, services, events and developments, added continuously from 2025 onwards."
+  },
+  "Hinter jedem Jahr stehen Menschen, Begegnungen, Ideen und viele Schritte, die gemeinsam gegangen wurden.": {
+    "en": "Behind every year are people, encounters, ideas and many steps taken together."
+  },
+  "In unseren Tätigkeits- und Jahresberichten halten wir fest, was KE!N EINZELFALL e.V. bewegt, aufgebaut und weiterentwickelt hat. Sie geben Einblick in Projekte, Angebote, Veranstaltungen und Entwicklungen – aber auch in die Geschichten, Erfahrungen und das Engagement, die unsere Arbeit tragen.": {
+    "en": "In our activity and annual reports, we record what KE!N EINZELFALL e.V. has set in motion, built up and developed further. They give an insight into projects, services, events and developments – but also into the stories, experiences and commitment that carry our work."
+  },
+  "Beginnend mit dem Jahr 2025 findest du hier unsere Berichte künftig fortlaufend ergänzt. Jeder Bericht erzählt ein Stück unserer gemeinsamen Entwicklung – von dem, was war, was daraus entstanden ist und was noch vor uns liegt.": {
+    "en": "Starting with 2025, you’ll find our reports here, with new ones added as they are published. Each report tells part of our shared journey – what has been, what has grown from it and what still lies ahead."
+  },
+  "Deutsches Institut für Menschenrechte": {
+    "en": "German Institute for Human Rights (Deutsches Institut für Menschenrechte)"
   }
 }

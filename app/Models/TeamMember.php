@@ -2,20 +2,26 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Uebersetzbar;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class TeamMember extends Model
 {
+    use Uebersetzbar;
+
     protected $fillable = [
         'name', 'rolle', 'untertitel', 'kurzprofil', 'profil',
-        'foto_pfad', 'foto_alt', 'bereich', 'position', 'published_at',
+        'foto_pfad', 'foto_alt', 'bereich', 'position', 'published_at', 'uebersetzungen',
     ];
+
+    /** Sprachfassungen (Uebersetzbar). Nicht `bereich`: danach wird gefiltert. */
+    protected array $uebersetzbar = ['rolle', 'untertitel', 'kurzprofil', 'profil', 'foto_alt'];
 
     protected function casts(): array
     {
-        return ['published_at' => 'datetime'];
+        return ['published_at' => 'datetime', 'uebersetzungen' => 'array'];
     }
 
     public function scopeVeroeffentlicht(Builder $query): Builder

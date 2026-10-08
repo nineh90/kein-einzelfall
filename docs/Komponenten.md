@@ -1016,10 +1016,15 @@ gelten in Deutschland unabhängig von der Sprache; nur ihre Beschriftungen sind
 - Der `UebersetzungenSeeder` legt seine Seiten als `ungeprueft` und `noindex`
   an. Auf Englisch heisst der Vermerk dann „Machine translation — not yet
   reviewed“. Die Triggerwarnung gehört jetzt zu den Kernseiten.
-- Korrekturen am Wörterbuch erreichen bestehende Übersetzungen nur über
-  `UEBERSETZUNGEN_AUFFRISCHEN=1 php artisan db:seed --class=UebersetzungenSeeder`.
-  Das baut die englischen Kernseiten neu auf und überschreibt Änderungen aus
-  dem Panel. Bewusst von Hand, nicht per Migration.
+- **Seit 08.10.2026 ist die ganze Website englisch** (Kevins Entscheidung):
+  alle Seiten, Glossar (eigene Einträge je Sprache), Gruppen und Team (Spalte
+  `uebersetzungen`, gelesen über `App\Models\Concerns\Uebersetzbar`). Die
+  Migration `englisch_vollstaendig` ruft den Seeder auf. Englische Seiten mit
+  Haken „ungeprüft“ baut jeder Lauf neu auf (Wörterbuch-Korrekturen kommen
+  an); ohne Haken gehören sie dem Verein und bleiben unberührt. Glossar,
+  Gruppen und Team werden nur befüllt, wo für Englisch noch nichts steht.
+- Ändert der Verein den deutschen Text, bleibt die englische Seite beim alten
+  Stand, bis jemand das Wörterbuch ergänzt und den Seeder laufen lässt.
 - Der Vereinsname wird nie übersetzt („KE!N EINZELFALL“), wo das Wortspiel
   gemeint ist, die Bedeutung („not isolated cases“).
 

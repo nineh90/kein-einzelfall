@@ -615,7 +615,7 @@ class TeamUndGruppenSeeder extends Seeder
             'teaser' => 'Wissen hilft nur dann weiter, wenn man es auch finden kann.',
             'absaetze' => [
                 'In dieser Arbeitsgruppe sammeln, sortieren und strukturieren wir Informationen, die für Betroffene, Angehörige, Interessierte und Fachpersonen wichtig sein können. Unser Ziel ist es, Wissen nicht irgendwo verschwinden zu lassen, sondern so aufzubereiten, dass es später gezielt gefunden und genutzt werden kann.',
-                'Dabei entstehen nach und nach Datenbanken zu unterschiedlichen Themen – zum Beispiel mit Volltexturteilen, Netzwerken, Fachliteratur oder weiteren hilfreichen Informationen. Gemeinsam überlegen wir, welche Inhalte wirklich nützlich sind, wie sie sinnvoll gegliedert werden können und wie daraus eine verlässliche Wissenssammlung entsteht.',
+                'Dabei entstehen nach und nach Datenbanken zu unterschiedlichen Themen – zum Beispiel mit Volltext-Urteilen, Netzwerken, Fachliteratur oder weiteren hilfreichen Informationen. Gemeinsam überlegen wir, welche Inhalte wirklich nützlich sind, wie sie sinnvoll gegliedert werden können und wie daraus eine verlässliche Wissenssammlung entsteht.',
                 'Du kannst jederzeit dazukommen. Du kannst dich mit Recherche, Sortierung, Strukturierung, Datenerfassung oder eigenen Ideen einbringen.',
             ],
             'schlusssatz' => 'Aus vielen einzelnen Informationen kann Orientierung entstehen.',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Uebersetzbar;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,11 @@ use Illuminate\Support\Collection;
 
 class Group extends Model
 {
+    use Uebersetzbar;
+
+    /** Sprachfassungen (Uebersetzbar). Nicht `typ` und `status`: danach wird gefiltert. */
+    protected array $uebersetzbar = ['name', 'teaser', 'beschreibung', 'schlusssatz', 'rhythmus', 'uhrzeit', 'ort', 'anmeldung_hinweis'];
+
     public const TYPEN = [
         'selbsthilfe' => 'Selbsthilfegruppe',
         'arbeits' => 'Arbeitsgruppe',
@@ -42,6 +48,7 @@ class Group extends Model
         'rhythmus', 'uhrzeit', 'ort', 'online', 'status',
         'anmeldung_hinweis', 'position', 'published_at',
         'wiederholung', 'wochentag', 'woche_im_monat', 'beginn_zeit', 'dauer_minuten',
+        'uebersetzungen',
     ];
 
     protected function casts(): array
@@ -49,6 +56,7 @@ class Group extends Model
         return [
             'online' => 'boolean',
             'published_at' => 'datetime',
+            'uebersetzungen' => 'array',
         ];
     }
 
