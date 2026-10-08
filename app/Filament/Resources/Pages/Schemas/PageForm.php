@@ -387,6 +387,8 @@ class PageForm
                             Textarea::make('data.text')
                                 ->label(fn ($get) => $get('typ') === 'hinweis' ? 'Text des Hinweises' : 'Text')
                                 ->rows(3)
+                                ->helperText(fn ($get) => $get('typ') === 'hero'
+                                    ? 'Jede Zeile wird ein eigener Absatz.' : null)
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
                                     ['hinweis', 'hero', 'contact_close', 'donation_options'],
@@ -823,11 +825,15 @@ class PageForm
                                     ['hero', 'cta_band', 'contact_close'],
                                     true,
                                 ))
-                                ->maxItems(2)
+                                // Im Aufmacher drei (KEV-86, Wunsch des Vereins:
+                                // Anfragen, Selbsthilfe- und Arbeitsgruppen).
+                                ->maxItems(fn ($get) => $get('typ') === 'hero' ? 3 : 2)
                                 ->columns(3)
                                 ->itemLabel(fn (array $state) => $state['label'] ?? null)
-                                ->helperText('Höchstens zwei — bei drei Knöpfen nebeneinander '
-                                    .'entscheidet sich niemand mehr.')
+                                ->helperText(fn ($get) => $get('typ') === 'hero'
+                                    ? 'Höchstens drei. Der erste ist der wichtigste.'
+                                    : 'Höchstens zwei — bei drei Knöpfen nebeneinander '
+                                        .'entscheidet sich niemand mehr.')
                                 ->schema(self::knopffelder()),
                         ]),
                 ]),

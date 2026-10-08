@@ -531,6 +531,33 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform');
     }
 
+    /** KEV-86: ein Satz je Absatz, dritter Knopf „Arbeitsgruppen“. */
+    public function test_aufmacher_mit_absaetzen_und_arbeitsgruppen(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        $this->assertStringContainsString('<p>Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform von KE!N EINZELFALL e.V.</p>', $html);
+        $this->assertStringContainsString('<p>Für mehr Sichtbarkeit, Gehör und Unterstützung!</p>', $html);
+        $this->assertMatchesRegularExpression('#href="/arbeitsgruppen"[^>]*>\s*Arbeitsgruppen\s*</a>#', $html);
+    }
+
+    /** KEV-86: Die Migration bricht den Text nur um, wo er noch in einem Stück steht. */
+    public function test_migration_setzt_absaetze_und_knopf(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'hero')->first();
+        $block->update(['data' => array_replace($block->data, [
+            'text' => str_replace("\n", ' ', \Database\Seeders\StartseiteSeeder::AUFMACHER_TEXT),
+            'ctas' => array_slice(\Database\Seeders\StartseiteSeeder::AUFMACHER_KNOEPFE, 0, 2),
+        ])]);
+
+        $migration = require database_path('migrations/2026_10_08_220000_aufmacher_absaetze_und_arbeitsgruppen.php');
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame(\Database\Seeders\StartseiteSeeder::AUFMACHER_TEXT, $data['text']);
+        $this->assertCount(3, $data['ctas']);
+    }
+
     /**
      * KEV-30: „Sofort verlassen“ steht als Band unten im Aufmacher, nicht mehr
      * am Seitenende. Auf dem Handy ohne Esc, dort gibt es die Taste nicht.

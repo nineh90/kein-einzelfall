@@ -157,6 +157,19 @@ class StartseiteSeeder extends Seeder
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
+    public const AUFMACHER_TEXT = "Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform "
+        ."von KE!N EINZELFALL e.V.\n"
+        ."Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe.\n"
+        ."Für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen.\n"
+        .'Für mehr Sichtbarkeit, Gehör und Unterstützung!';
+
+    public const AUFMACHER_KNOEPFE = [
+        ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
+        ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
+        // KEV-86, Wunsch des Vereins
+        ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
+    ];
+
     private function bausteine(): array
     {
         return [
@@ -169,16 +182,10 @@ class StartseiteSeeder extends Seeder
                     'titel' => 'Keiner soll mehr sagen müssen: *„Ich hab es nicht gewusst!“*',
                     // Ruhige Wand ohne Motiv, davor das Logo (KEV-35/36).
                     'bild' => '/img/titelbilder/startseite.webp',
-                    // Text von Taddi, 27.09.2026 (KEV-43).
-                    'text' => 'Du bist auf der Informations-, Austausch- und '
-                        .'Selbstwirksamkeitsplattform von KE!N EINZELFALL e.V. Ein zentrales '
-                        .'Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe. Für Opfer und '
-                        .'Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Für mehr '
-                        .'Sichtbarkeit, Gehör und Unterstützung!',
-                    'ctas' => [
-                        ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
-                        ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
-                    ],
+                    // Text von Taddi, 27.09.2026 (KEV-43). Seit KEV-86 ein
+                    // Satz je Zeile, jede Zeile wird ein Absatz.
+                    'text' => self::AUFMACHER_TEXT,
+                    'ctas' => self::AUFMACHER_KNOEPFE,
                 ],
             ],
 

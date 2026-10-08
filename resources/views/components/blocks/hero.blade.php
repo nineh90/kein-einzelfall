@@ -82,8 +82,14 @@
 
     {{-- Ab „lg“ bekommt der Text mehr Breite als das Logo (KEV-29): Die
          Überschrift soll dort in zwei Zeilen stehen, „Keiner soll mehr sagen
-         müssen:“ und das Zitat je für sich. --}}
-    <div class="mx-auto my-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-10">
+         müssen:“ und das Zitat je für sich.
+
+         Seit KEV-86 ist die Textspalte genau so breit wie ihr Inhalt (der
+         Absatz endet bei 65 Zeichen), das Logo steht mittig im Rest, ohne
+         Spaltenabstand. So ist links und rechts vom Logo gleich viel frei.
+         Vorher war die Spalte breiter als der Text, und das Logo stand bündig
+         am rechten Rand. --}}
+    <div class="mx-auto my-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-[1.25fr_0.75fr] md:gap-8 lg:grid-cols-[minmax(0,max-content)_minmax(16rem,1fr)] lg:gap-x-0 lg:gap-y-10">
 
         {{-- Auf schmalen Viewports steht die Grafik oben (order-first), wie im Mockup.
              Zweispaltig schon ab „md“ (KEV-26): Auf dem Tablet stand der Stapel
@@ -103,10 +109,14 @@
                 {!! $ueberschrift !!}
             </h1>
 
+            {{-- Jede Zeile im Panel ein eigener Absatz (KEV-86, Wunsch des
+                 Vereins: ein Satz je Zeile statt eines Blocks). --}}
             @if ($text)
-                <p class="mt-4 max-w-prose text-[0.9375rem] leading-relaxed text-ink-soft lg:text-lg">
-                    {{ $text }}
-                </p>
+                <div class="mt-4 flex max-w-prose flex-col gap-2 text-[0.9375rem] leading-relaxed text-ink-soft lg:text-lg">
+                    @foreach (preg_split('/\R+/u', trim($text)) as $zeile)
+                        <p>{{ $zeile }}</p>
+                    @endforeach
+                </div>
             @endif
 
             @if ($knoepfe)
