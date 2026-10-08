@@ -152,6 +152,19 @@ class AltseiteSeeder extends Seeder
                 'Finanzen: finanzen@kein-einzelfall.de',
             ],
         ],
+        'satzung' => [
+            // KEV-88, Text von Taddi („neue Homepage, neuer Text“). Erste
+            // Zeile wie vorher als Einleitung, Absätze von uns gesetzt.
+            'Die Satzung des KE!N EINZELFALL e.V.' => [
+                'Was uns trägt, wie wir zusammenarbeiten und wofür wir Verantwortung übernehmen.',
+                'Unsere Satzung bildet die verbindliche Grundlage unserer Vereinsarbeit. Sie beschreibt, wofür '
+                .'KE!N EINZELFALL e.V. steht, welche Ziele wir verfolgen und wie Verantwortung, Mitgliedschaft und '
+                .'Zusammenarbeit im Verein geregelt sind. Sie schafft Orientierung und Transparenz – für Mitglieder, '
+                .'Interessierte und alle, die unsere Arbeit kennenlernen möchten.',
+                'Mit der Veröffentlichung möchten wir transparent zeigen, wie KE!N EINZELFALL e.V. aufgebaut ist und '
+                .'nach welchen Grundsätzen wir handeln – offen, nachvollziehbar und für alle einsehbar.',
+            ],
+        ],
         'mitgliedschaft' => [
             // KEV-93, Text von Taddi: ohne „Einige Motivationen sind die
             // folgenden.“ und ohne „Hilfe und Unterstützung leisten“, „Eigene
@@ -327,6 +340,9 @@ class AltseiteSeeder extends Seeder
     ];
 
     public const NEUE_BESCHREIBUNGEN = [
+        // KEV-88: passend zu Taddis neuem Text, die alte nahm den alten auf.
+        'satzung' => 'Die Satzung des KE!N EINZELFALL e.V.: was uns trägt, wie wir zusammenarbeiten und wofür '
+            .'wir Verantwortung übernehmen. Zum Nachlesen als PDF.',
         // KEV-101: Die alte passte nicht zur Seite und war schief („Wir setzen
         // uns … ein und fordert …“).
         'istanbul-konvention' => 'Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt: unsere Haltung '

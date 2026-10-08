@@ -217,6 +217,18 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-88: neuer Text von Taddi im ersten Abschnitt der Satzung. */
+    public function test_satzung_hat_den_neuen_text(): void
+    {
+        $html = $this->get('/satzung')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Was uns trägt, wie wir zusammenarbeiten und wofür wir Verantwortung übernehmen.', $html);
+        $this->assertStringContainsString('Unsere Satzung bildet die verbindliche Grundlage unserer Vereinsarbeit.', $html);
+        $this->assertStringContainsString('offen, nachvollziehbar und für alle einsehbar.', $html);
+        $this->assertStringNotContainsString('Wir freuen uns, euch auf dieser Seite', $html);
+        $this->assertStringNotContainsString('Unser Fundament', $html);
+    }
+
     /** KEV-89: Unter „Satzung lesen“ steht ein Knopf zum PDF, nicht nur die Überschrift. */
     public function test_satzung_lesen_hat_einen_knopf_zum_pdf(): void
     {
