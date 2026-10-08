@@ -217,6 +217,20 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** KEV-89: Unter „Satzung lesen“ steht ein Knopf zum PDF, nicht nur die Überschrift. */
+    public function test_satzung_lesen_hat_einen_knopf_zum_pdf(): void
+    {
+        $html = $this->get('/satzung')->assertOk()->getContent();
+
+        $abschnitt = strpos($html, 'id="abschnitt-satzung-lesen"');
+        $knopf = strpos($html, 'Satzung lesen (PDF)');
+
+        $this->assertNotFalse($abschnitt);
+        $this->assertNotFalse($knopf);
+        $this->assertGreaterThan($abschnitt, $knopf);
+        $this->assertMatchesRegularExpression('#href="/dokumente/2026/05/26\.04\.02\.-Satzung-II\.pdf"[^>]*>\s*Satzung lesen \(PDF\)#', $html);
+    }
+
     /** KEV-93: neuer Text von Taddi unter „Wir brauchen dich!“. */
     public function test_mitgliedschaft_wir_brauchen_dich_hat_den_neuen_text(): void
     {

@@ -311,6 +311,11 @@ class AltseiteSeeder extends Seeder
         'kontakt' => [
             'Landesstellen' => ['label' => 'Zu den Landesstellen', 'url' => '/landesstellen', 'variant' => 'primary'],
         ],
+        // KEV-89: „Satzung lesen“ war nur eine Überschrift, Taddi suchte dort
+        // den Link. Das PDF stand erst im Block darunter.
+        'satzung' => [
+            'Satzung lesen' => ['label' => 'Satzung lesen (PDF)', 'url' => '/dokumente/2026/05/26.04.02.-Satzung-II.pdf', 'variant' => 'primary'],
+        ],
     ];
 
     /** Tippfehler in Linktexten der Altseite. */
