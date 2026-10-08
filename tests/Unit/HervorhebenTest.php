@@ -31,4 +31,28 @@ class HervorhebenTest extends TestCase
     {
         $this->assertSame('Satz. Mitarbeiter*innen', ohne_hervorhebung('*Satz.* Mitarbeiter*innen'));
     }
+
+    public function test_links_im_absatz(): void
+    {
+        $html = (string) hervorheben('Siehe [FSM](/fsm-erweitertes-hilfesystem) und [Teams](https://events.teams.microsoft.com/event/a@b).');
+
+        $this->assertStringContainsString('<a href="/fsm-erweitertes-hilfesystem" class="text-green-deep underline">FSM</a>', $html);
+        // Das @ in der Teams-Adresse wird nicht zur E-Mail-Adresse.
+        $this->assertStringContainsString('<a href="https://events.teams.microsoft.com/event/a@b" class="text-green-deep underline">Teams</a>', $html);
+        $this->assertStringNotContainsString('mailto:', $html);
+    }
+
+    public function test_nur_eigene_pfade_und_https_werden_verlinkt(): void
+    {
+        foreach (['[x](javascript:alert(1))', '[x](http://fremd.example)', '[x](data:text/html,1)'] as $text) {
+            $this->assertStringNotContainsString('<a ', (string) hervorheben($text), $text);
+        }
+
+        $this->assertStringNotContainsString(' onclick="', (string) hervorheben('[x](/pfad" onclick="alert(1))'));
+    }
+
+    public function test_ohne_hervorhebung_entfernt_link_klammern(): void
+    {
+        $this->assertSame('Text und fett', ohne_hervorhebung('[Text](/x) und *fett*'));
+    }
 }

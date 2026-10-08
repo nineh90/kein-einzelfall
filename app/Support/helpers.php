@@ -62,6 +62,11 @@ if (! function_exists('sprachlink')) {
 defined('HERVORHEBUNG_MUSTER')
     || define('HERVORHEBUNG_MUSTER', '/(?<![\p{L}\p{N}*])\*(?=\S)([^*]+?)(?<=\S)\*(?![\p{L}\p{N}])/u');
 
+// Ein Link im Absatz: [Text](/adresse) oder [Text](https://…). Nur eigene
+// Pfade und https, kein javascript: und kein http.
+defined('LINK_MUSTER')
+    || define('LINK_MUSTER', '/\[([^\[\]]+)\]\((\/[^\s()]*|https:\/\/[^\s()]+)\)/u');
+
 if (! function_exists('hervorheben')) {
     /**
      * *Sternchen* in einem Absatz werden fett, wie beim Fettschreiben in einer
@@ -74,6 +79,10 @@ if (! function_exists('hervorheben')) {
      *
      * E-Mail-Adressen im Text werden zum Link (KEV-74, „Schreib uns an
      * arbeitsgruppe@…“). Ein Punkt am Satzende gehört nicht zur Adresse.
+     *
+     * [Text](/adresse) wird ein Link (08.10.2026): Beim Import der Altseite
+     * gingen die Links im Fliesstext verloren („FSM – Fonds sexueller
+     * Missbrauch“ auf /wissen, die Termine der Reihe „im Dialog“).
      */
     function hervorheben(string $text): \Illuminate\Support\HtmlString
     {
@@ -83,16 +92,31 @@ if (! function_exists('hervorheben')) {
             e($text),
         );
 
-        return new \Illuminate\Support\HtmlString(preg_replace(
+        // Links zuerst beiseitelegen: Eine Adresse wie die eines Teams-Termins
+        // enthält ein @ und würde sonst als E-Mail-Adresse verlinkt.
+        $links = [];
+        $html = preg_replace_callback(LINK_MUSTER, function ($m) use (&$links) {
+            $links[] = '<a href="'.$m[2].'" class="text-green-deep underline">'.$m[1].'</a>';
+
+            return "\u{E000}".(count($links) - 1)."\u{E001}";
+        }, $html);
+
+        $html = preg_replace(
             '/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/u',
             '<a href="mailto:$0" class="text-green-deep underline">$0</a>',
+            $html,
+        );
+
+        return new \Illuminate\Support\HtmlString(preg_replace_callback(
+            "/\u{E000}(\d+)\u{E001}/u",
+            fn ($m) => $links[(int) $m[1]],
             $html,
         ));
     }
 
-    /** Derselbe Text ohne Sternchen, für Suche und Vorschautexte. */
+    /** Derselbe Text ohne Sternchen und Link-Klammern, für Suche und Vorschautexte. */
     function ohne_hervorhebung(string $text): string
     {
-        return preg_replace(HERVORHEBUNG_MUSTER, '$1', $text);
+        return preg_replace([HERVORHEBUNG_MUSTER, LINK_MUSTER], ['$1', '$1'], $text);
     }
 }

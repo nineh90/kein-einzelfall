@@ -44,12 +44,25 @@ class Textpflege
         ],
         'das-hilfesystem' => [
             'Referent: Quen Winter' => 'Referentin: Quen Winter',
+            // War ein Knopf auf der Altseite, jetzt einer am Abschnitt (AltseiteSeeder::NEUE_KNOEPFE).
+            'Diese findest du unter: Veranstaltungen' => 'Beides findest du auf der Seite Veranstaltungen.',
+        ],
+        'trauma-bindung-und-beziehung' => [
+            'Diese findest du unter: Veranstaltungen' => 'Beides findest du auf der Seite Veranstaltungen.',
+            // Auf der Altseite folgte ein Anmeldeknopf; der Termin ist vorbei.
+            'Die Veranstaltung findet bei Teams statt:' => 'Die Veranstaltung hat am 10. August 2026 bei Teams stattgefunden.',
         ],
         'buerokratie-labyrinth' => [
+            // Die Adresse war ein Knopf der Altseite und ging beim Import verloren.
+            'Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an:' => 'Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an: veranstaltung@kein-einzelfall.de',
             'Referent: Tatjana Belmar, weitere Referenten willkommen' => 'Referentin: Tatjana Belmar, weitere Referentinnen und Referenten willkommen',
             'Datum: coming soon' => 'Datum: folgt',
         ],
+        'veranstaltungen' => [
+            'betterplace-Projekte' => '[betterplace-Projekte](https://www.betterplace.org/de/organisations/71526-ke-n-einzelfall-e-v)',
+        ],
         'traumafolgestoerungen-verstehen' => [
+            'Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an:' => 'Die Anmeldung erfolgt per E-Mail unter Angabe der Veranstaltung an: veranstaltung@kein-einzelfall.de',
             'REFERENT GESUCHT' => 'Referentin oder Referent gesucht',
             'Datum: coming soon' => 'Datum: folgt',
             'Uhrzeit: coming soon' => 'Uhrzeit: folgt',
@@ -72,6 +85,27 @@ class Textpflege
      * @var array<string, array<string, list<string>>>
      */
     public const ABSAETZE = [
+        // Links im Fliesstext, die beim Import verloren gingen.
+        'wissen' => [
+            'Erwerbsminderungsrente' => ['[Erwerbsminderungsrente](/erwerbsminderungsrente)'],
+            'FSM – Fonds sexueller Missbrauch' => ['[FSM – Fonds sexueller Missbrauch](/fsm-erweitertes-hilfesystem)'],
+        ],
+        'unterstuetzung' => [
+            'Wissen – Informationen zu verschiedenen Themen' => ['[Wissen – Informationen zu verschiedenen Themen](/wissen)'],
+        ],
+        'kein-einzelfall-im-dialog' => [
+            '10.08.2026: Trauma, Bindung und Beziehung' => ['[10.08.2026: Trauma, Bindung und Beziehung](/trauma-bindung-und-beziehung)'],
+            '25.11.2026: Das Hilfesystem – Von der Krise zur Stärke' => ['[25.11.2026: Das Hilfesystem – Von der Krise zur Stärke](/das-hilfesystem)'],
+            'geplant: Traumafolgestörungen verstehen – Diagnosen, Therapien und neue Perspektiven' => ['[geplant: Traumafolgestörungen verstehen – Diagnosen, Therapien und neue Perspektiven](/traumafolgestoerungen-verstehen)'],
+            'geplant: Bürokratie-Labyrinth – Wenn Hilfe kompliziert wird' => ['[geplant: Bürokratie-Labyrinth – Wenn Hilfe kompliziert wird](/buerokratie-labyrinth)'],
+        ],
+        // Zwei Knöpfe der Altseite, als Text übrig geblieben. Die Dateien
+        // stehen darunter in der Dokumentenliste.
+        'veranstaltungen' => [
+            'KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung' => ['[KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung](/kein-einzelfall-im-dialog)'],
+            'TEILNAHMEVEREINBARUNG' => [],
+            'GRUPPENREGELN' => ['Beides findest du unten zum Herunterladen.'],
+        ],
         'impressum' => [
             'KE!N EINZELFALL e.V.Schiffbeker Höhe 3022119 Hamburg' => ['KE!N EINZELFALL e.V.', 'Schiffbeker Höhe 30', '22119 Hamburg'],
             'Tatjana BelmarSchiffbeker Höhe 3022119 Hamburg' => ['Tatjana Belmar', 'Schiffbeker Höhe 30', '22119 Hamburg'],
@@ -139,7 +173,16 @@ class Textpflege
     {
         $text = self::luecken($text);
 
-        return strtr($text, self::ERSETZUNGEN[$slug] ?? []);
+        foreach (self::ERSETZUNGEN[$slug] ?? [] as $alt => $neu) {
+            // Läuft öfter als einmal (Import, mehrere Migrationen). Wo der neue
+            // Wortlaut schon steht, nichts tun: „… an:“ → „… an: veranstaltung@…“
+            // hängte die Adresse sonst bei jedem Lauf noch einmal an.
+            if (! str_contains($text, $neu)) {
+                $text = str_replace($alt, $neu, $text);
+            }
+        }
+
+        return $text;
     }
 
     /**

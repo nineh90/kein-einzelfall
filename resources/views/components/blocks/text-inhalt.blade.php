@@ -33,7 +33,12 @@
     $sichtbar = $absaetze;
     $eingeklappt = [];
 
-    if (count($absaetze) > $ab_absatz + 1) {
+    // Listen aus lauter kurzen Zeilen (Adressen, „auf einen Blick“) nie
+    // einklappen: Dahinter verschwanden Kontaktadressen und Anmeldedaten
+    // (Prüfung der Firma, 08.10.2026). Einklappen lohnt für Fliesstext.
+    $liste = collect($absaetze)->every(fn ($a) => is_string($a) && mb_strlen($a) <= 90);
+
+    if (! $liste && count($absaetze) > $ab_absatz + 1) {
         $sichtbar = array_slice($absaetze, 0, $ab_absatz);
         $eingeklappt = array_slice($absaetze, $ab_absatz);
     }

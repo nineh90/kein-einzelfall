@@ -217,6 +217,36 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** Prüfung der Firma (08.10.2026): Beim Import verlorene Knöpfe, Links und Beschriftungen. */
+    public function test_verlorene_inhalte_der_altseite_sind_wieder_da(): void
+    {
+        $this->get('/das-hilfesystem')
+            ->assertSee('href="https://events.teams.microsoft.com/event/e54c4ba0-16e3-495a-97af-6a56d0c521ee@f30279d7-3481-4b91-a979-f9430f7afde1"', false)
+            ->assertSee('Jetzt anmelden')
+            ->assertDontSee('Diese findest du unter: Veranstaltungen');
+
+        // Vorbei: kein Anmeldeknopf, kein Doppelpunkt ins Leere.
+        $this->get('/trauma-bindung-und-beziehung')
+            ->assertSee('hat am 10. August 2026 bei Teams stattgefunden')
+            ->assertDontSee('Jetzt anmelden');
+
+        $buero = $this->get('/buerokratie-labyrinth')->getContent();
+        $this->assertSame(1, substr_count($buero, 'Veranstaltung an: <a href="mailto:veranstaltung@kein-einzelfall.de"'));
+
+        $this->get('/kontakt')
+            ->assertSee('1. Vorsitzende: Tatjana Belmar')
+            ->assertSee('Opferbeauftragter:')
+            ->assertSee('href="/landesstellen"', false)
+            // Kurze Zeilen werden nicht eingeklappt.
+            ->assertDontSee('weitere Absätze');
+
+        $this->get('/wissen')->assertSee('href="/fsm-erweitertes-hilfesystem"', false);
+        $this->get('/kein-einzelfall-im-dialog')->assertSee('href="/das-hilfesystem"', false);
+        $this->get('/veranstaltungen')
+            ->assertDontSee('TEILNAHMEVEREINBARUNG')
+            ->assertSee('Teilnahmevereinbarung');
+    }
+
     /** Prüfung der Firma (08.10.2026): Impressum mit geltenden Gesetzen und lesbarer Adresse. */
     public function test_impressum_nennt_die_geltenden_gesetze(): void
     {

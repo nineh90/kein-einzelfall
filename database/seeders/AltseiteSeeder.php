@@ -118,6 +118,40 @@ class AltseiteSeeder extends Seeder
                 .'ist, sowie die Istanbul-Konvention.',
             ],
         ],
+        // Beim Import gingen die Beschriftungen verloren, übrig blieben nackte
+        // Adressen (Prüfung der Firma, 08.10.2026). Wortlaut wie auf der
+        // Altseite, je Zeile Aufgabe und Adresse.
+        'kontakt' => [
+            'Vorstandsebene' => [
+                '1. Vorsitzende: Tatjana Belmar, belmar@kein-einzelfall.de',
+                '2. Vorsitzende: Franziska Künstler, kuenstler@kein-einzelfall.de',
+                'Kassenwartin: Petra Hildebrandt, hildebrandt@kein-einzelfall.de',
+            ],
+            'Kontakt & Geschäftssitz' => [
+                'Geschäftssitz: Hamburg',
+                'Anschrift: Schiffbeker Höhe 30, 22119 Hamburg',
+                'E-Mail: kontakt@kein-einzelfall.de, belmar@kein-einzelfall.de',
+            ],
+            'Landesstellen' => [
+                'Bayern: kuenstler@kein-einzelfall.de',
+                'Sachsen-Anhalt: redeker@kein-einzelfall.de',
+                'Berlin: khalil@kein-einzelfall.de',
+                'Schleswig-Holstein: posorske@kein-einzelfall.de',
+            ],
+            'Sachgebietsaufteilung' => [
+                'Verwaltung: verwaltung@kein-einzelfall.de',
+                'Anfragen: kontakt@kein-einzelfall.de',
+                'Selbsthilfegruppen: selbsthilfe@kein-einzelfall.de',
+                'Arbeitsgruppen: arbeitsgruppe@kein-einzelfall.de',
+                'Veranstaltungen: veranstaltung@kein-einzelfall.de',
+                'Akten & Dokumente: dokumente@kein-einzelfall.de',
+                'Presse & Öffentlichkeitsarbeit: pressekontakt@kein-einzelfall.de',
+                'Datenschutz: datenschutz@kein-einzelfall.de',
+                'Beschwerdemanagement: beschwerdemanagement@kein-einzelfall.de',
+                'Opferbeauftragter: opferbeauftragter@kein-einzelfall.de',
+                'Finanzen: finanzen@kein-einzelfall.de',
+            ],
+        ],
         'kinderkodex' => [
             // KEV-99, Text von Taddi. Der Abschnitt hat keine Überschrift,
             // der Schlüssel ist deshalb leer. Absätze von uns gesetzt.
@@ -185,9 +219,32 @@ class AltseiteSeeder extends Seeder
         ]],
     ];
 
+    /**
+     * Knöpfe der Altseite, die der Import verworfen hat (Elementor-Buttons,
+     * Prüfung der Firma 08.10.2026), je Seite am Abschnitt mit dieser
+     * Überschrift.
+     */
+    public const NEUE_KNOEPFE = [
+        'das-hilfesystem' => [
+            'Anmeldung' => ['label' => 'Jetzt anmelden', 'variant' => 'primary',
+                'url' => 'https://events.teams.microsoft.com/event/e54c4ba0-16e3-495a-97af-6a56d0c521ee@f30279d7-3481-4b91-a979-f9430f7afde1'],
+            'Teilnahme' => ['label' => 'Teilnahmevereinbarung und Gruppenregeln', 'url' => '/veranstaltungen#abschnitt-teilnahme', 'variant' => 'primary'],
+        ],
+        // Der Termin (10.08.2026) ist vorbei, deshalb kein Anmeldeknopf mehr.
+        'trauma-bindung-und-beziehung' => [
+            'Teilnahme' => ['label' => 'Teilnahmevereinbarung und Gruppenregeln', 'url' => '/veranstaltungen#abschnitt-teilnahme', 'variant' => 'primary'],
+        ],
+        'kontakt' => [
+            'Landesstellen' => ['label' => 'Zu den Landesstellen', 'url' => '/landesstellen', 'variant' => 'primary'],
+        ],
+    ];
+
     /** Tippfehler in Linktexten der Altseite. */
     public const DOKUMENT_KORREKTUREN = [
         'Hlfe zum Ausfüllen' => 'Hilfe zum Ausfüllen', // KEV-95, Mitgliedschaft
+        // /veranstaltungen: Elementor-Knöpfe in Grossbuchstaben
+        'TEILNAHMEVEREINBARUNG' => 'Teilnahmevereinbarung',
+        'GRUPPENREGELN' => 'Gruppenregeln',
     ];
 
     public const NEUE_BESCHREIBUNGEN = [
@@ -308,6 +365,7 @@ class AltseiteSeeder extends Seeder
                         'titel' => $block['titel'],
                         // Abschnitt ohne Überschrift: Schlüssel '' (KEV-99).
                         'absaetze' => self::NEUE_TEXTE[$slug][$block['titel'] ?? ''] ?? $block['absaetze'],
+                        'cta' => self::NEUE_KNOEPFE[$slug][$block['titel'] ?? ''] ?? null,
                     ], $slug),
                 ]);
 
