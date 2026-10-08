@@ -22,7 +22,9 @@
          Inhalt hat 1072. Mit „Gruppen & Veranstaltungen“ (KEV-72) lief die
          Zeile bei 1280 px über den Fensterrand; schon vorher ragte sie 72 px
          in den Seitenrand. --}}
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl">
+    {{-- data-kopf-zeile: kopfzeile.js misst, ob die Zeile passt, und schaltet
+         sonst aufs Burger-Menü (größere Schrift, Prüfung der Firma 08.10.2026). --}}
+    <div data-kopf-zeile class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl">
 
         {{-- Wortmarke.
 
@@ -56,7 +58,7 @@
              dauerhaft voller, deshalb bekommt sie erst dort Platz, wo sie
              wirklich passt. Zwischen 1024 und 1280 greift das Burger-Menü,
              das ohnehin vollständig bedienbar ist. --}}
-        <nav aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:block">
+        <nav data-kopf-menue aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:block">
             <ul class="flex items-center gap-5">
                 @foreach ($nav as $item)
                     <li class="group relative">
@@ -153,7 +155,7 @@
                 ganze Breite bekommt und die Zeile darüber nicht auseinanderzieht.
                 Als Bezug dient <header>: position:sticky zählt als positioniert.
             --}}
-            <details class="xl:hidden">
+            <details data-kopf-burger class="xl:hidden">
                 <summary
                     class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full
                            border border-line bg-card text-ink

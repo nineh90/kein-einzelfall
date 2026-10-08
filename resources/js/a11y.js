@@ -80,6 +80,8 @@ export function toolbarVerdrahten() {
         api.anwenden(werte)
         api.speichern(werte)
         spiegeln()
+        // Für die Kopfzeile: Passt sie mit der neuen Schrift noch? (kopfzeile.js)
+        document.dispatchEvent(new CustomEvent('ke:darstellung'))
     }
 
     /** Den gespeicherten Stand in die Bedienelemente zurückschreiben. */

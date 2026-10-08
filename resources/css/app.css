@@ -98,9 +98,14 @@ body {
   /* Lange Wörter und Adressen brechen um, statt die Seite aufzuziehen.
      Anlass (KEV-26): eine URL in der Datenschutzerklärung schob bei 320 px
      die ganze Seite auf 376 px Breite — waagerechtes Scrollen, das WCAG
-     1.4.10 genau bei dieser Breite verbietet. break-word greift nur, wenn
-     ein Wort sonst nicht passt; normaler Text bleibt unberührt. */
-  overflow-wrap: break-word;
+     1.4.10 genau bei dieser Breite verbietet. Umgebrochen wird nur, wenn
+     ein Wort sonst nicht passt; normaler Text bleibt unberührt.
+
+     anywhere statt break-word (08.10.2026): break-word zählt nicht bei der
+     Mindestbreite von Flex- und Grid-Elementen. Bei 150 % Schrift auf 320 px
+     zogen „Selbstwirksamkeitsplattform“ oder „Beschwerdemanagement“ deshalb
+     trotzdem die Seite auf (Prüfung der Firma). */
+  overflow-wrap: anywhere;
 }
 
 /* Dekoratives Wasserzeichen im Hinweisband.
@@ -379,3 +384,13 @@ svg.girocode path {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Kopfzeile zu breit (größere Schrift, weiter Zeichenabstand): Burger statt
+   Menüleiste, damit der Notausgang im Bild bleibt. Die Klasse setzt
+   kopfzeile.js nach Messung. Ausserhalb der Layer, damit sie die
+   Breakpoint-Klassen (xl:block, xl:hidden) schlägt.
+--------------------------------------------------------------------------- */
+html.kopf-eng [data-kopf-menue] { display: none; }
+html.kopf-eng [data-kopf-burger] { display: block; }
+html.kopf-sehr-eng [data-exit-beschriftung] { display: none; }
+html.kopf-sehr-eng [data-exit-kopf] { width: 2.5rem; padding-inline: 0; }

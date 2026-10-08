@@ -48,7 +48,7 @@
              rechte Spalte nicht die erste Zeile streckt und die Bescheinigung
              nach unten schiebt. Zwischen lg und xl bekommt die rechte Spalte
              mehr Anteil, sonst bricht dort die IBAN neben dem QR-Code um. --}}
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:grid-rows-[auto_1fr_auto] lg:gap-x-10 lg:gap-y-10 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-x-16">
+        <div class="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:grid-rows-[auto_1fr_auto] lg:gap-x-10 lg:gap-y-10 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-x-16">
 
             <div class="lg:col-start-1 lg:row-start-1">
                 {{-- Entweder Dachzeile oder der kurze Strich, nicht beides: Die
@@ -119,7 +119,7 @@
                         );
                     @endphp
 
-                    <div class="grid gap-6 p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:p-7">
+                    <div class="grid grid-cols-[minmax(0,1fr)] gap-6 p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:p-7">
                         <div>
                             <h3 class="mb-4 font-display text-lg text-ink">
                                 {{ __('rahmen.spenden.ueberweisung') }}

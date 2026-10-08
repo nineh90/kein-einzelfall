@@ -264,6 +264,54 @@ console.log('\nReflow (320 px, WCAG 1.4.10)')
     await kontext.close()
 }
 
+/*
+ * Notausgang bei vergrößerter Schrift (Prüfung der Firma, 08.10.2026).
+ *
+ * Die Schrift skaliert über rem, die Umschaltpunkte nicht. Bei 1280 px und
+ * der ersten Schriftstufe lief die Kopfzeile 106 px über den Rand und der
+ * Notausgang aus dem Bild. Geprüft wird: Notausgang im Kopf liegt im Fenster,
+ * und die Seite scrollt nicht seitwärts. Auf dem Handy mit größter Schrift
+ * auch die untere Leiste.
+ */
+console.log('\nNotausgang bei vergrößerter Schrift')
+for (const [breite, hoehe] of [[1280, 800], [1440, 900], [320, 640], [375, 700]]) {
+    for (const werte of [{ schrift: 1 }, { schrift: 3 }, { schrift: 3, zeichen: 2 }]) {
+        const kontext = await browser.newContext({ viewport: { width: breite, height: hoehe } })
+        await kontext.addInitScript((w) => {
+            localStorage.setItem('ke.trigger.aus', '1')
+            localStorage.setItem('ke-a11y', w)
+        }, JSON.stringify(werte))
+        const seite = await kontext.newPage()
+        await seite.goto(BASIS + '/anfragen', { waitUntil: 'networkidle' })
+
+        const befund = await seite.evaluate(() => {
+            const breite = document.documentElement.clientWidth
+            const kopf = document.querySelector('header [data-exit-kopf]').getBoundingClientRect()
+            const leiste = [...document.querySelectorAll('[data-notausgang]')]
+                .filter((a) => !a.closest('header') && a.offsetParent !== null)
+                .map((a) => a.getBoundingClientRect().right)
+
+            return {
+                kopf: kopf.right <= breite && kopf.width > 0,
+                leiste: leiste.every((r) => r <= breite),
+                ueberlauf: document.documentElement.scrollWidth - breite,
+            }
+        })
+        geprueft++
+
+        const titel = `${breite} px, ${JSON.stringify(werte)}`
+        if (befund.kopf && befund.leiste && befund.ueberlauf <= 0) {
+            console.log(`  ✓ ${titel}`)
+        } else {
+            verstoesse++
+            console.log(`  ✗ ${titel} — Notausgang Kopf ${befund.kopf ? 'ok' : 'ausserhalb'}, `
+                + `Leiste ${befund.leiste ? 'ok' : 'ausserhalb'}, Überlauf ${befund.ueberlauf} px`)
+        }
+
+        await kontext.close()
+    }
+}
+
 await browser.close()
 
 console.log(`\n${geprueft} Durchläufe.`)

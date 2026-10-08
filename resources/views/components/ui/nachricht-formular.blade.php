@@ -228,11 +228,13 @@
 
         <div class="rounded-card border border-line {{ $innen }} px-5 py-4">
             <label for="{{ $id('einwilligung') }}" class="flex items-start gap-3">
+                {{-- min-w-0: Sonst bricht „Datenschutzerklärung“ bei großer Schrift
+                     auf 320 px nicht um und schiebt die Seite über den Rand. --}}
                 <input type="checkbox" name="einwilligung" id="{{ $id('einwilligung') }}" value="1"
                        required class="mt-1 h-5 w-5 shrink-0 rounded border-line accent-[#00702F]"
                        @checked($alt('einwilligung'))
                        @if ($fehler->has('einwilligung')) aria-invalid="true" @endif>
-                <span class="text-sm text-ink">
+                <span class="min-w-0 text-sm text-ink [overflow-wrap:anywhere]">
                     @if ($auswahl)
                         {{-- Beide Wege in einem Satz: Ohne JavaScript weiss die
                              Seite nicht, welcher gerade gewählt ist. --}}

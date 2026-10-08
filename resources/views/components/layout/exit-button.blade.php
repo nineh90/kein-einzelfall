@@ -8,6 +8,7 @@
 <a
     href="{{ config('navigation.exit_url') }}"
     data-notausgang
+    @if ($variant === 'header') data-exit-kopf @endif
     rel="noreferrer noopener"
     @class([
         'inline-flex items-center justify-center no-underline transition-colors',
@@ -23,13 +24,13 @@
             .' h-10 w-10 min-[360px]:w-auto min-[360px]:px-4'
             => $variant === 'header',
         // Mobile-Bar: der einzige Ort, an dem die Warnfarbe eingesetzt wird
-        'flex-col gap-1 px-2 py-2 text-[0.6875rem] text-alert'
+        'flex-col gap-1 px-1 py-2 text-center text-[0.6875rem] leading-tight text-alert max-w-full [overflow-wrap:anywhere]'
             => $variant === 'bar',
     ])
 >
     <x-ui.icon name="exit" :size="$variant === 'bar' ? 22 : 18" />
     {{-- Beschriftung im Kopf erst ab 360 px — darunter trägt das Symbol allein,
          und die Vorlesehilfe bekommt den Namen weiterhin aus dem sr-only-Text. --}}
-    <span @class(['hidden min-[360px]:inline' => $variant === 'header'])>{{ $variant === 'bar' ? __('rahmen.notausgang.leiste') : __('rahmen.notausgang.kopf') }}</span>
+    <span @if ($variant === 'header') data-exit-beschriftung @endif @class(['hidden min-[360px]:inline' => $variant === 'header'])>{{ $variant === 'bar' ? __('rahmen.notausgang.leiste') : __('rahmen.notausgang.kopf') }}</span>
     <span class="sr-only">{{ __('rahmen.notausgang.erklaerung') }}</span>
 </a>

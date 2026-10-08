@@ -16,11 +16,12 @@
      class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] xl:hidden">
     <ul class="flex items-stretch justify-around">
         @foreach (\App\Support\Navigation::mobilLeiste() as $item)
-            <li class="flex-1">
+            <li class="min-w-0 flex-1">
                 <a href="{{ $item['url'] }}"
                    @if (request()->is(ltrim($item['url'], '/') ?: '/')) aria-current="page" @endif
-                   class="flex min-h-14 flex-col items-center justify-center gap-1 px-2 py-2
-                          text-[0.6875rem] no-underline text-ink-soft
+                   class="flex min-h-14 flex-col items-center justify-center gap-1 px-1 py-2
+                          text-center text-[0.6875rem] leading-tight no-underline text-ink-soft
+                          [overflow-wrap:anywhere] hyphens-auto
                           aria-[current=page]:text-green">
                     <x-ui.icon :name="$item['icon']" :size="22" />
                     {{ $item['label'] }}
@@ -34,13 +35,14 @@
              JavaScript ist das Panel nicht bedienbar, der Knopf deshalb
              erst mit Skript sichtbar (a11y.js nimmt das hidden weg).
              Steht vor dem Notausgang, damit der ganz rechts bleibt. --}}
-        <li class="flex-1" data-a11y-leiste hidden>
+        <li class="min-w-0 flex-1" data-a11y-leiste hidden>
             <button type="button"
                     data-a11y-oeffnen
                     aria-expanded="false"
                     aria-controls="a11y-panel"
-                    class="relative flex min-h-14 w-full flex-col items-center justify-center gap-1 px-2 py-2
-                           text-[0.6875rem] text-ink-soft aria-expanded:text-green">
+                    class="relative flex min-h-14 w-full flex-col items-center justify-center gap-1 px-1 py-2
+                           text-center text-[0.6875rem] leading-tight text-ink-soft aria-expanded:text-green
+                           [overflow-wrap:anywhere] hyphens-auto">
                 <span class="relative">
                     <x-ui.icon name="accessibility" :size="22" />
                     <span data-a11y-zaehler hidden
@@ -52,7 +54,7 @@
             </button>
         </li>
 
-        <li class="flex-1">
+        <li class="min-w-0 flex-1">
             <span class="flex min-h-14 items-center justify-center">
                 <x-layout.exit-button variant="bar" />
             </span>

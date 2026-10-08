@@ -24,9 +24,12 @@ import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
 import { kopfhoeheVerdrahten } from './kopfhoehe'
+import { kopfzeileVerdrahten } from './kopfzeile'
 
 // Zuerst: Der Aufmacher braucht die Höhe, bevor irgendetwas anderes zeichnet.
 kopfhoeheVerdrahten()
+// Gleich danach: ob die Kopfzeile in die Breite passt (Notausgang im Bild).
+kopfzeileVerdrahten()
 
 toolbarVerdrahten()
 leselinieVerdrahten()

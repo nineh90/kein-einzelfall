@@ -72,7 +72,7 @@
                    class="font-display text-lg font-medium text-alert no-underline hover:underline">
                     {{ $notruf['nummer'] }}
                 </a>
-                <span class="text-ink-soft">{{ $notruf['name'] }}</span>
+                <span class="text-ink-soft [overflow-wrap:anywhere]">{{ $notruf['name'] }}</span>
             </span>
         @endforeach
     </p>
