@@ -71,7 +71,7 @@
                 </div>
 
                 <p id="suchhilfe" class="mt-2 text-sm text-ink-soft">
-                    Zum Beispiel: „Brief vom Amt", „die glauben mir nicht" oder „Ausweis beantragen".
+                    Zum Beispiel: „Brief vom Amt“, „die glauben mir nicht“ oder „Ausweis beantragen“.
                 </p>
 
                 {{-- Ehrlich statt beruhigend.

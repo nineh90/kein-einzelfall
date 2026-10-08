@@ -96,7 +96,7 @@
             @if ($gruppentermine->isNotEmpty())
                 <section class="mt-8" aria-labelledby="gruppentermine-titel">
                     <h2 id="gruppentermine-titel" class="mb-1 font-display text-xl font-medium text-green">
-                        Regelmässige Gruppentreffen
+                        Regelmäßige Gruppentreffen
                     </h2>
                     <p class="mb-4 text-sm text-ink-soft">
                         Die nächsten Termine unserer Selbsthilfe- und Arbeitsgruppen.

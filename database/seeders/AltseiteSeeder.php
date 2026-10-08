@@ -7,6 +7,7 @@ use App\Models\Page;
 use App\Models\Redirect;
 use App\Support\Dokument;
 use App\Support\Spenden;
+use App\Support\Textpflege;
 use App\Support\Titelbilder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -301,11 +302,13 @@ class AltseiteSeeder extends Seeder
                 $page->blocks()->create([
                     'typ' => 'text',
                     'position' => $position++,
-                    'data' => [
+                    // Tippfehler, zusammengeklebte Sätze, alte Gesetzesangaben:
+                    // App\Support\Textpflege (Prüfung der Firma, 08.10.2026).
+                    'data' => Textpflege::bausteinDaten([
                         'titel' => $block['titel'],
                         // Abschnitt ohne Überschrift: Schlüssel '' (KEV-99).
                         'absaetze' => self::NEUE_TEXTE[$slug][$block['titel'] ?? ''] ?? $block['absaetze'],
-                    ],
+                    ], $slug),
                 ]);
 
                 foreach (self::NEUE_ABSCHNITTE[$slug] ?? [] as $neu) {

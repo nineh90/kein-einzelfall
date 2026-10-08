@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Page;
 use App\Models\TeamMember;
 use App\Support\Bild;
+use App\Support\Textpflege;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -51,6 +52,9 @@ class TeamUndGruppenSeeder extends Seeder
         ['personen' => $personen] = self::teamAusAbzug();
 
         foreach ($personen as $i => $person) {
+            // Beim Import gingen Zeilenumbrüche verloren („mehr.Ich wollte“).
+            $person['absaetze'] = array_map(fn ($a) => Textpflege::text($a), $person['absaetze']);
+
             // Nur Fotos, die tatsächlich geholt wurden (`bilder:holen`). Ein
             // Pfad ins Leere zeigte ein kaputtes Bild statt der Initialen.
             $foto = isset($person['bild']['src']) ? Bild::lokal($person['bild']['src']) : null;

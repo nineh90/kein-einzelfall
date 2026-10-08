@@ -18,6 +18,7 @@ Kümmert sich um alles: MariaDB starten, fehlende Abhängigkeiten nachziehen,
 Migrationen laufen lassen, Assets bauen, Server starten.
 
 Dann im Browser: **http://localhost:8000**
+(Ist Port 8000 belegt, mit `PORT=8001 bin/start` starten; Browser-Tests dann mit `BASIS=http://localhost:8001`.)
 Falls das nicht geht (Docker ohne Port-Mapping), die Container-IP nutzen —
 `bin/start` zeigt sie beim Start an.
 
@@ -127,7 +128,7 @@ php artisan db:seed --class=AltseiteSeeder    # JSON → Datenbank
   Zum Ausprobieren im Browser `localStorage.setItem('ke.spenden.aufrufe', '9')`
   und neu laden; zurücksetzen unter „Gespeicherte Einstellungen".
 - **Notausgang** — Button oben rechts, in der Mobil-Leiste unten, oder **3× ESC**.
-  Führt auf wetter.com und ersetzt den History-Eintrag. Steht auch im Dialog der
+  Führt auf google.de (seit KEV-40, Wunsch des Vereins) und ersetzt den History-Eintrag. Steht auch im Dialog der
   Trigger-Warnung.
 - **Darstellung** — das runde Symbol neben „Notausgang": Schriftgröße, 4 Kontrastmodi,
   Leselinie, Legasthenie-Schrift und mehr. Bleibt über Seitenwechsel erhalten.

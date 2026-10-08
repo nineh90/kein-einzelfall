@@ -217,6 +217,21 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Hlfe', $html);
     }
 
+    /** Prüfung der Firma (08.10.2026): Impressum mit geltenden Gesetzen und lesbarer Adresse. */
+    public function test_impressum_nennt_die_geltenden_gesetze(): void
+    {
+        $html = $this->get('/impressum')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Angaben gemäß § 5 DDG', $html);
+        $this->assertStringContainsString('§ 18 Abs. 2 MStV', $html);
+        $this->assertStringNotContainsString('TMG', $html);
+        $this->assertStringNotContainsString('RStV', $html);
+        $this->assertStringContainsString('<p>Schiffbeker Höhe 30</p>', $html);
+        $this->assertStringNotContainsString('3022119', $html);
+
+        $this->assertStringNotContainsString('TTDSG', $this->get('/datenschutz')->getContent());
+    }
+
     /** KEV-104: Landesstellen mit Text, je Bundesland ein Abschnitt, im Menü unter Kontakt. */
     public function test_landesstellen(): void
     {

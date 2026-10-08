@@ -61,8 +61,10 @@ class TriggerWarnungSeeder extends Seeder
                         .'zurückgehen oder diese Seite sofort verlassen — dafür gibt es unten '
                         .'einen Knopf, oben rechts den Notausgang, und du kannst dreimal '
                         .'hintereinander die Taste Esc drücken.',
+                    // Nicht alle Nummern dort sind rund um die Uhr erreichbar
+                    // (Opfer-Telefon 7–22 Uhr), Prüfung der Firma 08.10.2026.
                     'Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder '
-                        .'Seite und sind rund um die Uhr erreichbar.',
+                        .'Seite. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.',
                 ],
             ],
         ]);

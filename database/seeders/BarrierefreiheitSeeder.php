@@ -79,7 +79,7 @@ class BarrierefreiheitSeeder extends Seeder
     {
         return [
             ['Diese Seite schnell verlassen', [
-                'Oben rechts findest du den Knopf „Notausgang". Auf dem Handy ist er '
+                'Oben rechts findest du den Knopf „Notausgang“. Auf dem Handy ist er '
                 .'unten in der Leiste immer erreichbar. Ein Druck bringt dich sofort '
                 .'auf eine unverfängliche Seite.',
 
@@ -95,7 +95,9 @@ class BarrierefreiheitSeeder extends Seeder
             ]],
 
             ['Darstellung anpassen', [
-                'Neben dem Notausgang findest du ein rundes Symbol. Dahinter kannst du '
+                // Der Knopf sitzt am linken Rand (Prüfung der Firma, 08.10.2026).
+                'Am linken Bildschirmrand findest du ein rundes Symbol, auf dem Handy heißt '
+                .'es „Darstellung“ in der Leiste unten. Dahinter kannst du '
                 .'die Seite so einstellen, wie du sie am besten lesen kannst:',
 
                 'Schriftgröße in vier Stufen, Zeilen- und Buchstabenabstand, eine gut '

@@ -108,7 +108,7 @@ class GruppenterminTest extends TestCase
 
         $this->get('/veranstaltungen')
             ->assertOk()
-            ->assertSee('Regelmässige Gruppentreffen')
+            ->assertSee('Regelmäßige Gruppentreffen')
             ->assertSee('Monatlicher Austausch');
     }
 
@@ -152,6 +152,6 @@ class GruppenterminTest extends TestCase
 
         // In der Rückschau sind wiederkehrende Termine nicht sinnvoll
         $this->get('/veranstaltungen?zeitraum=vergangen')
-            ->assertDontSee('Regelmässige Gruppentreffen');
+            ->assertDontSee('Regelmäßige Gruppentreffen');
     }
 }
