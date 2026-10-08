@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Language;
+use App\Support\SitzungOhneSpuren;
 use App\Support\Triggerwarnung;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Throwable;
@@ -24,6 +26,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->triggerwarnungBereitstellen();
+        $this->sitzungenOhneSpuren();
+    }
+
+    /**
+     * Ersetzt den eingebauten Treiber „database“: gleiche Tabelle, aber ohne
+     * IP-Adresse und Browserkennung. Begründung in SitzungOhneSpuren.
+     */
+    private function sitzungenOhneSpuren(): void
+    {
+        Session::extend('database', fn ($app) => new SitzungOhneSpuren(
+            $app['db']->connection($app['config']['session.connection']),
+            $app['config']['session.table'],
+            $app['config']['session.lifetime'],
+            $app,
+        ));
     }
 
     /**

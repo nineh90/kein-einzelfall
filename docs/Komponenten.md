@@ -202,6 +202,7 @@ hier über erlebte Straftaten und ihre Gesundheit (Art. 9 DSGVO).
 | Felder **verschlüsselt** (`encrypted` Cast) | Ein Datenbankabzug — Backup, Hoster-Panel, offenes phpMyAdmin — zeigt keinen Klartext. Preis: kein `WHERE`, `LIKE` oder `ORDER BY` auf diesen Feldern |
 | Benachrichtigung **ohne Inhalt** | E-Mail ist unverschlüsselt und bleibt jahrelang in Postfächern. Der Hinweis enthält nur Eingangszeit und einen Link ins Panel. **Der wirksamste einzelne Hebel im ganzen Projekt** |
 | **Keine IP-Adresse**, kein User-Agent | Was nicht gespeichert wird, kann nicht abfließen |
+| **Sitzungen verschlüsselt**, ohne IP und User-Agent (seit 08.10.2026) | Nach einem Formularfehler steht der ganze Text in der Sitzung. `encrypt` ist fest an (`config/session.php`), `App\Support\SitzungOhneSpuren` lässt IP und Browserkennung weg |
 | Honigtopf + Zeitfalle statt CAPTCHA | Ein CAPTCHA wäre eine zusätzliche Hürde ausgerechnet für Menschen, die ohnehin Mühe haben. Auch kein reCAPTCHA — kein Drittdienst |
 | Formular **ohne JavaScript** nutzbar | Muss auch in gehärteten Browsern und über Tor funktionieren |
 

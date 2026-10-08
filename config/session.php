@@ -47,7 +47,12 @@ return [
     |
     */
 
-    'encrypt' => env('SESSION_ENCRYPT', false),
+    // Bewusst fest und nicht über die .env abschaltbar: Nach einem
+    // Formularfehler steht der ganze Nachrichtentext in der Sitzung, und
+    // `_previous.url` enthält Suchbegriffe. Unverschlüsselt läge beides im
+    // Klartext in der Tabelle `sessions` (Prüfung der Firma, 07.10.2026).
+    // IP und Browserkennung lässt App\Support\SitzungOhneSpuren weg.
+    'encrypt' => true,
 
     /*
     |--------------------------------------------------------------------------
