@@ -84,9 +84,9 @@
                             border-line px-4 py-2 text-sm text-green-deep marker:content-none
                             hover:bg-card [&::-webkit-details-marker]:hidden">
                 <span class="group-open:hidden">
-                    Weiterlesen ({{ count($eingeklappt) }} weitere Absätze)
+                    {{ __('Weiterlesen (:anzahl weitere Absätze)', ['anzahl' => count($eingeklappt)]) }}
                 </span>
-                <span class="hidden group-open:inline">Weniger anzeigen</span>
+                <span class="hidden group-open:inline">{{ __('Weniger anzeigen') }}</span>
                 <span class="transition-transform group-open:rotate-180">
                     <x-ui.icon name="chevron-down" :size="16" />
                 </span>

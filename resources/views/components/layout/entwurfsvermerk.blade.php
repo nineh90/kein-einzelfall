@@ -21,14 +21,19 @@
     role="status" statt "alert": Vorlesehilfen sollen den Vermerk ankündigen,
     aber niemanden aus dem Lesefluss reissen.
 --}}
+@php
+    // Übersetzungen sind maschinell (UebersetzungenSeeder), deutsche
+    // ungeprüfte Seiten von uns vorbereitet: zwei verschiedene Hinweise.
+    $maschinell = ($page->locale ?? null) && $page->locale !== \App\Models\Language::standardCode();
+@endphp
 @if ($page->ungeprueft ?? false)
     <div data-hinweisleiste class="border-b border-line bg-cream px-4 md:px-8 py-3 lg:px-10">
         <p role="status"
            class="mx-auto flex max-w-6xl items-start gap-2.5 text-sm text-ink">
             <x-ui.icon name="info" :size="18" class="mt-0.5 shrink-0 text-green-deep" />
             <span>
-                <strong class="font-medium">{{ __('rahmen.entwurf.titel') }}</strong>
-                {{ __('rahmen.entwurf.text') }}
+                <strong class="font-medium">{{ __($maschinell ? 'rahmen.entwurf.maschinell_titel' : 'rahmen.entwurf.titel') }}</strong>
+                {{ __($maschinell ? 'rahmen.entwurf.maschinell_text' : 'rahmen.entwurf.text') }}
             </span>
         </p>
     </div>

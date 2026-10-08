@@ -161,6 +161,8 @@ return [
      */
     'entwurf' => [
         'titel' => 'Entwurf — noch nicht vom Verein geprüft.',
+        'maschinell_titel' => 'Maschinelle Übersetzung — noch nicht vom Verein geprüft.',
+        'maschinell_text' => 'Diese Seite wurde automatisch aus dem Deutschen übersetzt und kann Fehler enthalten. Im Zweifel gilt die deutsche Fassung.',
         'text' => 'Diese Seite wurde vorbereitet und ist noch nicht gegengelesen. Die Angaben stammen aus amtlichen Quellen, ersetzen aber keine Beratung — verbindlich ist, was die zuständige Stelle in deinem Fall entscheidet.',
     ],
 

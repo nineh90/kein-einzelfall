@@ -45,8 +45,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
-            return Formularbremse::hinweis($request,
-                'Die Seite war länger offen, deshalb konnten wir deine Nachricht aus Sicherheitsgründen '
-                .'nicht annehmen. Dein Text steht noch im Formular. Bitte schick ihn einfach noch einmal ab.');
+            return Formularbremse::hinweis($request, __('Die Seite war länger offen, deshalb konnten wir deine Nachricht aus Sicherheitsgründen nicht annehmen. Dein Text steht noch im Formular. Bitte schick ihn einfach noch einmal ab.'));
         });
     })->create();

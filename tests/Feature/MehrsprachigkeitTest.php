@@ -323,6 +323,39 @@ class MehrsprachigkeitTest extends TestCase
             ->assertSee('<html lang="en"', false);
     }
 
+    /**
+     * Prüfung der Firma (08.10.2026): Auf den englischen Seiten standen
+     * Formular, Hilfe-Nummern, Triggerwarnung und Abschlussband auf Deutsch,
+     * „advice“ versprach Beratung, der Vereinsname war übersetzt.
+     */
+    public function test_englische_kernseiten_sind_durchgehend_englisch(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+        (new \Database\Seeders\AnfragenSeiteSeeder)->run();
+
+        $html = $this->get('/en/anfragen')->assertOk()->getContent();
+
+        foreach (['Send message', 'Your name', 'In immediate danger:', 'Violence Against Women Support Hotline',
+            'A note on the content of this website', 'Personal exchange on'] as $text) {
+            $this->assertStringContainsString($text, $html, $text);
+        }
+        foreach (['Nachricht senden', 'Dein Name', 'Bei unmittelbarer Gefahr', 'Hinweis zu den Inhalten',
+            'Du möchtest uns etwas mitteilen', 'advice'] as $text) {
+            $this->assertStringNotContainsString($text, $html, $text);
+        }
+
+        // Maschinell übersetzt: sichtbar gekennzeichnet und nicht in Suchmaschinen.
+        $this->assertStringContainsString('Machine translation', $html);
+        $this->assertStringContainsString('<meta name="robots" content="noindex', $html);
+
+        $this->get('/en')->assertSee('“I had no idea!”', false)->assertSee('Machine translation');
+        $this->get('/en/verein')
+            ->assertDontSee('NOT A SINGLE CASE')
+            ->assertSee('Non-profit association')
+            ->assertSee('Would you like to tell us something?')
+            ->assertDontSee('Du möchtest uns etwas mitteilen');
+    }
+
     public function test_der_umschalter_bietet_nach_dem_seeden_beide_sprachen(): void
     {
         $this->seed(UebersetzungenSeeder::class);

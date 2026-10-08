@@ -46,7 +46,7 @@
             class="fixed left-0 top-1/2 z-40 hidden h-12 w-11 -translate-y-1/2 items-center justify-center xl:flex
                    rounded-r-xl border border-l-0 border-line bg-card text-green shadow-md
                    transition-colors hover:bg-green-mist">
-        <span class="sr-only">Darstellung und Barrierefreiheit einstellen</span>
+        <span class="sr-only">{{ __('Darstellung und Barrierefreiheit einstellen') }}</span>
         <x-ui.icon name="accessibility" :size="20" />
 
         {{-- Zähler zeigt, dass Einstellungen aktiv sind — sonst wundert man sich
@@ -77,10 +77,10 @@
                  Seite. Als Überschrift ausgezeichnet würde sie die Dokument-Outline
                  anführen und Screenreader-Nutzer in die Irre schicken. Der Dialog
                  ist über aria-labelledby trotzdem sauber benannt. --}}
-            <p id="a11y-titel" class="font-display text-lg text-ink">Darstellung</p>
+            <p id="a11y-titel" class="font-display text-lg text-ink">{{ __('Darstellung') }}</p>
             <button type="button" data-a11y-schliessen
                     class="flex h-8 w-8 items-center justify-center rounded-full text-ink-soft hover:bg-green-mist">
-                <span class="sr-only">Schließen</span>
+                <span class="sr-only">{{ __('Schließen') }}</span>
                 <x-ui.icon name="close" :size="18" />
             </button>
         </div>
@@ -94,7 +94,7 @@
                             data-a11y-umschalten="{{ $schluessel }}"
                             aria-pressed="false"
                             class="group flex w-full items-center justify-between gap-3 text-left">
-                        <span class="text-sm text-ink">{{ $opt['label'] }}</span>
+                        <span class="text-sm text-ink">{{ __($opt['label']) }}</span>
                         <span class="relative h-6 w-11 shrink-0 rounded-full bg-line transition-colors
                                      group-aria-[pressed=true]:bg-green">
                             <span class="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-card transition-transform
@@ -104,7 +104,7 @@
                 @else
                     {{-- Stufen (Schriftgröße, Abstände) und Auswahl (Kontrast) --}}
                     <p class="mb-2 text-sm font-medium text-ink" id="a11y-{{ $schluessel }}-label">
-                        {{ $opt['label'] }}
+                        {{ __($opt['label']) }}
                     </p>
                     <div class="flex flex-wrap gap-1.5" role="group"
                          aria-labelledby="a11y-{{ $schluessel }}-label">
@@ -117,7 +117,7 @@
                                     class="rounded-full border border-line px-3 py-1.5 text-xs
                                            aria-[pressed=true]:border-green aria-[pressed=true]:bg-green
                                            aria-[pressed=true]:text-on-green">
-                                {{ $eintrag['label'] }}
+                                {{ __($eintrag['label']) }}
                             </button>
                         @endforeach
                     </div>
@@ -132,13 +132,13 @@
              gespeicherte Wert dazukam. --}}
         <button type="button" data-a11y-zuruecksetzen
                 class="mt-3 w-full rounded-full border border-line py-2 text-sm text-ink-soft hover:bg-green-mist">
-            Alles zurücksetzen
+            {{ __('Alles zurücksetzen') }}
         </button>
 
         <p class="mt-3 text-xs text-ink-soft">
-            Die Einstellungen bleiben auf diesem Gerät gespeichert.
-            <a href="/barrierefreiheit#gespeicherte-einstellungen"
-               class="text-green-deep underline">Was gespeichert wird</a>
+            {{ __('Die Einstellungen bleiben auf diesem Gerät gespeichert.') }}
+            <a href="{{ \App\Models\Language::aktuell()->pfad('/barrierefreiheit') }}#gespeicherte-einstellungen"
+               class="text-green-deep underline">{{ __('Was gespeichert wird') }}</a>
         </p>
     </div>
 </div>

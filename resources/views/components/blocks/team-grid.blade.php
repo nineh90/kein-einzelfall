@@ -120,7 +120,7 @@
                                                     [&::-webkit-details-marker]:hidden">
                                         <span class="flex-1">
                                             <span class="group-open:hidden">Mehr über {{ $person->rufname() }} lesen</span>
-                                            <span class="hidden group-open:inline">Weniger anzeigen</span>
+                                            <span class="hidden group-open:inline">{{ __('Weniger anzeigen') }}</span>
                                         </span>
                                         <span class="transition-transform group-open:rotate-180">
                                             <x-ui.icon name="chevron-down" :size="18" />

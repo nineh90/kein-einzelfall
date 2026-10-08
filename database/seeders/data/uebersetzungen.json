@@ -42,7 +42,7 @@
     "en": "Victim support for social justice!"
   },
   "Keiner soll mehr sagen müssen: *„Ich hab es nicht gewusst!“*": {
-    "en": "No one should ever have to say: *„I had no idea!“*"
+    "en": "No one should ever have to say: *“I had no idea!”*"
   },
   "Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform von KE!N EINZELFALL e.V. Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe. Für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen. Für mehr Sichtbarkeit, Gehör und Unterstützung!": {
     "en": "You are on the information, exchange and self-efficacy platform of KE!N EINZELFALL e.V. A central network of professional and lived-experience expertise on equal terms. For victims and co-victims, relatives, interested people and professionals. For more visibility, being heard and support!"
@@ -126,7 +126,7 @@
     "en": "Be part of it – every bit of support counts, no matter how small!"
   },
   "Du kannst diese Seite jederzeit sofort verlassen: über „Notausgang“ oben rechts, in der Leiste unten, oder mit dreimal ESC.": {
-    "en": "You can leave this page immediately at any time: via „Emergency exit“ at the top right, in the bar at the bottom, or by pressing ESC three times."
+    "en": "You can leave this page immediately at any time: via “Quick exit” at the top right, in the bar at the bottom, or by pressing ESC three times."
   },
   "Mehr über:": {
     "en": "More about:"
@@ -156,7 +156,7 @@
     "en": "KE!N EINZELFALL e.V. is steadily expanding its network and its cooperations with other actors. Among others, it cooperates with Bundesverband ANUAS e.V., Gegen Missbrauch e.V., Tour 41 and KISS Hamburg."
   },
   "Für Sichtbarkeit, Gehör und Unterstützung. Gemeinsam KE!N EINZELFALL!": {
-    "en": "For visibility, being heard and support. Together NOT A SINGLE CASE!"
+    "en": "For visibility, being heard and support. Together: KE!N EINZELFALL!"
   },
   "Der Anfrage- und Austausch-Service von KE!N EINZELFALL e.V.": {
     "en": "The request and exchange service of KE!N EINZELFALL e.V."
@@ -210,7 +210,7 @@
     "en": "Victim support for social justice."
   },
   "Wir geben Betroffenen eine Stimme, bieten Räume zum Austausch, leisten Aufklärungsarbeit, schaffen Vernetzung, teilen Wissen und kämpfen für strukturelle Veränderungen. Dabei geht es um Einzelschicksale, die KE!N EINZELFALL sind, und um ein System, das wir gemeinsam verändern können.": {
-    "en": "We give those affected a voice, offer spaces for exchange, do educational work, create networks, share knowledge and fight for structural change. This is about individual fates that are NOT A SINGLE CASE, and about a system that we can change together."
+    "en": "We give those affected a voice, offer spaces for exchange, do educational work, create networks, share knowledge and fight for structural change. This is about individual fates that are not isolated cases, and about a system that we can change together."
   },
   "Wofür wir Spenden einsetzen:": {
     "en": "What we use donations for:"
@@ -219,12 +219,66 @@
     "en": "Every donation is a sign of support and connection. With your donation you help not just one person, but many."
   },
   "Denn wir sind KE!N EINZELFALL.": {
-    "en": "Because we are NOT A SINGLE CASE."
+    "en": "Because we are KE!N EINZELFALL."
   },
   "Benötigst du eine Spendenbescheinigung? Dann schreibe uns eine kurze E-Mail mit deinen Daten an verwaltung@kein-einzelfall.de und du erhältst eine Bescheinigung.": {
     "en": "Do you need a donation receipt? Then send us a short e-mail with your details to verwaltung@kein-einzelfall.de and you will receive a receipt."
   },
   "Persönlicher Austausch zu Entschädigung, Schwerbehinderung und Pflegegrad.": {
-    "en": "Personal advice on victim compensation, severe disability and care levels."
+    "en": "Personal exchange on victim compensation, severe disability and care levels."
+  },
+  "Alle Spendenmöglichkeiten und Spendenbescheinigung": {
+    "en": "All ways to donate and donation receipts"
+  },
+  "Gemeinnütziger Verein": {
+    "en": "Non-profit association"
+  },
+  "Der KE!N EINZELFALL e.V. wurde 2024 gegründet – aus einer persönlichen Betroffenheit heraus und mit dem Ziel, von schädigenden Taten betroffene Menschen nicht länger allein zu lassen.": {
+    "en": "KE!N EINZELFALL e.V. was founded in 2024 – out of personal experience and with the aim of no longer leaving people affected by harmful acts on their own."
+  },
+  "Unsere Vorstandsebene und unsere Mitglieder bestehen aus Persönlichkeiten, die sich nicht nur durch ihre fachliche Kompetenz auszeichnen, sondern auch durch ihre persönliche Verbundenheit. Sie bringen unterschiedliche Perspektiven, Erfahrungen und Stärken mit – vereint durch die Motivation: Opferhilfe für soziale Gerechtigkeit!": {
+    "en": "Our board and our members are people who stand out not only for their professional expertise but also for their personal commitment. They bring different perspectives, experiences and strengths – united by one motivation: victim support for social justice!"
+  },
+  "Du beschreibst uns dein Anliegen kurz (per E-Mail oder über das Formular unten). So können wir deine Nachricht an die richtige Ansprechperson in unserem Team weiterleiten. Danach melden wir uns so schnell wie möglich – spätestens innerhalb von 48 Stunden – bei dir zurück.": {
+    "en": "You briefly describe your concern to us (by e-mail or using the form below). This way we can forward your message to the right contact person in our team. We will then get back to you as quickly as possible – within 48 hours at the latest."
+  },
+  "Kostenfreies Wissen, Recht und Aufklärung für Opfer, Mitopfer und Interessierte – z. B. über Webinare, Infoveranstaltungen, soziale Medien und Aufklärungskampagnen": {
+    "en": "Free knowledge, legal information and education for victims, co-victims and anyone interested – e.g. through webinars, information events, social media and awareness campaigns"
+  },
+  "Stärkung unserer Öffentlichkeitsarbeit, um Tabus zu brechen und Sichtbarkeit zu schaffen": {
+    "en": "Strengthening our public relations work to break taboos and create visibility"
+  },
+  "Finanzierung kostenfreier Angebote für Betroffene und Interessierte": {
+    "en": "Funding free services for those affected and anyone interested"
+  },
+  "Aufbau und Pflege helfender Netzwerke": {
+    "en": "Building and maintaining support networks"
+  },
+  "Kostenfreie Selbsthilfegruppen, die für Empowerment (Selbstermächtigung) stehen": {
+    "en": "Free self-help groups that stand for empowerment"
+  },
+  "Strukturelle Arbeiten & Kampagnen, die Missstände und Best Practices im System sichtbar machen": {
+    "en": "Structural work & campaigns that make shortcomings and best practices in the system visible"
+  },
+  "Onlinepräsenz von KE!N EINZELFALL e.V. – laufende Kosten für Homepage": {
+    "en": "Online presence of KE!N EINZELFALL e.V. – running costs of the website"
+  },
+  "Ausstattung für mobile Unterstützung bei Anträgen und Anfragen": {
+    "en": "Equipment for mobile support with applications and requests"
+  },
+  "Hinweis zu den Inhalten dieser Website": {
+    "en": "A note on the content of this website"
+  },
+  "Auf dieser Website geht es um Straftaten, Gewalt und ihre Folgen. Ein Hinweis vorab, und wie du die Seite jederzeit schnell verlässt.": {
+    "en": "This website is about crime, violence and their consequences. A note before you start, and how to leave the page quickly at any time."
+  },
+  "Auf dieser Website geht es um Straftaten, Gewalt und ihre Folgen. Einzelne Texte, Erfahrungsberichte und Dokumente können belastend sein oder Erinnerungen auslösen.": {
+    "en": "This website is about crime, violence and their consequences. Some texts, personal accounts and documents may be distressing or bring back memories."
+  },
+  "Du entscheidest, was du liest und wann. Du kannst jederzeit aufhören, zurückgehen oder diese Seite sofort verlassen — dafür gibt es unten einen Knopf, oben rechts den Notausgang, und du kannst dreimal hintereinander die Taste Esc drücken.": {
+    "en": "You decide what you read and when. You can stop at any time, go back or leave this page immediately — there is a button below for this, the quick exit at the top right, and you can press the Esc key three times in a row."
+  },
+  "Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder Seite. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.": {
+    "en": "If you need help right now: the emergency numbers are at the bottom of every page. TelefonSeelsorge (116 123) can be reached 24/7."
   }
 }

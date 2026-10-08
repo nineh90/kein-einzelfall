@@ -34,10 +34,10 @@
          class="rounded-card border-2 border-green bg-green-mist px-5 py-6">
 
     <h2 id="hilfe-titel" class="mb-1 font-display text-xl font-medium text-green-deep">
-        {{ $titel }}
+        {{ __($titel) }}
     </h2>
     <p class="mb-5 text-sm text-ink-soft">
-        Diese Stellen sind unabhängig von uns erreichbar — kostenfrei und auf Wunsch anonym.
+        {{ __('Diese Stellen sind unabhängig von uns erreichbar — kostenfrei und auf Wunsch anonym.') }}
     </p>
 
     <div @class(['grid gap-3', 'md:grid-cols-2 md:gap-x-10' => count($spalten) > 1])>
@@ -54,10 +54,10 @@
                         <a href="tel:{{ $n['tel'] }}"
                            class="font-display text-lg font-medium text-green-deep no-underline hover:underline">
                             {{ $n['nummer'] }}
-                            <span class="sr-only">– {{ $n['name'] }} anrufen</span>
+                            <span class="sr-only">– {{ __(':name anrufen', ['name' => __($n['name'])]) }}</span>
                         </a>
-                        <span class="text-sm text-ink">{{ $n['name'] }}</span>
-                        <span class="text-xs text-ink-soft">{{ implode(' · ', $n['angaben']) }}</span>
+                        <span class="text-sm text-ink">{{ __($n['name']) }}</span>
+                        <span class="text-xs text-ink-soft">{{ implode(' · ', array_map(fn ($a) => __($a), $n['angaben'])) }}</span>
                     </li>
                 @endforeach
             </ul>
@@ -65,14 +65,14 @@
     </div>
 
     <p class="mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-green/30 pt-4 text-sm text-ink">
-        <span>Bei unmittelbarer Gefahr:</span>
+        <span>{{ __('Bei unmittelbarer Gefahr:') }}</span>
         @foreach ($notrufe as $notruf)
             <span>
                 <a href="tel:{{ $notruf['tel'] }}"
                    class="font-display text-lg font-medium text-alert no-underline hover:underline">
                     {{ $notruf['nummer'] }}
                 </a>
-                <span class="text-ink-soft [overflow-wrap:anywhere]">{{ $notruf['name'] }}</span>
+                <span class="text-ink-soft [overflow-wrap:anywhere]">{{ __($notruf['name']) }}</span>
             </span>
         @endforeach
     </p>

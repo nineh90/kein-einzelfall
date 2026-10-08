@@ -26,8 +26,8 @@ class BeschwerdeRequest extends AnfrageRequest
     {
         return [
             ...parent::messages(),
-            'weg.required' => 'Bitte wähle oben, ob es um Kritik geht oder um eine Beschwerde über unseren Verein.',
-            'weg.in' => 'Bitte wähle oben, ob es um Kritik geht oder um eine Beschwerde über unseren Verein.',
+            'weg.required' => __('Bitte wähle oben, ob es um Kritik geht oder um eine Beschwerde über unseren Verein.'),
+            'weg.in' => __('Bitte wähle oben, ob es um Kritik geht oder um eine Beschwerde über unseren Verein.'),
         ];
     }
 }

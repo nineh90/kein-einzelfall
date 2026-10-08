@@ -64,7 +64,7 @@
 
     <div id="formular-{{ $kennung }}"
          class="mx-auto mt-14 max-w-3xl scroll-mt-24 border-t border-line pt-12 lg:mt-20">
-        <h2 class="mb-2 font-display text-2xl font-medium text-green lg:text-3xl">Schreib uns</h2>
+        <h2 class="mb-2 font-display text-2xl font-medium text-green lg:text-3xl">{{ __('Schreib uns') }}</h2>
 
         <x-ui.nachricht-formular
             :wege="$wege"

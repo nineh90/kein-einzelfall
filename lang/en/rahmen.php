@@ -117,6 +117,9 @@ return [
 
     'entwurf' => [
         'titel' => 'Draft — not yet reviewed by the association.',
+        // Für maschinell übersetzte Seiten (UebersetzungenSeeder).
+        'maschinell_titel' => 'Machine translation — not yet reviewed by the association.',
+        'maschinell_text' => 'This page was translated automatically from German. It may contain errors. If in doubt, the German version applies.',
         'text' => 'This page has been prepared and has not been proofread yet. The information comes from official sources but does not replace advice — what the responsible authority decides in your case is what counts.',
     ],
 

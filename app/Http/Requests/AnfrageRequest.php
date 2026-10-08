@@ -74,11 +74,11 @@ class AnfrageRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Name',
-            'email' => 'E-Mail-Adresse',
-            'betreff' => 'Betreff',
-            'nachricht' => 'Nachricht',
-            'einwilligung' => 'Einwilligung',
+            'name' => __('Name'),
+            'email' => __('E-Mail-Adresse'),
+            'betreff' => __('Betreff'),
+            'nachricht' => __('Nachricht'),
+            'einwilligung' => __('Einwilligung'),
         ];
     }
 
@@ -87,14 +87,14 @@ class AnfrageRequest extends FormRequest
         // Freundlich und in Du-Form — der Rest der Seite spricht auch so,
         // und wer hier schreibt, ist oft ohnehin angespannt.
         return [
-            'betreff.required' => 'Bitte gib einen Betreff an.',
-            'betreff.min' => 'Der Betreff ist sehr kurz — magst du ihn etwas ausführlicher fassen?',
-            'nachricht.required' => 'Bitte schreib uns ein paar Zeilen.',
-            'nachricht.min' => 'Die Nachricht ist sehr kurz. Schreib gern etwas mehr.',
-            'nachricht.max' => 'Die Nachricht ist zu lang. Bitte kürze sie etwas oder schreib uns direkt eine E-Mail.',
-            'email.email' => 'Diese E-Mail-Adresse sieht nicht richtig aus. Du kannst das Feld auch frei lassen.',
-            'einwilligung.accepted' => 'Ohne dein Einverständnis dürfen wir deine Nachricht nicht speichern.',
-            'webseite.size' => 'Deine Anfrage konnte nicht verarbeitet werden.',
+            'betreff.required' => __('Bitte gib einen Betreff an.'),
+            'betreff.min' => __('Der Betreff ist sehr kurz — magst du ihn etwas ausführlicher fassen?'),
+            'nachricht.required' => __('Bitte schreib uns ein paar Zeilen.'),
+            'nachricht.min' => __('Die Nachricht ist sehr kurz. Schreib gern etwas mehr.'),
+            'nachricht.max' => __('Die Nachricht ist zu lang. Bitte kürze sie etwas oder schreib uns direkt eine E-Mail.'),
+            'email.email' => __('Diese E-Mail-Adresse sieht nicht richtig aus. Du kannst das Feld auch frei lassen.'),
+            'einwilligung.accepted' => __('Ohne dein Einverständnis dürfen wir deine Nachricht nicht speichern.'),
+            'webseite.size' => __('Deine Anfrage konnte nicht verarbeitet werden.'),
         ];
     }
 
@@ -114,13 +114,13 @@ class AnfrageRequest extends FormRequest
                 $sekunden = now()->timestamp - (int) decrypt($start);
             } catch (\Throwable) {
                 // Manipulierter oder abgelaufener Wert
-                $validator->errors()->add('nachricht', 'Bitte lade die Seite neu und versuche es erneut.');
+                $validator->errors()->add('nachricht', __('Bitte lade die Seite neu und versuche es erneut.'));
 
                 return;
             }
 
             if ($sekunden < 3) {
-                $validator->errors()->add('nachricht', 'Bitte lade die Seite neu und versuche es erneut.');
+                $validator->errors()->add('nachricht', __('Bitte lade die Seite neu und versuche es erneut.'));
             }
         });
     }

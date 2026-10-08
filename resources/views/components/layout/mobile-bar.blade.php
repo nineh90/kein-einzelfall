@@ -50,7 +50,7 @@
                                  rounded-full bg-green px-1 text-[0.625rem] text-on-green"></span>
                 </span>
                 <span aria-hidden="true">{{ __('rahmen.darstellung_leiste') }}</span>
-                <span class="sr-only">Darstellung und Barrierefreiheit einstellen</span>
+                <span class="sr-only">{{ __('Darstellung und Barrierefreiheit einstellen') }}</span>
             </button>
         </li>
 

@@ -40,7 +40,9 @@ class UebersetzungenSeeder extends Seeder
      * übersetzte Seite sieht kaputt aus, eine fehlende fällt sauber auf Deutsch
      * zurück. Lieber wenige Seiten ganz als viele halb.
      */
-    private const KERN = ['startseite', 'verein', 'anfragen', 'spenden'];
+    private const KERN = ['startseite', 'verein', 'anfragen', 'spenden', 'trigger-warnung'];
+    // trigger-warnung seit 08.10.2026: Der Hinweis steht auf jeder Seite und
+    // war auf den englischen Seiten deutsch (Prüfung der Firma).
 
     /**
      * Felder, die sichtbaren Text tragen. Nur diese werden übersetzt — `url`,
@@ -54,6 +56,22 @@ class UebersetzungenSeeder extends Seeder
 
     /** @var array<string, array{en: string}> */
     private array $woerterbuch = [];
+
+    /**
+     * UEBERSETZUNGEN_AUFFRISCHEN=1: Bestehende Übersetzungen der Kernseiten
+     * neu aus der deutschen Fassung und dem Wörterbuch aufbauen, statt sie zu
+     * überspringen. Für Korrekturen am Wörterbuch (08.10.2026: „advice“,
+     * Anführungszeichen, der übersetzte Vereinsname, fehlende Absätze).
+     *
+     *     UEBERSETZUNGEN_AUFFRISCHEN=1 php artisan db:seed --class=UebersetzungenSeeder
+     *
+     * Achtung: Überschreibt, was im Panel an den englischen Kernseiten
+     * geändert wurde. Nur bewusst und von Hand laufen lassen.
+     */
+    private function auffrischen(): bool
+    {
+        return (bool) env('UEBERSETZUNGEN_AUFFRISCHEN', false);
+    }
 
     public function run(): void
     {
@@ -90,8 +108,16 @@ class UebersetzungenSeeder extends Seeder
                     ->where('slug', $slug)
                     ->exists();
 
-                if ($vorhanden) {
+                if ($vorhanden && ! $this->auffrischen()) {
                     continue;
+                }
+
+                if ($vorhanden) {
+                    Page::query()->where('locale', $locale)->where('fassung', Page::FASSUNG_STANDARD)
+                        ->where('slug', $slug)->each(function (Page $alt) {
+                            $alt->blocks()->delete();
+                            $alt->delete();
+                        });
                 }
 
                 $this->uebersetzung($deutsch, $locale);
@@ -127,6 +153,10 @@ class UebersetzungenSeeder extends Seeder
             'untertitel' => $this->tr($deutsch->untertitel, $locale),
             'meta_title' => $this->tr($deutsch->meta_title, $locale),
             'meta_description' => $this->tr($deutsch->meta_description, $locale),
+            // Maschinell übersetzt: sichtbar als ungeprüft gekennzeichnet und
+            // nicht in Suchmaschinen, bis der Verein gegengelesen hat.
+            'ungeprueft' => true,
+            'noindex' => true,
             'published_at' => now(),
         ]);
 

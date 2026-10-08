@@ -57,8 +57,7 @@
 --}}
 <div {{ $attributes }}>
     <p class="mb-6 text-ink-soft">
-        Du entscheidest, was du schreibst. Pflicht sind nur Betreff und Nachricht —
-        deinen Namen und deine E-Mail-Adresse kannst du weglassen.
+        {{ __('Du entscheidest, was du schreibst. Pflicht sind nur Betreff und Nachricht — deinen Namen und deine E-Mail-Adresse kannst du weglassen.') }}
     </p>
 
     @if (session('anfrage_versendet') && $meins(session('versendet_von')))
@@ -66,7 +65,7 @@
              keine Warnung. Screenreader lesen sie beim Laden vor. --}}
         <div role="status"
              class="mb-6 rounded-card border-2 border-green bg-green-mist px-5 py-4">
-            <p class="font-medium text-green-deep">Deine Nachricht ist angekommen.</p>
+            <p class="font-medium text-green-deep">{{ __('Deine Nachricht ist angekommen.') }}</p>
             <p class="mt-1 text-sm text-ink">
                 {{ session('anfrage_versendet') }}
             </p>
@@ -78,7 +77,7 @@
              wieder in den Feldern (Formularbremse, bootstrap/app.php). --}}
         <div role="alert"
              class="mb-6 rounded-card border-2 border-alert {{ $innen }} px-5 py-4">
-            <p class="font-medium text-alert">Deine Nachricht ist noch nicht angekommen.</p>
+            <p class="font-medium text-alert">{{ __('Deine Nachricht ist noch nicht angekommen.') }}</p>
             <p class="mt-1 text-sm text-ink">{{ session('formular_hinweis') }}</p>
         </div>
     @endif
@@ -88,10 +87,10 @@
              daneben genau hier stehen. Der Text bleibt in den Feldern. --}}
         <div role="alert"
              class="mb-6 rounded-card border-2 border-alert {{ $innen }} px-5 py-4">
-            <p class="font-medium text-alert">Deine Nachricht konnte gerade nicht verschickt werden.</p>
+            <p class="font-medium text-alert">{{ __('Deine Nachricht konnte gerade nicht verschickt werden.') }}</p>
             <p class="mt-1 text-sm text-ink">
-                Dein Text steht noch unten im Formular. Du kannst ihn kopieren und direkt an
-                {{ hervorheben(config('mail.ombudsstelle_an')) }} schicken.
+                {{ __('Dein Text steht noch unten im Formular. Du kannst ihn kopieren und direkt an diese Adresse schicken:') }}
+                {{ hervorheben(config('mail.ombudsstelle_an')) }}
             </p>
         </div>
     @endif
@@ -99,7 +98,7 @@
     @if ($fehler->any())
         <div role="alert"
              class="mb-6 rounded-card border-2 border-alert {{ $innen }} px-5 py-4">
-            <p class="font-medium text-alert">Bitte prüfe noch einmal:</p>
+            <p class="font-medium text-alert">{{ __('Bitte prüfe noch einmal:') }}</p>
             <ul class="mt-2 list-disc pl-5 text-sm text-ink">
                 @foreach ($fehler->all() as $meldung)
                     <li>{{ $meldung }}</li>
@@ -120,7 +119,7 @@
              Kein CAPTCHA — das wäre eine zusätzliche Hürde ausgerechnet für
              die Menschen, die ohnehin Mühe haben. --}}
         <div aria-hidden="true" class="absolute left-[-9999px] h-0 overflow-hidden">
-            <label for="{{ $id('webseite') }}">Dieses Feld bitte frei lassen</label>
+            <label for="{{ $id('webseite') }}">{{ __('Dieses Feld bitte frei lassen') }}</label>
             <input type="text" name="webseite" id="{{ $id('webseite') }}" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="gestartet_um" value="{{ encrypt(now()->timestamp) }}">
@@ -131,7 +130,7 @@
                  Verein beschwert, soll das wissen, bevor er schreibt. --}}
             <fieldset @if ($fehler->has('weg')) aria-describedby="{{ $id('weg-fehler') }}" @endif>
                 <legend class="mb-2 font-medium text-ink">
-                    Worum geht es? <span class="font-normal text-ink-soft">(bitte auswählen)</span>
+                    {{ __('Worum geht es?') }} <span class="font-normal text-ink-soft">{{ __('(bitte auswählen)') }}</span>
                 </legend>
                 <div class="grid gap-3 sm:grid-cols-2">
                     @foreach ($wege as $weg)
@@ -148,10 +147,9 @@
                                 <span class="block font-medium text-ink">{{ $weg['titel'] }}</span>
                                 <span class="mt-0.5 block text-sm text-ink-soft">
                                     @if ($weg['wert'] === 'ombudsstelle')
-                                        Geht direkt an die unabhängige Ombudsstelle. Der Verein
-                                        sieht sie nicht, die Website speichert sie nicht.
+                                        {{ __('Geht direkt an die unabhängige Ombudsstelle. Der Verein sieht sie nicht, die Website speichert sie nicht.') }}
                                     @else
-                                        Geht an unser Team und wird verschlüsselt gespeichert.
+                                        {{ __('Geht an unser Team und wird verschlüsselt gespeichert.') }}
                                     @endif
                                 </span>
                             </span>
@@ -166,7 +164,7 @@
 
         <div>
             <label for="{{ $id('name') }}" class="mb-1.5 block font-medium text-ink">
-                Dein Name <span class="font-normal text-ink-soft">(freiwillig)</span>
+                {{ __('Dein Name') }} <span class="font-normal text-ink-soft">{{ __('(freiwillig)') }}</span>
             </label>
             <input type="text" name="name" id="{{ $id('name') }}" value="{{ $alt('name') }}"
                    autocomplete="name" maxlength="120"
@@ -179,7 +177,7 @@
 
         <div>
             <label for="{{ $id('email') }}" class="mb-1.5 block font-medium text-ink">
-                Deine E-Mail-Adresse <span class="font-normal text-ink-soft">(freiwillig)</span>
+                {{ __('Deine E-Mail-Adresse') }} <span class="font-normal text-ink-soft">{{ __('(freiwillig)') }}</span>
             </label>
             <input type="email" name="email" id="{{ $id('email') }}" value="{{ $alt('email') }}"
                    autocomplete="email" maxlength="180"
@@ -188,11 +186,9 @@
                    @if ($fehler->has('email')) aria-invalid="true" @endif>
             <p id="{{ $id('email-hinweis') }}" class="mt-1.5 text-sm text-ink-soft">
                 @if ($auswahl)
-                    Ohne E-Mail-Adresse kann dir niemand antworten — deine Nachricht
-                    kommt aber trotzdem an.
+                    {{ __('Ohne E-Mail-Adresse kann dir niemand antworten — deine Nachricht kommt aber trotzdem an.') }}
                 @else
-                    Ohne E-Mail-Adresse können wir dir nicht antworten — deine Nachricht
-                    erreicht uns aber trotzdem.
+                    {{ __('Ohne E-Mail-Adresse können wir dir nicht antworten — deine Nachricht erreicht uns aber trotzdem.') }}
                 @endif
             </p>
             @if ($fehler->has('email'))
@@ -202,7 +198,7 @@
 
         <div>
             <label for="{{ $id('betreff') }}" class="mb-1.5 block font-medium text-ink">
-                Betreff <span class="font-normal text-ink-soft">(muss ausgefüllt werden)</span>
+                {{ __('Betreff') }} <span class="font-normal text-ink-soft">{{ __('(muss ausgefüllt werden)') }}</span>
             </label>
             <input type="text" name="betreff" id="{{ $id('betreff') }}" value="{{ $alt('betreff') }}"
                    required maxlength="200"
@@ -215,7 +211,7 @@
 
         <div>
             <label for="{{ $id('nachricht') }}" class="mb-1.5 block font-medium text-ink">
-                Deine Nachricht <span class="font-normal text-ink-soft">(muss ausgefüllt werden)</span>
+                {{ __('Deine Nachricht') }} <span class="font-normal text-ink-soft">{{ __('(muss ausgefüllt werden)') }}</span>
             </label>
             <textarea name="nachricht" id="{{ $id('nachricht') }}" rows="8" required maxlength="8000"
                       @class($feldKlassen('nachricht'))
@@ -238,18 +234,11 @@
                     @if ($auswahl)
                         {{-- Beide Wege in einem Satz: Ohne JavaScript weiss die
                              Seite nicht, welcher gerade gewählt ist. --}}
-                        Ich bin damit einverstanden, dass meine Angaben an die oben gewählte
-                        Stelle gehen. Kritik wird bei uns verschlüsselt gespeichert und nach
-                        der Bearbeitung gelöscht. Eine Beschwerde über den Verein geht per
-                        E-Mail an die Ombudsstelle und wird auf der Website nicht gespeichert.
-                        Mehr dazu in der
+                        {{ __('Ich bin damit einverstanden, dass meine Angaben an die oben gewählte Stelle gehen. Kritik wird bei uns verschlüsselt gespeichert und nach der Bearbeitung gelöscht. Eine Beschwerde über den Verein geht per E-Mail an die Ombudsstelle und wird auf der Website nicht gespeichert. Mehr dazu in der') }}
                     @else
-                        Ich bin damit einverstanden, dass meine Angaben zur Bearbeitung
-                        meiner Anfrage gespeichert werden. Die Übertragung ist verschlüsselt,
-                        die Nachricht wird verschlüsselt gespeichert und nach der Bearbeitung
-                        gelöscht. Mehr dazu in der
+                        {{ __('Ich bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Die Übertragung ist verschlüsselt, die Nachricht wird verschlüsselt gespeichert und nach der Bearbeitung gelöscht. Mehr dazu in der') }}
                     @endif
-                    <a href="/datenschutz" class="text-green-deep underline">Datenschutzerklärung</a>.
+                    <a href="{{ \App\Models\Language::aktuell()->pfad('/datenschutz') }}" class="text-green-deep underline">{{ __('Datenschutzerklärung') }}</a>.
                 </span>
             </label>
             @if ($fehler->has('einwilligung'))
@@ -261,7 +250,7 @@
             <button type="submit"
                     class="inline-flex items-center justify-center gap-2 rounded-full bg-green
                            px-6 py-3 font-medium text-on-green transition-colors hover:bg-green-deep">
-                Nachricht senden
+                {{ __('Nachricht senden') }}
             </button>
         </div>
 
@@ -279,7 +268,7 @@
                 ] as $trust)
                 <li class="flex items-center gap-1.5">
                     <x-ui.icon :name="$trust['icon']" :size="15" />
-                    {{ $trust['text'] }}
+                    {{ __($trust['text']) }}
                 </li>
             @endforeach
         </ul>

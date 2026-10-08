@@ -1006,6 +1006,23 @@ unübersetzt ist ehrlicher als falsch.
 gelten in Deutschland unabhängig von der Sprache; nur ihre Beschriftungen sind
 übersetzt.
 
+
+**Stand 08.10.2026 (Prüfung der Firma):**
+- Bedientexte in Vorlagen und Meldungen stehen deutsch im Code und sind in
+  `__()` gefasst; die englische Fassung steht in `lang/en.json` (deutscher Satz
+  als Schlüssel). So bleiben die Vorlagen lesbar. Betrifft Formular,
+  Hilfe-Nummern (auch die Angaben aus `config/hilfe.php`), Darstellungs-
+  Einstellungen, Abschlussband, Formularmeldungen und Prüfregeln.
+- Der `UebersetzungenSeeder` legt seine Seiten als `ungeprueft` und `noindex`
+  an. Auf Englisch heisst der Vermerk dann „Machine translation — not yet
+  reviewed“. Die Triggerwarnung gehört jetzt zu den Kernseiten.
+- Korrekturen am Wörterbuch erreichen bestehende Übersetzungen nur über
+  `UEBERSETZUNGEN_AUFFRISCHEN=1 php artisan db:seed --class=UebersetzungenSeeder`.
+  Das baut die englischen Kernseiten neu auf und überschreibt Änderungen aus
+  dem Panel. Bewusst von Hand, nicht per Migration.
+- Der Vereinsname wird nie übersetzt („KE!N EINZELFALL“), wo das Wortspiel
+  gemeint ist, die Bedeutung („not isolated cases“).
+
 ## 15. Sprachumschalter im jw.org-Stil (31.07.2026)
 
 Die alte Linkliste (》DE EN RU《 als Pillen) sah schlicht aus und **skaliert

@@ -33,7 +33,7 @@
                 <a href="tel:{{ $n['tel'] }}"
                    class="text-on-green no-underline hover:underline">
                     <span class="font-display text-lg font-medium">{{ $n['nummer'] }}</span>
-                    <span class="text-on-green-soft">{{ $n['name'] }}</span>
+                    <span class="text-on-green-soft">{{ __($n['name']) }}</span>
                 </a>
             @endforeach
         </section>

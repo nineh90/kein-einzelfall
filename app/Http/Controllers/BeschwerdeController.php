@@ -70,9 +70,8 @@ class BeschwerdeController extends Controller
             ->with(
                 'anfrage_versendet',
                 $request->filled('email')
-                    ? 'Sie ist an die Ombudsstelle gegangen. Die Antwort kommt direkt von dort an deine E-Mail-Adresse.'
-                    : 'Sie ist an die Ombudsstelle gegangen. Da du keine E-Mail-Adresse angegeben '
-                      .'hast, kann sie dir nicht direkt antworten.'
+                    ? __('Sie ist an die Ombudsstelle gegangen. Die Antwort kommt direkt von dort an deine E-Mail-Adresse.')
+                    : __('Sie ist an die Ombudsstelle gegangen. Da du keine E-Mail-Adresse angegeben hast, kann sie dir nicht direkt antworten.')
             );
     }
 

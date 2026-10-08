@@ -44,10 +44,9 @@ class Formularbremse
     {
         $minuten = max(1, (int) ceil(RateLimiter::availableIn(self::schluessel($request, self::art($request))) / 60));
 
-        return self::hinweis($request,
-            'Du hast in kurzer Zeit mehrere Nachrichten geschickt. Bitte warte etwa '
-            .($minuten === 1 ? 'eine Minute' : $minuten.' Minuten')
-            .' und schick deine Nachricht dann noch einmal ab. Dein Text steht noch im Formular.');
+        return self::hinweis($request, __('Du hast in kurzer Zeit mehrere Nachrichten geschickt. Bitte warte etwa :dauer und schick deine Nachricht dann noch einmal ab. Dein Text steht noch im Formular.', [
+            'dauer' => $minuten === 1 ? __('eine Minute') : __(':anzahl Minuten', ['anzahl' => $minuten]),
+        ]));
     }
 
     /** Zurück zum Formular, mit dem Text darin und einem Hinweis darüber. */

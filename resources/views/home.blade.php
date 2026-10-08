@@ -45,6 +45,9 @@
          bevor er anfängt zu lesen. --}}
     <x-layout.fassungswechsel :page="$page" />
 
+    {{-- Maschinell übersetzt? Dann steht das vor dem Aufmacher (08.10.2026). --}}
+    <x-layout.entwurfsvermerk :page="$page" />
+
     {{-- Flächenwechsel von Abschnitt zu Abschnitt, siehe PageBlock::FLAECHEN.
          Über dem ersten Baustein steht nur die helle Kopfzeile. --}}
     {{-- Kurze Textabschnitte hintereinander stehen hier als Spalten

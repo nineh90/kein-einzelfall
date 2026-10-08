@@ -170,11 +170,11 @@
     @unless ($kontext->istRechtstext() || $page->blocks->contains('typ', 'contact_form'))
         <x-blocks.contact-close
             :auf="$kontaktAuf"
-            titel="Du möchtest uns etwas mitteilen?"
-            text="Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?"
+            :titel="__('Du möchtest uns etwas mitteilen?')"
+            :text="__('Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?')"
             :ctas="[
-                ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
-                ['label' => 'Kontakt', 'url' => '/kontakt', 'variant' => 'ghost'],
+                ['label' => __('Anfrage stellen'), 'url' => \App\Models\Language::aktuell()->pfad('/anfragen'), 'variant' => 'primary'],
+                ['label' => __('Kontakt'), 'url' => \App\Models\Language::aktuell()->pfad('/kontakt'), 'variant' => 'ghost'],
             ]" />
     @endunless
 

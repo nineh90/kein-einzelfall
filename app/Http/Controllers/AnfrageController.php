@@ -47,9 +47,8 @@ class AnfrageController extends Controller
     public static function bestaetigung(Inquiry $anfrage): string
     {
         return $anfrage->istAnonym()
-            ? 'Wir haben deine Nachricht erhalten. Da du keine E-Mail-Adresse angegeben '
-              .'hast, können wir dir nicht direkt antworten.'
-            : 'Wir melden uns bei dir. Bitte hab etwas Geduld — wir sind ein kleines Team.';
+            ? __('Wir haben deine Nachricht erhalten. Da du keine E-Mail-Adresse angegeben hast, können wir dir nicht direkt antworten.')
+            : __('Wir melden uns bei dir. Bitte hab etwas Geduld — wir sind ein kleines Team.');
     }
 
     /**
