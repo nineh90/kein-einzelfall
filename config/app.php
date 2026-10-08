@@ -63,9 +63,15 @@ return [
     | will be used by the PHP date and date-time functions. The timezone
     | is set to "UTC" by default as it is suitable for most use cases.
     |
+    | Hier Europe/Berlin: Termine werden im Panel als deutsche Ortszeit
+    | eingetragen. Mit UTC lagen Kalender-Export (.ics), <time datetime> und
+    | die Daten für Suchmaschinen ein bis zwei Stunden daneben (Prüfung der
+    | Firma, 07.10.2026). Bestehende Zeitstempel werden ab jetzt als Berliner
+    | Zeit gelesen; für Termine ist das gerade richtig.
+    |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Berlin',
 
     /*
     |--------------------------------------------------------------------------

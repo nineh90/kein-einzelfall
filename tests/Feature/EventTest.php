@@ -99,6 +99,22 @@ class EventTest extends TestCase
         $this->assertStringContainsString("\r\n", $ics);
     }
 
+    /**
+     * Die Uhrzeit auf der Seite ist deutsche Ortszeit. Im Export muss sie
+     * dieselbe sein, in UTC umgerechnet: 19 Uhr im Oktober ist 17 Uhr UTC,
+     * im November 18 Uhr UTC. Mit der App auf UTC stand dort 19 Uhr UTC.
+     */
+    public function test_ical_rechnet_ortszeit_richtig_nach_utc_um(): void
+    {
+        $sommer = $this->termin(['slug' => 'sommerzeit', 'beginnt_am' => '2026-10-14 19:00:00', 'endet_am' => null]);
+        $winter = $this->termin(['slug' => 'winterzeit', 'beginnt_am' => '2026-11-11 19:00:00', 'endet_am' => null]);
+
+        $this->assertStringContainsString('DTSTART:20261014T170000Z', $this->get('/veranstaltungen/sommerzeit/kalender.ics')->getContent());
+        $this->assertStringContainsString('DTSTART:20261111T180000Z', $this->get('/veranstaltungen/winterzeit/kalender.ics')->getContent());
+
+        $this->get('/veranstaltungen/sommerzeit')->assertSee('datetime="2026-10-14T19:00:00+02:00"', false);
+    }
+
     public function test_ical_maskiert_sonderzeichen(): void
     {
         // Unmaskierte Kommas und Semikola zerlegen die Datei.
