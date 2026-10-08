@@ -82,7 +82,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Satzung | aufgeschlagenes Buch mit Füller auf heller Steinplatte; von Taddi geliefert (KEV-77, statt Platzhalter), unten ausgerichtet wie üblich |
 | Gremium UKFB (Entwurf) | runder Holztisch mit sechs Polsterstühlen; von Taddi geliefert (KEV-81), ausgerichtet auf 70 % |
 | Beschwerdemanagement | Briefschlitz mit Umschlag an heller Putzwand; von Taddi geliefert (KEV-80), ausgerichtet auf 35 % |
-| Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %) |
+| Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %). Steht auch auf jeder AG-Seite, solange die AG im Panel kein eigenes Titelbild hat |
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |

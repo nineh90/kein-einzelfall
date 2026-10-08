@@ -15,6 +15,11 @@
         ->orderBy('position')->orderBy('name')->get()
         ->map(fn ($g) => ['label' => trim($g->kuerzel.': '.$g->name, ': '), 'url' => $g->url()])
         ->all();
+
+    // Titelbild: das eigene der AG, sonst das der Übersicht /arbeitsgruppen.
+    // Aus der Datenbank, damit ein neues Bild im Panel überall ankommt.
+    $bild = $gruppe->titelbild ?: \App\Models\Page::where('slug', 'arbeitsgruppen')
+        ->where('locale', \App\Models\Language::standardCode())->value('titelbild');
 @endphp
 
 @section('content')
@@ -28,7 +33,20 @@
     projektbezogen“, „Ein Einstieg ist jederzeit möglich“, „kostenfrei und
     nicht an eine Vereinsmitgliedschaft gebunden“).
 --}}
-<article class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
+{{--
+    Seitenkopf mit Bild wie bei den Selbsthilfegruppen (KEV-82): Name und
+    Kurzbeschreibung stehen darauf, die Brotkrumen bleiben im Artikel. Ohne
+    Bild stehen Name und Kurzbeschreibung im Artikel.
+--}}
+@if ($bild)
+    <x-layout.seitenkopf
+        :titel="$gruppe->name"
+        :bereich="$gruppe->kuerzel ?: __('Arbeitsgruppe')"
+        :untertitel="$gruppe->teaser"
+        :bild="$bild" />
+@endif
+
+<article @class(['px-4 md:px-8 pb-8 lg:px-10 lg:pb-12', 'pt-8 lg:pt-12' => ! $bild, 'pt-6' => $bild])>
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="[
@@ -38,9 +56,12 @@
         ]" />
 
         <div class="flex flex-wrap items-center gap-2">
-            <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">
-                {{ $gruppe->kuerzel ?: __('Arbeitsgruppe') }}
-            </span>
+            {{-- Mit Titelbild steht das Kürzel schon darauf --}}
+            @unless ($bild)
+                <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">
+                    {{ $gruppe->kuerzel ?: __('Arbeitsgruppe') }}
+                </span>
+            @endunless
             @if ($gruppe->online)
                 <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
             @endif
@@ -51,13 +72,15 @@
             @endunless
         </div>
 
-        <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
-            {{ $gruppe->name }}
-        </h1>
+        @unless ($bild)
+            <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
+                {{ $gruppe->name }}
+            </h1>
 
-        @if ($gruppe->teaser)
-            <p class="mt-2 text-lg leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
-        @endif
+            @if ($gruppe->teaser)
+                <p class="mt-2 text-lg leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
+            @endif
+        @endunless
 
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             <div class="flex flex-wrap gap-x-3">
