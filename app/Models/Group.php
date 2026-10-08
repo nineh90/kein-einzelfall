@@ -168,7 +168,7 @@ class Group extends Model
         return collect([
             $this->rhythmus,
             $this->uhrzeit,
-            $this->online ? ($this->ort ?: 'online') : $this->ort,
+            $this->online ? ($this->ort ?: __('online')) : $this->ort,
         ])->filter()->implode(' · ');
     }
 }

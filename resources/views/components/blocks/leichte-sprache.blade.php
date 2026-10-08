@@ -20,7 +20,7 @@
     <summary class="flex cursor-pointer items-center gap-3 px-5 py-4 marker:content-none
                     [&::-webkit-details-marker]:hidden">
         <span class="flex-1 font-medium text-ink">
-            Diese Seite in Leichter Sprache
+            {{ __('Diese Seite in Leichter Sprache') }}
         </span>
         <span class="shrink-0 text-ink-soft transition-transform group-open:rotate-180">
             <x-ui.icon name="chevron-down" :size="20" />

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $gruppe->name.' – Arbeitsgruppe')
+@section('title', $gruppe->name.' – '.__('Arbeitsgruppe'))
 @section('description', trim($gruppe->name.': '.$gruppe->teaser, ': '))
 
 @php
@@ -32,21 +32,21 @@
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Arbeitsgruppen', 'url' => sprachlink('page', ['slug' => 'arbeitsgruppen'])],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Arbeitsgruppen'), 'url' => sprachlink('page', ['slug' => 'arbeitsgruppen'])],
             ['label' => $gruppe->name, 'url' => null],
         ]" />
 
         <div class="flex flex-wrap items-center gap-2">
             <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">
-                {{ $gruppe->kuerzel ?: 'Arbeitsgruppe' }}
+                {{ $gruppe->kuerzel ?: __('Arbeitsgruppe') }}
             </span>
             @if ($gruppe->online)
-                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">Online</span>
+                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
             @endif
             @unless ($offen)
                 <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">
-                    {{ \App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status }}
+                    {{ __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status) }}
                 </span>
             @endunless
         </div>
@@ -61,24 +61,28 @@
 
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">Wie</dt>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Wie') }}</dt>
                 <dd class="text-ink">
-                    {{ $gruppe->online ? 'Online und projektbezogen' : 'Projektbezogen' }}@if ($offen), Einstieg jederzeit möglich @endif
+                    @if ($offen)
+                        {{ $gruppe->online ? __('Online und projektbezogen, Einstieg jederzeit möglich') : __('Projektbezogen, Einstieg jederzeit möglich') }}
+                    @else
+                        {{ $gruppe->online ? __('Online und projektbezogen') : __('Projektbezogen') }}
+                    @endif
                 </dd>
             </div>
 
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">Für wen</dt>
-                <dd class="text-ink">Betroffene, Angehörige, Interessierte und Fachpersonen</dd>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Für wen') }}</dt>
+                <dd class="text-ink">{{ __('Betroffene, Angehörige, Interessierte und Fachpersonen') }}</dd>
             </div>
 
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">Kosten</dt>
-                <dd class="text-ink">Kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden</dd>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Kosten') }}</dt>
+                <dd class="text-ink">{{ __('Kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden') }}</dd>
             </div>
 
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">Kontakt</dt>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Kontakt') }}</dt>
                 <dd><a href="mailto:{{ $adresse }}" class="text-green-deep underline">{{ $adresse }}</a></dd>
             </div>
         </dl>
@@ -87,7 +91,7 @@
         <div class="mt-4">
             <x-ui.button :href="'mailto:'.$adresse.'?subject='.rawurlencode($betreff)"
                          :variant="$offen ? 'primary' : 'ghost'" size="sm">
-                {{ $offen ? 'Per E-Mail mitmachen' : 'Per E-Mail nachfragen' }}
+                {{ $offen ? __('Per E-Mail mitmachen') : __('Per E-Mail nachfragen') }}
             </x-ui.button>
         </div>
 
@@ -104,5 +108,5 @@
     </div>
 </article>
 
-<x-layout.weiterlesen :seiten="$andere" titel="Weitere Arbeitsgruppen" auf="card" />
+<x-layout.weiterlesen :seiten="$andere" :titel="__('Weitere Arbeitsgruppen')" auf="card" />
 @endsection

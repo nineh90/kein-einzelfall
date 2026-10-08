@@ -30,11 +30,15 @@
         ->values()
         ->all();
 
-    $groesse = function (?int $b): string {
+    // Dezimal- und Tausendertrennzeichen nach Sprache: „1,2 MB“, auf
+    // Englisch „1.2 MB“.
+    $englisch = app()->getLocale() === 'en';
+    $groesse = function (?int $b) use ($englisch): string {
         if (! $b) return '';
+        [$komma, $punkt] = $englisch ? ['.', ','] : [',', '.'];
         return $b >= 1048576
-            ? number_format($b / 1048576, 1, ',', '.').' MB'
-            : number_format($b / 1024, 0, ',', '.').' KB';
+            ? number_format($b / 1048576, 1, $komma, $punkt).' MB'
+            : number_format($b / 1024, 0, $komma, $punkt).' KB';
     };
 
     /*
@@ -105,7 +109,9 @@
                     $gr = $groesse($dok['bytes'] ?? null);
                     // Zusammengesetzt in PHP: eine @if-Direktive direkt an Text geklebt
                     // ("...Datei@if") erkennt Blade nicht als Direktive.
-                    $meta = $gr ? "{$typ}-Datei, {$gr}" : "{$typ}-Datei";
+                    $meta = $gr
+                        ? __(':typ-Datei, :groesse', ['typ' => $typ, 'groesse' => $gr])
+                        : __(':typ-Datei', ['typ' => $typ]);
                 }
             @endphp
             <li>

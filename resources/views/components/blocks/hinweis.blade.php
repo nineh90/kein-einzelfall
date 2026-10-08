@@ -57,7 +57,7 @@
 
                 <div class="flex-1">
                     <p class="font-display text-base font-medium {{ $stil['akzent'] }}">
-                        {{ $titel ?: $stil['standardtitel'] }}
+                        {{ $titel ?: __($stil['standardtitel']) }}
                     </p>
 
                     @if ($text)

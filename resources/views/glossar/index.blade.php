@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Glossar')
-@section('description', 'Abkürzungen und Fachbegriffe aus dem sozialen Entschädigungsrecht — kurz erklärt.')
+@section('title', __('Glossar'))
+@section('description', __('Abkürzungen und Fachbegriffe aus dem sozialen Entschädigungsrecht — kurz erklärt.'))
 
 {{--
     Glossar.
@@ -22,13 +22,13 @@
 @section('content')
 
     <x-layout.seitenkopf
-        titel="Glossar"
-        bereich="Wissen"
+        :titel="__('Glossar')"
+        :bereich="__('Wissen')"
         :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Glossar', 'url' => null],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Glossar'), 'url' => null],
         ]"
-        lead="Abkürzungen und Fachbegriffe, wie sie in Bescheiden und Formularen vorkommen — kurz erklärt." />
+        :lead="__('Abkürzungen und Fachbegriffe, wie sie in Bescheiden und Formularen vorkommen — kurz erklärt.')" />
 
     {{-- Flächenwechsel wie auf den Inhaltsseiten; der Seitenkopf darüber ist
          eine Karte. Das Verzeichnis nimmt die Gegenfläche des letzten
@@ -51,15 +51,14 @@
 
             @if ($gruppen->isEmpty())
                 <p class="max-w-prose leading-relaxed text-ink-soft">
-                    Hier entsteht ein Verzeichnis der Abkürzungen und Fachbegriffe.
-                    Es wird nach und nach ergänzt.
+                    {{ __('Hier entsteht ein Verzeichnis der Abkürzungen und Fachbegriffe. Es wird nach und nach ergänzt.') }}
                 </p>
             @else
 
                 {{-- Buchstabenleiste. Nur die Buchstaben, zu denen es auch
                      etwas gibt: Ein ausgegrautes „Q“ nimmt Platz weg und sagt
                      nichts, was die Liste darunter nicht auch sagt. --}}
-                <nav aria-label="Nach Anfangsbuchstaben springen" class="mb-10">
+                <nav aria-label="{{ __('Nach Anfangsbuchstaben springen') }}" class="mb-10">
                     <ul class="flex flex-wrap gap-1.5">
                         @foreach ($gruppen->keys() as $buchstabe)
                             <li>
@@ -115,8 +114,8 @@
                                         @if ($eintrag->mehr_url)
                                             <a href="{{ $eintrag->mehr_url }}"
                                                class="mt-2 inline-block text-green-deep underline">
-                                                {{ $eintrag->mehr_label ?: 'Mehr dazu' }}
-                                                <span class="sr-only">zu „{{ $eintrag->ueberschrift() }}“</span>
+                                                {{ $eintrag->mehr_label ?: __('Mehr dazu') }}
+                                                <span class="sr-only">{{ __('zu „:begriff“', ['begriff' => $eintrag->ueberschrift()]) }}</span>
                                             </a>
                                         @endif
                                     </dd>

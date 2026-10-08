@@ -20,8 +20,8 @@
     $geteilt = $offene->isNotEmpty() && $spaetere->isNotEmpty();
 
     $spaeterTitel = $spaetere->every(fn ($g) => $g->status === 'geplant')
-        ? \App\Models\Group::STATUS['geplant']
-        : 'Geplant oder zurzeit pausiert';
+        ? __(\App\Models\Group::STATUS['geplant'])
+        : __('Geplant oder zurzeit pausiert');
 @endphp
 
 @if ($gruppen->isNotEmpty())
@@ -50,7 +50,7 @@
                 <p class="mb-8 max-w-prose leading-relaxed text-ink-soft">{{ $einleitung }}</p>
             @endif
 
-            @foreach ([[$offene, \App\Models\Group::STATUS['offen']], [$spaetere, $spaeterTitel]] as [$liste, $zwischentitel])
+            @foreach ([[$offene, __(\App\Models\Group::STATUS['offen'])], [$spaetere, $spaeterTitel]] as [$liste, $zwischentitel])
                 @continue($liste->isEmpty())
 
                 @if ($geteilt)

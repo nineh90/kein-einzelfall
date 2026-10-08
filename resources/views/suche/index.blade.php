@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', $anfrage !== '' ? 'Suche: '.$anfrage : 'Suche')
-@section('description', 'Finde Seiten, Begriffe und Selbsthilfegruppen auf dieser Website.')
+@section('title', $anfrage !== '' ? __('Suche: :anfrage', ['anfrage' => $anfrage]) : __('Suche'))
+@section('description', __('Finde Seiten, Begriffe und Selbsthilfegruppen auf dieser Website.'))
 
 {{-- Suchergebnisse gehören nicht in den Index einer Suchmaschine: Sie sind für
      jede Anfrage anders und tragen keinen eigenen Inhalt. --}}
@@ -38,21 +38,21 @@
 @section('content')
 
     <x-layout.seitenkopf
-        titel="Suche"
+        :titel="__('Suche')"
         :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Suche', 'url' => null],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Suche'), 'url' => null],
         ]"
-        lead="Beschreibe mit eigenen Worten, was du suchst. Du musst die Fachbegriffe nicht kennen." />
+        :lead="__('Beschreibe mit eigenen Worten, was du suchst. Du musst die Fachbegriffe nicht kennen.')" />
 
     <section class="px-4 md:px-8 py-8 lg:px-10 lg:py-10">
         <div class="mx-auto max-w-6xl">
 
             {{-- action ohne Parameter, Methode GET: Der Browser hängt `q` selbst
                  an. Kein JavaScript beteiligt. --}}
-            <form role="search" method="get" action="{{ url('/suche') }}" class="max-w-prose">
+            <form role="search" method="get" action="{{ url(\App\Models\Language::aktuell()->pfad('/suche')) }}" class="max-w-prose">
                 <label for="suchfeld" class="mb-2 block font-display text-lg text-ink">
-                    Wonach suchst du?
+                    {{ __('Wonach suchst du?') }}
                 </label>
 
                 <div class="flex flex-col gap-3 sm:flex-row">
@@ -67,11 +67,11 @@
                            class="w-full rounded-full border border-line bg-card px-5 py-3 text-ink
                                   placeholder:text-ink-soft focus:border-green focus:outline-none">
 
-                    <x-ui.button type="submit" variant="primary">Suchen</x-ui.button>
+                    <x-ui.button type="submit" variant="primary">{{ __('Suchen') }}</x-ui.button>
                 </div>
 
                 <p id="suchhilfe" class="mt-2 text-sm text-ink-soft">
-                    Zum Beispiel: „Brief vom Amt“, „die glauben mir nicht“ oder „Ausweis beantragen“.
+                    {{ __('Zum Beispiel: „Brief vom Amt“, „die glauben mir nicht“ oder „Ausweis beantragen“.') }}
                 </p>
 
                 {{-- Ehrlich statt beruhigend.
@@ -85,8 +85,8 @@
                      gar keins. Steht klein und ruhig da: Es soll niemanden vom
                      Suchen abhalten, nur erreichbar sein. --}}
                 <p class="mt-2 text-sm text-ink-soft">
-                    Deine Suche steht danach in der Adresszeile.
-                    <a href="/barrierefreiheit" class="text-green-deep underline">Wie du keine Spuren hinterlässt</a>
+                    {{ __('Deine Suche steht danach in der Adresszeile.') }}
+                    <a href="{{ \App\Models\Language::aktuell()->pfad('/barrierefreiheit') }}" class="text-green-deep underline">{{ __('Wie du keine Spuren hinterlässt') }}</a>
                 </p>
             </form>
         </div>
@@ -103,14 +103,13 @@
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose rounded-card border-2 border-green bg-green-mist px-5 py-4">
                     <p id="krisenhinweis" class="font-display text-base font-medium text-green-deep">
-                        Wenn es dir gerade sehr schlecht geht
+                        {{ __('Wenn es dir gerade sehr schlecht geht') }}
                     </p>
                     <p class="mt-1.5 leading-relaxed text-ink">
-                        Du musst das nicht allein aushalten. Unter den Nummern unten nimmt
-                        rund um die Uhr jemand ab — kostenlos und auf Wunsch anonym.
+                        {{ __('Du musst das nicht allein aushalten. Unter den Nummern unten nimmt rund um die Uhr jemand ab — kostenlos und auf Wunsch anonym.') }}
                     </p>
                     <p class="mt-3">
-                        <a href="#hilfe-nummern" class="text-green-deep underline">Zu den Hilfe-Nummern</a>
+                        <a href="#hilfe-nummern" class="text-green-deep underline">{{ __('Zu den Hilfe-Nummern') }}</a>
                     </p>
                 </div>
             </div>
@@ -122,7 +121,7 @@
 
             @if ($anfrage === '')
                 <p class="max-w-prose leading-relaxed text-ink-soft">
-                    Gib oben ein, was du suchst. Ganze Sätze sind ausdrücklich erlaubt.
+                    {{ __('Gib oben ein, was du suchst. Ganze Sätze sind ausdrücklich erlaubt.') }}
                 </p>
 
             @elseif ($treffer === [])
@@ -131,29 +130,26 @@
                      „nichts gefunden" stehen zu lassen, wäre das Gegenteil von
                      dem, was diese Seite sein will. --}}
                 <h2 id="trefferzahl" class="mb-3 font-display text-xl text-green">
-                    Dazu haben wir nichts gefunden
+                    {{ __('Dazu haben wir nichts gefunden') }}
                 </h2>
 
                 <div class="max-w-prose leading-relaxed text-ink-soft">
                     <p>
-                        Das liegt nicht an dir. Vielleicht nennen wir die Sache anders, oder
-                        es steht noch nicht auf der Seite.
+                        {{ __('Das liegt nicht an dir. Vielleicht nennen wir die Sache anders, oder es steht noch nicht auf der Seite.') }}
                     </p>
-                    <p class="mt-3">Diese Wege führen weiter:</p>
+                    <p class="mt-3">{{ __('Diese Wege führen weiter:') }}</p>
                 </div>
 
                 <ul class="mt-4 flex flex-col gap-2 max-w-prose">
-                    <li><a href="/anfragen" class="text-green-deep underline">Frag uns direkt — auf Wunsch anonym</a></li>
-                    <li><a href="/glossar" class="text-green-deep underline">Im Glossar nachschlagen</a></li>
-                    <li><a href="/wissen" class="text-green-deep underline">Im Bereich Wissen stöbern</a></li>
-                    <li><a href="/selbsthilfegruppen" class="text-green-deep underline">Zu den Selbsthilfegruppen</a></li>
+                    <li><a href="{{ \App\Models\Language::aktuell()->pfad('/anfragen') }}" class="text-green-deep underline">{{ __('Frag uns direkt — auf Wunsch anonym') }}</a></li>
+                    <li><a href="{{ \App\Models\Language::aktuell()->pfad('/glossar') }}" class="text-green-deep underline">{{ __('Im Glossar nachschlagen') }}</a></li>
+                    <li><a href="{{ \App\Models\Language::aktuell()->pfad('/wissen') }}" class="text-green-deep underline">{{ __('Im Bereich Wissen stöbern') }}</a></li>
+                    <li><a href="{{ \App\Models\Language::aktuell()->pfad('/selbsthilfegruppen') }}" class="text-green-deep underline">{{ __('Zu den Selbsthilfegruppen') }}</a></li>
                 </ul>
 
             @else
                 <h2 id="trefferzahl" aria-live="polite" class="mb-5 font-display text-xl text-green">
-                    {{ count($treffer) }}
-                    {{ count($treffer) === 1 ? 'Treffer' : 'Treffer' }}
-                    für „{{ $anfrage }}"
+                    {{ trans_choice('{1}:count Treffer für „:anfrage"|[2,*]:count Treffer für „:anfrage"', count($treffer), ['count' => count($treffer), 'anfrage' => $anfrage]) }}
                 </h2>
 
                 {{-- <ol> und nicht <ul>: Die Reihenfolge trägt Bedeutung, der
@@ -186,9 +182,9 @@
                 </ol>
 
                 <p class="mt-6 max-w-prose text-sm text-ink-soft">
-                    Nicht dabei, was du gesucht hast?
-                    <a href="/anfragen" class="text-green-deep underline">Frag uns direkt</a> —
-                    auf Wunsch anonym.
+                    {{ __('Nicht dabei, was du gesucht hast?') }}
+                    <a href="{{ \App\Models\Language::aktuell()->pfad('/anfragen') }}" class="text-green-deep underline">{{ __('Frag uns direkt') }}</a> —
+                    {{ __('auf Wunsch anonym.') }}
                 </p>
             @endif
         </div>

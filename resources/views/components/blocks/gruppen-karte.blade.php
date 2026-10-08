@@ -38,7 +38,7 @@
 
             @if ($gruppe->online)
                 <span class="rounded-full border border-line px-2.5 py-0.5
-                             text-[0.6875rem] text-ink-soft">Online</span>
+                             text-[0.6875rem] text-ink-soft">{{ __('Online') }}</span>
             @endif
         </div>
     @endif
@@ -59,14 +59,14 @@
                  „Termin: Jeden 4. Mittwoch …" als Paar. --}}
             <dl class="flex flex-col gap-1.5 border-t border-line pt-3 text-sm">
                 <div class="flex gap-2">
-                    <dt class="shrink-0 text-ink-soft">Termin</dt>
+                    <dt class="shrink-0 text-ink-soft">{{ __('Termin') }}</dt>
                     <dd class="text-ink">{{ $gruppe->wannUndWo() }}</dd>
                 </div>
                 @if ($naechster = $gruppe->naechsterTermin())
                     <div class="flex gap-2">
-                        <dt class="shrink-0 text-ink-soft">Nächster Termin</dt>
+                        <dt class="shrink-0 text-ink-soft">{{ __('Nächster Termin') }}</dt>
                         <dd class="font-semibold text-ink">
-                            <time datetime="{{ $naechster->toIso8601String() }}">{{ $naechster->locale('de')->isoFormat('dd, D.M.YYYY') }}</time>
+                            <time datetime="{{ $naechster->toIso8601String() }}">{{ $naechster->locale(app()->getLocale())->isoFormat(app()->isLocale('en') ? 'ddd, D MMM YYYY' : 'dd, D.M.YYYY') }}</time>
                         </dd>
                     </div>
                 @endif
@@ -85,10 +85,9 @@
                  einheitlicher Satz für alle. --}}
             <p class="border-t border-line pt-3 text-sm text-ink-soft">
                 @unless ($status_sichtbar)
-                    {{ \App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status }} –
-                    noch keine Anmeldung möglich
+                    {{ __(':status – noch keine Anmeldung möglich', ['status' => __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status)]) }}
                 @else
-                    Noch keine Anmeldung möglich
+                    {{ __('Noch keine Anmeldung möglich') }}
                 @endunless
             </p>
         @endunless
@@ -100,7 +99,7 @@
              auf der AG-Seite. --}}
         <div class="mt-4">
             <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
-                {{ $gruppe->typ === 'arbeits' ? 'Mehr zur AG' : 'Mehr zur Gruppe' }}
+                {{ $gruppe->typ === 'arbeits' ? __('Mehr zur AG') : __('Mehr zur Gruppe') }}
                 <span class="sr-only">– {{ $gruppe->name }}</span>
             </x-ui.button>
         </div>

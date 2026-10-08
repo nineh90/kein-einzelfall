@@ -59,7 +59,7 @@
                      class="flex aspect-[4/3] w-full items-end justify-start rounded-card border border-line
                             bg-[linear-gradient(135deg,#EFE4CC_0%,#D9C7A2_60%,#C3AE83_100%)] p-4">
                     <span class="rounded-full bg-cream/90 px-3 py-1 text-xs text-ink-soft">
-                        Platzhalter — Foto folgt
+                        {{ __('Platzhalter — Foto folgt') }}
                     </span>
                 </div>
             @endif

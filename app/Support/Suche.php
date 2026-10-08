@@ -293,8 +293,10 @@ class Suche
                 $treffer[] = [
                     'art' => 'glossar',
                     'titel' => $eintrag->begriff.($eintrag->kuerzel ? ' ('.$eintrag->kuerzel.')' : ''),
-                    'url' => '/glossar#'.$eintrag->slug,
-                    'bereich' => 'Glossar',
+                    // Mit Sprachpräfix: sonst landete die englische Suche im
+                    // deutschen Glossar (08.10.2026).
+                    'url' => (\App\Models\Language::finden($sprache)?->pfad('/glossar') ?? '/glossar').'#'.$eintrag->slug,
+                    'bereich' => __('Glossar'),
                     'ausschnitt' => Str::limit((string) $eintrag->erklaerung, 160),
                     'punkte' => $punkte,
                 ];
@@ -322,7 +324,7 @@ class Suche
                     'titel' => $gruppe->name,
                     // Bis KEV-73 auch für Arbeitsgruppen /selbsthilfegruppen#…
                     'url' => $gruppe->url(),
-                    'bereich' => $gruppe->typ === 'selbsthilfe' ? 'Selbsthilfegruppen' : 'Arbeitsgruppen',
+                    'bereich' => $gruppe->typ === 'selbsthilfe' ? __('Selbsthilfegruppen') : __('Arbeitsgruppen'),
                     'ausschnitt' => Str::limit((string) $gruppe->teaser, 160),
                     'punkte' => $punkte,
                 ];

@@ -113,16 +113,20 @@
                  Beschriftung ab „sm" sichtbar, darunter nur die Lupe mit
                  sr-only-Text — ein Symbol allein sagt niemandem etwas, der es
                  nicht sieht. --}}
-            <a href="{{ url('/suche') }}"
+            @php
+                $suche = \App\Models\Language::aktuell()->pfad('/suche');
+                $aufSuche = request()->is(ltrim($suche, '/'));
+            @endphp
+            <a href="{{ $suche }}"
                @class([
                    'inline-flex items-center gap-2 rounded-full border border-line px-3 py-2',
                    'text-sm text-ink hover:bg-card',
-                   'bg-card' => request()->is('suche'),
+                   'bg-card' => $aufSuche,
                ])
-               @if (request()->is('suche')) aria-current="page" @endif>
+               @if ($aufSuche) aria-current="page" @endif>
                 <x-ui.icon name="search" :size="18" />
-                <span class="hidden sm:inline">Suche</span>
-                <span class="sr-only sm:hidden">Suche</span>
+                <span class="hidden sm:inline">{{ __('Suche') }}</span>
+                <span class="sr-only sm:hidden">{{ __('Suche') }}</span>
             </a>
 
             {{-- Steht vor dem Notausgang: Der Notausgang behält seine Position,

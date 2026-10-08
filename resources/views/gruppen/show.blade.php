@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $gruppe->name.' – Selbsthilfegruppe')
+@section('title', $gruppe->name.' – '.__('Selbsthilfegruppe'))
 @section('description', trim($gruppe->name.': '.$gruppe->teaser, ': '))
 
 @php
@@ -10,12 +10,16 @@
     $uebersicht = sprachlink('page', ['slug' => 'selbsthilfegruppen']);
 
     $krumen = [
-        ['label' => 'Start', 'url' => '/'],
-        ['label' => 'Selbsthilfegruppen', 'url' => $uebersicht],
+        ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+        ['label' => __('Selbsthilfegruppen'), 'url' => $uebersicht],
         ['label' => $gruppe->name, 'url' => null],
     ];
 
     // Die anderen Gruppen als Weiterführung am Seitenende
+    // Datum in der Sprache der Seite: Deutsch „Mittwoch, 14. Oktober 2026,
+    // 19:00 Uhr“, Englisch „Wednesday, 14 October 2026, 7:00 pm“.
+    $langesDatum = app()->isLocale('en') ? 'l, j F Y, g:i a' : 'l, j. F Y, H:i';
+
     $andere = \App\Models\Group::veroeffentlicht()->vomTyp('selbsthilfe')
         ->whereKeyNot($gruppe->getKey())
         ->orderBy('position')->orderBy('name')->get()
@@ -38,7 +42,7 @@
 @if ($gruppe->titelbild)
     <x-layout.seitenkopf
         :titel="$gruppe->name"
-        bereich="Selbsthilfegruppe"
+        :bereich="__('Selbsthilfegruppe')"
         :untertitel="$gruppe->teaser"
         :bild="$gruppe->titelbild" />
 @endif
@@ -51,14 +55,14 @@
         <div class="flex flex-wrap items-center gap-2">
             {{-- Mit Titelbild steht „Selbsthilfegruppe“ schon darauf --}}
             @unless ($gruppe->titelbild)
-                <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">Selbsthilfegruppe</span>
+                <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">{{ __('Selbsthilfegruppe') }}</span>
             @endunless
             @if ($gruppe->online)
-                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">Online</span>
+                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
             @endif
             @unless ($offen)
                 <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">
-                    {{ \App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status }}
+                    {{ __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status) }}
                 </span>
             @endunless
         </div>
@@ -76,9 +80,9 @@
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             @if ($gruppe->rhythmus)
                 <div class="flex flex-wrap gap-x-3">
-                    <dt class="w-36 shrink-0 text-sm text-ink-soft">Wann</dt>
+                    <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Wann') }}</dt>
                     <dd class="text-ink">
-                        {{ $gruppe->rhythmus }}@if ($gruppe->uhrzeit) um {{ $gruppe->uhrzeit }}@endif
+                        {{ $gruppe->rhythmus }}@if ($gruppe->uhrzeit) {{ __('um :uhrzeit', ['uhrzeit' => $gruppe->uhrzeit]) }}@endif
                     </dd>
                 </div>
             @endif
@@ -88,35 +92,35 @@
                      (Taddis Wunsch: „und sich dieser natürlich immer aktualisiert“). --}}
                 @if ($naechster)
                     <div class="flex flex-wrap gap-x-3">
-                        <dt class="w-36 shrink-0 text-sm text-ink-soft">Nächster Termin</dt>
+                        <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Nächster Termin') }}</dt>
                         <dd class="font-semibold text-ink">
                             <time datetime="{{ $naechster->toIso8601String() }}">
-                                {{ $naechster->locale('de')->isoFormat('dddd, D. MMMM YYYY') }}, {{ $naechster->format('H:i') }} Uhr
+                                {{ __(':zeit Uhr', ['zeit' => $naechster->locale(app()->getLocale())->translatedFormat($langesDatum)]) }}
                             </time>
                         </dd>
                     </div>
                 @endif
             @else
                 <div class="flex flex-wrap gap-x-3">
-                    <dt class="w-36 shrink-0 text-sm text-ink-soft">Stand</dt>
-                    <dd class="text-ink">Startet später, noch keine Anmeldung möglich</dd>
+                    <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Stand') }}</dt>
+                    <dd class="text-ink">{{ __('Startet später, noch keine Anmeldung möglich') }}</dd>
                 </div>
             @endif
 
             @if ($gruppe->ort || $gruppe->online)
                 <div class="flex flex-wrap gap-x-3">
-                    <dt class="w-36 shrink-0 text-sm text-ink-soft">Wo</dt>
-                    <dd class="text-ink">{{ \Illuminate\Support\Str::ucfirst($gruppe->ort ?: 'online') }}</dd>
+                    <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Wo') }}</dt>
+                    <dd class="text-ink">{{ \Illuminate\Support\Str::ucfirst($gruppe->ort ?: __('online')) }}</dd>
                 </div>
             @endif
 
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">Kosten</dt>
-                <dd class="text-ink">Kostenfrei und unabhängig von einer Vereinsmitgliedschaft</dd>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Kosten') }}</dt>
+                <dd class="text-ink">{{ __('Kostenfrei und unabhängig von einer Vereinsmitgliedschaft') }}</dd>
             </div>
 
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ $offen ? 'Kontakt und Anmeldung' : 'Kontakt' }}</dt>
+                <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ $offen ? __('Kontakt und Anmeldung') : __('Kontakt') }}</dt>
                 <dd><a href="mailto:{{ $adresse }}" class="text-green-deep underline">{{ $adresse }}</a></dd>
             </div>
         </dl>
@@ -124,12 +128,12 @@
         <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
             <x-ui.button :href="'mailto:'.$adresse.'?subject='.rawurlencode('Selbsthilfegruppe: '.$gruppe->name)"
                          :variant="$offen ? 'primary' : 'ghost'" size="sm">
-                {{ $offen ? 'Per E-Mail anmelden' : 'Per E-Mail nachfragen' }}
+                {{ $offen ? __('Per E-Mail anmelden') : __('Per E-Mail nachfragen') }}
             </x-ui.button>
 
             {{-- Mit dem Beitritt gelten sie, so steht es auf der Übersicht --}}
             <a href="{{ $uebersicht }}#dl-dokumente-zum-herunterladen" class="text-sm text-green-deep underline">
-                Teilnahmebedingungen und Gruppenregeln
+                {{ __('Teilnahmebedingungen und Gruppenregeln') }}
             </a>
         </div>
 
@@ -146,5 +150,5 @@
     </div>
 </article>
 
-<x-layout.weiterlesen :seiten="$andere" titel="Weitere Selbsthilfegruppen" auf="card" />
+<x-layout.weiterlesen :seiten="$andere" :titel="__('Weitere Selbsthilfegruppen')" auf="card" />
 @endsection

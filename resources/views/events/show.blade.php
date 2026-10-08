@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $termin->titel)
-@section('description', $termin->teaser ?: 'Termin des KE!N EINZELFALL e.V.')
+@section('description', $termin->teaser ?: __('Termin des KE!N EINZELFALL e.V.'))
 
 @php
     // Event-Auszeichnung: fehlt auf der Altseite komplett. Damit können
@@ -43,8 +43,8 @@
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Veranstaltungen', 'url' => sprachlink('events.index')],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Veranstaltungen'), 'url' => sprachlink('events.index')],
             ['label' => $termin->titel, 'url' => null],
         ]" />
 
@@ -55,7 +55,7 @@
                 </span>
             @endif
             @if ($termin->online)
-                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">Online</span>
+                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
             @endif
         </div>
 
@@ -65,7 +65,7 @@
 
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             <div class="flex flex-wrap gap-x-3">
-                <dt class="w-24 shrink-0 text-sm text-ink-soft">Wann</dt>
+                <dt class="w-24 shrink-0 text-sm text-ink-soft">{{ __('Wann') }}</dt>
                 <dd class="text-ink">
                     <time datetime="{{ $termin->zeitMaschinenlesbar() }}">{{ $termin->zeitraum() }}</time>
                 </dd>
@@ -73,9 +73,9 @@
 
             @if ($termin->ort || $termin->online)
                 <div class="flex flex-wrap gap-x-3">
-                    <dt class="w-24 shrink-0 text-sm text-ink-soft">Wo</dt>
+                    <dt class="w-24 shrink-0 text-sm text-ink-soft">{{ __('Wo') }}</dt>
                     <dd class="text-ink">
-                        {{ $termin->online ? 'Online' : $termin->ort }}
+                        {{ $termin->online ? __('Online') : $termin->ort }}
                         @if ($termin->adresse && ! $termin->online)
                             <span class="block text-sm text-ink-soft">{{ $termin->adresse }}</span>
                         @endif
@@ -86,12 +86,12 @@
 
         <div class="mt-4 flex flex-wrap gap-3">
             <x-ui.button :href="sprachlink('events.ical.einzeln', $termin->slug)" variant="ghost" size="sm">
-                In meinen Kalender eintragen
+                {{ __('In meinen Kalender eintragen') }}
             </x-ui.button>
 
             @if ($termin->anmeldung_url)
                 <x-ui.button :href="$termin->anmeldung_url" variant="primary" size="sm">
-                    Zur Anmeldung
+                    {{ __('Zur Anmeldung') }}
                 </x-ui.button>
             @endif
         </div>

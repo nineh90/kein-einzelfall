@@ -32,7 +32,7 @@
          verschiedene Kennungen; ohne Überschrift benennt der Bereich den
          Abschnitt. --}}
     @php $kennung = 'team-'.\Illuminate\Support\Str::slug($bereich ?: 'alle').'-titel'; @endphp
-    @if ($titel) aria-labelledby="{{ $kennung }}" @else aria-label="{{ $bereich ?: 'Vorstand und Team' }}" @endif>
+    @if ($titel) aria-labelledby="{{ $kennung }}" @else aria-label="{{ $bereich ?: __('Vorstand und Team') }}" @endif>
         <div class="mx-auto max-w-6xl">
             @if ($titel)
                 <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
@@ -119,7 +119,7 @@
                                                     text-sm text-green-deep marker:content-none
                                                     [&::-webkit-details-marker]:hidden">
                                         <span class="flex-1">
-                                            <span class="group-open:hidden">Mehr über {{ $person->rufname() }} lesen</span>
+                                            <span class="group-open:hidden">{{ __('Mehr über :name lesen', ['name' => $person->rufname()]) }}</span>
                                             <span class="hidden group-open:inline">{{ __('Weniger anzeigen') }}</span>
                                         </span>
                                         <span class="transition-transform group-open:rotate-180">

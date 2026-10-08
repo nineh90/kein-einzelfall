@@ -59,25 +59,37 @@ class Event extends Model
             && $this->endet_am?->isFuture() === true;
     }
 
-    /** Zeitangabe in einem Stück, wie sie auf der Seite erscheint. */
+    /**
+     * Zeitangabe in einem Stück, wie sie auf der Seite erscheint.
+     *
+     * Deutsch: „14.10.2026, 18:00 bis 20:00 Uhr“. Englisch mit ausgeschriebenem
+     * Monat und 12-Stunden-Uhr: „14 October 2026, 6:00 pm to 8:00 pm“ — die
+     * Zahlenschreibweise 14.10. läse man dort leicht falsch herum.
+     */
     public function zeitraum(): string
     {
         $beginn = $this->beginnt_am;
         $ende = $this->endet_am;
 
+        [$tagFormat, $uhrFormat] = app()->isLocale('en') ? ['j F Y', 'g:i a'] : ['d.m.Y', 'H:i'];
+        $datum = fn ($t) => $t->locale(app()->getLocale())->translatedFormat($tagFormat);
+        $uhr = fn ($t) => $t->locale(app()->getLocale())->translatedFormat($uhrFormat);
+        $datumUhr = fn ($t) => $datum($t).', '.$uhr($t);
+
         if ($this->ganztaegig) {
             return $ende && ! $ende->isSameDay($beginn)
-                ? $beginn->format('d.m.Y').' bis '.$ende->format('d.m.Y')
-                : $beginn->format('d.m.Y');
+                ? __(':beginn bis :ende', ['beginn' => $datum($beginn), 'ende' => $datum($ende)])
+                : $datum($beginn);
         }
 
         if (! $ende) {
-            return $beginn->format('d.m.Y, H:i').' Uhr';
+            return __(':zeit Uhr', ['zeit' => $datumUhr($beginn)]);
         }
 
-        return $ende->isSameDay($beginn)
-            ? $beginn->format('d.m.Y, H:i').' bis '.$ende->format('H:i').' Uhr'
-            : $beginn->format('d.m.Y, H:i').' bis '.$ende->format('d.m.Y, H:i').' Uhr';
+        return __(':beginn bis :ende Uhr', [
+            'beginn' => $datumUhr($beginn),
+            'ende' => $ende->isSameDay($beginn) ? $uhr($ende) : $datumUhr($ende),
+        ]);
     }
 
     /** Für Screenreader und <time datetime="…"> */

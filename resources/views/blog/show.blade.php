@@ -34,8 +34,8 @@
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="array_filter([
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Aktuelles', 'url' => sprachlink('blog.index')],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Aktuelles'), 'url' => sprachlink('blog.index')],
             $beitrag->category
                 ? ['label' => $beitrag->category->name,
                    'url' => sprachlink('blog.index', ['kategorie' => $beitrag->category->slug])]
@@ -45,7 +45,7 @@
 
         <p class="text-xs uppercase tracking-[0.04em] text-ink-soft">
             <time datetime="{{ $beitrag->published_at->toDateString() }}">
-                {{ $beitrag->published_at->translatedFormat('j. F Y') }}
+                {{ $beitrag->published_at->translatedFormat(app()->getLocale() === 'de' ? 'j. F Y' : 'j F Y') }}
             </time>
         </p>
 
@@ -77,7 +77,7 @@
 
         @if ($weitere->isNotEmpty())
             <aside class="mt-12 border-t border-line pt-8" aria-labelledby="weitere-titel">
-                <h2 id="weitere-titel" class="mb-4 font-display text-xl text-green">Weitere Beiträge</h2>
+                <h2 id="weitere-titel" class="mb-4 font-display text-xl text-green">{{ __('Weitere Beiträge') }}</h2>
                 <ul class="flex flex-col gap-3">
                     @foreach ($weitere as $andere)
                         <li>
@@ -85,7 +85,7 @@
                                class="flex items-baseline gap-3 no-underline">
                                 <time datetime="{{ $andere->published_at->toDateString() }}"
                                       class="shrink-0 text-xs text-ink-soft">
-                                    {{ $andere->published_at->format('d.m.Y') }}
+                                    {{ $andere->published_at->format(app()->getLocale() === 'de' ? 'd.m.Y' : 'j M Y') }}
                                 </time>
                                 <span class="text-ink hover:underline">{{ $andere->titel }}</span>
                             </a>

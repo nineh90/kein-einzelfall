@@ -26,15 +26,14 @@
 
         <span class="flex-1">
             <span class="block font-medium text-ink">
-                Hinweis zum Inhalt: {{ $thema }}
+                {{ __('Hinweis zum Inhalt: :thema', ['thema' => __($thema)]) }}
             </span>
             <span class="mt-0.5 block text-sm text-ink-soft">
                 <span class="group-open:hidden">
-                    Der folgende Abschnitt kann belastend sein. Zum Lesen aufklappen —
-                    du entscheidest, ob und wann.
+                    {{ __('Der folgende Abschnitt kann belastend sein. Zum Lesen aufklappen — du entscheidest, ob und wann.') }}
                 </span>
                 <span class="hidden group-open:inline">
-                    Zum Zuklappen erneut auswählen.
+                    {{ __('Zum Zuklappen erneut auswählen.') }}
                 </span>
             </span>
         </span>

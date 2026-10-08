@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Veranstaltungen')
-@section('description', 'Termine, Selbsthilfegruppen und Veranstaltungen des KE!N EINZELFALL e.V.')
+@section('title', __('Veranstaltungen'))
+@section('description', __('Termine, Selbsthilfegruppen und Veranstaltungen des KE!N EINZELFALL e.V.'))
 
 {{--
     Aufbau wie bei den Inhaltsseiten: Seitenkopf, dann Abschnitte, die ihren
@@ -19,14 +19,14 @@
 @section('content')
 
     <x-layout.seitenkopf
-        titel="Veranstaltungen"
-        bereich="Gruppen & Veranstaltungen"
+        :titel="__('Veranstaltungen')"
+        :bereich="__('Gruppen & Veranstaltungen')"
         :krumen="[
-            ['label' => 'Start', 'url' => '/'],
-            ['label' => 'Veranstaltungen', 'url' => null],
+            ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
+            ['label' => __('Veranstaltungen'), 'url' => null],
         ]"
-        lead="Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen."
-        untertitel="Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen."
+        :lead="__('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
+        :untertitel="__('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
         :bild="\App\Support\Titelbilder::fuer('veranstaltungen')" />
 
     {{-- Bestandstext der Altseite. Die Bausteine bringen ihren eigenen Rand
@@ -40,6 +40,11 @@
             : [];
         $listeAuf = \App\Models\PageBlock::gegenflaeche($abschnitte ? end($abschnitte)['flaeche'] : 'card');
         $karte = $listeAuf === 'card' ? 'bg-cream' : 'bg-card';
+
+        // Datum in der Sprache der Seite: Deutsch „Mittwoch, 14. Oktober 2026,
+        // 19:00 Uhr“, Englisch „Wednesday, 14 October 2026, 7:00 pm“.
+        $sprache = app()->getLocale();
+        $langesDatum = app()->isLocale('en') ? 'l, j F Y, g:i a' : 'l, j. F Y, H:i';
     @endphp
 
     @if ($einleitung)
@@ -51,7 +56,7 @@
 
             <div class="flex flex-wrap items-center justify-between gap-4">
                 @if ($anzahlVergangen > 0)
-                    <nav aria-label="Zeitraum">
+                    <nav aria-label="{{ __('Zeitraum') }}">
                         <ul class="flex gap-2">
                             <li>
                                 <a href="{{ sprachlink('events.index') }}"
@@ -60,7 +65,7 @@
                                           text-ink-soft {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}
                                           aria-[current=page]:border-green aria-[current=page]:bg-green
                                           aria-[current=page]:text-on-green">
-                                    Kommende ({{ $anzahlKommend }})
+                                    {{ __('Kommende (:anzahl)', ['anzahl' => $anzahlKommend]) }}
                                 </a>
                             </li>
                             <li>
@@ -70,7 +75,7 @@
                                           text-ink-soft {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}
                                           aria-[current=page]:border-green aria-[current=page]:bg-green
                                           aria-[current=page]:text-on-green">
-                                    Vergangene ({{ $anzahlVergangen }})
+                                    {{ __('Vergangene (:anzahl)', ['anzahl' => $anzahlVergangen]) }}
                                 </a>
                             </li>
                         </ul>
@@ -86,7 +91,7 @@
                        class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2
                               text-sm text-ink-soft no-underline {{ $listeAuf === 'card' ? 'hover:bg-cream' : 'hover:bg-card' }}">
                         <x-ui.icon name="arrow-right" :size="16" />
-                        Alle Termine in den eigenen Kalender
+                        {{ __('Alle Termine in den eigenen Kalender') }}
                     </a>
                 @endif
             </div>
@@ -96,10 +101,10 @@
             @if ($gruppentermine->isNotEmpty())
                 <section class="mt-8" aria-labelledby="gruppentermine-titel">
                     <h2 id="gruppentermine-titel" class="mb-1 font-display text-xl font-medium text-green">
-                        Regelmäßige Gruppentreffen
+                        {{ __('Regelmäßige Gruppentreffen') }}
                     </h2>
                     <p class="mb-4 text-sm text-ink-soft">
-                        Die nächsten Termine unserer Selbsthilfe- und Arbeitsgruppen.
+                        {{ __('Die nächsten Termine unserer Selbsthilfe- und Arbeitsgruppen.') }}
                     </p>
 
                     <ul class="flex flex-col gap-2">
@@ -114,18 +119,18 @@
                                             {{ $zeit->format('d') }}
                                         </div>
                                         <div class="px-3 py-0.5 text-[0.625rem] uppercase tracking-[0.1em] text-ink-soft">
-                                            {{ $zeit->locale('de')->isoFormat('MMM') }}
+                                            {{ $zeit->locale($sprache)->isoFormat('MMM') }}
                                         </div>
                                     </div>
 
                                     <div class="flex-1">
                                         <div class="flex flex-wrap items-center gap-2">
                                             <span class="rounded-full bg-green-mist px-2.5 py-0.5 text-[0.6875rem] text-green-deep">
-                                                {{ \App\Models\Group::TYPEN[$gruppe->typ] ?? $gruppe->typ }}
+                                                {{ __(\App\Models\Group::TYPEN[$gruppe->typ] ?? $gruppe->typ) }}
                                             </span>
                                             @if ($gruppe->online)
                                                 <span class="rounded-full border border-line px-2.5 py-0.5 text-[0.6875rem] text-ink-soft">
-                                                    Online
+                                                    {{ __('Online') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -136,7 +141,7 @@
 
                                         <p class="mt-0.5 text-sm text-ink-soft">
                                             <time datetime="{{ $zeit->toIso8601String() }}">
-                                                {{ $zeit->locale('de')->isoFormat('dddd, D. MMMM YYYY, HH:mm') }} Uhr
+                                                {{ __(':zeit Uhr', ['zeit' => $zeit->locale($sprache)->translatedFormat($langesDatum)]) }}
                                             </time>
                                             @if ($gruppe->ort)
                                                 · {{ $gruppe->ort }}
@@ -146,7 +151,7 @@
 
                                     <div class="hidden shrink-0 sm:block">
                                         <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
-                                            Zur Gruppe
+                                            {{ __('Zur Gruppe') }}
                                             <span class="sr-only">– {{ $gruppe->name }}</span>
                                         </x-ui.button>
                                     </div>
@@ -159,21 +164,23 @@
 
             <section class="mt-10" aria-labelledby="einzeltermine-titel">
                 <h2 id="einzeltermine-titel" class="mb-4 font-display text-xl font-medium text-green">
-                    {{ $zeigeVergangene ? 'Vergangene Veranstaltungen' : 'Einzelne Veranstaltungen' }}
+                    {{ $zeigeVergangene ? __('Vergangene Veranstaltungen') : __('Einzelne Veranstaltungen') }}
                 </h2>
 
                 @if ($termine->isEmpty())
                     <div class="rounded-card border border-line {{ $karte }} px-6 py-10 text-center">
                         <p class="text-ink">
                             {{ $zeigeVergangene
-                                ? 'Es sind keine vergangenen Termine hinterlegt.'
-                                : 'Zurzeit sind keine einzelnen Termine geplant.' }}
+                                ? __('Es sind keine vergangenen Termine hinterlegt.')
+                                : __('Zurzeit sind keine einzelnen Termine geplant.') }}
                         </p>
                         @unless ($zeigeVergangene)
                             <p class="mt-2 text-sm text-ink-soft">
-                                Schau gern später wieder vorbei — oder
-                                <a href="/anfragen" class="text-green-deep underline">schreib uns</a>,
-                                wenn du Interesse an einer Gruppe hast.
+                                {{-- Der Link steht als Platzhalter im Satz, damit die
+                                     Übersetzung ihn an die passende Stelle setzen kann. --}}
+                                {!! __('Schau gern später wieder vorbei — oder :link, wenn du Interesse an einer Gruppe hast.', [
+                                    'link' => '<a href="'.e(\App\Models\Language::aktuell()->pfad('/anfragen')).'" class="text-green-deep underline">'.e(__('schreib uns')).'</a>',
+                                ]) !!}
                             </p>
                         @endunless
                     </div>
@@ -195,7 +202,7 @@
                                             {{ $termin->beginnt_am->format('d') }}
                                         </div>
                                         <div class="px-3 py-1 text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
-                                            {{ $termin->beginnt_am->locale('de')->isoFormat('MMM') }}
+                                            {{ $termin->beginnt_am->locale($sprache)->isoFormat('MMM') }}
                                         </div>
                                     </div>
 
@@ -208,12 +215,12 @@
                                             @endif
                                             @if ($termin->laeuftGerade())
                                                 <span class="rounded-full bg-green px-2.5 py-0.5 text-[0.6875rem] text-on-green">
-                                                    läuft gerade
+                                                    {{ __('läuft gerade') }}
                                                 </span>
                                             @endif
                                             @if ($termin->online)
                                                 <span class="rounded-full border border-line px-2.5 py-0.5 text-[0.6875rem] text-ink-soft">
-                                                    Online
+                                                    {{ __('Online') }}
                                                 </span>
                                             @endif
                                         </div>

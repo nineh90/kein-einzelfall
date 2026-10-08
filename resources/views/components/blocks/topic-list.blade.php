@@ -20,8 +20,8 @@
 <section class="border-y border-line bg-card px-4 md:px-8 py-8 lg:px-10 lg:py-12"
          aria-labelledby="themen-titel">
     <div class="mx-auto max-w-6xl">
-        <x-ui.section-head :titel="$titel" :sub="$sub"
-                           :alleUrl="$alleUrl" :alleLabel="$alleLabel" />
+        <x-ui.section-head :titel="__($titel)" :sub="$sub"
+                           :alleUrl="$alleUrl" :alleLabel="__($alleLabel)" />
 
         <ul class="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($themen as $thema)

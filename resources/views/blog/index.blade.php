@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', $aktiveKategorie?->name ?? 'Aktuelles')
-@section('description', 'Neuigkeiten und Beiträge des KE!N EINZELFALL e.V.')
+@section('title', $aktiveKategorie?->name ?? __('Aktuelles'))
+@section('description', __('Neuigkeiten und Beiträge des KE!N EINZELFALL e.V.'))
 
 @section('content')
 <div class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-6xl">
 
         <h1 class="font-display text-[1.75rem] font-medium text-green lg:text-4xl">
-            {{ $aktiveKategorie?->name ?? 'Aktuelles' }}
+            {{ $aktiveKategorie?->name ?? __('Aktuelles') }}
         </h1>
         @if ($aktiveKategorie?->beschreibung)
             <p class="mt-2 max-w-prose text-ink-soft">{{ $aktiveKategorie->beschreibung }}</p>
@@ -21,10 +21,10 @@
               class="mt-6 flex flex-wrap items-end gap-3">
             <div class="min-w-56 flex-1">
                 <label for="suche" class="mb-1.5 block text-sm font-medium text-ink">
-                    Beiträge durchsuchen
+                    {{ __('Beiträge durchsuchen') }}
                 </label>
                 <input type="search" name="suche" id="suche" value="{{ $suchbegriff }}"
-                       placeholder="Stichwort eingeben"
+                       placeholder="{{ __('Stichwort eingeben') }}"
                        class="w-full rounded-lg border border-line bg-card px-4 py-2.5 text-ink">
             </div>
 
@@ -34,19 +34,19 @@
 
             <button type="submit"
                     class="rounded-full bg-green px-5 py-2.5 font-medium text-on-green hover:bg-green-deep">
-                Suchen
+                {{ __('Suchen') }}
             </button>
 
             @if ($suchbegriff || $aktiveKategorie)
                 <a href="{{ sprachlink('blog.index') }}"
                    class="rounded-full border border-line px-5 py-2.5 text-ink-soft no-underline hover:bg-card">
-                    Zurücksetzen
+                    {{ __('Zurücksetzen') }}
                 </a>
             @endif
         </form>
 
         @if ($kategorien->isNotEmpty())
-            <nav aria-label="Kategorien" class="mt-4">
+            <nav aria-label="{{ __('Kategorien') }}" class="mt-4">
                 <ul class="flex flex-wrap gap-2">
                     <li>
                         <a href="{{ sprachlink('blog.index', $suchbegriff ? ['suche' => $suchbegriff] : []) }}"
@@ -55,7 +55,7 @@
                                   text-ink-soft hover:bg-card
                                   aria-[current=page]:border-green aria-[current=page]:bg-green
                                   aria-[current=page]:text-on-green">
-                            Alle
+                            {{ __('Alle') }}
                         </a>
                     </li>
                     @foreach ($kategorien as $kategorie)
@@ -82,9 +82,8 @@
              was die Suche ergeben hat, ohne dass man erst weitertabbt. --}}
         <p role="status" class="mt-6 text-sm text-ink-soft">
             @if ($suchbegriff)
-                {{ trans_choice('{0}Keine Beiträge|{1}Ein Beitrag|[2,*]:count Beiträge',
-                   $beitraege->total(), ['count' => $beitraege->total()]) }}
-                für „{{ $suchbegriff }}“
+                {{ trans_choice('{0}Keine Beiträge für „:suche“|{1}Ein Beitrag für „:suche“|[2,*]:count Beiträge für „:suche“',
+                   $beitraege->total(), ['count' => $beitraege->total(), 'suche' => $suchbegriff]) }}
             @else
                 {{ trans_choice('{0}Noch keine Beiträge|{1}Ein Beitrag|[2,*]:count Beiträge',
                    $beitraege->total(), ['count' => $beitraege->total()]) }}
@@ -93,11 +92,11 @@
 
         @if ($beitraege->isEmpty())
             <div class="mt-6 rounded-card border border-line bg-card px-6 py-10 text-center">
-                <p class="text-ink">Hier ist noch nichts zu finden.</p>
+                <p class="text-ink">{{ __('Hier ist noch nichts zu finden.') }}</p>
                 @if ($suchbegriff || $aktiveKategorie)
                     <p class="mt-2 text-sm text-ink-soft">
-                        Versuch es mit einem anderen Stichwort oder
-                        <a href="{{ sprachlink('blog.index') }}" class="text-green-deep underline">zeig alle Beiträge</a>.
+                        {{ __('Versuch es mit einem anderen Stichwort oder') }}
+                        <a href="{{ sprachlink('blog.index') }}" class="text-green-deep underline">{{ __('zeig alle Beiträge') }}</a>.
                     </p>
                 @endif
             </div>
@@ -114,7 +113,7 @@
                             <div class="flex flex-1 flex-col p-5">
                                 <p class="text-xs uppercase tracking-[0.04em] text-ink-soft">
                                     <time datetime="{{ $beitrag->published_at->toDateString() }}">
-                                        {{ $beitrag->published_at->format('d.m.Y') }}
+                                        {{ $beitrag->published_at->format(app()->getLocale() === 'de' ? 'd.m.Y' : 'j M Y') }}
                                     </time>
                                     @if ($beitrag->category)
                                         · {{ $beitrag->category->name }}

@@ -65,7 +65,7 @@
                     'font-display text-2xl font-medium text-green lg:text-3xl',
                     'mb-4' => ! $hand,
                 ])>
-                    {{ $titel }}
+                    {{ __($titel) }}
                 </h2>
 
                 {{-- Leitsatz in Handschrift wie „Opferhilfe für soziale

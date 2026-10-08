@@ -27,7 +27,7 @@
     'bg-card border-y border-line' => $auf === 'card',
 ]) aria-labelledby="qa-titel">
     <div class="mx-auto max-w-6xl">
-        <x-ui.section-head :titel="$titel" :sub="$sub" />
+        <x-ui.section-head :titel="__($titel)" :sub="$sub" />
 
         {{-- Auf dem Handy einspaltig, ab „sm“ zwei, ab „lg“ vier Spalten.
 
@@ -66,7 +66,7 @@
                             </span>
                         @endif
                         <span class="mt-3 text-[0.8125rem] text-green-deep">
-                            {{ $karte['link'] ?? 'Mehr erfahren' }} <span aria-hidden="true">→</span>
+                            {{ $karte['link'] ?? __('Mehr erfahren') }} <span aria-hidden="true">→</span>
                         </span>
                     </a>
                 </li>
