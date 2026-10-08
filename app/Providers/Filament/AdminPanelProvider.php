@@ -47,6 +47,8 @@ class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->middleware([
+                // Header fürs Panel (Prüfung der Firma, 08.10.2026)
+                \App\Http\Middleware\PanelSicherheitsHeader::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,

@@ -33,10 +33,15 @@ class InquiryForm
                         ))
                         ->live(),
 
+                    // Nur Anzeige (08.10.2026): Von Hand geleert oder in die
+                    // Zukunft gesetzt, hielt es die Löschfrist an. Gesetzt wird
+                    // es über den Stand oben, gespeichert trotzdem.
                     DateTimePicker::make('erledigt_at')
                         ->label('Erledigt am')
                         ->seconds(false)
-                        ->helperText('Ab hier läuft die Aufbewahrungsfrist.'),
+                        ->disabled()
+                        ->dehydrated()
+                        ->helperText('Ab hier läuft die Aufbewahrungsfrist. Setzt sich von selbst, wenn der Stand auf „Erledigt“ wechselt.'),
                 ]),
 
             Section::make('Die Anfrage')

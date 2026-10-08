@@ -41,6 +41,24 @@ class Inquiry extends Model
         ];
     }
 
+    /**
+     * Abschlussdatum und Stand passen immer zusammen (08.10.2026).
+     *
+     * Ab „erledigt_at“ läuft die Löschfrist. Stand „erledigt“ ohne Datum
+     * wurde nie gelöscht, ein Datum in der Zukunft verschob die Löschung
+     * beliebig. Gilt für jeden Weg: Formular, Tabellenaktion, Sammelaktion.
+     */
+    protected static function booted(): void
+    {
+        static::saving(function (self $anfrage) {
+            if ($anfrage->status !== 'erledigt') {
+                $anfrage->erledigt_at = null;
+            } elseif (! $anfrage->erledigt_at || $anfrage->erledigt_at->isFuture()) {
+                $anfrage->erledigt_at = now();
+            }
+        });
+    }
+
     /** Anfragen ohne Absenderangabe — wir können hier nicht antworten. */
     public function istAnonym(): bool
     {

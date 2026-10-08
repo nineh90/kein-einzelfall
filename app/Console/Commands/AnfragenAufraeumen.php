@@ -30,10 +30,13 @@ class AnfragenAufraeumen extends Command
         $tageErledigt = config('anfragen.aufbewahrung_tage_erledigt');
         $tageOffen = config('anfragen.aufbewahrung_tage_offen');
 
-        // Erledigte Anfragen: Frist läuft ab dem Abschluss.
+        // Erledigte Anfragen: Frist läuft ab dem Abschluss. Altfälle ohne
+        // Abschlussdatum (vor dem 08.10.2026 möglich) ab der letzten Änderung,
+        // sonst blieben sie für immer liegen.
+        $grenze = now()->subDays($tageErledigt);
         $erledigt = Inquiry::where('status', 'erledigt')
-            ->whereNotNull('erledigt_at')
-            ->where('erledigt_at', '<=', now()->subDays($tageErledigt));
+            ->where(fn ($q) => $q->where('erledigt_at', '<=', $grenze)
+                ->orWhere(fn ($q) => $q->whereNull('erledigt_at')->where('updated_at', '<=', $grenze)));
 
         // Unbearbeitete Anfragen bekommen eine längere Frist ab Eingang —
         // sonst löschen wir jemandem die Nachricht weg, bevor sie gelesen wurde.

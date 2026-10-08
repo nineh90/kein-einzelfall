@@ -64,7 +64,7 @@ class Suche
         'widerspruch' => ['frist', 'bescheid'],
         'klage' => ['widerspruch', 'sozialgericht', 'gericht'],
         'gericht' => ['sozialgericht', 'klage', 'urteil'],
-        'glauben' => ['beweis', 'glaubhaftmachung', 'nachweis'],
+        'glauben' => ['beweis', 'glaubhaftmachung', 'glaubhaftigkeit', 'nachweis'],
         'beweisen' => ['beweis', 'nachweis', 'glaubhaftmachung'],
 
         // Geld und Leistungen
@@ -140,6 +140,24 @@ class Suche
     private const HOECHSTENS = 12;
 
     /**
+     * Rechtstexte werden nur über Titel und Beschreibung gefunden, nicht über
+     * ihren Fliesstext (08.10.2026). Das Beispiel der Suchseite „die glauben
+     * mir nicht“ lieferte sonst Impressum (Bild*nachweis*) und
+     * Datenschutzerklärung als einzige Treffer.
+     */
+    private const NUR_TITEL = ['impressum', 'datenschutz'];
+
+    /**
+     * Begriffe, die aus der Synonymliste stammen und nicht von der suchenden
+     * Person. Sie zählen nur am Wortanfang: „Nachweis“ soll „Nachweise“
+     * finden, aber nicht „Bildnachweis“. Was jemand selbst eintippt, sucht
+     * weiter auch mitten im Wort („antrag“ in „Rentenantrag“).
+     *
+     * @var array<string, true>
+     */
+    private array $nurWortanfang = [];
+
+    /**
      * @return array{treffer: list<array<string, mixed>>, krise: bool, begriffe: list<string>}
      */
     public function suchen(string $anfrage, string $sprache = 'de'): array
@@ -176,6 +194,8 @@ class Suche
         $roh = preg_split('/[^\p{L}\p{N}]+/u', mb_strtolower(trim($anfrage)), -1, PREG_SPLIT_NO_EMPTY) ?: [];
 
         $begriffe = [];
+        $eigene = [];
+        $synonyme = [];
 
         foreach ($roh as $wort) {
             // Einzelne Buchstaben und Füllwörter tragen nichts bei. „GdB" ist
@@ -186,11 +206,15 @@ class Suche
             }
 
             $begriffe[] = $wort;
+            $eigene[] = $wort;
 
             foreach (self::SYNONYME[$wort] ?? [] as $synonym) {
                 $begriffe[] = $synonym;
+                $synonyme[] = $synonym;
             }
         }
+
+        $this->nurWortanfang = array_fill_keys(array_diff($synonyme, $eigene), true);
 
         return array_values(array_unique($begriffe));
     }
@@ -246,7 +270,7 @@ class Suche
             $punkte += 10 * $this->wieOft($begriffe, $seite->titel);
             $punkte += 4 * $this->wieOft($begriffe, (string) $seite->meta_description);
 
-            foreach ($seite->blocks as $block) {
+            foreach (in_array($seite->slug, self::NUR_TITEL, true) ? [] : $seite->blocks as $block) {
                 $ueberschrift = (string) ($block->data['titel'] ?? '');
                 $punkte += 6 * $this->wieOft($begriffe, $ueberschrift);
 
@@ -354,7 +378,11 @@ class Suche
         $summe = 0;
 
         foreach ($begriffe as $begriff) {
-            $summe += substr_count($text, $this->vereinfacht($begriff));
+            $gesucht = $this->vereinfacht($begriff);
+
+            $summe += isset($this->nurWortanfang[$begriff])
+                ? preg_match_all('/(?<![\p{L}\p{N}])'.preg_quote($gesucht, '/').'/u', $text)
+                : substr_count($text, $gesucht);
         }
 
         return $summe;

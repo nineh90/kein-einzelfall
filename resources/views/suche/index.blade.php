@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $anfrage !== '' ? __('Suche: :anfrage', ['anfrage' => $anfrage]) : __('Suche'))
+{{-- Ohne den Suchbegriff (08.10.2026): Der Titel steht im Tab, in der
+     Taskleiste und lesbar im Verlauf. „Suche: Vergewaltigung“ wäre auf einem
+     geteilten Gerät genau die Spur, die der Notausgang vermeiden soll. --}}
+@section('title', __('Suche'))
 @section('description', __('Finde Seiten, Begriffe und Selbsthilfegruppen auf dieser Website.'))
 
 {{-- Suchergebnisse gehören nicht in den Index einer Suchmaschine: Sie sind für

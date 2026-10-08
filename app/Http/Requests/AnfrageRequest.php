@@ -28,7 +28,9 @@ class AnfrageRequest extends FormRequest
 
             // Honigtopf: muss leer bleiben
             'webseite' => ['nullable', 'size:0'],
-            'gestartet_um' => ['nullable', 'string'],
+            // Pflicht (08.10.2026): Vorher prüfte die Zeitfalle nur, wenn das
+            // Feld mitkam. Ein Bot, der es weglässt, war durch.
+            'gestartet_um' => ['required', 'string'],
         ];
     }
 
@@ -95,6 +97,7 @@ class AnfrageRequest extends FormRequest
             'email.email' => __('Diese E-Mail-Adresse sieht nicht richtig aus. Du kannst das Feld auch frei lassen.'),
             'einwilligung.accepted' => __('Ohne dein Einverständnis dürfen wir deine Nachricht nicht speichern.'),
             'webseite.size' => __('Deine Anfrage konnte nicht verarbeitet werden.'),
+            'gestartet_um.required' => __('Bitte lade die Seite neu und versuche es erneut.'),
         ];
     }
 

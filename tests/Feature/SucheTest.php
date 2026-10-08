@@ -200,4 +200,44 @@ class SucheTest extends TestCase
             );
         }
     }
+
+    /** Prüfung der Firma (08.10.2026): Der Suchbegriff gehört nicht in den Seitentitel. */
+    public function test_suchbegriff_steht_nicht_im_seitentitel(): void
+    {
+        $html = $this->get('/suche?q=Gewalterfahrung')->getContent();
+
+        preg_match('#<title>(.*?)</title>#s', $html, $titel);
+        $this->assertStringNotContainsString('Gewalterfahrung', $titel[1]);
+    }
+
+    /**
+     * Prüfung der Firma (08.10.2026): Das Beispiel der Suchseite lieferte nur
+     * Impressum (Bild„nachweis“) und Datenschutzerklärung.
+     */
+    public function test_beispiel_der_suchseite_findet_keine_rechtstexte(): void
+    {
+        $this->seed(\Database\Seeders\AltseiteSeeder::class);
+
+        $treffer = (new \App\Support\Suche)->suchen('die glauben mir nicht')['treffer'];
+        $titel = array_column($treffer, 'titel');
+
+        $this->assertNotContains('Impressum', $titel);
+        $this->assertNotContains('Datenschutz', $titel);
+
+        // Gezielt gesucht, findet man sie weiterhin.
+        $this->assertContains('Impressum', array_column((new \App\Support\Suche)->suchen('Impressum')['treffer'], 'titel'));
+    }
+
+    public function test_synonyme_zaehlen_nur_am_wortanfang(): void
+    {
+        $suche = new \App\Support\Suche;
+        $begriffe = $suche->begriffe('glauben');
+
+        $wieOft = (new \ReflectionMethod($suche, 'wieOft'))->getClosure($suche);
+        $this->assertSame(0, $wieOft($begriffe, 'Bildnachweis Shutterstock'));
+        $this->assertSame(1, $wieOft($begriffe, 'Nachweise einreichen'));
+
+        // Eigene Wörter weiter auch mitten im Wort.
+        $this->assertSame(1, $wieOft($suche->begriffe('antrag'), 'Rentenantrag stellen'));
+    }
 }

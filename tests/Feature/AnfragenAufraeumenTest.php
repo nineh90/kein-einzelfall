@@ -77,4 +77,32 @@ class AnfragenAufraeumenTest extends TestCase
 
         $this->assertTrue($eingeplant, 'anfragen:aufraeumen ist nicht im Zeitplan eingetragen');
     }
+
+    /** Prüfung der Firma (08.10.2026): Stand und Abschlussdatum passen immer zusammen. */
+    public function test_abschlussdatum_folgt_dem_stand(): void
+    {
+        $ohneDatum = $this->anfrage(['status' => 'erledigt', 'erledigt_at' => null]);
+        $this->assertNotNull($ohneDatum->erledigt_at);
+
+        $zukunft = $this->anfrage(['status' => 'erledigt', 'erledigt_at' => now()->addYear()]);
+        $this->assertFalse($zukunft->erledigt_at->isFuture());
+
+        $wiederOffen = $this->anfrage(['status' => 'erledigt']);
+        $wiederOffen->update(['status' => 'offen']);
+        $this->assertNull($wiederOffen->fresh()->erledigt_at);
+    }
+
+    public function test_altfaelle_ohne_abschlussdatum_werden_trotzdem_geloescht(): void
+    {
+        $frist = config('anfragen.aufbewahrung_tage_erledigt');
+        $alt = $this->anfrage(['status' => 'erledigt']);
+
+        // Der Zustand vor dem 08.10.2026, am Model vorbei.
+        \Illuminate\Support\Facades\DB::table('inquiries')->where('id', $alt->id)
+            ->update(['erledigt_at' => null, 'updated_at' => now()->subDays($frist + 1)]);
+
+        $this->artisan('anfragen:aufraeumen')->assertSuccessful();
+
+        $this->assertDatabaseMissing('inquiries', ['id' => $alt->id]);
+    }
 }

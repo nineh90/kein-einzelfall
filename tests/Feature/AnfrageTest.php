@@ -154,6 +154,16 @@ class AnfrageTest extends TestCase
         $this->assertSame(0, Inquiry::count());
     }
 
+    /** Prüfung der Firma (08.10.2026): Die Zeitfalle liess sich durch Weglassen umgehen. */
+    public function test_ohne_startzeit_wird_abgelehnt(): void
+    {
+        $daten = $this->gueltig();
+        unset($daten['gestartet_um']);
+
+        $this->post('/anfrage', $daten)->assertSessionHasErrors('gestartet_um');
+        $this->assertSame(0, Inquiry::count());
+    }
+
     public function test_zu_schnelles_absenden_wird_abgelehnt(): void
     {
         $this->post('/anfrage', $this->gueltig([
