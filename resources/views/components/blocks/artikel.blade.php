@@ -15,8 +15,11 @@
     Ab „lg“ steht links das Verzeichnis „Auf dieser Seite“. Es klebt beim
     Scrollen und markiert den Abschnitt, in dem man gerade ist
     (inhaltsverzeichnis.js). Damit hat die Fläche neben dem Text eine Aufgabe,
-    statt leer zu bleiben. Die Spalten teilen sich wie beim Spendenblock (4:8,
-    ab „xl“ 5:7), damit die Textkante seitenweit fluchtet.
+    statt leer zu bleiben. Die Spalten teilen sich 3:7 (KEV-92, Wunsch des
+    Vereins: vorher 5:7 wie beim Spendenblock, das Verzeichnis hatte zu viel
+    Luft und der Text zu wenig). Der Text darf neben dem Verzeichnis deshalb
+    breiter laufen als sonst (45rem statt 65ch, rund 70 statt 47 Zeichen je
+    Zeile); in rem, damit er mit der Schriftgröße aus „Darstellung“ wächst.
 
     Unterhalb von „lg“ gibt es die Seitenleiste nicht; dort steht das
     Verzeichnis wie bisher als Kasten über dem Inhalt (page.blade.php).
@@ -27,7 +30,7 @@
 ])>
     <div @class([
         'mx-auto max-w-6xl',
-        'lg:grid lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-x-10 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-x-16' => $verzeichnis,
+        'lg:grid lg:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] lg:gap-x-10 xl:gap-x-16' => $verzeichnis,
     ])>
 
         @if ($verzeichnis)
@@ -55,7 +58,11 @@
             </nav>
         @endif
 
-        <div class="flex max-w-prose flex-col gap-12 lg:gap-16">
+        <div @class([
+            'flex flex-col gap-12 lg:gap-16',
+            'max-w-prose' => ! $verzeichnis,
+            'max-w-prose lg:max-w-[45rem]' => $verzeichnis,
+        ])>
             @foreach ($bloecke as $block)
                 @php $t = $block->textAngaben(); @endphp
                 <x-blocks.text-inhalt

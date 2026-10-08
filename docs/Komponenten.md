@@ -1975,8 +1975,10 @@ dargestellt wird:
 **Artikel mit Seitenleiste.** Hat die Seite mindestens zwei Sprungziele,
 steht ab `lg` links „Auf dieser Seite“. Es klebt beim Scrollen und markiert
 den Abschnitt, in dem man gerade liest (`resources/js/inhaltsverzeichnis.js`,
-`aria-current="true"`). Die Spalten teilen sich wie beim Spendenblock (4:8,
-ab `xl` 5:7), sodass die Textkante seitenweit fluchtet. Nur der erste
+`aria-current="true"`). Die Spalten teilen sich 3:7 (KEV-92, Wunsch des
+Vereins; vorher 4:8 und ab `xl` 5:7 wie beim Spendenblock, das Verzeichnis
+hatte zu viel Luft). Der Text läuft daneben bis `45rem` statt `max-w-prose`,
+rund 70 statt 47 Zeichen je Zeile. Nur der erste
 Artikel einer Seite bekommt die Leiste. Der Verzeichnis-Kasten über dem
 Inhalt bleibt für Handy und Tablet (`lg:hidden`, wenn es die Leiste gibt).
 Ins Verzeichnis kommt neu auch der Spendenblock (`#spenden`).
