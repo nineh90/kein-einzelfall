@@ -72,7 +72,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Verein | warmes, unscharfes Licht von Taddi (KEV-75), das echte Logo liegt als eigenes Element darauf (`Titelbilder::LOGO_DARAUF`, siehe unten) |
 | Über uns – Vorstand und Team | Vereinslogo auf leerer Wand mit Fensterlicht, wie Verein (KEV-62, statt zwei Keramikschalen) |
 | Startseite (Aufmacher) | leere Wand mit goldenen Lichtstrahlen und Blätterschatten, ohne Motiv; davor das Logo. Nach KEV-29 kurz ohne Blätter, auf Wunsch des Vereins wieder mit (28.09.2026) |
-| Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, oben ausgerichtet (siehe unten) |
+| Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, ausgerichtet auf 35 %, auf dem Handy Text unten (KEV-91, siehe unten) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
 | Unterstützung | Keimling im Terrakottatopf |
 | Selbsthilfegruppen | drei Holzstühle nebeneinander in hellem Raum |
@@ -168,8 +168,26 @@ gezeichnet; Überschrift und Formular bleiben scharf. Die Beiträge im
 Formular (12/24/36 €) hat der Verein gegenzuprüfen.
 
 Das Motiv reicht bis an den oberen Rand, anders als die Vorgabe es vorsieht.
-Es steht deshalb in `Titelbilder::FOKUS` (0 %) und wird im Kopf oben statt
-unten ausgerichtet.
+Es stand deshalb in `Titelbilder::FOKUS` zuerst auf 0 %, also oben
+ausgerichtet.
+
+**Seit KEV-91 (09.10.2026)** auf 35 %. Taddi schickte das Bild noch einmal
+als Vorlage für den Kopf: ganzer Antrag mit Stift. Oben ausgerichtet fehlte
+ab 1440 px der Stift, bei 1920 px endete das Bild bei „Persönliche Angaben“.
+Ganz passt der Antrag in keinen breiten Kopf: Bei 16:9 zeigt der Kopf nur die
+halbe Bildhöhe, der Antrag ist über 80 % hoch. 35 % ist der Ausgleich: Logo
+und „Antrag auf Mitgliedschaft“ bleiben ganz, der Stift ist bei 1920 px zur
+Hälfte, bei 1024 px fast ganz zu sehen. Ab 40 % schneidet 16:9 das Logo oben
+an. Auf dem Handy füllt der Antrag die ganze Höhe, der Titel lag oben auf der
+Überschrift des Formulars. Das Bild steht deshalb auch in
+`Titelbilder::TEXT_UNTEN`, der Titel liegt jetzt auf dem weich gezeichneten
+Fuß. Geprüft von 320 × 568 bis 2560 × 1440, Deutsch und Englisch. Taddis
+Vorlage ist das ungefilterte Original; die Weichzeichnung bleibt, das
+Kleingedruckte darin ist weiter falsch.
+
+Der Stift wirkt im Kopf heller als auf dem Bild: Er reicht bis 53 % der
+Breite und damit in den Schleier von rechts. Den gibt es auf jeder Seite
+gleich, er bleibt.
 
 **Ausrichtung allgemein:** Der Seitenkopf schneidet je nach Breite oben oder
 unten ab. Ohne Eintrag richtet er unten aus, wie die Bildvorgabe es vorsieht.

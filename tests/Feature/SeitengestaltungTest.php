@@ -104,10 +104,20 @@ class SeitengestaltungTest extends TestCase
         $this->assertSame(['startseite', 'trigger-warnung'], $ohne);
     }
 
-    /** KEV-61: Das Antragsbild reicht bis oben und wird dort ausgerichtet. */
-    public function test_bilder_mit_motiv_oben_werden_oben_ausgerichtet(): void
+    /**
+     * KEV-61: Das Antragsbild reicht bis oben. Seit KEV-91 auf 35 % statt
+     * ganz oben, damit der Stift mit hineinpasst, und auf dem Handy mit dem
+     * Text unten statt auf „Antrag auf Mitgliedschaft“.
+     */
+    public function test_antragsbild_mit_stift_und_text_unten(): void
     {
-        $this->assertStringContainsString('object-position: 0% 0%', $this->get('/mitgliedschaft')->getContent());
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/mitgliedschaft.webp"', $html);
+        $this->assertStringContainsString('object-position: 0% 35%', $html);
+        $this->assertStringContainsString('min-h-[60svh] md:min-h-[50svh]', $html);
+        $this->assertStringContainsString('bg-linear-to-t', $html);
+
         $this->assertStringContainsString('object-position: 0% 100%', $this->get('/spenden')->getContent());
     }
 

@@ -118,8 +118,11 @@ class Titelbilder
      * was wegfällt, ist leere Wand. Taddis eigene Bilder halten sich nicht
      * immer daran:
      *
-     *  - Mitgliedschaft: der Antrag (KEV-61). Oben steht „Antrag auf
-     *    Mitgliedschaft“, unten nur das (weich gezeichnete) Kleingedruckte.
+     *  - Mitgliedschaft: der Antrag mit Stift, fast so hoch wie das Bild
+     *    (KEV-61). Seit KEV-91 auf 35 % statt 0 %: Oben ausgerichtet fehlte
+     *    ab 1440 px der Stift. Bei 35 % bleiben Logo und „Antrag auf
+     *    Mitgliedschaft“ ganz, darüber darf es nicht gehen, sonst schneidet
+     *    16:9 das Logo an. Ganz passt der Antrag in keinen breiten Kopf.
      *  - Arbeitsgruppen: Tisch mit Mappe, Karten und Stiften (KEV-83). Unten
      *    steht nur eine unscharfe Stuhllehne.
      *  - Beschwerdemanagement: Briefschlitz mit Umschlag, etwas über der
@@ -138,7 +141,7 @@ class Titelbilder
      * @var array<string, int>
      */
     public const FOKUS = [
-        self::ORDNER.'/mitgliedschaft.webp' => 0,
+        self::ORDNER.'/mitgliedschaft.webp' => 35,
         self::ORDNER.'/arbeitsgruppen.webp' => 50,
         self::ORDNER.'/beschwerdemanagement.webp' => 35,
         self::ORDNER.'/gremium-ukfb.webp' => 70,
@@ -155,10 +158,15 @@ class Titelbilder
      * zwischen 28 und 62 % der Höhe, darunter nur Ordnerkante und Tisch.
      *
      * Verein: Oben steht das aufgelegte Logo (LOGO_DARAUF), der Text darunter.
+     *
+     * Mitgliedschaft (KEV-91): Der Antrag füllt auf dem Handy die ganze Höhe,
+     * oben lag der Titel auf „Antrag auf Mitgliedschaft“. Unten liegt er nur
+     * auf dem weich gezeichneten Kleingedruckten.
      */
     public const TEXT_UNTEN = [
         self::ORDNER.'/ordner-mit-logo.webp',
         self::ORDNER.'/verein.webp',
+        self::ORDNER.'/mitgliedschaft.webp',
     ];
 
     /**
