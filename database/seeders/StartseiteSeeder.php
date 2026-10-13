@@ -170,6 +170,12 @@ class StartseiteSeeder extends Seeder
         ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
     ];
 
+    public const ARBEITSGRUPPEN_KARTE_TEXT = '*Du hast Ideen, Wissen, bist kreativ oder hast einfach '
+        .'Lust, etwas zu verändern?* In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, '
+        .'Perspektiven und ihr Wissen zusammen, entwickeln daraus Ideen und setzen gemeinsam Projekte '
+        .'in Bewegung. Du kannst Dich jederzeit in laufende Arbeitsgruppen einbringen – auch ohne '
+        .'Vorkenntnisse.';
+
     public const ANFRAGEN_KARTE_TEXT = '*Nur wenn wir miteinander reden, können wir gemeinsam etwas '
         .'bewegen.* Also trau Dich und nimm Kontakt mit uns auf – egal, ob Du eine Projektidee '
         .'mitbringst, Unterstützung suchst oder Dich einfach mal mit uns austauschen möchtest. Dein '
@@ -220,11 +226,8 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'network',
                             'titel' => 'Arbeitsgruppen',
-                            'text' => 'Um unsere Arbeit weiter zu professionalisieren und gezielt '
-                                .'Wirkung zu entfalten, gründen wir immer wieder Arbeitsgruppen – '
-                                .'und laden Dich herzlich ein, Teil davon zu werden. Ein '
-                                .'Quereinstieg ist möglich, Du kannst jederzeit dazu kommen. Ob mit '
-                                .'Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen!',
+                            // Text von Taddi, 13.10.2026 (KEV-49), *fett* wie von ihr markiert.
+                            'text' => self::ARBEITSGRUPPEN_KARTE_TEXT,
                             'url' => '/arbeitsgruppen',
                             'link' => 'Zu den Arbeitsgruppen',
                         ],

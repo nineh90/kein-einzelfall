@@ -584,6 +584,27 @@ class StartseiteTest extends TestCase
         $this->assertSame(1, substr_count($html, 'Du wünschst einen persönlichen Austausch'));
     }
 
+    /** KEV-49: Karte „Arbeitsgruppen“ mit Taddis Text, der markierte Satz fett. */
+    public function test_arbeitsgruppenkarte_hat_den_neuen_text(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/arbeitsgruppen', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = 'Um unsere Arbeit weiter zu professionalisieren und gezielt Wirkung '
+            .'zu entfalten, gründen wir immer wieder Arbeitsgruppen – und laden Dich herzlich ein, Teil '
+            .'davon zu werden. Ein Quereinstieg ist möglich, Du kannst jederzeit dazu kommen. Ob mit '
+            .'Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen!';
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_13_120000_arbeitsgruppenkarte_text_erneuern.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::ARBEITSGRUPPEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+        $this->get('/')->assertSee('<strong class="font-semibold text-ink">Du hast Ideen, Wissen, bist '
+            .'kreativ oder hast einfach Lust, etwas zu verändern?</strong> In unseren Arbeitsgruppen', false)
+            ->assertDontSee('Um unsere Arbeit weiter zu professionalisieren');
+    }
+
     /**
      * KEV-30: „Sofort verlassen“ steht als Band unten im Aufmacher, nicht mehr
      * am Seitenende. Auf dem Handy ohne Esc, dort gibt es die Taste nicht.
