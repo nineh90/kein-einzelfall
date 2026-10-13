@@ -558,6 +558,32 @@ class StartseiteTest extends TestCase
         $this->assertCount(3, $data['ctas']);
     }
 
+    /** KEV-51: Karte „Anfragen & Austausch“ mit Taddis Text, der markierte Satz fett. */
+    public function test_anfragenkarte_hat_den_neuen_text(): void
+    {
+        $alt = 'Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht '
+            .'(OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu '
+            .'anderen Hilfesystemen, oder möchtest uns etwas mitteilen?';
+
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/anfragen', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = $alt;
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_13_110000_anfragenkarte_text_erneuern.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::ANFRAGEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+
+        $html = $this->get('/')->getContent();
+        $this->assertStringContainsString('<strong class="font-semibold text-ink">Nur wenn wir miteinander '
+            .'reden, können wir gemeinsam etwas bewegen.</strong> Also trau Dich', $html);
+
+        // Der Abschlussblock unten behält seinen Text, das Ticket meint nur die Karte.
+        $this->assertSame(1, substr_count($html, 'Du wünschst einen persönlichen Austausch'));
+    }
+
     /**
      * KEV-30: „Sofort verlassen“ steht als Band unten im Aufmacher, nicht mehr
      * am Seitenende. Auf dem Handy ohne Esc, dort gibt es die Taste nicht.

@@ -170,6 +170,12 @@ class StartseiteSeeder extends Seeder
         ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
     ];
 
+    public const ANFRAGEN_KARTE_TEXT = '*Nur wenn wir miteinander reden, können wir gemeinsam etwas '
+        .'bewegen.* Also trau Dich und nimm Kontakt mit uns auf – egal, ob Du eine Projektidee '
+        .'mitbringst, Unterstützung suchst oder Dich einfach mal mit uns austauschen möchtest. Dein '
+        .'Anliegen muss noch nicht fertig gedacht sein. Wir hören zu und schauen gemeinsam, was wir '
+        .'machen können.';
+
     private function bausteine(): array
     {
         return [
@@ -225,10 +231,8 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'notebook-pen',
                             'titel' => 'Anfragen & Austausch',
-                            'text' => 'Du wünschst einen persönlichen Austausch in Bezug auf das '
-                                .'Soziale Entschädigungsrecht (OEG/SGB XIV), den '
-                                .'Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen '
-                                .'zu anderen Hilfesystemen, oder möchtest uns etwas mitteilen?',
+                            // Text von Taddi, 13.10.2026 (KEV-51), *fett* wie von ihr markiert.
+                            'text' => self::ANFRAGEN_KARTE_TEXT,
                             'url' => '/anfragen',
                             'link' => 'Anfrage stellen',
                         ],
