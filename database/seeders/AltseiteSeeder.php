@@ -278,6 +278,8 @@ class AltseiteSeeder extends Seeder
         // KEV-101: Die Konvention ist ein Link auf eine fremde Seite, kein
         // Download (Kevin, 07.10.2026).
         'istanbul-konvention' => 'Zum Nachlesen',
+        // KEV-90, Wunsch von Taddi
+        'satzung' => 'Aktuelle Satzung zum Herunterladen',
     ];
 
     /**

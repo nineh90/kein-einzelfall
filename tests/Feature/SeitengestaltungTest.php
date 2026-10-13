@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Page;
 use App\Models\PageBlock;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\UebersetzungenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -251,6 +252,31 @@ class SeitengestaltungTest extends TestCase
         $this->assertNotFalse($knopf);
         $this->assertGreaterThan($abschnitt, $knopf);
         $this->assertMatchesRegularExpression('#href="/dokumente/2026/05/26\.04\.02\.-Satzung-II\.pdf"[^>]*>\s*Satzung lesen \(PDF\)#', $html);
+    }
+
+    /** KEV-90: Über dem PDF steht „Aktuelle Satzung zum Herunterladen“. */
+    public function test_satzung_download_hat_eigene_ueberschrift(): void
+    {
+        $html = $this->get('/satzung')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Aktuelle Satzung zum Herunterladen', $html);
+        $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
+
+        $this->seed(UebersetzungenSeeder::class);
+        $this->assertStringContainsString('Download the current Articles of Association', $this->get('/en/satzung')->getContent());
+    }
+
+    /** KEV-90: Die Migration tauscht nur den alten Wortlaut. */
+    public function test_migration_tauscht_satzung_download_ueberschrift(): void
+    {
+        $block = Page::where('slug', 'satzung')->where('locale', 'de')->firstOrFail()
+            ->blocks()->where('typ', 'download_list')->firstOrFail();
+        $block->update(['data' => array_replace($block->data, ['titel' => 'Dokumente zum Herunterladen'])]);
+
+        $migration = require database_path('migrations/2026_10_13_100000_satzung_download_ueberschrift.php');
+        $migration->up();
+
+        $this->assertSame('Aktuelle Satzung zum Herunterladen', $block->fresh()->data['titel']);
     }
 
     /** KEV-93: neuer Text von Taddi unter „Wir brauchen dich!“. */
