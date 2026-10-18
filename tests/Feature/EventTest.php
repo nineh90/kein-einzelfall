@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use App\Models\Language;
+use App\Models\Page;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,6 +24,32 @@ class EventTest extends TestCase
             'beginnt_am' => now()->addWeek(),
             'published_at' => now()->subDay(),
         ], $daten));
+    }
+
+    /**
+     * Die Einleitung über dem Kalender kommt in der Sprache der Seite. Bis
+     * 18.10.2026 zeigte /en/veranstaltungen den deutschen Text. Fehlt die
+     * Übersetzung, bleibt es beim deutschen.
+     */
+    public function test_einleitung_in_der_sprache_der_seite(): void
+    {
+        $this->seed(AltseiteSeeder::class);
+        Language::finden('en')->update(['aktiv' => true]);
+        Language::memoLeeren();
+
+        $deutsch = Page::where('locale', 'de')->where('slug', 'veranstaltungen')->firstOrFail();
+        $englisch = $deutsch->replicate()->fill(['locale' => 'en', 'uebersetzungs_gruppe' => $deutsch->uebersetzungs_gruppe]);
+        $englisch->save();
+        $englisch->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['titel' => 'Sharing knowledge', 'absaetze' => ['Intro']]]);
+
+        $this->get('/en/veranstaltungen')->assertOk()
+            ->assertSee('Sharing knowledge')->assertDontSee('Wissen teilen. Erfahrungen verbinden.');
+        $this->get('/veranstaltungen')->assertOk()
+            ->assertSee('Wissen teilen. Erfahrungen verbinden.')->assertDontSee('Sharing knowledge');
+
+        $englisch->blocks()->delete();
+        $englisch->delete();
+        $this->get('/en/veranstaltungen')->assertOk()->assertSee('Wissen teilen. Erfahrungen verbinden.');
     }
 
     public function test_uebersicht_zeigt_kommende_termine(): void

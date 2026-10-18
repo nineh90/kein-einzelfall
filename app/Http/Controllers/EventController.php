@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\Language;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,10 +33,7 @@ class EventController extends Controller
             // /veranstaltungen ist auf der Altseite eine gepflegte Inhaltsseite
             // (443 Wörter). Der Text bleibt als Einleitung erhalten, der
             // Kalender kommt darunter — statt den Bestand zu verwerfen.
-            'einleitung' => Page::veroeffentlicht()
-                ->with('blocks')
-                ->where('slug', 'veranstaltungen')
-                ->first(),
+            'einleitung' => $this->einleitung(),
 
             // Die regelmäßigen Gruppentreffen gehören in denselben Kalender.
             // Vorher standen sie nur auf den Gruppenseiten — wer wissen wollte,
@@ -49,6 +47,25 @@ class EventController extends Controller
         $termin = Event::veroeffentlicht()->where('slug', $slug)->firstOrFail();
 
         return view('events.show', compact('termin'));
+    }
+
+    /**
+     * Die Einleitung in der Sprache der Seite, fehlt sie, die deutsche.
+     *
+     * Bis 18.10.2026 ohne Sprache gesucht: `first()` nahm irgendeine Fassung,
+     * und /en/veranstaltungen zeigte den deutschen Text. Nur die
+     * Standardfassung, nicht die in Leichter Sprache.
+     */
+    private function einleitung(): ?Page
+    {
+        $suche = fn (string $locale) => Page::veroeffentlicht()
+            ->standardfassung()
+            ->sprache($locale)
+            ->with('blocks')
+            ->where('slug', 'veranstaltungen')
+            ->first();
+
+        return $suche(app()->getLocale()) ?? $suche(Language::standardCode());
     }
 
     /**
