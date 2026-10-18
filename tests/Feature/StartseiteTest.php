@@ -660,21 +660,78 @@ class StartseiteTest extends TestCase
         $this->assertMatchesRegularExpression('#href="/arbeitsgruppen"[^>]*>\s*Arbeitsgruppen\s*</a>#', $html);
     }
 
-    /** KEV-86: Die Migration bricht den Text nur um, wo er noch in einem Stück steht. */
+    /**
+     * KEV-86: Die Migration bricht den Text nur um, wo er noch in einem Stück
+     * steht. Die Knöpfe bringt seit KEV-113 dessen Migration in Ordnung: Die
+     * von KEV-86 leitet den alten Stand aus der Seeder-Konstante ab, und die
+     * hat sich mit KEV-113 geändert.
+     */
     public function test_migration_setzt_absaetze_und_knopf(): void
     {
         $block = $this->startseite()->blocks()->where('typ', 'hero')->first();
         $block->update(['data' => array_replace($block->data, [
-            'text' => str_replace("\n", ' ', \Database\Seeders\StartseiteSeeder::AUFMACHER_TEXT),
-            'ctas' => array_slice(\Database\Seeders\StartseiteSeeder::AUFMACHER_KNOEPFE, 0, 2),
+            'text' => str_replace("\n", ' ', StartseiteSeeder::AUFMACHER_TEXT),
+            'ctas' => self::KNOEPFE_VOR_KEV_86,
         ])]);
 
-        $migration = require database_path('migrations/2026_10_08_220000_aufmacher_absaetze_und_arbeitsgruppen.php');
-        $migration->up();
+        foreach (['2026_10_08_220000_aufmacher_absaetze_und_arbeitsgruppen', '2026_10_18_170000_aufmacher_arbeitsgruppen_vorne'] as $datei) {
+            (require database_path("migrations/{$datei}.php"))->up();
+        }
 
         $data = $block->fresh()->data;
-        $this->assertSame(\Database\Seeders\StartseiteSeeder::AUFMACHER_TEXT, $data['text']);
-        $this->assertCount(3, $data['ctas']);
+        $this->assertSame(StartseiteSeeder::AUFMACHER_TEXT, $data['text']);
+        $this->assertSame(StartseiteSeeder::AUFMACHER_KNOEPFE, $data['ctas']);
+    }
+
+    private const KNOEPFE_VOR_KEV_86 = [
+        ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
+        ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
+    ];
+
+    /** KEV-113: „Arbeitsgruppen“ vorne, „Anfragen & Austausch“ hinten. */
+    public function test_aufmacher_beginnt_mit_arbeitsgruppen(): void
+    {
+        $html = $this->get('/')->getContent();
+        $aufmacher = substr($html, 0, strpos($html, '</section>', strpos($html, '<h1')));
+
+        $this->assertMatchesRegularExpression('#href="/arbeitsgruppen"[^>]*>\s*Arbeitsgruppen\s*</a>.*'
+            .'href="/selbsthilfegruppen"[^>]*>\s*Selbsthilfegruppen\s*</a>.*'
+            .'href="/anfragen"[^>]*>\s*Anfragen &amp; Austausch\s*</a>#s', $aufmacher);
+    }
+
+    public function test_bestehender_aufmacher_tauscht_die_knoepfe(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'hero')->first();
+        $migration = require database_path('migrations/2026_10_18_170000_aufmacher_arbeitsgruppen_vorne.php');
+
+        // Stand nach KEV-86, mit einer im Panel geänderten Beschriftung: Die
+        // bleibt, nur die Plätze tauschen.
+        $block->update(['data' => array_replace($block->data, ['ctas' => [
+            ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
+            ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
+            ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
+        ]])]);
+        $migration->up();
+        $this->assertSame([
+            ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'primary'],
+            ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
+            ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'ghost'],
+        ], $block->fresh()->data['ctas']);
+
+        // Ein zweiter Lauf tauscht nicht zurück.
+        $migration->up();
+        $this->assertSame('/arbeitsgruppen', $block->fresh()->data['ctas'][0]['url']);
+
+        // Stand vor KEV-86: gleich die drei neuen Knöpfe.
+        $block->update(['data' => array_replace($block->data, ['ctas' => self::KNOEPFE_VOR_KEV_86])]);
+        $migration->up();
+        $this->assertSame(StartseiteSeeder::AUFMACHER_KNOEPFE, $block->fresh()->data['ctas']);
+
+        // Selbst eingerichtete Knöpfe bleiben.
+        $eigene = [['label' => 'Spenden', 'url' => '/spenden', 'variant' => 'primary']];
+        $block->update(['data' => array_replace($block->data, ['ctas' => $eigene])]);
+        $migration->up();
+        $this->assertSame($eigene, $block->fresh()->data['ctas']);
     }
 
     /** KEV-51: Karte „Anfragen & Austausch“ mit Taddis Text, der markierte Satz fett. */

@@ -175,11 +175,16 @@ class StartseiteSeeder extends Seeder
         ."Für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen.\n"
         .'Für mehr Sichtbarkeit, Gehör und Unterstützung!';
 
+    /*
+     * Seit KEV-113 (Wunsch von Taddi) „Arbeitsgruppen“ vorne und „Anfragen &
+     * Austausch“ hinten, vorher umgekehrt. Der erste ist der wichtigste,
+     * darum primary; im Aufmacher sehen beide Varianten gleich aus.
+     */
     public const AUFMACHER_KNOEPFE = [
-        ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'primary'],
-        ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
         // KEV-86, Wunsch des Vereins
-        ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
+        ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'primary'],
+        ['label' => 'Selbsthilfegruppen', 'url' => '/selbsthilfegruppen', 'variant' => 'ghost'],
+        ['label' => 'Anfragen & Austausch', 'url' => '/anfragen', 'variant' => 'ghost'],
     ];
 
     /*
