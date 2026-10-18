@@ -18,24 +18,40 @@
 
         {{-- Notfall-Zeile auf jeder Seite (KEV-42). Das Hinweisfenster sagt „Die
              Notfallnummern stehen am Ende jeder Seite“, und hier stehen sie.
-             Nummern aus config/hilfe.php, damit sie an jeder Stelle gleich sind.
+             Seit KEV-123 dieselben Nummern wie in der Box der Startseite, in
+             denselben zwei Spalten, aber ohne Polizei und Feuerwehr (Taddi).
              Auf dem dunkelgrünen Grund in der hellen Schrift der Fusszeile,
              nicht im Warnrot: Das hätte hier keinen Kontrast. --}}
         @php
             $alle = config('hilfe.nummern');
-            $sofort = array_values(array_filter(array_map(fn ($s) => $alle[$s] ?? null, config('hilfe.fusszeile', []))));
-            $sofort[] = config('hilfe.notruf')[0];
+            $spalten = array_map(
+                fn (array $schluessel) => array_values(array_filter(array_map(fn ($s) => $alle[$s] ?? null, $schluessel))),
+                array_values(config('hilfe.kompakt')),
+            );
         @endphp
         <section aria-labelledby="sofort-hilfe-titel"
-                 class="mb-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-y border-on-green-line py-4 text-sm">
-            <h2 id="sofort-hilfe-titel" class="font-display text-base">{{ __('rahmen.fusszeile.sofort_hilfe') }}:</h2>
-            @foreach ($sofort as $n)
-                <a href="tel:{{ $n['tel'] }}"
-                   class="text-on-green no-underline hover:underline">
-                    <span class="font-display text-lg font-medium">{{ $n['nummer'] }}</span>
-                    <span class="text-on-green-soft">{{ __($n['name']) }}</span>
-                </a>
-            @endforeach
+                 class="mb-8 flex flex-col gap-2 border-y border-on-green-line py-4 text-sm lg:flex-row lg:items-baseline lg:gap-6">
+            <h2 id="sofort-hilfe-titel" class="shrink-0 font-display text-base">{{ __('rahmen.fusszeile.sofort_hilfe') }}:</h2>
+            <div class="grid gap-x-6 gap-y-1 sm:grid-cols-2">
+                @foreach ($spalten as $nummern)
+                    <ul class="flex flex-col gap-1">
+                        @foreach ($nummern as $n)
+                            <li>
+                                {{-- Die Nummer bricht nie um: „0800 123 99“ / „00“
+                                     sähe aus wie zwei Nummern. Der Name als Block
+                                     daneben oder ganz darunter, sonst stand
+                                     „Männern“ allein unter der Nummer. --}}
+                                <a href="tel:{{ $n['tel'] }}"
+                                   class="group text-on-green no-underline hover:underline">
+                                    <span class="whitespace-nowrap font-display text-lg font-medium">{{ $n['nummer'] }}</span>
+                                    {{-- Die Unterstreichung vererbt sich nicht in einen inline-block. --}}
+                                    <span class="inline-block text-on-green-soft group-hover:underline">{{ __($n['name']) }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endforeach
+            </div>
         </section>
 
         {{-- Vier Spalten erst ab „lg“: Bei 768 px blieben je 170 px, und die

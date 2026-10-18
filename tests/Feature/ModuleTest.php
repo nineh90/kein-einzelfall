@@ -89,6 +89,9 @@ class ModuleTest extends TestCase
     /**
      * KEV-42: Das Hinweisfenster verspricht „Die Notfallnummern stehen am Ende
      * jeder Seite“. Also stehen sie in der Fusszeile, auf jeder Seite.
+     *
+     * KEV-123: Dieselben Nummern wie in der Box der Startseite, in derselben
+     * Reihenfolge, aber ohne Polizei und Feuerwehr.
      */
     public function test_notfallnummern_stehen_in_der_fusszeile_jeder_seite(): void
     {
@@ -96,9 +99,10 @@ class ModuleTest extends TestCase
             $html = $this->get($pfad)->getContent();
             $fuss = substr($html, strpos($html, '<footer'));
 
-            $this->assertStringContainsString('tel:+49116006', $fuss, $pfad);
-            $this->assertStringContainsString('tel:+49116123', $fuss, $pfad);
-            $this->assertStringContainsString('tel:110', $fuss, $pfad);
+            $this->assertMatchesRegularExpression(
+                '/tel:\+49116016.*tel:\+498001239900.*<\/ul>.*tel:\+49116123.*tel:\+49116006/s', $fuss, $pfad);
+            $this->assertStringNotContainsString('tel:110', $fuss, $pfad);
+            $this->assertStringNotContainsString('tel:112', $fuss, $pfad);
         }
     }
 

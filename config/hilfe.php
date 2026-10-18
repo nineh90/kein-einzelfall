@@ -68,19 +68,15 @@ return [
      * Die Kurzfassung (Startseite): zwei Spalten, so vom Verein gewünscht
      * (Taddi, KEV-46). Links die Hilfetelefone bei Gewalt, rechts die
      * allgemeinen Stellen.
+     *
+     * Dieselben Nummern stehen in der Fusszeile jeder Seite, dort ohne
+     * Polizei und Feuerwehr (Taddi, KEV-123). Bis dahin hatte die Fusszeile
+     * eine eigene Auswahl: Weisser Ring, TelefonSeelsorge und 110.
      */
     'kompakt' => [
         'links' => ['frauen', 'maenner'],
         'rechts' => ['telefonseelsorge', 'weisser-ring'],
     ],
-
-    /*
-     * Die Notfall-Zeile in der Fußzeile jeder Seite (KEV-42). Das Hinweisfenster
-     * verspricht „Die Notfallnummern stehen am Ende jeder Seite“; vorher
-     * standen sie nur auf der Startseite. Zwei Nummern plus der Polizei-Notruf,
-     * mehr wird in einer Zeile unübersichtlich. Beide rund um die Uhr oder fast.
-     */
-    'fusszeile' => ['weisser-ring', 'telefonseelsorge'],
 
     /* Bei unmittelbarer Gefahr — steht separat und optisch abgesetzt. */
     'notruf' => [
