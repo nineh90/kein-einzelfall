@@ -41,7 +41,7 @@
         <a href="{{ \App\Models\Language::aktuell()->pfad('/') }}"
            class="flex shrink-0 items-center gap-2.5 no-underline">
             <img src="/img/logo.png" alt="" width="40" height="40" class="h-10 w-10 shrink-0 object-contain md:h-9 md:w-9">
-            <span class="sr-only font-display text-base font-medium tracking-[0.01em] text-ink md:not-sr-only md:whitespace-nowrap">
+            <span data-kopf-name class="sr-only font-display text-base font-medium tracking-[0.01em] text-ink md:not-sr-only md:whitespace-nowrap">
                 KE!N EINZELFALL e.V.
             </span>
         </a>

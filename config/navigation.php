@@ -92,9 +92,16 @@ return [
     ],
 
     'footer' => [
+        /*
+         * Die Postfächer des Vereins (KEV-124). „Anfragen & Austausch“ stand
+         * bis dahin hier, ist aber über das Menü unter Kontakt erreichbar.
+         * Arbeitsgruppen in der Einzahl, wie in jedem AG-Text (Group::AG_ADRESSE).
+         */
         'kontakt' => [
-            ['label' => 'kontakt@kein-einzelfall.de', 'url' => 'mailto:kontakt@kein-einzelfall.de'],
-            ['schluessel' => 'anfragen', 'label' => 'Anfragen & Austausch',       'url' => '/anfragen'],
+            ['label' => 'kontakt@kein-einzelfall.de',       'url' => 'mailto:kontakt@kein-einzelfall.de'],
+            ['label' => 'selbsthilfe@kein-einzelfall.de',   'url' => 'mailto:selbsthilfe@kein-einzelfall.de'],
+            ['label' => 'arbeitsgruppe@kein-einzelfall.de', 'url' => 'mailto:arbeitsgruppe@kein-einzelfall.de'],
+            ['label' => 'presse@kein-einzelfall.de',        'url' => 'mailto:presse@kein-einzelfall.de'],
         ],
         'informationen' => [
             ['schluessel' => 'impressum', 'label' => 'Impressum',   'url' => '/impressum'],

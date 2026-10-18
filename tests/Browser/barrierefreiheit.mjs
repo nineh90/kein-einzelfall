@@ -271,10 +271,11 @@ console.log('\nReflow (320 px, WCAG 1.4.10)')
  * der ersten Schriftstufe lief die Kopfzeile 106 px über den Rand und der
  * Notausgang aus dem Bild. Geprüft wird: Notausgang im Kopf liegt im Fenster,
  * und die Seite scrollt nicht seitwärts. Auf dem Handy mit größter Schrift
- * auch die untere Leiste.
+ * auch die untere Leiste. 768 und 1024 px (Tablet) seit KEV-124: Bei 768 px
+ * und größter Schrift lief die Zeile mit Vereinsname 80 px über.
  */
 console.log('\nNotausgang bei vergrößerter Schrift')
-for (const [breite, hoehe] of [[1280, 800], [1440, 900], [320, 640], [375, 700]]) {
+for (const [breite, hoehe] of [[1280, 800], [1440, 900], [320, 640], [375, 700], [768, 1024], [1024, 768]]) {
     for (const werte of [{ schrift: 1 }, { schrift: 3 }, { schrift: 3, zeichen: 2 }]) {
         const kontext = await browser.newContext({ viewport: { width: breite, height: hoehe } })
         await kontext.addInitScript((w) => {

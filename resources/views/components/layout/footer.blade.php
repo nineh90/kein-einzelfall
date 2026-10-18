@@ -41,8 +41,9 @@
         {{-- Vier Spalten erst ab „lg“: Bei 768 px blieben je 170 px, und die
              E-Mail-Adresse brach mitten im Wort. Auf dem Handy stehen Adresse
              und Kontakt über die volle Breite, die beiden Linklisten
-             nebeneinander. --}}
-        <div class="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4 lg:gap-8">
+             nebeneinander. Die Kontaktspalte etwas breiter (KEV-124): Bei
+             1024 px blieben sonst 212 px, arbeitsgruppe@… braucht 223. --}}
+        <div class="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-[1fr_1.25fr_1fr_1fr] lg:gap-8">
             <div class="col-span-2 sm:col-span-1">
                 <h2 class="mb-3 font-display text-base">KE!N EINZELFALL e.V.</h2>
                 <address class="text-sm not-italic text-on-green-soft">
@@ -53,11 +54,19 @@
             <div class="col-span-2 sm:col-span-1">
                 <h2 class="mb-3 font-display text-base">{{ __('rahmen.fusszeile.kontakt') }}</h2>
                 <ul class="flex flex-col">
+                    {{-- Muss eine Adresse umbrechen (grössere Schrift aus der
+                         Darstellung), dann nach dem @ und nie am Bindestrich:
+                         „arbeitsgruppe@kein-“ / „einzelfall.de“ liest sich
+                         wie zwei Adressen. --}}
                     @foreach ($footer['kontakt'] as $link)
                         <li>
                             <a href="{{ $link['url'] }}"
                                class="inline-block py-1.5 text-sm text-on-green-soft no-underline hover:text-on-green hover:underline">
-                                {{ $link['label'] }}
+                                @if (str_starts_with($link['url'], 'mailto:'))
+                                    {{ Str::before($link['label'], '@') }}@<wbr><span class="whitespace-nowrap">{{ Str::after($link['label'], '@') }}</span>
+                                @else
+                                    {{ $link['label'] }}
+                                @endif
                             </a>
                         </li>
                     @endforeach
