@@ -1670,17 +1670,32 @@
   "Gemeinschaft und Zusammenhalt: Du suchst nach einer Gemeinschaft von Gleichgesinnten/Betroffenen, um endlich nicht mehr allein mit deinen Problemen zu sein. Denn du bist KE!N EINZELFALL!": {
     "en": "Community and solidarity: You are looking for a community of like-minded people/people who have been affected, so that you finally no longer have to face your problems alone. Because you are KE!N EINZELFALL!"
   },
+  "*Gemeinschaft und Zusammenhalt*: Du suchst nach einer Gemeinschaft von Gleichgesinnten/Betroffenen, um endlich nicht mehr allein mit deinen Problemen zu sein. Denn du bist KE!N EINZELFALL!": {
+    "en": "*Community and solidarity*: You are looking for a community of like-minded people/people who have been affected, so that you finally no longer have to face your problems alone. Because you are KE!N EINZELFALL!"
+  },
   "Persönliche Entwicklung: Durch die Arbeit bei uns im Verein kannst du für dich wertvolle Erfahrungen sammeln, neue Fähigkeiten erlernen und deine sozialen Kompetenzen stärken.": {
     "en": "Personal development: Working with us in the association, you can gain valuable experience, learn new skills and strengthen your interpersonal skills."
+  },
+  "*Persönliche Entwicklung*: Durch die Arbeit bei uns im Verein kannst du für dich wertvolle Erfahrungen sammeln, neue Fähigkeiten erlernen und deine sozialen Kompetenzen stärken.": {
+    "en": "*Personal development*: Working with us in the association, you can gain valuable experience, learn new skills and strengthen your interpersonal skills."
   },
   "Netzwerk erweitern: Du hast die Möglichkeit, durch den Verein neue Kontakte zu knüpfen und dich mit anderen engagierten Menschen zu vernetzen, die sich für gleiche Ziele einsetzen und gemeinsam etwas bewirken möchten.": {
     "en": "Expand your network: Through the association, you have the chance to make new contacts and connect with other committed people who are working towards the same goals and want to make a difference together."
   },
+  "*Netzwerk erweitern*: Du hast die Möglichkeit, durch den Verein neue Kontakte zu knüpfen und dich mit anderen engagierten Menschen zu vernetzen, die sich für gleiche Ziele einsetzen und gemeinsam etwas bewirken möchten.": {
+    "en": "*Expand your network*: Through the association, you have the chance to make new contacts and connect with other committed people who are working towards the same goals and want to make a difference together."
+  },
   "Neue Projekte ins Leben rufen: Du hast die Möglichkeit, durch den Verein und mit anderen Mitgliedern neue Projekte ins Leben zu rufen, um gemeinsam etwas bewirken zu können und mehr Sichtbarkeit zu schaffen.": {
     "en": "Launch new projects: Through the association and together with other members, you have the chance to launch new projects so that you can make a difference together and create more visibility."
   },
+  "*Neue Projekte ins Leben rufen*: Du hast die Möglichkeit, durch den Verein und mit anderen Mitgliedern neue Projekte ins Leben zu rufen, um gemeinsam etwas bewirken zu können und mehr Sichtbarkeit zu schaffen.": {
+    "en": "*Launch new projects*: Through the association and together with other members, you have the chance to launch new projects so that you can make a difference together and create more visibility."
+  },
   "Bewusstsein schaffen: Du möchtest dazu beitragen, das Bewusstsein für die Bedürfnisse und Rechte von Opfern zu erhöhen und gesellschaftliche Veränderungen anzustoßen, um so für mehr Sichtbarkeit und Anerkennung zu sorgen.": {
     "en": "Raise awareness: You want to help raise awareness of the needs and rights of victims and set social change in motion, bringing about more visibility and recognition."
+  },
+  "*Bewusstsein schaffen*: Du möchtest dazu beitragen, das Bewusstsein für die Bedürfnisse und Rechte von Opfern zu erhöhen und gesellschaftliche Veränderungen anzustoßen, um so für mehr Sichtbarkeit und Anerkennung zu sorgen.": {
+    "en": "*Raise awareness*: You want to help raise awareness of the needs and rights of victims and set social change in motion, bringing about more visibility and recognition."
   },
   "Hilfe und Unterstützung leisten: Du möchtest Menschen in schwierigen Lebenssituationen aktiv unterstützen und ihnen helfen, ihre Erlebnisse zu verarbeiten und neue Perspektiven zu finden.": {
     "en": "Offer help and support: You want to actively support people in difficult situations in life and help them process what they have been through and find new perspectives."
@@ -2102,8 +2117,14 @@
   "Warum solltest ausgerechnet DU bei uns im Verein Mitglied werden? Es gibt viele Gründe dafür, unserem Verein beizutreten.": {
     "en": "Why should YOU, of all people, become a member of our association? There are many reasons to join us."
   },
+  "*Warum solltest ausgerechnet DU bei uns im Verein Mitglied werden? Es gibt viele Gründe dafür, unserem Verein beizutreten.*": {
+    "en": "*Why should YOU, of all people, become a member of our association? There are many reasons to join us.*"
+  },
   "Eigene Erfahrungen: Vielleicht bist du selbst betroffen und möchtest anderen helfen, indem du eigene Erfahrungen im Umgang mit der Betroffenheit teilst und Unterstützung anbietest, oder vielleicht brauchst du genau deswegen selbst Hilfe.": {
     "en": "Your own experiences: Perhaps you have been affected yourself and want to help others by sharing your own experience of coping with what happened and by offering support – or perhaps that is exactly why you need help yourself."
+  },
+  "*Eigene Erfahrungen*: Vielleicht bist du selbst betroffen und möchtest anderen helfen, indem du eigene Erfahrungen im Umgang mit der Betroffenheit teilst und Unterstützung anbietest, oder vielleicht brauchst du genau deswegen selbst Hilfe.": {
+    "en": "*Your own experiences*: Perhaps you have been affected yourself and want to help others by sharing your own experience of coping with what happened and by offering support – or perhaps that is exactly why you need help yourself."
   },
   "Mit deiner Mitgliedschaft wirst du Teil von etwas, das aus Erfahrung Wissen und Veränderung entstehen lässt.": {
     "en": "With your membership, you become part of something that turns experience into knowledge and change."

@@ -284,10 +284,56 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
 
-        $this->assertStringContainsString('Eigene Erfahrungen: Vielleicht bist du selbst betroffen', $html);
+        $this->assertStringContainsString('Eigene Erfahrungen</strong>: Vielleicht bist du selbst betroffen', $html);
         $this->assertStringContainsString('das aus Erfahrung Wissen und Veränderung entstehen lässt.', $html);
         $this->assertStringNotContainsString('Einige Motivationen sind die folgenden.', $html);
         $this->assertStringNotContainsString('Hilfe und Unterstützung leisten', $html);
+    }
+
+    /** KEV-126: Einstieg und Stichworte unter „Wir brauchen dich!“ fett, der Schlusssatz nicht. */
+    public function test_mitgliedschaft_wir_brauchen_dich_hebt_einstieg_und_stichworte_hervor(): void
+    {
+        $fett = fn (string $text) => '<strong class="font-semibold text-ink">'.$text.'</strong>';
+
+        $this->get('/mitgliedschaft')->assertOk()->assertSeeInOrder([
+            $fett('Warum solltest ausgerechnet DU bei uns im Verein Mitglied werden? Es gibt viele Gründe dafür, unserem Verein beizutreten.'),
+            $fett('Eigene Erfahrungen').': Vielleicht',
+            $fett('Gemeinschaft und Zusammenhalt').': Du suchst',
+            $fett('Persönliche Entwicklung').': Durch die Arbeit',
+            $fett('Netzwerk erweitern').': Du hast',
+            $fett('Neue Projekte ins Leben rufen').': Du hast',
+            $fett('Bewusstsein schaffen').': Du möchtest',
+            '<p>Mit deiner Mitgliedschaft wirst du Teil von etwas',
+        ], false)->assertDontSee('*Eigene Erfahrungen', false);
+    }
+
+    public function test_bestehende_mitgliedschaft_bekommt_die_hervorhebungen(): void
+    {
+        $neu = AltseiteSeeder::NEUE_TEXTE['mitgliedschaft']['Wir brauchen dich!'];
+        $block = Page::where('slug', 'mitgliedschaft')->where('locale', 'de')->firstOrFail()
+            ->blocks()->where('typ', 'text')->get()
+            ->first(fn ($b) => ($b->data['titel'] ?? null) === 'Wir brauchen dich!');
+
+        // Stand nach KEV-93: Taddis Text ohne Hervorhebung.
+        $block->update(['data' => array_replace($block->data, [
+            'absaetze' => array_map(fn ($a) => str_replace('*', '', $a), $neu),
+        ])]);
+
+        $migration = require database_path('migrations/2026_10_18_200000_mitgliedschaft_wir_brauchen_dich_hervorheben.php');
+        $migration->up();
+        $this->assertSame($neu, $block->fresh()->data['absaetze']);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $this->assertStringStartsWith('*Your own experiences*:', $woerterbuch[$neu[1]]['en']);
+
+        // Die KEV-93-Migration findet ihren alten Stand weiterhin, obwohl der
+        // Seeder jetzt Sternchen enthält: einmal zurück und wieder vor.
+        $kev93 = require database_path('migrations/2026_10_08_190000_mitgliedschaft_wir_brauchen_dich.php');
+        $kev93->down();
+        $this->assertStringStartsWith('Warum solltest ausgerechnet DU', $block->fresh()->data['absaetze'][0]);
+        $this->assertStringNotContainsString('*', implode(' ', $block->fresh()->data['absaetze']));
+        $kev93->up();
+        $this->assertSame($neu, $block->fresh()->data['absaetze']);
     }
 
     /** KEV-94: neuer Text von Taddi unter „Antrag auf Mitgliedschaft“. */

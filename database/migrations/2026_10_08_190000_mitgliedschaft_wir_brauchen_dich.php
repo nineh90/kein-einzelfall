@@ -41,12 +41,17 @@ return new class extends Migration
         $this->tauschen(AltseiteSeeder::NEUE_TEXTE['mitgliedschaft'][self::TITEL], $this->alt());
     }
 
-    /** Der Text der Altseite: Taddis Mittelteil ist unverändert übernommen. */
+    /**
+     * Der Text der Altseite: Taddis Mittelteil ist unverändert übernommen.
+     * Ohne die Hervorhebungen, die seit KEV-126 im Seeder stehen: Die Altseite
+     * hatte keine.
+     */
     private function alt(): array
     {
         $neu = AltseiteSeeder::NEUE_TEXTE['mitgliedschaft'][self::TITEL];
+        $mitte = array_map(fn (string $absatz) => str_replace('*', '', $absatz), array_slice($neu, 2, -1));
 
-        return [...self::ALT_ANFANG, ...array_slice($neu, 2, -1), self::ALT_ENDE];
+        return [...self::ALT_ANFANG, ...$mitte, self::ALT_ENDE];
     }
 
     private function tauschen(array $von, array $nach): void
