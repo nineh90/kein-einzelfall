@@ -446,6 +446,39 @@ class StartseiteTest extends TestCase
             ->assertDontSee('Vereinsarbeit');
     }
 
+    /** KEV-117: zweiter Absatz am Ende des Abschnitts „Verein“. */
+    public function test_vereinsabschnitt_hat_den_zweiten_absatz(): void
+    {
+        $this->get('/')->assertSeeInOrder([
+            'was Betroffene bewegt.</p>',
+            '<p>Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und Interessierten und fördern '
+                .'den Austausch auf Augenhöhe mit Fachpersonen.</p>',
+            'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.',
+        ], false);
+    }
+
+    public function test_bestehende_startseite_bekommt_den_zweiten_vereinsabsatz(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/verein');
+        $erster = $block->data['absaetze'][0];
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [$erster]])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_18_130000_verein_zweiter_absatz.php');
+        $migration->up();
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame([$erster, StartseiteSeeder::VEREIN_ZWEITER_ABSATZ], $data['absaetze']);
+        $this->assertSame($schluessel, array_keys($data));
+
+        // Ein im Panel umgeschriebener Abschnitt bleibt, wie er ist.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text.']])]);
+        $migration->up();
+        $this->assertSame(['Eigener Text.'], $block->fresh()->data['absaetze']);
+    }
+
     public function test_bestehende_startseite_bekommt_den_neuen_vereinsabschnitt(): void
     {
         $block = $this->startseite()->blocks()->where('typ', 'text')->get()

@@ -122,6 +122,10 @@ class StartseiteSeeder extends Seeder
         return true;
     }
 
+    /** Abschnitt „Verein“: zweiter Absatz von Taddi (KEV-117). */
+    public const VEREIN_ZWEITER_ABSATZ = 'Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und '
+        .'Interessierten und fördern den Austausch auf Augenhöhe mit Fachpersonen.';
+
     /**
      * Leitsatz in Handschrift, seit KEV-119 unter dem Absatz statt unter der
      * Überschrift. Vorher „Gute Ideen brauchen Rückenwind.“ (KEV-56).
@@ -274,6 +278,7 @@ class StartseiteSeeder extends Seeder
                         .'gegründet.* Aus Erfahrung wurde Wissen und aus Wissen wurde '
                         .'Betroffenenexpertise. Heute schaffen wir Räume für Austausch, teilen '
                         .'Wissen und machen sichtbar, was Betroffene bewegt.',
+                        self::VEREIN_ZWEITER_ABSATZ,
                     ],
                     'hand' => 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.',
                     'cta' => ['label' => 'Mehr über den Verein', 'url' => '/verein', 'variant' => 'primary'],
