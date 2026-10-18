@@ -763,10 +763,45 @@ class StartseiteTest extends TestCase
         $migration = require database_path('migrations/2026_10_13_120000_arbeitsgruppenkarte_text_erneuern.php');
         $migration->up();
 
+        // Die Migration setzt den jeweils aktuellen Text, seit KEV-114 also
+        // gleich den neuesten.
         $this->assertSame(StartseiteSeeder::ARBEITSGRUPPEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
-        $this->get('/')->assertSee('<strong class="font-semibold text-ink">Du hast Ideen, Wissen, bist '
-            .'kreativ oder hast einfach Lust, etwas zu verändern?</strong> In unseren Arbeitsgruppen', false)
-            ->assertDontSee('Um unsere Arbeit weiter zu professionalisieren');
+        $this->get('/')->assertDontSee('Um unsere Arbeit weiter zu professionalisieren');
+    }
+
+    /**
+     * KEV-114: Karte „Arbeitsgruppen“ mit Taddis neuem Text. Der Satz aus
+     * ihren Anführungszeichen fett und als eigener Absatz.
+     */
+    public function test_arbeitsgruppenkarte_hat_fetten_ersten_absatz(): void
+    {
+        $this->get('/')->assertSeeInOrder([
+            '<span><strong class="font-semibold text-ink">Gute Ideen werden sichtbar, wenn wir sie gemeinsam weiterdenken.</strong></span>',
+            '<span>In unseren Arbeitsgruppen kommen Menschen zusammen,',
+            'oder einfach mit Lust, etwas zu bewegen.</span>',
+        ], false)->assertDontSee('Du hast Ideen, Wissen, bist kreativ');
+    }
+
+    public function test_bestehende_arbeitsgruppenkarte_bekommt_den_text_mit_absatz(): void
+    {
+        $kev49 = '*Du hast Ideen, Wissen, bist kreativ oder hast einfach Lust, etwas zu verändern?* In unseren '
+            .'Arbeitsgruppen bringen Menschen ihre Erfahrungen, Perspektiven und ihr Wissen zusammen, '
+            .'entwickeln daraus Ideen und setzen gemeinsam Projekte in Bewegung. Du kannst Dich jederzeit in '
+            .'laufende Arbeitsgruppen einbringen – auch ohne Vorkenntnisse.';
+
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/arbeitsgruppen', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = $kev49;
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_18_160000_arbeitsgruppenkarte_text_mit_absatz.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::ARBEITSGRUPPEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+        $this->assertStringStartsWith("*Good ideas become visible when we develop them further together.*\n",
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::ARBEITSGRUPPEN_KARTE_TEXT]['en']);
     }
 
     /**

@@ -28,8 +28,9 @@ class ContentTreueTest extends TestCase
         'Du fühlst Dich mit unserer Vision verbunden?',
         // Seit KEV-48 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'Manchmal tut es gut, Menschen zu treffen',
-        // Seit KEV-49 ein neuer Text von Taddi statt des Altseiten-Satzes.
-        'In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen',
+        // Seit KEV-49 ein neuer Text von Taddi statt des Altseiten-Satzes,
+        // seit KEV-114 noch einmal neu.
+        'In unseren Arbeitsgruppen kommen Menschen zusammen',
         // Seit KEV-52 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'Deine Spende macht unsere Arbeit möglich.',
         // „Sei Du dabei, jede Unterstützung zählt“ steht seit KEV-120 nicht

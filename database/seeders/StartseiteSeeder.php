@@ -182,11 +182,15 @@ class StartseiteSeeder extends Seeder
         ['label' => 'Arbeitsgruppen', 'url' => '/arbeitsgruppen', 'variant' => 'ghost'],
     ];
 
-    public const ARBEITSGRUPPEN_KARTE_TEXT = '*Du hast Ideen, Wissen, bist kreativ oder hast einfach '
-        .'Lust, etwas zu verändern?* In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen, '
-        .'Perspektiven und ihr Wissen zusammen, entwickeln daraus Ideen und setzen gemeinsam Projekte '
-        .'in Bewegung. Du kannst Dich jederzeit in laufende Arbeitsgruppen einbringen – auch ohne '
-        .'Vorkenntnisse.';
+    /*
+     * Text von Taddi (KEV-114, vorher KEV-49): der Satz aus ihren
+     * Anführungszeichen fett und als eigener Absatz, wie bei „Anfragen &
+     * Austausch“.
+     */
+    public const ARBEITSGRUPPEN_KARTE_TEXT = "*Gute Ideen werden sichtbar, wenn wir sie gemeinsam weiterdenken.*\n"
+        .'In unseren Arbeitsgruppen kommen Menschen zusammen, die gemeinsam Ideen entwickeln, Projekte '
+        .'voranbringen und Veränderungen anstoßen möchten. Du kannst Dich jederzeit einbringen – mit '
+        .'Deinem Wissen, Deiner Erfahrung, Deiner Kreativität oder einfach mit Lust, etwas zu bewegen.';
 
     /*
      * Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert. Bis
@@ -252,7 +256,7 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'network',
                             'titel' => 'Arbeitsgruppen',
-                            // Text von Taddi, 13.10.2026 (KEV-49), *fett* wie von ihr markiert.
+                            // Text von Taddi, 18.10.2026 (KEV-114), *fett* wie von ihr markiert.
                             'text' => self::ARBEITSGRUPPEN_KARTE_TEXT,
                             'url' => '/arbeitsgruppen',
                             'link' => 'Zu den Arbeitsgruppen',
