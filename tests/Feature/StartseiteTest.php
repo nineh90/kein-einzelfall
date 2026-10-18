@@ -591,6 +591,29 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('Was wir gemeinsam bewegen')->assertDontSee('Unsere Aufgabe');
     }
 
+    /**
+     * KEV-111: „Was wir gemeinsam bewegen …“, das „…“ fest am letzten Wort
+     * (geschütztes Leerzeichen). Auch auf bestehenden Startseiten, beide Sprachen.
+     */
+    public function test_einstiegskarten_ueberschrift_endet_mit_drei_punkten(): void
+    {
+        $this->get('/')->assertSee("Was wir gemeinsam bewegen\u{00A0}…", false);
+
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $block->update(['data' => array_replace($block->data, ['titel' => 'Was wir gemeinsam bewegen'])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_18_190000_einstiegskarten_ueberschrift_mit_punkten.php');
+        $migration->up();
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::KARTEN_UEBERSCHRIFT, $block->fresh()->data['titel']);
+        $this->assertSame($schluessel, array_keys($block->fresh()->data));
+        $this->assertSame("What we achieve together\u{00A0}…",
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::KARTEN_UEBERSCHRIFT]['en']);
+    }
+
     /** KEV-48: Selbsthilfe-Karte mit Taddis Text, der markierte Satz fett. */
     public function test_bestehende_startseite_bekommt_den_neuen_selbsthilfekartentext(): void
     {

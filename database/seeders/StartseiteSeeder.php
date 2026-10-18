@@ -122,6 +122,13 @@ class StartseiteSeeder extends Seeder
         return true;
     }
 
+    /**
+     * Überschrift über den Einstiegskarten, seit KEV-111 mit Auslassungspunkten
+     * (Taddi: „drei Punkte“). Davor ein geschütztes Leerzeichen, damit „…“
+     * auf dem Handy nicht allein in die nächste Zeile rutscht.
+     */
+    public const KARTEN_UEBERSCHRIFT = "Was wir gemeinsam bewegen\u{00A0}…";
+
     /** Abschnitt „Verein“: zweiter Absatz von Taddi (KEV-117). */
     public const VEREIN_ZWEITER_ABSATZ = 'Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und '
         .'Interessierten und fördern den Austausch auf Augenhöhe mit Fachpersonen.';
@@ -255,7 +262,7 @@ class StartseiteSeeder extends Seeder
                 'typ' => 'quick_access',
                 'data' => [
                     // Bis 27.09.2026 „Unsere Aufgabe“ (Wunsch von Taddi, KEV-52/53).
-                    'titel' => 'Was wir gemeinsam bewegen',
+                    'titel' => self::KARTEN_UEBERSCHRIFT,
                     'sub' => null,
                     'karten' => [
                         [
