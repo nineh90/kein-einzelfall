@@ -345,10 +345,39 @@ class StartseiteTest extends TestCase
         $abschnitt = substr($html, strpos($html, 'id="spenden"'));
         $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
 
-        $this->assertStringContainsString('Gute Ideen brauchen Rückenwind.', $abschnitt);
         $this->assertStringContainsString('Deine Spende hilft uns, Projekte umzusetzen', $abschnitt);
         $this->assertStringNotContainsString('Mit Deiner Spende hilfst Du uns', $abschnitt);
         $this->assertSame(1, substr_count($abschnitt, 'bg-green-brand'), 'zwei Striche über der Überschrift');
+
+        // KEV-119: „Deinen Rückenwind“, und der Leitsatz schliesst den Absatz
+        // ab, statt unter der Überschrift zu stehen.
+        $this->assertMatchesRegularExpression(
+            '/Jetzt spenden\s*<\/h2>\s*<p[^>]*>\s*Deine Spende hilft uns.*?weiter wachsen zu lassen\.<\/p>\s*'
+            .'<p class="[^"]*font-hand[^"]*">Gute Ideen brauchen Deinen Rückenwind\.<\/p>/s', $abschnitt);
+        $this->assertStringNotContainsString('Gute Ideen brauchen Rückenwind.', $abschnitt);
+    }
+
+    /**
+     * KEV-119: Der neue Leitsatz kommt auch auf bestehende Startseiten. Die
+     * englische baut der UebersetzungenSeeder aus dem Wörterbuch neu.
+     */
+    public function test_bestehende_startseite_bekommt_den_neuen_spendenleitsatz(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'donation_options')->first();
+        $block->update(['data' => array_replace($block->data, ['hand' => 'Gute Ideen brauchen Rückenwind.'])]);
+
+        $migration = require database_path('migrations/2026_10_18_120000_spenden_leitsatz_deinen_rueckenwind.php');
+        $migration->up();
+
+        $this->assertSame('Gute Ideen brauchen Deinen Rückenwind.', $block->fresh()->data['hand']);
+        $this->assertSame('Good ideas need your tailwind.',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                ['Gute Ideen brauchen Deinen Rückenwind.']['en']);
+
+        // Ein im Panel gepflegter Leitsatz bleibt stehen.
+        $block->update(['data' => array_replace($block->data, ['hand' => 'Eigener Satz.'])]);
+        $migration->up();
+        $this->assertSame('Eigener Satz.', $block->fresh()->data['hand']);
     }
 
     public function test_bestehende_startseite_bekommt_den_neuen_spendentext(): void

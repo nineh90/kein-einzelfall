@@ -123,6 +123,12 @@ class StartseiteSeeder extends Seeder
     }
 
     /**
+     * Leitsatz in Handschrift, seit KEV-119 unter dem Absatz statt unter der
+     * Überschrift. Vorher „Gute Ideen brauchen Rückenwind.“ (KEV-56).
+     */
+    public const SPENDEN_LEITSATZ = 'Gute Ideen brauchen Deinen Rückenwind.';
+
+    /**
      * Konto und PayPal aus App\Support\Spenden (Bestand der Altseite).
      * Leitsatz und Einleitung hat Taddi am 27.09.2026 geschickt (KEV-56).
      * Vorher stand hier der Text der Einstiegskarte „Spenden“, auf derselben
@@ -141,7 +147,7 @@ class StartseiteSeeder extends Seeder
             'text' => 'Deine Spende hilft uns, Projekte umzusetzen, Wissen kostenfrei zugänglich '
                 .'zu machen, aufzuklären, Stimmen hörbar zu machen und KE!N EINZELFALL als '
                 .'Informations-, Austausch- und Selbstwirksamkeitsplattform weiter wachsen zu lassen.',
-            'hand' => 'Gute Ideen brauchen Rückenwind.',
+            'hand' => self::SPENDEN_LEITSATZ,
             'kompakt' => true,
             // Dieselbe Quelle wie die Spendenseite — eine IBAN, eine Stelle.
             'bank' => Spenden::konto(),

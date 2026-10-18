@@ -2,7 +2,7 @@
     'eyebrow' => null,
     'titel' => 'Jetzt spenden',
     'text' => null,        // Einleitung — auf der Startseite: warum spenden
-    'hand' => null,        // handschriftlicher Leitsatz unter der Überschrift
+    'hand' => null,        // handschriftlicher Leitsatz unter der Einleitung
     'bank' => null,        // ['institut'=>, 'iban'=>, 'bic'=>, 'empfaenger'=>]
     'paypal' => null,      // ['empfaenger'=>, 'url'=>]
     'projekte' => [],      // [['titel'=>, 'widget'=>, 'url'=>], ...]
@@ -61,22 +61,21 @@
                     <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 @endif
 
-                <h2 id="spenden-titel" @class([
-                    'font-display text-2xl font-medium text-green lg:text-3xl',
-                    'mb-4' => ! $hand,
-                ])>
+                <h2 id="spenden-titel" class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
                     {{ __($titel) }}
                 </h2>
 
-                {{-- Leitsatz in Handschrift wie „Opferhilfe für soziale
-                     Gerechtigkeit!“ bei „Vereinsarbeit“. Ein Absatz, keine
-                     Überschrift: Er gehört zu „Jetzt spenden“. --}}
-                @if ($hand)
-                    <p class="mb-4 mt-2 font-hand text-2xl text-green">{{ $hand }}</p>
-                @endif
-
                 @if ($text)
                     <p class="max-w-prose leading-relaxed text-ink-soft">{{ $text }}</p>
+                @endif
+
+                {{-- Leitsatz in Handschrift wie „Opferhilfe für soziale
+                     Gerechtigkeit!“ bei „Vereinsarbeit“. Ein Absatz, keine
+                     Überschrift: Er gehört zu „Jetzt spenden“. Seit KEV-119
+                     unter der Einleitung statt unter der Überschrift, als
+                     Schlusssatz (Taddi). --}}
+                @if ($hand)
+                    <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
                 @endif
 
                 @if ($mehr)
