@@ -107,6 +107,26 @@ class ModuleTest extends TestCase
     }
 
     /**
+     * KEV-122: Unter dem Vereinsnamen das Motto in der Handschrift, jeder Satz
+     * für sich, damit es nur zwischen den Sätzen umbricht. Auf Englisch übersetzt.
+     */
+    public function test_fusszeile_zeigt_das_motto_unter_dem_namen(): void
+    {
+        $html = $this->get('/module-demo')->getContent();
+        $fuss = substr($html, strpos($html, '<footer'));
+
+        $this->assertMatchesRegularExpression(
+            '/KE!N EINZELFALL e\.V\.<\/span>\s*.*?<p class="font-hand[^"]*">\s*'
+            .'<span class="inline-block">Für Sichtbarkeit\.<\/span>\s*'
+            .'<span class="inline-block">Für eine Stimme\.<\/span>\s*'
+            .'<span class="inline-block">Für Gehör\.<\/span>/s', $fuss);
+
+        app()->setLocale('en');
+        $this->assertSame('For visibility. For a voice. For being heard.',
+            __('Für Sichtbarkeit. Für eine Stimme. Für Gehör.'));
+    }
+
+    /**
      * KEV-124: Unter Kontakt die vier Postfächer statt „Anfragen & Austausch“.
      * Bricht eine Adresse um, dann nach dem @, nie am Bindestrich der Domain.
      */

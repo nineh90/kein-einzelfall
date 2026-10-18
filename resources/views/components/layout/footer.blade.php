@@ -6,14 +6,28 @@
 <footer class="bg-green-deep px-4 md:px-8 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 text-on-green lg:px-10 xl:pb-8">
     <div class="mx-auto max-w-6xl">
 
-        <div class="mb-8 flex items-center gap-3">
+        {{-- Unter 12 rem neben dem Logo rutschen Name und Motto darunter: Bei
+             320 px und größter Schrift brachen sie sonst mitten im Wort
+             („EINZELFAL“ / „L“). In rem, damit die Grenze mitwächst. --}}
+        <div class="mb-8 flex flex-wrap items-center gap-3">
             {{-- Das Logo ist schwarz auf transparent und auf dunklem Grund unsichtbar.
                  Bis eine helle Vektor-Variante vorliegt: cremefarbenes Badge als Träger. --}}
-            <span class="flex h-13 w-13 items-center justify-center rounded-full bg-cream p-2.5">
+            <span class="flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-cream p-2.5">
                 <img src="/img/logo.png" alt="" width="52" height="52" loading="lazy" decoding="async"
                      class="h-full w-full object-contain">
             </span>
-            <span class="font-display text-lg">KE!N EINZELFALL e.V.</span>
+            <div class="min-w-0 flex-1 basis-48">
+                <span class="block font-display text-lg">KE!N EINZELFALL e.V.</span>
+                {{-- Das Motto des Vereins in der Handschrift (Kundenwunsch, KEV-122),
+                     im hellen Grün wie die Handschrift im CTA-Band. Jeder Satz
+                     als Block: Auf dem Handy bricht es zwischen den Sätzen um,
+                     nicht in „Für eine / Stimme“. --}}
+                <p class="font-hand text-xl leading-tight text-on-green-hand">
+                    @foreach (preg_split('/(?<=\.)\s+/', __('Für Sichtbarkeit. Für eine Stimme. Für Gehör.')) as $satz)
+                        <span class="inline-block">{{ $satz }}</span>
+                    @endforeach
+                </p>
+            </div>
         </div>
 
         {{-- Notfall-Zeile auf jeder Seite (KEV-42). Das Hinweisfenster sagt „Die
