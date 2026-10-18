@@ -211,16 +211,48 @@ class StartseiteTest extends TestCase
         $typen = $this->startseite()->blocks()->orderBy('position')->pluck('typ')->all();
 
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
             $typen,
         );
+    }
+
+    /** KEV-121: Der Abschnitt „Anfragen & Austausch“ am Ende ist weg, der Weg zur Anfrage bleibt. */
+    public function test_startseite_endet_ohne_kontaktabschluss(): void
+    {
+        $this->assertFalse($this->startseite()->blocks()->where('typ', 'contact_close')->exists());
+
+        $html = $this->get('/')->getContent();
+        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch', $html);
+        // Knopf im Aufmacher und Karte unter „Was wir gemeinsam bewegen“.
+        $this->assertGreaterThanOrEqual(2, substr_count($html, 'href="/anfragen"'));
+    }
+
+    public function test_kontaktabschluss_verschwindet_von_bestehenden_startseiten(): void
+    {
+        // Stand vor KEV-121, in beiden Sprachfassungen.
+        $de = $this->startseite();
+        $de->blocks()->create(['typ' => 'contact_close', 'position' => 99, 'data' => ['titel' => 'Anfragen & Austausch']]);
+        $en = $de->replicate()->fill(['locale' => 'en', 'uebersetzungs_gruppe' => $de->uebersetzungs_gruppe]);
+        $en->save();
+        $en->blocks()->create(['typ' => 'hero', 'position' => 0, 'data' => ['titel' => 'Hero']]);
+        $en->blocks()->create(['typ' => 'contact_close', 'position' => 1, 'data' => ['titel' => 'Enquiries & exchange']]);
+        $vorher = $de->blocks()->count();
+
+        $migration = require database_path('migrations/2026_10_18_100000_startseite_ohne_kontaktabschluss.php');
+        $migration->up();
+        $migration->up();
+
+        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
+            $de->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
+        $this->assertSame($vorher - 1, $de->fresh()->blocks()->count());
+        $this->assertSame(['hero'], $en->fresh()->blocks()->pluck('typ')->all());
     }
 
     public function test_band_rueckt_auf_bestehenden_startseiten_unter_verein(): void
     {
         // Stand vor KEV-106: das Band direkt hinter der Spendenmöglichkeit.
         $seite = $this->startseite();
-        $reihenfolge = ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band', 'contact_close'];
+        $reihenfolge = ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band'];
         $bloecke = $seite->blocks()->orderBy('position')->get()->all();
         $band = array_values(array_filter($bloecke, fn ($b) => $b->typ === 'cta_band'))[0];
         $bloecke = array_values(array_filter($bloecke, fn ($b) => $b->typ !== 'cta_band'));
@@ -232,7 +264,7 @@ class StartseiteTest extends TestCase
         $migration = require database_path('migrations/2026_10_07_190000_unterstuetzung_unter_verein.php');
         $migration->up();
 
-        $neu = ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'];
+        $neu = ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'];
         $this->assertSame($neu, $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
 
         // Ein zweiter Lauf ändert nichts mehr.
@@ -258,10 +290,11 @@ class StartseiteTest extends TestCase
 
         $this->get('/')->assertSee('DE79 8306', false);
 
-        // Seit KEV-106 vor den Kontaktabschluss, das Band steht weiter oben.
+        // Ans Ende: Den Kontaktabschluss gibt es seit KEV-121 nicht mehr, das
+        // Band steht seit KEV-106 weiter oben.
         $typen = $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all();
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
             $typen,
         );
         // Keine zwei Bausteine auf derselben Position — sonst wäre die
@@ -298,8 +331,10 @@ class StartseiteTest extends TestCase
     {
         // Der Verein kann das Band im Panel löschen. Dann darf der Baustein
         // trotzdem nicht ans Ende hinter den Kontaktabschluss rutschen.
+        // Stand vor KEV-121: Da stand der Abschluss noch am Ende.
         $seite = $this->startseite();
         $seite->blocks()->whereIn('typ', ['donation_options', 'cta_band'])->delete();
+        $seite->blocks()->create(['typ' => 'contact_close', 'position' => 99, 'data' => ['titel' => 'Anfragen & Austausch']]);
 
         $this->spendenMigration()->up();
 
@@ -506,7 +541,7 @@ class StartseiteTest extends TestCase
 
         // Das Band steht seit KEV-106 schon unter „Mitglieder“.
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options', 'contact_close'],
+            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
             $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all(),
         );
 
@@ -580,8 +615,9 @@ class StartseiteTest extends TestCase
         $this->assertStringContainsString('<strong class="font-semibold text-ink">Nur wenn wir miteinander '
             .'reden, können wir gemeinsam etwas bewegen.</strong> Also trau Dich', $html);
 
-        // Der Abschlussblock unten behält seinen Text, das Ticket meint nur die Karte.
-        $this->assertSame(1, substr_count($html, 'Du wünschst einen persönlichen Austausch'));
+        // Der alte Wortlaut steht nirgends mehr: Die Karte hat den neuen, und
+        // den Abschlussblock unten mit dem alten gibt es seit KEV-121 nicht mehr.
+        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch', $html);
     }
 
     /** KEV-49: Karte „Arbeitsgruppen“ mit Taddis Text, der markierte Satz fett. */
@@ -618,10 +654,13 @@ class StartseiteTest extends TestCase
         $this->assertStringContainsString('„Exit“ in der Leiste unten', $aufmacher);
         $this->assertStringContainsString('TLS-verschlüsselt', $aufmacher);
 
-        // Am Seitenende nicht noch einmal.
-        $ende = substr($html, strpos($html, 'id="kontakt-titel"'));
-        $this->assertStringNotContainsString('jederzeit sofort verlassen', $ende);
-        $this->assertStringNotContainsString('TLS-verschlüsselt', substr($ende, 0, strpos($ende, '<footer')));
+        // Nicht noch einmal weiter unten. Bis KEV-121 hiess das: nicht im
+        // Kontaktabschluss am Seitenende, den es seitdem nicht mehr gibt.
+        // Jedes Vorkommen liegt im Aufmacher (dort je eine Fassung für Handy und Desktop).
+        $this->assertSame(substr_count($aufmacher, 'jederzeit sofort verlassen'),
+            substr_count($html, 'jederzeit sofort verlassen'));
+        $this->assertSame(substr_count($aufmacher, 'TLS-verschlüsselt'),
+            substr_count(substr($html, 0, strpos($html, '<footer')), 'TLS-verschlüsselt'));
     }
 
     /** Die Migration, die die Spendenmöglichkeit auf bestehenden Datenbanken nachträgt. */

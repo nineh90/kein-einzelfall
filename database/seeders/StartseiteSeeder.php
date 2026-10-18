@@ -151,9 +151,10 @@ class StartseiteSeeder extends Seeder
     }
 
     /**
-     * Die Struktur folgt dem Bestand der Altseite:
-     * Aufmacher · Was wir gemeinsam bewegen · Verein · Mitglieder ·
-     * Hilfe-Nummern · Spendenmöglichkeit · Spendenaufruf · Kontaktabschluss.
+     * Die Struktur folgt dem Bestand der Altseite, umgestellt auf Wunsch des
+     * Vereins: Aufmacher · Was wir gemeinsam bewegen · Verein · Mitglieder ·
+     * Unterstützung · Hilfe-Nummern · Spendenmöglichkeit. Den Kontaktabschluss
+     * „Anfragen & Austausch“ am Ende gibt es seit KEV-121 nicht mehr.
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
@@ -324,22 +325,9 @@ class StartseiteSeeder extends Seeder
                 'data' => self::spendenBaustein(),
             ],
 
-            [
-                'typ' => 'contact_close',
-                'data' => [
-                    'titel' => 'Anfragen & Austausch',
-                    'text' => 'Du wünschst einen persönlichen Austausch in Bezug auf das Soziale '
-                        .'Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder '
-                        .'den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder möchtest '
-                        .'uns etwas mitteilen?',
-                    // Der Hinweis zum sofortigen Verlassen steht seit KEV-30
-                    // im Band unten im Aufmacher, nicht mehr hier.
-                    'ctas' => [
-                        ['label' => 'Anfrage stellen', 'url' => '/anfragen', 'variant' => 'primary'],
-                        ['label' => 'Kontakt', 'url' => '/kontakt', 'variant' => 'ghost'],
-                    ],
-                ],
-            ],
+            // Bis KEV-121 folgte hier der Kontaktabschluss „Anfragen &
+            // Austausch“. Der Weg zur Anfrage bleibt über den Knopf im
+            // Aufmacher und die Karte unter „Was wir gemeinsam bewegen“.
         ];
     }
 }

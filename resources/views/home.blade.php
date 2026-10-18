@@ -13,8 +13,9 @@
       - Kein Seitenkopf. Die Überschrift der Startseite steht im Aufmacher;
         ein zusätzlicher Seitenkopf ergäbe eine zweite <h1>.
       - Keine Brotkrumen, kein „Weiterlesen“, kein angehängter Kontaktschluss.
-        Die Startseite ist der Anfang des Weges, nicht eine Station darin — und
-        ihren Kontaktabschluss bringt sie als eigenen Baustein mit.
+        Die Startseite ist der Anfang des Weges, nicht eine Station darin. Bis
+        KEV-121 brachte sie ihren Kontaktabschluss als eigenen Baustein mit;
+        der Verein wollte ihn weg haben.
 
     Die Texte stammen wörtlich vom Verein (Bestand von kein-einzelfall.de,
     Stand 26.07.2026) und stehen im `StartseiteSeeder`.
