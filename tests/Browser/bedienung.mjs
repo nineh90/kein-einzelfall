@@ -455,11 +455,14 @@ console.log('\nSpendenhinweis wartet auf die Trigger-Warnung')
 // um 68px heraus, ohne dass ein einziger Test rot wurde.
 //
 // Der Text ist im Panel pflegbar. Wer ihn verlaengert, soll es hier merken.
+//
+// Geprueft auf /verein: Seit KEV-120 steht das Band nicht mehr auf der
+// Startseite, sondern auf einzelnen Unterseiten (UnterstuetzungsbandSeeder).
 
 console.log('\nVereinsname im Hinweisband')
 {
     for (const breite of [320, 390, 768, 1400]) {
-        const seite = await oeffnen({ breite })
+        const seite = await oeffnen({ breite, pfad: '/verein' })
 
         const mass = await seite.evaluate(() => {
             const schrift = document.querySelector('[data-wasserzeichen]')

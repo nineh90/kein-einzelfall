@@ -563,6 +563,10 @@ class AltseiteSeeder extends Seeder
         // ueberfuehren und die betroffenen Seiten neu zusammensetzen.
         $this->call(TeamUndGruppenSeeder::class);
 
+        // Das Band „Unterstützung“ auf Verein, Team und Co. (KEV-120). Die
+        // Migration dafür lief, bevor es diese Seiten gab.
+        $this->call(UnterstuetzungsbandSeeder::class);
+
         // Titelbilder im Seitenkopf. Die Migration dafür lief schon, als die
         // Datenbank noch leer war, und hat nichts gefunden.
         Titelbilder::setzen();

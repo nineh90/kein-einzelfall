@@ -32,7 +32,9 @@ class ContentTreueTest extends TestCase
         'In unseren Arbeitsgruppen bringen Menschen ihre Erfahrungen',
         // Seit KEV-52 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'Deine Spende macht unsere Arbeit möglich.',
-        'Sei Du dabei, jede Unterstützung zählt',
+        // „Sei Du dabei, jede Unterstützung zählt“ steht seit KEV-120 nicht
+        // mehr hier, sondern im Band auf einzelnen Unterseiten
+        // (UnterstuetzungsbandSeeder, StartseiteTest).
     ];
 
     /**

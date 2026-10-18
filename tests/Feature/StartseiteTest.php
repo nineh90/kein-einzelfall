@@ -202,18 +202,16 @@ class StartseiteTest extends TestCase
     }
 
     /**
-     * KEV-106: Das Band „Unterstützung“ steht unter „Verein“ und „Mitglieder“.
-     * Direkt unter der Spendenmöglichkeit hiess es zweimal „Spenden“
-     * untereinander.
+     * KEV-120: Das Band „Unterstützung“ ist von der Startseite weg. Auch unter
+     * „Mitglieder“ (KEV-106) rief sie damit zweimal kurz hintereinander zum
+     * Spenden auf. Es steht jetzt auf Unterseiten (UnterstuetzungsbandTest).
      */
-    public function test_hinweisband_steht_unter_verein_nicht_unter_den_spenden(): void
+    public function test_startseite_ruft_nur_einmal_zum_spenden_auf(): void
     {
         $typen = $this->startseite()->blocks()->orderBy('position')->pluck('typ')->all();
 
-        $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
-            $typen,
-        );
+        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options'], $typen);
+        $this->get('/')->assertDontSee('Sei Du dabei, jede Unterstützung zählt');
     }
 
     /** KEV-121: Der Abschnitt „Anfragen & Austausch“ am Ende ist weg, der Weg zur Anfrage bleibt. */
@@ -242,7 +240,7 @@ class StartseiteTest extends TestCase
         $migration->up();
         $migration->up();
 
-        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
+        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options'],
             $de->fresh()->blocks()->orderBy('position')->pluck('typ')->all());
         $this->assertSame($vorher - 1, $de->fresh()->blocks()->count());
         $this->assertSame(['hero'], $en->fresh()->blocks()->pluck('typ')->all());
@@ -251,15 +249,11 @@ class StartseiteTest extends TestCase
     public function test_band_rueckt_auf_bestehenden_startseiten_unter_verein(): void
     {
         // Stand vor KEV-106: das Band direkt hinter der Spendenmöglichkeit.
+        // Seit KEV-120 gibt es das Band auf der Startseite nicht mehr, darum
+        // legt der Test es selbst an.
         $seite = $this->startseite();
         $reihenfolge = ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band'];
-        $bloecke = $seite->blocks()->orderBy('position')->get()->all();
-        $band = array_values(array_filter($bloecke, fn ($b) => $b->typ === 'cta_band'))[0];
-        $bloecke = array_values(array_filter($bloecke, fn ($b) => $b->typ !== 'cta_band'));
-        array_splice($bloecke, array_search('donation_options', array_column($bloecke, 'typ'), true) + 1, 0, [$band]);
-        foreach ($bloecke as $position => $block) {
-            $block->update(['position' => $position]);
-        }
+        $seite->blocks()->create(['typ' => 'cta_band', 'position' => 99, 'data' => ['zitat' => 'Band']]);
 
         $migration = require database_path('migrations/2026_10_07_190000_unterstuetzung_unter_verein.php');
         $migration->up();
@@ -291,12 +285,9 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertSee('DE79 8306', false);
 
         // Ans Ende: Den Kontaktabschluss gibt es seit KEV-121 nicht mehr, das
-        // Band steht seit KEV-106 weiter oben.
+        // Band seit KEV-120 nicht mehr auf der Startseite.
         $typen = $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all();
-        $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
-            $typen,
-        );
+        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options'], $typen);
         // Keine zwei Bausteine auf derselben Position — sonst wäre die
         // Reihenfolge Zufall. Lückenlos müssen sie nicht sein.
         $positionen = $seite->fresh()->blocks()->pluck('position')->all();
@@ -539,15 +530,15 @@ class StartseiteTest extends TestCase
         $migration = require database_path('migrations/2026_09_27_200000_hilfe_box_unter_mitglieder.php');
         $migration->up();
 
-        // Das Band steht seit KEV-106 schon unter „Mitglieder“.
+        // Das Band gibt es seit KEV-120 auf der Startseite nicht mehr.
         $this->assertSame(
-            ['hero', 'quick_access', 'text', 'text', 'cta_band', 'hilfe_box', 'donation_options'],
+            ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options'],
             $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all(),
         );
 
         // Ein zweiter Lauf ändert nichts mehr.
         $migration->up();
-        $this->assertSame('hilfe_box', $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all()[5]);
+        $this->assertSame('hilfe_box', $seite->fresh()->blocks()->orderBy('position')->pluck('typ')->all()[4]);
     }
 
     /** KEV-43: neuer Aufmacher-Text von Taddi, auch in bestehenden Datenbanken. */

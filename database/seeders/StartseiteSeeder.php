@@ -153,8 +153,9 @@ class StartseiteSeeder extends Seeder
     /**
      * Die Struktur folgt dem Bestand der Altseite, umgestellt auf Wunsch des
      * Vereins: Aufmacher · Was wir gemeinsam bewegen · Verein · Mitglieder ·
-     * Unterstützung · Hilfe-Nummern · Spendenmöglichkeit. Den Kontaktabschluss
-     * „Anfragen & Austausch“ am Ende gibt es seit KEV-121 nicht mehr.
+     * Hilfe-Nummern · Spendenmöglichkeit. Den Kontaktabschluss „Anfragen &
+     * Austausch“ am Ende gibt es seit KEV-121 nicht mehr, das Band
+     * „Unterstützung“ steht seit KEV-120 auf Unterseiten.
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
@@ -293,20 +294,10 @@ class StartseiteSeeder extends Seeder
                 ],
             ],
 
-            // Stand bis 07.10.2026 direkt unter der Spendenmöglichkeit, dort
-            // hiess es zweimal „Spenden“ untereinander. Auf Wunsch des
-            // Vereins jetzt unter „Verein“ und „Mitglieder“ (KEV-106).
-            [
-                'typ' => 'cta_band',
-                'data' => [
-                    'eyebrow' => 'Unterstützung',
-                    'zitat' => 'Sei Du dabei, jede Unterstützung zählt, egal wie gering!',
-                    'ctas' => [
-                        ['label' => 'Spenden', 'url' => '/spenden', 'variant' => 'light'],
-                        ['label' => 'Mitglied werden', 'url' => '/mitgliedschaft', 'variant' => 'outline'],
-                    ],
-                ],
-            ],
+            // Hier stand bis KEV-120 das Band „Unterstützung“ (Spenden,
+            // Mitglied werden). Auch unter „Mitglieder“ rief die Startseite
+            // damit zweimal kurz hintereinander zum Spenden auf. Es steht
+            // jetzt auf einzelnen Unterseiten, siehe UnterstuetzungsbandSeeder.
 
             // Siehe spendenAnhaengen(): dieselbe Stelle, dieselben Daten.
             // Von Kevin beauftragt, nicht im Altbestand. Stand bis 27.09.2026

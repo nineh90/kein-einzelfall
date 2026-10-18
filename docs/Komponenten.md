@@ -41,9 +41,9 @@ Status: ✅ gebaut · 🔨 geplant · 💭 zu klären
 | `topic_list` | ✅ | Wissen — im Panel pflegbar |
 | `event_teaser` | 🔨 | Startseite |
 | `news_teaser` | 🔨 | Startseite |
-| `cta_band` | ✅ | Startseite — im Panel pflegbar |
+| `cta_band` | ✅ | Verein, Team, Jahresberichte, KE!N EINZELFALL im Dialog (seit KEV-120, vorher Startseite) — im Panel pflegbar |
 | `donation_options` | ✅ | Startseite (kompakt), Spenden — im Panel pflegbar |
-| `contact_close` | ✅ | Startseite, Kontakt — im Panel pflegbar |
+| `contact_close` | ✅ | Kontakt, fest am Ende jeder Unterseite (bis KEV-121 auch Startseite) — im Panel pflegbar |
 
 ## 3. Module, die das Mockup **nicht** zeigt
 
