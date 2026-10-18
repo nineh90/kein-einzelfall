@@ -67,6 +67,30 @@ class TriggerWarnungTest extends TestCase
         $this->assertStringContainsString('aria-labelledby="trigger-warnung-ueberschrift trigger-warnung-titel"', $html);
     }
 
+    /**
+     * KEV-110: Unter der Erklärung die Symbole von Notausgang und Darstellung,
+     * wie auf der Seite, damit man sie gleich wiedererkennt. Plaketten, keine
+     * Knöpfe: Der echte Notausgang im Dialog bleibt der einzige.
+     */
+    public function test_warnung_zeigt_die_symbole_von_notausgang_und_darstellung(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+        $dialog = substr($html, strpos($html, 'id="trigger-warnung"'));
+        $dialog = substr($dialog, 0, strpos($dialog, '</dialog>'));
+        $symbole = substr($dialog, strpos($dialog, '<ul'), strpos($dialog, '</ul>') - strpos($dialog, '<ul'));
+
+        // Dieselben Zeichen wie Notausgang und Darstellung auf der Seite.
+        $this->assertStringContainsString('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>', $symbole);
+        $this->assertSame(2, substr_count($symbole, '<svg'));
+        $this->assertStringContainsString('<strong class="font-semibold text-ink">Notausgang</strong> – verlässt diese Seite sofort', $symbole);
+        $this->assertStringContainsString('<strong class="font-semibold text-ink">Darstellung</strong> – Schrift, Kontrast und mehr einstellen', $symbole);
+        $this->assertStringNotContainsString('<a ', $symbole);
+        $this->assertStringNotContainsString('<button', $symbole);
+        // Gezählt wird das Attribut, nicht der Text: Blade schreibt es als
+        // data-notausgang="data-notausgang".
+        $this->assertSame(1, preg_match_all('/\sdata-notausgang[\s=>]/', $dialog));
+    }
+
     public function test_warnung_steht_auf_jeder_seite(): void
     {
         $this->seed(AltseiteSeeder::class);

@@ -96,6 +96,29 @@
             @endforeach
         </div>
 
+        {{-- Die Symbole von Notausgang und Darstellung, damit man sie auf der
+             Seite gleich wiedererkennt (KEV-110, Wunsch von Taddi). Aussehen
+             wie dort: der grüne Kreis ist der Notausgang auf kleinen Handys,
+             der helle der Knopf der Darstellung.
+             Plaketten, keine Knöpfe: Der Weg hinaus steht unten als echter
+             Knopf, und die Darstellung liesse sich hinter dem offenen Dialog
+             gar nicht bedienen. Bedientexte, kein Seiteninhalt: Taddis Text im
+             Panel bleibt, wie er ist. --}}
+        <ul class="mx-auto mt-6 flex w-fit max-w-full flex-col gap-3 text-left text-[0.9375rem] leading-snug text-ink-soft">
+            <li class="flex items-center gap-3">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green text-on-green">
+                    <x-ui.icon name="exit" :size="18" />
+                </span>
+                <span><strong class="font-semibold text-ink">{{ __('rahmen.notausgang.kopf') }}</strong> {{ __('rahmen.notausgang.erklaerung') }}</span>
+            </li>
+            <li class="flex items-center gap-3">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-cream text-green">
+                    <x-ui.icon name="accessibility" :size="18" />
+                </span>
+                <span><strong class="font-semibold text-ink">{{ __('Darstellung') }}</strong> {{ __('rahmen.trigger.darstellung') }}</span>
+            </li>
+        </ul>
+
         <div class="mt-8 border-t border-line pt-6">
 
             {{-- „Nicht mehr anzeigen“ ist ein Kontrollkästchen und kein Knopf.

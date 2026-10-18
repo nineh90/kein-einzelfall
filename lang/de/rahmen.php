@@ -52,6 +52,8 @@ return [
         'weiter' => 'Verstanden – weiterlesen',
         'nie_mehr' => 'Diesen Hinweis nicht mehr anzeigen',
         'verlassen' => 'Seite sofort verlassen',
+        // Unter der Erklärung, neben dem Symbol der Darstellung (KEV-110).
+        'darstellung' => '– Schrift, Kontrast und mehr einstellen',
         'ohne_js' => 'Dieser Hinweis lässt sich nur mit eingeschaltetem JavaScript '
             .'ausblenden — er merkt sich die Entscheidung im Browser. Du kannst '
             .'trotzdem einfach weiterlesen.',

@@ -39,6 +39,7 @@ return [
         'weiter' => 'Understood – continue',
         'nie_mehr' => 'Do not show this notice again',
         'verlassen' => 'Leave this site now',
+        'darstellung' => '– adjust text size, contrast and more',
         'ohne_js' => 'This notice can only be dismissed with JavaScript enabled — '
             .'it remembers your choice in the browser. You can simply read on.',
     ],
