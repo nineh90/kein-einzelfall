@@ -61,9 +61,10 @@
                             {{ $karte['titel'] }}
                         </span>
                         {{-- Jede Zeile im Panel ein eigener Absatz, wie im Aufmacher
-                             (KEV-115). Spans statt <p>: Die Karte ist ein Link. --}}
+                             (KEV-115). Spans statt <p>: Die Karte ist ein Link.
+                             Etwas mehr Luft zwischen den Absätzen (KEV-112). --}}
                         @if (!empty($karte['text']))
-                            <span class="mt-1.5 flex flex-1 flex-col gap-2 text-[0.8125rem] leading-relaxed text-ink-soft">
+                            <span class="mt-1.5 flex flex-1 flex-col gap-3 text-[0.8125rem] leading-relaxed text-ink-soft">
                                 @foreach (preg_split('/\R+/u', trim($karte['text'])) as $absatz)
                                     <span>{{ hervorheben($absatz) }}</span>
                                 @endforeach

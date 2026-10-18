@@ -198,13 +198,25 @@ class StartseiteSeeder extends Seeder
         .'Deinem Wissen, Deiner Erfahrung, Deiner Kreativität oder einfach mit Lust, etwas zu bewegen.';
 
     /*
+     * Text von Taddi, 27.09.2026 (KEV-48), *fett* wie von ihr markiert. Der
+     * fette Satz seit KEV-112 als eigener Absatz, wie auf allen vier Karten.
+     */
+    public const SELBSTHILFE_KARTE_TEXT = "*Manchmal tut es gut, Menschen zu treffen, die verstehen, ohne dass "
+        ."Du viel erklären musst.*\n"
+        .'In unseren Selbsthilfegruppen kannst Du Dich austauschen, Erfahrungen teilen und neue '
+        .'Perspektiven kennenlernen. Du entscheidest selbst, ob Du erzählen, mitreden oder erstmal '
+        .'einfach nur zuhören möchtest.';
+
+    /*
      * Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert. Bis
      * KEV-116 war auch der letzte Satz fett, auf ihren Wunsch nicht mehr.
+     * Der fette Satz seit KEV-112 als eigener Absatz.
      */
-    public const SPENDEN_KARTE_TEXT = '*Deine Spende macht unsere Arbeit möglich.* Sie hilft uns, '
-        .'Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und Austausch zu '
-        .'ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, dass Du dabei '
-        .'bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.';
+    public const SPENDEN_KARTE_TEXT = "*Deine Spende macht unsere Arbeit möglich.*\n"
+        .'Sie hilft uns, Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und '
+        .'Austausch zu ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, '
+        .'dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu '
+        .'bewegen.';
 
     /*
      * Text von Taddi (KEV-115, vorher KEV-51): der Satz aus ihren
@@ -249,12 +261,7 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'user-group',
                             'titel' => 'Selbsthilfegruppen',
-                            // Text von Taddi, 27.09.2026 (KEV-48), *fett* wie von ihr markiert.
-                            'text' => '*Manchmal tut es gut, Menschen zu treffen, die verstehen, ohne '
-                                .'dass Du viel erklären musst.* In unseren Selbsthilfegruppen kannst Du '
-                                .'Dich austauschen, Erfahrungen teilen und neue Perspektiven '
-                                .'kennenlernen. Du entscheidest selbst, ob Du erzählen, mitreden oder '
-                                .'erstmal einfach nur zuhören möchtest.',
+                            'text' => self::SELBSTHILFE_KARTE_TEXT,
                             'url' => '/selbsthilfegruppen',
                             'link' => 'Zu den Selbsthilfegruppen',
                         ],

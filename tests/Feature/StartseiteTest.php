@@ -546,8 +546,11 @@ class StartseiteTest extends TestCase
         $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
         $data = $block->data;
         $i = array_search('/spenden', array_column($data['karten'], 'url'), true);
-        $data['karten'][$i]['text'] = str_replace('Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.',
-            '*Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.*', StartseiteSeeder::SPENDEN_KARTE_TEXT);
+        // Der Text von KEV-52, beide Sätze fett, noch ohne Absatz (KEV-112).
+        $data['karten'][$i]['text'] = '*Deine Spende macht unsere Arbeit möglich.* Sie hilft uns, Informationen '
+            .'und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und Austausch zu ermöglichen und Projekte '
+            .'umzusetzen, die Betroffenen eine Stimme geben. Danke, dass Du dabei bist. *Jeder Beitrag hilft '
+            .'uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.*';
         $block->update(['data' => $data]);
 
         $migration = require database_path('migrations/2026_10_18_140000_spendenkarte_letzter_satz_normal.php');
@@ -824,6 +827,58 @@ class StartseiteTest extends TestCase
         // gleich den neuesten.
         $this->assertSame(StartseiteSeeder::ARBEITSGRUPPEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
         $this->get('/')->assertDontSee('Um unsere Arbeit weiter zu professionalisieren');
+    }
+
+    /**
+     * KEV-112: Auf allen vier Karten steht der fette Satz als eigener Absatz,
+     * mit etwas mehr Luft zum Text darunter.
+     */
+    public function test_alle_einstiegskarten_beginnen_mit_fettem_absatz(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        foreach (['/selbsthilfegruppen', '/arbeitsgruppen', '/anfragen', '/spenden'] as $ziel) {
+            $this->assertMatchesRegularExpression(
+                // Nicht über das Ende der Karte hinaus: Sonst passte die Nachbarkarte.
+                '#<a href="'.preg_quote($ziel, '#').'"[^>]*>(?:(?!</a>).)*?<span class="[^"]*flex-col gap-3[^"]*">\s*'
+                .'<span><strong class="font-semibold text-ink">[^<]+</strong></span>\s*<span>[^<]+</span>#s',
+                $html, $ziel);
+        }
+    }
+
+    public function test_migration_setzt_den_fetten_satz_als_absatz(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $karten = array_column($data['karten'], null, 'url');
+        $inline = fn (string $text) => preg_replace('/^(\*[^*]+\*)\n/u', '$1 ', $text);
+
+        // Stand vor KEV-112: Selbsthilfe und Spenden mit dem fetten Satz im Fliesstext.
+        foreach ($data['karten'] as $i => $karte) {
+            if (in_array($karte['url'], ['/selbsthilfegruppen', '/spenden'], true)) {
+                $data['karten'][$i]['text'] = $inline($karte['text']);
+            }
+            // Eine Karte ohne fetten Anfang bleibt, wie sie ist.
+            if ($karte['url'] === '/anfragen') {
+                $data['karten'][$i]['text'] = 'Ohne Hervorhebung. Zweiter Satz.';
+            }
+        }
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_18_180000_einstiegskarten_fetter_satz_als_absatz.php');
+        $migration->up();
+        $migration->up();
+
+        $neu = array_column($block->fresh()->data['karten'], 'text', 'url');
+        $this->assertSame(StartseiteSeeder::SELBSTHILFE_KARTE_TEXT, $neu['/selbsthilfegruppen']);
+        $this->assertSame(StartseiteSeeder::SPENDEN_KARTE_TEXT, $neu['/spenden']);
+        $this->assertSame($karten['/arbeitsgruppen']['text'], $neu['/arbeitsgruppen']);
+        $this->assertSame('Ohne Hervorhebung. Zweiter Satz.', $neu['/anfragen']);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        foreach ([StartseiteSeeder::SELBSTHILFE_KARTE_TEXT, StartseiteSeeder::SPENDEN_KARTE_TEXT] as $text) {
+            $this->assertMatchesRegularExpression('/^\*[^*]+\*\n\S/u', $woerterbuch[$text]['en']);
+        }
     }
 
     /**
