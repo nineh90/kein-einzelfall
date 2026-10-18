@@ -219,8 +219,10 @@ class StartseiteTest extends TestCase
     {
         $this->assertFalse($this->startseite()->blocks()->where('typ', 'contact_close')->exists());
 
+        // Der Wortlaut des Abschlusses. Die Karte beginnt seit KEV-115 ähnlich
+        // („… zum Sozialen Entschädigungsrecht“).
         $html = $this->get('/')->getContent();
-        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch', $html);
+        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch in Bezug auf', $html);
         // Knopf im Aufmacher und Karte unter „Was wir gemeinsam bewegen“.
         $this->assertGreaterThanOrEqual(2, substr_count($html, 'href="/anfragen"'));
     }
@@ -691,15 +693,59 @@ class StartseiteTest extends TestCase
         $migration = require database_path('migrations/2026_10_13_110000_anfragenkarte_text_erneuern.php');
         $migration->up();
 
+        // Die Migration setzt den jeweils aktuellen Text, seit KEV-115 also
+        // gleich den neuesten.
         $this->assertSame(StartseiteSeeder::ANFRAGEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
-
-        $html = $this->get('/')->getContent();
-        $this->assertStringContainsString('<strong class="font-semibold text-ink">Nur wenn wir miteinander '
-            .'reden, können wir gemeinsam etwas bewegen.</strong> Also trau Dich', $html);
 
         // Der alte Wortlaut steht nirgends mehr: Die Karte hat den neuen, und
         // den Abschlussblock unten mit dem alten gibt es seit KEV-121 nicht mehr.
-        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch', $html);
+        $this->assertStringNotContainsString('Du wünschst einen persönlichen Austausch in Bezug auf',
+            $this->get('/')->getContent());
+    }
+
+    /**
+     * KEV-115: Karte „Anfragen & Austausch“ mit Taddis neuem Text. Der Satz
+     * aus ihren Anführungszeichen fett und als eigener Absatz.
+     */
+    public function test_anfragenkarte_hat_fetten_ersten_absatz(): void
+    {
+        $this->get('/')->assertSeeInOrder([
+            '<span><strong class="font-semibold text-ink">Deine Frage, Deine Idee, Dein Anliegen – wir hören zu.</strong></span>',
+            '<span>Du wünschst einen persönlichen Austausch zum Sozialen Entschädigungsrecht (OEG/SGB XIV),',
+            'Dann melde Dich gern bei uns.</span>',
+        ], false);
+    }
+
+    public function test_bestehende_anfragenkarte_bekommt_den_text_mit_absatz(): void
+    {
+        $kev51 = '*Nur wenn wir miteinander reden, können wir gemeinsam etwas bewegen.* Also trau Dich und '
+            .'nimm Kontakt mit uns auf – egal, ob Du eine Projektidee mitbringst, Unterstützung suchst oder '
+            .'Dich einfach mal mit uns austauschen möchtest. Dein Anliegen muss noch nicht fertig gedacht '
+            .'sein. Wir hören zu und schauen gemeinsam, was wir machen können.';
+
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/anfragen', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = $kev51;
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_18_150000_anfragenkarte_text_mit_absatz.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::ANFRAGEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+        $this->assertStringStartsWith("*Your question, your idea, your concern – we are listening.*\n",
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::ANFRAGEN_KARTE_TEXT]['en']);
+    }
+
+    /** Eine Zeile im Kartentext ist ein Absatz, auch ohne fetten Satz. */
+    public function test_kartentext_mit_zeilenumbruch_wird_zu_absaetzen(): void
+    {
+        $html = view('components.blocks.quick-access', ['karten' => [
+            ['icon' => 'info', 'titel' => 'Karte', 'text' => "Erste Zeile.\r\nZweite Zeile.", 'url' => '/x'],
+        ]])->render();
+
+        $this->assertMatchesRegularExpression('#<span>Erste Zeile\.</span>\s*<span>Zweite Zeile\.</span>#', $html);
     }
 
     /** KEV-49: Karte „Arbeitsgruppen“ mit Taddis Text, der markierte Satz fett. */

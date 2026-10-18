@@ -458,7 +458,8 @@ class PageForm
                                         ->default('info')
                                         ->native(false),
                                     Textarea::make('text')->label('Text')->rows(4)->columnSpanFull()
-                                        ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen.'),
+                                        ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen. '
+                                            .'Eine neue Zeile beginnt einen neuen Absatz.'),
                                     TextInput::make('url')->label('Ziel')->required()
                                         ->helperText('Zum Beispiel /spenden'),
                                     TextInput::make('link')

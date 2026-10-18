@@ -197,11 +197,16 @@ class StartseiteSeeder extends Seeder
         .'ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, dass Du dabei '
         .'bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.';
 
-    public const ANFRAGEN_KARTE_TEXT = '*Nur wenn wir miteinander reden, können wir gemeinsam etwas '
-        .'bewegen.* Also trau Dich und nimm Kontakt mit uns auf – egal, ob Du eine Projektidee '
-        .'mitbringst, Unterstützung suchst oder Dich einfach mal mit uns austauschen möchtest. Dein '
-        .'Anliegen muss noch nicht fertig gedacht sein. Wir hören zu und schauen gemeinsam, was wir '
-        .'machen können.';
+    /*
+     * Text von Taddi (KEV-115, vorher KEV-51): der Satz aus ihren
+     * Anführungszeichen fett und als eigener Absatz. Die neue Zeile wird auf
+     * der Karte ein Absatz, wie im Aufmacher.
+     */
+    public const ANFRAGEN_KARTE_TEXT = "*Deine Frage, Deine Idee, Dein Anliegen – wir hören zu.*\n"
+        .'Du wünschst einen persönlichen Austausch zum Sozialen Entschädigungsrecht (OEG/SGB XIV), '
+        .'zum Schwerbehindertenausweis, zum Pflegegrad oder zu anderen Hilfesystemen? Du hast eine '
+        .'Frage, möchtest uns etwas mitteilen, hast eine Idee für eine neue Selbsthilfegruppe oder '
+        .'möchtest ein eigenes Projekt anstoßen? Dann melde Dich gern bei uns.';
 
     private function bausteine(): array
     {
@@ -255,7 +260,7 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'notebook-pen',
                             'titel' => 'Anfragen & Austausch',
-                            // Text von Taddi, 13.10.2026 (KEV-51), *fett* wie von ihr markiert.
+                            // Text von Taddi, 18.10.2026 (KEV-115), *fett* wie von ihr markiert.
                             'text' => self::ANFRAGEN_KARTE_TEXT,
                             'url' => '/anfragen',
                             'link' => 'Anfrage stellen',
