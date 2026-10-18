@@ -355,6 +355,11 @@ class StartseiteTest extends TestCase
             '/Jetzt spenden\s*<\/h2>\s*<p[^>]*>\s*Deine Spende hilft uns.*?weiter wachsen zu lassen\.<\/p>\s*'
             .'<p class="[^"]*font-hand[^"]*">Gute Ideen brauchen Deinen Rückenwind\.<\/p>/s', $abschnitt);
         $this->assertStringNotContainsString('Gute Ideen brauchen Rückenwind.', $abschnitt);
+
+        // KEV-118: Der Verweis auf alle Spendenmöglichkeiten ohne Unterstrich,
+        // erst beim Darüberfahren.
+        $this->assertMatchesRegularExpression(
+            '/<a href="\/spenden" class="text-green-deep no-underline hover:underline">Alle Spendenmöglichkeiten/', $abschnitt);
     }
 
     /**

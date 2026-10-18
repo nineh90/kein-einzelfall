@@ -81,9 +81,13 @@
                 @if ($mehr)
                     {{-- Ein Link, kein Knopf: Die Handlung auf dieser Fläche ist das
                          Spenden selbst; der Weg zur vollständigen Seite (betterplace,
-                         Spendenbescheinigung) ist der Nebenweg. --}}
+                         Spendenbescheinigung) ist der Nebenweg.
+                         Ohne Unterstrich, Wunsch von Taddi (KEV-118). Er steht für
+                         sich und trägt den Pfeil, ist also auch so als Link zu
+                         erkennen; „Links hervorheben“ in der Darstellung
+                         unterstreicht ihn weiterhin. --}}
                     <p class="mt-5">
-                        <a href="{{ $mehr['url'] }}" class="text-green-deep underline">{{ $mehr['label'] }}<x-ui.icon
+                        <a href="{{ $mehr['url'] }}" class="text-green-deep no-underline hover:underline">{{ $mehr['label'] }}<x-ui.icon
                             name="arrow-right" :size="16" class="ml-1.5 inline align-[-2px]" /></a>
                     </p>
                 @endif
