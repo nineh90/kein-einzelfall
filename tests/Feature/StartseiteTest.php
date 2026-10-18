@@ -524,13 +524,37 @@ class StartseiteTest extends TestCase
         );
     }
 
-    /** KEV-52: Spendenkarte mit Taddis Text, die markierten Sätze fett. */
-    public function test_spendenkarte_zeigt_taddis_text_mit_fetten_saetzen(): void
+    /**
+     * KEV-52: Spendenkarte mit Taddis Text, der erste Satz fett. Seit KEV-116
+     * der letzte nicht mehr.
+     */
+    public function test_spendenkarte_zeigt_taddis_text_mit_fettem_ersten_satz(): void
     {
         $this->get('/')
             ->assertSee('<strong class="font-semibold text-ink">Deine Spende macht unsere Arbeit möglich.</strong>', false)
-            ->assertSee('<strong class="font-semibold text-ink">Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.</strong>', false)
-            ->assertDontSee('*Deine Spende', false);
+            ->assertSee('Danke, dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.', false)
+            ->assertDontSee('<strong class="font-semibold text-ink">Jeder Beitrag', false)
+            ->assertDontSee('*Deine Spende', false)
+            ->assertDontSee('*Jeder Beitrag', false);
+    }
+
+    /** KEV-116: Auch bestehende Startseiten verlieren den fetten letzten Satz, Englisch mit. */
+    public function test_bestehende_spendenkarte_verliert_den_fetten_letzten_satz(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/spenden', array_column($data['karten'], 'url'), true);
+        $data['karten'][$i]['text'] = str_replace('Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.',
+            '*Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.*', StartseiteSeeder::SPENDEN_KARTE_TEXT);
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_18_140000_spendenkarte_letzter_satz_normal.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::SPENDEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+        $this->assertStringEndsWith('to make a difference together.',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::SPENDEN_KARTE_TEXT]['en']);
     }
 
     public function test_bestehende_startseite_bekommt_den_neuen_spendenkartentext(): void

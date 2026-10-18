@@ -188,6 +188,15 @@ class StartseiteSeeder extends Seeder
         .'in Bewegung. Du kannst Dich jederzeit in laufende Arbeitsgruppen einbringen – auch ohne '
         .'Vorkenntnisse.';
 
+    /*
+     * Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert. Bis
+     * KEV-116 war auch der letzte Satz fett, auf ihren Wunsch nicht mehr.
+     */
+    public const SPENDEN_KARTE_TEXT = '*Deine Spende macht unsere Arbeit möglich.* Sie hilft uns, '
+        .'Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und Austausch zu '
+        .'ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, dass Du dabei '
+        .'bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.';
+
     public const ANFRAGEN_KARTE_TEXT = '*Nur wenn wir miteinander reden, können wir gemeinsam etwas '
         .'bewegen.* Also trau Dich und nimm Kontakt mit uns auf – egal, ob Du eine Projektidee '
         .'mitbringst, Unterstützung suchst oder Dich einfach mal mit uns austauschen möchtest. Dein '
@@ -254,12 +263,7 @@ class StartseiteSeeder extends Seeder
                         [
                             'icon' => 'hand-coins',
                             'titel' => 'Spenden',
-                            // Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert.
-                            'text' => '*Deine Spende macht unsere Arbeit möglich.* Sie hilft uns, '
-                                .'Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe '
-                                .'und Austausch zu ermöglichen und Projekte umzusetzen, die Betroffenen '
-                                .'eine Stimme geben. Danke, dass Du dabei bist. *Jeder Beitrag hilft '
-                                .'uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.*',
+                            'text' => self::SPENDEN_KARTE_TEXT,
                             'url' => '/spenden',
                             'link' => 'Jetzt spenden',
                         ],
