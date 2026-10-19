@@ -120,3 +120,39 @@ if (! function_exists('hervorheben')) {
         return preg_replace([HERVORHEBUNG_MUSTER, LINK_MUSTER], ['$1', '$1'], $text);
     }
 }
+
+if (! function_exists('bildadresse')) {
+    /**
+     * Adresse eines Bildes aus public/, mit Fingerabdruck seines Inhalts.
+     *
+     * Ein neues Bild ersetzt das alte meist unter demselben Namen
+     * (titelbilder/verein.webp). Für den Browser ist das dieselbe Datei, er
+     * zeigt die alte aus seinem Cache, und das tagelang: Ohne Cache-Control
+     * schätzt er die Haltbarkeit selbst. Mit `?v=…` aus dem Inhalt bekommt
+     * jedes neue Bild eine neue Adresse und ist beim nächsten Aufruf da, ohne
+     * dass jemand neu laden muss. Wie bei CSS und JS, denen Vite den Hash in
+     * den Namen schreibt.
+     *
+     * Aus dem Inhalt, nicht aus dem Änderungsdatum: Das setzt jeder frische
+     * Checkout und jeder Docker-Build neu, die Adresse wechselte dann bei
+     * jedem Deploy, auch für unveränderte Bilder.
+     *
+     * Fremde Adressen (https://…) und fehlende Dateien bleiben, wie sie sind.
+     */
+    function bildadresse(?string $pfad): ?string
+    {
+        static $gemerkt = [];
+
+        if (blank($pfad) || ! str_starts_with($pfad, '/') || str_starts_with($pfad, '//')) {
+            return $pfad;
+        }
+
+        return $gemerkt[$pfad] ??= (function () use ($pfad) {
+            $datei = public_path(ltrim(parse_url($pfad, PHP_URL_PATH) ?? '', '/'));
+
+            return is_file($datei)
+                ? $pfad.(str_contains($pfad, '?') ? '&' : '?').'v='.substr(hash_file('xxh3', $datei), 0, 10)
+                : $pfad;
+        })();
+    }
+}

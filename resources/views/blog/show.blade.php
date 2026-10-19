@@ -60,7 +60,7 @@
         @if ($beitrag->bild_pfad)
             {{-- Kein loading="lazy": Das Beitragsbild steht im ersten
                  Sichtbereich, verzögertes Laden würde es nur langsamer machen. --}}
-            <img src="{{ $beitrag->bild_pfad }}" alt="{{ $beitrag->bild_alt }}"
+            <img src="{{ bildadresse($beitrag->bild_pfad) }}" alt="{{ $beitrag->bild_alt }}"
                  decoding="async" class="mt-6 w-full rounded-card">
         @endif
 

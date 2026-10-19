@@ -89,7 +89,7 @@
                                  allen Seitenverhältnissen, und ein Raster, in dem
                                  eines doppelt so groß wirkt wie das nächste,
                                  sieht nach Rangfolge aus, wo keine gemeint ist. --}}
-                            <img src="{{ $p['logo'] }}"
+                            <img src="{{ bildadresse($p['logo']) }}"
                                  alt="{{ $p['logo_alt'] ?? '' }}"
                                  loading="lazy"
                                  class="h-12 w-auto max-w-full object-contain">

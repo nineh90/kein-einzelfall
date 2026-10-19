@@ -71,7 +71,7 @@
         // Panel hat keine kleine Fassung und kommt ohne srcset aus.
         $klein = preg_replace('/\.webp$/', '-1000.webp', $bild);
         $srcset = $klein !== $bild && is_file(public_path(ltrim($klein, '/')))
-            ? "{$klein} 1000w, {$bild} 2000w"
+            ? bildadresse($klein).' 1000w, '.bildadresse($bild).' 2000w'
             : null;
 
         $zeile = $bereich && $bereich !== $titel ? $bereich : 'KE!N EINZELFALL e.V.';
@@ -110,7 +110,7 @@
         ])>
             <div class="absolute inset-0 -z-10">
                 {{-- Nicht lazy: Das Bild steht im ersten Bildschirm. --}}
-                <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
+                <img src="{{ bildadresse($bild) }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                      alt="{{ $bild_alt ?? '' }}" width="2000" height="1116" fetchpriority="high"
                      class="h-full w-full object-cover" style="object-position: {{ $fokus }}">
 
@@ -143,7 +143,7 @@
                         {{-- Schmuck: Der Vereinsname steht in der grünen Zeile
                              und im Titel, deshalb alt="". --}}
                         <div class="flex md:w-1/2 md:justify-center">
-                            <img src="/img/logo-gross.webp" alt="" width="479" height="432" fetchpriority="high"
+                            <img src="{{ bildadresse('/img/logo-gross.webp') }}" alt="" width="479" height="432" fetchpriority="high"
                                  data-kopf-logo
                                  class="h-auto w-44 md:w-52 lg:w-64 xl:w-72">
                         </div>

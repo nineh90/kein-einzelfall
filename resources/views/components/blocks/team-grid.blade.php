@@ -67,7 +67,7 @@
                                         sm:items-start sm:gap-y-2">
                                 <div class="shrink-0 sm:row-span-2">
                                     @if ($person->foto_pfad)
-                                        <img src="{{ $person->foto_pfad }}" alt="{{ $person->foto_alt }}"
+                                        <img src="{{ bildadresse($person->foto_pfad) }}" alt="{{ $person->foto_alt }}"
                                              loading="lazy"
                                              class="h-20 w-20 rounded-full border border-line object-cover">
                                     @else

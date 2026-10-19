@@ -49,12 +49,12 @@ class SeitengestaltungTest extends TestCase
         $html = $this->get('/verein')->getContent();
         preg_match('/<header data-anschliessend.*?<\/header>/s', $html, $kopf);
 
-        $this->assertStringContainsString('src="/img/titelbilder/verein.webp"', $kopf[0]);
+        $this->assertStringContainsString('src="/img/titelbilder/verein.webp?v=', $kopf[0]);
         // Stimmungsbild ohne Aussage: leeres alt, Vorlesehilfen überspringen es.
         $this->assertStringContainsString('alt=""', $kopf[0]);
         $this->assertFileExists(public_path('img/titelbilder/verein.webp'));
         // Kleine Fassung für schmale Bildschirme
-        $this->assertStringContainsString('/img/titelbilder/verein-1000.webp 1000w', $kopf[0]);
+        $this->assertStringContainsString('/img/titelbilder/verein-1000.webp?v=', $kopf[0]);
     }
 
     public function test_titelbild_kopf_ist_immer_gleich_gebaut(): void
@@ -114,7 +114,7 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
 
-        $this->assertStringContainsString('src="/img/titelbilder/mitgliedschaft.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/mitgliedschaft.webp?v=', $html);
         $this->assertStringContainsString('object-position: 0% 35%', $html);
         $this->assertStringContainsString('min-h-[60svh] md:min-h-[50svh]', $html);
         $this->assertStringContainsString('bg-linear-to-t', $html);
@@ -127,7 +127,7 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/arbeitsgruppen')->getContent();
 
-        $this->assertStringContainsString('src="/img/titelbilder/arbeitsgruppen.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/arbeitsgruppen.webp?v=', $html);
         $this->assertStringContainsString('object-position: 0% 50%', $html);
     }
 
@@ -138,7 +138,7 @@ class SeitengestaltungTest extends TestCase
 
         $this->assertSame('/img/titelbilder/beschwerdemanagement.webp', $seite->titelbild);
         $this->get('/beschwerdemanagement')->assertOk()
-            ->assertSee('src="/img/titelbilder/beschwerdemanagement.webp"', false)
+            ->assertSee('src="/img/titelbilder/beschwerdemanagement.webp?v=', false)
             ->assertSee('object-position: 0% 35%', false);
     }
 
@@ -151,7 +151,7 @@ class SeitengestaltungTest extends TestCase
         foreach (['/istanbul-konvention', '/kinderkodex'] as $pfad) {
             $html = $this->get($pfad)->assertOk()->getContent();
 
-            $this->assertStringContainsString('src="/img/titelbilder/ordner-mit-logo.webp"', $html, $pfad);
+            $this->assertStringContainsString('src="/img/titelbilder/ordner-mit-logo.webp?v=', $html, $pfad);
             $this->assertStringNotContainsString('platzhalter.webp', $html, $pfad);
             $this->assertStringContainsString('object-position: 0% 42%', $html, $pfad);
             $this->assertStringContainsString('min-h-[60svh] md:min-h-[50svh]', $html, $pfad);
@@ -420,7 +420,7 @@ class SeitengestaltungTest extends TestCase
 
         // Der erste Satz steht als Unterzeile auf dem Bild, im Text nicht noch einmal.
         $this->assertSame(1, substr_count($html, 'ist nicht nur an einem Ort zuhause.'));
-        $this->assertStringContainsString('src="/img/titelbilder/landesstellen.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/landesstellen.webp?v=', $html);
 
         $this->assertStringContainsString('Elke Redeker', $html);
         $this->assertStringNotContainsString('Reedeker', $html);
@@ -437,7 +437,7 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Assoziiertes Fachgremium – UKFB', $html);
         $this->assertStringContainsString('Unabhängiges Kuratorium für Betroffenenexpertise', $html);
         $this->assertStringContainsString('nimmt keinen Einfluss auf die inhaltliche Arbeit', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/gremium-ukfb.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/gremium-ukfb.webp?v=', $html);
 
         // Taddi schrieb ufb.org und ukf.org; ufb.org steht zum Verkauf.
         $this->assertStringContainsString('href="mailto:kontakt@ukfb.org"', $html);
@@ -455,13 +455,13 @@ class SeitengestaltungTest extends TestCase
         $html = $this->get('/schutz-und-wertekonzept')->assertOk()->getContent();
         $this->assertStringContainsString('Schutz, Würde und Selbstbestimmung sind Grundlagen unserer Arbeit.', $html);
         $this->assertStringContainsString('Der Mensch steht vor dem Verfahren. Immer.', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
 
         $html = $this->get('/red-flags')->assertOk()->getContent();
         $this->assertStringContainsString('Gemeinsam gelingt Zusammenarbeit am besten', $html);
         $this->assertStringContainsString('Leitfaden herunterladen', $html);
         $this->assertStringContainsString('6.1.2.-Must-haves-u.-Red-Flaggs-fuer-Betroffene.pdf', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
 
         // Der leere Entwurf ist gefüllt, nicht verdoppelt.
         $this->assertFalse(Page::where('slug', 'schutzkonzept')->exists());
@@ -479,7 +479,7 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Tätigkeits- und Jahresberichte', $html);
         $this->assertStringContainsString('Hinter jedem Jahr stehen Menschen, Begegnungen, Ideen', $html);
         $this->assertStringContainsString('Beginnend mit dem Jahr 2025 findest du hier unsere Berichte', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
 
         // Hinter dem Kinderkodex (seit KEV-105 steht das Gremium UKFB dahinter).
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
@@ -495,8 +495,8 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/verein')->assertOk()->getContent();
 
-        $this->assertStringContainsString('src="/img/titelbilder/verein.webp"', $html);
-        $this->assertMatchesRegularExpression('#<img src="/img/logo-gross\.webp" alt=""[^>]*data-kopf-logo#', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/verein.webp?v=', $html);
+        $this->assertMatchesRegularExpression('#<img src="/img/logo-gross\.webp\?v=\w+" alt=""[^>]*data-kopf-logo#', $html);
 
         // Auf dem Handy so hoch wie der Inhalt, eine Mindesthöhe machte nur
         // die Lücke zwischen Logo und Text größer. Erst ab md halbe Höhe.
@@ -512,7 +512,7 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/satzung')->assertOk()->getContent();
 
-        $this->assertStringContainsString('src="/img/titelbilder/satzung.webp"', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/satzung.webp?v=', $html);
         $this->assertStringNotContainsString('platzhalter.webp', $html);
         $this->assertStringContainsString('object-position: 0% 100%', $html);
     }

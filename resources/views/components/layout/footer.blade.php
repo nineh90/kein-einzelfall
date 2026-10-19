@@ -13,7 +13,7 @@
             {{-- Das Logo ist schwarz auf transparent und auf dunklem Grund unsichtbar.
                  Bis eine helle Vektor-Variante vorliegt: cremefarbenes Badge als Träger. --}}
             <span class="flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-cream p-2.5">
-                <img src="/img/logo.png" alt="" width="52" height="52" loading="lazy" decoding="async"
+                <img src="{{ bildadresse('/img/logo.png') }}" alt="" width="52" height="52" loading="lazy" decoding="async"
                      class="h-full w-full object-contain">
             </span>
             <div class="min-w-0 flex-1 basis-48">

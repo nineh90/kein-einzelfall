@@ -22,7 +22,7 @@
     {{-- Vereinsfarbe, abgedunkelt auf den Wert, der auch als Knopfflaeche
          barrierefrei ist. Siehe Farbkommentar in resources/css/app.css. --}}
     <meta name="theme-color" content="#00702F">
-    <link rel="icon" href="/img/logo.png" type="image/png">
+    <link rel="icon" href="{{ bildadresse('/img/logo.png') }}" type="image/png">
 
     {{-- Zwei Wege zum Titel:
 

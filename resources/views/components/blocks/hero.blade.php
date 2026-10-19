@@ -56,7 +56,7 @@
     // bild.webp (2000 px) und bild-1000.webp, wie bei den Titelbildern.
     $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
     $srcset = $bild && $klein !== $bild && is_file(public_path(ltrim($klein, '/')))
-        ? "{$klein} 1000w, {$bild} 2000w"
+        ? bildadresse($klein).' 1000w, '.bildadresse($bild).' 2000w'
         : null;
 @endphp
 
@@ -71,7 +71,7 @@
          steht er über dem ganzen Bild. Schmuck: alt="". --}}
     @if ($bild)
         <div class="absolute inset-0 -z-10">
-            <img src="{{ $bild }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
+            <img src="{{ bildadresse($bild) }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                  alt="" width="2000" height="1116" fetchpriority="high"
                  class="h-full w-full object-cover object-[0%_100%]">
             <div aria-hidden="true" class="absolute inset-0 bg-cream/60 md:hidden"></div>
@@ -138,7 +138,7 @@
                  deshalb alt="". Auf dem Handy kleiner, damit Überschrift und
                  Knöpfe im ersten Bildschirm bleiben. --}}
             <div class="hero-logo mx-auto flex w-full max-w-sm items-center justify-center">
-                <img src="/img/logo-gross.webp" alt="" width="479" height="432" fetchpriority="high"
+                <img src="{{ bildadresse('/img/logo-gross.webp') }}" alt="" width="479" height="432" fetchpriority="high"
                      class="h-auto w-40 sm:w-56 lg:w-64 xl:w-80">
             </div>
 

@@ -23,3 +23,20 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Bilder und Dokumente: Mit ?v= (Fingerabdruck, siehe bildadresse() in
+# app/Support/helpers.php) ändert sich die Adresse mit dem Inhalt, die Datei
+# darf also ein Jahr im Cache bleiben. Ohne ?v= fragt der Browser jedes Mal
+# nach, ob sich etwas geändert hat (unverändert: kurze Antwort 304). Ohne
+# diese Angabe schätzt er die Haltbarkeit selbst und zeigt ein ersetztes Bild
+# unter gleichem Namen tagelang in der alten Fassung.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|avif|jpe?g|png|gif|svg|ico|pdf)$">
+        <If "%{QUERY_STRING} =~ /(^|&)v=/">
+            Header set Cache-Control "public, max-age=31536000, immutable"
+        </If>
+        <Else>
+            Header set Cache-Control "no-cache"
+        </Else>
+    </FilesMatch>
+</IfModule>

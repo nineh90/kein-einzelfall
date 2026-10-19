@@ -51,7 +51,7 @@
 
         <div @class(['order-1', 'lg:order-2' => $bild_seite === 'rechts', 'lg:order-1' => $bild_seite === 'links'])>
             @if ($bild)
-                <img src="{{ $bild }}" alt="{{ $bild_alt }}" loading="lazy"
+                <img src="{{ bildadresse($bild) }}" alt="{{ $bild_alt }}" loading="lazy"
                      class="w-full rounded-card border border-line object-cover">
             @else
                 {{-- Platzhalter in der Farbwelt der Seite, nicht als grauer Kasten --}}

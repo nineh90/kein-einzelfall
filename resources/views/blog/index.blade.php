@@ -106,7 +106,7 @@
                     <li class="flex">
                         <article class="flex flex-1 flex-col overflow-hidden rounded-card border border-line bg-card">
                             @if ($beitrag->bild_pfad)
-                                <img src="{{ $beitrag->bild_pfad }}" alt="{{ $beitrag->bild_alt }}"
+                                <img src="{{ bildadresse($beitrag->bild_pfad) }}" alt="{{ $beitrag->bild_alt }}"
                                      loading="lazy" class="h-40 w-full object-cover">
                             @endif
 
