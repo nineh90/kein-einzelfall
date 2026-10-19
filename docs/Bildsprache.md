@@ -88,6 +88,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Wissen | Bücherstapel mit Leinenband |
 | Publikationen | Broschürenstapel und Lesebrille |
 | Veranstaltungen | Becher, Vase mit Trockenblumen, Tisch |
+| Gruppen & Veranstaltungen | Laptop mit Videotreffen (neun Gesichter) auf rundem Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-127, statt Platzhalter), ausgerichtet auf 40 %: unten ausgerichtet fehlte ab 1440 px die obere Reihe der Gesichter |
 | Projekte | Holzhaus-Modell, Papier, Bleistift |
 | KE!N EINZELFALL im Dialog | Stuhl mit Beistelltisch an der Wand |
 | Soziales Entschädigungsrecht | Papierstapel mit Füller |
@@ -148,7 +149,7 @@ Wand mit Fensterlicht, ohne Motiv. Liste in
 `App\Support\Titelbilder::PLATZHALTER_SEITEN` (die Satzung ist seit KEV-77
 raus, Istanbul-Konvention und Kinderkodex seit KEV-79; neu dabei seit KEV-103
 die Tätigkeits- und Jahresberichte, seit KEV-97 Schutz- und Wertekonzept und
-Red Flags). Die richtigen Bilder kommen in
+Red Flags; Gruppen & Veranstaltungen ist seit KEV-127 raus). Die richtigen Bilder kommen in
 späteren Tickets; wer eins setzt, ersetzt einfach den Platzhalter im Panel.
 
 Erzeugt direkt über fal.ai, **nicht** mit `bin/titelbild`: Die Vorlage

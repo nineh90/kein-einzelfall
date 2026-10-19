@@ -69,6 +69,9 @@ class Titelbilder
         // KEV-77: Bild von Taddi statt Platzhalter. Ohne Unterzeile, der
         // Verein hat keine geschickt.
         'satzung' => null,
+        // KEV-127: Bild von Taddi statt Platzhalter, Laptop mit Videotreffen.
+        // Ohne Unterzeile, der Verein hat keine geschickt.
+        'gruppen-und-veranstaltungen' => null,
     ];
 
     /**
@@ -99,8 +102,9 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
-        // KEV-72, bis Taddi Bilder schickt
-        'gruppen-und-veranstaltungen', 'oeffentlichkeitsarbeit', 'rueckblick',
+        // KEV-72, bis Taddi Bilder schickt (Gruppen & Veranstaltungen hat
+        // seit KEV-127 eins)
+        'oeffentlichkeitsarbeit', 'rueckblick',
         // KEV-103, bis Taddi ein Bild schickt
         'taetigkeits-und-jahresberichte',
         // KEV-97, bis Taddi Bilder schickt
@@ -147,6 +151,7 @@ class Titelbilder
         self::ORDNER.'/gremium-ukfb.webp' => 70,
         self::ORDNER.'/landesstellen.webp' => 50,
         self::ORDNER.'/ordner-mit-logo.webp' => 42,
+        self::ORDNER.'/gruppen-und-veranstaltungen.webp' => 40,
     ];
 
     /**

@@ -508,6 +508,35 @@ class SeitengestaltungTest extends TestCase
     }
 
     /** KEV-77: Taddis Bild statt Platzhalter, Motiv unten wie üblich. */
+    /**
+     * KEV-127: Taddis Bild statt Platzhalter, auf 40 % ausgerichtet (unten
+     * fehlte auf breiten Bildschirmen die obere Reihe der Gesichter).
+     */
+    public function test_gruppen_und_veranstaltungen_hat_eigenes_titelbild(): void
+    {
+        $html = $this->get('/gruppen-und-veranstaltungen')->assertOk()->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/gruppen-und-veranstaltungen.webp?v=', $html);
+        $this->assertStringContainsString('/img/titelbilder/gruppen-und-veranstaltungen-1000.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('object-position: 0% 40%', $html);
+    }
+
+    public function test_migration_tauscht_nur_den_platzhalter_bei_gruppen_und_veranstaltungen(): void
+    {
+        $seite = Page::where('slug', 'gruppen-und-veranstaltungen')->where('locale', 'de')->firstOrFail();
+        $migration = require database_path('migrations/2026_10_19_110000_gruppen_und_veranstaltungen_titelbild.php');
+
+        $seite->update(['titelbild' => \App\Support\Titelbilder::PLATZHALTER]);
+        $migration->up();
+        $this->assertSame('/img/titelbilder/gruppen-und-veranstaltungen.webp', $seite->fresh()->titelbild);
+
+        // Im Panel gepflegt: bleibt.
+        $seite->update(['titelbild' => '/storage/eigenes.webp']);
+        $migration->up();
+        $this->assertSame('/storage/eigenes.webp', $seite->fresh()->titelbild);
+    }
+
     public function test_satzung_hat_eigenes_titelbild(): void
     {
         $html = $this->get('/satzung')->assertOk()->getContent();
