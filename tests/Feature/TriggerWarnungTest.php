@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Language;
 use App\Models\Page;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\TriggerWarnungSeeder;
 use Tests\TestCase;
 
 /**
@@ -46,7 +47,72 @@ class TriggerWarnungTest extends TestCase
             'Die Warnung muss als <dialog open> im ausgelieferten HTML stehen'
         );
 
-        $this->assertStringContainsString('Auf dieser Website geht es um Straftaten', $html);
+        $this->assertStringContainsString('Auf dieser Homepage geht es um die Folgeschäden', $html);
+    }
+
+    /**
+     * KEV-109: Taddis Text, vier Absätze, im zweiten das Symbol des
+     * Darstellungs-Knopfs mit Namen für Vorlesehilfen.
+     */
+    public function test_warnung_hat_taddis_text_mit_symbol_der_darstellung(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+        $dialog = substr($html, strpos($html, 'id="trigger-warnung"'));
+        $dialog = substr($dialog, 0, strpos($dialog, '</dialog>'));
+
+        $this->assertMatchesRegularExpression(
+            '#Links am Rand findest du einen Button <span role="img" aria-label="Darstellung"[^>]*>\s*<svg[^>]*aria-hidden="true".*?</svg>\s*</span>, mit dem du#s',
+            $dialog,
+        );
+        $this->assertStringNotContainsString('{darstellung}', $dialog);
+        $this->assertSeeInOrderText($dialog, [
+            'Auf dieser Homepage geht es um die Folgeschäden',
+            'Links am Rand findest du einen Button',
+            'Einige Inhalte können belastend sein.',
+            'Wenn du gerade Hilfe brauchst: Notfallnummern und Hilfsangebote findest du weiter unten.',
+        ]);
+        $this->assertStringNotContainsString('Auf dieser Website geht es um Straftaten', $dialog);
+    }
+
+    public function test_bestehende_warnung_bekommt_taddis_text(): void
+    {
+        $alt = [
+            'Auf dieser Website geht es um Straftaten, Gewalt und ihre Folgen. Einzelne Texte, '
+                .'Erfahrungsberichte und Dokumente können belastend sein oder Erinnerungen auslösen.',
+            'Du entscheidest, was du liest und wann. Du kannst jederzeit aufhören, zurückgehen oder diese '
+                .'Seite sofort verlassen — dafür gibt es unten einen Knopf, oben rechts den Notausgang, und du '
+                .'kannst dreimal hintereinander die Taste Esc drücken.',
+            'Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder Seite. Die '
+                .'TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.',
+        ];
+        $block = $this->warnung()->blocks()->where('typ', 'text')->firstOrFail();
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $alt])]);
+
+        $migration = require database_path('migrations/2026_10_19_100000_trigger_warnung_text_von_taddi.php');
+        $migration->up();
+        $this->assertSame(TriggerWarnungSeeder::ABSAETZE, $block->fresh()->data['absaetze']);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        foreach (TriggerWarnungSeeder::ABSAETZE as $absatz) {
+            $this->assertArrayHasKey($absatz, $woerterbuch);
+        }
+        $this->assertStringContainsString('{darstellung}', $woerterbuch[TriggerWarnungSeeder::ABSAETZE[1]]['en']);
+
+        // Im Panel umgeschrieben: bleibt.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text.']])]);
+        $migration->up();
+        $this->assertSame(['Eigener Text.'], $block->fresh()->data['absaetze']);
+    }
+
+    private function assertSeeInOrderText(string $html, array $teile): void
+    {
+        $pos = -1;
+        foreach ($teile as $teil) {
+            $neu = strpos($html, $teil, $pos + 1);
+            $this->assertNotFalse($neu, $teil);
+            $this->assertGreaterThan($pos, $neu, $teil);
+            $pos = $neu;
+        }
     }
 
     /** Kevin, 03.10.2026: „Triggerwarnung“ grün zwischen Vorzeile und Titel. */

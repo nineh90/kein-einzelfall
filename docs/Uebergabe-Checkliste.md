@@ -233,11 +233,9 @@ Alles hier gehört zu dem, was am 05.08.2026 aus dem Besprechungs-Abgleich gebau
 wurde (`docs/Abgleich-Besprechung-2026-08-02.md`, `docs/Komponenten.md` Abschnitt 17).
 Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 
-- [ ] **Wortlaut der Trigger-Warnung.** Der Text unter `/trigger-warnung` ist ein
-  Vorschlag von uns und bewusst nüchtern: Er beschreibt, worum es auf der Website
-  geht, und sagt nichts im Namen des Vereins. **Er ist veröffentlicht und damit
-  auf jeder Seite sichtbar** — bitte gegenlesen und ändern oder bestätigen. Im
-  Panel unter „Seiten → Hinweis zu den Inhalten dieser Website".
+- [x] **Wortlaut der Trigger-Warnung.** Geklärt mit KEV-109 (19.10.2026): Der
+  Text stammt jetzt von Taddi, unser nüchterner Vorschlag ist ersetzt. Im Panel
+  unter „Seiten → Hinweis zu den Inhalten dieser Website".
 - [ ] **Wie oft soll die Warnung kommen?** Gebaut ist: einmal pro Besuch. Wer sie
   wegklickt, sieht sie beim nächsten Besuch wieder; wer „nicht mehr anzeigen"
   wählt, nie wieder. Alternative wäre: auf jeder einzelnen Seite erneut. Das

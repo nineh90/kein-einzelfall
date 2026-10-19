@@ -55,4 +55,11 @@ class HervorhebenTest extends TestCase
     {
         $this->assertSame('Text und fett', ohne_hervorhebung('[Text](/x) und *fett*'));
     }
+
+    /** KEV-109: Symbole gehören nicht in Suche und Vorschautext, fremde Klammern bleiben. */
+    public function test_ohne_hervorhebung_entfernt_symbole(): void
+    {
+        $this->assertSame('Ein Button, mit dem du', ohne_hervorhebung('Ein Button {darstellung}, mit dem du'));
+        $this->assertSame('Bleibt {anderes} stehen', ohne_hervorhebung('Bleibt {anderes} stehen'));
+    }
 }

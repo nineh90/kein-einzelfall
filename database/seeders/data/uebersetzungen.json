@@ -299,6 +299,18 @@
   "Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder Seite. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.": {
     "en": "If you need help right now: the emergency numbers are at the bottom of every page. TelefonSeelsorge (116 123) can be reached 24/7."
   },
+  "Auf dieser Homepage geht es um die Folgeschäden von physischen, psychischen, digitalen und sexuellen Gewalttaten und die oft schwierigen Wege durch Hilfe-, Versorgungs- und Entschädigungssysteme.": {
+    "en": "This website is about the long-term consequences of physical, psychological, digital and sexual violence and the often difficult paths through support, care and compensation systems."
+  },
+  "Links am Rand findest du einen Button {darstellung}, mit dem du die Darstellung der Seite (Schriftgröße/Kontrast etc.) verändern kannst.": {
+    "en": "On the left edge you will find a button {darstellung} that lets you change how the site is displayed (text size/contrast etc.)."
+  },
+  "Einige Inhalte können belastend sein. Du entscheidest, was du wann liest. Du kannst die Seite jederzeit über den Button unten rechts, den Notausgang oben rechts oder durch dreimaliges Drücken der Esc-Taste verlassen.": {
+    "en": "Some content may be distressing. You decide what you read and when. You can leave the site at any time using the button at the bottom right, the quick exit at the top right or by pressing the Esc key three times."
+  },
+  "Wenn du gerade Hilfe brauchst: Notfallnummern und Hilfsangebote findest du weiter unten. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.": {
+    "en": "If you need help right now: you will find emergency numbers and support services further down. TelefonSeelsorge (116 123) can be reached 24/7."
+  },
   "Datenschutz": {
     "en": "Privacy Policy"
   },

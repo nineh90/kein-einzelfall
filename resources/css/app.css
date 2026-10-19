@@ -6,6 +6,8 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+/* Die Symbole im Fliesstext (text_symbol(), KEV-109) setzen ihre Klassen in PHP. */
+@source '../../app/Support/helpers.php';
 
 /* ---------------------------------------------------------------------------
    Design-Tokens — übernommen aus dem freigegebenen Mockup (docs/KEIN-EINZELFALL_Mockup.html).

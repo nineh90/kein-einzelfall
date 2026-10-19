@@ -67,6 +67,11 @@ defined('HERVORHEBUNG_MUSTER')
 defined('LINK_MUSTER')
     || define('LINK_MUSTER', '/\[([^\[\]]+)\]\((\/[^\s()]*|https:\/\/[^\s()]+)\)/u');
 
+// Ein Symbol im Text: {darstellung} oder {notausgang} (KEV-109). Nur diese
+// beiden, alles andere in geschweiften Klammern bleibt stehen.
+defined('SYMBOL_MUSTER')
+    || define('SYMBOL_MUSTER', '/\{(darstellung|notausgang)\}/u');
+
 if (! function_exists('hervorheben')) {
     /**
      * *Sternchen* in einem Absatz werden fett, wie beim Fettschreiben in einer
@@ -83,6 +88,11 @@ if (! function_exists('hervorheben')) {
      * [Text](/adresse) wird ein Link (08.10.2026): Beim Import der Altseite
      * gingen die Links im Fliesstext verloren („FSM – Fonds sexueller
      * Missbrauch“ auf /wissen, die Termine der Reihe „im Dialog“).
+     *
+     * {darstellung} und {notausgang} werden das Symbol des jeweiligen Knopfs
+     * (KEV-109): In der Triggerwarnung sieht man so gleich, welcher Knopf
+     * gemeint ist. Für Vorlesehilfen mit Namen, die Grösse in em, damit es
+     * mit der Schrift aus der Darstellung mitwächst.
      */
     function hervorheben(string $text): \Illuminate\Support\HtmlString
     {
@@ -107,17 +117,40 @@ if (! function_exists('hervorheben')) {
             $html,
         );
 
-        return new \Illuminate\Support\HtmlString(preg_replace_callback(
+        $html = preg_replace_callback(
             "/\u{E000}(\d+)\u{E001}/u",
             fn ($m) => $links[(int) $m[1]],
             $html,
-        ));
+        );
+
+        // Übersteht das Maskieren unverändert, darum erst hier.
+        return new \Illuminate\Support\HtmlString(
+            preg_replace_callback(SYMBOL_MUSTER, fn ($m) => text_symbol($m[1]), $html),
+        );
     }
 
-    /** Derselbe Text ohne Sternchen und Link-Klammern, für Suche und Vorschautexte. */
+    /** Das Symbol eines Knopfs, so gestaltet wie der Knopf selbst (KEV-109). */
+    function text_symbol(string $name): string
+    {
+        [$icon, $beschriftung, $aussehen] = match ($name) {
+            'darstellung' => ['accessibility', __('Darstellung'), 'border border-line bg-cream text-green'],
+            'notausgang' => ['exit', __('rahmen.notausgang.kopf'), 'bg-green text-on-green'],
+        };
+
+        return '<span role="img" aria-label="'.e($beschriftung).'" class="mx-0.5 inline-flex h-[1.6em] w-[1.6em] '
+            .'items-center justify-center rounded-full align-middle '.$aussehen.'">'
+            .\Illuminate\Support\Facades\Blade::render('<x-ui.icon :name="$icon" class="h-[0.95em] w-[0.95em]" />', ['icon' => $icon])
+            .'</span>';
+    }
+
+    /** Derselbe Text ohne Sternchen, Link-Klammern und Symbole, für Suche und Vorschautexte. */
     function ohne_hervorhebung(string $text): string
     {
-        return preg_replace([HERVORHEBUNG_MUSTER, LINK_MUSTER], ['$1', '$1'], $text);
+        return preg_replace(
+            [HERVORHEBUNG_MUSTER, LINK_MUSTER, '/\s*\{(?:darstellung|notausgang)\}/u'],
+            ['$1', '$1', ''],
+            $text,
+        );
     }
 }
 

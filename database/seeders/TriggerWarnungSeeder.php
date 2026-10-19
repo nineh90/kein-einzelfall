@@ -12,17 +12,35 @@ use Illuminate\Database\Seeder;
  * Ausdrücklicher Wunsch des Vereins aus dem Strukturpapier und noch einmal
  * bestätigt in der Besprechung vom 02.08.2026.
  *
- * ⚠️ Der Wortlaut hier ist ein Vorschlag und gehört bestätigt — er steht als
- * A-Punkt auf der Übergabe-Checkliste. Bewusst nüchtern und beschreibend
- * gehalten: Er sagt, worum es auf dieser Website geht, und trifft keine Aussage
- * im Namen des Vereins. Was der Verein über sich selbst sagt, schreibt der
- * Verein.
+ * Der Wortlaut ist seit KEV-109 (19.10.2026) von Taddi. Vorher stand hier ein
+ * nüchterner Vorschlag von uns, der auf Bestätigung wartete.
  *
  * Abschalten geht ohne Deployment: Seite im Panel auf Entwurf setzen, dann
  * entfällt der Hinweis überall.
  */
 class TriggerWarnungSeeder extends Seeder
 {
+    /*
+     * Text von Taddi (KEV-109). Kam am Stück, die Absätze sind von uns. Zwei
+     * Korrekturen: „und die oft schwierigen Wege“ statt „, und den oft
+     * schwierigen Wegen“ (hängt an „um“), und „Wenn du gerade Hilfe brauchst:“
+     * mit Doppelpunkt, sonst fehlt dem Satz das Verb an zweiter Stelle.
+     * {darstellung} wird das Symbol des Knopfs (Taddi: „vielleicht kann man
+     * den hier grafisch einfügen“).
+     */
+    public const ABSAETZE = [
+        'Auf dieser Homepage geht es um die Folgeschäden von physischen, psychischen, digitalen und '
+            .'sexuellen Gewalttaten und die oft schwierigen Wege durch Hilfe-, Versorgungs- und '
+            .'Entschädigungssysteme.',
+        'Links am Rand findest du einen Button {darstellung}, mit dem du die Darstellung der Seite '
+            .'(Schriftgröße/Kontrast etc.) verändern kannst.',
+        'Einige Inhalte können belastend sein. Du entscheidest, was du wann liest. Du kannst die Seite '
+            .'jederzeit über den Button unten rechts, den Notausgang oben rechts oder durch dreimaliges '
+            .'Drücken der Esc-Taste verlassen.',
+        'Wenn du gerade Hilfe brauchst: Notfallnummern und Hilfsangebote findest du weiter unten. Die '
+            .'TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.',
+    ];
+
     public function run(): void
     {
         $seite = Page::updateOrCreate(
@@ -52,21 +70,7 @@ class TriggerWarnungSeeder extends Seeder
         $seite->blocks()->create([
             'typ' => 'text',
             'position' => 0,
-            'data' => [
-                'absaetze' => [
-                    'Auf dieser Website geht es um Straftaten, Gewalt und ihre Folgen. '
-                        .'Einzelne Texte, Erfahrungsberichte und Dokumente können belastend '
-                        .'sein oder Erinnerungen auslösen.',
-                    'Du entscheidest, was du liest und wann. Du kannst jederzeit aufhören, '
-                        .'zurückgehen oder diese Seite sofort verlassen — dafür gibt es unten '
-                        .'einen Knopf, oben rechts den Notausgang, und du kannst dreimal '
-                        .'hintereinander die Taste Esc drücken.',
-                    // Nicht alle Nummern dort sind rund um die Uhr erreichbar
-                    // (Opfer-Telefon 7–22 Uhr), Prüfung der Firma 08.10.2026.
-                    'Wenn du gerade Hilfe brauchst: Die Notfallnummern stehen am Ende jeder '
-                        .'Seite. Die TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.',
-                ],
-            ],
+            'data' => ['absaetze' => self::ABSAETZE],
         ]);
     }
 }
