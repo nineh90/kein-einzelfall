@@ -53,7 +53,8 @@
          Über dem ersten Baustein steht nur die helle Kopfzeile. --}}
     {{-- Kurze Textabschnitte hintereinander stehen hier als Spalten
          nebeneinander (x-blocks.nebeneinander). --}}
-    <x-bloecke :abschnitte="\App\Models\PageBlock::abschnitte($page->blocks, davor: 'cream')"
+    {{-- Leere Bausteine fallen vorher raus, wie in page.blade.php. --}}
+    <x-bloecke :abschnitte="\App\Models\PageBlock::abschnitte($page->blocks->reject->zeigtNichts()->values(), davor: 'cream')"
                art="nebeneinander" />
 
 @endsection

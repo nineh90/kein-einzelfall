@@ -278,6 +278,16 @@ class AdminPanelTest extends TestCase
                     ['titel' => 'Interne Beschwerde', 'absaetze' => ['Beschwerdeabsatz'], 'art' => 'ombudsstelle'],
                 ],
             ]],
+            // KEV-129: Öffentlichkeitsarbeit
+            ['typ' => 'eintraege', 'data' => [
+                'titel' => 'Einblicke', 'einleitung' => 'Wo wir waren.',
+                'eintraege' => [[
+                    'art' => 'messe', 'datum' => '2026-04-18', 'titel' => 'Ehrenamtsmesse Hamburg',
+                    'ort' => 'Messehalle', 'text' => 'Zwei Tage am Stand.',
+                    'url' => 'https://example.org/messe', 'link' => 'Zur Messe',
+                    'bild' => '/img/messe.webp', 'bild_alt' => 'Unser Stand',
+                ]],
+            ]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -307,6 +317,9 @@ class AdminPanelTest extends TestCase
             'Kritikabsatz', 'Handsatz', 'Knopfsatz',         // Zwei Wege mit Formular
             'Beschwerdeabsatz',
             'ombudsstelle',
+            'Wo wir waren.', 'messe', '2026-04-18',          // Einträge mit Datum
+            'Ehrenamtsmesse Hamburg', 'Messehalle', 'Zwei Tage am Stand.',
+            'example.org', 'Zur Messe', 'messe.webp', 'Unser Stand',
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

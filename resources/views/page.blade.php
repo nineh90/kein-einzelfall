@@ -24,7 +24,10 @@
 
     $kontext = Seitenkontext::fuer($page->slug);
 
-    $bloecke = $page->blocks;
+    // Bausteine, die nichts zeigen (etwa „Einträge mit Datum“ ohne Einträge,
+    // KEV-129), gar nicht erst mitzählen: Sonst bekämen sie eine Fläche, und
+    // zwei gleiche Flächen stünden direkt untereinander.
+    $bloecke = $page->blocks->reject->zeigtNichts()->values();
 
     // Der erste Absatz wandert als Vorspann in den Seitenkopf — aber nur, wenn
     // der erste Baustein ein Text ohne eigene Überschrift ist. Sonst risse man

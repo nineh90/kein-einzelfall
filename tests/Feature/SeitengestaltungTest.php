@@ -471,6 +471,92 @@ class SeitengestaltungTest extends TestCase
         $this->assertSame('/red-flags', $verein['children'][4]['url']);
     }
 
+    /**
+     * KEV-129: Öffentlichkeitsarbeit mit Taddis Text, die beiden Sätze in
+     * Anführungszeichen fett. Darunter der Baustein für Messen, Petitionen und
+     * Presse, noch ohne Einträge: Dann steht dort nichts.
+     */
+    public function test_oeffentlichkeitsarbeit_mit_taddis_text(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+
+        $this->assertStringContainsString('<strong class="font-semibold text-ink">Veränderung beginnt dort, wo Themen '
+            .'sichtbar werden, Menschen zuhören und Stimmen gehört werden.</strong>', $html);
+        $this->assertStringContainsString('<strong class="font-semibold text-ink">Sichtbarkeit schafft Verständnis – '
+            .'und Verständnis kann Veränderung möglich machen.</strong>', $html);
+        $this->assertStringContainsString('Wir zeigen Präsenz auf Ehrenamtsmessen', $html);
+        $this->assertStringContainsString('Menschen miteinander zu verbinden.', $html);
+        $this->assertStringNotContainsString('*Veränderung', $html);
+
+        // Mit Text darf sie in die Suchmaschinen; das Bild bleibt der Platzhalter.
+        $this->assertStringNotContainsString('noindex', $html);
+        $this->assertStringContainsString('Ehrenamtsmessen, Petitionen, Presseartikel und Interviews', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp', $html);
+
+        // Der Baustein ist angelegt, zeigt aber ohne Einträge nichts.
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $this->assertSame(['text', 'eintraege'], $seite->blocks()->pluck('typ')->all());
+        // „Einblicke“ steht auch in Taddis Text, deshalb am Sprungziel geprüft.
+        $this->assertStringNotContainsString('id="eintraege-einblicke"', $html);
+    }
+
+    public function test_eintrag_aus_dem_panel_erscheint_auf_der_oeffentlichkeitsarbeit(): void
+    {
+        $block = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail()
+            ->blocks()->where('typ', 'eintraege')->firstOrFail();
+        $block->update(['data' => $block->data + ['eintraege' => [
+            ['art' => 'messe', 'datum' => '2026-04-18', 'titel' => 'Ehrenamtsmesse Hamburg', 'ort' => 'Hamburg'],
+        ]]]);
+
+        $this->get('/oeffentlichkeitsarbeit')->assertOk()
+            ->assertSee('id="eintraege-einblicke"', false)
+            ->assertSee('Ehrenamtsmesse Hamburg')
+            ->assertSee('18.04.2026')
+            ->assertSee('Messe');
+    }
+
+    public function test_migration_fuellt_nur_die_leere_oeffentlichkeitsarbeit(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $migration = require database_path('migrations/2026_10_21_100000_oeffentlichkeitsarbeit_inhalt.php');
+
+        // Leer wie seit KEV-72: wird gefüllt.
+        $seite->blocks()->delete();
+        $seite->update(['noindex' => true, 'meta_description' => null]);
+        $migration->up();
+        $seite->refresh();
+        $this->assertSame(['text', 'eintraege'], $seite->blocks()->pluck('typ')->all());
+        $this->assertFalse($seite->noindex);
+        $this->assertSame(\Database\Seeders\OeffentlichkeitsarbeitSeeder::META_DESCRIPTION, $seite->meta_description);
+
+        // Im Panel gepflegt: bleibt.
+        $seite->blocks()->delete();
+        $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => ['Eigener Text']]]);
+        $migration->up();
+        $this->assertSame([['absaetze' => ['Eigener Text']]], $seite->blocks()->pluck('data')->all());
+    }
+
+    /** Die englische Fassung entsteht aus dem Wörterbuch; jeder neue Satz steht darin. */
+    public function test_oeffentlichkeitsarbeit_hat_englische_texte(): void
+    {
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $seeder = \Database\Seeders\OeffentlichkeitsarbeitSeeder::class;
+
+        foreach ([...$seeder::ABSAETZE, $seeder::META_DESCRIPTION, $seeder::EINTRAEGE['titel']] as $satz) {
+            $this->assertArrayHasKey($satz, $woerterbuch, $satz);
+        }
+
+        // Hervorhebungen an denselben Stellen
+        $this->assertStringStartsWith('*', $woerterbuch[$seeder::ABSAETZE[0]]['en']);
+        $this->assertStringStartsWith('*', $woerterbuch[$seeder::ABSAETZE[3]]['en']);
+
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->get('/en/oeffentlichkeitsarbeit')->assertOk()
+            ->assertSee('Change begins where issues become visible')
+            ->assertSee('Visibility creates understanding');
+    }
+
     /** KEV-103: neue Seite unter Verein, hinter dem Kinderkodex, mit Platzhalterbild. */
     public function test_taetigkeits_und_jahresberichte(): void
     {

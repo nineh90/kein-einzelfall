@@ -14,6 +14,7 @@ use Illuminate\Database\Seeder;
  * Text, er kommt in eigenen Tickets. Sie stehen trotzdem schon im Menü
  * (Kevin, 03.10.2026) und sind deshalb veröffentlicht, aber für Suchmaschinen
  * gesperrt, bis Text da ist. Alle drei tragen vorerst den Platzhalter.
+ * Öffentlichkeitsarbeit hat seit KEV-129 Text (OeffentlichkeitsarbeitSeeder).
  *
  * Legt nur an, was fehlt. Eine Seite, die es schon gibt, bleibt, wie sie ist:
  * Danach gehört sie dem Verein.

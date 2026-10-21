@@ -362,6 +362,18 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   „noindex“ entfernen. Alle drei tragen vorerst den Platzhalter, eigene Bilder
   fehlen. Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
   Menü bleiben? Taddis Gliederung nennt sie nicht, sie stehen vorerst dahinter.
+- [ ] **Öffentlichkeitsarbeit (KEV-129).** Taddis Text steht, die beiden Sätze
+  in Anführungszeichen fett, die Seite ist jetzt für Suchmaschinen offen.
+  Darunter der neue Baustein **„Einträge mit Datum“**: Messen, Petitionen,
+  Presseartikel, Interviews trägt der Verein im Panel selbst ein (Art, Datum,
+  Ort, Text, Link, Bild), die neuesten stehen von selbst oben. Solange es
+  keinen Eintrag gibt, zeigt die Seite dort nichts. Zu klären:
+  - Die Überschrift **„Einblicke“** über den Einträgen ist von uns.
+  - Bilder für Einträge gehen bisher nur über einen Pfad, ein Hochladen gibt es
+    im Panel noch nirgends. Fotos bitte schicken, wir legen sie ab.
+  - In Taddis Vorlage („4. Öffentlichkeitsarbeit“) beginnt der Schlusssatz mit
+    „Denn Sichtbarkeit schafft …“, im Ticket ohne „Denn“. Umgesetzt wie im
+    Ticket.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

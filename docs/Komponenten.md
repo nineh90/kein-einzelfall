@@ -2097,3 +2097,37 @@ lesen“, weil stur das erste Wort genommen wurde. `TeamMember::rufname()`
 nimmt jetzt den ganzen Namen, wenn er mit einer Anrede (Herr, Frau, Dr.,
 Prof.) beginnt oder mehrere Personen nennt („und“, „&“), sonst weiter den
 Vornamen.
+
+---
+
+## 33. Baustein „Einträge mit Datum“ (21.10.2026, KEV-129)
+
+Für die Öffentlichkeitsarbeit: Messen, Petitionen, Presseartikel, Interviews
+als einzelne Einträge, die der Verein im Panel selbst anlegt. „Diese Arbeiten
+erweitern sich“, also eine Liste, die wächst.
+
+Bewusst ein Seitenbaustein (`eintraege`) mit Wiederholungsfeld und kein
+eigenes Modell wie die Veranstaltungen: Die Einträge laufen so durch die
+englische Fassung (`UebersetzungenSeeder`, Felder `titel`, `text`, `link`,
+`bild_alt`), die Suche und das Speichern im Panel wie jeder andere Baustein,
+und derselbe Baustein passt später auf den Rückblick oder auf Unterseiten
+(Ehrenamtsmessen, Petitionen, Presse).
+
+- Je Eintrag: Art (Schild: Messe, Petition, Presseartikel, Interview,
+  Veranstaltung, Aktion; `PageBlock::EINTRAG_ARTEN`, übersetzt über
+  `lang/en.json`), Datum (optional), Titel, Ort, Text (jede Zeile ein Absatz,
+  `*fett*` und `[Link](…)` wie im Textbaustein), Link mit Beschriftung, ein Bild.
+- **Neueste zuerst**, unabhängig von der Reihenfolge im Panel
+  (`PageBlock::eintraegeSortiert`): Der Verein hängt Neues unten an. Gleicher
+  Tag behält die Panel-Reihenfolge, ohne Datum (Petitionen) ans Ende, ohne
+  Titel fällt ein Eintrag raus.
+- **Leer zeigt er nichts** und zählt beim Flächenwechsel nicht mit
+  (`PageBlock::zeigtNichts`, gefiltert in `page.blade.php` und
+  `home.blade.php`). Sonst stünden zwei gleiche Flächen untereinander.
+- Barrierefreiheit: Liste (`<ul>`), Datum als `<time>`, der Link nennt den
+  Titel für Vorlesehilfen mit, fremde Seiten sind gekennzeichnet, kein
+  `target="_blank"`. Ohne Überschrift des Bausteins sind die Einträge `h2`,
+  sonst `h3`.
+- Bild nur als Pfad, wie überall im Panel. Mehrere Fotos je Messe und ein
+  Video (Trude Kuh) kommen mit den Folgetickets.
+
