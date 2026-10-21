@@ -420,7 +420,7 @@ class Suche
         array_walk_recursive($daten, function ($wert, $schluessel) use (&$stuecke) {
             // `url` und `variant` sind Technik, kein Inhalt — ein Treffer in
             // einer Adresse wäre für Suchende nicht nachvollziehbar.
-            if (is_string($wert) && ! in_array($schluessel, ['url', 'variant', 'icon', 'art', 'widget'], true)) {
+            if (is_string($wert) && ! in_array($schluessel, ['url', 'datei', 'variant', 'icon', 'art', 'widget'], true)) {
                 // *Markierungen* (Fettdruck im Absatz) gehören nicht in den Ausschnitt.
                 $stuecke[] = ohne_hervorhebung($wert);
             }

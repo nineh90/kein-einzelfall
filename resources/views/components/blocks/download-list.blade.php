@@ -1,6 +1,6 @@
 @props([
     'titel' => null,
-    'dokumente' => [],   // [['titel' =>, 'url' =>, 'bytes' =>, 'typ' =>, 'quelle' =>], ...]
+    'dokumente' => [],   // [['titel' =>, 'datei' =>, 'url' =>, 'bytes' =>, 'typ' =>, 'quelle' =>], ...]
     'auf' => 'cream',    // cream | card
 ])
 
@@ -20,12 +20,26 @@
      * unangetastet — die koennen wir nicht pruefen.
      */
     $dokumente = collect($dokumente)
+        // Im Panel hochgeladen (`datei`, seit 21.10.2026) geht vor der
+        // eingetragenen Adresse. Die Größe ergibt sich dann aus der Datei,
+        // niemand muss sie mehr in Bytes eintippen.
+        ->map(function ($d) {
+            if (filled($d['datei'] ?? null)) {
+                $d['url'] = $d['datei'];
+            }
+
+            $datei = \App\Support\Medien::dateipfad($d['url'] ?? null);
+            if (blank($d['bytes'] ?? null) && $datei !== null && is_file($datei)) {
+                $d['bytes'] = filesize($datei);
+            }
+
+            return $d;
+        })
         ->filter(function ($d) {
             $url = $d['url'] ?? '';
+            $eigen = str_starts_with($url, '/'.\App\Support\Dokument::ORDNER.'/') || str_starts_with($url, '/storage/');
 
-            return $url !== ''
-                && (! str_starts_with($url, '/'.\App\Support\Dokument::ORDNER.'/')
-                    || is_file(public_path(ltrim($url, '/'))));
+            return $url !== '' && (! $eigen || \App\Support\Medien::vorhanden($url));
         })
         ->values()
         ->all();

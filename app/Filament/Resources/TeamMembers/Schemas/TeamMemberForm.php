@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TeamMembers\Schemas;
 
+use App\Support\Medien;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
@@ -47,7 +48,7 @@ class TeamMemberForm
             ]),
 
             Section::make('Foto und Sichtbarkeit')->columns(2)->schema([
-                TextInput::make('foto_pfad')->label('Foto (Pfad oder Adresse)')
+                Medien::bild('foto_pfad', 1000)->label('Foto')
                     ->helperText('Ohne Foto erscheinen die Initialen.'),
 
                 TextInput::make('foto_alt')->label('Bildbeschreibung')

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Groups\Schemas;
 
 use App\Models\Group;
+use App\Support\Medien;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -52,9 +53,8 @@ class GroupForm
 
                 // Wie bei den Seiten (KEV-82): Mit Bild bekommt die Seite der
                 // Gruppe den Seitenkopf, Name und Kurzbeschreibung stehen darauf.
-                TextInput::make('titelbild')->label('Titelbild (Pfad oder Adresse)')->maxLength(255)
-                    ->helperText('Querformat 16:9, z. B. /img/titelbilder/gruppe-wir-sind-nicht-mehr-stumm.webp. '
-                        .'Leer lassen = Seite ohne Bild.'),
+                Medien::bild('titelbild')->label('Titelbild')
+                    ->helperText('Querformat 16:9. Leer lassen = Seite ohne Bild.'),
             ]),
 
             Section::make('Termin und Ort')->columns(2)->schema([

@@ -47,6 +47,21 @@ return [
             'report' => false,
         ],
 
+        /*
+         * Die Website selbst (public/), nur für die Upload-Felder im Panel
+         * (App\Support\Medien): Gespeichert sind Adressen der Seite
+         * („/img/…“, „/storage/medien/…“), und die Felder bauen daraus die
+         * Vorschau. Geschrieben wird hierhin nie, neue Dateien gehen auf
+         * `public`.
+         */
+        'webroot' => [
+            'driver' => 'local',
+            'root' => public_path(),
+            'url' => '',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

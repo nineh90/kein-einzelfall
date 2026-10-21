@@ -181,9 +181,11 @@ if (! function_exists('bildadresse')) {
         }
 
         return $gemerkt[$pfad] ??= (function () use ($pfad) {
-            $datei = public_path(ltrim(parse_url($pfad, PHP_URL_PATH) ?? '', '/'));
+            // Medien::dateipfad: Hochgeladenes (/storage/…) liegt in
+            // storage/app/public, auch ohne Verknüpfung in public/.
+            $datei = \App\Support\Medien::dateipfad($pfad);
 
-            return is_file($datei)
+            return $datei !== null && is_file($datei)
                 ? $pfad.(str_contains($pfad, '?') ? '&' : '?').'v='.substr(hash_file('xxh3', $datei), 0, 10)
                 : $pfad;
         })();

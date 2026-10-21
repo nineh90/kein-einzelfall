@@ -13,7 +13,9 @@ use App\Http\Controllers\SucheController;
 use App\Http\Middleware\SpracheSetzen;
 use App\Models\Language;
 use App\Support\Dokument;
+use App\Support\Medien;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
  * Die öffentlichen Routen stehen genau einmal hier und werden zweimal
@@ -200,6 +202,31 @@ Route::get('/wp-content/uploads/{pfad}', function (string $pfad) {
 
     return redirect($ziel, 301);
 })->where('pfad', '.*')->name('altdokument');
+
+/*
+ * Im Panel hochgeladene Bilder und Dokumente (App\Support\Medien).
+ *
+ * Normalerweise liefert der Webserver sie direkt aus, über die Verknüpfung
+ * public/storage. Fehlt die (auf dem Server ist das ein Schritt im Image,
+ * den wir nicht sehen), käme hier eine 404, und jedes hochgeladene Bild
+ * wäre kaputt. Dann springt diese Route ein.
+ *
+ * Nur Dateien in storage/app/public: Medien::dateipfad() weist „..“ ab, und
+ * realpath() hält auch Verknüpfungen in den Ordner hinein draußen. Die
+ * Dateinamen sind eindeutig, deshalb lange zwischenspeichern.
+ */
+Route::get('/storage/{pfad}', function (string $pfad) {
+    $datei = Medien::dateipfad('/storage/'.$pfad);
+    $echt = $datei ? realpath($datei) : false;
+    $ordner = realpath(Storage::disk('public')->path(''));
+
+    abort_unless($echt && $ordner && str_starts_with($echt, $ordner.DIRECTORY_SEPARATOR) && is_file($echt), 404);
+
+    return response()->file($echt, [
+        'Cache-Control' => 'public, max-age=31536000, immutable',
+        'X-Content-Type-Options' => 'nosniff',
+    ]);
+})->where('pfad', '.*')->name('medien');
 
 /*
  * Suchmaschinen-Wegweiser. Kennt alle Sprachfassungen und verweist sie

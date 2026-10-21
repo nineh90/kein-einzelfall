@@ -70,7 +70,7 @@
         // bild.webp (2000 px) und bild-1000.webp; ein fremder Pfad aus dem
         // Panel hat keine kleine Fassung und kommt ohne srcset aus.
         $klein = preg_replace('/\.webp$/', '-1000.webp', $bild);
-        $srcset = $klein !== $bild && is_file(public_path(ltrim($klein, '/')))
+        $srcset = $klein !== $bild && \App\Support\Medien::vorhanden($klein)
             ? bildadresse($klein).' 1000w, '.bildadresse($bild).' 2000w'
             : null;
 

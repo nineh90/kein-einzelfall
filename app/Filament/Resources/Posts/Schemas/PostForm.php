@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
+use App\Support\Medien;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -77,7 +78,7 @@ class PostForm
             ]),
 
             Section::make('Bild')->columns(2)->collapsed()->schema([
-                TextInput::make('bild_pfad')->label('Bildpfad'),
+                Medien::bild('bild_pfad')->label('Bild'),
                 TextInput::make('bild_alt')
                     ->label('Bildbeschreibung')
                     ->helperText('Was auf dem Bild zu sehen ist — wird Menschen vorgelesen, '

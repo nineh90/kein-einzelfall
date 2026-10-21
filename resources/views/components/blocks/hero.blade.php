@@ -55,7 +55,7 @@
 @php
     // bild.webp (2000 px) und bild-1000.webp, wie bei den Titelbildern.
     $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
-    $srcset = $bild && $klein !== $bild && is_file(public_path(ltrim($klein, '/')))
+    $srcset = $bild && $klein !== $bild && \App\Support\Medien::vorhanden($klein)
         ? bildadresse($klein).' 1000w, '.bildadresse($bild).' 2000w'
         : null;
 @endphp

@@ -2128,6 +2128,48 @@ und derselbe Baustein passt später auf den Rückblick oder auf Unterseiten
   Titel für Vorlesehilfen mit, fremde Seiten sind gekennzeichnet, kein
   `target="_blank"`. Ohne Überschrift des Bausteins sind die Einträge `h2`,
   sonst `h3`.
-- Bild nur als Pfad, wie überall im Panel. Mehrere Fotos je Messe und ein
-  Video (Trude Kuh) kommen mit den Folgetickets.
+- Das Bild lädt der Verein hoch (Abschnitt 34). Mehrere Fotos je Messe und
+  ein Video (Trude Kuh) kommen mit den Folgetickets.
+
+---
+
+## 34. Bilder und Dokumente im Panel hochladen (21.10.2026)
+
+Bis hierhin gab es im Panel nur Pfadfelder („Bild (Pfad oder Adresse)“):
+Jedes neue Bild musste erst bei uns landen. Kevin: „Der Kunde soll das ganze
+ja auch komplett selbst pflegen können. Das gilt für die gesamte Seite.“
+
+Jetzt sind es Upload-Felder (`App\Support\Medien`): Titelbild der Seiten und
+Gruppen, Bild im Aufmacher und bei „Text mit Bild“, Partnerlogos, Bilder der
+Einträge, Fotos im Team, Bilder der Beiträge. Im Baustein „Dokumente“ gibt es
+zusätzlich zur Adresse „Datei hochladen“ (PDF, Word, Tabellen, bis 20 MB).
+
+- **In der Datenbank steht weiter ein Pfad der Website**, neue Dateien als
+  `/storage/medien/<bilder|dokumente>/<Jahr>/<Monat>/<name>-<6 Zeichen>.<endung>`.
+  Alles, was Pfade liest (`bildadresse()`, Dokumentenliste, Übersetzung,
+  Suche), bleibt unverändert. Der Name bleibt lesbar, weil man ihn beim
+  Herunterladen sieht.
+- **Bestehende Pfade überleben das Speichern.** Filament wirft beim Laden
+  still jeden Wert weg, den es auf der Festplatte des Felds nicht findet;
+  beim nächsten Speichern wäre er gelöscht. Die Felder lesen deshalb keine
+  Dateiangaben (`fetchFileInformation(false)`) und zeigen die Vorschau über die
+  Adresse (Festplatte `webroot` = `public/`, nur gelesen). Geschrieben wird auf
+  `public`.
+- **Große Fotos verkleinert der Browser** vor dem Hochladen (höchstens 2000 px,
+  Logos 800, Teamfotos 1000). Auf dem Server braucht es dafür kein GD.
+- **Kein SVG:** Eine SVG-Datei kann Skript enthalten und liefe unter unserer
+  Adresse mit den Rechten der Seite. Erlaubt sind JPEG, PNG, WebP, GIF, AVIF.
+- **Auslieferung ohne `storage:link`:** Fehlt die Verknüpfung public/storage,
+  springt die Route `/storage/{pfad}` ein (nur Dateien in storage/app/public,
+  `..` und Verknüpfungen nach draußen werden abgewiesen, `nosniff`).
+- **Dokumente:** Die hochgeladene Datei geht vor der Adresse, die Größe
+  („PDF, 180 KB“) ermittelt die Seite selbst. Fehlt eine hochgeladene Datei,
+  fällt der Eintrag weg wie bei `/dokumente`.
+- **Livewire** nimmt bis 20 MB an (`config/livewire.php`), PHP auf dem Server
+  muss dazu passen. Und `storage/app/public` muss einen Deploy überleben.
+  Beides steht in der Übergabe-Checkliste unter B1.
+- Tests: `MedienTest` (Hochladen, SVG abgewiesen, alte Pfade bleiben, Dokument
+  in der Liste, Auslieferung bleibt im Ordner). Im echten Panel einmal
+  durchgespielt: Bild hochgeladen, gespeichert, auf der Seite und unter
+  `/storage/…` ohne Verknüpfung ausgeliefert.
 

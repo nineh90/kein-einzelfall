@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\PageBlock;
 use App\Models\TeamMember;
 use App\Rules\KollidiertNichtMitSprachpraefix;
+use App\Support\Medien;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
@@ -187,11 +188,11 @@ class PageForm
                 ->columns(2)
                 ->collapsed()
                 ->schema([
-                    TextInput::make('titelbild')
-                        ->label('Bild (Pfad oder Adresse)')
-                        ->maxLength(255)
-                        ->helperText('Querformat 16:9, z. B. /img/titelbilder/verein.webp. '
-                            .'Neue Bilder nach der Bildvorgabe in docs/Bildsprache.md.'),
+                    Medien::bild('titelbild')
+                        ->label('Bild')
+                        ->helperText('Querformat 16:9. Bild hierher ziehen oder antippen zum Auswählen. '
+                            .'Ruhige Stillleben in Sand- und Cremetönen passen am besten '
+                            .'(Bildvorgabe in docs/Bildsprache.md).'),
 
                     TextInput::make('untertitel')
                         ->label('Unterzeile')
@@ -324,8 +325,8 @@ class PageForm
                                     .'Abschnitte; lange Texte liest man linksbündig leichter.'),
 
                             // --- Text mit Bild ---
-                            TextInput::make('data.bild')
-                                ->label('Bild (Pfad oder Adresse)')
+                            Medien::bild('data.bild')
+                                ->label('Bild')
                                 ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero'], true))
                                 ->helperText(fn ($get) => $get('typ') === 'hero'
                                     ? 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
@@ -409,16 +410,22 @@ class PageForm
                                         ->columnSpanFull()
                                         ->helperText('Was die Besucherin liest — nicht der Dateiname. '
                                             .'Screenreader lesen genau diesen Text vor.'),
+                                    Medien::dokument('datei')
+                                        ->label('Datei hochladen')
+                                        ->columnSpanFull()
+                                        ->helperText('PDF, Word oder Tabelle, bis 20 MB. Geht vor der '
+                                            .'Adresse darunter.'),
                                     TextInput::make('url')
-                                        ->label('Adresse')
-                                        ->required()
-                                        ->helperText('Entweder eine eigene Datei (/dokumente/…) oder '
-                                            .'die Adresse bei der Behörde (https://…). '
+                                        ->label('Oder Adresse')
+                                        ->required(fn ($get) => blank($get('datei')))
+                                        ->helperText('Die Adresse bei der Behörde (https://…) oder eine '
+                                            .'Datei, die schon bei uns liegt (/dokumente/…). '
                                             .'Antragsformulare gehören verlinkt, nicht hierher kopiert — '
                                             .'Ämter ändern ihre Vordrucke, und eine veraltete Fassung '
                                             .'kostet die Antragstellerin Zeit, die sie oft nicht hat.'),
                                     TextInput::make('bytes')->label('Größe in Bytes')->numeric()
-                                        ->helperText('Nur für eigene Dateien — für den Hinweis „PDF, 180 KB“.'),
+                                        ->helperText('Kann leer bleiben: Bei Dateien, die bei uns liegen, '
+                                            .'ermittelt die Seite die Größe selbst.'),
                                     TextInput::make('quelle')
                                         ->label('Name der fremden Seite')
                                         ->columnSpanFull()
@@ -587,10 +594,10 @@ class PageForm
                                         ->label('Ziel')
                                         ->helperText('Adresse der Partnerseite. Leer lassen heisst: '
                                             .'Der Eintrag wird gezeigt, ist aber kein Link.'),
-                                    TextInput::make('logo')
-                                        ->label('Logo (Pfad oder Adresse)')
+                                    Medien::bild('logo', 800)
+                                        ->label('Logo')
                                         ->helperText('Leer lassen ist in Ordnung — dann steht nur der '
-                                            .'Name da. Logos bitte hier ablegen und nicht beim Partner '
+                                            .'Name da. Logos bitte hier hochladen und nicht beim Partner '
                                             .'verlinken: Ein fremd geladenes Bild überträgt die '
                                             .'IP-Adresse unserer Besucherinnen dorthin.'),
                                     TextInput::make('logo_alt')
@@ -657,8 +664,8 @@ class PageForm
                                         ->label('Beschriftung des Links')
                                         ->helperText('Zum Beispiel „Zum Artikel“ oder „Zur Petition“. '
                                             .'Leer lassen zeigt „Mehr erfahren“.'),
-                                    TextInput::make('bild')
-                                        ->label('Bild (Pfad oder Adresse)')
+                                    Medien::bild('bild')
+                                        ->label('Bild')
                                         ->helperText('Querformat, z. B. ein Foto vom Messestand. '
                                             .'Kann leer bleiben.'),
                                     TextInput::make('bild_alt')

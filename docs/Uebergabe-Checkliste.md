@@ -369,7 +369,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Ort, Text, Link, Bild), die neuesten stehen von selbst oben. Solange es
   keinen Eintrag gibt, zeigt die Seite dort nichts. Zu klären:
   - Die Überschrift **„Einblicke“** über den Einträgen ist von uns.
-  - Bilder für Einträge gehen bisher nur über einen Pfad, ein Hochladen gibt es
+  - Bilder lädt der Verein seit dem 21.10.2026 im Panel selbst hoch (siehe B1,
+    Hochladen). Bis dahin ging es nur über einen Pfad.
     im Panel noch nirgends. Fotos bitte schicken, wir legen sie ab.
   - In Taddis Vorlage („4. Öffentlichkeitsarbeit“) beginnt der Schlusssatz mit
     „Denn Sichtbarkeit schafft …“, im Ticket ohne „Denn“. Umgesetzt wie im
@@ -488,6 +489,18 @@ Seite im Panel unter „Titelbild“ ändern.
 ## B. Technisch vor dem Go-Live (Kevin)
 
 ### B1 · Muss
+- [ ] **Hochladen im Panel: Ablage muss einen Deploy überleben.** Bilder und
+      Dokumente, die der Verein hochlädt, liegen in `storage/app/public/medien`
+      (seit 21.10.2026). Der Deploy baut das Image neu und tauscht die
+      Container (`/docker/kein-einzelfall/deploy.sh`). Ist `storage/app/public`
+      dort kein Volume, sind nach dem nächsten Deploy alle hochgeladenen Dateien
+      weg. Bitte auf dem Server prüfen und sonst ein Volume einrichten. Zum
+      Prüfen: ein Bild hochladen, deployen, Bild noch da?
+- [ ] **PHP-Grenzen fürs Hochladen:** `upload_max_filesize` mindestens `20M`,
+      `post_max_size` mindestens `25M`. Die Vorgabe von PHP (2 MB) lässt die
+      meisten PDFs scheitern. Bilder verkleinert schon der Browser, die kommen
+      auch so durch. Die Verknüpfung `php artisan storage:link` ist nicht nötig:
+      Fehlt sie, liefert eine Route die Dateien aus (schneller ist sie aber).
 - [ ] **`APP_KEY` sichern.** Die Verschlüsselung der Anfragen hängt daran. Geht der
       Schlüssel verloren, sind alle Anfragen unwiederbringlich weg.
 - [ ] **`SESSION_SECURE_COOKIE=true`** setzen. Steht derzeit auf `NULL`, damit ginge
