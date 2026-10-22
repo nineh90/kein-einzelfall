@@ -23,13 +23,13 @@ class GlossaryTermsTable
                     ->weight('medium')->wrap()
                     // Die ersten Worte der Erklärung als Vorschau: Ohne sie
                     // sähe die Liste bei „SGB XIV“ und „SGB IX“ gleich aus.
-                    ->description(fn ($r) => \Illuminate\Support\Str::limit($r?->erklaerung, 90)),
+                    ->description(fn ($record) => \Illuminate\Support\Str::limit($record?->erklaerung, 90)),
 
                 TextColumn::make('locale')->label('Sprache')->badge()
-                    ->formatStateUsing(fn ($s) => Language::finden($s)?->label_deutsch ?? $s),
+                    ->formatStateUsing(fn ($state) => Language::finden($state)?->label_deutsch ?? $state),
 
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($r) => $r?->published_at?->isPast() === true),
+                    ->getStateUsing(fn ($record) => $record?->published_at?->isPast() === true),
             ])
             // Nach dem, was auf der Seite vorn steht — sonst sucht die
             // Redaktion einen Eintrag in einer anderen Reihenfolge, als sie ihn

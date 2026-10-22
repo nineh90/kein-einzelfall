@@ -317,6 +317,35 @@ class AdminPanelTest extends TestCase
         }
     }
 
+    /**
+     * Filament 4 reicht in die Spalten-Funktionen nur Werte mit den Namen
+     * `$state` und `$record` herein. Mit `fn ($s)` und `fn ($r)` blieben die
+     * Schilder „Art“ und „Status“ leer, und „Sichtbar“ zeigte bei jeder
+     * Gruppe, Person und jedem Glossarbegriff ein Kreuz (gefunden am
+     * 22.10.2026 bei KEV-134).
+     */
+    public function test_listen_zeigen_art_status_und_sichtbar(): void
+    {
+        $gruppe = Group::where('typ', 'selbsthilfe')->whereNotNull('published_at')->firstOrFail();
+
+        Livewire::actingAs($this->redaktion)
+            ->test(\App\Filament\Resources\Groups\Pages\ListGroups::class)
+            ->assertTableColumnFormattedStateSet('typ', 'Selbsthilfegruppe', $gruppe)
+            ->assertTableColumnFormattedStateSet('status', Group::STATUS[$gruppe->status], $gruppe)
+            ->assertTableColumnStateSet('published_at', true, $gruppe);
+
+        $person = TeamMember::whereNotNull('published_at')->firstOrFail();
+
+        Livewire::actingAs($this->redaktion)
+            ->test(\App\Filament\Resources\TeamMembers\Pages\ListTeamMembers::class)
+            ->assertTableColumnStateSet('published_at', true, $person);
+
+        // Und keine Spalten-Funktion mehr mit Namen, die Filament nicht kennt
+        foreach (glob(app_path('Filament/Resources/*/Tables/*.php')) as $datei) {
+            $this->assertDoesNotMatchRegularExpression('/fn \(\$(s|r)\)/', file_get_contents($datei), basename($datei));
+        }
+    }
+
     public function test_reihenfolge_der_bausteine_bleibt_erhalten(): void
     {
         $seite = Page::where('slug', 'arbeitsgruppen')->first();

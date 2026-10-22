@@ -21,21 +21,21 @@ class GroupsTable
 
                 TextColumn::make('name')->label('Name')->searchable()->sortable()
                     ->weight('medium')->wrap()
-                    ->description(fn ($r) => $r?->wannUndWo() ?: null),
+                    ->description(fn ($record) => $record?->wannUndWo() ?: null),
 
                 TextColumn::make('typ')->label('Art')->badge()
-                    ->formatStateUsing(fn ($s) => Group::TYPEN[$s] ?? $s),
+                    ->formatStateUsing(fn ($state) => Group::TYPEN[$state] ?? $state),
 
                 TextColumn::make('status')->label('Status')->badge()
-                    ->formatStateUsing(fn ($s) => Group::STATUS[$s] ?? $s)
-                    ->color(fn ($s) => match ($s) {
+                    ->formatStateUsing(fn ($state) => Group::STATUS[$state] ?? $state)
+                    ->color(fn ($state) => match ($state) {
                         'offen' => 'success',
                         'geplant' => 'warning',
                         default => 'gray',
                     }),
 
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
-                    ->getStateUsing(fn ($r) => $r?->published_at?->isPast() === true),
+                    ->getStateUsing(fn ($record) => $record?->published_at?->isPast() === true),
             ])
             ->defaultSort('position')
             ->reorderable('position')
