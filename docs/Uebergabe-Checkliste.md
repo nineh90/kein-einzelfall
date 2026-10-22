@@ -333,7 +333,13 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   mit Taddis Text, im Menü als letzter Punkt (eine Position stand nicht im
   Ticket). Noch ohne Berichte: Der Text kündigt sie ab 2025 an. **Bitte den
   Bericht 2025 als PDF schicken**, oder im Panel selbst als Baustein
-  „Dokumente“ anhängen. Bis Taddi ein Bild schickt, steht der Platzhalter oben.
+  „Dokumente“ anhängen. Seit KEV-147 mit Taddis Bild (Leinenbücher mit „2025“);
+  wir haben es rechts um ruhige Wand verlängert, damit die Bücher nicht unter
+  dem Titel liegen.
+- [ ] **Titelbilder für Red Flags und Schutz- und Wertekonzept.** In Taddis
+  Drive-Ordner „1. Verein“ liegen Bilder „Red Flaggs“ und „Schutz u.
+  Wertekonzept“; beide Seiten zeigen noch den Platzhalter. Kommen sie per
+  Ticket, sind sie schnell eingebaut.
 - [ ] **Beschwerdemanagement (KEV-98) abnehmen.** Taddis Text in zwei Spalten,
   im Menü „Verein“ an Position 5, darunter ein gemeinsames Formular. Darin
   wählt man oben „Externe Kritik“ (landet wie jede Anfrage im

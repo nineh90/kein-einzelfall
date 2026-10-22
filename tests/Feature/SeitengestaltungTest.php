@@ -570,7 +570,8 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Tätigkeits- und Jahresberichte', $html);
         $this->assertStringContainsString('Hinter jedem Jahr stehen Menschen, Begegnungen, Ideen', $html);
         $this->assertStringContainsString('Beginnend mit dem Jahr 2025 findest du hier unsere Berichte', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
+        // Seit KEV-147 Taddis Bild statt Platzhalter
+        $this->assertStringContainsString('src="/img/titelbilder/taetigkeits-und-jahresberichte.webp?v=', $html);
 
         // Hinter dem Kinderkodex (seit KEV-105 steht das Gremium UKFB dahinter).
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
@@ -621,6 +622,38 @@ class SeitengestaltungTest extends TestCase
         $seite->update(['titelbild' => \App\Support\Titelbilder::PLATZHALTER]);
         $migration->up();
         $this->assertSame('/img/titelbilder/oeffentlichkeitsarbeit.webp', $seite->fresh()->titelbild);
+
+        // Im Panel gepflegt: bleibt.
+        $seite->update(['titelbild' => '/storage/medien/bilder/2026/10/eigenes-abc123.webp']);
+        $migration->up();
+        $this->assertSame('/storage/medien/bilder/2026/10/eigenes-abc123.webp', $seite->fresh()->titelbild);
+    }
+
+    /**
+     * KEV-147: Taddis Bild (Leinenbücher mit „2025“) statt Platzhalter. Rechts
+     * um ruhige Wand verlängert (2,58 : 1 statt 16 : 9), damit die Bücher links
+     * vom Titel bleiben und auf breiten Bildschirmen ganz zu sehen sind;
+     * ausgerichtet auf 60 %.
+     */
+    public function test_jahresberichte_haben_eigenes_titelbild(): void
+    {
+        $html = $this->get('/taetigkeits-und-jahresberichte')->assertOk()->getContent();
+
+        $this->assertStringContainsString('/img/titelbilder/taetigkeits-und-jahresberichte-1000.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('object-position: 0% 60%', $html);
+        $this->assertNotContains('taetigkeits-und-jahresberichte', \App\Support\Titelbilder::PLATZHALTER_SEITEN);
+        $this->assertSame([2000, 776], array_slice(getimagesize(public_path('img/titelbilder/taetigkeits-und-jahresberichte.webp')), 0, 2));
+    }
+
+    public function test_migration_tauscht_nur_den_platzhalter_bei_jahresberichten(): void
+    {
+        $seite = Page::where('slug', 'taetigkeits-und-jahresberichte')->where('locale', 'de')->firstOrFail();
+        $migration = require database_path('migrations/2026_10_22_220000_jahresberichte_titelbild.php');
+
+        $seite->update(['titelbild' => \App\Support\Titelbilder::PLATZHALTER]);
+        $migration->up();
+        $this->assertSame('/img/titelbilder/taetigkeits-und-jahresberichte.webp', $seite->fresh()->titelbild);
 
         // Im Panel gepflegt: bleibt.
         $seite->update(['titelbild' => '/storage/medien/bilder/2026/10/eigenes-abc123.webp']);

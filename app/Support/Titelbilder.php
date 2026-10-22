@@ -75,6 +75,9 @@ class Titelbilder
         // KEV-149: Bild von Taddi statt Platzhalter, Megafon auf Holztisch.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'oeffentlichkeitsarbeit' => null,
+        // KEV-147: Bild von Taddi statt Platzhalter, Leinenbücher mit „2025“.
+        // Ohne Unterzeile, der Verein hat keine geschickt.
+        'taetigkeits-und-jahresberichte' => null,
     ];
 
     /**
@@ -108,8 +111,6 @@ class Titelbilder
         // KEV-72, bis Taddi ein Bild schickt (Gruppen & Veranstaltungen hat
         // seit KEV-127 eins, Öffentlichkeitsarbeit seit KEV-149)
         'rueckblick',
-        // KEV-103, bis Taddi ein Bild schickt
-        'taetigkeits-und-jahresberichte',
         // KEV-97, bis Taddi Bilder schickt
         'schutz-und-wertekonzept', 'red-flags',
     ];
@@ -147,6 +148,9 @@ class Titelbilder
      *  - Öffentlichkeitsarbeit: Megafon auf Holztisch, Trichter zwischen 26
      *    und 74 % der Höhe (KEV-149). Unten ausgerichtet fehlte ab 1440 px
      *    der obere Rand des Trichters, bei 2560 px der halbe Trichter.
+     *  - Tätigkeits- und Jahresberichte: Leinenbücher (KEV-147). Das Bild ist
+     *    rechts um Wand verlängert (2,58 : 1), die Bücher stehen zwischen 20
+     *    und 82 % der Höhe; mit 60 % bleiben sie von 1024 bis 2560 px ganz.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -163,6 +167,7 @@ class Titelbilder
         self::ORDNER.'/gruppen-und-veranstaltungen.webp' => 40,
         self::ORDNER.'/oeffentlichkeitsarbeit.webp' => 50,
         self::ORDNER.'/veranstaltungen.webp' => 75,
+        self::ORDNER.'/taetigkeits-und-jahresberichte.webp' => 60,
     ];
 
     /**
