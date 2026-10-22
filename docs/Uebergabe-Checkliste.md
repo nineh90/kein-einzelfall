@@ -429,9 +429,6 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     ergänzen, wenn er es anders sieht.
   - Das Standfoto ist ein Bildschirmfoto mit nur 796 px Breite. Gibt es das
     Original, wirkt es auf der Seite schärfer (im Panel austauschen).
-  - Im Drive-Ordner „Ehrenamtsmesse“ liegt außerdem ein Bild „Ehrenamtsmesse“,
-    vermutlich für den Abschnitt „Messen“ (wie bei den Petitionen). Noch nicht
-    eingebaut, kein Ticket dazu.
 - [ ] **Ehrenamtsmesse Berlin (KEV-132).** Dritte Messe, Taddis Text (im Ticket
   nichts in Anführungszeichen, deshalb nichts fett). Laut Plakat im Drive war es
   die **19. Berliner Freiwilligenbörse** am Roten Rathaus und Neptunbrunnen;
@@ -445,6 +442,10 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     (@…), eines vom Stand eines anderen Ausstellers. Beim Teamfoto sind die
     Story-Ränder abgeschnitten. Gibt es die Originalfotos (ohne Story), wären
     sie schärfer.
+- [ ] **Abschnitt „Ehrenamtsmessen“ (KEV-131).** Der Abschnitt mit den Messen
+  heißt jetzt „Ehrenamtsmessen“ wie in Taddis Ticket (vorher „Messen“), mit
+  ihrer Einleitung und ihrem Bild (leerer Messestand) daneben, wie bei den
+  Petitionen. Die Überschrift ist im Panel änderbar.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

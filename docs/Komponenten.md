@@ -2147,8 +2147,10 @@ und der Abschnitt heißt „Messen“. Deshalb seit KEV-134 wie bei den Gruppen:
   „Unterstützten“ (Art „Unterstützte Petition“). Ohne Untergruppen gilt
   `data.arten` wie bisher. Gruppen ohne Eintrag fallen weg, ganz ohne Eintrag
   der ganze Abschnitt (`PageBlock::oeffentlichkeitsarbeitGruppen`). Optional
-  `data.bild` (Upload) neben der Einleitung, ab „lg“ zweispaltig. Neue
-  Abschnitte an einer bestimmten Stelle per `abschnittEinfuegen()`.
+  `data.bild` (Upload) neben der Einleitung, ab „lg“ zweispaltig, so bei
+  „Ehrenamtsmessen“ (KEV-131) und „Petitionen“. Neue Abschnitte hinter dem
+  Abschnitt einer bestimmten Art per `abschnittEinfuegen($daten, 'messe')`:
+  nach Art, nicht nach Überschrift, die ändert sich (Messen → Ehrenamtsmessen).
 - **Galerie (KEV-132):** Auf der Seite eines Eintrags ist jedes Foto ein Link
   auf die große Fassung, die weiteren Fotos stehen als Raster aus
   Vorschaubildern (3:4 zugeschnitten, zwei bzw. drei Spalten). `galerie.js`

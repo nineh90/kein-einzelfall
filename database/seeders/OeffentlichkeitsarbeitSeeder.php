@@ -41,9 +41,20 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
         '*Sichtbarkeit schafft Verständnis – und Verständnis kann Veränderung möglich machen.*',
     ];
 
-    /** Abschnitt „Messen“: die Messen als Karten (KEV-134, Kevin: „Messen“, nicht „Einblicke“). */
+    /**
+     * Abschnitt mit den Messen als Karten. Erst „Messen“ (KEV-134, statt
+     * „Einblicke“), seit KEV-131 „Ehrenamtsmessen“ wie in Taddis Ticket, mit
+     * ihrer Einleitung und ihrem Bild (leerer Messestand) daneben.
+     */
     public const MESSEN = [
-        'titel' => 'Messen',
+        'titel' => 'Ehrenamtsmessen',
+        'einleitung' => "Wir zeigen gern, wer wir sind, wofür wir stehen und was wir bewegen möchten. Deshalb sind "
+            ."wir mit viel Engagement auf Ehrenamtsmessen unterwegs.\n"
+            ."Dort möchten wir sichtbarer werden, neue Menschen kennenlernen, Kontakte knüpfen und ins Gespräch "
+            ."kommen – mit allen, die sich für unsere Arbeit interessieren oder sich vielleicht sogar einbringen "
+            ."möchten.\n"
+            ."Wir freuen uns auf jede Begegnung, aus der etwas Neues entstehen kann.",
+        'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmessen.webp',
         'arten' => ['messe'],
     ];
 
@@ -427,13 +438,16 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     }
 
     /**
-     * Fügt einen Abschnitt direkt hinter einem anderen ein (Petitionen hinter
-     * Messen, KEV-135). Gibt es den nicht mehr, kommt er ans Ende. Steht schon
-     * einer mit derselben Überschrift da, passiert nichts.
+     * Fügt einen Abschnitt direkt hinter dem ein, der Einträge der Art
+     * $nachArt zeigt (Petitionen hinter den Messen, KEV-135). Gesucht wird nach
+     * der Art, nicht nach der Überschrift: Die heißt je nach Stand „Messen“
+     * oder „Ehrenamtsmessen“ (KEV-131), oder der Verein hat sie geändert.
+     * Gibt es keinen, kommt er ans Ende. Steht schon einer mit derselben
+     * Überschrift da, passiert nichts.
      *
      * @param  array<string, mixed>  $daten
      */
-    public static function abschnittEinfuegen(array $daten, string $nachTitel): void
+    public static function abschnittEinfuegen(array $daten, string $nachArt): void
     {
         $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
 
@@ -447,7 +461,11 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
             return;
         }
 
-        $davor = $abschnitte->first(fn ($b) => ($b->data['titel'] ?? null) === $nachTitel);
+        $davor = $abschnitte->first(fn ($b) => in_array(
+            $nachArt,
+            collect(\App\Models\PageBlock::oeffentlichkeitsarbeitGruppen($b->data ?? []))->pluck('arten')->flatten()->all(),
+            true,
+        ));
 
         if (! $davor) {
             self::abschnittAnhaengen($daten);
@@ -461,5 +479,26 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
             'position' => $davor->position + 1,
             'data' => $daten,
         ]);
+    }
+
+    /**
+     * KEV-131: Der Abschnitt „Messen“ bekommt Taddis Überschrift
+     * „Ehrenamtsmessen“, ihre Einleitung und ihr Bild. Nur wo er noch so
+     * dasteht, wie wir ihn angelegt haben (Überschrift „Messen“, ohne
+     * Einleitung und Bild); hat der Verein ihn geändert, bleibt er.
+     */
+    public static function messenAbschnittErgaenzen(): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+
+        foreach ($seite?->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get() ?? [] as $block) {
+            $data = $block->data ?? [];
+
+            if (($data['titel'] ?? null) !== 'Messen' || filled($data['einleitung'] ?? null) || filled($data['bild'] ?? null)) {
+                continue;
+            }
+
+            $block->update(['data' => array_merge($data, self::MESSEN)]);
+        }
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        OeffentlichkeitsarbeitSeeder::abschnittEinfuegen(OeffentlichkeitsarbeitSeeder::PETITIONEN, 'Messen');
+        OeffentlichkeitsarbeitSeeder::abschnittEinfuegen(OeffentlichkeitsarbeitSeeder::PETITIONEN, 'messe');
         OeffentlichkeitsarbeitSeeder::eintragAnlegen(OeffentlichkeitsarbeitSeeder::PETITION_VERSORGUNG);
         OeffentlichkeitsarbeitSeeder::eintragAnlegen(OeffentlichkeitsarbeitSeeder::PETITION_TOUR41);
 

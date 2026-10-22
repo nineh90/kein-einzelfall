@@ -37,7 +37,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
     {
         $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('#<h2 id="oa-messen"[^>]*>\s*Messen\s*</h2>#', $html);
+        $this->assertMatchesRegularExpression('#<h2 id="oa-ehrenamtsmessen"[^>]*>\s*Ehrenamtsmessen\s*</h2>#', $html);
         $this->assertStringNotContainsString('Einblicke</h2>', $html);
 
         // Die Karte: Foto (Schmuck), Datum, Ort, Titel als Link, Anriss
@@ -93,7 +93,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->get('/oeffentlichkeitsarbeit/gibt-es-nicht')->assertNotFound();
 
         // Ohne veröffentlichte Messe kein leerer Abschnitt
-        $this->get('/oeffentlichkeitsarbeit')->assertOk()->assertDontSee('id="oa-messen"', false);
+        $this->get('/oeffentlichkeitsarbeit')->assertOk()->assertDontSee('id="oa-ehrenamtsmessen"', false);
     }
 
     /** Neueste zuerst, ohne Datum ans Ende; nur die Art des Abschnitts. */
@@ -141,7 +141,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->seed(UebersetzungenSeeder::class);
 
         $this->get('/en/oeffentlichkeitsarbeit')->assertOk()
-            ->assertSee('Fairs')
+            ->assertSee('Volunteering fairs')
             ->assertSee('Volunteering fair Bayreuth')
             ->assertSee('10 October 2026')
             ->assertSee('/en/oeffentlichkeitsarbeit/ehrenamtsmesse-bayreuth-2026', false);
@@ -212,7 +212,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
         $block = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->firstOrFail();
 
-        $this->assertSame(['titel' => 'Messen', 'arten' => ['messe']], $block->data);
+        $this->assertSame(OeffentlichkeitsarbeitSeeder::MESSEN, $block->data);
         $this->assertFalse($block->zeigtNichts());
 
         $block->update(['data' => ['titel' => 'Aktionen', 'arten' => ['aktion']]]);
@@ -252,7 +252,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->assertStringContainsString('<a href="mailto:presse@kein-einzelfall.de"', $html);
 
         // Unter den Messen, Reihenfolge: Messen, Presse
-        $this->assertLessThan(strpos($html, 'id="oa-presse"'), strpos($html, 'id="oa-messen"'));
+        $this->assertLessThan(strpos($html, 'id="oa-presse"'), strpos($html, 'id="oa-ehrenamtsmessen"'));
 
         // Neueste zuerst: Trude Kuh (12/2025) vor dem stern (06/2025), je mit Schild und Medium
         $presse = substr($html, strpos($html, 'id="oa-presse"'));
@@ -263,7 +263,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->assertStringContainsString('<span>stern</span>', $presse);
 
         // Die Messen bleiben ohne Schild und ohne Presse
-        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-presse"') - strpos($html, 'id="oa-messen"'));
+        $messen = substr($html, strpos($html, 'id="oa-ehrenamtsmessen"'), strpos($html, 'id="oa-presse"') - strpos($html, 'id="oa-ehrenamtsmessen"'));
         $this->assertStringNotContainsString('Staat streicht Hilfen', $messen);
         $this->assertStringNotContainsString('>Messe</span>', $messen);
     }
@@ -294,7 +294,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
 
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
         $titel = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()->map(fn ($b) => $b->data['titel']);
-        $this->assertSame(['Messen', 'Petitionen', 'Presse'], $titel->all());
+        $this->assertSame(['Ehrenamtsmessen', 'Petitionen', 'Presse'], $titel->all());
         $this->assertSame(1, OutreachItem::where('slug', 'stern-fonds-sexueller-missbrauch-2025')->count());
         $this->assertSame(1, OutreachItem::where('slug', 'besuch-bei-trude-kuh-2025')->count());
     }
@@ -327,7 +327,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
 
         $abschnitte = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()
             ->mapWithKeys(fn ($b) => [$b->data['titel'] => \App\Models\PageBlock::oeffentlichkeitsarbeitGruppen($b->data)]);
-        $this->assertSame([['messe']], array_column($abschnitte['Messen'], 'arten'));
+        $this->assertSame([['messe']], array_column($abschnitte['Ehrenamtsmessen'], 'arten'));
         $this->assertSame([['petition'], ['petition_unterstuetzt']], array_column($abschnitte['Petitionen'], 'arten'));
         $this->assertSame([['presse', 'interview']], array_column($abschnitte['Presse'], 'arten'));
 
@@ -337,7 +337,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->assertSame(['Initiierte Petitionen', 'Unterstützte Petitionen'], array_column($petitionen->data['gruppen'], 'titel'));
 
         $this->get('/oeffentlichkeitsarbeit')
-            ->assertSee('id="oa-messen"', false)
+            ->assertSee('id="oa-ehrenamtsmessen"', false)
             ->assertSee('id="oa-petitionen"', false)
             ->assertSee('id="oa-presse"', false);
     }
@@ -366,7 +366,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
     {
         $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
 
-        $messen = strpos($html, 'id="oa-messen"');
+        $messen = strpos($html, 'id="oa-ehrenamtsmessen"');
         $petitionen = strpos($html, 'id="oa-petitionen"');
         $presse = strpos($html, 'id="oa-presse"');
         $this->assertTrue($messen < $petitionen && $petitionen < $presse);
@@ -414,12 +414,12 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->map(fn ($b) => $b->data['titel'])->all();
 
         $migration->up();
-        $this->assertSame(['Messen', 'Petitionen', 'Presse'], $titel());
+        $this->assertSame(['Ehrenamtsmessen', 'Petitionen', 'Presse'], $titel());
         $this->assertSame(1, OutreachItem::where('slug', 'petition-erst-versorgung-sichern')->count());
 
         // Ohne „Messen“ kommt der Abschnitt ans Ende
         $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
-            ->filter(fn ($b) => in_array($b->data['titel'], ['Messen', 'Petitionen'], true))->each->delete();
+            ->filter(fn ($b) => in_array($b->data['titel'], ['Ehrenamtsmessen', 'Petitionen'], true))->each->delete();
         $migration->up();
         $this->assertSame(['Presse', 'Petitionen'], $titel());
     }
@@ -457,7 +457,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
     public function test_ehrenamtsmesse_luebeck(): void
     {
         $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
-        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-messen"'));
+        $messen = substr($html, strpos($html, 'id="oa-ehrenamtsmessen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-ehrenamtsmessen"'));
         $this->assertLessThan(strpos($messen, 'Ehrenamtsmesse Lübeck'), strpos($messen, 'Ehrenamtsmesse Bayreuth'));
         $this->assertStringContainsString('<time datetime="2026-09-06">06.09.2026</time>', $messen);
 
@@ -497,7 +497,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
     public function test_ehrenamtsmesse_berlin_mit_galerie(): void
     {
         $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
-        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-messen"'));
+        $messen = substr($html, strpos($html, 'id="oa-ehrenamtsmessen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-ehrenamtsmessen"'));
         // Neueste zuerst: Bayreuth, Lübeck, Berlin
         $this->assertTrue(strpos($messen, 'Ehrenamtsmesse Lübeck') < strpos($messen, 'Ehrenamtsmesse Berlin'));
         $this->assertStringContainsString('<time datetime="2026-04-25">25.04.2026</time>', $messen);
@@ -533,5 +533,61 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->assertSee('Berlin State Advisory Council for People with Disabilities')
             ->assertSee('data-zaehler=":nr of :gesamt"', false)
             ->assertSee('Enlarge photo');
+    }
+
+    /**
+     * KEV-131: Der Abschnitt heißt „Ehrenamtsmessen“, mit Taddis Einleitung
+     * und ihrem Bild (Stimmung, alt="") daneben.
+     */
+    public function test_abschnitt_ehrenamtsmessen(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+        $abschnitt = substr($html, strpos($html, 'id="oa-ehrenamtsmessen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-ehrenamtsmessen"'));
+
+        $this->assertStringContainsString('<p>Wir zeigen gern, wer wir sind, wofür wir stehen und was wir bewegen möchten.', $abschnitt);
+        $this->assertStringContainsString('<p>Wir freuen uns auf jede Begegnung, aus der etwas Neues entstehen kann.</p>', $abschnitt);
+        $this->assertMatchesRegularExpression('#<img src="/img/oeffentlichkeitsarbeit/ehrenamtsmessen\.webp\?v=[^"]+" alt=""#', $abschnitt);
+        $this->assertStringNotContainsString('>Messen<', $html);
+    }
+
+    /** Die Migration ergänzt nur den unveränderten Abschnitt „Messen“. */
+    public function test_migration_ehrenamtsmessen_nur_wenn_unveraendert(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $block = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->first(fn ($b) => in_array('messe', $b->data['arten'] ?? [], true));
+        $migration = require database_path('migrations/2026_10_22_200000_oeffentlichkeitsarbeit_ehrenamtsmessen.php');
+
+        // Stand vor KEV-131
+        $block->update(['data' => ['titel' => 'Messen', 'arten' => ['messe']]]);
+        $migration->up();
+        $this->assertEquals(OeffentlichkeitsarbeitSeeder::MESSEN, $block->fresh()->data);
+
+        // Vom Verein umbenannt: bleibt
+        $block->update(['data' => ['titel' => 'Unsere Messen', 'arten' => ['messe']]]);
+        $migration->up();
+        $this->assertSame(['titel' => 'Unsere Messen', 'arten' => ['messe']], $block->fresh()->data);
+    }
+
+    /** Petitionen landen hinter den Messen, egal wie deren Abschnitt heißt. */
+    public function test_petitionen_hinter_messen_auch_mit_neuem_namen(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
+            ->filter(fn ($b) => ($b->data['titel'] ?? null) === 'Petitionen')->each->delete();
+
+        (require database_path('migrations/2026_10_22_140000_oeffentlichkeitsarbeit_petitionen.php'))->up();
+
+        $titel = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()->map(fn ($b) => $b->data['titel'])->all();
+        $this->assertSame(['Ehrenamtsmessen', 'Petitionen', 'Presse'], $titel);
+    }
+
+    public function test_ehrenamtsmessen_auf_englisch(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->get('/en/oeffentlichkeitsarbeit')->assertOk()
+            ->assertSee('Volunteering fairs')
+            ->assertSee('We like to show who we are, what we stand for')
+            ->assertSee('ehrenamtsmessen.webp', false);
     }
 }
