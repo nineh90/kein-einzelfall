@@ -2131,7 +2131,16 @@ und der Abschnitt heißt „Messen“. Deshalb seit KEV-134 wie bei den Gruppen:
   `uebersetzungen-oeffentlichkeitsarbeit.json`), Bildbeschreibungen je Foto
   unter `foto_alt`. Dazu in Suche und Sitemap.
 - Neue Einträge per Migration: `OeffentlichkeitsarbeitSeeder::eintragAnlegen()`,
-  nur wenn die Adresse fehlt.
+  nur wenn die Adresse fehlt; neue Abschnitte mit `abschnittAnhaengen()`.
+- **Mehrere Arten je Abschnitt (KEV-136):** „Presse“ zeigt Presseartikel und
+  Interviews. Die Arten stehen als Liste unter `data.arten` (Mehrfachauswahl
+  im Panel), dann trägt jede Karte ein Schild mit ihrer Art. Bis KEV-136 hieß
+  das Feld `data.art` (ein Wert); das gehört im Panel aber dem
+  Hinweis-Baustein, und zwei Felder mit einem Namen störten sich, sobald eins
+  eine Liste trug. Die Migration stellt um, gelesen wird beides
+  (`PageBlock::oeffentlichkeitsarbeitArten`). Die Einleitung eines Abschnitts
+  ist zeilenweise in Absätze geteilt, mit `*fett*` und E-Mail-Adressen als Link.
+- Feld „Ort oder Medium“: bei Messen der Ort, bei Presse das Medium („stern“).
 - Nebenbei: Der alte Baustein nutzte im Panel dasselbe Feld `data.eintraege`
   wie „Fragen und Antworten“. Mit seinem Wegfall ist das erledigt.
 

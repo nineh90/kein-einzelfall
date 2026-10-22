@@ -447,11 +447,30 @@ class Suche
     private function textAus(array $daten): string
     {
         $stuecke = [];
+        $technik = ['url', 'datei', 'variant', 'icon', 'art', 'arten', 'widget'];
 
-        array_walk_recursive($daten, function ($wert, $schluessel) use (&$stuecke) {
+        // Auch Listen unter diesen Schlüsseln fallen weg: Seit KEV-136 nennt
+        // `arten` mehrere Arten, und array_walk_recursive sähe deren
+        // Einträge nur unter 0, 1, …
+        $ohneTechnik = function (array $teil) use (&$ohneTechnik, $technik): array {
+            foreach ($teil as $schluessel => $wert) {
+                if (in_array($schluessel, $technik, true)) {
+                    unset($teil[$schluessel]);
+                } elseif (is_array($wert)) {
+                    $teil[$schluessel] = $ohneTechnik($wert);
+                }
+            }
+
+            return $teil;
+        };
+
+        // array_walk_recursive nimmt nur eine Variable (Referenz)
+        $inhalt = $ohneTechnik($daten);
+
+        array_walk_recursive($inhalt, function ($wert, $schluessel) use (&$stuecke, $technik) {
             // `url` und `variant` sind Technik, kein Inhalt — ein Treffer in
             // einer Adresse wäre für Suchende nicht nachvollziehbar.
-            if (is_string($wert) && ! in_array($schluessel, ['url', 'datei', 'variant', 'icon', 'art', 'widget'], true)) {
+            if (is_string($wert) && ! in_array($schluessel, $technik, true)) {
                 // *Markierungen* (Fettdruck im Absatz) gehören nicht in den Ausschnitt.
                 $stuecke[] = ohne_hervorhebung($wert);
             }

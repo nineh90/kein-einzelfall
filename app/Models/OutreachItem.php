@@ -55,9 +55,10 @@ class OutreachItem extends Model
         return $query->whereNotNull('published_at')->where('published_at', '<=', now());
     }
 
-    public function scopeVonArt(Builder $query, string $art): Builder
+    /** Eine Art oder mehrere: Der Abschnitt „Presse“ zeigt Presseartikel und Interviews (KEV-136). */
+    public function scopeVonArt(Builder $query, string|array $art): Builder
     {
-        return $query->where('art', $art);
+        return $query->whereIn('art', (array) $art);
     }
 
     /** Neueste zuerst; ohne Datum (etwa Petitionen) am Ende, nach Titel. */

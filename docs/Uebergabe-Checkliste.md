@@ -386,6 +386,24 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Taddis Vorlage hat für die Ehrenamtsmessen noch einen eigenen
     Einleitungstext („Wir zeigen gern, wer wir sind …“). Der kann im Panel als
     Einleitung über die Karten, sobald er per Ticket kommt.
+- [ ] **Presse auf der Öffentlichkeitsarbeit (KEV-136).** Abschnitt „Presse“
+  unter den Messen, mit Taddis Einleitung (presse@ als Link). Zwei Einträge mit
+  eigener Seite: der stern-Artikel zum Fonds Sexueller Missbrauch und „Unser
+  Besuch bei Trude Kuh“. Zu klären:
+  - **Datum des stern-Artikels:** Im Ticket 25.05.25, Taddis Drive-Ordner heißt
+    „25.06.25 Fonds Sexueller Missbrauch“. Eingetragen ist der **25.06.2025**:
+    Der Juni passt zum Ablauf (Antragsstopp im Juni 2025). stern.de ließ sich
+    von uns nicht abrufen. Bitte bestätigen, sonst im Panel ändern.
+  - **Foto im stern-Artikel:** Taddis Bildschirmfoto zeigt das Foto von
+    Tatjana Belmar aus dem Artikel, Bildnachweis „© Broeg“. Das darf auf der
+    Website nur mit Erlaubnis des Fotografen bzw. des stern stehen, sonst droht
+    eine Abmahnung. Deshalb noch ohne Foto. Liegt die Erlaubnis vor (oder ein
+    eigenes Foto), lädt der Verein es im Panel selbst hoch, mit Bildnachweis.
+  - **Trude Kuh:** Das Video kommt von Franzi. Bis dahin fehlt Taddis Satz
+    „Aber schaut selbst – im Video bekommt ihr den besten Eindruck davon.“, er
+    zeigte sonst auf nichts. Stattdessen ein Link zum Beitrag bei Trude Kuh
+    TELEVISION; dessen Datum (09.12.2025) steht als Datum, Taddi nannte keins.
+    Für das Video fehlt noch ein Feld (eigene Datei oder Zwei-Klick-Einbettung).
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

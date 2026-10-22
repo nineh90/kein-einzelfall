@@ -612,17 +612,24 @@ class PageForm
                             // --- Öffentlichkeitsarbeit (KEV-134) ---
                             // Zeigt die Einträge einer Art als Karten. Die
                             // Einträge selbst stehen unter „Öffentlichkeitsarbeit“.
-                            Select::make('data.art')
+                            // `arten`, nicht `art`: Das Feld `data.art` gehört dem
+                            // Hinweis-Baustein. Zwei Felder mit einem Namen störten
+                            // sich, sobald dieses mehrere Werte trug (KEV-136).
+                            Select::make('data.arten')
                                 ->label('Welche Einträge')
                                 ->options(OutreachItem::ARTEN)
-                                ->default('messe')
+                                // Mehrere Arten in einem Abschnitt, z. B. Presse:
+                                // Presseartikel und Interviews (KEV-136).
+                                ->multiple()
+                                ->default(['messe'])
                                 ->native(false)
                                 ->required(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
                                 ->visible(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
-                                ->helperText('Die Einträge selbst (Messen, Petitionen, Presse …) legst du '
+                                ->helperText('Eine oder mehrere Arten, z. B. für „Presse“ Presseartikel '
+                                    .'und Interviews. Die Einträge selbst (Messen, Petitionen, Presse …) legst du '
                                     .'unter „Öffentlichkeitsarbeit“ an, mit Text und Fotos. Hier stehen sie '
                                     .'als kleine Karten, die neuesten zuerst. Gibt es noch keinen, bleibt '
-                                    .'der Abschnitt unsichtbar.'),
+                                    .'der Abschnitt unsichtbar. In der Einleitung wird jede Zeile ein Absatz.'),
 
                             // --- Vorstand und Team ---
                             // Zieht die Personen aus der Verwaltung „Vorstand & Team“.

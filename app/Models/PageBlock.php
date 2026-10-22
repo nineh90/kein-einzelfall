@@ -249,7 +249,20 @@ class PageBlock extends Model
     public function zeigtNichts(): bool
     {
         return $this->typ === 'oeffentlichkeitsarbeit'
-            && ! OutreachItem::veroeffentlicht()->vonArt($this->data['art'] ?? 'messe')->exists();
+            && ! OutreachItem::veroeffentlicht()->vonArt(self::oeffentlichkeitsarbeitArten($this->data ?? []))->exists();
+    }
+
+    /**
+     * Welche Arten ein Abschnitt „Öffentlichkeitsarbeit“ zeigt. Seit KEV-136
+     * eine Liste unter `arten`; bis dahin ein einzelner Schlüssel unter `art`
+     * (die Migration stellt um, gelesen wird beides).
+     *
+     * @param  array<string, mixed>  $data
+     * @return list<string>
+     */
+    public static function oeffentlichkeitsarbeitArten(array $data): array
+    {
+        return array_values((array) ($data['arten'] ?? $data['art'] ?? 'messe'));
     }
 
     /** Die Fläche dieses Bausteins, wenn davor die Fläche $davor steht. */

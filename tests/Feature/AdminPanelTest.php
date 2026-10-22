@@ -280,7 +280,7 @@ class AdminPanelTest extends TestCase
             ]],
             // KEV-134: Abschnitt der Öffentlichkeitsarbeit
             ['typ' => 'oeffentlichkeitsarbeit', 'data' => [
-                'titel' => 'Messen', 'einleitung' => 'Wo wir waren.', 'art' => 'petition',
+                'titel' => 'Presse', 'einleitung' => 'Wo wir waren.', 'arten' => ['presse', 'interview'],
             ]],
         ];
 
@@ -311,7 +311,7 @@ class AdminPanelTest extends TestCase
             'Kritikabsatz', 'Handsatz', 'Knopfsatz',         // Zwei Wege mit Formular
             'Beschwerdeabsatz',
             'ombudsstelle',
-            'Wo wir waren.', 'petition',                     // Öffentlichkeitsarbeit
+            'Wo wir waren.', 'interview',                    // Öffentlichkeitsarbeit
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

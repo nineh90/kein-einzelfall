@@ -1,12 +1,22 @@
 @props([
     'titel' => null,
     'einleitung' => null,
-    'art' => 'messe',  // Schlüssel aus App\Models\OutreachItem::ARTEN
+    'arten' => null,   // Schlüssel aus App\Models\OutreachItem::ARTEN (KEV-136)
+    'art' => null,     // bis KEV-136: ein einzelner Schlüssel
     'auf' => 'cream',  // cream | card
 ])
 
 @php
-    $eintraege = \App\Models\OutreachItem::veroeffentlicht()->vonArt($art)->neuesteZuerst()->get();
+    $arten = \App\Models\PageBlock::oeffentlichkeitsarbeitArten(['arten' => $arten, 'art' => $art]);
+    $eintraege = \App\Models\OutreachItem::veroeffentlicht()->vonArt($arten)->neuesteZuerst()->get();
+
+    // Zeigt der Abschnitt mehrere Arten (Presse: Artikel und Interviews),
+    // trägt jede Karte ein Schild. Bei nur einer sagt es die Überschrift.
+    $mitSchild = count($arten) > 1;
+
+    // Jede Zeile der Einleitung ein Absatz; *fett* und E-Mail-Adressen als
+    // Link wie im Textbaustein (Presse: „Presseanfragen bitte an: presse@…“).
+    $einleitung = preg_split('/\R+/u', trim((string) $einleitung), flags: PREG_SPLIT_NO_EMPTY);
 
     // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
     // auf der Karte mit dem Hintergrund.
@@ -48,7 +58,11 @@
                 @endif
 
                 @if ($einleitung)
-                    <p class="mb-8 leading-relaxed text-ink-soft">{{ $einleitung }}</p>
+                    <div class="mb-8 flex flex-col gap-3 leading-relaxed text-ink-soft [&_a]:text-green-deep [&_a]:underline">
+                        @foreach ($einleitung as $absatz)
+                            <p>{{ hervorheben($absatz) }}</p>
+                        @endforeach
+                    </div>
                 @endif
             </div>
         @endif
@@ -66,6 +80,9 @@
 
                         <div class="flex flex-1 flex-col p-5">
                             <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-soft">
+                                @if ($mitSchild && $eintrag->artName())
+                                    <span class="rounded-full bg-green-mist px-2.5 py-0.5 text-[0.6875rem] text-green-deep">{{ $eintrag->artName() }}</span>
+                                @endif
                                 @if ($eintrag->datum)
                                     <time datetime="{{ $eintrag->datum->toDateString() }}">{{ $eintrag->datumKurz() }}</time>
                                 @endif

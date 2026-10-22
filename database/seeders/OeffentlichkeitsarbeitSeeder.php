@@ -44,7 +44,7 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     /** Abschnitt „Messen“: die Messen als Karten (KEV-134, Kevin: „Messen“, nicht „Einblicke“). */
     public const MESSEN = [
         'titel' => 'Messen',
-        'art' => 'messe',
+        'arten' => ['messe'],
     ];
 
     /**
@@ -90,6 +90,72 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
                     .'verändern!“ und einem QR-Code zum Unterschreiben.',
             ],
         ],
+    ];
+
+    /**
+     * Abschnitt „Presse“ (KEV-136): Presseartikel und Interviews, Einleitung
+     * von Taddi. Jede Zeile ein Absatz, die Adresse wird zum Link.
+     */
+    public const PRESSE = [
+        'titel' => 'Presse',
+        'arten' => ['presse', 'interview'],
+        'einleitung' => "Hier findest du eine Auswahl unserer Presseartikel, Interviews und Berichte über "
+            ."KE!N EINZELFALL e.V. und unsere Arbeit.\n"
+            ."Wir freuen uns über journalistisches Interesse, Anfragen und die Möglichkeit, wichtige Themen "
+            ."sichtbar zu machen und Betroffenen eine Stimme zu geben.\n"
+            ."Presseanfragen bitte an: presse@kein-einzelfall.de",
+    ];
+
+    /**
+     * stern-Artikel zum Fonds Sexueller Missbrauch (KEV-136), Text von Taddi.
+     *
+     * Datum 25.06.2025: Im Ticket stand 25.05.25, Taddis Drive-Ordner heißt
+     * „25.06.25 Fonds Sexueller Missbrauch“. Der Juni passt zum Ablauf (Antrags-
+     * stopp im Juni 2025, Reaktion der Missbrauchsbeauftragten am 27.06.).
+     * stern.de selbst ließ sich nicht abrufen. Rückfrage in der Checkliste.
+     *
+     * Ohne Foto: Taddis Bildschirmfoto zeigt ein Foto aus dem Artikel, „© Broeg“.
+     * Das darf der Verein nur mit Erlaubnis zeigen (Checkliste); hochladen kann
+     * er es dann selbst.
+     */
+    public const PRESSE_STERN = [
+        'slug' => 'stern-fonds-sexueller-missbrauch-2025',
+        'art' => 'presse',
+        'titel' => 'Staat streicht Hilfen für Betroffene sexualisierter Gewalt',
+        'datum' => '2025-06-25',
+        'ort' => 'stern',
+        'beschreibung' => '<p>Der Fonds Sexueller Missbrauch hat für viele Betroffene dort geholfen, wo andere '
+            .'Systeme zu langsam, zu kompliziert oder nicht ausreichend erreichbar waren. Nun wird genau diese '
+            .'Unterstützung schrittweise beendet.</p>'
+            .'<p>Der Artikel im stern zeigt, welche Folgen das für Betroffene haben kann – und warum die Entscheidung '
+            .'weit mehr bedeutet als eine haushaltspolitische Kürzung. Auch KE!N EINZELFALL kommt darin zu Wort und '
+            .'macht deutlich, was der Fonds im Alltag tatsächlich bewirken konnte.</p>'
+            .'<p>Warum der Wegfall für viele Menschen so gravierend ist und welche Lücke dadurch entsteht, lest ihr '
+            .'im vollständigen Artikel.</p>',
+        'link_url' => 'https://www.stern.de/panorama/wissen/fonds--sexueller-missbrauch--wird-gestrichen--die-opfer-sind-enttaeuscht-35920302.html',
+        'link_text' => 'Zum Artikel im stern',
+    ];
+
+    /**
+     * Besuch bei Trude Kuh (KEV-136), Text von Taddi.
+     *
+     * Das Video kommt später (Franzi). Bis dahin fehlt Taddis Satz „Aber
+     * schaut selbst – im Video bekommt ihr den besten Eindruck davon.“, er
+     * zeigte sonst auf nichts. Stattdessen der Link zum Beitrag bei Trude Kuh
+     * TELEVISION; dessen Datum (09.12.2025) steht hier, Taddi nannte keins.
+     */
+    public const PRESSE_TRUDE_KUH = [
+        'slug' => 'besuch-bei-trude-kuh-2025',
+        'art' => 'interview',
+        'titel' => 'Unser Besuch bei Trude Kuh',
+        'datum' => '2025-12-09',
+        'ort' => 'Trude Kuh TELEVISION',
+        'beschreibung' => '<p>Wir hatten die Gelegenheit, unseren Verein bei Trude Kuh vorzustellen – und sind sehr '
+            .'dankbar für diese besondere Erfahrung.</p>'
+            .'<p>Uns erwarteten ein unglaublich netter und kompetenter Kontakt, ein professionelles Studio und eine '
+            .'Atmosphäre, in der wir uns von Anfang an wohlgefühlt haben.</p>',
+        'link_url' => 'https://www.trude-kuh.de/tatjana-belmar-und-petra-hildebrandt-von-kein-einzelfall-zu-gast-bei-trude-kuh/',
+        'link_text' => 'Zum Beitrag bei Trude Kuh',
     ];
 
     public const META_DESCRIPTION = 'Öffentlichkeitsarbeit von KE!N EINZELFALL e.V.: Ehrenamtsmessen, '
@@ -140,5 +206,47 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
             ['slug' => $daten['slug']],
             $daten + ['published_at' => now()],
         );
+    }
+
+    /**
+     * Hängt einen Abschnitt „Öffentlichkeitsarbeit“ unten an die deutsche
+     * Seite an, wenn es noch keinen mit derselben Überschrift gibt.
+     *
+     * @param  array<string, mixed>  $daten
+     */
+    public static function abschnittAnhaengen(array $daten): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+
+        if (! $seite || $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
+            ->contains(fn ($b) => ($b->data['titel'] ?? null) === $daten['titel'])) {
+            return;
+        }
+
+        $seite->blocks()->create([
+            'typ' => 'oeffentlichkeitsarbeit',
+            'position' => (int) $seite->blocks()->max('position') + 1,
+            'data' => $daten,
+        ]);
+    }
+
+    /**
+     * Abschnitte aus der Zeit vor KEV-136 nannten ihre Art unter `art`
+     * („messe“). Seitdem eine Liste unter `arten`, denn `data.art` gehört im
+     * Panel dem Hinweis-Baustein. Stellt alle Sprachfassungen um.
+     */
+    public static function artenUmstellen(): void
+    {
+        foreach (\App\Models\PageBlock::where('typ', 'oeffentlichkeitsarbeit')->get() as $block) {
+            $data = $block->data ?? [];
+
+            if (! array_key_exists('art', $data)) {
+                continue;
+            }
+
+            $data['arten'] = \App\Models\PageBlock::oeffentlichkeitsarbeitArten($data);
+            unset($data['art']);
+            $block->update(['data' => $data]);
+        }
     }
 }

@@ -208,10 +208,10 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
         $block = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->firstOrFail();
 
-        $this->assertSame(['titel' => 'Messen', 'art' => 'messe'], $block->data);
+        $this->assertSame(['titel' => 'Messen', 'arten' => ['messe']], $block->data);
         $this->assertFalse($block->zeigtNichts());
 
-        $block->update(['data' => ['titel' => 'Presse', 'art' => 'presse']]);
+        $block->update(['data' => ['titel' => 'Petitionen', 'arten' => ['petition']]]);
         $this->assertTrue($block->fresh()->zeigtNichts());
     }
 
@@ -232,5 +232,114 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $felder->invoke(new UebersetzungenSeeder, $ohneTabelle::class, 'slug', 'uebersetzungen-oeffentlichkeitsarbeit.json');
 
         $this->assertFalse(\Illuminate\Support\Facades\Schema::hasTable('gibt_es_noch_nicht'));
+    }
+
+    /**
+     * KEV-136: Abschnitt „Presse“ unter den Messen, mit Taddis Einleitung.
+     * Zeigt Presseartikel und Interviews, deshalb mit Schild je Karte.
+     */
+    public function test_presse_abschnitt(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('#<h2 id="oa-presse"[^>]*>\s*Presse\s*</h2>#', $html);
+        $this->assertStringContainsString('<p>Hier findest du eine Auswahl unserer Presseartikel, Interviews und '
+            .'Berichte über KE!N EINZELFALL e.V. und unsere Arbeit.</p>', $html);
+        $this->assertStringContainsString('<a href="mailto:presse@kein-einzelfall.de"', $html);
+
+        // Unter den Messen, Reihenfolge: Messen, Presse
+        $this->assertLessThan(strpos($html, 'id="oa-presse"'), strpos($html, 'id="oa-messen"'));
+
+        // Neueste zuerst: Trude Kuh (12/2025) vor dem stern (06/2025), je mit Schild und Medium
+        $presse = substr($html, strpos($html, 'id="oa-presse"'));
+        $this->assertLessThan(strpos($presse, 'Staat streicht Hilfen'), strpos($presse, 'Unser Besuch bei Trude Kuh'));
+        $this->assertStringContainsString('>Interview</span>', $presse);
+        $this->assertStringContainsString('>Presseartikel</span>', $presse);
+        $this->assertStringContainsString('<time datetime="2025-06-25">25.06.2025</time>', $presse);
+        $this->assertStringContainsString('<span>stern</span>', $presse);
+
+        // Die Messen bleiben ohne Schild und ohne Presse
+        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-presse"') - strpos($html, 'id="oa-messen"'));
+        $this->assertStringNotContainsString('Staat streicht Hilfen', $messen);
+        $this->assertStringNotContainsString('>Messe</span>', $messen);
+    }
+
+    public function test_seiten_der_presse(): void
+    {
+        $this->get('/oeffentlichkeitsarbeit/stern-fonds-sexueller-missbrauch-2025')->assertOk()
+            ->assertSee('Auch KE!N EINZELFALL kommt darin zu Wort')
+            ->assertSee('25. Juni 2025')
+            ->assertSee('href="https://www.stern.de/panorama/wissen/fonds--sexueller-missbrauch--wird-gestrichen--die-opfer-sind-enttaeuscht-35920302.html"', false)
+            ->assertSee('rel="noreferrer noopener"', false)
+            ->assertSee('Zum Artikel im stern')
+            // Kein Foto: Das aus dem Artikel gehört dem Fotografen (Checkliste)
+            ->assertDontSee('<img src="/img/oeffentlichkeitsarbeit/', false);
+
+        // Ohne Video kein Satz, der auf eines zeigt
+        $this->get('/oeffentlichkeitsarbeit/besuch-bei-trude-kuh-2025')->assertOk()
+            ->assertSee('ein professionelles Studio')
+            ->assertSee('Zum Beitrag bei Trude Kuh')
+            ->assertDontSee('im Video');
+    }
+
+    public function test_migration_presse_nur_einmal(): void
+    {
+        $migration = require database_path('migrations/2026_10_22_120000_oeffentlichkeitsarbeit_presse.php');
+        $migration->up();
+        $migration->up();
+
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $titel = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->map(fn ($b) => $b->data['titel']);
+        $this->assertSame(['Messen', 'Presse'], $titel->all());
+        $this->assertSame(1, OutreachItem::where('slug', 'stern-fonds-sexueller-missbrauch-2025')->count());
+        $this->assertSame(1, OutreachItem::where('slug', 'besuch-bei-trude-kuh-2025')->count());
+    }
+
+    public function test_presse_auf_englisch(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->get('/en/oeffentlichkeitsarbeit')->assertOk()
+            ->assertSee('Press')
+            ->assertSee('Please send press enquiries to:')
+            ->assertSee('mailto:presse@kein-einzelfall.de', false)
+            ->assertSee('Our visit to Trude Kuh')
+            ->assertSee('State cuts support for those affected by sexualised violence');
+    }
+
+    /**
+     * Ein Abschnitt kann mehrere Arten zeigen (Mehrfachauswahl unter
+     * `arten`). Beide Abschnitte überstehen das Speichern im Panel; unter
+     * `data.art` lag es mit dem Hinweis-Baustein im Streit.
+     */
+    public function test_abschnitte_ueberstehen_speichern_im_panel(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+
+        Livewire::actingAs(User::factory()->redaktion()->create())
+            ->test(\App\Filament\Resources\Pages\Pages\EditPage::class, ['record' => $seite->getKey()])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $arten = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->map(fn ($b) => $b->data['arten']);
+        $this->assertSame([['messe'], ['presse', 'interview']], $arten->all());
+
+        $this->get('/oeffentlichkeitsarbeit')->assertSee('id="oa-messen"', false)->assertSee('id="oa-presse"', false);
+    }
+
+    /** Auf dem Server steht „Messen“ noch mit `art: messe` (KEV-134). */
+    public function test_migration_stellt_art_auf_arten_um(): void
+    {
+        $block = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail()
+            ->blocks()->where('typ', 'oeffentlichkeitsarbeit')->firstOrFail();
+        $block->update(['data' => ['titel' => 'Messen', 'art' => 'messe']]);
+
+        // Das alte Format wird auch vor der Umstellung gelesen
+        $this->get('/oeffentlichkeitsarbeit')->assertSee('id="oa-messen"', false);
+
+        (require database_path('migrations/2026_10_22_120000_oeffentlichkeitsarbeit_presse.php'))->up();
+
+        $this->assertSame(['titel' => 'Messen', 'arten' => ['messe']], $block->fresh()->data);
+        $this->get('/oeffentlichkeitsarbeit')->assertSee('id="oa-messen"', false)->assertSee('id="oa-presse"', false);
     }
 }

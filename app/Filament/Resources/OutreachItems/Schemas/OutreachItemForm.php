@@ -43,8 +43,9 @@ class OutreachItemForm
                     ->helperText('Nur Kleinbuchstaben, Ziffern und Bindestriche. Nach dem '
                         .'Veröffentlichen besser nicht mehr ändern, sonst gehen geteilte Links ins Leere.'),
 
-                TextInput::make('ort')->label('Ort')
-                    ->helperText('Bei Messen und Veranstaltungen. Kann leer bleiben.'),
+                TextInput::make('ort')->label('Ort oder Medium')
+                    ->helperText('Bei Messen der Ort, bei Presse das Medium, z. B. „stern“. '
+                        .'Steht neben dem Datum. Kann leer bleiben.'),
             ]),
 
             Section::make('Text')->schema([
