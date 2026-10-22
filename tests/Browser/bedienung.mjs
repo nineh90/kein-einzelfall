@@ -557,6 +557,43 @@ console.log('\nSuche')
     }
 }
 
+// --- Galerie einer Messe (KEV-132) -----------------------------------------
+
+console.log('\nGalerie einer Messe')
+{
+    const pfad = '/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026'
+
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad })
+        const links = s.locator('a[data-galerie-bild]')
+        const gesamt = await links.count()
+        const zaehler = s.locator('dialog [aria-live]')
+
+        await links.nth(1).click()
+        pruefe(`${breite}px: Klick öffnet die große Ansicht`, await s.locator('dialog[open]').count() === 1)
+        pruefe(`${breite}px: Zähler nennt das Foto`, (await zaehler.innerText()).trim() === `2 von ${gesamt}`)
+
+        await s.keyboard.press('ArrowRight')
+        pruefe(`${breite}px: Pfeiltaste blättert weiter`, (await zaehler.innerText()).trim() === `3 von ${gesamt}`)
+
+        await s.locator('dialog button[aria-label="Vorheriges Foto"]').click()
+        pruefe(`${breite}px: Knopf blättert zurück`, (await zaehler.innerText()).trim() === `2 von ${gesamt}`)
+
+        await s.keyboard.press('Escape')
+        pruefe(`${breite}px: Esc schließt`, await s.locator('dialog[open]').count() === 0)
+        const fokus = await s.evaluate(() => document.activeElement?.hasAttribute('data-galerie-bild'))
+        pruefe(`${breite}px: Fokus kehrt zum Foto zurück`, fokus === true)
+
+        await s.context().close()
+    }
+
+    // Ohne JavaScript bleibt jedes Foto ein Link auf die große Fassung.
+    const ohne = await oeffnen({ js: false, pfad })
+    const ziel = await ohne.locator('a[data-galerie-bild]').nth(1).getAttribute('href')
+    pruefe('ohne JS: Foto ist ein Link auf die Bilddatei', /\.webp(\?|$)/.test(ziel ?? ''), ziel ?? '')
+    await ohne.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

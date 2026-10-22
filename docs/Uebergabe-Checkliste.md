@@ -432,6 +432,19 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Im Drive-Ordner „Ehrenamtsmesse“ liegt außerdem ein Bild „Ehrenamtsmesse“,
     vermutlich für den Abschnitt „Messen“ (wie bei den Petitionen). Noch nicht
     eingebaut, kein Ticket dazu.
+- [ ] **Ehrenamtsmesse Berlin (KEV-132).** Dritte Messe, Taddis Text (im Ticket
+  nichts in Anführungszeichen, deshalb nichts fett). Laut Plakat im Drive war es
+  die **19. Berliner Freiwilligenbörse** am Roten Rathaus und Neptunbrunnen;
+  der Titel bleibt „Ehrenamtsmesse Berlin“ wie bei den anderen, im Panel
+  änderbar. Die Seiten der Messen sind jetzt Galerien: Klick auf ein Foto zeigt
+  es groß, mit Blättern. Zu klären:
+  - **Sechs von vierzehn Fotos** aus dem Drive-Ordner „Berlin“. Viele sind
+    Bildschirmfotos aus Instagram-Storys. Nicht dabei: das Plakat und ein
+    Rathaus-Foto mit Story-Aufklebern, drei Doppelungen, ein Foto mit gut
+    erkennbarem fremdem Gesicht, eines mit einer markierten Privatperson
+    (@…), eines vom Stand eines anderen Ausstellers. Beim Teamfoto sind die
+    Story-Ränder abgeschnitten. Gibt es die Originalfotos (ohne Story), wären
+    sie schärfer.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

@@ -37,7 +37,17 @@
     Schleier.
 --}}
 <article class="px-4 md:px-8 pb-10 pt-8 lg:px-10 lg:pb-14 lg:pt-12">
-    <div class="mx-auto max-w-3xl">
+    {{-- Galerie (KEV-132): Jedes Foto ist ein Link auf die große Fassung.
+         galerie.js öffnet sie in einem Dialog mit Vor und Zurück; ohne
+         JavaScript öffnet der Link einfach das Bild. Die Beschriftungen kommen
+         von hier, damit sie übersetzt sind. --}}
+    <div class="mx-auto max-w-3xl"
+         data-galerie
+         data-titel="{{ __('Fotos') }}"
+         data-schliessen="{{ __('Schließen') }}"
+         data-zurueck="{{ __('Vorheriges Foto') }}"
+         data-weiter="{{ __('Nächstes Foto') }}"
+         data-zaehler="{{ __(':nr von :gesamt') }}">
 
         <x-ui.brotkrumen :krumen="$krumen" />
 
@@ -65,10 +75,14 @@
 
         @if ($erstes)
             @php($masse = Medien::masse($erstes['bild']))
-            <img src="{{ bildadresse($erstes['bild']) }}" alt="{{ $erstes['alt'] }}"
-                 @if ($masse) width="{{ $masse[0] }}" height="{{ $masse[1] }}" @endif
-                 fetchpriority="high"
-                 class="mt-6 h-auto w-full rounded-card border border-line">
+            <a href="{{ bildadresse($erstes['bild']) }}" data-galerie-bild
+               class="mt-6 block overflow-hidden rounded-card border border-line focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green">
+                <img src="{{ bildadresse($erstes['bild']) }}" alt="{{ $erstes['alt'] }}"
+                     @if ($masse) width="{{ $masse[0] }}" height="{{ $masse[1] }}" @endif
+                     fetchpriority="high"
+                     class="h-auto w-full">
+                <span class="sr-only">{{ __('Foto vergrößern') }}</span>
+            </a>
         @endif
 
         @if (filled(strip_tags((string) $eintrag->beschreibung)))
@@ -92,18 +106,23 @@
         @endif
 
         @if ($fotos)
-            {{-- Spalten statt Raster: Hoch- und Querformat stehen ungeschnitten
-                 nebeneinander, niemandem wird der Kopf abgeschnitten. --}}
+            {{-- Gleichmäßiges Raster aus Vorschaubildern (KEV-132): Mit sechs
+                 Hochformaten untereinander wurde die Seite sehr lang. Die
+                 Vorschau schneidet zu (3:4), groß steht jedes Foto ganz da. --}}
             <section class="mt-10" aria-labelledby="weitere-fotos">
                 <h2 id="weitere-fotos" class="mb-4 font-display text-xl font-medium text-green">{{ __('Weitere Fotos') }}</h2>
-                <div class="gap-4 sm:columns-2">
+                <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     @foreach ($fotos as $foto)
-                        @php($masse = Medien::masse($foto['bild']))
-                        <img src="{{ bildadresse($foto['bild']) }}" alt="{{ $foto['alt'] }}" loading="lazy"
-                             @if ($masse) width="{{ $masse[0] }}" height="{{ $masse[1] }}" @endif
-                             class="mb-4 h-auto w-full break-inside-avoid rounded-card border border-line">
+                        <li>
+                            <a href="{{ bildadresse($foto['bild']) }}" data-galerie-bild
+                               class="group block overflow-hidden rounded-card border border-line focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green">
+                                <img src="{{ bildadresse($foto['bild']) }}" alt="{{ $foto['alt'] }}" loading="lazy"
+                                     class="aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90">
+                                <span class="sr-only">{{ __('Foto vergrößern') }}</span>
+                            </a>
+                        </li>
                     @endforeach
-                </div>
+                </ul>
             </section>
         @endif
     </div>

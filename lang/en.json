@@ -472,5 +472,10 @@
     "Mehr Öffentlichkeitsarbeit": "More public outreach",
     "Alle Einträge der Öffentlichkeitsarbeit": "All public outreach entries",
     "Eigene Petition": "Our petition",
-    "Unterstützte Petition": "Supported petition"
+    "Unterstützte Petition": "Supported petition",
+    "Fotos": "Photos",
+    "Foto vergrößern": "Enlarge photo",
+    "Vorheriges Foto": "Previous photo",
+    "Nächstes Foto": "Next photo",
+    ":nr von :gesamt": ":nr of :gesamt"
 }

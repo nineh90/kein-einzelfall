@@ -139,6 +139,63 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     ];
 
     /**
+     * Ehrenamtsmesse Berlin (KEV-132): Taddis Text, ohne Hervorhebung (im
+     * Ticket nichts in Anführungszeichen). Es war die 19. Berliner
+     * Freiwilligenbörse am Roten Rathaus und Neptunbrunnen, laut Plakat in
+     * Taddis Drive-Ordner; die Fotos sind vom 25.04.2026.
+     *
+     * Sechs von vierzehn Bildern aus dem Drive-Ordner „Berlin“, ohne
+     * Metadaten. Viele sind Bildschirmfotos aus Instagram-Storys: Beim
+     * Teamfoto sind die Ränder abgeschnitten. Nicht dabei: Plakat und Rathaus
+     * mit Story-Aufklebern, drei Doppelungen, ein Foto mit gut erkennbarem
+     * fremdem Gesicht, eines mit einer markierten Privatperson, eines vom Stand
+     * eines anderen Ausstellers. Bildbeschreibungen von uns, ohne Namen.
+     */
+    public const MESSE_BERLIN = [
+        'slug' => 'ehrenamtsmesse-berlin-2026',
+        'art' => 'messe',
+        'titel' => 'Ehrenamtsmesse Berlin',
+        'datum' => '2026-04-25',
+        'ort' => 'Berlin',
+        'beschreibung' => '<p>Ein schöner Tag auf der Ehrenamtsmesse in Berlin!</p>'
+            .'<p>An unserem Stand waren unsere 1. Vorsitzende Tatjana Belmar, unsere Kassenwartin Petra Hildebrandt '
+            .'und unser Gründungsmitglied Nicole Khalil vertreten. Nicole vertritt KE!N EINZELFALL e. V. außerdem im '
+            .'Berliner Landesbeirat für Menschen mit Behinderungen.</p>'
+            .'<p>Wir konnten viele tolle Gespräche führen, neue Kontakte knüpfen und spannende Menschen kennenlernen. '
+            .'Unser Stand befand sich draußen – und auch das Wetter hat wunderbar mitgespielt.</p>'
+            .'<p>Wir nehmen viele schöne Begegnungen und neue Impulse mit und freuen uns schon jetzt darauf, im '
+            .'nächsten Jahr wieder dabei zu sein!</p>',
+        'fotos' => [
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-1.webp',
+                'alt' => 'Drei Frauen stehen lächelnd am Stand von KE!N EINZELFALL e.V., hinter ihnen die Banner des '
+                    .'Vereins mit einem QR-Code zum Spenden, darüber Bäume in der Sonne.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-2.webp',
+                'alt' => 'Besucherinnen und Besucher im Gespräch am Stand, dahinter eine Frau am Tisch und die Banner '
+                    .'des Vereins.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-3.webp',
+                'alt' => 'Der Tisch am Stand mit Flyern des Vereins und kleinen Steinen, eine Hand ordnet die Auslage.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-4.webp',
+                'alt' => 'Flyer des Vereins mit seinen Angeboten, Kontaktdaten und QR-Codes.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-5.webp',
+                'alt' => 'Das Rote Rathaus in Berlin unter blauem Himmel, davor viele Menschen auf dem Platz.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-6.webp',
+                'alt' => 'Menschen auf dem Messegelände vor der Marienkirche, im Hintergrund ein grünes Zelt.',
+            ],
+        ],
+    ];
+
+    /**
      * Abschnitt „Presse“ (KEV-136): Presseartikel und Interviews, Einleitung
      * von Taddi. Jede Zeile ein Absatz, die Adresse wird zum Link.
      */

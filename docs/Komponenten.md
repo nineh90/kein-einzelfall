@@ -2149,6 +2149,15 @@ und der Abschnitt heißt „Messen“. Deshalb seit KEV-134 wie bei den Gruppen:
   der ganze Abschnitt (`PageBlock::oeffentlichkeitsarbeitGruppen`). Optional
   `data.bild` (Upload) neben der Einleitung, ab „lg“ zweispaltig. Neue
   Abschnitte an einer bestimmten Stelle per `abschnittEinfuegen()`.
+- **Galerie (KEV-132):** Auf der Seite eines Eintrags ist jedes Foto ein Link
+  auf die große Fassung, die weiteren Fotos stehen als Raster aus
+  Vorschaubildern (3:4 zugeschnitten, zwei bzw. drei Spalten). `galerie.js`
+  öffnet sie in einem nativen `<dialog>` (showModal): Vor/Zurück per Knopf und
+  Pfeiltasten, Zähler „2 von 6“ als `aria-live`, Esc oder Klick daneben
+  schließt, der Fokus geht an das zuletzt gezeigte Foto. Feste Farben (fast
+  schwarz, weiße Knöpfe), damit es im Dunkel- und Kontrastmodus gleich bleibt.
+  Ohne JavaScript öffnet der Link das Bild. Beschriftungen übersetzt über
+  `data-*` am Bereich. Browser-Test „Galerie einer Messe“ in `bedienung.mjs`.
 - Stolperstein: In einer Blade-Datei kein `@php(...)` vor einem
   `@php … @endphp`-Block, sonst liest Blade beides als einen Block (Fehler
   „unexpected endforeach“).

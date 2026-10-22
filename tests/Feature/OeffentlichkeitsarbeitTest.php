@@ -73,9 +73,10 @@ class OeffentlichkeitsarbeitTest extends TestCase
             );
         }
 
-        // Maße am Bild, damit die Seite beim Laden nicht springt
-        // Seit dem Drive-Ordner die Originale (1000 × 1333 statt 745 × 994)
-        $this->assertStringContainsString('width="1000" height="1333"', $html);
+        // Damit die Seite beim Laden nicht springt: Maße am großen Bild (das
+        // Original aus dem Drive), festes Seitenverhältnis im Raster (KEV-132)
+        $this->assertStringContainsString('width="1600" height="1200"', $html);
+        $this->assertStringContainsString('aspect-[3/4] w-full object-cover', $html);
         $this->assertStringContainsString('Weitere Fotos', $html);
 
         // Brotkrumen zurück zur Übersicht
@@ -487,5 +488,50 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->assertSee('6 September 2026')
             ->assertSee('We took away many good encounters')
             ->assertSee('View from above into the fair hall');
+    }
+
+    /**
+     * KEV-132: Ehrenamtsmesse Berlin mit sechs Fotos, die Seite als Galerie:
+     * jedes Foto ein Link auf die große Fassung, die übrigen als Raster.
+     */
+    public function test_ehrenamtsmesse_berlin_mit_galerie(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-messen"'));
+        // Neueste zuerst: Bayreuth, Lübeck, Berlin
+        $this->assertTrue(strpos($messen, 'Ehrenamtsmesse Lübeck') < strpos($messen, 'Ehrenamtsmesse Berlin'));
+        $this->assertStringContainsString('<time datetime="2026-04-25">25.04.2026</time>', $messen);
+
+        $seite = $this->get('/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026')->assertOk()->getContent();
+        $this->assertStringContainsString('<p>Ein schöner Tag auf der Ehrenamtsmesse in Berlin!</p>', $seite);
+        $this->assertStringContainsString('im Berliner Landesbeirat für Menschen mit Behinderungen.', $seite);
+        $this->assertStringNotContainsString('<strong>', substr($seite, strpos($seite, '<h1'), strpos($seite, 'weitere-fotos') - strpos($seite, '<h1')));
+
+        // Galerie: Beschriftungen für das Skript, sechs Links auf die Bilder
+        $this->assertStringContainsString('data-galerie', $seite);
+        $this->assertStringContainsString('data-zaehler=":nr von :gesamt"', $seite);
+        $this->assertSame(6, preg_match_all('#<a href="/img/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026-\d\.webp\?v=[^"]+" data-galerie-bild#', $seite));
+        $this->assertSame(6, substr_count($seite, '<span class="sr-only">Foto vergrößern</span>'));
+        $this->assertStringContainsString('<ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">', $seite);
+    }
+
+    public function test_migration_berlin_einmal_und_englisch(): void
+    {
+        $migration = require database_path('migrations/2026_10_22_180000_oeffentlichkeitsarbeit_messe_berlin.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(1, OutreachItem::where('slug', 'ehrenamtsmesse-berlin-2026')->count());
+
+        foreach (OeffentlichkeitsarbeitSeeder::MESSE_BERLIN['fotos'] as $foto) {
+            $this->assertFileExists(public_path(ltrim($foto['bild'], '/')));
+        }
+
+        $this->seed(UebersetzungenSeeder::class);
+        $this->get('/en/oeffentlichkeitsarbeit/ehrenamtsmesse-berlin-2026')->assertOk()
+            ->assertSee('Volunteering fair Berlin')
+            ->assertSee('25 April 2026')
+            ->assertSee('Berlin State Advisory Council for People with Disabilities')
+            ->assertSee('data-zaehler=":nr of :gesamt"', false)
+            ->assertSee('Enlarge photo');
     }
 }
