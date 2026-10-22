@@ -7,19 +7,20 @@ use App\Models\Page;
 use Illuminate\Database\Seeder;
 
 /**
- * Öffentlichkeitsarbeit (KEV-129): Taddis Text als Beschreibung, darunter der
- * Abschnitt „Messen“ (Baustein „Öffentlichkeitsarbeit“, KEV-134). Darin
- * stehen die Messen als kleine Karten; jede hat eine eigene Seite mit dem
- * ganzen Text und allen Fotos. Petitionen und Presse kommen als weitere
- * Abschnitte dazu. Die Einträge legt der Verein im Panel unter
- * „Öffentlichkeitsarbeit“ an (App\Models\OutreachItem).
+ * Öffentlichkeitsarbeit (KEV-129): Taddis Text als Beschreibung, darunter
+ * drei Abschnitte (Baustein „Öffentlichkeitsarbeit“): „Ehrenamtsmessen“
+ * (KEV-131/134), „Petitionen“ (KEV-135) und „Presse“ (KEV-136). Darin stehen
+ * die Einträge als kleine Karten; jeder hat eine eigene Seite mit dem ganzen
+ * Text und allen Fotos als Galerie (KEV-132). Die Einträge legt der Verein im
+ * Panel unter „Öffentlichkeitsarbeit“ an (App\Models\OutreachItem), so wie
+ * Taddi es wollte: „Diese Arbeiten erweitern sich.“
  *
  * Die beiden Sätze, die Taddi in Anführungszeichen gesetzt hat, sind fett
  * (*Sternchen*), wie bei allen ihren Texten. Absätze von uns gesetzt.
  *
  * Die Seite selbst gibt es seit KEV-72 als leere Hülle im Menü, für
- * Suchmaschinen gesperrt, bis Text da ist. Jetzt ist er da. Bild bleibt der
- * Platzhalter (Taddi: „Bilder nehmen wir Platzhalter“).
+ * Suchmaschinen gesperrt, bis Text da ist. Jetzt ist er da. Titelbild seit
+ * KEV-149 von Taddi (Megafon), vorher der Platzhalter.
  *
  * Füllt nur eine leere Seite. Hat der Verein schon etwas eingetragen, gehört
  * sie ihm.
