@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\OutreachItem;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Post;
@@ -31,6 +32,7 @@ class SitemapController extends Controller
             ...$this->beitraege(),
             ...$this->termine(),
             ...$this->gruppen(),
+            ...$this->oeffentlichkeitsarbeit(),
         ];
 
         return response()
@@ -136,6 +138,19 @@ class SitemapController extends Controller
             ->map(fn (Group $gruppe) => [
                 'url' => url($gruppe->url(Language::standardCode())),
                 'geaendert' => $gruppe->updated_at?->toAtomString(),
+                'alternativen' => [],
+            ])
+            ->all();
+    }
+
+    /** Die Seiten der Messen, Petitionen, Presseartikel (KEV-134). */
+    private function oeffentlichkeitsarbeit(): array
+    {
+        return OutreachItem::veroeffentlicht()
+            ->get()
+            ->map(fn (OutreachItem $eintrag) => [
+                'url' => url($eintrag->url(Language::standardCode())),
+                'geaendert' => $eintrag->updated_at?->toAtomString(),
                 'alternativen' => [],
             ])
             ->all();

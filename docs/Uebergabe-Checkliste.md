@@ -364,17 +364,27 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Menü bleiben? Taddis Gliederung nennt sie nicht, sie stehen vorerst dahinter.
 - [ ] **Öffentlichkeitsarbeit (KEV-129).** Taddis Text steht, die beiden Sätze
   in Anführungszeichen fett, die Seite ist jetzt für Suchmaschinen offen.
-  Darunter der neue Baustein **„Einträge mit Datum“**: Messen, Petitionen,
-  Presseartikel, Interviews trägt der Verein im Panel selbst ein (Art, Datum,
-  Ort, Text, Link, Bild), die neuesten stehen von selbst oben. Solange es
-  keinen Eintrag gibt, zeigt die Seite dort nichts. Zu klären:
-  - Die Überschrift **„Einblicke“** über den Einträgen ist von uns.
-  - Bilder lädt der Verein seit dem 21.10.2026 im Panel selbst hoch (siehe B1,
-    Hochladen). Bis dahin ging es nur über einen Pfad.
-    im Panel noch nirgends. Fotos bitte schicken, wir legen sie ab.
   - In Taddis Vorlage („4. Öffentlichkeitsarbeit“) beginnt der Schlusssatz mit
     „Denn Sichtbarkeit schafft …“, im Ticket ohne „Denn“. Umgesetzt wie im
     Ticket.
+- [ ] **Messen auf der Öffentlichkeitsarbeit (KEV-134).** Unter dem Text der
+  Abschnitt **„Messen“** mit kleinen Karten (Foto, Datum, Ort, Titel, Anfang
+  des Texts). Ein Klick führt auf die eigene Seite der Messe mit dem ganzen
+  Text und allen Fotos, z. B. /oeffentlichkeitsarbeit/ehrenamtsmesse-bayreuth-2026.
+  Neue Messen (und später Petitionen und Presse) legt der Verein im Panel
+  unter **„Öffentlichkeitsarbeit“** an, Fotos lädt er dort selbst hoch. Erste
+  Messe: Ehrenamtsmesse Bayreuth mit drei Fotos. Zu klären:
+  - **Datum:** Im Ticket steht 10.10.2025, eingetragen ist der **10.10.2026**.
+    Die Freiwilligen-Messe Bayreuth war am Samstag, 10.10.2026, im
+    Friedrichsforum; der 10.10.2025 war ein Freitag, da gab es keine. Taddis
+    Vorlage nennt 2026 in der Zwischenzeile. Bitte bestätigen, im Panel sonst
+    einfach ändern (die Adresse endet dann trotzdem auf -2026).
+  - **Bildbeschreibungen** der drei Fotos sind von uns und nennen bewusst
+    keine Namen. Wenn der Verein sagen möchte, wer zu sehen ist: im Panel beim
+    Foto ergänzen.
+  - Taddis Vorlage hat für die Ehrenamtsmessen noch einen eigenen
+    Einleitungstext („Wir zeigen gern, wer wir sind …“). Der kann im Panel als
+    Einleitung über die Karten, sobald er per Ticket kommt.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

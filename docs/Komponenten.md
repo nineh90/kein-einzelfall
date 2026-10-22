@@ -2100,36 +2100,40 @@ Vornamen.
 
 ---
 
-## 33. Baustein „Einträge mit Datum“ (21.10.2026, KEV-129)
+## 33. Öffentlichkeitsarbeit: Messen, Petitionen, Presse (KEV-129, KEV-134)
 
-Für die Öffentlichkeitsarbeit: Messen, Petitionen, Presseartikel, Interviews
-als einzelne Einträge, die der Verein im Panel selbst anlegt. „Diese Arbeiten
-erweitern sich“, also eine Liste, die wächst.
+Erst (KEV-129) ein Seitenbaustein „Einträge mit Datum“, in dem alles auf der
+Übersicht stand. Kevin nach dem ersten Eintrag: Die Übersicht zeigt nur
+kleine Karten, der ganze Text und die Fotos gehören auf eine eigene Seite,
+und der Abschnitt heißt „Messen“. Deshalb seit KEV-134 wie bei den Gruppen:
 
-Bewusst ein Seitenbaustein (`eintraege`) mit Wiederholungsfeld und kein
-eigenes Modell wie die Veranstaltungen: Die Einträge laufen so durch die
-englische Fassung (`UebersetzungenSeeder`, Felder `titel`, `text`, `link`,
-`bild_alt`), die Suche und das Speichern im Panel wie jeder andere Baustein,
-und derselbe Baustein passt später auf den Rückblick oder auf Unterseiten
-(Ehrenamtsmessen, Petitionen, Presse).
-
-- Je Eintrag: Art (Schild: Messe, Petition, Presseartikel, Interview,
-  Veranstaltung, Aktion; `PageBlock::EINTRAG_ARTEN`, übersetzt über
-  `lang/en.json`), Datum (optional), Titel, Ort, Text (jede Zeile ein Absatz,
-  `*fett*` und `[Link](…)` wie im Textbaustein), Link mit Beschriftung, ein Bild.
-- **Neueste zuerst**, unabhängig von der Reihenfolge im Panel
-  (`PageBlock::eintraegeSortiert`): Der Verein hängt Neues unten an. Gleicher
-  Tag behält die Panel-Reihenfolge, ohne Datum (Petitionen) ans Ende, ohne
-  Titel fällt ein Eintrag raus.
-- **Leer zeigt er nichts** und zählt beim Flächenwechsel nicht mit
-  (`PageBlock::zeigtNichts`, gefiltert in `page.blade.php` und
-  `home.blade.php`). Sonst stünden zwei gleiche Flächen untereinander.
-- Barrierefreiheit: Liste (`<ul>`), Datum als `<time>`, der Link nennt den
-  Titel für Vorlesehilfen mit, fremde Seiten sind gekennzeichnet, kein
-  `target="_blank"`. Ohne Überschrift des Bausteins sind die Einträge `h2`,
-  sonst `h3`.
-- Das Bild lädt der Verein hoch (Abschnitt 34). Mehrere Fotos je Messe und
-  ein Video (Trude Kuh) kommen mit den Folgetickets.
+- **Eigene Datensätze** `App\Models\OutreachItem` (Tabelle `outreach_items`),
+  im Panel unter „Öffentlichkeitsarbeit“: Art (Messe, Petition, Presseartikel,
+  Interview, Veranstaltung, Aktion), Titel, Adresse, Datum (optional), Ort,
+  Kurztext für die Karte (optional), ausführlicher Text, Fotos mit
+  Bildbeschreibung (hochladen, Reihenfolge ziehbar), Link, „Sichtbar ab“.
+- **Eigene Seite** `/oeffentlichkeitsarbeit/{adresse}`
+  (`OeffentlichkeitsarbeitController`, `oeffentlichkeitsarbeit/show`): Art,
+  Titel, Datum und Ort, das erste Foto groß, der Text, „Weitere Fotos“ in
+  zwei Spalten ungeschnitten (Hoch- und Querformat), Weiterführung zu den
+  anderen Einträgen. Kein Seitenkopf mit Bild: Der ist für die ruhigen
+  Stimmungsbilder gebaut, auf einem echten Messefoto wäre der Text kaum zu
+  lesen. `width`/`height` aus der Datei (`Medien::masse`), damit nichts springt.
+- **Baustein „Öffentlichkeitsarbeit“** (`oeffentlichkeitsarbeit`) auf der
+  Übersicht, je Art einer („Messen“, später „Petitionen“, „Presse“):
+  kleine Karten im Dreierraster, neueste zuerst, ohne Datum ans Ende. Foto
+  4:3 als Schmuck (`alt=""`, beschrieben wird es auf der Seite), Anriss auf
+  drei Zeilen gekürzt. Der Link sitzt auf dem Titel und deckt die Karte ab;
+  „Mehr erfahren“ ist nur sichtbar, nicht vorgelesen. Ohne veröffentlichten
+  Eintrag seiner Art zeigt der Abschnitt nichts und zählt beim
+  Flächenwechsel nicht mit (`PageBlock::zeigtNichts`).
+- Englisch: Felder über `uebersetzungen` (wie Gruppen, Datei
+  `uebersetzungen-oeffentlichkeitsarbeit.json`), Bildbeschreibungen je Foto
+  unter `foto_alt`. Dazu in Suche und Sitemap.
+- Neue Einträge per Migration: `OeffentlichkeitsarbeitSeeder::eintragAnlegen()`,
+  nur wenn die Adresse fehlt.
+- Nebenbei: Der alte Baustein nutzte im Panel dasselbe Feld `data.eintraege`
+  wie „Fragen und Antworten“. Mit seinem Wegfall ist das erledigt.
 
 ---
 
@@ -2140,8 +2144,8 @@ Jedes neue Bild musste erst bei uns landen. Kevin: „Der Kunde soll das ganze
 ja auch komplett selbst pflegen können. Das gilt für die gesamte Seite.“
 
 Jetzt sind es Upload-Felder (`App\Support\Medien`): Titelbild der Seiten und
-Gruppen, Bild im Aufmacher und bei „Text mit Bild“, Partnerlogos, Bilder der
-Einträge, Fotos im Team, Bilder der Beiträge. Im Baustein „Dokumente“ gibt es
+Gruppen, Bild im Aufmacher und bei „Text mit Bild“, Partnerlogos, Fotos der
+Öffentlichkeitsarbeit (KEV-134), Fotos im Team, Bilder der Beiträge. Im Baustein „Dokumente“ gibt es
 zusätzlich zur Adresse „Datei hochladen“ (PDF, Word, Tabellen, bis 20 MB).
 
 - **In der Datenbank steht weiter ein Pfad der Website**, neue Dateien als

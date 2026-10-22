@@ -96,24 +96,11 @@ class PageBlock extends Model
         'speicher_uebersicht' => 'Gespeicherte Einstellungen',
         'leichte_sprache' => 'Leichte Sprache',
         'stat_strip' => 'Kennzahlen',
-        // KEV-129: Messen, Petitionen, Presse … als einzelne Einträge, die der
-        // Verein selbst anlegt. Neueste zuerst, egal in welcher Reihenfolge
-        // sie im Panel stehen.
-        'eintraege' => 'Einträge mit Datum (Messen, Presse, Petitionen …)',
-    ];
-
-    /**
-     * Arten eines Eintrags (KEV-129). Der Schlüssel steht in den Daten, die
-     * Beschriftung erscheint als Schild auf der Karte und wird mit __()
-     * übersetzt. Ohne Art steht kein Schild da.
-     */
-    public const EINTRAG_ARTEN = [
-        'messe' => 'Messe',
-        'petition' => 'Petition',
-        'presse' => 'Presseartikel',
-        'interview' => 'Interview',
-        'veranstaltung' => 'Veranstaltung',
-        'aktion' => 'Aktion',
+        // KEV-134: Messen, Petitionen, Presse … als kleine Karten, je Art ein
+        // Abschnitt. Die Einträge selbst pflegt der Verein unter
+        // „Öffentlichkeitsarbeit“ im Panel (App\Models\OutreachItem), jeder
+        // hat eine eigene Seite.
+        'oeffentlichkeitsarbeit' => 'Öffentlichkeitsarbeit (Messen, Petitionen, Presse …)',
     ];
 
     /**
@@ -146,7 +133,7 @@ class PageBlock extends Model
         'hilfe_box' => 'wechselnd',
         'partner_logos' => 'wechselnd',
         'speicher_uebersicht' => 'wechselnd',
-        'eintraege' => 'wechselnd',
+        'oeffentlichkeitsarbeit' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
@@ -250,45 +237,19 @@ class PageBlock extends Model
     }
 
     /**
-     * Die Einträge eines Bausteins „Einträge mit Datum“ (KEV-129), wie sie
-     * auf der Seite stehen: ohne Titel raus, die neuesten zuerst. Einträge
-     * ohne Datum ans Ende, in ihrer Reihenfolge aus dem Panel.
-     *
-     * So kann der Verein Neues einfach unten anhängen, statt die Liste
-     * umzusortieren.
-     *
-     * @param  array<int, mixed>  $eintraege
-     * @return list<array<string, mixed>>
-     */
-    public static function eintraegeSortiert(array $eintraege): array
-    {
-        $gefiltert = array_values(array_filter(
-            $eintraege,
-            fn ($e) => is_array($e) && trim($e['titel'] ?? '') !== '',
-        ));
-
-        $mitDatum = array_values(array_filter($gefiltert, fn ($e) => filled($e['datum'] ?? null)));
-        $ohneDatum = array_values(array_filter($gefiltert, fn ($e) => blank($e['datum'] ?? null)));
-
-        // Stabil: Gleiche Tage behalten die Reihenfolge aus dem Panel.
-        usort($mitDatum, fn ($a, $b) => strcmp((string) $b['datum'], (string) $a['datum']));
-
-        return [...$mitDatum, ...$ohneDatum];
-    }
-
-    /**
      * Ob der Baustein auf der Seite gar nichts zeigt. Dann fällt er aus der
      * Seite heraus, bevor die Flächen verteilt werden: Ein leerer Baustein
      * nähme sonst eine Fläche ein, die niemand sieht, und zwei gleiche
      * Flächen stünden direkt untereinander.
      *
-     * Bisher nur „Einträge mit Datum“: Der Verein legt den Baustein an,
-     * bevor es Einträge gibt (KEV-129).
+     * Bisher nur „Öffentlichkeitsarbeit“ ohne veröffentlichte Einträge seiner
+     * Art: Der Abschnitt „Petitionen“ soll schon bereitstehen dürfen, bevor
+     * es eine gibt.
      */
     public function zeigtNichts(): bool
     {
-        return $this->typ === 'eintraege'
-            && self::eintraegeSortiert($this->data['eintraege'] ?? []) === [];
+        return $this->typ === 'oeffentlichkeitsarbeit'
+            && ! OutreachItem::veroeffentlicht()->vonArt($this->data['art'] ?? 'messe')->exists();
     }
 
     /** Die Fläche dieses Bausteins, wenn davor die Fläche $davor steht. */

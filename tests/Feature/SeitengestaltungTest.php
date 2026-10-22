@@ -473,8 +473,8 @@ class SeitengestaltungTest extends TestCase
 
     /**
      * KEV-129: Öffentlichkeitsarbeit mit Taddis Text, die beiden Sätze in
-     * Anführungszeichen fett. Darunter der Baustein für Messen, Petitionen und
-     * Presse, noch ohne Einträge: Dann steht dort nichts.
+     * Anführungszeichen fett. Darunter seit KEV-134 der Abschnitt „Messen“
+     * (OeffentlichkeitsarbeitTest).
      */
     public function test_oeffentlichkeitsarbeit_mit_taddis_text(): void
     {
@@ -493,26 +493,8 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Ehrenamtsmessen, Petitionen, Presseartikel und Interviews', $html);
         $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp', $html);
 
-        // Der Baustein ist angelegt, zeigt aber ohne Einträge nichts.
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
-        $this->assertSame(['text', 'eintraege'], $seite->blocks()->pluck('typ')->all());
-        // „Einblicke“ steht auch in Taddis Text, deshalb am Sprungziel geprüft.
-        $this->assertStringNotContainsString('id="eintraege-einblicke"', $html);
-    }
-
-    public function test_eintrag_aus_dem_panel_erscheint_auf_der_oeffentlichkeitsarbeit(): void
-    {
-        $block = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail()
-            ->blocks()->where('typ', 'eintraege')->firstOrFail();
-        $block->update(['data' => $block->data + ['eintraege' => [
-            ['art' => 'messe', 'datum' => '2026-04-18', 'titel' => 'Ehrenamtsmesse Hamburg', 'ort' => 'Hamburg'],
-        ]]]);
-
-        $this->get('/oeffentlichkeitsarbeit')->assertOk()
-            ->assertSee('id="eintraege-einblicke"', false)
-            ->assertSee('Ehrenamtsmesse Hamburg')
-            ->assertSee('18.04.2026')
-            ->assertSee('Messe');
+        $this->assertSame(['text', 'oeffentlichkeitsarbeit'], $seite->blocks()->pluck('typ')->all());
     }
 
     public function test_migration_fuellt_nur_die_leere_oeffentlichkeitsarbeit(): void
@@ -525,7 +507,7 @@ class SeitengestaltungTest extends TestCase
         $seite->update(['noindex' => true, 'meta_description' => null]);
         $migration->up();
         $seite->refresh();
-        $this->assertSame(['text', 'eintraege'], $seite->blocks()->pluck('typ')->all());
+        $this->assertSame(['text', 'oeffentlichkeitsarbeit'], $seite->blocks()->pluck('typ')->all());
         $this->assertFalse($seite->noindex);
         $this->assertSame(\Database\Seeders\OeffentlichkeitsarbeitSeeder::META_DESCRIPTION, $seite->meta_description);
 
@@ -542,7 +524,7 @@ class SeitengestaltungTest extends TestCase
         $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
         $seeder = \Database\Seeders\OeffentlichkeitsarbeitSeeder::class;
 
-        foreach ([...$seeder::ABSAETZE, $seeder::META_DESCRIPTION, $seeder::EINTRAEGE['titel']] as $satz) {
+        foreach ([...$seeder::ABSAETZE, $seeder::META_DESCRIPTION, $seeder::MESSEN['titel']] as $satz) {
             $this->assertArrayHasKey($satz, $woerterbuch, $satz);
         }
 

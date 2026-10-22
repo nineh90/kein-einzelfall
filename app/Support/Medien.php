@@ -143,6 +143,21 @@ class Medien
             : public_path(ltrim($pfad, '/'));
     }
 
+    /**
+     * Breite und Höhe eines Bilds, das bei uns liegt, für width/height am
+     * <img>: Der Browser hält dann den Platz frei, und die Seite springt
+     * beim Laden nicht. Fremde Adressen und unlesbare Dateien: null.
+     *
+     * @return array{0: int, 1: int}|null
+     */
+    public static function masse(?string $adresse): ?array
+    {
+        $datei = self::dateipfad($adresse);
+        $info = $datei !== null && is_file($datei) ? @getimagesize($datei) : false;
+
+        return $info ? [$info[0], $info[1]] : null;
+    }
+
     /** Liegt die Datei bei uns? Fremde Adressen: nein. */
     public static function vorhanden(?string $adresse): bool
     {

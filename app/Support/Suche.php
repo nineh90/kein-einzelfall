@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Models\GlossaryTerm;
 use App\Models\Group;
+use App\Models\OutreachItem;
 use App\Models\Page;
 use Illuminate\Support\Str;
 
@@ -173,6 +174,7 @@ class Suche
             $this->seiten($begriffe, $sprache),
             $this->glossar($begriffe, $sprache),
             $this->gruppen($begriffe),
+            $this->oeffentlichkeitsarbeit($begriffe),
         );
 
         usort($treffer, fn ($a, $b) => $b['punkte'] <=> $a['punkte']);
@@ -350,6 +352,35 @@ class Suche
                     'url' => $gruppe->url(),
                     'bereich' => $gruppe->typ === 'selbsthilfe' ? __('Selbsthilfegruppen') : __('Arbeitsgruppen'),
                     'ausschnitt' => Str::limit((string) $gruppe->teaser, 160),
+                    'punkte' => $punkte,
+                ];
+            }
+        }
+
+        return $treffer;
+    }
+
+    /**
+     * Messen, Petitionen, Presse (KEV-134), gewichtet wie die Gruppen.
+     *
+     * @param  list<string>  $begriffe
+     * @return list<array<string, mixed>>
+     */
+    private function oeffentlichkeitsarbeit(array $begriffe): array
+    {
+        $treffer = [];
+
+        foreach (OutreachItem::veroeffentlicht()->get() as $eintrag) {
+            $punkte = 8 * $this->wieOft($begriffe, $eintrag->titel.' '.(string) $eintrag->ort)
+                + 2 * $this->wieOft($begriffe, strip_tags((string) $eintrag->teaser.' '.(string) $eintrag->beschreibung));
+
+            if ($punkte > 0) {
+                $treffer[] = [
+                    'art' => 'oeffentlichkeitsarbeit',
+                    'titel' => $eintrag->titel,
+                    'url' => $eintrag->url(),
+                    'bereich' => __('Öffentlichkeitsarbeit'),
+                    'ausschnitt' => Str::limit($eintrag->anriss(), 160),
                     'punkte' => $punkte,
                 ];
             }

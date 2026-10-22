@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GlossarController;
 use App\Http\Controllers\GruppeController;
+use App\Http\Controllers\OeffentlichkeitsarbeitController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SitemapController;
@@ -92,6 +93,14 @@ $oeffentlicheRouten = function () {
     Route::get('/selbsthilfegruppen/{slug}', [GruppeController::class, 'show'])
         ->where('slug', '[a-z0-9-]+')
         ->name('gruppen.show');
+
+    /*
+     * Eine Seite je Messe, Petition, Presseartikel (KEV-134). Auf der
+     * Übersicht /oeffentlichkeitsarbeit steht nur die Karte.
+     */
+    Route::get('/oeffentlichkeitsarbeit/{slug}', [OeffentlichkeitsarbeitController::class, 'show'])
+        ->where('slug', '[a-z0-9-]+')
+        ->name('oeffentlichkeitsarbeit.show');
 
     /*
      * Eine Seite je Arbeitsgruppe (KEV-84), wie bei den Selbsthilfegruppen.

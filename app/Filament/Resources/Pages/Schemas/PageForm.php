@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\Pages\Schemas;
 
 use App\Models\Group;
+use App\Models\OutreachItem;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\PageBlock;
 use App\Models\TeamMember;
 use App\Rules\KollidiertNichtMitSprachpraefix;
 use App\Support\Medien;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -291,7 +291,7 @@ class PageForm
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
                                     ['schritte', 'accordion', 'team_grid', 'group_list', 'partner_logos',
-                                        'speicher_uebersicht', 'eintraege'],
+                                        'speicher_uebersicht', 'oeffentlichkeitsarbeit'],
                                     true,
                                 ))
                                 ->helperText(fn ($get) => $get('typ') === 'speicher_uebersicht'
@@ -609,70 +609,20 @@ class PageForm
                                             .'etwas zeigt, das der Name nicht sagt.'),
                                 ]),
 
-                            // --- Einträge mit Datum (KEV-129) ---
-                            // Messen, Petitionen, Presse, Interviews: Die Liste
-                            // wächst, der Verein hängt Neues einfach unten an.
-                            // Auf der Seite stehen die neuesten zuerst.
-                            Repeater::make('data.eintraege')
-                                ->label('Einträge')
-                                ->addActionLabel('Eintrag hinzufügen')
-                                ->visible(fn ($get) => $get('typ') === 'eintraege')
-                                ->collapsible()
-                                ->collapsed()
-                                ->columns(2)
-                                ->itemLabel(fn (array $state) => trim(implode(' · ', array_filter([
-                                    filled($state['datum'] ?? null) ? date('d.m.Y', strtotime($state['datum'])) : null,
-                                    $state['titel'] ?? null,
-                                ]))) ?: null)
-                                ->helperText('Neue Einträge einfach unten anhängen: Auf der Seite stehen '
-                                    .'die neuesten von selbst oben. Solange es keinen Eintrag gibt, '
-                                    .'zeigt die Seite an dieser Stelle nichts.')
-                                ->schema([
-                                    Select::make('art')
-                                        ->label('Art')
-                                        ->options(PageBlock::EINTRAG_ARTEN)
-                                        ->native(false)
-                                        ->placeholder('Ohne Angabe')
-                                        ->helperText('Steht als kleines Schild über dem Titel.'),
-                                    DatePicker::make('datum')
-                                        ->label('Datum')
-                                        ->native(false)
-                                        ->displayFormat('d.m.Y')
-                                        ->helperText('Danach wird sortiert, neueste zuerst. Bei '
-                                            .'Presseartikeln der Tag des Erscheinens. Ohne Datum '
-                                            .'(etwa bei Petitionen) steht der Eintrag am Ende.'),
-                                    TextInput::make('titel')
-                                        ->label('Titel')
-                                        ->required()
-                                        ->columnSpanFull()
-                                        ->helperText('Zum Beispiel „Ehrenamtsmesse Hamburg“ oder '
-                                            .'„Interview im NDR“.'),
-                                    TextInput::make('ort')
-                                        ->label('Ort')
-                                        ->helperText('Bei Messen und Veranstaltungen. Kann leer bleiben.'),
-                                    Textarea::make('text')
-                                        ->label('Text')
-                                        ->rows(4)
-                                        ->columnSpanFull()
-                                        ->helperText('Ein paar Sätze dazu. Jede Zeile wird ein eigener '
-                                            .'Absatz. *Sternchen* machen fett, [Text](https://…) wird ein Link.'),
-                                    TextInput::make('url')
-                                        ->label('Link')
-                                        ->helperText('Zum Artikel, zur Petition, zum Video … '
-                                            .'Leer lassen heisst: kein Link.'),
-                                    TextInput::make('link')
-                                        ->label('Beschriftung des Links')
-                                        ->helperText('Zum Beispiel „Zum Artikel“ oder „Zur Petition“. '
-                                            .'Leer lassen zeigt „Mehr erfahren“.'),
-                                    Medien::bild('bild')
-                                        ->label('Bild')
-                                        ->helperText('Querformat, z. B. ein Foto vom Messestand. '
-                                            .'Kann leer bleiben.'),
-                                    TextInput::make('bild_alt')
-                                        ->label('Bildbeschreibung')
-                                        ->helperText('Was auf dem Bild zu sehen ist, für Menschen, '
-                                            .'die es nicht sehen können.'),
-                                ]),
+                            // --- Öffentlichkeitsarbeit (KEV-134) ---
+                            // Zeigt die Einträge einer Art als Karten. Die
+                            // Einträge selbst stehen unter „Öffentlichkeitsarbeit“.
+                            Select::make('data.art')
+                                ->label('Welche Einträge')
+                                ->options(OutreachItem::ARTEN)
+                                ->default('messe')
+                                ->native(false)
+                                ->required(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
+                                ->visible(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
+                                ->helperText('Die Einträge selbst (Messen, Petitionen, Presse …) legst du '
+                                    .'unter „Öffentlichkeitsarbeit“ an, mit Text und Fotos. Hier stehen sie '
+                                    .'als kleine Karten, die neuesten zuerst. Gibt es noch keinen, bleibt '
+                                    .'der Abschnitt unsichtbar.'),
 
                             // --- Vorstand und Team ---
                             // Zieht die Personen aus der Verwaltung „Vorstand & Team“.
