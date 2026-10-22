@@ -69,6 +69,9 @@ return [
                 ['schluessel' => 'traumafolgestoerungen_verstehen', 'label' => 'Traumafolgestörungen verstehen', 'url' => '/traumafolgestoerungen-verstehen'],
                 ['schluessel' => 'trauma_bindung_und_beziehung', 'label' => 'Trauma, Bindung und Beziehung', 'url' => '/trauma-bindung-und-beziehung'],
                 ['schluessel' => 'unterstuetzung', 'label' => 'Unterstützung',                 'url' => '/unterstuetzung'],
+                // KEV-144: ohne Positionsangabe von Taddi, deshalb ans Ende,
+                // aber vor das Glossar, das als Nachschlagewerk zuletzt steht.
+                ['schluessel' => 'atteste', 'label' => 'Atteste',                       'url' => '/atteste'],
                 ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
             ],
         ],

@@ -141,8 +141,10 @@ class SeitenUndRedirectsTest extends TestCase
          *
          * KEV-97: Der Entwurf Schutzkonzept ist jetzt das veröffentlichte
          * Schutz- und Wertekonzept, dazu neu Red Flags.
+         *
+         * KEV-144: neu Atteste unter Wissen.
          */
-        $this->assertSame(42, Page::count());
+        $this->assertSame(43, Page::count());
         $this->assertSame(2, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

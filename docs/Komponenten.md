@@ -102,7 +102,7 @@ Es sind vollständige, systematisch nummerierte Infoblatt-Reihen:
 
 | Reihe | Anz. | Thema |
 |---|---|---|
-| `6.5.1.x` | 27 | Atteste, Alltagsbeeinträchtigungen |
+| `6.5.1.x` | 27 | Atteste, Alltagsbeeinträchtigungen (seit KEV-144 auf /atteste) |
 | `6.5.5.x` | 25 | Grad der Behinderung (Antrag, Kündigungsschutz, Krankengeld, Reha …) |
 | `6.5.7.x` | 5 | Kfz-Hilfe |
 | `6.1.3.x` | 5 | Einverständnis-/Datenschutzformulare |

@@ -49,7 +49,7 @@ verlinkt. Die übrigen 79 sind vollständige Infoblatt-Reihen:
 
 | Reihe | Anz. | Thema |
 |---|---|---|
-| `6.5.1.x` | 27 | Atteste, Alltagsbeeinträchtigungen |
+| `6.5.1.x` | 27 | Atteste, Alltagsbeeinträchtigungen (seit KEV-144 auf /atteste) |
 | `6.5.5.x` | 25 | Grad der Behinderung |
 | `6.5.7.x` | 5 | Kfz-Hilfe |
 | weitere | 22 | Jugendamt, Behörden-Schriftwechsel, Formulare |
@@ -77,6 +77,11 @@ speichern").
 alten `/wp-content/`-Adressen leiten dauerhaft weiter. Die **übrigen 90 sind
 bewusst nicht geholt** — genau wegen der Frage oben. Sobald der Verein je Reihe
 freigibt: `php artisan dokumente:holen --alle`.
+
+Seit KEV-144 sind die **27 Attestvorlagen (6.5.1)** auf der neuen Seite
+/atteste verlinkt und liegen ebenfalls unter `public/dokumente/`: Taddis Text
+dort kündigt genau diese „Attestvorlagen und Formulierungshilfen“ an. Es sind
+Mustertexte für die behandelnde Ärztin oder den Arzt, ohne persönliche Daten.
 
 **Wichtiger Befund vom 30.07.2026 — die rote Markierung hilft hier nicht weiter.**
 
@@ -454,6 +459,21 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   heißt jetzt „Ehrenamtsmessen“ wie in Taddis Ticket (vorher „Messen“), mit
   ihrer Einleitung und ihrem Bild (leerer Messestand) daneben, wie bei den
   Petitionen. Die Überschrift ist im Panel änderbar.
+- [ ] **Atteste (KEV-144).** Neue Seite unter „Wissen“ mit Taddis Text, der
+  Satz in Anführungszeichen fett, und ihrem Bild aus dem Drive-Ordner
+  „3. Wissen“. Das Bild haben wir rechts um ruhige Wand verlängert, damit der
+  Papierstapel nicht unter dem Titel liegt. Im Menü steht die Seite vor dem
+  Glossar, weil das Ticket keine Position nennt. Darunter hängen die **27
+  Attestvorlagen der Altseite** (Reihe 6.5.1, Stand 01/26). Sie lagen dort in
+  der Mediathek, waren aber nirgends verlinkt. Bitte prüfen:
+  - Sollen alle 27 öffentlich sein? Im Panel lassen sich einzelne entfernen
+    oder durch neuere Fassungen ersetzen.
+  - Die Titel in der Liste sind Taddis Kurznamen aus der Mediathek. Tippfehler
+    haben wir korrigiert („Begeitperson“, „Alltaghsbeeinträchtigungen“,
+    „Teilhabebeeinträchtigng“), unklare Namen ergänzt („Maske“ →
+    „Maskenpflicht, Befreiung“, „Geschlechtsauswahl“ → „Geschlecht der
+    behandelnden Person“). In den Dateinamen stehen die Tippfehler weiter, das
+    sieht man nur in der Adresse.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

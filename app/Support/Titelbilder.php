@@ -83,6 +83,9 @@ class Titelbilder
         // Ohne Unterzeile.
         'schutz-und-wertekonzept' => null,
         'red-flags' => null,
+        // KEV-144: Bild von Taddi (Drive-Ordner „3. Wissen“), Papierstapel
+        // mit Stempel. Ohne Unterzeile.
+        'atteste' => null,
     ];
 
     /**
@@ -160,6 +163,9 @@ class Titelbilder
      *  - Schutz- und Wertekonzept: Holzdach über Holzfiguren (KEV-145),
      *    zwischen 36 und 76 % der Höhe. Unten ausgerichtet fehlte ab 1440 px
      *    das Dach.
+     *  - Atteste: Papierstapel und Holzstempel (KEV-144). Rechts um Wand
+     *    verlängert wie die Jahresberichte, Motiv zwischen 36 und 90 % der
+     *    Höhe; mit 85 % bleibt über dem Stempel auch bei 2560 px Luft.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -179,6 +185,7 @@ class Titelbilder
         self::ORDNER.'/taetigkeits-und-jahresberichte.webp' => 60,
         self::ORDNER.'/red-flags.webp' => 30,
         self::ORDNER.'/schutz-und-wertekonzept.webp' => 65,
+        self::ORDNER.'/atteste.webp' => 85,
     ];
 
     /**

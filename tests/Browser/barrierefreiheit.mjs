@@ -65,6 +65,8 @@ const SEITEN = [
     // ungeprüft nicht bleiben.
     ['Barrierefreiheit', '/barrierefreiheit'],
     ['Glossar', '/glossar'],
+    // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
+    ['Dokumentenliste', '/atteste'],
     ['Fehlerseite', '/diese-seite-gibt-es-nicht'],
 ]
 

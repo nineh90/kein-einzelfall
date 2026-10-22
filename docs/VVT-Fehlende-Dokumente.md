@@ -143,7 +143,7 @@ Website **nirgends verlinkt** sind:
 
 | Reihe | unverlinkt | im Bestand | Thema |
 |---|---|---|---|
-| 6.5.1.x | **27** | 27 | Atteste, Alltagsbeeinträchtigungen |
+| 6.5.1.x | **27** | 27 | Atteste, Alltagsbeeinträchtigungen (seit KEV-144 auf /atteste) |
 | 6.5.2.x | **2** | 2 | Datenschutz bei Ämtern |
 | 6.5.4.x | **2** | 2 | sonstige |
 | 6.5.5.x | **25** | 25 | Grad der Behinderung |
