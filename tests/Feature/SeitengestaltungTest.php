@@ -660,10 +660,9 @@ class SeitengestaltungTest extends TestCase
     }
 
     /**
-     * KEV-146: Taddis Bilder aus ihrem Drive-Ordner „1. Verein“ statt
-     * Platzhalter, Schutzkonzept ohne eigenes Ticket gleich mit (die Seiten
-     * stammen aus KEV-97). Red Flags rechts um Wand verlängert wie die
-     * Jahresberichte, Schutzkonzept unverändert 16 : 9.
+     * KEV-145 und KEV-146: Taddis Bilder aus ihrem Drive-Ordner „1. Verein“
+     * statt Platzhalter (die Seiten stammen aus KEV-97). Red Flags rechts um
+     * Wand verlängert wie die Jahresberichte, Schutzkonzept unverändert 16 : 9.
      */
     public function test_schutz_und_wertekonzept_und_red_flags_haben_eigene_titelbilder(): void
     {

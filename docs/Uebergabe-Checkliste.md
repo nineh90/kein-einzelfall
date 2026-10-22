@@ -336,10 +336,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   „Dokumente“ anhängen. Seit KEV-147 mit Taddis Bild (Leinenbücher mit „2025“);
   wir haben es rechts um ruhige Wand verlängert, damit die Bücher nicht unter
   dem Titel liegen.
-- [ ] **Titelbilder für Red Flags (KEV-146) und Schutz- und Wertekonzept.** Die
-  Bilder „Red Flaggs“ und „Schutz u. Wertekonzept“ aus Taddis Drive-Ordner
-  „1. Verein“ sind eingebaut, das Schutzkonzept ohne eigenes Ticket gleich mit
-  (kommt dafür noch eins, ist es schon erledigt). Das Bild zu Red Flags (zwei Türen) haben
+- [ ] **Titelbilder für Schutz- und Wertekonzept (KEV-145) und Red Flags
+  (KEV-146).** Die Bilder „Schutz u. Wertekonzept“ und „Red Flaggs“ aus Taddis
+  Drive-Ordner „1. Verein“ sind eingebaut. Das Bild zu Red Flags (zwei Türen) haben
   wir rechts um ruhige Wand verlängert, damit die offene Tür nicht unter dem
   Titel liegt. Bitte kurz ansehen; war ein anderes Bild gemeint, lässt es sich
   im Panel tauschen.

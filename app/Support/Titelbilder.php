@@ -79,8 +79,8 @@ class Titelbilder
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'taetigkeits-und-jahresberichte' => null,
         // Bilder von Taddi aus ihrem Drive-Ordner „1. Verein“ statt
-        // Platzhalter: Red Flags ist KEV-146, Schutz- und Wertekonzept kam
-        // ohne eigenes Ticket gleich mit. Ohne Unterzeile.
+        // Platzhalter: Schutz- und Wertekonzept KEV-145, Red Flags KEV-146.
+        // Ohne Unterzeile.
         'schutz-und-wertekonzept' => null,
         'red-flags' => null,
     ];
@@ -157,8 +157,9 @@ class Titelbilder
      *  - Red Flags: zwei Türen, eine offen (KEV-146).
      *    Rechts um Wand verlängert wie die Jahresberichte; Türen zwischen 12
      *    und 74 % der Höhe, mit 30 % ganz von 1024 bis 2560 px.
-     *  - Schutz- und Wertekonzept: Holzdach über Holzfiguren, zwischen 36
-     *    und 76 % der Höhe. Unten ausgerichtet fehlte ab 1440 px das Dach.
+     *  - Schutz- und Wertekonzept: Holzdach über Holzfiguren (KEV-145),
+     *    zwischen 36 und 76 % der Höhe. Unten ausgerichtet fehlte ab 1440 px
+     *    das Dach.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
