@@ -598,17 +598,26 @@ console.log('\nGalerie einer Messe')
 
 console.log('\nKopfzeile mit sechs Bereichen')
 {
-    for (const breite of [1280, 1440, 1920]) {
-        const s = await oeffnen({ breite, pfad: '/verein' })
-        const zustand = await s.evaluate(() => ({
-            zweizeilig: document.documentElement.classList.contains('kopf-zweizeilig'),
-            ueberlauf: document.documentElement.scrollWidth > window.innerWidth,
-        }))
-        pruefe(`${breite}px: Menüleiste in zweiter Zeile statt Burger`, zustand.zweizeilig
-            && await s.locator('[data-kopf-menue]').isVisible() && !(await s.locator('[data-kopf-burger]').isVisible()))
-        pruefe(`${breite}px: kein seitliches Scrollen`, !zustand.ueberlauf)
-        pruefe(`${breite}px: alle sechs Bereiche sichtbar`, await s.locator('[data-kopf-menue] > ul > li:visible').count() === 6)
-        await s.context().close()
+    for (const js of [true, false]) {
+        for (const breite of [1280, 1440, 1920]) {
+            const s = await oeffnen({ breite, pfad: '/verein', js })
+            const art = js ? '' : ' ohne JS'
+            const zustand = await s.evaluate(() => {
+                const logo = document.querySelector('[data-kopf-zeile] > a').getBoundingClientRect()
+                const menue = document.querySelector('[data-kopf-menue]').getBoundingClientRect()
+                const exit = document.querySelector('header [data-notausgang]').getBoundingClientRect()
+                return {
+                    zweiteZeile: menue.top >= logo.bottom - 1,
+                    ueberlauf: document.documentElement.scrollWidth > window.innerWidth,
+                    exitImBild: exit.right <= window.innerWidth,
+                }
+            })
+            pruefe(`${breite}px${art}: Menüleiste in zweiter Zeile statt Burger`, zustand.zweiteZeile
+                && await s.locator('[data-kopf-menue]').isVisible() && !(await s.locator('[data-kopf-burger]').isVisible()))
+            pruefe(`${breite}px${art}: kein seitliches Scrollen, Notausgang im Bild`, !zustand.ueberlauf && zustand.exitImBild)
+            pruefe(`${breite}px${art}: alle sechs Bereiche sichtbar`, await s.locator('[data-kopf-menue] > ul > li:visible').count() === 6)
+            await s.context().close()
+        }
     }
 
     // Größte Schrift: zweite Zeile oder Burger, je nach Breite. Entscheidend

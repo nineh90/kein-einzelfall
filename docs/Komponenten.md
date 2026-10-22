@@ -739,9 +739,12 @@ Beim Nachmessen fielen zwei Dinge auf, die **schon vorher** kaputt waren:
 **Zweite Zeile (KEV-159, 22.10.2026).** Mit dem sechsten Bereich „Raum für
 Ungesagtes“ braucht die Kopfzeile in einer Zeile 1417 px, sie hat höchstens
 1280 (`xl:max-w-7xl`). Ohne Gegenmaßnahme gäbe es auf jedem Bildschirm nur noch
-das Burger-Menü. `kopfzeile.js` setzt deshalb zuerst `kopf-zweizeilig`: Die
-Menüleiste rutscht unter Logo, Suche und Notausgang (Kopf 127 statt 81 px hoch).
-Erst wenn auch die zweite Zeile nicht reicht, kommt der Burger (`kopf-eng`).
+das Burger-Menü. Deshalb steht die Menüleiste ab `xl` in einer zweiten Zeile
+unter Logo, Suche und Notausgang (Kopf 127 statt 81 px hoch), fest per CSS
+(`xl:flex-wrap`, `xl:basis-full`). Zuerst schaltete das `kopfzeile.js` um; ohne
+JavaScript lief die Zeile dann über, bei 1280 px lag der Notausgang außerhalb
+des Fensters (behoben am 22.10.2026). Reicht auch die zweite Zeile nicht
+(größere Schrift), kommt wie bisher der Burger (`kopf-eng`).
 Platz ist dort auch für „Projekte“, laut Taddis Drive der siebte Bereich.
 
 ### Leichte Sprache — Fassung, nicht Sprache

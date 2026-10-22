@@ -24,10 +24,12 @@
          in den Seitenrand. --}}
     {{-- data-kopf-zeile: kopfzeile.js misst, ob die Zeile passt, und schaltet
          sonst aufs Burger-Menü (größere Schrift, Prüfung der Firma 08.10.2026).
-         Seit KEV-159 (sechster Bereich „Raum für Ungesagtes“) vorher eine
-         Stufe: Die Menüleiste rutscht in eine zweite Zeile (kopf-zweizeilig).
-         In einer Zeile bräuchte sie 1417 px, der Kopf hat höchstens 1280. --}}
-    <div data-kopf-zeile class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl">
+         Seit KEV-159 (sechster Bereich „Raum für Ungesagtes“) steht die
+         Menüleiste ab „xl“ in einer zweiten Zeile: In einer Zeile bräuchte
+         sie 1417 px, der Kopf hat höchstens 1280. Fest per CSS (xl:flex-wrap,
+         xl:basis-full), nicht per Skript: Ohne JavaScript lief die Zeile
+         sonst über, und bei 1280 px lag der Notausgang außerhalb des Fensters. --}}
+    <div data-kopf-zeile class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl xl:flex-wrap xl:gap-y-1">
 
         {{-- Wortmarke.
 
@@ -61,7 +63,7 @@
              dauerhaft voller, deshalb bekommt sie erst dort Platz, wo sie
              wirklich passt. Zwischen 1024 und 1280 greift das Burger-Menü,
              das ohnehin vollständig bedienbar ist. --}}
-        <nav data-kopf-menue aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:block">
+        <nav data-kopf-menue aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:order-3 xl:block xl:basis-full">
             <ul class="flex items-center gap-5">
                 @foreach ($nav as $item)
                     <li class="group relative">
