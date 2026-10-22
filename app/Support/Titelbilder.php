@@ -96,6 +96,9 @@ class Titelbilder
         'unueberhoerbar' => null,
         // KEV-158: Bild von Taddi, Staffelei mit leerer Leinwand.
         'blickwinkel' => null,
+        // KEV-157: Bild von Taddi „1 Wall of Shame“, Stuhl vor einer Wand
+        // mit Schatten von Sprechblasen.
+        'wall-of-shame' => null,
     ];
 
     /**
@@ -188,6 +191,10 @@ class Titelbilder
      *    verlängert; Staffelei von 3 bis 92 % der Höhe, zu hoch für jeden
      *    Kopf. Mit 35 % bleibt die Leinwand ganz, unten fehlen bei 2560 px
      *    die Beinenden.
+     *  - Wall of Shame: Stuhl, darüber Schatten von Sprechblasen (KEV-157).
+     *    Rechts um Wand verlängert; Schatten ab 2 %, Stuhlbeine bei 83 % der
+     *    Höhe. Mit 45 % bleibt der Stuhl ganz, oben fehlt bei 2560 px ein
+     *    Stück der obersten Sprechblase.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -212,6 +219,7 @@ class Titelbilder
         self::ORDNER.'/raum-fuer-ungesagtes.webp' => 25,
         self::ORDNER.'/unueberhoerbar.webp' => 60,
         self::ORDNER.'/blickwinkel.webp' => 35,
+        self::ORDNER.'/wall-of-shame.webp' => 45,
     ];
 
     /**

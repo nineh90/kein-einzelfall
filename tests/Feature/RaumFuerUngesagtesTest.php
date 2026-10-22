@@ -76,8 +76,8 @@ class RaumFuerUngesagtesTest extends TestCase
 
         $raum = $bereiche->firstWhere('url', '/raum-fuer-ungesagtes');
         $this->assertSame('Raum für Ungesagtes', $raum['label']);
-        // Reihenfolge wie Taddis Bilder im Drive: 3. Blickwinkel, 4. Unüberhörbar.
-        $this->assertSame(['/blickwinkel', '/unueberhoerbar'], array_column($raum['children'], 'url'));
+        // Reihenfolge wie Taddis Bilder im Drive: 1. Wall of Shame, 3. Blickwinkel, 4. Unüberhörbar.
+        $this->assertSame(['/wall-of-shame', '/blickwinkel', '/unueberhoerbar'], array_column($raum['children'], 'url'));
 
         $html = $this->get('/unueberhoerbar')->getContent();
         $this->assertStringContainsString('href="/raum-fuer-ungesagtes"', $html);

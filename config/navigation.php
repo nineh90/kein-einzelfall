@@ -77,9 +77,9 @@ return [
         ],
         /*
          * KEV-159: neuer Bereich, Platz wie in Taddis Drive („4. Raum für
-         * Ungesagtes“ nach „3. Wissen“). Laut Drive kommen noch Wall of
-         * Shame und Wort für Wort dazu. Unterseiten in Taddis Reihenfolge
-         * (Bilder 1. bis 4.): Blickwinkel (KEV-158) ist Nummer 3,
+         * Ungesagtes“ nach „3. Wissen“). Laut Drive kommt noch Wort für Wort
+         * dazu. Unterseiten in Taddis Reihenfolge (Bilder 1. bis 4.): Wall of
+         * Shame (KEV-157) ist Nummer 1, Blickwinkel (KEV-158) Nummer 3,
          * Unüberhörbar Nummer 4.
          */
         [
@@ -87,6 +87,7 @@ return [
             'label' => 'Raum für Ungesagtes',
             'url' => '/raum-fuer-ungesagtes',
             'children' => [
+                ['schluessel' => 'wall_of_shame', 'label' => 'Wall of Shame', 'url' => '/wall-of-shame'],
                 ['schluessel' => 'blickwinkel', 'label' => 'Blickwinkel', 'url' => '/blickwinkel'],
                 ['schluessel' => 'unueberhoerbar', 'label' => 'Unüberhörbar', 'url' => '/unueberhoerbar'],
             ],

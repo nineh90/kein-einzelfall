@@ -21,6 +21,7 @@ import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
 import { inhaltsverzeichnisVerdrahten } from './inhaltsverzeichnis'
 import { galerieVerdrahten } from './galerie'
 import { glossarVerdrahten } from './glossar'
+import { wallOfShameVerdrahten } from './wall-of-shame'
 import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
@@ -50,6 +51,9 @@ galerieVerdrahten()
 
 // Nur im Glossar: Filtern beim Tippen (KEV-153).
 glossarVerdrahten()
+
+// Nur auf der Wall of Shame: Sätze und Zählstriche (KEV-157).
+wallOfShameVerdrahten()
 
 // Steht bewusst hinter der Toolbar. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.

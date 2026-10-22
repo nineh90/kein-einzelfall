@@ -235,6 +235,15 @@ button:not(:disabled),
   border-radius: 2px;
 }
 
+/* Wall of Shame (KEV-157): Der neue Zählstrich wird gezogen, nicht gesetzt.
+   pathLength="1" an der Linie, deshalb reicht 1 als Strichlänge. */
+.wand-strich-neu {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: wand-strich 0.35s ease-out forwards;
+}
+@keyframes wand-strich { to { stroke-dashoffset: 0; } }
+
 /* Nutzerpraeferenzen des Betriebssystems von Haus aus respektieren */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

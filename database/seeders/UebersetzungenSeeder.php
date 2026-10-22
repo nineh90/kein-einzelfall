@@ -61,6 +61,8 @@ class UebersetzungenSeeder extends Seeder
         // Seit 08.10.2026 (alle Seiten): Knöpfe der Beschwerdeseite, Fragen und
         // Antworten, Partner, Teaser, Quellenangaben der Dokumentenliste.
         'knopf', 'frage', 'antwort', 'name', 'rolle', 'beschreibung', 'teaser', 'quelle',
+        // KEV-157: Schlusssatz der Wall of Shame.
+        'schluss',
     ];
 
     /** Pfade, die Dateien sind und kein Sprachpräfix bekommen. */
@@ -173,7 +175,9 @@ class UebersetzungenSeeder extends Seeder
         $ergebnis = [];
 
         foreach ($data as $schluessel => $wert) {
-            if ($schluessel === 'absaetze' && is_array($wert)) {
+            // Listen von Sätzen: Absätze, seit KEV-157 auch die Sätze der
+            // Wall of Shame.
+            if (in_array($schluessel, ['absaetze', 'saetze'], true) && is_array($wert)) {
                 // Liste von Textabsätzen.
                 $ergebnis[$schluessel] = array_map(
                     fn ($absatz) => is_string($absatz) ? $this->links($this->tr($absatz, $locale), $locale) : $absatz,

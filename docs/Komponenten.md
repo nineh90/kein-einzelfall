@@ -2235,3 +2235,46 @@ zusätzlich zur Adresse „Datei hochladen“ (PDF, Word, Tabellen, bis 20 MB).
   durchgespielt: Bild hochgeladen, gespeichert, auf der Seite und unter
   `/storage/…` ohne Verknüpfung ausgeliefert.
 
+
+## 35. Wall of Shame (KEV-157, 22.10.2026)
+
+Seite `/wall-of-shame` unter „Raum für Ungesagtes“: Taddis Einleitung als
+Textbaustein, darunter der Baustein `wall_of_shame` mit 145 Sätzen, die
+Betroffene von Fachkräften, Behörden, Gerichten und Gutachtern gehört haben
+(`WallOfShameSeeder`, Sätze in `database/seeders/data/wall-of-shame.json`).
+
+**Darstellung nach Taddis Wunsch.** Ihre rissige Wand mit Papierstapel
+(`public/img/wall-of-shame/wand.webp`). Ein Klick auf den Stapel zeigt den
+nächsten Satz auf einem Zettel und setzt einen Zählstrich an die Wand, vier
+senkrecht, der fünfte quer wie im Logo. Mit jedem Satz wird die Wand dunkler,
+die Striche kräftiger, der Zettel schiefer. Nach dem letzten Satz kommt ein
+Schlusszettel („Das waren alle 145 Sätze.“ und der Schlusssatz in Fett), dann
+„Noch einmal von vorn“.
+
+**Wenn die Seite wächst.** Die Strichgröße richtet sich nach der Zahl aller
+Sätze, nicht der gelesenen (`felderVerteilen()` in
+`resources/js/wall-of-shame.js`): die größte Feldgröße, bei der alle
+Fünferbündel neben Zettel und Stapel Platz finden. Die Wand selbst behält ihr
+Seitenverhältnis (4:5 Handy, 4:3 Tablet, 16:9 Desktop). Bei 500 Sätzen werden
+die Striche kleiner, die Seite nicht länger. Die Bündel tauchen verstreut auf,
+leicht verschoben und gedreht; der Zufall hat feste Startwerte, das Bild bleibt
+beim Neuzeichnen (Fenstergröße) dasselbe.
+
+**Barrierefreiheit.**
+- Die Wand gibt es nur mit JavaScript (`hidden`, bis das Skript sie zeigt).
+  Darunter stehen alle Sätze als Liste in einem `<details>`: ohne Skript der
+  Weg, mit Vorlesehilfe oft der bequemere, und die Suche findet die Sätze.
+- Der Stapel ist ein echter `<button>` mit sichtbarer Beschriftung, der Fokus
+  bleibt beim Weiterlesen darauf. Der Zettel ist `aria-live="polite"`, neue
+  Sätze werden vorgelesen. Die Striche sind `aria-hidden`.
+- Erst ein Klick zeigt einen Satz; nichts springt ungefragt ins Bild.
+- Bewegung (Strich wird gezogen) nur ohne `prefers-reduced-motion`.
+- Feste Farben für Wand und Zettel, auch im Dunkel- und Kontrastmodus.
+
+**Pflege im Panel.** Baustein „Wall of Shame (Sätze mit Zählstrichen)“: die
+Sätze als Textfeld, ein Satz pro Zeile (gespeichert als Liste, damit jeder
+Satz einzeln übersetzt und gefunden wird), dazu Wandbild und Schlusssatz.
+
+Tests: `WallOfShameTest`, im Browser-Lauf „Wall of Shame“ (Klicken, Tastatur,
+alle Striche auf der Wand bei 390 und 1400 px, ohne JavaScript nur die Liste),
+im Barrierefreiheits-Lauf `/wall-of-shame` auf Deutsch und Englisch.

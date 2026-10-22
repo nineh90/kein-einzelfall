@@ -284,6 +284,11 @@ class AdminPanelTest extends TestCase
                 'bild' => '/img/oeffentlichkeitsarbeit/petitionen.webp',
                 'gruppen' => [['titel' => 'Untergruppe A', 'einleitung' => 'Einleitung A', 'arten' => ['petition_unterstuetzt']]],
             ]],
+            // KEV-157: Sätze als Liste, im Panel ein Textfeld mit einer Zeile je Satz
+            ['typ' => 'wall_of_shame', 'data' => [
+                'saetze' => ['Erster Wandsatz.', 'Zweiter Wandsatz.'],
+                'bild' => '/img/wall-of-shame/wand.webp', 'schluss' => 'Schlusswandsatz',
+            ]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -315,9 +320,14 @@ class AdminPanelTest extends TestCase
             'ombudsstelle',
             'Wo wir waren.', 'interview',                    // Öffentlichkeitsarbeit
             'petitionen.webp', 'Untergruppe A', 'Einleitung A', 'petition_unterstuetzt',
+            'Erster Wandsatz.', 'Schlusswandsatz', 'wand.webp', // Wall of Shame
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }
+
+        // Die Sätze bleiben eine Liste, kein Textblock mit Zeilenumbrüchen.
+        $wand = $seite->fresh()->blocks()->where('typ', 'wall_of_shame')->first()->data;
+        $this->assertSame(['Erster Wandsatz.', 'Zweiter Wandsatz.'], $wand['saetze']);
     }
 
     /**

@@ -494,6 +494,24 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Kopfzeile:** Mit sechs Bereichen passt die Menüleiste nicht mehr neben
     Logo und Notausgang. Sie steht auf großen Bildschirmen jetzt in einer
     zweiten Zeile darunter, sonst gäbe es überall nur noch das Burger-Menü.
+- [ ] **Wall of Shame (KEV-157), bitte ansehen.** Erste Unterseite unter „Raum
+  für Ungesagtes“ mit Taddis Einleitung (fett wie im Dokument) und allen 145
+  Sätzen. Gebaut nach ihrem Wunsch: ihre rissige Wand mit Papierstapel, jeder
+  Klick auf den Stapel zeigt den nächsten Satz auf einem Zettel und setzt einen
+  Zählstrich, immer vier und ein Querstrich. Mit jedem Satz wird die Wand
+  dunkler und voller, am Ende kommt ihr Satz „Nicht die Betroffenen sollten sich
+  für diese Aussagen schämen müssen!“. Wächst die Liste, werden die Striche
+  kleiner, die Seite nicht länger. Alle Sätze stehen zusätzlich als Liste zum
+  Aufklappen darunter (ohne JavaScript, für Vorlesehilfen, für die Suche).
+  Pflegen: Baustein „Wall of Shame“, ein Satz pro Zeile. Zu klären:
+  - Reihenfolge: wie im Dokument. Soll es von harmlos nach bösartig gehen,
+    reicht es, die Zeilen im Panel umzustellen.
+  - Korrigiert: „Gutachter“ → „Gutachtern“ in der Einleitung.
+  - Ganz oben im Dokument steht ein fetter Satzrest: „Platz hatte, darf hier
+    einen bekommen.“ Der Anfang fehlt. Gehört er auf die Bereichsseite „Raum
+    für Ungesagtes“ (etwa „Was bisher keinen Platz hatte …“)?
+  - Ihr Vorschlag mit Absperrbändern ist nicht umgesetzt, die Zählstriche
+    tragen die Idee. Ihr Bild „Mauer“ ist noch frei.
 - [ ] **Blickwinkel (KEV-158).** Zweite Unterseite unter „Raum für
   Ungesagtes“, gebaut wie Unüberhörbar: Taddis Text, Adresse und letzter Satz
   fett, ihr Bild „3. Blickwinkel“ (Staffelei). Im Menü vor Unüberhörbar, wie

@@ -2401,5 +2401,464 @@
   },
   "*Manchmal zeigt ein Bild mehr von einer Wahrheit, als Worte es je könnten.*": {
     "en": "*Sometimes a picture shows more of a truth than words ever could.*"
+  },
+  "Wall of Shame": {
+    "en": "Wall of Shame"
+  },
+  "Wall of Shame - Kein Einzelfall e.V.": {
+    "en": "Wall of Shame - Kein Einzelfall e.V."
+  },
+  "Wall of Shame: Sätze, die Betroffene von Fachkräften, Behörden, Gerichten und Gutachtern zu hören bekommen haben. Gesammelt von KE!N EINZELFALL e.V.": {
+    "en": "Wall of Shame: sentences that survivors have heard from professionals, authorities, courts and expert assessors. Collected by KE!N EINZELFALL e.V."
+  },
+  "Manche Sätze vergisst man nicht. Nicht, weil sie helfen – sondern weil sie verletzen, entwerten, beschämen oder einfach sprachlos machen …": {
+    "en": "Some sentences you never forget. Not because they help – but because they hurt, devalue, shame or simply leave you speechless …"
+  },
+  "Auf unserer *Wall of Shame* sammeln wir Aussagen, die Betroffene von Fachkräften, Behörden, Gerichten, Gutachtern, Anwälten oder anderen Stellen tatsächlich zu hören bekommen haben.": {
+    "en": "On our *Wall of Shame* we collect statements that survivors have actually heard from professionals, authorities, courts, expert assessors, lawyers or other bodies."
+  },
+  "Wir machen diese Sätze sichtbar, weil sie zeigen, wo Verständnis fehlt, Vorurteile wirken und Worte zusätzliche Verletzungen hinterlassen können.": {
+    "en": "We make these sentences visible because they show where understanding is lacking, where prejudice is at work and where words can cause further harm."
+  },
+  "*Nicht die Betroffenen sollten sich für diese Aussagen schämen müssen!*": {
+    "en": "*It is not the survivors who should have to be ashamed of these statements!*"
+  },
+  "Nicht die Betroffenen sollten sich für diese Aussagen schämen müssen!": {
+    "en": "It is not the survivors who should have to be ashamed of these statements!"
+  },
+  "So schlimm kann es ja nicht gewesen sein, wenn Sie später noch zwei Kinder bekommen haben.": {
+    "en": "It can't have been that bad if you went on to have two children."
+  },
+  "Warum sind Sie denn nicht einfach mit 18 ausgezogen?": {
+    "en": "Why didn't you just move out when you turned 18?"
+  },
+  "Nun muss doch irgendwann auch mal gut sein.": {
+    "en": "Surely it has to be enough at some point."
+  },
+  "Das ist doch schon so lange her.": {
+    "en": "That was such a long time ago."
+  },
+  "Warum haben Sie denn damals nichts gesagt?": {
+    "en": "Why didn't you say anything back then?"
+  },
+  "Warum sind Sie nicht zur Polizei gegangen?": {
+    "en": "Why didn't you go to the police?"
+  },
+  "Wenn das wirklich passiert wäre, hätten Sie doch Anzeige erstattet.": {
+    "en": "If that had really happened, you would have reported it."
+  },
+  "Warum haben Sie so lange geschwiegen?": {
+    "en": "Why did you stay silent for so long?"
+  },
+  "Warum erinnern Sie sich erst jetzt daran?": {
+    "en": "Why are you only remembering this now?"
+  },
+  "Wenn Sie sich nicht an alles erinnern können, woher wollen Sie dann wissen, dass es passiert ist?": {
+    "en": "If you can't remember everything, how can you know it happened?"
+  },
+  "Sie können sich aber erstaunlich gut an Einzelheiten erinnern.": {
+    "en": "You remember the details remarkably well, though."
+  },
+  "Ihre Erinnerung ist sehr lückenhaft.": {
+    "en": "Your memory has a lot of gaps."
+  },
+  "Ihre Erinnerung ist ungewöhnlich detailliert.": {
+    "en": "Your memory is unusually detailed."
+  },
+  "Sie wirken gar nicht traumatisiert.": {
+    "en": "You don't seem traumatised at all."
+  },
+  "Sie wirken sehr gefasst.": {
+    "en": "You seem very composed."
+  },
+  "Sie können darüber doch ganz ruhig sprechen.": {
+    "en": "You can talk about it quite calmly."
+  },
+  "Sie haben während Ihrer Aussage nicht geweint.": {
+    "en": "You didn't cry during your statement."
+  },
+  "Sie haben während Ihrer Aussage sehr viel geweint.": {
+    "en": "You cried a lot during your statement."
+  },
+  "Sie wirken sehr emotional.": {
+    "en": "You seem very emotional."
+  },
+  "Sie wirken auffallend emotionslos.": {
+    "en": "You seem strikingly unemotional."
+  },
+  "Sie lachen ja sogar.": {
+    "en": "You're even laughing."
+  },
+  "Sie sehen gar nicht aus wie jemand, der so etwas erlebt hat.": {
+    "en": "You don't look like someone who went through something like that."
+  },
+  "Dafür funktionieren Sie im Alltag aber noch ziemlich gut.": {
+    "en": "You still function pretty well in everyday life, though."
+  },
+  "Sie können doch arbeiten.": {
+    "en": "But you can work."
+  },
+  "Sie können doch einkaufen gehen.": {
+    "en": "But you can go shopping."
+  },
+  "Sie fahren doch sogar in den Urlaub.": {
+    "en": "You even go on holiday."
+  },
+  "Sie haben doch Freunde.": {
+    "en": "But you have friends."
+  },
+  "Sie führen doch eine Beziehung.": {
+    "en": "But you're in a relationship."
+  },
+  "Sie haben geheiratet – so schlimm können Ihre Beziehungsprobleme also nicht sein.": {
+    "en": "You got married – so your relationship problems can't be that bad."
+  },
+  "Sie haben Kinder bekommen – dann kann die Sexualität ja nicht so beeinträchtigt sein.": {
+    "en": "You had children – so your sexuality can't be that impaired."
+  },
+  "Andere Menschen erleben auch Schlimmes.": {
+    "en": "Other people go through bad things too."
+  },
+  "Jeder hat sein Päckchen zu tragen.": {
+    "en": "Everyone has their cross to bear."
+  },
+  "Man kann sich auch in etwas hineinsteigern.": {
+    "en": "You can also work yourself up about something."
+  },
+  "Sie beschäftigen sich vielleicht einfach zu viel damit.": {
+    "en": "Maybe you just think about it too much."
+  },
+  "Vielleicht sollten Sie versuchen, nach vorne zu schauen.": {
+    "en": "Maybe you should try to look ahead."
+  },
+  "Sie müssen irgendwann lernen loszulassen.": {
+    "en": "At some point you have to learn to let go."
+  },
+  "Vergeben wäre vielleicht ein erster Schritt.": {
+    "en": "Forgiving might be a first step."
+  },
+  "Sie sollten versuchen, mit Ihrer Vergangenheit Frieden zu schließen.": {
+    "en": "You should try to make peace with your past."
+  },
+  "Man kann nicht für alles die Vergangenheit verantwortlich machen.": {
+    "en": "You can't blame the past for everything."
+  },
+  "Irgendwann muss man auch selbst Verantwortung übernehmen.": {
+    "en": "At some point you have to take responsibility yourself."
+  },
+  "Sie sind heute erwachsen.": {
+    "en": "You're an adult now."
+  },
+  "Sie hätten sich ja wehren können.": {
+    "en": "You could have defended yourself."
+  },
+  "Warum haben Sie nicht geschrien?": {
+    "en": "Why didn't you scream?"
+  },
+  "Warum sind Sie nicht weggelaufen?": {
+    "en": "Why didn't you run away?"
+  },
+  "Warum haben Sie den Kontakt nicht abgebrochen?": {
+    "en": "Why didn't you break off contact?"
+  },
+  "Warum sind Sie immer wieder dorthin zurückgegangen?": {
+    "en": "Why did you keep going back there?"
+  },
+  "Warum haben Sie weiterhin mit der Person gesprochen?": {
+    "en": "Why did you keep talking to that person?"
+  },
+  "Warum haben Sie der Person später noch geschrieben?": {
+    "en": "Why did you still write to that person later?"
+  },
+  "Warum haben Sie sich noch mit ihm getroffen?": {
+    "en": "Why did you still meet up with him?"
+  },
+  "Wenn Sie solche Angst hatten, warum sind Sie dann freiwillig wieder hingegangen?": {
+    "en": "If you were so afraid, why did you go back voluntarily?"
+  },
+  "Sie hätten doch Hilfe holen können.": {
+    "en": "You could have got help."
+  },
+  "Es gab doch Lehrer.": {
+    "en": "There were teachers, after all."
+  },
+  "Es gab doch Nachbarn.": {
+    "en": "There were neighbours, after all."
+  },
+  "Sie hätten sich jemandem anvertrauen können.": {
+    "en": "You could have confided in someone."
+  },
+  "Ihre Mutter hätte doch etwas merken müssen.": {
+    "en": "Your mother should have noticed something."
+  },
+  "Das hätte doch irgendjemand bemerken müssen.": {
+    "en": "Surely someone should have noticed."
+  },
+  "Warum hat niemand etwas bemerkt?": {
+    "en": "Why did nobody notice anything?"
+  },
+  "Vielleicht haben Sie die Situation als Kind anders wahrgenommen.": {
+    "en": "Maybe you perceived the situation differently as a child."
+  },
+  "Kinder interpretieren Dinge manchmal falsch.": {
+    "en": "Children sometimes misinterpret things."
+  },
+  "Vielleicht war das gar nicht so gemeint.": {
+    "en": "Maybe it wasn't meant that way."
+  },
+  "Vielleicht war das nur eine unglückliche Situation.": {
+    "en": "Maybe it was just an unfortunate situation."
+  },
+  "Kann es sein, dass Sie heute etwas hineininterpretieren?": {
+    "en": "Could it be that you are reading something into it today?"
+  },
+  "Sind Sie sicher, dass Ihre Therapeutin Ihnen das nicht eingeredet hat?": {
+    "en": "Are you sure your therapist didn't talk you into this?"
+  },
+  "Sie beschäftigen sich in der Therapie sehr viel mit dem Thema. Das kann Erinnerungen verändern.": {
+    "en": "You spend a lot of time on this topic in therapy. That can change memories."
+  },
+  "Sie haben darüber mit anderen Betroffenen gesprochen – das könnte Ihre Erinnerung beeinflusst haben.": {
+    "en": "You talked about it with other survivors – that could have influenced your memory."
+  },
+  "Sie haben viel über Trauma gelesen.": {
+    "en": "You have read a lot about trauma."
+  },
+  "Sie kennen sich auffällig gut mit den Diagnosen aus.": {
+    "en": "You know the diagnoses suspiciously well."
+  },
+  "Sie verwenden sehr viele Fachbegriffe.": {
+    "en": "You use a lot of technical terms."
+  },
+  "Sie wirken gut vorbereitet.": {
+    "en": "You seem well prepared."
+  },
+  "Ihre Aussage wirkt einstudiert.": {
+    "en": "Your statement seems rehearsed."
+  },
+  "Ihre Aussage ist sehr strukturiert.": {
+    "en": "Your statement is very structured."
+  },
+  "Ihre Aussage ist wenig strukturiert.": {
+    "en": "Your statement is not very structured."
+  },
+  "Sie springen sehr stark zwischen den Ereignissen.": {
+    "en": "You jump around a lot between the events."
+  },
+  "Sie erzählen nicht chronologisch.": {
+    "en": "You don't tell it in chronological order."
+  },
+  "Sie können keine genauen Daten nennen.": {
+    "en": "You can't give exact dates."
+  },
+  "Sie können erstaunlich genaue Daten nennen.": {
+    "en": "You can give remarkably exact dates."
+  },
+  "Dafür, dass es so lange her ist, wissen Sie noch ziemlich viel.": {
+    "en": "Considering how long ago it was, you still know quite a lot."
+  },
+  "Dafür, dass es so einschneidend gewesen sein soll, wissen Sie erstaunlich wenig.": {
+    "en": "Considering how drastic it supposedly was, you know remarkably little."
+  },
+  "Es gibt keine objektiven Beweise.": {
+    "en": "There is no objective evidence."
+  },
+  "Es steht Aussage gegen Aussage.": {
+    "en": "It's your word against theirs."
+  },
+  "Wir können nicht ausschließen, dass Sie sich irren.": {
+    "en": "We cannot rule out that you are mistaken."
+  },
+  "Es lässt sich nicht mehr feststellen, was damals tatsächlich passiert ist.": {
+    "en": "It is no longer possible to establish what actually happened back then."
+  },
+  "Die Diagnose beweist nicht, wodurch die Erkrankung entstanden ist.": {
+    "en": "The diagnosis does not prove what caused the illness."
+  },
+  "Eine Traumafolgestörung kann viele Ursachen haben.": {
+    "en": "A trauma-related disorder can have many causes."
+  },
+  "Vielleicht kommen Ihre Beschwerden aus Ihrer Persönlichkeit.": {
+    "en": "Maybe your symptoms come from your personality."
+  },
+  "Sie waren doch schon vorher psychisch auffällig.": {
+    "en": "You already had mental health problems before."
+  },
+  "Sie hatten doch schon vorher Probleme.": {
+    "en": "You already had problems before."
+  },
+  "Ihre familiäre Vorgeschichte ist insgesamt schwierig.": {
+    "en": "Your family history is difficult overall."
+  },
+  "Es gibt mehrere mögliche Ursachen.": {
+    "en": "There are several possible causes."
+  },
+  "Man kann den heutigen Zustand nicht eindeutig diesem Ereignis zuordnen.": {
+    "en": "Your current condition cannot be clearly attributed to this event."
+  },
+  "Sie haben ja auch andere Belastungen erlebt.": {
+    "en": "You have experienced other stresses as well."
+  },
+  "Vielleicht liegt es an Ihrer Beziehung.": {
+    "en": "Maybe it's because of your relationship."
+  },
+  "Vielleicht liegt es an Ihrer Arbeitslosigkeit.": {
+    "en": "Maybe it's because of your unemployment."
+  },
+  "Vielleicht liegt es an Ihren finanziellen Problemen.": {
+    "en": "Maybe it's because of your financial problems."
+  },
+  "Vielleicht liegt es an Ihrer aktuellen Lebenssituation.": {
+    "en": "Maybe it's because of your current life situation."
+  },
+  "Dass Ihre Therapeutin Ihnen glaubt, ist kein Beweis.": {
+    "en": "The fact that your therapist believes you is no proof."
+  },
+  "Therapeuten sind schließlich parteilich.": {
+    "en": "Therapists are biased, after all."
+  },
+  "Ihre behandelnden Ärzte kennen nur Ihre Darstellung.": {
+    "en": "Your doctors only know your account."
+  },
+  "Sie erzählen den Ärzten natürlich Ihre Version.": {
+    "en": "Of course you tell the doctors your version."
+  },
+  "Dass mehrere Behandler dieselbe Diagnose stellen, bedeutet nicht, dass das Ereignis stattgefunden hat.": {
+    "en": "The fact that several practitioners make the same diagnosis does not mean the event took place."
+  },
+  "Warum wollen Sie jetzt nach so vielen Jahren noch eine Entschädigung?": {
+    "en": "Why do you want compensation now, after so many years?"
+  },
+  "Warum ist Ihnen das Geld so wichtig?": {
+    "en": "Why is the money so important to you?"
+  },
+  "Es entsteht der Eindruck eines Versorgungswunsches.": {
+    "en": "There is an impression of a wish to be provided for."
+  },
+  "Ein sekundärer Krankheitsgewinn kann nicht ausgeschlossen werden.": {
+    "en": "A secondary gain from illness cannot be ruled out."
+  },
+  "Vielleicht wollen Sie einfach nicht arbeiten.": {
+    "en": "Maybe you just don't want to work."
+  },
+  "Sie profitieren schließlich auch von Ihrer Erkrankung.": {
+    "en": "After all, you benefit from your illness too."
+  },
+  "Sie haben doch bereits Unterstützung.": {
+    "en": "But you already receive support."
+  },
+  "Was erwarten Sie denn noch vom Staat?": {
+    "en": "What more do you expect from the state?"
+  },
+  "Andere bekommen auch keine Entschädigung.": {
+    "en": "Other people don't get compensation either."
+  },
+  "Sie müssen verstehen, dass wir sehr genau prüfen müssen.": {
+    "en": "You have to understand that we must check very carefully."
+  },
+  "Das Verfahren ist nun einmal belastend.": {
+    "en": "The procedure is simply stressful."
+  },
+  "Wenn Sie ein Verfahren anfangen, müssen Sie damit rechnen, darüber sprechen zu müssen.": {
+    "en": "If you start a procedure, you have to expect to talk about it."
+  },
+  "Sie haben das Verfahren schließlich selbst angestoßen.": {
+    "en": "After all, you started the procedure yourself."
+  },
+  "Dann ziehen Sie den Antrag eben zurück.": {
+    "en": "Then just withdraw the application."
+  },
+  "Wenn Ihnen die Begutachtung zu belastend ist, müssen Sie sie ja nicht machen.": {
+    "en": "If the assessment is too stressful for you, you don't have to do it."
+  },
+  "Ohne Mitwirkung können wir Ihnen eben nicht helfen.": {
+    "en": "Without your cooperation we simply can't help you."
+  },
+  "Dann können wir den Antrag leider nicht bearbeiten.": {
+    "en": "Then unfortunately we cannot process the application."
+  },
+  "Sie müssen da jetzt durch.": {
+    "en": "You just have to get through this now."
+  },
+  "Eine Begutachtung ist für niemanden angenehm.": {
+    "en": "An assessment isn't pleasant for anyone."
+  },
+  "Das sind nun einmal die gesetzlichen Vorgaben.": {
+    "en": "Those are simply the legal requirements."
+  },
+  "Wir behandeln alle Antragsteller gleich.": {
+    "en": "We treat all applicants the same."
+  },
+  "Für eine Sonderbehandlung gibt es keinen Grund.": {
+    "en": "There is no reason for special treatment."
+  },
+  "Sie können nicht erwarten, dass sich das ganze Verfahren nach Ihnen richtet.": {
+    "en": "You can't expect the whole procedure to revolve around you."
+  },
+  "Sie wirken sehr anspruchsvoll.": {
+    "en": "You seem very demanding."
+  },
+  "Sie stellen sehr viele Forderungen.": {
+    "en": "You make a lot of demands."
+  },
+  "Sie beschäftigen sich ungewöhnlich intensiv mit Ihrem Verfahren.": {
+    "en": "You are unusually preoccupied with your procedure."
+  },
+  "Sie schreiben sehr viele Briefe.": {
+    "en": "You write a lot of letters."
+  },
+  "Sie wirken sehr kämpferisch.": {
+    "en": "You seem very combative."
+  },
+  "Sie wirken misstrauisch gegenüber Behörden.": {
+    "en": "You seem distrustful of the authorities."
+  },
+  "Sie scheinen ein Problem mit Autoritäten zu haben.": {
+    "en": "You seem to have a problem with authority."
+  },
+  "Ihre Kritik am Verfahren ist möglicherweise Teil Ihrer psychischen Problematik.": {
+    "en": "Your criticism of the procedure may be part of your mental health problems."
+  },
+  "Dass Sie sich über die Begutachtung aufregen, bestätigt eigentlich die Diagnose.": {
+    "en": "The fact that you are upset about the assessment actually confirms the diagnosis."
+  },
+  "Sie müssen auch akzeptieren können, wenn eine Entscheidung gegen Sie ausfällt.": {
+    "en": "You also have to be able to accept it when a decision goes against you."
+  },
+  "Sie können nicht immer weiter kämpfen.": {
+    "en": "You can't keep fighting forever."
+  },
+  "Vielleicht wäre es besser, die Sache ruhen zu lassen.": {
+    "en": "Maybe it would be better to let the matter rest."
+  },
+  "Ich verstehe ja, dass Sie das belastet, aber …": {
+    "en": "I do understand that this is hard for you, but …"
+  },
+  "Wir wollen hier niemandem etwas unterstellen, aber …": {
+    "en": "We don't want to accuse anyone of anything here, but …"
+  },
+  "Ich stelle ja nur Fragen.": {
+    "en": "I'm only asking questions."
+  },
+  "Bitte beantworten Sie einfach meine Frage.": {
+    "en": "Please just answer my question."
+  },
+  "Das ist für die rechtliche Bewertung nicht relevant.": {
+    "en": "That is not relevant for the legal assessment."
+  },
+  "Darum geht es heute nicht.": {
+    "en": "That's not what this is about today."
+  },
+  "Ihre Gefühle spielen für diese Frage keine Rolle.": {
+    "en": "Your feelings play no role in this question."
+  },
+  "Wir müssen zwischen Ihrem Erleben und den Tatsachen unterscheiden.": {
+    "en": "We have to distinguish between your experience and the facts."
+  },
+  "Versuchen Sie bitte, sachlich zu bleiben.": {
+    "en": "Please try to stay objective."
+  },
+  "Sie müssen sich jetzt ein bisschen zusammenreißen.": {
+    "en": "You need to pull yourself together a bit now."
   }
 }

@@ -101,6 +101,9 @@ class PageBlock extends Model
         // „Öffentlichkeitsarbeit“ im Panel (App\Models\OutreachItem), jeder
         // hat eine eigene Seite.
         'oeffentlichkeitsarbeit' => 'Öffentlichkeitsarbeit (Messen, Petitionen, Presse …)',
+        // KEV-157: Sätze, die man nacheinander liest; jeder setzt einen
+        // Zählstrich an die Wand.
+        'wall_of_shame' => 'Wall of Shame (Sätze mit Zählstrichen)',
     ];
 
     /**
@@ -134,6 +137,7 @@ class PageBlock extends Model
         'partner_logos' => 'wechselnd',
         'speicher_uebersicht' => 'wechselnd',
         'oeffentlichkeitsarbeit' => 'wechselnd',
+        'wall_of_shame' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre

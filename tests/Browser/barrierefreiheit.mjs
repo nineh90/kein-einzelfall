@@ -67,6 +67,8 @@ const SEITEN = [
     ['Glossar', '/glossar'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
     ['Dokumentenliste', '/atteste'],
+    // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).
+    ['Wall of Shame', '/wall-of-shame'],
     ['Fehlerseite', '/diese-seite-gibt-es-nicht'],
 ]
 

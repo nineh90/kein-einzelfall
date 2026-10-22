@@ -635,6 +635,55 @@ console.log('\nKopfzeile mit sechs Bereichen')
     }
 }
 
+// --- Wall of Shame (KEV-157) ----------------------------------------------
+
+console.log('\nWall of Shame')
+{
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/wall-of-shame' })
+        const striche = () => s.locator('[data-wand-striche] line').count()
+        const zaehler = s.locator('[data-wand-zaehler]')
+        const gesamt = await s.locator('[data-wand-liste] li').count()
+
+        pruefe(`${breite}px: Wand ist da, noch kein Strich`, await s.locator('[data-wand]').isVisible() && await striche() === 0)
+
+        await s.locator('[data-wand-stapel]').click()
+        pruefe(`${breite}px: Klick zeigt den ersten Satz und setzt einen Strich`,
+            (await s.locator('[data-wand-satz]').innerText()).startsWith('„So schlimm')
+            // textContent: innerText gäbe die Großbuchstaben aus dem CSS zurück.
+            && await striche() === 1 && (await zaehler.textContent()).trim() === `1 von ${gesamt}`)
+
+        // Weiter mit der Tastatur: Der Fokus bleibt auf dem Stapel.
+        await s.locator('[data-wand-stapel]').focus()
+        for (let i = 0; i < 4; i++) await s.keyboard.press('Enter')
+        pruefe(`${breite}px: fünf Sätze, fünf Striche, Fokus bleibt`, await striche() === 5
+            && await s.evaluate(() => document.activeElement?.hasAttribute('data-wand-stapel')))
+
+        // Alles lesen: Die Striche passen auf die Wand, nichts läuft über.
+        for (let i = 5; i < gesamt; i++) await s.locator('[data-wand-stapel]').click()
+        const passt = await s.evaluate(() => {
+            const wand = document.querySelector('[data-wand]').getBoundingClientRect()
+            const linien = [...document.querySelectorAll('[data-wand-striche] line')].map((l) => l.getBoundingClientRect())
+            return linien.every((r) => r.left >= wand.left - 2 && r.right <= wand.right + 2 && r.top >= wand.top - 2 && r.bottom <= wand.bottom + 2)
+                && document.documentElement.scrollWidth <= window.innerWidth
+        })
+        pruefe(`${breite}px: alle ${gesamt} Striche auf der Wand, nichts läuft über`, await striche() === gesamt && passt)
+
+        await s.locator('[data-wand-stapel]').click()
+        pruefe(`${breite}px: danach der Schluss`, (await s.locator('[data-wand-satz]').innerText()).includes(`alle ${gesamt} Sätze`)
+            && (await s.locator('[data-wand-knopf]').innerText()).trim() === 'Noch einmal von vorn')
+
+        await s.locator('[data-wand-stapel]').click()
+        pruefe(`${breite}px: von vorn`, await striche() === 1)
+        await s.context().close()
+    }
+
+    const ohne = await oeffnen({ js: false, pfad: '/wall-of-shame' })
+    pruefe('ohne JS: keine Wand, aber alle Sätze als Liste', !(await ohne.locator('[data-wand]').isVisible())
+        && await ohne.locator('[data-wand-liste] li').count() > 100)
+    await ohne.context().close()
+}
+
 // --- Suche im Glossar (KEV-153) --------------------------------------------
 
 console.log('\nSuche im Glossar')

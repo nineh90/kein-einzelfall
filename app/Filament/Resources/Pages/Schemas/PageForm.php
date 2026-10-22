@@ -327,11 +327,14 @@ class PageForm
                             // --- Text mit Bild ---
                             Medien::bild('data.bild')
                                 ->label('Bild')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero', 'oeffentlichkeitsarbeit'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero', 'oeffentlichkeitsarbeit', 'wall_of_shame'], true))
                                 ->helperText(fn ($get) => match ($get('typ')) {
                                     'hero' => 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
                                         .'(ruhige Wand). Leer lassen zeigt die helle Fläche.',
                                     'oeffentlichkeitsarbeit' => 'Steht neben der Einleitung. Kann leer bleiben.',
+                                    'wall_of_shame' => 'Die Wand, auf die die Striche kommen. Am besten eine '
+                                        .'ruhige Wand mit Papierstapel unten in der Mitte: Darauf liegt der Knopf. '
+                                        .'Leer lassen nimmt Taddis Wand.',
                                     default => 'Leer lassen zeigt eine Platzhalterfläche.',
                                 }),
 
@@ -347,6 +350,31 @@ class PageForm
                                 ->default('rechts')
                                 ->native(false)
                                 ->visible(fn ($get) => $get('typ') === 'text_media'),
+
+                            // --- Wall of Shame (KEV-157) ---
+                            // Ein Textfeld statt einer Liste mit Einzelfeldern:
+                            // Bei 145 Sätzen wären das 145 Kästen zum Aufklappen.
+                            // Gespeichert wird trotzdem eine Liste, damit jeder
+                            // Satz einzeln übersetzt und gesucht werden kann.
+                            Textarea::make('data.saetze')
+                                ->label('Sätze')
+                                ->rows(16)
+                                ->required(fn ($get) => $get('typ') === 'wall_of_shame')
+                                ->visible(fn ($get) => $get('typ') === 'wall_of_shame')
+                                ->formatStateUsing(fn ($state) => is_array($state) ? implode("\n", $state) : $state)
+                                ->dehydrateStateUsing(fn ($state) => is_string($state)
+                                    ? array_values(array_filter(array_map('trim', preg_split('/\R/u', $state))))
+                                    : $state)
+                                ->helperText('Ein Satz pro Zeile, ohne Anführungszeichen (die setzt die Seite). '
+                                    .'Gelesen wird von oben nach unten. Je mehr Sätze, desto kleiner die '
+                                    .'Striche, damit alle auf die Wand passen.'),
+
+                            Textarea::make('data.schluss')
+                                ->label('Schlusssatz')
+                                ->rows(2)
+                                ->visible(fn ($get) => $get('typ') === 'wall_of_shame')
+                                ->helperText('Steht fett auf dem Zettel, wenn alle Sätze gelesen sind, und unter '
+                                    .'der Liste. Kann leer bleiben.'),
 
                             // --- Ablauf in Schritten ---
                             Repeater::make('data.schritte')
