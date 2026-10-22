@@ -488,10 +488,9 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Menschen miteinander zu verbinden.', $html);
         $this->assertStringNotContainsString('*Veränderung', $html);
 
-        // Mit Text darf sie in die Suchmaschinen; das Bild bleibt der Platzhalter.
+        // Mit Text darf sie in die Suchmaschinen. Bild seit KEV-149 von Taddi.
         $this->assertStringNotContainsString('noindex', $html);
         $this->assertStringContainsString('Ehrenamtsmessen, Petitionen, Presseartikel und Interviews', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp', $html);
 
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
         $this->assertSame(['text', 'oeffentlichkeitsarbeit'], $seite->blocks()->pluck('typ')->all());
@@ -573,6 +572,36 @@ class SeitengestaltungTest extends TestCase
 
         // Nur dort: Andere Seiten haben ihr Motiv im Bild.
         $this->assertStringNotContainsString('data-kopf-logo', $this->get('/spenden')->getContent());
+    }
+
+    /**
+     * KEV-149: Taddis Megafon statt Platzhalter, auf 50 % ausgerichtet (unten
+     * fehlte ab 1440 px der obere Rand des Trichters).
+     */
+    public function test_oeffentlichkeitsarbeit_hat_eigenes_titelbild(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/oeffentlichkeitsarbeit.webp?v=', $html);
+        $this->assertStringContainsString('/img/titelbilder/oeffentlichkeitsarbeit-1000.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('object-position: 0% 50%', $html);
+        $this->assertNotContains('oeffentlichkeitsarbeit', \App\Support\Titelbilder::PLATZHALTER_SEITEN);
+    }
+
+    public function test_migration_tauscht_nur_den_platzhalter_bei_oeffentlichkeitsarbeit(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $migration = require database_path('migrations/2026_10_22_100000_oeffentlichkeitsarbeit_titelbild.php');
+
+        $seite->update(['titelbild' => \App\Support\Titelbilder::PLATZHALTER]);
+        $migration->up();
+        $this->assertSame('/img/titelbilder/oeffentlichkeitsarbeit.webp', $seite->fresh()->titelbild);
+
+        // Im Panel gepflegt: bleibt.
+        $seite->update(['titelbild' => '/storage/medien/bilder/2026/10/eigenes-abc123.webp']);
+        $migration->up();
+        $this->assertSame('/storage/medien/bilder/2026/10/eigenes-abc123.webp', $seite->fresh()->titelbild);
     }
 
     /** KEV-77: Taddis Bild statt Platzhalter, Motiv unten wie üblich. */

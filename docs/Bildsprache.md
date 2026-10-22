@@ -89,6 +89,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Publikationen | Broschürenstapel und Lesebrille |
 | Veranstaltungen | Becher, Vase mit Trockenblumen, Tisch |
 | Gruppen & Veranstaltungen | Laptop mit Videotreffen (neun Gesichter) auf rundem Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-127, statt Platzhalter), ausgerichtet auf 40 %: unten ausgerichtet fehlte ab 1440 px die obere Reihe der Gesichter |
+| Öffentlichkeitsarbeit | Megafon (grün-weiß) auf Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-149, statt Platzhalter), ausgerichtet auf 50 %: unten ausgerichtet fehlte ab 1440 px der obere Rand des Trichters |
 | Projekte | Holzhaus-Modell, Papier, Bleistift |
 | KE!N EINZELFALL im Dialog | Stuhl mit Beistelltisch an der Wand |
 | Soziales Entschädigungsrecht | Papierstapel mit Füller |

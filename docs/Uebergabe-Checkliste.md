@@ -359,8 +359,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   hat eine Übersichtsseite mit Taddis Text. Neu im Menü: **Öffentlichkeitsarbeit**
   und **Rückblick**. Beide sind veröffentlicht, aber noch ohne Text und für
   Suchmaschinen gesperrt (`noindex`). Wenn der Text da ist, im Panel den Haken
-  „noindex“ entfernen. Alle drei tragen vorerst den Platzhalter, eigene Bilder
-  fehlen. Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
+  „noindex“ entfernen. Eigene Bilder von Taddi haben inzwischen Gruppen &
+  Veranstaltungen (KEV-127) und Öffentlichkeitsarbeit (KEV-149), der Rückblick
+  trägt noch den Platzhalter. Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
   Menü bleiben? Taddis Gliederung nennt sie nicht, sie stehen vorerst dahinter.
 - [ ] **Öffentlichkeitsarbeit (KEV-129).** Taddis Text steht, die beiden Sätze
   in Anführungszeichen fett, die Seite ist jetzt für Suchmaschinen offen.

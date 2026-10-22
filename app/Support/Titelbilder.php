@@ -72,6 +72,9 @@ class Titelbilder
         // KEV-127: Bild von Taddi statt Platzhalter, Laptop mit Videotreffen.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'gruppen-und-veranstaltungen' => null,
+        // KEV-149: Bild von Taddi statt Platzhalter, Megafon auf Holztisch.
+        // Ohne Unterzeile, der Verein hat keine geschickt.
+        'oeffentlichkeitsarbeit' => null,
     ];
 
     /**
@@ -102,9 +105,9 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
-        // KEV-72, bis Taddi Bilder schickt (Gruppen & Veranstaltungen hat
-        // seit KEV-127 eins)
-        'oeffentlichkeitsarbeit', 'rueckblick',
+        // KEV-72, bis Taddi ein Bild schickt (Gruppen & Veranstaltungen hat
+        // seit KEV-127 eins, Öffentlichkeitsarbeit seit KEV-149)
+        'rueckblick',
         // KEV-103, bis Taddi ein Bild schickt
         'taetigkeits-und-jahresberichte',
         // KEV-97, bis Taddi Bilder schickt
@@ -141,6 +144,9 @@ class Titelbilder
      *  - Landesstellen: Deutschlandkarte mit Holzkugeln, fast so hoch wie
      *    das Bild (KEV-78). Unten ausgerichtet blieb auf breiten
      *    Bildschirmen nur Süddeutschland übrig.
+     *  - Öffentlichkeitsarbeit: Megafon auf Holztisch, Trichter zwischen 26
+     *    und 74 % der Höhe (KEV-149). Unten ausgerichtet fehlte ab 1440 px
+     *    der obere Rand des Trichters, bei 2560 px der halbe Trichter.
      *
      * @var array<string, int>
      */
@@ -152,6 +158,7 @@ class Titelbilder
         self::ORDNER.'/landesstellen.webp' => 50,
         self::ORDNER.'/ordner-mit-logo.webp' => 42,
         self::ORDNER.'/gruppen-und-veranstaltungen.webp' => 40,
+        self::ORDNER.'/oeffentlichkeitsarbeit.webp' => 50,
     ];
 
     /**
