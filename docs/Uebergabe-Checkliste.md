@@ -404,6 +404,21 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     zeigte sonst auf nichts. Stattdessen ein Link zum Beitrag bei Trude Kuh
     TELEVISION; dessen Datum (09.12.2025) steht als Datum, Taddi nannte keins.
     Für das Video fehlt noch ein Feld (eigene Datei oder Zwei-Klick-Einbettung).
+- [ ] **Petitionen auf der Öffentlichkeitsarbeit (KEV-135).** Abschnitt
+  „Petitionen“ zwischen Messen und Presse, Taddis Einleitung mit ihrem Bild
+  (Unterschriftenliste) daneben. Darunter „Initiierte Petitionen“ mit der
+  eigenen Petition auf openPetition und „Unterstützte Petitionen“ mit der von
+  Tour41, je mit eigener Seite. Zu klären:
+  - Überschriften: „Initiierte Petitionen“ (im Ticket „Initiitiert“) und
+    „Unterstützte Petitionen“ in der Mehrzahl wie die erste Gruppe (im Ticket
+    „Unterstützte Petition“).
+  - **Titel der Tour41-Petition** ist von uns, aus der Petition übernommen:
+    „‚Fonds Sexueller Missbrauch‘ muss erhalten bleiben!“. Der Link führt wie
+    bei Taddi zu Tour41 (Neuigkeiten und Weg zur Petition), nicht direkt zu
+    innn.it. Ob dort noch gesammelt wird, ließ sich nicht prüfen.
+  - Eigene Petition: Datum 05.10.2026 ist der Start auf openPetition (läuft
+    bis 04.04.2027). Knopf „Petition unterschreiben“ ist von uns. Nach dem
+    Ende bitte im Panel umbenennen oder den Link entfernen.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

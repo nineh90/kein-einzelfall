@@ -248,8 +248,40 @@ class PageBlock extends Model
      */
     public function zeigtNichts(): bool
     {
-        return $this->typ === 'oeffentlichkeitsarbeit'
-            && ! OutreachItem::veroeffentlicht()->vonArt(self::oeffentlichkeitsarbeitArten($this->data ?? []))->exists();
+        if ($this->typ !== 'oeffentlichkeitsarbeit') {
+            return false;
+        }
+
+        $arten = collect(self::oeffentlichkeitsarbeitGruppen($this->data ?? []))->pluck('arten')->flatten()->unique()->all();
+
+        return ! OutreachItem::veroeffentlicht()->vonArt($arten)->exists();
+    }
+
+    /**
+     * Die Gruppen eines Abschnitts „Öffentlichkeitsarbeit“: seit KEV-135 die
+     * gepflegten Untergruppen (Petitionen: „Initiierte“ und „Unterstützte“),
+     * sonst eine Gruppe ohne eigene Überschrift aus den Arten des Abschnitts.
+     *
+     * @param  array<string, mixed>  $data
+     * @return list<array{titel: ?string, einleitung: ?string, arten: list<string>}>
+     */
+    public static function oeffentlichkeitsarbeitGruppen(array $data): array
+    {
+        $gruppen = collect($data['gruppen'] ?? [])
+            ->filter(fn ($g) => is_array($g) && filled($g['arten'] ?? null))
+            ->map(fn ($g) => [
+                'titel' => $g['titel'] ?? null,
+                'einleitung' => $g['einleitung'] ?? null,
+                'arten' => array_values((array) $g['arten']),
+            ])
+            ->values()
+            ->all();
+
+        return $gruppen ?: [[
+            'titel' => null,
+            'einleitung' => null,
+            'arten' => self::oeffentlichkeitsarbeitArten($data),
+        ]];
     }
 
     /**

@@ -514,9 +514,10 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('noindex', $html);
         $this->assertStringContainsString('Ehrenamtsmessen, Petitionen, Presseartikel und Interviews', $html);
 
-        // Darunter die Abschnitte Messen (KEV-134) und Presse (KEV-136)
+        // Darunter die Abschnitte Messen (KEV-134), Petitionen (KEV-135) und Presse (KEV-136)
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
-        $this->assertSame(['text', 'oeffentlichkeitsarbeit', 'oeffentlichkeitsarbeit'], $seite->blocks()->pluck('typ')->all());
+        $this->assertSame(['text', 'oeffentlichkeitsarbeit', 'oeffentlichkeitsarbeit', 'oeffentlichkeitsarbeit'],
+            $seite->blocks()->orderBy('position')->pluck('typ')->all());
     }
 
     public function test_migration_fuellt_nur_die_leere_oeffentlichkeitsarbeit(): void

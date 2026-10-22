@@ -281,6 +281,8 @@ class AdminPanelTest extends TestCase
             // KEV-134: Abschnitt der Öffentlichkeitsarbeit
             ['typ' => 'oeffentlichkeitsarbeit', 'data' => [
                 'titel' => 'Presse', 'einleitung' => 'Wo wir waren.', 'arten' => ['presse', 'interview'],
+                'bild' => '/img/oeffentlichkeitsarbeit/petitionen.webp',
+                'gruppen' => [['titel' => 'Untergruppe A', 'einleitung' => 'Einleitung A', 'arten' => ['petition_unterstuetzt']]],
             ]],
         ];
 
@@ -312,6 +314,7 @@ class AdminPanelTest extends TestCase
             'Beschwerdeabsatz',
             'ombudsstelle',
             'Wo wir waren.', 'interview',                    // Öffentlichkeitsarbeit
+            'petitionen.webp', 'Untergruppe A', 'Einleitung A', 'petition_unterstuetzt',
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }

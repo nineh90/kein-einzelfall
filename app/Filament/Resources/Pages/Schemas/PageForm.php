@@ -327,15 +327,17 @@ class PageForm
                             // --- Text mit Bild ---
                             Medien::bild('data.bild')
                                 ->label('Bild')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero'], true))
-                                ->helperText(fn ($get) => $get('typ') === 'hero'
-                                    ? 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
-                                        .'(ruhige Wand). Leer lassen zeigt die helle Fläche.'
-                                    : 'Leer lassen zeigt eine Platzhalterfläche.'),
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero', 'oeffentlichkeitsarbeit'], true))
+                                ->helperText(fn ($get) => match ($get('typ')) {
+                                    'hero' => 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
+                                        .'(ruhige Wand). Leer lassen zeigt die helle Fläche.',
+                                    'oeffentlichkeitsarbeit' => 'Steht neben der Einleitung. Kann leer bleiben.',
+                                    default => 'Leer lassen zeigt eine Platzhalterfläche.',
+                                }),
 
                             TextInput::make('data.bild_alt')
                                 ->label('Bildbeschreibung')
-                                ->visible(fn ($get) => $get('typ') === 'text_media')
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'oeffentlichkeitsarbeit'], true))
                                 ->helperText('Was auf dem Bild zu sehen ist — wird Menschen vorgelesen, '
                                     .'die es nicht sehen können. Bei rein schmückenden Bildern leer lassen.'),
 
@@ -623,13 +625,35 @@ class PageForm
                                 ->multiple()
                                 ->default(['messe'])
                                 ->native(false)
-                                ->required(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
+                                // Mit Untergruppen bestimmen die ihre Arten selbst.
+                                ->required(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit' && blank($get('data.gruppen')))
                                 ->visible(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
                                 ->helperText('Eine oder mehrere Arten, z. B. für „Presse“ Presseartikel '
                                     .'und Interviews. Die Einträge selbst (Messen, Petitionen, Presse …) legst du '
                                     .'unter „Öffentlichkeitsarbeit“ an, mit Text und Fotos. Hier stehen sie '
                                     .'als kleine Karten, die neuesten zuerst. Gibt es noch keinen, bleibt '
                                     .'der Abschnitt unsichtbar. In der Einleitung wird jede Zeile ein Absatz.'),
+
+                            // KEV-135: Untergruppen, z. B. bei Petitionen „Initiierte“
+                            // und „Unterstützte“, je mit Überschrift und Einleitung.
+                            Repeater::make('data.gruppen')
+                                ->label('Untergruppen')
+                                ->addActionLabel('Untergruppe hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'oeffentlichkeitsarbeit')
+                                ->collapsible()
+                                ->defaultItems(0)
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->helperText('Kann leer bleiben. Mit Untergruppen steht unter der Überschrift '
+                                    .'des Abschnitts je Gruppe eine eigene Überschrift mit Einleitung und ihren '
+                                    .'Karten, z. B. „Initiierte Petitionen“ und „Unterstützte Petitionen“. '
+                                    .'„Welche Einträge“ oben gilt dann nicht.')
+                                ->schema([
+                                    TextInput::make('titel')->label('Überschrift')->required(),
+                                    Textarea::make('einleitung')->label('Einleitung')->rows(3)
+                                        ->helperText('Jede Zeile wird ein Absatz. Kann leer bleiben.'),
+                                    Select::make('arten')->label('Welche Einträge')
+                                        ->options(OutreachItem::ARTEN)->multiple()->required()->native(false),
+                                ]),
 
                             // --- Vorstand und Team ---
                             // Zieht die Personen aus der Verwaltung „Vorstand & Team“.

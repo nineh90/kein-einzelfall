@@ -99,7 +99,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $neu(['slug' => 'messe-berlin-2026', 'titel' => 'Messe Berlin', 'datum' => '2026-04-25']);
         $neu(['slug' => 'messe-ohne-datum', 'titel' => 'Messe ohne Datum']);
         $neu(['slug' => 'messe-luebeck-2026', 'titel' => 'Messe Lübeck', 'datum' => '2026-09-06']);
-        $neu(['slug' => 'eine-petition', 'titel' => 'Eine Petition', 'art' => 'petition']);
+        $neu(['slug' => 'eine-aktion', 'titel' => 'Eine Aktion', 'art' => 'aktion']);
 
         $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
 
@@ -109,9 +109,9 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->assertNotContains(false, $stellen);
         $this->assertSame($stellen, collect($stellen)->sort()->values()->all());
 
-        // Petitionen stehen nicht unter „Messen“, einen Abschnitt dafür gibt es noch nicht
-        $this->assertStringNotContainsString('Eine Petition', $html);
-        $this->get('/oeffentlichkeitsarbeit/eine-petition')->assertOk();
+        // Aktionen stehen nicht unter „Messen“, einen Abschnitt dafür gibt es noch nicht
+        $this->assertStringNotContainsString('Eine Aktion', $html);
+        $this->get('/oeffentlichkeitsarbeit/eine-aktion')->assertOk();
     }
 
     public function test_migration_legt_bayreuth_nur_einmal_an(): void
@@ -211,7 +211,7 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $this->assertSame(['titel' => 'Messen', 'arten' => ['messe']], $block->data);
         $this->assertFalse($block->zeigtNichts());
 
-        $block->update(['data' => ['titel' => 'Petitionen', 'arten' => ['petition']]]);
+        $block->update(['data' => ['titel' => 'Aktionen', 'arten' => ['aktion']]]);
         $this->assertTrue($block->fresh()->zeigtNichts());
     }
 
@@ -289,8 +289,8 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $migration->up();
 
         $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
-        $titel = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->map(fn ($b) => $b->data['titel']);
-        $this->assertSame(['Messen', 'Presse'], $titel->all());
+        $titel = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()->map(fn ($b) => $b->data['titel']);
+        $this->assertSame(['Messen', 'Petitionen', 'Presse'], $titel->all());
         $this->assertSame(1, OutreachItem::where('slug', 'stern-fonds-sexueller-missbrauch-2025')->count());
         $this->assertSame(1, OutreachItem::where('slug', 'besuch-bei-trude-kuh-2025')->count());
     }
@@ -321,10 +321,21 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->call('save')
             ->assertHasNoFormErrors();
 
-        $arten = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->map(fn ($b) => $b->data['arten']);
-        $this->assertSame([['messe'], ['presse', 'interview']], $arten->all());
+        $abschnitte = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()
+            ->mapWithKeys(fn ($b) => [$b->data['titel'] => \App\Models\PageBlock::oeffentlichkeitsarbeitGruppen($b->data)]);
+        $this->assertSame([['messe']], array_column($abschnitte['Messen'], 'arten'));
+        $this->assertSame([['petition'], ['petition_unterstuetzt']], array_column($abschnitte['Petitionen'], 'arten'));
+        $this->assertSame([['presse', 'interview']], array_column($abschnitte['Presse'], 'arten'));
 
-        $this->get('/oeffentlichkeitsarbeit')->assertSee('id="oa-messen"', false)->assertSee('id="oa-presse"', false);
+        // Bild und Untergruppen der Petitionen überstehen das Speichern
+        $petitionen = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()->firstWhere('data.titel', 'Petitionen');
+        $this->assertSame('/img/oeffentlichkeitsarbeit/petitionen.webp', $petitionen->data['bild']);
+        $this->assertSame(['Initiierte Petitionen', 'Unterstützte Petitionen'], array_column($petitionen->data['gruppen'], 'titel'));
+
+        $this->get('/oeffentlichkeitsarbeit')
+            ->assertSee('id="oa-messen"', false)
+            ->assertSee('id="oa-petitionen"', false)
+            ->assertSee('id="oa-presse"', false);
     }
 
     /** Auf dem Server steht „Messen“ noch mit `art: messe` (KEV-134). */
@@ -341,5 +352,100 @@ class OeffentlichkeitsarbeitTest extends TestCase
 
         $this->assertSame(['titel' => 'Messen', 'arten' => ['messe']], $block->fresh()->data);
         $this->get('/oeffentlichkeitsarbeit')->assertSee('id="oa-messen"', false)->assertSee('id="oa-presse"', false);
+    }
+
+    /**
+     * KEV-135: Abschnitt „Petitionen“ zwischen Messen und Presse, mit Taddis
+     * Bild neben der Einleitung und zwei Untergruppen (h3, Karten h4).
+     */
+    public function test_petitionen_abschnitt(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+
+        $messen = strpos($html, 'id="oa-messen"');
+        $petitionen = strpos($html, 'id="oa-petitionen"');
+        $presse = strpos($html, 'id="oa-presse"');
+        $this->assertTrue($messen < $petitionen && $petitionen < $presse);
+
+        $abschnitt = substr($html, $petitionen, $presse - $petitionen);
+        $this->assertStringContainsString('<p>Deine Stimme zählt – gemeinsam KE!N EINZELFALL.</p>', $abschnitt);
+        $this->assertMatchesRegularExpression('#<img src="/img/oeffentlichkeitsarbeit/petitionen\.webp\?v=[^"]+" alt=""#', $abschnitt);
+
+        $initiiert = strpos($abschnitt, 'id="oa-initiierte-petitionen"');
+        $unterstuetzt = strpos($abschnitt, 'id="oa-unterstutzte-petitionen"');
+        $this->assertNotFalse($initiiert);
+        $this->assertNotFalse($unterstuetzt);
+        $this->assertMatchesRegularExpression('#<h3 id="oa-initiierte-petitionen"[^>]*>Initiierte Petitionen</h3>#', $abschnitt);
+
+        // Jede Petition in ihrer Gruppe, als h4
+        $this->assertGreaterThan($initiiert, strpos($abschnitt, 'Erst Versorgung sichern – dann Pflegeleistungen verändern!'));
+        $this->assertLessThan($unterstuetzt, strpos($abschnitt, 'Erst Versorgung sichern – dann Pflegeleistungen verändern!'));
+        $this->assertGreaterThan($unterstuetzt, strpos($abschnitt, 'Tour41 e. V.'));
+        $this->assertStringContainsString('<h4 class="mt-1 font-display', $abschnitt);
+
+        // Eine Art je Gruppe: kein Schild
+        $this->assertStringNotContainsString('>Eigene Petition</span>', $abschnitt);
+    }
+
+    public function test_seiten_der_petitionen(): void
+    {
+        $this->get('/oeffentlichkeitsarbeit/petition-erst-versorgung-sichern')->assertOk()
+            ->assertSee('Eigene Petition')
+            ->assertSee('5. Oktober 2026')
+            ->assertSee('href="https://www.openpetition.de/petition/online/erst-versorgung-sichern-dann-pflegeleistungen-veraendern"', false)
+            ->assertSee('Petition unterschreiben');
+
+        $this->get('/oeffentlichkeitsarbeit/petition-tour41-fonds-sexueller-missbrauch')->assertOk()
+            ->assertSee('Unterstützte Petition')
+            ->assertSee('Die Petition des Tour41 e. V. setzt sich für den Erhalt')
+            ->assertSee('href="https://tour41.net/aktiv/aktuelle-petition-updates/"', false)
+            ->assertSee('Zur Petition bei Tour41');
+    }
+
+    public function test_migration_petitionen_nur_einmal_und_hinter_messen(): void
+    {
+        $seite = Page::where('slug', 'oeffentlichkeitsarbeit')->where('locale', 'de')->firstOrFail();
+        $migration = require database_path('migrations/2026_10_22_140000_oeffentlichkeitsarbeit_petitionen.php');
+        $titel = fn () => $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->orderBy('position')->get()
+            ->map(fn ($b) => $b->data['titel'])->all();
+
+        $migration->up();
+        $this->assertSame(['Messen', 'Petitionen', 'Presse'], $titel());
+        $this->assertSame(1, OutreachItem::where('slug', 'petition-erst-versorgung-sichern')->count());
+
+        // Ohne „Messen“ kommt der Abschnitt ans Ende
+        $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
+            ->filter(fn ($b) => in_array($b->data['titel'], ['Messen', 'Petitionen'], true))->each->delete();
+        $migration->up();
+        $this->assertSame(['Presse', 'Petitionen'], $titel());
+    }
+
+    public function test_petitionen_auf_englisch(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        $this->get('/en/oeffentlichkeitsarbeit')->assertOk()
+            ->assertSee('Petitions')
+            ->assertSee('Your voice counts – together KE!N EINZELFALL.')
+            ->assertSee('Petitions we started')
+            ->assertSee('Petitions we support')
+            ->assertSee('Secure care first – then change care benefits!');
+
+        $this->get('/en/oeffentlichkeitsarbeit/petition-tour41-fonds-sexueller-missbrauch')->assertOk()
+            ->assertSee('Supported petition')
+            ->assertSee('must be preserved');
+    }
+
+    public function test_gruppen_ohne_eintraege_zeigen_nichts(): void
+    {
+        $leer = new \App\Models\PageBlock(['typ' => 'oeffentlichkeitsarbeit', 'data' => [
+            'titel' => 'Leer', 'gruppen' => [['titel' => 'A', 'arten' => ['aktion']], ['titel' => 'B', 'arten' => ['veranstaltung']]],
+        ]]);
+        $this->assertTrue($leer->zeigtNichts());
+
+        $halb = new \App\Models\PageBlock(['typ' => 'oeffentlichkeitsarbeit', 'data' => [
+            'titel' => 'Halb', 'gruppen' => [['titel' => 'A', 'arten' => ['aktion']], ['titel' => 'B', 'arten' => ['petition']]],
+        ]]);
+        $this->assertFalse($halb->zeigtNichts());
     }
 }

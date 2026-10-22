@@ -2141,6 +2141,17 @@ und der Abschnitt heißt „Messen“. Deshalb seit KEV-134 wie bei den Gruppen:
   (`PageBlock::oeffentlichkeitsarbeitArten`). Die Einleitung eines Abschnitts
   ist zeilenweise in Absätze geteilt, mit `*fett*` und E-Mail-Adressen als Link.
 - Feld „Ort oder Medium“: bei Messen der Ort, bei Presse das Medium („stern“).
+- **Untergruppen und Bild (KEV-135):** Ein Abschnitt kann `data.gruppen`
+  haben, je mit Überschrift (h3, Karten dann h4), Einleitung und Arten. So
+  stehen unter „Petitionen“ die „Initiierten“ (Art „Eigene Petition“) und die
+  „Unterstützten“ (Art „Unterstützte Petition“). Ohne Untergruppen gilt
+  `data.arten` wie bisher. Gruppen ohne Eintrag fallen weg, ganz ohne Eintrag
+  der ganze Abschnitt (`PageBlock::oeffentlichkeitsarbeitGruppen`). Optional
+  `data.bild` (Upload) neben der Einleitung, ab „lg“ zweispaltig. Neue
+  Abschnitte an einer bestimmten Stelle per `abschnittEinfuegen()`.
+- Stolperstein: In einer Blade-Datei kein `@php(...)` vor einem
+  `@php … @endphp`-Block, sonst liest Blade beides als einen Block (Fehler
+  „unexpected endforeach“).
 - Nebenbei: Der alte Baustein nutzte im Panel dasselbe Feld `data.eintraege`
   wie „Fragen und Antworten“. Mit seinem Wegfall ist das erledigt.
 

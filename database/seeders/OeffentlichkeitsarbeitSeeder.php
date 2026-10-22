@@ -158,6 +158,79 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
         'link_text' => 'Zum Beitrag bei Trude Kuh',
     ];
 
+    /**
+     * Abschnitt „Petitionen“ (KEV-135), Text von Taddi, mit ihrem Bild (Unter-
+     * schriftenliste) neben der Einleitung. Zwei Untergruppen wie bei ihr:
+     * selbst angestoßene und unterstützte Petitionen. „Initiierte“ statt
+     * „Initiitiert“, „Unterstützte Petitionen“ in der Mehrzahl wie die erste
+     * Gruppe. Zwischen Messen und Presse, wie in Taddis Gliederung.
+     */
+    public const PETITIONEN = [
+        'titel' => 'Petitionen',
+        'einleitung' => "Deine Stimme zählt – gemeinsam KE!N EINZELFALL.\n"
+            ."Mit unseren Petitionen machen wir auf Missstände aufmerksam, geben wichtigen Anliegen mehr Gewicht "
+            ."und setzen uns für Veränderung ein.\n"
+            ."Wenn Du unsere Haltung teilst, werde mit Deiner Unterschrift Teil einer gemeinsamen Stimme für Veränderung.",
+        'bild' => '/img/oeffentlichkeitsarbeit/petitionen.webp',
+        'gruppen' => [
+            [
+                'titel' => 'Initiierte Petitionen',
+                'einleitung' => 'Manchmal reicht es nicht, auf Veränderung zu hoffen – manchmal muss man sie selbst '
+                    .'anstoßen. Hier findest Du die Petitionen, die wir als KE!N EINZELFALL e. V. selbst auf den Weg '
+                    .'gebracht haben.',
+                'arten' => ['petition'],
+            ],
+            [
+                'titel' => 'Unterstützte Petitionen',
+                'einleitung' => 'Wir müssen das Rad nicht immer neu erfinden. Hier findest Du Petitionen anderer, '
+                    .'deren Anliegen wir teilen und denen wir gerne unsere Stimme geben.',
+                'arten' => ['petition_unterstuetzt'],
+            ],
+        ],
+    ];
+
+    /**
+     * Eigene Petition auf openPetition (KEV-135), Text von Taddi. Titel mit
+     * „!“ wie auf openPetition; Datum ist der Start dort (05.10.2026, läuft
+     * bis 04.04.2027, an den Bundestag).
+     */
+    public const PETITION_VERSORGUNG = [
+        'slug' => 'petition-erst-versorgung-sichern',
+        'art' => 'petition',
+        'titel' => 'Erst Versorgung sichern – dann Pflegeleistungen verändern!',
+        'datum' => '2026-10-05',
+        'ort' => 'openPetition',
+        'beschreibung' => '<p>Mit dieser Petition setzen wir uns dafür ein, dass Veränderungen in der Pflege nicht '
+            .'zulasten der Menschen gehen, die auf Unterstützung angewiesen sind. Bevor Leistungen verändert oder '
+            .'eingeschränkt werden, muss eine verlässliche und bedarfsgerechte Versorgung sichergestellt sein.</p>'
+            .'<p>Wenn Du diese Forderung teilst, freuen wir uns, wenn Du die Petition mit Deiner Unterschrift '
+            .'unterstützt.</p>',
+        'link_url' => 'https://www.openpetition.de/petition/online/erst-versorgung-sichern-dann-pflegeleistungen-veraendern',
+        'link_text' => 'Petition unterschreiben',
+    ];
+
+    /**
+     * Petition des Tour41 e.V. zum Fonds Sexueller Missbrauch (KEV-135),
+     * Text von Taddi. Den Titel nannte sie nicht, er ist der der Petition
+     * („Fonds sexueller Missbrauch“ muss erhalten bleiben!, innn.it). Ohne
+     * Datum: Der Start steht nirgends. Link wie bei Taddi auf die Seite von
+     * Tour41 mit den Neuigkeiten und dem Weg zur Petition.
+     */
+    public const PETITION_TOUR41 = [
+        'slug' => 'petition-tour41-fonds-sexueller-missbrauch',
+        'art' => 'petition_unterstuetzt',
+        'titel' => '„Fonds Sexueller Missbrauch“ muss erhalten bleiben!',
+        'ort' => 'Tour41 e. V.',
+        'beschreibung' => '<p>Die Petition des Tour41 e. V. setzt sich für den Erhalt des Fonds sexueller Missbrauch '
+            .'(FSM) ein. Der Fonds bietet Betroffenen sexuellen Missbrauchs im familiären Bereich niedrigschwellige '
+            .'Unterstützung in Form von Sachleistungen und darf nach Auffassung des Vereins nicht Sparmaßnahmen zum '
+            .'Opfer fallen.</p>'
+            .'<p>Dieses Anliegen unterstützen wir als KE!N EINZELFALL e.V. ausdrücklich und freuen uns über jede '
+            .'weitere Unterschrift.</p>',
+        'link_url' => 'https://tour41.net/aktiv/aktuelle-petition-updates/',
+        'link_text' => 'Zur Petition bei Tour41',
+    ];
+
     public const META_DESCRIPTION = 'Öffentlichkeitsarbeit von KE!N EINZELFALL e.V.: Ehrenamtsmessen, '
         .'Petitionen, Presseartikel und Interviews. Für Sichtbarkeit, Verständnis und Veränderung.';
 
@@ -248,5 +321,42 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
             unset($data['art']);
             $block->update(['data' => $data]);
         }
+    }
+
+    /**
+     * Fügt einen Abschnitt direkt hinter einem anderen ein (Petitionen hinter
+     * Messen, KEV-135). Gibt es den nicht mehr, kommt er ans Ende. Steht schon
+     * einer mit derselben Überschrift da, passiert nichts.
+     *
+     * @param  array<string, mixed>  $daten
+     */
+    public static function abschnittEinfuegen(array $daten, string $nachTitel): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+
+        if (! $seite) {
+            return;
+        }
+
+        $abschnitte = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get();
+
+        if ($abschnitte->contains(fn ($b) => ($b->data['titel'] ?? null) === $daten['titel'])) {
+            return;
+        }
+
+        $davor = $abschnitte->first(fn ($b) => ($b->data['titel'] ?? null) === $nachTitel);
+
+        if (! $davor) {
+            self::abschnittAnhaengen($daten);
+
+            return;
+        }
+
+        $seite->blocks()->where('position', '>', $davor->position)->increment('position');
+        $seite->blocks()->create([
+            'typ' => 'oeffentlichkeitsarbeit',
+            'position' => $davor->position + 1,
+            'data' => $daten,
+        ]);
     }
 }

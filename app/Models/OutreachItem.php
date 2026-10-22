@@ -28,7 +28,9 @@ class OutreachItem extends Model
      */
     public const ARTEN = [
         'messe' => 'Messe',
-        'petition' => 'Petition',
+        // KEV-135: eigene Petitionen und solche anderer, die der Verein unterstützt
+        'petition' => 'Eigene Petition',
+        'petition_unterstuetzt' => 'Unterstützte Petition',
         'presse' => 'Presseartikel',
         'interview' => 'Interview',
         'veranstaltung' => 'Veranstaltung',
