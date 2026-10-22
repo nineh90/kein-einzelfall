@@ -374,12 +374,11 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Text und allen Fotos, z. B. /oeffentlichkeitsarbeit/ehrenamtsmesse-bayreuth-2026.
   Neue Messen (und später Petitionen und Presse) legt der Verein im Panel
   unter **„Öffentlichkeitsarbeit“** an, Fotos lädt er dort selbst hoch. Erste
-  Messe: Ehrenamtsmesse Bayreuth mit drei Fotos. Zu klären:
+  Messe: Ehrenamtsmesse Bayreuth mit drei Fotos (aus Taddis Drive, volle
+  Auflösung). Zu klären:
   - **Datum:** Im Ticket steht 10.10.2025, eingetragen ist der **10.10.2026**.
-    Die Freiwilligen-Messe Bayreuth war am Samstag, 10.10.2026, im
-    Friedrichsforum; der 10.10.2025 war ein Freitag, da gab es keine. Taddis
-    Vorlage nennt 2026 in der Zwischenzeile. Bitte bestätigen, im Panel sonst
-    einfach ändern (die Adresse endet dann trotzdem auf -2026).
+    Das ist geklärt: Die Fotos im Drive sind am 10.10.2026 aufgenommen, und an
+    dem Samstag war die Freiwilligen-Messe Bayreuth. Nur zur Info für Taddi.
   - **Bildbeschreibungen** der drei Fotos sind von uns und nennen bewusst
     keine Namen. Wenn der Verein sagen möchte, wer zu sehen ist: im Panel beim
     Foto ergänzen.

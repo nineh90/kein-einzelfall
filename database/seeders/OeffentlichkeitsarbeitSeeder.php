@@ -49,13 +49,14 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
 
     /**
      * Ehrenamtsmesse Bayreuth (KEV-134): Taddis Text, der Satz in
-     * Anführungszeichen fett, drei Fotos vom Stand (von Kevin).
+     * Anführungszeichen fett, drei Fotos vom Stand. Seit dem 22.10.2026 aus
+     * Taddis Drive-Ordner „Bayreuth“ in voller Auflösung, ohne Metadaten
+     * (vorher Bildschirmfotos davon).
      *
      * Datum 10.10.2026, nicht 10.10.2025 wie in der Überschrift des Tickets:
      * Die Freiwilligen-Messe Bayreuth war am Samstag, 10.10.2026, im
-     * Friedrichsforum (Gemeinde Bindlach, Mainwelle); der 10.10.2025 war ein
-     * Freitag, eine Messe gab es da nicht. Taddis Vorlage nennt 2026 in der
-     * Zwischenzeile. Rückfrage in der Übergabe-Checkliste.
+     * Friedrichsforum (Gemeinde Bindlach, Mainwelle), und die iPhone-Fotos im
+     * Drive sind am 10.10.2026 um 12:56 und 15:35 Uhr aufgenommen.
      *
      * Die Bildbeschreibungen sind von uns und nennen keine Namen: Wer auf
      * welchem Foto steht, wissen wir nicht sicher.

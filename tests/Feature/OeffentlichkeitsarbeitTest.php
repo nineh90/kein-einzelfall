@@ -74,7 +74,8 @@ class OeffentlichkeitsarbeitTest extends TestCase
         }
 
         // Maße am Bild, damit die Seite beim Laden nicht springt
-        $this->assertStringContainsString('width="745" height="994"', $html);
+        // Seit dem Drive-Ordner die Originale (1000 × 1333 statt 745 × 994)
+        $this->assertStringContainsString('width="1000" height="1333"', $html);
         $this->assertStringContainsString('Weitere Fotos', $html);
 
         // Brotkrumen zurück zur Übersicht
