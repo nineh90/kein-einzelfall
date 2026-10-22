@@ -78,8 +78,9 @@ class Titelbilder
         // KEV-147: Bild von Taddi statt Platzhalter, Leinenbücher mit „2025“.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'taetigkeits-und-jahresberichte' => null,
-        // Bilder von Taddi aus ihrem Drive-Ordner „1. Verein“, ohne eigenes
-        // Ticket eingebaut (Kevin, 22.10.2026). Ohne Unterzeile.
+        // Bilder von Taddi aus ihrem Drive-Ordner „1. Verein“ statt
+        // Platzhalter: Red Flags ist KEV-146, Schutz- und Wertekonzept kam
+        // ohne eigenes Ticket gleich mit. Ohne Unterzeile.
         'schutz-und-wertekonzept' => null,
         'red-flags' => null,
     ];
@@ -153,7 +154,7 @@ class Titelbilder
      *  - Tätigkeits- und Jahresberichte: Leinenbücher (KEV-147). Das Bild ist
      *    rechts um Wand verlängert (2,58 : 1), die Bücher stehen zwischen 20
      *    und 82 % der Höhe; mit 60 % bleiben sie von 1024 bis 2560 px ganz.
-     *  - Red Flags: zwei Türen, eine offen (Bild von Taddi, ohne Ticket).
+     *  - Red Flags: zwei Türen, eine offen (KEV-146).
      *    Rechts um Wand verlängert wie die Jahresberichte; Türen zwischen 12
      *    und 74 % der Höhe, mit 30 % ganz von 1024 bis 2560 px.
      *  - Schutz- und Wertekonzept: Holzdach über Holzfiguren, zwischen 36

@@ -6,9 +6,10 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * Schutz- und Wertekonzept und Red Flags: Titelbilder von Taddi statt des
- * Platzhalters (aus ihrem Drive-Ordner „1. Verein“, ohne eigenes Ticket;
- * die Seiten stammen aus KEV-97). Ersetzt wird nur der Platzhalter; ein im
- * Panel gepflegtes Bild bleibt.
+ * Platzhalters, aus ihrem Drive-Ordner „1. Verein“ (Red Flags: KEV-146,
+ * Schutzkonzept ohne eigenes Ticket gleich mit; die Seiten stammen aus
+ * KEV-97). Ersetzt wird nur der Platzhalter; ein im Panel gepflegtes Bild
+ * bleibt.
  */
 return new class extends Migration
 {
