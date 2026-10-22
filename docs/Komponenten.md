@@ -736,6 +736,14 @@ Beim Nachmessen fielen zwei Dinge auf, die **schon vorher** kaputt waren:
   zwischen 1024 und 1280 greift das Burger-Menü, das ohnehin vollständig
   bedienbar ist. **Das ist eine sichtbare Designänderung für Deutsch.**
 
+**Zweite Zeile (KEV-159, 22.10.2026).** Mit dem sechsten Bereich „Raum für
+Ungesagtes“ braucht die Kopfzeile in einer Zeile 1417 px, sie hat höchstens
+1280 (`xl:max-w-7xl`). Ohne Gegenmaßnahme gäbe es auf jedem Bildschirm nur noch
+das Burger-Menü. `kopfzeile.js` setzt deshalb zuerst `kopf-zweizeilig`: Die
+Menüleiste rutscht unter Logo, Suche und Notausgang (Kopf 127 statt 81 px hoch).
+Erst wenn auch die zweite Zeile nicht reicht, kommt der Burger (`kopf-eng`).
+Platz ist dort auch für „Projekte“, laut Taddis Drive der siebte Bereich.
+
 ### Leichte Sprache — Fassung, nicht Sprache
 
 Leichte Sprache ist eine **Fassung** einer Seite (`pages.fassung`), keine Sprache

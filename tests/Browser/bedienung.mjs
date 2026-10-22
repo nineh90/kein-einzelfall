@@ -594,6 +594,38 @@ console.log('\nGalerie einer Messe')
     await ohne.context().close()
 }
 
+// --- Kopfzeile mit sechs Bereichen (KEV-159) -------------------------------
+
+console.log('\nKopfzeile mit sechs Bereichen')
+{
+    for (const breite of [1280, 1440, 1920]) {
+        const s = await oeffnen({ breite, pfad: '/verein' })
+        const zustand = await s.evaluate(() => ({
+            zweizeilig: document.documentElement.classList.contains('kopf-zweizeilig'),
+            ueberlauf: document.documentElement.scrollWidth > window.innerWidth,
+        }))
+        pruefe(`${breite}px: Menüleiste in zweiter Zeile statt Burger`, zustand.zweizeilig
+            && await s.locator('[data-kopf-menue]').isVisible() && !(await s.locator('[data-kopf-burger]').isVisible()))
+        pruefe(`${breite}px: kein seitliches Scrollen`, !zustand.ueberlauf)
+        pruefe(`${breite}px: alle sechs Bereiche sichtbar`, await s.locator('[data-kopf-menue] > ul > li:visible').count() === 6)
+        await s.context().close()
+    }
+
+    // Größte Schrift: zweite Zeile oder Burger, je nach Breite. Entscheidend
+    // ist, dass nichts überläuft und der Notausgang im Bild bleibt.
+    for (const breite of [1280, 1440]) {
+        const s = await oeffnen({ breite, pfad: '/verein' })
+        await s.locator('button[aria-controls="a11y-panel"]:visible').click()
+        await s.locator('[data-a11y-setzen="schrift"][data-a11y-wert="3"]').click()
+        await s.waitForTimeout(300)
+        const exit = await s.locator('header [data-notausgang]:visible').first().boundingBox()
+        pruefe(`${breite}px, größte Schrift: nichts läuft über, Notausgang im Bild`,
+            await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)
+            && exit !== null && exit.x + exit.width <= breite)
+        await s.context().close()
+    }
+}
+
 // --- Suche im Glossar (KEV-153) --------------------------------------------
 
 console.log('\nSuche im Glossar')

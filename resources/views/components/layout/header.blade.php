@@ -23,7 +23,10 @@
          Zeile bei 1280 px über den Fensterrand; schon vorher ragte sie 72 px
          in den Seitenrand. --}}
     {{-- data-kopf-zeile: kopfzeile.js misst, ob die Zeile passt, und schaltet
-         sonst aufs Burger-Menü (größere Schrift, Prüfung der Firma 08.10.2026). --}}
+         sonst aufs Burger-Menü (größere Schrift, Prüfung der Firma 08.10.2026).
+         Seit KEV-159 (sechster Bereich „Raum für Ungesagtes“) vorher eine
+         Stufe: Die Menüleiste rutscht in eine zweite Zeile (kopf-zweizeilig).
+         In einer Zeile bräuchte sie 1417 px, der Kopf hat höchstens 1280. --}}
     <div data-kopf-zeile class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 md:px-8 py-3 sm:gap-4 lg:px-10 lg:py-5 xl:max-w-7xl">
 
         {{-- Wortmarke.

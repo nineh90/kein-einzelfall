@@ -75,6 +75,19 @@ return [
                 ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
             ],
         ],
+        /*
+         * KEV-159: neuer Bereich, Platz wie in Taddis Drive („4. Raum für
+         * Ungesagtes“ nach „3. Wissen“). Laut Drive kommen noch Wall of
+         * Shame, Wort für Wort und Blickwinkel dazu.
+         */
+        [
+            'schluessel' => 'bereich_raum_fuer_ungesagtes',
+            'label' => 'Raum für Ungesagtes',
+            'url' => '/raum-fuer-ungesagtes',
+            'children' => [
+                ['schluessel' => 'unueberhoerbar', 'label' => 'Unüberhörbar', 'url' => '/unueberhoerbar'],
+            ],
+        ],
         [
             'schluessel' => 'bereich_spenden',
             'label' => 'Spenden',

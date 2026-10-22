@@ -89,6 +89,11 @@ class Titelbilder
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
         // SER“), Zettelkasten. Ohne Unterzeile.
         'glossar' => null,
+        // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
+        // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar. Ohne
+        // Unterzeile.
+        'raum-fuer-ungesagtes' => null,
+        'unueberhoerbar' => null,
     ];
 
     /**
@@ -172,6 +177,11 @@ class Titelbilder
      *  - Glossar: Zettelkasten aus Holz (KEV-153). Rechts um Wand verlängert,
      *    Karten ab 31 %, Kastenboden bei 97 % der Höhe; mit 90 % bleiben
      *    Karten und Griff auch bei 2560 px ganz.
+     *  - Raum für Ungesagtes: offene Tür mit Licht (KEV-159). Rechts um Wand
+     *    verlängert, Türrahmen ab 3 %, Türschwelle bei 78 % der Höhe; mit
+     *    25 % bleibt die Tür von oben bis zur Schwelle zu sehen.
+     *  - Unüberhörbar: Tonbandgerät und Kassette (KEV-159). Rechts um Wand
+     *    verlängert, Motiv zwischen 14 und 89 % der Höhe, mit 60 % fast ganz.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -193,6 +203,8 @@ class Titelbilder
         self::ORDNER.'/schutz-und-wertekonzept.webp' => 65,
         self::ORDNER.'/atteste.webp' => 85,
         self::ORDNER.'/glossar.webp' => 90,
+        self::ORDNER.'/raum-fuer-ungesagtes.webp' => 25,
+        self::ORDNER.'/unueberhoerbar.webp' => 60,
     ];
 
     /**

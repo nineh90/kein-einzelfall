@@ -28,21 +28,28 @@ export function kopfzeileVerdrahten() {
         // Erst im normalen Zustand messen, sonst bliebe die Seite nach dem
         // Verkleinern der Schrift im Burger-Modus hängen. Kein Zeichnen
         // dazwischen: Alles passiert im selben Durchlauf.
-        html.classList.remove('kopf-eng', 'kopf-ohne-name', 'kopf-sehr-eng')
+        html.classList.remove('kopf-zweizeilig', 'kopf-eng', 'kopf-ohne-name', 'kopf-sehr-eng')
 
-        // Stufe 1: Burger statt Menüleiste.
+        // Stufe 1 (KEV-159): Menüleiste in eine zweite Zeile. Hilft nur, wo
+        // sie überhaupt steht (ab „xl“); darunter gibt es ohnehin den Burger.
         if (zuBreit()) {
-            html.classList.add('kopf-eng')
+            html.classList.add('kopf-zweizeilig')
         }
 
-        // Stufe 2: Nur noch das Logo, wie unter „md“. Bei 768 px und größter
+        // Stufe 2: Burger statt Menüleiste, wenn auch die zweite Zeile nicht
+        // reicht (größere Schrift).
+        if (zuBreit()) {
+            html.classList.replace('kopf-zweizeilig', 'kopf-eng')
+        }
+
+        // Stufe 3: Nur noch das Logo, wie unter „md“. Bei 768 px und größter
         // Schrift nahm der Name 331 px, die Zeile lief 80 px über (KEV-124).
         // Vor dem Notausgang: Der bleibt so lange wie möglich beschriftet.
         if (zuBreit()) {
             html.classList.add('kopf-ohne-name')
         }
 
-        // Stufe 3, auf dem Handy mit größter Schrift: Notausgang nur noch als
+        // Stufe 4, auf dem Handy mit größter Schrift: Notausgang nur noch als
         // Symbol (wie unter 360 px), die Beschriftung bleibt für Vorlesehilfen.
         if (zuBreit()) {
             html.classList.add('kopf-sehr-eng')

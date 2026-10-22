@@ -475,6 +475,25 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     „Maskenpflicht, Befreiung“, „Geschlechtsauswahl“ → „Geschlecht der
     behandelnden Person“). In den Dateinamen stehen die Tippfehler weiter, das
     sieht man nur in der Adresse.
+- [ ] **Raum für Ungesagtes und Unüberhörbar (KEV-159).** Neuer Bereich im
+  Menü nach „Wissen“, wie in Taddis Drive-Ordner („4. Raum für Ungesagtes“).
+  Unüberhörbar mit ihrem Text: Die Adresse sichtbarkeit@kein-einzelfall.de und
+  der letzte Satz sind fett, die Adresse ist ein Mailto-Link. Beide Seiten mit
+  ihren Bildern aus dem Drive (Tonbandgerät, offene Tür), rechts um Wand
+  verlängert. Offen:
+  - **Text für die Bereichsseite /raum-fuer-ungesagtes.** Bis dahin zeigt sie
+    nur Bild und den Verweis auf Unüberhörbar und ist für Suchmaschinen
+    gesperrt, wie Rückblick (KEV-72). Laut Drive kommen noch Wall of Shame, Wort
+    für Wort und Blickwinkel dazu; das Bild heißt „Deine Stimme – Raum für
+    ungesagtes“. Soll „Deine Stimme“ als Unterzeile aufs Bild?
+  - **Wie sollen die Musikstücke auf die Seite?** Audiodateien hochladen geht
+    bisher nicht. Schon jetzt möglich: der Baustein „Eingebetteter Inhalt
+    (2-Klick)“ mit einem Stück bei SoundCloud, YouTube o. Ä., geladen erst nach
+    Klick. Alternativ bauen wir einen Audio-Baustein mit Hochladen im Panel.
+    Bitte sagen, was geplant ist.
+  - **Kopfzeile:** Mit sechs Bereichen passt die Menüleiste nicht mehr neben
+    Logo und Notausgang. Sie steht auf großen Bildschirmen jetzt in einer
+    zweiten Zeile darunter, sonst gäbe es überall nur noch das Burger-Menü.
 - [ ] **Glossar mit Taddis Abkürzungen (KEV-153).** /glossar zeigt ihre
   Einleitung („Abkürzungen im Sozialen Entschädigungsrecht (SER)“, Fettes wie
   im Dokument) und 195 Abkürzungen mit Auflösung, darüber ein Suchfeld, das

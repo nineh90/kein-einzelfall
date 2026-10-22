@@ -56,7 +56,8 @@ class BarrierefreiheitTest extends TestCase
         $mobil = fn (string $html) => substr($html, strpos($html, 'aria-label="Hauptnavigation (mobil)"'));
 
         $start = $mobil($this->get('/')->getContent());
-        $this->assertSame(4, substr_count($start, '<details name="mobilmenue"'));
+        // Vier Bereiche mit Unterseiten, seit KEV-159 fünf (Raum für Ungesagtes).
+        $this->assertSame(5, substr_count($start, '<details name="mobilmenue"'));
         $this->assertDoesNotMatchRegularExpression('#name="mobilmenue"[^>]*\bopen\b#', $start);
         $this->assertStringContainsString('<a href="/wissen"', $start);
         $this->assertStringContainsString('Übersicht', $start);

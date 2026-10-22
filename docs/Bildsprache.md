@@ -86,6 +86,8 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |
+| Raum für Ungesagtes | offene Holztür in einem dunklen Raum, dahinter helles Licht; von Taddi geliefert (KEV-159, Drive-Ordner „4. Raum für Ungesagtes“, „0 Deine Stimme – Raum für ungesagtes“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 25 %, damit die Tür vom Rahmen bis zur Schwelle zu sehen ist |
+| Unüberhörbar | Tonbandgerät mit zwei Spulen, davor eine Kassette; von Taddi geliefert (KEV-159, „4. Unüberhörbar“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 60 % |
 | Glossar | Zettelkasten aus Holz mit Karteikarten; von Taddi geliefert (KEV-153, Drive-Ordner „3. Wissen“, „Abkürzungen SER“; vorher kein Bild). Rechts um ruhige Wand verlängert (2,58 : 1) wie die Jahresberichte, ausgerichtet auf 90 % |
 | Atteste | Papierstapel und Holzstempel auf warmem Tisch; von Taddi geliefert (KEV-144, Drive-Ordner „3. Wissen“). Rechts um ruhige Wand verlängert (2,58 : 1) wie die Jahresberichte: Im Original reichte der Stapel bis 59 % der Breite und lag unter dem Titel. Ausgerichtet auf 85 % |
 | Publikationen | Broschürenstapel und Lesebrille |

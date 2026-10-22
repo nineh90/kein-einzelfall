@@ -394,6 +394,13 @@ svg.girocode path {
 --------------------------------------------------------------------------- */
 html.kopf-eng [data-kopf-menue] { display: none; }
 html.kopf-eng [data-kopf-burger] { display: block; }
+
+/* Vorstufe (KEV-159): Erst rutscht die Menüleiste in eine zweite Zeile unter
+   Logo, Suche und Notausgang. Mit sechs Bereichen braucht die eine Zeile
+   1417 px, der Kopf hat höchstens 1280; ohne diese Stufe gäbe es auch auf
+   großen Bildschirmen nur noch das Burger-Menü. */
+html.kopf-zweizeilig [data-kopf-zeile] { flex-wrap: wrap; row-gap: 0.25rem; }
+html.kopf-zweizeilig [data-kopf-menue] { order: 3; flex-basis: 100%; }
 /* Vereinsname nur noch für Vorlesehilfen, wie unter „md“ (KEV-124). */
 html.kopf-ohne-name [data-kopf-name] {
   position: absolute;
