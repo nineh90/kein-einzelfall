@@ -477,5 +477,12 @@
     "Foto vergrößern": "Enlarge photo",
     "Vorheriges Foto": "Previous photo",
     "Nächstes Foto": "Next photo",
-    ":nr von :gesamt": ":nr of :gesamt"
+    ":nr von :gesamt": ":nr of :gesamt",
+  "Abkürzung oder Begriff suchen": "Search for an abbreviation or term",
+  ":gesamt Einträge": ":gesamt entries",
+  "Treffer: :anzahl von :gesamt": "Matches: :anzahl of :gesamt",
+  "Alle zeigen": "Show all",
+  "Dazu steht noch nichts im Glossar.": "There is nothing on this in the glossary yet.",
+  "Auf der ganzen Website suchen": "Search the whole website",
+  "Alle :anzahl passenden Einträge im Glossar": "All :anzahl matching entries in the glossary"
 }

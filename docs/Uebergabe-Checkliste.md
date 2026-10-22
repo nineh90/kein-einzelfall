@@ -246,12 +246,12 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   wählt, nie wieder. Alternative wäre: auf jeder einzelnen Seite erneut. Das
   wäre für Menschen, die viel lesen, schnell zermürbend — deshalb der Vorschlag
   so. Bitte bestätigen.
-- [ ] **Glossar: die drei Entwürfe freigeben.** GdB, Pflegegrad und Persönliches
-  Budget liegen im Panel als Entwurf und sind auf der Website unsichtbar. Der
-  Text beginnt jeweils mit „ENTWURF — bitte prüfen". Wir schreiben dazu bewusst
-  keine verbindliche Fassung: Wer das liest, entscheidet danach womöglich über
-  eine Frist. **Das ist ein Fall für die Anwälte des Vereins.** Weitere Begriffe
-  legt der Verein selbst an — je Eintrag reichen zwei, drei Sätze.
+- [x] **Glossar: die drei Entwürfe freigeben.** Erledigt mit KEV-153: Taddis
+  Abkürzungsverzeichnis nennt GdB, Pflegegrad (PG) und Persönliches Budget
+  (PB). Sie stehen jetzt mit Abkürzung und Auflösung auf der Seite, unsere
+  ungeprüfte Erklärung („ENTWURF — bitte prüfen“) ist weg. Wer eine Erklärung
+  ergänzen möchte: Feld „In eigenen Worten“ im Panel, unser alter Entwurf steht
+  noch im `GlossarSeeder`.
 - [x] **Schreibweise „Killing me Softly".** Geklärt mit KEV-73 (29.09.2026):
   Die Gruppe heißt „Skillin me Softly – Trigger und Skills".
 - [ ] **Adresse des YouTube-Kanals.** Er wurde in der Besprechung genannt, die
@@ -304,7 +304,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Fristen, Ansprüche und Zuständigkeiten auf den Wissensseiten.
   - Aufgefallen beim Übersetzen: Der Referent heißt einmal „Quendolin
     Winter“, einmal „Quen Winter“ (Das Hilfesystem). Welcher Name stimmt?
-    Das Glossar trägt noch den Vermerk „ENTWURF — bitte prüfen.“
+    Den Vermerk „ENTWURF — bitte prüfen.“ im Glossar gibt es seit KEV-153
+    nicht mehr.
 - [ ] **Landesstellen (KEV-104).** Mit Taddis Text veröffentlicht, je
   Bundesland ein Abschnitt. Im Menü unter **Kontakt** (Platz stand nicht im
   Ticket; die Kontaktseite verspricht im Bild schon „Alle Ansprechpartner,
@@ -474,6 +475,45 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     „Maskenpflicht, Befreiung“, „Geschlechtsauswahl“ → „Geschlecht der
     behandelnden Person“). In den Dateinamen stehen die Tippfehler weiter, das
     sieht man nur in der Adresse.
+- [ ] **Glossar mit Taddis Abkürzungen (KEV-153).** /glossar zeigt ihre
+  Einleitung („Abkürzungen im Sozialen Entschädigungsrecht (SER)“, Fettes wie
+  im Dokument) und 195 Abkürzungen mit Auflösung, darüber ein Suchfeld, das
+  schon beim Tippen filtert. Taddis Frage im Dokument („Soll das als
+  Suchfunktion aufgebaut werden?“) haben wir mit Ja beantwortet: Suchfeld auf
+  der Seite, und die Suche der Website findet jetzt auch kurze Abkürzungen
+  (AU, KK, SG) und verweist bei vielen Treffern ins Glossar. Pflegen: die
+  Einträge im Panel unter „Glossar“ (eine Erklärung ist jetzt freiwillig),
+  Einleitung, Titel und Bild unter „Seiten“ → „Glossar“. Das Bild ist Taddis
+  „Abkürzungen SER“ (Zettelkasten) aus dem Drive-Ordner „3. Wissen“, rechts um
+  Wand verlängert. Bitte prüfen:
+  - **Korrigierte Auflösungen** (im Dokument stand etwas anderes): BAS =
+    Bundesamt für Soziale *Sicherung* (nicht „für soziale Dienste“); BfA =
+    *Bundesversicherungsanstalt für Angestellte*, heute DRV Bund (die
+    Bundesanstalt für Arbeit hieß BA); EM = *Erwerbsminderung* (EMR ist die
+    Rente); GdS = Grad der *Schädigungsfolgen*; PI = *Polizeiinspektion*
+    (Polizeidirektion ist PD); SEK = *Spezial*einsatzkommando; MD =
+    Medizinischer Dienst (früher MDK), MDK = Medizinischer Dienst der
+    Kranken*versicherung*; INTERPOL = Internationale Kriminalpolizeiliche
+    Organisation.
+  - **Korrigierte Abkürzungen:** „AuslG“ → *AusglV* (so steht es in Taddis
+    Einleitung; AuslG war das Ausländergesetz), „PAVG“ → *PflVG*, „BARMEER“ →
+    *BARMER*, „TBI“ → *TBl* (Merkzeichen Taubblindheit), „Bundestags.Drs.“ →
+    *BT-Drs.*, „Psych KG“ → *PsychKG*.
+  - **Tippfehler** stillschweigend korrigiert, etwa „aussergewöhnliche“,
+    „Berufsausübungssgemeinschaft“, „Sondereinsatzkomando“,
+    „Pflichtvericherungsgesetz“, „Teilhaberatungsstelle“, „vergleich“; dazu
+    Punkte (bzw., ggf., vgl., z. B.), Bindestriche und Kleinschreibung
+    vereinheitlicht und die Kürzel in UBSKM und UKASK ausgeschrieben.
+  - **Als Entwurf, auf der Seite unsichtbar:** „vi: Seite“ (vi ist uns als
+    Abkürzung für Seite nicht bekannt; gemeint „S.“?) und „vVV:
+    Verwaltungsvorschrift“ (üblich sind VV oder VwV). Im Panel mit dem Filter
+    „Sichtbar → Nur Entwürfe“ zu finden.
+  - Doppelt vergeben, beide stehen da: KKH (Krankenhaus und Kaufmännische
+    Krankenkasse), VA (Versorgungsamt und Verwaltungsakt).
+  - Ergänzt: „1. Kl.“ trägt wie die übrigen Merkzeichen den Zusatz
+    „(Schwerbehindertenausweis)“.
+  - Die englischen Auflösungen sind maschinell und ungeprüft, die deutsche
+    Bezeichnung steht jeweils in Klammern dabei.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

@@ -26,19 +26,1159 @@
   "gdb": {
     "begriff": "Degree of disability (Grad der Behinderung)",
     "kuerzel": "GdB",
-    "erklaerung": "DRAFT — please check. A measure of how much a disability affects a person’s participation in society. It is given in steps of ten from 20 to 100. From 50 upwards, a person is considered severely disabled.",
+    "erklaerung": null,
     "mehr_label": null
   },
   "pflegegrad": {
     "begriff": "Care level (Pflegegrad)",
-    "kuerzel": null,
-    "erklaerung": "DRAFT — please check. A rating of how independently someone can manage their everyday life. There are five care levels; they determine which benefits the long-term care insurance covers.",
+    "kuerzel": "PG",
+    "erklaerung": null,
     "mehr_label": null
   },
   "persoenliches-budget": {
     "begriff": "Personal budget (Persönliches Budget)",
-    "kuerzel": null,
-    "erklaerung": "DRAFT — please check. Instead of a benefit in kind, money is paid out, which the entitled person uses to buy and organise the support they need themselves.",
+    "kuerzel": "PB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "paragraf": {
+    "begriff": "Section / sections (Paragraf / Paragrafen)",
+    "kuerzel": "§ / §§",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "1-kl": {
+    "begriff": "First class (1. Klasse, severely disabled ID card)",
+    "kuerzel": "1. Kl.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "abs": {
+    "begriff": "Subsection (Absatz)",
+    "kuerzel": "Abs.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "a-f": {
+    "begriff": "Old version (alte Fassung)",
+    "kuerzel": "a. F.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ag": {
+    "begriff": "Exceptional walking disability (außergewöhnliche Gehbehinderung, severely disabled ID card)",
+    "kuerzel": "aG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "aiz": {
+    "begriff": "Anti-terror operations centre (Anti-Terror-Einsatzzentrum)",
+    "kuerzel": "AIZ",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ak": {
+    "begriff": "Working group in police investigations (Arbeitskreis)",
+    "kuerzel": "AK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "alt": {
+    "begriff": "Alternative (Alternative)",
+    "kuerzel": "Alt.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "aok": {
+    "begriff": "General local health insurance fund (Allgemeine Ortskrankenkasse)",
+    "kuerzel": "AOK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ar": {
+    "begriff": "Compensatory pension (Ausgleichsrente)",
+    "kuerzel": "AR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "art": {
+    "begriff": "Article (Artikel)",
+    "kuerzel": "Art.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "au": {
+    "begriff": "Incapacity for work (Arbeitsunfähigkeit)",
+    "kuerzel": "AU",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "aub": {
+    "begriff": "Sick note (Arbeitsunfähigkeitsbescheinigung)",
+    "kuerzel": "AUB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ausglv": {
+    "begriff": "Compensatory Pension Ordinance (Ausgleichsrentenverordnung)",
+    "kuerzel": "AusglV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "az": {
+    "begriff": "File reference (Aktenzeichen)",
+    "kuerzel": "Az.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "b": {
+    "begriff": "Accompanying person (Begleitperson, severely disabled ID card)",
+    "kuerzel": "B",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ba": {
+    "begriff": "Federal Employment Agency (Bundesagentur für Arbeit)",
+    "kuerzel": "BA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bag": {
+    "begriff": "Joint medical practice (Berufsausübungsgemeinschaft)",
+    "kuerzel": "BAG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "barmer": {
+    "begriff": "Barmer health insurance fund (Barmer Ersatzkasse)",
+    "kuerzel": "BARMER",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bas": {
+    "begriff": "Federal Office for Social Security (Bundesamt für Soziale Sicherung)",
+    "kuerzel": "BAS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bbb": {
+    "begriff": "Particular occupational impairment (besondere berufliche Betroffenheit)",
+    "kuerzel": "BBB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bem": {
+    "begriff": "Occupational reintegration management (Betriebliches Eingliederungsmanagement)",
+    "kuerzel": "BEM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "berh": {
+    "begriff": "Legal advice assistance (Beratungshilfe)",
+    "kuerzel": "BerH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "beschl": {
+    "begriff": "Decision (Beschluss)",
+    "kuerzel": "Beschl.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bfa": {
+    "begriff": "Federal Insurance Institute for Salaried Employees, today German Pension Insurance Federation (Bundesversicherungsanstalt für Angestellte)",
+    "kuerzel": "BfA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bfdi": {
+    "begriff": "Federal Commissioner for Data Protection and Freedom of Information (Bundesbeauftragte für den Datenschutz und die Informationsfreiheit)",
+    "kuerzel": "BfDI",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bfv": {
+    "begriff": "Federal Office for the Protection of the Constitution (Bundesamt für Verfassungsschutz)",
+    "kuerzel": "BfV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bgb": {
+    "begriff": "German Civil Code (Bürgerliches Gesetzbuch)",
+    "kuerzel": "BGB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bgbl": {
+    "begriff": "Federal Law Gazette (Bundesgesetzblatt)",
+    "kuerzel": "BGBl.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bgm": {
+    "begriff": "Occupational health management (Betriebliches Gesundheitsmanagement)",
+    "kuerzel": "BGM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bka": {
+    "begriff": "Federal Criminal Police Office (Bundeskriminalamt)",
+    "kuerzel": "BKA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bkk": {
+    "begriff": "Company health insurance fund (Betriebskrankenkasse)",
+    "kuerzel": "BKK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bl": {
+    "begriff": "Blindness (Blindheit, severely disabled ID card)",
+    "kuerzel": "Bl",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bmas": {
+    "begriff": "Federal Ministry of Labour and Social Affairs (Bundesministerium für Arbeit und Soziales)",
+    "kuerzel": "BMAS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bmg": {
+    "begriff": "Federal Ministry of Health (Bundesministerium für Gesundheit)",
+    "kuerzel": "BMG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bpol": {
+    "begriff": "Federal Police (Bundespolizei)",
+    "kuerzel": "BPOL",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bri": {
+    "begriff": "Assessment guidelines (Begutachtungs-Richtlinien)",
+    "kuerzel": "BRi",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bsa": {
+    "begriff": "Compensation for occupational loss (Berufsschadensausgleich)",
+    "kuerzel": "BSA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bschav": {
+    "begriff": "Ordinance on compensation for occupational loss (Berufsschadensausgleichsverordnung)",
+    "kuerzel": "BSchAV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bsg": {
+    "begriff": "Federal Social Court (Bundessozialgericht)",
+    "kuerzel": "BSG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bthg": {
+    "begriff": "Federal Participation Act (Bundesteilhabegesetz)",
+    "kuerzel": "BTHG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bt-drs": {
+    "begriff": "Bundestag printed paper (Bundestagsdrucksache)",
+    "kuerzel": "BT-Drs.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bverfg": {
+    "begriff": "Federal Constitutional Court (Bundesverfassungsgericht)",
+    "kuerzel": "BVerfG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bvg": {
+    "begriff": "Federal War Victims Relief Act (Bundesversorgungsgesetz)",
+    "kuerzel": "BVG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "bzw": {
+    "begriff": "Or / respectively (beziehungsweise)",
+    "kuerzel": "bzw.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "dak": {
+    "begriff": "German salaried employees’ health insurance fund (Deutsche Angestellten-Krankenkasse)",
+    "kuerzel": "DAK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "drv": {
+    "begriff": "German Pension Insurance (Deutsche Rentenversicherung)",
+    "kuerzel": "DRV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "drv-bund": {
+    "begriff": "German Pension Insurance Federation (Deutsche Rentenversicherung Bund)",
+    "kuerzel": "DRV Bund",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "dsgvo": {
+    "begriff": "General Data Protection Regulation, GDPR (Datenschutz-Grundverordnung)",
+    "kuerzel": "DSGVO",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "dx": {
+    "begriff": "Diagnosis (Diagnose)",
+    "kuerzel": "Dx",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "egh": {
+    "begriff": "Integration assistance (Eingliederungshilfe)",
+    "kuerzel": "EGH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ehs": {
+    "begriff": "Supplementary support system (Ergänzendes Hilfesystem)",
+    "kuerzel": "EHS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "em": {
+    "begriff": "Reduced earning capacity (Erwerbsminderung)",
+    "kuerzel": "EM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "emr": {
+    "begriff": "Reduced earning capacity pension (Erwerbsminderungsrente)",
+    "kuerzel": "EMR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "epa": {
+    "begriff": "Electronic patient record (elektronische Patientenakte)",
+    "kuerzel": "ePA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "esf": {
+    "begriff": "Compensation fund for damage from motor vehicle accidents under section 12 of the Compulsory Insurance Act (Entschädigungsfonds)",
+    "kuerzel": "ESF",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "etc": {
+    "begriff": "Et cetera (et cetera)",
+    "kuerzel": "etc.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "eutb": {
+    "begriff": "Supplementary independent participation counselling (Ergänzende unabhängige Teilhabeberatung)",
+    "kuerzel": "EUTB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "fa": {
+    "begriff": "Medical specialist (Facharzt)",
+    "kuerzel": "FA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ff": {
+    "begriff": "And following (fortfolgende, e.g. § 12 ff.)",
+    "kuerzel": "ff.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "fsm": {
+    "begriff": "Fund for Sexual Abuse (Fonds Sexueller Missbrauch)",
+    "kuerzel": "FSM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "g": {
+    "begriff": "Impaired mobility (Beeinträchtigung der Bewegungsfähigkeit, severely disabled ID card)",
+    "kuerzel": "G",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ga": {
+    "begriff": "Expert report (Gutachten)",
+    "kuerzel": "GA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "g-ba": {
+    "begriff": "Federal Joint Committee (Gemeinsamer Bundesausschuss)",
+    "kuerzel": "G-BA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gds": {
+    "begriff": "Degree of damage consequences (Grad der Schädigungsfolgen)",
+    "kuerzel": "GdS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gem": {
+    "begriff": "In accordance with (gemäß)",
+    "kuerzel": "gem.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ggf": {
+    "begriff": "If applicable (gegebenenfalls)",
+    "kuerzel": "ggf.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gkv": {
+    "begriff": "Statutory health insurance (Gesetzliche Krankenversicherung)",
+    "kuerzel": "GKV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gkv-sv": {
+    "begriff": "National Association of Statutory Health Insurance Funds (GKV-Spitzenverband)",
+    "kuerzel": "GKV-SV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gl": {
+    "begriff": "Deafness (Gehörlosigkeit, severely disabled ID card)",
+    "kuerzel": "Gl",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gr": {
+    "begriff": "Basic pension under the Victims’ Compensation Act (Grundrente)",
+    "kuerzel": "GR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gsg-9": {
+    "begriff": "Border Protection Group 9, a police special unit (Grenzschutzgruppe 9)",
+    "kuerzel": "GSG 9",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "gstfsm": {
+    "begriff": "Office of the Fund for Sexual Abuse (Geschäftsstelle „Fonds Sexueller Missbrauch“)",
+    "kuerzel": "GStFSM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "h": {
+    "begriff": "Helplessness (Hilflosigkeit, severely disabled ID card)",
+    "kuerzel": "H",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ha": {
+    "begriff": "General practitioner (Hausarzt)",
+    "kuerzel": "HA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "havs": {
+    "begriff": "Hessian Office for Pensions and Social Affairs (Hessisches Amt für Versorgung und Soziales)",
+    "kuerzel": "HAVS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "hek": {
+    "begriff": "Hanseatic health insurance fund (Hanseatische Krankenkasse)",
+    "kuerzel": "HEK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "hkk": {
+    "begriff": "Commercial health insurance fund (Handelskrankenkasse)",
+    "kuerzel": "hkk",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "hs": {
+    "begriff": "Severely visually impaired (hochgradig sehbehindert, severely disabled ID card)",
+    "kuerzel": "HS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "hs-halbsatz": {
+    "begriff": "Half-sentence of a legal provision (Halbsatz)",
+    "kuerzel": "Hs.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "icd": {
+    "begriff": "International Statistical Classification of Diseases and Related Health Problems",
+    "kuerzel": "ICD",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "idf": {
+    "begriff": "In the version of (in der Fassung)",
+    "kuerzel": "idF.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "i-d-r": {
+    "begriff": "As a rule (in der Regel)",
+    "kuerzel": "i. d. R.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ifsg": {
+    "begriff": "Infection Protection Act (Infektionsschutzgesetz)",
+    "kuerzel": "IfSG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ikk": {
+    "begriff": "Guild health insurance fund (Innungskrankenkasse)",
+    "kuerzel": "IKK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "interpol": {
+    "begriff": "International Criminal Police Organization",
+    "kuerzel": "INTERPOL",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "i-r-d": {
+    "begriff": "Within the scope of (im Rahmen der/des)",
+    "kuerzel": "i. R. d.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "i-s-d": {
+    "begriff": "Within the meaning of (im Sinne der/des)",
+    "kuerzel": "i. S. d.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "i-v-m": {
+    "begriff": "In conjunction with (in Verbindung mit)",
+    "kuerzel": "i. V. m.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "jc": {
+    "begriff": "Jobcentre (Jobcenter)",
+    "kuerzel": "JC",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "k": {
+    "begriff": "Criminal police (Kriminalpolizei)",
+    "kuerzel": "K",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kdd": {
+    "begriff": "Criminal police standby service (Kriminaldauerdienst)",
+    "kuerzel": "KDD",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kfuersv": {
+    "begriff": "War Victims Welfare Ordinance (Kriegsopferfürsorgeverordnung)",
+    "kuerzel": "KFürsV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kfzhv": {
+    "begriff": "Motor Vehicle Assistance Ordinance (Kraftfahrzeughilfe-Verordnung)",
+    "kuerzel": "KfzHV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kh": {
+    "begriff": "Hospital (Krankenhaus)",
+    "kuerzel": "KH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kk": {
+    "begriff": "Health insurance fund (Krankenkasse)",
+    "kuerzel": "KK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kkh-krankenhaus": {
+    "begriff": "Hospital (Krankenhaus)",
+    "kuerzel": "KKH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kkh-kaufmaennische-krankenkasse": {
+    "begriff": "Commercial employees’ health insurance fund (Kaufmännische Krankenkasse)",
+    "kuerzel": "KKH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kom": {
+    "begriff": "Senior detective constable (Kriminalobermeister)",
+    "kuerzel": "KOM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kovvfg": {
+    "begriff": "Act on the Administrative Procedure for War Victims’ Pensions (Gesetz über das Verwaltungsverfahren der Kriegsopferversorgung)",
+    "kuerzel": "KOVVfG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "krh": {
+    "begriff": "Hospital (Krankenhaus, also Krhs., Krkhs.)",
+    "kuerzel": "Krh",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ksv": {
+    "begriff": "Municipal Social Association of Saxony (Kommunaler Sozialverband Sachsen)",
+    "kuerzel": "KSV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kv": {
+    "begriff": "Association of Statutory Health Insurance Physicians (Kassenärztliche Vereinigung)",
+    "kuerzel": "KV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "kzv": {
+    "begriff": "Association of Statutory Health Insurance Dentists (Kassenzahnärztliche Vereinigung)",
+    "kuerzel": "KZV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ldi": {
+    "begriff": "State Commissioner for Data Protection and Freedom of Information (Landesbeauftragte für Datenschutz und Informationsfreiheit)",
+    "kuerzel": "LDI",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lfd": {
+    "begriff": "State Commissioner for Data Protection (Landesbeauftragte für Datenschutz)",
+    "kuerzel": "LfD",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lit": {
+    "begriff": "Letter within a legal provision (Buchstabe)",
+    "kuerzel": "lit.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lka": {
+    "begriff": "State Criminal Police Office (Landeskriminalamt)",
+    "kuerzel": "LKA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lkk": {
+    "begriff": "Agricultural health insurance fund (Landwirtschaftliche Krankenkasse)",
+    "kuerzel": "LKK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lsg": {
+    "begriff": "Higher Social Court of a federal state (Landessozialgericht)",
+    "kuerzel": "LSG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lta": {
+    "begriff": "Benefits for participation in working life (Leistungen zur Teilhabe am Arbeitsleben)",
+    "kuerzel": "LTA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lvr": {
+    "begriff": "Rhineland Regional Association (Landschaftsverband Rheinland)",
+    "kuerzel": "LVR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lwl": {
+    "begriff": "Westphalia-Lippe Regional Association (Landschaftsverband Westfalen-Lippe)",
+    "kuerzel": "LWL",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "lwv": {
+    "begriff": "State welfare association (Landeswohlfahrtsverband)",
+    "kuerzel": "LWV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "md": {
+    "begriff": "Medical Service (Medizinischer Dienst, formerly MDK)",
+    "kuerzel": "MD",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "mdk": {
+    "begriff": "Medical Service of the Health Insurance Funds, today MD (Medizinischer Dienst der Krankenversicherung)",
+    "kuerzel": "MDK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "mez": {
+    "begriff": "Monthly compensation payment (Monatliche Entschädigungszahlung)",
+    "kuerzel": "MEZ",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "miqr": {
+    "begriff": "Central German Institute for Qualification and Rehabilitation (Mitteldeutsches Institut für Qualifikation und Rehabilitation)",
+    "kuerzel": "MIQR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "m-w-n": {
+    "begriff": "With further references (mit weiteren Nachweisen)",
+    "kuerzel": "m. w. N.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "m-w-v": {
+    "begriff": "With effect from (mit Wirkung vom)",
+    "kuerzel": "m. W. v.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "mz": {
+    "begriff": "Marker on the severely disabled ID card (Merkzeichen)",
+    "kuerzel": "MZ",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "nba": {
+    "begriff": "New assessment procedure for care needs (Neues Begutachtungsassessment)",
+    "kuerzel": "NBA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "n-f": {
+    "begriff": "New version (neue Fassung)",
+    "kuerzel": "n. F.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "nr": {
+    "begriff": "Number (Nummer)",
+    "kuerzel": "Nr.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "osg": {
+    "begriff": "Organised sexualised and systematic violence (organisierte sexualisierte und systematische Gewalt)",
+    "kuerzel": "OSG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ovst": {
+    "begriff": "Orthopaedic supply office (Orthopädische Versorgungsstelle)",
+    "kuerzel": "OVST",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pflvg": {
+    "begriff": "Compulsory Insurance Act (Pflichtversicherungsgesetz)",
+    "kuerzel": "PflVG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pi": {
+    "begriff": "Police inspectorate (Polizeiinspektion)",
+    "kuerzel": "PI",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pia": {
+    "begriff": "Psychiatric outpatient clinic (Psychiatrische Institutsambulanz)",
+    "kuerzel": "PIA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pk": {
+    "begriff": "Long-term care insurance fund (Pflegekasse)",
+    "kuerzel": "PK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pkh": {
+    "begriff": "Legal aid for court proceedings (Prozesskostenhilfe)",
+    "kuerzel": "PKH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pkv": {
+    "begriff": "Private health insurance (Private Krankenversicherung)",
+    "kuerzel": "PKV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pom": {
+    "begriff": "Senior police constable (Polizeiobermeister)",
+    "kuerzel": "POM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "pp": {
+    "begriff": "Police headquarters (Polizeipräsidium)",
+    "kuerzel": "PP",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "psychkg": {
+    "begriff": "Mental Illness Act of a federal state (Psychisch-Kranken-Gesetz)",
+    "kuerzel": "PsychKG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ra": {
+    "begriff": "Lawyer (Rechtsanwalt)",
+    "kuerzel": "RA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "reha": {
+    "begriff": "Rehabilitation (Rehabilitation)",
+    "kuerzel": "Reha",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "rf": {
+    "begriff": "Broadcasting fee reduction (Rundfunk/Fernsehen, severely disabled ID card)",
+    "kuerzel": "RF",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "rn": {
+    "begriff": "Margin number (Randnummer)",
+    "kuerzel": "Rn.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "rv": {
+    "begriff": "Pension insurance (Rentenversicherung)",
+    "kuerzel": "RV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "rvg": {
+    "begriff": "Lawyers’ Remuneration Act (Rechtsanwaltsvergütungsgesetz)",
+    "kuerzel": "RVG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "rx": {
+    "begriff": "Prescription (Rezept)",
+    "kuerzel": "Rx",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "s": {
+    "begriff": "Sentence of a legal provision (Satz)",
+    "kuerzel": "S.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sb": {
+    "begriff": "Caseworker (Sachbearbeiter)",
+    "kuerzel": "Sb",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sba": {
+    "begriff": "Severely disabled ID card (Schwerbehindertenausweis)",
+    "kuerzel": "SBA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sbv": {
+    "begriff": "Representative body for severely disabled employees (Schwerbehindertenvertretung)",
+    "kuerzel": "SBV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sek": {
+    "begriff": "Special deployment unit of the police (Spezialeinsatzkommando)",
+    "kuerzel": "SEK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sg": {
+    "begriff": "Social court (Sozialgericht)",
+    "kuerzel": "SG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb": {
+    "begriff": "Social Code (Sozialgesetzbuch)",
+    "kuerzel": "SGB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-i": {
+    "begriff": "Social Code, Book I: general part (Allgemeiner Teil)",
+    "kuerzel": "SGB I",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-ii": {
+    "begriff": "Social Code, Book II: basic income support for jobseekers (Grundsicherung für Arbeitsuchende)",
+    "kuerzel": "SGB II",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-iii": {
+    "begriff": "Social Code, Book III: employment promotion (Arbeitsförderung)",
+    "kuerzel": "SGB III",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-ix": {
+    "begriff": "Social Code, Book IX: rehabilitation and participation of people with disabilities (Rehabilitation und Teilhabe)",
+    "kuerzel": "SGB IX",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-v": {
+    "begriff": "Social Code, Book V: statutory health insurance (Gesetzliche Krankenversicherung)",
+    "kuerzel": "SGB V",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-vi": {
+    "begriff": "Social Code, Book VI: statutory pension insurance (Gesetzliche Rentenversicherung)",
+    "kuerzel": "SGB VI",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-vii": {
+    "begriff": "Social Code, Book VII: statutory accident insurance (Gesetzliche Unfallversicherung)",
+    "kuerzel": "SGB VII",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-viii": {
+    "begriff": "Social Code, Book VIII: child and youth services (Kinder- und Jugendhilfe)",
+    "kuerzel": "SGB VIII",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-x": {
+    "begriff": "Social Code, Book X: social administrative procedure and social data protection (Sozialverwaltungsverfahren und Sozialdatenschutz)",
+    "kuerzel": "SGB X",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-xi": {
+    "begriff": "Social Code, Book XI: social long-term care insurance (Soziale Pflegeversicherung)",
+    "kuerzel": "SGB XI",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgb-xii": {
+    "begriff": "Social Code, Book XII: social assistance (Sozialhilfe)",
+    "kuerzel": "SGB XII",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sgg": {
+    "begriff": "Social Courts Act (Sozialgerichtsgesetz)",
+    "kuerzel": "SGG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "soko": {
+    "begriff": "Special investigation team (Sonderkommission)",
+    "kuerzel": "SOKO",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "sovd": {
+    "begriff": "Social Association of Germany (Sozialverband Deutschland e. V.)",
+    "kuerzel": "SoVD",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "spv": {
+    "begriff": "Social long-term care insurance (Soziale Pflegeversicherung)",
+    "kuerzel": "SPV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "stk": {
+    "begriff": "State security unit (Staatsschutzkommando)",
+    "kuerzel": "STK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "tbl": {
+    "begriff": "Deafblindness (Taubblindheit, severely disabled ID card)",
+    "kuerzel": "TBl",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "tk": {
+    "begriff": "Techniker health insurance fund (Techniker Krankenkasse)",
+    "kuerzel": "TK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ubskm": {
+    "begriff": "Independent Commissioner for Child Sexual Abuse Issues (Unabhängige Beauftragte für Fragen des sexuellen Kindesmissbrauchs)",
+    "kuerzel": "UBSKM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "uk": {
+    "begriff": "Public-sector accident insurance fund (Unfallkasse)",
+    "kuerzel": "UK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "ukask": {
+    "begriff": "Independent Commission for the Investigation of Child Sexual Abuse (Unabhängige Kommission zur Aufarbeitung sexuellen Kindesmissbrauchs)",
+    "kuerzel": "UKASK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "urt": {
+    "begriff": "Judgment (Urteil)",
+    "kuerzel": "Urt.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "va-versorgungsamt": {
+    "begriff": "Pensions office (Versorgungsamt)",
+    "kuerzel": "VA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "va-verwaltungsakt": {
+    "begriff": "Administrative act (Verwaltungsakt)",
+    "kuerzel": "VA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vb": {
+    "begriff": "Entitled to benefits (versorgungsberechtigt)",
+    "kuerzel": "VB",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vdk": {
+    "begriff": "Association of war-disabled persons, war survivors and social pensioners in Germany (Verband der Kriegsbeschädigten, Kriegshinterbliebenen und Sozialrentner Deutschlands)",
+    "kuerzel": "VdK",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "versmedv": {
+    "begriff": "Medical Care Ordinance (Versorgungsmedizin-Verordnung)",
+    "kuerzel": "VersMedV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vgl": {
+    "begriff": "Compare (vergleiche)",
+    "kuerzel": "vgl.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vi": {
+    "begriff": "Page (Seite)",
+    "kuerzel": "vi",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vkh": {
+    "begriff": "Legal aid in family proceedings (Verfahrenskostenhilfe)",
+    "kuerzel": "VKH",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vsa": {
+    "begriff": "Pensions office (Versorgungsamt)",
+    "kuerzel": "VSA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vvv": {
+    "begriff": "Administrative regulation (Verwaltungsvorschrift)",
+    "kuerzel": "vVV",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vwgo": {
+    "begriff": "Code of Administrative Court Procedure (Verwaltungsgerichtsordnung)",
+    "kuerzel": "VwGO",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "vwvfg": {
+    "begriff": "Administrative Procedure Act (Verwaltungsverfahrensgesetz)",
+    "kuerzel": "VwVfG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "wfbm": {
+    "begriff": "Sheltered workshop for people with disabilities (Werkstatt für behinderte Menschen)",
+    "kuerzel": "WfbM",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "wr": {
+    "begriff": "WEISSER RING victim support association (Weißer Ring)",
+    "kuerzel": "WR",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "z-b": {
+    "begriff": "For example (zum Beispiel)",
+    "kuerzel": "z. B.",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "zbfs": {
+    "begriff": "Bavarian Centre for Family and Social Affairs, the pensions office (Zentrum Bayern Familie und Soziales)",
+    "kuerzel": "ZBFS",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "zdg": {
+    "begriff": "Civilian Service Act (Zivildienstgesetz)",
+    "kuerzel": "ZDG",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "zka": {
+    "begriff": "Customs Criminological Office (Zollkriminalamt)",
+    "kuerzel": "ZKA",
+    "erklaerung": null,
+    "mehr_label": null
+  },
+  "zug": {
+    "begriff": "Arrest unit of the police (Zugriffseinheit)",
+    "kuerzel": "ZUG",
+    "erklaerung": null,
     "mehr_label": null
   }
 }

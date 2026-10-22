@@ -1189,9 +1189,25 @@ Dialog selbst bekommt einen eigenen axe-Lauf und einen eigenen Abschnitt in
 ### 17.2 Glossar
 
 Eigene Tabelle (`glossary_terms`), eigene Adresse (`/glossar`), Filament-Resource.
-Alphabetisch, mit Buchstabenleiste aus echten Ankern — ohne JavaScript bedienbar,
-und ein Filter ist es bewusst nicht: Die vollständige Liste bleibt sichtbar, damit
-`Strg+F` alles findet.
+Alphabetisch, mit Buchstabenleiste aus echten Ankern — ohne JavaScript bedienbar.
+
+**Seit KEV-153** (Taddis Abkürzungsverzeichnis, rund 200 Einträge):
+
+- Die Seite `glossar` im Panel trägt Einleitung, Titel und Titelbild; der
+  `GlossarController` zeigt die Liste darunter.
+- Die **Erklärung ist freiwillig**. „AOK — Allgemeine Ortskrankenkasse“ ist schon
+  die Antwort; Pflicht ist sie nur ohne Abkürzung. Ohne Erklärung steht die
+  Auflösung als `<dd>` zur Abkürzung im `<dt>`.
+- **Suchfeld über der Liste** (`?suche=`). Ohne JavaScript filtert der Server, mit
+  JavaScript die Seite beim Tippen (`resources/js/glossar.js`), ohne die Adresse
+  zu ändern. Was passt, regelt `GlossaryTerm::passt()`: die Abkürzung ohne
+  Leerzeichen und Punkte („idr“ findet „i. d. R.“), der übrige Text mit
+  Wortgrenzen („sgb“ findet nicht „BSG Bundessozialgericht“). Leer zeigt es
+  wieder alles, `Strg+F` findet weiterhin jeden Eintrag.
+- **Suche der Website:** Abkürzungen zählen auch unter drei Zeichen (AU, KK),
+  ein genauer Treffer steht vorn, ohne Erklärung aber hinter einer Seite zum
+  Thema. Höchstens fünf Glossareinträge je Suche; passen mehr, verweist die
+  Trefferliste mit derselben Suche ins Glossar (`Suche::HOECHSTENS_GLOSSAR`).
 
 **Jeder Eintrag hat ein eigenes Sprungziel** (`/glossar#gdb`). Genau das steht in
 einer Antwort des Vereins auf eine Anfrage — ein Glossar, aus dem man keinen
@@ -1205,10 +1221,10 @@ dort niemand sucht.
 > ⚠️ Vom Startbestand sind nur die Einträge veröffentlicht, deren Text sich auf
 > eine Aussage des Vereins selbst stützt (OEG und SGB XIV stehen wörtlich im
 > Protokoll; SER und IFG sind Auflösungen von Abkürzungen aus den eigenen
-> AG-Namen). GdB, Pflegegrad und Persönliches Budget liegen als **Entwurf** in
-> der Datenbank. Was hier steht, liest jemand, der danach über eine Frist
-> entscheidet — Rechtsauskünfte schreiben wir nicht. Der Verein hat für solche
-> Fälle eigene Anwälte zugesagt.
+> AG-Namen). GdB, Pflegegrad und Persönliches Budget lagen als **Entwurf** mit
+> unserer Erklärung in der Datenbank; seit KEV-153 stehen sie mit Taddis
+> Abkürzung sichtbar da, ohne diese Erklärung. Was hier steht, liest jemand, der
+> danach über eine Frist entscheidet — Rechtsauskünfte schreiben wir nicht.
 
 ### 17.3 Dokumentenliste mit Verweisen nach draußen
 

@@ -120,7 +120,8 @@ class GlossarTest extends TestCase
         $html = $this->get('/glossar')->getContent();
 
         $this->assertStringContainsString('<abbr title="Grad der Behinderung"', $html);
-        $this->assertStringContainsString('Grad der Behinderung</span>', $html);
+        // Seit KEV-153 als Beschreibung zur Abkürzung: <dt>GdB</dt><dd>Grad …</dd>.
+        $this->assertMatchesRegularExpression('/<dd[^>]*>Grad der Behinderung<\/dd>/', $html);
     }
 
     public function test_ohne_uebersetzung_faellt_das_glossar_sichtbar_zurueck(): void

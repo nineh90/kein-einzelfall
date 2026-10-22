@@ -9,7 +9,9 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class GlossaryTermsTable
 {
@@ -17,13 +19,13 @@ class GlossaryTermsTable
     {
         return $table
             ->columns([
-                TextColumn::make('kuerzel')->label('Abkürzung')->searchable()->placeholder('—'),
+                TextColumn::make('kuerzel')->label('Abkürzung')->searchable()->sortable()->placeholder('—'),
 
                 TextColumn::make('begriff')->label('Begriff')->searchable()->sortable()
                     ->weight('medium')->wrap()
                     // Die ersten Worte der Erklärung als Vorschau: Ohne sie
                     // sähe die Liste bei „SGB XIV“ und „SGB IX“ gleich aus.
-                    ->description(fn ($record) => \Illuminate\Support\Str::limit($record?->erklaerung, 90)),
+                    ->description(fn ($record) => \Illuminate\Support\Str::limit((string) $record?->erklaerung, 90)),
 
                 TextColumn::make('locale')->label('Sprache')->badge()
                     ->formatStateUsing(fn ($state) => Language::finden($state)?->label_deutsch ?? $state),
@@ -31,14 +33,21 @@ class GlossaryTermsTable
                 IconColumn::make('published_at')->label('Sichtbar')->alignCenter()->boolean()
                     ->getStateUsing(fn ($record) => $record?->published_at?->isPast() === true),
             ])
-            // Nach dem, was auf der Seite vorn steht — sonst sucht die
-            // Redaktion einen Eintrag in einer anderen Reihenfolge, als sie ihn
-            // im Glossar sieht.
-            ->defaultSort('begriff')
+            // Nach dem, was auf der Seite vorn steht (die Abkürzung, sonst der
+            // Begriff) — sonst sucht die Redaktion einen Eintrag in einer
+            // anderen Reihenfolge, als sie ihn im Glossar sieht.
+            ->defaultSort(fn (Builder $query) => $query->orderByRaw("COALESCE(NULLIF(kuerzel, ''), begriff)"))
             ->filters([
                 SelectFilter::make('locale')
                     ->label('Sprache')
                     ->options(fn () => Language::alle()->pluck('label_deutsch', 'code')->all()),
+                // Entwürfe finden (KEV-153: zwei Abkürzungen aus Taddis Liste
+                // warten auf Klärung).
+                TernaryFilter::make('published_at')
+                    ->label('Sichtbar')
+                    ->nullable()
+                    ->trueLabel('Nur sichtbare')
+                    ->falseLabel('Nur Entwürfe'),
             ])
             ->recordActions([EditAction::make()])
             ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])])

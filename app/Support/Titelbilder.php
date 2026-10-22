@@ -86,6 +86,9 @@ class Titelbilder
         // KEV-144: Bild von Taddi (Drive-Ordner „3. Wissen“), Papierstapel
         // mit Stempel. Ohne Unterzeile.
         'atteste' => null,
+        // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
+        // SER“), Zettelkasten. Ohne Unterzeile.
+        'glossar' => null,
     ];
 
     /**
@@ -166,6 +169,9 @@ class Titelbilder
      *  - Atteste: Papierstapel und Holzstempel (KEV-144). Rechts um Wand
      *    verlängert wie die Jahresberichte, Motiv zwischen 36 und 90 % der
      *    Höhe; mit 85 % bleibt über dem Stempel auch bei 2560 px Luft.
+     *  - Glossar: Zettelkasten aus Holz (KEV-153). Rechts um Wand verlängert,
+     *    Karten ab 31 %, Kastenboden bei 97 % der Höhe; mit 90 % bleiben
+     *    Karten und Griff auch bei 2560 px ganz.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -186,6 +192,7 @@ class Titelbilder
         self::ORDNER.'/red-flags.webp' => 30,
         self::ORDNER.'/schutz-und-wertekonzept.webp' => 65,
         self::ORDNER.'/atteste.webp' => 85,
+        self::ORDNER.'/glossar.webp' => 90,
     ];
 
     /**
@@ -289,6 +296,12 @@ class Titelbilder
             // die ältere Titelbild-Migration auf frischer Datenbank, gibt es
             // sie noch nicht; die neue ruft setzen() danach noch einmal auf.
             if (! Schema::hasColumn('pages', 'untertitel')) {
+                continue;
+            }
+
+            // Ohne Unterzeile (null) nichts zu tun. PHP 8.5 meldet null als
+            // Schlüssel im Wörterbuch sonst als veraltet.
+            if ($untertitel === null) {
                 continue;
             }
 

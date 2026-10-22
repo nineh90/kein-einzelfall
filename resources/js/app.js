@@ -20,6 +20,7 @@
 import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
 import { inhaltsverzeichnisVerdrahten } from './inhaltsverzeichnis'
 import { galerieVerdrahten } from './galerie'
+import { glossarVerdrahten } from './glossar'
 import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
@@ -46,6 +47,9 @@ inhaltsverzeichnisVerdrahten()
 
 // Nur auf der Seite einer Messe o. Ä. mit Fotos (KEV-132).
 galerieVerdrahten()
+
+// Nur im Glossar: Filtern beim Tippen (KEV-153).
+glossarVerdrahten()
 
 // Steht bewusst hinter der Toolbar. Scheitert der Aufruf, bleibt der Hinweis als lesbarer
 // Block stehen und lässt sich nur nicht wegklicken — unschön, aber harmlos.

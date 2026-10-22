@@ -141,6 +141,14 @@ class Suche
     private const HOECHSTENS = 12;
 
     /**
+     * Höchstens so viele Glossareinträge unter den Treffern (KEV-153). Seit
+     * dem Abkürzungsverzeichnis gibt es rund 200; „Krankenkasse“ trifft ein
+     * Dutzend davon (AOK, BKK, DAK …) und drängte sonst jede Seite aus der
+     * Liste. Für den Rest gibt es den Verweis ins Glossar mit derselben Suche.
+     */
+    private const HOECHSTENS_GLOSSAR = 5;
+
+    /**
      * Rechtstexte werden nur über Titel und Beschreibung gefunden, nicht über
      * ihren Fliesstext (08.10.2026). Das Beispiel der Suchseite „die glauben
      * mir nicht“ lieferte sonst Impressum (Bild*nachweis*) und
@@ -159,20 +167,34 @@ class Suche
     private array $nurWortanfang = [];
 
     /**
-     * @return array{treffer: list<array<string, mixed>>, krise: bool, begriffe: list<string>}
+     * Die Anfrage in Stücken zum Vergleich mit Abkürzungen, auch Wörter unter
+     * drei Zeichen: „AU“, „KK“ und „SG“ sind Abkürzungen, die genau so im
+     * Bescheid stehen. Einzeln, zu zweit und zu dritt zusammengezogen, damit
+     * „SGB XIV“ und „i. d. R.“ als ganze Abkürzung erkannt werden.
+     *
+     * @var array{genau: list<string>, klein: list<string>}
+     */
+    private array $abkuerzungen = ['genau' => [], 'klein' => []];
+
+    /**
+     * @return array{treffer: list<array<string, mixed>>, krise: bool, begriffe: list<string>, im_glossar: int}
      */
     public function suchen(string $anfrage, string $sprache = 'de'): array
     {
         $krise = $this->kriseErkannt($anfrage);
         $begriffe = $this->begriffe($anfrage);
+        $this->abkuerzungen = $this->stuecke($anfrage);
 
-        if ($begriffe === []) {
-            return ['treffer' => [], 'krise' => $krise, 'begriffe' => []];
+        if ($begriffe === [] && $this->abkuerzungen['klein'] === []) {
+            return ['treffer' => [], 'krise' => $krise, 'begriffe' => [], 'im_glossar' => 0];
         }
+
+        $glossar = $this->glossar($begriffe, $sprache);
+        usort($glossar, fn ($a, $b) => $b['punkte'] <=> $a['punkte']);
 
         $treffer = array_merge(
             $this->seiten($begriffe, $sprache),
-            $this->glossar($begriffe, $sprache),
+            array_slice($glossar, 0, self::HOECHSTENS_GLOSSAR),
             $this->gruppen($begriffe),
             $this->oeffentlichkeitsarbeit($begriffe),
         );
@@ -183,6 +205,36 @@ class Suche
             'treffer' => array_slice($treffer, 0, self::HOECHSTENS),
             'krise' => $krise,
             'begriffe' => $begriffe,
+            // Wie viele Einträge die Suche im Glossar mit derselben Eingabe
+            // zeigt. Für den Verweis „Alle … im Glossar“ unter den Treffern.
+            // Erst ab drei Zeichen: „au“ steckt in jedem dritten Wort.
+            'im_glossar' => mb_strlen(GlossaryTerm::kompakt($anfrage)) < 3 ? 0
+                : GlossaryTerm::veroeffentlicht()->where('locale', $sprache)->get()->filter->passt($anfrage)->count(),
+        ];
+    }
+
+    /**
+     * @return array{genau: list<string>, klein: list<string>}
+     */
+    private function stuecke(string $anfrage): array
+    {
+        $woerter = preg_split('/[^\p{L}\p{N}]+/u', trim($anfrage), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $genau = [];
+
+        foreach ($woerter as $i => $wort) {
+            for ($laenge = 1; $laenge <= 3 && $i + $laenge <= count($woerter); $laenge++) {
+                $genau[] = implode('', array_slice($woerter, $i, $laenge));
+            }
+        }
+
+        $genau = array_values(array_unique($genau));
+
+        return [
+            'genau' => $genau,
+            'klein' => array_values(array_unique(array_filter(
+                array_map(fn ($stueck) => GlossaryTerm::kompakt($stueck), $genau),
+                fn ($stueck) => mb_strlen($stueck) >= 2,
+            ))),
         ];
     }
 
@@ -311,9 +363,12 @@ class Suche
         foreach (GlossaryTerm::where('locale', $sprache)->whereNotNull('published_at')->get() as $eintrag) {
             // Ein Glossarbegriff, der genau getroffen wird, ist fast immer das,
             // wonach jemand sucht — „Was heisst GdB?" ist eine der häufigsten
-            // Fragen überhaupt. Deshalb höher bewertet als ein Seitentitel.
-            $punkte = 14 * $this->wieOft($begriffe, $eintrag->begriff.' '.(string) $eintrag->kuerzel)
-                + 2 * $this->wieOft($begriffe, (string) $eintrag->erklaerung);
+            // Fragen überhaupt. Deshalb höher bewertet als ein Seitentitel —
+            // seit KEV-153 nur, wenn der Eintrag auch etwas erklärt
+            // (abkuerzungGetroffen()).
+            $punkte = $this->abkuerzungGetroffen((string) $eintrag->kuerzel, filled($eintrag->erklaerung))
+                + 14 * $this->wieOftImGlossar($begriffe, $eintrag->begriff.' '.(string) $eintrag->kuerzel)
+                + 2 * $this->wieOftImGlossar($begriffe, (string) $eintrag->erklaerung);
 
             if ($punkte > 0) {
                 $treffer[] = [
@@ -330,6 +385,64 @@ class Suche
         }
 
         return $treffer;
+    }
+
+    /**
+     * Wer genau eine Abkürzung eintippt, will genau diese (KEV-153). Gleiche
+     * Schreibweise zählt mehr als nur dieselben Buchstaben: „AG 01“ meint die
+     * Arbeitsgruppe, nicht „aG“ (außergewöhnliche Gehbehinderung).
+     *
+     * Voll zählt das nur mit Erklärung. Steht im Eintrag bloß die Auflösung
+     * („GdB — Grad der Behinderung“), hilft eine Seite zum Thema mehr; sie
+     * soll dann vorn stehen, der Eintrag gleich dahinter.
+     */
+    private function abkuerzungGetroffen(string $kuerzel, bool $mitErklaerung): int
+    {
+        $vereinfacht = GlossaryTerm::kompakt($kuerzel);
+
+        if (mb_strlen($vereinfacht) < 2) {
+            return 0;
+        }
+
+        $buchstaben = preg_replace('/[^\p{L}\p{N}]+/u', '', $kuerzel);
+
+        if (in_array($buchstaben, $this->abkuerzungen['genau'], true)) {
+            return $mitErklaerung ? 40 : 20;
+        }
+
+        // Bei zwei Buchstaben mit Kleinbuchstaben darin (aG, Bl, Dx) trägt
+        // die Schreibweise die Bedeutung. Dort zählt nur die genaue.
+        $kurzUndGemischt = mb_strlen($vereinfacht) <= 2 && $buchstaben !== mb_strtoupper($buchstaben);
+
+        if ($kurzUndGemischt || ! in_array($vereinfacht, $this->abkuerzungen['klein'], true)) {
+            return 0;
+        }
+
+        return $mitErklaerung ? 25 : 10;
+    }
+
+    /**
+     * Wie wieOft(), aber kurze Suchwörter nur am Wortanfang. Im Glossar
+     * stehen rund 200 kurze Einträge; „bsa“ fand sonst „Absatz“ und
+     * „Halbsatz“. Ab fünf Zeichen auch mitten im Wort, damit „Krankenkasse“
+     * die „Ortskrankenkasse“ findet.
+     *
+     * @param  list<string>  $begriffe
+     */
+    private function wieOftImGlossar(array $begriffe, string $text): int
+    {
+        $vorher = $this->nurWortanfang;
+
+        foreach ($begriffe as $begriff) {
+            if (mb_strlen($begriff) < 5) {
+                $this->nurWortanfang[$begriff] = true;
+            }
+        }
+
+        $anzahl = $this->wieOft($begriffe, $text);
+        $this->nurWortanfang = $vorher;
+
+        return $anzahl;
     }
 
     /**

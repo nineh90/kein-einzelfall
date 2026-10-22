@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GlossaryTerm;
 use App\Models\Language;
 use App\Models\Page;
+use Illuminate\Http\Request;
 
 /**
  * Glossar — Abkürzungen und Fachbegriffe.
@@ -16,9 +17,20 @@ use App\Models\Page;
  */
 class GlossarController extends Controller
 {
-    public function index()
+    /** Länger tippt niemand eine Abkürzung oder einen Begriff. */
+    private const HOECHSTENS_ZEICHEN = 100;
+
+    public function index(Request $request)
     {
         $sprache = Language::aktuell();
+
+        /*
+         * Suche im Glossar (KEV-153). Über GET, damit sie ohne JavaScript
+         * funktioniert und die Suche der Website direkt hierher verlinken
+         * kann (/glossar?suche=SGB). Mit JavaScript filtert die Liste schon
+         * beim Tippen (resources/js/glossar.js), ohne die Adresse zu ändern.
+         */
+        $suche = mb_substr(trim((string) $request->query('suche', '')), 0, self::HOECHSTENS_ZEICHEN);
         $ersatzsprache = null;
 
         $gruppen = GlossaryTerm::nachBuchstaben($sprache->code);
@@ -42,11 +54,15 @@ class GlossarController extends Controller
         return view('glossar.index', [
             'gruppen' => $gruppen,
             'ersatzsprache' => $ersatzsprache,
+            'suche' => $suche,
 
             /*
              * Optionale Einleitung aus dem Panel — dasselbe Muster wie bei
              * /veranstaltungen. Gibt es die Seite nicht, steht eben nur die
              * Liste da. Der Text gehört dem Verein, wir erfinden hier keinen.
+             *
+             * Seit KEV-153 kommen auch Titel, Titelbild und Beschreibung von
+             * dort, wenn die Seite sie trägt.
              */
             'einleitung' => Page::veroeffentlicht()
                 ->with('blocks')

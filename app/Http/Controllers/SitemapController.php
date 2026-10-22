@@ -35,6 +35,11 @@ class SitemapController extends Controller
             ...$this->oeffentlichkeitsarbeit(),
         ];
 
+        // Jede Adresse einmal. /veranstaltungen und seit KEV-153 /glossar
+        // sind zugleich Übersicht und Seite (deren Einleitung im Panel); die
+        // Seite steht vorn und gewinnt, sie kennt das Änderungsdatum.
+        $eintraege = collect($eintraege)->unique('url')->values()->all();
+
         return response()
             ->view('sitemap', ['eintraege' => $eintraege])
             ->header('Content-Type', 'application/xml; charset=UTF-8');

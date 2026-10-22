@@ -594,6 +594,49 @@ console.log('\nGalerie einer Messe')
     await ohne.context().close()
 }
 
+// --- Suche im Glossar (KEV-153) --------------------------------------------
+
+console.log('\nSuche im Glossar')
+{
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/glossar' })
+        const sichtbar = () => s.locator('[data-glossar-eintrag]:visible').count()
+        const status = s.locator('[data-glossar-status]')
+        const gesamt = await sichtbar()
+
+        await s.fill('#glossar-suche', 'sgb')
+        await s.waitForTimeout(400)
+        const sgb = await sichtbar()
+        pruefe(`${breite}px: Tippen filtert die Liste`, sgb > 1 && sgb < 20, `${sgb} von ${gesamt}`)
+        pruefe(`${breite}px: Trefferzahl wird angesagt`, (await status.innerText()).trim() === `Treffer: ${sgb} von ${gesamt}`)
+        pruefe(`${breite}px: Adresse bleibt ohne Suchwort`, !s.url().includes('suche='), s.url())
+        pruefe(`${breite}px: Buchstaben ohne Treffer verschwinden`, await s.locator('[data-glossar-sprung]:visible').count() === 1)
+
+        await s.fill('#glossar-suche', 'idr')
+        await s.waitForTimeout(400)
+        pruefe(`${breite}px: „idr“ findet „i. d. R.“`, await s.locator('#i-d-r').isVisible())
+
+        await s.fill('#glossar-suche', 'xqzv')
+        await s.waitForTimeout(400)
+        pruefe(`${breite}px: ohne Treffer der Weg in die Websuche`, await s.locator('[data-glossar-leer]').isVisible()
+            && (await s.locator('[data-glossar-websuche]').getAttribute('href')).endsWith('?q=xqzv'))
+
+        await s.locator('[data-glossar-zuruecksetzen]').click()
+        pruefe(`${breite}px: „Alle zeigen“ setzt zurück`, await sichtbar() === gesamt)
+
+        await s.context().close()
+    }
+
+    // Ohne JavaScript filtert der Server.
+    const ohne = await oeffnen({ js: false, pfad: '/glossar' })
+    await ohne.fill('#glossar-suche', 'SGB')
+    await ohne.press('#glossar-suche', 'Enter')
+    await ohne.waitForLoadState('load')
+    pruefe('ohne JS: Absenden filtert über die Adresse', ohne.url().includes('suche=SGB')
+        && await ohne.locator('[data-glossar-eintrag]:visible').count() < 20)
+    await ohne.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

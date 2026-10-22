@@ -234,7 +234,7 @@ class UebersetzungenSeeder extends Seeder
                 'slug' => $begriff->slug,
                 'kuerzel' => $en['kuerzel'] ?? $begriff->kuerzel,
                 'begriff' => $en['begriff'],
-                'erklaerung' => $en['erklaerung'],
+                'erklaerung' => $en['erklaerung'] ?? null,
                 'mehr_url' => $begriff->mehr_url,
                 'mehr_label' => $en['mehr_label'] ?? $begriff->mehr_label,
                 'published_at' => $begriff->published_at,

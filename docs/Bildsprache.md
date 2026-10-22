@@ -86,6 +86,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |
+| Glossar | Zettelkasten aus Holz mit Karteikarten; von Taddi geliefert (KEV-153, Drive-Ordner „3. Wissen“, „Abkürzungen SER“; vorher kein Bild). Rechts um ruhige Wand verlängert (2,58 : 1) wie die Jahresberichte, ausgerichtet auf 90 % |
 | Atteste | Papierstapel und Holzstempel auf warmem Tisch; von Taddi geliefert (KEV-144, Drive-Ordner „3. Wissen“). Rechts um ruhige Wand verlängert (2,58 : 1) wie die Jahresberichte: Im Original reichte der Stapel bis 59 % der Breite und lag unter dem Titel. Ausgerichtet auf 85 % |
 | Publikationen | Broschürenstapel und Lesebrille |
 | Veranstaltungen | zwei Holzstühle und ein runder Tisch mit zwei Mikrofonen vor warmer Wand; von Taddi geliefert (KEV-148, statt Becher und Vase), gleicher Dateiname, ausgerichtet auf 75 %: unten ausgerichtet fehlten ab 1440 px die Stuhllehnen. Gilt auch für die Terminübersicht |

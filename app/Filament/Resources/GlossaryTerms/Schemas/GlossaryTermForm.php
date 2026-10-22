@@ -76,7 +76,10 @@ class GlossaryTermForm
                 ->schema([
                     Textarea::make('erklaerung')
                         ->label('In eigenen Worten')
-                        ->required()
+                        // Seit KEV-153 freiwillig: Bei „AOK — Allgemeine
+                        // Ortskrankenkasse“ ist die Auflösung schon die
+                        // Antwort. Ohne Abkürzung bliebe sonst nur ein Wort.
+                        ->required(fn ($get) => blank($get('kuerzel')))
                         ->rows(4)
                         /*
                          * Der Hinweis auf die Länge ist kein Stilwunsch. Wer
@@ -88,7 +91,8 @@ class GlossaryTermForm
                         ->helperText('Zwei, drei Sätze reichen. Wer hier nachschlägt, sitzt '
                             .'meist gerade über einem Bescheid und braucht eine Antwort, '
                             .'keine zweite Recherche. Weiterführendes gehört in den '
-                            .'Verweis darunter.'),
+                            .'Verweis darunter. Bei einer Abkürzung kann das Feld leer '
+                            .'bleiben, dann steht nur die Auflösung da.'),
 
                     TextInput::make('mehr_url')
                         ->label('Weiterführender Verweis — Ziel')

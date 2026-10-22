@@ -1,0 +1,996 @@
+[
+  {
+    "slug": "paragraf",
+    "kuerzel": "§ / §§",
+    "begriff": "Paragraf / Paragrafen"
+  },
+  {
+    "slug": "1-kl",
+    "kuerzel": "1. Kl.",
+    "begriff": "1. Klasse (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "abs",
+    "kuerzel": "Abs.",
+    "begriff": "Absatz"
+  },
+  {
+    "slug": "a-f",
+    "kuerzel": "a. F.",
+    "begriff": "alte Fassung"
+  },
+  {
+    "slug": "ag",
+    "kuerzel": "aG",
+    "begriff": "außergewöhnliche Gehbehinderung (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "aiz",
+    "kuerzel": "AIZ",
+    "begriff": "Anti-Terror-Einsatzzentrum"
+  },
+  {
+    "slug": "ak",
+    "kuerzel": "AK",
+    "begriff": "Arbeitskreis (polizeiliche Ermittlung)"
+  },
+  {
+    "slug": "alt",
+    "kuerzel": "Alt.",
+    "begriff": "Alternative"
+  },
+  {
+    "slug": "aok",
+    "kuerzel": "AOK",
+    "begriff": "Allgemeine Ortskrankenkasse"
+  },
+  {
+    "slug": "ar",
+    "kuerzel": "AR",
+    "begriff": "Ausgleichsrente"
+  },
+  {
+    "slug": "art",
+    "kuerzel": "Art.",
+    "begriff": "Artikel"
+  },
+  {
+    "slug": "au",
+    "kuerzel": "AU",
+    "begriff": "Arbeitsunfähigkeit"
+  },
+  {
+    "slug": "aub",
+    "kuerzel": "AUB",
+    "begriff": "Arbeitsunfähigkeitsbescheinigung"
+  },
+  {
+    "slug": "ausglv",
+    "kuerzel": "AusglV",
+    "begriff": "Ausgleichsrentenverordnung"
+  },
+  {
+    "slug": "az",
+    "kuerzel": "Az.",
+    "begriff": "Aktenzeichen"
+  },
+  {
+    "slug": "b",
+    "kuerzel": "B",
+    "begriff": "Begleitperson (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "ba",
+    "kuerzel": "BA",
+    "begriff": "Bundesagentur für Arbeit"
+  },
+  {
+    "slug": "bag",
+    "kuerzel": "BAG",
+    "begriff": "Berufsausübungsgemeinschaft (Gemeinschaftspraxis)"
+  },
+  {
+    "slug": "barmer",
+    "kuerzel": "BARMER",
+    "begriff": "Barmer Ersatzkasse"
+  },
+  {
+    "slug": "bas",
+    "kuerzel": "BAS",
+    "begriff": "Bundesamt für Soziale Sicherung"
+  },
+  {
+    "slug": "bbb",
+    "kuerzel": "BBB",
+    "begriff": "besondere berufliche Betroffenheit"
+  },
+  {
+    "slug": "bem",
+    "kuerzel": "BEM",
+    "begriff": "Betriebliches Eingliederungsmanagement"
+  },
+  {
+    "slug": "berh",
+    "kuerzel": "BerH",
+    "begriff": "Beratungshilfe"
+  },
+  {
+    "slug": "beschl",
+    "kuerzel": "Beschl.",
+    "begriff": "Beschluss"
+  },
+  {
+    "slug": "bfa",
+    "kuerzel": "BfA",
+    "begriff": "Bundesversicherungsanstalt für Angestellte (heute Deutsche Rentenversicherung Bund)"
+  },
+  {
+    "slug": "bfdi",
+    "kuerzel": "BfDI",
+    "begriff": "Bundesbeauftragte für den Datenschutz und die Informationsfreiheit"
+  },
+  {
+    "slug": "bfv",
+    "kuerzel": "BfV",
+    "begriff": "Bundesamt für Verfassungsschutz"
+  },
+  {
+    "slug": "bgb",
+    "kuerzel": "BGB",
+    "begriff": "Bürgerliches Gesetzbuch"
+  },
+  {
+    "slug": "bgbl",
+    "kuerzel": "BGBl.",
+    "begriff": "Bundesgesetzblatt"
+  },
+  {
+    "slug": "bgm",
+    "kuerzel": "BGM",
+    "begriff": "Betriebliches Gesundheitsmanagement"
+  },
+  {
+    "slug": "bka",
+    "kuerzel": "BKA",
+    "begriff": "Bundeskriminalamt"
+  },
+  {
+    "slug": "bkk",
+    "kuerzel": "BKK",
+    "begriff": "Betriebskrankenkasse"
+  },
+  {
+    "slug": "bl",
+    "kuerzel": "Bl",
+    "begriff": "Blindheit (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "bmas",
+    "kuerzel": "BMAS",
+    "begriff": "Bundesministerium für Arbeit und Soziales"
+  },
+  {
+    "slug": "bmg",
+    "kuerzel": "BMG",
+    "begriff": "Bundesministerium für Gesundheit"
+  },
+  {
+    "slug": "bpol",
+    "kuerzel": "BPOL",
+    "begriff": "Bundespolizei"
+  },
+  {
+    "slug": "bri",
+    "kuerzel": "BRi",
+    "begriff": "Begutachtungs-Richtlinien"
+  },
+  {
+    "slug": "bsa",
+    "kuerzel": "BSA",
+    "begriff": "Berufsschadensausgleich"
+  },
+  {
+    "slug": "bschav",
+    "kuerzel": "BSchAV",
+    "begriff": "Berufsschadensausgleichsverordnung"
+  },
+  {
+    "slug": "bsg",
+    "kuerzel": "BSG",
+    "begriff": "Bundessozialgericht"
+  },
+  {
+    "slug": "bthg",
+    "kuerzel": "BTHG",
+    "begriff": "Bundesteilhabegesetz"
+  },
+  {
+    "slug": "bt-drs",
+    "kuerzel": "BT-Drs.",
+    "begriff": "Bundestagsdrucksache"
+  },
+  {
+    "slug": "bverfg",
+    "kuerzel": "BVerfG",
+    "begriff": "Bundesverfassungsgericht"
+  },
+  {
+    "slug": "bvg",
+    "kuerzel": "BVG",
+    "begriff": "Bundesversorgungsgesetz"
+  },
+  {
+    "slug": "bzw",
+    "kuerzel": "bzw.",
+    "begriff": "beziehungsweise"
+  },
+  {
+    "slug": "dak",
+    "kuerzel": "DAK",
+    "begriff": "Deutsche Angestellten-Krankenkasse"
+  },
+  {
+    "slug": "drv",
+    "kuerzel": "DRV",
+    "begriff": "Deutsche Rentenversicherung"
+  },
+  {
+    "slug": "drv-bund",
+    "kuerzel": "DRV Bund",
+    "begriff": "Deutsche Rentenversicherung Bund"
+  },
+  {
+    "slug": "dsgvo",
+    "kuerzel": "DSGVO",
+    "begriff": "Datenschutz-Grundverordnung (auch DS-GVO)"
+  },
+  {
+    "slug": "dx",
+    "kuerzel": "Dx",
+    "begriff": "Diagnose"
+  },
+  {
+    "slug": "egh",
+    "kuerzel": "EGH",
+    "begriff": "Eingliederungshilfe"
+  },
+  {
+    "slug": "ehs",
+    "kuerzel": "EHS",
+    "begriff": "Ergänzendes Hilfesystem"
+  },
+  {
+    "slug": "em",
+    "kuerzel": "EM",
+    "begriff": "Erwerbsminderung"
+  },
+  {
+    "slug": "emr",
+    "kuerzel": "EMR",
+    "begriff": "Erwerbsminderungsrente"
+  },
+  {
+    "slug": "epa",
+    "kuerzel": "ePA",
+    "begriff": "elektronische Patientenakte"
+  },
+  {
+    "slug": "esf",
+    "kuerzel": "ESF",
+    "begriff": "Entschädigungsfonds für Schäden aus Kfz-Unfällen nach § 12 Pflichtversicherungsgesetz"
+  },
+  {
+    "slug": "etc",
+    "kuerzel": "etc.",
+    "begriff": "et cetera"
+  },
+  {
+    "slug": "eutb",
+    "kuerzel": "EUTB",
+    "begriff": "Ergänzende unabhängige Teilhabeberatung"
+  },
+  {
+    "slug": "fa",
+    "kuerzel": "FA",
+    "begriff": "Facharzt"
+  },
+  {
+    "slug": "ff",
+    "kuerzel": "ff.",
+    "begriff": "fortfolgende (z. B. § 12 ff.)"
+  },
+  {
+    "slug": "fsm",
+    "kuerzel": "FSM",
+    "begriff": "Fonds Sexueller Missbrauch"
+  },
+  {
+    "slug": "g",
+    "kuerzel": "G",
+    "begriff": "Beeinträchtigung der Bewegungsfähigkeit (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "ga",
+    "kuerzel": "GA",
+    "begriff": "Gutachten"
+  },
+  {
+    "slug": "g-ba",
+    "kuerzel": "G-BA",
+    "begriff": "Gemeinsamer Bundesausschuss"
+  },
+  {
+    "slug": "gdb",
+    "kuerzel": "GdB",
+    "begriff": "Grad der Behinderung",
+    "vorhanden": true
+  },
+  {
+    "slug": "gds",
+    "kuerzel": "GdS",
+    "begriff": "Grad der Schädigungsfolgen"
+  },
+  {
+    "slug": "gem",
+    "kuerzel": "gem.",
+    "begriff": "gemäß"
+  },
+  {
+    "slug": "ggf",
+    "kuerzel": "ggf.",
+    "begriff": "gegebenenfalls"
+  },
+  {
+    "slug": "gkv",
+    "kuerzel": "GKV",
+    "begriff": "Gesetzliche Krankenversicherung"
+  },
+  {
+    "slug": "gkv-sv",
+    "kuerzel": "GKV-SV",
+    "begriff": "GKV-Spitzenverband"
+  },
+  {
+    "slug": "gl",
+    "kuerzel": "Gl",
+    "begriff": "Gehörlosigkeit (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "gr",
+    "kuerzel": "GR",
+    "begriff": "Grundrente (OEG)"
+  },
+  {
+    "slug": "gsg-9",
+    "kuerzel": "GSG 9",
+    "begriff": "Grenzschutzgruppe 9 (polizeiliche Spezialeinheit)"
+  },
+  {
+    "slug": "gstfsm",
+    "kuerzel": "GStFSM",
+    "begriff": "Geschäftsstelle „Fonds Sexueller Missbrauch“"
+  },
+  {
+    "slug": "h",
+    "kuerzel": "H",
+    "begriff": "Hilflosigkeit (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "ha",
+    "kuerzel": "HA",
+    "begriff": "Hausarzt"
+  },
+  {
+    "slug": "havs",
+    "kuerzel": "HAVS",
+    "begriff": "Hessisches Amt für Versorgung und Soziales"
+  },
+  {
+    "slug": "hek",
+    "kuerzel": "HEK",
+    "begriff": "Hanseatische Krankenkasse"
+  },
+  {
+    "slug": "hkk",
+    "kuerzel": "hkk",
+    "begriff": "Handelskrankenkasse"
+  },
+  {
+    "slug": "hs",
+    "kuerzel": "HS",
+    "begriff": "hochgradig sehbehindert (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "hs-halbsatz",
+    "kuerzel": "Hs.",
+    "begriff": "Halbsatz"
+  },
+  {
+    "slug": "icd",
+    "kuerzel": "ICD",
+    "begriff": "Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme"
+  },
+  {
+    "slug": "idf",
+    "kuerzel": "idF.",
+    "begriff": "in der Fassung"
+  },
+  {
+    "slug": "i-d-r",
+    "kuerzel": "i. d. R.",
+    "begriff": "in der Regel"
+  },
+  {
+    "slug": "ifg",
+    "kuerzel": "IFG",
+    "begriff": "Informationsfreiheitsgesetz",
+    "vorhanden": true
+  },
+  {
+    "slug": "ifsg",
+    "kuerzel": "IfSG",
+    "begriff": "Infektionsschutzgesetz"
+  },
+  {
+    "slug": "ikk",
+    "kuerzel": "IKK",
+    "begriff": "Innungskrankenkasse"
+  },
+  {
+    "slug": "interpol",
+    "kuerzel": "INTERPOL",
+    "begriff": "Internationale Kriminalpolizeiliche Organisation"
+  },
+  {
+    "slug": "i-r-d",
+    "kuerzel": "i. R. d.",
+    "begriff": "im Rahmen der/des"
+  },
+  {
+    "slug": "i-s-d",
+    "kuerzel": "i. S. d.",
+    "begriff": "im Sinne der/des"
+  },
+  {
+    "slug": "i-v-m",
+    "kuerzel": "i. V. m.",
+    "begriff": "in Verbindung mit"
+  },
+  {
+    "slug": "jc",
+    "kuerzel": "JC",
+    "begriff": "Jobcenter"
+  },
+  {
+    "slug": "k",
+    "kuerzel": "K",
+    "begriff": "Kriminalpolizei"
+  },
+  {
+    "slug": "kdd",
+    "kuerzel": "KDD",
+    "begriff": "Kriminaldauerdienst"
+  },
+  {
+    "slug": "kfuersv",
+    "kuerzel": "KFürsV",
+    "begriff": "Kriegsopferfürsorgeverordnung"
+  },
+  {
+    "slug": "kfzhv",
+    "kuerzel": "KfzHV",
+    "begriff": "Kraftfahrzeughilfe-Verordnung"
+  },
+  {
+    "slug": "kh",
+    "kuerzel": "KH",
+    "begriff": "Krankenhaus"
+  },
+  {
+    "slug": "kk",
+    "kuerzel": "KK",
+    "begriff": "Krankenkasse"
+  },
+  {
+    "slug": "kkh-krankenhaus",
+    "kuerzel": "KKH",
+    "begriff": "Krankenhaus"
+  },
+  {
+    "slug": "kkh-kaufmaennische-krankenkasse",
+    "kuerzel": "KKH",
+    "begriff": "Kaufmännische Krankenkasse"
+  },
+  {
+    "slug": "kom",
+    "kuerzel": "KOM",
+    "begriff": "Kriminalobermeister"
+  },
+  {
+    "slug": "kovvfg",
+    "kuerzel": "KOVVfG",
+    "begriff": "Gesetz über das Verwaltungsverfahren der Kriegsopferversorgung"
+  },
+  {
+    "slug": "krh",
+    "kuerzel": "Krh",
+    "begriff": "Krankenhaus (auch Krhs., Krkhs.)"
+  },
+  {
+    "slug": "ksv",
+    "kuerzel": "KSV",
+    "begriff": "Kommunaler Sozialverband Sachsen"
+  },
+  {
+    "slug": "kv",
+    "kuerzel": "KV",
+    "begriff": "Kassenärztliche Vereinigung"
+  },
+  {
+    "slug": "kzv",
+    "kuerzel": "KZV",
+    "begriff": "Kassenzahnärztliche Vereinigung"
+  },
+  {
+    "slug": "ldi",
+    "kuerzel": "LDI",
+    "begriff": "Landesbeauftragte für Datenschutz und Informationsfreiheit"
+  },
+  {
+    "slug": "lfd",
+    "kuerzel": "LfD",
+    "begriff": "Landesbeauftragte für Datenschutz"
+  },
+  {
+    "slug": "lit",
+    "kuerzel": "lit.",
+    "begriff": "Buchstabe innerhalb einer Rechtsnorm"
+  },
+  {
+    "slug": "lka",
+    "kuerzel": "LKA",
+    "begriff": "Landeskriminalamt"
+  },
+  {
+    "slug": "lkk",
+    "kuerzel": "LKK",
+    "begriff": "Landwirtschaftliche Krankenkasse"
+  },
+  {
+    "slug": "lsg",
+    "kuerzel": "LSG",
+    "begriff": "Landessozialgericht"
+  },
+  {
+    "slug": "lta",
+    "kuerzel": "LTA",
+    "begriff": "Leistungen zur Teilhabe am Arbeitsleben"
+  },
+  {
+    "slug": "lvr",
+    "kuerzel": "LVR",
+    "begriff": "Landschaftsverband Rheinland"
+  },
+  {
+    "slug": "lwl",
+    "kuerzel": "LWL",
+    "begriff": "Landschaftsverband Westfalen-Lippe"
+  },
+  {
+    "slug": "lwv",
+    "kuerzel": "LWV",
+    "begriff": "Landeswohlfahrtsverband"
+  },
+  {
+    "slug": "md",
+    "kuerzel": "MD",
+    "begriff": "Medizinischer Dienst (früher MDK)"
+  },
+  {
+    "slug": "mdk",
+    "kuerzel": "MDK",
+    "begriff": "Medizinischer Dienst der Krankenversicherung (heute MD)"
+  },
+  {
+    "slug": "mez",
+    "kuerzel": "MEZ",
+    "begriff": "Monatliche Entschädigungszahlung"
+  },
+  {
+    "slug": "miqr",
+    "kuerzel": "MIQR",
+    "begriff": "Mitteldeutsches Institut für Qualifikation und Rehabilitation"
+  },
+  {
+    "slug": "m-w-n",
+    "kuerzel": "m. w. N.",
+    "begriff": "mit weiteren Nachweisen"
+  },
+  {
+    "slug": "m-w-v",
+    "kuerzel": "m. W. v.",
+    "begriff": "mit Wirkung vom"
+  },
+  {
+    "slug": "mz",
+    "kuerzel": "MZ",
+    "begriff": "Merkzeichen (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "nba",
+    "kuerzel": "NBA",
+    "begriff": "Neues Begutachtungsassessment"
+  },
+  {
+    "slug": "n-f",
+    "kuerzel": "n. F.",
+    "begriff": "neue Fassung"
+  },
+  {
+    "slug": "nr",
+    "kuerzel": "Nr.",
+    "begriff": "Nummer"
+  },
+  {
+    "slug": "oeg",
+    "kuerzel": "OEG",
+    "begriff": "Opferentschädigungsgesetz (bis 2023)",
+    "vorhanden": true
+  },
+  {
+    "slug": "osg",
+    "kuerzel": "OSG",
+    "begriff": "organisierte sexualisierte und systematische Gewalt"
+  },
+  {
+    "slug": "ovst",
+    "kuerzel": "OVST",
+    "begriff": "Orthopädische Versorgungsstelle"
+  },
+  {
+    "slug": "pflvg",
+    "kuerzel": "PflVG",
+    "begriff": "Pflichtversicherungsgesetz"
+  },
+  {
+    "slug": "persoenliches-budget",
+    "kuerzel": "PB",
+    "begriff": "Persönliches Budget",
+    "vorhanden": true
+  },
+  {
+    "slug": "pflegegrad",
+    "kuerzel": "PG",
+    "begriff": "Pflegegrad",
+    "vorhanden": true
+  },
+  {
+    "slug": "pi",
+    "kuerzel": "PI",
+    "begriff": "Polizeiinspektion"
+  },
+  {
+    "slug": "pia",
+    "kuerzel": "PIA",
+    "begriff": "Psychiatrische Institutsambulanz"
+  },
+  {
+    "slug": "pk",
+    "kuerzel": "PK",
+    "begriff": "Pflegekasse"
+  },
+  {
+    "slug": "pkh",
+    "kuerzel": "PKH",
+    "begriff": "Prozesskostenhilfe"
+  },
+  {
+    "slug": "pkv",
+    "kuerzel": "PKV",
+    "begriff": "Private Krankenversicherung"
+  },
+  {
+    "slug": "pom",
+    "kuerzel": "POM",
+    "begriff": "Polizeiobermeister"
+  },
+  {
+    "slug": "pp",
+    "kuerzel": "PP",
+    "begriff": "Polizeipräsidium"
+  },
+  {
+    "slug": "psychkg",
+    "kuerzel": "PsychKG",
+    "begriff": "Psychisch-Kranken-Gesetz"
+  },
+  {
+    "slug": "ra",
+    "kuerzel": "RA",
+    "begriff": "Rechtsanwalt"
+  },
+  {
+    "slug": "reha",
+    "kuerzel": "Reha",
+    "begriff": "Rehabilitation"
+  },
+  {
+    "slug": "rf",
+    "kuerzel": "RF",
+    "begriff": "Rundfunk/Fernsehen (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "rn",
+    "kuerzel": "Rn.",
+    "begriff": "Randnummer"
+  },
+  {
+    "slug": "rv",
+    "kuerzel": "RV",
+    "begriff": "Rentenversicherung"
+  },
+  {
+    "slug": "rvg",
+    "kuerzel": "RVG",
+    "begriff": "Rechtsanwaltsvergütungsgesetz"
+  },
+  {
+    "slug": "rx",
+    "kuerzel": "Rx",
+    "begriff": "Rezept"
+  },
+  {
+    "slug": "s",
+    "kuerzel": "S.",
+    "begriff": "Satz"
+  },
+  {
+    "slug": "sb",
+    "kuerzel": "Sb",
+    "begriff": "Sachbearbeiter"
+  },
+  {
+    "slug": "sba",
+    "kuerzel": "SBA",
+    "begriff": "Schwerbehindertenausweis"
+  },
+  {
+    "slug": "sbv",
+    "kuerzel": "SBV",
+    "begriff": "Schwerbehindertenvertretung"
+  },
+  {
+    "slug": "sek",
+    "kuerzel": "SEK",
+    "begriff": "Spezialeinsatzkommando"
+  },
+  {
+    "slug": "ser",
+    "kuerzel": "SER",
+    "begriff": "Soziales Entschädigungsrecht (ab 2024)",
+    "vorhanden": true
+  },
+  {
+    "slug": "sg",
+    "kuerzel": "SG",
+    "begriff": "Sozialgericht"
+  },
+  {
+    "slug": "sgb",
+    "kuerzel": "SGB",
+    "begriff": "Sozialgesetzbuch"
+  },
+  {
+    "slug": "sgb-i",
+    "kuerzel": "SGB I",
+    "begriff": "Allgemeiner Teil des Sozialgesetzbuches"
+  },
+  {
+    "slug": "sgb-ii",
+    "kuerzel": "SGB II",
+    "begriff": "Grundsicherung für Arbeitsuchende"
+  },
+  {
+    "slug": "sgb-iii",
+    "kuerzel": "SGB III",
+    "begriff": "Arbeitsförderung"
+  },
+  {
+    "slug": "sgb-ix",
+    "kuerzel": "SGB IX",
+    "begriff": "Rehabilitation und Teilhabe von Menschen mit Behinderungen"
+  },
+  {
+    "slug": "sgb-v",
+    "kuerzel": "SGB V",
+    "begriff": "Gesetzliche Krankenversicherung"
+  },
+  {
+    "slug": "sgb-vi",
+    "kuerzel": "SGB VI",
+    "begriff": "Gesetzliche Rentenversicherung"
+  },
+  {
+    "slug": "sgb-vii",
+    "kuerzel": "SGB VII",
+    "begriff": "Gesetzliche Unfallversicherung"
+  },
+  {
+    "slug": "sgb-viii",
+    "kuerzel": "SGB VIII",
+    "begriff": "Kinder- und Jugendhilfe"
+  },
+  {
+    "slug": "sgb-x",
+    "kuerzel": "SGB X",
+    "begriff": "Sozialverwaltungsverfahren und Sozialdatenschutz"
+  },
+  {
+    "slug": "sgb-xi",
+    "kuerzel": "SGB XI",
+    "begriff": "Soziale Pflegeversicherung"
+  },
+  {
+    "slug": "sgb-xii",
+    "kuerzel": "SGB XII",
+    "begriff": "Sozialhilfe"
+  },
+  {
+    "slug": "sgb-xiv",
+    "kuerzel": "SGB XIV",
+    "begriff": "Sozialgesetzbuch Nr. 14 (Soziales Entschädigungsrecht/SER)",
+    "vorhanden": true
+  },
+  {
+    "slug": "sgg",
+    "kuerzel": "SGG",
+    "begriff": "Sozialgerichtsgesetz"
+  },
+  {
+    "slug": "soko",
+    "kuerzel": "SOKO",
+    "begriff": "Sonderkommission"
+  },
+  {
+    "slug": "sovd",
+    "kuerzel": "SoVD",
+    "begriff": "Sozialverband Deutschland e. V."
+  },
+  {
+    "slug": "spv",
+    "kuerzel": "SPV",
+    "begriff": "Soziale Pflegeversicherung"
+  },
+  {
+    "slug": "stk",
+    "kuerzel": "STK",
+    "begriff": "Staatsschutzkommando"
+  },
+  {
+    "slug": "tbl",
+    "kuerzel": "TBl",
+    "begriff": "Taubblindheit (Schwerbehindertenausweis)"
+  },
+  {
+    "slug": "tk",
+    "kuerzel": "TK",
+    "begriff": "Techniker Krankenkasse"
+  },
+  {
+    "slug": "ubskm",
+    "kuerzel": "UBSKM",
+    "begriff": "Unabhängige Beauftragte für Fragen des sexuellen Kindesmissbrauchs"
+  },
+  {
+    "slug": "uk",
+    "kuerzel": "UK",
+    "begriff": "Unfallkasse"
+  },
+  {
+    "slug": "ukask",
+    "kuerzel": "UKASK",
+    "begriff": "Unabhängige Kommission zur Aufarbeitung sexuellen Kindesmissbrauchs"
+  },
+  {
+    "slug": "urt",
+    "kuerzel": "Urt.",
+    "begriff": "Urteil"
+  },
+  {
+    "slug": "va-versorgungsamt",
+    "kuerzel": "VA",
+    "begriff": "Versorgungsamt"
+  },
+  {
+    "slug": "va-verwaltungsakt",
+    "kuerzel": "VA",
+    "begriff": "Verwaltungsakt"
+  },
+  {
+    "slug": "vb",
+    "kuerzel": "VB",
+    "begriff": "versorgungsberechtigt"
+  },
+  {
+    "slug": "vdk",
+    "kuerzel": "VdK",
+    "begriff": "Verband der Kriegsbeschädigten, Kriegshinterbliebenen und Sozialrentner Deutschlands"
+  },
+  {
+    "slug": "versmedv",
+    "kuerzel": "VersMedV",
+    "begriff": "Versorgungsmedizin-Verordnung"
+  },
+  {
+    "slug": "vgl",
+    "kuerzel": "vgl.",
+    "begriff": "vergleiche"
+  },
+  {
+    "slug": "vi",
+    "kuerzel": "vi",
+    "begriff": "Seite",
+    "entwurf": true
+  },
+  {
+    "slug": "vkh",
+    "kuerzel": "VKH",
+    "begriff": "Verfahrenskostenhilfe"
+  },
+  {
+    "slug": "vsa",
+    "kuerzel": "VSA",
+    "begriff": "Versorgungsamt"
+  },
+  {
+    "slug": "vvv",
+    "kuerzel": "vVV",
+    "begriff": "Verwaltungsvorschrift",
+    "entwurf": true
+  },
+  {
+    "slug": "vwgo",
+    "kuerzel": "VwGO",
+    "begriff": "Verwaltungsgerichtsordnung"
+  },
+  {
+    "slug": "vwvfg",
+    "kuerzel": "VwVfG",
+    "begriff": "Verwaltungsverfahrensgesetz"
+  },
+  {
+    "slug": "wfbm",
+    "kuerzel": "WfbM",
+    "begriff": "Werkstatt für behinderte Menschen"
+  },
+  {
+    "slug": "wr",
+    "kuerzel": "WR",
+    "begriff": "Weißer Ring"
+  },
+  {
+    "slug": "z-b",
+    "kuerzel": "z. B.",
+    "begriff": "zum Beispiel"
+  },
+  {
+    "slug": "zbfs",
+    "kuerzel": "ZBFS",
+    "begriff": "Zentrum Bayern Familie und Soziales (Versorgungsamt)"
+  },
+  {
+    "slug": "zdg",
+    "kuerzel": "ZDG",
+    "begriff": "Zivildienstgesetz"
+  },
+  {
+    "slug": "zka",
+    "kuerzel": "ZKA",
+    "begriff": "Zollkriminalamt"
+  },
+  {
+    "slug": "zug",
+    "kuerzel": "ZUG",
+    "begriff": "Zugriffseinheit"
+  }
+]

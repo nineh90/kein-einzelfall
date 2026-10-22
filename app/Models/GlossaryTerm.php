@@ -56,6 +56,48 @@ class GlossaryTerm extends Model
     }
 
     /**
+     * Text für die Suche im Glossar (KEV-153): Abkürzung, Begriff und
+     * Erklärung, vereinfacht wie die Eingabe.
+     */
+    public function suchtext(): string
+    {
+        return self::vereinfacht($this->kuerzel.' '.$this->begriff.' '.$this->erklaerung);
+    }
+
+    /**
+     * Passt der Eintrag zu dem, was jemand ins Suchfeld des Glossars tippt?
+     *
+     * Zwei Wege. Die Abkürzung ohne Leerzeichen und Punkte: So findet „idr“
+     * auch „i. d. R.“ und „bt drs“ auch „BT-Drs.“. Der übrige Text mit
+     * Wortgrenzen: Ohne sie fand „sgb“ auch „BSG Bundessozialgericht“
+     * („bs*g b*undes…“). Dieselbe Regel steht in resources/js/glossar.js,
+     * damit das Filtern beim Tippen dasselbe findet wie das Absenden ohne
+     * JavaScript.
+     */
+    public function passt(string $suche): bool
+    {
+        $gesucht = self::vereinfacht($suche);
+
+        return $gesucht === ''
+            || str_contains(self::kompakt((string) $this->kuerzel), self::kompakt($gesucht))
+            || str_contains($this->suchtext(), $gesucht);
+    }
+
+    /** Klein, Umlaute ausgeschrieben, sonst nur Buchstaben, Ziffern und einzelne Leerzeichen. */
+    public static function vereinfacht(string $text): string
+    {
+        $text = strtr(mb_strtolower($text), ['ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss']);
+
+        return trim(preg_replace('/[^a-z0-9]+/', ' ', Str::ascii($text)));
+    }
+
+    /** Wie vereinfacht(), aber ganz ohne Leerzeichen: „i. d. R.“ → „idr“. */
+    public static function kompakt(string $text): string
+    {
+        return str_replace(' ', '', self::vereinfacht($text));
+    }
+
+    /**
      * Der Buchstabe, unter dem der Eintrag einsortiert wird.
      *
      * Nach der Abkürzung, falls es eine gibt: Wer „GdB“ im Bescheid liest,

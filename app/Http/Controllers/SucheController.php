@@ -49,13 +49,14 @@ class SucheController extends Controller
         }
 
         $ergebnis = $anfrage === ''
-            ? ['treffer' => [], 'krise' => false, 'begriffe' => []]
+            ? ['treffer' => [], 'krise' => false, 'begriffe' => [], 'im_glossar' => 0]
             : $suche->suchen($anfrage, Language::aktuell()->code);
 
         return view('suche.index', [
             'anfrage' => $anfrage,
             'treffer' => $ergebnis['treffer'],
             'krise' => $ergebnis['krise'],
+            'imGlossar' => $ergebnis['im_glossar'],
         ]);
     }
 }

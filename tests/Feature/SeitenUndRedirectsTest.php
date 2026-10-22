@@ -143,8 +143,11 @@ class SeitenUndRedirectsTest extends TestCase
          * Schutz- und Wertekonzept, dazu neu Red Flags.
          *
          * KEV-144: neu Atteste unter Wissen.
+         *
+         * KEV-153: neu die Seite „glossar“, sie trägt Einleitung und Bild des
+         * Glossars.
          */
-        $this->assertSame(43, Page::count());
+        $this->assertSame(44, Page::count());
         $this->assertSame(2, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
