@@ -418,6 +418,20 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Eigene Petition: Datum 05.10.2026 ist der Start auf openPetition (läuft
     bis 04.04.2027). Knopf „Petition unterschreiben“ ist von uns. Nach dem
     Ende bitte im Panel umbenennen oder den Link entfernen.
+- [ ] **Ehrenamtsmesse Lübeck (KEV-133).** Zweite Messe, Taddis Text, der Dank
+  am Ende fett; „in Lübeck“ wie im Ticket (ihre Vorlage hatte „in Berlin“).
+  Datum 06.09.2026 passt zu den Fotos. Von sechs Bildern im Drive-Ordner
+  „Lübeck“ stehen vier auf der Seite (Stand, Halle von oben, Lübeck übers
+  Wasser, Gebäude). Zu klären:
+  - **Nicht dabei** sind zwei fast gleiche Aufnahmen aus der Halle. Auf einer
+    ist ein fremder Mann groß und erkennbar im Vordergrund; ohne seine
+    Einwilligung besser nicht veröffentlichen. Der Verein kann sie im Panel
+    ergänzen, wenn er es anders sieht.
+  - Das Standfoto ist ein Bildschirmfoto mit nur 796 px Breite. Gibt es das
+    Original, wirkt es auf der Seite schärfer (im Panel austauschen).
+  - Im Drive-Ordner „Ehrenamtsmesse“ liegt außerdem ein Bild „Ehrenamtsmesse“,
+    vermutlich für den Abschnitt „Messen“ (wie bei den Petitionen). Noch nicht
+    eingebaut, kein Ticket dazu.
 - [ ] **Antragsformulare: welche Adressen?** Gebaut ist die Umsetzung der
   Entscheidung „verlinken statt hosten". Gebraucht wird jetzt je Formular die
   Adresse bei der Behörde und deren Name (z.B. „Deutsche Rentenversicherung").

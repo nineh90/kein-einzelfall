@@ -94,6 +94,51 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     ];
 
     /**
+     * Ehrenamtsmesse Lübeck (KEV-133): Taddis Text, der Satz in
+     * Anführungszeichen fett. „in Lübeck“ wie im Ticket (ihre Vorlage hatte
+     * „in Berlin“). Datum bestätigt: die iPhone-Fotos sind vom 06.09.2026.
+     *
+     * Vier von sechs Bildern aus Taddis Drive-Ordner „Lübeck“, ohne
+     * Metadaten: der Stand (Bildschirmfoto, nur 796 px), die Halle von oben,
+     * Lübeck übers Wasser, das Gebäude. Nicht dabei: zwei fast gleiche
+     * Innenaufnahmen, auf einer davon ein fremder Mann groß im Vordergrund.
+     * Bildbeschreibungen von uns, ohne Namen.
+     */
+    public const MESSE_LUEBECK = [
+        'slug' => 'ehrenamtsmesse-luebeck-2026',
+        'art' => 'messe',
+        'titel' => 'Ehrenamtsmesse Lübeck',
+        'datum' => '2026-09-06',
+        'ort' => 'Lübeck',
+        'beschreibung' => '<p>Mit viel Freude und Engagement haben unsere 1. Vorsitzende Tatjana Belmar und unsere '
+            .'Kassenwartin Petra Hildebrandt KE!N EINZELFALL e.V. auf der Ehrenamtsmesse in Lübeck präsentiert.</p>'
+            .'<p>Für uns war die Messe eine schöne Gelegenheit, unseren Verein vorzustellen, neue Kontakte zu '
+            .'knüpfen und bestehende Netzwerke weiter auszubauen.</p>'
+            .'<p><strong>Wir haben viele gute Begegnungen mitgenommen und freuen uns schon jetzt auf das nächste '
+            .'Jahr.</strong></p>',
+        'fotos' => [
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026-1.webp',
+                'alt' => 'Zwei Frauen in T-Shirts mit dem Vereinslogo am Stand von KE!N EINZELFALL e.V.: Eine arbeitet '
+                    .'am Laptop, die andere zeigt den Daumen nach oben. Dahinter ein Plakat mit QR-Codes zur '
+                    .'Homepage und zum Spenden.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026-2.webp',
+                'alt' => 'Blick von oben in die Messehalle: viele Stände, dazwischen zahlreiche Menschen.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026-3.webp',
+                'alt' => 'Blick über das Wasser auf die Lübecker Altstadt mit zwei Kirchtürmen, am Ufer liegt ein Schiff.',
+            ],
+            [
+                'bild' => '/img/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026-4.webp',
+                'alt' => 'Das Gebäude der Messe von außen, mit großer Glasfront unter blauem Himmel.',
+            ],
+        ],
+    ];
+
+    /**
      * Abschnitt „Presse“ (KEV-136): Presseartikel und Interviews, Einleitung
      * von Taddi. Jede Zeile ein Absatz, die Adresse wird zum Link.
      */

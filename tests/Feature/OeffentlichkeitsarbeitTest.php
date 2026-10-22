@@ -85,6 +85,8 @@ class OeffentlichkeitsarbeitTest extends TestCase
     public function test_unveroeffentlicht_oder_unbekannt_gibt_404(): void
     {
         OutreachItem::where('slug', 'ehrenamtsmesse-bayreuth-2026')->update(['published_at' => null]);
+        // Ohne veröffentlichte Messe überhaupt (seit KEV-133 auch Lübeck)
+        OutreachItem::where('art', 'messe')->where('slug', '!=', 'ehrenamtsmesse-bayreuth-2026')->update(['published_at' => null]);
 
         $this->get(self::BAYREUTH)->assertNotFound();
         $this->get('/oeffentlichkeitsarbeit/gibt-es-nicht')->assertNotFound();
@@ -167,10 +169,10 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->test(CreateOutreachItem::class)
             ->fillForm([
                 'art' => 'messe',
-                'titel' => 'Ehrenamtsmesse Lübeck',
-                'slug' => 'ehrenamtsmesse-luebeck-2026',
-                'datum' => '2026-09-06',
-                'ort' => 'Lübeck',
+                'titel' => 'Ehrenamtsmesse Kiel',
+                'slug' => 'ehrenamtsmesse-kiel-2027',
+                'datum' => '2027-03-13',
+                'ort' => 'Kiel',
                 'beschreibung' => '<p>Mit viel Freude …</p>',
                 'fotos' => [['bild' => [UploadedFile::fake()->createWithContent(
                     'stand.png', file_get_contents(public_path('img/logo.png')),
@@ -180,13 +182,13 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->call('create')
             ->assertHasNoFormErrors();
 
-        $messe = OutreachItem::where('slug', 'ehrenamtsmesse-luebeck-2026')->firstOrFail();
+        $messe = OutreachItem::where('slug', 'ehrenamtsmesse-kiel-2027')->firstOrFail();
         $foto = $messe->fotoListe()[0];
         $this->assertMatchesRegularExpression('#^/storage/medien/bilder/\d{4}/\d{2}/stand-[a-z0-9]{6}\.png$#', $foto['bild']);
         $this->assertSame('Unser Stand', $foto['alt']);
 
-        $this->get('/oeffentlichkeitsarbeit')->assertSee('Ehrenamtsmesse Lübeck');
-        $this->get('/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026')->assertOk()->assertSee('Mit viel Freude');
+        $this->get('/oeffentlichkeitsarbeit')->assertSee('Ehrenamtsmesse Kiel');
+        $this->get('/oeffentlichkeitsarbeit/ehrenamtsmesse-kiel-2027')->assertOk()->assertSee('Mit viel Freude');
     }
 
     /** Bestehende Fotos (Pfade unter /img) überstehen das Speichern. */
@@ -448,5 +450,42 @@ class OeffentlichkeitsarbeitTest extends TestCase
             'titel' => 'Halb', 'gruppen' => [['titel' => 'A', 'arten' => ['aktion']], ['titel' => 'B', 'arten' => ['petition']]],
         ]]);
         $this->assertFalse($halb->zeigtNichts());
+    }
+
+    /** KEV-133: Ehrenamtsmesse Lübeck, neben Bayreuth unter „Messen“ (neueste zuerst). */
+    public function test_ehrenamtsmesse_luebeck(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit')->assertOk()->getContent();
+        $messen = substr($html, strpos($html, 'id="oa-messen"'), strpos($html, 'id="oa-petitionen"') - strpos($html, 'id="oa-messen"'));
+        $this->assertLessThan(strpos($messen, 'Ehrenamtsmesse Lübeck'), strpos($messen, 'Ehrenamtsmesse Bayreuth'));
+        $this->assertStringContainsString('<time datetime="2026-09-06">06.09.2026</time>', $messen);
+
+        $seite = $this->get('/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026')->assertOk()->getContent();
+        $this->assertStringContainsString('auf der Ehrenamtsmesse in Lübeck präsentiert.', $seite);
+        $this->assertStringNotContainsString('in Berlin', $seite);
+        $this->assertStringContainsString('<p><strong>Wir haben viele gute Begegnungen mitgenommen und freuen uns schon '
+            .'jetzt auf das nächste Jahr.</strong></p>', $seite);
+        foreach ([1, 2, 3, 4] as $nr) {
+            $this->assertMatchesRegularExpression('#src="/img/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026-'.$nr.'\.webp\?v=[^"]+" alt="[^"]{20,}"#', $seite);
+        }
+    }
+
+    public function test_migration_luebeck_einmal_und_englisch(): void
+    {
+        $migration = require database_path('migrations/2026_10_22_160000_oeffentlichkeitsarbeit_messe_luebeck.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(1, OutreachItem::where('slug', 'ehrenamtsmesse-luebeck-2026')->count());
+
+        foreach (OeffentlichkeitsarbeitSeeder::MESSE_LUEBECK['fotos'] as $foto) {
+            $this->assertFileExists(public_path(ltrim($foto['bild'], '/')));
+        }
+
+        $this->seed(UebersetzungenSeeder::class);
+        $this->get('/en/oeffentlichkeitsarbeit/ehrenamtsmesse-luebeck-2026')->assertOk()
+            ->assertSee('Volunteering fair Lübeck')
+            ->assertSee('6 September 2026')
+            ->assertSee('We took away many good encounters')
+            ->assertSee('View from above into the fair hall');
     }
 }
