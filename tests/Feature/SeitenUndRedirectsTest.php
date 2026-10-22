@@ -147,9 +147,10 @@ class SeitenUndRedirectsTest extends TestCase
          * KEV-153: neu die Seite „glossar“, sie trägt Einleitung und Bild des
          * Glossars.
          *
-         * KEV-159: neu der Bereich „Raum für Ungesagtes“ und „Unüberhörbar“.
+         * KEV-159: neu der Bereich „Raum für Ungesagtes“ und „Unüberhörbar“,
+         * KEV-158 „Blickwinkel“.
          */
-        $this->assertSame(46, Page::count());
+        $this->assertSame(47, Page::count());
         $this->assertSame(2, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

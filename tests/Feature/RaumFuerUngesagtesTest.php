@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 /**
  * KEV-159: neuer Bereich „Raum für Ungesagtes“ mit der Unterseite
- * „Unüberhörbar“.
+ * „Unüberhörbar“. KEV-158: dazu „Blickwinkel“.
  */
 class RaumFuerUngesagtesTest extends TestCase
 {
@@ -40,9 +40,23 @@ class RaumFuerUngesagtesTest extends TestCase
         $this->assertStringNotContainsString('werden.*', $this->text($html));
     }
 
+    public function test_blickwinkel_mit_taddis_text(): void
+    {
+        $html = $this->get('/blickwinkel')->assertOk()->getContent();
+
+        $this->assertStringContainsString('<title>Blickwinkel - Kein Einzelfall e.V.</title>', $html);
+        $this->assertStringContainsString('Manches lässt sich nicht in Worte fassen – aber zeigen.', $html);
+        $this->assertStringContainsString('Sie zeigen Erlebtes, Gefühle, Gedanken und Perspektiven auf eine ganz eigene Weise.', $html);
+        $this->assertStringContainsString('Dann schick uns deine Bilder gern an', $html);
+
+        $this->assertMatchesRegularExpression('/<strong[^>]*><a href="mailto:sichtbarkeit@kein-einzelfall\.de"[^>]*>sichtbarkeit@kein-einzelfall\.de<\/a><\/strong>/', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Manchmal zeigt ein Bild mehr von einer Wahrheit, als Worte es je könnten\.<\/strong>/u', $html);
+        $this->assertStringNotContainsString('*sichtbarkeit', $this->text($html));
+    }
+
     public function test_titelbilder_von_taddi(): void
     {
-        foreach (['unueberhoerbar' => 60, 'raum-fuer-ungesagtes' => 25] as $slug => $fokus) {
+        foreach (['unueberhoerbar' => 60, 'raum-fuer-ungesagtes' => 25, 'blickwinkel' => 35] as $slug => $fokus) {
             $html = $this->get('/'.$slug)->getContent();
 
             $this->assertStringContainsString('src="/img/titelbilder/'.$slug.'.webp?v=', $html, $slug);
@@ -62,7 +76,8 @@ class RaumFuerUngesagtesTest extends TestCase
 
         $raum = $bereiche->firstWhere('url', '/raum-fuer-ungesagtes');
         $this->assertSame('Raum für Ungesagtes', $raum['label']);
-        $this->assertSame(['/unueberhoerbar'], array_column($raum['children'], 'url'));
+        // Reihenfolge wie Taddis Bilder im Drive: 3. Blickwinkel, 4. Unüberhörbar.
+        $this->assertSame(['/blickwinkel', '/unueberhoerbar'], array_column($raum['children'], 'url'));
 
         $html = $this->get('/unueberhoerbar')->getContent();
         $this->assertStringContainsString('href="/raum-fuer-ungesagtes"', $html);
@@ -80,6 +95,7 @@ class RaumFuerUngesagtesTest extends TestCase
         $html = $this->get('/raum-fuer-ungesagtes')->assertOk()->getContent();
         $this->assertStringContainsString('<meta name="robots" content="noindex, nofollow">', $html);
         $this->assertStringContainsString('href="/unueberhoerbar"', $html);
+        $this->assertStringContainsString('href="/blickwinkel"', $html);
         $this->assertStringNotContainsString('/raum-fuer-ungesagtes</loc>', $this->get('/sitemap.xml')->getContent());
     }
 
@@ -107,6 +123,10 @@ class RaumFuerUngesagtesTest extends TestCase
         $this->assertMatchesRegularExpression('/<strong[^>]*>What remained unsaid for a long time may now be heard loud and clear\.<\/strong>/u', $html);
         $this->assertStringContainsString('href="mailto:sichtbarkeit@kein-einzelfall.de"', $html);
         $this->assertStringContainsString('Space for the unsaid', $html);
+
+        $html = $this->get('/en/blickwinkel')->assertOk()->getContent();
+        $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Perspectives\s*<\/h1>/u', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Sometimes a picture shows more of a truth than words ever could\.<\/strong>/u', $html);
     }
 
     /** Sichtbarer Text ohne Kopf und Skripte, um übrig gebliebene Sternchen zu finden. */

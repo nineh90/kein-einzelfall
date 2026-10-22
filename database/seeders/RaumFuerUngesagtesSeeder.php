@@ -7,8 +7,8 @@ use App\Support\Titelbilder;
 use Illuminate\Database\Seeder;
 
 /**
- * Neuer Bereich „Raum für Ungesagtes“ mit der Unterseite „Unüberhörbar“
- * (KEV-159).
+ * Neuer Bereich „Raum für Ungesagtes“ mit den Unterseiten „Unüberhörbar“
+ * (KEV-159) und „Blickwinkel“ (KEV-158).
  *
  * Laut Taddis Drive-Ordner „4. Raum für Ungesagtes“ bekommt der Bereich eine
  * Übersicht („Deine Stimme – Raum für Ungesagtes“) und vier Unterseiten: Wall
@@ -21,6 +21,7 @@ use Illuminate\Database\Seeder;
  * - Unüberhörbar mit Taddis Text, die Stellen in Gänsefüßchen fett
  *   (*Sternchen*), Absätze von uns gesetzt. Die Adresse wird zum Mailto-Link.
  *   Mit Taddis Bild (Tonbandgerät und Kassette).
+ * - Blickwinkel genauso gebaut, Bild: Staffelei mit leerer Leinwand.
  *
  * Legt nur an, was fehlt.
  */
@@ -48,6 +49,24 @@ class RaumFuerUngesagtesSeeder extends Seeder
     public const META_DESCRIPTION = 'Unüberhörbar: selbst geschriebene Lieder, vertonte Tagebucheinträge und '
         .'eigene Musikstücke von Betroffenen bei KE!N EINZELFALL e.V. Schick uns deinen Sound, gern auch anonym.';
 
+    public const BLICKWINKEL_SLUG = 'blickwinkel';
+
+    public const BLICKWINKEL_TITEL = 'Blickwinkel';
+
+    public const BLICKWINKEL_ABSAETZE = [
+        'Manches lässt sich nicht in Worte fassen – aber zeigen. Hier finden Bilder, Zeichnungen, Fotografien '
+            .'und andere visuelle Arbeiten ihren Platz.',
+        'Sie zeigen Erlebtes, Gefühle, Gedanken und Perspektiven auf eine ganz eigene Weise.',
+        'Möchtest du uns auch etwas mitteilen? Dann schick uns deine Bilder gern an '
+            .'*sichtbarkeit@kein-einzelfall.de*.',
+        'Ob anonym, unter einem Pseudonym oder mit deinem Klarnamen – du entscheidest, wie sichtbar du sein '
+            .'möchtest.',
+        '*Manchmal zeigt ein Bild mehr von einer Wahrheit, als Worte es je könnten.*',
+    ];
+
+    public const BLICKWINKEL_META_DESCRIPTION = 'Blickwinkel: Bilder, Zeichnungen, Fotografien und andere '
+        .'visuelle Arbeiten von Betroffenen bei KE!N EINZELFALL e.V. Schick uns deine Bilder, gern auch anonym.';
+
     public function run(): void
     {
         self::anlegen();
@@ -65,20 +84,27 @@ class RaumFuerUngesagtesSeeder extends Seeder
             ],
         );
 
+        self::unterseite(self::SLUG, self::TITEL, self::META_DESCRIPTION, self::ABSAETZE);
+        self::unterseite(self::BLICKWINKEL_SLUG, self::BLICKWINKEL_TITEL, self::BLICKWINKEL_META_DESCRIPTION, self::BLICKWINKEL_ABSAETZE);
+
+        Titelbilder::setzen();
+    }
+
+    /** @param  list<string>  $absaetze */
+    private static function unterseite(string $slug, string $titel, string $beschreibung, array $absaetze): void
+    {
         $seite = Page::firstOrCreate(
-            ['slug' => self::SLUG, 'locale' => 'de'],
+            ['slug' => $slug, 'locale' => 'de'],
             [
-                'titel' => self::TITEL,
-                'meta_title' => self::TITEL.' - Kein Einzelfall e.V.',
-                'meta_description' => self::META_DESCRIPTION,
+                'titel' => $titel,
+                'meta_title' => $titel.' - Kein Einzelfall e.V.',
+                'meta_description' => $beschreibung,
                 'published_at' => now(),
             ],
         );
 
         if ($seite->wasRecentlyCreated) {
-            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::ABSAETZE]]);
+            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => $absaetze]]);
         }
-
-        Titelbilder::setzen();
     }
 }

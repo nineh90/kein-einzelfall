@@ -494,6 +494,14 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Kopfzeile:** Mit sechs Bereichen passt die Menüleiste nicht mehr neben
     Logo und Notausgang. Sie steht auf großen Bildschirmen jetzt in einer
     zweiten Zeile darunter, sonst gäbe es überall nur noch das Burger-Menü.
+- [ ] **Blickwinkel (KEV-158).** Zweite Unterseite unter „Raum für
+  Ungesagtes“, gebaut wie Unüberhörbar: Taddis Text, Adresse und letzter Satz
+  fett, ihr Bild „3. Blickwinkel“ (Staffelei). Im Menü vor Unüberhörbar, wie
+  ihre Nummern im Drive (3. Blickwinkel, 4. Unüberhörbar). Offen wie bei der
+  Musik: **Wie sollen die eingesandten Bilder auf die Seite?** Einzelne Bilder
+  gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
+  Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
+  Bedarf.
 - [ ] **Glossar mit Taddis Abkürzungen (KEV-153).** /glossar zeigt ihre
   Einleitung („Abkürzungen im Sozialen Entschädigungsrecht (SER)“, Fettes wie
   im Dokument) und 195 Abkürzungen mit Auflösung, darüber ein Suchfeld, das

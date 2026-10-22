@@ -94,6 +94,8 @@ class Titelbilder
         // Unterzeile.
         'raum-fuer-ungesagtes' => null,
         'unueberhoerbar' => null,
+        // KEV-158: Bild von Taddi, Staffelei mit leerer Leinwand.
+        'blickwinkel' => null,
     ];
 
     /**
@@ -182,6 +184,10 @@ class Titelbilder
      *    25 % bleibt die Tür von oben bis zur Schwelle zu sehen.
      *  - Unüberhörbar: Tonbandgerät und Kassette (KEV-159). Rechts um Wand
      *    verlängert, Motiv zwischen 14 und 89 % der Höhe, mit 60 % fast ganz.
+     *  - Blickwinkel: Staffelei mit leerer Leinwand (KEV-158). Rechts um Wand
+     *    verlängert; Staffelei von 3 bis 92 % der Höhe, zu hoch für jeden
+     *    Kopf. Mit 35 % bleibt die Leinwand ganz, unten fehlen bei 2560 px
+     *    die Beinenden.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -205,6 +211,7 @@ class Titelbilder
         self::ORDNER.'/glossar.webp' => 90,
         self::ORDNER.'/raum-fuer-ungesagtes.webp' => 25,
         self::ORDNER.'/unueberhoerbar.webp' => 60,
+        self::ORDNER.'/blickwinkel.webp' => 35,
     ];
 
     /**
