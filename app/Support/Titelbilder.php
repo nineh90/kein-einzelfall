@@ -147,6 +147,9 @@ class Titelbilder
      *  - Öffentlichkeitsarbeit: Megafon auf Holztisch, Trichter zwischen 26
      *    und 74 % der Höhe (KEV-149). Unten ausgerichtet fehlte ab 1440 px
      *    der obere Rand des Trichters, bei 2560 px der halbe Trichter.
+     *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
+     *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
+     *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
      *
      * @var array<string, int>
      */
@@ -159,6 +162,7 @@ class Titelbilder
         self::ORDNER.'/ordner-mit-logo.webp' => 42,
         self::ORDNER.'/gruppen-und-veranstaltungen.webp' => 40,
         self::ORDNER.'/oeffentlichkeitsarbeit.webp' => 50,
+        self::ORDNER.'/veranstaltungen.webp' => 75,
     ];
 
     /**

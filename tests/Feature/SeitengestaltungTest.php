@@ -94,6 +94,28 @@ class SeitengestaltungTest extends TestCase
     }
 
     /**
+     * KEV-148: Taddis Bild (zwei Stühle, Tisch mit Mikrofonen) unter dem
+     * alten Dateinamen, auf 75 % ausgerichtet: unten ausgerichtet fehlten ab
+     * 1440 px die Stuhllehnen. Gilt für die Seite und die Terminübersicht.
+     */
+    public function test_veranstaltungen_haben_taddis_titelbild(): void
+    {
+        $this->seed(UebersetzungenSeeder::class);
+
+        foreach (['/veranstaltungen', '/en/veranstaltungen'] as $pfad) {
+            $html = $this->get($pfad)->assertOk()->getContent();
+
+            $this->assertStringContainsString('src="/img/titelbilder/veranstaltungen.webp?v=', $html, $pfad);
+            $this->assertStringContainsString('/img/titelbilder/veranstaltungen-1000.webp?v=', $html, $pfad);
+            $this->assertStringContainsString('object-position: 0% 75%', $html, $pfad);
+        }
+
+        // Taddis Bild ist 16:9 (1672 × 941), das alte war etwas flacher.
+        $this->assertSame([2000, 1126], array_slice(getimagesize(public_path('img/titelbilder/veranstaltungen.webp')), 0, 2));
+        $this->assertSame([1000, 563], array_slice(getimagesize(public_path('img/titelbilder/veranstaltungen-1000.webp')), 0, 2));
+    }
+
+    /**
      * Seit KEV-36 hat jede Seite ein Titelbild. Wo es noch kein eigenes gibt,
      * vorerst den Platzhalter; nur Startseite und Hinweisfenster bleiben ohne.
      */

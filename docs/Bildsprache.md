@@ -87,7 +87,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
 | Wissen | Bücherstapel mit Leinenband |
 | Publikationen | Broschürenstapel und Lesebrille |
-| Veranstaltungen | Becher, Vase mit Trockenblumen, Tisch |
+| Veranstaltungen | zwei Holzstühle und ein runder Tisch mit zwei Mikrofonen vor warmer Wand; von Taddi geliefert (KEV-148, statt Becher und Vase), gleicher Dateiname, ausgerichtet auf 75 %: unten ausgerichtet fehlten ab 1440 px die Stuhllehnen. Gilt auch für die Terminübersicht |
 | Gruppen & Veranstaltungen | Laptop mit Videotreffen (neun Gesichter) auf rundem Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-127, statt Platzhalter), ausgerichtet auf 40 %: unten ausgerichtet fehlte ab 1440 px die obere Reihe der Gesichter |
 | Öffentlichkeitsarbeit | Megafon (grün-weiß) auf Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-149, statt Platzhalter), ausgerichtet auf 50 %: unten ausgerichtet fehlte ab 1440 px der obere Rand des Trichters |
 | Projekte | Holzhaus-Modell, Papier, Bleistift |
