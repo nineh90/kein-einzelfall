@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Language;
 use App\Models\Page;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Englische Fassungen aller Seiten, des Glossars, der Gruppen und des Teams.
@@ -249,6 +250,17 @@ class UebersetzungenSeeder extends Seeder
      */
     private function felder(string $klasse, string $schluessel, string $datei): void
     {
+        /*
+         * Der Seeder läuft auch aus älteren Inhalts-Migrationen heraus. Auf dem
+         * Server kann das vor der Migration sein, die eine Tabelle erst
+         * anlegt: Am 22.10.2026 brach so der Deploy ab, weil die Migration von
+         * KEV-129 die Einträge der Öffentlichkeitsarbeit (KEV-134) lesen
+         * wollte. Dann gibt es dort ohnehin nichts zu übersetzen.
+         */
+        if (! Schema::hasTable((new $klasse)->getTable())) {
+            return;
+        }
+
         $daten = $this->datei($datei);
 
         foreach ($klasse::all() as $eintrag) {

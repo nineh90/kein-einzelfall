@@ -214,4 +214,23 @@ class OeffentlichkeitsarbeitTest extends TestCase
         $block->update(['data' => ['titel' => 'Presse', 'art' => 'presse']]);
         $this->assertTrue($block->fresh()->zeigtNichts());
     }
+
+    /**
+     * Deploy vom 22.10.2026: Die Migration von KEV-129 ruft die Übersetzungen
+     * auf, und die lasen die Tabelle der Öffentlichkeitsarbeit, die erst
+     * eine Migration später entsteht. Auf dem Server (mit Vereinsseite) brach
+     * der Deploy deshalb ab. Fehlt eine Tabelle, wird sie übersprungen.
+     */
+    public function test_uebersetzungen_ueberspringen_fehlende_tabellen(): void
+    {
+        $ohneTabelle = new class extends \Illuminate\Database\Eloquent\Model
+        {
+            protected $table = 'gibt_es_noch_nicht';
+        };
+
+        $felder = new \ReflectionMethod(UebersetzungenSeeder::class, 'felder');
+        $felder->invoke(new UebersetzungenSeeder, $ohneTabelle::class, 'slug', 'uebersetzungen-oeffentlichkeitsarbeit.json');
+
+        $this->assertFalse(\Illuminate\Support\Facades\Schema::hasTable('gibt_es_noch_nicht'));
+    }
 }
