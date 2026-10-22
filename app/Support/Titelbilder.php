@@ -78,6 +78,10 @@ class Titelbilder
         // KEV-147: Bild von Taddi statt Platzhalter, Leinenbücher mit „2025“.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'taetigkeits-und-jahresberichte' => null,
+        // Bilder von Taddi aus ihrem Drive-Ordner „1. Verein“, ohne eigenes
+        // Ticket eingebaut (Kevin, 22.10.2026). Ohne Unterzeile.
+        'schutz-und-wertekonzept' => null,
+        'red-flags' => null,
     ];
 
     /**
@@ -111,8 +115,6 @@ class Titelbilder
         // KEV-72, bis Taddi ein Bild schickt (Gruppen & Veranstaltungen hat
         // seit KEV-127 eins, Öffentlichkeitsarbeit seit KEV-149)
         'rueckblick',
-        // KEV-97, bis Taddi Bilder schickt
-        'schutz-und-wertekonzept', 'red-flags',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
@@ -151,6 +153,11 @@ class Titelbilder
      *  - Tätigkeits- und Jahresberichte: Leinenbücher (KEV-147). Das Bild ist
      *    rechts um Wand verlängert (2,58 : 1), die Bücher stehen zwischen 20
      *    und 82 % der Höhe; mit 60 % bleiben sie von 1024 bis 2560 px ganz.
+     *  - Red Flags: zwei Türen, eine offen (Bild von Taddi, ohne Ticket).
+     *    Rechts um Wand verlängert wie die Jahresberichte; Türen zwischen 12
+     *    und 74 % der Höhe, mit 30 % ganz von 1024 bis 2560 px.
+     *  - Schutz- und Wertekonzept: Holzdach über Holzfiguren, zwischen 36
+     *    und 76 % der Höhe. Unten ausgerichtet fehlte ab 1440 px das Dach.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -168,6 +175,8 @@ class Titelbilder
         self::ORDNER.'/oeffentlichkeitsarbeit.webp' => 50,
         self::ORDNER.'/veranstaltungen.webp' => 75,
         self::ORDNER.'/taetigkeits-und-jahresberichte.webp' => 60,
+        self::ORDNER.'/red-flags.webp' => 30,
+        self::ORDNER.'/schutz-und-wertekonzept.webp' => 65,
     ];
 
     /**

@@ -328,7 +328,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Bei Red Flags hängt der Leitfaden der Altseite („6.1.2. Must haves u. Red
     Flaggs für Betroffene“, Stand 01/26). Ist der im Drive neuer, bitte schicken.
   - „Red Flags“ statt „Red Flaggs“ geschrieben, so steht es auch im PDF.
-  - Bilder liegen im Drive, bis dahin der Platzhalter.
+  - Seit 22.10.2026 mit Taddis Bildern aus dem Drive (siehe unten).
 - [ ] **Tätigkeits- und Jahresberichte (KEV-103).** Neue Seite unter „Verein“
   mit Taddis Text, im Menü als letzter Punkt (eine Position stand nicht im
   Ticket). Noch ohne Berichte: Der Text kündigt sie ab 2025 an. **Bitte den
@@ -336,10 +336,12 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   „Dokumente“ anhängen. Seit KEV-147 mit Taddis Bild (Leinenbücher mit „2025“);
   wir haben es rechts um ruhige Wand verlängert, damit die Bücher nicht unter
   dem Titel liegen.
-- [ ] **Titelbilder für Red Flags und Schutz- und Wertekonzept.** In Taddis
-  Drive-Ordner „1. Verein“ liegen Bilder „Red Flaggs“ und „Schutz u.
-  Wertekonzept“; beide Seiten zeigen noch den Platzhalter. Kommen sie per
-  Ticket, sind sie schnell eingebaut.
+- [ ] **Titelbilder für Red Flags und Schutz- und Wertekonzept.** Die Bilder
+  „Red Flaggs“ und „Schutz u. Wertekonzept“ aus Taddis Drive-Ordner „1. Verein“
+  sind eingebaut, ohne eigenes Ticket. Das Bild zu Red Flags (zwei Türen) haben
+  wir rechts um ruhige Wand verlängert, damit die offene Tür nicht unter dem
+  Titel liegt. Bitte kurz ansehen; war ein anderes Bild gemeint, lässt es sich
+  im Panel tauschen.
 - [ ] **Beschwerdemanagement (KEV-98) abnehmen.** Taddis Text in zwei Spalten,
   im Menü „Verein“ an Position 5, darunter ein gemeinsames Formular. Darin
   wählt man oben „Externe Kritik“ (landet wie jede Anfrage im
