@@ -2473,3 +2473,15 @@ erst nach den Migrationen).
 („Weiterlesen“), Aufzählungen mit „- “, festes Sprungziel möglich. Vorher
 hatte der Baustein eine eigene, ärmere Fassung davon.
 
+**Seit KEV-140** der dritte Abschnitt: „Zusammenarbeit mit aus-unserer-sicht im
+Bereich Soziales Entschädigungsrecht“ (Fachtag 30.11.2024, AG SER bis zur
+Auflösung des Vereins 2026), Bild „Aus unserer Sicht“ aus Taddis Ordner
+„2. Gruppen & Veranstaltungen / 5. Rückblick“. Darunter die zwei Präsentationen
+vom Fachtag als PDF in einer Dokumentenliste
+(`public/dokumente/2026/10/aus-unserer-sicht-fachtag-2024-*.pdf`). Aus den
+PowerPoints mit LibreOffice erzeugt; vorher auf der Workshop-Präsentation die
+Vornamen der zwei weiteren Mitwirkenden entfernt (Folien 1 und 17) und Titel
+und Autor gesetzt (die Vorlage trug „Infoveranstaltung für alle Interessierte“
+von „Frauenwohnen EG“). Protokoll und AG-Zusammenfassung aus demselben Ordner
+sind nicht veröffentlicht (interne Arbeitspapiere mit Namen).
+

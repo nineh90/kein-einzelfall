@@ -29,6 +29,20 @@ use Illuminate\Database\Seeder;
  * auf die Dokumente der FSM-Seite (Sprungziel `dokumente`). „Gemeinsam KE!N
  * EINZELFALL.“ fett wie auf ihren anderen Seiten.
  *
+ * Der dritte (KEV-140): „Zusammenarbeit mit aus-unserer-sicht im Bereich
+ * Soziales Entschädigungsrecht“, Taddis Text aus „0. Aus-unserer-sicht – AG
+ * SER u. Workshop“, ihr Bild „Aus unserer Sicht“ (SER, OEG/SGB XIV) aus dem
+ * Drive-Ordner „2. Gruppen & Veranstaltungen / 5. Rückblick“. Darunter die
+ * zwei Präsentationen vom Fachtag als PDF (Taddi: „als PDF oder
+ * Slideshow“; ein PDF zeigt der Browser Folie für Folie). Auf der
+ * Workshop-Präsentation sind die Vornamen der zwei weiteren Mitwirkenden
+ * entfernt, die Metadaten der Vorlage (fremder Titel und Autor) ersetzt.
+ * Protokoll und AG-Zusammenfassung aus demselben Ordner sind interne
+ * Arbeitspapiere mit Namen und bleiben draußen.
+ * Korrigiert: „Fachtag im November 2025“ → 2024 (Folien und Protokoll:
+ * 30.11.2024), „e. V.“ → „e.V.“; die drei Zeilen zum Workshop-Titel sind ein
+ * Absatz. Ältester Abschnitt, deshalb unten.
+ *
  * Mit Inhalt darf die Seite gefunden werden (vorher noindex wie andere leere
  * Seiten). Legt nur an, was fehlt.
  */
@@ -126,6 +140,75 @@ class RueckblickSeeder extends Seeder
         .'Widerspruch und unsere Stellungnahmen dazu findest du auf unserer '
         .'[Seite zum Fonds Sexueller Missbrauch](/fsm-erweitertes-hilfesystem#dokumente).';
 
+    public const AUS_TITEL = 'Zusammenarbeit mit aus-unserer-sicht im Bereich Soziales Entschädigungsrecht: SGB XIV / OEG';
+
+    public const AUS_BILD = '/img/rueckblick/aus-unserer-sicht.webp';
+
+    public const AUS_ABSAETZE = [
+        '*KE!N EINZELFALL e.V.* hatte die Möglichkeit, sich im Rahmen der Arbeitsgruppen von *aus-unserer-sicht '
+            .'e.V.* intensiv mit dem Sozialen Entschädigungsrecht und insbesondere mit dem Wechsel vom OEG zum '
+            .'SGB XIV und der Umsetzung des SGB XIV auseinanderzusetzen.',
+        'Unsere 1. Vorsitzende Tatjana Belmar nahm aktiv an der *Arbeitsgruppe Soziales Entschädigungsrecht (AG '
+            .'SER)* teil. Im Mittelpunkt der Arbeitsgruppe standen die Erfahrungen von Betroffenen mit dem bisherigen '
+            .'Opferentschädigungsrecht und dem neuen Sozialen Entschädigungsrecht sowie die Frage, wie Verfahren '
+            .'betroffenenorientierter, transparenter und weniger belastend gestaltet werden können.',
+        'Ein wichtiger Bestandteil dieser Zusammenarbeit war der Fachtag im November 2024. Dort führte Tatjana '
+            .'Belmar für KE!N EINZELFALL e.V. den Workshop *„SGB XIV – eine erste Auswertung des Sozialen '
+            .'Entschädigungsrechts aus unserer Sicht!“* durch.',
+        'Im Workshop wurden gemeinsam Erfahrungen mit dem Übergang vom OEG zum SGB XIV betrachtet. Thematisiert '
+            .'wurden unter anderem Antragsverfahren, bürokratische Abläufe, Veränderungen durch das neue Recht, '
+            .'bestehende Hürden sowie positive und negative Erfahrungen von Betroffenen. Ziel war es, '
+            .'Erfahrungswissen sichtbar zu machen und daraus Rückmeldungen und mögliche Verbesserungsansätze für die '
+            .'weitere Umsetzung des Sozialen Entschädigungsrechts abzuleiten.',
+        'Aus der Arbeit in der AG entwickelte sich anschließend die Idee für ein weiterführendes Projekt. Geplant war '
+            .'eine bundesweite, anonymisierte und strukturierte Auswertung von Erfahrungen und Unterlagen aus '
+            .'OEG-/SGB-XIV-Verfahren. Dabei sollten nicht einzelne Fälle bewertet, sondern wiederkehrende Muster von '
+            .'Best Practice und Worst Case sichtbar gemacht werden.',
+        "Untersucht werden sollten insbesondere:\n"
+            ."- strukturelle Missstände und Verfahrensfehler,\n"
+            ."- Unterschiede zwischen den Bundesländern,\n"
+            ."- Erfahrungen mit Gutachten und Begutachtungsverfahren,\n"
+            ."- Fristen und Bearbeitungsabläufe,\n"
+            ."- Beispiele guter Praxis,\n"
+            .'- sowie Möglichkeiten, das Hilfesystem besser auf die Bedürfnisse von Betroffenen vorzubereiten.',
+        'Für dieses Vorhaben sollte zunächst ein belastbarer Erhebungs- und Projektplan entwickelt werden. Dazu '
+            .'gehörten unter anderem die Entwicklung von Auswertungskategorien, Fragen der Anonymisierung und des '
+            .'Datenschutzes, die rechtliche Absicherung der Datennutzung sowie die Planung der späteren Auswertung und '
+            .'Veröffentlichung.',
+        'In die Überlegungen flossen auch bereits vorhandene Erfahrungen und Vorarbeiten von KE!N EINZELFALL e.V. '
+            .'ein, unter anderem bestehende Kontakte zu Betroffenen sowie vorbereitete Anfragen nach dem '
+            .'Informationsfreiheitsgesetz.',
+        'Das langfristige Ziel war, Erfahrungen nicht nur zu sammeln, sondern daraus konkrete Erkenntnisse über '
+            .'strukturelle Probleme und funktionierende Lösungsansätze abzuleiten. Diese sollten anschließend unter '
+            .'anderem an zuständige Landesbehörden, Opferbeauftragte, Bundesministerien und Einrichtungen des '
+            .'Hilfesystems weitergegeben werden.',
+        '*aus-unserer-sicht e.V. löste sich zum 11.02.2026 auf*, sodass die geplante Zusammenarbeit und das '
+            .'ausgearbeitete Projekt in dieser Form nicht fortgeführt werden konnten. Der KE!N EINZELFALL e.V. hat '
+            .'Teile des Projektes in eigener Regie weitergeführt.',
+        'Trotzdem war diese Zeit für uns sehr wertvoll. Wir konnten Erfahrungen sammeln, uns mit anderen '
+            .'Betroffenen und Engagierten vernetzen, unterschiedliche Perspektiven kennenlernen und unsere eigene '
+            .'Arbeit im Bereich des Sozialen Entschädigungsrechts weiterentwickeln.',
+        '*Wir danken aus-unserer-sicht e.V. für die Möglichkeit zur Mitarbeit, für die gemeinsamen Erfahrungen und '
+            .'für den Raum, in dem Betroffenenwissen eingebracht und weiterentwickelt werden konnte.*',
+        'Auch wenn dieses Projekt nicht gemeinsam zu Ende geführt werden konnte, bleiben die gewonnenen Erfahrungen '
+            .'und viele der daraus entstandenen Ideen Teil unserer weiteren Arbeit.',
+        '*Gemeinsam KE!N EINZELFALL*',
+    ];
+
+    /** Die Präsentationen vom Fachtag, als PDF. Überschrift und Titel von uns. */
+    public const AUS_DOKUMENTE_TITEL = 'Präsentationen vom Fachtag am 30.11.2024';
+
+    public const AUS_DOKUMENTE = [
+        [
+            'titel' => 'Workshop „SGB XIV / Soziales Entschädigungsrecht – ein knappes Jahr später!“ (18 Folien)',
+            'url' => '/dokumente/2026/10/aus-unserer-sicht-fachtag-2024-workshop-sgb-xiv.pdf',
+        ],
+        [
+            'titel' => 'Ergebnisse der AG SGB XIV/SER (5 Folien)',
+            'url' => '/dokumente/2026/10/aus-unserer-sicht-fachtag-2024-ag-ser.pdf',
+        ],
+    ];
+
     /**
      * Die Abschnitte in der Reihenfolge der Seite, neueste Veranstaltung oben.
      *
@@ -146,6 +229,16 @@ class RueckblickSeeder extends Seeder
                 'bild' => self::FSM_BILD,
                 'bild_seite' => 'links',
                 'danach' => ['typ' => 'hinweis', 'data' => ['titel' => self::FSM_PS_TITEL, 'text' => self::FSM_PS]],
+            ],
+            [
+                'titel' => self::AUS_TITEL,
+                'absaetze' => self::AUS_ABSAETZE,
+                'bild' => self::AUS_BILD,
+                'bild_seite' => 'rechts',
+                'danach' => ['typ' => 'download_list', 'data' => [
+                    'titel' => self::AUS_DOKUMENTE_TITEL,
+                    'dokumente' => self::AUS_DOKUMENTE,
+                ]],
             ],
         ];
     }

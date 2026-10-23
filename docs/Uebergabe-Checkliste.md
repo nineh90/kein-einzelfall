@@ -554,6 +554,28 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Rückblick: Zusammenarbeit mit aus-unserer-sicht (KEV-140), bitte
+  ansehen.** Dritter Abschnitt auf /rueckblick mit Taddis Text und ihrem Bild
+  „Aus unserer Sicht“, darunter die zwei Präsentationen als PDF (öffnen sich im
+  Browser Folie für Folie). Zu klären:
+  - **Datum:** Im Text stand „Fachtag im November 2025“, auf beiden
+    Präsentationen und im Protokoll steht 30.11.2024 (Workshop „ein knappes
+    Jahr später“ nach dem 01.01.2024). Auf der Seite steht jetzt **November
+    2024**. Bitte bestätigen.
+  - **Namen:** Auf der Workshop-Präsentation standen neben Taddi die Vornamen
+    der Person für Chat/Hintergrund und der Protokollantin. Die sind
+    rausgenommen, damit niemand ungefragt mit einer AG für Betroffene in
+    Verbindung gebracht wird. Wenn beide einverstanden sind, setzen wir sie
+    wieder ein.
+  - **Nicht veröffentlicht:** „Fachtagung Protokoll aG SGB.pdf“ und
+    „Zusammenfassung der AG SER.docx“ aus dem Ordner. Beides sind interne
+    Arbeitspapiere mit vollen Namen und persönlichen Einschätzungen; das
+    Ticket nannte nur die Präsentationen.
+  - Überschrift „Präsentationen vom Fachtag am 30.11.2024“ und die Titel der
+    zwei Dateien sind von uns. „e. V.“ → „e.V.“, die drei Zeilen zum
+    Workshop-Titel sind ein Absatz, ihr Fettes ist fett.
+  - Im selben Drive-Ordner liegen „0 Rückblick“ und „0 Rückblick II“ (vermutlich
+    das Titelbild der Seite, noch der Platzhalter) und „Assistenzhunde“.
 - [ ] **Rückblick: Veranstaltungen zum FSM (KEV-141).** Zweiter Abschnitt
   auf /rueckblick mit Taddis Text und dem „FSM“-Bild (links). Lange Abschnitte
   klappen jetzt nach vier Absätzen ein („Weiterlesen“), auch der zu „Trauma,

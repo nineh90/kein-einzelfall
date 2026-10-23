@@ -13,6 +13,7 @@ use Tests\TestCase;
  * KEV-142: Rückblick mit dem Abschnitt „KE!N EINZELFALL im Dialog – Trauma,
  * Bindung und Beziehung“ und Taddis Bild. KEV-141: dazu „Unsere
  * Veranstaltungen zum Fonds Sexueller Missbrauch (FSM)“ mit ihrem P.S.
+ * KEV-140: „Zusammenarbeit mit aus-unserer-sicht …“ mit den Präsentationen.
  */
 class RueckblickTest extends TestCase
 {
@@ -81,6 +82,35 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('Musterwiderspruch', $ziel);
     }
 
+    public function test_aus_unserer_sicht_mit_praesentationen(): void
+    {
+        $html = $this->get('/rueckblick')->getContent();
+
+        $this->assertMatchesRegularExpression('/<h2[^>]*>\s*Zusammenarbeit mit aus-unserer-sicht im Bereich Soziales Entschädigungsrecht: SGB XIV \/ OEG\s*<\/h2>/u', $html);
+        // Ältester Abschnitt unten
+        $this->assertGreaterThan(strpos($html, 'Unsere Veranstaltungen zum Fonds'), strpos($html, 'Zusammenarbeit mit aus-unserer-sicht'));
+        $this->assertMatchesRegularExpression('/<strong[^>]*>aus-unserer-sicht e\.V\. löste sich zum 11\.02\.2026 auf<\/strong>/u', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>„SGB XIV – eine erste Auswertung des Sozialen Entschädigungsrechts aus unserer Sicht!“<\/strong>/u', $html);
+        // Fachtag laut Folien und Protokoll am 30.11.2024
+        $this->assertStringContainsString('war der Fachtag im November 2024.', $html);
+        $this->assertStringNotContainsString('November 2025. Dort', $html);
+        // Ihre Aufzählung als Liste
+        $this->assertStringContainsString('<p>Untersucht werden sollten insbesondere:</p><ul><li>strukturelle Missstände und Verfahrensfehler,</li>', $html);
+        $this->assertStringContainsString('src="/img/rueckblick/aus-unserer-sicht.webp', $html);
+
+        // Die zwei Präsentationen als PDF
+        $this->assertStringContainsString('Präsentationen vom Fachtag am 30.11.2024', $html);
+        foreach (['workshop-sgb-xiv', 'ag-ser'] as $name) {
+            $pfad = '/dokumente/2026/10/aus-unserer-sicht-fachtag-2024-'.$name.'.pdf';
+            $this->assertStringContainsString('href="'.$pfad, $html, $name);
+            $this->assertFileExists(public_path(ltrim($pfad, '/')));
+            $pdf = file_get_contents(public_path(ltrim($pfad, '/')));
+            // Keine weiteren Namen, keine Metadaten der fremden Vorlage
+            $this->assertStringNotContainsString('Frauenwohnen', $pdf, $name);
+        }
+        $this->assertStringContainsString('PDF-Datei', $html);
+    }
+
     public function test_mit_inhalt_fuer_suchmaschinen_offen(): void
     {
         $seite = Page::where('slug', 'rueckblick')->where('locale', 'de')->firstOrFail();
@@ -98,9 +128,10 @@ class RueckblickTest extends TestCase
         (require database_path('migrations/2026_10_23_180000_rueckblick_trauma_bindung.php'))->up();
 
         (require database_path('migrations/2026_10_23_190000_rueckblick_fsm.php'))->up();
+        (require database_path('migrations/2026_10_23_200000_rueckblick_aus_unserer_sicht.php'))->up();
 
-        // Trauma, FSM, Hinweis
-        $this->assertSame(3, $seite->blocks()->count());
+        // Trauma, FSM, Hinweis, aus-unserer-sicht, Präsentationen
+        $this->assertSame(5, $seite->blocks()->count());
         $this->assertSame(['Vom Verein geändert.'], $block->fresh()->data['absaetze']);
     }
 
@@ -118,5 +149,8 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('Received a rejection notice?', $html);
         $this->assertStringContainsString('href="/en/fsm-erweitertes-hilfesystem#dokumente"', $html);
         $this->assertStringContainsString('id="dokumente"', $this->get('/en/fsm-erweitertes-hilfesystem')->getContent());
+
+        $this->assertStringContainsString('Cooperation with aus-unserer-sicht on social compensation law', $html);
+        $this->assertStringContainsString('Results of the SGB XIV/SER working group (5 slides, in German)', $html);
     }
 }
