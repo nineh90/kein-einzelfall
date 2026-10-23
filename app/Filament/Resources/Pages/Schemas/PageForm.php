@@ -272,7 +272,14 @@ class PageForm
                                 ->default('text')
                                 ->required()
                                 ->live()
-                                ->native(false),
+                                ->native(false)
+                                // KEV-155: Dieser Baustein hat keine eigenen
+                                // Felder, sein Inhalt wird woanders gepflegt.
+                                ->helperText(fn ($get) => $get('typ') === 'glossar'
+                                    ? 'Zeigt alle Einträge unter „Glossar“, bei denen diese Seite unter „Steht auf '
+                                        .'der Seite“ gewählt ist, mit Suchfeld und Buchstabenleiste. Neue Begriffe dort '
+                                        .'anlegen.'
+                                    : null),
 
                             // Steht im Formular vor der Überschrift, weil sie auf
                             // der Seite darüber steht.
@@ -296,7 +303,7 @@ class PageForm
                                 // Titelfeld, das nichts bewirkt, ist eine Falle.
                                 ->hidden(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['cta_band', 'stat_strip', 'inhalts_hinweis', 'formular_spalten'],
+                                    ['cta_band', 'stat_strip', 'inhalts_hinweis', 'formular_spalten', 'glossar'],
                                     true,
                                 ))
                                 // Der Aufmacher-Rahmen der Zwei-Klick-Einbettung

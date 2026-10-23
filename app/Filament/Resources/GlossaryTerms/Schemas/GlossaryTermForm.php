@@ -51,6 +51,23 @@ class GlossaryTermForm
                             .'/glossar#gdb. Möglichst nicht mehr ändern — verschickte '
                             .'Links zeigen sonst ins Leere.'),
 
+                    /*
+                     * KEV-155: Es gibt mehrere Glossare, jedes eine Seite mit
+                     * dem Baustein „Glossar“. Gespeichert wird die
+                     * Übersetzungsgruppe der Seite, damit die Zuordnung in
+                     * jeder Sprache gilt.
+                     */
+                    Select::make('seite_gruppe')
+                        ->label('Steht auf der Seite')
+                        ->options(fn () => GlossaryTerm::seitenAuswahl())
+                        ->default(fn () => GlossaryTerm::hauptseitenGruppe())
+                        // Ohne Zuordnung steht ein Eintrag im Glossar (/glossar).
+                        ->formatStateUsing(fn ($state) => $state ?: GlossaryTerm::hauptseitenGruppe())
+                        ->required()
+                        ->native(false)
+                        ->helperText('Welches Glossar. Zur Auswahl stehen alle Seiten mit dem Baustein '
+                            .'„Glossar“; ein neues Glossar ist eine neue Seite mit diesem Baustein.'),
+
                     Select::make('locale')
                         ->label('Sprache')
                         ->options(fn () => Language::alle()->pluck('label_deutsch', 'code')->all())

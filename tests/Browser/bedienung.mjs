@@ -833,6 +833,27 @@ console.log('\nSuche im Glossar')
     await ohne.context().close()
 }
 
+// --- Zweites Glossar (KEV-155) ----------------------------------------------
+
+console.log('\nBehörden & Bescheide')
+{
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/behoerden-und-bescheide' })
+        const sichtbar = () => s.locator('[data-glossar-eintrag]:visible').count()
+        const gesamt = await sichtbar()
+        pruefe(`${breite}px: alle 128 Begriffe`, gesamt === 128, `${gesamt}`)
+
+        await s.fill('#glossar-suche', 'frist')
+        await s.waitForTimeout(400)
+        const frist = await sichtbar()
+        pruefe(`${breite}px: Tippen filtert auch hier`, frist > 1 && frist < 20
+            && (await s.locator('[data-glossar-status]').innerText()).trim() === `Treffer: ${frist} von 128`, `${frist}`)
+        pruefe(`${breite}px: nichts läuft über`,
+            await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+        await s.context().close()
+    }
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

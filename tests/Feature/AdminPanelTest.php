@@ -291,6 +291,8 @@ class AdminPanelTest extends TestCase
             ]],
             // KEV-156: Kacheln der Unterseiten, nur Überschrift und Schalter
             ['typ' => 'unterseiten', 'data' => ['titel' => 'Kachelprobe', 'aufrufe' => true]],
+            // KEV-155: Glossar-Liste, ohne eigene Felder
+            ['typ' => 'glossar', 'data' => []],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -334,6 +336,7 @@ class AdminPanelTest extends TestCase
 
         $kacheln = $seite->fresh()->blocks()->where('typ', 'unterseiten')->first()->data;
         $this->assertTrue($kacheln['aufrufe']);
+        $this->assertSame(1, $seite->fresh()->blocks()->where('typ', 'glossar')->count());
     }
 
     /** KEV-156: Die Triggerwarnung vor einem Bereich pflegt der Verein an der Seite selbst. */

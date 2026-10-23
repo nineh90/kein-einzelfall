@@ -73,6 +73,9 @@ return [
                 // aber vor das Glossar, das als Nachschlagewerk zuletzt steht.
                 ['schluessel' => 'atteste', 'label' => 'Atteste',                       'url' => '/atteste'],
                 ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
+                // KEV-155: zweites Glossar, Taddis Datei „3. Behörden und
+                // Bescheide“. Ohne Positionsangabe, deshalb neben das Glossar.
+                ['schluessel' => 'behoerden_und_bescheide', 'label' => 'Behörden & Bescheide', 'url' => '/behoerden-und-bescheide'],
             ],
         ],
         /*

@@ -554,6 +554,26 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
+  eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
+  Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle
+  128 Begriffe mit Erklärung, darüber das Suchfeld wie im Glossar. Pflegen:
+  Einleitung und Titel unter „Seiten“ → „Behörden & Bescheide“, die Begriffe
+  unter „Glossar“ (Spalte und Filter „Glossar“ zeigen, wo ein Eintrag steht).
+  - **Neu für den Verein:** Jedes Glossar ist eine Seite mit dem Baustein
+    „Glossar“, und an jedem Eintrag wählt man „Steht auf der Seite“. Für Taddis
+    nächstes („Abkürzungen sexueller Kontext“) braucht es uns nur noch für den
+    Menüpunkt.
+  - **Weggelassen:** das „Einfach erklärt:“ vor jeder der 128 Erklärungen;
+    die Einleitung sagt es einmal. Ebenso die Zeilen „1. Behördendeutsch“ und
+    „TEXT:“ über der Einleitung (Arbeitsnotizen?).
+  - **Bild fehlt:** Im Drive-Ordner „3. Wissen“ liegt noch keins für diese
+    Seite, bis dahin der Platzhalter (leere Wand).
+  - **Reihenfolge:** Die Liste sortiert selbst alphabetisch, Umlaute wie ihr
+    Grundbuchstabe („Änderung“ unter A).
+  - /glossar sieht fast aus wie vorher, hat jetzt aber wie jede Seite die
+    Brotkrumen mit „Wissen“ und am Ende „Mehr zu „Wissen““ und „Du möchtest
+    uns etwas mitteilen?“.
 - [ ] **Glossar mit Taddis Abkürzungen (KEV-153).** /glossar zeigt ihre
   Einleitung („Abkürzungen im Sozialen Entschädigungsrecht (SER)“, Fettes wie
   im Dokument) und 195 Abkürzungen mit Auflösung, darüber ein Suchfeld, das

@@ -1204,8 +1204,9 @@ Alphabetisch, mit Buchstabenleiste aus echten Ankern — ohne JavaScript bedienb
 
 **Seit KEV-153** (Taddis Abkürzungsverzeichnis, rund 200 Einträge):
 
-- Die Seite `glossar` im Panel trägt Einleitung, Titel und Titelbild; der
-  `GlossarController` zeigt die Liste darunter.
+- Die Seite `glossar` im Panel trägt Einleitung, Titel und Titelbild; die
+  Liste darunter ist seit KEV-155 der Baustein `glossar` (vorher ein eigener
+  `GlossarController`, siehe Abschnitt 37).
 - Die **Erklärung ist freiwillig**. „AOK — Allgemeine Ortskrankenkasse“ ist schon
   die Antwort; Pflicht ist sie nur ohne Abkürzung. Ohne Erklärung steht die
   Auflösung als `<dd>` zur Abkürzung im `<dt>`.
@@ -2338,3 +2339,45 @@ speichern), `SpeicherTest` (Schlüssel registriert), im Browser-Lauf
 „Triggerwarnung vor „Raum für Ungesagtes““ und „Spendenhinweis wartet auch auf
 die Warnung des Bereichs“, im Barrierefreiheits-Lauf die Übersicht (de/en) und
 der offene Dialog (Desktop, mobil).
+
+
+## 37. Mehrere Glossare: Baustein `glossar`, „Behörden & Bescheide“ (KEV-155, 23.10.2026)
+
+Taddi schickt die Glossare einzeln („1. Abkürzungen Sozialrecht“, „3. Behörden
+und Bescheide“, laut Drive kommt „Abkürzungen sexueller Kontext“), jedes als
+eigene Seite unter „Wissen“. Statt einer zweiten fest verdrahteten Route ist
+die Liste jetzt ein **Baustein**:
+
+- **Baustein `glossar`** („Glossar (Einträge dieser Seite)“), ohne eigene
+  Felder: Suchfeld, Buchstabenleiste und Liste wie bisher, mit den Einträgen,
+  die dieser Seite zugeordnet sind (`blocks/glossar.blade.php`). Das Suchfeld
+  schickt an die eigene Adresse (`?suche=`), `glossar.js` ist unverändert.
+  Ohne Abkürzungen in der Liste heißt es „Begriff suchen“.
+- **Zuordnung am Eintrag:** `glossary_terms.seite_gruppe` ist die
+  Übersetzungsgruppe der Seite, gilt also in jeder Sprache. Leer heißt
+  Hauptglossar (`GlossaryTerm::HAUPTSEITE`, `/glossar`), so wie vor KEV-155.
+  Im Panel: „Steht auf der Seite“ (Auswahl aller Seiten mit dem Baustein,
+  Vorgabe Glossar), Spalte und Filter „Glossar“ in der Liste.
+- **Ein neues Glossar** legt der Verein selbst an: neue Seite, Baustein
+  „Glossar“ hinzufügen, Einträge zuordnen. Ins Menü kommt sie bisher nur über
+  `config/navigation.php`.
+- `/glossar` ist damit eine gewöhnliche Seite (`PageController`):
+  `GlossarController`, Route `glossar` und `glossar/index.blade.php` sind
+  entfernt. Dazugekommen sind die Brotkrumen mit „Wissen“, „Mehr zu „Wissen““
+  und der Kontakt-Abschluss am Ende, wie auf jeder Inhaltsseite.
+- **Websuche:** Ein Glossartreffer verlinkt die Seite, auf der der Eintrag
+  steht (`GlossaryTerm::seite()`), mit deren Titel als Bereich. „Alle …
+  passenden Einträge in „…““ gibt es je Glossar-Seite.
+
+**„Behörden & Bescheide“** (`/behoerden-und-bescheide`, `BehoerdenUndBescheideSeeder`):
+Taddis Einleitung (Fettes wie im Dokument, Adresse als Mailto-Link), 128
+Begriffe mit Erklärung (`data/glossar-behoerden.json`). Ihr „Einfach erklärt:“
+vor jeder Erklärung ist weggelassen. Im Menü direkt nach dem Glossar. Titelbild
+vorerst der Platzhalter. Englisch maschinell und ungeprüft, die Begriffe als
+„Objection (Widerspruch)“, damit der deutsche Begriff aus dem Brief bleibt.
+
+Tests: `BehoerdenUndBescheideTest` (Seite, Liste, Suche auf der Seite,
+Websuche, neues Glossar im Panel, Englisch), angepasst `GlossarSozialrechtTest`,
+`AttesteTest`, `AdminPanelTest`; im Browser-Lauf „Behörden & Bescheide“
+(Filtern beim Tippen, 390 und 1400 px), im Barrierefreiheits-Lauf die Seite
+auf Deutsch und Englisch.

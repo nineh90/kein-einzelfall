@@ -50,7 +50,8 @@ class SpendenHinweis
      * Formularseite ihn, ohne dass es jemand gemerkt hat.
      */
     private const ROUTEN = [
-        'start', 'page', 'leichte-sprache', 'glossar',
+        // Das Glossar ist seit KEV-155 eine Seite ('page').
+        'start', 'page', 'leichte-sprache',
         'blog.index', 'blog.show', 'events.index', 'events.show',
     ];
 }

@@ -68,9 +68,10 @@
             $attribute['vertrauen'] = false;
         }
 
-        // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite und
-        // müssen deshalb wissen, wo sie stehen.
-        if ($block->typ === 'unterseiten') {
+        // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite, das
+        // Glossar (KEV-155) die Einträge dieser Seite. Beide müssen deshalb
+        // wissen, wo sie stehen.
+        if (in_array($block->typ, ['unterseiten', 'glossar'], true)) {
             $attribute['seite'] = $block->page;
         }
     @endphp

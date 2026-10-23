@@ -14,9 +14,9 @@ use Illuminate\Support\Str;
  *
  * Zwei Teile:
  *
- * - Die Seite „glossar“ trägt ihre Einleitung. Der GlossarController zeigt
- *   sie über der Liste; Titel, Titelbild und Text pflegt der Verein damit im
- *   Panel wie bei jeder Seite. Was im Dokument fett war, ist fett
+ * - Die Seite „glossar“ trägt ihre Einleitung, darunter seit KEV-155 die
+ *   Liste als Baustein „Glossar“. Titel, Titelbild und Text pflegt der
+ *   Verein damit im Panel wie bei jeder Seite. Was im Dokument fett war, ist fett
  *   (*Sternchen*), Absätze wie bei ihr. Das Titelbild ist Taddis
  *   „Abkürzungen SER“ aus dem Drive (Zettelkasten).
  * - Die Abkürzungen (data/glossar-sozialrecht.json) werden Glossareinträge,
@@ -101,6 +101,8 @@ class GlossarSozialrechtSeeder extends Seeder
                 'position' => 0,
                 'data' => ['titel' => self::UEBERSCHRIFT, 'absaetze' => self::ABSAETZE],
             ]);
+            // Seit KEV-155 ist die Liste ein Baustein der Seite.
+            $seite->blocks()->create(['typ' => 'glossar', 'position' => 1, 'data' => []]);
         }
 
         // Taddis Bild „Abkürzungen SER“ (Zettelkasten), Titelbilder::SEITEN.

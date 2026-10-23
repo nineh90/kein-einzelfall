@@ -4,7 +4,6 @@ use App\Http\Controllers\AnfrageController;
 use App\Http\Controllers\BeschwerdeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\GlossarController;
 use App\Http\Controllers\GruppeController;
 use App\Http\Controllers\OeffentlichkeitsarbeitController;
 use App\Http\Controllers\PageController;
@@ -120,13 +119,10 @@ $oeffentlicheRouten = function () {
     Route::get('/suche', SucheController::class)->name('suche');
 
     /*
-     * Glossar. Steht vor der Sammelroute, sonst griffe /{slug}.
-     *
-     * Eine eigene Adresse und keine Aufklapper auf einer Inhaltsseite: Nur so
-     * lässt sich ein einzelner Begriff verlinken — „siehe /glossar#gdb“ ist
-     * genau das, was in einer Antwort des Vereins auf eine Anfrage steht.
+     * Das Glossar hat seit KEV-155 keine eigene Route mehr: /glossar ist eine
+     * Seite mit dem Baustein „Glossar“, wie /behoerden-und-bescheide. Jeder
+     * Begriff bleibt einzeln verlinkbar („siehe /glossar#gdb“).
      */
-    Route::get('/glossar', [GlossarController::class, 'index'])->name('glossar');
 
     /*
      * Leichte Sprache.

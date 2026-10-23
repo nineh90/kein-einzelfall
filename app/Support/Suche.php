@@ -177,7 +177,7 @@ class Suche
     private array $abkuerzungen = ['genau' => [], 'klein' => []];
 
     /**
-     * @return array{treffer: list<array<string, mixed>>, krise: bool, begriffe: list<string>, im_glossar: int}
+     * @return array{treffer: list<array<string, mixed>>, krise: bool, begriffe: list<string>, im_glossar: list<array{titel: string, url: string, anzahl: int}>}
      */
     public function suchen(string $anfrage, string $sprache = 'de'): array
     {
@@ -186,7 +186,7 @@ class Suche
         $this->abkuerzungen = $this->stuecke($anfrage);
 
         if ($begriffe === [] && $this->abkuerzungen['klein'] === []) {
-            return ['treffer' => [], 'krise' => $krise, 'begriffe' => [], 'im_glossar' => 0];
+            return ['treffer' => [], 'krise' => $krise, 'begriffe' => [], 'im_glossar' => []];
         }
 
         $glossar = $this->glossar($begriffe, $sprache);
@@ -205,12 +205,52 @@ class Suche
             'treffer' => array_slice($treffer, 0, self::HOECHSTENS),
             'krise' => $krise,
             'begriffe' => $begriffe,
-            // Wie viele Einträge die Suche im Glossar mit derselben Eingabe
-            // zeigt. Für den Verweis „Alle … im Glossar“ unter den Treffern.
-            // Erst ab drei Zeichen: „au“ steckt in jedem dritten Wort.
-            'im_glossar' => mb_strlen(GlossaryTerm::kompakt($anfrage)) < 3 ? 0
-                : GlossaryTerm::veroeffentlicht()->where('locale', $sprache)->get()->filter->passt($anfrage)->count(),
+            // Wie viele Einträge die Suche in jedem Glossar mit derselben
+            // Eingabe zeigt. Für den Verweis „Alle … in „Glossar““ unter den
+            // Treffern. Erst ab drei Zeichen: „au“ steckt in jedem dritten Wort.
+            'im_glossar' => mb_strlen(GlossaryTerm::kompakt($anfrage)) < 3 ? [] : $this->imGlossar($anfrage, $sprache),
         ];
+    }
+
+    /**
+     * Passende Einträge je Glossar-Seite (KEV-155), die meisten zuerst.
+     *
+     * @return list<array{titel: string, url: string, anzahl: int}>
+     */
+    private function imGlossar(string $anfrage, string $sprache): array
+    {
+        return GlossaryTerm::veroeffentlicht()->where('locale', $sprache)->get()
+            ->filter->passt($anfrage)
+            ->groupBy(fn (GlossaryTerm $eintrag) => $this->glossarSeite($eintrag, $sprache)?->getKey() ?? 0)
+            ->map(function ($eintraege) use ($sprache) {
+                $seite = $this->glossarSeite($eintraege->first(), $sprache);
+
+                return $seite
+                    ? ['titel' => $seite->titel, 'url' => $seite->pfad(), 'anzahl' => $eintraege->count()]
+                    : null;
+            })
+            ->filter()
+            ->sortByDesc('anzahl')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Die Seite, auf der ein Glossar-Eintrag steht, einmal je Seite gesucht.
+     *
+     * @var array<string, ?\App\Models\Page>
+     */
+    private array $glossarSeiten = [];
+
+    private function glossarSeite(GlossaryTerm $eintrag, string $sprache): ?\App\Models\Page
+    {
+        $schluessel = ($eintrag->seite_gruppe ?? GlossaryTerm::HAUPTSEITE).'|'.$sprache;
+
+        if (! array_key_exists($schluessel, $this->glossarSeiten)) {
+            $this->glossarSeiten[$schluessel] = $eintrag->seite($sprache);
+        }
+
+        return $this->glossarSeiten[$schluessel];
     }
 
     /**
@@ -371,13 +411,18 @@ class Suche
                 + 2 * $this->wieOftImGlossar($begriffe, (string) $eintrag->erklaerung);
 
             if ($punkte > 0) {
+                // Seit KEV-155 gibt es mehrere Glossare: der Link führt auf
+                // die Seite, auf der der Eintrag steht, in der Sprache der
+                // Suche (sonst landete die englische Suche im deutschen
+                // Glossar, 08.10.2026).
+                $seite = $this->glossarSeite($eintrag, $sprache);
+
                 $treffer[] = [
                     'art' => 'glossar',
                     'titel' => $eintrag->begriff.($eintrag->kuerzel ? ' ('.$eintrag->kuerzel.')' : ''),
-                    // Mit Sprachpräfix: sonst landete die englische Suche im
-                    // deutschen Glossar (08.10.2026).
-                    'url' => (\App\Models\Language::finden($sprache)?->pfad('/glossar') ?? '/glossar').'#'.$eintrag->slug,
-                    'bereich' => __('Glossar'),
+                    'url' => ($seite?->pfad() ?? (\App\Models\Language::finden($sprache)?->pfad('/glossar') ?? '/glossar'))
+                        .'#'.$eintrag->slug,
+                    'bereich' => $seite?->titel ?? __('Glossar'),
                     'ausschnitt' => Str::limit((string) $eintrag->erklaerung, 160),
                     'punkte' => $punkte,
                 ];

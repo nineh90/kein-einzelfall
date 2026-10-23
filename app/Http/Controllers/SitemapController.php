@@ -35,9 +35,9 @@ class SitemapController extends Controller
             ...$this->oeffentlichkeitsarbeit(),
         ];
 
-        // Jede Adresse einmal. /veranstaltungen und seit KEV-153 /glossar
-        // sind zugleich Übersicht und Seite (deren Einleitung im Panel); die
-        // Seite steht vorn und gewinnt, sie kennt das Änderungsdatum.
+        // Jede Adresse einmal. /veranstaltungen ist zugleich Übersicht und
+        // Seite (deren Einleitung im Panel); die Seite steht vorn und gewinnt,
+        // sie kennt das Änderungsdatum. /glossar ist seit KEV-155 nur Seite.
         $eintraege = collect($eintraege)->unique('url')->values()->all();
 
         return response()
@@ -99,7 +99,7 @@ class SitemapController extends Controller
     {
         $sprachen = Language::aktive();
 
-        return collect(['blog.index', 'events.index', 'glossar'])
+        return collect(['blog.index', 'events.index'])
             ->map(fn (string $route) => $sprachen->map(fn (Language $s) => [
                 'url' => url(sprachlink($route, [], $s->code)),
                 'geaendert' => null,

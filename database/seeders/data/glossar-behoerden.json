@@ -1,0 +1,642 @@
+[
+  {
+    "slug": "abhilfe",
+    "begriff": "Abhilfe",
+    "erklaerung": "Du hast dich gegen eine Entscheidung gewehrt und die Behörde gibt dir ganz oder teilweise recht. Sie ändert ihre ursprüngliche Entscheidung entsprechend."
+  },
+  {
+    "slug": "ablehnung",
+    "begriff": "Ablehnung",
+    "erklaerung": "Die Behörde entscheidet, dass du das, was du beantragt hast, ganz oder teilweise nicht bekommst."
+  },
+  {
+    "slug": "ablehnungsbescheid",
+    "begriff": "Ablehnungsbescheid",
+    "erklaerung": "Das ist der Bescheid, in dem dir mitgeteilt wird, dass dein Antrag ganz oder teilweise abgelehnt wurde."
+  },
+  {
+    "slug": "akte",
+    "begriff": "Akte",
+    "erklaerung": "In deiner Akte sammelt die Behörde Unterlagen und Informationen, die zu deinem Antrag oder Verfahren gehören."
+  },
+  {
+    "slug": "akteneinsicht",
+    "begriff": "Akteneinsicht",
+    "erklaerung": "Du darfst dir unter bestimmten Voraussetzungen anschauen, welche Unterlagen die Behörde zu deinem Verfahren gesammelt hat."
+  },
+  {
+    "slug": "aktenvermerk",
+    "begriff": "Aktenvermerk",
+    "erklaerung": "Eine Person bei der Behörde hält schriftlich fest, was passiert ist oder besprochen wurde, zum Beispiel ein Telefonat oder eine interne Einschätzung."
+  },
+  {
+    "slug": "aktenzeichen",
+    "begriff": "Aktenzeichen",
+    "erklaerung": "Das ist die Nummer oder Kennzeichnung, unter der die Behörde deinen Fall führt."
+  },
+  {
+    "slug": "aenderung",
+    "begriff": "Änderung",
+    "erklaerung": "Etwas an einer früheren Entscheidung wird verändert."
+  },
+  {
+    "slug": "aenderungsbescheid",
+    "begriff": "Änderungsbescheid",
+    "erklaerung": "Die Behörde ändert mit diesem Bescheid eine frühere Entscheidung."
+  },
+  {
+    "slug": "amtsermittlung",
+    "begriff": "Amtsermittlung",
+    "erklaerung": "Die Behörde muss selbst nachprüfen, was passiert ist. Sie darf nicht erwarten, dass du allein alle Informationen und Beweise zusammensuchst."
+  },
+  {
+    "slug": "anhoerung",
+    "begriff": "Anhörung",
+    "erklaerung": "Bevor die Behörde eine Entscheidung trifft, die für dich nachteilig sein kann, bekommst du häufig die Möglichkeit, vorher noch etwas dazu zu sagen."
+  },
+  {
+    "slug": "anhoerungsschreiben",
+    "begriff": "Anhörungsschreiben",
+    "erklaerung": "Die Behörde teilt dir mit, was sie möglicherweise entscheiden möchte, und gibt dir Gelegenheit, vorher Stellung dazu zu nehmen."
+  },
+  {
+    "slug": "antrag",
+    "begriff": "Antrag",
+    "erklaerung": "Du bittest eine Behörde offiziell darum, über eine bestimmte Leistung, Unterstützung oder andere Angelegenheit zu entscheiden."
+  },
+  {
+    "slug": "antragsdatum",
+    "begriff": "Antragsdatum",
+    "erklaerung": "Das ist der Tag, an dem du deinen Antrag gestellt hast. Dieses Datum kann später wichtig sein."
+  },
+  {
+    "slug": "antragseingang",
+    "begriff": "Antragseingang",
+    "erklaerung": "Das ist der Zeitpunkt, an dem dein Antrag bei der Behörde angekommen ist."
+  },
+  {
+    "slug": "antragsunterlagen",
+    "begriff": "Antragsunterlagen",
+    "erklaerung": "Das sind Formulare, Nachweise und weitere Unterlagen, die zu deinem Antrag gehören."
+  },
+  {
+    "slug": "anspruch",
+    "begriff": "Anspruch",
+    "erklaerung": "Wenn alle gesetzlichen Voraussetzungen erfüllt sind, kann dir eine bestimmte Leistung oder ein bestimmtes Recht zustehen."
+  },
+  {
+    "slug": "aufhebung",
+    "begriff": "Aufhebung",
+    "erklaerung": "Eine frühere Entscheidung der Behörde wird ganz oder teilweise beendet oder verändert."
+  },
+  {
+    "slug": "aufhebungsbescheid",
+    "begriff": "Aufhebungsbescheid",
+    "erklaerung": "In diesem Bescheid teilt dir die Behörde mit, dass eine frühere Entscheidung ganz oder teilweise aufgehoben wird."
+  },
+  {
+    "slug": "auflage",
+    "begriff": "Auflage",
+    "erklaerung": "Die Behörde erlaubt oder bewilligt etwas, verlangt aber gleichzeitig, dass du dabei eine bestimmte Vorgabe erfüllst."
+  },
+  {
+    "slug": "aufforderung",
+    "begriff": "Aufforderung",
+    "erklaerung": "Die Behörde möchte, dass du etwas tust, zum Beispiel Unterlagen einreichst oder eine Frage beantwortest."
+  },
+  {
+    "slug": "auskunft",
+    "begriff": "Auskunft",
+    "erklaerung": "Eine Behörde gibt dir Informationen oder bittet dich darum, bestimmte Informationen mitzuteilen."
+  },
+  {
+    "slug": "auskunftsersuchen",
+    "begriff": "Auskunftsersuchen",
+    "erklaerung": "Die Behörde bittet dich oder eine andere Stelle darum, bestimmte Informationen zu übermitteln."
+  },
+  {
+    "slug": "bearbeitung",
+    "begriff": "Bearbeitung",
+    "erklaerung": "Die Behörde prüft deinen Antrag, deine Unterlagen oder dein Anliegen."
+  },
+  {
+    "slug": "bearbeitungsstand",
+    "begriff": "Bearbeitungsstand",
+    "erklaerung": "Damit ist gemeint, wie weit die Behörde mit deinem Antrag oder deinem Verfahren gerade ist."
+  },
+  {
+    "slug": "bedarf",
+    "begriff": "Bedarf",
+    "erklaerung": "Damit wird beschrieben, welche Hilfe oder Unterstützung du brauchst."
+  },
+  {
+    "slug": "befristung",
+    "begriff": "Befristung",
+    "erklaerung": "Eine Entscheidung oder Bewilligung gilt nur bis zu einem bestimmten Zeitpunkt."
+  },
+  {
+    "slug": "beguenstigend",
+    "begriff": "Begünstigend",
+    "erklaerung": "Eine Entscheidung bringt dir einen Vorteil, zum Beispiel weil eine Leistung bewilligt wird."
+  },
+  {
+    "slug": "bekanntgabe",
+    "begriff": "Bekanntgabe",
+    "erklaerung": "Damit ist gemeint, wann dir eine behördliche Entscheidung offiziell mitgeteilt wurde. Das kann für Fristen wichtig sein."
+  },
+  {
+    "slug": "belastend",
+    "begriff": "Belastend",
+    "erklaerung": "Eine Entscheidung ist für dich nachteilig, zum Beispiel weil eine Leistung abgelehnt, gekürzt oder zurückgefordert wird."
+  },
+  {
+    "slug": "berechnung",
+    "begriff": "Berechnung",
+    "erklaerung": "Die Behörde erklärt, wie sie einen bestimmten Betrag oder eine Leistung ausgerechnet hat."
+  },
+  {
+    "slug": "bescheid",
+    "begriff": "Bescheid",
+    "erklaerung": "Ein Bescheid ist eine offizielle Entscheidung einer Behörde zu deinem konkreten Fall."
+  },
+  {
+    "slug": "bescheidbegruendung",
+    "begriff": "Bescheidbegründung",
+    "erklaerung": "Hier erklärt die Behörde, warum sie so entschieden hat."
+  },
+  {
+    "slug": "bestandskraft-bestandskraeftig",
+    "begriff": "Bestandskraft / bestandskräftig",
+    "erklaerung": "Die normale Möglichkeit, sich gegen die Entscheidung zu wehren, ist meist vorbei. Die Entscheidung gilt deshalb zunächst weiter."
+  },
+  {
+    "slug": "bestimmtheit",
+    "begriff": "Bestimmtheit",
+    "erklaerung": "Aus einem Bescheid muss ausreichend klar hervorgehen, was genau entschieden wurde."
+  },
+  {
+    "slug": "beteiligte",
+    "begriff": "Beteiligte",
+    "erklaerung": "Das sind die Personen oder Stellen, die offiziell an einem Verfahren beteiligt sind."
+  },
+  {
+    "slug": "bevollmaechtigte-person",
+    "begriff": "Bevollmächtigte Person",
+    "erklaerung": "Du kannst eine andere Person bevollmächtigen, bestimmte Dinge gegenüber der Behörde für dich zu erledigen."
+  },
+  {
+    "slug": "begruendung",
+    "begriff": "Begründung",
+    "erklaerung": "Hier erklärt die Behörde, warum sie eine bestimmte Entscheidung getroffen hat."
+  },
+  {
+    "slug": "beweismittel",
+    "begriff": "Beweismittel",
+    "erklaerung": "Das sind Informationen oder Unterlagen, die helfen können zu zeigen, was passiert ist oder wie deine Situation ist."
+  },
+  {
+    "slug": "bewilligung",
+    "begriff": "Bewilligung",
+    "erklaerung": "Die Behörde hat deinem Antrag ganz oder teilweise zugestimmt."
+  },
+  {
+    "slug": "bewilligungsbescheid",
+    "begriff": "Bewilligungsbescheid",
+    "erklaerung": "In diesem Bescheid steht, dass dir eine beantragte Leistung ganz oder teilweise gewährt wird."
+  },
+  {
+    "slug": "bewilligungszeitraum",
+    "begriff": "Bewilligungszeitraum",
+    "erklaerung": "Das ist der Zeitraum, für den dir eine Leistung bewilligt wurde."
+  },
+  {
+    "slug": "dauerwirkung",
+    "begriff": "Dauerwirkung",
+    "erklaerung": "Eine Entscheidung wirkt nicht nur einmal, sondern über einen längeren Zeitraum weiter, zum Beispiel eine laufende Bewilligung."
+  },
+  {
+    "slug": "datenschutz",
+    "begriff": "Datenschutz",
+    "erklaerung": "Behörden dürfen persönliche Daten nicht beliebig verwenden oder weitergeben. Für den Umgang mit deinen Daten gelten gesetzliche Regeln."
+  },
+  {
+    "slug": "dienstweg",
+    "begriff": "Dienstweg",
+    "erklaerung": "Damit ist der vorgesehene Weg gemeint, über den eine Angelegenheit innerhalb einer Behörde weitergegeben oder bearbeitet wird."
+  },
+  {
+    "slug": "eingang",
+    "begriff": "Eingang",
+    "erklaerung": "Damit ist gemeint, wann dein Antrag, dein Schreiben oder deine Unterlagen bei der Behörde angekommen sind."
+  },
+  {
+    "slug": "eingangsbestaetigung",
+    "begriff": "Eingangsbestätigung",
+    "erklaerung": "Damit bestätigt die Behörde, dass dein Antrag, Widerspruch oder deine Unterlagen angekommen sind."
+  },
+  {
+    "slug": "einzelfall",
+    "begriff": "Einzelfall",
+    "erklaerung": "Deine persönliche Situation muss betrachtet werden. Nicht jeder Fall kann automatisch genauso behandelt werden wie ein anderer."
+  },
+  {
+    "slug": "entscheidung",
+    "begriff": "Entscheidung",
+    "erklaerung": "Die Behörde legt fest, wie sie über deinen Antrag oder eine andere Angelegenheit entscheidet."
+  },
+  {
+    "slug": "entscheidung-nach-aktenlage",
+    "begriff": "Entscheidung nach Aktenlage",
+    "erklaerung": "Die Behörde entscheidet mit den Informationen und Unterlagen, die ihr zu diesem Zeitpunkt vorliegen."
+  },
+  {
+    "slug": "entscheidungserheblich",
+    "begriff": "Entscheidungserheblich",
+    "erklaerung": "Etwas ist wichtig dafür, wie die Behörde entscheidet."
+  },
+  {
+    "slug": "entziehung",
+    "begriff": "Entziehung",
+    "erklaerung": "Eine Leistung, die du bisher bekommen hast, wird dir für die Zukunft ganz oder teilweise weggenommen."
+  },
+  {
+    "slug": "ermessen",
+    "begriff": "Ermessen",
+    "erklaerung": "Das Gesetz lässt der Behörde mehrere Möglichkeiten. Sie muss prüfen, welche Entscheidung in deinem konkreten Fall passend ist."
+  },
+  {
+    "slug": "ermessensentscheidung",
+    "begriff": "Ermessensentscheidung",
+    "erklaerung": "Die Behörde hat bei ihrer Entscheidung einen gewissen Spielraum und muss deine konkrete Situation berücksichtigen."
+  },
+  {
+    "slug": "erforderlich",
+    "begriff": "Erforderlich",
+    "erklaerung": "Die Behörde meint, dass etwas notwendig ist."
+  },
+  {
+    "slug": "erstattung",
+    "begriff": "Erstattung",
+    "erklaerung": "Geld wird zurückgezahlt oder zurückverlangt. Was genau gemeint ist, ergibt sich aus dem Zusammenhang."
+  },
+  {
+    "slug": "erstattungsbescheid",
+    "begriff": "Erstattungsbescheid",
+    "erklaerung": "Die Behörde verlangt mit diesem Bescheid Geld zurück, das bereits gezahlt wurde."
+  },
+  {
+    "slug": "festsetzung",
+    "begriff": "Festsetzung",
+    "erklaerung": "Die Behörde legt etwas verbindlich fest, zum Beispiel einen Betrag."
+  },
+  {
+    "slug": "festsetzungsbescheid",
+    "begriff": "Festsetzungsbescheid",
+    "erklaerung": "Mit diesem Bescheid wird ein bestimmter Betrag oder eine andere Entscheidung verbindlich festgelegt."
+  },
+  {
+    "slug": "feststellung",
+    "begriff": "Feststellung",
+    "erklaerung": "Die Behörde entscheidet offiziell, dass etwas in deinem Fall vorliegt oder anerkannt wird."
+  },
+  {
+    "slug": "feststellungsbescheid",
+    "begriff": "Feststellungsbescheid",
+    "erklaerung": "In diesem Bescheid stellt die Behörde offiziell etwas fest, zum Beispiel einen bestimmten Status oder eine bestimmte Voraussetzung."
+  },
+  {
+    "slug": "formlos",
+    "begriff": "Formlos",
+    "erklaerung": "Es ist nicht zwingend ein bestimmtes Formular vorgeschrieben. Eine einfache schriftliche Erklärung kann in manchen Fällen ausreichen."
+  },
+  {
+    "slug": "formloser-antrag",
+    "begriff": "Formloser Antrag",
+    "erklaerung": "Je nach Leistung kann es möglich sein, zunächst mit einem einfachen Schreiben deutlich zu machen, dass du etwas beantragen möchtest."
+  },
+  {
+    "slug": "frist",
+    "begriff": "Frist",
+    "erklaerung": "Bis zu einem bestimmten Zeitpunkt sollst oder musst du etwas erledigen, einreichen oder beantworten."
+  },
+  {
+    "slug": "fristsetzung",
+    "begriff": "Fristsetzung",
+    "erklaerung": "Die Behörde nennt dir einen Zeitpunkt, bis zu dem sie etwas von dir erwartet."
+  },
+  {
+    "slug": "fristverlaengerung",
+    "begriff": "Fristverlängerung",
+    "erklaerung": "Wenn die Behörde dir selbst eine Frist gesetzt hat und du mehr Zeit brauchst, kannst du darum bitten, diese Frist zu verlängern."
+  },
+  {
+    "slug": "heilung-eines-fehlers",
+    "begriff": "Heilung eines Fehlers",
+    "erklaerung": "Ein Fehler im Ablauf eines Verfahrens kann unter bestimmten Voraussetzungen später noch korrigiert werden."
+  },
+  {
+    "slug": "hinweis",
+    "begriff": "Hinweis",
+    "erklaerung": "Die Behörde macht dich auf etwas aufmerksam. Ein Hinweis ist nicht automatisch eine verbindliche Entscheidung."
+  },
+  {
+    "slug": "kenntnisnahme",
+    "begriff": "Kenntnisnahme",
+    "erklaerung": "Du sollst eine Information lesen oder zur Kenntnis nehmen. Das bedeutet nicht automatisch, dass du ihr zustimmst."
+  },
+  {
+    "slug": "kuerzung",
+    "begriff": "Kürzung",
+    "erklaerung": "Eine Leistung, die du bekommst oder beantragt hast, wird geringer festgesetzt."
+  },
+  {
+    "slug": "mitteilung",
+    "begriff": "Mitteilung",
+    "erklaerung": "Die Behörde informiert dich über etwas oder du informierst die Behörde über eine Veränderung."
+  },
+  {
+    "slug": "mitteilungspflicht",
+    "begriff": "Mitteilungspflicht",
+    "erklaerung": "Bestimmte Veränderungen musst du der zuständigen Stelle mitteilen, wenn sie für deine Leistung oder dein Verfahren wichtig sein können."
+  },
+  {
+    "slug": "mitwirkung",
+    "begriff": "Mitwirkung",
+    "erklaerung": "Du musst bei deinem Verfahren in bestimmten Punkten mithelfen, zum Beispiel Fragen beantworten oder vorhandene Unterlagen einreichen."
+  },
+  {
+    "slug": "mitwirkungsaufforderung",
+    "begriff": "Mitwirkungsaufforderung",
+    "erklaerung": "Die Behörde fordert dich auf, bestimmte Informationen oder Unterlagen einzureichen oder etwas anderes zu tun."
+  },
+  {
+    "slug": "mitwirkungspflicht",
+    "begriff": "Mitwirkungspflicht",
+    "erklaerung": "Das Gesetz kann verlangen, dass du bei bestimmten Dingen mitmachst, damit die Behörde entscheiden kann. Das bedeutet aber nicht automatisch, dass du alles selbst beschaffen oder jede Forderung erfüllen musst."
+  },
+  {
+    "slug": "nach-aktenlage",
+    "begriff": "Nach Aktenlage",
+    "erklaerung": "Die Behörde stützt sich auf die Informationen und Unterlagen, die bereits in deiner Akte vorhanden sind."
+  },
+  {
+    "slug": "nachforderung",
+    "begriff": "Nachforderung",
+    "erklaerung": "Die Behörde möchte noch weitere Unterlagen oder Informationen von dir haben."
+  },
+  {
+    "slug": "nachreichen",
+    "begriff": "Nachreichen",
+    "erklaerung": "Du gibst Unterlagen oder Informationen später noch ab."
+  },
+  {
+    "slug": "nachweis",
+    "begriff": "Nachweis",
+    "erklaerung": "Ein Nachweis soll zeigen, dass eine Angabe stimmt."
+  },
+  {
+    "slug": "nebenbestimmung",
+    "begriff": "Nebenbestimmung",
+    "erklaerung": "Eine Entscheidung oder Bewilligung ist mit zusätzlichen Regeln, Bedingungen oder Vorgaben verbunden."
+  },
+  {
+    "slug": "nichtigkeit",
+    "begriff": "Nichtigkeit",
+    "erklaerung": "In seltenen Fällen kann eine behördliche Entscheidung so schwer fehlerhaft sein, dass sie rechtlich von Anfang an keine Wirkung hat."
+  },
+  {
+    "slug": "offenbare-unrichtigkeit",
+    "begriff": "Offenbare Unrichtigkeit",
+    "erklaerung": "In einem Bescheid befindet sich ein offensichtlicher Fehler, zum Beispiel ein Schreib- oder Rechenfehler."
+  },
+  {
+    "slug": "rechtsbehelf",
+    "begriff": "Rechtsbehelf",
+    "erklaerung": "Damit kannst du dich gegen eine behördliche Entscheidung wehren. Ein Widerspruch ist zum Beispiel ein Rechtsbehelf."
+  },
+  {
+    "slug": "rechtsbehelfsbelehrung",
+    "begriff": "Rechtsbehelfsbelehrung",
+    "erklaerung": "Hier steht, was du gegen eine Entscheidung tun kannst, wo du dich melden musst und wie lange du dafür Zeit hast."
+  },
+  {
+    "slug": "rechtsgrundlage",
+    "begriff": "Rechtsgrundlage",
+    "erklaerung": "Das ist das Gesetz oder die Vorschrift, auf die sich die Behörde bei ihrer Entscheidung stützt."
+  },
+  {
+    "slug": "rechtswidrig",
+    "begriff": "Rechtswidrig",
+    "erklaerung": "Eine Entscheidung oder Handlung entspricht nicht den gesetzlichen Regeln."
+  },
+  {
+    "slug": "rueckforderung",
+    "begriff": "Rückforderung",
+    "erklaerung": "Die Behörde möchte Geld zurückhaben, das bereits an dich gezahlt wurde."
+  },
+  {
+    "slug": "rueckforderungsbescheid",
+    "begriff": "Rückforderungsbescheid",
+    "erklaerung": "Mit diesem Bescheid fordert die Behörde einen bestimmten Betrag von dir zurück."
+  },
+  {
+    "slug": "ruecknahme",
+    "begriff": "Rücknahme",
+    "erklaerung": "Eine frühere Entscheidung wird unter bestimmten Voraussetzungen wieder aufgehoben."
+  },
+  {
+    "slug": "ruecknahmebescheid",
+    "begriff": "Rücknahmebescheid",
+    "erklaerung": "Die Behörde teilt dir damit mit, dass eine frühere Entscheidung zurückgenommen wird."
+  },
+  {
+    "slug": "sachbearbeiter-sachbearbeiterin",
+    "begriff": "Sachbearbeiter / Sachbearbeiterin",
+    "erklaerung": "Das ist die Person bei der Behörde, die deinen Antrag oder dein Verfahren bearbeitet."
+  },
+  {
+    "slug": "sachstand",
+    "begriff": "Sachstand",
+    "erklaerung": "Damit ist gemeint, wo dein Antrag oder Verfahren gerade steht und was bisher passiert ist."
+  },
+  {
+    "slug": "sachstandsanfrage",
+    "begriff": "Sachstandsanfrage",
+    "erklaerung": "Du fragst bei der Behörde nach, wie weit dein Antrag, Widerspruch oder anderes Verfahren inzwischen bearbeitet wurde."
+  },
+  {
+    "slug": "schriftform",
+    "begriff": "Schriftform",
+    "erklaerung": "Etwas muss schriftlich erklärt oder festgehalten werden. Welche Form genau erforderlich ist, hängt vom jeweiligen Verfahren ab."
+  },
+  {
+    "slug": "stellungnahme",
+    "begriff": "Stellungnahme",
+    "erklaerung": "Du bekommst die Möglichkeit, deine Sicht zu erklären oder auf bestimmte Aussagen, Unterlagen oder Fragen zu reagieren."
+  },
+  {
+    "slug": "teilbewilligung",
+    "begriff": "Teilbewilligung",
+    "erklaerung": "Die Behörde gibt deinem Antrag nur teilweise statt. Du bekommst also einen Teil dessen, was du beantragt hast."
+  },
+  {
+    "slug": "ueberzahlung",
+    "begriff": "Überzahlung",
+    "erklaerung": "Die Behörde meint, dass dir mehr Geld ausgezahlt wurde, als dir ihrer Ansicht nach zustand."
+  },
+  {
+    "slug": "ueberpruefungsantrag",
+    "begriff": "Überprüfungsantrag",
+    "erklaerung": "Damit bittest du die Behörde, eine ältere Entscheidung noch einmal zu prüfen, obwohl die normale Widerspruchsfrist bereits vorbei sein kann."
+  },
+  {
+    "slug": "umdeutung",
+    "begriff": "Umdeutung",
+    "erklaerung": "Eine fehlerhafte Entscheidung kann unter bestimmten Voraussetzungen rechtlich als eine andere Entscheidung behandelt werden."
+  },
+  {
+    "slug": "unterlagen-nachreichen",
+    "begriff": "Unterlagen nachreichen",
+    "erklaerung": "Du reichst Dokumente später ein, die beim ersten Schreiben noch nicht vorlagen."
+  },
+  {
+    "slug": "unterschrift",
+    "begriff": "Unterschrift",
+    "erklaerung": "Mit deiner Unterschrift bestätigst du bei vielen Schreiben, dass die Erklärung von dir stammt."
+  },
+  {
+    "slug": "unzustaendigkeit",
+    "begriff": "Unzuständigkeit",
+    "erklaerung": "Die Stelle meint, dass sie für dein Anliegen nicht verantwortlich ist."
+  },
+  {
+    "slug": "verwaltungsakt",
+    "begriff": "Verwaltungsakt",
+    "erklaerung": "Das ist eine verbindliche Entscheidung einer Behörde in deinem konkreten Fall. Viele Bescheide sind solche Entscheidungen."
+  },
+  {
+    "slug": "verfahren",
+    "begriff": "Verfahren",
+    "erklaerung": "Damit ist der gesamte Ablauf gemeint – zum Beispiel vom Antrag über die Prüfung bis zur Entscheidung."
+  },
+  {
+    "slug": "verfahrensfehler",
+    "begriff": "Verfahrensfehler",
+    "erklaerung": "Beim Ablauf des Verfahrens wurde eine vorgeschriebene Regel nicht eingehalten."
+  },
+  {
+    "slug": "verrechnung",
+    "begriff": "Verrechnung",
+    "erklaerung": "Geld, das dir zusteht, wird mit einer Forderung verrechnet, die eine Stelle gegen dich hat."
+  },
+  {
+    "slug": "versagung",
+    "begriff": "Versagung",
+    "erklaerung": "Eine Leistung wird nicht gewährt, zum Beispiel weil die Behörde meint, dass eine notwendige Mitwirkung nicht erfolgt ist."
+  },
+  {
+    "slug": "versagungsbescheid",
+    "begriff": "Versagungsbescheid",
+    "erklaerung": "Mit diesem Bescheid teilt die Behörde dir mit, dass eine Leistung wegen fehlender Mitwirkung nicht gewährt wird."
+  },
+  {
+    "slug": "vollmacht",
+    "begriff": "Vollmacht",
+    "erklaerung": "Du erlaubst einer anderen Person, dich gegenüber einer Behörde in bestimmten Angelegenheiten zu vertreten."
+  },
+  {
+    "slug": "vollziehung",
+    "begriff": "Vollziehung",
+    "erklaerung": "Eine behördliche Entscheidung wird praktisch umgesetzt."
+  },
+  {
+    "slug": "vorbehalt",
+    "begriff": "Vorbehalt",
+    "erklaerung": "Die Behörde macht deutlich, dass eine Entscheidung später noch einmal überprüft oder verändert werden kann."
+  },
+  {
+    "slug": "vorlaeufige-bewilligung",
+    "begriff": "Vorläufige Bewilligung",
+    "erklaerung": "Die Behörde bewilligt eine Leistung zunächst nur vorläufig. Später kann sie noch einmal endgültig prüfen und entscheiden."
+  },
+  {
+    "slug": "vorsprache",
+    "begriff": "Vorsprache",
+    "erklaerung": "Damit ist gemeint, dass du persönlich bei einer Behörde erscheinst oder dort einen Termin wahrnimmst."
+  },
+  {
+    "slug": "widerruf",
+    "begriff": "Widerruf",
+    "erklaerung": "Eine Entscheidung, die ursprünglich rechtmäßig war, kann unter bestimmten Voraussetzungen wieder aufgehoben werden."
+  },
+  {
+    "slug": "widerrufsbescheid",
+    "begriff": "Widerrufsbescheid",
+    "erklaerung": "Die Behörde teilt dir mit, dass eine frühere Entscheidung widerrufen wird."
+  },
+  {
+    "slug": "widerrufsvorbehalt",
+    "begriff": "Widerrufsvorbehalt",
+    "erklaerung": "In einem Bescheid steht von Anfang an, dass die Behörde sich unter bestimmten Voraussetzungen einen späteren Widerruf vorbehält."
+  },
+  {
+    "slug": "widerspruch",
+    "begriff": "Widerspruch",
+    "erklaerung": "Wenn du mit einem Bescheid nicht einverstanden bist, kannst du die Behörde auffordern, ihre Entscheidung noch einmal zu überprüfen."
+  },
+  {
+    "slug": "widerspruchsfrist",
+    "begriff": "Widerspruchsfrist",
+    "erklaerung": "Das ist die Zeit, die du hast, um gegen einen Bescheid Widerspruch einzulegen."
+  },
+  {
+    "slug": "widerspruchsbescheid",
+    "begriff": "Widerspruchsbescheid",
+    "erklaerung": "Das ist die Entscheidung darüber, ob die Behörde nach deinem Widerspruch bei ihrer ursprünglichen Entscheidung bleibt oder sie verändert."
+  },
+  {
+    "slug": "wirksamkeit",
+    "begriff": "Wirksamkeit",
+    "erklaerung": "Damit ist gemeint, ab wann eine behördliche Entscheidung rechtlich gilt."
+  },
+  {
+    "slug": "zahlungsaufforderung",
+    "begriff": "Zahlungsaufforderung",
+    "erklaerung": "Die Behörde fordert dich auf, einen bestimmten Betrag zu bezahlen."
+  },
+  {
+    "slug": "zahlungsfrist",
+    "begriff": "Zahlungsfrist",
+    "erklaerung": "Bis zu diesem Zeitpunkt soll ein geforderter Betrag bezahlt werden."
+  },
+  {
+    "slug": "zusicherung",
+    "begriff": "Zusicherung",
+    "erklaerung": "Eine Behörde sagt dir verbindlich zu, später eine bestimmte Entscheidung zu treffen oder etwas Bestimmtes zu tun, wenn die gesetzlichen Voraussetzungen dafür erfüllt sind."
+  },
+  {
+    "slug": "zustaendigkeit",
+    "begriff": "Zuständigkeit",
+    "erklaerung": "Damit ist gemeint, welche Behörde oder Stelle für dein Anliegen verantwortlich ist."
+  },
+  {
+    "slug": "zustaendigkeitspruefung",
+    "begriff": "Zuständigkeitsprüfung",
+    "erklaerung": "Die Behörde prüft, ob sie selbst für dein Anliegen zuständig ist oder eine andere Stelle."
+  },
+  {
+    "slug": "zustellung",
+    "begriff": "Zustellung",
+    "erklaerung": "Ein wichtiges Schreiben oder eine Entscheidung wird dir offiziell übermittelt. Wie und wann das passiert, kann für Fristen wichtig sein."
+  },
+  {
+    "slug": "zurueckweisung",
+    "begriff": "Zurückweisung",
+    "erklaerung": "Die Behörde kommt zu dem Ergebnis, dass deinem Anliegen, Antrag oder Widerspruch nicht entsprochen wird."
+  },
+  {
+    "slug": "zwischenbescheid",
+    "begriff": "Zwischenbescheid",
+    "erklaerung": "Die Behörde teilt dir mit, dass dein Anliegen noch nicht abschließend bearbeitet wurde, und informiert dich über den aktuellen Stand."
+  }
+]

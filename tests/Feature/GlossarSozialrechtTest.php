@@ -55,7 +55,9 @@ class GlossarSozialrechtTest extends TestCase
         $daten = GlossarSozialrechtSeeder::eintraege();
 
         $this->assertCount(197, $daten);
-        $this->assertSame(195, GlossaryTerm::where('locale', 'de')->whereNotNull('published_at')->count());
+        // Nur dieses Glossar: Seit KEV-155 gibt es auch „Behörden & Bescheide“.
+        $glossar = Page::where('slug', 'glossar')->where('locale', 'de')->firstOrFail();
+        $this->assertSame(195, GlossaryTerm::aufSeite($glossar)->where('locale', 'de')->whereNotNull('published_at')->count());
         $this->assertSame(195, substr_count($html, 'data-glossar-eintrag'));
 
         // Gleiche Abkürzung, zwei Bedeutungen: zwei Einträge mit eigenem Sprungziel.
@@ -173,11 +175,12 @@ class GlossarSozialrechtTest extends TestCase
         $glossar = array_filter($ergebnis['treffer'], fn ($t) => $t['art'] === 'glossar');
 
         $this->assertCount(5, $glossar);
-        $this->assertSame(10, $ergebnis['im_glossar']);
+        // Je Glossar-Seite (KEV-155); „Krankenkasse“ steht nur im ersten.
+        $this->assertSame([['titel' => 'Glossar', 'url' => '/glossar', 'anzahl' => 10]], $ergebnis['im_glossar']);
 
         $html = $this->get('/suche?q=Krankenkasse')->getContent();
         $this->assertStringContainsString('href="/glossar?suche=Krankenkasse"', $html);
-        $this->assertStringContainsString('Alle 10 passenden Einträge im Glossar', $html);
+        $this->assertStringContainsString('Alle 10 passenden Einträge in „Glossar“', $html);
     }
 
     public function test_glossar_steht_einmal_in_der_sitemap(): void
@@ -203,7 +206,9 @@ class GlossarSozialrechtTest extends TestCase
         // Ohne Abkürzung bliebe nur ein Wort: Dann ist die Erklärung Pflicht.
         Livewire::actingAs($redaktion)
             ->test(CreateGlossaryTerm::class)
-            ->fillForm(['kuerzel' => null, 'begriff' => 'Widerspruchsfrist', 'slug' => 'widerspruchsfrist', 'erklaerung' => null])
+            // Ein Begriff, den es noch nicht gibt („Widerspruchsfrist“ steht
+            // seit KEV-155 in „Behörden & Bescheide“).
+            ->fillForm(['kuerzel' => null, 'begriff' => 'Klagefrist', 'slug' => 'klagefrist', 'erklaerung' => null])
             ->call('create')
             ->assertHasFormErrors(['erklaerung' => 'required']);
     }
@@ -227,6 +232,7 @@ class GlossarSozialrechtTest extends TestCase
         $this->assertStringContainsString('Abbreviations in social compensation law (SER)', $html);
         $this->assertStringContainsString('General local health insurance fund (Allgemeine Ortskrankenkasse)', $html);
         $this->assertStringContainsString('Search for an abbreviation or term', $html);
-        $this->assertSame(195, GlossaryTerm::where('locale', 'en')->whereNotNull('published_at')->count());
+        $glossar = Page::where('slug', 'glossar')->where('locale', 'en')->firstOrFail();
+        $this->assertSame(195, GlossaryTerm::aufSeite($glossar)->where('locale', 'en')->whereNotNull('published_at')->count());
     }
 }

@@ -140,6 +140,8 @@ class Titelbilder
         // KEV-72, bis Taddi ein Bild schickt (Gruppen & Veranstaltungen hat
         // seit KEV-127 eins, Öffentlichkeitsarbeit seit KEV-149)
         'rueckblick',
+        // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
+        'behoerden-und-bescheide',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

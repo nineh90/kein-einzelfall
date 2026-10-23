@@ -186,14 +186,17 @@
 
                 {{-- Im Glossar stehen höchstens fünf Einträge unter den
                      Treffern (Suche::HOECHSTENS_GLOSSAR). Passen mehr, führt
-                     dieser Verweis zu allen, mit derselben Suche (KEV-153). --}}
-                @if ($imGlossar >= 2)
-                    <p class="mt-6 max-w-prose">
-                        <a href="{{ \App\Models\Language::aktuell()->pfad('/glossar') }}?suche={{ urlencode($anfrage) }}" class="text-green-deep underline">
-                            {{ __('Alle :anzahl passenden Einträge im Glossar', ['anzahl' => $imGlossar]) }}
-                        </a>
-                    </p>
-                @endif
+                     dieser Verweis zu allen, mit derselben Suche (KEV-153).
+                     Seit KEV-155 je Glossar-Seite einer. --}}
+                @foreach ($imGlossar as $glossar)
+                    @if ($glossar['anzahl'] >= 2)
+                        <p class="mt-6 max-w-prose">
+                            <a href="{{ $glossar['url'] }}?suche={{ urlencode($anfrage) }}" class="text-green-deep underline">
+                                {{ __('Alle :anzahl passenden Einträge in „:seite“', ['anzahl' => $glossar['anzahl'], 'seite' => $glossar['titel']]) }}
+                            </a>
+                        </p>
+                    @endif
+                @endforeach
 
                 <p class="mt-6 max-w-prose text-sm text-ink-soft">
                     {{ __('Nicht dabei, was du gesucht hast?') }}

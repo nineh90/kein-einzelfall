@@ -228,6 +228,10 @@ class UebersetzungenSeeder extends Seeder
     {
         $daten = $this->datei('uebersetzungen-glossar.json');
 
+        // KEV-155: auf welcher Seite. Die Spalte gibt es erst seitdem; ältere
+        // Inhalts-Migrationen rufen diesen Seeder vorher auf.
+        $mitSeite = Schema::hasColumn('glossary_terms', 'seite_gruppe');
+
         foreach (\App\Models\GlossaryTerm::where('locale', Language::standardCode())->get() as $begriff) {
             $en = $daten[$begriff->slug] ?? null;
 
@@ -246,7 +250,7 @@ class UebersetzungenSeeder extends Seeder
                 'mehr_url' => $begriff->mehr_url,
                 'mehr_label' => $en['mehr_label'] ?? $begriff->mehr_label,
                 'published_at' => $begriff->published_at,
-            ]);
+            ] + ($mitSeite ? ['seite_gruppe' => $begriff->seite_gruppe] : []));
         }
     }
 

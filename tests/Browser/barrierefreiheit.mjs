@@ -65,6 +65,8 @@ const SEITEN = [
     // ungeprüft nicht bleiben.
     ['Barrierefreiheit', '/barrierefreiheit'],
     ['Glossar', '/glossar'],
+    // Zweites Glossar, nur Begriffe mit Erklärung (KEV-155).
+    ['Behörden & Bescheide', '/behoerden-und-bescheide'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
     ['Dokumentenliste', '/atteste'],
     // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).

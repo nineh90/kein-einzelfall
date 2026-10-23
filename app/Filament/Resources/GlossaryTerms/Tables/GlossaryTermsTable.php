@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\GlossaryTerms\Tables;
 
+use App\Models\GlossaryTerm;
 use App\Models\Language;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -27,6 +28,12 @@ class GlossaryTermsTable
                     // sähe die Liste bei „SGB XIV“ und „SGB IX“ gleich aus.
                     ->description(fn ($record) => \Illuminate\Support\Str::limit((string) $record?->erklaerung, 90)),
 
+                // KEV-155: in welchem Glossar
+                TextColumn::make('seite_gruppe')->label('Glossar')
+                    ->formatStateUsing(fn ($state) => GlossaryTerm::seitenAuswahl()[$state] ?? $state)
+                    ->placeholder('Glossar')
+                    ->toggleable(),
+
                 TextColumn::make('locale')->label('Sprache')->badge()
                     ->formatStateUsing(fn ($state) => Language::finden($state)?->label_deutsch ?? $state),
 
@@ -38,6 +45,9 @@ class GlossaryTermsTable
             // anderen Reihenfolge, als sie ihn im Glossar sieht.
             ->defaultSort(fn (Builder $query) => $query->orderByRaw("COALESCE(NULLIF(kuerzel, ''), begriff)"))
             ->filters([
+                SelectFilter::make('seite_gruppe')
+                    ->label('Glossar')
+                    ->options(fn () => GlossaryTerm::seitenAuswahl()),
                 SelectFilter::make('locale')
                     ->label('Sprache')
                     ->options(fn () => Language::alle()->pluck('label_deutsch', 'code')->all()),

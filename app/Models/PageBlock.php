@@ -109,6 +109,9 @@ class PageBlock extends Model
         // Unterzeile und auf Wunsch den Aufrufen. Nichts davon wird hier
         // gepflegt, es kommt aus Menü und Seiten (App\Support\Unterseiten).
         'unterseiten' => 'Unterseiten als Kacheln (mit Bild und Aufrufen)',
+        // KEV-155: die Glossar-Einträge, die im Panel dieser Seite
+        // zugeordnet sind, mit Suche und Buchstabenleiste.
+        'glossar' => 'Glossar (Einträge dieser Seite)',
     ];
 
     /**
@@ -144,6 +147,7 @@ class PageBlock extends Model
         'oeffentlichkeitsarbeit' => 'wechselnd',
         'wall_of_shame' => 'wechselnd',
         'unterseiten' => 'wechselnd',
+        'glossar' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre

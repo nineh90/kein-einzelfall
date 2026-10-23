@@ -484,7 +484,7 @@
   "Alle zeigen": "Show all",
   "Dazu steht noch nichts im Glossar.": "There is nothing on this in the glossary yet.",
   "Auf der ganzen Website suchen": "Search the whole website",
-  "Alle :anzahl passenden Einträge im Glossar": "All :anzahl matching entries in the glossary",
+  "Alle :anzahl passenden Einträge in „:seite“": "All :anzahl matching entries in “:seite”",
   "Die Sätze an der Wand": "The sentences on the wall",
   "Nächsten Satz lesen": "Read the next sentence",
   "Weiter": "Continue",
@@ -493,5 +493,6 @@
   "Alle :gesamt Sätze als Liste": "All :gesamt sentences as a list",
   "Ein Klick auf den Papierstapel zeigt den ersten Satz. Mit jedem Satz kommt ein Strich an die Wand.": "Click the stack of paper to see the first sentence. Every sentence adds a mark to the wall.",
   "Ansehen": "View",
-  ":anzahl Aufruf|:anzahl Aufrufe": ":anzahl view|:anzahl views"
+  ":anzahl Aufruf|:anzahl Aufrufe": ":anzahl view|:anzahl views",
+  "Begriff suchen": "Search for a term"
 }

@@ -1180,5 +1180,773 @@
     "kuerzel": "ZUG",
     "erklaerung": null,
     "mehr_label": null
+  },
+  "abhilfe": {
+    "begriff": "Remedy (Abhilfe)",
+    "kuerzel": null,
+    "erklaerung": "You challenged a decision and the authority agrees with you in full or in part. It changes its original decision accordingly.",
+    "mehr_label": null
+  },
+  "ablehnung": {
+    "begriff": "Rejection (Ablehnung)",
+    "kuerzel": null,
+    "erklaerung": "The authority decides that you will not receive all or part of what you applied for.",
+    "mehr_label": null
+  },
+  "ablehnungsbescheid": {
+    "begriff": "Notice of rejection (Ablehnungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "This is the notice telling you that your application has been rejected in full or in part.",
+    "mehr_label": null
+  },
+  "akte": {
+    "begriff": "File (Akte)",
+    "kuerzel": null,
+    "erklaerung": "In your file, the authority collects documents and information that belong to your application or proceedings.",
+    "mehr_label": null
+  },
+  "akteneinsicht": {
+    "begriff": "Inspection of files (Akteneinsicht)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions you may look at the documents the authority has collected on your proceedings.",
+    "mehr_label": null
+  },
+  "aktenvermerk": {
+    "begriff": "File note (Aktenvermerk)",
+    "kuerzel": null,
+    "erklaerung": "Someone at the authority records in writing what happened or was discussed, for example a phone call or an internal assessment.",
+    "mehr_label": null
+  },
+  "aktenzeichen": {
+    "begriff": "File reference (Aktenzeichen)",
+    "kuerzel": null,
+    "erklaerung": "This is the number or reference under which the authority handles your case.",
+    "mehr_label": null
+  },
+  "aenderung": {
+    "begriff": "Amendment (Änderung)",
+    "kuerzel": null,
+    "erklaerung": "Something in an earlier decision is changed.",
+    "mehr_label": null
+  },
+  "aenderungsbescheid": {
+    "begriff": "Notice of amendment (Änderungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this notice, the authority changes an earlier decision.",
+    "mehr_label": null
+  },
+  "amtsermittlung": {
+    "begriff": "Official investigation (Amtsermittlung)",
+    "kuerzel": null,
+    "erklaerung": "The authority has to find out for itself what happened. It may not expect you to gather all the information and evidence on your own.",
+    "mehr_label": null
+  },
+  "anhoerung": {
+    "begriff": "Hearing (Anhörung)",
+    "kuerzel": null,
+    "erklaerung": "Before the authority makes a decision that may be to your disadvantage, you are often given the chance to say something about it first.",
+    "mehr_label": null
+  },
+  "anhoerungsschreiben": {
+    "begriff": "Hearing letter (Anhörungsschreiben)",
+    "kuerzel": null,
+    "erklaerung": "The authority tells you what it may decide and gives you the opportunity to comment beforehand.",
+    "mehr_label": null
+  },
+  "antrag": {
+    "begriff": "Application (Antrag)",
+    "kuerzel": null,
+    "erklaerung": "You officially ask an authority to decide on a particular benefit, support or other matter.",
+    "mehr_label": null
+  },
+  "antragsdatum": {
+    "begriff": "Date of application (Antragsdatum)",
+    "kuerzel": null,
+    "erklaerung": "This is the day you submitted your application. This date can matter later on.",
+    "mehr_label": null
+  },
+  "antragseingang": {
+    "begriff": "Receipt of application (Antragseingang)",
+    "kuerzel": null,
+    "erklaerung": "This is the point in time when your application arrived at the authority.",
+    "mehr_label": null
+  },
+  "antragsunterlagen": {
+    "begriff": "Application documents (Antragsunterlagen)",
+    "kuerzel": null,
+    "erklaerung": "These are the forms, proofs and other documents that belong to your application.",
+    "mehr_label": null
+  },
+  "anspruch": {
+    "begriff": "Entitlement (Anspruch)",
+    "kuerzel": null,
+    "erklaerung": "If all legal requirements are met, you may be entitled to a particular benefit or right.",
+    "mehr_label": null
+  },
+  "aufhebung": {
+    "begriff": "Revocation (Aufhebung)",
+    "kuerzel": null,
+    "erklaerung": "An earlier decision of the authority is ended or changed in full or in part.",
+    "mehr_label": null
+  },
+  "aufhebungsbescheid": {
+    "begriff": "Notice of revocation (Aufhebungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "In this notice, the authority tells you that an earlier decision is being revoked in full or in part.",
+    "mehr_label": null
+  },
+  "auflage": {
+    "begriff": "Condition (Auflage)",
+    "kuerzel": null,
+    "erklaerung": "The authority allows or grants something, but at the same time requires you to meet a particular requirement.",
+    "mehr_label": null
+  },
+  "aufforderung": {
+    "begriff": "Request (Aufforderung)",
+    "kuerzel": null,
+    "erklaerung": "The authority wants you to do something, for example submit documents or answer a question.",
+    "mehr_label": null
+  },
+  "auskunft": {
+    "begriff": "Information (Auskunft)",
+    "kuerzel": null,
+    "erklaerung": "An authority gives you information or asks you to provide certain information.",
+    "mehr_label": null
+  },
+  "auskunftsersuchen": {
+    "begriff": "Request for information (Auskunftsersuchen)",
+    "kuerzel": null,
+    "erklaerung": "The authority asks you or another body to provide certain information.",
+    "mehr_label": null
+  },
+  "bearbeitung": {
+    "begriff": "Processing (Bearbeitung)",
+    "kuerzel": null,
+    "erklaerung": "The authority examines your application, your documents or your request.",
+    "mehr_label": null
+  },
+  "bearbeitungsstand": {
+    "begriff": "Processing status (Bearbeitungsstand)",
+    "kuerzel": null,
+    "erklaerung": "This means how far the authority has got with your application or proceedings.",
+    "mehr_label": null
+  },
+  "bedarf": {
+    "begriff": "Need (Bedarf)",
+    "kuerzel": null,
+    "erklaerung": "This describes what help or support you need.",
+    "mehr_label": null
+  },
+  "befristung": {
+    "begriff": "Time limit (Befristung)",
+    "kuerzel": null,
+    "erklaerung": "A decision or approval is only valid until a certain date.",
+    "mehr_label": null
+  },
+  "beguenstigend": {
+    "begriff": "Favourable (Begünstigend)",
+    "kuerzel": null,
+    "erklaerung": "A decision gives you an advantage, for example because a benefit is granted.",
+    "mehr_label": null
+  },
+  "bekanntgabe": {
+    "begriff": "Notification (Bekanntgabe)",
+    "kuerzel": null,
+    "erklaerung": "This means when an official decision was formally communicated to you. This can matter for deadlines.",
+    "mehr_label": null
+  },
+  "belastend": {
+    "begriff": "Adverse (Belastend)",
+    "kuerzel": null,
+    "erklaerung": "A decision is to your disadvantage, for example because a benefit is refused, reduced or reclaimed.",
+    "mehr_label": null
+  },
+  "berechnung": {
+    "begriff": "Calculation (Berechnung)",
+    "kuerzel": null,
+    "erklaerung": "The authority explains how it calculated a certain amount or benefit.",
+    "mehr_label": null
+  },
+  "bescheid": {
+    "begriff": "Official notice (Bescheid)",
+    "kuerzel": null,
+    "erklaerung": "An official notice is a formal decision by an authority on your specific case.",
+    "mehr_label": null
+  },
+  "bescheidbegruendung": {
+    "begriff": "Reasons for the decision (Bescheidbegründung)",
+    "kuerzel": null,
+    "erklaerung": "This is where the authority explains why it decided the way it did.",
+    "mehr_label": null
+  },
+  "bestandskraft-bestandskraeftig": {
+    "begriff": "Finality / final (Bestandskraft / bestandskräftig)",
+    "kuerzel": null,
+    "erklaerung": "The normal way of challenging the decision is usually over. The decision therefore continues to apply for the time being.",
+    "mehr_label": null
+  },
+  "bestimmtheit": {
+    "begriff": "Clarity (Bestimmtheit)",
+    "kuerzel": null,
+    "erklaerung": "A notice must make it sufficiently clear what exactly has been decided.",
+    "mehr_label": null
+  },
+  "beteiligte": {
+    "begriff": "Parties (Beteiligte)",
+    "kuerzel": null,
+    "erklaerung": "These are the people or bodies officially involved in proceedings.",
+    "mehr_label": null
+  },
+  "bevollmaechtigte-person": {
+    "begriff": "Authorised representative (Bevollmächtigte Person)",
+    "kuerzel": null,
+    "erklaerung": "You can authorise another person to deal with certain matters with the authority on your behalf.",
+    "mehr_label": null
+  },
+  "begruendung": {
+    "begriff": "Statement of reasons (Begründung)",
+    "kuerzel": null,
+    "erklaerung": "This is where the authority explains why it made a particular decision.",
+    "mehr_label": null
+  },
+  "beweismittel": {
+    "begriff": "Evidence (Beweismittel)",
+    "kuerzel": null,
+    "erklaerung": "This is information or documents that can help show what happened or what your situation is.",
+    "mehr_label": null
+  },
+  "bewilligung": {
+    "begriff": "Approval (Bewilligung)",
+    "kuerzel": null,
+    "erklaerung": "The authority has granted your application in full or in part.",
+    "mehr_label": null
+  },
+  "bewilligungsbescheid": {
+    "begriff": "Notice of approval (Bewilligungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "This notice states that a benefit you applied for is granted to you in full or in part.",
+    "mehr_label": null
+  },
+  "bewilligungszeitraum": {
+    "begriff": "Approval period (Bewilligungszeitraum)",
+    "kuerzel": null,
+    "erklaerung": "This is the period for which a benefit has been granted to you.",
+    "mehr_label": null
+  },
+  "dauerwirkung": {
+    "begriff": "Continuing effect (Dauerwirkung)",
+    "kuerzel": null,
+    "erklaerung": "A decision does not have effect just once but continues over a longer period, for example an ongoing approval.",
+    "mehr_label": null
+  },
+  "datenschutz": {
+    "begriff": "Data protection (Datenschutz)",
+    "kuerzel": null,
+    "erklaerung": "Authorities may not use or pass on personal data as they please. There are legal rules for how your data is handled.",
+    "mehr_label": null
+  },
+  "dienstweg": {
+    "begriff": "Official channels (Dienstweg)",
+    "kuerzel": null,
+    "erklaerung": "This means the intended route by which a matter is passed on or dealt with within an authority.",
+    "mehr_label": null
+  },
+  "eingang": {
+    "begriff": "Receipt (Eingang)",
+    "kuerzel": null,
+    "erklaerung": "This means when your application, your letter or your documents arrived at the authority.",
+    "mehr_label": null
+  },
+  "eingangsbestaetigung": {
+    "begriff": "Confirmation of receipt (Eingangsbestätigung)",
+    "kuerzel": null,
+    "erklaerung": "With this, the authority confirms that your application, objection or documents have arrived.",
+    "mehr_label": null
+  },
+  "einzelfall": {
+    "begriff": "Individual case (Einzelfall)",
+    "kuerzel": null,
+    "erklaerung": "Your personal situation has to be considered. Not every case can automatically be treated exactly like another one.",
+    "mehr_label": null
+  },
+  "entscheidung": {
+    "begriff": "Decision (Entscheidung)",
+    "kuerzel": null,
+    "erklaerung": "The authority determines how it decides on your application or another matter.",
+    "mehr_label": null
+  },
+  "entscheidung-nach-aktenlage": {
+    "begriff": "Decision on the basis of the file (Entscheidung nach Aktenlage)",
+    "kuerzel": null,
+    "erklaerung": "The authority decides using the information and documents it has at that point.",
+    "mehr_label": null
+  },
+  "entscheidungserheblich": {
+    "begriff": "Relevant to the decision (Entscheidungserheblich)",
+    "kuerzel": null,
+    "erklaerung": "Something matters for how the authority decides.",
+    "mehr_label": null
+  },
+  "entziehung": {
+    "begriff": "Withdrawal (Entziehung)",
+    "kuerzel": null,
+    "erklaerung": "A benefit you have been receiving is taken away from you in full or in part for the future.",
+    "mehr_label": null
+  },
+  "ermessen": {
+    "begriff": "Discretion (Ermessen)",
+    "kuerzel": null,
+    "erklaerung": "The law leaves the authority several options. It has to examine which decision is appropriate in your specific case.",
+    "mehr_label": null
+  },
+  "ermessensentscheidung": {
+    "begriff": "Discretionary decision (Ermessensentscheidung)",
+    "kuerzel": null,
+    "erklaerung": "The authority has some leeway in its decision and has to take your specific situation into account.",
+    "mehr_label": null
+  },
+  "erforderlich": {
+    "begriff": "Required (Erforderlich)",
+    "kuerzel": null,
+    "erklaerung": "The authority considers something to be necessary.",
+    "mehr_label": null
+  },
+  "erstattung": {
+    "begriff": "Reimbursement (Erstattung)",
+    "kuerzel": null,
+    "erklaerung": "Money is paid back or reclaimed. What exactly is meant depends on the context.",
+    "mehr_label": null
+  },
+  "erstattungsbescheid": {
+    "begriff": "Notice of reimbursement (Erstattungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this notice, the authority reclaims money that has already been paid.",
+    "mehr_label": null
+  },
+  "festsetzung": {
+    "begriff": "Determination (Festsetzung)",
+    "kuerzel": null,
+    "erklaerung": "The authority sets something in a binding way, for example an amount.",
+    "mehr_label": null
+  },
+  "festsetzungsbescheid": {
+    "begriff": "Notice of determination (Festsetzungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this notice, a particular amount or another decision is set in a binding way.",
+    "mehr_label": null
+  },
+  "feststellung": {
+    "begriff": "Finding (Feststellung)",
+    "kuerzel": null,
+    "erklaerung": "The authority officially decides that something applies or is recognised in your case.",
+    "mehr_label": null
+  },
+  "feststellungsbescheid": {
+    "begriff": "Declaratory notice (Feststellungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "In this notice, the authority officially establishes something, for example a particular status or requirement.",
+    "mehr_label": null
+  },
+  "formlos": {
+    "begriff": "Informal (Formlos)",
+    "kuerzel": null,
+    "erklaerung": "No particular form is mandatory. In some cases a simple written statement may be enough.",
+    "mehr_label": null
+  },
+  "formloser-antrag": {
+    "begriff": "Informal application (Formloser Antrag)",
+    "kuerzel": null,
+    "erklaerung": "Depending on the benefit, it may be possible to make clear with a simple letter, for the time being, that you want to apply for something.",
+    "mehr_label": null
+  },
+  "frist": {
+    "begriff": "Deadline (Frist)",
+    "kuerzel": null,
+    "erklaerung": "By a certain date you should or must do, submit or answer something.",
+    "mehr_label": null
+  },
+  "fristsetzung": {
+    "begriff": "Setting of a deadline (Fristsetzung)",
+    "kuerzel": null,
+    "erklaerung": "The authority tells you a date by which it expects something from you.",
+    "mehr_label": null
+  },
+  "fristverlaengerung": {
+    "begriff": "Extension of a deadline (Fristverlängerung)",
+    "kuerzel": null,
+    "erklaerung": "If the authority itself has set you a deadline and you need more time, you can ask for the deadline to be extended.",
+    "mehr_label": null
+  },
+  "heilung-eines-fehlers": {
+    "begriff": "Remedying a defect (Heilung eines Fehlers)",
+    "kuerzel": null,
+    "erklaerung": "A mistake in how proceedings were conducted can, under certain conditions, still be corrected later.",
+    "mehr_label": null
+  },
+  "hinweis": {
+    "begriff": "Note (Hinweis)",
+    "kuerzel": null,
+    "erklaerung": "The authority draws your attention to something. A note is not automatically a binding decision.",
+    "mehr_label": null
+  },
+  "kenntnisnahme": {
+    "begriff": "Acknowledgement (Kenntnisnahme)",
+    "kuerzel": null,
+    "erklaerung": "You are supposed to read or take note of a piece of information. That does not automatically mean you agree with it.",
+    "mehr_label": null
+  },
+  "kuerzung": {
+    "begriff": "Reduction (Kürzung)",
+    "kuerzel": null,
+    "erklaerung": "A benefit you receive or have applied for is set at a lower amount.",
+    "mehr_label": null
+  },
+  "mitteilung": {
+    "begriff": "Notification of a change (Mitteilung)",
+    "kuerzel": null,
+    "erklaerung": "The authority informs you about something, or you inform the authority about a change.",
+    "mehr_label": null
+  },
+  "mitteilungspflicht": {
+    "begriff": "Duty to report changes (Mitteilungspflicht)",
+    "kuerzel": null,
+    "erklaerung": "You have to tell the responsible body about certain changes if they may matter for your benefit or your proceedings.",
+    "mehr_label": null
+  },
+  "mitwirkung": {
+    "begriff": "Cooperation (Mitwirkung)",
+    "kuerzel": null,
+    "erklaerung": "You have to help with your proceedings on certain points, for example by answering questions or submitting documents you have.",
+    "mehr_label": null
+  },
+  "mitwirkungsaufforderung": {
+    "begriff": "Request to cooperate (Mitwirkungsaufforderung)",
+    "kuerzel": null,
+    "erklaerung": "The authority asks you to submit certain information or documents or to do something else.",
+    "mehr_label": null
+  },
+  "mitwirkungspflicht": {
+    "begriff": "Duty to cooperate (Mitwirkungspflicht)",
+    "kuerzel": null,
+    "erklaerung": "The law can require you to take part in certain things so that the authority can decide. But that does not automatically mean you have to obtain everything yourself or meet every demand.",
+    "mehr_label": null
+  },
+  "nach-aktenlage": {
+    "begriff": "On the basis of the file (Nach Aktenlage)",
+    "kuerzel": null,
+    "erklaerung": "The authority relies on the information and documents that are already in your file.",
+    "mehr_label": null
+  },
+  "nachforderung": {
+    "begriff": "Request for further documents (Nachforderung)",
+    "kuerzel": null,
+    "erklaerung": "The authority wants further documents or information from you.",
+    "mehr_label": null
+  },
+  "nachreichen": {
+    "begriff": "Submitting later (Nachreichen)",
+    "kuerzel": null,
+    "erklaerung": "You hand in documents or information at a later date.",
+    "mehr_label": null
+  },
+  "nachweis": {
+    "begriff": "Proof (Nachweis)",
+    "kuerzel": null,
+    "erklaerung": "Proof is meant to show that a statement is true.",
+    "mehr_label": null
+  },
+  "nebenbestimmung": {
+    "begriff": "Ancillary provision (Nebenbestimmung)",
+    "kuerzel": null,
+    "erklaerung": "A decision or approval comes with additional rules, conditions or requirements.",
+    "mehr_label": null
+  },
+  "nichtigkeit": {
+    "begriff": "Nullity (Nichtigkeit)",
+    "kuerzel": null,
+    "erklaerung": "In rare cases, an official decision can be so seriously flawed that it has no legal effect from the outset.",
+    "mehr_label": null
+  },
+  "offenbare-unrichtigkeit": {
+    "begriff": "Obvious error (Offenbare Unrichtigkeit)",
+    "kuerzel": null,
+    "erklaerung": "A notice contains an obvious mistake, for example a typing or calculation error.",
+    "mehr_label": null
+  },
+  "rechtsbehelf": {
+    "begriff": "Legal remedy (Rechtsbehelf)",
+    "kuerzel": null,
+    "erklaerung": "This is how you can challenge an official decision. An objection, for example, is a legal remedy.",
+    "mehr_label": null
+  },
+  "rechtsbehelfsbelehrung": {
+    "begriff": "Information on legal remedies (Rechtsbehelfsbelehrung)",
+    "kuerzel": null,
+    "erklaerung": "This states what you can do about a decision, where you have to go and how long you have to do so.",
+    "mehr_label": null
+  },
+  "rechtsgrundlage": {
+    "begriff": "Legal basis (Rechtsgrundlage)",
+    "kuerzel": null,
+    "erklaerung": "This is the law or regulation on which the authority bases its decision.",
+    "mehr_label": null
+  },
+  "rechtswidrig": {
+    "begriff": "Unlawful (Rechtswidrig)",
+    "kuerzel": null,
+    "erklaerung": "A decision or action does not comply with the legal rules.",
+    "mehr_label": null
+  },
+  "rueckforderung": {
+    "begriff": "Reclaim (Rückforderung)",
+    "kuerzel": null,
+    "erklaerung": "The authority wants back money that has already been paid to you.",
+    "mehr_label": null
+  },
+  "rueckforderungsbescheid": {
+    "begriff": "Notice of reclaim (Rückforderungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this notice, the authority reclaims a specific amount from you.",
+    "mehr_label": null
+  },
+  "ruecknahme": {
+    "begriff": "Withdrawal of a decision (Rücknahme)",
+    "kuerzel": null,
+    "erklaerung": "An earlier decision is cancelled again under certain conditions.",
+    "mehr_label": null
+  },
+  "ruecknahmebescheid": {
+    "begriff": "Notice of withdrawal (Rücknahmebescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this, the authority tells you that an earlier decision is being withdrawn.",
+    "mehr_label": null
+  },
+  "sachbearbeiter-sachbearbeiterin": {
+    "begriff": "Case worker (Sachbearbeiter / Sachbearbeiterin)",
+    "kuerzel": null,
+    "erklaerung": "This is the person at the authority who deals with your application or proceedings.",
+    "mehr_label": null
+  },
+  "sachstand": {
+    "begriff": "State of affairs (Sachstand)",
+    "kuerzel": null,
+    "erklaerung": "This means where your application or proceedings currently stand and what has happened so far.",
+    "mehr_label": null
+  },
+  "sachstandsanfrage": {
+    "begriff": "Status enquiry (Sachstandsanfrage)",
+    "kuerzel": null,
+    "erklaerung": "You ask the authority how far your application, objection or other proceedings have got.",
+    "mehr_label": null
+  },
+  "schriftform": {
+    "begriff": "Written form (Schriftform)",
+    "kuerzel": null,
+    "erklaerung": "Something has to be declared or recorded in writing. Which exact form is required depends on the particular proceedings.",
+    "mehr_label": null
+  },
+  "stellungnahme": {
+    "begriff": "Statement (Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "You get the chance to explain your view or respond to certain statements, documents or questions.",
+    "mehr_label": null
+  },
+  "teilbewilligung": {
+    "begriff": "Partial approval (Teilbewilligung)",
+    "kuerzel": null,
+    "erklaerung": "The authority grants your application only in part. So you receive part of what you applied for.",
+    "mehr_label": null
+  },
+  "ueberzahlung": {
+    "begriff": "Overpayment (Überzahlung)",
+    "kuerzel": null,
+    "erklaerung": "The authority believes that more money was paid to you than you were, in its view, entitled to.",
+    "mehr_label": null
+  },
+  "ueberpruefungsantrag": {
+    "begriff": "Application for review (Überprüfungsantrag)",
+    "kuerzel": null,
+    "erklaerung": "With this, you ask the authority to check an older decision again, even though the normal deadline for an objection may already have passed.",
+    "mehr_label": null
+  },
+  "umdeutung": {
+    "begriff": "Reinterpretation (Umdeutung)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, a flawed decision can be treated in law as a different decision.",
+    "mehr_label": null
+  },
+  "unterlagen-nachreichen": {
+    "begriff": "Submitting documents later (Unterlagen nachreichen)",
+    "kuerzel": null,
+    "erklaerung": "You hand in documents later that were not yet available with your first letter.",
+    "mehr_label": null
+  },
+  "unterschrift": {
+    "begriff": "Signature (Unterschrift)",
+    "kuerzel": null,
+    "erklaerung": "With your signature you confirm, for many letters, that the statement comes from you.",
+    "mehr_label": null
+  },
+  "unzustaendigkeit": {
+    "begriff": "Lack of competence (Unzuständigkeit)",
+    "kuerzel": null,
+    "erklaerung": "The body believes it is not responsible for your matter.",
+    "mehr_label": null
+  },
+  "verwaltungsakt": {
+    "begriff": "Administrative act (Verwaltungsakt)",
+    "kuerzel": null,
+    "erklaerung": "This is a binding decision by an authority in your specific case. Many notices are such decisions.",
+    "mehr_label": null
+  },
+  "verfahren": {
+    "begriff": "Proceedings (Verfahren)",
+    "kuerzel": null,
+    "erklaerung": "This means the whole process – for example from the application through the examination to the decision.",
+    "mehr_label": null
+  },
+  "verfahrensfehler": {
+    "begriff": "Procedural error (Verfahrensfehler)",
+    "kuerzel": null,
+    "erklaerung": "A prescribed rule was not followed in the course of the proceedings.",
+    "mehr_label": null
+  },
+  "verrechnung": {
+    "begriff": "Offsetting (Verrechnung)",
+    "kuerzel": null,
+    "erklaerung": "Money you are owed is offset against a claim that a body has against you.",
+    "mehr_label": null
+  },
+  "versagung": {
+    "begriff": "Refusal (Versagung)",
+    "kuerzel": null,
+    "erklaerung": "A benefit is not granted, for example because the authority believes that necessary cooperation did not take place.",
+    "mehr_label": null
+  },
+  "versagungsbescheid": {
+    "begriff": "Notice of refusal (Versagungsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "With this notice, the authority tells you that a benefit is not granted because of a lack of cooperation.",
+    "mehr_label": null
+  },
+  "vollmacht": {
+    "begriff": "Power of attorney (Vollmacht)",
+    "kuerzel": null,
+    "erklaerung": "You allow another person to represent you before an authority in certain matters.",
+    "mehr_label": null
+  },
+  "vollziehung": {
+    "begriff": "Enforcement (Vollziehung)",
+    "kuerzel": null,
+    "erklaerung": "An official decision is put into practice.",
+    "mehr_label": null
+  },
+  "vorbehalt": {
+    "begriff": "Reservation (Vorbehalt)",
+    "kuerzel": null,
+    "erklaerung": "The authority makes clear that a decision can be checked again or changed later.",
+    "mehr_label": null
+  },
+  "vorlaeufige-bewilligung": {
+    "begriff": "Provisional approval (Vorläufige Bewilligung)",
+    "kuerzel": null,
+    "erklaerung": "The authority initially grants a benefit only provisionally. Later it can examine it again and make a final decision.",
+    "mehr_label": null
+  },
+  "vorsprache": {
+    "begriff": "Personal appointment (Vorsprache)",
+    "kuerzel": null,
+    "erklaerung": "This means that you appear in person at an authority or attend an appointment there.",
+    "mehr_label": null
+  },
+  "widerruf": {
+    "begriff": "Revocation of a lawful decision (Widerruf)",
+    "kuerzel": null,
+    "erklaerung": "A decision that was originally lawful can be cancelled again under certain conditions.",
+    "mehr_label": null
+  },
+  "widerrufsbescheid": {
+    "begriff": "Notice of revocation of a lawful decision (Widerrufsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "The authority tells you that an earlier decision is being revoked.",
+    "mehr_label": null
+  },
+  "widerrufsvorbehalt": {
+    "begriff": "Reservation of revocation (Widerrufsvorbehalt)",
+    "kuerzel": null,
+    "erklaerung": "A notice states from the outset that the authority reserves the right to revoke it later under certain conditions.",
+    "mehr_label": null
+  },
+  "widerspruch": {
+    "begriff": "Objection (Widerspruch)",
+    "kuerzel": null,
+    "erklaerung": "If you do not agree with a notice, you can ask the authority to review its decision again.",
+    "mehr_label": null
+  },
+  "widerspruchsfrist": {
+    "begriff": "Deadline for objection (Widerspruchsfrist)",
+    "kuerzel": null,
+    "erklaerung": "This is the time you have to lodge an objection against a notice.",
+    "mehr_label": null
+  },
+  "widerspruchsbescheid": {
+    "begriff": "Decision on an objection (Widerspruchsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "This is the decision on whether, after your objection, the authority sticks to its original decision or changes it.",
+    "mehr_label": null
+  },
+  "wirksamkeit": {
+    "begriff": "Effectiveness (Wirksamkeit)",
+    "kuerzel": null,
+    "erklaerung": "This means from when an official decision applies in law.",
+    "mehr_label": null
+  },
+  "zahlungsaufforderung": {
+    "begriff": "Request for payment (Zahlungsaufforderung)",
+    "kuerzel": null,
+    "erklaerung": "The authority asks you to pay a certain amount.",
+    "mehr_label": null
+  },
+  "zahlungsfrist": {
+    "begriff": "Payment deadline (Zahlungsfrist)",
+    "kuerzel": null,
+    "erklaerung": "A demanded amount is to be paid by this date.",
+    "mehr_label": null
+  },
+  "zusicherung": {
+    "begriff": "Assurance (Zusicherung)",
+    "kuerzel": null,
+    "erklaerung": "An authority gives you a binding commitment to make a certain decision later or to do something specific, if the legal requirements for it are met.",
+    "mehr_label": null
+  },
+  "zustaendigkeit": {
+    "begriff": "Competence (Zuständigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This means which authority or body is responsible for your matter.",
+    "mehr_label": null
+  },
+  "zustaendigkeitspruefung": {
+    "begriff": "Check of competence (Zuständigkeitsprüfung)",
+    "kuerzel": null,
+    "erklaerung": "The authority checks whether it is itself responsible for your matter, or another body.",
+    "mehr_label": null
+  },
+  "zustellung": {
+    "begriff": "Formal service (Zustellung)",
+    "kuerzel": null,
+    "erklaerung": "An important letter or decision is officially delivered to you. How and when this happens can matter for deadlines.",
+    "mehr_label": null
+  },
+  "zurueckweisung": {
+    "begriff": "Dismissal (Zurückweisung)",
+    "kuerzel": null,
+    "erklaerung": "The authority concludes that your request, application or objection will not be granted.",
+    "mehr_label": null
+  },
+  "zwischenbescheid": {
+    "begriff": "Interim notice (Zwischenbescheid)",
+    "kuerzel": null,
+    "erklaerung": "The authority tells you that your matter has not yet been fully dealt with and informs you of the current status.",
+    "mehr_label": null
   }
 }
