@@ -148,6 +148,10 @@ class UebersetzungenSeeder extends Seeder
             'untertitel' => $this->tr($deutsch->untertitel, $locale),
             'meta_title' => $this->tr($deutsch->meta_title, $locale),
             'meta_description' => $this->tr($deutsch->meta_description, $locale),
+            // KEV-156: eigene Warnung vor dem Bereich, Absatz für Absatz.
+            'triggerwarnung' => $deutsch->triggerwarnung
+                ? array_map(fn ($absatz) => $this->tr($absatz, $locale), $deutsch->triggerwarnung)
+                : null,
             // Maschinell übersetzt: sichtbar als ungeprüft gekennzeichnet und
             // nicht in Suchmaschinen, bis der Verein gegengelesen hat.
             'ungeprueft' => true,

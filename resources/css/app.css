@@ -267,7 +267,8 @@ button:not(:disabled),
    fit-content) muessen dabei komplett zurueckgesetzt werden: Sie stammen aus
    einer Zeit vor Design-Tokens und ignorieren jede Kontrasteinstellung.
 --------------------------------------------------------------------------- */
-#trigger-warnung {
+#trigger-warnung,
+#bereichswarnung {
   border: 0;
   padding: 0;
   margin: 0;
@@ -280,7 +281,8 @@ button:not(:disabled),
 
 /* Ohne JavaScript: normaler Block im Seitenfluss. Die UA-Vorgabe waere
    position: absolute — der Hinweis laege dann ueber der Kopfzeile. */
-#trigger-warnung[open]:not(:modal) {
+#trigger-warnung[open]:not(:modal),
+#bereichswarnung[open]:not(:modal) {
   position: static;
   padding: 1rem;
 }
@@ -288,7 +290,8 @@ button:not(:disabled),
 /* Mit JavaScript: fuellt den Bildschirm und scrollt, statt zu zentrieren.
    Zentriert man vertikal, schneiden alle Browser bei langem Text den Anfang
    ab — und der Anfang ist bei einer Warnung genau das Wichtige. */
-#trigger-warnung:modal {
+#trigger-warnung:modal,
+#bereichswarnung:modal {
   position: fixed;
   inset: 0;
   height: 100%;
@@ -300,9 +303,22 @@ button:not(:disabled),
   background: rgb(44 38 32 / 0.75);
 }
 
+/* Die Warnung vor einem Bereich (KEV-156) deckt dichter ab: Hinter ihr steht
+   genau der Inhalt, vor dem sie warnt, etwa die Sätze der Wall of Shame. Sie
+   soll nicht schon durch den Schleier zu lesen sein. */
+#bereichswarnung::backdrop {
+  background: rgb(44 38 32 / 0.96);
+}
+
 /* Vom Kopf-Skript gesetzt, bevor der Browser zeichnet: Wer den Hinweis
    weggeklickt hat, soll ihn nicht kurz aufblitzen sehen. */
 html.ke-trigger-aus #trigger-warnung {
+  display: none;
+}
+
+/* Dasselbe für die Warnung vor einem Bereich: in diesem Besuch schon
+   bestätigt (Kopf-Skript in page.blade.php). */
+html.ke-bereichswarnung-aus #bereichswarnung {
   display: none;
 }
 
@@ -316,6 +332,14 @@ html:not(.ke-trigger-bereit) [data-trigger-braucht-js] {
 }
 
 html.ke-trigger-bereit [data-trigger-ohne-js] {
+  display: none;
+}
+
+html:not(.ke-bereichswarnung-bereit) [data-bereichswarnung-braucht-js] {
+  display: none !important;
+}
+
+html.ke-bereichswarnung-bereit [data-bereichswarnung-ohne-js] {
   display: none;
 }
 

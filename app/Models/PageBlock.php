@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Seitenkontext;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
@@ -104,6 +105,10 @@ class PageBlock extends Model
         // KEV-157: Sätze, die man nacheinander liest; jeder setzt einen
         // Zählstrich an die Wand.
         'wall_of_shame' => 'Wall of Shame (Sätze mit Zählstrichen)',
+        // KEV-156: die Seiten unter diesem Bereich im Menü, mit Titelbild,
+        // Unterzeile und auf Wunsch den Aufrufen. Nichts davon wird hier
+        // gepflegt, es kommt aus Menü und Seiten (App\Support\Unterseiten).
+        'unterseiten' => 'Unterseiten als Kacheln (mit Bild und Aufrufen)',
     ];
 
     /**
@@ -138,6 +143,7 @@ class PageBlock extends Model
         'speicher_uebersicht' => 'wechselnd',
         'oeffentlichkeitsarbeit' => 'wechselnd',
         'wall_of_shame' => 'wechselnd',
+        'unterseiten' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
@@ -252,6 +258,12 @@ class PageBlock extends Model
      */
     public function zeigtNichts(): bool
     {
+        // KEV-156: Kacheln auf einer Seite ohne Unterseiten im Menü.
+        if ($this->typ === 'unterseiten') {
+            return $this->page === null
+                || Seitenkontext::fuer($this->page->slug)->geschwister(PHP_INT_MAX) === [];
+        }
+
         if ($this->typ !== 'oeffentlichkeitsarbeit') {
             return false;
         }

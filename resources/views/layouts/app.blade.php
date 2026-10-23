@@ -207,6 +207,11 @@
         :seite="$triggerwarnung"
         :ersatzsprache="$triggerwarnungErsatz" />
 
+    {{-- Eigene Warnung vor einem Bereich (KEV-156), gesetzt von page.blade.php.
+         Aus demselben Grund hier oben: Ohne JavaScript muss sie vor dem
+         Inhalt stehen. --}}
+    @yield('vorschaltung')
+
     {{-- Fixes Barrierefreiheits-Tab am linken Rand, auf jeder Seite erreichbar.
          Bewusst hier statt im Header: als zweiter Tab-Stopp (gleich nach dem
          Sprunglink) für die Tastatur früh erreichbar, und als seitenweites

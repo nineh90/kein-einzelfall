@@ -78,7 +78,10 @@ class SpeicherTest extends TestCase
 
         foreach ([
             resource_path('views/layouts/app.blade.php'),
+            // KEV-156: Kopf-Skript der Warnung vor einem Bereich.
+            resource_path('views/page.blade.php'),
             resource_path('js/trigger-warnung.js'),
+            resource_path('js/bereichswarnung.js'),
             resource_path('js/spendenhinweis.js'),
             resource_path('js/a11y.js'),
         ] as $datei) {
@@ -108,7 +111,9 @@ class SpeicherTest extends TestCase
          */
         $quellen = collect([
             resource_path('views/layouts/app.blade.php'),
+            resource_path('views/page.blade.php'),
             resource_path('js/trigger-warnung.js'),
+            resource_path('js/bereichswarnung.js'),
             resource_path('js/spendenhinweis.js'),
             base_path('config/darstellung.php'),
         ])->map(fn ($p) => file_get_contents($p))->implode("\n");

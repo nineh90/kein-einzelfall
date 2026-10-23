@@ -67,6 +67,12 @@
         if ($block->typ === 'contact_close' && $block->page?->blocks->contains('typ', 'hero')) {
             $attribute['vertrauen'] = false;
         }
+
+        // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite und
+        // müssen deshalb wissen, wo sie stehen.
+        if ($block->typ === 'unterseiten') {
+            $attribute['seite'] = $block->page;
+        }
     @endphp
     <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($attribute)" />
 @endif

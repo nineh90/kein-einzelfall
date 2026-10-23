@@ -38,13 +38,15 @@ const meldungen = []
 /**
  * Seite öffnen und dabei jede Browser-Meldung mitschneiden.
  *
+ * `bereich: false` macht dasselbe für die Warnung vor einem Bereich (KEV-156).
+ *
  * `trigger: false` bestellt die vorgeschaltete Trigger-Warnung vorab ab —
  * so, wie es jemand tut, der sie einmal weggeklickt hat. Das ist für fast
  * alle Prüfungen hier der richtige Ausgangszustand: Der Hinweis ist ein
  * modaler Dialog, hält den Fokus fest und läge sonst vor jedem Knopf, um den
  * es in diesem Test geht. Die Warnung selbst wird weiter unten eigens geprüft.
  */
-async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false } = {}) {
+async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false, bereich = false } = {}) {
     const kontext = await browser.newContext({
         javaScriptEnabled: js,
         viewport: { width: breite, height: 900 },
@@ -52,6 +54,12 @@ async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false }
 
     if (!trigger && js) {
         await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
+    }
+
+    // Dasselbe für die Warnung vor „Raum für Ungesagtes“ (KEV-156): in diesem
+    // Besuch schon bestätigt. Geprüft wird sie weiter unten eigens.
+    if (!bereich && js) {
+        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes"]'))
     }
 
     const seite = await kontext.newPage()
@@ -313,6 +321,104 @@ console.log('\nTrigger-Warnung ohne JavaScript')
 
     pruefe('stattdessen steht da, warum',
         await dialog.locator('[data-trigger-ohne-js]').isVisible())
+}
+
+// --- Triggerwarnung vor einem Bereich (KEV-156) ------------------------------
+
+console.log('\nTriggerwarnung vor „Raum für Ungesagtes“')
+{
+    // Erster Besuch: erst der allgemeine Hinweis, dann die Warnung des Bereichs,
+    // nie beide übereinander.
+    const s = await oeffnen({ trigger: true, bereich: true, pfad: '/blickwinkel' })
+    const allgemein = s.locator('#trigger-warnung')
+    const warnung = s.locator('#bereichswarnung')
+
+    pruefe('erst der allgemeine Hinweis, die Warnung wartet',
+        await allgemein.isVisible() && !(await warnung.isVisible()))
+
+    await allgemein.locator('[data-trigger-weiter]').click()
+    // Das close-Ereignis kommt asynchron, erst danach öffnet sie.
+    await warnung.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {})
+    pruefe('danach die Warnung vor dem Bereich, als modaler Dialog',
+        await warnung.isVisible() && await s.evaluate(() => document.getElementById('bereichswarnung').matches(':modal')))
+    pruefe('der Fokus liegt in ihr',
+        await s.evaluate(() => document.getElementById('bereichswarnung').contains(document.activeElement)))
+
+    const knoepfe = await Promise.all(['[data-bereichswarnung-weiter]', 'a[href="/"]', 'a[data-notausgang]']
+        .map((w) => warnung.locator(w).boundingBox()))
+    pruefe('drei Wege, gleich hoch, auf einer Linie',
+        knoepfe.every((k) => k && Math.abs(k.height - knoepfe[0].height) < 1 && Math.abs(k.y - knoepfe[0].y) < 1),
+        JSON.stringify(knoepfe.map((k) => k && [Math.round(k.y), Math.round(k.height)])))
+
+    await warnung.locator('[data-bereichswarnung-weiter]').click()
+    await s.waitForTimeout(100)
+    pruefe('„weiter“ schliesst sie', !(await warnung.isVisible()))
+    pruefe('gemerkt wird nur der Bereich, nur für diesen Besuch',
+        await s.evaluate(() => sessionStorage.getItem('ke.bereichswarnung') === '["raum-fuer-ungesagtes"]'
+            && !Object.keys(localStorage).some((k) => k.includes('bereich'))))
+
+    await s.goto(BASIS + '/unueberhoerbar', { waitUntil: 'networkidle' })
+    pruefe('auf den übrigen Seiten des Bereichs nicht noch einmal', (await s.locator('#bereichswarnung').count()) === 0)
+    await s.context().close()
+
+    // Neuer Besuch: Sie kommt wieder, auch wenn der allgemeine Hinweis
+    // abbestellt ist. Escape gilt wie „weiter“.
+    const wieder = await oeffnen({ bereich: true, pfad: '/raum-fuer-ungesagtes' })
+    pruefe('kommt beim nächsten Besuch wieder', await wieder.locator('#bereichswarnung').isVisible())
+    await wieder.keyboard.press('Escape')
+    await wieder.waitForTimeout(100)
+    await wieder.reload({ waitUntil: 'networkidle' })
+    pruefe('per Escape geschlossen gilt sie als bestätigt', (await wieder.locator('#bereichswarnung').count()) === 0)
+    await wieder.context().close()
+
+    // Wer den Bereich jetzt nicht sehen will, muss nicht die Website verlassen.
+    const zurueck = await oeffnen({ bereich: true, pfad: '/wall-of-shame' })
+    await zurueck.locator('#bereichswarnung a[href="/"]').click()
+    await zurueck.waitForLoadState('networkidle')
+    pruefe('„Zurück zur Startseite“ führt hinaus, ohne zu bestätigen',
+        new URL(zurueck.url()).pathname === '/'
+        && await zurueck.evaluate(() => sessionStorage.getItem('ke.bereichswarnung') === null))
+    await zurueck.context().close()
+
+    const mobil = await oeffnen({ bereich: true, breite: 390, pfad: '/blickwinkel' })
+    const mk = await Promise.all(['[data-bereichswarnung-weiter]', 'a[href="/"]', 'a[data-notausgang]']
+        .map((w) => mobil.locator('#bereichswarnung').locator(w).boundingBox()))
+    pruefe('mobil untereinander und gleich breit',
+        mk.every((k, i) => Math.abs(k.width - mk[0].width) < 1 && (i === 0 || k.y > mk[i - 1].y + mk[i - 1].height - 1))
+        && await mobil.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+    await mobil.context().close()
+
+    const ohne = await oeffnen({ js: false, pfad: '/wall-of-shame' })
+    const ow = ohne.locator('#bereichswarnung')
+    pruefe('ohne JS: steht sichtbar vor dem Inhalt',
+        await ow.isVisible() && (await ow.boundingBox()).y < (await ohne.locator('h1').boundingBox()).y)
+    pruefe('ohne JS: Zurück und Notausgang da, „weiter“ verborgen, Hinweis warum',
+        await ow.locator('a[href="/"]').isVisible() && await ow.locator('a[data-notausgang]').isVisible()
+        && !(await ow.locator('[data-bereichswarnung-weiter]').isVisible())
+        && await ow.locator('[data-bereichswarnung-ohne-js]').isVisible())
+    await ohne.context().close()
+
+    const anderswo = await oeffnen({ bereich: true, pfad: '/wissen' })
+    pruefe('ausserhalb des Bereichs keine', (await anderswo.locator('#bereichswarnung').count()) === 0)
+    await anderswo.context().close()
+}
+
+console.log('\nSpendenhinweis wartet auch auf die Warnung des Bereichs')
+{
+    const kontext = await browser.newContext({ viewport: { width: 1400, height: 900 } })
+    await kontext.addInitScript(() => localStorage.setItem('ke.spenden.aufrufe', '99'))
+    const seite = await kontext.newPage()
+    seite.on('pageerror', (e) => meldungen.push(`[bereich+hinweis] ${e.message}`))
+    await seite.goto(BASIS + '/blickwinkel', { waitUntil: 'networkidle' })
+
+    await seite.locator('#trigger-warnung [data-trigger-weiter]').click()
+    await seite.waitForTimeout(100)
+    pruefe('nach dem allgemeinen Hinweis noch nicht', !(await seite.locator('#spendenhinweis').isVisible()))
+
+    await seite.locator('#bereichswarnung [data-bereichswarnung-weiter]').click()
+    await seite.waitForTimeout(100)
+    pruefe('erst nach der Warnung des Bereichs', await seite.locator('#spendenhinweis').isVisible())
+    await kontext.close()
 }
 
 // --- Gespeicherte Einstellungen zurücksetzen --------------------------------

@@ -59,6 +59,15 @@ class PagesTable
                     ->trueColor('warning')
                     ->tooltip('Von Suchmaschinen ausgeschlossen'),
 
+                // KEV-156: wie oft die Seite aufgerufen wurde, je Sprachfassung.
+                // Nur die Zahl, nichts über die Person (App\Support\Aufrufe).
+                TextColumn::make('aufrufe')
+                    ->label('Aufrufe')
+                    ->numeric(locale: 'de')
+                    ->alignEnd()
+                    ->sortable()
+                    ->tooltip('Ohne Suchmaschinen und angemeldete Vereinsmitglieder. Neu laden zählt neu.'),
+
                 TextColumn::make('updated_at')
                     ->label('Zuletzt geändert')
                     ->dateTime('d.m.Y H:i')

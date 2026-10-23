@@ -289,6 +289,8 @@ class AdminPanelTest extends TestCase
                 'saetze' => ['Erster Wandsatz.', 'Zweiter Wandsatz.'],
                 'bild' => '/img/wall-of-shame/wand.webp', 'schluss' => 'Schlusswandsatz',
             ]],
+            // KEV-156: Kacheln der Unterseiten, nur Überschrift und Schalter
+            ['typ' => 'unterseiten', 'data' => ['titel' => 'Kachelprobe', 'aufrufe' => true]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -321,6 +323,7 @@ class AdminPanelTest extends TestCase
             'Wo wir waren.', 'interview',                    // Öffentlichkeitsarbeit
             'petitionen.webp', 'Untergruppe A', 'Einleitung A', 'petition_unterstuetzt',
             'Erster Wandsatz.', 'Schlusswandsatz', 'wand.webp', // Wall of Shame
+            'Kachelprobe',                                   // Unterseiten als Kacheln
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }
@@ -328,6 +331,33 @@ class AdminPanelTest extends TestCase
         // Die Sätze bleiben eine Liste, kein Textblock mit Zeilenumbrüchen.
         $wand = $seite->fresh()->blocks()->where('typ', 'wall_of_shame')->first()->data;
         $this->assertSame(['Erster Wandsatz.', 'Zweiter Wandsatz.'], $wand['saetze']);
+
+        $kacheln = $seite->fresh()->blocks()->where('typ', 'unterseiten')->first()->data;
+        $this->assertTrue($kacheln['aufrufe']);
+    }
+
+    /** KEV-156: Die Triggerwarnung vor einem Bereich pflegt der Verein an der Seite selbst. */
+    public function test_verein_pflegt_die_triggerwarnung_eines_bereichs(): void
+    {
+        $seite = Page::where('slug', 'raum-fuer-ungesagtes')->where('locale', 'de')->firstOrFail();
+
+        Livewire::actingAs($this->redaktion)
+            ->test(EditPage::class, ['record' => $seite->getKey()])
+            // Ein Absatz je Eintrag; so liegt ein einfacher Repeater im Formular.
+            ->fillForm(['triggerwarnung' => [['absatz' => 'Neuer erster Satz.'], ['absatz' => 'Und ein *zweiter*.']]])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame(['Neuer erster Satz.', 'Und ein *zweiter*.'], $seite->fresh()->triggerwarnung);
+
+        // Leer gespeichert: keine eigene Warnung mehr.
+        Livewire::actingAs($this->redaktion)
+            ->test(EditPage::class, ['record' => $seite->getKey()])
+            ->fillForm(['triggerwarnung' => []])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertStringNotContainsString('id="bereichswarnung"', $this->get('/wall-of-shame')->getContent());
     }
 
     /**

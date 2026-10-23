@@ -55,6 +55,20 @@ return [
         ],
 
         /*
+         * Eigene Warnung vor einem Bereich (KEV-156): die Bereiche, vor denen
+         * sie in diesem Besuch schon bestätigt wurde, als Liste ihrer Slugs.
+         * Nur für die Sitzung, ein „nicht mehr anzeigen“ gibt es dort bewusst
+         * nicht (resources/js/bereichswarnung.js).
+         */
+        [
+            'schluessel' => 'bereichswarnung',
+            'label' => 'rahmen.speicher.bereichswarnung.label',
+            'text' => 'rahmen.speicher.bereichswarnung.text',
+            'local' => [],
+            'session' => ['ke.bereichswarnung'],
+        ],
+
+        /*
          * Der Spendenhinweis (config/spendenhinweis.php): ein Zähler der
          * Seitenaufrufe und der Zeitpunkt, bis zu dem nach dem Wegklicken
          * Ruhe ist.

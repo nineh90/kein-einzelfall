@@ -69,6 +69,8 @@ const SEITEN = [
     ['Dokumentenliste', '/atteste'],
     // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).
     ['Wall of Shame', '/wall-of-shame'],
+    // Kacheln mit Bild und Aufrufen (KEV-156).
+    ['Bereich mit Kacheln', '/raum-fuer-ungesagtes'],
     ['Fehlerseite', '/diese-seite-gibt-es-nicht'],
 ]
 
@@ -135,7 +137,7 @@ function pfad(code, standard, seitenpfad) {
     return seitenpfad === '/' ? `/${code}` : `/${code}${seitenpfad}`
 }
 
-async function pruefen(titel, url, vorbereiten = null, breite = 1400, trigger = false) {
+async function pruefen(titel, url, vorbereiten = null, breite = 1400, trigger = false, bereich = false) {
     const kontext = await browser.newContext({ viewport: { width: breite, height: 900 } })
 
     /*
@@ -148,6 +150,11 @@ async function pruefen(titel, url, vorbereiten = null, breite = 1400, trigger = 
      */
     if (!trigger) {
         await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
+    }
+
+    // Aus demselben Grund die Warnung vor „Raum für Ungesagtes“ (KEV-156).
+    if (!bereich) {
+        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes"]'))
     }
 
     const seite = await kontext.newPage()
@@ -236,6 +243,12 @@ for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
 console.log('\nTrigger-Warnung (offener Dialog)')
 for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
     await pruefen(`Trigger-Warnung ${titel}`, BASIS + '/', null, breite, true)
+}
+
+// Die Warnung vor einem Bereich (KEV-156) ebenso, hier vor der Wall of Shame.
+console.log('\nTriggerwarnung vor einem Bereich (offener Dialog)')
+for (const [titel, breite] of [['Desktop', 1400], ['mobil', 390]]) {
+    await pruefen(`Bereichswarnung ${titel}`, BASIS + '/wall-of-shame', null, breite, false, true)
 }
 
 // 320 px ist die Untergrenze aus WCAG 1.4.10: Ab hier darf nicht waagerecht

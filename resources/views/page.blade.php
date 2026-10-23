@@ -20,9 +20,13 @@
 
 @php
     use App\Models\PageBlock;
+    use App\Support\Bereichswarnung;
     use App\Support\Seitenkontext;
 
     $kontext = Seitenkontext::fuer($page->slug);
+
+    // Eigene Triggerwarnung der Seite oder ihres Bereichs (KEV-156).
+    $warnung = Bereichswarnung::fuer($page);
 
     // Bausteine, die nichts zeigen (etwa „Einträge mit Datum“ ohne Einträge,
     // KEV-129), gar nicht erst mitzählen: Sonst bekämen sie eine Fläche, und
@@ -112,10 +116,31 @@
     $mitSeitenleiste = count($sprungpunkte) >= 2
         && collect($abschnitte)->contains(fn ($a) => count($a['bloecke']) > 1);
 
-    $geschwister = $kontext->geschwister();
+    // Zeigt die Seite ihre Unterseiten schon als Kacheln (KEV-156), wäre die
+    // Liste am Ende dieselben Links noch einmal.
+    $geschwister = $page->blocks->contains('typ', 'unterseiten') ? [] : $kontext->geschwister();
     $weiterlesenAuf = PageBlock::gegenflaeche($zuletzt);
     $kontaktAuf = PageBlock::gegenflaeche(count($geschwister) > 0 ? $weiterlesenAuf : $zuletzt);
 @endphp
+
+@if ($warnung)
+    {{-- Vor dem ersten Zeichnen verstecken, wenn in diesem Besuch schon
+         bestätigt, wie beim allgemeinen Hinweis im Layout. Nur verstecken,
+         nie zeigen: Sichtbar ist die Warnung schon aus dem Server-HTML. --}}
+    @push('head')
+        <script @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
+        try {
+            if ((JSON.parse(sessionStorage.getItem('ke.bereichswarnung')) || []).indexOf(@json($warnung->slug)) !== -1) {
+                document.documentElement.classList.add('ke-bereichswarnung-aus');
+            }
+        } catch (e) { /* Im Zweifel warnen. */ }
+        </script>
+    @endpush
+
+    @section('vorschaltung')
+        <x-layout.bereichswarnung :seite="$warnung" />
+    @endsection
+@endif
 
 @section('content')
 

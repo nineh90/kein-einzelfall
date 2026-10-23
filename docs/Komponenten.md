@@ -2278,3 +2278,63 @@ Satz einzeln übersetzt und gefunden wird), dazu Wandbild und Schlusssatz.
 Tests: `WallOfShameTest`, im Browser-Lauf „Wall of Shame“ (Klicken, Tastatur,
 alle Striche auf der Wand bei 390 und 1400 px, ohne JavaScript nur die Liste),
 im Barrierefreiheits-Lauf `/wall-of-shame` auf Deutsch und Englisch.
+
+
+## 36. Raum für Ungesagtes: Bereichswarnung, Kacheln, Aufrufe (KEV-156, 23.10.2026)
+
+Taddis Ticket zum ganzen Bereich. Die Übersicht `/raum-fuer-ungesagtes` hat
+jetzt ihren Text („Deine Stimme“ als Unterzeile) und ist für Suchmaschinen
+offen; dazu „Wort für Wort“ (`/wort-fuer-wort`, Kategorie 2, Bild ja, Text
+fehlt noch, deshalb `noindex`). Aufbau der Übersicht: Text, Kacheln, Aufruf mit
+Adresse und Schlusssatz. In einem Stück hätte der Textbaustein nach vier
+Absätzen eingeklappt, und gerade Adresse und Schlusssatz lägen hinter
+„Weiterlesen“.
+
+**Triggerwarnung vor einem Bereich.** Taddi: „Als erstes muss hier noch mal ne
+Triggerwarnung hin, bevor man auf dieser Seite weiter kommt.“ Gepflegt an der
+Seite selbst, Feld `pages.triggerwarnung` (Absätze, Panel: Abschnitt
+„Triggerwarnung für diesen Bereich“). Steht sie an der Übersicht eines
+Bereichs, gilt sie für alle Seiten darunter im Menü (`App\Support\Bereichswarnung`,
+Zugehörigkeit über `Seitenkontext`). Fehlt sie in einer Sprache, kommt die
+deutsche, ausgezeichnet mit `lang`.
+
+- Gebaut wie der allgemeine Hinweis (`x-layout.bereichswarnung`,
+  `resources/js/bereichswarnung.js`): `<dialog open>` vor dem Inhalt, mit
+  JavaScript `showModal()`. Ohne JavaScript ein Block über dem Inhalt mit
+  „Zurück zur Startseite“ und Notausgang (beides Links).
+- Reihenfolge: Ist der allgemeine Hinweis offen, wartet sie und öffnet nach
+  dessen Schließen. Der Spendenhinweis wartet auf beide.
+- Bestätigt (Knopf oder Escape) gilt für den Besuch: `sessionStorage`
+  `ke.bereichswarnung`, eine Liste der Bereiche (eingetragen in
+  `config/speicher.php`). Kein „nicht mehr anzeigen“, Taddi will sie jedes Mal.
+  Ein Kopf-Skript in `page.blade.php` versteckt sie vor dem ersten Zeichnen,
+  wenn schon bestätigt.
+- Drei Wege: „Verstanden – weiter“, „Zurück zur Startseite“, Notausgang (der
+  Knopf oben ist hinter dem Dialog nicht erreichbar). Bis `lg` untereinander.
+- Der Schleier ist fast deckend (96 %, der allgemeine 75 %): Dahinter steht
+  genau der Inhalt, vor dem gewarnt wird.
+
+**Baustein `unterseiten` (Unterseiten als Kacheln).** Die Seiten unter dem
+Bereich in der Reihenfolge des Menüs, je Kachel Titelbild (kleine Fassung,
+links ausgerichtet, Höhe nach `Titelbilder::FOKUS`), Titel und Unterzeile der
+Seite (`App\Support\Unterseiten`). Gepflegt wird am Baustein nur die
+Überschrift und der Schalter „Aufrufe anzeigen“. Steht er auf einer Seite,
+entfällt die Liste „Mehr zu …“ am Seitenende (dieselben Links). Die
+Unterzeilen der vier Kategorien sind Taddis Beschreibungen aus dem Ticket,
+die der Wall of Shame ist von uns (`Titelbilder::SEITEN`).
+
+**Aufrufe.** Taddis Frage, wie oft jede Kategorie angeklickt wird.
+`pages.aufrufe`, hochgezählt in `PageController` über `App\Support\Aufrufe`:
+nur die Zahl, kein Cookie, keine Adresse, keine Uhrzeit, deshalb ohne
+Einwilligung. Nicht gezählt: Programme mit erkennbarer Kennung (Suchmaschinen,
+Vorschaudienste, Headless-Browser), Vorab-Laden (`Sec-Purpose: prefetch`),
+angemeldete Vereinsmitglieder. Neu laden zählt neu, die Zahl ist ein Richtwert.
+Am Query-Builder vorbei, damit `updated_at` (Sitemap) unberührt bleibt. Auf
+den Kacheln die Summe aller Sprachfassungen (Übersetzungsgruppe), bei null
+keine Zeile. Im Panel die Spalte „Aufrufe“ in der Seitenliste, je Fassung.
+
+Tests: `RaumFuerUngesagtesTest`, `AdminPanelTest` (Warnung pflegen, Baustein
+speichern), `SpeicherTest` (Schlüssel registriert), im Browser-Lauf
+„Triggerwarnung vor „Raum für Ungesagtes““ und „Spendenhinweis wartet auch auf
+die Warnung des Bereichs“, im Barrierefreiheits-Lauf die Übersicht (de/en) und
+der offene Dialog (Desktop, mobil).

@@ -60,6 +60,19 @@ return [
     ],
 
     /*
+     * Eigene Warnung vor einem Bereich (KEV-156, „Raum für Ungesagtes“). Der
+     * Wortlaut der Warnung steht an der Seite im Panel, hier nur die
+     * Bedientexte. Überschrift und Notausgang wie beim allgemeinen Hinweis.
+     */
+    'bereichswarnung' => [
+        'eyebrow' => 'Bevor du weitergehst',
+        'weiter' => 'Verstanden – weiter',
+        'zurueck' => 'Zurück zur Startseite',
+        'ohne_js' => 'Die Inhalte folgen unter diesem Hinweis. Ausblenden lässt er sich nur mit '
+            .'eingeschaltetem JavaScript.',
+    ],
+
+    /*
      * Dokumentenlisten.
      *
      * „extern“ heisst hier: Der Verweis führt zur Behörde selbst. Der Verein
@@ -108,6 +121,11 @@ return [
             'label' => 'Hinweis zu belastenden Inhalten',
             'text' => 'Ob der Hinweis beim Öffnen der Seite erscheint — und ob du ihn '
                 .'dauerhaft abbestellt hast.',
+        ],
+        'bereichswarnung' => [
+            'label' => 'Triggerwarnung vor einzelnen Bereichen',
+            'text' => 'Vor welchen Bereichen (etwa „Raum für Ungesagtes“) du die Warnung bei diesem '
+                .'Besuch schon bestätigt hast. Beim nächsten Besuch kommt sie wieder.',
         ],
         'spendenhinweis' => [
             'label' => 'Spendenhinweis',

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Redirect;
+use App\Support\Aufrufe;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends Controller
@@ -22,16 +24,20 @@ class PageController extends Controller
      * stiller Rückfall auf fest verdrahtete Texte — der gäbe der Startseite auf
      * Dauer wieder zwei Quellen, und genau das war der Zustand vorher.
      */
-    public function start()
+    public function start(Request $request)
     {
         $sprache = Language::aktuell();
 
         if ($page = $this->startseite($sprache->code)) {
+            Aufrufe::zaehlen($page, $request);
+
             return view('home', ['page' => $page, 'ersatzsprache' => null]);
         }
 
         if ($rueckfall = $sprache->fallback()) {
             if ($page = $this->startseite($rueckfall->code)) {
+                Aufrufe::zaehlen($page, $request);
+
                 return view('home', ['page' => $page, 'ersatzsprache' => $rueckfall]);
             }
         }
@@ -39,7 +45,7 @@ class PageController extends Controller
         throw new NotFoundHttpException;
     }
 
-    public function show(string $slug)
+    public function show(Request $request, string $slug)
     {
         $sprache = Language::aktuell();
 
@@ -56,6 +62,8 @@ class PageController extends Controller
         $page = $this->seite($sprache->code, $slug);
 
         if ($page) {
+            Aufrufe::zaehlen($page, $request);
+
             return view('page', ['page' => $page, 'ersatzsprache' => null]);
         }
 
@@ -70,6 +78,8 @@ class PageController extends Controller
          */
         if ($rueckfall = $sprache->fallback()) {
             if ($page = $this->seite($rueckfall->code, $slug)) {
+                Aufrufe::zaehlen($page, $request);
+
                 return view('page', ['page' => $page, 'ersatzsprache' => $rueckfall]);
             }
         }
@@ -89,7 +99,7 @@ class PageController extends Controller
      * schweren Text zu zeigen wäre schlechter als ein ehrliches 404 mit den
      * Auswegen der Fehlerseite.
      */
-    public function leichteSprache(string $slug)
+    public function leichteSprache(Request $request, string $slug)
     {
         $sprache = Language::aktuell();
 
@@ -98,6 +108,8 @@ class PageController extends Controller
         if (! $page) {
             throw new NotFoundHttpException;
         }
+
+        Aufrufe::zaehlen($page, $request);
 
         return view('page', ['page' => $page, 'ersatzsprache' => null]);
     }

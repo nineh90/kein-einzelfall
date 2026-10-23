@@ -26,6 +26,7 @@ import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
 import { spendenHinweisVerdrahten } from './spendenhinweis'
 import { triggerWarnungVerdrahten } from './trigger-warnung'
+import { bereichswarnungVerdrahten } from './bereichswarnung'
 import { kopfhoeheVerdrahten } from './kopfhoehe'
 import { kopfzeileVerdrahten } from './kopfzeile'
 
@@ -61,8 +62,12 @@ wallOfShameVerdrahten()
 // und die brauchen manche Menschen, um überhaupt lesen zu können.
 triggerWarnungVerdrahten()
 
-// Nach der Trigger-Warnung, mit Absicht: Der Hinweis muss wissen, ob der
-// Dialog gerade offen ist, und wartet dann auf dessen Schliessen. Scheitert
+// Direkt danach: Die Warnung vor einem Bereich (KEV-156) wartet, solange der
+// allgemeine Hinweis offen ist, und muss deshalb wissen, ob er noch da ist.
+bereichswarnungVerdrahten()
+
+// Nach den Warnungen, mit Absicht: Der Hinweis muss wissen, ob ein Dialog
+// gerade offen ist, und wartet dann auf dessen Schliessen. Scheitert
 // etwas davor, fehlt schlimmstenfalls eine Spendenbitte — das ist von allem
 // hier das Verzichtbarste.
 spendenHinweisVerdrahten()

@@ -84,7 +84,17 @@ export function spendenHinweisVerdrahten() {
     const dialogOffen = dialog && dialog.open
         && !document.documentElement.classList.contains('ke-trigger-aus')
 
-    if (dialogOffen) {
+    /*
+     * Die Warnung vor einem Bereich (KEV-156) kommt erst nach dem allgemeinen
+     * Hinweis und ist bis dahin zu. Steht sie noch im Dokument, ist sie offen
+     * oder kommt gleich: Dann zählt ihr Schliessen, sie ist die letzte.
+     * Bestätigte entfernt bereichswarnung.js vorher.
+     */
+    const bereich = document.getElementById('bereichswarnung')
+
+    if (bereich) {
+        bereich.addEventListener('close', zeigen, { once: true })
+    } else if (dialogOffen) {
         dialog.addEventListener('close', zeigen, { once: true })
     } else {
         zeigen()

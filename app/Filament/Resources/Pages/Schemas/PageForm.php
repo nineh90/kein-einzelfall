@@ -208,6 +208,30 @@ class PageForm
                             .'reiner Schmuck — dann leer lassen, sonst liest die Vorlesehilfe es vor.'),
                 ]),
 
+            /*
+             * KEV-156: eigene Triggerwarnung, für den „Raum für Ungesagtes“.
+             * Absätze wie im Textbaustein, damit sich *fett* und Links genauso
+             * schreiben lassen.
+             */
+            Section::make('Triggerwarnung für diesen Bereich')
+                ->description('Erscheint vor dieser Seite und vor allen Seiten, die im Menü darunter stehen. '
+                    .'Leer lassen = keine eigene Warnung, dann gilt nur der allgemeine Hinweis.')
+                ->collapsed(fn ($record) => blank($record?->triggerwarnung))
+                ->schema([
+                    Repeater::make('triggerwarnung')
+                        ->label('Absätze')
+                        // Ohne dies legte jede neue Seite einen leeren
+                        // Pflicht-Absatz an und liess sich nicht speichern.
+                        ->defaultItems(0)
+                        ->addActionLabel('Absatz hinzufügen')
+                        ->helperText('Kommt nach dem allgemeinen Hinweis, einmal pro Besuch: Wer sie bestätigt, '
+                            .'sieht sie auf den übrigen Seiten des Bereichs nicht noch einmal, beim nächsten '
+                            .'Besuch aber wieder. Einen Satz hervorheben: *Sternchen* darum setzen.')
+                        ->simple(
+                            Textarea::make('absatz')->label('')->rows(3)->required()
+                        ),
+                ]),
+
             Section::make('Suchmaschinen')
                 ->description('Was bei Google in den Trefferlisten steht. Leer lassen übernimmt den Titel.')
                 ->collapsed()
@@ -375,6 +399,17 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'wall_of_shame')
                                 ->helperText('Steht fett auf dem Zettel, wenn alle Sätze gelesen sind, und unter '
                                     .'der Liste. Kann leer bleiben.'),
+
+                            // --- Unterseiten als Kacheln (KEV-156) ---
+                            Toggle::make('data.aufrufe')
+                                ->label('Aufrufe anzeigen')
+                                ->visible(fn ($get) => $get('typ') === 'unterseiten')
+                                ->dehydrated(fn ($state) => (bool) $state)
+                                ->helperText('Zeigt auf jeder Kachel, wie oft die Seite aufgerufen wurde. Gezählt '
+                                    .'wird ohne Cookie und ohne etwas über die Person zu speichern; Suchmaschinen '
+                                    .'und angemeldete Vereinsmitglieder zählen nicht. Welche Seiten als Kachel '
+                                    .'erscheinen, steht im Menü; Bild und Text darunter sind Titelbild und '
+                                    .'Unterzeile der jeweiligen Seite.'),
 
                             // --- Ablauf in Schritten ---
                             Repeater::make('data.schritte')

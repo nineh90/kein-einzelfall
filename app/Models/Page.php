@@ -60,6 +60,10 @@ class Page extends Model
     protected $fillable = [
         'locale', 'fassung', 'uebersetzungs_gruppe', 'slug', 'titel', 'titelbild', 'titelbild_alt', 'untertitel',
         'meta_title', 'meta_description', 'noindex', 'ungeprueft', 'published_at',
+        // KEV-156: eigene Warnung vor der Seite bzw. dem Bereich (Absätze).
+        // `aufrufe` fehlt hier bewusst: Die Zahl zählt App\Support\Aufrufe
+        // hoch, niemand soll sie über ein Formular setzen.
+        'triggerwarnung',
     ];
 
     protected function casts(): array
@@ -68,6 +72,8 @@ class Page extends Model
             'noindex' => 'boolean',
             'published_at' => 'datetime',
             'ungeprueft' => 'boolean',
+            'triggerwarnung' => 'array',
+            'aufrufe' => 'integer',
         ];
     }
 

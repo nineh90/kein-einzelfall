@@ -481,11 +481,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   der letzte Satz sind fett, die Adresse ist ein Mailto-Link. Beide Seiten mit
   ihren Bildern aus dem Drive (Tonbandgerät, offene Tür), rechts um Wand
   verlängert. Offen:
-  - **Text für die Bereichsseite /raum-fuer-ungesagtes.** Bis dahin zeigt sie
-    nur Bild und den Verweis auf Unüberhörbar und ist für Suchmaschinen
-    gesperrt, wie Rückblick (KEV-72). Laut Drive kommen noch Wall of Shame, Wort
-    für Wort und Blickwinkel dazu; das Bild heißt „Deine Stimme – Raum für
-    ungesagtes“. Soll „Deine Stimme“ als Unterzeile aufs Bild?
+  - ~~Text für die Bereichsseite /raum-fuer-ungesagtes~~: kam mit KEV-156,
+    „Deine Stimme“ steht jetzt als Unterzeile auf dem Bild.
   - **Wie sollen die Musikstücke auf die Seite?** Audiodateien hochladen geht
     bisher nicht. Schon jetzt möglich: der Baustein „Eingebetteter Inhalt
     (2-Klick)“ mit einem Stück bei SoundCloud, YouTube o. Ä., geladen erst nach
@@ -507,11 +504,48 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - Reihenfolge: wie im Dokument. Soll es von harmlos nach bösartig gehen,
     reicht es, die Zeilen im Panel umzustellen.
   - Korrigiert: „Gutachter“ → „Gutachtern“ in der Einleitung.
-  - Ganz oben im Dokument steht ein fetter Satzrest: „Platz hatte, darf hier
-    einen bekommen.“ Der Anfang fehlt. Gehört er auf die Bereichsseite „Raum
-    für Ungesagtes“ (etwa „Was bisher keinen Platz hatte …“)?
+  - ~~Satzrest „Platz hatte, darf hier einen bekommen.“~~: Gehört auf die
+    Bereichsseite, KEV-156 bringt ihn ganz („Was zu lange keinen Platz hatte,
+    darf hier einen bekommen.“).
   - Ihr Vorschlag mit Absperrbändern ist nicht umgesetzt, die Zählstriche
     tragen die Idee. Ihr Bild „Mauer“ ist noch frei.
+- [ ] **Raum für Ungesagtes: Text, Triggerwarnung, Kacheln, Zähler (KEV-156),
+  bitte ansehen.** Die Übersicht hat Taddis Text und ist jetzt für
+  Suchmaschinen offen. Aufbau: ihr Text, darunter die vier Kategorien als
+  Kacheln mit Bild, darunter ihr Aufruf mit Adresse (fett, Mailto-Link) und
+  Schlusssatz (fett). In einem Stück wäre der Text nach vier Absätzen
+  eingeklappt, und gerade Adresse und Schlusssatz lägen hinter
+  „Weiterlesen“.
+  - **Triggerwarnung:** ihr Text wörtlich, vor der Übersicht und jeder Seite
+    darunter. Sie kommt nach dem allgemeinen Hinweis, nicht gleichzeitig.
+    Bestätigt gilt sie für den Besuch, beim nächsten Besuch kommt sie wieder;
+    ein „nicht mehr anzeigen“ gibt es bewusst nicht. Drei Wege: weiter, zurück
+    zur Startseite, Notausgang. Pflegen: Seite „Raum für Ungesagtes“, Abschnitt
+    „Triggerwarnung für diesen Bereich“; leer = keine.
+  - **Vorschlag:** Die Warnung nennt Suizidalität und Selbstverletzung, aber
+    anders als der allgemeine Hinweis keine Hilfe. Soll ein Satz dazu, etwa
+    „Wenn es dir gerade nicht gut geht: Die TelefonSeelsorge (116 123) ist rund
+    um die Uhr erreichbar.“? Im Panel ein Absatz mehr.
+  - **Zähler (ihre Frage):** Ja, auf jeder Kachel steht „… Aufrufe“, im Panel
+    zusätzlich die Spalte „Aufrufe“ in der Seitenliste (jede Seite). Gezählt
+    wird auf dem Server nur die Zahl: kein Cookie, nichts über die Person,
+    keine Einwilligung nötig. Suchmaschinen und angemeldete Vereinsmitglieder
+    zählen nicht, neu laden zählt neu. Steht eine Seite bei null, fehlt die
+    Zeile. Abschalten: Baustein „Unterseiten als Kacheln“, Schalter „Aufrufe
+    anzeigen“. Beim Livegang beginnt die Zählung bei null.
+  - **Von uns:** die Überschrift „Was du hier findest“ über den Kacheln und die
+    Unterzeile der Wall of Shame („Sätze, die Betroffene zu hören bekommen
+    haben“). Die übrigen Unterzeilen sind ihre Beschreibungen aus dem Ticket
+    („Gedichte, Briefe und Texte von Betroffenen“, „Bilder von Betroffenen“,
+    „Musikstücke von Betroffenen“); sie stehen jetzt auch auf den Titelbildern
+    der Seiten.
+  - **Korrigiert:** „etwas Sichtbar machen“ → „sichtbar“; „Texte: Gedichte,
+    Briefe, Bilder, Lieder etc.“ → „Texte, Gedichte, …“ (Bilder und Lieder
+    sind keine Texte). „Möchtest du uns auch etwas sichtbar machen?“ ist
+    stehen geblieben, besser wäre „Möchtest du auch etwas sichtbar machen?“.
+  - **Wort für Wort** (ihre Kategorie 2) steht mit ihrem Bild im Menü, aber
+    noch ohne Text und deshalb für Suchmaschinen gesperrt. Ihr Bild
+    „Word für Word Hintergrund für Texte“ ist noch frei.
 - [ ] **Blickwinkel (KEV-158).** Zweite Unterseite unter „Raum für
   Ungesagtes“, gebaut wie Unüberhörbar: Taddis Text, Adresse und letzter Satz
   fett, ihr Bild „3. Blickwinkel“ (Staffelei). Im Menü vor Unüberhörbar, wie

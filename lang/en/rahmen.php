@@ -44,6 +44,14 @@ return [
             .'it remembers your choice in the browser. You can simply read on.',
     ],
 
+    'bereichswarnung' => [
+        'eyebrow' => 'Before you go on',
+        'weiter' => 'Understood – continue',
+        'zurueck' => 'Back to the home page',
+        'ohne_js' => 'The content follows below this notice. It can only be dismissed with '
+            .'JavaScript enabled.',
+    ],
+
     'dokumente' => [
         'bereich' => 'Documents to download',
         'extern' => 'Opens :quelle',
@@ -76,6 +84,11 @@ return [
             'label' => 'Notice about distressing content',
             'text' => 'Whether the notice appears when you open the site — and whether you have '
                 .'dismissed it for good.',
+        ],
+        'bereichswarnung' => [
+            'label' => 'Trigger warning for individual sections',
+            'text' => 'For which sections (such as “Space for the unsaid”) you have already confirmed '
+                .'the warning during this visit. It comes back on your next visit.',
         ],
         'spendenhinweis' => [
             'label' => 'Donation notice',

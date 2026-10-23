@@ -90,15 +90,23 @@ class Titelbilder
         // SER“), Zettelkasten. Ohne Unterzeile.
         'glossar' => null,
         // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
-        // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar. Ohne
-        // Unterzeile.
-        'raum-fuer-ungesagtes' => null,
-        'unueberhoerbar' => null,
+        // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar.
+        //
+        // Unterzeilen seit KEV-156: „Deine Stimme“ aus Taddis Titel des
+        // Bereichs („Raum für Ungesagtes – Deine Stimme“), bei den vier
+        // Kategorien ihre Beschreibung aus dem Ticket („Musik: Musikstücke von
+        // Betroffenen“). Sie stehen auch auf den Kacheln der Übersicht.
+        'raum-fuer-ungesagtes' => 'Deine Stimme',
+        'unueberhoerbar' => 'Musikstücke von Betroffenen',
         // KEV-158: Bild von Taddi, Staffelei mit leerer Leinwand.
-        'blickwinkel' => null,
+        'blickwinkel' => 'Bilder von Betroffenen',
         // KEV-157: Bild von Taddi „1 Wall of Shame“, Stuhl vor einer Wand
-        // mit Schatten von Sprechblasen.
-        'wall-of-shame' => null,
+        // mit Schatten von Sprechblasen. Zu ihr hat Taddi keine Beschreibung
+        // geschickt, die Unterzeile ist aus ihrer Einleitung.
+        'wall-of-shame' => 'Sätze, die Betroffene zu hören bekommen haben',                      // von uns
+        // KEV-156: Bild von Taddi „2. Wort für Wort“, aufgeschlagenes Buch auf
+        // zwei alten Büchern.
+        'wort-fuer-wort' => 'Gedichte, Briefe und Texte von Betroffenen',
     ];
 
     /**
@@ -195,6 +203,8 @@ class Titelbilder
      *    Rechts um Wand verlängert; Schatten ab 2 %, Stuhlbeine bei 83 % der
      *    Höhe. Mit 45 % bleibt der Stuhl ganz, oben fehlt bei 2560 px ein
      *    Stück der obersten Sprechblase.
+     *  - Wort für Wort: aufgeschlagenes Buch auf zwei alten Büchern (KEV-156).
+     *    Rechts um Wand verlängert, Bücher zwischen 47 und 86 % der Höhe.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -220,6 +230,7 @@ class Titelbilder
         self::ORDNER.'/unueberhoerbar.webp' => 60,
         self::ORDNER.'/blickwinkel.webp' => 35,
         self::ORDNER.'/wall-of-shame.webp' => 45,
+        self::ORDNER.'/wort-fuer-wort.webp' => 80,
     ];
 
     /**
