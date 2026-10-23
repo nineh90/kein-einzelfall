@@ -105,6 +105,16 @@ return [
                 ['schluessel' => 'unueberhoerbar', 'label' => 'Unüberhörbar', 'url' => '/unueberhoerbar'],
             ],
         ],
+        /*
+         * KEV-160: eigener Bereich, Platz wie in Taddis Drive („5. Projekte“
+         * nach „4. Raum für Ungesagtes“). Die Projekte kommen später als
+         * Unterseiten (children); dann zeigt die Übersicht sie als Kacheln.
+         */
+        [
+            'schluessel' => 'bereich_projekte',
+            'label' => 'Projekte',
+            'url' => '/projekte',
+        ],
         [
             'schluessel' => 'bereich_spenden',
             'label' => 'Spenden',

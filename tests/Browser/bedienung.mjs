@@ -701,9 +701,9 @@ console.log('\nGalerie einer Messe')
     await ohne.context().close()
 }
 
-// --- Kopfzeile mit sechs Bereichen (KEV-159) -------------------------------
+// --- Kopfzeile mit allen Bereichen (KEV-159, seit KEV-160 sieben) ----------
 
-console.log('\nKopfzeile mit sechs Bereichen')
+console.log('\nKopfzeile mit sieben Bereichen')
 {
     for (const js of [true, false]) {
         for (const breite of [1280, 1440, 1920]) {
@@ -722,7 +722,7 @@ console.log('\nKopfzeile mit sechs Bereichen')
             pruefe(`${breite}px${art}: Menüleiste in zweiter Zeile statt Burger`, zustand.zweiteZeile
                 && await s.locator('[data-kopf-menue]').isVisible() && !(await s.locator('[data-kopf-burger]').isVisible()))
             pruefe(`${breite}px${art}: kein seitliches Scrollen, Notausgang im Bild`, !zustand.ueberlauf && zustand.exitImBild)
-            pruefe(`${breite}px${art}: alle sechs Bereiche sichtbar`, await s.locator('[data-kopf-menue] > ul > li:visible').count() === 6)
+            pruefe(`${breite}px${art}: alle sieben Bereiche sichtbar`, await s.locator('[data-kopf-menue] > ul > li:visible').count() === 7)
             await s.context().close()
         }
     }

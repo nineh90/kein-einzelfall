@@ -152,9 +152,12 @@ class SeitenUndRedirectsTest extends TestCase
          * Wort“, KEV-155 „Behörden & Bescheide“, KEV-154 „Abkürzungen im
          * sexuellen Kontext“, KEV-152 „Fristen und Möglichkeiten“, KEV-150
          * „Formulare“.
+         *
+         * KEV-160: Der Entwurf Projekte ist jetzt die veröffentlichte Übersicht
+         * des Bereichs „Projekte“. Übrig bleibt Publikationen.
          */
         $this->assertSame(53, Page::count());
-        $this->assertSame(2, Page::whereNull('published_at')->count());
+        $this->assertSame(1, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -180,8 +183,8 @@ class SeitenUndRedirectsTest extends TestCase
          */
         // Beschwerdemanagement fehlt seit KEV-98: Es hat Text und ist veröffentlicht.
         // Gremium UKFB (KEV-105) und Landesstellen (KEV-104) ebenfalls nicht mehr,
-        // das Schutzkonzept seit KEV-97 auch nicht.
-        foreach (['projekte', 'publikationen'] as $slug) {
+        // das Schutzkonzept seit KEV-97 auch nicht, Projekte seit KEV-160.
+        foreach (['publikationen'] as $slug) {
             $seite = Page::where('slug', $slug)->first();
 
             $this->assertNotNull($seite, "Die Seite '{$slug}' fehlt");

@@ -49,6 +49,8 @@ class Titelbilder
         'wissen' => 'Rechte, Anträge und Hilfesysteme verständlich erklärt.',                     // von uns
         'publikationen' => 'Umfragen und Veröffentlichungen des Vereins.',                         // von uns
         'veranstaltungen' => 'Wissen teilen. Erfahrungen verbinden. Gemeinsam Perspektiven schaffen.',
+        // KEV-160: Bild von Taddi (Hand heftet Zettel an eine Wand) statt
+        // unseres Holzhaus-Modells, gleicher Dateiname.
         'projekte' => 'Woran wir gerade arbeiten.',                                                // von uns
         'kein-einzelfall-im-dialog' => 'Wissenschaftliche Erkenntnisse und gelebte Erfahrung im Austausch.', // von uns
         'soziales-entschaedigungsrecht' => 'Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden.', // von uns
@@ -227,6 +229,9 @@ class Titelbilder
      *  - Formulare: Formular mit Vereinslogo und Füller (KEV-151). Rechts um
      *    Wand verlängert, Blatt von 12 bis 92 % der Höhe; mit 40 % bleibt
      *    oben das Logo auf dem Formular zu sehen.
+     *  - Projekte: Hand heftet einen Zettel an eine Wand voller Zettel und
+     *    Fäden (KEV-160). Rechts um Wand verlängert, Zettel über die ganze
+     *    Höhe, die Hand zwischen 23 und 55 %; mit 40 % bleibt sie im Bild.
      *  - Rückblick: aufgeschlagenes Fotoalbum, davor ein loses Foto (KEV-137).
      *    Rechts um Wand verlängert, Album zwischen 7 und 81 %, das lose Foto
      *    bis 97 % der Höhe; mit 40 % bleibt das Album ganz.
@@ -261,6 +266,7 @@ class Titelbilder
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,
         self::ORDNER.'/rueckblick.webp' => 40,
+        self::ORDNER.'/projekte.webp' => 40,
     ];
 
     /**
@@ -276,11 +282,15 @@ class Titelbilder
      * Mitgliedschaft (KEV-91): Der Antrag füllt auf dem Handy die ganze Höhe,
      * oben lag der Titel auf „Antrag auf Mitgliedschaft“. Unten liegt er nur
      * auf dem weich gezeichneten Kleingedruckten.
+     *
+     * Projekte (KEV-160): Die Hand mit dem Zettel sitzt oben links, zwischen
+     * 23 und 55 % der Höhe. Oben verschwand sie auf dem Handy unter dem Titel.
      */
     public const TEXT_UNTEN = [
         self::ORDNER.'/ordner-mit-logo.webp',
         self::ORDNER.'/verein.webp',
         self::ORDNER.'/mitgliedschaft.webp',
+        self::ORDNER.'/projekte.webp',
     ];
 
     /**

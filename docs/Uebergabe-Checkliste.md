@@ -284,7 +284,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Panel im Baustein „Spendenmöglichkeiten" ersetzen.
 - [ ] **Die drei neuen Seiten füllen:** Schutzkonzept, Projekte, Publikationen
   (Beschwerdemanagement ist seit KEV-98 fertig, siehe nächster Punkt, Gremium
-  UKFB seit KEV-105, Landesstellen seit KEV-104). Sie liegen im Panel als Entwurf bereit, mit Adresse und
+  UKFB seit KEV-105, Landesstellen seit KEV-104, Projekte seit KEV-160). Sie liegen im Panel als Entwurf bereit, mit Adresse und
   Gliederung, aber ohne Text. Ins Menü nehmen wir sie auf, sobald sie Inhalt
   haben.
 - [ ] **Englische Fassung gegenlesen (seit 08.10.2026 die ganze Seite).**
@@ -574,6 +574,29 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
   Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
+- [ ] **Projekte (KEV-160), bitte gegenlesen.** Neuer Bereich „Projekte“ im
+  Menü nach „Raum für Ungesagtes“ (wie Taddis Drive-Ordner „5. Projekte“), die
+  Übersicht /projekte mit ihrem Text und ihrem Titelbild (Hand heftet Zettel
+  an eine Wand). Die Seite war bisher ein leerer Entwurf mit den Überschriften
+  „Laufende Projekte“ und „Abgeschlossene Projekte“; die sind weg.
+  - **E-Mail-Adresse:** Im Text stand **arbeitsgruppen@**kein-einzelfall.de.
+    Überall sonst auf der Website (Fußzeile, jede Arbeitsgruppe) steht
+    **arbeitsgruppe@** ohne „n“. Wir haben die bekannte Adresse genommen.
+    Bitte klären, welches Postfach es gibt, sonst kommen die Mails nicht an.
+  - **Absätze und Hervorhebung:** Der Text kam in einer Zeile. Absätze von uns,
+    „Du hast eine eigene Projektidee?“ als Überschrift des Aufrufs,
+    „Für Sichtbarkeit, Gehör und Unterstützung.“ fett, „Das Team von KE!N
+    EINZELFALL“ in Handschrift wie auf „Gruppen & Veranstaltungen“.
+    Korrigiert: Anführungszeichen „…“, Doppelpunkt und großes „Auf“ vor dem
+    ersten Zitat, kein Komma vor „oder auf die Beine stellen“. „grad“ und
+    „Boah“ bleiben, das ist ihr Ton.
+  - **Unterzeile** auf dem Bild ist weiter unser „Woran wir gerade arbeiten.“
+    (A14). Wenn Taddi eine eigene möchte, im Panel an der Seite ändern.
+  - **Die Projekte selbst:** Jedes Projekt wird eine eigene Seite. Anlegen
+    kann der Verein sie im Panel; ins Menü unter „Projekte“ trägt sie bisher
+    noch die Technik ein (`config/navigation.php`). Sobald dort eine steht,
+    erscheint sie auf der Übersicht als Kachel („Unsere Projekte“) mit ihrem
+    Titelbild, zwischen Text und Aufruf.
 - [ ] **Rückblick: Einleitung und Titelbild (KEV-137), bitte gegenlesen.**
   /rueckblick hat oben Taddis Einleitung („Manche Begegnungen, Projekte und
   Veranstaltungen wirken noch lange nach. …“) und ihr Titelbild (Fotoalbum)

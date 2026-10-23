@@ -2516,3 +2516,20 @@ Eintrag mit Datei oder Adresse entfällt der Baustein samt Überschrift. Lädt
 der Verein im Panel ein Formular hinein, erscheint er. Bis dahin ist die Seite
 für Suchmaschinen gesperrt, weil sie Formulare verspricht, die noch fehlen.
 
+
+## 41. Bereich „Projekte“ (KEV-160, 23.10.2026)
+
+Eigener Menüpunkt nach „Raum für Ungesagtes“ (Taddis Drive-Ordner
+„5. Projekte“), vorerst ohne Untermenü wie „Spenden“. Die Übersicht
+`/projekte` war seit dem `NeueBereicheSeeder` ein leerer Entwurf; jetzt mit
+Taddis Text, veröffentlicht und auffindbar (`ProjekteSeeder`).
+
+Aufbau wie die Übersicht „Raum für Ungesagtes“: Text, Baustein
+„Unterseiten als Kacheln“ („Unsere Projekte“), Aufruf mit Überschrift und
+handschriftlichem Gruß. Die Kacheln bleiben unsichtbar, bis im Menü Projekte
+unter dem Bereich stehen (`children` in `config/navigation.php`); dann
+erscheinen sie mit Titelbild und Unterzeile der jeweiligen Seite. Der Aufruf
+steht linksbündig, weil er ohne Kacheln direkt am Text hängt.
+
+Titelbild von Taddi unter dem alten Dateinamen `projekte.webp`, auf dem Handy
+mit Text unten (`Titelbilder::TEXT_UNTEN`).
