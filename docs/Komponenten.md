@@ -2542,3 +2542,12 @@ Projektdokumentation als Abschnitte mit dem Stand als Überzeile (`eyebrow`),
 neuester oben. Noch ohne eigenes Bild (Platzhalter). Ein weiteres Projekt:
 Seite im Panel anlegen, Eintrag unter `children` von „Projekte“ in
 `config/navigation.php`.
+
+**Seit KEV-161** das zweite Projekt: `/109-sgg-gegengutachten` („§ 109 SGG
+Gegengutachten“, Unterzeile „Wenn ein Recht an der Suche nach
+Sachverständigen scheitert“), nach ANUAS wie in der Projektliste des Vereins.
+Projektseiten erben jetzt von `ProjektSeite` (Titel, Unterzeile, Abschnitte
+mit Stand als Überzeile; neues Projekt = neuer Seeder mit Konstanten und
+`abschnitte()`). Alle Projekte tragen vorerst das Bild der Übersicht
+(`Titelbilder::DATEI` → `projekte.webp`, Kevin: „Nutze bei Projekte erst mal
+überall das gleiche Hero Bild“); ANUAS hatte bis dahin den Platzhalter.

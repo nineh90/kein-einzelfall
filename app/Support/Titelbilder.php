@@ -52,6 +52,11 @@ class Titelbilder
         // KEV-160: Bild von Taddi (Hand heftet Zettel an eine Wand) statt
         // unseres Holzhaus-Modells, gleicher Dateiname.
         'projekte' => 'Woran wir gerade arbeiten.',                                                // von uns
+        // Die Projekte darunter tragen vorerst dasselbe Bild (KEV-161, Kevin:
+        // „Nutze bei Projekte erst mal überall das gleiche Hero Bild“). Ihre
+        // Unterzeile setzt der jeweilige Seeder (ProjektSeite).
+        'anuas' => null,
+        '109-sgg-gegengutachten' => null,
         'kein-einzelfall-im-dialog' => 'Wissenschaftliche Erkenntnisse und gelebte Erfahrung im Austausch.', // von uns
         'soziales-entschaedigungsrecht' => 'Hilfe für Menschen, die durch eine Gewalttat geschädigt wurden.', // von uns
         'traumafolgestoerungen-verstehen' => 'Was eine Traumafolgestörung ist – und wie man passende Hilfe findet.', // von uns
@@ -131,6 +136,9 @@ class Titelbilder
     public const DATEI = [
         'istanbul-konvention' => 'ordner-mit-logo.webp',
         'kinderkodex' => 'ordner-mit-logo.webp',
+        // KEV-161: die Projekte vorerst mit dem Bild der Übersicht
+        'anuas' => 'projekte.webp',
+        '109-sgg-gegengutachten' => 'projekte.webp',
     ];
 
     public static function datei(string $slug): string
@@ -153,8 +161,6 @@ class Titelbilder
         'persoenliches-budget', 'pflegegrad',
         // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
         'behoerden-und-bescheide',
-        // KEV-162: Im Ordner „1. Opferanwalt“ lag keins.
-        'anuas',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

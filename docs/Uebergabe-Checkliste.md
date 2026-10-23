@@ -574,6 +574,24 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
   Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
+- [ ] **Projekt § 109 SGG Gegengutachten (KEV-161), bitte gegenlesen.** Neue
+  Seite /109-sgg-gegengutachten unter „Projekte“, nach ANUAS (wie eure
+  Projektliste: 4.5.12, 4.5.21), mit Taddis Text: „Worum geht es?“, ihre
+  Projektdokumentation mit zehn Ständen vom 08.09.2026 zurück bis 17.10.2025,
+  „Das Kernproblem“ und das Ziel. Ihre Überschrift steht als Unterzeile.
+  **Alle Projekte tragen vorerst das Bild der Projekte-Übersicht** (Wunsch aus
+  dem Ticket), auch ANUAS statt des Platzhalters. Eigene Bilder je Projekt
+  lassen sich im Panel an der Seite setzen.
+  - **Zwei Stellen umformuliert:** „Als Möglichkeiten zur eigenen Suche werden
+    Betroffene weiterhin unter anderem auf: [Liste] verwiesen.“ → „Zur eigenen
+    Suche verweist das BMAS Betroffene weiterhin unter anderem auf: [Liste]“,
+    sonst stünde „verwiesen.“ allein unter der Liste. Im Kernproblem „nach
+    § 109 SGG einen bestimmten Arzt benennen zu lassen“ → „**anhören** zu
+    lassen“: Benennen tun Betroffene selbst, angehört wird der Arzt vom
+    Gericht (so steht es auch in „Worum geht es?“). Bitte bestätigen.
+  - Einige kurze Absätze sind zusammengezogen, damit nichts einklappt; die
+    drei Nachfragen vom 21.07.2026 stehen weiter als eigene Absätze.
+  - Englischer Titel „§ 109 SGG counter-expert opinion“ (von uns).
 - [ ] **Projekt ANUAS (KEV-162), bitte gegenlesen und zwei Fragen klären.**
   Neue Seite /anuas unter „Projekte“ (erste Kachel auf der Übersicht) mit
   Taddis Text aus dem Doc „Opferanwalt“: „Worum geht es?“, ihre
@@ -594,7 +612,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
        online, oder nehmen wir Adresse und Nummern heraus?
     3. Die 50 Erfahrungsberichte tragen Vorname und Initial („Anna S.“). Sind
        das Pseudonyme, und sind alle mit der Veröffentlichung einverstanden?
-  - **Bild:** Im Ordner lag keins, die Seite trägt den Platzhalter.
+  - **Bild:** Im Ordner lag keins; seit KEV-161 trägt die Seite das Bild der
+    Projekte-Übersicht.
   - **Ehepaar aus Hamburg:** Im Stand 23.09.2025 steht, dass ein Ehepaar
     seinen Sohn bei einem Terroranschlag in Hamburg verloren hat. Das macht
     die beiden womöglich erkennbar; bitte kurz bestätigen, dass sie damit

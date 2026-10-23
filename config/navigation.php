@@ -115,8 +115,11 @@ return [
             'label' => 'Projekte',
             'url' => '/projekte',
             'children' => [
-                // KEV-162, das erste Projekt.
+                // KEV-162, das erste Projekt. Reihenfolge wie die Projektliste
+                // des Vereins (VVT 4.5): ANUAS 4.5.12, § 109 SGG 4.5.21.
                 ['schluessel' => 'anuas', 'label' => 'ANUAS', 'url' => '/anuas'],
+                // KEV-161
+                ['schluessel' => 'paragraf_109_sgg', 'label' => '§ 109 SGG Gegengutachten', 'url' => '/109-sgg-gegengutachten'],
             ],
         ],
         [

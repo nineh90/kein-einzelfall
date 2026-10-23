@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Page;
-use App\Support\Titelbilder;
-use Illuminate\Database\Seeder;
-
 /**
  * Projekt „ANUAS“ (KEV-162), die erste Unterseite im Bereich „Projekte“.
  *
@@ -28,11 +24,11 @@ use Illuminate\Database\Seeder;
  * Sie gehören zum Projekt „Opferanwalt“ der Projektliste des Vereins (VVT
  * 4.5.11), ANUAS ist 4.5.12, und ihr Briefkopf trägt eine alte Adresse und
  * private Telefonnummern. Frage in der Übergabe-Checkliste. Ein Bild lag
- * nicht im Ordner: Platzhalter.
+ * nicht im Ordner; seit KEV-161 das der Übersicht (ProjektSeite).
  *
  * Legt nur an, was fehlt.
  */
-class AnuasSeeder extends Seeder
+class AnuasSeeder extends ProjektSeite
 {
     public const SLUG = 'anuas';
 
@@ -239,33 +235,5 @@ class AnuasSeeder extends Seeder
                 ],
             ],
         ];
-    }
-
-    public function run(): void
-    {
-        self::anlegen();
-    }
-
-    public static function anlegen(): void
-    {
-        $seite = Page::firstOrCreate(
-            ['slug' => self::SLUG, 'locale' => 'de'],
-            [
-                'titel' => self::TITEL,
-                'untertitel' => self::UNTERTITEL,
-                'meta_title' => self::TITEL.' - Kein Einzelfall e.V.',
-                'meta_description' => self::META_DESCRIPTION,
-                'noindex' => false,
-                'published_at' => now(),
-            ],
-        );
-
-        if ($seite->blocks()->doesntExist()) {
-            foreach (self::abschnitte() as $position => $abschnitt) {
-                $seite->blocks()->create(['typ' => 'text', 'position' => $position, 'data' => array_filter($abschnitt)]);
-            }
-        }
-
-        Titelbilder::platzhalterSetzen();
     }
 }

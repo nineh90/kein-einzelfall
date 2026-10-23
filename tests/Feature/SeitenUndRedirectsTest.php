@@ -156,9 +156,9 @@ class SeitenUndRedirectsTest extends TestCase
          * KEV-160: Der Entwurf Projekte ist jetzt die veröffentlichte Übersicht
          * des Bereichs „Projekte“. Übrig bleibt Publikationen.
          *
-         * KEV-162: neu das Projekt „ANUAS“.
+         * KEV-162: neu das Projekt „ANUAS“, KEV-161 „§ 109 SGG Gegengutachten“.
          */
-        $this->assertSame(54, Page::count());
+        $this->assertSame(55, Page::count());
         $this->assertSame(1, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

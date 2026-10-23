@@ -19,7 +19,8 @@ class AnuasTest extends TestCase
     public function test_erstes_projekt_unter_projekte(): void
     {
         $projekte = collect(config('navigation.main'))->firstWhere('url', '/projekte');
-        $this->assertSame(['/anuas'], array_column($projekte['children'], 'url'));
+        // Reihenfolge wie die Projektliste des Vereins (VVT 4.5.12, 4.5.21)
+        $this->assertSame(['/anuas', '/109-sgg-gegengutachten'], array_column($projekte['children'], 'url'));
 
         $html = $this->get('/anuas')->assertOk()->getContent();
 
@@ -27,8 +28,9 @@ class AnuasTest extends TestCase
         // Ihr Projekttitel als Unterzeile, der Bereich darüber
         $this->assertStringContainsString('Opferschutz aus Betroffenenperspektive weiterdenken', $html);
         $this->assertMatchesRegularExpression('/aria-label="Sie sind hier".*Projekte.*ANUAS/s', $html);
-        // Noch kein Bild im Ordner
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
+        // Kein Bild im Ordner: seit KEV-161 das der Übersicht
+        $this->assertStringContainsString('src="/img/titelbilder/projekte.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
         $this->assertStringContainsString('/anuas</loc>', $this->get('/sitemap.xml')->getContent());
     }
 
