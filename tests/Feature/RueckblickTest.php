@@ -14,6 +14,7 @@ use Tests\TestCase;
  * Bindung und Beziehung“ und Taddis Bild. KEV-141: dazu „Unsere
  * Veranstaltungen zum Fonds Sexueller Missbrauch (FSM)“ mit ihrem P.S.
  * KEV-140: „Zusammenarbeit mit aus-unserer-sicht …“ mit den Präsentationen.
+ * KEV-138: „Unsere Veranstaltungen rund um Assistenzhunde“ nach Trauma.
  */
 class RueckblickTest extends TestCase
 {
@@ -67,9 +68,10 @@ class RueckblickTest extends TestCase
         $this->assertMatchesRegularExpression('/<strong[^>]*>Gemeinsam KE!N EINZELFALL\.<\/strong>/u', $html);
         $this->assertStringContainsString('Weiterlesen (13 weitere Absätze)', $html);
 
-        // Bild links, die Abschnitte wechseln sich ab
-        $this->assertMatchesRegularExpression('/class="order-1 lg:order-1[^"]*"[^>]*>\s*<img src="\/img\/rueckblick\/fsm\.webp/', $html);
-        $this->assertMatchesRegularExpression('/class="order-1 lg:order-2[^"]*"[^>]*>\s*<img src="\/img\/rueckblick\/trauma/', $html);
+        // Die Bilder wechseln die Seite: rechts, links, rechts, links
+        foreach (['trauma' => 2, 'assistenzhunde' => 1, 'fsm' => 2, 'aus-unserer-sicht' => 1] as $bild => $order) {
+            $this->assertMatchesRegularExpression('/class="order-1 lg:order-'.$order.'[^"]*"[^>]*>\s*<img src="\/img\/rueckblick\/'.$bild.'/', $html, $bild);
+        }
 
         // Ihr P.S. als Kasten, der Link führt zu den Musterwidersprüchen
         $this->assertStringContainsString('Ablehnungsbescheid bekommen?', $html);
@@ -111,6 +113,35 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('PDF-Datei', $html);
     }
 
+    public function test_assistenzhunde_mit_taddis_text_und_bild(): void
+    {
+        $html = $this->get('/rueckblick')->getContent();
+
+        $this->assertMatchesRegularExpression('/<h2[^>]*>\s*Unsere Veranstaltungen rund um Assistenzhunde\s*<\/h2>/u', $html);
+        // Teil I im Oktober 2025, Teil II danach: nach Trauma (2026), vor FSM (bis November 2025)
+        $hier = strpos($html, 'rund um Assistenzhunde');
+        $this->assertGreaterThan(strpos($html, 'im Dialog – Trauma, Bindung und Beziehung'), $hier);
+        $this->assertLessThan(strpos($html, 'Unsere Veranstaltungen zum Fonds'), $hier);
+
+        $this->assertStringContainsString('eine enorme Unterstützung im Alltag sein.', $html);
+        foreach (['Teil I – Ausbildung, Rechte und Pflichten', 'Teil II – Halter &amp; Haltung: Verantwortung, Alltag und Rechte',
+            '30.10.2025', 'Ullrich Horn von der Spürnasenakademie'] as $fett) {
+            $this->assertMatchesRegularExpression('/<strong[^>]*>'.preg_quote($fett, '/').'<\/strong>/u', $html, $fett);
+        }
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Nicht nur fragen: Was kann ein Assistenzhund für mich tun\?/u', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Assistenzhunde können Selbstständigkeit und Teilhabe ermöglichen – .*?ehrlich anzuschauen\.<\/strong>/u', $html);
+
+        // Ihre zwei Aufzählungen als Listen, auch im eingeklappten Teil mit Punkten
+        $this->assertStringContainsString('<p>Gemeinsam haben wir uns unter anderem damit beschäftigt,</p><ul><li>welche Voraussetzungen', $html);
+        $this->assertStringContainsString('<li>und welche Rechte und Pflichten im Alltag eine Rolle spielen.</li></ul>', $html);
+        $this->assertStringContainsString('<p>Dabei ging es auch um Fragen, die oft zu wenig gestellt werden:</p><ul><li>Welchen konkreten Hilfebedarf habe ich überhaupt?</li>', $html);
+        $this->assertMatchesRegularExpression('/\[&_ul\]:list-disc \[&_ul\]:pl-5">(?:(?!<\/details>).)*Gemeinsam haben wir uns/su', $html);
+        $this->assertStringContainsString('Weiterlesen (16 weitere Absätze)', $html);
+
+        $this->assertMatchesRegularExpression('/<img src="\/img\/rueckblick\/assistenzhunde\.webp[^"]*" alt=""/', $html);
+        $this->assertSame([1200, 675], array_slice(getimagesize(public_path('img/rueckblick/assistenzhunde.webp')), 0, 2));
+    }
+
     public function test_mit_inhalt_fuer_suchmaschinen_offen(): void
     {
         $seite = Page::where('slug', 'rueckblick')->where('locale', 'de')->firstOrFail();
@@ -129,10 +160,44 @@ class RueckblickTest extends TestCase
 
         (require database_path('migrations/2026_10_23_190000_rueckblick_fsm.php'))->up();
         (require database_path('migrations/2026_10_23_200000_rueckblick_aus_unserer_sicht.php'))->up();
+        (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
 
-        // Trauma, FSM, Hinweis, aus-unserer-sicht, Präsentationen
-        $this->assertSame(5, $seite->blocks()->count());
+        // Trauma, Assistenzhunde, FSM, Hinweis, aus-unserer-sicht, Präsentationen
+        $this->assertSame(6, $seite->blocks()->count());
         $this->assertSame(['Vom Verein geändert.'], $block->fresh()->data['absaetze']);
+    }
+
+    /** Auf der Seite, wie sie vor KEV-138 war: dazwischen eingefügt, Bilder wechseln weiter. */
+    public function test_assistenzhunde_kommt_auf_bestehender_seite_an_seinen_platz(): void
+    {
+        $seite = Page::where('slug', 'rueckblick')->where('locale', 'de')->firstOrFail();
+        $bild = fn (string $pfad) => $seite->blocks()->get()->first(fn ($b) => ($b->data['bild'] ?? null) === $pfad);
+
+        // Stand vor KEV-138
+        $bild(RueckblickSeeder::ASSISTENZ_BILD)->delete();
+        foreach ([RueckblickSeeder::FSM_BILD => 'links', RueckblickSeeder::AUS_BILD => 'rechts'] as $pfad => $seiteBild) {
+            $b = $bild($pfad);
+            $b->update(['data' => array_merge($b->data, ['bild_seite' => $seiteBild])]);
+        }
+        // Vom Verein zwischen Trauma und FSM gesetzt: bleibt dort.
+        $seite->blocks()->where('position', '>=', 1)->increment('position');
+        $seite->blocks()->create(['typ' => 'hinweis', 'position' => 1, 'data' => ['titel' => 'Vom Verein', 'text' => 'Eigener Kasten.']]);
+
+        (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
+
+        $reihenfolge = $seite->blocks()->orderBy('position')->get()
+            ->map(fn ($b) => $b->data['bild'] ?? $b->data['titel'])->all();
+        $this->assertSame([
+            RueckblickSeeder::TRAUMA_BILD, 'Vom Verein', RueckblickSeeder::ASSISTENZ_BILD, RueckblickSeeder::FSM_BILD,
+            RueckblickSeeder::FSM_PS_TITEL, RueckblickSeeder::AUS_BILD, RueckblickSeeder::AUS_DOKUMENTE_TITEL,
+        ], $reihenfolge);
+        $this->assertSame('rechts', $bild(RueckblickSeeder::FSM_BILD)->data['bild_seite']);
+        $this->assertSame('links', $bild(RueckblickSeeder::AUS_BILD)->data['bild_seite']);
+
+        // Ein zweites Mal ändert nichts mehr.
+        (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
+        $this->assertSame(7, $seite->blocks()->count());
+        $this->assertSame('rechts', $bild(RueckblickSeeder::FSM_BILD)->data['bild_seite']);
     }
 
     public function test_englische_fassung(): void
@@ -149,6 +214,10 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('Received a rejection notice?', $html);
         $this->assertStringContainsString('href="/en/fsm-erweitertes-hilfesystem#dokumente"', $html);
         $this->assertStringContainsString('id="dokumente"', $this->get('/en/fsm-erweitertes-hilfesystem')->getContent());
+
+        $this->assertStringContainsString('Our events on assistance dogs', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Part I – Training, rights and obligations<\/strong>/u', $html);
+        $this->assertStringContainsString('<li>Who supports me during the training?</li>', $html);
 
         $this->assertStringContainsString('Cooperation with aus-unserer-sicht on social compensation law', $html);
         $this->assertStringContainsString('Results of the SGB XIV/SER working group (5 slides, in German)', $html);

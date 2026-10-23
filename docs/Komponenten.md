@@ -2485,6 +2485,20 @@ und Autor gesetzt (die Vorlage trug „Infoveranstaltung für alle Interessierte
 von „Frauenwohnen EG“). Protokoll und AG-Zusammenfassung aus demselben Ordner
 sind nicht veröffentlicht (interne Arbeitspapiere mit Namen).
 
+**Seit KEV-138** der vierte Abschnitt: „Unsere Veranstaltungen rund um
+Assistenzhunde“ (Teil I am 30.10.2025, Teil II danach), zeitlich zwischen
+Trauma und FSM. `RueckblickSeeder::anlegen()` setzt einen fehlenden Abschnitt
+deshalb vor den nächsten vorhandenen aus `abschnitte()` und rückt die Bausteine
+dahinter auf, statt nur hinten anzuhängen; vom Verein eingefügte Bausteine
+bleiben, wo sie sind. Damit die Bilder weiter abwechseln, stellt die Migration
+FSM auf rechts und aus-unserer-sicht auf links (nur, wenn sie noch so stehen,
+wie wir sie angelegt hatten). Taddis Zwischenüberschriften „Teil I/II“ sind
+fette Absätze wie bei ihr, ihre zwei Aufzählungen Listen.
+
+**Listen im eingeklappten Teil** („Weiterlesen“ in `x-blocks.text-inhalt`)
+haben jetzt dieselben Listenpunkte wie oben. Vorher standen sie dort ohne
+Punkte (betraf schon die Aufzählung bei aus-unserer-sicht).
+
 
 ## 40. Formulare (KEV-150, 23.10.2026)
 

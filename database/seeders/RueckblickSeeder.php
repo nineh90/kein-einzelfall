@@ -43,6 +43,15 @@ use Illuminate\Database\Seeder;
  * 30.11.2024), „e. V.“ → „e.V.“; die drei Zeilen zum Workshop-Titel sind ein
  * Absatz. Ältester Abschnitt, deshalb unten.
  *
+ * Der vierte (KEV-138): „Unsere Veranstaltungen rund um Assistenzhunde“,
+ * Taddis Text aus „Assistenzhunde Veranstaltung“ und ihr Bild (Frau mit
+ * Hund im Geschirr, Gegenlicht). Teil I am 30.10.2025, Teil II danach,
+ * deshalb zwischen „Trauma, Bindung und Beziehung“ (2026) und FSM (bis
+ * November 2025). Ihre Zwischenüberschriften „Teil I/II“ fett wie bei ihr,
+ * die Aufzählungen als Listen. Ihre Videoaufnahmen kommen später.
+ * Die Bilder wechseln weiter die Seite: FSM jetzt rechts, aus-unserer-sicht
+ * links (Migration KEV-138, nur wenn der Verein sie nicht umgestellt hat).
+ *
  * Mit Inhalt darf die Seite gefunden werden (vorher noindex wie andere leere
  * Seiten). Legt nur an, was fehlt.
  */
@@ -79,6 +88,59 @@ class RueckblickSeeder extends Seeder
             .'die mit den Folgen von Trauma leben, beschäftigen.',
         'Denn manchmal verändert schon das Verstehen den Blick auf sich selbst und aufeinander.',
         '*KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung.*',
+    ];
+
+    public const ASSISTENZ_TITEL = 'Unsere Veranstaltungen rund um Assistenzhunde';
+
+    public const ASSISTENZ_BILD = '/img/rueckblick/assistenzhunde.webp';
+
+    public const ASSISTENZ_ABSAETZE = [
+        'Assistenzhunde können für Menschen mit Behinderung, psychischen Erkrankungen oder traumabedingten '
+            .'Einschränkungen eine enorme Unterstützung im Alltag sein. Gleichzeitig ist der Weg dorthin oft '
+            .'kompliziert: Ausbildung, Eignung, Finanzierung, Rechte, Pflichten und die tatsächliche Umsetzung im '
+            .'Alltag werfen viele Fragen auf.',
+        'Deshalb haben wir das Thema in mehreren kostenfreien Online-Veranstaltungen aufgegriffen.',
+        '*Teil I – Ausbildung, Rechte und Pflichten*',
+        'Am *30.10.2025* war *Ullrich Horn von der Spürnasenakademie* bei uns zu Gast.',
+        "Gemeinsam haben wir uns unter anderem damit beschäftigt,\n"
+            ."- welche Voraussetzungen ein Assistenzhund mitbringen sollte,\n"
+            ."- wie eine Ausbildung ablaufen kann,\n"
+            ."- wie wichtig die Bindung zwischen Mensch und Hund ist,\n"
+            ."- welche Rolle die individuelle Lebenssituation der betroffenen Person spielt,\n"
+            ."- welche Kosten entstehen können,\n"
+            ."- welche Finanzierungsmöglichkeiten denkbar sind,\n"
+            .'- und welche Rechte und Pflichten im Alltag eine Rolle spielen.',
+        'Besonders wichtig war uns dabei, nicht nur über den Hund zu sprechen, sondern über das Team Mensch und Hund.',
+        'Denn ein Assistenzhund ist kein Hilfsmittel, das einfach „funktioniert“. Er braucht eine gute Ausbildung, '
+            .'eine passende Aufgabe, eine tragfähige Bindung und einen Menschen, der Verantwortung für ihn übernehmen '
+            .'kann.',
+        'Auch die Schwierigkeiten im Alltag wurden offen angesprochen: fehlende Kenntnisse über Zutrittsrechte, '
+            .'Unsicherheiten bei Geschäften oder Einrichtungen und die Frage, wie belastend es sein kann, seine Rechte '
+            .'immer wieder erklären oder durchsetzen zu müssen.',
+        'Im Anschluss war klar: Das Thema ist viel größer als eine einzelne Veranstaltung.',
+        '*Teil II – Halter & Haltung: Verantwortung, Alltag und Rechte*',
+        'Deshalb entstand ein zweiter Teil mit einem anderen Schwerpunkt.',
+        'Diesmal sollte nicht der Vortrag im Mittelpunkt stehen, sondern der offene Erfahrungsaustausch.',
+        'Menschen mit eigenen Erfahrungen rund um Assistenzhunde, Ausbildung und Hundehaltung brachten ihre '
+            .'Perspektiven ein.',
+        "Dabei ging es auch um Fragen, die oft zu wenig gestellt werden:\n"
+            ."- Welchen konkreten Hilfebedarf habe ich überhaupt?\n"
+            ."- Ist ein Assistenzhund dafür die richtige Unterstützung – oder wäre menschliche Assistenz passender?\n"
+            ."- Wer unterstützt mich während der Ausbildung?\n"
+            ."- Was passiert, wenn genau die Situationen trainiert werden müssen, die ich selbst kaum bewältigen kann?\n"
+            ."- Wie gehe ich mit Vorurteilen, Ablehnung und Konflikten im Alltag um?\n"
+            .'- Was braucht der Hund, damit auch sein Wohl dauerhaft gesichert ist?',
+        'Gerade dieser Teil war uns wichtig, weil Assistenzhunde nicht nur Möglichkeiten eröffnen können. Sie bringen '
+            .'auch Verantwortung, Training, Organisation und manchmal zusätzlichen Stress mit sich.',
+        'Ein Satz zog sich deshalb sinngemäß durch die Vorbereitung:',
+        '*Nicht nur fragen: Was kann ein Assistenzhund für mich tun? Sondern auch: Was braucht dieses Team, damit es '
+            .'wirklich funktionieren kann?*',
+        'Unsere Veranstaltungen richteten sich an Menschen mit Assistenzhund, Menschen in Ausbildung, Interessierte, '
+            .'Angehörige und Fachkräfte. Wie bei unseren Veranstaltungen üblich, war die Teilnahme kostenfrei und nicht '
+            .'an eine Mitgliedschaft gebunden.',
+        'Für uns war diese Veranstaltungsreihe ein wichtiger Blick auf ein Thema, das oft zu einfach dargestellt wird.',
+        '*Assistenzhunde können Selbstständigkeit und Teilhabe ermöglichen – aber gute Unterstützung beginnt damit, '
+            .'Chancen, Grenzen, Rechte und Verantwortung gemeinsam ehrlich anzuschauen.*',
     ];
 
     public const FSM_TITEL = 'Unsere Veranstaltungen zum Fonds Sexueller Missbrauch (FSM)';
@@ -224,17 +286,23 @@ class RueckblickSeeder extends Seeder
                 'bild_seite' => 'rechts',
             ],
             [
+                'titel' => self::ASSISTENZ_TITEL,
+                'absaetze' => self::ASSISTENZ_ABSAETZE,
+                'bild' => self::ASSISTENZ_BILD,
+                'bild_seite' => 'links',
+            ],
+            [
                 'titel' => self::FSM_TITEL,
                 'absaetze' => self::FSM_ABSAETZE,
                 'bild' => self::FSM_BILD,
-                'bild_seite' => 'links',
+                'bild_seite' => 'rechts',
                 'danach' => ['typ' => 'hinweis', 'data' => ['titel' => self::FSM_PS_TITEL, 'text' => self::FSM_PS]],
             ],
             [
                 'titel' => self::AUS_TITEL,
                 'absaetze' => self::AUS_ABSAETZE,
                 'bild' => self::AUS_BILD,
-                'bild_seite' => 'rechts',
+                'bild_seite' => 'links',
                 'danach' => ['typ' => 'download_list', 'data' => [
                     'titel' => self::AUS_DOKUMENTE_TITEL,
                     'dokumente' => self::AUS_DOKUMENTE,
@@ -261,30 +329,45 @@ class RueckblickSeeder extends Seeder
         }
 
         $warLeer = $seite->blocks->isEmpty();
-        $position = (int) $seite->blocks->max('position');
+        $abschnitte = self::abschnitte();
+        $abschnittBlock = fn (array $abschnitt) => $seite->blocks
+            ->first(fn ($b) => ($b->data['titel'] ?? null) === $abschnitt['titel']);
 
-        foreach (self::abschnitte() as $abschnitt) {
-            $vorhanden = $seite->blocks->contains(fn ($b) => ($b->data['titel'] ?? null) === $abschnitt['titel']);
-
-            if ($vorhanden) {
+        foreach ($abschnitte as $i => $abschnitt) {
+            if ($abschnittBlock($abschnitt)) {
                 continue;
             }
 
-            $seite->blocks()->create([
-                'typ' => 'text_media',
-                'position' => $seite->blocks()->exists() ? ++$position : $position,
-                'data' => [
-                    'titel' => $abschnitt['titel'],
-                    'absaetze' => $abschnitt['absaetze'],
-                    // Stimmungsbilder, sagen nichts aus: ohne Bildbeschreibung.
-                    'bild' => $abschnitt['bild'],
-                    'bild_seite' => $abschnitt['bild_seite'],
+            $neu = array_values(array_filter([
+                [
+                    'typ' => 'text_media',
+                    'data' => [
+                        'titel' => $abschnitt['titel'],
+                        'absaetze' => $abschnitt['absaetze'],
+                        // Stimmungsbilder, sagen nichts aus: ohne Bildbeschreibung.
+                        'bild' => $abschnitt['bild'],
+                        'bild_seite' => $abschnitt['bild_seite'],
+                    ],
                 ],
-            ]);
+                $abschnitt['danach'] ?? null,
+            ]));
 
-            if (isset($abschnitt['danach'])) {
-                $seite->blocks()->create($abschnitt['danach'] + ['position' => ++$position]);
+            // Vor den nächsten vorhandenen Abschnitt (KEV-138: Assistenzhunde
+            // kam nach FSM, gehört aber davor), sonst ans Ende.
+            $folgender = collect(array_slice($abschnitte, $i + 1))->map($abschnittBlock)->filter()->first();
+
+            if ($folgender) {
+                $position = $folgender->position;
+                $seite->blocks()->where('position', '>=', $position)->increment('position', count($neu));
+            } else {
+                $position = $seite->blocks->isEmpty() ? 0 : $seite->blocks->max('position') + 1;
             }
+
+            foreach ($neu as $block) {
+                $seite->blocks()->create($block + ['position' => $position++]);
+            }
+
+            $seite->load('blocks');
         }
 
         self::sprungzielDokumente();

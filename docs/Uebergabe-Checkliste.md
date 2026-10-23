@@ -574,6 +574,21 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
   Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
+- [ ] **Rückblick: Veranstaltungen rund um Assistenzhunde (KEV-138), bitte
+  ansehen.** Neuer Abschnitt auf /rueckblick mit Taddis Text aus „Assistenzhunde
+  Veranstaltung“ und ihrem Bild (Frau mit Hund im Gegenlicht). Er steht
+  zwischen „Trauma, Bindung und Beziehung“ und FSM (neueste Veranstaltung
+  oben); dafür steht das FSM-Bild jetzt rechts und das von aus-unserer-sicht
+  links, damit die Bilder weiter abwechseln. Offen:
+  - **Videos:** Taddi schreibt, dass es zu beiden Teilen Videoaufnahmen gibt,
+    die Franzi noch bearbeitet. Wenn sie fertig sind: wohin damit (YouTube,
+    eigene Datei), und dürfen alle Gezeigten öffentlich zu sehen sein?
+  - **Datum von Teil II** fehlt im Text. Wenn gewünscht, ergänzen wir es.
+  - **Name:** „Ullrich Horn von der Spürnasenakademie“ steht so wie bei ihr.
+    Im Netz war dazu nichts zu finden; bitte Schreibweise (Ullrich/Ulrich) und
+    Namen der Akademie kurz bestätigen.
+  - Ihre Zwischenüberschriften „Teil I“ und „Teil II“ stehen fett wie bei ihr,
+    ihre Aufzählungen als Listen, ihr Fettes ist fett.
 - [ ] **Rückblick: Zusammenarbeit mit aus-unserer-sicht (KEV-140), bitte
   ansehen.** Dritter Abschnitt auf /rueckblick mit Taddis Text und ihrem Bild
   „Aus unserer Sicht“, darunter die zwei Präsentationen als PDF (öffnen sich im
@@ -595,7 +610,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     zwei Dateien sind von uns. „e. V.“ → „e.V.“, die drei Zeilen zum
     Workshop-Titel sind ein Absatz, ihr Fettes ist fett.
   - Im selben Drive-Ordner liegen „0 Rückblick“ und „0 Rückblick II“ (vermutlich
-    das Titelbild der Seite, noch der Platzhalter) und „Assistenzhunde“.
+    das Titelbild der Seite, noch der Platzhalter) und „Assistenzhunde“ (seit
+    KEV-138 eingebaut).
 - [ ] **Rückblick: Veranstaltungen zum FSM (KEV-141).** Zweiter Abschnitt
   auf /rueckblick mit Taddis Text und dem „FSM“-Bild (links). Lange Abschnitte
   klappen jetzt nach vier Absätzen ein („Weiterlesen“), auch der zu „Trauma,

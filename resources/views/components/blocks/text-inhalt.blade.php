@@ -92,8 +92,11 @@
                 </span>
             </summary>
 
+            {{-- Listen wie oben: Aufzählungen stehen oft weiter hinten
+                 (KEV-138, vorher hier ohne Punkte). --}}
             <div class="mt-4 flex flex-col gap-4 leading-relaxed text-ink-soft
-                        [&_a]:text-green-deep [&_a]:underline">
+                        [&_a]:text-green-deep [&_a]:underline
+                        [&_li]:mb-1 [&_ul]:list-disc [&_ul]:pl-5">
                 @foreach ($eingeklappt as $absatz)
                     {{ absatz($absatz) }}
                 @endforeach
