@@ -2398,3 +2398,46 @@ dem ersten Glossar (BBB, FF, KK, KV) haben die Auflösung im Sprungziel
 (`pages.triggerwarnung`, Abschnitt 36), Text von uns, weil bei Taddi nur
 „TRIGGERWARNUNG“ steht.
 
+
+## 38. Fristen und Möglichkeiten (KEV-152, 23.10.2026)
+
+Seite `/fristen` unter „Wissen“ (nach Atteste) nach Taddis Vorschlag: ihre
+Einleitung, zwei Kacheln (links „Mögliche Fristen“, rechts „Frist bekommen –
+Was jetzt?“), die zu ihrem Bereich weiter unten springen. Bausteine:
+Text, Einstiegskarten, Text „Mögliche Fristen“ (Sprungziel `moegliche-fristen`),
+Hinweis „Wichtig“, **Fristenübersicht**, Schritte „Frist bekommen – Was
+jetzt?“ (Sprungziel `frist-bekommen`, acht Schritte), Text „Noch wichtig“ mit
+Aufzählung (`FristenSeeder`).
+
+**Fristen als eigene Einträge.** Taddi: „Inhalt muss erweiterbar und änderbar
+sein“. Tabelle `fristen`, Model `App\Models\Frist`, im Panel „Fristen“:
+Titel, Sprungziel, Frist in Kürze (zwei Zeilen möglich), Schlagworte
+(Vorschläge: Behörde, Gericht, Widerspruch, Antrag, Klage, Bescheid), Text im
+Editor (fett, kursiv, Link, H3, Listen). Sprachfassungen in `uebersetzungen`
+(`Uebersetzbar`), Englisch aus `data/uebersetzungen-fristen.json`.
+
+**Baustein `fristen`** (`blocks/fristen.blade.php`): Suche „Welche Frist suchst
+du?“, A–Z, je Frist ein `<details>` mit Titel, Frist (Uhr-Symbol) und
+Schlagworten, aufgeklappt der Text. Suche, Buchstabenleiste und Filtern beim
+Tippen sind die des Glossars (gleiche `data-glossar-*`-Attribute,
+`glossar.js`); ohne JavaScript filtert der Server (`?suche=`) und die Treffer
+stehen offen. `aufklapper.js` öffnet ein `<details>`, auf das ein Link zeigt
+(`/fristen#widerspruch`), auch beim Sprung innerhalb der Seite. Die Websuche
+findet Fristen (höchstens fünf je Suche) und verlinkt die Karte.
+
+**Dabei für alle Seiten dazugekommen:**
+- Textbausteine können **Aufzählungen**: Zeilen mit „- “ am Anfang werden eine
+  Liste (`absatz()` in `helpers.php`), sonst bleibt der Absatz wie bisher.
+- Textabschnitte und Schritte können ein **festes Sprungziel** bekommen
+  (`data.anker`, im Panel „Sprungziel (optional)“). Es bleibt bei geänderter
+  oder übersetzter Überschrift gleich; ohne gilt weiter `abschnitt-<überschrift>`.
+- Der **Hinweis-Kasten** kann *fett*, Links und E-Mail-Adressen wie der
+  Textbaustein.
+- **Einstiegskarten** mit zwei oder drei Karten nutzen die Breite (zwei bzw.
+  drei Spalten statt vier).
+
+Tests: `FristenTest`, `AdminPanelTest` (Baustein, Sprungziele, Aufzählung), im
+Browser-Lauf „Fristen und Möglichkeiten“ (Filtern, Aufklappen, Sprung der
+Kachel, Link auf eine Frist), im Barrierefreiheits-Lauf `/fristen` mit und
+ohne offene Karte, Deutsch und Englisch.
+

@@ -554,6 +554,29 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Fristen und Möglichkeiten (KEV-152), bitte ansehen.** Neue Seite
+  /fristen unter „Wissen“ (nach „Atteste“), gebaut nach Taddis Vorschlag:
+  Einleitung, zwei Kacheln (links „Mögliche Fristen“, rechts „Frist bekommen –
+  Was jetzt?“), die zu ihrem Bereich weiter unten springen. Bei den Fristen
+  oben die Suche „Welche Frist suchst du?“, darunter A–Z, darunter alle 19
+  Fristen als aufklappbare Karten mit Schlagworten; dann ihr Leitfaden in acht
+  Schritten und „Noch wichtig“. Bild: ihr „5. Fristen“ (Sanduhr).
+  - **Pflegen:** Die Fristen stehen im Panel unter „Fristen“ (neu anlegen,
+    ändern, als Entwurf zurückhalten); Einleitung, Leitfaden und „Noch
+    wichtig“ unter „Seiten“ → „Fristen und Möglichkeiten“.
+  - **Von uns:** die Schlagworte an jeder Frist (aus ihren Beispielen
+    Behörde, Gericht, Widerspruch, Antrag, dazu Klage und Bescheid), die
+    Überschrift „Was du hier findest“ über den Kacheln und deren Linktexte
+    („Zur Fristenübersicht“, „Zum Leitfaden“).
+  - **Umgestellt, ohne Wortänderung:** In „Fristverlängerung“ und
+    „Überprüfungsantrag“ standen „… und …“ als einzelne Zeilen, jetzt ein Satz
+    mit Aufzählung. Ihr „Wichtig: … keine Rechtsberatung“ steht als
+    hervorgehobener Kasten. Die Schritte ohne Punkt am Ende der Überschrift.
+  - **Korrigiert:** „Kontakt@kein-einzelfall.de“ → klein (ist ein Link),
+    doppeltes Leerzeichen in „Frist bekommen – Was jetzt?“.
+  - **Inhaltlich** sind es ihre Angaben. Die genannten Paragrafen (§§ 84, 87,
+    88, 66, 151, 164, 173 SGG, §§ 25–27, 44 SGB X) passen zu dem, was dort
+    steht; eine Rechtsprüfung ersetzt das nicht.
 - [ ] **Abkürzungen im sexuellen Kontext (KEV-154), bitte ansehen.** Drittes
   Glossar als eigene Seite unter „Wissen“, im Menü zwischen „Glossar“ und
   „Behörden & Bescheide“ (Taddis Nummern 1, 2, 3): ihre Einleitung, alle 109

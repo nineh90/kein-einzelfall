@@ -21,6 +21,7 @@ import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
 import { inhaltsverzeichnisVerdrahten } from './inhaltsverzeichnis'
 import { galerieVerdrahten } from './galerie'
 import { glossarVerdrahten } from './glossar'
+import { aufklapperVerdrahten } from './aufklapper'
 import { wallOfShameVerdrahten } from './wall-of-shame'
 import { kopierenVerdrahten } from './kopieren'
 import { speicherVerdrahten } from './speicher'
@@ -50,8 +51,11 @@ inhaltsverzeichnisVerdrahten()
 // Nur auf der Seite einer Messe o. Ä. mit Fotos (KEV-132).
 galerieVerdrahten()
 
-// Nur im Glossar: Filtern beim Tippen (KEV-153).
+// Im Glossar und in der Fristenübersicht: Filtern beim Tippen (KEV-153, KEV-152).
 glossarVerdrahten()
+
+// Links auf eine Frist klappen ihre Karte auf (KEV-152).
+aufklapperVerdrahten()
 
 // Nur auf der Wall of Shame: Sätze und Zählstriche (KEV-157).
 wallOfShameVerdrahten()

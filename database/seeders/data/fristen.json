@@ -1,0 +1,192 @@
+[
+  {
+    "slug": "akteneinsicht",
+    "titel": "Akteneinsicht",
+    "frist": "Keine allgemeine feste Bearbeitungsfrist",
+    "schlagworte": [
+      "Behörde",
+      "Antrag"
+    ],
+    "inhalt": "<p>Als Beteiligter eines Sozialverwaltungsverfahrens kannst du unter den Voraussetzungen des § 25 SGB X Einsicht in die Akten verlangen, soweit du die Kenntnis der Akten zur Wahrnehmung oder Verteidigung deiner rechtlichen Interessen benötigst.</p><p>Eine allgemeine gesetzliche Vorgabe wie „innerhalb von 14 Tagen“ oder „innerhalb von vier Wochen“ gibt es dafür nicht.</p><p>Unser Tipp: Notiere dir, wann du Akteneinsicht beantragt hast. Wenn längere Zeit nichts passiert, kannst du schriftlich nachfragen und um Mitteilung bitten, wann und in welcher Form die Akteneinsicht ermöglicht wird.</p>"
+  },
+  {
+    "slug": "anhoerung",
+    "titel": "Anhörung",
+    "frist": "Frist: steht normalerweise im Schreiben",
+    "schlagworte": [
+      "Behörde",
+      "Bescheid"
+    ],
+    "inhalt": "<p>Bevor eine Behörde eine Entscheidung trifft, die in deine Rechte eingreift, muss sie dir in vielen Fällen Gelegenheit geben, dich zu den entscheidungserheblichen Tatsachen zu äußern.</p><p>Die konkrete Frist für deine Stellungnahme findest du normalerweise im Anhörungsschreiben.</p><p>Kannst du diese Frist nicht einhalten, kannst du bei einer von der Behörde gesetzten Frist grundsätzlich eine Fristverlängerung beantragen. § 26 Abs. 7 SGB X erlaubt die Verlängerung behördlich gesetzter Fristen.</p>"
+  },
+  {
+    "slug": "antrag-bearbeitungsdauer",
+    "titel": "Antrag – Bearbeitungsdauer",
+    "frist": "Keine allgemeine feste Bearbeitungsfrist",
+    "schlagworte": [
+      "Behörde",
+      "Antrag"
+    ],
+    "inhalt": "<p>Nicht jeder Antrag bei einer Sozialbehörde muss innerhalb einer bestimmten Anzahl von Wochen oder Monaten entschieden werden.</p><p>Für einzelne Leistungen können besondere gesetzliche Entscheidungsfristen bestehen. Eine allgemeine Frist für sämtliche sozialrechtlichen Anträge gibt es jedoch nicht.</p><p>Wurde über einen Antrag ohne ausreichenden Grund über längere Zeit nicht entschieden, kann eine Untätigkeitsklage in Betracht kommen.</p>"
+  },
+  {
+    "slug": "bekanntgabe-eines-bescheides",
+    "titel": "Bekanntgabe eines Bescheides",
+    "frist": null,
+    "schlagworte": [
+      "Bescheid",
+      "Widerspruch",
+      "Klage"
+    ],
+    "inhalt": "<p>Das Datum auf dem Bescheid ist nicht automatisch der Beginn deiner Rechtsbehelfsfrist.</p><p>Entscheidend ist grundsätzlich die Bekanntgabe des Bescheides.</p><p>Bei der Berechnung einer Widerspruchs- oder Klagefrist solltest du deshalb nicht einfach vom Datum oben auf dem Schreiben ausgehen.</p><p>Gerade wenn ein Bescheid später angekommen ist als erwartet, solltest du dir den tatsächlichen Eingangstag notieren und – wenn vorhanden – auch den Umschlag aufbewahren.</p>"
+  },
+  {
+    "slug": "berufung",
+    "titel": "Berufung",
+    "frist": "Frist: grundsätzlich 1 Monat",
+    "schlagworte": [
+      "Gericht"
+    ],
+    "inhalt": "<p>Ist gegen ein Urteil des Sozialgerichts die Berufung zulässig, muss sie grundsätzlich innerhalb eines Monats nach Zustellung des Urteils eingelegt werden.</p><p>Die Berufung wird beim Landessozialgericht eingelegt. Die Frist ist auch gewahrt, wenn sie innerhalb der Frist beim Sozialgericht eingeht. § 151 SGG.</p>"
+  },
+  {
+    "slug": "beschwerde",
+    "titel": "Beschwerde",
+    "frist": "Frist: grundsätzlich 1 Monat, soweit die Beschwerde zulässig ist",
+    "schlagworte": [
+      "Gericht"
+    ],
+    "inhalt": "<p>Gegen bestimmte gerichtliche Entscheidungen kann Beschwerde eingelegt werden.</p><p>Nach § 173 SGG beträgt die Beschwerdefrist grundsätzlich einen Monat nach Bekanntgabe der Entscheidung. Nicht gegen jede gerichtliche Entscheidung ist jedoch eine Beschwerde möglich.</p><p>Schau deshalb immer in die Rechtsmittelbelehrung der konkreten Entscheidung.</p>"
+  },
+  {
+    "slug": "fristberechnung",
+    "titel": "Fristberechnung",
+    "frist": null,
+    "schlagworte": [
+      "Behörde",
+      "Gericht"
+    ],
+    "inhalt": "<p>Bei Fristen kommt es nicht nur darauf an, wie lang die Frist ist, sondern auch darauf, wann sie beginnt und wann sie endet.</p><p>Für von Behörden gesetzte Fristen gilt nach § 26 SGB X grundsätzlich:</p><ul><li>Die Frist beginnt am Tag nach der Bekanntgabe der Frist, sofern nichts anderes mitgeteilt wurde.</li><li>Fällt das Fristende auf einen Samstag, Sonntag oder gesetzlichen Feiertag, endet die Frist grundsätzlich mit Ablauf des nächsten Werktages.</li><li>Für bestimmte ausdrücklich gesetzte Termine können Besonderheiten gelten.</li></ul><p>Bei gesetzlichen Rechtsbehelfsfristen gelten zusätzlich die jeweiligen besonderen Vorschriften.</p>"
+  },
+  {
+    "slug": "fristverlaengerung",
+    "titel": "Fristverlängerung",
+    "frist": null,
+    "schlagworte": [
+      "Behörde"
+    ],
+    "inhalt": "<p>Du schaffst eine gesetzte Frist nicht? Dann kümmere dich möglichst frühzeitig darum.</p><p>Nicht jede Frist ist gleich.</p><p>Besonders wichtig ist die Unterscheidung zwischen <strong>gesetzlichen Fristen</strong>, zum Beispiel der Frist für einen Widerspruch oder eine Klage, und <strong>von einer Behörde gesetzten Fristen</strong>, zum Beispiel:</p><ul><li>„Bitte reichen Sie die Unterlagen bis zum … ein.“</li><li>„Bitte nehmen Sie innerhalb von 14 Tagen Stellung.“</li><li>„Bitte übersenden Sie die angeforderten Unterlagen innerhalb von vier Wochen.“</li></ul><h3>Behördlich gesetzte Fristen können verlängert werden</h3><p>Nach § 26 Abs. 7 SGB X können Fristen, die eine Behörde selbst gesetzt hat, verlängert werden. Auch eine bereits abgelaufene behördliche Frist kann unter bestimmten Voraussetzungen rückwirkend verlängert werden.</p><h3>Wann kann eine Fristverlängerung sinnvoll sein?</h3><p>Zum Beispiel wenn:</p><ul><li>dir Unterlagen noch nicht vorliegen,</li><li>du auf Befunde, Arztberichte oder Gutachten wartest,</li><li>die beantragte Akteneinsicht noch nicht erfolgt ist,</li><li>du zunächst Beratung oder Unterstützung benötigst,</li><li>umfangreiche Unterlagen ausgewertet werden müssen,</li><li>du gesundheitlich nicht in der Lage bist, rechtzeitig zu reagieren,</li><li>deine Vertretung noch Zeit zur Prüfung benötigt oder</li><li>andere nachvollziehbare Gründe bestehen.</li></ul><h3>Möglichst vor Ablauf der Frist beantragen</h3><p>Du solltest die Fristverlängerung möglichst beantragen, bevor die ursprüngliche Frist endet.</p><p>Dabei solltest du angeben:</p><ul><li>auf welches Schreiben du dich beziehst,</li><li>welche Frist gemeint ist,</li><li>wann die ursprüngliche Frist endet,</li><li>warum du mehr Zeit benötigst und</li><li>bis zu welchem Datum du die Verlängerung beantragst.</li></ul><h3>Beispiel</h3><p>„Mit Schreiben vom … wurde mir eine Frist bis zum … gesetzt. Da mir die für meine Stellungnahme erforderlichen Unterlagen derzeit noch nicht vollständig vorliegen, beantrage ich eine Verlängerung der Frist bis zum … . Ich bitte um kurze schriftliche Bestätigung.“</p><h3>Wie lange kann eine Frist verlängert werden?</h3><p>Dafür gibt es keine allgemeine feste Dauer.</p><p>Die beantragte Verlängerung sollte zum jeweiligen Grund passen.</p><p>Wartest du beispielsweise noch auf Akteneinsicht oder medizinische Unterlagen, sollte die beantragte Zeit ausreichen, um diese Unterlagen nach Erhalt auch tatsächlich prüfen zu können.</p><h3>Noch keine Antwort auf deinen Antrag?</h3><p>Gehe nicht automatisch davon aus, dass die Frist verlängert wurde.</p><p>Rückt das ursprüngliche Fristende näher, solltest du nochmals nachfragen und auf deinen bereits gestellten Antrag auf Fristverlängerung hinweisen.</p><p>Bewahre unbedingt einen Nachweis darüber auf, wann du die Fristverlängerung beantragt hast.</p><h3>Die Frist ist bereits abgelaufen?</h3><p>Auch dann solltest du nicht einfach aufgeben.</p><p>§ 26 Abs. 7 SGB X ermöglicht grundsätzlich auch eine rückwirkende Verlängerung einer von der Behörde gesetzten Frist, insbesondere wenn es unbillig wäre, die Folgen des Fristablaufs bestehen zu lassen.</p><p>Reagiere möglichst schnell und erkläre:</p><ul><li>welche Frist versäumt wurde,</li><li>warum du sie nicht einhalten konntest und</li><li>dass du eine rückwirkende Fristverlängerung beantragst.</li></ul><h3>Achtung bei Widerspruch und Klage</h3><p>Eine gesetzliche Widerspruchs- oder Klagefrist kannst du nicht einfach dadurch verlängern, dass du um mehr Zeit bittest.</p><p>Wenn diese Frist läuft, sollte der Rechtsbehelf grundsätzlich rechtzeitig eingelegt werden.</p><p>Eine ausführliche Begründung kann häufig später nachgereicht werden.</p><p>Lieber erst die gesetzliche Frist sichern und anschließend mehr Zeit für die Begründung beantragen.</p>"
+  },
+  {
+    "slug": "klage-vor-dem-sozialgericht",
+    "titel": "Klage vor dem Sozialgericht",
+    "frist": "Frist: grundsätzlich 1 Monat",
+    "schlagworte": [
+      "Gericht",
+      "Klage",
+      "Widerspruch"
+    ],
+    "inhalt": "<p>Wenn dein Widerspruch abgelehnt wurde, kannst du grundsätzlich innerhalb eines Monats nach Bekanntgabe des Widerspruchsbescheides Klage beim Sozialgericht erheben.</p><p>Hat ein Vorverfahren stattgefunden, beginnt die Klagefrist mit der Bekanntgabe des Widerspruchsbescheides.</p><p>Bei Bekanntgabe im Ausland beträgt die Frist grundsätzlich drei Monate. § 87 SGG.</p>"
+  },
+  {
+    "slug": "rechtsbehelfsbelehrung-fehlt-oder-ist-fehlerhaft",
+    "titel": "Rechtsbehelfsbelehrung fehlt oder ist fehlerhaft",
+    "frist": "Frist: grundsätzlich bis zu 1 Jahr",
+    "schlagworte": [
+      "Bescheid",
+      "Widerspruch",
+      "Klage"
+    ],
+    "inhalt": "<p>Ein Bescheid enthält normalerweise eine Rechtsbehelfsbelehrung. Dort steht, welcher Rechtsbehelf möglich ist, wo er eingelegt werden muss und welche Frist dafür gilt.</p><p>Ist diese Belehrung unterblieben oder unrichtig erteilt worden, kann der Rechtsbehelf nach § 66 SGG grundsätzlich innerhalb eines Jahres eingelegt werden.</p><p>Auch hier können besondere Ausnahmen gelten.</p>"
+  },
+  {
+    "slug": "revision",
+    "titel": "Revision",
+    "frist": "Einlegung: grundsätzlich 1 Monat\nBegründung: grundsätzlich 2 Monate",
+    "schlagworte": [
+      "Gericht"
+    ],
+    "inhalt": "<p>Eine zugelassene Revision zum Bundessozialgericht muss grundsätzlich innerhalb eines Monats eingelegt werden.</p><p>Die Revision muss grundsätzlich innerhalb von zwei Monaten begründet werden.</p><p>Anders als beispielsweise die normale Widerspruchsfrist kann die Revisionsbegründungsfrist auf einen vor ihrem Ablauf gestellten Antrag durch den Vorsitzenden verlängert werden. § 164 SGG.</p>"
+  },
+  {
+    "slug": "sachstandsanfrage",
+    "titel": "Sachstandsanfrage",
+    "frist": "Keine feste Frist – aber oft sehr sinnvoll, wenn längere Zeit nichts passiert",
+    "schlagworte": [
+      "Behörde",
+      "Antrag",
+      "Widerspruch"
+    ],
+    "inhalt": "<p>Du hast einen Antrag gestellt, Widerspruch eingelegt, Unterlagen eingereicht oder Akteneinsicht beantragt – und seitdem hörst du nichts?</p><p>Dann kannst du schriftlich nach dem aktuellen Stand des Verfahrens fragen.</p><p>Eine Sachstandsanfrage ist keine Klage und setzt der Behörde nicht automatisch eine rechtlich verbindliche Entscheidungsfrist.</p><p>Sie kann dir aber helfen herauszufinden:</p><ul><li>ob dein Antrag oder Widerspruch angekommen ist,</li><li>ob noch Unterlagen fehlen,</li><li>ob bereits Ermittlungen oder Begutachtungen laufen,</li><li>wer das Verfahren bearbeitet,</li><li>ob noch etwas von dir benötigt wird,</li><li>warum sich die Bearbeitung verzögert und</li><li>wie der weitere Ablauf aussieht.</li></ul><h3>Was sollte in eine Sachstandsanfrage?</h3><p>Wenn vorhanden:</p><ul><li>dein Aktenzeichen,</li><li>deine Versicherungs- oder Geschäftsnummer,</li><li>das Datum deines Antrags oder Widerspruchs,</li><li>eine kurze Bezeichnung des Verfahrens und</li><li>die Bitte um Mitteilung des aktuellen Bearbeitungsstandes.</li></ul><h3>Beispiel</h3><p>„Am … habe ich meinen Antrag/Widerspruch eingereicht. Bis heute habe ich keine weitere Nachricht zum Bearbeitungsstand erhalten. Ich bitte daher um Mitteilung des aktuellen Sachstands und darum, mir mitzuteilen, ob meinerseits noch Unterlagen oder Mitwirkungshandlungen erforderlich sind.“</p><h3>Kann ich dafür selbst eine Antwortfrist setzen?</h3><p>Du kannst die Behörde darum bitten, dir innerhalb eines angemessenen Zeitraums zu antworten.</p><p>Eine von dir gesetzte Frist führt aber nicht automatisch dazu, dass die Behörde nach Ablauf dieser Frist rechtlich in Verzug ist oder sofort entscheiden muss.</p><p>Bleibt ein Antrag oder Widerspruch über längere Zeit unbearbeitet, können die gesetzlichen Voraussetzungen einer Untätigkeitsklage wichtig werden.</p>"
+  },
+  {
+    "slug": "untaetigkeitsklage-antrag",
+    "titel": "Untätigkeitsklage – Antrag",
+    "frist": "Grundsätzlich frühestens nach 6 Monaten",
+    "schlagworte": [
+      "Gericht",
+      "Klage",
+      "Antrag"
+    ],
+    "inhalt": "<p>Wurde über einen Antrag auf Erlass eines Verwaltungsaktes ohne zureichenden Grund nicht entschieden, ist eine Untätigkeitsklage grundsätzlich nicht vor Ablauf von sechs Monaten seit Antragstellung zulässig.</p><p>Liegt ein zureichender Grund für die Verzögerung vor, kann das Gericht dem Verfahren weitere Zeit geben. § 88 Abs. 1 SGG.</p><p>Wichtig: Die sechs Monate sind nicht automatisch eine gesetzliche Bearbeitungsfrist für jede Behörde.</p><p>Sie bestimmen grundsätzlich, ab wann eine Untätigkeitsklage zulässig werden kann.</p>"
+  },
+  {
+    "slug": "untaetigkeitsklage-widerspruch",
+    "titel": "Untätigkeitsklage – Widerspruch",
+    "frist": "Grundsätzlich frühestens nach 3 Monaten",
+    "schlagworte": [
+      "Gericht",
+      "Klage",
+      "Widerspruch"
+    ],
+    "inhalt": "<p>Wurde über deinen Widerspruch ohne zureichenden Grund nicht entschieden, kann grundsätzlich nach Ablauf von drei Monaten eine Untätigkeitsklage in Betracht kommen.</p><p>Auch hier bedeutet die Drei-Monats-Grenze nicht automatisch, dass jeder Widerspruch innerhalb von drei Monaten abgeschlossen sein muss.</p><p>Entscheidend ist auch, ob ein zureichender Grund für die Verzögerung besteht. § 88 SGG.</p>"
+  },
+  {
+    "slug": "unterlagen-nachreichen",
+    "titel": "Unterlagen nachreichen",
+    "frist": "Frist: steht meistens im Schreiben",
+    "schlagworte": [
+      "Behörde"
+    ],
+    "inhalt": "<p>Fordert eine Behörde weitere Unterlagen an, setzt sie dafür häufig eine konkrete Frist.</p><p>Zum Beispiel:</p><p>„Bitte reichen Sie die Unterlagen innerhalb von 14 Tagen ein.“</p><p>Kannst du die Unterlagen bis dahin nicht beschaffen, solltest du nicht einfach die Frist verstreichen lassen.</p><p>Teile der Behörde möglichst früh mit:</p><ul><li>welche Unterlagen noch fehlen,</li><li>warum sie noch nicht vorliegen,</li><li>ob du sie bereits angefordert hast und</li><li>wie viel zusätzliche Zeit du voraussichtlich benötigst.</li></ul><p>Dann kannst du gleichzeitig eine Fristverlängerung beantragen.</p>"
+  },
+  {
+    "slug": "ueberpruefungsantrag",
+    "titel": "Überprüfungsantrag",
+    "frist": null,
+    "schlagworte": [
+      "Behörde",
+      "Bescheid",
+      "Antrag"
+    ],
+    "inhalt": "<p>Ein bereits bestandskräftiger Bescheid kann unter bestimmten Voraussetzungen nach § 44 SGB X erneut überprüft werden.</p><p>Dabei muss zwischen zwei Fragen unterschieden werden:</p><ul><li>Kann der alte Bescheid noch überprüft werden?</li><li>Für welchen Zeitraum können gegebenenfalls noch Leistungen rückwirkend erbracht werden?</li></ul><p>Deshalb solltest du bei einem Überprüfungsantrag nicht pauschal davon ausgehen, dass automatisch für einen bestimmten Zeitraum nachgezahlt wird. Je nach Sozialleistungsbereich können besondere Regeln gelten.</p>"
+  },
+  {
+    "slug": "widerspruch",
+    "titel": "Widerspruch",
+    "frist": "Frist: grundsätzlich 1 Monat",
+    "schlagworte": [
+      "Widerspruch",
+      "Bescheid"
+    ],
+    "inhalt": "<p>Gegen einen sozialrechtlichen Verwaltungsakt kannst du grundsätzlich innerhalb eines Monats nach Bekanntgabe Widerspruch einlegen.</p><p>Bei Bekanntgabe im Ausland beträgt die Frist grundsätzlich drei Monate. § 84 SGG.</p><h3>Muss der Widerspruch sofort begründet werden?</h3><p>Nein. Für die Wahrung der Widerspruchsfrist ist zunächst entscheidend, dass der Widerspruch rechtzeitig eingelegt wird.</p><p>Wenn du noch Akteneinsicht benötigst, Unterlagen fehlen oder du Beratung brauchst, kannst du zunächst fristwahrend Widerspruch einlegen und mitteilen, dass eine Begründung folgt.</p><p>Wichtig: Warte mit dem Widerspruch nicht darauf, dass alle Unterlagen vollständig sind, wenn dadurch die Widerspruchsfrist verstreichen würde.</p>"
+  },
+  {
+    "slug": "wiedereinsetzung-in-den-vorigen-stand-behoerde",
+    "titel": "Wiedereinsetzung in den vorigen Stand – Behörde",
+    "frist": null,
+    "schlagworte": [
+      "Behörde"
+    ],
+    "inhalt": "<p>Du hast eine gesetzliche Frist versäumt und konntest sie ohne eigenes Verschulden nicht einhalten?</p><p>Dann kann unter bestimmten Voraussetzungen eine Wiedereinsetzung in den vorigen Stand möglich sein.</p><p>Nach § 27 SGB X muss der Antrag grundsätzlich innerhalb von zwei Wochen nach Wegfall des Hindernisses gestellt werden.</p><p>Innerhalb dieser Zeit muss grundsätzlich auch die versäumte Handlung nachgeholt werden.</p><p>Nach einem Jahr seit Ende der versäumten Frist ist eine Wiedereinsetzung grundsätzlich nicht mehr möglich, sofern nicht höhere Gewalt eine rechtzeitige Handlung verhindert hat.</p>"
+  },
+  {
+    "slug": "wiedereinsetzung-in-den-vorigen-stand-sozialgericht",
+    "titel": "Wiedereinsetzung in den vorigen Stand – Sozialgericht",
+    "frist": null,
+    "schlagworte": [
+      "Gericht"
+    ],
+    "inhalt": "<p>Geht es um eine gesetzliche Verfahrensfrist im sozialgerichtlichen Verfahren, gelten die Regeln des § 67 SGG.</p><p>Der Antrag muss grundsätzlich innerhalb eines Monats nach Wegfall des Hindernisses gestellt werden.</p>"
+  }
+]

@@ -65,6 +65,10 @@ const SEITEN = [
     // ungeprüft nicht bleiben.
     ['Barrierefreiheit', '/barrierefreiheit'],
     ['Glossar', '/glossar'],
+    // Kacheln, aufklappbare Karten, Schritte, Aufzählung (KEV-152).
+    ['Fristen', '/fristen'],
+    // Mit offener Karte: Zwischenüberschriften und Listen aus dem Editor.
+    ['Fristen, Karte offen', '/fristen#fristverlaengerung'],
     // Glossar mit eigener Warnung davor (KEV-154).
     ['Abkürzungen im sexuellen Kontext', '/abkuerzungen-im-sexuellen-kontext'],
     // Zweites Glossar, nur Begriffe mit Erklärung (KEV-155).

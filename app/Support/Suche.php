@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Frist;
 use App\Models\GlossaryTerm;
 use App\Models\Group;
 use App\Models\OutreachItem;
@@ -197,6 +198,7 @@ class Suche
             array_slice($glossar, 0, self::HOECHSTENS_GLOSSAR),
             $this->gruppen($begriffe),
             $this->oeffentlichkeitsarbeit($begriffe),
+            $this->fristen($begriffe, $sprache),
         );
 
         usort($treffer, fn ($a, $b) => $b['punkte'] <=> $a['punkte']);
@@ -545,6 +547,54 @@ class Suche
         }
 
         return $treffer;
+    }
+
+    /**
+     * Die Fristenübersicht (KEV-152): Wer „Widerspruchsfrist“ oder
+     * „Fristverlängerung“ sucht, landet auf der Karte, aufgeklappt
+     * (aufklapper.js). Höchstens so viele wie aus dem Glossar, „Frist“ trifft
+     * sonst jede.
+     *
+     * @param  list<string>  $begriffe
+     * @return list<array<string, mixed>>
+     */
+    private function fristen(array $begriffe, string $sprache): array
+    {
+        // Die Seite mit dem Baustein, in der Sprache der Suche, sonst deutsch.
+        $seiten = Page::veroeffentlicht()
+            ->standardfassung()
+            ->whereIn('locale', array_unique([$sprache, \App\Models\Language::standardCode()]))
+            ->whereHas('blocks', fn ($q) => $q->where('typ', 'fristen'))
+            ->get();
+        $seite = $seiten->firstWhere('locale', $sprache) ?? $seiten->first();
+
+        if (! $seite) {
+            return [];
+        }
+
+        $treffer = [];
+
+        foreach (Frist::veroeffentlicht()->get() as $frist) {
+            $text = html_entity_decode(strip_tags(str_replace('<', ' <', (string) $frist->inhalt)));
+
+            $punkte = 12 * $this->wieOft($begriffe, $frist->titel.' '.implode(' ', $frist->schlagworte ?? []))
+                + 2 * $this->wieOft($begriffe, (string) $frist->frist.' '.$text);
+
+            if ($punkte > 0) {
+                $treffer[] = [
+                    'art' => 'frist',
+                    'titel' => $frist->titel,
+                    'url' => $seite->pfad().'#'.$frist->slug,
+                    'bereich' => $seite->titel,
+                    'ausschnitt' => Str::limit(filled($frist->frist) ? $frist->frist : $text, 160),
+                    'punkte' => $punkte,
+                ];
+            }
+        }
+
+        usort($treffer, fn ($a, $b) => $b['punkte'] <=> $a['punkte']);
+
+        return array_slice($treffer, 0, self::HOECHSTENS_GLOSSAR);
     }
 
     /**

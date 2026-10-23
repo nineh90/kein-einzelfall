@@ -46,7 +46,13 @@
              Zeichen: Sonst trennte der Browser auch „ge-zielt“, und der Text
              sah zerhackt aus. Browser ohne die Eigenschaft trennen eben
              großzügiger, überlaufen tut trotzdem nichts. --}}
-        <ul class="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+        {{-- Bei zwei oder drei Karten nur so viele Spalten (KEV-152, Fristen):
+             Sonst stand rechts eine halbe Reihe leer. --}}
+        <ul @class([
+            'grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 lg:gap-4',
+            'lg:grid-cols-3' => count($karten) === 3,
+            'lg:grid-cols-4' => count($karten) >= 4,
+        ])>
             @foreach ($karten as $karte)
                 <li class="flex min-w-0">
                     {{-- Die ganze Karte ist der Link — größere Trefferfläche,

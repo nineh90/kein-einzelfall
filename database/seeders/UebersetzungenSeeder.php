@@ -119,6 +119,8 @@ class UebersetzungenSeeder extends Seeder
         $this->felder(\App\Models\TeamMember::class, 'name', 'uebersetzungen-team.json');
         // KEV-134: Messen, Petitionen, Presse, nach Adresse
         $this->felder(\App\Models\OutreachItem::class, 'slug', 'uebersetzungen-oeffentlichkeitsarbeit.json');
+        // KEV-152: die Fristen der Fristenübersicht, nach Sprungziel
+        $this->felder(\App\Models\Frist::class, 'slug', 'uebersetzungen-fristen.json');
 
         // Erst jetzt freischalten: Vorher hätte der Umschalter auf leere
         // Fassungen gezeigt. Nach dem Anlegen der Kernseiten ist der Rückfall

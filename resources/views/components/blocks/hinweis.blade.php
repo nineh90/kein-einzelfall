@@ -61,7 +61,8 @@
                     </p>
 
                     @if ($text)
-                        <p class="mt-1.5 leading-relaxed text-ink">{{ $text }}</p>
+                        {{-- *Fett*, Links und E-Mail-Adressen wie im Textbaustein (KEV-152). --}}
+                        <p class="mt-1.5 leading-relaxed text-ink [&_a]:text-green-deep [&_a]:underline">{{ hervorheben($text) }}</p>
                     @endif
 
                     @if ($verweis)

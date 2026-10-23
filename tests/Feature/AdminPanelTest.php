@@ -293,6 +293,11 @@ class AdminPanelTest extends TestCase
             ['typ' => 'unterseiten', 'data' => ['titel' => 'Kachelprobe', 'aufrufe' => true]],
             // KEV-155: Glossar-Liste, ohne eigene Felder
             ['typ' => 'glossar', 'data' => []],
+            // KEV-152: Fristenübersicht, Textabschnitt mit festem Sprungziel
+            // und Aufzählung, Schritte mit Sprungziel
+            ['typ' => 'fristen', 'data' => []],
+            ['typ' => 'text', 'data' => ['titel' => 'Ankerprobe', 'anker' => 'ankerprobe', 'absaetze' => ["Liste:\n- Listenpunkt"]]],
+            ['typ' => 'schritte', 'data' => ['titel' => 'Schrittprobe', 'anker' => 'schrittprobe', 'schritte' => [['titel' => 'Erster Schritt']]]],
         ];
 
         foreach ($bausteine as $i => $baustein) {
@@ -326,6 +331,7 @@ class AdminPanelTest extends TestCase
             'petitionen.webp', 'Untergruppe A', 'Einleitung A', 'petition_unterstuetzt',
             'Erster Wandsatz.', 'Schlusswandsatz', 'wand.webp', // Wall of Shame
             'Kachelprobe',                                   // Unterseiten als Kacheln
+            'ankerprobe', 'Listenpunkt', 'schrittprobe',     // Sprungziele, Aufzählung
         ] as $erwartet) {
             $this->assertStringContainsString($erwartet, $json, "Nach dem Speichern fehlt: {$erwartet}");
         }
@@ -337,6 +343,7 @@ class AdminPanelTest extends TestCase
         $kacheln = $seite->fresh()->blocks()->where('typ', 'unterseiten')->first()->data;
         $this->assertTrue($kacheln['aufrufe']);
         $this->assertSame(1, $seite->fresh()->blocks()->where('typ', 'glossar')->count());
+        $this->assertSame(1, $seite->fresh()->blocks()->where('typ', 'fristen')->count());
     }
 
     /** KEV-156: Die Triggerwarnung vor einem Bereich pflegt der Verein an der Seite selbst. */

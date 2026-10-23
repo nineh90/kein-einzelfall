@@ -129,6 +129,54 @@ if (! function_exists('hervorheben')) {
         );
     }
 
+    /**
+     * Ein Absatz eines Textbausteins als HTML (KEV-152).
+     *
+     * Zeilen, die mit „- “ beginnen, werden zur Aufzählung, was davor oder
+     * danach steht, bleibt Absatz. So lässt sich im Panel eine Liste
+     * schreiben, ohne einen eigenen Editor:
+     *
+     *     Fristen können unter anderem davon abhängen:
+     *     - um welches Verfahren es geht,
+     *     - welcher Träger zuständig ist.
+     *
+     * Ohne solche Zeilen ist es genau der Absatz wie vorher.
+     */
+    function absatz(string $text): \Illuminate\Support\HtmlString
+    {
+        $html = '';
+        $zeilen = [];
+        $liste = [];
+
+        $absatz = function () use (&$html, &$zeilen) {
+            if ($zeilen !== []) {
+                $html .= '<p>'.hervorheben(implode("\n", $zeilen)).'</p>';
+                $zeilen = [];
+            }
+        };
+        $aufzaehlung = function () use (&$html, &$liste) {
+            if ($liste !== []) {
+                $html .= '<ul>'.implode('', $liste).'</ul>';
+                $liste = [];
+            }
+        };
+
+        foreach (preg_split('/\R/u', trim($text)) as $zeile) {
+            if (preg_match('/^\s*[-•]\s+(.+)$/u', $zeile, $treffer)) {
+                $absatz();
+                $liste[] = '<li>'.hervorheben($treffer[1]).'</li>';
+            } else {
+                $aufzaehlung();
+                $zeilen[] = $zeile;
+            }
+        }
+
+        $absatz();
+        $aufzaehlung();
+
+        return new \Illuminate\Support\HtmlString($html);
+    }
+
     /** Das Symbol eines Knopfs, so gestaltet wie der Knopf selbst (KEV-109). */
     function text_symbol(string $name): string
     {

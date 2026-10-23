@@ -494,5 +494,10 @@
   "Ein Klick auf den Papierstapel zeigt den ersten Satz. Mit jedem Satz kommt ein Strich an die Wand.": "Click the stack of paper to see the first sentence. Every sentence adds a mark to the wall.",
   "Ansehen": "View",
   ":anzahl Aufruf|:anzahl Aufrufe": ":anzahl view|:anzahl views",
-  "Begriff suchen": "Search for a term"
+  "Begriff suchen": "Search for a term",
+  ":gesamt Fristen": ":gesamt deadlines",
+  "Welche Frist suchst du?": "Which deadline are you looking for?",
+  "Dazu steht hier noch nichts.": "There is nothing on this here yet.",
+  "Schlagworte:": "Tags:",
+  "Hier entsteht eine Übersicht der Fristen. Sie wird nach und nach ergänzt.": "An overview of deadlines is being built here. It will be added to over time."
 }

@@ -855,6 +855,46 @@ console.log('\nBehörden & Bescheide')
     }
 }
 
+// --- Fristen (KEV-152) -----------------------------------------------------
+
+console.log('\nFristen und Möglichkeiten')
+{
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/fristen' })
+        const sichtbar = () => s.locator('details[data-glossar-eintrag]:visible').count()
+        pruefe(`${breite}px: alle 19 Fristen`, await sichtbar() === 19)
+
+        await s.fill('#glossar-suche', 'untätigkeit')
+        await s.waitForTimeout(400)
+        const treffer = await sichtbar()
+        pruefe(`${breite}px: Tippen filtert die Fristen`, treffer >= 2 && treffer < 19
+            && (await s.locator('[data-glossar-status]').innerText()).trim() === `Treffer: ${treffer} von 19`, `${treffer}`)
+
+        await s.locator('[data-glossar-zuruecksetzen]').click()
+        await s.locator('#widerspruch summary').click()
+        pruefe(`${breite}px: Karte klappt auf`, await s.locator('#widerspruch').evaluate((d) => d.open)
+            && await s.getByText('Muss der Widerspruch sofort begründet werden?').isVisible())
+
+        // Die Kachel springt zum Leitfaden.
+        // Die Seite scrollt weich (scroll-behavior: smooth): warten, bis es steht.
+        await s.locator('a[href="#frist-bekommen"]').click()
+        await s.waitForFunction(() => {
+            const oben = document.getElementById('frist-bekommen').getBoundingClientRect().top
+            return oben >= 0 && oben < 500
+        }, null, { timeout: 4000 }).catch(() => {})
+        const kopf = await s.locator('#frist-bekommen').boundingBox()
+        pruefe(`${breite}px: Kachel springt zum Leitfaden`, kopf && kopf.y >= 0 && kopf.y < 500, JSON.stringify(kopf))
+        pruefe(`${breite}px: nichts läuft über`, await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+        await s.context().close()
+    }
+
+    // Ein Link auf eine Frist klappt ihre Karte auf.
+    const link = await oeffnen({ pfad: '/fristen#sachstandsanfrage' })
+    pruefe('Link auf eine Frist öffnet die Karte', await link.locator('#sachstandsanfrage').evaluate((d) => d.open)
+        && await link.getByText('Was sollte in eine Sachstandsanfrage?').isVisible())
+    await link.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

@@ -275,11 +275,15 @@ class PageForm
                                 ->native(false)
                                 // KEV-155: Dieser Baustein hat keine eigenen
                                 // Felder, sein Inhalt wird woanders gepflegt.
-                                ->helperText(fn ($get) => $get('typ') === 'glossar'
-                                    ? 'Zeigt alle Einträge unter „Glossar“, bei denen diese Seite unter „Steht auf '
-                                        .'der Seite“ gewählt ist, mit Suchfeld und Buchstabenleiste. Neue Begriffe dort '
-                                        .'anlegen.'
-                                    : null),
+                                ->helperText(fn ($get) => match ($get('typ')) {
+                                    'glossar' => 'Zeigt alle Einträge unter „Glossar“, bei denen diese Seite unter '
+                                        .'„Steht auf der Seite“ gewählt ist, mit Suchfeld und Buchstabenleiste. Neue '
+                                        .'Begriffe dort anlegen.',
+                                    // KEV-152
+                                    'fristen' => 'Zeigt alle Einträge unter „Fristen“ mit Suchfeld, Buchstabenleiste '
+                                        .'und aufklappbaren Karten. Neue Fristen dort anlegen.',
+                                    default => null,
+                                }),
 
                             // Steht im Formular vor der Überschrift, weil sie auf
                             // der Seite darüber steht.
@@ -303,7 +307,7 @@ class PageForm
                                 // Titelfeld, das nichts bewirkt, ist eine Falle.
                                 ->hidden(fn ($get) => in_array(
                                     $get('typ'),
-                                    ['cta_band', 'stat_strip', 'inhalts_hinweis', 'formular_spalten', 'glossar'],
+                                    ['cta_band', 'stat_strip', 'inhalts_hinweis', 'formular_spalten', 'glossar', 'fristen'],
                                     true,
                                 ))
                                 // Der Aufmacher-Rahmen der Zwei-Klick-Einbettung
@@ -337,12 +341,24 @@ class PageForm
                                 ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true))
                                 ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen, '
                                     .'wie beim Fettschreiben in einer Nachricht. Er erscheint dann fett. '
+                                    .'Eine Aufzählung: jede Zeile mit „- “ beginnen. '
                                     .'Ein Link: [Text](/adresse) oder [Text](https://…). '
                                     .'E-Mail-Adressen werden von selbst zum Link. '
                                     .'{darstellung} und {notausgang} zeigen das Symbol des jeweiligen Knopfs.')
                                 ->simple(
                                     Textarea::make('absatz')->label('')->rows(4)->required()
                                 ),
+
+                            // KEV-152: festes Sprungziel, damit Links (etwa von den
+                            // Kacheln auf /fristen) auch nach einer Änderung der
+                            // Überschrift und in jeder Sprache treffen.
+                            TextInput::make('data.anker')
+                                ->label('Sprungziel (optional)')
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'schritte'], true))
+                                ->rules(['nullable', 'regex:/^[a-z0-9-]+$/'])
+                                ->helperText('Damit lässt sich direkt auf diesen Abschnitt verlinken, etwa '
+                                    .'/fristen#moegliche-fristen. Nur Kleinbuchstaben, Ziffern und Bindestriche. '
+                                    .'Leer = aus der Überschrift.'),
 
                             // KEV-68: über einer mittig stehenden Karte („Herr und
                             // Frau Unbekannt“) sah linksbündiger Text verrutscht aus.

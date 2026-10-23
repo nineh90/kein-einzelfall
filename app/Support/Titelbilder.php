@@ -89,6 +89,9 @@ class Titelbilder
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
         // SER“), Zettelkasten. Ohne Unterzeile.
         'glossar' => null,
+        // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten. Ohne
+        // Unterzeile.
+        'fristen' => null,
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel. Ohne Unterzeile.
         'abkuerzungen-im-sexuellen-kontext' => null,
@@ -213,6 +216,8 @@ class Titelbilder
      *  - Abkürzungen im sexuellen Kontext: Kiste mit Buchstabenwürfeln
      *    (KEV-154). Rechts um Wand verlängert, Kiste ab 15 %, Würfel bis 97 %
      *    der Höhe; ausgerichtet auf 85 %.
+     *  - Fristen: Sanduhr vor Aktenstapel (KEV-152). Rechts um Wand
+     *    verlängert, Sanduhr zwischen 18 und 86 % der Höhe; 65 %.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -240,6 +245,7 @@ class Titelbilder
         self::ORDNER.'/wall-of-shame.webp' => 45,
         self::ORDNER.'/wort-fuer-wort.webp' => 80,
         self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
+        self::ORDNER.'/fristen.webp' => 65,
     ];
 
     /**

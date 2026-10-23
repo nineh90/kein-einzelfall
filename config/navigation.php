@@ -72,6 +72,9 @@ return [
                 // KEV-144: ohne Positionsangabe von Taddi, deshalb ans Ende,
                 // aber vor das Glossar, das als Nachschlagewerk zuletzt steht.
                 ['schluessel' => 'atteste', 'label' => 'Atteste',                       'url' => '/atteste'],
+                // KEV-152: Taddis „5. Fristen“, nach Atteste und vor den
+                // Glossaren, die als Nachschlagewerke zuletzt stehen.
+                ['schluessel' => 'fristen', 'label' => 'Fristen und Möglichkeiten', 'url' => '/fristen'],
                 ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
                 // KEV-154: Taddis „2. Abkürzungen sexueller Kontext“, zwischen
                 // ihrer 1 (Glossar) und 3 (Behörden & Bescheide).

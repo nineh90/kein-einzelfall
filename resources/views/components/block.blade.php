@@ -74,6 +74,12 @@
         if (in_array($block->typ, ['unterseiten', 'glossar'], true)) {
             $attribute['seite'] = $block->page;
         }
+
+        // Schritte mit Sprungziel, wie die Textabschnitte (KEV-152: die
+        // Kachel „Frist bekommen – Was jetzt?“ springt dorthin).
+        if ($block->typ === 'schritte') {
+            $attribute['anker'] = $block->anker();
+        }
     @endphp
     <x-dynamic-component :component="$komponente" :attributes="new \Illuminate\View\ComponentAttributeBag($attribute)" />
 @endif

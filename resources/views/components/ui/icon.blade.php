@@ -24,6 +24,8 @@
         'globe'         => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>',
         // Häkchen für die aktuell gewählte Sprache.
         'check'         => '<path d="M20 6 9 17l-5-5"/>',
+        // Uhr für die Frist auf den Karten der Fristenübersicht (KEV-152).
+        'clock'         => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
         // Auge für den Aufrufzähler der Kacheln (KEV-156).
         'eye'           => '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
         // Pfeil aus dem Kasten heraus: führt auf eine fremde Seite. Nur dort

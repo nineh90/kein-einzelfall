@@ -69,7 +69,7 @@
                 [&_li]:mb-1 [&_ul]:list-disc [&_ul]:pl-5
                 [&>p:first-child]:text-[1.0625rem] [&>p:first-child]:text-ink">
         @forelse ($sichtbar as $absatz)
-            <p>{{ hervorheben($absatz) }}</p>
+            {{ absatz($absatz) }}
         @empty
             {{ $slot }}
         @endforelse
@@ -95,7 +95,7 @@
             <div class="mt-4 flex flex-col gap-4 leading-relaxed text-ink-soft
                         [&_a]:text-green-deep [&_a]:underline">
                 @foreach ($eingeklappt as $absatz)
-                    <p>{{ hervorheben($absatz) }}</p>
+                    {{ absatz($absatz) }}
                 @endforeach
             </div>
         </details>

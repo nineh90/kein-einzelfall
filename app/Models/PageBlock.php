@@ -112,6 +112,9 @@ class PageBlock extends Model
         // KEV-155: die Glossar-Einträge, die im Panel dieser Seite
         // zugeordnet sind, mit Suche und Buchstabenleiste.
         'glossar' => 'Glossar (Einträge dieser Seite)',
+        // KEV-152: die Fristen aus dem Panel mit Suche, A–Z und
+        // aufklappbaren Karten.
+        'fristen' => 'Fristenübersicht (Suche, A–Z, aufklappbar)',
     ];
 
     /**
@@ -148,6 +151,7 @@ class PageBlock extends Model
         'wall_of_shame' => 'wechselnd',
         'unterseiten' => 'wechselnd',
         'glossar' => 'wechselnd',
+        'fristen' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
@@ -363,6 +367,15 @@ class PageBlock extends Model
     {
         $titel = $this->data['titel'] ?? null;
 
-        return $titel ? 'abschnitt-'.Str::slug($titel) : null;
+        if (! $titel) {
+            return null;
+        }
+
+        // Fest vergeben (KEV-152): bleibt gleich, wenn die Überschrift sich
+        // ändert oder übersetzt wird. Links wie /fristen#moegliche-fristen
+        // zeigen dann in jeder Sprache auf denselben Abschnitt.
+        return filled($this->data['anker'] ?? null)
+            ? $this->data['anker']
+            : 'abschnitt-'.Str::slug($titel);
     }
 }
