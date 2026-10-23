@@ -153,6 +153,8 @@ class Titelbilder
         'persoenliches-budget', 'pflegegrad',
         // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
         'behoerden-und-bescheide',
+        // KEV-162: Im Ordner „1. Opferanwalt“ lag keins.
+        'anuas',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

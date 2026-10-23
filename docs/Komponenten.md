@@ -2533,3 +2533,12 @@ steht linksbündig, weil er ohne Kacheln direkt am Text hängt.
 
 Titelbild von Taddi unter dem alten Dateinamen `projekte.webp`, auf dem Handy
 mit Text unten (`Titelbilder::TEXT_UNTEN`).
+
+**Seit KEV-162** das erste Projekt: `/anuas` („ANUAS“, Unterzeile Taddis
+Projekttitel „Opferschutz aus Betroffenenperspektive weiterdenken“), im Menü
+unter „Projekte“ und damit als Kachel auf der Übersicht (`AnuasSeeder`). Lauter
+Textabschnitte, also ein Artikel mit „Auf dieser Seite“; ihre
+Projektdokumentation als Abschnitte mit dem Stand als Überzeile (`eyebrow`),
+neuester oben. Noch ohne eigenes Bild (Platzhalter). Ein weiteres Projekt:
+Seite im Panel anlegen, Eintrag unter `children` von „Projekte“ in
+`config/navigation.php`.

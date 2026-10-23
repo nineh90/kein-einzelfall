@@ -574,6 +574,35 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
   Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
+- [ ] **Projekt ANUAS (KEV-162), bitte gegenlesen und zwei Fragen klären.**
+  Neue Seite /anuas unter „Projekte“ (erste Kachel auf der Übersicht) mit
+  Taddis Text aus dem Doc „Opferanwalt“: „Worum geht es?“, ihre
+  Projektdokumentation mit den Ständen 18.10.2026 bis 23.09.2025 (neuester
+  oben), dann Mit-Opfer, Betroffenenexpertise und Ziel. Ihr Projekttitel
+  „Opferschutz aus Betroffenenperspektive weiterdenken“ steht als Unterzeile
+  unter „ANUAS“.
+  - **Die drei PDFs im Ordner sind (noch) nicht auf der Seite:** „Stellungnahme
+    Berufsbild Opferanwalt“, „O-Ton Opferanwalt“ und „anonym
+    Erfahrungsberichte“ (alle 02/2025, zum „Fachanwalt für Opferrecht“). Gründe:
+    1. Der Ordner heißt „1. Opferanwalt“, und in eurer Projektliste sind
+       „Opferanwalt“ (4.5.11) und „Opferrechte Gruppe ANUAS“ (4.5.12) zwei
+       Projekte. Gehören die PDFs auf eine eigene Seite „Opferanwalt“ oder
+       wirklich zu ANUAS?
+    2. Briefkopf von Stellungnahme und O-Tönen: alte Adresse (Hummelsbütteler
+       Landstraße 96) und zwei Telefonnummern, eine davon „Home“. Unterschrieben
+       von Prof. Dr. Carsten Proppe, Tatjana Belmar und A. Hennig. Sollen die so
+       online, oder nehmen wir Adresse und Nummern heraus?
+    3. Die 50 Erfahrungsberichte tragen Vorname und Initial („Anna S.“). Sind
+       das Pseudonyme, und sind alle mit der Veröffentlichung einverstanden?
+  - **Bild:** Im Ordner lag keins, die Seite trägt den Platzhalter.
+  - **Ehepaar aus Hamburg:** Im Stand 23.09.2025 steht, dass ein Ehepaar
+    seinen Sohn bei einem Terroranschlag in Hamburg verloren hat. Das macht
+    die beiden womöglich erkennbar; bitte kurz bestätigen, dass sie damit
+    einverstanden sind.
+  - Kleinigkeiten: „Stand 23.09.2025“ ist der einzige Stand aus 2025, bitte
+    prüfen. Ihre Zwischenfrage „Wie können Institutionen überprüfen …?“ steht
+    fett im Abschnitt statt als eigene Überschrift, einige kurze Absätze sind
+    zusammengezogen, damit nichts einklappt. „ANUAS e. V.“ → „e.V.“.
 - [ ] **Projekte (KEV-160), bitte gegenlesen.** Neuer Bereich „Projekte“ im
   Menü nach „Raum für Ungesagtes“ (wie Taddis Drive-Ordner „5. Projekte“), die
   Übersicht /projekte mit ihrem Text und ihrem Titelbild (Hand heftet Zettel
@@ -596,7 +625,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     kann der Verein sie im Panel; ins Menü unter „Projekte“ trägt sie bisher
     noch die Technik ein (`config/navigation.php`). Sobald dort eine steht,
     erscheint sie auf der Übersicht als Kachel („Unsere Projekte“) mit ihrem
-    Titelbild, zwischen Text und Aufruf.
+    Titelbild, zwischen Text und Aufruf. Seit KEV-162 steht dort ANUAS.
 - [ ] **Rückblick: Einleitung und Titelbild (KEV-137), bitte gegenlesen.**
   /rueckblick hat oben Taddis Einleitung („Manche Begegnungen, Projekte und
   Veranstaltungen wirken noch lange nach. …“) und ihr Titelbild (Fotoalbum)

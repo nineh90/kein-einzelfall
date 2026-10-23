@@ -107,13 +107,17 @@ return [
         ],
         /*
          * KEV-160: eigener Bereich, Platz wie in Taddis Drive („5. Projekte“
-         * nach „4. Raum für Ungesagtes“). Die Projekte kommen später als
-         * Unterseiten (children); dann zeigt die Übersicht sie als Kacheln.
+         * nach „4. Raum für Ungesagtes“). Die Projekte stehen als Unterseiten
+         * darunter; die Übersicht zeigt sie als Kacheln.
          */
         [
             'schluessel' => 'bereich_projekte',
             'label' => 'Projekte',
             'url' => '/projekte',
+            'children' => [
+                // KEV-162, das erste Projekt.
+                ['schluessel' => 'anuas', 'label' => 'ANUAS', 'url' => '/anuas'],
+            ],
         ],
         [
             'schluessel' => 'bereich_spenden',

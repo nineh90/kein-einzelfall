@@ -86,23 +86,24 @@ class ProjekteTest extends TestCase
     public function test_unterseiten_erscheinen_als_kacheln(): void
     {
         $kachelUeberschrift = '/<h2[^>]*>\s*Unsere Projekte\s*<\/h2>/u';
-        $this->assertDoesNotMatchRegularExpression($kachelUeberschrift, $this->get('/projekte')->getContent());
-
-        // Ein Projekt im Menü unter „Projekte“, hier stellvertretend eine bestehende Seite.
-        $menue = collect(config('navigation.main'))->map(fn (array $punkt) => $punkt['url'] === '/projekte'
-            ? $punkt + ['children' => [['schluessel' => 'rueckblick', 'label' => 'Rückblick', 'url' => '/rueckblick']]]
-            : $punkt);
-        config(['navigation.main' => $menue->all()]);
-
         $html = $this->get('/projekte')->getContent();
 
+        // Seit KEV-162 das erste Projekt, ANUAS. Beschriftung, Unterzeile
+        // und Bild kommen von dessen Seite.
         $this->assertMatchesRegularExpression($kachelUeberschrift, $html);
-        // Beschriftung und Bild kommen von der Seite selbst.
-        $this->assertMatchesRegularExpression('/Unsere Projekte\s*<\/h2>.*?<a href="\/rueckblick".*?Rückblick/s', $html);
+        $this->assertMatchesRegularExpression('/Unsere Projekte\s*<\/h2>.*?<a href="\/anuas".*?ANUAS.*?Opferschutz aus Betroffenenperspektive weiterdenken/s', $html);
         // Die Kacheln stehen zwischen Text und Aufruf.
         preg_match($kachelUeberschrift, $html, $treffer, PREG_OFFSET_CAPTURE);
         $this->assertGreaterThan(strpos($html, 'mitzugestalten.'), $treffer[0][1]);
         $this->assertLessThan(strpos($html, 'Du hast eine eigene Projektidee?'), $treffer[0][1]);
+
+        // Ohne Projekte im Menü keine leere Überschrift.
+        $menue = collect(config('navigation.main'))->map(fn (array $punkt) => $punkt['url'] === '/projekte'
+            ? array_diff_key($punkt, ['children' => true])
+            : $punkt);
+        config(['navigation.main' => $menue->all()]);
+
+        $this->assertDoesNotMatchRegularExpression($kachelUeberschrift, $this->get('/projekte')->getContent());
     }
 
     public function test_legt_nur_an_was_fehlt(): void

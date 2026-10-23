@@ -70,6 +70,8 @@ const SEITEN = [
     // Bereichsübersicht mit Aufruf und handschriftlichem Gruß, Text unten
     // auf dem Titelbild (KEV-160).
     ['Projekte', '/projekte'],
+    // Langer Artikel mit Überzeilen und „Auf dieser Seite“ (KEV-162).
+    ['Projekt ANUAS', '/anuas'],
     // Seite mit vorbereiteter, noch leerer Dokumentenliste (KEV-150).
     ['Formulare', '/formulare'],
     // Kacheln, aufklappbare Karten, Schritte, Aufzählung (KEV-152).
