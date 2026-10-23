@@ -554,6 +554,15 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Rückblick: Trauma, Bindung und Beziehung (KEV-142).** /rueckblick hat
+  den ersten Abschnitt mit Taddis Text und dem Bild mit den zwei Stühlen,
+  daneben bzw. auf dem Handy darüber. Absätze von uns gesetzt, der Name der
+  Reihe am Ende fett. Korrigiert: Komma in „Mit den Fragen, die Menschen, die
+  mit den Folgen von Trauma leben, beschäftigen.“ (der Satz bleibt ein
+  Nachsatz ohne Verb; vielleicht lieber an den Satz davor hängen?). Die Seite
+  ist jetzt für Suchmaschinen offen. Das Titelbild oben ist noch der
+  Platzhalter. Nächste Veranstaltungen: im Panel unter „Seiten“ →
+  „Rückblick“ einen weiteren Baustein „Text mit Bild“ anlegen.
 - [ ] **Fristen und Möglichkeiten (KEV-152), bitte ansehen.** Neue Seite
   /fristen unter „Wissen“ (nach „Atteste“), gebaut nach Taddis Vorschlag:
   Einleitung, zwei Kacheln (links „Mögliche Fristen“, rechts „Frist bekommen –

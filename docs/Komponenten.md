@@ -2441,3 +2441,21 @@ Browser-Lauf „Fristen und Möglichkeiten“ (Filtern, Aufklappen, Sprung der
 Kachel, Link auf eine Frist), im Barrierefreiheits-Lauf `/fristen` mit und
 ohne offene Karte, Deutsch und Englisch.
 
+
+## 39. Rückblick: Veranstaltungen als „Text mit Bild“ (KEV-142, 23.10.2026)
+
+`/rueckblick` (unter „Gruppen & Veranstaltungen“, seit KEV-72 leer) hat den
+ersten Abschnitt: „KE!N EINZELFALL im Dialog – Trauma, Bindung und Beziehung“
+vom 10.08.2026, Taddis Text und ihr Bild (zwei Holzstühle,
+`public/img/rueckblick/`), als Baustein „Text mit Bild“ (`RueckblickSeeder`).
+Jede weitere Veranstaltung ist ein weiterer solcher Baustein, im Panel
+anzulegen. Mit Inhalt ist die Seite für Suchmaschinen offen.
+
+**Text mit Bild bei langem Text:** Ab fünf Absätzen steht das Bild oben neben
+der Überschrift und läuft beim Lesen mit (`lg:sticky` unter der Kopfzeile,
+`--kopfhoehe`). Vorher schwebte es mittig neben dem Text. Kurze Texte bleiben
+wie bisher mittig neben dem Bild.
+
+Tests: `RueckblickTest`, `TeamUndGruppenTest` angepasst, Barrierefreiheits-Lauf
+`/rueckblick` auf Deutsch und Englisch.
+
