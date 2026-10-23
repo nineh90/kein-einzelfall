@@ -78,6 +78,9 @@ class AltseiteSeeder extends Seeder
      */
     public const WEGLASSEN = [
         'verein' => ['Mehr über:'],
+        // KEV-143: zwei Links auf 2 von 12 Unterseiten; „Mehr zu „Wissen““
+        // darunter nennt alle.
+        'wissen' => ['Zu den einzelnen Kategorien:'],
     ];
 
     /**
@@ -86,6 +89,21 @@ class AltseiteSeeder extends Seeder
      * Datenbanken erreicht die Änderung über eine eigene Migration.
      */
     public const NEUE_TEXTE = [
+        'wissen' => [
+            // KEV-143, Text von Taddi. Fett die Stellen, die sie in
+            // Gänsefüßchen gesetzt hat. Ersetzt die Einleitung der Altseite
+            // samt „Wichtig: … keine Beratung“.
+            '' => [
+                'Wissen bedeutet mehr, als Informationen zu haben. *Wissen bedeutet verstehen. Und verstehen '
+                .'bedeutet, selbst handeln zu können.*',
+                'Hier findest Du Informationen, Erklärungen und praktische Hilfen, die komplizierte Dinge '
+                .'verständlicher machen und Dir Orientierung geben können – von Fachbegriffen und Abkürzungen '
+                .'über Fristen und Verfahren bis hin zu Attesten, Formularen und Vorlagen.',
+                'Denn wer versteht, was passiert, welche Möglichkeiten es gibt und welche Schritte möglich sind, '
+                .'kann eigene Entscheidungen treffen und für sich handeln.',
+                '*Wissen schafft Klarheit. Und Klarheit stärkt Selbstwirksamkeit.*',
+            ],
+        ],
         'ueber-uns-vorstand-und-team' => [
             // KEV-64, Text von Taddi. Ohne Komma vor „und ein Raum“,
             // „persönlichem“ statt „persönlichen“.

@@ -85,7 +85,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %). Steht auch auf jeder AG-Seite, solange die AG im Panel kein eigenes Titelbild hat |
 | Anfragen | Briefumschlag auf Holztisch |
 | Kontakt | zwei Becher nebeneinander am langen Tisch |
-| Wissen | Bücherstapel mit Leinenband |
+| Wissen | Bücherstapel vor abblätternder Wand, davor ein aufgeschlagenes Buch; von Taddi geliefert (KEV-143, vorher unser Bücherstapel mit Leinenband). Rechts um Wand verlängert (2,58 : 1), Bücher zwischen 25 und 84 % der Höhe, ausgerichtet auf 60 % |
 | Raum für Ungesagtes | offene Holztür in einem dunklen Raum, dahinter helles Licht; von Taddi geliefert (KEV-159, Drive-Ordner „4. Raum für Ungesagtes“, „0 Deine Stimme – Raum für ungesagtes“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 25 %, damit die Tür vom Rahmen bis zur Schwelle zu sehen ist |
 | Unüberhörbar | Tonbandgerät mit zwei Spulen, davor eine Kassette; von Taddi geliefert (KEV-159, „4. Unüberhörbar“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 60 % |
 | Wall of Shame | Holzstuhl vor rissiger Wand, darüber Schatten von Sprechblasen; von Taddi geliefert (KEV-157, „1 Wall of Shame“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 45 %. Die Wand im Baustein darunter ist ihr Bild „Verwitterte Wand mit altem Papierstapel“ (kein Titelbild, `public/img/wall-of-shame/`) |

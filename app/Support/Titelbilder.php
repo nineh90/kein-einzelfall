@@ -221,6 +221,9 @@ class Titelbilder
      *    der Höhe; ausgerichtet auf 85 %.
      *  - Fristen: Sanduhr vor Aktenstapel (KEV-152). Rechts um Wand
      *    verlängert, Sanduhr zwischen 18 und 86 % der Höhe; 65 %.
+     *  - Wissen: Bücherstapel und aufgeschlagenes Buch (KEV-143, Bild von
+     *    Taddi statt unseres Leinenbands). Rechts um Wand verlängert, Bücher
+     *    zwischen 25 und 84 % der Höhe; mit 60 % auch bei 1920 px ganz.
      *  - Formulare: Formular mit Vereinslogo und Füller (KEV-151). Rechts um
      *    Wand verlängert, Blatt von 12 bis 92 % der Höhe; mit 40 % bleibt
      *    oben das Logo auf dem Formular zu sehen.
@@ -253,6 +256,7 @@ class Titelbilder
         self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
+        self::ORDNER.'/wissen.webp' => 60,
     ];
 
     /**

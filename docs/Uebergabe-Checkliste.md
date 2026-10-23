@@ -554,6 +554,19 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Wissen: neuer Text und neues Bild (KEV-143), bitte prüfen.** /wissen
+  hat Taddis neuen Text und ihr Bild (Bücherstapel mit aufgeschlagenem Buch).
+  - **Fett:** Im Ticket waren die Gänsefüßchen beim Kopieren verloren. Fett
+    gesetzt sind „Wissen bedeutet verstehen. Und verstehen bedeutet, selbst
+    handeln zu können.“ und der Schlusssatz „Wissen schafft Klarheit. Und
+    Klarheit stärkt Selbstwirksamkeit.“ Bitte mit ihrem Original abgleichen.
+  - **Weggefallen:** der alte Text samt „Wichtig: Diese Informationen stellen
+    keine Beratung dar …“ (ihr neuer Text ersetzt ihn) und „Zu den einzelnen
+    Kategorien:“ mit nur zwei Links. Darunter verlinkt „Mehr zu „Wissen““
+    alle Unterseiten. Den Hinweis „keine Beratung“ tragen die Seiten Fristen
+    und Anträge selbst.
+  - Die Unterzeile auf dem Bild („Rechte, Anträge und Hilfesysteme
+    verständlich erklärt.“) ist weiter von uns.
 - [ ] **Formulare (KEV-150).** Neue Seite /formulare unter „Wissen“ zwischen
   Atteste und Fristen mit Taddis Text. Die Formulare selbst fehlen noch:
   Pflegen unter „Seiten“ → „Formulare“, im Baustein „Dokumente“ („Formulare
