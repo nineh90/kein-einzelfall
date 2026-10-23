@@ -28,7 +28,8 @@ class FristenTest extends TestCase
     {
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
         $urls = array_column($wissen['children'], 'url');
-        $this->assertSame(array_search('/atteste', $urls) + 1, array_search('/fristen', $urls));
+        // Taddis Nummern: 1. Atteste, 4. Formulare (KEV-150), 5. Fristen
+        $this->assertSame(array_search('/formulare', $urls) + 1, array_search('/fristen', $urls));
 
         $html = $this->get('/fristen')->assertOk()->getContent();
 

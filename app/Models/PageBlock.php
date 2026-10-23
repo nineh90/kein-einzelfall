@@ -266,6 +266,14 @@ class PageBlock extends Model
      */
     public function zeigtNichts(): bool
     {
+        // KEV-150: eine Dokumentenliste, in der noch nichts steht (die
+        // Formulare kommen später). Sonst stünde ihre Überschrift über nichts.
+        if ($this->typ === 'download_list') {
+            return collect($this->data['dokumente'] ?? [])
+                ->filter(fn ($d) => filled($d['datei'] ?? null) || filled($d['url'] ?? null))
+                ->isEmpty();
+        }
+
         // KEV-156: Kacheln auf einer Seite ohne Unterseiten im Menü.
         if ($this->typ === 'unterseiten') {
             return $this->page === null

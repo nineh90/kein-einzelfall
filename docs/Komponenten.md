@@ -2485,3 +2485,15 @@ und Autor gesetzt (die Vorlage trug „Infoveranstaltung für alle Interessierte
 von „Frauenwohnen EG“). Protokoll und AG-Zusammenfassung aus demselben Ordner
 sind nicht veröffentlicht (interne Arbeitspapiere mit Namen).
 
+
+## 40. Formulare (KEV-150, 23.10.2026)
+
+`/formulare` unter „Wissen“ zwischen Atteste und Fristen (Taddis Nummern 1, 4,
+5), mit ihrem Text (`FormulareSeeder`). Die Formulare folgen später: Darunter
+steht schon die Dokumentenliste „Formulare zum Herunterladen“, leer.
+
+**Leere Dokumentenliste wird nicht gezeigt** (`PageBlock::zeigtNichts`): Ohne
+Eintrag mit Datei oder Adresse entfällt der Baustein samt Überschrift. Lädt
+der Verein im Panel ein Formular hinein, erscheint er. Bis dahin ist die Seite
+für Suchmaschinen gesperrt, weil sie Formulare verspricht, die noch fehlen.
+

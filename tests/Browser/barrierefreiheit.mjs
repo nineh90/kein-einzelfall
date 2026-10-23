@@ -67,6 +67,8 @@ const SEITEN = [
     ['Glossar', '/glossar'],
     // Text mit Bild, langer Text mit mitlaufendem Bild (KEV-142).
     ['Rückblick', '/rueckblick'],
+    // Seite mit vorbereiteter, noch leerer Dokumentenliste (KEV-150).
+    ['Formulare', '/formulare'],
     // Kacheln, aufklappbare Karten, Schritte, Aufzählung (KEV-152).
     ['Fristen', '/fristen'],
     // Mit offener Karte: Zwischenüberschriften und Listen aus dem Editor.

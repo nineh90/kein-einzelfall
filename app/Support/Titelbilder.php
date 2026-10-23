@@ -148,6 +148,8 @@ class Titelbilder
         'rueckblick',
         // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
         'behoerden-und-bescheide',
+        // KEV-150, bis zum Bild aus KEV-151
+        'formulare',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

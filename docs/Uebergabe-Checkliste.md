@@ -554,6 +554,12 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Formulare (KEV-150).** Neue Seite /formulare unter „Wissen“ zwischen
+  Atteste und Fristen mit Taddis Text. Die Formulare selbst fehlen noch:
+  Pflegen unter „Seiten“ → „Formulare“, im Baustein „Dokumente“ („Formulare
+  zum Herunterladen“) je Formular eine Datei hochladen. Solange er leer ist,
+  sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
+  Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
 - [ ] **Rückblick: Zusammenarbeit mit aus-unserer-sicht (KEV-140), bitte
   ansehen.** Dritter Abschnitt auf /rueckblick mit Taddis Text und ihrem Bild
   „Aus unserer Sicht“, darunter die zwei Präsentationen als PDF (öffnen sich im
