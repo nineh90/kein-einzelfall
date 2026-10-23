@@ -569,6 +569,10 @@ class AltseiteSeeder extends Seeder
         // Migration dafür lief, bevor es diese Seiten gab.
         $this->call(UnterstuetzungsbandSeeder::class);
 
+        // Sprungziel #dokumente auf der FSM-Seite, auf das der Rückblick
+        // verlinkt (KEV-141). Die Migration dafür fand die Seite noch nicht.
+        RueckblickSeeder::sprungzielDokumente();
+
         // Titelbilder im Seitenkopf. Die Migration dafür lief schon, als die
         // Datenbank noch leer war, und hat nichts gefunden.
         Titelbilder::setzen();

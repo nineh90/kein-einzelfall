@@ -354,7 +354,7 @@ class PageForm
                             // Überschrift und in jeder Sprache treffen.
                             TextInput::make('data.anker')
                                 ->label('Sprungziel (optional)')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'schritte'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'schritte', 'text_media'], true))
                                 ->rules(['nullable', 'regex:/^[a-z0-9-]+$/'])
                                 ->helperText('Damit lässt sich direkt auf diesen Abschnitt verlinken, etwa '
                                     .'/fristen#moegliche-fristen. Nur Kleinbuchstaben, Ziffern und Bindestriche. '

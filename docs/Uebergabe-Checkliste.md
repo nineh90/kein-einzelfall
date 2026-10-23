@@ -554,6 +554,21 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Rückblick: Veranstaltungen zum FSM (KEV-141).** Zweiter Abschnitt
+  auf /rueckblick mit Taddis Text und dem „FSM“-Bild (links). Lange Abschnitte
+  klappen jetzt nach vier Absätzen ein („Weiterlesen“), auch der zu „Trauma,
+  Bindung und Beziehung“. Ihr P.S. steht als Kasten „Ablehnungsbescheid
+  bekommen?“ darunter (Überschrift von uns); „LINK zu den Widersprüchen“ ist
+  ein Link auf die Dokumentenliste der FSM-Seite (Musterwidersprüche und
+  Stellungnahmen). Korrigiert:
+  - „… gearbeitet worden war und das ab sofort keine weiteren Neuanträge mehr
+    möglich waren“ → „… mit einer deutlich späteren Antragsfrist, dem
+    31.08.2025, gearbeitet worden war –, und dass ab sofort …“
+  - „So setzen wir im November 2025 …“ → „setzten“ (Vergangenheit wie davor)
+  - Komma vor „und orientierten uns an der Antragsfrist“,
+    „Ausfüllhilfe-Veranstaltung“, „behinderungsbedingten“ klein,
+    Anführungszeichen „FSM vs. offene Fragen“.
+  - „Gemeinsam KE!N EINZELFALL.“ fett wie auf ihren anderen Seiten.
 - [ ] **Rückblick: Trauma, Bindung und Beziehung (KEV-142).** /rueckblick hat
   den ersten Abschnitt mit Taddis Text und dem Bild mit den zwei Stühlen,
   daneben bzw. auf dem Handy darüber. Absätze von uns gesetzt, der Name der

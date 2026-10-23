@@ -5,6 +5,7 @@
     'bild_alt' => null,
     'bild_seite' => 'rechts',   // rechts | links
     'cta' => null,
+    'anker' => null,            // Sprungziel der Überschrift
     'auf' => 'cream',
 ])
 
@@ -22,7 +23,8 @@
 @php
     // Langer Text (KEV-142, Rückblick): Das Bild steht oben neben der
     // Überschrift und läuft beim Lesen mit, statt mittig neben dem Text zu
-    // schweben. Kurzer Text bleibt mittig neben dem Bild.
+    // schweben. Kurzer Text bleibt mittig neben dem Bild. Eingeklappt wird
+    // erst ab sechs Absätzen (text-inhalt), darunter bleibt alles sichtbar.
     $lang = count($absaetze) > 4;
 @endphp
 
@@ -33,27 +35,13 @@
     <div @class(['mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:gap-12', 'items-center' => ! $lang, 'items-start' => $lang])>
 
         <div @class(['order-2', 'lg:order-1' => $bild_seite === 'rechts', 'lg:order-2' => $bild_seite === 'links'])>
-            @if ($titel)
-                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
-                <h2 class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">{{ $titel }}</h2>
-            @endif
-
-            <div class="flex flex-col gap-4 leading-relaxed text-ink-soft
-                        [&>p:first-child]:text-[1.0625rem] [&>p:first-child]:text-ink">
-                @forelse ($absaetze as $absatz)
-                    <p>{{ hervorheben($absatz) }}</p>
-                @empty
-                    {{ $slot }}
-                @endforelse
-            </div>
-
-            @if ($cta)
-                <div class="mt-6">
-                    <x-ui.button :href="$cta['url']" :variant="$cta['variant'] ?? 'primary'">
-                        {{ $cta['label'] }}
-                    </x-ui.button>
-                </div>
-            @endif
+            {{-- Derselbe Inhaltsteil wie im Textbaustein (KEV-141): lange Texte
+                 klappen nach vier Absätzen ein, „- “ wird zur Aufzählung, die
+                 Überschrift trägt ihr Sprungziel. Vorher stand hier eine
+                 eigene, ärmere Fassung davon. --}}
+            <x-blocks.text-inhalt :titel="$titel" :absaetze="$absaetze" :cta="$cta" :anker="$anker">
+                {{ $slot }}
+            </x-blocks.text-inhalt>
         </div>
 
         <div @class(['order-1', 'lg:order-2' => $bild_seite === 'rechts', 'lg:order-1' => $bild_seite === 'links',

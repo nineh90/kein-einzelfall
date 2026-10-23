@@ -18,6 +18,17 @@ use Illuminate\Database\Seeder;
  * „Mit den Fragen, die Menschen, die mit den Folgen von Trauma leben,
  * beschäftigen.“ Der Schlusssatz, der Name der Reihe, fett.
  *
+ * Der zweite (KEV-141): „Unsere Veranstaltungen zum Fonds Sexueller
+ * Missbrauch (FSM)“ 2025, Taddis Text und ihr Bild („FSM“ im Licht), das
+ * Bild links, damit die Abschnitte sich abwechseln. Neueste Veranstaltung
+ * oben. Korrigiert: „das ab sofort“ → „dass“ (mit schließendem Gedankenstrich
+ * und „dem 31.08.2025“), „So setzen wir im November 2025“ → „setzten“,
+ * Komma vor „und orientierten uns“, „Ausfüllhilfe-Veranstaltung“,
+ * „behinderungsbedingten“ klein, Anführungszeichen „…“. Ihr P.S. mit dem Link
+ * zu den Musterwidersprüchen steht als Hinweis-Kasten darunter, der Link zeigt
+ * auf die Dokumente der FSM-Seite (Sprungziel `dokumente`). „Gemeinsam KE!N
+ * EINZELFALL.“ fett wie auf ihren anderen Seiten.
+ *
  * Mit Inhalt darf die Seite gefunden werden (vorher noindex wie andere leere
  * Seiten). Legt nur an, was fehlt.
  */
@@ -56,6 +67,89 @@ class RueckblickSeeder extends Seeder
         '*KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung.*',
     ];
 
+    public const FSM_TITEL = 'Unsere Veranstaltungen zum Fonds Sexueller Missbrauch (FSM)';
+
+    public const FSM_BILD = '/img/rueckblick/fsm.webp';
+
+    public const FSM_ABSAETZE = [
+        'Die plötzlichen Veränderungen beim Fonds Sexueller Missbrauch (FSM) haben viele Betroffene nicht nur '
+            .'verunsichert – sie haben Vertrauen erschüttert.',
+        'Neue Fristen, Jahrestranchen, der Wegfall von Vorauszahlungen und komplizierte Übergangsregelungen waren '
+            .'schon Anfang 2025 schwer genug zu verstehen. Viele Betroffene wussten plötzlich nicht mehr, welche '
+            .'Regelung für sie gilt, was noch beantragt werden kann und wie bereits bewilligte Leistungen überhaupt '
+            .'noch genutzt werden können.',
+        'Deshalb haben wir mehrere kostenfreie Online-Veranstaltungen zum Thema „FSM vs. offene Fragen“ angeboten. '
+            .'Wir wollten nicht nur Informationen weitergeben, sondern das sortieren, was durch viele neue Regelungen '
+            .'unübersichtlich geworden war. Gemeinsam haben wir geschaut, wann eine Bewilligung erfolgt ist, welche '
+            .'Fristen gelten, welche Tranchen betroffen sind und was sich konkret verändert hat.',
+        'Aus diesen Veranstaltungen entstanden dann unsere „Ausfüllhilfen für Neuanträge“, die wir ebenso mehrfach '
+            .'kostenfrei angeboten haben. Wir gingen die Anträge gemeinsam Schritt für Schritt durch, beantworteten '
+            .'Fragen und versuchten, aus einem belastenden und komplizierten Verfahren etwas zu machen, das ein '
+            .'bisschen weniger überwältigend wirkte, und orientierten uns an der Antragsfrist vom 31.08.2025.',
+        'Wir machten Mut, wir motivierten, wir haben geholfen, Neuanträge zu stellen.',
+        'Dann kam der 24. Juni 2025.',
+        'Plötzlich gab der FSM bekannt, dass Erstanträge rückwirkend nur noch berücksichtigt werden sollten, wenn '
+            .'sie bis zum 19.03.2025 eingegangen waren – obwohl zuvor mit einer deutlich späteren Antragsfrist, dem '
+            .'31.08.2025, gearbeitet worden war –, und dass ab sofort keine weiteren Neuanträge mehr möglich waren.',
+        'Für viele Betroffene war das mehr als ein Schock!',
+        'Wir waren erschüttert und schämten uns, noch so viele Betroffene nach dem 19.03.25 motiviert und '
+            .'unterstützt zu haben, diesen belastenden Antrag zu stellen, der nun nicht mehr zugelassen wurde.',
+        'Menschen haben ihren Mut zusammengenommen, sich wieder mit ihrer Geschichte beschäftigt, Unterlagen '
+            .'zusammengesucht und Anträge ausgefüllt – oft unter großer psychischer Belastung. Und dann mussten sie '
+            .'erfahren, dass ihr Antrag wegen eines rückwirkend gesetzten Stichtages nicht mehr berücksichtigt wird.',
+        'Auch wir waren darüber enttäuscht, wütend und fassungslos. Denn genau ein Hilfesystem für Menschen mit '
+            .'schweren Gewalterfahrungen sollte verlässlich, transparent und traumasensibel handeln – und nicht '
+            .'zusätzlich das Gefühl erzeugen, wieder keine Kontrolle zu haben und wieder im Stich gelassen zu werden.',
+        'Aus einer geplanten Ausfüllhilfe-Veranstaltung wurde deshalb nun ein Raum für „Frust und Fragen“. Hier '
+            .'durfte alles Platz haben: Enttäuschung, Wut, Unsicherheit, offene Fragen und die Sorge darüber, wie es '
+            .'jetzt weitergeht. Gleichzeitig haben wir gemeinsam geschaut, welche Möglichkeiten noch bestehen und wie '
+            .'Betroffene ihre Rechte weiter wahrnehmen können.',
+        'So setzten wir im November 2025 unsere Veranstaltungen fort. Unter dem Motto „Wir lassen uns nicht zum '
+            .'Schweigen bringen – wir kämpfen weiter!“ informierten wir über neue Entwicklungen, bestehende '
+            .'Unterstützungsmöglichkeiten und die weitere Abwicklung des Fonds.',
+        'Bei allen diesen Veranstaltungen war uns besonders wichtig, dass niemand zusätzliche Hürden überwinden '
+            .'muss: kostenfrei, ohne Mitgliedschaft, ohne Klarnamenzwang, Kamera und Mikrofon freiwillig und Fragen '
+            .'jederzeit über den Chat möglich.',
+        'Unsere FSM-Veranstaltungen waren deshalb viel mehr als reine Informationsabende. Sie waren Orte zum '
+            .'Verstehen, Sortieren, Auffangen, Fragenstellen und Gehörtwerden.',
+        'Und sie haben uns noch einmal sehr deutlich gezeigt: Hilfe darf nicht selbst zur nächsten Belastung '
+            .'werden. Wer Unterstützung verspricht, muss auch dafür sorgen, dass Menschen sich auf diese '
+            .'Unterstützung verlassen können.',
+        '*Gemeinsam KE!N EINZELFALL.*',
+    ];
+
+    /** Taddis P.S., als Kasten unter dem Abschnitt. Überschrift von uns. */
+    public const FSM_PS_TITEL = 'Ablehnungsbescheid bekommen?';
+
+    public const FSM_PS = 'Falls du einen Ablehnungsbescheid zum behinderungsbedingten Mehrbedarf oder zu deinem '
+        .'Neuantrag nach dem 19.03.25 bekommen hast, kannst du einen Widerspruch einlegen. Vorlagen für den '
+        .'Widerspruch und unsere Stellungnahmen dazu findest du auf unserer '
+        .'[Seite zum Fonds Sexueller Missbrauch](/fsm-erweitertes-hilfesystem#dokumente).';
+
+    /**
+     * Die Abschnitte in der Reihenfolge der Seite, neueste Veranstaltung oben.
+     *
+     * @return list<array{titel: string, absaetze: list<string>, bild: string, bild_seite: string, danach?: array}>
+     */
+    public static function abschnitte(): array
+    {
+        return [
+            [
+                'titel' => self::TRAUMA_TITEL,
+                'absaetze' => self::TRAUMA_ABSAETZE,
+                'bild' => self::TRAUMA_BILD,
+                'bild_seite' => 'rechts',
+            ],
+            [
+                'titel' => self::FSM_TITEL,
+                'absaetze' => self::FSM_ABSAETZE,
+                'bild' => self::FSM_BILD,
+                'bild_seite' => 'links',
+                'danach' => ['typ' => 'hinweis', 'data' => ['titel' => self::FSM_PS_TITEL, 'text' => self::FSM_PS]],
+            ],
+        ];
+    }
+
     public function run(): void
     {
         self::anlegen();
@@ -73,25 +167,34 @@ class RueckblickSeeder extends Seeder
             return;
         }
 
-        $vorhanden = $seite->blocks->contains(fn ($b) => ($b->data['titel'] ?? null) === self::TRAUMA_TITEL);
+        $warLeer = $seite->blocks->isEmpty();
+        $position = (int) $seite->blocks->max('position');
 
-        if ($vorhanden) {
-            return;
+        foreach (self::abschnitte() as $abschnitt) {
+            $vorhanden = $seite->blocks->contains(fn ($b) => ($b->data['titel'] ?? null) === $abschnitt['titel']);
+
+            if ($vorhanden) {
+                continue;
+            }
+
+            $seite->blocks()->create([
+                'typ' => 'text_media',
+                'position' => $seite->blocks()->exists() ? ++$position : $position,
+                'data' => [
+                    'titel' => $abschnitt['titel'],
+                    'absaetze' => $abschnitt['absaetze'],
+                    // Stimmungsbilder, sagen nichts aus: ohne Bildbeschreibung.
+                    'bild' => $abschnitt['bild'],
+                    'bild_seite' => $abschnitt['bild_seite'],
+                ],
+            ]);
+
+            if (isset($abschnitt['danach'])) {
+                $seite->blocks()->create($abschnitt['danach'] + ['position' => ++$position]);
+            }
         }
 
-        $warLeer = $seite->blocks->isEmpty();
-
-        $seite->blocks()->create([
-            'typ' => 'text_media',
-            'position' => (int) $seite->blocks->max('position') + ($warLeer ? 0 : 1),
-            'data' => [
-                'titel' => self::TRAUMA_TITEL,
-                'absaetze' => self::TRAUMA_ABSAETZE,
-                // Stimmungsbild, sagt nichts aus: ohne Bildbeschreibung.
-                'bild' => self::TRAUMA_BILD,
-                'bild_seite' => 'rechts',
-            ],
-        ]);
+        self::sprungzielDokumente();
 
         if ($warLeer) {
             $seite->update([
@@ -99,5 +202,32 @@ class RueckblickSeeder extends Seeder
                 'meta_description' => $seite->meta_description ?: self::META_DESCRIPTION,
             ]);
         }
+    }
+
+    /**
+     * Der Link im P.S. zeigt auf die Dokumente der FSM-Seite. Ein festes
+     * Sprungziel, damit er auch auf Englisch und nach einer geänderten
+     * Überschrift trifft. Nur, wenn dort noch keins steht.
+     *
+     * Öffentlich, weil auch der AltseiteSeeder es aufruft: Auf frischer
+     * Datenbank gibt es die FSM-Seite erst nach den Migrationen.
+     */
+    public static function sprungzielDokumente(): void
+    {
+        $deutsch = Page::where('slug', 'fsm-erweitertes-hilfesystem')->where('locale', 'de')->with('blocks')->first();
+        $block = $deutsch?->blocks->first(fn ($b) => $b->typ === 'text'
+            && str_starts_with((string) ($b->data['titel'] ?? ''), 'Dokumente von uns'));
+
+        if (! $block) {
+            return;
+        }
+
+        // Die Übersetzungen tragen dieselben Bausteine an derselben Stelle,
+        // aber mit übersetzter Überschrift.
+        Page::where('uebersetzungs_gruppe', $deutsch->uebersetzungs_gruppe)->with('blocks')->get()
+            ->flatMap->blocks
+            ->filter(fn ($b) => $b->typ === 'text' && $b->position === $block->position)
+            ->reject(fn ($b) => filled($b->data['anker'] ?? null))
+            ->each(fn ($b) => $b->update(['data' => $b->data + ['anker' => 'dokumente']]));
     }
 }

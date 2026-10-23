@@ -2459,3 +2459,17 @@ wie bisher mittig neben dem Bild.
 Tests: `RueckblickTest`, `TeamUndGruppenTest` angepasst, Barrierefreiheits-Lauf
 `/rueckblick` auf Deutsch und Englisch.
 
+**Seit KEV-141** der zweite Abschnitt: „Unsere Veranstaltungen zum Fonds
+Sexueller Missbrauch (FSM)“ (2025), Bild links, damit die Abschnitte sich
+abwechseln; neueste Veranstaltung oben. Taddis P.S. (Widerspruch nach
+Ablehnung) steht als Hinweis-Kasten darunter und verlinkt
+`/fsm-erweitertes-hilfesystem#dokumente`, die Dokumentenliste mit den
+Musterwidersprüchen. Das Sprungziel `dokumente` setzt `RueckblickSeeder`
+(auf frischer Datenbank aus dem `AltseiteSeeder` heraus, die FSM-Seite gibt es
+erst nach den Migrationen).
+
+**Text mit Bild nutzt jetzt den Inhaltsteil des Textbausteins**
+(`x-blocks.text-inhalt`): ab sechs Absätzen nach vier eingeklappt
+(„Weiterlesen“), Aufzählungen mit „- “, festes Sprungziel möglich. Vorher
+hatte der Baustein eine eigene, ärmere Fassung davon.
+

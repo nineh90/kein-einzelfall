@@ -75,9 +75,9 @@
             $attribute['seite'] = $block->page;
         }
 
-        // Schritte mit Sprungziel, wie die Textabschnitte (KEV-152: die
-        // Kachel „Frist bekommen – Was jetzt?“ springt dorthin).
-        if ($block->typ === 'schritte') {
+        // Schritte und Text mit Bild mit Sprungziel, wie die Textabschnitte
+        // (KEV-152: die Kachel „Frist bekommen – Was jetzt?“ springt dorthin).
+        if (in_array($block->typ, ['schritte', 'text_media'], true)) {
             $attribute['anker'] = $block->anker();
         }
     @endphp
