@@ -2495,6 +2495,11 @@ FSM auf rechts und aus-unserer-sicht auf links (nur, wenn sie noch so stehen,
 wie wir sie angelegt hatten). Taddis Zwischenüberschriften „Teil I/II“ sind
 fette Absätze wie bei ihr, ihre zwei Aufzählungen Listen.
 
+**Seit KEV-137** steht über allem Taddis Einleitung (Textbaustein ohne
+Überschrift, `RueckblickSeeder::EINLEITUNG`), das Titelbild ist ihr Fotoalbum
+statt des Platzhalters. Die Beschreibung für Suchmaschinen ist ihr Satz über
+die Seite statt „zuletzt …“ mit der neuesten Veranstaltung.
+
 **Listen im eingeklappten Teil** („Weiterlesen“ in `x-blocks.text-inhalt`)
 haben jetzt dieselben Listenpunkte wie oben. Vorher standen sie dort ohne
 Punkte (betraf schon die Aufzählung bei aus-unserer-sicht).

@@ -95,6 +95,9 @@ class Titelbilder
         // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten. Ohne
         // Unterzeile.
         'fristen' => null,
+        // KEV-137: Bild von Taddi, aufgeschlagenes Fotoalbum mit Bildern von
+        // Veranstaltungen. Ohne Unterzeile, ihre Einleitung steht darunter.
+        'rueckblick' => null,
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel. Ohne Unterzeile.
         'abkuerzungen-im-sexuellen-kontext' => null,
@@ -146,9 +149,6 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
-        // KEV-72, bis Taddi ein Bild schickt (Gruppen & Veranstaltungen hat
-        // seit KEV-127 eins, Öffentlichkeitsarbeit seit KEV-149)
-        'rueckblick',
         // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
         'behoerden-und-bescheide',
     ];
@@ -227,6 +227,9 @@ class Titelbilder
      *  - Formulare: Formular mit Vereinslogo und Füller (KEV-151). Rechts um
      *    Wand verlängert, Blatt von 12 bis 92 % der Höhe; mit 40 % bleibt
      *    oben das Logo auf dem Formular zu sehen.
+     *  - Rückblick: aufgeschlagenes Fotoalbum, davor ein loses Foto (KEV-137).
+     *    Rechts um Wand verlängert, Album zwischen 7 und 81 %, das lose Foto
+     *    bis 97 % der Höhe; mit 40 % bleibt das Album ganz.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -257,6 +260,7 @@ class Titelbilder
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,
+        self::ORDNER.'/rueckblick.webp' => 40,
     ];
 
     /**

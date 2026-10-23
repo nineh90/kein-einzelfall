@@ -374,8 +374,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   und **Rückblick**. Beide sind veröffentlicht, aber noch ohne Text und für
   Suchmaschinen gesperrt (`noindex`). Wenn der Text da ist, im Panel den Haken
   „noindex“ entfernen. Eigene Bilder von Taddi haben inzwischen Gruppen &
-  Veranstaltungen (KEV-127) und Öffentlichkeitsarbeit (KEV-149), der Rückblick
-  trägt noch den Platzhalter. Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
+  Veranstaltungen (KEV-127), Öffentlichkeitsarbeit (KEV-149) und der Rückblick
+  (KEV-137). Offen: Sollen **Aktuelles** und **KE!N EINZELFALL im Dialog** im
   Menü bleiben? Taddis Gliederung nennt sie nicht, sie stehen vorerst dahinter.
 - [ ] **Öffentlichkeitsarbeit (KEV-129).** Taddis Text steht, die beiden Sätze
   in Anführungszeichen fett, die Seite ist jetzt für Suchmaschinen offen.
@@ -574,6 +574,16 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
   Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
+- [ ] **Rückblick: Einleitung und Titelbild (KEV-137), bitte gegenlesen.**
+  /rueckblick hat oben Taddis Einleitung („Manche Begegnungen, Projekte und
+  Veranstaltungen wirken noch lange nach. …“) und ihr Titelbild (Fotoalbum)
+  statt des Platzhalters.
+  - **Absätze:** Der Text kam im Ticket in einer Zeile an. Wir haben vier
+    Absätze gesetzt (je zwei Sätze, dann die zwei Schlusssätze einzeln). Wenn
+    ihr Original anders gegliedert ist oder etwas fett sein soll, bitte sagen.
+  - **Beschreibung für Suchmaschinen** ist jetzt ihr Satz „Hier findest du
+    Eindrücke von …“ statt unseres „zuletzt Trauma, Bindung und Beziehung …“,
+    das mit jeder neuen Veranstaltung veraltet wäre.
 - [ ] **Rückblick: Veranstaltungen rund um Assistenzhunde (KEV-138), bitte
   ansehen.** Neuer Abschnitt auf /rueckblick mit Taddis Text aus „Assistenzhunde
   Veranstaltung“ und ihrem Bild (Frau mit Hund im Gegenlicht). Er steht
@@ -610,8 +620,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     zwei Dateien sind von uns. „e. V.“ → „e.V.“, die drei Zeilen zum
     Workshop-Titel sind ein Absatz, ihr Fettes ist fett.
   - Im selben Drive-Ordner liegen „0 Rückblick“ und „0 Rückblick II“ (vermutlich
-    das Titelbild der Seite, noch der Platzhalter) und „Assistenzhunde“ (seit
-    KEV-138 eingebaut).
+    das Titelbild der Seite, seit KEV-137 eins davon eingebaut) und
+    „Assistenzhunde“ (seit KEV-138 eingebaut).
 - [ ] **Rückblick: Veranstaltungen zum FSM (KEV-141).** Zweiter Abschnitt
   auf /rueckblick mit Taddis Text und dem „FSM“-Bild (links). Lange Abschnitte
   klappen jetzt nach vier Absätzen ein („Weiterlesen“), auch der zu „Trauma,

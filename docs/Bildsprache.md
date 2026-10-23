@@ -99,6 +99,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Publikationen | Broschürenstapel und Lesebrille |
 | Veranstaltungen | zwei Holzstühle und ein runder Tisch mit zwei Mikrofonen vor warmer Wand; von Taddi geliefert (KEV-148, statt Becher und Vase), gleicher Dateiname, ausgerichtet auf 75 %: unten ausgerichtet fehlten ab 1440 px die Stuhllehnen. Gilt auch für die Terminübersicht |
 | Gruppen & Veranstaltungen | Laptop mit Videotreffen (neun Gesichter) auf rundem Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-127, statt Platzhalter), ausgerichtet auf 40 %: unten ausgerichtet fehlte ab 1440 px die obere Reihe der Gesichter |
+| Rückblick | aufgeschlagenes Fotoalbum mit Bildern von Veranstaltungen (Publikum, Videotreffen, Stuhlkreis, Mikrofon), davor ein loses Foto von zwei Menschen im Gespräch; von Taddi geliefert (KEV-137, statt Platzhalter). Rechts um Wand verlängert (2,58 : 1), Album zwischen 7 und 81 % der Höhe, ausgerichtet auf 40 %: bis 1440 px ist alles zu sehen, darüber bleibt das Album, das lose Foto fällt unten weg |
 | Öffentlichkeitsarbeit | Megafon (grün-weiß) auf Holztisch, Notizbuch mit Stift; von Taddi geliefert (KEV-149, statt Platzhalter), ausgerichtet auf 50 %: unten ausgerichtet fehlte ab 1440 px der obere Rand des Trichters |
 | Tätigkeits- und Jahresberichte | vier Leinenbücher vor warmer Wand, auf dem vordersten „2025“; von Taddi geliefert (KEV-147, statt Platzhalter). Rechts um ruhige Wand verlängert (2,58 : 1): Im 16:9-Original reichten die Bücher bis zur Bildmitte, das vordere lag unter dem Titel und „2025“ stand wie ein Teil der Überschrift daneben. Ausgerichtet auf 60 % |
 | Schutz- und Wertekonzept | Holzdach aus zwei Brettern über zwei Holzkugeln und einem kleinen Holzzylinder; von Taddi geliefert (KEV-145, statt Platzhalter), ausgerichtet auf 65 %: unten ausgerichtet fehlte ab 1440 px die Dachspitze |
@@ -164,7 +165,8 @@ Wand mit Fensterlicht, ohne Motiv. Liste in
 raus, Istanbul-Konvention und Kinderkodex seit KEV-79, Gruppen & Veranstaltungen
 seit KEV-127, Öffentlichkeitsarbeit seit KEV-149, die Tätigkeits- und
 Jahresberichte (seit KEV-103 dabei) seit KEV-147, Schutz- und Wertekonzept und
-Red Flags (seit KEV-97 dabei) seit KEV-145 und KEV-146). Die richtigen Bilder kommen in
+Red Flags (seit KEV-97 dabei) seit KEV-145 und KEV-146, der Rückblick seit KEV-137).
+Die richtigen Bilder kommen in
 späteren Tickets; wer eins setzt, ersetzt einfach den Platzhalter im Panel.
 
 Erzeugt direkt über fal.ai, **nicht** mit `bin/titelbild`: Die Vorlage

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Page;
+use App\Support\Titelbilder;
 use Database\Seeders\AltseiteSeeder;
 use Database\Seeders\RueckblickSeeder;
 use Database\Seeders\UebersetzungenSeeder;
@@ -15,6 +16,7 @@ use Tests\TestCase;
  * Veranstaltungen zum Fonds Sexueller Missbrauch (FSM)“ mit ihrem P.S.
  * KEV-140: „Zusammenarbeit mit aus-unserer-sicht …“ mit den Präsentationen.
  * KEV-138: „Unsere Veranstaltungen rund um Assistenzhunde“ nach Trauma.
+ * KEV-137: Taddis Einleitung über allem und ihr Titelbild.
  */
 class RueckblickTest extends TestCase
 {
@@ -25,6 +27,58 @@ class RueckblickTest extends TestCase
     {
         parent::setUp();
         $this->seed(AltseiteSeeder::class);
+    }
+
+    public function test_einleitung_und_titelbild_von_taddi(): void
+    {
+        $html = $this->get('/rueckblick')->getContent();
+
+        // Einleitung ohne eigene Überschrift, vor der ersten Veranstaltung
+        $einleitung = strpos($html, '<p>Manche Begegnungen, Projekte und Veranstaltungen wirken noch lange nach.');
+        $this->assertNotFalse($einleitung);
+        $this->assertLessThan(strpos($html, 'im Dialog – Trauma, Bindung und Beziehung'), $einleitung);
+        $this->assertStringContainsString('Ehrenamtsmessen, Projekten und besonderen Momenten unserer Vereinsarbeit.', $html);
+        $this->assertStringContainsString('<p>Was hinter uns liegt, hat Spuren hinterlassen – in unserer Arbeit', $html);
+        $this->assertStringContainsString('und auf Erfahrungen, die bis heute in unserer Arbeit nachwirken.</p>', $html);
+        // Vier Absätze: nichts eingeklappt
+        $this->assertDoesNotMatchRegularExpression('/nachwirken\.<\/p>\s*<\/div>\s*<details/', $html);
+
+        // Ihr Bild statt des Platzhalters, Album ganz im Bild
+        $this->assertStringContainsString('src="/img/titelbilder/rueckblick.webp?v=', $html);
+        $this->assertStringNotContainsString('/img/titelbilder/platzhalter.webp', $html);
+        $this->assertStringContainsString('object-position: 0% 40%', $html);
+        $this->assertSame([2000, 776], array_slice(getimagesize(public_path('img/titelbilder/rueckblick.webp')), 0, 2));
+        $this->assertFileExists(public_path('img/titelbilder/rueckblick-1000.webp'));
+
+        // Beschreibung für Suchmaschinen aus ihrem Text, ohne „zuletzt …“
+        $this->assertStringContainsString('<meta name="description" content="Rückblick von KE!N EINZELFALL e.V.: Eindrücke von Veranstaltungen', $html);
+    }
+
+    /** Auf der Seite, wie sie vor KEV-137 war; Gepflegtes bleibt. */
+    public function test_bestehende_seite_bekommt_einleitung_bild_und_beschreibung(): void
+    {
+        $seite = Page::where('slug', 'rueckblick')->where('locale', 'de')->firstOrFail();
+        $seite->blocks()->where('typ', 'text')->delete();
+        $seite->update(['titelbild' => Titelbilder::PLATZHALTER, 'meta_description' => RueckblickSeeder::META_DESCRIPTION_ALT]);
+
+        (require database_path('migrations/2026_10_23_250000_rueckblick_einleitung_titelbild.php'))->up();
+
+        $seite->refresh();
+        $this->assertSame(Titelbilder::datei('rueckblick'), $seite->titelbild);
+        $this->assertSame(RueckblickSeeder::META_DESCRIPTION, $seite->meta_description);
+        $erster = $seite->blocks()->orderBy('position')->first();
+        $this->assertSame(['text', RueckblickSeeder::EINLEITUNG], [$erster->typ, $erster->data['absaetze']]);
+        $this->assertSame(1, $seite->blocks()->where('typ', 'text')->count());
+
+        // Vom Verein gepflegt: bleibt.
+        $erster->update(['data' => ['absaetze' => ['Vom Verein geändert.']]]);
+        $seite->update(['titelbild' => '/storage/eigenes.webp', 'meta_description' => 'Eigene Beschreibung.']);
+        (require database_path('migrations/2026_10_23_250000_rueckblick_einleitung_titelbild.php'))->up();
+
+        $seite->refresh();
+        $this->assertSame(['/storage/eigenes.webp', 'Eigene Beschreibung.'], [$seite->titelbild, $seite->meta_description]);
+        $this->assertSame(1, $seite->blocks()->where('typ', 'text')->count());
+        $this->assertSame(['Vom Verein geändert.'], $erster->fresh()->data['absaetze']);
     }
 
     public function test_abschnitt_mit_taddis_text_und_bild(): void
@@ -152,7 +206,7 @@ class RueckblickTest extends TestCase
     public function test_legt_nur_an_was_fehlt(): void
     {
         $seite = Page::where('slug', 'rueckblick')->where('locale', 'de')->firstOrFail();
-        $block = $seite->blocks()->firstOrFail();
+        $block = $seite->blocks()->where('typ', 'text_media')->firstOrFail();
         $block->update(['data' => array_merge($block->data, ['absaetze' => ['Vom Verein geändert.']])]);
 
         RueckblickSeeder::anlegen();
@@ -161,9 +215,10 @@ class RueckblickTest extends TestCase
         (require database_path('migrations/2026_10_23_190000_rueckblick_fsm.php'))->up();
         (require database_path('migrations/2026_10_23_200000_rueckblick_aus_unserer_sicht.php'))->up();
         (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
+        (require database_path('migrations/2026_10_23_250000_rueckblick_einleitung_titelbild.php'))->up();
 
-        // Trauma, Assistenzhunde, FSM, Hinweis, aus-unserer-sicht, Präsentationen
-        $this->assertSame(6, $seite->blocks()->count());
+        // Einleitung, Trauma, Assistenzhunde, FSM, Hinweis, aus-unserer-sicht, Präsentationen
+        $this->assertSame(7, $seite->blocks()->count());
         $this->assertSame(['Vom Verein geändert.'], $block->fresh()->data['absaetze']);
     }
 
@@ -180,15 +235,16 @@ class RueckblickTest extends TestCase
             $b->update(['data' => array_merge($b->data, ['bild_seite' => $seiteBild])]);
         }
         // Vom Verein zwischen Trauma und FSM gesetzt: bleibt dort.
-        $seite->blocks()->where('position', '>=', 1)->increment('position');
-        $seite->blocks()->create(['typ' => 'hinweis', 'position' => 1, 'data' => ['titel' => 'Vom Verein', 'text' => 'Eigener Kasten.']]);
+        $nachTrauma = $bild(RueckblickSeeder::TRAUMA_BILD)->position + 1;
+        $seite->blocks()->where('position', '>=', $nachTrauma)->increment('position');
+        $seite->blocks()->create(['typ' => 'hinweis', 'position' => $nachTrauma, 'data' => ['titel' => 'Vom Verein', 'text' => 'Eigener Kasten.']]);
 
         (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
 
         $reihenfolge = $seite->blocks()->orderBy('position')->get()
-            ->map(fn ($b) => $b->data['bild'] ?? $b->data['titel'])->all();
+            ->map(fn ($b) => $b->data['bild'] ?? $b->data['titel'] ?? $b->typ)->all();
         $this->assertSame([
-            RueckblickSeeder::TRAUMA_BILD, 'Vom Verein', RueckblickSeeder::ASSISTENZ_BILD, RueckblickSeeder::FSM_BILD,
+            'text', RueckblickSeeder::TRAUMA_BILD, 'Vom Verein', RueckblickSeeder::ASSISTENZ_BILD, RueckblickSeeder::FSM_BILD,
             RueckblickSeeder::FSM_PS_TITEL, RueckblickSeeder::AUS_BILD, RueckblickSeeder::AUS_DOKUMENTE_TITEL,
         ], $reihenfolge);
         $this->assertSame('rechts', $bild(RueckblickSeeder::FSM_BILD)->data['bild_seite']);
@@ -196,7 +252,7 @@ class RueckblickTest extends TestCase
 
         // Ein zweites Mal ändert nichts mehr.
         (require database_path('migrations/2026_10_23_240000_rueckblick_assistenzhunde.php'))->up();
-        $this->assertSame(7, $seite->blocks()->count());
+        $this->assertSame(8, $seite->blocks()->count());
         $this->assertSame('rechts', $bild(RueckblickSeeder::FSM_BILD)->data['bild_seite']);
     }
 
@@ -205,6 +261,10 @@ class RueckblickTest extends TestCase
         $this->seed(UebersetzungenSeeder::class);
 
         $html = $this->get('/en/rueckblick')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Some encounters, projects and events stay with us for a long time.', $html);
+        $this->assertStringContainsString('content="A look back at KE!N EINZELFALL e.V.: impressions of events', $html);
+        $this->assertStringContainsString('src="/img/titelbilder/rueckblick.webp?v=', $html);
 
         $this->assertStringContainsString('KE!N EINZELFALL im Dialog – Trauma, attachment and relationships', $html);
         $this->assertStringContainsString('our event series “KE!N EINZELFALL im Dialog – Knowledge meets experience” began on 10 August 2026', $html);

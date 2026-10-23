@@ -52,6 +52,10 @@ use Illuminate\Database\Seeder;
  * Die Bilder wechseln weiter die Seite: FSM jetzt rechts, aus-unserer-sicht
  * links (Migration KEV-138, nur wenn der Verein sie nicht umgestellt hat).
  *
+ * Darüber seit KEV-137 Taddis Einleitung als Textbaustein ohne Überschrift
+ * (im Ticket ohne Absätze angekommen, Absätze von uns). Ihr Satz über die
+ * Eindrücke ist auch die Beschreibung für Suchmaschinen.
+ *
  * Mit Inhalt darf die Seite gefunden werden (vorher noindex wie andere leere
  * Seiten). Legt nur an, was fehlt.
  */
@@ -59,8 +63,26 @@ class RueckblickSeeder extends Seeder
 {
     public const SLUG = 'rueckblick';
 
-    public const META_DESCRIPTION = 'Rückblick auf Veranstaltungen von KE!N EINZELFALL e.V., zuletzt „KE!N '
+    public const META_DESCRIPTION = 'Rückblick von KE!N EINZELFALL e.V.: Eindrücke von Veranstaltungen, '
+        .'Kooperationen, Workshops, Ehrenamtsmessen, Projekten und besonderen Momenten unserer Vereinsarbeit.';
+
+    /** Bis KEV-137, nennt die neueste Veranstaltung und veraltet mit jeder weiteren. */
+    public const META_DESCRIPTION_ALT = 'Rückblick auf Veranstaltungen von KE!N EINZELFALL e.V., zuletzt „KE!N '
         .'EINZELFALL im Dialog – Trauma, Bindung und Beziehung“ mit Lutz-Ulrich Besser.';
+
+    public const EINLEITUNG = [
+        'Manche Begegnungen, Projekte und Veranstaltungen wirken noch lange nach. In unserem Rückblick zeigen wir, '
+            .'wo wir waren, was wir bewegt haben und welche Erfahrungen uns auf unserem Weg geprägt haben.',
+        'Hier findest du Eindrücke von Veranstaltungen, Kooperationen, Workshops, Ehrenamtsmessen, Projekten und '
+            .'besonderen Momenten unserer Vereinsarbeit. Manche davon haben neue Kontakte entstehen lassen, andere '
+            .'neue Ideen angestoßen oder uns noch einmal gezeigt, wie wichtig Sichtbarkeit, Austausch und '
+            .'gemeinsames Engagement sind.',
+        'Was hinter uns liegt, hat Spuren hinterlassen – in unserer Arbeit, in unseren Beziehungen und in dem, was '
+            .'wir heute weitertragen.',
+        'Darum schauen wir auf Momente zurück, die uns berührt, verändert und weitergebracht haben – auf '
+            .'Begegnungen, aus denen Verbindungen entstanden sind, und auf Erfahrungen, die bis heute in unserer '
+            .'Arbeit nachwirken.',
+    ];
 
     public const TRAUMA_TITEL = 'KE!N EINZELFALL im Dialog – Trauma, Bindung und Beziehung';
 
@@ -329,6 +351,16 @@ class RueckblickSeeder extends Seeder
         }
 
         $warLeer = $seite->blocks->isEmpty();
+
+        // Taddis Einleitung über allen Veranstaltungen (KEV-137). Einen
+        // anderen Textbaustein hat die Seite nicht; steht einer da, ist es
+        // diese, auch wenn der Verein sie umgeschrieben hat.
+        if (! $seite->blocks->contains('typ', 'text')) {
+            $seite->blocks()->increment('position');
+            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::EINLEITUNG]]);
+            $seite->load('blocks');
+        }
+
         $abschnitte = self::abschnitte();
         $abschnittBlock = fn (array $abschnitt) => $seite->blocks
             ->first(fn ($b) => ($b->data['titel'] ?? null) === $abschnitt['titel']);
