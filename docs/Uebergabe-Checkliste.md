@@ -554,6 +554,28 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   gehen schon jetzt mit dem Baustein „Text mit Bild“. Eine Galerie mit großer
   Ansicht wie bei den Messen gibt es für Seiten noch nicht, die bauen wir bei
   Bedarf.
+- [ ] **Abkürzungen im sexuellen Kontext (KEV-154), bitte ansehen.** Drittes
+  Glossar als eigene Seite unter „Wissen“, im Menü zwischen „Glossar“ und
+  „Behörden & Bescheide“ (Taddis Nummern 1, 2, 3): ihre Einleitung, alle 109
+  Abkürzungen und ihr Bild (Buchstabenwürfel) aus dem Drive, rechts um Wand
+  verlängert. Pflegen wie die anderen Glossare.
+  - **Triggerwarnung, Text von uns:** Bei Taddi steht über der Liste nur
+    „TRIGGERWARNUNG“. Die Warnung kommt jetzt vor der Seite, gebaut wie die
+    vor „Raum für Ungesagtes“ (einmal pro Besuch, weiter / Startseite /
+    Notausgang): „Auf dieser Seite werden Abkürzungen und Begriffe aus
+    Sexdienstleistung, Sexualität und BDSM erklärt. Manche Erklärungen
+    beschreiben sexuelle Praktiken sehr direkt. Einzelne Begriffe können an
+    sexualisierte Gewalt, Ausbeutung oder andere belastende Erfahrungen
+    erinnern. Bitte achte auf dich und entscheide selbst, ob und wann du diese
+    Inhalte lesen möchtest.“ Bitte gegenlesen oder durch ihren Text ersetzen
+    (Seite → Abschnitt „Triggerwarnung für diesen Bereich“).
+  - **Aufgeteilt:** Jede Zeile in Auflösung (neben der Abkürzung) und
+    Erklärung (darunter), am ersten Doppelpunkt, sonst am Semikolon. Bei
+    BulRum/RumBul und GF3 steht deshalb die Beschreibung als Auflösung.
+  - **Korrigiert:** „KE!N EINZELFALL e. V.“ → „e.V.“ wie überall.
+  - **Zu klären:** Die Seite ist für Suchmaschinen offen wie die anderen
+    Glossare. Damit kann sie auch bei Suchen nach Szenebegriffen auftauchen;
+    falls das nicht gewollt ist, im Panel „Von Suchmaschinen ausschließen“.
 - [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
   eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
   Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle

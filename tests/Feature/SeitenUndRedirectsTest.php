@@ -149,9 +149,10 @@ class SeitenUndRedirectsTest extends TestCase
          *
          * KEV-159: neu der Bereich „Raum für Ungesagtes“ und „Unüberhörbar“,
          * KEV-158 „Blickwinkel“, KEV-157 „Wall of Shame“, KEV-156 „Wort für
-         * Wort“, KEV-155 „Behörden & Bescheide“.
+         * Wort“, KEV-155 „Behörden & Bescheide“, KEV-154 „Abkürzungen im
+         * sexuellen Kontext“.
          */
-        $this->assertSame(50, Page::count());
+        $this->assertSame(51, Page::count());
         $this->assertSame(2, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

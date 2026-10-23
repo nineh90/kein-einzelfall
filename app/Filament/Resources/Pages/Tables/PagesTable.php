@@ -75,9 +75,10 @@ class PagesTable
                     ->toggleable(),
             ])
             ->defaultSort('titel')
-            // Die Website hat gut zwei Dutzend Seiten. Blättern wäre hier nur
-            // ein zusätzlicher Klick ohne Nutzen.
-            ->defaultPaginationPageOption(50)
+            // Blättern wäre hier nur ein zusätzlicher Klick ohne Nutzen. Mit
+            // KEV-154 sind es 51 deutsche Seiten, mit Englisch über 100.
+            ->paginationPageOptions([50, 100, 'all'])
+            ->defaultPaginationPageOption(100)
             ->filters([
                 TernaryFilter::make('published_at')
                     ->label('Sichtbarkeit')

@@ -2,11 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\GlossaryTerm;
-use App\Models\Page;
-use App\Support\Titelbilder;
-use Illuminate\Database\Seeder;
-
 /**
  * Zweites Glossar „Behörden & Bescheide“ unter „Wissen“ (KEV-155).
  *
@@ -23,9 +18,9 @@ use Illuminate\Database\Seeder;
  * - Ihre Reihenfolge war fast alphabetisch, das Glossar sortiert selbst.
  * - Ein eigenes Bild gibt es noch nicht, bis dahin der Platzhalter.
  *
- * Legt nur an, was fehlt.
+ * Legt nur an, was fehlt (GlossarSeite).
  */
-class BehoerdenUndBescheideSeeder extends Seeder
+class BehoerdenUndBescheideSeeder extends GlossarSeite
 {
     public const SLUG = 'behoerden-und-bescheide';
 
@@ -44,46 +39,5 @@ class BehoerdenUndBescheideSeeder extends Seeder
     public const META_DESCRIPTION = 'Behörden & Bescheide: Begriffe aus Bescheiden und Behördenschreiben, von '
         .'Anhörung bis Widerspruchsbescheid, einfach erklärt. Von KE!N EINZELFALL e.V.';
 
-    public function run(): void
-    {
-        self::anlegen();
-    }
-
-    /** @return list<array{slug: string, begriff: string, erklaerung: string}> */
-    public static function eintraege(): array
-    {
-        return json_decode(file_get_contents(database_path('seeders/data/glossar-behoerden.json')), true);
-    }
-
-    public static function anlegen(): void
-    {
-        $seite = Page::firstOrCreate(
-            ['slug' => self::SLUG, 'locale' => 'de'],
-            [
-                'titel' => self::TITEL,
-                'meta_title' => self::TITEL.' - Kein Einzelfall e.V.',
-                'meta_description' => self::META_DESCRIPTION,
-                'published_at' => now(),
-            ],
-        );
-
-        if ($seite->wasRecentlyCreated) {
-            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::ABSAETZE]]);
-            $seite->blocks()->create(['typ' => 'glossar', 'position' => 1, 'data' => []]);
-        }
-
-        foreach (self::eintraege() as $eintrag) {
-            GlossaryTerm::firstOrCreate(
-                ['locale' => 'de', 'slug' => $eintrag['slug']],
-                [
-                    'begriff' => $eintrag['begriff'],
-                    'erklaerung' => $eintrag['erklaerung'],
-                    'seite_gruppe' => $seite->uebersetzungs_gruppe,
-                    'published_at' => now(),
-                ],
-            );
-        }
-
-        Titelbilder::platzhalterSetzen();
-    }
+    public const DATEI = 'glossar-behoerden.json';
 }

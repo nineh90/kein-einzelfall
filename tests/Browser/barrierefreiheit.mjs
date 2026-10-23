@@ -65,6 +65,8 @@ const SEITEN = [
     // ungeprüft nicht bleiben.
     ['Barrierefreiheit', '/barrierefreiheit'],
     ['Glossar', '/glossar'],
+    // Glossar mit eigener Warnung davor (KEV-154).
+    ['Abkürzungen im sexuellen Kontext', '/abkuerzungen-im-sexuellen-kontext'],
     // Zweites Glossar, nur Begriffe mit Erklärung (KEV-155).
     ['Behörden & Bescheide', '/behoerden-und-bescheide'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
@@ -154,9 +156,10 @@ async function pruefen(titel, url, vorbereiten = null, breite = 1400, trigger = 
         await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
     }
 
-    // Aus demselben Grund die Warnung vor „Raum für Ungesagtes“ (KEV-156).
+    // Aus demselben Grund die Warnungen vor „Raum für Ungesagtes“ (KEV-156)
+    // und den Abkürzungen im sexuellen Kontext (KEV-154).
     if (!bereich) {
-        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes"]'))
+        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes","abkuerzungen-im-sexuellen-kontext"]'))
     }
 
     const seite = await kontext.newPage()

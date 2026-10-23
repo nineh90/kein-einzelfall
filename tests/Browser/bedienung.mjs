@@ -56,10 +56,11 @@ async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false, 
         await kontext.addInitScript(() => localStorage.setItem('ke.trigger.aus', '1'))
     }
 
-    // Dasselbe für die Warnung vor „Raum für Ungesagtes“ (KEV-156): in diesem
-    // Besuch schon bestätigt. Geprüft wird sie weiter unten eigens.
+    // Dasselbe für die Warnungen vor „Raum für Ungesagtes“ (KEV-156) und den
+    // Abkürzungen im sexuellen Kontext (KEV-154): in diesem Besuch schon
+    // bestätigt. Geprüft wird sie weiter unten eigens.
     if (!bereich && js) {
-        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes"]'))
+        await kontext.addInitScript(() => sessionStorage.setItem('ke.bereichswarnung', '["raum-fuer-ungesagtes","abkuerzungen-im-sexuellen-kontext"]'))
     }
 
     const seite = await kontext.newPage()

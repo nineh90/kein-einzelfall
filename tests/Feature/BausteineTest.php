@@ -486,10 +486,13 @@ class BausteineTest extends TestCase
         // Aus dem Slug abgeleitet hiesse die Seite „Ueber Uns Vorstand Und Team".
         $this->seed(AltseiteSeeder::class);
 
+        // Wörter, in denen „ue“ kein umschriebenes „ü“ ist (KEV-154).
+        $echt = ['sexuellen'];
+
         foreach (Page::pluck('titel', 'slug') as $slug => $titel) {
             $this->assertDoesNotMatchRegularExpression(
                 '/\b\w*(ae|oe|ue|Ae|Oe|Ue)\w+\b/u',
-                $titel,
+                str_replace($echt, '', $titel),
                 "Titel von /{$slug} schreibt Umlaute aus: „{$titel}“"
             );
         }

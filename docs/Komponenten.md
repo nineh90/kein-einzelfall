@@ -2381,3 +2381,20 @@ Websuche, neues Glossar im Panel, Englisch), angepasst `GlossarSozialrechtTest`,
 `AttesteTest`, `AdminPanelTest`; im Browser-Lauf „Behörden & Bescheide“
 (Filtern beim Tippen, 390 und 1400 px), im Barrierefreiheits-Lauf die Seite
 auf Deutsch und Englisch.
+
+**Seit KEV-154** gibt es drei Glossar-Seiten unter „Wissen“, in Taddis
+Reihenfolge: Glossar (1), „Abkürzungen im sexuellen Kontext“ (2,
+`/abkuerzungen-im-sexuellen-kontext`, 109 Abkürzungen), „Behörden & Bescheide“
+(3). Beide neuen Seeder erben von `Database\Seeders\GlossarSeite`: Seite mit
+Einleitung und Baustein, optional eigene Triggerwarnung, Einträge aus
+`data/<datei>.json`, legt nur an, was fehlt. Ein viertes Glossar ist ein
+Seeder mit fünf Konstanten.
+
+Bei den Abkürzungen im sexuellen Kontext ist jede Zeile bei Taddi „AO ⇥ Alles
+ohne: Szenebegriff …“; geteilt am ersten Doppelpunkt, sonst am Semikolon, in
+Auflösung und Erklärung. Doppelte Abkürzungen (AO, FA, GB, HH) und solche aus
+dem ersten Glossar (BBB, FF, KK, KV) haben die Auflösung im Sprungziel
+(`#ao-alles-ohne`). Vor der Seite steht eine eigene Triggerwarnung
+(`pages.triggerwarnung`, Abschnitt 36), Text von uns, weil bei Taddi nur
+„TRIGGERWARNUNG“ steht.
+

@@ -25,7 +25,8 @@ class BehoerdenUndBescheideTest extends TestCase
     {
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
         $urls = array_column($wissen['children'], 'url');
-        $this->assertSame(array_search('/glossar', $urls) + 1, array_search('/behoerden-und-bescheide', $urls));
+        // Taddis Nummern: 1. Glossar, 2. sexueller Kontext (KEV-154), 3. diese.
+        $this->assertSame(array_search('/glossar', $urls) + 2, array_search('/behoerden-und-bescheide', $urls));
 
         $html = $this->get('/behoerden-und-bescheide')->assertOk()->getContent();
 
@@ -110,7 +111,7 @@ class BehoerdenUndBescheideTest extends TestCase
 
         $this->assertStringContainsString('Hier entsteht ein Verzeichnis', $this->get('/abkuerzungen-probe')->getContent());
         $this->assertSame(
-            ['Behörden & Bescheide', 'Glossar', 'Probe'],
+            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Glossar', 'Probe'],
             array_values(GlossaryTerm::seitenAuswahl()),
         );
 

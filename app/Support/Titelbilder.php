@@ -89,6 +89,9 @@ class Titelbilder
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
         // SER“), Zettelkasten. Ohne Unterzeile.
         'glossar' => null,
+        // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
+        // Buchstabenwürfel. Ohne Unterzeile.
+        'abkuerzungen-im-sexuellen-kontext' => null,
         // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
         // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar.
         //
@@ -207,6 +210,9 @@ class Titelbilder
      *    Stück der obersten Sprechblase.
      *  - Wort für Wort: aufgeschlagenes Buch auf zwei alten Büchern (KEV-156).
      *    Rechts um Wand verlängert, Bücher zwischen 47 und 86 % der Höhe.
+     *  - Abkürzungen im sexuellen Kontext: Kiste mit Buchstabenwürfeln
+     *    (KEV-154). Rechts um Wand verlängert, Kiste ab 15 %, Würfel bis 97 %
+     *    der Höhe; ausgerichtet auf 85 %.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -233,6 +239,7 @@ class Titelbilder
         self::ORDNER.'/blickwinkel.webp' => 35,
         self::ORDNER.'/wall-of-shame.webp' => 45,
         self::ORDNER.'/wort-fuer-wort.webp' => 80,
+        self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
     ];
 
     /**
