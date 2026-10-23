@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Page;
+use App\Support\Titelbilder;
 use Database\Seeders\FormulareSeeder;
 use Database\Seeders\UebersetzungenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +11,7 @@ use Tests\TestCase;
 
 /**
  * KEV-150: „Formulare“ unter „Wissen“, Taddis Text, die Formulare folgen.
+ * KEV-151: ihr Titelbild „4. Formulare“.
  */
 class FormulareTest extends TestCase
 {
@@ -49,6 +51,18 @@ class FormulareTest extends TestCase
         $html = $this->get('/formulare')->getContent();
         $this->assertStringContainsString('Formulare zum Herunterladen', $html);
         $this->assertStringContainsString('Mitgliedsantrag', $html);
+    }
+
+    public function test_titelbild_von_taddi(): void
+    {
+        $html = $this->get('/formulare')->getContent();
+
+        $this->assertStringContainsString('src="/img/titelbilder/formulare.webp?v=', $html);
+        $this->assertStringContainsString('object-position: 0% 40%', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertNotContains('formulare', Titelbilder::PLATZHALTER_SEITEN);
+        // Rechts um Wand verlängert wie die übrigen Bilder aus „3. Wissen“
+        $this->assertSame([2000, 776], array_slice(getimagesize(public_path('img/titelbilder/formulare.webp')), 0, 2));
     }
 
     public function test_legt_nur_an_was_fehlt(): void

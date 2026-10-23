@@ -560,6 +560,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   zum Herunterladen“) je Formular eine Datei hochladen. Solange er leer ist,
   sieht man ihn nicht. Danach „Von Suchmaschinen ausschließen“ abschalten.
   Hinweis: Der Mitgliedsantrag liegt schon auf /mitgliedschaft.
+  Titelbild seit KEV-151 Taddis „4. Formulare“ (Formular mit Vereinslogo).
 - [ ] **Rückblick: Zusammenarbeit mit aus-unserer-sicht (KEV-140), bitte
   ansehen.** Dritter Abschnitt auf /rueckblick mit Taddis Text und ihrem Bild
   „Aus unserer Sicht“, darunter die zwei Präsentationen als PDF (öffnen sich im

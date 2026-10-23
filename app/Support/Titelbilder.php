@@ -89,6 +89,9 @@ class Titelbilder
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
         // SER“), Zettelkasten. Ohne Unterzeile.
         'glossar' => null,
+        // KEV-151: Bild von Taddi („4. Formulare“), Formular mit Vereinslogo
+        // und Füller. Ohne Unterzeile.
+        'formulare' => null,
         // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten. Ohne
         // Unterzeile.
         'fristen' => null,
@@ -148,8 +151,6 @@ class Titelbilder
         'rueckblick',
         // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
         'behoerden-und-bescheide',
-        // KEV-150, bis zum Bild aus KEV-151
-        'formulare',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
@@ -220,6 +221,9 @@ class Titelbilder
      *    der Höhe; ausgerichtet auf 85 %.
      *  - Fristen: Sanduhr vor Aktenstapel (KEV-152). Rechts um Wand
      *    verlängert, Sanduhr zwischen 18 und 86 % der Höhe; 65 %.
+     *  - Formulare: Formular mit Vereinslogo und Füller (KEV-151). Rechts um
+     *    Wand verlängert, Blatt von 12 bis 92 % der Höhe; mit 40 % bleibt
+     *    oben das Logo auf dem Formular zu sehen.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -248,6 +252,7 @@ class Titelbilder
         self::ORDNER.'/wort-fuer-wort.webp' => 80,
         self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
         self::ORDNER.'/fristen.webp' => 65,
+        self::ORDNER.'/formulare.webp' => 40,
     ];
 
     /**
