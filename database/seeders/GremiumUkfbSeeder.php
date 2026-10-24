@@ -25,8 +25,15 @@ class GremiumUkfbSeeder extends Seeder
 
     public const HOMEPAGE = 'https://ukfb.org';
 
+    /** Logo des Kuratoriums, aus Taddis Drive („Bilder“), KEV-221. */
+    public const LOGO = '/img/ukfb/logo-ukfb.webp';
+
+    /** Überschrift bis KEV-221, woran der unveränderte Abschnitt zu erkennen ist. */
+    public const ALTE_UEBERSCHRIFT = 'Assoziiertes Fachgremium – UKFB';
+
     public const ABSCHNITT = [
-        'titel' => 'Assoziiertes Fachgremium – UKFB',
+        // KEV-221: Taddi wollte UKFB vorn, rechts daneben das Logo.
+        'titel' => 'UKFB – Assoziiertes Fachgremium',
         'absaetze' => [
             'Das Unabhängige Kuratorium für Betroffenenexpertise (UKFB) ist als eigenständiges und unabhängiges '
                 .'Fachgremium an KE!N EINZELFALL e.V. assoziiert.',
@@ -36,6 +43,9 @@ class GremiumUkfbSeeder extends Seeder
             'Kontakt: kontakt@ukfb.org',
         ],
         'cta' => ['label' => 'Zur Website des UKFB', 'url' => self::HOMEPAGE, 'variant' => 'primary'],
+        'bild' => self::LOGO,
+        'bild_alt' => 'Logo des UKFB: neun Menschen an einem Tisch, darunter UKFB, Unabhängiges Kuratorium für Betroffenenexpertise',
+        'bild_seite' => 'rechts',
     ];
 
     public const META_DESCRIPTION = 'Das Unabhängige Kuratorium für Betroffenenexpertise (UKFB) ist als '
@@ -60,7 +70,7 @@ class GremiumUkfbSeeder extends Seeder
         }
 
         $seite->blocks()->delete();
-        $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => self::ABSCHNITT]);
+        $seite->blocks()->create(['typ' => 'text_media', 'position' => 0, 'data' => self::ABSCHNITT]);
 
         $seite->forceFill([
             'meta_description' => $seite->meta_description ?: self::META_DESCRIPTION,
@@ -69,5 +79,32 @@ class GremiumUkfbSeeder extends Seeder
 
         // Bild und Unterzeile, nur wo noch leer.
         Titelbilder::setzen();
+    }
+
+    /**
+     * KEV-221: Der Abschnitt wird „Text mit Bild“, mit dem Logo rechts und
+     * „UKFB“ vorn in der Überschrift. Nur wo noch die bisherige Überschrift
+     * steht; Text und Knopf bleiben, wie sie sind.
+     */
+    public static function logoUndUeberschrift(): void
+    {
+        foreach (Page::where('slug', self::SLUG)->where('locale', 'de')->get() as $seite) {
+            $block = $seite->blocks()->where('typ', 'text')->get()
+                ->first(fn ($b) => ($b->data['titel'] ?? null) === self::ALTE_UEBERSCHRIFT);
+
+            if (! $block) {
+                continue;
+            }
+
+            $block->update([
+                'typ' => 'text_media',
+                'data' => array_replace($block->data, [
+                    'titel' => self::ABSCHNITT['titel'],
+                    'bild' => self::ABSCHNITT['bild'],
+                    'bild_alt' => self::ABSCHNITT['bild_alt'],
+                    'bild_seite' => 'rechts',
+                ]),
+            ]);
+        }
     }
 }

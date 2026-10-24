@@ -456,7 +456,11 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/gremium-ukfb')->assertOk()->getContent();
 
-        $this->assertStringContainsString('Assoziiertes Fachgremium – UKFB', $html);
+        // KEV-221: UKFB vorn, rechts das Logo (mit Beschreibung, es trägt Text)
+        $this->assertMatchesRegularExpression('#<h2[^>]*>\s*UKFB – Assoziiertes Fachgremium\s*</h2>#u', $html);
+        $this->assertStringNotContainsString('Assoziiertes Fachgremium – UKFB', $html);
+        $this->assertMatchesRegularExpression('#<img src="/img/ukfb/logo-ukfb\.webp\?v=[^"]+" alt="Logo des UKFB:#', $html);
+        $this->assertFileExists(public_path('img/ukfb/logo-ukfb.webp'));
         $this->assertStringContainsString('Unabhängiges Kuratorium für Betroffenenexpertise', $html);
         $this->assertStringContainsString('nimmt keinen Einfluss auf die inhaltliche Arbeit', $html);
         $this->assertStringContainsString('src="/img/titelbilder/gremium-ukfb.webp?v=', $html);
