@@ -264,6 +264,26 @@ class AltseiteSeeder extends Seeder
      * Reihenfolge in der Dokumentenliste, wo sie nicht der der Altseite
      * folgt: diese Adressen zuerst, in dieser Folge, der Rest dahinter.
      */
+    /**
+     * Seiten, auf denen die Dokumente rechts neben dem Text stehen (KEV-217:
+     * Kinderkodex, Taddis Wunsch). Wirkt nur bei genau einem Textabschnitt
+     * darüber, siehe PageBlock::abschnitte(). Bestehende Datenbanken
+     * erreicht es über eine eigene Migration (dokumenteNebenText()).
+     */
+    public const DOKUMENTE_NEBEN_TEXT = ['kinderkodex'];
+
+    /** Den Schalter „neben_text“ auf den Seiten in DOKUMENTE_NEBEN_TEXT setzen, wo er noch fehlt. */
+    public static function dokumenteNebenText(): void
+    {
+        foreach (Page::whereIn('slug', self::DOKUMENTE_NEBEN_TEXT)->where('locale', 'de')->get() as $seite) {
+            foreach ($seite->blocks()->where('typ', 'download_list')->get() as $block) {
+                if (! array_key_exists('neben_text', $block->data ?? [])) {
+                    $block->update(['data' => ($block->data ?? []) + ['neben_text' => true]]);
+                }
+            }
+        }
+    }
+
     public const DOKUMENTE_REIHENFOLGE = [
         // KEV-96, Wunsch von Taddi: erst der Antrag, dann die Ausfüllhilfe,
         // dann die Ordnung.
@@ -534,7 +554,8 @@ class AltseiteSeeder extends Seeder
                 $page->blocks()->create([
                     'typ' => 'download_list',
                     'position' => $position++,
-                    'data' => ['titel' => self::DOKUMENTE_TITEL[$slug] ?? 'Dokumente zum Herunterladen', 'dokumente' => $liste],
+                    'data' => ['titel' => self::DOKUMENTE_TITEL[$slug] ?? 'Dokumente zum Herunterladen', 'dokumente' => $liste]
+                        + (in_array($slug, self::DOKUMENTE_NEBEN_TEXT, true) ? ['neben_text' => true] : []),
                 ]);
             }
 

@@ -195,8 +195,9 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Erwachsene, die hinsehen', $html);
         $this->assertStringNotContainsString('ein Versprechen, das wir jeden Tag einlösen', $html);
 
-        // Der Kodex zum Herunterladen bleibt direkt darunter, seit KEV-100
-        // unter eigener Überschrift: Es ist nur ein Dokument.
+        // Der Kodex zum Herunterladen, seit KEV-100 unter eigener Überschrift
+        // (nur ein Dokument), seit KEV-217 rechts neben dem Text.
+        $this->assertMatchesRegularExpression('#lg:grid-cols-\[minmax\(0,65ch\)_minmax\(0,1fr\)\].*?Kinder und Jugendliche brauchen Schutz.*?Kinderkodex-HP-29\.03\.26\.pdf#s', $html);
         $this->assertStringContainsString('Kinderkodex-HP-29.03.26.pdf', $html);
         $this->assertStringContainsString('Kinderkodex herunterladen', $html);
         $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
