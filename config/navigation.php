@@ -47,10 +47,19 @@ return [
             'schluessel' => 'bereich_gruppen_veranstaltungen',
             'label' => 'Gruppen & Veranstaltungen',
             'url' => '/gruppen-und-veranstaltungen',
+            // KEV-225: Auf der Übersicht je zwei Kacheln nebeneinander, Taddis
+            // drei Paare (Gruppen, Veranstaltungen und Öffentlichkeitsarbeit,
+            // Aktuelles und Rückblick).
+            'spalten' => 2,
             'children' => [
                 ['schluessel' => 'selbsthilfegruppen', 'label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
                 ['schluessel' => 'arbeitsgruppen', 'label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
-                ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
+                // KEV-225: „KE!N EINZELFALL im Dialog“ nicht mehr im Menü und
+                // in den Kacheln. Als Veranstaltungsreihe hängt die Seite
+                // unter „Veranstaltungen“ und behält so Brotkrumen.
+                ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen', 'children' => [
+                    ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
+                ]],
                 // KEV-238: die drei Themen als eigene Seiten, nicht im Menü
                 // aufgeklappt, sondern als Kacheln auf der Übersicht.
                 ['schluessel' => 'oeffentlichkeitsarbeit', 'label' => 'Öffentlichkeitsarbeit',     'url' => '/oeffentlichkeitsarbeit', 'children' => [
@@ -58,9 +67,9 @@ return [
                     ['schluessel' => 'petitionen', 'label' => 'Petitionen', 'url' => '/petitionen'],
                     ['schluessel' => 'presse', 'label' => 'Presse', 'url' => '/presse'],
                 ]],
-                ['schluessel' => 'rueckblick', 'label' => 'Rückblick',                 'url' => '/rueckblick'],
+                // KEV-225: Aktuelles vor Rückblick
                 ['schluessel' => 'aktuelles', 'label' => 'Aktuelles',                 'url' => '/aktuelles'],
-                ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
+                ['schluessel' => 'rueckblick', 'label' => 'Rückblick',                 'url' => '/rueckblick'],
             ],
         ],
         [

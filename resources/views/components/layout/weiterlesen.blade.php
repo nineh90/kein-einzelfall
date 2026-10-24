@@ -3,6 +3,9 @@
     'bereich' => null,
     'titel' => null,   // schlägt „Mehr zu „…““, wo ein Bereich anders heissen soll
     'auf' => 'card',   // cream | card — die Gegenfläche des letzten Bausteins
+    // Spalten ab lg. 2 auf der Übersicht „Gruppen & Veranstaltungen“ (KEV-225,
+    // `spalten` am Bereich in config/navigation.php).
+    'spalten' => 3,
 ])
 
 @if (count($seiten) > 0)
@@ -26,7 +29,7 @@
                     : __('rahmen.weiterlesen.auch_interessant')) }}
             </h2>
 
-            <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <ul @class(['grid gap-3 sm:grid-cols-2', 'lg:grid-cols-3' => $spalten !== 2])>
                 @foreach ($seiten as $seite)
                     <li class="flex">
                         {{-- Die Karten stehen auf der jeweils anderen Fläche,
