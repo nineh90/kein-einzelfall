@@ -452,7 +452,9 @@ class TeamUndGruppenSeeder extends Seeder
                 'Texte können geteilt werden – müssen aber nicht. Du entscheidest selbst, was du schreiben, zeigen oder lieber für dich behalten möchtest.',
                 'Die Schreibwerkstatt soll für alle offen sein und befindet sich derzeit noch in Vorbereitung.',
             ],
-            'schlusssatz' => 'Das Wichtigste steht nicht immer in den großen Worten – sondern oft zwischen den Zeilen.',
+            // KEV-231: Taddis letzter Satz als zweite Zeile.
+            'schlusssatz' => "Das Wichtigste steht nicht immer in den großen Worten – sondern oft zwischen den Zeilen.\n"
+                .'Manches lässt sich nicht sagen, aber vielleicht schreiben.',
         ],
     ];
 

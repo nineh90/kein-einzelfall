@@ -48,8 +48,8 @@ class GroupForm
                     ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
                     ->helperText('Steht auf der Seite der Gruppe.'),
 
-                TextInput::make('schlusssatz')->label('Schlusssatz')->maxLength(400)
-                    ->helperText('Steht in grüner Handschrift unter dem ausführlichen Text.'),
+                Textarea::make('schlusssatz')->label('Schlusssatz')->maxLength(400)->rows(2)
+                    ->helperText('Steht in grüner Handschrift unter dem ausführlichen Text. Jede Zeile wird ein eigener Satz.'),
 
                 // Wie bei den Seiten (KEV-82): Mit Bild bekommt die Seite der
                 // Gruppe den Seitenkopf, Name und Kurzbeschreibung stehen darauf.

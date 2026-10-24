@@ -144,9 +144,10 @@
             </div>
         @endif
 
-        @if ($gruppe->schlusssatz)
-            <p class="mt-6 max-w-prose font-hand text-2xl leading-snug text-green">{{ $gruppe->schlusssatz }}</p>
-        @endif
+        {{-- Jede Zeile des Schlusssatzes ein eigener Satz (KEV-231). --}}
+        @foreach ($gruppe->schlusssaetze() as $satz)
+            <p @class(['max-w-prose font-hand text-2xl leading-snug text-green', 'mt-6' => $loop->first, 'mt-2' => ! $loop->first])>{{ $satz }}</p>
+        @endforeach
     </div>
 </article>
 

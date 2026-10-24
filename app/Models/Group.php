@@ -96,6 +96,17 @@ class Group extends Model
         return $this->istOffen() ? $this->naechsteTermine(1)->first() : null;
     }
 
+    /**
+     * Der Schlusssatz Zeile für Zeile, jede steht als eigener Satz in
+     * Handschrift (KEV-231: bei der Schreibwerkstatt zwei).
+     *
+     * @return list<string>
+     */
+    public function schlusssaetze(): array
+    {
+        return array_values(array_filter(array_map('trim', preg_split('/\R/u', (string) $this->schlusssatz))));
+    }
+
     public function istOffen(): bool
     {
         return $this->status === 'offen';
