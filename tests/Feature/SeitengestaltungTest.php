@@ -214,6 +214,9 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/istanbul-konvention')->assertOk()->getContent();
 
+        // Wie beim Kinderkodex (KEV-217): die Dokumente rechts neben dem Text.
+        $this->assertMatchesRegularExpression('#lg:grid-cols-\[minmax\(0,65ch\)_minmax\(0,1fr\)\].*?Gewalt gegen Frauen.*?Zum Nachlesen#s', $html);
+
         $this->assertStringContainsString('<p>Als KE!N EINZELFALL e.V. erkennen wir die Istanbul-Konvention', $html);
         $this->assertStringContainsString('<p>Hier findest du unsere Haltung zur Istanbul-Konvention', $html);
         $this->assertStringNotContainsString('unseren vollständigen Text zur Istanbul Konvention', $html);

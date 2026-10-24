@@ -266,11 +266,12 @@ class AltseiteSeeder extends Seeder
      */
     /**
      * Seiten, auf denen die Dokumente rechts neben dem Text stehen (KEV-217:
-     * Kinderkodex, Taddis Wunsch). Wirkt nur bei genau einem Textabschnitt
+     * Kinderkodex, Taddis Wunsch; Istanbul-Konvention gleich mit, gleicher
+     * Aufbau). Wirkt nur bei genau einem Textabschnitt
      * darüber, siehe PageBlock::abschnitte(). Bestehende Datenbanken
      * erreicht es über eine eigene Migration (dokumenteNebenText()).
      */
-    public const DOKUMENTE_NEBEN_TEXT = ['kinderkodex'];
+    public const DOKUMENTE_NEBEN_TEXT = ['kinderkodex', 'istanbul-konvention'];
 
     /** Den Schalter „neben_text“ auf den Seiten in DOKUMENTE_NEBEN_TEXT setzen, wo er noch fehlt. */
     public static function dokumenteNebenText(): void
