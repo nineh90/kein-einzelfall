@@ -531,6 +531,42 @@ class TeamUndGruppenSeeder extends Seeder
     /** Kontaktzeile am Ende jeder AG-Beschreibung. */
     public const AG_KONTAKT = 'Du hast Interesse? Schreibe uns einfach kurz an: arbeitsgruppe@kein-einzelfall.de';
 
+    /**
+     * Knopf „Anmelden (AG 01)“ für einen Abschnitt „AG 01 – …“ auf
+     * /arbeitsgruppen (KEV-233). Die Altseite hatte ihn unter jeder AG, der
+     * Import hat ihn verworfen (Elementor-Knopf). Öffnet eine Mail mit der
+     * AG im Betreff. Für andere Überschriften null.
+     *
+     * @return array{label: string, url: string, variant: string}|null
+     */
+    public static function agAnmeldeknopf(?string $titel): ?array
+    {
+        if (! preg_match('/^(AG\s*\d+)\b/u', trim((string) $titel), $treffer)) {
+            return null;
+        }
+
+        return [
+            'label' => 'Anmelden ('.$treffer[1].')',
+            'url' => Group::agAnmeldung('Anmeldung: '.trim($titel)),
+            'variant' => 'primary',
+        ];
+    }
+
+    /**
+     * Den Knopf an jedem AG-Abschnitt der Seite nachtragen, wo noch keiner
+     * ist. Ein im Panel gesetzter oder geänderter Knopf bleibt.
+     */
+    public static function agAnmeldeknoepfeNachtragen(Page $seite): void
+    {
+        foreach ($seite->blocks()->where('typ', 'text')->get() as $block) {
+            $knopf = self::agAnmeldeknopf($block->data['titel'] ?? null);
+
+            if ($knopf && blank($block->data['cta']['label'] ?? null)) {
+                $block->update(['data' => array_replace($block->data, ['cta' => $knopf])]);
+            }
+        }
+    }
+
     /** Woran die Arbeitsgruppen-Seite der Altseite zu erkennen ist. */
     public const ARBEITSGRUPPEN_ALT = [
         'alt_erster_absatz' => 'Mach mit – mit Fachwissen, Kreativität oder einfach dem Wunsch, etwas zu bewegen.',

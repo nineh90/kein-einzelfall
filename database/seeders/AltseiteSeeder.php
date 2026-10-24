@@ -482,7 +482,9 @@ class AltseiteSeeder extends Seeder
                         'titel' => $block['titel'],
                         // Abschnitt ohne Überschrift: Schlüssel '' (KEV-99).
                         'absaetze' => self::NEUE_TEXTE[$slug][$block['titel'] ?? ''] ?? $block['absaetze'],
-                        'cta' => self::NEUE_KNOEPFE[$slug][$block['titel'] ?? ''] ?? null,
+                        // Auf /arbeitsgruppen „Anmelden (AG 01)“ (KEV-233).
+                        'cta' => self::NEUE_KNOEPFE[$slug][$block['titel'] ?? '']
+                            ?? ($slug === 'arbeitsgruppen' ? TeamUndGruppenSeeder::agAnmeldeknopf($block['titel']) : null),
                     ], $slug),
                 ]);
 

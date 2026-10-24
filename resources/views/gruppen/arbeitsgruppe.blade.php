@@ -112,7 +112,7 @@
 
         {{-- Der Betreff nennt die AG, wie bisher auf der Karte (KEV-74). --}}
         <div class="mt-4">
-            <x-ui.button :href="'mailto:'.$adresse.'?subject='.rawurlencode($betreff)"
+            <x-ui.button :href="\App\Models\Group::agAnmeldung($betreff)"
                          :variant="$offen ? 'primary' : 'ghost'" size="sm">
                 {{ $offen ? __('Per E-Mail mitmachen') : __('Per E-Mail nachfragen') }}
             </x-ui.button>

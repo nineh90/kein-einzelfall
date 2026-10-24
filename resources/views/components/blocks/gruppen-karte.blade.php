@@ -96,8 +96,16 @@
              Text steht dort schon. Selbsthilfegruppen seit KEV-73,
              Arbeitsgruppen seit KEV-84; vorher klappte der AG-Text in der
              Karte auf, und der Mail-Knopf stand hier. Beides steht jetzt
-             auf der AG-Seite. --}}
-        <div class="mt-4">
+             auf der AG-Seite. Seit KEV-233 steht bei offenen AGs auch hier
+             wieder „Anmelden“: Taddi vermisste es auf /arbeitsgruppen. --}}
+        <div class="mt-4 flex flex-wrap gap-2">
+            @if ($offen && $gruppe->typ === 'arbeits')
+                <x-ui.button :href="\App\Models\Group::agAnmeldung(trim($gruppe->kuerzel.': '.$gruppe->name, ': '))" size="sm">
+                    {{ __('Anmelden') }}
+                    <span class="sr-only">– {{ $gruppe->name }}</span>
+                </x-ui.button>
+            @endif
+
             <x-ui.button :href="$gruppe->url()" variant="ghost" size="sm">
                 {{ $gruppe->typ === 'arbeits' ? __('Mehr zur AG') : __('Mehr zur Gruppe') }}
                 <span class="sr-only">– {{ $gruppe->name }}</span>

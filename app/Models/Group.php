@@ -23,6 +23,15 @@ class Group extends Model
     /** Postfach der Arbeitsgruppen, so steht es in jedem AG-Text (KEV-74). */
     public const AG_ADRESSE = 'arbeitsgruppe@kein-einzelfall.de';
 
+    /**
+     * Mail an das AG-Postfach mit Betreff, zum Anmelden (KEV-233). Auf der
+     * Altseite öffnete „Anmelden (AG 01)“ genau so eine Mail.
+     */
+    public static function agAnmeldung(string $betreff): string
+    {
+        return 'mailto:'.self::AG_ADRESSE.'?subject='.rawurlencode($betreff);
+    }
+
     /** Postfach der Selbsthilfegruppen (KEV-73). */
     public const SHG_ADRESSE = 'selbsthilfe@kein-einzelfall.de';
 
