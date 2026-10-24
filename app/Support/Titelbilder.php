@@ -243,6 +243,9 @@ class Titelbilder
      *  - Rückblick: aufgeschlagenes Fotoalbum, davor ein loses Foto (KEV-137).
      *    Rechts um Wand verlängert, Album zwischen 7 und 81 %, das lose Foto
      *    bis 97 % der Höhe; mit 40 % bleibt das Album ganz.
+     *  - Seelenfarben (Gruppe, KEV-229): Pinsel und Aquarell-Kreis oben links,
+     *    der Kreis zwischen 12 und 75 % der Höhe. Unten ausgerichtet fehlte
+     *    ab 1400 px sein oberer Rand.
      *  - Veranstaltungen: zwei Holzstühle und ein Tisch mit zwei Mikrofonen,
      *    zwischen 41 und 84 % der Höhe (KEV-148). Unten ausgerichtet fehlten
      *    ab 1440 px die Stuhllehnen, bei 2560 px auch die Mikrofone.
@@ -275,6 +278,7 @@ class Titelbilder
         self::ORDNER.'/wissen.webp' => 60,
         self::ORDNER.'/rueckblick.webp' => 40,
         self::ORDNER.'/projekte.webp' => 40,
+        self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
     ];
 
     /**

@@ -418,6 +418,8 @@ class TeamUndGruppenSeeder extends Seeder
         [
             'slug' => 'seelenfarben', 'status' => 'geplant',
             'name' => 'Seelenfarben',
+            // KEV-229: Bild von Taddi (Pinsel und Aquarell-Kreis)
+            'titelbild' => '/img/titelbilder/gruppe-seelenfarben.webp',
             'teaser' => 'Wenn Bilder mehr als 1.000 Worte sagen',
             'absaetze' => [
                 'Manchmal lässt sich etwas leichter malen als aussprechen. In „Seelenfarben“ geht es darum, Gefühle, Gedanken und innere Prozesse kreativ sichtbar werden zu lassen – ganz ohne Leistungsdruck und ohne Bewertung.',
