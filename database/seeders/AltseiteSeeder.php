@@ -542,6 +542,12 @@ class AltseiteSeeder extends Seeder
                 AnfragenSeiteSeeder::umbauen($page);
             }
 
+            // Cookies, Browser-Speicher, betterplace, Kontaktformular: wie die
+            // Website heute arbeitet, nicht die Altseite (DatenschutzSeeder).
+            if ($slug === DatenschutzSeeder::SLUG) {
+                DatenschutzSeeder::umbauen($page);
+            }
+
             // WordPress liefert jede Seite mit Schrägstrich am Ende aus.
             // Ohne diese Weiterleitung wäre jede indexierte URL ein 404.
             Redirect::updateOrCreate(

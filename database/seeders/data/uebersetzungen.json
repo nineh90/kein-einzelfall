@@ -3796,5 +3796,77 @@
   },
   "*Rechte müssen nicht nur bestehen. Sie müssen auch erreichbar sein.*": {
     "en": "*Rights must not only exist. They must also be within reach.*"
+  },
+  "Diese Website setzt nur zwei Cookies. Beide stammen von uns selbst und sind technisch notwendig. Cookies von Drittanbietern, für Statistik oder für Werbung setzen wir nicht. Deshalb gibt es hier auch keinen Cookie-Banner.": {
+    "en": "This website sets only two cookies. Both come from us and are technically necessary. We do not set third-party, statistics or advertising cookies. That is why there is no cookie banner here."
+  },
+  "Sitzungs-Cookie (Name endet auf „-session“): verbindet Ihre Seitenaufrufe zu einer Sitzung, damit etwa ein Formular nach einem Tippfehler mit Ihrem Text zurückkommt. Die Sitzung speichern wir verschlüsselt und ohne IP-Adresse oder Browserkennung.": {
+    "en": "Session cookie (name ends in “-session”): links your page views into one session, so that a form comes back with your text after a typo, for example. We store the session encrypted and without IP address or browser identifier."
+  },
+  "XSRF-TOKEN: schützt die Formulare davor, dass fremde Websites in Ihrem Namen etwas absenden.": {
+    "en": "XSRF-TOKEN: protects the forms against other websites submitting something in your name."
+  },
+  "Beide Cookies enthalten keine Angaben zu Ihrer Person und werden nach zwei Stunden ohne Seitenaufruf ungültig.": {
+    "en": "Neither cookie contains any information about you, and both expire after two hours without a page view."
+  },
+  "Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Cookies unbedingt erforderlich sind, um die Website und ihre Formulare bereitzustellen, sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, funktionierenden Website).": {
+    "en": "The legal basis is Section 25 (2) No. 2 TDDDG, because the cookies are strictly necessary to provide the website and its forms, and Art. 6 (1) (f) GDPR (legitimate interest in a secure, working website)."
+  },
+  "Sie können Cookies in Ihrem Browser jederzeit löschen oder blockieren. Dann lassen sich die Formulare auf dieser Website nicht mehr absenden, alles andere funktioniert weiter.": {
+    "en": "You can delete or block cookies in your browser at any time. The forms on this website can then no longer be sent; everything else keeps working."
+  },
+  "Speicher im Browser (Local Storage)": {
+    "en": "Storage in your browser (local storage)"
+  },
+  "Spendenformulare von betterplace.org": {
+    "en": "Donation forms from betterplace.org"
+  },
+  "Auf unseren Seiten zum Spenden können Sie Spendenformulare von betterplace.org anzeigen lassen. Anbieter ist die betterplace.org gGmbH, Schlesische Straße 26, 10997 Berlin.": {
+    "en": "On our donation pages you can display donation forms from betterplace.org. The provider is betterplace.org gGmbH, Schlesische Straße 26, 10997 Berlin, Germany."
+  },
+  "Die Formulare werden erst geladen, wenn Sie das ausdrücklich anklicken. Vorher stellt Ihr Browser keine Verbindung zu betterplace.org her. Nach dem Klick lädt er das Formular direkt von betterplace.org und überträgt dabei technisch notwendige Daten wie Ihre IP-Adresse. betterplace.org kann dabei eigene Cookies setzen. Für diese Verarbeitung ist betterplace.org selbst verantwortlich.": {
+    "en": "The forms are only loaded when you expressly click on them. Before that, your browser does not connect to betterplace.org. After the click, it loads the form directly from betterplace.org and transmits technically necessary data such as your IP address. betterplace.org may set its own cookies. betterplace.org itself is responsible for this processing."
+  },
+  "Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG). Sie können sie jederzeit für die Zukunft widerrufen, indem Sie das Formular nicht mehr öffnen. Von betterplace.org gesetzte Cookies können Sie in Ihrem Browser löschen.": {
+    "en": "The legal basis is your consent given by clicking (Art. 6 (1) (a) GDPR and Section 25 (1) TDDDG). You can withdraw it at any time for the future by no longer opening the form. You can delete cookies set by betterplace.org in your browser."
+  },
+  "Mehr dazu in der [Datenschutzerklärung von betterplace.org](https://www.betterplace.org/c/regeln/datenschutz).": {
+    "en": "More on this in the [privacy policy of betterplace.org](https://www.betterplace.org/c/regeln/datenschutz)."
+  },
+  "Über die Formulare auf dieser Website, etwa auf den Seiten „Anfragen“ und „Beschwerdemanagement“, können Sie uns schreiben. Dabei übermitteln Sie uns:": {
+    "en": "You can write to us using the forms on this website, for example on the pages “Requests” and “Complaints management”. In doing so, you send us:"
+  },
+  "Betreff und Nachricht": {
+    "en": "subject and message"
+  },
+  "freiwillig Ihren Namen und Ihre E-Mail-Adresse. Ohne E-Mail-Adresse können wir Ihnen nicht antworten.": {
+    "en": "optionally your name and your e-mail address. Without an e-mail address we cannot reply to you."
+  },
+  "Ihre Nachricht speichern wir verschlüsselt in unserem Verwaltungsbereich. Per E-Mail erfahren wir nur, dass eine neue Nachricht vorliegt, der Inhalt geht nicht per E-Mail heraus. Ihre IP-Adresse speichern wir nicht. Gegen massenhaften Versand merkt sich der Server für zehn Minuten nur eine Prüfsumme davon.": {
+    "en": "We store your message encrypted in our administration area. By e-mail we only learn that a new message has arrived; the content is not sent by e-mail. We do not store your IP address. To prevent mass sending, the server only keeps a checksum of it for ten minutes."
+  },
+  "Eine Beschwerde über unseren Verein, die Sie im Beschwerdemanagement an die Ombudsstelle richten, speichern wir nicht. Sie geht als E-Mail direkt an die Ombudsstelle.": {
+    "en": "A complaint about our association that you address to the ombudsperson via complaints management is not stored by us. It goes directly to the ombudsperson by e-mail."
+  },
+  "Es erfolgt keine Weitergabe an Dritte, sofern wir nicht aufgrund gesetzlicher Bestimmungen oder eines Gerichtsbeschlusses hierzu verpflichtet sind.": {
+    "en": "Your data is not passed on to third parties unless we are obliged to do so by law or by court order."
+  },
+  "Die Verarbeitung Ihrer personenbezogenen Daten aus der Eingabemaske dient allein zur Bearbeitung der Kontaktaufnahme. Die Prüfsumme beim Absenden dient der Missbrauchsprävention und der Sicherheit unserer IT-Systeme.": {
+    "en": "Your personal data from the input form is processed solely to handle your enquiry. The checksum when sending serves to prevent misuse and to secure our IT systems."
+  },
+  "Bearbeitete Nachrichten löschen wir automatisch 90 Tage nach Abschluss der Bearbeitung, unbearbeitete spätestens 365 Tage nach Eingang, es sei denn, wir sind gesetzlich zu einer längeren Aufbewahrung verpflichtet. Die Prüfsumme verfällt nach zehn Minuten.": {
+    "en": "We automatically delete processed messages 90 days after processing is completed and unprocessed messages no later than 365 days after receipt, unless we are legally obliged to keep them longer. The checksum expires after ten minutes."
+  },
+  "Sie können Ihre Einwilligung zur Verarbeitung personenbezogener Daten jederzeit widerrufen und der Speicherung Ihrer Nachricht jederzeit widersprechen. In diesem Fall kann die Konversation nicht fortgeführt werden. Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden, werden dann gelöscht.": {
+    "en": "You can withdraw your consent to the processing of personal data and object to the storage of your message at any time. In this case the conversation cannot be continued. All personal data stored in the course of contacting us will then be deleted."
+  },
+  "Einige Einstellungen merkt sich diese Website im Speicher Ihres Browsers (Local Storage, für die Dauer eines Besuchs Session Storage), und zwar nur auf Ihrem Gerät. Das sind keine Cookies: Nichts davon wird an uns übertragen, und nichts davon enthält eine Kennung, über die wir Sie wiedererkennen könnten.": {
+    "en": "This website remembers some settings in your browser’s storage (local storage, and session storage for the duration of a visit), and only on your device. These are not cookies: none of it is sent to us, and none of it contains an identifier by which we could recognise you."
+  },
+  "Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Speicherung unbedingt erforderlich ist, um Funktionen bereitzustellen, die Sie nutzen, sowie Art. 6 Abs. 1 lit. f DSGVO.": {
+    "en": "The legal basis is Section 25 (2) No. 2 TDDDG, because the storage is strictly necessary to provide features you use, and Art. 6 (1) (f) GDPR."
+  },
+  "Was im Einzelnen gespeichert werden kann, steht vollständig in der Liste [am Ende dieser Seite](/datenschutz#gespeicherte-einstellungen). Dort können Sie jeden Eintrag auch zurücksetzen. Ebenso können Sie den Speicher in Ihren Browser-Einstellungen löschen.": {
+    "en": "Everything that can be stored is listed in full [at the end of this page](/datenschutz#gespeicherte-einstellungen). There you can also reset each entry. You can likewise clear the storage in your browser settings."
   }
 }
