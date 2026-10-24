@@ -243,6 +243,8 @@ class Titelbilder
      *  - Rückblick: aufgeschlagenes Fotoalbum, davor ein loses Foto (KEV-137).
      *    Rechts um Wand verlängert, Album zwischen 7 und 81 %, das lose Foto
      *    bis 97 % der Höhe; mit 40 % bleibt das Album ganz.
+     *  - Bürokratie-Labyrinth (Gruppe, KEV-228): Labyrinth aus Papier links,
+     *    zwischen 17 und 75 % der Höhe; mit 45 % bleibt es ganz.
      *  - Seelenfarben (Gruppe, KEV-229): Pinsel und Aquarell-Kreis oben links,
      *    der Kreis zwischen 12 und 75 % der Höhe. Unten ausgerichtet fehlte
      *    ab 1400 px sein oberer Rand.
@@ -279,6 +281,7 @@ class Titelbilder
         self::ORDNER.'/rueckblick.webp' => 40,
         self::ORDNER.'/projekte.webp' => 40,
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
+        self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
     ];
 
     /**

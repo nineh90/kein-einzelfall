@@ -405,6 +405,8 @@ class TeamUndGruppenSeeder extends Seeder
         [
             'slug' => 'buerokratie-labyrinth', 'status' => 'offen',
             'name' => 'Bürokratie-Labyrinth',
+            // KEV-228: Bild von Taddi (Labyrinth aus Papier im Gegenlicht)
+            'titelbild' => '/img/titelbilder/gruppe-buerokratie-labyrinth.webp',
             'teaser' => 'Gefangen im Dschungel von Behörden, Anträgen und Verfahren',
             'absaetze' => [
                 'Anträge, Fristen, lange Bearbeitungszeiten und schwer verständliche Schreiben können schnell überfordern – besonders dann, wenn ohnehin schon viel Kraft für andere Dinge gebraucht wird.',
