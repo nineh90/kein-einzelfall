@@ -157,8 +157,11 @@ class SeitenUndRedirectsTest extends TestCase
          * des Bereichs „Projekte“. Übrig bleibt Publikationen.
          *
          * KEV-162: neu das Projekt „ANUAS“, KEV-161 „§ 109 SGG Gegengutachten“.
+         *
+         * KEV-238: neu die Themenseiten der Öffentlichkeitsarbeit,
+         * Ehrenamtsmessen, Petitionen und Presse.
          */
-        $this->assertSame(55, Page::count());
+        $this->assertSame(58, Page::count());
         $this->assertSame(1, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

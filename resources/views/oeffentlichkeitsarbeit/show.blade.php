@@ -8,11 +8,16 @@
 
     $uebersicht = sprachlink('page', ['slug' => 'oeffentlichkeitsarbeit']);
 
-    $krumen = [
+    // Über die Themenseite, auf der der Eintrag steht (KEV-238).
+    $thema = $eintrag->themenseite();
+    $themaUrl = $thema ? sprachlink('page', ['slug' => $thema->slug]) : null;
+
+    $krumen = array_values(array_filter([
         ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
         ['label' => __('Öffentlichkeitsarbeit'), 'url' => $uebersicht],
+        $thema ? ['label' => $thema->titel, 'url' => $themaUrl] : null,
         ['label' => $eintrag->titel, 'url' => null],
-    ];
+    ]));
 
     $fotos = $eintrag->fotoListe();
     $erstes = array_shift($fotos);
@@ -21,6 +26,7 @@
 
     // Die anderen Einträge und die Übersicht als Weiterführung am Seitenende
     $andere = $weitere->map(fn ($e) => ['label' => $e->titel, 'url' => $e->url()])
+        ->when($thema, fn ($liste) => $liste->push(['label' => $thema->titel, 'url' => $themaUrl]))
         ->push(['label' => __('Alle Einträge der Öffentlichkeitsarbeit'), 'url' => $uebersicht])
         ->all();
 @endphp

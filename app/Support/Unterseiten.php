@@ -31,8 +31,10 @@ class Unterseiten
 
         // Slug je Menüpunkt aus der Konfiguration: Die aufgelösten Adressen
         // tragen in Fremdsprachen Präfix und übersetzten Slug.
+        // Auch eine Ebene tiefer (KEV-238: die Themen der Öffentlichkeitsarbeit).
         $adressen = collect(config('navigation.main'))
             ->flatMap(fn (array $punkt) => $punkt['children'] ?? [])
+            ->flatMap(fn (array $kind) => [$kind, ...($kind['children'] ?? [])])
             ->pluck('url', 'schluessel');
 
         $slugs = collect($kinder)

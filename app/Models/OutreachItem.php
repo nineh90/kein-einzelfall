@@ -74,6 +74,33 @@ class OutreachItem extends Model
         return sprachlink('oeffentlichkeitsarbeit.show', ['slug' => $this->slug], $sprache);
     }
 
+    /**
+     * Die Themenseite, auf der dieser Eintrag steht (KEV-238: eine Messe auf
+     * /ehrenamtsmessen), in der aktuellen Sprache, sonst der deutschen. Null,
+     * wenn keine Seite seine Art zeigt.
+     */
+    public function themenseite(): ?Page
+    {
+        $deutsch = Page::veroeffentlicht()->standardfassung()
+            ->where('locale', Language::standardCode())
+            ->where('slug', '!=', 'oeffentlichkeitsarbeit')
+            ->whereHas('blocks', fn ($q) => $q->where('typ', 'oeffentlichkeitsarbeit'))
+            ->with('blocks')
+            ->get()
+            ->first(fn (Page $seite) => $seite->blocks->where('typ', 'oeffentlichkeitsarbeit')->contains(
+                fn ($b) => in_array($this->art, collect(PageBlock::oeffentlichkeitsarbeitGruppen($b->data ?? []))->pluck('arten')->flatten()->all(), true)
+            ));
+
+        if (! $deutsch || Language::aktuell()->istStandard()) {
+            return $deutsch;
+        }
+
+        return Page::veroeffentlicht()->standardfassung()
+            ->where('locale', Language::aktuell()->code)
+            ->where('uebersetzungs_gruppe', $deutsch->uebersetzungs_gruppe)
+            ->first() ?? $deutsch;
+    }
+
     public function artName(): ?string
     {
         return isset(self::ARTEN[$this->art]) ? __(self::ARTEN[$this->art]) : null;

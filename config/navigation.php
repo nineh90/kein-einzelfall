@@ -51,7 +51,13 @@ return [
                 ['schluessel' => 'selbsthilfegruppen', 'label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
                 ['schluessel' => 'arbeitsgruppen', 'label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
                 ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen'],
-                ['schluessel' => 'oeffentlichkeitsarbeit', 'label' => 'Öffentlichkeitsarbeit',     'url' => '/oeffentlichkeitsarbeit'],
+                // KEV-238: die drei Themen als eigene Seiten, nicht im Menü
+                // aufgeklappt, sondern als Kacheln auf der Übersicht.
+                ['schluessel' => 'oeffentlichkeitsarbeit', 'label' => 'Öffentlichkeitsarbeit',     'url' => '/oeffentlichkeitsarbeit', 'children' => [
+                    ['schluessel' => 'ehrenamtsmessen', 'label' => 'Ehrenamtsmessen', 'url' => '/ehrenamtsmessen'],
+                    ['schluessel' => 'petitionen', 'label' => 'Petitionen', 'url' => '/petitionen'],
+                    ['schluessel' => 'presse', 'label' => 'Presse', 'url' => '/presse'],
+                ]],
                 ['schluessel' => 'rueckblick', 'label' => 'Rückblick',                 'url' => '/rueckblick'],
                 ['schluessel' => 'aktuelles', 'label' => 'Aktuelles',                 'url' => '/aktuelles'],
                 ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],

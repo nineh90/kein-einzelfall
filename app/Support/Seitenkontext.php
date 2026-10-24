@@ -34,7 +34,14 @@ class Seitenkontext
         return Language::aktuell()->pfad('/'.$this->slug);
     }
 
-    /** Der Navigationspunkt, unter dem diese Seite hängt. */
+    /**
+     * Der Navigationspunkt, unter dem diese Seite hängt.
+     *
+     * Seit KEV-238 auch eine Ebene tiefer: /ehrenamtsmessen hängt unter
+     * „Öffentlichkeitsarbeit“, das selbst unter „Gruppen & Veranstaltungen“
+     * steht. Bereich ist dann „Öffentlichkeitsarbeit“, die Geschwister sind
+     * Petitionen und Presse.
+     */
     public function bereich(): ?array
     {
         foreach (Navigation::haupt() as $punkt) {
@@ -42,6 +49,14 @@ class Seitenkontext
 
             if (in_array($this->eigeneAdresse(), $urls, true)) {
                 return $punkt;
+            }
+        }
+
+        foreach (Navigation::haupt() as $punkt) {
+            foreach ($punkt['children'] ?? [] as $kind) {
+                if (in_array($this->eigeneAdresse(), array_column($kind['children'] ?? [], 'url'), true)) {
+                    return $kind;
+                }
             }
         }
 
@@ -57,6 +72,14 @@ class Seitenkontext
         foreach (Navigation::haupt() as $punkt) {
             if ($punkt['url'] === $this->eigeneAdresse() && ! empty($punkt['children'])) {
                 return $punkt;
+            }
+
+            // Eine Ebene tiefer (KEV-238): „Öffentlichkeitsarbeit“ führt zu
+            // ihren Themenseiten.
+            foreach ($punkt['children'] ?? [] as $kind) {
+                if ($kind['url'] === $this->eigeneAdresse() && ! empty($kind['children'])) {
+                    return $kind;
+                }
             }
         }
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\OutreachItem;
 use App\Models\Page;
+use App\Support\Titelbilder;
 use Illuminate\Database\Seeder;
 
 /**
@@ -349,6 +350,34 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     public const META_DESCRIPTION = 'Öffentlichkeitsarbeit von KE!N EINZELFALL e.V.: Ehrenamtsmessen, '
         .'Petitionen, Presseartikel und Interviews. Für Sichtbarkeit, Verständnis und Veränderung.';
 
+    /**
+     * Die drei Themen als eigene Seiten (KEV-238), je mit der Art, an der ihr
+     * Abschnitt auf der Übersicht zu erkennen ist. Taddi: „jeweils das
+     * einzelne Thema auf einer Unterseite, dann machen die Bilder auch wieder
+     * Sinn mit der hellen Fläche rechts.“ Die Bilder sind die Titelbilder
+     * (Titelbilder::SEITEN), die Beschreibungen Taddis erste Sätze.
+     */
+    public const THEMEN = [
+        'ehrenamtsmessen' => [
+            'titel' => 'Ehrenamtsmessen',
+            'art' => 'messe',
+            'meta_description' => 'Wir zeigen gern, wer wir sind, wofür wir stehen und was wir bewegen möchten. '
+                .'Deshalb sind wir mit viel Engagement auf Ehrenamtsmessen unterwegs.',
+        ],
+        'petitionen' => [
+            'titel' => 'Petitionen',
+            'art' => 'petition',
+            'meta_description' => 'Deine Stimme zählt – gemeinsam KE!N EINZELFALL. Mit unseren Petitionen machen wir '
+                .'auf Missstände aufmerksam, geben wichtigen Anliegen mehr Gewicht und setzen uns für Veränderung ein.',
+        ],
+        'presse' => [
+            'titel' => 'Presse',
+            'art' => 'presse',
+            'meta_description' => 'Hier findest du eine Auswahl unserer Presseartikel, Interviews und Berichte über '
+                .'KE!N EINZELFALL e.V. und unsere Arbeit.',
+        ],
+    ];
+
     public function run(): void
     {
         self::anlegen();
@@ -406,7 +435,7 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
     {
         $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
 
-        if (! $seite || $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
+        if (! $seite || self::artenSchonGezeigt($daten) || $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
             ->contains(fn ($b) => ($b->data['titel'] ?? null) === $daten['titel'])) {
             return;
         }
@@ -416,6 +445,25 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
             'position' => (int) $seite->blocks()->max('position') + 1,
             'data' => $daten,
         ]);
+    }
+
+    /**
+     * Zeigt schon ein Abschnitt auf irgendeiner deutschen Seite eine der Arten
+     * von $daten? Seit KEV-238 stehen die Abschnitte auf den Themenseiten,
+     * ohne Überschrift; ein erneuter Lauf einer älteren Migration fände auf
+     * der Übersicht nichts und legte sonst einen zweiten an.
+     *
+     * @param  array<string, mixed>  $daten
+     */
+    private static function artenSchonGezeigt(array $daten): bool
+    {
+        $arten = fn (array $data) => collect(\App\Models\PageBlock::oeffentlichkeitsarbeitGruppen($data))->pluck('arten')->flatten();
+        $gesucht = $arten($daten);
+
+        return \App\Models\PageBlock::where('typ', 'oeffentlichkeitsarbeit')
+            ->whereHas('page', fn ($q) => $q->where('locale', 'de'))
+            ->get()
+            ->contains(fn ($b) => $arten($b->data ?? [])->intersect($gesucht)->isNotEmpty());
     }
 
     /**
@@ -458,7 +506,7 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
 
         $abschnitte = $seite->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get();
 
-        if ($abschnitte->contains(fn ($b) => ($b->data['titel'] ?? null) === $daten['titel'])) {
+        if (self::artenSchonGezeigt($daten) || $abschnitte->contains(fn ($b) => ($b->data['titel'] ?? null) === $daten['titel'])) {
             return;
         }
 
@@ -501,5 +549,68 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
 
             $block->update(['data' => array_merge($data, self::MESSEN)]);
         }
+    }
+
+    /**
+     * KEV-238: Jeder Abschnitt der Übersicht zieht auf seine eigene Seite
+     * (/ehrenamtsmessen, /petitionen, /presse). Dort trägt er weder
+     * Überschrift noch Bild: Beides steht schon im Titelbild. Auf der
+     * Übersicht bleiben die Einleitung und die Themen als Kacheln.
+     *
+     * Legt nur an, was fehlt. Eine Themenseite, die schon Inhalt hat, bleibt;
+     * ein Abschnitt, den der Verein entfernt hat, wird nicht erfunden.
+     */
+    public static function themenseitenAufbauen(): void
+    {
+        $uebersicht = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+
+        if (! $uebersicht) {
+            return;
+        }
+
+        foreach (self::THEMEN as $slug => $thema) {
+            $abschnitt = $uebersicht->blocks()->where('typ', 'oeffentlichkeitsarbeit')->get()
+                ->first(fn ($b) => in_array(
+                    $thema['art'],
+                    collect(\App\Models\PageBlock::oeffentlichkeitsarbeitGruppen($b->data ?? []))->pluck('arten')->flatten()->all(),
+                    true,
+                ));
+
+            $seite = Page::firstOrCreate(
+                ['slug' => $slug, 'locale' => 'de'],
+                [
+                    'titel' => $thema['titel'],
+                    'meta_title' => $thema['titel'].' - Kein Einzelfall e.V.',
+                    'meta_description' => $thema['meta_description'],
+                    'noindex' => false,
+                    'published_at' => now(),
+                ],
+            );
+
+            if (! $abschnitt || $seite->blocks()->exists()) {
+                continue;
+            }
+
+            $abschnitt->update([
+                'page_id' => $seite->getKey(),
+                'position' => 0,
+                'data' => array_diff_key($abschnitt->data ?? [], array_flip(['titel', 'bild', 'bild_alt'])),
+            ]);
+        }
+
+        // Hinter die Einleitung, also ans Ende: Die Abschnitte sind umgezogen.
+        if (! $uebersicht->blocks()->where('typ', 'unterseiten')->exists()) {
+            $uebersicht->blocks()->create([
+                'typ' => 'unterseiten',
+                'position' => (int) $uebersicht->blocks()->max('position') + 1,
+                'data' => ['aufrufe' => false],
+            ]);
+        }
+
+        foreach ($uebersicht->blocks()->orderBy('position')->get()->values() as $i => $block) {
+            $block->update(['position' => $i]);
+        }
+
+        Titelbilder::setzen();
     }
 }

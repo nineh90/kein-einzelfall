@@ -82,6 +82,10 @@ class Titelbilder
         // KEV-149: Bild von Taddi statt Platzhalter, Megafon auf Holztisch.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'oeffentlichkeitsarbeit' => null,
+        // KEV-238: Taddis Bilder der drei Themen, Motiv links, Fläche rechts
+        'ehrenamtsmessen' => null,
+        'petitionen' => null,
+        'presse' => null,
         // KEV-147: Bild von Taddi statt Platzhalter, Leinenbücher mit „2025“.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'taetigkeits-und-jahresberichte' => null,
@@ -243,6 +247,11 @@ class Titelbilder
      *  - Rückblick: aufgeschlagenes Fotoalbum, davor ein loses Foto (KEV-137).
      *    Rechts um Wand verlängert, Album zwischen 7 und 81 %, das lose Foto
      *    bis 97 % der Höhe; mit 40 % bleibt das Album ganz.
+     *  - Ehrenamtsmessen, Petitionen, Presse (KEV-238): Messestand, Blatt mit
+     *    Unterschriften, Zeitungsstapel mit Logo, alle links. Das Logo sitzt
+     *    zwischen 20 und 50 % der Höhe, die Unterschriften zwischen 10 und
+     *    95 %, der Stand füllt die Höhe. Unten ausgerichtet fehlten Logo und
+     *    die obersten Unterschriften.
      *  - Bürokratie-Labyrinth (Gruppe, KEV-228): Labyrinth aus Papier links,
      *    zwischen 17 und 75 % der Höhe; mit 45 % bleibt es ganz.
      *  - Seelenfarben (Gruppe, KEV-229): Pinsel und Aquarell-Kreis oben links,
@@ -282,6 +291,9 @@ class Titelbilder
         self::ORDNER.'/projekte.webp' => 40,
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
         self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
+        self::ORDNER.'/ehrenamtsmessen.webp' => 55,
+        self::ORDNER.'/petitionen.webp' => 40,
+        self::ORDNER.'/presse.webp' => 40,
     ];
 
     /**

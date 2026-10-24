@@ -3,7 +3,10 @@
 
     // Aktiv = exakt diese URL oder eine ihrer Unterseiten.
     $istAktiv = function (array $item): bool {
-        $urls = [$item['url'], ...array_column($item['children'] ?? [], 'url')];
+        // Auch die Themenseiten unter einem Unterpunkt (KEV-238: /presse unter
+        // „Öffentlichkeitsarbeit“).
+        $urls = [$item['url'], ...array_column($item['children'] ?? [], 'url'),
+            ...collect($item['children'] ?? [])->flatMap(fn ($kind) => array_column($kind['children'] ?? [], 'url'))->all()];
         foreach ($urls as $url) {
             // Unterseiten zählen mit: /selbsthilfegruppen/seelenfarben (KEV-73)
             // gehört zu „Gruppen & Veranstaltungen“, wie /veranstaltungen/….
