@@ -83,6 +83,35 @@ class UnterstuetzungsbandTest extends TestCase
         $this->get('/en')->assertOk()->assertDontSee('every bit of support counts');
     }
 
+    /**
+     * KEV-219: Auf den Tätigkeits- und Jahresberichten statt des Bands der
+     * Spendenkasten der Startseite („Jetzt spenden“, kompakt).
+     */
+    public function test_jahresberichte_mit_dem_spendenkasten_der_startseite(): void
+    {
+        $seite = $this->seite('taetigkeits-und-jahresberichte');
+        $this->assertSame(['text', 'donation_options'], $seite->blocks()->orderBy('position')->pluck('typ')->all());
+        $this->assertTrue((bool) $seite->blocks()->where('typ', 'donation_options')->value('data')['kompakt']);
+        $this->get('/taetigkeits-und-jahresberichte')->assertOk()
+            ->assertSee('Jetzt spenden')
+            ->assertSee('IBAN kopieren')
+            ->assertDontSee(self::ZITAT);
+
+        // Stand davor: das Band am Ende. Die Migration tauscht es an derselben Stelle.
+        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $seite->blocks()->create(['typ' => 'cta_band', 'position' => 1, 'data' => UnterstuetzungsbandSeeder::BAND]);
+        $migration = require database_path('migrations/2026_10_24_290000_jahresberichte_spendenkasten.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(['text', 'donation_options'], $seite->blocks()->orderBy('position')->pluck('typ')->all());
+
+        // Ein vom Verein geändertes Band bleibt.
+        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $seite->blocks()->create(['typ' => 'cta_band', 'position' => 1, 'data' => ['eyebrow' => 'Eigenes Band', 'zitat' => 'Vom Verein.']]);
+        UnterstuetzungsbandSeeder::spendenStattBand();
+        $this->assertSame(['text', 'cta_band'], $seite->blocks()->orderBy('position')->pluck('typ')->all());
+    }
+
     private function seite(string $slug): Page
     {
         return Page::where('locale', 'de')->where('slug', $slug)->firstOrFail();

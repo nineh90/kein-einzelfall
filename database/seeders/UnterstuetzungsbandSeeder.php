@@ -36,8 +36,15 @@ class UnterstuetzungsbandSeeder extends Seeder
     public const SEITEN = [
         'verein',
         'ueber-uns-vorstand-und-team',
-        'taetigkeits-und-jahresberichte',
         'kein-einzelfall-im-dialog',
+    ];
+
+    /**
+     * Seiten mit dem Spendenkasten der Startseite („Jetzt spenden“, kompakt)
+     * statt des Bands (KEV-219, Taddis Wunsch).
+     */
+    public const SPENDEN_STATT_BAND = [
+        'taetigkeits-und-jahresberichte',
     ];
 
     public const BAND = [
@@ -80,6 +87,47 @@ class UnterstuetzungsbandSeeder extends Seeder
             $anzahl++;
         }
 
+        self::spendenStattBand();
+
         return $anzahl;
+    }
+
+    /**
+     * KEV-219: Auf den Seiten in SPENDEN_STATT_BAND steht statt des Bands der
+     * Spendenkasten der Startseite, mit denselben Daten wie dort (so, wie der
+     * Verein ihn gerade gepflegt hat). Ein Band, das der Verein geändert hat,
+     * bleibt; ein Spendenkasten, der schon dasteht, auch.
+     */
+    public static function spendenStattBand(): void
+    {
+        $vorlage = Page::where('slug', 'startseite')->where('locale', Language::standardCode())->first()
+            ?->blocks()->where('typ', 'donation_options')->value('data')
+            ?? StartseiteSeeder::spendenBaustein();
+
+        $seiten = Page::query()
+            ->where('locale', Language::standardCode())
+            ->where('fassung', Page::FASSUNG_STANDARD)
+            ->whereIn('slug', self::SPENDEN_STATT_BAND)
+            ->get();
+
+        foreach ($seiten as $seite) {
+            if ($seite->blocks()->where('typ', 'donation_options')->exists()) {
+                continue;
+            }
+
+            $band = $seite->blocks()->where('typ', 'cta_band')->get()->first(fn ($b) => $b->data == self::BAND);
+            $position = $band?->position ?? (int) $seite->blocks()->max('position') + 1;
+            $band?->delete();
+
+            if ($seite->blocks()->where('typ', 'cta_band')->exists()) {
+                continue; // vom Verein geändertes Band: nicht anfassen
+            }
+
+            $seite->blocks()->create([
+                'typ' => 'donation_options',
+                'position' => $position,
+                'data' => is_array($vorlage) ? $vorlage : json_decode($vorlage, true),
+            ]);
+        }
     }
 }
