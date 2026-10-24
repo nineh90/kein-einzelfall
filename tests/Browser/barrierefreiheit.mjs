@@ -88,6 +88,8 @@ const SEITEN = [
     ['Wall of Shame', '/wall-of-shame'],
     // Kacheln mit Bild und Aufrufen (KEV-156).
     ['Bereich mit Kacheln', '/raum-fuer-ungesagtes'],
+    // Einleitung mit Termin-Kalender daneben, Kacheln zu zweit (KEV-224, KEV-225).
+    ['Bereich mit Kalender', '/gruppen-und-veranstaltungen'],
     ['Fehlerseite', '/diese-seite-gibt-es-nicht'],
 ]
 

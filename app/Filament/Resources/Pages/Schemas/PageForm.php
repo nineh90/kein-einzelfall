@@ -282,6 +282,9 @@ class PageForm
                                     // KEV-152
                                     'fristen' => 'Zeigt alle Einträge unter „Fristen“ mit Suchfeld, Buchstabenleiste '
                                         .'und aufklappbaren Karten. Neue Fristen dort anlegen.',
+                                    // KEV-224
+                                    'kalender' => 'Zeigt die Termine aus „Veranstaltungen“ und die Treffen der offenen '
+                                        .'Gruppen, Monat für Monat. Termine dort pflegen, hier nur die Überschrift.',
                                     default => null,
                                 }),
 
@@ -491,7 +494,7 @@ class PageForm
                                 ->label('Neben den Textabschnitt darüber stellen')
                                 ->helperText('Auf großen Bildschirmen rechts neben dem Text, auf dem Handy darunter. '
                                     .'Wirkt nur, wenn direkt darüber genau ein Textabschnitt steht.')
-                                ->visible(fn ($get) => $get('typ') === 'download_list'),
+                                ->visible(fn ($get) => in_array($get('typ'), PageBlock::DANEBEN, true)),
 
                             Repeater::make('data.dokumente')
                                 ->label('Dokumente')

@@ -115,6 +115,9 @@ class PageBlock extends Model
         // KEV-152: die Fristen aus dem Panel mit Suche, A–Z und
         // aufklappbaren Karten.
         'fristen' => 'Fristenübersicht (Suche, A–Z, aufklappbar)',
+        // KEV-224: Veranstaltungen und Gruppentreffen eines Monats, aus
+        // denselben Daten wie /veranstaltungen (App\Support\Termine).
+        'kalender' => 'Termin-Kalender (Veranstaltungen und Gruppentreffen)',
     ];
 
     /**
@@ -152,6 +155,7 @@ class PageBlock extends Model
         'unterseiten' => 'wechselnd',
         'glossar' => 'wechselnd',
         'fristen' => 'wechselnd',
+        'kalender' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
@@ -188,6 +192,9 @@ class PageBlock extends Model
         return $flaechen;
     }
 
+    /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224). */
+    public const DANEBEN = ['download_list', 'kalender'];
+
     /**
      * Die Bausteine einer Seite als Abschnitte: Aufeinanderfolgende
      * Textbausteine bilden einen gemeinsamen Abschnitt, jeder andere
@@ -216,7 +223,8 @@ class PageBlock extends Model
 
             // Dokumente neben dem Text (KEV-226): Steht direkt darüber genau
             // ein Textabschnitt, wandert die Liste in dessen Abschnitt.
-            if ($block->typ === 'download_list' && ! empty($block->data['neben_text']) && $letzter !== null
+            // Seit KEV-224 auch der Termin-Kalender.
+            if (in_array($block->typ, self::DANEBEN, true) && ! empty($block->data['neben_text']) && $letzter !== null
                 && count($abschnitte[$letzter]['bloecke']) === 1
                 && $abschnitte[$letzter]['bloecke'][0]->typ === 'text'
                 && ! isset($abschnitte[$letzter]['daneben'])) {

@@ -541,5 +541,11 @@
     "Dein Zugang (Microsoft Teams):": "Your access (Microsoft Teams):",
     "Bitte gib den Link nicht weiter, er ist nur für dich.": "Please do not pass the link on; it is only for you.",
     "Mit der Teilnahme gelten die Teilnahme- und Verschwiegenheitsvereinbarung und die Gruppenregeln:": "By taking part, the participation and confidentiality agreement and the group rules apply:",
-    "Du möchtest nicht mehr teilnehmen oder hast eine Frage? Schreib uns an :adresse.": "No longer want to take part, or have a question? Write to us at :adresse."
+    "Du möchtest nicht mehr teilnehmen oder hast eine Frage? Schreib uns an :adresse.": "No longer want to take part, or have a question? Write to us at :adresse.",
+    "Termine": "Dates",
+    "Alle Veranstaltungen": "All events",
+    "Termine in den eigenen Kalender": "Add dates to your own calendar",
+    "Vorheriger Monat: :monat": "Previous month: :monat",
+    "Nächster Monat: :monat": "Next month: :monat",
+    "In diesem Monat stehen keine weiteren Termine an.": "There are no more dates this month."
 }

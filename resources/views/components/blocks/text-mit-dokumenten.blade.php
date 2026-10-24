@@ -13,6 +13,8 @@
     sonst leer bliebe. Unter lg steht sie unter dem Text, in derselben
     Reihenfolge wie im Panel. Eingeschaltet wird das am Dokumente-Baustein
     („Neben den Textabschnitt darüber stellen“), siehe PageBlock::abschnitte().
+    Genauso der Termin-Kalender (KEV-224) neben der Einleitung von
+    /gruppen-und-veranstaltungen.
 --}}
 @php
     $d = $text->data ?? [];
@@ -33,8 +35,13 @@
             :hand="$d['hand'] ?? null"
             :mittig="(bool) ($d['mittig'] ?? false)" />
 
-        <x-blocks.download-list :rahmen="false" :auf="$auf"
-            :titel="$dok['titel'] ?? null"
-            :dokumente="$dok['dokumente'] ?? []" />
+        {{-- Seit KEV-224 auch der Termin-Kalender (PageBlock::DANEBEN). --}}
+        @if ($dokumente->typ === 'kalender')
+            <x-blocks.kalender :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null" />
+        @else
+            <x-blocks.download-list :rahmen="false" :auf="$auf"
+                :titel="$dok['titel'] ?? null"
+                :dokumente="$dok['dokumente'] ?? []" />
+        @endif
     </div>
 </section>

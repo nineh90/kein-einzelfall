@@ -90,5 +90,36 @@ class GruppenUndVeranstaltungenSeeder extends Seeder
         }
 
         Titelbilder::platzhalterSetzen();
+        self::kalenderNebenEinleitung();
+    }
+
+    /**
+     * KEV-224, Taddis Wunsch: rechts neben der Einleitung der Übersicht ein
+     * Kalender mit den Terminen des Vereins (Baustein „kalender“, Schalter
+     * „neben_text“). Nur wo noch keiner steht.
+     */
+    public static function kalenderNebenEinleitung(): void
+    {
+        $seite = Page::where('slug', 'gruppen-und-veranstaltungen')->where('locale', 'de')->first();
+
+        if (! $seite || $seite->blocks()->where('typ', 'kalender')->exists()) {
+            return;
+        }
+
+        $bloecke = $seite->blocks()->orderBy('position')->get()->values();
+        $einleitung = $bloecke->search(fn ($b) => $b->typ === 'text');
+        $position = 0;
+
+        foreach ($bloecke as $i => $block) {
+            $block->update(['position' => $position++]);
+
+            if ($i === $einleitung) {
+                $seite->blocks()->create([
+                    'typ' => 'kalender',
+                    'position' => $position++,
+                    'data' => ['titel' => 'Termine', 'neben_text' => true],
+                ]);
+            }
+        }
     }
 }
