@@ -62,9 +62,11 @@ class DatenschutzerklaerungTest extends TestCase
 
         // Die neuen Abschnitte hinter „Cookies“, die Liste am Ende: Zwischen
         // den Abschnitten bräche sie die Seitenleiste auf.
+        // Seit KEV-226 dahinter die Anmeldung zu Selbsthilfegruppen.
         $this->assertSame(
-            ['Cookies', 'Speicher im Browser (Local Storage)', 'Spendenformulare von betterplace.org', 'Kontaktformular', 'speicher_uebersicht'],
-            array_slice($this->reihenfolge(), -5),
+            ['Cookies', 'Speicher im Browser (Local Storage)', 'Spendenformulare von betterplace.org', 'Kontaktformular',
+                'Anmeldung zu Selbsthilfegruppen', 'speicher_uebersicht'],
+            array_slice($this->reihenfolge(), -6),
         );
     }
 

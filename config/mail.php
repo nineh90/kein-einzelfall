@@ -147,6 +147,18 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Anmeldungen zu Selbsthilfegruppen (KEV-226)
+    |--------------------------------------------------------------------------
+    |
+    | Wohin der Hinweis geht, dass eine Anmeldung vorliegt. Ohne Name und
+    | E-Mail der Person, siehe App\Notifications\NeueGruppenAnmeldung.
+    |
+    */
+
+    'anmeldungen_an' => env('MAIL_ANMELDUNGEN_AN') ?: 'selbsthilfe@kein-einzelfall.de',
+
     // Leere Zeile in der .env zählt als nicht gesetzt.
     'ombudsstelle_an' => env('MAIL_OMBUDSSTELLE_AN') ?: 'beschwerdemanagement@kein-einzelfall.de',
 

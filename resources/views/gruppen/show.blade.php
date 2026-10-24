@@ -31,7 +31,8 @@
 {{--
     Eine Selbsthilfegruppe (KEV-73). Aufbau wie bei einer Veranstaltung:
     erst das Wichtigste zum Mitmachen (Wann, nächster Termin, Wo, Kosten,
-    Kontakt), dann Taddis Text mit dem Schlusssatz in Handschrift.
+    Kontakt), dann Taddis Text mit dem Schlusssatz in Handschrift, darunter
+    bei offenen Gruppen die Anmeldung (KEV-226).
 --}}
 {{--
     Mit Titelbild (KEV-82) der Seitenkopf wie auf den anderen Seiten: Name
@@ -126,10 +127,17 @@
         </dl>
 
         <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <x-ui.button :href="'mailto:'.$adresse.'?subject='.rawurlencode('Selbsthilfegruppe: '.$gruppe->name)"
-                         :variant="$offen ? 'primary' : 'ghost'" size="sm">
-                {{ $offen ? __('Per E-Mail anmelden') : __('Per E-Mail nachfragen') }}
-            </x-ui.button>
+            {{-- KEV-226: Offene Gruppen melden sich über das Formular unten an,
+                 mit Zustimmung zu Vereinbarung und Regeln. Für die übrigen
+                 bleibt die Mail. --}}
+            @if ($gruppe->anmeldungMoeglich())
+                <x-ui.button href="#anmeldung" size="sm">{{ __('Jetzt anmelden') }}</x-ui.button>
+            @else
+                <x-ui.button :href="'mailto:'.$adresse.'?subject='.rawurlencode('Selbsthilfegruppe: '.$gruppe->name)"
+                             :variant="$offen ? 'primary' : 'ghost'" size="sm">
+                    {{ $offen ? __('Per E-Mail anmelden') : __('Per E-Mail nachfragen') }}
+                </x-ui.button>
+            @endif
 
             {{-- Mit dem Beitritt gelten sie, so steht es auf der Übersicht --}}
             <a href="{{ $uebersicht }}#dl-dokumente-zum-herunterladen" class="text-sm text-green-deep underline">
@@ -148,6 +156,20 @@
         @foreach ($gruppe->schlusssaetze() as $satz)
             <p @class(['max-w-prose font-hand text-2xl leading-snug text-green', 'mt-6' => $loop->first, 'mt-2' => ! $loop->first])>{{ $satz }}</p>
         @endforeach
+
+        {{-- Anmeldung über die Website (KEV-226). scroll-mt: Der Knopf oben
+             springt hierher, die Überschrift bleibt unter dem Kopfbereich
+             sichtbar. --}}
+        @if ($gruppe->anmeldungMoeglich())
+            <section id="anmeldung" aria-labelledby="anmeldung-titel"
+                     class="mt-12 scroll-mt-24 rounded-card border border-line bg-card px-5 py-6 sm:px-8 sm:py-8">
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+                <h2 id="anmeldung-titel" class="mb-3 font-display text-2xl font-medium text-green">
+                    {{ __('Anmeldung zu „:gruppe“', ['gruppe' => $gruppe->name]) }}
+                </h2>
+                <x-ui.gruppen-anmeldung :gruppe="$gruppe" auf="card" class="max-w-prose" />
+            </section>
+        @endif
     </div>
 </article>
 

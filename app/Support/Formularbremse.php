@@ -60,7 +60,12 @@ class Formularbremse
 
     private static function art(Request $request): string
     {
-        return $request->routeIs('*beschwerde.senden') ? 'beschwerde' : 'anfrage';
+        return match (true) {
+            $request->routeIs('*beschwerde.senden') => 'beschwerde',
+            // KEV-226
+            $request->routeIs('*gruppen.anmelden') => 'gruppenanmeldung',
+            default => 'anfrage',
+        };
     }
 
     private static function schluessel(Request $request, string $formular): string

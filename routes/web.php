@@ -5,6 +5,7 @@ use App\Http\Controllers\BeschwerdeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GruppeController;
+use App\Http\Controllers\GruppenAnmeldungController;
 use App\Http\Controllers\OeffentlichkeitsarbeitController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RedirectController;
@@ -89,6 +90,16 @@ $oeffentlicheRouten = function () {
      * /selbsthilfegruppen/ und nicht flach: /buerokratie-labyrinth ist schon
      * die Seite zum gleichnamigen Vortragsabend.
      */
+    /*
+     * Anmeldung zu einer Selbsthilfegruppe (KEV-226). Tempolimit nur gegen
+     * Massenversand, wie bei /anfrage; wie oft jemand sich anmelden kann,
+     * regelt App\Support\Formularbremse.
+     */
+    Route::post('/selbsthilfegruppen/{slug}/anmeldung', [GruppenAnmeldungController::class, 'store'])
+        ->middleware('throttle:30,10')
+        ->where('slug', '[a-z0-9-]+')
+        ->name('gruppen.anmelden');
+
     Route::get('/selbsthilfegruppen/{slug}', [GruppeController::class, 'show'])
         ->where('slug', '[a-z0-9-]+')
         ->name('gruppen.show');

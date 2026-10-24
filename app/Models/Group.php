@@ -55,7 +55,7 @@ class Group extends Model
     protected $fillable = [
         'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung', 'schlusssatz', 'titelbild',
         'rhythmus', 'uhrzeit', 'ort', 'online', 'status',
-        'anmeldung_hinweis', 'position', 'published_at',
+        'anmeldung_hinweis', 'zugangslink', 'link_automatisch', 'position', 'published_at',
         'wiederholung', 'wochentag', 'woche_im_monat', 'beginn_zeit', 'dauer_minuten',
         'uebersetzungen',
     ];
@@ -66,7 +66,25 @@ class Group extends Model
             'online' => 'boolean',
             'published_at' => 'datetime',
             'uebersetzungen' => 'array',
+            // KEV-226: Wer den Link hat, sitzt im Gruppenraum.
+            'zugangslink' => 'encrypted',
+            'link_automatisch' => 'boolean',
         ];
+    }
+
+    /** Anmeldungen über die Website (KEV-226). */
+    public function anmeldungen(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(GroupRegistration::class);
+    }
+
+    /**
+     * Kann man sich über die Website anmelden? Nur bei Selbsthilfegruppen,
+     * die laufen (KEV-226). Die AGs melden sich weiter per Mail an.
+     */
+    public function anmeldungMoeglich(): bool
+    {
+        return $this->typ === 'selbsthilfe' && $this->istOffen();
     }
 
     public function scopeVeroeffentlicht(Builder $query): Builder

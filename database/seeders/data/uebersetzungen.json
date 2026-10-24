@@ -3913,5 +3913,26 @@
   },
   "Hier findest du eine Auswahl unserer Presseartikel, Interviews und Berichte über KE!N EINZELFALL e.V. und unsere Arbeit.": {
     "en": "Here you will find a selection of press articles, interviews and reports about KE!N EINZELFALL e.V. and our work."
+  },
+  "Anmeldung zu Selbsthilfegruppen": {
+    "en": "Signing up for self-help groups"
+  },
+  "Zu unseren Selbsthilfegruppen können Sie sich über das Formular auf der Seite der jeweiligen Gruppe anmelden. Dabei übermitteln Sie uns Ihre E-Mail-Adresse und freiwillig einen Namen, ein Vorname oder Spitzname genügt. Außerdem speichern wir, zu welcher Gruppe Sie sich angemeldet haben, und wann Sie der Teilnahme- und Verschwiegenheitsvereinbarung, den Gruppenregeln und der Verarbeitung zugestimmt haben.": {
+    "en": "You can sign up for our self-help groups using the form on the page of the respective group. In doing so, you send us your e-mail address and, optionally, a name; a first name or nickname is enough. We also store which group you signed up for and when you agreed to the participation and confidentiality agreement, the group rules and the processing."
+  },
+  "Schon die Anmeldung zu einer Selbsthilfegruppe kann etwas über Ihre Gesundheit aussagen. Wir verarbeiten diese Angaben deshalb nur mit Ihrer ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a in Verbindung mit Art. 6 Abs. 1 lit. a DSGVO) und nur, um Ihre Anmeldung zu bearbeiten und Ihnen den Zugang zur Gruppe zu schicken.": {
+    "en": "Signing up for a self-help group can in itself say something about your health. We therefore process this information only with your explicit consent (Art. 9 (2) (a) in conjunction with Art. 6 (1) (a) GDPR) and only to handle your sign-up and send you access to the group."
+  },
+  "Ihre Angaben speichern wir verschlüsselt in unserem Verwaltungsbereich. Per E-Mail erfahren wir nur, dass eine Anmeldung vorliegt, ohne Ihren Namen und Ihre E-Mail-Adresse. Sie erhalten von uns per E-Mail eine Bestätigung und den Zugangslink zur Gruppe. Eine Weitergabe an Dritte findet nicht statt.": {
+    "en": "We store your details encrypted in our administration area. By e-mail we only learn that a sign-up has arrived, without your name and e-mail address. You receive a confirmation and the access link to the group from us by e-mail. Your data is not passed on to third parties."
+  },
+  "Bearbeitete Anmeldungen löschen wir automatisch 30 Tage nach der Freigabe oder Ablehnung, unbearbeitete spätestens 90 Tage nach Eingang.": {
+    "en": "We automatically delete processed sign-ups 30 days after approval or rejection, and unprocessed ones no later than 90 days after receipt."
+  },
+  "*Widerruf*": {
+    "en": "*Withdrawal*"
+  },
+  "Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, etwa per E-Mail an selbsthilfe@kein-einzelfall.de. Ihre Anmeldung wird dann gelöscht.": {
+    "en": "You can withdraw your consent at any time with effect for the future, for example by e-mail to selbsthilfe@kein-einzelfall.de. Your sign-up will then be deleted."
   }
 }

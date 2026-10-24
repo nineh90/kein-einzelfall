@@ -839,6 +839,40 @@ console.log('\nWall of Shame')
     await ohne.context().close()
 }
 
+// --- Anmeldung zu einer Selbsthilfegruppe (KEV-226) -----------------------
+
+console.log('\nAnmeldung zu einer Selbsthilfegruppe')
+{
+    const s = await oeffnen({ breite: 390, pfad: '/selbsthilfegruppen/wir-sind-nicht-mehr-stumm' })
+
+    await s.locator('a[href="#anmeldung"]').click()
+    await s.waitForTimeout(400)
+    const imBild = await s.evaluate(() => {
+        const r = document.querySelector('#anmeldung-titel').getBoundingClientRect()
+        return r.top >= 0 && r.top < window.innerHeight
+    })
+    pruefe('„Jetzt anmelden“ springt zum Formular', imBild)
+
+    // Ohne Häkchen lässt der Browser nicht absenden (required)
+    await s.waitForTimeout(3200)
+    await s.fill('#anmeldung-email', 'browsertest@beispiel.de')
+    await s.locator('#anmeldung button[type=submit]').click()
+    pruefe('ohne Zustimmung kein Absenden', !(await s.locator('#anmeldung [role=status]').count())
+        && await s.evaluate(() => !document.querySelector('#anmeldung-teilnahme').validity.valid))
+
+    await s.check('#anmeldung-teilnahme')
+    await s.check('#anmeldung-gruppenregeln')
+    await s.check('#anmeldung-einwilligung')
+    await s.locator('#anmeldung button[type=submit]').click()
+    await s.waitForLoadState('networkidle')
+    const meldung = s.locator('#anmeldung [role=status]')
+    pruefe('nach dem Absenden die Bestätigung, im Blick', await meldung.isVisible()
+        && (await meldung.innerText()).includes('Deine Anmeldung ist angekommen')
+        && s.url().endsWith('#formular-anmeldung')
+        && await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+    await s.context().close()
+}
+
 // --- Suche im Glossar (KEV-153) --------------------------------------------
 
 console.log('\nSuche im Glossar')

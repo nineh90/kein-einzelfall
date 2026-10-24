@@ -93,17 +93,26 @@ class GroupForm
             Section::make('Teilnahme')->columns(2)->schema([
                 Select::make('status')->label('Status')->options(Group::STATUS)
                     ->default('offen')->required()->native(false)
-                    ->helperText('Nur offene Gruppen bekommen einen Anfrage-Knopf.'),
+                    ->helperText('Nur bei offenen Gruppen kann man sich anmelden.'),
 
                 DateTimePicker::make('published_at')->label('Sichtbar ab')->seconds(false)
                     ->native(false)->helperText('Leer = nicht öffentlich sichtbar.'),
 
                 TextInput::make('anmeldung_hinweis')->label('Hinweis zur Teilnahme')->columnSpanFull()
-                    // Bewusst nur ein Hinweis: Anmeldungen zu Selbsthilfegruppen sind
-                    // Art.-9-Daten und brauchen ein eigenes Konzept.
-                    ->helperText('Anmeldungen werden nicht auf der Website erfasst — '
-                        .'die Teilnahme an einer Selbsthilfegruppe ist eine besonders '
-                        .'schützenswerte Angabe und braucht ein eigenes Datenschutzkonzept.'),
+                    ->helperText('Kurzer Hinweis auf der Karte, etwa „Bitte vorher anmelden“.'),
+
+                // KEV-226: Anmeldung über die Website, nur bei Selbsthilfegruppen.
+                // Verschlüsselt gespeichert, öffentlich nirgends zu sehen.
+                TextInput::make('zugangslink')->label('Zugangslink (Teams)')->columnSpanFull()
+                    ->url()->password()->revealable()
+                    ->helperText('Geht per E-Mail an alle, deren Anmeldung freigegeben ist. Steht nirgends auf der Website.')
+                    ->visible(fn ($get) => $get('typ') === 'selbsthilfe'),
+
+                Toggle::make('link_automatisch')->label('Zugangslink sofort nach der Anmeldung verschicken')
+                    ->columnSpanFull()
+                    ->helperText('Aus: Ihr gebt jede Anmeldung unter „Anmeldungen“ frei, dann geht der Link raus. '
+                        .'An: Wer sich anmeldet, bekommt den Link sofort, ohne Prüfung.')
+                    ->visible(fn ($get) => $get('typ') === 'selbsthilfe'),
             ]),
         ]);
     }

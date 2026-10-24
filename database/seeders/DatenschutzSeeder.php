@@ -118,6 +118,29 @@ class DatenschutzSeeder extends Seeder
         .'werden dann gelöscht.',
     ];
 
+    /** KEV-226: Anmeldung zu Selbsthilfegruppen über die Website, hinter „Kontaktformular“. */
+    public const ANMELDUNG = [
+        'titel' => 'Anmeldung zu Selbsthilfegruppen',
+        'absaetze' => [
+            'Zu unseren Selbsthilfegruppen können Sie sich über das Formular auf der Seite der jeweiligen Gruppe '
+            .'anmelden. Dabei übermitteln Sie uns Ihre E-Mail-Adresse und freiwillig einen Namen, ein Vorname oder '
+            .'Spitzname genügt. Außerdem speichern wir, zu welcher Gruppe Sie sich angemeldet haben, und wann Sie '
+            .'der Teilnahme- und Verschwiegenheitsvereinbarung, den Gruppenregeln und der Verarbeitung zugestimmt haben.',
+            'Schon die Anmeldung zu einer Selbsthilfegruppe kann etwas über Ihre Gesundheit aussagen. Wir verarbeiten '
+            .'diese Angaben deshalb nur mit Ihrer ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a in Verbindung mit '
+            .'Art. 6 Abs. 1 lit. a DSGVO) und nur, um Ihre Anmeldung zu bearbeiten und Ihnen den Zugang zur Gruppe zu schicken.',
+            'Ihre Angaben speichern wir verschlüsselt in unserem Verwaltungsbereich. Per E-Mail erfahren wir nur, dass '
+            .'eine Anmeldung vorliegt, ohne Ihren Namen und Ihre E-Mail-Adresse. Sie erhalten von uns per E-Mail eine '
+            .'Bestätigung und den Zugangslink zur Gruppe. Eine Weitergabe an Dritte findet nicht statt.',
+            '*Dauer der Speicherung*',
+            'Bearbeitete Anmeldungen löschen wir automatisch 30 Tage nach der Freigabe oder Ablehnung, unbearbeitete '
+            .'spätestens 90 Tage nach Eingang.',
+            '*Widerruf*',
+            'Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, etwa per E-Mail an '
+            .'selbsthilfe@kein-einzelfall.de. Ihre Anmeldung wird dann gelöscht.',
+        ],
+    ];
+
     public function run(): void
     {
         foreach (Page::where('slug', self::SLUG)->where('locale', 'de')->get() as $seite) {
@@ -171,6 +194,8 @@ class DatenschutzSeeder extends Seeder
             }
         }
 
+        self::anmeldungEinfuegen($seite);
+
         // Die Liste selbst ans Ende: Zwischen den Abschnitten bräche sie die
         // Seitenleiste mit den Sprungmarken auf. Ohne Daten, Überschrift und
         // Einleitung kommen wie auf /barrierefreiheit aus den Übersetzungen.
@@ -197,5 +222,38 @@ class DatenschutzSeeder extends Seeder
             ->filter(fn ($b) => in_array($b['titel'], ['Cookies', 'Kontaktformular'], true))
             ->mapWithKeys(fn ($b) => [$b['titel'] => Textpflege::bausteinDaten(['absaetze' => $b['absaetze']], self::SLUG)['absaetze']])
             ->all();
+    }
+
+    /**
+     * Den Abschnitt zur Anmeldung zu Selbsthilfegruppen (KEV-226) hinter
+     * „Kontaktformular“ einfügen, sonst vor der Liste am Ende. Gibt es ihn
+     * schon, passiert nichts.
+     */
+    public static function anmeldungEinfuegen(Page $seite): void
+    {
+        $bloecke = $seite->blocks()->orderBy('position')->get()->values();
+
+        if ($bloecke->contains(fn ($b) => ($b->data['titel'] ?? null) === self::ANMELDUNG['titel'])) {
+            return;
+        }
+
+        $nach = $bloecke->search(fn ($b) => $b->typ === 'text' && ($b->data['titel'] ?? null) === 'Kontaktformular');
+        if ($nach === false) {
+            $liste = $bloecke->search(fn ($b) => $b->typ === 'speicher_uebersicht');
+            $nach = $liste === false ? $bloecke->count() - 1 : $liste - 1;
+        }
+
+        $position = 0;
+        foreach ($bloecke as $i => $block) {
+            $block->update(['position' => $position++]);
+
+            if ($i === $nach) {
+                $seite->blocks()->create(['typ' => 'text', 'position' => $position++, 'data' => self::ANMELDUNG]);
+            }
+        }
+
+        if ($nach < 0) {
+            $seite->blocks()->create(['typ' => 'text', 'position' => $position, 'data' => self::ANMELDUNG]);
+        }
     }
 }

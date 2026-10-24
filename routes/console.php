@@ -13,3 +13,6 @@ Artisan::command('inspire', function () {
  * Nachts, wenn ohnehin niemand am Panel arbeitet.
  */
 Schedule::command('anfragen:aufraeumen')->dailyAt('03:30');
+
+// Dasselbe für die Anmeldungen zu Selbsthilfegruppen (KEV-226).
+Schedule::command('anmeldungen:aufraeumen')->dailyAt('03:40');
