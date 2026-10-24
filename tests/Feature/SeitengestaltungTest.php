@@ -456,6 +456,13 @@ class SeitengestaltungTest extends TestCase
     {
         $html = $this->get('/gremium-ukfb')->assertOk()->getContent();
 
+        // KEV-220: groß der Name des Kuratoriums, darunter „Assoziiertes
+        // Fachgremium“; im Menü und im Browser-Tab weiter „Gremium UKFB“.
+        $this->assertMatchesRegularExpression('#<h1[^>]*>\s*Unabhängiges Kuratorium für Betroffenenexpertise\s*</h1>#u', $html);
+        $this->assertStringContainsString('Assoziiertes Fachgremium</p>', preg_replace('/\s+</', '<', $html));
+        $this->assertStringContainsString('<title>Gremium UKFB - Kein Einzelfall e.V.</title>', $html);
+        $this->assertMatchesRegularExpression('#href="/gremium-ukfb"[^>]*>\s*Gremium UKFB\s*<#u', $html);
+
         // KEV-221: UKFB vorn, rechts das Logo (mit Beschreibung, es trägt Text)
         $this->assertMatchesRegularExpression('#<h2[^>]*>\s*UKFB – Assoziiertes Fachgremium\s*</h2>#u', $html);
         $this->assertStringNotContainsString('Assoziiertes Fachgremium – UKFB', $html);

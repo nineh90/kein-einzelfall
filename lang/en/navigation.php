@@ -22,6 +22,9 @@ return [
     'erwerbsminderungsrente' => 'Reduced earning capacity pension',
     'bereich_gruppen_veranstaltungen' => 'Groups & events',
     'bereich_kontakt' => 'Contact',
+    // KEV-220: Die Seite heißt jetzt nach dem Kuratorium (deutscher Name mit
+    // Übersetzung in Klammern); im Menü bleibt es kurz wie auf Deutsch.
+    'gremium_ukfb' => 'UKFB committee',
 
     'gespeicherte_einstellungen' => 'Saved settings',
     'glossar' => 'Glossary',

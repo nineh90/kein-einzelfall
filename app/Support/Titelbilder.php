@@ -65,7 +65,8 @@ class Titelbilder
         'beschwerdemanagement' => 'Deine Rückmeldung hilft uns, besser zu werden.',                // von uns
         // KEV-81, Bild von Taddi. Seit KEV-105 mit Text; die Unterzeile ist
         // der ausgeschriebene Name.
-        'gremium-ukfb' => 'Unabhängiges Kuratorium für Betroffenenexpertise',                    // von uns
+        // KEV-220: Der Name steht seitdem groß als Titel, darunter Taddis Zusatz.
+        'gremium-ukfb' => 'Assoziiertes Fachgremium',
         // KEV-78, Bild von Taddi. Seit KEV-104 mit Text; die Unterzeile ist
         // dessen erster Satz.
         'landesstellen' => 'KE!N EINZELFALL ist nicht nur an einem Ort zuhause.',

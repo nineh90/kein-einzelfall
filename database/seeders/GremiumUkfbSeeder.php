@@ -25,6 +25,15 @@ class GremiumUkfbSeeder extends Seeder
 
     public const HOMEPAGE = 'https://ukfb.org';
 
+    /**
+     * Seitenkopf (KEV-220): groß der Name des Kuratoriums, darunter
+     * „Assoziiertes Fachgremium“. Im Menü bleibt es „Gremium UKFB“
+     * (config/navigation.php), ebenso der Titel im Browser-Tab.
+     */
+    public const SEITENTITEL = 'Unabhängiges Kuratorium für Betroffenenexpertise';
+
+    public const UNTERTITEL = 'Assoziiertes Fachgremium';
+
     /** Logo des Kuratoriums, aus Taddis Drive („Bilder“), KEV-221. */
     public const LOGO = '/img/ukfb/logo-ukfb.webp';
 
@@ -60,7 +69,7 @@ class GremiumUkfbSeeder extends Seeder
     {
         $seite = Page::firstOrCreate(
             ['slug' => self::SLUG, 'locale' => 'de'],
-            ['titel' => 'Gremium UKFB', 'meta_title' => 'Gremium UKFB - Kein Einzelfall e.V.'],
+            ['titel' => self::SEITENTITEL, 'meta_title' => 'Gremium UKFB - Kein Einzelfall e.V.'],
         );
 
         $leer = $seite->blocks()->get()->every(fn ($b) => $b->typ === 'text' && blank($b->data));
@@ -106,5 +115,18 @@ class GremiumUkfbSeeder extends Seeder
                 ]),
             ]);
         }
+    }
+
+    /**
+     * KEV-220: Seitenkopf mit dem Namen des Kuratoriums, darunter
+     * „Assoziiertes Fachgremium“. Nur wo noch der bisherige Titel und die
+     * bisherige Unterzeile stehen.
+     */
+    public static function seitenkopf(): void
+    {
+        Page::where('slug', self::SLUG)->where('locale', 'de')->where('titel', 'Gremium UKFB')
+            ->update(['titel' => self::SEITENTITEL]);
+        Page::where('slug', self::SLUG)->where('locale', 'de')->where('untertitel', self::SEITENTITEL)
+            ->update(['untertitel' => self::UNTERTITEL]);
     }
 }
