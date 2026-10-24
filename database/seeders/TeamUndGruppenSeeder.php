@@ -554,9 +554,11 @@ class TeamUndGruppenSeeder extends Seeder
      * beiden Seiten, Taddi sah keine einzige Gruppe. Deshalb öffentlich, für
      * die Migration.
      *
-     * Auf /selbsthilfegruppen außerdem Taddis Aufbau: Einleitung mit den
-     * Dokumenten daneben, darunter die Gruppen. Auf /arbeitsgruppen kommen die
-     * Karten ans Ende, wie bisher.
+     * Auf beiden Seiten außerdem Taddis Aufbau: Einleitung mit den Dokumenten
+     * daneben, darunter die Gruppen. Auf /arbeitsgruppen fallen dafür die
+     * Abschnitte „AG 02 – …“ der Altseite weg (KEV-234): Sie standen doppelt
+     * zu den Karten, mit teils alten Namen, und nur für 5 von 8 AGs. Die
+     * Texte der AGs stehen auf ihren eigenen Seiten.
      */
     public static function gruppenseitenVervollstaendigen(): void
     {
@@ -575,8 +577,10 @@ class TeamUndGruppenSeeder extends Seeder
                 ]);
             }
 
-            if ($slug !== 'selbsthilfegruppen') {
-                continue;
+            if ($slug === 'arbeitsgruppen') {
+                $seite->blocks()->where('typ', 'text')->get()
+                    ->filter(fn ($b) => preg_match('/^AG\s*\d+\b/u', trim((string) ($b->data['titel'] ?? ''))))
+                    ->each->delete();
             }
 
             $bloecke = $seite->blocks()->orderBy('position')->get();
