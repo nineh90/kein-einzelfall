@@ -20,7 +20,10 @@
 @foreach ($abschnitte as $abschnitt)
     @php $bloecke = $abschnitt['bloecke']; @endphp
 
-    @if (count($bloecke) === 1)
+    @if (count($bloecke) === 1 && isset($abschnitt['daneben']))
+        <x-blocks.text-mit-dokumenten :text="$bloecke[0]" :dokumente="$abschnitt['daneben']" :auf="$abschnitt['flaeche']" />
+
+    @elseif (count($bloecke) === 1)
         <x-block :block="$bloecke[0]" :flaeche="$abschnitt['flaeche']" />
 
     @elseif ($art === 'nebeneinander' && count($bloecke) <= 3

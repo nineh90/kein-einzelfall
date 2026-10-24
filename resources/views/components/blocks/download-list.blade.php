@@ -2,6 +2,9 @@
     'titel' => null,
     'dokumente' => [],   // [['titel' =>, 'datei' =>, 'url' =>, 'bytes' =>, 'typ' =>, 'quelle' =>], ...]
     'auf' => 'cream',    // cream | card
+    // Ohne eigenes Band und Satzspiegel, als Spalte neben einem Text
+    // (x-blocks.text-mit-dokumenten, KEV-226).
+    'rahmen' => true,
 ])
 
 @php
@@ -89,15 +92,19 @@
 {{-- Derselbe Rahmen wie die Textbausteine: Ohne Container lief die Liste über
      die volle Fensterbreite und fiel aus dem Satzspiegel der Seite. --}}
 <section @class([
-    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
-    'bg-card border-y border-line' => $auf === 'card',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12' => $rahmen,
+    'bg-card border-y border-line' => $rahmen && $auf === 'card',
 ])
          @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>
-    <div class="mx-auto max-w-6xl">
-        <div class="max-w-prose">
+    <div @class(['mx-auto max-w-6xl' => $rahmen])>
+        <div @class(['max-w-prose' => $rahmen])>
             @if ($titel)
                 <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
-                <h2 id="dl-{{ Str::slug($titel) }}" class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
+                <h2 id="dl-{{ Str::slug($titel) }}" @class([
+                    'mb-4 font-display font-medium text-green',
+                    'text-2xl lg:text-3xl' => $rahmen,
+                    'text-xl lg:text-2xl' => ! $rahmen,
+                ])>
                     {{ $titel }}
                 </h2>
             @endif

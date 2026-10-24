@@ -526,8 +526,8 @@ class TeamUndGruppenSeeder extends Seeder
             $block->update(['data' => $data]);
         }
 
-        // Einleitung, Gruppen, Dokumente
-        $rang = ['text' => 0, 'group_list' => 1, 'download_list' => 2];
+        // Einleitung, Dokumente (daneben, KEV-226), Gruppen
+        $rang = ['text' => 0, 'download_list' => 1, 'group_list' => 2];
         $seite->blocks()->orderBy('position')->get()
             ->sortBy(fn ($b) => [$rang[$b->typ] ?? 1, $b->position])
             ->values()
@@ -538,6 +538,68 @@ class TeamUndGruppenSeeder extends Seeder
 
     /** Kontaktzeile am Ende jeder AG-Beschreibung. */
     public const AG_KONTAKT = 'Du hast Interesse? Schreibe uns einfach kurz an: arbeitsgruppe@kein-einzelfall.de';
+
+    /** Die Gruppenkarten auf den beiden Übersichten (KEV-73, KEV-74). */
+    public const GRUPPENKARTEN = [
+        'selbsthilfegruppen' => ['titel' => 'Unsere Selbsthilfegruppen', 'typ' => 'selbsthilfe'],
+        'arbeitsgruppen' => ['titel' => 'Aktuelle Arbeitsgruppen', 'typ' => 'arbeits'],
+    ];
+
+    /**
+     * Gruppenkarten auf /selbsthilfegruppen und /arbeitsgruppen anlegen, wo
+     * sie fehlen (KEV-226).
+     *
+     * Bis dahin legte sie nur seitenNeuAufbauen() an, und das läuft nur mit
+     * dem ganzen Seeder. Auf der Demo lief er nie: Dort fehlten die Karten auf
+     * beiden Seiten, Taddi sah keine einzige Gruppe. Deshalb öffentlich, für
+     * die Migration.
+     *
+     * Auf /selbsthilfegruppen außerdem Taddis Aufbau: Einleitung mit den
+     * Dokumenten daneben, darunter die Gruppen. Auf /arbeitsgruppen kommen die
+     * Karten ans Ende, wie bisher.
+     */
+    public static function gruppenseitenVervollstaendigen(): void
+    {
+        foreach (self::GRUPPENKARTEN as $slug => $karten) {
+            $seite = Page::where('slug', $slug)->where('locale', 'de')->first();
+
+            if (! $seite) {
+                continue;
+            }
+
+            if (! $seite->blocks()->where('typ', 'group_list')->exists()) {
+                $seite->blocks()->create([
+                    'typ' => 'group_list',
+                    'position' => (int) $seite->blocks()->max('position') + 1,
+                    'data' => $karten,
+                ]);
+            }
+
+            if ($slug !== 'selbsthilfegruppen') {
+                continue;
+            }
+
+            $bloecke = $seite->blocks()->orderBy('position')->get();
+            $einleitung = $bloecke->firstWhere('typ', 'text');
+            $dokumente = $bloecke->where('typ', 'download_list');
+
+            // Nur den Aufbau der Seite, wie wir ihn kennen: eine Einleitung,
+            // eine Dokumentenliste. Was der Verein anders gebaut hat, bleibt.
+            if (! $einleitung || $dokumente->count() !== 1 || $bloecke->where('typ', 'text')->count() !== 1) {
+                continue;
+            }
+
+            $liste = $dokumente->first();
+            if (! array_key_exists('neben_text', $liste->data ?? [])) {
+                $liste->update(['data' => ($liste->data ?? []) + ['neben_text' => true]]);
+            }
+
+            $rang = ['text' => 0, 'download_list' => 1, 'group_list' => 2];
+            $bloecke->sortBy(fn ($b) => [$rang[$b->typ] ?? 3, $b->position])
+                ->values()
+                ->each(fn ($b, $i) => $b->update(['position' => $i]));
+        }
+    }
 
     /**
      * Knopf „Anmelden (AG 01)“ für einen Abschnitt „AG 01 – …“ auf
@@ -836,6 +898,7 @@ class TeamUndGruppenSeeder extends Seeder
         ]);
         self::arbeitsgruppenseiteAufbauen(['de' => self::ARBEITSGRUPPEN_ALT + ['seite' => self::ARBEITSGRUPPEN_SEITE]]);
         self::selbsthilfeseiteAufbauen();
+        self::gruppenseitenVervollstaendigen();
     }
 
     private function seiteUmbauen(string $slug, string $typ, array $daten): void

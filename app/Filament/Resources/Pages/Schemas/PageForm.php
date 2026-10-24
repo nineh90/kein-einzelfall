@@ -486,6 +486,13 @@ class PageForm
                                     true,
                                 )),
 
+                            // KEV-226: Taddis Wunsch auf /selbsthilfegruppen.
+                            Toggle::make('data.neben_text')
+                                ->label('Neben den Textabschnitt darüber stellen')
+                                ->helperText('Auf großen Bildschirmen rechts neben dem Text, auf dem Handy darunter. '
+                                    .'Wirkt nur, wenn direkt darüber genau ein Textabschnitt steht.')
+                                ->visible(fn ($get) => $get('typ') === 'download_list'),
+
                             Repeater::make('data.dokumente')
                                 ->label('Dokumente')
                                 ->addActionLabel('Dokument hinzufügen')

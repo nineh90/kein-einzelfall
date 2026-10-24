@@ -205,7 +205,7 @@ class PageBlock extends Model
      *
      * @param  iterable<self>  $bloecke
      * @param  string  $davor  Fläche des Elements über dem ersten Baustein
-     * @return list<array{bloecke: list<self>, flaeche: string}>
+     * @return list<array{bloecke: list<self>, flaeche: string, daneben?: self}>
      */
     public static function abschnitte(iterable $bloecke, string $davor = 'card'): array
     {
@@ -213,6 +213,17 @@ class PageBlock extends Model
 
         foreach ($bloecke as $block) {
             $letzter = array_key_last($abschnitte);
+
+            // Dokumente neben dem Text (KEV-226): Steht direkt darüber genau
+            // ein Textabschnitt, wandert die Liste in dessen Abschnitt.
+            if ($block->typ === 'download_list' && ! empty($block->data['neben_text']) && $letzter !== null
+                && count($abschnitte[$letzter]['bloecke']) === 1
+                && $abschnitte[$letzter]['bloecke'][0]->typ === 'text'
+                && ! isset($abschnitte[$letzter]['daneben'])) {
+                $abschnitte[$letzter]['daneben'] = $block;
+
+                continue;
+            }
 
             if ($block->typ === 'text' && $letzter !== null
                 && $abschnitte[$letzter]['bloecke'][0]->typ === 'text') {
