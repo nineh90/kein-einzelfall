@@ -85,7 +85,8 @@ class RueckblickTest extends TestCase
     {
         $html = $this->get('/rueckblick')->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('/<h2[^>]*>\s*KE!N EINZELFALL im Dialog – Trauma, Bindung und Beziehung\s*<\/h2>/u', $html);
+        // Der Vereinsname am Stück (KEV-232).
+        $this->assertMatchesRegularExpression('/<h2[^>]*>\s*<span class="inline-block">KE!N EINZELFALL<\/span> im Dialog – Trauma, Bindung und Beziehung\s*<\/h2>/u', $html);
         $this->assertStringContainsString('startete am 10. August 2026 unsere Veranstaltungsreihe', $html);
         $this->assertStringContainsString('Als Referenten durften wir Lutz-Ulrich Besser, Facharzt für Psychiatrie und Psychotherapie', $html);
         $this->assertStringContainsString('Fragen konnten auch ausschließlich über den Chat gestellt werden.', $html);
@@ -266,7 +267,7 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('content="A look back at KE!N EINZELFALL e.V.: impressions of events', $html);
         $this->assertStringContainsString('src="/img/titelbilder/rueckblick.webp?v=', $html);
 
-        $this->assertStringContainsString('KE!N EINZELFALL im Dialog – Trauma, attachment and relationships', $html);
+        $this->assertStringContainsString('KE!N EINZELFALL</span> im Dialog – Trauma, attachment and relationships', $html);
         $this->assertStringContainsString('our event series “KE!N EINZELFALL im Dialog – Knowledge meets experience” began on 10 August 2026', $html);
         $this->assertStringContainsString('/img/rueckblick/trauma-bindung-und-beziehung.webp', $html);
 

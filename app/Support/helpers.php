@@ -202,6 +202,27 @@ if (! function_exists('hervorheben')) {
     }
 }
 
+if (! function_exists('ueberschrift')) {
+    /**
+     * Eine Abschnittsüberschrift mit dem Vereinsnamen am Stück (KEV-232).
+     *
+     * „KE!N EINZELFALL“ wird nie auseinandergerissen; vorher stand „KE!N“ am
+     * Zeilenende und „EINZELFALL e.V.“ allein darunter. Endet die Überschrift
+     * auf „KE!N EINZELFALL e.V.“, steht der Name in einer eigenen Zeile:
+     * „Die Selbsthilfegruppen des“ / „KE!N EINZELFALL e.V.“ (Wunsch von Taddi).
+     * inline-block statt nowrap: Passt der Name bei grosser Schrift auf einem
+     * schmalen Bildschirm nicht in eine Zeile, bricht er doch um, statt über
+     * den Rand zu laufen. Erst maskieren, dann ersetzen.
+     */
+    function ueberschrift(string $text): \Illuminate\Support\HtmlString
+    {
+        $html = preg_replace('/KE!N EINZELFALL(?: e\.V\.)?/u', '<span class="inline-block">$0</span>', e($text));
+        $html = preg_replace('/(?<=\S)\s+(<span class="inline-block">KE!N EINZELFALL e\.V\.<\/span>)$/u', '<br>$1', $html);
+
+        return new \Illuminate\Support\HtmlString($html);
+    }
+}
+
 if (! function_exists('bildadresse')) {
     /**
      * Adresse eines Bildes aus public/, mit Fingerabdruck seines Inhalts.

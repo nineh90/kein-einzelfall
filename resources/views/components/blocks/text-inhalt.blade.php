@@ -58,8 +58,9 @@
             @if ($strich)
                 <span aria-hidden="true" @class(['mb-4 block h-0.5 w-10 rounded-full bg-green-brand', 'mx-auto' => $mittig])></span>
             @endif
+            {{-- ueberschrift(): Vereinsname am Stück, am Ende in eigener Zeile (KEV-232). --}}
             <h2 class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
-                {{ $titel }}
+                {{ ueberschrift($titel) }}
             </h2>
         </div>
     @endif
