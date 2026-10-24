@@ -429,8 +429,10 @@ class TeamUndGruppenSeeder extends Seeder
             'wochentag' => 5, 'woche_im_monat' => 1, 'beginn_zeit' => '10:00',
         ],
         [
-            'slug' => 'skillin-me-softly', 'status' => 'geplant',
+            // KEV-230: läuft ab November 2026, Bild von Taddi (wellige Linien im Gegenlicht)
+            'slug' => 'skillin-me-softly', 'status' => 'offen',
             'name' => 'Skillin me Softly',
+            'titelbild' => '/img/titelbilder/gruppe-skillin-me-softly.webp',
             'teaser' => 'Trigger und Skills',
             'absaetze' => [
                 'Manchmal reicht ein Geruch, ein Satz, eine Situation oder eine Erinnerung – und plötzlich ist die Anspannung da. Was in solchen Momenten hilft, ist von Mensch zu Mensch verschieden.',
