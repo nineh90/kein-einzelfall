@@ -132,6 +132,11 @@ return [
             'text' => 'Wie oft du Seiten aufgerufen hast — der Hinweis kommt erst nach ein paar '
                 .'Aufrufen — und ob du ihn weggeklickt hast. Dann bleibt er eine Weile weg.',
         ],
+        'wand' => [
+            'label' => 'Wall of Shame',
+            'text' => 'Wie viele Sätze du an der Wall of Shame schon gelesen hast, damit es nach dem '
+                .'Neuladen dort weitergeht. Nach 30 Tagen ohne Weiterlesen wird der Stand vergessen.',
+        ],
     ],
 
     /*

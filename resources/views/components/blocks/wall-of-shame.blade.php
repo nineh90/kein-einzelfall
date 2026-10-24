@@ -22,6 +22,9 @@
       Website findet die Sätze darüber.
     - Erst ein Klick zeigt etwas. Wen diese Sätze treffen, entscheidet selbst,
       ob und wie viele er liest; nichts springt ungefragt ins Bild.
+    - Wie weit jemand gelesen hat, merkt sich der Browser 30 Tage (KEV-163).
+      Beim Wiederkommen steht auf dem Zettel nur der Stand, der nächste Satz
+      kommt wieder erst mit dem Klick. „Von vorn“ setzt ihn zurück.
     - Wächst die Liste, werden die Striche kleiner, damit alle auf die Wand
       passen. Die Wand selbst wächst nicht mit.
     - Feste Farben statt der Seitenfarben: Die Wand ist ein Bild, und der
@@ -47,7 +50,8 @@
              data-text-weiter="{{ __('Nächsten Satz lesen') }}"
              data-text-schluss="{{ __('Weiter') }}"
              data-text-neu="{{ __('Noch einmal von vorn') }}"
-             data-text-ende="{{ __('Das waren alle :gesamt Sätze.') }}">
+             data-text-ende="{{ __('Das waren alle :gesamt Sätze.') }}"
+             data-text-fortsetzen="{{ __('Du hast schon :nr von :gesamt Sätzen gelesen. Ein Klick auf den Papierstapel zeigt den nächsten.') }}">
         <div class="mx-auto max-w-6xl">
             <h2 id="{{ $anker }}" @class([
                 'mb-6 font-display text-2xl font-medium text-green lg:text-3xl' => $titel,
@@ -77,9 +81,18 @@
                         class="absolute left-1/2 top-[6%] w-[min(90%,34rem)] -translate-x-1/2 rotate-[-1deg]
                                rounded-sm bg-[#f4ecdf] px-5 py-4 text-[#271e18] shadow-[0_8px_24px_rgba(0,0,0,0.35)]
                                transition-transform duration-500 sm:px-7 sm:py-5">
-                    <p data-wand-zaehler class="mb-1.5 text-xs font-medium uppercase tracking-[0.12em] text-[#6b5a4c]">
-                        {{ __(':nr von :gesamt', ['nr' => 0, 'gesamt' => $gesamt]) }}
-                    </p>
+                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                        <p data-wand-zaehler class="text-xs font-medium uppercase tracking-[0.12em] text-[#6b5a4c]">
+                            {{ __(':nr von :gesamt', ['nr' => 0, 'gesamt' => $gesamt]) }}
+                        </p>
+                        {{-- Setzt den gemerkten Lesestand zurück, ohne bis zum Schluss zu klicken. --}}
+                        <button type="button" data-wand-von-vorn hidden
+                                class="-my-2 cursor-pointer px-1 py-2 text-xs font-medium text-[#6b5a4c] underline
+                                       underline-offset-2 hover:text-[#271e18] focus-visible:outline-2
+                                       focus-visible:outline-offset-2 focus-visible:outline-[#271e18]">
+                            {{ __('Von vorn beginnen') }}
+                        </button>
+                    </div>
                     <blockquote aria-live="polite">
                         <p data-wand-satz class="font-display text-lg leading-snug sm:text-xl lg:text-2xl">
                             {{ __('Ein Klick auf den Papierstapel zeigt den ersten Satz. Mit jedem Satz kommt ein Strich an die Wand.') }}

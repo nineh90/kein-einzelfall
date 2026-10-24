@@ -83,6 +83,7 @@ class SpeicherTest extends TestCase
             resource_path('js/trigger-warnung.js'),
             resource_path('js/bereichswarnung.js'),
             resource_path('js/spendenhinweis.js'),
+            resource_path('js/wall-of-shame.js'),
             resource_path('js/a11y.js'),
         ] as $datei) {
             preg_match_all(
@@ -115,6 +116,8 @@ class SpeicherTest extends TestCase
             resource_path('js/trigger-warnung.js'),
             resource_path('js/bereichswarnung.js'),
             resource_path('js/spendenhinweis.js'),
+            // KEV-163: Lesestand der Wall of Shame.
+            resource_path('js/wall-of-shame.js'),
             base_path('config/darstellung.php'),
         ])->map(fn ($p) => file_get_contents($p))->implode("\n");
 

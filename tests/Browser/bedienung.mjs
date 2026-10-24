@@ -785,6 +785,54 @@ console.log('\nWall of Shame')
         await s.context().close()
     }
 
+    // Lesestand (KEV-163): Nach dem Neuladen geht es weiter, wo man war.
+    {
+        const s = await oeffnen({ pfad: '/wall-of-shame' })
+        const striche = () => s.locator('[data-wand-striche] line').count()
+        const zaehler = s.locator('[data-wand-zaehler]')
+        const satz = s.locator('[data-wand-satz]')
+        const vonVorn = s.locator('[data-wand-von-vorn]')
+        const gesamt = await s.locator('[data-wand-liste] li').count()
+
+        pruefe('Lesestand: anfangs nichts gespeichert, kein „Von vorn“',
+            await s.evaluate(() => localStorage.getItem('ke.wand')) === null && !(await vonVorn.isVisible()))
+
+        for (let i = 0; i < 7; i++) await s.locator('[data-wand-stapel]').click()
+        const achter = await s.locator('[data-wand-liste] li').nth(7).getAttribute('data-satz')
+        await s.reload({ waitUntil: 'networkidle' })
+
+        pruefe('Lesestand: nach dem Neuladen 7 Striche, Zettel nennt nur den Stand',
+            await striche() === 7 && (await zaehler.textContent()).trim() === `7 von ${gesamt}`
+            && (await satz.innerText()).startsWith('Du hast schon 7 von') && await vonVorn.isVisible())
+
+        await s.locator('[data-wand-stapel]').click()
+        pruefe('Lesestand: Klick zeigt Satz 8', (await satz.innerText()) === `„${achter}“` && await striche() === 8)
+
+        const bis = await s.evaluate(() => Object.values(JSON.parse(localStorage.getItem('ke.wand')))[0].bis - Date.now())
+        pruefe('Lesestand: gilt rund 30 Tage', bis > 29.9 * 864e5 && bis <= 30 * 864e5)
+
+        await vonVorn.click()
+        pruefe('Lesestand: „Von vorn beginnen“ leert Wand und Speicher, Fokus auf dem Stapel',
+            await striche() === 0 && (await satz.innerText()).startsWith('Ein Klick auf den Papierstapel')
+            && !(await vonVorn.isVisible()) && await s.evaluate(() => localStorage.getItem('ke.wand')) === null
+            && await s.evaluate(() => document.activeElement?.hasAttribute('data-wand-stapel')))
+
+        // Abgelaufen: wieder von vorn.
+        await s.evaluate(() => localStorage.setItem('ke.wand', JSON.stringify({
+            [document.querySelector('[data-wall-of-shame]').getAttribute('aria-labelledby')]: { gelesen: 20, gesamt: 145, ende: false, bis: Date.now() - 1000 },
+        })))
+        await s.reload({ waitUntil: 'networkidle' })
+        pruefe('Lesestand: nach Ablauf vergessen', await striche() === 0)
+
+        // Bis zum Schluss gelesen: Nach dem Neuladen steht wieder der Schluss.
+        for (let i = 0; i <= gesamt; i++) await s.locator('[data-wand-stapel]').click()
+        await s.reload({ waitUntil: 'networkidle' })
+        pruefe('Lesestand: bis zum Schluss gelesen, nach dem Neuladen wieder der Schluss',
+            await striche() === gesamt && (await satz.innerText()).includes(`alle ${gesamt} Sätze`)
+            && (await s.locator('[data-wand-knopf]').innerText()).trim() === 'Noch einmal von vorn')
+        await s.context().close()
+    }
+
     const ohne = await oeffnen({ js: false, pfad: '/wall-of-shame' })
     pruefe('ohne JS: keine Wand, aber alle Sätze als Liste', !(await ohne.locator('[data-wand]').isVisible())
         && await ohne.locator('[data-wand-liste] li').count() > 100)

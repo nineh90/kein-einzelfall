@@ -123,7 +123,27 @@ class WallOfShameTest extends TestCase
         $this->assertStringContainsString('„You need to pull yourself together a bit now.“', $html);
         $this->assertStringContainsString('All 145 sentences as a list', $html);
         $this->assertStringContainsString('Read the next sentence', $html);
+        $this->assertStringContainsString('Start over', $html);
+        $this->assertStringContainsString('You have already read :nr of :gesamt sentences.', $html);
         // Kein Satz bleibt deutsch.
         $this->assertStringNotContainsString('„So schlimm kann es', $html);
+    }
+
+    /**
+     * KEV-163: Der Lesestand bleibt 30 Tage im Browser. Die Seite liefert dafür
+     * den Text fürs Wiederkommen und den Knopf „Von vorn beginnen“ (verborgen,
+     * bis etwas gelesen ist), und der Schlüssel steht in der Speicher-Übersicht.
+     */
+    public function test_lesestand_wird_gemerkt_und_laesst_sich_zuruecksetzen(): void
+    {
+        $html = $this->get('/wall-of-shame')->getContent();
+
+        $this->assertStringContainsString('data-text-fortsetzen="Du hast schon :nr von :gesamt Sätzen gelesen.', $html);
+        $this->assertMatchesRegularExpression('/<button type="button" data-wand-von-vorn hidden[^>]*>\s*Von vorn beginnen/u', $html);
+
+        $eintrag = collect(config('speicher.eintraege'))->firstWhere('schluessel', 'wand');
+        $this->assertSame(['ke.wand'], $eintrag['local']);
+        $this->assertStringContainsString('"wand":{"local":["ke.wand"]', $html);
+        $this->assertSame('Wall of Shame', __($eintrag['label']));
     }
 }

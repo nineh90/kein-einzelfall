@@ -14,9 +14,49 @@
  * Reihe: Die Wand füllt sich überall zugleich. Bündel und Striche sind
  * leicht schief, wie von Hand. Der Zufall hängt an festen Startwerten, damit
  * dasselbe Bild entsteht, egal wie oft neu gezeichnet wird.
+ *
+ * Lesestand (KEV-163): Wie weit jemand gelesen hat, merkt sich der Browser
+ * 30 Tage lang, damit es nach dem Neuladen dort weitergeht. Gespeichert wird
+ * erst nach dem ersten Klick, und nichts geht an den Server (Eintrag `wand`
+ * in config/speicher.php). Beim Wiederkommen stehen die Striche schon an der
+ * Wand, auf dem Zettel steht aber nur, wie weit man war, nicht der letzte
+ * Satz: Den nächsten zeigt wieder erst ein Klick.
  */
 
 const SVG = 'http://www.w3.org/2000/svg'
+
+const SPEICHER = 'ke.wand'
+const HALTBAR = 30 * 24 * 60 * 60 * 1000
+
+/** Alle gemerkten Lesestände, abgelaufene schon aussortiert. */
+function lesestaende() {
+    try {
+        const alle = JSON.parse(localStorage.getItem(SPEICHER)) || {}
+        return Object.fromEntries(Object.entries(alle).filter(([, stand]) => stand?.bis > Date.now()))
+    } catch (e) {
+        return {}
+    }
+}
+
+/** Lesestand einer Wand merken, `null` vergisst ihn. */
+function merken(id, stand) {
+    try {
+        const alle = lesestaende()
+        if (stand) {
+            alle[id] = { ...stand, bis: Date.now() + HALTBAR }
+        } else {
+            delete alle[id]
+        }
+
+        if (Object.keys(alle).length) {
+            localStorage.setItem(SPEICHER, JSON.stringify(alle))
+        } else {
+            localStorage.removeItem(SPEICHER)
+        }
+    } catch (e) {
+        /* Privater Modus o.ä.: Dann gilt der Stand nur bis zum Neuladen. */
+    }
+}
 
 // Kleiner Zufallsgenerator mit Startwert (mulberry32).
 function zufall(startwert) {
@@ -106,6 +146,8 @@ function verdrahten(bereich) {
     const zaehler = wand.querySelector('[data-wand-zaehler]')
     const stapel = wand.querySelector('[data-wand-stapel]')
     const knopf = wand.querySelector('[data-wand-knopf]')
+    const vonVorn = wand.querySelector('[data-wand-von-vorn]')
+    const anleitung = satz.textContent.trim()
     const schluss = bereich.querySelector('[data-wand-schluss]')?.textContent.trim() ?? ''
     const text = bereich.dataset
     const gesamt = saetze.length
@@ -113,6 +155,16 @@ function verdrahten(bereich) {
     // gesamt + 1 = Schluss. Gezählt wird höchstens bis gesamt.
     let schritt = 0
     let gelesen = 0
+
+    // Gemerkter Stand. Sind seitdem Sätze dazugekommen, geht es nach dem
+    // zuletzt gelesenen weiter, auch wenn damals schon der Schluss stand.
+    const id = bereich.getAttribute('aria-labelledby')
+    const stand = lesestaende()[id]
+    if (stand) {
+        gelesen = Math.min(Math.max(0, parseInt(stand.gelesen, 10) || 0), gesamt)
+        schritt = stand.ende && stand.gesamt === gesamt ? gesamt + 1 : gelesen
+    }
+    let fortgesetzt = gelesen > 0 && schritt <= gesamt
 
     wand.hidden = false
 
@@ -174,6 +226,19 @@ function verdrahten(bereich) {
 
     function anzeigen() {
         zaehler.textContent = text.textZaehler.replace(':nr', gelesen).replace(':gesamt', gesamt)
+        vonVorn.hidden = gelesen === 0 || schritt > gesamt
+
+        if (schritt === 0) {
+            satz.textContent = anleitung
+            knopf.textContent = text.textWeiter
+            return
+        }
+
+        if (fortgesetzt) {
+            satz.textContent = text.textFortsetzen.replace(':nr', gelesen).replace(':gesamt', gesamt)
+            knopf.textContent = schritt === gesamt ? text.textSchluss : text.textWeiter
+            return
+        }
 
         if (schritt <= gesamt) {
             satz.textContent = `„${saetze[schritt - 1]}“`
@@ -196,9 +261,25 @@ function verdrahten(bereich) {
         schritt = schritt > gesamt ? 1 : schritt + 1
         const vorher = gelesen
         gelesen = Math.min(schritt, gesamt)
+        fortgesetzt = false
+        merken(id, { gelesen, gesamt, ende: schritt > gesamt })
         anzeigen()
         zeichnen(gelesen > vorher)
     })
+
+    // Zurück auf null, ohne erst bis zum Schluss klicken zu müssen. Der Knopf
+    // verschwindet dabei, der Fokus geht auf den Stapel.
+    vonVorn.addEventListener('click', () => {
+        schritt = 0
+        gelesen = 0
+        fortgesetzt = false
+        merken(id, null)
+        anzeigen()
+        zeichnen()
+        stapel.focus()
+    })
+
+    if (schritt > 0) anzeigen()
 
     if ('ResizeObserver' in window) {
         new ResizeObserver(() => zeichnen()).observe(wand)

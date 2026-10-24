@@ -489,6 +489,8 @@
   "Nächsten Satz lesen": "Read the next sentence",
   "Weiter": "Continue",
   "Noch einmal von vorn": "Start again",
+  "Von vorn beginnen": "Start over",
+  "Du hast schon :nr von :gesamt Sätzen gelesen. Ein Klick auf den Papierstapel zeigt den nächsten.": "You have already read :nr of :gesamt sentences. A click on the stack of paper shows the next one.",
   "Das waren alle :gesamt Sätze.": "Those were all :gesamt sentences.",
   "Alle :gesamt Sätze als Liste": "All :gesamt sentences as a list",
   "Ein Klick auf den Papierstapel zeigt den ersten Satz. Mit jedem Satz kommt ein Strich an die Wand.": "Click the stack of paper to see the first sentence. Every sentence adds a mark to the wall.",

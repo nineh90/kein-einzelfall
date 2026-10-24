@@ -91,5 +91,19 @@ return [
             'session' => [],
         ],
 
+        /*
+         * Lesestand der Wall of Shame (KEV-163): je Wand, wie viele Sätze
+         * gelesen sind, und bis wann das gilt (30 Tage nach dem letzten
+         * Klick). Gespeichert erst nach dem ersten Klick auf den Stapel
+         * (resources/js/wall-of-shame.js).
+         */
+        [
+            'schluessel' => 'wand',
+            'label' => 'rahmen.speicher.wand.label',
+            'text' => 'rahmen.speicher.wand.text',
+            'local' => ['ke.wand'],
+            'session' => [],
+        ],
+
     ],
 ];

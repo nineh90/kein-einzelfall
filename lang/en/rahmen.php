@@ -95,6 +95,11 @@ return [
             'text' => 'How many pages you have opened — the notice only appears after a few — '
                 .'and whether you have dismissed it. It then stays away for a while.',
         ],
+        'wand' => [
+            'label' => 'Wall of Shame',
+            'text' => 'How many sentences you have already read on the Wall of Shame, so you can carry on '
+                .'after reloading. After 30 days without reading on, it is forgotten.',
+        ],
     ],
 
     'verlassen' => [
