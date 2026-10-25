@@ -101,6 +101,20 @@ class FormulareTest extends TestCase
         $this->assertSame(2, $seite->blocks()->count());
     }
 
+    /** KEV-248: Unterzeile unter dem Titel, auch nachträglich und auf Englisch. */
+    public function test_unterzeile(): void
+    {
+        $this->assertStringContainsString('Übersichtlich an einem Ort', $this->get('/formulare')->getContent());
+
+        $seite = Page::where('slug', 'formulare')->where('locale', 'de')->sole();
+        $seite->update(['untertitel' => null]);
+        (require database_path('migrations/2026_10_25_240000_formulare_unterzeile.php'))->up();
+        $this->assertSame('Übersichtlich an einem Ort', $seite->fresh()->untertitel);
+
+        $this->seed(UebersetzungenSeeder::class);
+        $this->assertStringContainsString('All in one place', $this->get('/en/formulare')->getContent());
+    }
+
     public function test_titelbild_von_taddi(): void
     {
         $html = $this->get('/formulare')->getContent();

@@ -102,8 +102,8 @@ class Titelbilder
         // SER“), Zettelkasten. Unterzeile seit KEV-255 aus dem Ticket.
         'glossar' => 'Damit aus Buchstaben wieder Bedeutung wird.',
         // KEV-151: Bild von Taddi („4. Formulare“), Formular mit Vereinslogo
-        // und Füller. Ohne Unterzeile.
-        'formulare' => null,
+        // und Füller. Unterzeile seit KEV-248 aus dem Ticket.
+        'formulare' => 'Übersichtlich an einem Ort',
         // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten.
         // Unterzeile seit KEV-251 aus dem Ticket.
         'fristen' => 'Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.',
