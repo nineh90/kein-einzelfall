@@ -862,6 +862,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     „Weiterlesen“ ein), Wortlaut unverändert.
   - **Von uns:** Überschrift „In allen Kategorien suchen“ und die Zeile
     „Abkürzung, Begriff oder Satz aus deinem Schreiben“ über dem Suchfeld.
+  - Die Suche filtert beim Tippen wie in den einzelnen Glossaren.
 - [ ] **Glossar / Abkürzungen Sozialrecht (KEV-255).** Unterzeile „Damit aus
   Buchstaben wieder Bedeutung wird.“, grüne Überschrift „Abkürzungen verstehen,
   Zusammenhänge erkennen, sicherer durch das SER finden.“ statt bisher

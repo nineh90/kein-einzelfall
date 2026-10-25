@@ -19,10 +19,12 @@
 {{--
     Suche über alle Kategorien unter „Klartext statt Fachsprache“ (KEV-254).
 
-    Anders als im einzelnen Glossar sucht hier der Server, nicht die Seite
-    beim Tippen: Alle Kategorien zusammen sind über 700 Einträge, die müsste
-    jeder Besuch sonst vorab laden. Das Formular springt nach dem Absenden zu
-    den Treffern (#klartext-suche).
+    Gefiltert wird beim Tippen wie im einzelnen Glossar (Kevin: einheitlich).
+    Die Treffer rechnet aber der Server aus: Alle Kategorien zusammen sind
+    über 700 Einträge, die müsste jeder Besuch sonst vorab laden.
+    resources/js/klartext-suche.js holt diese Seite mit ?suche= und tauscht
+    Trefferzahl und Liste aus. Ohne JavaScript schickt das Formular ab und
+    springt zu den Treffern (#klartext-suche).
 
     Die Treffer stehen je Kategorie, jeder mit Link auf seine Stelle in der
     Kategorie: Begriffe auf ihr Sprungziel, Sätze auf die typischen Sätze.
@@ -37,7 +39,7 @@
             {{ $titel ?: __('In allen Kategorien suchen') }}
         </h2>
 
-        <form role="search" method="get" action="{{ $hier }}#klartext-suche" class="max-w-xl">
+        <form role="search" method="get" action="{{ $hier }}#klartext-suche" class="max-w-xl" data-klartext-suche>
             <label for="klartext-suchfeld" class="mb-2 block text-ink-soft">
                 {{ __('Abkürzung, Begriff oder Satz aus deinem Schreiben') }}
             </label>
@@ -57,27 +59,24 @@
             </div>
         </form>
 
-        @if ($suche !== '')
-            <div class="mt-8" role="status">
-                @if ($anzahl === 0)
-                    <div class="max-w-prose leading-relaxed text-ink-soft">
-                        <p>{{ __('Zu „:suche“ steht in keiner Kategorie etwas.', ['suche' => $suche]) }}</p>
-                        <p class="mt-2">
-                            <a href="{{ $suchPfad }}?q={{ urlencode($suche) }}" class="text-green-deep underline">{{ __('Auf der ganzen Website suchen') }}</a>
-                        </p>
-                    </div>
-                @else
-                    <p class="text-ink-soft">
-                        {{ __('Treffer: :anzahl (in :kategorien von :gesamt Kategorien)', [
-                            'anzahl' => $anzahl,
-                            'kategorien' => count($gruppen),
-                            'gesamt' => count(KlartextSuche::kategorien()),
-                        ]) }}
-                        <a href="{{ $hier }}" class="ms-2 text-green-deep underline">{{ __('Suche leeren') }}</a>
-                    </p>
-                @endif
-            </div>
+        {{-- Trefferzahl als eigene, immer vorhandene Ansage: Beim Tippen
+             tauscht das Skript nur ihren Text, Vorlesehilfen lesen dann die
+             Zahl vor und nicht die ganze Liste. --}}
+        <p class="mt-6 text-ink-soft" aria-live="polite" data-klartext-status>@if ($suche !== '' && $anzahl > 0){{ __('Treffer: :anzahl (in :kategorien von :gesamt Kategorien)', [
+                'anzahl' => $anzahl,
+                'kategorien' => count($gruppen),
+                'gesamt' => count(KlartextSuche::kategorien()),
+            ]) }}@elseif ($suche !== ''){{ __('Zu „:suche“ steht in keiner Kategorie etwas.', ['suche' => $suche]) }}@endif</p>
 
+        <div data-klartext-treffer>
+        @if ($suche !== '')
+            <p class="mt-2">
+                @if ($anzahl === 0)
+                    <a href="{{ $suchPfad }}?q={{ urlencode($suche) }}" class="text-green-deep underline">{{ __('Auf der ganzen Website suchen') }}</a>
+                @else
+                    <a href="{{ $hier }}" class="text-green-deep underline" data-klartext-leeren>{{ __('Suche leeren') }}</a>
+                @endif
+            </p>
             @foreach ($gruppen as $gruppe)
                 <section class="mt-8" aria-label="{{ $gruppe['titel'] }}">
                     <h3 class="mb-2 border-b border-line pb-2 font-display text-xl font-medium text-green-deep">
@@ -112,5 +111,6 @@
                 </section>
             @endforeach
         @endif
+        </div>
     </div>
 </section>

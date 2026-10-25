@@ -985,19 +985,35 @@ console.log('\nKlartext statt Fachsprache')
         const s = await oeffnen({ breite, pfad: '/klartext-statt-fachsprache' })
         pruefe(`${breite}px: sechs Kacheln`, await s.locator('li.flex.min-w-0 > a').count() === 6)
 
-        await s.fill('#klartext-suchfeld', 'Widerspruch')
-        await s.press('#klartext-suchfeld', 'Enter')
-        await s.waitForLoadState('networkidle')
-        const status = (await s.locator('#klartext-suche [role="status"]').innerText()).trim()
-        pruefe(`${breite}px: Suche über alle Kategorien`, /^Treffer: \d+ \(in \d von 6 Kategorien\)/.test(status), status)
-        const kopf = await s.evaluate(() => [
-            document.querySelector('header.sticky').getBoundingClientRect().bottom,
-            document.getElementById('klartext-suche').getBoundingClientRect().top,
-        ])
-        pruefe(`${breite}px: springt zu den Treffern`, kopf[1] >= kopf[0] - 1 && kopf[1] < kopf[0] + 80, JSON.stringify(kopf))
+        // Filtert beim Tippen wie im Glossar, ohne Absenden.
+        const status = s.locator('[data-klartext-status]')
+        await s.locator('#klartext-suchfeld').pressSequentially('Widerspruch', { delay: 20 })
+        await s.waitForFunction(() => /^Treffer: \d+ \(in \d von 6 Kategorien\)/.test(
+            document.querySelector('[data-klartext-status]').textContent.trim()), null, { timeout: 5000 }).catch(() => {})
+        const text = (await status.innerText()).trim()
+        pruefe(`${breite}px: Tippen sucht in allen Kategorien`, /^Treffer: \d+ \(in \d von 6 Kategorien\)/.test(text), text)
+        pruefe(`${breite}px: Adresse bleibt`, !s.url().includes('suche='))
+        const links = await s.locator('[data-klartext-treffer] a[href*="#"]').count()
+        pruefe(`${breite}px: Treffer verlinken ihre Stelle`, links > 3, `${links}`)
+
+        await s.locator('[data-klartext-leeren]').click()
+        await s.waitForFunction(() => document.querySelector('[data-klartext-status]').textContent.trim() === '',
+            null, { timeout: 3000 }).catch(() => {})
+        pruefe(`${breite}px: Suche leeren`, (await status.innerText()).trim() === ''
+            && await s.locator('[data-klartext-treffer] section').count() === 0
+            && await s.evaluate(() => document.activeElement?.id) === 'klartext-suchfeld')
         pruefe(`${breite}px: nichts läuft über`, await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
         await s.context().close()
     }
+
+    // Ohne JavaScript: Absenden, die Seite springt zu den Treffern.
+    const ohne = await oeffnen({ js: false, breite: 1400, pfad: '/klartext-statt-fachsprache' })
+    await ohne.fill('#klartext-suchfeld', 'Widerspruch')
+    await ohne.press('#klartext-suchfeld', 'Enter')
+    await ohne.waitForLoadState('load')
+    pruefe('ohne JavaScript: Absenden zeigt die Treffer', ohne.url().includes('suche=Widerspruch')
+        && /^Treffer: /.test((await ohne.locator('[data-klartext-status]').innerText()).trim()))
+    await ohne.context().close()
 }
 
 // --- Sprungziele unter dem klebenden Kopf (KEV-262) -------------------------

@@ -2654,9 +2654,13 @@ Fachsprache“ im Bereich „Wissen“, nicht mehr einzeln. Wie bei
 - **Suche über alle Kategorien** (`App\Support\KlartextSuche`,
   `components/blocks/glossar-suche.blade.php`): Glossar-Einträge und typische
   Sätze aller Seiten unter dem Menüpunkt, gruppiert je Kategorie, jeder Treffer
-  mit Link auf seine Stelle (`#slug` bzw. `#typische-saetze`). Der Server sucht
-  (`?suche=`), nicht die Seite beim Tippen: Zusammen sind es über 700 Einträge.
-  Das Formular springt zu `#klartext-suche`.
+  mit Link auf seine Stelle (`#slug` bzw. `#typische-saetze`). Gefiltert wird
+  beim Tippen wie im einzelnen Glossar (ab zwei Zeichen, 250 ms Pause), die
+  Treffer rechnet aber der Server: `resources/js/klartext-suche.js` holt die
+  Seite mit `?suche=` und tauscht Trefferzahl (`aria-live`) und Liste aus,
+  die Adresse bleibt. Zusammen sind es über 700 Einträge, die nicht jeder
+  Besuch vorab laden soll. Ohne JavaScript schickt das Formular ab und springt
+  zu `#klartext-suche`.
 - **Kacheln:** Sind es mehr als vier und durch drei teilbar, stehen sie in
   Dreierreihen (sechs = zwei Reihen statt vier und zwei).
 - **Brotkrumen** auf der dritten Ebene mit dem Hauptbereich davor:

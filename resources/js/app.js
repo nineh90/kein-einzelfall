@@ -21,6 +21,7 @@ import { toolbarVerdrahten, leselinieVerdrahten } from './a11y'
 import { inhaltsverzeichnisVerdrahten } from './inhaltsverzeichnis'
 import { galerieVerdrahten } from './galerie'
 import { glossarVerdrahten } from './glossar'
+import { klartextSucheVerdrahten } from './klartext-suche'
 import { aufklapperVerdrahten } from './aufklapper'
 import { wallOfShameVerdrahten } from './wall-of-shame'
 import { kopierenVerdrahten } from './kopieren'
@@ -53,6 +54,7 @@ galerieVerdrahten()
 
 // Im Glossar und in der Fristenübersicht: Filtern beim Tippen (KEV-153, KEV-152).
 glossarVerdrahten()
+klartextSucheVerdrahten()
 
 // Links auf eine Frist klappen ihre Karte auf (KEV-152).
 aufklapperVerdrahten()
