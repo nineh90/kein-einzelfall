@@ -27,6 +27,8 @@
         // Uhr für die Frist auf den Karten der Fristenübersicht (KEV-152).
         'clock'         => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
         // Auge für den Aufrufzähler der Kacheln (KEV-156).
+        // Pfeil in die Ablage für „Herunterladen“ (KEV-245).
+        'download'      => '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
         'eye'           => '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
         // Pfeil aus dem Kasten heraus: führt auf eine fremde Seite. Nur dort
         // einsetzen, wo das auch im Text steht — ein Symbol allein sagt

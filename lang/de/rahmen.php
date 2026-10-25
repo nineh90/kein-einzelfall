@@ -81,6 +81,8 @@ return [
      * die er oft nicht hat. Entschieden in der Besprechung vom 02.08.2026.
      */
     'dokumente' => [
+        'ansehen' => 'öffnet im Browser',
+        'herunterladen' => 'Herunterladen',
         'bereich' => 'Dokumente zum Herunterladen',
         'extern' => 'Öffnet :quelle',
         'warum_extern' => 'Anträge und Formulare verlinken wir bei der zuständigen Stelle, '

@@ -73,6 +73,9 @@
      * was ein Download-Symbol verspricht.
      */
     $istExtern = fn (array $d): bool => (bool) preg_match('#^https?://#i', $d['url'] ?? '');
+
+    // Ab acht Einträgen zwei Spalten, nur als eigenes Band (nicht neben Text).
+    $zweispaltig = $rahmen && count($dokumente) >= 8;
 @endphp
 
 {{--
@@ -97,7 +100,9 @@
 ])
          @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>
     <div @class(['mx-auto max-w-6xl' => $rahmen])>
-        <div @class(['max-w-prose' => $rahmen])>
+        {{-- Lange Listen (Atteste: 27) auf großen Bildschirmen in zwei
+             Spalten (KEV-245), sonst bliebe rechts die halbe Seite leer. --}}
+        <div @class(['max-w-prose' => $rahmen && ! $zweispaltig])>
             @if ($titel)
                 <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 <h2 id="dl-{{ Str::slug($titel) }}" @class([
@@ -111,7 +116,15 @@
 
             {{-- Als abgesetzte Karte statt randloser Liste — sonst wirkt der
                  Abschnitt wie ein loses Anhängsel unter dem Fließtext. --}}
-            <ul class="flex flex-col divide-y divide-line overflow-hidden rounded-card border border-line {{ $innen }}">
+            <ul @class([
+                'overflow-hidden rounded-card border border-line', $innen,
+                'flex flex-col divide-y divide-line' => ! $zweispaltig,
+                // Trennlinien an den Einträgen statt als Fugen: Bei ungerader
+                // Zahl bliebe sonst die letzte Zelle als graue Fläche stehen.
+                // -mb-px schiebt die Unterkante der letzten Reihe unter den
+                // Rahmen der Liste.
+                'grid md:grid-cols-2 [&>li]:-mb-px [&>li]:border-b [&>li]:border-line md:[&>li:nth-child(odd)]:border-e' => $zweispaltig,
+            ])>
         @foreach ($dokumente as $dok)
             @php
                 $extern = $istExtern($dok);
@@ -133,15 +146,20 @@
                     $meta = $gr
                         ? __(':typ-Datei, :groesse', ['typ' => $typ, 'groesse' => $gr])
                         : __(':typ-Datei', ['typ' => $typ]);
+                    // PDFs zeigt der Browser selbst an, andere Formate nicht.
+                    if ($typ === 'PDF') {
+                        $meta .= ', '.__('rahmen.dokumente.ansehen');
+                    }
                 }
             @endphp
-            <li>
-                {{-- download und rel="noreferrer" schliessen sich gegenseitig aus:
-                     Das eine gilt nur für eigene Dateien, das andere nur für
-                     fremde Ziele. --}}
+            <li class="flex items-stretch">
+                {{-- Eigene Dateien öffnen im Browser (KEV-245, Taddi: erst
+                     ansehen, dann entscheiden), daneben ein eigener Knopf zum
+                     Herunterladen. Fremde Adressen nur als Verweis mit
+                     rel="noreferrer". --}}
                 <a href="{{ $dok['url'] }}"
-                   @if ($extern) rel="noreferrer noopener" @else download @endif
-                   class="group flex items-center gap-4 px-4 py-3.5 no-underline hover:bg-green-mist">
+                   @if ($extern) rel="noreferrer noopener" @endif
+                   class="group flex min-w-0 flex-1 items-center gap-4 px-4 py-3.5 no-underline hover:bg-green-mist">
                     <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
                                  bg-green-mist font-display text-[0.625rem] font-semibold text-green-deep
                                  group-hover:bg-cream">
@@ -157,10 +175,23 @@
                         <span class="mt-0.5 block text-xs text-ink-soft">{{ $meta }}</span>
                     </span>
 
-                    <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5">
-                        <x-ui.icon :name="$extern ? 'external' : 'arrow-right'" :size="18" />
-                    </span>
+                    @if ($extern)
+                        <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5">
+                            <x-ui.icon name="external" :size="18" />
+                        </span>
+                    @endif
                 </a>
+
+                @unless ($extern)
+                    <a href="{{ $dok['url'] }}" download
+                       class="flex shrink-0 items-center gap-2 border-s border-line px-4 text-sm text-green-deep
+                              no-underline hover:bg-green-mist hover:underline">
+                        <x-ui.icon name="download" :size="18" />
+                        <span class="hidden sm:inline">{{ __('rahmen.dokumente.herunterladen') }}</span>
+                        <span class="sr-only sm:hidden">{{ __('rahmen.dokumente.herunterladen') }}</span>
+                        <span class="sr-only">: {{ $dok['titel'] }}</span>
+                    </a>
+                @endunless
             </li>
                 @endforeach
             </ul>

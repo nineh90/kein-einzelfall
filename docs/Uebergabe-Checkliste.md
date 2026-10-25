@@ -887,6 +887,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     uns etwas mitteilen?“.
 - [x] **Fristen (KEV-252):** grüne Überschrift „Damit aus einer Frist keine
   verpasste Chance wird!“ über der Einleitung, wie gewünscht.
+- [x] **Atteste (KEV-245):** Die 27 Vorlagen stehen auf großen Bildschirmen
+  in zwei Spalten. Ein Klick auf den Titel öffnet das PDF im Browser, daneben
+  „Herunterladen“. Gilt für alle Dokumentenlisten der Website.
 - [ ] **Atteste / „Mehr zu ‚Wissen‘“ (KEV-246), Rückfrage offen.** Unten auf
   den Wissen-Seiten stehen jetzt zuerst Taddis Kategorien (Atteste, Formulare,
   Fristen, Klartext statt Fachsprache), danach die Seiten der alten Website.

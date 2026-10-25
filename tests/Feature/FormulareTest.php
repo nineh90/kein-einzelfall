@@ -53,7 +53,8 @@ class FormulareTest extends TestCase
             $this->assertFileExists(public_path(ltrim($d['url'], '/')), $d['url']);
             $this->assertStringContainsString('href="'.$d['url'].'"', $html);
         }
-        $this->assertSame(8, substr_count($html, '(ausfüllbar)'));
+        // Je Formular zweimal: im Titel und im Herunterladen-Link für Vorlesehilfen.
+        $this->assertSame(16, substr_count($html, '(ausfüllbar)'));
 
         // So geht's: am PC, auf Papier, Unterschrift, wohin
         $this->assertMatchesRegularExpression('/<h2[^>]*>\s*So nutzt du die Formulare\s*<\/h2>/u', $html);

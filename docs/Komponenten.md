@@ -2698,3 +2698,11 @@ Autor, keine Namen aus dem Drive.
 Tests: `FormulareTest` (alle Dateien da, „ausfüllbar“ nur bei PDFs mit
 Feldern, Migration nur auf leerer Liste).
 
+**Seit KEV-245** (alle Dokumentenlisten): Ein Klick auf den Titel öffnet eine
+eigene Datei im Browser (kein `download` mehr), daneben steht ein eigener
+Link „Herunterladen“ mit `download` und dem Titel für Vorlesehilfen. Bei PDFs
+steht „öffnet im Browser“ in der Zeile darunter. Ab acht Einträgen und als
+eigenes Band zwei Spalten ab „md“ (Atteste, FSM, Erwerbsminderungsrente);
+Trennlinien an den Einträgen, damit eine ungerade letzte Zelle leer bleibt.
+Fremde Adressen unverändert.
+

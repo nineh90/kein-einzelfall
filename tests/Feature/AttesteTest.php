@@ -73,6 +73,24 @@ class AttesteTest extends TestCase
     }
 
     /**
+     * KEV-245: Die 27 Vorlagen ab „md“ in zwei Spalten. Jede öffnet im Browser
+     * (Titel ohne download) und lässt sich daneben herunterladen.
+     */
+    public function test_zwei_spalten_ansehen_und_herunterladen(): void
+    {
+        $html = $this->get('/atteste')->getContent();
+
+        $this->assertStringContainsString('md:grid-cols-2', $html);
+        $url = '/dokumente/2026/07/6.5.1.-Info-Attest-Fahrdienst.pdf';
+        $this->assertMatchesRegularExpression('/<a href="'.preg_quote($url, '/').'"\s+class="group[^"]*">/', $html);
+        $this->assertMatchesRegularExpression('/<a href="'.preg_quote($url, '/').'" download[^>]*>.*?Herunterladen.*?<span class="sr-only">: Fahrdienst<\/span>/s', $html);
+        $this->assertSame(27, substr_count($html, 'öffnet im Browser'));
+
+        // Kurze Listen bleiben einspaltig.
+        $this->assertStringNotContainsString('md:grid-cols-2', $this->get('/satzung')->getContent());
+    }
+
+    /**
      * KEV-246: „Mehr zu „Wissen““ zeigt zuerst Taddis Kategorien (Atteste,
      * Formulare, Fristen, Klartext), dann die Seiten der alten Website. Das
      * Menü behält seine Reihenfolge.
@@ -136,8 +154,10 @@ class AttesteTest extends TestCase
         $this->assertMatchesRegularExpression('/<strong[^>]*>So that you don(\'|&#039;)t have to explain every “why” yourself\.<\/strong>/u', $html);
         $this->assertStringContainsString('Certificate templates and wording aids', $html);
         $this->assertStringContainsString('Cancellation fee for short-notice cancellations', $html);
-        // Dateien bekommen kein Sprachpräfix.
-        $this->assertSame(27, preg_match_all('/<a href="\/dokumente\/2026\/07\/6\.5\.1\.-Info-Attest-/', $html));
+        // Dateien bekommen kein Sprachpräfix. Je Datei zwei Links (KEV-245):
+        // ansehen und herunterladen.
+        $this->assertSame(54, preg_match_all('/<a href="\/dokumente\/2026\/07\/6\.5\.1\.-Info-Attest-/', $html));
+        $this->assertSame(27, preg_match_all('/\.pdf" download/', $html));
         $this->assertStringNotContainsString('/en/dokumente/', $html);
     }
 }
