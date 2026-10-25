@@ -42,6 +42,9 @@ class FormulareSeeder extends Seeder
         'Damit du nicht lange suchen musst, findest du hier alles übersichtlich und direkt zugänglich.',
     ];
 
+    /** KEV-247: Taddis grüne Überschrift über der Einleitung. */
+    public const EINLEITUNG_TITEL = 'Die Formulare des KE!N EINZELFALL e.V.';
+
     public const LISTE_TITEL = 'Formulare zum Herunterladen';
 
     /** KEV-250: von uns, zum Gegenlesen in der Übergabe-Checkliste. */
@@ -103,7 +106,7 @@ class FormulareSeeder extends Seeder
     public static function bausteine(): array
     {
         return [
-            ['typ' => 'text', 'data' => ['absaetze' => self::ABSAETZE]],
+            ['typ' => 'text', 'data' => ['titel' => self::EINLEITUNG_TITEL, 'absaetze' => self::ABSAETZE]],
             ['typ' => 'text', 'data' => ['titel' => self::ANLEITUNG_TITEL, 'absaetze' => self::ANLEITUNG]],
             ...array_map(fn ($liste) => ['typ' => 'download_list', 'data' => $liste], self::listen()),
         ];

@@ -101,6 +101,29 @@ class FormulareTest extends TestCase
         $this->assertSame(2, $seite->blocks()->count());
     }
 
+    /** KEV-247: grüne Überschrift über der Einleitung, auch nachträglich und auf Englisch. */
+    public function test_ueberschrift_ueber_der_einleitung(): void
+    {
+        $this->assertMatchesRegularExpression(
+            // Vereinsname am Stück in eigener Zeile (ueberschrift(), KEV-232)
+            '/<h2[^>]*text-green[^>]*>\s*Die Formulare des<br><span class="inline-block">KE!N EINZELFALL e\.V\.<\/span>\s*<\/h2>\s*.*Manchmal braucht es einfach/su',
+            $this->get('/formulare')->getContent(),
+        );
+
+        $this->seed(UebersetzungenSeeder::class);
+        $this->assertStringContainsString('The forms of KE!N EINZELFALL e.V.', $this->get('/en/formulare')->getContent());
+
+        $block = Page::where('slug', 'formulare')->where('locale', 'de')->sole()->blocks()->orderBy('position')->first();
+        $block->update(['data' => ['absaetze' => FormulareSeeder::ABSAETZE]]);
+        $migration = require database_path('migrations/2026_10_25_250000_formulare_ueberschrift.php');
+        $migration->up();
+        $this->assertSame(['titel', 'absaetze'], array_keys($block->fresh()->data));
+
+        $block->update(['data' => ['titel' => 'Eigene', 'absaetze' => ['x']]]);
+        $migration->up();
+        $this->assertSame('Eigene', $block->fresh()->data['titel']);
+    }
+
     /** KEV-248: Unterzeile unter dem Titel, auch nachträglich und auf Englisch. */
     public function test_unterzeile(): void
     {
