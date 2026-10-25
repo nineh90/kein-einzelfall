@@ -85,6 +85,7 @@ const SEITEN = [
     // Glossar mit grüner Überschrift und typischen Sätzen (KEV-261/262).
     ['Sozialrecht & Hilfesystem', '/sozialrecht-und-hilfesystem'],
     ['Medizinische Berichte & Gutachten', '/medizinische-berichte-und-gutachten'],
+    ['Gericht & Verfahren', '/gericht-und-verfahren'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
     ['Dokumentenliste', '/atteste'],
     // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).

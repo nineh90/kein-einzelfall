@@ -2569,9 +2569,8 @@ Anführungszeichen, die die Seite setzt; davor „Einfach übersetzt:“.
   in `database/seeders/data/typische-saetze.json` stehen. Neue Glossar-Seiten
   bekommen ihn beim Anlegen. Hat die Seite schon einen, passiert nichts.
   Stand: „Behörden & Bescheide“ (47 Sätze), „Sozialrecht & Hilfesystem“
-  (61, KEV-261), „Medizinische Berichte & Gutachten“ (60, KEV-260); für
-  Gericht & Verfahren liegen die Sätze in derselben Datei, die Seite gibt es
-  noch nicht.
+  (61, KEV-261), „Medizinische Berichte & Gutachten“ (60, KEV-260),
+  „Gericht & Verfahren“ (53, KEV-259). Damit sind alle vier Blöcke versorgt.
 - **Sprung:** Das Glossar zeigt unter der Buchstabenleiste „Zu den typischen
   Sätzen“, wenn die Seite den Baustein hat. Sprungziel fest `typische-saetze`.
 - **Englisch:** Übersetzt wird nur `bedeutung` (in `TEXT_FELDER` des
@@ -2622,4 +2621,13 @@ grüne Überschrift „Was medizinische Berichte wirklich sagen“ und Unterzeil
 „Befunde verstehen. Gutachten besser einordnen.“ aus dem Ticket. Sechs schon
 vorhandene Begriffe haben das Sprungziel `…-medizin` (`#teilhabe-medizin`).
 Tests: `MedizinischeBerichteUndGutachtenTest`.
+
+**Seit KEV-259** die letzte der vier: `/gericht-und-verfahren`
+(`GerichtUndVerfahrenSeeder`, Taddis 4, im Menü zwischen „Behörden &
+Bescheide“ und „Medizinische Berichte & Gutachten“): 87 Begriffe
+(`data/glossar-gericht-und-verfahren.json`), 53 typische Sätze, grüne
+Überschrift „Begriffe aus Widerspruchs-, Klage- und Gerichtsverfahren für
+dich“ und Unterzeile „Damit juristische Begriffe verständlicher werden“ aus dem
+Ticket. 21 schon vorhandene Begriffe (meist aus „Behörden & Bescheide“) haben
+das Sprungziel `…-gericht` (`#frist-gericht`). Tests: `GerichtUndVerfahrenTest`.
 

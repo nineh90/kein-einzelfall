@@ -111,7 +111,8 @@ class BehoerdenUndBescheideTest extends TestCase
 
         $this->assertStringContainsString('Hier entsteht ein Verzeichnis', $this->get('/abkuerzungen-probe')->getContent());
         $this->assertSame(
-            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Glossar', 'Medizinische Berichte & Gutachten', 'Probe',
+            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Gericht & Verfahren', 'Glossar',
+                'Medizinische Berichte & Gutachten', 'Probe',
                 'Sozialrecht & Hilfesystem'],
             array_values(GlossaryTerm::seitenAuswahl()),
         );
@@ -155,8 +156,11 @@ class BehoerdenUndBescheideTest extends TestCase
         $this->assertSame(128, substr_count($html, 'data-glossar-eintrag'));
         $this->assertStringContainsString('action="/en/behoerden-und-bescheide"', $html);
 
-        // Die Suche auf Englisch führt in die englische Seite.
-        $treffer = collect(app(Suche::class)->suchen('Objection', 'en')['treffer'])->firstWhere('titel', 'Objection (Widerspruch)');
-        $this->assertSame('/en/behoerden-und-bescheide#widerspruch', $treffer['url']);
+        // Die Suche auf Englisch führt in die englische Seite. Seit KEV-259
+        // steht „Widerspruch“ auch unter „Gericht & Verfahren“.
+        $urls = collect(app(Suche::class)->suchen('Objection', 'en')['treffer'])
+            ->where('titel', 'Objection (Widerspruch)')->pluck('url');
+        $this->assertContains('/en/behoerden-und-bescheide#widerspruch', $urls);
+        $this->assertContains('/en/gericht-und-verfahren#widerspruch-gericht', $urls);
     }
 }

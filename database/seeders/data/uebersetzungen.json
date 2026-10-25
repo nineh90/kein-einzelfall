@@ -4519,5 +4519,191 @@
   },
   "Die zu beweisende Tatsache kann nach Auffassung der begutachtenden oder entscheidenden Stelle mit dem hierfür geforderten Beweismaß nicht festgestellt werden.": {
     "en": "In the view of the assessing or deciding body, the fact to be proven cannot be established with the standard of proof required for it."
+  },
+  "Gericht & Verfahren": {
+    "en": "Courts & proceedings"
+  },
+  "Gericht & Verfahren - Kein Einzelfall e.V.": {
+    "en": "Courts & proceedings - Kein Einzelfall e.V."
+  },
+  "Gericht & Verfahren: Begriffe aus Widerspruchs-, Klage- und Gerichtsverfahren vor den Sozialgerichten, einfach erklärt. Von KE!N EINZELFALL e.V.": {
+    "en": "Courts & proceedings: terms from objection procedures, actions and court proceedings before the social courts, simply explained. By KE!N EINZELFALL e.V."
+  },
+  "Damit juristische Begriffe verständlicher werden": {
+    "en": "So that legal terms become easier to understand"
+  },
+  "Begriffe aus Widerspruchs-, Klage- und Gerichtsverfahren für dich": {
+    "en": "Terms from objection procedures, actions and court proceedings for you"
+  },
+  "Hier findest Du typische Begriffe aus Klage-, Gerichts- und Rechtsmittelverfahren – verständlich erklärt und mit Schwerpunkt auf Verfahren vor den Sozialgerichten.": {
+    "en": "Here you will find typical terms from actions, court proceedings and appeal proceedings – clearly explained and with a focus on proceedings before the social courts."
+  },
+  "Die Erklärungen sollen Dir helfen, Schreiben und Abläufe besser einzuordnen. Sie ersetzen keine individuelle Rechtsberatung.": {
+    "en": "The explanations are meant to help you understand letters and procedures better. They do not replace individual legal advice."
+  },
+  "Fehlt Dir hier ein Begriff? Dann schreib uns gern an *kontakt@kein-einzelfall.de*. Wir ergänzen die Liste und lassen sie gemeinsam mit euch weiter wachsen.": {
+    "en": "Is a term missing? Then write to us at *kontakt@kein-einzelfall.de*. We will add to the list and let it keep growing together with you."
+  },
+  "Hier findest Du typische Formulierungen aus *Klage-, Gerichts- und Rechtsmittelverfahren* – übersetzt in verständlichere Sprache.": {
+    "en": "Here you will find typical wording from *actions, court proceedings and appeal proceedings* – translated into plainer language. The sentences are quoted in German, the way they appear in your letter."
+  },
+  "Die formalen Voraussetzungen dafür, dass das Gericht die Klage prüfen kann, sind erfüllt.": {
+    "en": "The formal requirements for the court to examine the action are met."
+  },
+  "Das Gericht prüft die Sache nicht vollständig inhaltlich, weil eine Voraussetzung für das gerichtliche Verfahren fehlt.": {
+    "en": "The court does not fully examine the substance of the case because a requirement for the court proceedings is missing."
+  },
+  "Das Gericht hält die Klage inhaltlich ganz oder teilweise für berechtigt.": {
+    "en": "The court considers the action justified in substance, in whole or in part."
+  },
+  "Die Klage durfte so erhoben werden, aber das Gericht hält den geltend gemachten Anspruch inhaltlich nicht für gegeben.": {
+    "en": "The action could be brought in this way, but the court does not consider the claim made to exist in substance."
+  },
+  "Das Gericht gibt der Klage nicht oder nicht vollständig statt.": {
+    "en": "The court does not uphold the action, or not in full."
+  },
+  "Das Gericht entscheidet ganz oder teilweise im Sinne der klagenden Person.": {
+    "en": "The court decides in favour of the claimant, in whole or in part."
+  },
+  "Die Berufung durfte eingelegt werden und hat auch inhaltlich ganz oder teilweise Erfolg.": {
+    "en": "The appeal could be lodged and is also successful in substance, in whole or in part."
+  },
+  "Das nächsthöhere Gericht ändert die angegriffene Entscheidung aufgrund der Berufung nicht.": {
+    "en": "On the basis of the appeal, the next higher court does not change the contested decision."
+  },
+  "Das Revisionsgericht sieht keinen ausreichenden Grund, die angegriffene Entscheidung entsprechend dem Revisionsantrag zu ändern.": {
+    "en": "The court hearing the appeal on points of law sees no sufficient reason to change the contested decision as requested."
+  },
+  "Die Entscheidung kann unter den gesetzlichen Voraussetzungen vom nächsthöheren Gericht überprüft werden.": {
+    "en": "The decision can be reviewed by the next higher court under the legal requirements."
+  },
+  "Die Entscheidung kann unter den gesetzlichen Voraussetzungen vom Bundessozialgericht überprüft werden.": {
+    "en": "The decision can be reviewed by the Federal Social Court under the legal requirements."
+  },
+  "Das Gericht eröffnet mit seiner Entscheidung nicht unmittelbar den Weg zur Revision.": {
+    "en": "With its decision, the court does not directly open the way to an appeal on points of law."
+  },
+  "Das Gericht meint, dass die Rechtssache eine grundsätzlich wichtige Rechtsfrage enthält, die höchstrichterlich geklärt werden kann.": {
+    "en": "The court believes that the case contains a fundamentally important question of law that can be clarified by the highest court."
+  },
+  "Die Voraussetzungen dafür, dass das Gericht die Beschwerde inhaltlich prüft, sind nicht erfüllt.": {
+    "en": "The requirements for the court to examine the substance of the complaint are not met."
+  },
+  "Die Beschwerde durfte geprüft werden, hat inhaltlich aber keinen Erfolg.": {
+    "en": "The complaint could be examined but is unsuccessful in substance."
+  },
+  "Das Gericht meint, dass genügend Informationen vorliegen, um eine Entscheidung treffen zu können.": {
+    "en": "The court believes that enough information is available to make a decision."
+  },
+  "Das Gericht meint, dass die für seine Entscheidung notwendigen Tatsachen ausreichend geklärt sind.": {
+    "en": "The court believes that the facts needed for its decision have been sufficiently clarified."
+  },
+  "Das Gericht meint, dass es den Sachverhalt nicht weiter aufklären muss.": {
+    "en": "The court believes that it does not need to investigate the facts any further."
+  },
+  "Das Gericht hält den Fall weder bei den Tatsachen noch bei den rechtlichen Fragen für besonders schwierig.": {
+    "en": "The court does not consider the case particularly difficult, either regarding the facts or the legal questions."
+  },
+  "Das Sozialgericht entscheidet unter den gesetzlichen Voraussetzungen ohne mündliche Verhandlung durch Gerichtsbescheid.": {
+    "en": "Under the legal requirements, the social court decides without an oral hearing by court decision (Gerichtsbescheid)."
+  },
+  "Du kannst Dich noch zu bestimmten Unterlagen, Aussagen oder rechtlichen Fragen äußern.": {
+    "en": "You can still comment on certain documents, statements or legal questions."
+  },
+  "Bevor das Gericht weiter entscheidet, können die Beteiligten ihre Sicht dazu mitteilen.": {
+    "en": "Before the court decides further, the parties can give their view."
+  },
+  "Das Gericht möchte eine offene Frage mithilfe des genannten Beweismittels klären, zum Beispiel durch ein Gutachten oder eine Zeugenaussage.": {
+    "en": "The court wants to clarify an open question with the means of evidence named, for example an expert opinion or a witness statement."
+  },
+  "Das Gericht folgt dem Antrag, einen bestimmten Beweis zu erheben, nicht.": {
+    "en": "The court does not follow the application to take a particular piece of evidence."
+  },
+  "Das Gericht meint, dass keine weiteren Beweise benötigt werden.": {
+    "en": "The court believes that no further evidence is needed."
+  },
+  "Das Gericht ist nach seiner Bewertung der vorliegenden Informationen und Beweise zu diesem Ergebnis gekommen.": {
+    "en": "After evaluating the available information and evidence, the court has come to this conclusion."
+  },
+  "Das Gericht hält die fachliche Einschätzung des Gutachtens für überzeugend und berücksichtigt sie bei seiner Entscheidung.": {
+    "en": "The court considers the professional assessment in the expert opinion convincing and takes it into account in its decision."
+  },
+  "Das Gericht hält Aufbau, Begründung und Schlussfolgerungen des Gutachtens für verständlich und widerspruchsfrei.": {
+    "en": "The court considers the structure, reasoning and conclusions of the expert opinion understandable and free of contradictions."
+  },
+  "Das Gericht möchte derzeit weiterverfahren oder entscheiden, ohne Dich persönlich anzuhören.": {
+    "en": "The court wants to continue or decide for now without hearing you in person."
+  },
+  "Das Gericht verlangt, dass Du zu dem genannten Termin persönlich erscheinst, sofern die Anordnung nicht aufgehoben oder geändert wird.": {
+    "en": "The court requires you to attend the hearing on the date stated in person, unless the order is cancelled or changed."
+  },
+  "Die Verhandlung oder Entscheidung wird auf einen späteren Zeitpunkt verschoben.": {
+    "en": "The hearing or decision is postponed to a later date."
+  },
+  "Das Verfahren wird vorübergehend nicht weiterbetrieben, soll aber nicht endgültig beendet werden.": {
+    "en": "The proceedings are temporarily not pursued but are not meant to end for good."
+  },
+  "Das Gericht unterbricht das Verfahren vorübergehend, zum Beispiel weil zunächst eine andere Frage geklärt werden muss.": {
+    "en": "The court interrupts the proceedings temporarily, for example because another question has to be clarified first."
+  },
+  "Das gerichtliche Verfahren wird beendet, ohne dass zwingend noch eine inhaltliche Entscheidung über die ursprüngliche Streitfrage getroffen wird.": {
+    "en": "The court proceedings are ended without necessarily making a decision on the substance of the original dispute."
+  },
+  "Über die ursprüngliche Streitfrage muss das Gericht nicht mehr weiterentscheiden.": {
+    "en": "The court no longer has to decide on the original dispute."
+  },
+  "Der eigentliche Streitgegenstand besteht nicht mehr oder muss nicht mehr entschieden werden.": {
+    "en": "The actual subject of the dispute no longer exists or no longer needs to be decided."
+  },
+  "Die klagende Person erklärt, dass sie die Klage nicht weiterführen möchte.": {
+    "en": "The claimant declares that they do not want to continue the action."
+  },
+  "Die Gegenseite hat einen Anspruch anerkannt und die klagende Person nimmt dieses Anerkenntnis an.": {
+    "en": "The other side has acknowledged a claim and the claimant accepts this acknowledgement."
+  },
+  "Die Beteiligten haben sich geeinigt. Über die dadurch erledigten Streitpunkte muss das Gericht nicht mehr entscheiden.": {
+    "en": "The parties have reached an agreement. The court no longer has to decide on the points of dispute that this settles."
+  },
+  "Das Gericht trifft die beantragte vorläufige Entscheidung nicht.": {
+    "en": "The court does not make the provisional decision applied for."
+  },
+  "Das Gericht hält die Voraussetzungen für die beantragte vorläufige Regelung für erfüllt.": {
+    "en": "The court considers the requirements for the provisional arrangement applied for to be met."
+  },
+  "Das Gericht hält es im Eilverfahren für ausreichend wahrscheinlich, dass der geltend gemachte Anspruch bestehen könnte.": {
+    "en": "In the urgent proceedings, the court considers it sufficiently likely that the claim made could exist."
+  },
+  "Das Gericht hält es für ausreichend glaubhaft, dass eine schnelle gerichtliche Entscheidung notwendig ist.": {
+    "en": "The court considers it sufficiently credible that a quick court decision is necessary."
+  },
+  "Das Gericht sieht die besondere Dringlichkeit für eine vorläufige Entscheidung nicht ausreichend belegt.": {
+    "en": "The court does not see the particular urgency for a provisional decision as sufficiently shown."
+  },
+  "Die angegriffene Entscheidung darf vorläufig grundsätzlich nicht weiter umgesetzt werden.": {
+    "en": "The contested decision may generally not be carried out any further for the time being."
+  },
+  "Eine zuvor entfallene oder beseitigte aufschiebende Wirkung wird durch das Gericht wieder hergestellt.": {
+    "en": "A suspensive effect that had previously ceased or been removed is restored by the court."
+  },
+  "Das Gericht legt fest, wer die Kosten des Verfahrens tragen muss.": {
+    "en": "The court determines who has to bear the costs of the proceedings."
+  },
+  "Die Beteiligten bekommen ihre eigenen außerhalb des Gerichts entstandenen Kosten grundsätzlich nicht von der Gegenseite ersetzt.": {
+    "en": "The parties generally do not get their own costs incurred outside the court reimbursed by the other side."
+  },
+  "Jede Seite bezahlt ihre eigenen entsprechenden Kosten.": {
+    "en": "Each side pays its own costs of this kind."
+  },
+  "Grundsätzlich trägt jede Seite ihre eigenen Kosten; die genaue Wirkung hängt von der gerichtlichen Kostenentscheidung ab.": {
+    "en": "In principle each side bears its own costs; the exact effect depends on the court's decision on costs."
+  },
+  "Das Gericht legt den Geldwert fest, der für bestimmte Kostenberechnungen des Verfahrens maßgeblich ist.": {
+    "en": "The court sets the monetary value that is decisive for certain cost calculations in the proceedings."
+  },
+  "Über diesen Punkt entscheidet das Gericht noch nicht endgültig, sondern erst mit einer späteren abschließenden Entscheidung.": {
+    "en": "The court does not yet decide finally on this point, but only with a later final decision."
+  },
+  "Die Entscheidung kann unter den genannten Voraussetzungen bereits umgesetzt werden, obwohl sie möglicherweise noch nicht rechtskräftig ist.": {
+    "en": "The decision can already be carried out under the conditions stated, even though it may not yet be final."
   }
 }

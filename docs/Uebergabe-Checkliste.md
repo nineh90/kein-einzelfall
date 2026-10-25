@@ -762,6 +762,23 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Zu klären:** Die Seite ist für Suchmaschinen offen wie die anderen
     Glossare. Damit kann sie auch bei Suchen nach Szenebegriffen auftauchen;
     falls das nicht gewollt ist, im Panel „Von Suchmaschinen ausschließen“.
+- [ ] **Gericht & Verfahren (KEV-259), bitte ansehen.** Neues Glossar unter
+  „Wissen“, im Menü zwischen „Behörden & Bescheide“ und „Medizinische Berichte
+  & Gutachten“ (Taddis 3 bis 6 jetzt in ihrer Reihenfolge): ihr Bild
+  (Richterhammer und Akten, rechts verlängert), Unterzeile „Damit juristische
+  Begriffe verständlicher werden“, grün „Begriffe aus Widerspruchs-, Klage- und
+  Gerichtsverfahren für dich“, ihre Einleitung, 87 Begriffe und 53 typische
+  Sätze.
+  - **Wie im Dokument gelassen:** Anders als in den anderen Glossaren fehlt
+    hier „Gemeinsam KE!N EINZELFALL“ am Ende der Einleitung, und „Fehlt Dir
+    hier ein Begriff?“ ist nicht fett. Soll das angeglichen werden?
+  - **Doppelt:** 21 Begriffe stehen auch in anderen Glossaren, die meisten in
+    „Behörden & Bescheide“ (Akte, Antrag, Frist, Widerspruch, Zustellung …),
+    hier mit der Erklärung fürs Gerichtsverfahren.
+  - **Typische Sätze:** Kategorie eingesetzt als „aus *Klage-, Gerichts- und
+    Rechtsmittelverfahren*“ (wie in ihrer Einleitung).
+  - **Vorschlag:** „Gutachten nach § 109 SGG“ könnte auf unsere Projektseite
+    „§ 109 SGG Gegengutachten“ verlinken (Feld „Mehr dazu“ am Eintrag). Gewünscht?
 - [ ] **Medizinische Berichte & Gutachten (KEV-260), bitte ansehen.** Neues
   Glossar unter „Wissen“, im Menü vor „Sozialrecht & Hilfesystem“: Taddis Bild
   (Mappe mit Stethoskop, rechts verlängert), Unterzeile „Befunde verstehen.
@@ -806,9 +823,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     Einleitung der Seite darüber klein („du“). Soll das vereinheitlicht werden?
   - **Englisch:** Der Satz bleibt deutsch (so steht er im Brief), übersetzt ist
     nur die Erklärung; ein Satz in der Einleitung sagt das. Ungeprüft.
-  - Die Sätze für Gericht & Verfahren (53) liegen bereit und erscheinen,
-    sobald es die Seite gibt. Sozialrecht & Hilfesystem (61) siehe KEV-261,
-    Medizinische Berichte & Gutachten (60) siehe KEV-260.
+  - Die übrigen Blöcke: Gericht & Verfahren (53) siehe KEV-259, Medizinische
+    Berichte & Gutachten (60) KEV-260, Sozialrecht & Hilfesystem (61) KEV-261.
 - [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
   eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
   Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle

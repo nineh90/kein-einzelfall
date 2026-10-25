@@ -3886,5 +3886,527 @@
     "kuerzel": null,
     "erklaerung": "Documentation of anaesthesia in connection with a procedure. Anaesthesia records can be part of the patient record.",
     "mehr_label": null
+  },
+  "akte-gericht": {
+    "begriff": "File (Akte)",
+    "kuerzel": null,
+    "erklaerung": "The court file collects the documents that belong to your proceedings.",
+    "mehr_label": null
+  },
+  "akteneinsicht-gericht": {
+    "begriff": "Inspection of files (Akteneinsicht)",
+    "kuerzel": null,
+    "erklaerung": "You or an authorised representative can inspect the court file under the legal requirements.",
+    "mehr_label": null
+  },
+  "aktenzeichen-gericht": {
+    "begriff": "File number (Aktenzeichen)",
+    "kuerzel": null,
+    "erklaerung": "This is the reference under which the court handles your proceedings.",
+    "mehr_label": null
+  },
+  "amtsermittlung-amtsermittlungsgrundsatz": {
+    "begriff": "Official investigation / inquisitorial principle (Amtsermittlung / Amtsermittlungsgrundsatz)",
+    "kuerzel": null,
+    "erklaerung": "In social court proceedings, the court generally investigates the facts of its own accord. It is not bound only by what the parties put forward or apply for as evidence.",
+    "mehr_label": null
+  },
+  "anerkenntnis": {
+    "begriff": "Acknowledgement (Anerkenntnis)",
+    "kuerzel": null,
+    "erklaerung": "The other side acknowledges a claim in whole or in part. If the acknowledgement is accepted, the dispute can be settled to that extent.",
+    "mehr_label": null
+  },
+  "anhoerung-gericht": {
+    "begriff": "Hearing (Anhörung)",
+    "kuerzel": null,
+    "erklaerung": "You are given the opportunity to comment on certain facts, documents or intended procedural steps.",
+    "mehr_label": null
+  },
+  "antrag-gericht": {
+    "begriff": "Application (Antrag)",
+    "kuerzel": null,
+    "erklaerung": "You ask the court to make a particular decision.",
+    "mehr_label": null
+  },
+  "antragsgegner-antragsgegnerin": {
+    "begriff": "Respondent (Antragsgegner / Antragsgegnerin)",
+    "kuerzel": null,
+    "erklaerung": "This is the person or body against whom a court application is directed.",
+    "mehr_label": null
+  },
+  "antragsteller-antragstellerin": {
+    "begriff": "Applicant (Antragsteller / Antragstellerin)",
+    "kuerzel": null,
+    "erklaerung": "This is the person who makes a court application.",
+    "mehr_label": null
+  },
+  "aufschiebende-wirkung": {
+    "begriff": "Suspensive effect (Aufschiebende Wirkung)",
+    "kuerzel": null,
+    "erklaerung": "A decision is provisionally not enforced while a legal remedy has effect. Whether there is suspensive effect depends on the procedure.",
+    "mehr_label": null
+  },
+  "befangenheit": {
+    "begriff": "Bias (Befangenheit)",
+    "kuerzel": null,
+    "erklaerung": "There are reasons that may raise doubts as to whether a judge or another person involved can take part impartially.",
+    "mehr_label": null
+  },
+  "beigeladene-beigeladener": {
+    "begriff": "Joined party (Beigeladene / Beigeladener)",
+    "kuerzel": null,
+    "erklaerung": "The court can involve further persons or bodies in proceedings if their legal interests may be affected by the decision or their involvement is required by law.",
+    "mehr_label": null
+  },
+  "beklagte-beklagter": {
+    "begriff": "Defendant (Beklagte / Beklagter)",
+    "kuerzel": null,
+    "erklaerung": "This is the person or body against whom the action is brought. In social court proceedings, this is often the responsible benefit provider or authority.",
+    "mehr_label": null
+  },
+  "berufung": {
+    "begriff": "Appeal (Berufung)",
+    "kuerzel": null,
+    "erklaerung": "With an appeal, a judgment of the social court can be reviewed by the regional social court under the legal requirements.",
+    "mehr_label": null
+  },
+  "berufungsfrist": {
+    "begriff": "Time limit for appeal (Berufungsfrist)",
+    "kuerzel": null,
+    "erklaerung": "A statutory time limit generally applies for lodging an appeal. In social court proceedings, it is usually one month after service of the judgment.",
+    "mehr_label": null
+  },
+  "beschluss": {
+    "begriff": "Order (Beschluss)",
+    "kuerzel": null,
+    "erklaerung": "A court decision that is not issued as a judgment. Many decisions during ongoing proceedings are made by order.",
+    "mehr_label": null
+  },
+  "beschwerde": {
+    "begriff": "Complaint (Beschwerde)",
+    "kuerzel": null,
+    "erklaerung": "A legal remedy by which certain court decisions can be reviewed where the law provides for it.",
+    "mehr_label": null
+  },
+  "begruendung-gericht": {
+    "begriff": "Grounds (Begründung)",
+    "kuerzel": null,
+    "erklaerung": "This explains why an application was made, an action was brought or a court decision was made.",
+    "mehr_label": null
+  },
+  "beistand": {
+    "begriff": "Supporter (Beistand)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, another person can accompany and support you at a hearing.",
+    "mehr_label": null
+  },
+  "bevollmaechtigte-person-gericht": {
+    "begriff": "Authorised representative (Bevollmächtigte Person)",
+    "kuerzel": null,
+    "erklaerung": "A person authorised to represent you in the proceedings. Before the social courts and regional social courts, you can generally conduct proceedings yourself; stricter rules on representation apply before the Federal Social Court.",
+    "mehr_label": null
+  },
+  "beweis": {
+    "begriff": "Evidence (Beweis)",
+    "kuerzel": null,
+    "erklaerung": "Evidence is meant to help clarify whether a fact that is important for the proceedings is true.",
+    "mehr_label": null
+  },
+  "beweisantrag": {
+    "begriff": "Application to take evidence (Beweisantrag)",
+    "kuerzel": null,
+    "erklaerung": "A party applies for the court to take evidence on a particular question. In social court proceedings, the court is not automatically bound by such applications.",
+    "mehr_label": null
+  },
+  "beweiserhebung": {
+    "begriff": "Taking of evidence (Beweiserhebung)",
+    "kuerzel": null,
+    "erklaerung": "The court clarifies a question that is important for the decision, for example through documents, witness statements, information or expert opinions.",
+    "mehr_label": null
+  },
+  "beweismittel-gericht": {
+    "begriff": "Means of evidence (Beweismittel)",
+    "kuerzel": null,
+    "erklaerung": "These can be, for example, documents, records, witness statements, expert opinions or other suitable sources of information.",
+    "mehr_label": null
+  },
+  "beweiswuerdigung": {
+    "begriff": "Evaluation of evidence (Beweiswürdigung)",
+    "kuerzel": null,
+    "erklaerung": "The court evaluates the available evidence and decides what weight it has for forming its conviction.",
+    "mehr_label": null
+  },
+  "eilverfahren-einstweiliger-rechtsschutz": {
+    "begriff": "Urgent proceedings / interim relief (Eilverfahren / einstweiliger Rechtsschutz)",
+    "kuerzel": null,
+    "erklaerung": "Proceedings in which a quick provisional court decision is applied for because the decision in normal court proceedings cannot be awaited.",
+    "mehr_label": null
+  },
+  "einstweilige-anordnung": {
+    "begriff": "Interim order (Einstweilige Anordnung)",
+    "kuerzel": null,
+    "erklaerung": "Under the legal requirements, the court can regulate something provisionally if this is necessary to prevent significant disadvantages or to secure a claim provisionally.",
+    "mehr_label": null
+  },
+  "entscheidung-nach-lage-der-akten": {
+    "begriff": "Decision on the basis of the file (Entscheidung nach Lage der Akten)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, the court can decide on the basis of the existing file, even if parties do not attend a hearing.",
+    "mehr_label": null
+  },
+  "eroerterungstermin": {
+    "begriff": "Discussion hearing (Erörterungstermin)",
+    "kuerzel": null,
+    "erklaerung": "A hearing in which the court can discuss the facts, open questions and the further course of the proceedings with the parties.",
+    "mehr_label": null
+  },
+  "frist-gericht": {
+    "begriff": "Time limit (Frist)",
+    "kuerzel": null,
+    "erklaerung": "By a certain date, something must or should be submitted to the court or done.",
+    "mehr_label": null
+  },
+  "fristverlaengerung-gericht": {
+    "begriff": "Extension of time (Fristverlängerung)",
+    "kuerzel": null,
+    "erklaerung": "For time limits set by the court, it may be possible to apply for more time. Statutory time limits, on the other hand, cannot simply be extended.",
+    "mehr_label": null
+  },
+  "gerichtsbescheid": {
+    "begriff": "Court decision without a hearing (Gerichtsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, the social court can decide without an oral hearing by court decision if the case has no particular factual or legal difficulties and the facts are clear. The parties must be heard beforehand.",
+    "mehr_label": null
+  },
+  "gerichtskosten": {
+    "begriff": "Court costs (Gerichtskosten)",
+    "kuerzel": null,
+    "erklaerung": "Whether court costs arise depends on the type of proceedings and the parties. For many insured persons, benefit recipients and people with disabilities, social court proceedings are free of court costs; there are exceptions, however.",
+    "mehr_label": null
+  },
+  "gutachten-gericht": {
+    "begriff": "Expert opinion (Gutachten)",
+    "kuerzel": null,
+    "erklaerung": "An expert answers specialist questions that may be important for the court's decision.",
+    "mehr_label": null
+  },
+  "gutachter-gutachterin-gericht": {
+    "begriff": "Expert assessor (Gutachter / Gutachterin)",
+    "kuerzel": null,
+    "erklaerung": "An expert commissioned by the court to carry out an assessment.",
+    "mehr_label": null
+  },
+  "gutachten-nach-109-sgg": {
+    "begriff": "Expert opinion under § 109 SGG (Gutachten nach § 109 SGG)",
+    "kuerzel": null,
+    "erklaerung": "In social court proceedings, certain entitled persons can apply for a particular doctor to be heard as an expert. The court can make this hearing conditional on the costs being paid in advance and possibly borne in the end.",
+    "mehr_label": null
+  },
+  "klage": {
+    "begriff": "Action (Klage)",
+    "kuerzel": null,
+    "erklaerung": "With an action, the social court is asked to examine a legal dispute and decide on it.",
+    "mehr_label": null
+  },
+  "klageaenderung": {
+    "begriff": "Amendment of the action (Klageänderung)",
+    "kuerzel": null,
+    "erklaerung": "The subject of an action is changed afterwards. This is only permitted under certain legal conditions. Not every addition or correction is an amendment of the action.",
+    "mehr_label": null
+  },
+  "klagebegruendung": {
+    "begriff": "Statement of grounds (Klagebegründung)",
+    "kuerzel": null,
+    "erklaerung": "Here you explain why you think the contested decision is wrong and which facts or legal reasons should be taken into account in your view.",
+    "mehr_label": null
+  },
+  "klageerhebung": {
+    "begriff": "Filing the action (Klageerhebung)",
+    "kuerzel": null,
+    "erklaerung": "This is how the action is lodged with the competent court. In social court proceedings, it can be filed in writing or for the record at the court office.",
+    "mehr_label": null
+  },
+  "klagefrist": {
+    "begriff": "Time limit for the action (Klagefrist)",
+    "kuerzel": null,
+    "erklaerung": "In social court proceedings, the time limit for bringing an action is generally one month. If there was an objection procedure, it usually begins when the decision on the objection is announced.",
+    "mehr_label": null
+  },
+  "klagegegenstand-gegenstand-des-klagebegehrens": {
+    "begriff": "Subject of the action (Klagegegenstand / Gegenstand des Klagebegehrens)",
+    "kuerzel": null,
+    "erklaerung": "This means what exactly the court is to decide on.",
+    "mehr_label": null
+  },
+  "klaeger-klaegerin": {
+    "begriff": "Claimant (Kläger / Klägerin)",
+    "kuerzel": null,
+    "erklaerung": "This is the person or body that brought the action.",
+    "mehr_label": null
+  },
+  "klageruecknahme": {
+    "begriff": "Withdrawal of the action (Klagerücknahme)",
+    "kuerzel": null,
+    "erklaerung": "The claimant declares that the action is not to be continued. In social court proceedings, an action can generally be withdrawn until the judgment becomes final.",
+    "mehr_label": null
+  },
+  "ladung": {
+    "begriff": "Summons (Ladung)",
+    "kuerzel": null,
+    "erklaerung": "The court tells you when and where a hearing takes place and whether you have to attend in person.",
+    "mehr_label": null
+  },
+  "landessozialgericht-lsg": {
+    "begriff": "Regional social court – LSG (Landessozialgericht)",
+    "kuerzel": null,
+    "erklaerung": "In the social court system, the regional social court is usually the level above the social court and decides, among other things, on appeals.",
+    "mehr_label": null
+  },
+  "muendliche-verhandlung": {
+    "begriff": "Oral hearing (Mündliche Verhandlung)",
+    "kuerzel": null,
+    "erklaerung": "A court hearing in which the facts and the applications are discussed with the parties. In social court proceedings, decisions are generally made on the basis of an oral hearing unless the law provides otherwise.",
+    "mehr_label": null
+  },
+  "entscheidung-ohne-muendliche-verhandlung": {
+    "begriff": "Decision without an oral hearing (Entscheidung ohne mündliche Verhandlung)",
+    "kuerzel": null,
+    "erklaerung": "With the consent of the parties, the court can, under certain conditions, also decide by judgment without an oral hearing.",
+    "mehr_label": null
+  },
+  "nichtzulassungsbeschwerde": {
+    "begriff": "Complaint against refusal of leave (Nichtzulassungsbeschwerde)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, it is possible to challenge the fact that a legal remedy, for example an appeal on points of law, was not allowed. Special legal requirements apply.",
+    "mehr_label": null
+  },
+  "persoenliches-erscheinen": {
+    "begriff": "Personal attendance (Persönliches Erscheinen)",
+    "kuerzel": null,
+    "erklaerung": "The court can order you to attend a hearing in person. Under certain conditions, taking part by video and audio link may also be possible.",
+    "mehr_label": null
+  },
+  "prozessbevollmaechtigte-person": {
+    "begriff": "Legal representative (Prozessbevollmächtigte Person)",
+    "kuerzel": null,
+    "erklaerung": "A person who represents you in court proceedings and may take procedural steps on your behalf.",
+    "mehr_label": null
+  },
+  "prozesskostenhilfe-pkh": {
+    "begriff": "Legal aid – PKH (Prozesskostenhilfe)",
+    "kuerzel": null,
+    "erklaerung": "Anyone who, given their personal and financial circumstances, cannot pay the costs of proceedings, or only in part, can receive legal aid under the legal requirements. It is also checked whether the intended legal action has sufficient prospects of success and does not appear frivolous.",
+    "mehr_label": null
+  },
+  "rechtliches-gehoer": {
+    "begriff": "Right to be heard (Rechtliches Gehör)",
+    "kuerzel": null,
+    "erklaerung": "You must generally be given the opportunity to comment on the facts and results of evidence on which the court intends to base its decision.",
+    "mehr_label": null
+  },
+  "rechtsbehelf-gericht": {
+    "begriff": "Legal remedy (Rechtsbehelf)",
+    "kuerzel": null,
+    "erklaerung": "A legal route by which a decision can be challenged or reviewed.",
+    "mehr_label": null
+  },
+  "rechtskraft-rechtskraeftig": {
+    "begriff": "Finality / final (Rechtskraft / rechtskräftig)",
+    "kuerzel": null,
+    "erklaerung": "A court decision can generally no longer be challenged with the ordinary legal remedies.",
+    "mehr_label": null
+  },
+  "rechtsmittel": {
+    "begriff": "Appeal remedy (Rechtsmittel)",
+    "kuerzel": null,
+    "erklaerung": "A route provided by law to have a court decision reviewed by a higher court, for example an appeal or an appeal on points of law.",
+    "mehr_label": null
+  },
+  "rechtsmittelbelehrung": {
+    "begriff": "Information on legal remedies (Rechtsmittelbelehrung)",
+    "kuerzel": null,
+    "erklaerung": "This states whether, and with which legal remedy, a decision can be challenged and which form and time limit apply.",
+    "mehr_label": null
+  },
+  "rechtshaengigkeit": {
+    "begriff": "Pendency (Rechtshängigkeit)",
+    "kuerzel": null,
+    "erklaerung": "When the action is filed, the dispute becomes pending before the court.",
+    "mehr_label": null
+  },
+  "revision": {
+    "begriff": "Appeal on points of law (Revision)",
+    "kuerzel": null,
+    "erklaerung": "With an appeal on points of law, the Federal Social Court generally reviews questions of law. It is only admissible if it has been allowed.",
+    "mehr_label": null
+  },
+  "revisionsfrist": {
+    "begriff": "Time limit for appeal on points of law (Revisionsfrist)",
+    "kuerzel": null,
+    "erklaerung": "An appeal on points of law that has been allowed must generally be lodged within one month and its grounds submitted within two months.",
+    "mehr_label": null
+  },
+  "richter-richterin": {
+    "begriff": "Judge (Richter / Richterin)",
+    "kuerzel": null,
+    "erklaerung": "The person who conducts the court proceedings or takes part in the court's decision.",
+    "mehr_label": null
+  },
+  "richterlicher-hinweis": {
+    "begriff": "Judicial notice (Richterlicher Hinweis)",
+    "kuerzel": null,
+    "erklaerung": "The court draws the parties' attention to legally or factually important points, unclear applications or missing information.",
+    "mehr_label": null
+  },
+  "sachverstaendige-person": {
+    "begriff": "Expert (Sachverständige Person)",
+    "kuerzel": null,
+    "erklaerung": "A person with specialist knowledge who helps the court with questions that require special expertise.",
+    "mehr_label": null
+  },
+  "schriftsatz": {
+    "begriff": "Written submission (Schriftsatz)",
+    "kuerzel": null,
+    "erklaerung": "A written submission to the court, for example a statement of grounds, a statement or a reply.",
+    "mehr_label": null
+  },
+  "sozialgericht-sg": {
+    "begriff": "Social court – SG (Sozialgericht)",
+    "kuerzel": null,
+    "erklaerung": "In many social law disputes, the social court is the first court level.",
+    "mehr_label": null
+  },
+  "stellungnahme-gericht": {
+    "begriff": "Statement (Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "You explain in writing or orally your view on certain statements, documents or questions.",
+    "mehr_label": null
+  },
+  "streitgegenstand": {
+    "begriff": "Subject matter of the dispute (Streitgegenstand)",
+    "kuerzel": null,
+    "erklaerung": "This means which specific legal claim or decision is the subject of the court proceedings.",
+    "mehr_label": null
+  },
+  "termin": {
+    "begriff": "Hearing date (Termin)",
+    "kuerzel": null,
+    "erklaerung": "A time set by the court at which, for example, an oral hearing or a discussion hearing takes place.",
+    "mehr_label": null
+  },
+  "terminverlegung": {
+    "begriff": "Postponement of a hearing (Terminverlegung)",
+    "kuerzel": null,
+    "erklaerung": "A court hearing that has already been scheduled is moved to another time. Whether a hearing is postponed is decided by the court according to the legal requirements.",
+    "mehr_label": null
+  },
+  "urteil": {
+    "begriff": "Judgment (Urteil)",
+    "kuerzel": null,
+    "erklaerung": "A court decision that decides on the action.",
+    "mehr_label": null
+  },
+  "urteilsbegruendung-entscheidungsgruende": {
+    "begriff": "Reasons for the judgment (Urteilsbegründung / Entscheidungsgründe)",
+    "kuerzel": null,
+    "erklaerung": "Here the court explains which factual and legal considerations were decisive for its decision.",
+    "mehr_label": null
+  },
+  "urteilsformel-tenor": {
+    "begriff": "Operative part (Urteilsformel / Tenor)",
+    "kuerzel": null,
+    "erklaerung": "This is the part of the judgment that states how the court decided.",
+    "mehr_label": null
+  },
+  "verfahren-gericht": {
+    "begriff": "Proceedings (Verfahren)",
+    "kuerzel": null,
+    "erklaerung": "This means the whole process before the court – from the action or an application to the final decision.",
+    "mehr_label": null
+  },
+  "verfahrensbeteiligte": {
+    "begriff": "Parties to the proceedings (Verfahrensbeteiligte)",
+    "kuerzel": null,
+    "erklaerung": "In social court proceedings, the parties are in particular the claimant, the defendant and, where applicable, joined parties.",
+    "mehr_label": null
+  },
+  "verfahrensfehler-gericht": {
+    "begriff": "Procedural error (Verfahrensfehler)",
+    "kuerzel": null,
+    "erklaerung": "A legal rule on the course of the court proceedings may not have been followed.",
+    "mehr_label": null
+  },
+  "vergleich": {
+    "begriff": "Settlement (Vergleich)",
+    "kuerzel": null,
+    "erklaerung": "The parties reach an agreement on the subject matter of the dispute in whole or in part and thereby end the dispute accordingly.",
+    "mehr_label": null
+  },
+  "vertretung": {
+    "begriff": "Representation (Vertretung)",
+    "kuerzel": null,
+    "erklaerung": "An authorised person conducts the proceedings for you in whole or in part.",
+    "mehr_label": null
+  },
+  "videoverhandlung": {
+    "begriff": "Video hearing (Videoverhandlung)",
+    "kuerzel": null,
+    "erklaerung": "Under the legal requirements, an oral hearing can be held in such a way that one or more parties take part by video and audio link.",
+    "mehr_label": null
+  },
+  "vollmacht-gericht": {
+    "begriff": "Power of attorney (Vollmacht)",
+    "kuerzel": null,
+    "erklaerung": "With this you allow another person to represent you in the proceedings.",
+    "mehr_label": null
+  },
+  "vollstreckung": {
+    "begriff": "Enforcement (Vollstreckung)",
+    "kuerzel": null,
+    "erklaerung": "A court decision or another enforceable title is put into practice.",
+    "mehr_label": null
+  },
+  "widerspruch-gericht": {
+    "begriff": "Objection (Widerspruch)",
+    "kuerzel": null,
+    "erklaerung": "In many social law procedures, an objection procedure must first be carried out before an action can be brought before the social court.",
+    "mehr_label": null
+  },
+  "widerspruchsbescheid-gericht": {
+    "begriff": "Decision on the objection (Widerspruchsbescheid)",
+    "kuerzel": null,
+    "erklaerung": "This is the decision on the objection. The time limit for bringing an action often begins once it has been announced.",
+    "mehr_label": null
+  },
+  "wiedereinsetzung-in-den-vorigen-stand": {
+    "begriff": "Reinstatement (Wiedereinsetzung in den vorigen Stand)",
+    "kuerzel": null,
+    "erklaerung": "If a statutory time limit was missed through no fault of your own, you can, under certain conditions, apply to be treated as if the time limit had been met.",
+    "mehr_label": null
+  },
+  "zeuge-zeugin": {
+    "begriff": "Witness (Zeuge / Zeugin)",
+    "kuerzel": null,
+    "erklaerung": "A person who can tell the court about their own perceptions of an event that is important for the proceedings.",
+    "mehr_label": null
+  },
+  "zeugenaussage": {
+    "begriff": "Witness statement (Zeugenaussage)",
+    "kuerzel": null,
+    "erklaerung": "This is what a witness tells the court about their own perceptions.",
+    "mehr_label": null
+  },
+  "zustaendigkeit-gericht": {
+    "begriff": "Jurisdiction (Zuständigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This means which court has subject-matter and local jurisdiction for proceedings.",
+    "mehr_label": null
+  },
+  "zustellung-gericht": {
+    "begriff": "Service (Zustellung)",
+    "kuerzel": null,
+    "erklaerung": "A court letter or decision is officially delivered to you in the way provided by law. The date of service can be decisive for when a time limit begins.",
+    "mehr_label": null
   }
 }

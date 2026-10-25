@@ -1,0 +1,437 @@
+[
+  {
+    "slug": "akte-gericht",
+    "begriff": "Akte",
+    "erklaerung": "In der Gerichtsakte werden die Unterlagen gesammelt, die zu Deinem Verfahren gehören."
+  },
+  {
+    "slug": "akteneinsicht-gericht",
+    "begriff": "Akteneinsicht",
+    "erklaerung": "Du oder eine dazu berechtigte Vertretung könnt unter den gesetzlichen Voraussetzungen Einsicht in die Gerichtsakte nehmen."
+  },
+  {
+    "slug": "aktenzeichen-gericht",
+    "begriff": "Aktenzeichen",
+    "erklaerung": "Das ist die Kennzeichnung, unter der das Gericht Dein Verfahren führt."
+  },
+  {
+    "slug": "amtsermittlung-amtsermittlungsgrundsatz",
+    "begriff": "Amtsermittlung / Amtsermittlungsgrundsatz",
+    "erklaerung": "Im Sozialgerichtsverfahren erforscht das Gericht den Sachverhalt grundsätzlich von Amts wegen. Es ist dabei nicht allein an das gebunden, was die Beteiligten vortragen oder als Beweis beantragen."
+  },
+  {
+    "slug": "anerkenntnis",
+    "begriff": "Anerkenntnis",
+    "erklaerung": "Die Gegenseite erkennt einen geltend gemachten Anspruch ganz oder teilweise an. Wird das Anerkenntnis angenommen, kann der Rechtsstreit insoweit erledigt sein."
+  },
+  {
+    "slug": "anhoerung-gericht",
+    "begriff": "Anhörung",
+    "erklaerung": "Du erhältst Gelegenheit, Dich zu bestimmten Tatsachen, Unterlagen oder beabsichtigten Verfahrensschritten zu äußern."
+  },
+  {
+    "slug": "antrag-gericht",
+    "begriff": "Antrag",
+    "erklaerung": "Du bittest das Gericht darum, eine bestimmte Entscheidung zu treffen."
+  },
+  {
+    "slug": "antragsgegner-antragsgegnerin",
+    "begriff": "Antragsgegner / Antragsgegnerin",
+    "erklaerung": "Das ist die Person oder Stelle, gegen die sich ein gerichtlicher Antrag richtet."
+  },
+  {
+    "slug": "antragsteller-antragstellerin",
+    "begriff": "Antragsteller / Antragstellerin",
+    "erklaerung": "Das ist die Person, die einen gerichtlichen Antrag stellt."
+  },
+  {
+    "slug": "aufschiebende-wirkung",
+    "begriff": "Aufschiebende Wirkung",
+    "erklaerung": "Eine Entscheidung wird vorläufig nicht vollzogen, solange ein Rechtsbehelf wirkt. Ob eine aufschiebende Wirkung besteht, hängt vom jeweiligen Verfahren ab."
+  },
+  {
+    "slug": "befangenheit",
+    "begriff": "Befangenheit",
+    "erklaerung": "Es bestehen Gründe, die Zweifel daran wecken können, ob eine Richterin, ein Richter oder eine andere beteiligte Person unvoreingenommen mitwirken kann."
+  },
+  {
+    "slug": "beigeladene-beigeladener",
+    "begriff": "Beigeladene / Beigeladener",
+    "erklaerung": "Das Gericht kann weitere Personen oder Stellen in ein Verfahren einbeziehen, wenn deren rechtliche Interessen von der Entscheidung betroffen sein können oder eine Beteiligung gesetzlich erforderlich ist."
+  },
+  {
+    "slug": "beklagte-beklagter",
+    "begriff": "Beklagte / Beklagter",
+    "erklaerung": "Das ist die Person oder Stelle, gegen die sich die Klage richtet. Im Sozialgerichtsverfahren ist das häufig der zuständige Leistungsträger oder die Behörde."
+  },
+  {
+    "slug": "berufung",
+    "begriff": "Berufung",
+    "erklaerung": "Mit einer Berufung kann ein Urteil des Sozialgerichts unter den gesetzlichen Voraussetzungen vom Landessozialgericht überprüft werden."
+  },
+  {
+    "slug": "berufungsfrist",
+    "begriff": "Berufungsfrist",
+    "erklaerung": "Für die Einlegung der Berufung gilt grundsätzlich eine gesetzliche Frist. Im Sozialgerichtsverfahren beträgt sie regelmäßig einen Monat nach Zustellung des Urteils."
+  },
+  {
+    "slug": "beschluss",
+    "begriff": "Beschluss",
+    "erklaerung": "Eine gerichtliche Entscheidung, die nicht als Urteil ergeht. Viele Entscheidungen während eines laufenden Verfahrens werden durch Beschluss getroffen."
+  },
+  {
+    "slug": "beschwerde",
+    "begriff": "Beschwerde",
+    "erklaerung": "Ein Rechtsmittel, mit dem bestimmte gerichtliche Entscheidungen überprüft werden können, wenn das Gesetz dies vorsieht."
+  },
+  {
+    "slug": "begruendung-gericht",
+    "begriff": "Begründung",
+    "erklaerung": "Hier wird erklärt, warum ein Antrag gestellt, eine Klage erhoben oder eine gerichtliche Entscheidung getroffen wurde."
+  },
+  {
+    "slug": "beistand",
+    "begriff": "Beistand",
+    "erklaerung": "Unter bestimmten Voraussetzungen kann Dich eine andere Person in einer Verhandlung begleiten und unterstützen."
+  },
+  {
+    "slug": "bevollmaechtigte-person-gericht",
+    "begriff": "Bevollmächtigte Person",
+    "erklaerung": "Eine Person, die berechtigt ist, Dich im Verfahren zu vertreten. Vor Sozial- und Landessozialgerichten kann ein Verfahren grundsätzlich auch selbst geführt werden; vor dem Bundessozialgericht gelten strengere Vertretungsregeln."
+  },
+  {
+    "slug": "beweis",
+    "begriff": "Beweis",
+    "erklaerung": "Beweise sollen helfen zu klären, ob eine für das Verfahren wichtige Tatsache zutrifft."
+  },
+  {
+    "slug": "beweisantrag",
+    "begriff": "Beweisantrag",
+    "erklaerung": "Ein Beteiligter beantragt, dass das Gericht zu einer bestimmten Frage Beweis erhebt. Im Sozialgerichtsverfahren ist das Gericht an Beweisanträge nicht automatisch gebunden."
+  },
+  {
+    "slug": "beweiserhebung",
+    "begriff": "Beweiserhebung",
+    "erklaerung": "Das Gericht klärt eine entscheidungswichtige Frage zum Beispiel durch Unterlagen, Zeugenaussagen, Auskünfte oder Gutachten."
+  },
+  {
+    "slug": "beweismittel-gericht",
+    "begriff": "Beweismittel",
+    "erklaerung": "Das können zum Beispiel Urkunden, Unterlagen, Zeugenaussagen, Gutachten oder andere geeignete Erkenntnisquellen sein."
+  },
+  {
+    "slug": "beweiswuerdigung",
+    "begriff": "Beweiswürdigung",
+    "erklaerung": "Das Gericht bewertet die vorliegenden Beweise und entscheidet, welche Bedeutung sie für seine Überzeugungsbildung haben."
+  },
+  {
+    "slug": "eilverfahren-einstweiliger-rechtsschutz",
+    "begriff": "Eilverfahren / einstweiliger Rechtsschutz",
+    "erklaerung": "Ein Verfahren, in dem eine schnelle vorläufige gerichtliche Entscheidung beantragt wird, weil die Entscheidung im normalen Klageverfahren nicht abgewartet werden kann."
+  },
+  {
+    "slug": "einstweilige-anordnung",
+    "begriff": "Einstweilige Anordnung",
+    "erklaerung": "Das Gericht kann unter den gesetzlichen Voraussetzungen vorläufig etwas regeln, wenn dies notwendig ist, um wesentliche Nachteile zu verhindern oder einen Anspruch vorläufig zu sichern."
+  },
+  {
+    "slug": "entscheidung-nach-lage-der-akten",
+    "begriff": "Entscheidung nach Lage der Akten",
+    "erklaerung": "Unter bestimmten Voraussetzungen kann das Gericht auf Grundlage des bisherigen Akteninhalts entscheiden, auch wenn Beteiligte zu einem Termin nicht erscheinen."
+  },
+  {
+    "slug": "eroerterungstermin",
+    "begriff": "Erörterungstermin",
+    "erklaerung": "Ein Termin, in dem das Gericht mit den Beteiligten den Sachverhalt, offene Fragen und den weiteren Verlauf des Verfahrens besprechen kann."
+  },
+  {
+    "slug": "frist-gericht",
+    "begriff": "Frist",
+    "erklaerung": "Bis zu einem bestimmten Zeitpunkt muss oder soll etwas beim Gericht eingereicht oder erledigt werden."
+  },
+  {
+    "slug": "fristverlaengerung-gericht",
+    "begriff": "Fristverlängerung",
+    "erklaerung": "Bei Fristen, die vom Gericht gesetzt wurden, kann unter Umständen beantragt werden, mehr Zeit zu bekommen. Gesetzliche Fristen können dagegen nicht ohne Weiteres verlängert werden."
+  },
+  {
+    "slug": "gerichtsbescheid",
+    "begriff": "Gerichtsbescheid",
+    "erklaerung": "Das Sozialgericht kann unter bestimmten Voraussetzungen ohne mündliche Verhandlung durch Gerichtsbescheid entscheiden, wenn die Sache keine besonderen tatsächlichen oder rechtlichen Schwierigkeiten aufweist und der Sachverhalt geklärt ist. Die Beteiligten müssen vorher angehört werden."
+  },
+  {
+    "slug": "gerichtskosten",
+    "begriff": "Gerichtskosten",
+    "erklaerung": "Ob Gerichtskosten entstehen, hängt von der Art des Verfahrens und den Beteiligten ab. Für viele Versicherte, Leistungsempfänger und Menschen mit Behinderungen sind sozialgerichtliche Verfahren gerichtskostenfrei; es gibt jedoch Ausnahmen."
+  },
+  {
+    "slug": "gutachten-gericht",
+    "begriff": "Gutachten",
+    "erklaerung": "Eine sachverständige Person beantwortet Fachfragen, die für die Entscheidung des Gerichts wichtig sein können."
+  },
+  {
+    "slug": "gutachter-gutachterin-gericht",
+    "begriff": "Gutachter / Gutachterin",
+    "erklaerung": "Eine sachverständige Person, die vom Gericht mit einer Begutachtung beauftragt wird."
+  },
+  {
+    "slug": "gutachten-nach-109-sgg",
+    "begriff": "Gutachten nach § 109 SGG",
+    "erklaerung": "Bestimmte Berechtigte können im Sozialgerichtsverfahren beantragen, dass ein bestimmter Arzt gutachtlich gehört wird. Das Gericht kann die Anhörung davon abhängig machen, dass die Kosten zunächst vorgeschossen und möglicherweise endgültig getragen werden."
+  },
+  {
+    "slug": "klage",
+    "begriff": "Klage",
+    "erklaerung": "Mit einer Klage wird das Sozialgericht darum gebeten, eine rechtliche Streitfrage zu prüfen und darüber zu entscheiden."
+  },
+  {
+    "slug": "klageaenderung",
+    "begriff": "Klageänderung",
+    "erklaerung": "Der Gegenstand einer Klage wird nachträglich verändert. Das ist nur unter bestimmten gesetzlichen Voraussetzungen zulässig. Nicht jede Ergänzung oder Berichtigung ist bereits eine Klageänderung."
+  },
+  {
+    "slug": "klagebegruendung",
+    "begriff": "Klagebegründung",
+    "erklaerung": "Hier erklärst Du, warum Du die angegriffene Entscheidung für falsch hältst und welche Tatsachen oder rechtlichen Gründe aus Deiner Sicht berücksichtigt werden sollen."
+  },
+  {
+    "slug": "klageerhebung",
+    "begriff": "Klageerhebung",
+    "erklaerung": "Damit wird die Klage beim zuständigen Gericht eingereicht. Im Sozialgerichtsverfahren kann sie schriftlich oder zu Protokoll der Geschäftsstelle erhoben werden."
+  },
+  {
+    "slug": "klagefrist",
+    "begriff": "Klagefrist",
+    "erklaerung": "Im Sozialgerichtsverfahren beträgt die Klagefrist grundsätzlich einen Monat. Hat ein Widerspruchsverfahren stattgefunden, beginnt sie in der Regel mit der Bekanntgabe des Widerspruchsbescheids."
+  },
+  {
+    "slug": "klagegegenstand-gegenstand-des-klagebegehrens",
+    "begriff": "Klagegegenstand / Gegenstand des Klagebegehrens",
+    "erklaerung": "Damit ist gemeint, worüber das Gericht konkret entscheiden soll."
+  },
+  {
+    "slug": "klaeger-klaegerin",
+    "begriff": "Kläger / Klägerin",
+    "erklaerung": "Das ist die Person oder Stelle, die die Klage erhoben hat."
+  },
+  {
+    "slug": "klageruecknahme",
+    "begriff": "Klagerücknahme",
+    "erklaerung": "Die Klägerin oder der Kläger erklärt, dass die Klage nicht weitergeführt werden soll. Im Sozialgerichtsverfahren kann die Klage grundsätzlich bis zur Rechtskraft des Urteils zurückgenommen werden."
+  },
+  {
+    "slug": "ladung",
+    "begriff": "Ladung",
+    "erklaerung": "Das Gericht teilt Dir mit, wann und wo ein Termin stattfindet und ob Dein persönliches Erscheinen erforderlich ist."
+  },
+  {
+    "slug": "landessozialgericht-lsg",
+    "begriff": "Landessozialgericht (LSG)",
+    "erklaerung": "Das Landessozialgericht ist in der Sozialgerichtsbarkeit in der Regel die Instanz über dem Sozialgericht und entscheidet unter anderem über Berufungen."
+  },
+  {
+    "slug": "muendliche-verhandlung",
+    "begriff": "Mündliche Verhandlung",
+    "erklaerung": "Ein Gerichtstermin, in dem der Sachverhalt und die Anträge mit den Beteiligten erörtert werden. Im Sozialgerichtsverfahren wird grundsätzlich aufgrund mündlicher Verhandlung entschieden, soweit das Gesetz nichts anderes bestimmt."
+  },
+  {
+    "slug": "entscheidung-ohne-muendliche-verhandlung",
+    "begriff": "Entscheidung ohne mündliche Verhandlung",
+    "erklaerung": "Mit Einverständnis der Beteiligten kann das Gericht unter bestimmten Voraussetzungen auch durch Urteil entscheiden, ohne dass eine mündliche Verhandlung stattfindet."
+  },
+  {
+    "slug": "nichtzulassungsbeschwerde",
+    "begriff": "Nichtzulassungsbeschwerde",
+    "erklaerung": "Unter bestimmten Voraussetzungen kann dagegen vorgegangen werden, dass ein Rechtsmittel – zum Beispiel eine Revision – nicht zugelassen wurde. Dafür gelten besondere gesetzliche Anforderungen."
+  },
+  {
+    "slug": "persoenliches-erscheinen",
+    "begriff": "Persönliches Erscheinen",
+    "erklaerung": "Das Gericht kann anordnen, dass Du persönlich zu einem Termin erscheinst. Unter bestimmten Voraussetzungen kann auch eine Teilnahme per Bild- und Tonübertragung möglich sein."
+  },
+  {
+    "slug": "prozessbevollmaechtigte-person",
+    "begriff": "Prozessbevollmächtigte Person",
+    "erklaerung": "Eine Person, die Dich im gerichtlichen Verfahren vertritt und für Dich Verfahrenshandlungen vornehmen darf."
+  },
+  {
+    "slug": "prozesskostenhilfe-pkh",
+    "begriff": "Prozesskostenhilfe (PKH)",
+    "erklaerung": "Wer die Kosten einer Prozessführung nach seinen persönlichen und wirtschaftlichen Verhältnissen nicht oder nur teilweise aufbringen kann, kann unter den gesetzlichen Voraussetzungen Prozesskostenhilfe erhalten. Dabei wird auch geprüft, ob die beabsichtigte Rechtsverfolgung hinreichende Aussicht auf Erfolg bietet und nicht mutwillig erscheint."
+  },
+  {
+    "slug": "rechtliches-gehoer",
+    "begriff": "Rechtliches Gehör",
+    "erklaerung": "Du musst grundsätzlich die Möglichkeit bekommen, Dich zu den Tatsachen und Beweisergebnissen zu äußern, auf die das Gericht seine Entscheidung stützen möchte."
+  },
+  {
+    "slug": "rechtsbehelf-gericht",
+    "begriff": "Rechtsbehelf",
+    "erklaerung": "Ein rechtlicher Weg, mit dem eine Entscheidung angegriffen oder überprüft werden kann."
+  },
+  {
+    "slug": "rechtskraft-rechtskraeftig",
+    "begriff": "Rechtskraft / rechtskräftig",
+    "erklaerung": "Eine gerichtliche Entscheidung kann grundsätzlich nicht mehr mit den gewöhnlichen Rechtsmitteln angegriffen werden."
+  },
+  {
+    "slug": "rechtsmittel",
+    "begriff": "Rechtsmittel",
+    "erklaerung": "Ein gesetzlich vorgesehener Weg, eine gerichtliche Entscheidung durch eine höhere Instanz überprüfen zu lassen, zum Beispiel Berufung oder Revision."
+  },
+  {
+    "slug": "rechtsmittelbelehrung",
+    "begriff": "Rechtsmittelbelehrung",
+    "erklaerung": "Hier steht, ob und mit welchem Rechtsmittel eine Entscheidung angegriffen werden kann und welche Form und Frist dafür gelten."
+  },
+  {
+    "slug": "rechtshaengigkeit",
+    "begriff": "Rechtshängigkeit",
+    "erklaerung": "Mit der Erhebung der Klage wird die Streitsache beim Gericht rechtshängig."
+  },
+  {
+    "slug": "revision",
+    "begriff": "Revision",
+    "erklaerung": "Mit einer Revision überprüft das Bundessozialgericht grundsätzlich Rechtsfragen. Eine Revision ist nur zulässig, wenn sie zugelassen wurde."
+  },
+  {
+    "slug": "revisionsfrist",
+    "begriff": "Revisionsfrist",
+    "erklaerung": "Eine zugelassene Revision muss grundsätzlich innerhalb eines Monats eingelegt und innerhalb von zwei Monaten begründet werden."
+  },
+  {
+    "slug": "richter-richterin",
+    "begriff": "Richter / Richterin",
+    "erklaerung": "Die Person, die das gerichtliche Verfahren leitet oder an der Entscheidung des Gerichts mitwirkt."
+  },
+  {
+    "slug": "richterlicher-hinweis",
+    "begriff": "Richterlicher Hinweis",
+    "erklaerung": "Das Gericht macht die Beteiligten auf rechtlich oder tatsächlich wichtige Punkte, unklare Anträge oder fehlende Angaben aufmerksam."
+  },
+  {
+    "slug": "sachverstaendige-person",
+    "begriff": "Sachverständige Person",
+    "erklaerung": "Eine fachkundige Person, die dem Gericht bei Fragen hilft, für deren Beurteilung besonderes Fachwissen notwendig ist."
+  },
+  {
+    "slug": "schriftsatz",
+    "begriff": "Schriftsatz",
+    "erklaerung": "Eine schriftliche Eingabe an das Gericht, zum Beispiel eine Klagebegründung, Stellungnahme oder Erwiderung."
+  },
+  {
+    "slug": "sozialgericht-sg",
+    "begriff": "Sozialgericht (SG)",
+    "erklaerung": "Das Sozialgericht ist in vielen sozialrechtlichen Streitigkeiten die erste gerichtliche Instanz."
+  },
+  {
+    "slug": "stellungnahme-gericht",
+    "begriff": "Stellungnahme",
+    "erklaerung": "Du erklärst schriftlich oder mündlich Deine Sicht zu bestimmten Aussagen, Unterlagen oder Fragen."
+  },
+  {
+    "slug": "streitgegenstand",
+    "begriff": "Streitgegenstand",
+    "erklaerung": "Damit ist gemeint, welcher konkrete rechtliche Anspruch oder welche Entscheidung Gegenstand des Gerichtsverfahrens ist."
+  },
+  {
+    "slug": "termin",
+    "begriff": "Termin",
+    "erklaerung": "Ein vom Gericht bestimmter Zeitpunkt, zu dem zum Beispiel eine mündliche Verhandlung oder ein Erörterungstermin stattfindet."
+  },
+  {
+    "slug": "terminverlegung",
+    "begriff": "Terminverlegung",
+    "erklaerung": "Ein bereits angesetzter Gerichtstermin wird auf einen anderen Zeitpunkt verschoben. Ob ein Termin verlegt wird, entscheidet das Gericht nach den gesetzlichen Voraussetzungen."
+  },
+  {
+    "slug": "urteil",
+    "begriff": "Urteil",
+    "erklaerung": "Eine gerichtliche Entscheidung, mit der über die Klage entschieden wird."
+  },
+  {
+    "slug": "urteilsbegruendung-entscheidungsgruende",
+    "begriff": "Urteilsbegründung / Entscheidungsgründe",
+    "erklaerung": "Hier erklärt das Gericht, welche tatsächlichen und rechtlichen Überlegungen für seine Entscheidung maßgeblich waren."
+  },
+  {
+    "slug": "urteilsformel-tenor",
+    "begriff": "Urteilsformel / Tenor",
+    "erklaerung": "Das ist der Teil des Urteils, in dem steht, wie das Gericht entschieden hat."
+  },
+  {
+    "slug": "verfahren-gericht",
+    "begriff": "Verfahren",
+    "erklaerung": "Damit ist der gesamte Ablauf vor Gericht gemeint – von der Klage oder einem Antrag bis zur abschließenden Entscheidung."
+  },
+  {
+    "slug": "verfahrensbeteiligte",
+    "begriff": "Verfahrensbeteiligte",
+    "erklaerung": "Im Sozialgerichtsverfahren sind insbesondere Kläger, Beklagter und gegebenenfalls Beigeladene Beteiligte."
+  },
+  {
+    "slug": "verfahrensfehler-gericht",
+    "begriff": "Verfahrensfehler",
+    "erklaerung": "Eine gesetzliche Regel über den Ablauf des Gerichtsverfahrens wurde möglicherweise nicht eingehalten."
+  },
+  {
+    "slug": "vergleich",
+    "begriff": "Vergleich",
+    "erklaerung": "Die Beteiligten einigen sich ganz oder teilweise über den Streitgegenstand und beenden dadurch den Rechtsstreit entsprechend."
+  },
+  {
+    "slug": "vertretung",
+    "begriff": "Vertretung",
+    "erklaerung": "Eine dazu berechtigte Person führt das Verfahren ganz oder teilweise für Dich."
+  },
+  {
+    "slug": "videoverhandlung",
+    "begriff": "Videoverhandlung",
+    "erklaerung": "Unter den gesetzlichen Voraussetzungen kann eine mündliche Verhandlung so durchgeführt werden, dass einzelne oder mehrere Beteiligte per Bild- und Tonübertragung teilnehmen."
+  },
+  {
+    "slug": "vollmacht-gericht",
+    "begriff": "Vollmacht",
+    "erklaerung": "Damit erlaubst Du einer anderen Person, Dich im Verfahren zu vertreten."
+  },
+  {
+    "slug": "vollstreckung",
+    "begriff": "Vollstreckung",
+    "erklaerung": "Eine gerichtliche Entscheidung oder ein anderer Vollstreckungstitel wird praktisch durchgesetzt."
+  },
+  {
+    "slug": "widerspruch-gericht",
+    "begriff": "Widerspruch",
+    "erklaerung": "In vielen sozialrechtlichen Verfahren muss zunächst ein Widerspruchsverfahren durchgeführt werden, bevor eine Klage beim Sozialgericht erhoben werden kann."
+  },
+  {
+    "slug": "widerspruchsbescheid-gericht",
+    "begriff": "Widerspruchsbescheid",
+    "erklaerung": "Das ist die Entscheidung über den Widerspruch. Nach seiner Bekanntgabe beginnt häufig die Klagefrist."
+  },
+  {
+    "slug": "wiedereinsetzung-in-den-vorigen-stand",
+    "begriff": "Wiedereinsetzung in den vorigen Stand",
+    "erklaerung": "Wenn eine gesetzliche Frist ohne eigenes Verschulden versäumt wurde, kann unter bestimmten Voraussetzungen beantragt werden, so behandelt zu werden, als wäre die Frist eingehalten worden."
+  },
+  {
+    "slug": "zeuge-zeugin",
+    "begriff": "Zeuge / Zeugin",
+    "erklaerung": "Eine Person, die dem Gericht über eigene Wahrnehmungen zu einem für das Verfahren wichtigen Geschehen berichten kann."
+  },
+  {
+    "slug": "zeugenaussage",
+    "begriff": "Zeugenaussage",
+    "erklaerung": "Das ist das, was eine Zeugin oder ein Zeuge dem Gericht über eigene Wahrnehmungen mitteilt."
+  },
+  {
+    "slug": "zustaendigkeit-gericht",
+    "begriff": "Zuständigkeit",
+    "erklaerung": "Damit ist gemeint, welches Gericht für ein Verfahren sachlich und örtlich zuständig ist."
+  },
+  {
+    "slug": "zustellung-gericht",
+    "begriff": "Zustellung",
+    "erklaerung": "Ein gerichtliches Schreiben oder eine Entscheidung wird Dir auf gesetzlich vorgesehene Weise offiziell übermittelt. Der Zeitpunkt der Zustellung kann für den Beginn einer Frist entscheidend sein."
+  }
+]
