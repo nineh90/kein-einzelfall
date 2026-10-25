@@ -160,8 +160,10 @@ class SeitenUndRedirectsTest extends TestCase
          *
          * KEV-238: neu die Themenseiten der Öffentlichkeitsarbeit,
          * Ehrenamtsmessen, Petitionen und Presse.
+         *
+         * KEV-261: neu das Glossar „Sozialrecht & Hilfesystem“.
          */
-        $this->assertSame(58, Page::count());
+        $this->assertSame(59, Page::count());
         $this->assertSame(1, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

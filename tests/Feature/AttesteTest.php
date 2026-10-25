@@ -63,11 +63,12 @@ class AttesteTest extends TestCase
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
         $urls = array_column($wissen['children'], 'url');
 
-        // Seit KEV-155/154 stehen die weiteren Glossare dahinter, seit
+        // Seit KEV-155/154/261 stehen die weiteren Glossare dahinter, seit
         // KEV-150/152 Formulare und Fristen zwischen Atteste und Glossar.
         $this->assertSame(
-            ['/atteste', '/formulare', '/fristen', '/glossar', '/abkuerzungen-im-sexuellen-kontext', '/behoerden-und-bescheide'],
-            array_slice($urls, -6),
+            ['/atteste', '/formulare', '/fristen', '/glossar', '/abkuerzungen-im-sexuellen-kontext', '/behoerden-und-bescheide',
+                '/sozialrecht-und-hilfesystem'],
+            array_slice($urls, -7),
         );
         $this->assertStringContainsString('href="/atteste"', $this->get('/wissen')->getContent());
     }

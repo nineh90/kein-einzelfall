@@ -2602,5 +2602,599 @@
     "kuerzel": "ZK",
     "erklaerung": "Kisses with tongue contact",
     "mehr_label": null
+  },
+  "ansprechstelle": {
+    "begriff": "Point of contact (Ansprechstelle)",
+    "kuerzel": null,
+    "erklaerung": "A place you can turn to with questions about certain social benefits or support services. Which body is responsible depends on the support system concerned.",
+    "mehr_label": null
+  },
+  "anspruch-sozialrecht": {
+    "begriff": "Entitlement (Anspruch)",
+    "kuerzel": null,
+    "erklaerung": "An entitlement means that you may be due a particular benefit or right if the legal requirements are met.",
+    "mehr_label": null
+  },
+  "antrag-sozialrecht": {
+    "begriff": "Application (Antrag)",
+    "kuerzel": null,
+    "erklaerung": "With an application you officially ask a benefit provider or an authority to decide on a particular benefit or form of support.",
+    "mehr_label": null
+  },
+  "assistenzleistungen": {
+    "begriff": "Assistance services (Assistenzleistungen)",
+    "kuerzel": null,
+    "erklaerung": "Services that can help people with disabilities to organise their everyday lives and their participation in a self-determined way. Type and scope depend on individual need and the relevant legal basis.",
+    "mehr_label": null
+  },
+  "auskunft-sozialrecht": {
+    "begriff": "Information (Auskunft)",
+    "kuerzel": null,
+    "erklaerung": "Social benefit providers and certain other bodies must, within their remit, give information about social rights, responsible benefit providers and the factual and legal questions relevant to the enquiry.",
+    "mehr_label": null
+  },
+  "barrierefreiheit": {
+    "begriff": "Accessibility (Barrierefreiheit)",
+    "kuerzel": null,
+    "erklaerung": "Buildings, information, communication, digital services and benefits should be as accessible as possible, so that people with disabilities can use them without additional obstacles.",
+    "mehr_label": null
+  },
+  "bedarf-sozialrecht": {
+    "begriff": "Need (Bedarf)",
+    "kuerzel": null,
+    "erklaerung": "This describes which support or benefit a person needs because of their individual situation.",
+    "mehr_label": null
+  },
+  "bedarfsermittlung": {
+    "begriff": "Needs assessment (Bedarfsermittlung)",
+    "kuerzel": null,
+    "erklaerung": "A regulated procedure establishes which support and which benefits are needed in the individual case.",
+    "mehr_label": null
+  },
+  "behinderung": {
+    "begriff": "Disability (Behinderung)",
+    "kuerzel": null,
+    "erklaerung": "Under SGB IX, people may be considered disabled if physical, mental, intellectual or sensory impairments, in interaction with barriers, are likely to restrict their equal participation in society for more than six months.",
+    "mehr_label": null
+  },
+  "beratung": {
+    "begriff": "Advice (Beratung)",
+    "kuerzel": null,
+    "erklaerung": "Social benefit providers have advisory duties within their area of responsibility. Which advice must be offered depends on the social benefit system concerned.",
+    "mehr_label": null
+  },
+  "besondere-leistungen-im-einzelfall": {
+    "begriff": "Special benefits in individual cases (Besondere Leistungen im Einzelfall)",
+    "kuerzel": null,
+    "erklaerung": "A group of benefits under social compensation law. Whether and which benefits are possible in a given case depends on the legal requirements of SGB XIV.",
+    "mehr_label": null
+  },
+  "dienstleistung": {
+    "begriff": "Service (Dienstleistung)",
+    "kuerzel": null,
+    "erklaerung": "Social benefits can be provided as services, benefits in kind or cash benefits. Services also include, for example, personal help and advice.",
+    "mehr_label": null
+  },
+  "eingliederungshilfe": {
+    "begriff": "Integration assistance (Eingliederungshilfe)",
+    "kuerzel": null,
+    "erklaerung": "Benefits for certain people with disabilities that are meant to enable or promote a self-determined life and full, effective and equal participation in society.",
+    "mehr_label": null
+  },
+  "eingliederungshilfetraeger": {
+    "begriff": "Integration assistance provider (Eingliederungshilfeträger)",
+    "kuerzel": null,
+    "erklaerung": "The body responsible for integration assistance benefits. Which authority or provider is responsible depends on the law of the federal state.",
+    "mehr_label": null
+  },
+  "entlastungsbetrag": {
+    "begriff": "Relief amount (Entlastungsbetrag)",
+    "kuerzel": null,
+    "erklaerung": "A long-term care insurance benefit for support services in everyday life provided for by law. Requirements and possible uses are set out in SGB XI.",
+    "mehr_label": null
+  },
+  "ergaenzende-unabhaengige-teilhabeberatung-eutb": {
+    "begriff": "Supplementary independent participation counselling – EUTB (Ergänzende unabhängige Teilhabeberatung)",
+    "kuerzel": null,
+    "erklaerung": "Counselling on rehabilitation and participation for people with disabilities and people at risk of disability, independent of benefit providers and service providers. It can be used before applying for specific benefits.",
+    "mehr_label": null
+  },
+  "erwerbsfaehigkeit": {
+    "begriff": "Earning capacity (Erwerbsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "A social law term for whether, and to what extent, a person can work under the relevant legal requirements. Its exact meaning depends on the benefit system concerned.",
+    "mehr_label": null
+  },
+  "erwerbsminderung": {
+    "begriff": "Reduced earning capacity (Erwerbsminderung)",
+    "kuerzel": null,
+    "erklaerung": "A legal term used mainly in the statutory pension insurance. Whether there is partial or full reduced earning capacity depends on the legal requirements and is determined by the responsible pension insurance provider.",
+    "mehr_label": null
+  },
+  "fallmanagement": {
+    "begriff": "Case management (Fallmanagement)",
+    "kuerzel": null,
+    "erklaerung": "Under social compensation law, eligible persons can be accompanied through the application and benefit procedure by a case manager who activates and coordinates.",
+    "mehr_label": null
+  },
+  "feststellungsverfahren": {
+    "begriff": "Determination procedure (Feststellungsverfahren)",
+    "kuerzel": null,
+    "erklaerung": "A procedure in which an authority determines with binding effect whether certain legal requirements are met, for example a degree of disability.",
+    "mehr_label": null
+  },
+  "gdb-grad-der-behinderung": {
+    "begriff": "Degree of disability – GdB (Grad der Behinderung)",
+    "kuerzel": null,
+    "erklaerung": "The GdB describes the effects of health impairments on participation in society. It is set in steps of ten. A particular GdB does not automatically say anything about need for long-term care or earning capacity.",
+    "mehr_label": null
+  },
+  "gds-grad-der-schaedigungsfolgen": {
+    "begriff": "Degree of damage consequences – GdS (Grad der Schädigungsfolgen)",
+    "kuerzel": null,
+    "erklaerung": "The GdS is used in social compensation law. It describes the effects of the recognised consequences of damage on all areas of life and is set in steps of ten.",
+    "mehr_label": null
+  },
+  "geldleistung": {
+    "begriff": "Cash benefit (Geldleistung)",
+    "kuerzel": null,
+    "erklaerung": "A social benefit paid out as a sum of money, for example care allowance. Which requirements apply depends on the benefit.",
+    "mehr_label": null
+  },
+  "gesamtplan": {
+    "begriff": "Overall plan (Gesamtplan)",
+    "kuerzel": null,
+    "erklaerung": "In integration assistance an overall plan is drawn up. It is used to document, steer and review the individual participation process, the necessary benefits and their goals.",
+    "mehr_label": null
+  },
+  "gesamtplankonferenz": {
+    "begriff": "Overall plan conference (Gesamtplankonferenz)",
+    "kuerzel": null,
+    "erklaerung": "In the overall plan procedure, the benefits needed can be discussed and agreed together with the person entitled to benefits and the bodies involved.",
+    "mehr_label": null
+  },
+  "gesamtplanverfahren": {
+    "begriff": "Overall plan procedure (Gesamtplanverfahren)",
+    "kuerzel": null,
+    "erklaerung": "The integration assistance procedure for assessing and planning individual support needs. The person entitled to benefits must be involved in each step.",
+    "mehr_label": null
+  },
+  "gleichstellung": {
+    "begriff": "Equal status (Gleichstellung)",
+    "kuerzel": null,
+    "erklaerung": "People with a GdB of at least 30 but less than 50 can, under certain conditions, be given equal status with severely disabled people in working life.",
+    "mehr_label": null
+  },
+  "grundsicherung-im-alter-und-bei-erwerbsminderung": {
+    "begriff": "Basic income support in old age and in case of reduced earning capacity (Grundsicherung im Alter und bei Erwerbsminderung)",
+    "kuerzel": null,
+    "erklaerung": "A social assistance benefit for people who, among other things because of age or permanent full reduction in earning capacity, cannot sufficiently secure their necessary living costs from their own means and meet the legal requirements.",
+    "mehr_label": null
+  },
+  "haeusliche-pflege": {
+    "begriff": "Home care (Häusliche Pflege)",
+    "kuerzel": null,
+    "erklaerung": "Care and support provided in the home environment. Depending on the care level and situation, different long-term care insurance benefits may apply.",
+    "mehr_label": null
+  },
+  "hilfe-in-anderen-lebenslagen": {
+    "begriff": "Help in other circumstances (Hilfe in anderen Lebenslagen)",
+    "kuerzel": null,
+    "erklaerung": "A group of social assistance benefits for special life situations. Which help is possible depends on the relevant legal provision.",
+    "mehr_label": null
+  },
+  "hilfe-zur-pflege": {
+    "begriff": "Help with care (Hilfe zur Pflege)",
+    "kuerzel": null,
+    "erklaerung": "A social assistance benefit for people in need of care, if the legal requirements are met and necessary care cannot be sufficiently covered by other benefits or own means.",
+    "mehr_label": null
+  },
+  "hilfe-zur-ueberwindung-besonderer-sozialer-schwierigkeiten": {
+    "begriff": "Help to overcome particular social difficulties (Hilfe zur Überwindung besonderer sozialer Schwierigkeiten)",
+    "kuerzel": null,
+    "erklaerung": "A social assistance benefit for people whose particular living conditions are combined with social difficulties that they cannot overcome on their own.",
+    "mehr_label": null
+  },
+  "hilfe-zum-lebensunterhalt": {
+    "begriff": "Help with living costs (Hilfe zum Lebensunterhalt)",
+    "kuerzel": null,
+    "erklaerung": "A social assistance benefit for people who cannot sufficiently cover their necessary living costs from their own means or from benefits with priority, and who meet the legal requirements.",
+    "mehr_label": null
+  },
+  "hilfen-zur-gesundheit": {
+    "begriff": "Health assistance (Hilfen zur Gesundheit)",
+    "kuerzel": null,
+    "erklaerung": "Social assistance benefits for health care in certain cases, if the legal requirements are met.",
+    "mehr_label": null
+  },
+  "hilfesystem": {
+    "begriff": "Support system (Hilfesystem)",
+    "kuerzel": null,
+    "erklaerung": "This does not mean a single law. The term describes how different bodies and benefit systems work together, for example health insurance, long-term care insurance, social assistance, integration assistance, rehabilitation, youth welfare and social compensation.",
+    "mehr_label": null
+  },
+  "hilfsmittel": {
+    "begriff": "Aids (Hilfsmittel)",
+    "kuerzel": null,
+    "erklaerung": "Objects or technical aids that can compensate for health limitations, support treatment or enable participation. Which benefit provider is responsible depends on the need and the legal basis.",
+    "mehr_label": null
+  },
+  "individueller-bedarf": {
+    "begriff": "Individual need (Individueller Bedarf)",
+    "kuerzel": null,
+    "erklaerung": "Benefits should be based on the personal situation and the support actually needed, not on a diagnosis alone.",
+    "mehr_label": null
+  },
+  "inklusion": {
+    "begriff": "Inclusion (Inklusion)",
+    "kuerzel": null,
+    "erklaerung": "Inclusion describes the goal that people with and without disabilities can take part in social life equally and with as few barriers as possible.",
+    "mehr_label": null
+  },
+  "krankenbehandlung": {
+    "begriff": "Medical treatment (Krankenbehandlung)",
+    "kuerzel": null,
+    "erklaerung": "Benefits for medical care. Which benefits are covered and which provider is responsible depends on the benefit system concerned.",
+    "mehr_label": null
+  },
+  "krankenkasse": {
+    "begriff": "Health insurance fund (Krankenkasse)",
+    "kuerzel": null,
+    "erklaerung": "Provider of statutory health insurance. Among other things, it is responsible for medical treatment benefits provided for by law and certain rehabilitation benefits.",
+    "mehr_label": null
+  },
+  "kurzzeitpflege": {
+    "begriff": "Short-term care (Kurzzeitpflege)",
+    "kuerzel": null,
+    "erklaerung": "Temporary full inpatient care when home care is temporarily not, or not yet, sufficiently possible and the legal requirements are met.",
+    "mehr_label": null
+  },
+  "leistungsberechtigte-person": {
+    "begriff": "Person entitled to benefits (Leistungsberechtigte Person)",
+    "kuerzel": null,
+    "erklaerung": "A person who meets the legal requirements for a particular social benefit.",
+    "mehr_label": null
+  },
+  "leistungserbringer": {
+    "begriff": "Service provider (Leistungserbringer)",
+    "kuerzel": null,
+    "erklaerung": "A person, facility or service that actually delivers an approved benefit, for example a care service or assistance service. Service providers and benefit providers are not the same.",
+    "mehr_label": null
+  },
+  "leistungsgruppe": {
+    "begriff": "Benefit group (Leistungsgruppe)",
+    "kuerzel": null,
+    "erklaerung": "SGB IX distinguishes different groups of participation benefits, for example medical rehabilitation, participation in working life, participation in education and social participation.",
+    "mehr_label": null
+  },
+  "leistungstraeger": {
+    "begriff": "Benefit provider (Leistungsträger)",
+    "kuerzel": null,
+    "erklaerung": "Public bodies, institutions or authorities responsible for certain social benefits. Which body is responsible follows from the relevant benefit law.",
+    "mehr_label": null
+  },
+  "leistungen-bei-pflegebeduerftigkeit": {
+    "begriff": "Benefits for people in need of care (Leistungen bei Pflegebedürftigkeit)",
+    "kuerzel": null,
+    "erklaerung": "Depending on the benefit system and individual requirements, benefits can be provided if there is a need for long-term care.",
+    "mehr_label": null
+  },
+  "leistungen-der-sozialen-entschaedigung": {
+    "begriff": "Social compensation benefits (Leistungen der Sozialen Entschädigung)",
+    "kuerzel": null,
+    "erklaerung": "SGB XIV provides for different areas of benefits, including fast help, medical treatment, participation, benefits for people in need of care and compensation payments.",
+    "mehr_label": null
+  },
+  "leistungen-zur-medizinischen-rehabilitation": {
+    "begriff": "Medical rehabilitation benefits (Leistungen zur medizinischen Rehabilitation)",
+    "kuerzel": null,
+    "erklaerung": "Benefits meant to prevent, reduce or compensate for health impairments or prevent them from getting worse, and to support participation.",
+    "mehr_label": null
+  },
+  "leistungen-zur-sozialen-teilhabe": {
+    "begriff": "Social participation benefits (Leistungen zur Sozialen Teilhabe)",
+    "kuerzel": null,
+    "erklaerung": "Benefits meant to enable or make easier a self-determined and equal participation in community life.",
+    "mehr_label": null
+  },
+  "leistungen-zur-teilhabe": {
+    "begriff": "Participation benefits (Leistungen zur Teilhabe)",
+    "kuerzel": null,
+    "erklaerung": "Benefits meant to promote rehabilitation, self-determination and participation. Which benefits are possible depends on individual need and the responsible rehabilitation provider.",
+    "mehr_label": null
+  },
+  "leistungen-zur-teilhabe-am-arbeitsleben": {
+    "begriff": "Benefits for participation in working life (Leistungen zur Teilhabe am Arbeitsleben)",
+    "kuerzel": null,
+    "erklaerung": "Benefits meant to help a person take up, carry out or keep a job.",
+    "mehr_label": null
+  },
+  "leistungen-zur-teilhabe-an-bildung": {
+    "begriff": "Benefits for participation in education (Leistungen zur Teilhabe an Bildung)",
+    "kuerzel": null,
+    "erklaerung": "Benefits that, under the legal requirements, can enable or support equal participation in education.",
+    "mehr_label": null
+  },
+  "medizinischer-dienst-md": {
+    "begriff": "Medical Service – MD (Medizinischer Dienst)",
+    "kuerzel": null,
+    "erklaerung": "In cases provided for by law, the Medical Service supports the statutory health and long-term care insurance funds with medical and nursing assessments or statements. The decision on the benefit is generally made by the responsible benefit provider.",
+    "mehr_label": null
+  },
+  "mehrbedarf": {
+    "begriff": "Additional need (Mehrbedarf)",
+    "kuerzel": null,
+    "erklaerung": "In certain social benefit systems, an additional need regulated by law can be taken into account on top of the regular need.",
+    "mehr_label": null
+  },
+  "merkzeichen": {
+    "begriff": "Marks (Merkzeichen)",
+    "kuerzel": null,
+    "erklaerung": "Certain marks can be entered in a severely disabled person's pass if the relevant legal requirements are met. They can come with certain compensations for disadvantages.",
+    "mehr_label": null
+  },
+  "nachrang-nachrangigkeit": {
+    "begriff": "Subsidiarity (Nachrang / Nachrangigkeit)",
+    "kuerzel": null,
+    "erklaerung": "Some social benefits generally only come into question if no benefit with priority from another provider applies. Which rule applies depends on the benefit system concerned.",
+    "mehr_label": null
+  },
+  "nachteilsausgleich": {
+    "begriff": "Compensation for disadvantages (Nachteilsausgleich)",
+    "kuerzel": null,
+    "erklaerung": "Benefits or relief provided for by law can compensate for certain disadvantages caused by a disability. Which compensations apply depends on the relevant requirements.",
+    "mehr_label": null
+  },
+  "persoenliches-budget-sozialrecht": {
+    "begriff": "Personal budget (Persönliches Budget)",
+    "kuerzel": null,
+    "erklaerung": "On application, certain participation benefits can be provided as a personal budget. The aim is to give people entitled to benefits more responsibility and the most self-determined way possible of organising their support. The personal budget is not an additional benefit but a form of providing benefits.",
+    "mehr_label": null
+  },
+  "pflegeberatung": {
+    "begriff": "Care counselling (Pflegeberatung)",
+    "kuerzel": null,
+    "erklaerung": "People who are entitled can receive individual advice and support in choosing and using care benefits and other help.",
+    "mehr_label": null
+  },
+  "pflegebeduerftigkeit": {
+    "begriff": "Need for long-term care (Pflegebedürftigkeit)",
+    "kuerzel": null,
+    "erklaerung": "In terms of long-term care insurance, people are in need of care if health-related impairments limit their independence or abilities, they therefore need help, and this need is likely to last at least six months.",
+    "mehr_label": null
+  },
+  "pflegebegutachtung": {
+    "begriff": "Care assessment (Pflegebegutachtung)",
+    "kuerzel": null,
+    "erklaerung": "An assessment checks whether there is a need for care in terms of long-term care insurance and which care level, if any, can be determined.",
+    "mehr_label": null
+  },
+  "pflegegeld": {
+    "begriff": "Care allowance (Pflegegeld)",
+    "kuerzel": null,
+    "erklaerung": "A cash benefit that can be paid for home care under the legal requirements.",
+    "mehr_label": null
+  },
+  "pflegegrad-sozialrecht": {
+    "begriff": "Care level (Pflegegrad)",
+    "kuerzel": null,
+    "erklaerung": "The care level describes how severely independence or abilities are impaired. Long-term care insurance distinguishes five care levels.",
+    "mehr_label": null
+  },
+  "pflegehilfsmittel": {
+    "begriff": "Care aids (Pflegehilfsmittel)",
+    "kuerzel": null,
+    "erklaerung": "Aids that can make care easier, relieve complaints or enable a more independent life.",
+    "mehr_label": null
+  },
+  "pflegekasse": {
+    "begriff": "Long-term care insurance fund (Pflegekasse)",
+    "kuerzel": null,
+    "erklaerung": "Provider of the social long-term care insurance. The long-term care insurance fund is set up at the respective statutory health insurance fund.",
+    "mehr_label": null
+  },
+  "pflegeperson": {
+    "begriff": "Carer (Pflegeperson)",
+    "kuerzel": null,
+    "erklaerung": "In terms of long-term care insurance, a carer is a person who cares for someone in need of care in their home, not as a job. Additional requirements apply for some social insurance entitlements.",
+    "mehr_label": null
+  },
+  "pflegesachleistung": {
+    "begriff": "Care in kind (Pflegesachleistung)",
+    "kuerzel": null,
+    "erklaerung": "A benefit where approved professional care or support services provide the services and bill the long-term care insurance fund.",
+    "mehr_label": null
+  },
+  "pflegestuetzpunkt": {
+    "begriff": "Care support centre (Pflegestützpunkt)",
+    "kuerzel": null,
+    "erklaerung": "A local advice centre that, where such structures exist, can bundle information and support on care and other help.",
+    "mehr_label": null
+  },
+  "rehabilitation": {
+    "begriff": "Rehabilitation (Rehabilitation)",
+    "kuerzel": null,
+    "erklaerung": "Benefits and measures meant to prevent, reduce or compensate for health limitations and to enable or maintain participation.",
+    "mehr_label": null
+  },
+  "rehabilitationsbedarf": {
+    "begriff": "Rehabilitation need (Rehabilitationsbedarf)",
+    "kuerzel": null,
+    "erklaerung": "This describes whether rehabilitation benefits may be needed, and which.",
+    "mehr_label": null
+  },
+  "rehabilitationstraeger": {
+    "begriff": "Rehabilitation provider (Rehabilitationsträger)",
+    "kuerzel": null,
+    "erklaerung": "The bodies named in SGB IX that can be responsible for rehabilitation and participation depending on the type of benefit, for example health insurance funds, pension insurance, accident insurance, the Federal Employment Agency, integration assistance or social compensation providers.",
+    "mehr_label": null
+  },
+  "sachleistung": {
+    "begriff": "Benefit in kind (Sachleistung)",
+    "kuerzel": null,
+    "erklaerung": "A social benefit where no money is paid out; instead a specific service or care is provided.",
+    "mehr_label": null
+  },
+  "schwerbehindert": {
+    "begriff": "Severely disabled (Schwerbehindert)",
+    "kuerzel": null,
+    "erklaerung": "Under SGB IX, people are severely disabled if a GdB of at least 50 has been determined and the legal requirements are met.",
+    "mehr_label": null
+  },
+  "schwerbehindertenausweis": {
+    "begriff": "Severely disabled person's pass (Schwerbehindertenausweis)",
+    "kuerzel": null,
+    "erklaerung": "A pass that proves the status of a severely disabled person and, where applicable, certain marks.",
+    "mehr_label": null
+  },
+  "selbstbestimmung": {
+    "begriff": "Self-determination (Selbstbestimmung)",
+    "kuerzel": null,
+    "erklaerung": "An important aim of rehabilitation and participation law is to give people as much room as possible for their own decisions and for shaping their lives on their own responsibility.",
+    "mehr_label": null
+  },
+  "schnelle-hilfen": {
+    "begriff": "Fast help (Schnelle Hilfen)",
+    "kuerzel": null,
+    "erklaerung": "Under social compensation law this includes case management and help in a trauma outpatient clinic.",
+    "mehr_label": null
+  },
+  "soziale-entschaedigung": {
+    "begriff": "Social compensation (Soziale Entschädigung)",
+    "kuerzel": null,
+    "erklaerung": "Social compensation law supports people who have suffered damage to their health from certain harmful events covered by law in dealing with the consequences.",
+    "mehr_label": null
+  },
+  "soziale-teilhabe": {
+    "begriff": "Social participation (Soziale Teilhabe)",
+    "kuerzel": null,
+    "erklaerung": "This means equal participation in community life. Social participation benefits can enable it or make it easier.",
+    "mehr_label": null
+  },
+  "sozialhilfe": {
+    "begriff": "Social assistance (Sozialhilfe)",
+    "kuerzel": null,
+    "erklaerung": "Social assistance under SGB XII includes various kinds of help for people who meet the relevant legal requirements, for example help with living costs, basic income support, health assistance and help with care.",
+    "mehr_label": null
+  },
+  "sozialleistung": {
+    "begriff": "Social benefit (Sozialleistung)",
+    "kuerzel": null,
+    "erklaerung": "A service, benefit in kind or cash benefit provided for in the Social Code. Personal and educational help can also be services.",
+    "mehr_label": null
+  },
+  "tagespflege-und-nachtpflege": {
+    "begriff": "Day care and night care (Tagespflege und Nachtpflege)",
+    "kuerzel": null,
+    "erklaerung": "Forms of partial inpatient care. People in need of care are looked after in a facility for part of the day or night and otherwise continue to live at home.",
+    "mehr_label": null
+  },
+  "teilhabe": {
+    "begriff": "Participation (Teilhabe)",
+    "kuerzel": null,
+    "erklaerung": "Participation means being able to take part in different areas of social life as self-determined and as equally as possible.",
+    "mehr_label": null
+  },
+  "teilhabe-am-arbeitsleben": {
+    "begriff": "Participation in working life (Teilhabe am Arbeitsleben)",
+    "kuerzel": null,
+    "erklaerung": "This means taking part in working life. Benefits can help to enable, keep or restore employment.",
+    "mehr_label": null
+  },
+  "teilhabe-an-bildung": {
+    "begriff": "Participation in education (Teilhabe an Bildung)",
+    "kuerzel": null,
+    "erklaerung": "This means equal participation in education. Benefits may be needed so that people with disabilities can take part.",
+    "mehr_label": null
+  },
+  "teilhabeplan": {
+    "begriff": "Participation plan (Teilhabeplan)",
+    "kuerzel": null,
+    "erklaerung": "If several benefit groups or rehabilitation providers are involved, the necessary benefits are coordinated and documented in a participation plan under certain conditions.",
+    "mehr_label": null
+  },
+  "teilhabeplankonferenz": {
+    "begriff": "Participation plan conference (Teilhabeplankonferenz)",
+    "kuerzel": null,
+    "erklaerung": "With the consent of the person entitled to benefits, the bodies involved can discuss the rehabilitation need and the necessary benefits together.",
+    "mehr_label": null
+  },
+  "teilhabeplanverfahren": {
+    "begriff": "Participation plan procedure (Teilhabeplanverfahren)",
+    "kuerzel": null,
+    "erklaerung": "A procedure in which several necessary rehabilitation or participation benefits are coordinated with one another.",
+    "mehr_label": null
+  },
+  "teilhabezielvereinbarung": {
+    "begriff": "Participation goal agreement (Teilhabezielvereinbarung)",
+    "kuerzel": null,
+    "erklaerung": "In integration assistance, the provider can conclude an agreement with the person entitled to benefits on the goals of the overall plan or parts of it.",
+    "mehr_label": null
+  },
+  "traumaambulanz": {
+    "begriff": "Trauma outpatient clinic (Traumaambulanz)",
+    "kuerzel": null,
+    "erklaerung": "Under social compensation law, eligible persons can, under the legal requirements, receive psychotherapeutic intervention in a trauma outpatient clinic contracted for this purpose.",
+    "mehr_label": null
+  },
+  "traeger-der-eingliederungshilfe": {
+    "begriff": "Integration assistance provider (Träger der Eingliederungshilfe)",
+    "kuerzel": null,
+    "erklaerung": "The body responsible under state law for integration assistance benefits.",
+    "mehr_label": null
+  },
+  "traeger-der-sozialen-entschaedigung": {
+    "begriff": "Social compensation provider (Träger der Sozialen Entschädigung)",
+    "kuerzel": null,
+    "erklaerung": "The body responsible under state law for benefits under SGB XIV.",
+    "mehr_label": null
+  },
+  "verhinderungspflege": {
+    "begriff": "Respite care (Verhinderungspflege)",
+    "kuerzel": null,
+    "erklaerung": "A care benefit for certain situations in which the private carer is temporarily unable to care. Requirements and scope depend on the long-term care insurance law in force.",
+    "mehr_label": null
+  },
+  "vollstationaere-pflege": {
+    "begriff": "Full inpatient care (Vollstationäre Pflege)",
+    "kuerzel": null,
+    "erklaerung": "Care and support in a full inpatient care facility. Which benefits long-term care insurance covers depends among other things on the care level and the legal requirements.",
+    "mehr_label": null
+  },
+  "vorrangige-leistung": {
+    "begriff": "Benefit with priority (Vorrangige Leistung)",
+    "kuerzel": null,
+    "erklaerung": "A benefit that, because of legal responsibilities, comes into question before another benefit.",
+    "mehr_label": null
+  },
+  "wohnumfeldverbessernde-massnahmen": {
+    "begriff": "Measures to improve the living environment (Wohnumfeldverbessernde Maßnahmen)",
+    "kuerzel": null,
+    "erklaerung": "Under certain conditions, grants can be made for measures that change the home so that care becomes easier or a more independent life becomes possible.",
+    "mehr_label": null
+  },
+  "wunsch-und-wahlrecht": {
+    "begriff": "Right to wishes and choice (Wunsch- und Wahlrecht)",
+    "kuerzel": null,
+    "erklaerung": "For participation benefits, justified wishes of the person entitled to benefits should be taken into account. Personal circumstances and individual need play a role, among other things. Not every wish has to be fulfilled automatically.",
+    "mehr_label": null
+  },
+  "zielvereinbarung-beim-persoenlichen-budget": {
+    "begriff": "Goal agreement for the personal budget (Zielvereinbarung beim Persönlichen Budget)",
+    "kuerzel": null,
+    "erklaerung": "In connection with the personal budget, the person entitled to benefits and the responsible benefit provider make agreements on how the budget is carried out.",
+    "mehr_label": null
+  },
+  "zustaendigkeit-sozialrecht": {
+    "begriff": "Responsibility (Zuständigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This means which benefit provider or authority is responsible for a particular benefit or procedure.",
+    "mehr_label": null
+  },
+  "zustaendigkeitsklaerung": {
+    "begriff": "Clarifying responsibility (Zuständigkeitsklärung)",
+    "kuerzel": null,
+    "erklaerung": "For rehabilitation and participation benefits, once an application has been received it must be clarified which rehabilitation provider is responsible for processing it.",
+    "mehr_label": null
   }
 }

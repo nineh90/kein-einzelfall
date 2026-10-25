@@ -762,6 +762,21 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Zu klären:** Die Seite ist für Suchmaschinen offen wie die anderen
     Glossare. Damit kann sie auch bei Suchen nach Szenebegriffen auftauchen;
     falls das nicht gewollt ist, im Panel „Von Suchmaschinen ausschließen“.
+- [ ] **Sozialrecht & Hilfesystem (KEV-261), bitte ansehen.** Neues Glossar
+  unter „Wissen“, im Menü nach „Behörden & Bescheide“: Taddis Bild (Kasten mit
+  Registern, rechts um Wand verlängert), darunter die Unterzeile „Leistungen
+  verstehen. Zuständigkeiten einordnen. Unterstützung finden.“, über ihrer
+  Einleitung grün „Zwischen Leistungsträgern, Teilhabe und Pflege den
+  Überblick behalten.“, dann 99 Begriffe mit Suchfeld und darunter ihre 61
+  typischen Sätze. Pflegen wie die anderen Glossare.
+  - **Weggelassen:** „Einfach erklärt:“ vor jeder Erklärung (wie bei
+    „Behörden & Bescheide“) und die Zeile „4. Sozialrecht und Hilfesysteme“
+    über dem Text (bei ihr im Ordner Nummer 6).
+  - **Doppelt:** Antrag, Anspruch, Auskunft, Bedarf, Persönliches Budget,
+    Pflegegrad und Zuständigkeit stehen auch in anderen Glossaren, hier mit
+    Taddis Erklärung für dieses Thema.
+  - **Typische Sätze:** Kategorie eingesetzt als „aus *dem Sozialrecht und aus
+    verschiedenen Hilfesystemen*“ (wie in ihrer Einleitung).
 - [ ] **Typische Sätze (KEV-262), bitte ansehen.** Taddis „7. Typische Sätze –
   einfach übersetzt“ ist keine eigene Seite, sondern steht wie gewünscht unter
   dem Glossar der jeweiligen Kategorie. Auf /behoerden-und-bescheide jetzt
@@ -778,9 +793,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     Einleitung der Seite darüber klein („du“). Soll das vereinheitlicht werden?
   - **Englisch:** Der Satz bleibt deutsch (so steht er im Brief), übersetzt ist
     nur die Erklärung; ein Satz in der Einleitung sagt das. Ungeprüft.
-  - Die Sätze für Gericht & Verfahren (53), Medizinische Berichte & Gutachten
-    (60) und Sozialrecht & Hilfesystem (61) liegen bereit und erscheinen, sobald
-    es diese Seiten gibt.
+  - Die Sätze für Gericht & Verfahren (53) und Medizinische Berichte &
+    Gutachten (60) liegen bereit und erscheinen, sobald es diese Seiten gibt.
+    Sozialrecht & Hilfesystem (61) siehe KEV-261.
 - [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
   eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
   Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle

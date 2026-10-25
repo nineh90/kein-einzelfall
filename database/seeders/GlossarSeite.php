@@ -25,6 +25,9 @@ abstract class GlossarSeite extends Seeder
     /** @var list<string> */
     public const ABSAETZE = [];
 
+    /** KEV-261: grüne Überschrift über der Einleitung, leer = keine. */
+    public const TEXT_TITEL = '';
+
     public const META_DESCRIPTION = '';
 
     /** Datei unter database/seeders/data/. */
@@ -65,7 +68,10 @@ abstract class GlossarSeite extends Seeder
         );
 
         if ($seite->wasRecentlyCreated) {
-            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => static::ABSAETZE]]);
+            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => array_filter([
+                'titel' => static::TEXT_TITEL,
+                'absaetze' => static::ABSAETZE,
+            ])]);
             $seite->blocks()->create(['typ' => 'glossar', 'position' => 1, 'data' => []]);
             static::saetzeAnlegen($seite);
 

@@ -113,6 +113,9 @@ class Titelbilder
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel. Ohne Unterzeile.
         'abkuerzungen-im-sexuellen-kontext' => null,
+        // KEV-261: Bild von Taddi („Sozialrecht & Hilfesystem“), Kasten mit
+        // Registermappen. Unterzeile aus dem Ticket.
+        'sozialrecht-und-hilfesystem' => 'Leistungen verstehen. Zuständigkeiten einordnen. Unterstützung finden.',
         // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
         // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar.
         //
@@ -234,6 +237,10 @@ class Titelbilder
      *  - Abkürzungen im sexuellen Kontext: Kiste mit Buchstabenwürfeln
      *    (KEV-154). Rechts um Wand verlängert, Kiste ab 15 %, Würfel bis 97 %
      *    der Höhe; ausgerichtet auf 85 %.
+     *  - Sozialrecht & Hilfesystem: Kasten mit Registermappen (KEV-261).
+     *    Rechts um Wand verlängert, Register ab 26 % der Höhe, der Kasten
+     *    läuft unten aus dem Bild. Mit 40 % bleiben die oberen Register
+     *    auch bei 2560 px ganz, unten fällt dort nur Kasten weg.
      *  - Fristen: Sanduhr vor Aktenstapel (KEV-152). Rechts um Wand
      *    verlängert, Sanduhr zwischen 18 und 86 % der Höhe; 65 %.
      *  - Wissen: Bücherstapel und aufgeschlagenes Buch (KEV-143, Bild von
@@ -285,6 +292,7 @@ class Titelbilder
         self::ORDNER.'/wall-of-shame.webp' => 45,
         self::ORDNER.'/wort-fuer-wort.webp' => 80,
         self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
+        self::ORDNER.'/sozialrecht-und-hilfesystem.webp' => 40,
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,

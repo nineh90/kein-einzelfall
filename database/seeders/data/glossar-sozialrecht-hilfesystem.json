@@ -1,0 +1,497 @@
+[
+  {
+    "slug": "ansprechstelle",
+    "begriff": "Ansprechstelle",
+    "erklaerung": "Eine Stelle, an die Du Dich mit Fragen zu bestimmten Sozialleistungen oder Unterstützungsangeboten wenden kannst. Welche Stelle zuständig ist, hängt vom jeweiligen Hilfesystem ab."
+  },
+  {
+    "slug": "anspruch-sozialrecht",
+    "begriff": "Anspruch",
+    "erklaerung": "Ein Anspruch bedeutet, dass Dir eine bestimmte Leistung oder ein bestimmtes Recht zustehen kann, wenn die gesetzlichen Voraussetzungen erfüllt sind."
+  },
+  {
+    "slug": "antrag-sozialrecht",
+    "begriff": "Antrag",
+    "erklaerung": "Mit einem Antrag bittest Du einen Leistungsträger oder eine Behörde offiziell darum, über eine bestimmte Leistung oder Unterstützung zu entscheiden."
+  },
+  {
+    "slug": "assistenzleistungen",
+    "begriff": "Assistenzleistungen",
+    "erklaerung": "Leistungen, die Menschen mit Behinderungen bei einer selbstbestimmten Gestaltung ihres Alltags und ihrer Teilhabe unterstützen können. Art und Umfang richten sich nach dem individuellen Bedarf und der jeweiligen Rechtsgrundlage."
+  },
+  {
+    "slug": "auskunft-sozialrecht",
+    "begriff": "Auskunft",
+    "erklaerung": "Sozialleistungsträger und bestimmte weitere Stellen müssen im Rahmen ihrer Zuständigkeit Auskunft über soziale Rechte, zuständige Leistungsträger und für die Anfrage relevante Sach- und Rechtsfragen geben."
+  },
+  {
+    "slug": "barrierefreiheit",
+    "begriff": "Barrierefreiheit",
+    "erklaerung": "Gebäude, Informationen, Kommunikation, digitale Angebote und Leistungen sollen möglichst so zugänglich sein, dass Menschen mit Behinderungen sie ohne zusätzliche Hindernisse nutzen können."
+  },
+  {
+    "slug": "bedarf-sozialrecht",
+    "begriff": "Bedarf",
+    "erklaerung": "Damit wird beschrieben, welche Unterstützung oder Leistung eine Person aufgrund ihrer individuellen Situation benötigt."
+  },
+  {
+    "slug": "bedarfsermittlung",
+    "begriff": "Bedarfsermittlung",
+    "erklaerung": "In einem geregelten Verfahren wird festgestellt, welche Unterstützung und welche Leistungen im konkreten Einzelfall benötigt werden."
+  },
+  {
+    "slug": "behinderung",
+    "begriff": "Behinderung",
+    "erklaerung": "Nach dem SGB IX können Menschen als behindert gelten, wenn körperliche, seelische, geistige oder Sinnesbeeinträchtigungen in Wechselwirkung mit Barrieren ihre gleichberechtigte Teilhabe an der Gesellschaft voraussichtlich länger als sechs Monate beeinträchtigen können."
+  },
+  {
+    "slug": "beratung",
+    "begriff": "Beratung",
+    "erklaerung": "Sozialleistungsträger haben in ihrem jeweiligen Zuständigkeitsbereich Beratungsaufgaben. Welche Beratung angeboten werden muss, richtet sich nach dem jeweiligen Sozialleistungssystem."
+  },
+  {
+    "slug": "besondere-leistungen-im-einzelfall",
+    "begriff": "Besondere Leistungen im Einzelfall",
+    "erklaerung": "Eine Leistungsgruppe des Sozialen Entschädigungsrechts. Ob und welche Leistungen im konkreten Fall möglich sind, richtet sich nach den gesetzlichen Voraussetzungen des SGB XIV."
+  },
+  {
+    "slug": "dienstleistung",
+    "begriff": "Dienstleistung",
+    "erklaerung": "Sozialleistungen können als Dienst-, Sach- oder Geldleistungen erbracht werden. Zu Dienstleistungen gehören zum Beispiel auch persönliche Hilfen und Beratung."
+  },
+  {
+    "slug": "eingliederungshilfe",
+    "begriff": "Eingliederungshilfe",
+    "erklaerung": "Leistungen für bestimmte Menschen mit Behinderungen, die eine möglichst selbstbestimmte Lebensführung sowie eine volle, wirksame und gleichberechtigte Teilhabe am Leben in der Gesellschaft ermöglichen oder fördern sollen."
+  },
+  {
+    "slug": "eingliederungshilfetraeger",
+    "begriff": "Eingliederungshilfeträger",
+    "erklaerung": "Die zuständige Stelle für Leistungen der Eingliederungshilfe. Welche Behörde oder welcher Träger zuständig ist, richtet sich nach dem jeweiligen Landesrecht."
+  },
+  {
+    "slug": "entlastungsbetrag",
+    "begriff": "Entlastungsbetrag",
+    "erklaerung": "Eine Leistung der Pflegeversicherung für gesetzlich vorgesehene Unterstützungsangebote im Alltag. Voraussetzungen und Verwendungsmöglichkeiten richten sich nach dem SGB XI."
+  },
+  {
+    "slug": "ergaenzende-unabhaengige-teilhabeberatung-eutb",
+    "begriff": "Ergänzende unabhängige Teilhabeberatung – EUTB",
+    "erklaerung": "Ein von Leistungsträgern und Leistungserbringern unabhängiges Beratungsangebot für Menschen mit Behinderungen und von Behinderung bedrohte Menschen zu Rehabilitation und Teilhabe. Die Beratung kann bereits vor der Beantragung konkreter Leistungen genutzt werden."
+  },
+  {
+    "slug": "erwerbsfaehigkeit",
+    "begriff": "Erwerbsfähigkeit",
+    "erklaerung": "Ein sozialrechtlicher Begriff dafür, ob und in welchem Umfang eine Person unter den jeweiligen gesetzlichen Voraussetzungen arbeiten kann. Die genaue Bedeutung hängt vom jeweiligen Leistungssystem ab."
+  },
+  {
+    "slug": "erwerbsminderung",
+    "begriff": "Erwerbsminderung",
+    "erklaerung": "Ein rechtlicher Begriff insbesondere aus der gesetzlichen Rentenversicherung. Ob eine teilweise oder volle Erwerbsminderung vorliegt, richtet sich nach den gesetzlichen Voraussetzungen und wird vom zuständigen Rentenversicherungsträger festgestellt."
+  },
+  {
+    "slug": "fallmanagement",
+    "begriff": "Fallmanagement",
+    "erklaerung": "Im Sozialen Entschädigungsrecht können Berechtigte durch eine Fallmanagerin oder einen Fallmanager aktivierend und koordinierend durch das Antrags- und Leistungsverfahren begleitet werden."
+  },
+  {
+    "slug": "feststellungsverfahren",
+    "begriff": "Feststellungsverfahren",
+    "erklaerung": "Ein Verfahren, in dem eine Behörde verbindlich feststellt, ob bestimmte gesetzliche Voraussetzungen vorliegen, zum Beispiel ein Grad der Behinderung."
+  },
+  {
+    "slug": "gdb-grad-der-behinderung",
+    "begriff": "GdB – Grad der Behinderung",
+    "erklaerung": "Der GdB beschreibt die Auswirkungen von Gesundheitsstörungen auf die Teilhabe am Leben in der Gesellschaft. Er wird in Zehnergraden festgestellt. Ein bestimmter GdB sagt nicht automatisch etwas über Pflegebedürftigkeit oder Erwerbsfähigkeit aus."
+  },
+  {
+    "slug": "gds-grad-der-schaedigungsfolgen",
+    "begriff": "GdS – Grad der Schädigungsfolgen",
+    "erklaerung": "Der GdS wird im Sozialen Entschädigungsrecht verwendet. Er beschreibt die Auswirkungen der anerkannten Schädigungsfolgen auf alle Lebensbereiche und wird in Zehnergraden bemessen."
+  },
+  {
+    "slug": "geldleistung",
+    "begriff": "Geldleistung",
+    "erklaerung": "Eine Sozialleistung, die als Geldbetrag ausgezahlt wird, zum Beispiel Pflegegeld. Welche Voraussetzungen gelten, hängt von der jeweiligen Leistung ab."
+  },
+  {
+    "slug": "gesamtplan",
+    "begriff": "Gesamtplan",
+    "erklaerung": "Im Bereich der Eingliederungshilfe wird ein Gesamtplan erstellt. Er dient dazu, den individuellen Teilhabeprozess, die erforderlichen Leistungen und deren Ziele zu dokumentieren, zu steuern und zu überprüfen."
+  },
+  {
+    "slug": "gesamtplankonferenz",
+    "begriff": "Gesamtplankonferenz",
+    "erklaerung": "Im Gesamtplanverfahren können die benötigten Leistungen gemeinsam mit der leistungsberechtigten Person und den beteiligten Stellen besprochen und abgestimmt werden."
+  },
+  {
+    "slug": "gesamtplanverfahren",
+    "begriff": "Gesamtplanverfahren",
+    "erklaerung": "Das Verfahren der Eingliederungshilfe zur Ermittlung und Planung des individuellen Unterstützungsbedarfs. Die leistungsberechtigte Person ist in die Verfahrensschritte einzubeziehen."
+  },
+  {
+    "slug": "gleichstellung",
+    "begriff": "Gleichstellung",
+    "erklaerung": "Menschen mit einem GdB von mindestens 30, aber weniger als 50 können unter bestimmten Voraussetzungen schwerbehinderten Menschen im Arbeitsleben gleichgestellt werden."
+  },
+  {
+    "slug": "grundsicherung-im-alter-und-bei-erwerbsminderung",
+    "begriff": "Grundsicherung im Alter und bei Erwerbsminderung",
+    "erklaerung": "Eine Leistung der Sozialhilfe für Menschen, die unter anderem wegen Alters oder dauerhafter voller Erwerbsminderung ihren notwendigen Lebensunterhalt nicht ausreichend aus eigenen Mitteln sichern können und die gesetzlichen Voraussetzungen erfüllen."
+  },
+  {
+    "slug": "haeusliche-pflege",
+    "begriff": "Häusliche Pflege",
+    "erklaerung": "Pflege und Unterstützung, die im häuslichen Umfeld erbracht wird. Dafür können je nach Pflegegrad und Situation unterschiedliche Leistungen der Pflegeversicherung infrage kommen."
+  },
+  {
+    "slug": "hilfe-in-anderen-lebenslagen",
+    "begriff": "Hilfe in anderen Lebenslagen",
+    "erklaerung": "Eine Gruppe von Leistungen der Sozialhilfe für besondere Lebenssituationen. Welche Hilfe möglich ist, hängt von der jeweiligen gesetzlichen Regelung ab."
+  },
+  {
+    "slug": "hilfe-zur-pflege",
+    "begriff": "Hilfe zur Pflege",
+    "erklaerung": "Eine Leistung der Sozialhilfe für pflegebedürftige Menschen, wenn die gesetzlichen Voraussetzungen erfüllt sind und notwendige Pflege nicht ausreichend durch andere Leistungen oder eigene Mittel gedeckt werden kann."
+  },
+  {
+    "slug": "hilfe-zur-ueberwindung-besonderer-sozialer-schwierigkeiten",
+    "begriff": "Hilfe zur Überwindung besonderer sozialer Schwierigkeiten",
+    "erklaerung": "Eine Leistung der Sozialhilfe für Menschen, bei denen besondere Lebensverhältnisse mit sozialen Schwierigkeiten verbunden sind und die aus eigener Kraft nicht überwunden werden können."
+  },
+  {
+    "slug": "hilfe-zum-lebensunterhalt",
+    "begriff": "Hilfe zum Lebensunterhalt",
+    "erklaerung": "Eine Leistung der Sozialhilfe für Menschen, die ihren notwendigen Lebensunterhalt nicht ausreichend aus eigenen Mitteln oder vorrangigen Leistungen decken können und die gesetzlichen Voraussetzungen erfüllen."
+  },
+  {
+    "slug": "hilfen-zur-gesundheit",
+    "begriff": "Hilfen zur Gesundheit",
+    "erklaerung": "Leistungen der Sozialhilfe für gesundheitliche Versorgung in bestimmten Fällen, wenn die gesetzlichen Voraussetzungen erfüllt sind."
+  },
+  {
+    "slug": "hilfesystem",
+    "begriff": "Hilfesystem",
+    "erklaerung": "Damit ist kein einzelnes Gesetz gemeint. Der Begriff beschreibt das Zusammenspiel verschiedener Stellen und Leistungssysteme, zum Beispiel Krankenversicherung, Pflegeversicherung, Sozialhilfe, Eingliederungshilfe, Rehabilitation, Jugendhilfe und Soziale Entschädigung."
+  },
+  {
+    "slug": "hilfsmittel",
+    "begriff": "Hilfsmittel",
+    "erklaerung": "Gegenstände oder technische Hilfen, die gesundheitliche Einschränkungen ausgleichen, Behandlung unterstützen oder Teilhabe ermöglichen können. Welcher Leistungsträger zuständig ist, hängt vom jeweiligen Bedarf und der Rechtsgrundlage ab."
+  },
+  {
+    "slug": "individueller-bedarf",
+    "begriff": "Individueller Bedarf",
+    "erklaerung": "Leistungen sollen sich an der persönlichen Situation und dem tatsächlich bestehenden Unterstützungsbedarf orientieren und nicht allein an einer Diagnose."
+  },
+  {
+    "slug": "inklusion",
+    "begriff": "Inklusion",
+    "erklaerung": "Inklusion beschreibt das Ziel, dass Menschen mit und ohne Behinderungen gleichberechtigt und möglichst ohne Barrieren am gesellschaftlichen Leben teilhaben können."
+  },
+  {
+    "slug": "krankenbehandlung",
+    "begriff": "Krankenbehandlung",
+    "erklaerung": "Leistungen zur medizinischen Versorgung. Welche Leistungen übernommen werden und welcher Träger zuständig ist, richtet sich nach dem jeweiligen Leistungssystem."
+  },
+  {
+    "slug": "krankenkasse",
+    "begriff": "Krankenkasse",
+    "erklaerung": "Träger der gesetzlichen Krankenversicherung. Sie ist unter anderem für gesetzlich vorgesehene Leistungen zur Krankenbehandlung und bestimmte Rehabilitationsleistungen zuständig."
+  },
+  {
+    "slug": "kurzzeitpflege",
+    "begriff": "Kurzzeitpflege",
+    "erklaerung": "Eine zeitlich begrenzte vollstationäre Pflege, wenn die häusliche Pflege vorübergehend nicht oder noch nicht ausreichend möglich ist und die gesetzlichen Voraussetzungen erfüllt sind."
+  },
+  {
+    "slug": "leistungsberechtigte-person",
+    "begriff": "Leistungsberechtigte Person",
+    "erklaerung": "Eine Person, die die gesetzlichen Voraussetzungen für eine bestimmte Sozialleistung erfüllt."
+  },
+  {
+    "slug": "leistungserbringer",
+    "begriff": "Leistungserbringer",
+    "erklaerung": "Eine Person, Einrichtung oder ein Dienst, der eine bewilligte Leistung tatsächlich ausführt, zum Beispiel ein Pflegedienst oder Assistenzdienst. Leistungserbringer und Leistungsträger sind nicht dasselbe."
+  },
+  {
+    "slug": "leistungsgruppe",
+    "begriff": "Leistungsgruppe",
+    "erklaerung": "Das SGB IX unterscheidet verschiedene Gruppen von Teilhabeleistungen, zum Beispiel medizinische Rehabilitation, Teilhabe am Arbeitsleben, Teilhabe an Bildung und Soziale Teilhabe."
+  },
+  {
+    "slug": "leistungstraeger",
+    "begriff": "Leistungsträger",
+    "erklaerung": "Körperschaften, Anstalten oder Behörden, die für bestimmte Sozialleistungen zuständig sind. Welche Stelle zuständig ist, ergibt sich aus dem jeweiligen Leistungsgesetz."
+  },
+  {
+    "slug": "leistungen-bei-pflegebeduerftigkeit",
+    "begriff": "Leistungen bei Pflegebedürftigkeit",
+    "erklaerung": "Leistungen können je nach Leistungssystem und individuellen Voraussetzungen erbracht werden, wenn Pflegebedürftigkeit vorliegt."
+  },
+  {
+    "slug": "leistungen-der-sozialen-entschaedigung",
+    "begriff": "Leistungen der Sozialen Entschädigung",
+    "erklaerung": "Das SGB XIV sieht unterschiedliche Leistungsbereiche vor, darunter Schnelle Hilfen, Krankenbehandlung, Teilhabe, Leistungen bei Pflegebedürftigkeit und Entschädigungszahlungen."
+  },
+  {
+    "slug": "leistungen-zur-medizinischen-rehabilitation",
+    "begriff": "Leistungen zur medizinischen Rehabilitation",
+    "erklaerung": "Leistungen, die gesundheitliche Beeinträchtigungen vermeiden, vermindern, ausgleichen oder deren Verschlimmerung verhindern und Teilhabe unterstützen sollen."
+  },
+  {
+    "slug": "leistungen-zur-sozialen-teilhabe",
+    "begriff": "Leistungen zur Sozialen Teilhabe",
+    "erklaerung": "Leistungen, die eine möglichst selbstbestimmte und gleichberechtigte Teilhabe am Leben in der Gemeinschaft ermöglichen oder erleichtern sollen."
+  },
+  {
+    "slug": "leistungen-zur-teilhabe",
+    "begriff": "Leistungen zur Teilhabe",
+    "erklaerung": "Leistungen, die Rehabilitation, Selbstbestimmung und Teilhabe fördern sollen. Welche Leistungen möglich sind, hängt vom individuellen Bedarf und dem zuständigen Rehabilitationsträger ab."
+  },
+  {
+    "slug": "leistungen-zur-teilhabe-am-arbeitsleben",
+    "begriff": "Leistungen zur Teilhabe am Arbeitsleben",
+    "erklaerung": "Leistungen, die dabei unterstützen sollen, eine Beschäftigung aufzunehmen, auszuüben oder zu erhalten."
+  },
+  {
+    "slug": "leistungen-zur-teilhabe-an-bildung",
+    "begriff": "Leistungen zur Teilhabe an Bildung",
+    "erklaerung": "Leistungen, die unter den gesetzlichen Voraussetzungen eine gleichberechtigte Teilnahme an Bildung ermöglichen oder unterstützen können."
+  },
+  {
+    "slug": "medizinischer-dienst-md",
+    "begriff": "Medizinischer Dienst – MD",
+    "erklaerung": "Der Medizinische Dienst unterstützt die gesetzlichen Kranken- und Pflegekassen in gesetzlich vorgesehenen Fällen durch medizinische und pflegefachliche Gutachten oder Stellungnahmen. Über die Leistung entscheidet grundsätzlich der zuständige Leistungsträger."
+  },
+  {
+    "slug": "mehrbedarf",
+    "begriff": "Mehrbedarf",
+    "erklaerung": "In bestimmten Sozialleistungssystemen kann zusätzlich zum regulären Bedarf ein gesetzlich geregelter zusätzlicher Bedarf berücksichtigt werden."
+  },
+  {
+    "slug": "merkzeichen",
+    "begriff": "Merkzeichen",
+    "erklaerung": "Bestimmte Merkzeichen können in einem Schwerbehindertenausweis eingetragen werden, wenn die jeweiligen gesetzlichen Voraussetzungen erfüllt sind. Sie können mit bestimmten Nachteilsausgleichen verbunden sein."
+  },
+  {
+    "slug": "nachrang-nachrangigkeit",
+    "begriff": "Nachrang / Nachrangigkeit",
+    "erklaerung": "Manche Sozialleistungen kommen grundsätzlich erst in Betracht, wenn keine vorrangige Leistung eines anderen Trägers greift. Welche Regel gilt, hängt vom jeweiligen Leistungssystem ab."
+  },
+  {
+    "slug": "nachteilsausgleich",
+    "begriff": "Nachteilsausgleich",
+    "erklaerung": "Gesetzlich vorgesehene Vergünstigungen oder Erleichterungen können bestimmte Nachteile aufgrund einer Behinderung ausgleichen. Welche Nachteilsausgleiche gelten, hängt von den jeweiligen Voraussetzungen ab."
+  },
+  {
+    "slug": "persoenliches-budget-sozialrecht",
+    "begriff": "Persönliches Budget",
+    "erklaerung": "Auf Antrag können bestimmte Teilhabeleistungen als Persönliches Budget ausgeführt werden. Ziel ist, Leistungsberechtigten mehr eigene Verantwortung und eine möglichst selbstbestimmte Organisation ihrer Unterstützung zu ermöglichen. Das Persönliche Budget ist keine zusätzliche Leistung, sondern eine Form der Leistungserbringung."
+  },
+  {
+    "slug": "pflegeberatung",
+    "begriff": "Pflegeberatung",
+    "erklaerung": "Anspruchsberechtigte können individuelle Beratung und Unterstützung bei der Auswahl und Nutzung von Pflegeleistungen und weiteren Hilfsangeboten erhalten."
+  },
+  {
+    "slug": "pflegebeduerftigkeit",
+    "begriff": "Pflegebedürftigkeit",
+    "erklaerung": "Pflegebedürftig im Sinne der Pflegeversicherung sind Menschen, die gesundheitlich bedingte Beeinträchtigungen ihrer Selbstständigkeit oder Fähigkeiten haben, deshalb Hilfe benötigen und deren Pflegebedürftigkeit voraussichtlich mindestens sechs Monate besteht."
+  },
+  {
+    "slug": "pflegebegutachtung",
+    "begriff": "Pflegebegutachtung",
+    "erklaerung": "In einer Begutachtung wird geprüft, ob Pflegebedürftigkeit im Sinne der Pflegeversicherung vorliegt und welcher Pflegegrad gegebenenfalls festgestellt werden kann."
+  },
+  {
+    "slug": "pflegegeld",
+    "begriff": "Pflegegeld",
+    "erklaerung": "Eine Geldleistung, die unter den gesetzlichen Voraussetzungen bei häuslicher Pflege gezahlt werden kann."
+  },
+  {
+    "slug": "pflegegrad-sozialrecht",
+    "begriff": "Pflegegrad",
+    "erklaerung": "Der Pflegegrad beschreibt die Schwere der Beeinträchtigungen der Selbstständigkeit oder Fähigkeiten. Die Pflegeversicherung unterscheidet fünf Pflegegrade."
+  },
+  {
+    "slug": "pflegehilfsmittel",
+    "begriff": "Pflegehilfsmittel",
+    "erklaerung": "Hilfsmittel, die Pflege erleichtern, Beschwerden lindern oder eine selbstständigere Lebensführung ermöglichen können."
+  },
+  {
+    "slug": "pflegekasse",
+    "begriff": "Pflegekasse",
+    "erklaerung": "Träger der sozialen Pflegeversicherung. Die Pflegekasse ist bei der jeweiligen gesetzlichen Krankenkasse eingerichtet."
+  },
+  {
+    "slug": "pflegeperson",
+    "begriff": "Pflegeperson",
+    "erklaerung": "Im Sinne der Pflegeversicherung ist eine Pflegeperson eine Person, die einen pflegebedürftigen Menschen nicht erwerbsmäßig in seiner häuslichen Umgebung pflegt. Für einzelne sozialversicherungsrechtliche Ansprüche gelten zusätzliche Voraussetzungen."
+  },
+  {
+    "slug": "pflegesachleistung",
+    "begriff": "Pflegesachleistung",
+    "erklaerung": "Eine Leistung, bei der zugelassene professionelle Pflege- oder Betreuungsdienste Leistungen erbringen und mit der Pflegekasse abrechnen."
+  },
+  {
+    "slug": "pflegestuetzpunkt",
+    "begriff": "Pflegestützpunkt",
+    "erklaerung": "Eine örtliche Beratungsstelle, die – soweit entsprechende Strukturen bestehen – Informationen und Unterstützung rund um Pflege und weitere Hilfen bündeln kann."
+  },
+  {
+    "slug": "rehabilitation",
+    "begriff": "Rehabilitation",
+    "erklaerung": "Leistungen und Maßnahmen, die gesundheitliche Einschränkungen vermeiden, vermindern oder ausgleichen und Teilhabe ermöglichen oder erhalten sollen."
+  },
+  {
+    "slug": "rehabilitationsbedarf",
+    "begriff": "Rehabilitationsbedarf",
+    "erklaerung": "Damit wird beschrieben, ob und welche Rehabilitationsleistungen erforderlich sein können."
+  },
+  {
+    "slug": "rehabilitationstraeger",
+    "begriff": "Rehabilitationsträger",
+    "erklaerung": "Die im SGB IX genannten Stellen, die je nach Leistungsart für Rehabilitation und Teilhabe zuständig sein können, zum Beispiel Krankenkassen, Rentenversicherung, Unfallversicherung, Bundesagentur für Arbeit, Eingliederungshilfe oder Träger der Sozialen Entschädigung."
+  },
+  {
+    "slug": "sachleistung",
+    "begriff": "Sachleistung",
+    "erklaerung": "Eine Sozialleistung, bei der nicht Geld ausgezahlt wird, sondern eine konkrete Leistung oder Versorgung bereitgestellt wird."
+  },
+  {
+    "slug": "schwerbehindert",
+    "begriff": "Schwerbehindert",
+    "erklaerung": "Schwerbehindert im Sinne des SGB IX sind Menschen mit einem festgestellten GdB von mindestens 50, wenn die gesetzlichen Voraussetzungen erfüllt sind."
+  },
+  {
+    "slug": "schwerbehindertenausweis",
+    "begriff": "Schwerbehindertenausweis",
+    "erklaerung": "Ein Ausweis, mit dem die Eigenschaft als schwerbehinderter Mensch und gegebenenfalls bestimmte Merkzeichen nachgewiesen werden können."
+  },
+  {
+    "slug": "selbstbestimmung",
+    "begriff": "Selbstbestimmung",
+    "erklaerung": "Ein wichtiges Ziel des Rehabilitations- und Teilhaberechts ist, Menschen möglichst viel Raum für eigene Entscheidungen und die eigenverantwortliche Gestaltung ihrer Lebensumstände zu geben."
+  },
+  {
+    "slug": "schnelle-hilfen",
+    "begriff": "Schnelle Hilfen",
+    "erklaerung": "Im Sozialen Entschädigungsrecht gehören dazu Leistungen des Fallmanagements und Leistungen in einer Traumaambulanz."
+  },
+  {
+    "slug": "soziale-entschaedigung",
+    "begriff": "Soziale Entschädigung",
+    "erklaerung": "Das Soziale Entschädigungsrecht unterstützt Menschen, die durch bestimmte gesetzlich erfasste schädigende Ereignisse gesundheitliche Schäden erlitten haben, bei der Bewältigung der Folgen."
+  },
+  {
+    "slug": "soziale-teilhabe",
+    "begriff": "Soziale Teilhabe",
+    "erklaerung": "Damit ist die gleichberechtigte Beteiligung am Leben in der Gemeinschaft gemeint. Leistungen zur Sozialen Teilhabe können diese ermöglichen oder erleichtern."
+  },
+  {
+    "slug": "sozialhilfe",
+    "begriff": "Sozialhilfe",
+    "erklaerung": "Die Sozialhilfe nach dem SGB XII umfasst verschiedene Hilfen für Menschen, die die jeweiligen gesetzlichen Voraussetzungen erfüllen, zum Beispiel Hilfe zum Lebensunterhalt, Grundsicherung, Hilfen zur Gesundheit und Hilfe zur Pflege."
+  },
+  {
+    "slug": "sozialleistung",
+    "begriff": "Sozialleistung",
+    "erklaerung": "Eine im Sozialgesetzbuch vorgesehene Dienst-, Sach- oder Geldleistung. Auch persönliche und erzieherische Hilfen können Dienstleistungen sein."
+  },
+  {
+    "slug": "tagespflege-und-nachtpflege",
+    "begriff": "Tagespflege und Nachtpflege",
+    "erklaerung": "Formen der teilstationären Pflege. Pflegebedürftige Menschen werden für einen Teil des Tages oder der Nacht in einer Einrichtung versorgt und leben ansonsten weiterhin im häuslichen Umfeld."
+  },
+  {
+    "slug": "teilhabe",
+    "begriff": "Teilhabe",
+    "erklaerung": "Teilhabe bedeutet, möglichst selbstbestimmt und gleichberechtigt an unterschiedlichen Bereichen des gesellschaftlichen Lebens beteiligt sein zu können."
+  },
+  {
+    "slug": "teilhabe-am-arbeitsleben",
+    "begriff": "Teilhabe am Arbeitsleben",
+    "erklaerung": "Damit ist die Beteiligung am Erwerbsleben gemeint. Leistungen können dazu dienen, Beschäftigung zu ermöglichen, zu erhalten oder wiederherzustellen."
+  },
+  {
+    "slug": "teilhabe-an-bildung",
+    "begriff": "Teilhabe an Bildung",
+    "erklaerung": "Damit ist die gleichberechtigte Beteiligung an Bildung gemeint. Leistungen können notwendig sein, damit Menschen mit Behinderungen daran teilnehmen können."
+  },
+  {
+    "slug": "teilhabeplan",
+    "begriff": "Teilhabeplan",
+    "erklaerung": "Wenn mehrere Leistungsgruppen oder Rehabilitationsträger beteiligt sind, werden die erforderlichen Leistungen unter bestimmten Voraussetzungen in einem Teilhabeplan koordiniert und dokumentiert."
+  },
+  {
+    "slug": "teilhabeplankonferenz",
+    "begriff": "Teilhabeplankonferenz",
+    "erklaerung": "Mit Zustimmung der leistungsberechtigten Person können die beteiligten Stellen gemeinsam über den Rehabilitationsbedarf und die erforderlichen Leistungen beraten."
+  },
+  {
+    "slug": "teilhabeplanverfahren",
+    "begriff": "Teilhabeplanverfahren",
+    "erklaerung": "Ein Verfahren, in dem mehrere erforderliche Rehabilitations- oder Teilhabeleistungen miteinander koordiniert werden."
+  },
+  {
+    "slug": "teilhabezielvereinbarung",
+    "begriff": "Teilhabezielvereinbarung",
+    "erklaerung": "Im Bereich der Eingliederungshilfe kann der Träger mit der leistungsberechtigten Person eine Vereinbarung über Ziele des Gesamtplans oder Teile davon abschließen."
+  },
+  {
+    "slug": "traumaambulanz",
+    "begriff": "Traumaambulanz",
+    "erklaerung": "Im Sozialen Entschädigungsrecht können berechtigte Personen unter den gesetzlichen Voraussetzungen psychotherapeutische Intervention in einer dafür vereinbarten Traumaambulanz erhalten."
+  },
+  {
+    "slug": "traeger-der-eingliederungshilfe",
+    "begriff": "Träger der Eingliederungshilfe",
+    "erklaerung": "Die nach Landesrecht zuständige Stelle für Leistungen der Eingliederungshilfe."
+  },
+  {
+    "slug": "traeger-der-sozialen-entschaedigung",
+    "begriff": "Träger der Sozialen Entschädigung",
+    "erklaerung": "Die nach Landesrecht zuständige Stelle für Leistungen nach dem SGB XIV."
+  },
+  {
+    "slug": "verhinderungspflege",
+    "begriff": "Verhinderungspflege",
+    "erklaerung": "Eine Pflegeleistung für bestimmte Situationen, in denen die private Pflegeperson vorübergehend verhindert ist. Voraussetzungen und Umfang richten sich nach dem geltenden Pflegeversicherungsrecht."
+  },
+  {
+    "slug": "vollstationaere-pflege",
+    "begriff": "Vollstationäre Pflege",
+    "erklaerung": "Pflege und Versorgung in einer vollstationären Pflegeeinrichtung. Welche Leistungen die Pflegeversicherung übernimmt, richtet sich unter anderem nach dem Pflegegrad und den gesetzlichen Voraussetzungen."
+  },
+  {
+    "slug": "vorrangige-leistung",
+    "begriff": "Vorrangige Leistung",
+    "erklaerung": "Eine Leistung, die aufgrund gesetzlicher Zuständigkeiten vor einer anderen Leistung in Betracht kommt."
+  },
+  {
+    "slug": "wohnumfeldverbessernde-massnahmen",
+    "begriff": "Wohnumfeldverbessernde Maßnahmen",
+    "erklaerung": "Unter bestimmten Voraussetzungen können Zuschüsse für Maßnahmen gewährt werden, die das häusliche Umfeld so verändern, dass Pflege erleichtert oder eine selbstständigere Lebensführung ermöglicht wird."
+  },
+  {
+    "slug": "wunsch-und-wahlrecht",
+    "begriff": "Wunsch- und Wahlrecht",
+    "erklaerung": "Bei Leistungen zur Teilhabe sollen berechtigte Wünsche der leistungsberechtigten Person berücksichtigt werden. Dabei spielen unter anderem persönliche Lebenssituation und individueller Bedarf eine Rolle. Nicht jeder Wunsch muss automatisch erfüllt werden."
+  },
+  {
+    "slug": "zielvereinbarung-beim-persoenlichen-budget",
+    "begriff": "Zielvereinbarung beim Persönlichen Budget",
+    "erklaerung": "Im Zusammenhang mit dem Persönlichen Budget werden zwischen der leistungsberechtigten Person und dem zuständigen Leistungsträger Vereinbarungen über die Durchführung des Budgets getroffen."
+  },
+  {
+    "slug": "zustaendigkeit-sozialrecht",
+    "begriff": "Zuständigkeit",
+    "erklaerung": "Damit ist gemeint, welcher Leistungsträger oder welche Behörde für eine bestimmte Leistung oder ein bestimmtes Verfahren verantwortlich ist."
+  },
+  {
+    "slug": "zustaendigkeitsklaerung",
+    "begriff": "Zuständigkeitsklärung",
+    "erklaerung": "Bei Leistungen zur Rehabilitation und Teilhabe muss nach Eingang eines Antrags geklärt werden, welcher Rehabilitationsträger für die Bearbeitung verantwortlich ist."
+  }
+]

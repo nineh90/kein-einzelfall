@@ -2568,9 +2568,9 @@ Anführungszeichen, die die Seite setzt; davor „Einfach übersetzt:“.
   „Hier findest Du typische Formulierungen aus …“) und unter ihrem Slug Sätze
   in `database/seeders/data/typische-saetze.json` stehen. Neue Glossar-Seiten
   bekommen ihn beim Anlegen. Hat die Seite schon einen, passiert nichts.
-  Stand: „Behörden & Bescheide“ (47 Sätze); für Gericht & Verfahren,
-  Medizinische Berichte & Gutachten und Sozialrecht & Hilfesystem liegen die
-  Sätze in derselben Datei, die Seiten gibt es noch nicht.
+  Stand: „Behörden & Bescheide“ (47 Sätze), „Sozialrecht & Hilfesystem“
+  (61, KEV-261); für Gericht & Verfahren und Medizinische Berichte &
+  Gutachten liegen die Sätze in derselben Datei, die Seiten gibt es noch nicht.
 - **Sprung:** Das Glossar zeigt unter der Buchstabenleiste „Zu den typischen
   Sätzen“, wenn die Seite den Baustein hat. Sprungziel fest `typische-saetze`.
 - **Englisch:** Übersetzt wird nur `bedeutung` (in `TEXT_FELDER` des
@@ -2590,4 +2590,27 @@ Rückfallwert je Breite. `scroll-mt-24` ist überall entfernt, bei neuen
 Sprungzielen nichts mehr setzen. „Auf dieser Seite“ (inhaltsverzeichnis.js)
 misst den Kopf ebenfalls, statt fest 140 px anzunehmen. Browser-Lauf:
 „Sprungziele unter dem Kopf“ (390, 1024, 1400 px, große Schrift, Verzeichnis).
+
+
+## 43. Sozialrecht & Hilfesystem (KEV-261, 25.10.2026)
+
+Viertes Glossar als eigene Seite `/sozialrecht-und-hilfesystem` unter
+„Wissen“, im Menü nach „Behörden & Bescheide“ (Taddis 6; ihre 4 und 5 kommen
+davor). `SozialrechtUndHilfesystemSeeder` erbt von `GlossarSeite`: Einleitung,
+99 Begriffe (`data/glossar-sozialrecht-hilfesystem.json`), darunter die 61
+typischen Sätze (§ 42).
+
+- **Neu in `GlossarSeite`:** `TEXT_TITEL`, eine grüne Überschrift über der
+  Einleitung (hier aus dem Ticket: „Zwischen Leistungsträgern, Teilhabe und
+  Pflege den Überblick behalten.“).
+- **Unterzeile** unter dem Titel aus dem Ticket, über `Titelbilder::SEITEN`.
+- **Doppelte Begriffe:** Antrag, Anspruch, Auskunft, Bedarf, Persönliches
+  Budget, Pflegegrad und Zuständigkeit gibt es schon in anderen Glossaren.
+  Das Sprungziel muss je Sprache eindeutig sein, hier deshalb
+  `#antrag-sozialrecht` usw.
+- Abkürzungen stehen wie bei Taddi im Begriff („GdB – Grad der Behinderung“),
+  nicht im Feld Abkürzung; so bleibt die Liste ein reines Begriffsverzeichnis
+  wie „Behörden & Bescheide“.
+
+Tests: `SozialrechtUndHilfesystemTest`, Barrierefreiheits-Lauf.
 

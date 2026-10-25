@@ -175,8 +175,12 @@ class GlossarSozialrechtTest extends TestCase
         $glossar = array_filter($ergebnis['treffer'], fn ($t) => $t['art'] === 'glossar');
 
         $this->assertCount(5, $glossar);
-        // Je Glossar-Seite (KEV-155); „Krankenkasse“ steht nur im ersten.
-        $this->assertSame([['titel' => 'Glossar', 'url' => '/glossar', 'anzahl' => 10]], $ergebnis['im_glossar']);
+        // Je Glossar-Seite (KEV-155); seit KEV-261 auch in „Sozialrecht &
+        // Hilfesystem“.
+        $this->assertSame([
+            ['titel' => 'Glossar', 'url' => '/glossar', 'anzahl' => 10],
+            ['titel' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem', 'anzahl' => 3],
+        ], $ergebnis['im_glossar']);
 
         $html = $this->get('/suche?q=Krankenkasse')->getContent();
         $this->assertStringContainsString('href="/glossar?suche=Krankenkasse"', $html);

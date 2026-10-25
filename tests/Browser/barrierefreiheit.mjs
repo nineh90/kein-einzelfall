@@ -82,6 +82,8 @@ const SEITEN = [
     ['Abkürzungen im sexuellen Kontext', '/abkuerzungen-im-sexuellen-kontext'],
     // Zweites Glossar, nur Begriffe mit Erklärung (KEV-155).
     ['Behörden & Bescheide', '/behoerden-und-bescheide'],
+    // Glossar mit grüner Überschrift und typischen Sätzen (KEV-261/262).
+    ['Sozialrecht & Hilfesystem', '/sozialrecht-und-hilfesystem'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
     ['Dokumentenliste', '/atteste'],
     // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).
