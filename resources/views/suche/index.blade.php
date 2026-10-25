@@ -209,6 +209,6 @@
 
     {{-- Die Notfallnummern stehen auf jeder Seite im Fuss; hier bekommen sie ein
          Sprungziel, damit der Krisenhinweis oben darauf zeigen kann. --}}
-    <div id="hilfe-nummern" class="scroll-mt-24"></div>
+    <div id="hilfe-nummern"></div>
 
 @endsection

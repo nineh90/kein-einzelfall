@@ -977,6 +977,50 @@ console.log('\nFristen und Möglichkeiten')
     await link.context().close()
 }
 
+// --- Sprungziele unter dem klebenden Kopf (KEV-262) -------------------------
+
+// Ab 1280 px ist der Kopf zweizeilig (127 px) und wächst mit der Schrift.
+// Ein angesprungener Abschnitt muss darunter beginnen, nicht dahinter.
+console.log('\nSprungziele unter dem Kopf')
+{
+    const unterDemKopf = (s, ziel) => s.evaluate((id) => {
+        const kopf = document.querySelector('header.sticky').getBoundingClientRect().bottom
+        const oben = document.getElementById(id).getBoundingClientRect().top
+        return { kopf: Math.round(kopf), oben: Math.round(oben) }
+    }, ziel)
+    const warten = (s, id) => s.waitForFunction((ziel) => {
+        const oben = document.getElementById(ziel).getBoundingClientRect().top
+        return Math.abs(oben - (window.__vorher ?? -1)) < 1 || ((window.__vorher = oben), false)
+    }, id, { polling: 150, timeout: 5000 }).catch(() => {})
+
+    for (const [breite, gross] of [[390, false], [1024, false], [1400, false], [1400, true]]) {
+        const s = await oeffnen({ breite, pfad: '/behoerden-und-bescheide' })
+        const name = `${breite}px${gross ? ', große Schrift' : ''}`
+
+        if (gross) {
+            await s.locator('button[aria-controls="a11y-panel"]:visible').click()
+            await s.locator('[data-a11y-setzen="schrift"][data-a11y-wert="3"]').click()
+            await s.keyboard.press('Escape')
+        }
+
+        await s.getByRole('link', { name: 'Zu den typischen Sätzen' }).click()
+        await warten(s, 'typische-saetze')
+        const { kopf, oben } = await unterDemKopf(s, 'typische-saetze')
+        pruefe(`${name}: Überschrift sichtbar unter dem Kopf`, oben >= kopf && oben < kopf + 60, `Kopf ${kopf}, Ziel ${oben}`)
+        await s.context().close()
+    }
+
+    // „Auf dieser Seite“: Der angesprungene Abschnitt ist danach markiert.
+    const artikel = await oeffnen({ pfad: '/anuas' })
+    await artikel.locator('[data-verzeichnis] a[href="#abschnitt-projektdokumentation"]').click()
+    await warten(artikel, 'abschnitt-projektdokumentation')
+    const { kopf, oben } = await unterDemKopf(artikel, 'abschnitt-projektdokumentation')
+    pruefe('Verzeichnis: Abschnitt unter dem Kopf', oben >= kopf && oben < kopf + 60, `Kopf ${kopf}, Ziel ${oben}`)
+    pruefe('Verzeichnis: angesprungener Abschnitt markiert',
+        await artikel.locator('[data-verzeichnis] a[href="#abschnitt-projektdokumentation"]').getAttribute('aria-current') === 'true')
+    await artikel.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

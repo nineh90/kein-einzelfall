@@ -23,7 +23,7 @@
 @php $offen = $gruppe->istOffen(); @endphp
 
 <article id="{{ $gruppe->slug }}" @class([
-    'flex h-full scroll-mt-24 flex-col rounded-card border border-line p-5 lg:p-6',
+    'flex h-full flex-col rounded-card border border-line p-5 lg:p-6',
     'bg-card' => $auf !== 'card',
     'bg-cream' => $auf === 'card',
 ])>

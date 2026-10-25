@@ -87,6 +87,16 @@ html {
      Keine feste px-Angabe — sonst ueberschreiben wir die Nutzerpraeferenz. */
   font-size: calc(100% * var(--a11y-font-scale));
   scroll-behavior: smooth;
+  /* Sprungziele (#abschnitt, #typische-saetze …) landen unter dem klebenden
+     Kopf statt dahinter. Vorher hatte jedes Ziel scroll-mt-24 (96 px), der
+     Kopf ist ab 1280 px aber zweizeilig (127 px) und wächst mit der
+     Schriftgröße. --kopfhoehe misst kopfhoehe.js; ohne Skript gilt der
+     Rückfallwert, darunter die Höhe von Handy bis Tablet. */
+  scroll-padding-top: calc(var(--kopfhoehe, 5rem) + 1rem);
+}
+
+@media (min-width: 80rem) {
+  html { scroll-padding-top: calc(var(--kopfhoehe, 8rem) + 1rem); }
 }
 
 body {

@@ -12,7 +12,7 @@
 {{-- id: Sprungziel nach dem Absenden (AnfrageRequest::mitSprungziel), sonst
      stünde man nach einem Fehler oben auf der Seite und sähe ihn nicht. --}}
 <section id="formular-f" @class([
-    'scroll-mt-24 px-4 md:px-8 py-8 lg:px-10 lg:py-12',
+    'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
     'bg-card border-y border-line' => $auf === 'card',
 ]) aria-labelledby="formular-titel">
     <div class="mx-auto max-w-2xl">

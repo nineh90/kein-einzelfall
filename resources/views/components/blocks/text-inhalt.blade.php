@@ -51,10 +51,8 @@
 
     @if ($titel)
         {{-- Kurzer Strich über der Überschrift: markiert den
-             Abschnittsanfang, ohne zusätzliche Linien quer über die Seite.
-             scroll-mt hält die Überschrift beim Anspringen unter dem
-             klebenden Kopfbereich sichtbar. --}}
-        <div @if ($anker) id="{{ $anker }}" @endif class="scroll-mt-24">
+             Abschnittsanfang, ohne zusätzliche Linien quer über die Seite. --}}
+        <div @if ($anker) id="{{ $anker }}" @endif>
             @if ($strich)
                 <span aria-hidden="true" @class(['mb-4 block h-0.5 w-10 rounded-full bg-green-brand', 'mx-auto' => $mittig])></span>
             @endif

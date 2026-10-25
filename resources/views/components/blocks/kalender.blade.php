@@ -52,7 +52,6 @@
 @endphp
 
 <section id="kalender" aria-labelledby="kalender-titel" @class([
-    'scroll-mt-24',
     'px-4 md:px-8 py-8 lg:px-10 lg:py-12' => $rahmen,
     'bg-card border-y border-line' => $rahmen && $auf === 'card',
 ])>

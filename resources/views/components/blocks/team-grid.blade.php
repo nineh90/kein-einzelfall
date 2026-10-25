@@ -56,7 +56,7 @@
                 @foreach ($personen as $person)
                     <li class="flex md:odd:last:col-span-2 md:odd:last:w-[calc(50%-0.625rem)] md:odd:last:justify-self-center">
                         <article id="{{ $person->anker() }}"
-                                 class="flex flex-1 scroll-mt-24 flex-col overflow-hidden rounded-card
+                                 class="flex flex-1 flex-col overflow-hidden rounded-card
                                         border border-line bg-cream">
 
                             {{-- Auf dem Handy steht das Kurzprofil unter Foto und Name

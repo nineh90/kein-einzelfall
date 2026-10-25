@@ -24,9 +24,7 @@
     <div class="mx-auto max-w-6xl">
         <div class="max-w-prose">
             @if ($titel)
-                {{-- scroll-mt hält die Überschrift beim Anspringen unter dem
-                     klebenden Kopfbereich sichtbar. --}}
-                <div @if ($anker) id="{{ $anker }}" @endif class="scroll-mt-24">
+                <div @if ($anker) id="{{ $anker }}" @endif>
                     <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                     <h2 class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">{{ $titel }}</h2>
                 </div>

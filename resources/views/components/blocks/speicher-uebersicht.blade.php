@@ -55,9 +55,9 @@
 
             <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
 
-            {{-- scroll-mt hält die Überschrift beim Anspringen aus dem Fuss
-                 unter dem klebenden Kopfbereich sichtbar. --}}
-            <h2 id="{{ $anker }}" class="mb-4 scroll-mt-24 font-display text-2xl font-medium text-green lg:text-3xl">
+            {{-- Beim Anspringen aus dem Fuss bleibt die Überschrift unter dem
+                 klebenden Kopfbereich sichtbar (scroll-padding in app.css). --}}
+            <h2 id="{{ $anker }}" class="mb-4 font-display text-2xl font-medium text-green lg:text-3xl">
                 {{ $titel ?: __('rahmen.speicher.titel') }}
             </h2>
 

@@ -111,7 +111,7 @@
                              data-glossar-abschnitt @if ($passend[$buchstabe]->isEmpty()) hidden @endif>
 
                         <h2 id="{{ $anker($buchstabe) }}"
-                            class="mb-3 scroll-mt-24 border-b border-line pb-2 font-display text-xl
+                            class="mb-3 border-b border-line pb-2 font-display text-xl
                                    font-medium text-green-deep">
                             {{ $buchstabe }}
                         </h2>
@@ -125,7 +125,7 @@
                                          data-suchtext="{{ $frist->suchtext() }}"
                                          @unless ($trifft) hidden @endunless
                                          @if ($suche !== '' && $trifft) open @endif
-                                         class="group scroll-mt-24 rounded-card border border-line {{ $innen }} open:border-green">
+                                         class="group rounded-card border border-line {{ $innen }} open:border-green">
                                     <summary class="flex cursor-pointer items-start gap-3 px-5 py-4
                                                     marker:content-none [&::-webkit-details-marker]:hidden">
                                         <span class="flex-1">

@@ -13,7 +13,11 @@
  * stimmen.
  */
 
-const OBERKANTE = 140 // klebender Kopf plus etwas Luft, in px
+// Klebender Kopf plus etwas mehr Luft als beim Anspringen (scroll-padding
+// in app.css: Kopf + 16 px), damit ein angesprungener Abschnitt als aktuell
+// gilt. Gemessen, weil der Kopf ab 1280 px zweizeilig ist und mit der
+// Schrift wächst.
+const oberkante = () => (document.querySelector('header.sticky')?.offsetHeight ?? 112) + 24
 
 export function inhaltsverzeichnisVerdrahten() {
     const nav = document.querySelector('[data-verzeichnis]')
@@ -30,9 +34,10 @@ export function inhaltsverzeichnisVerdrahten() {
     const markieren = () => {
         geplant = false
         let aktuell = eintraege[0]
+        const grenze = oberkante()
 
         for (const e of eintraege) {
-            if (e.ziel.getBoundingClientRect().top <= OBERKANTE) aktuell = e
+            if (e.ziel.getBoundingClientRect().top <= grenze) aktuell = e
         }
 
         for (const e of eintraege) {

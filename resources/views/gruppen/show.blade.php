@@ -157,12 +157,11 @@
             <p @class(['max-w-prose font-hand text-2xl leading-snug text-green', 'mt-6' => $loop->first, 'mt-2' => ! $loop->first])>{{ $satz }}</p>
         @endforeach
 
-        {{-- Anmeldung über die Website (KEV-226). scroll-mt: Der Knopf oben
-             springt hierher, die Überschrift bleibt unter dem Kopfbereich
-             sichtbar. --}}
+        {{-- Anmeldung über die Website (KEV-226). Der Knopf oben springt
+             hierher. --}}
         @if ($gruppe->anmeldungMoeglich())
             <section id="anmeldung" aria-labelledby="anmeldung-titel"
-                     class="mt-12 scroll-mt-24 rounded-card border border-line bg-card px-5 py-6 sm:px-8 sm:py-8">
+                     class="mt-12 rounded-card border border-line bg-card px-5 py-6 sm:px-8 sm:py-8">
                 <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 <h2 id="anmeldung-titel" class="mb-3 font-display text-2xl font-medium text-green">
                     {{ __('Anmeldung zu „:gruppe“', ['gruppe' => $gruppe->name]) }}

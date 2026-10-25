@@ -159,10 +159,8 @@
                 <section class="mb-10" aria-labelledby="{{ $anker($buchstabe) }}"
                          data-glossar-abschnitt @if ($passend[$buchstabe]->isEmpty()) hidden @endif>
 
-                    {{-- scroll-mt hält die Überschrift beim Anspringen
-                         unter dem klebenden Kopfbereich sichtbar. --}}
                     <h2 id="{{ $anker($buchstabe) }}"
-                        class="mb-2 scroll-mt-24 border-b border-line pb-2 font-display text-xl
+                        class="mb-2 border-b border-line pb-2 font-display text-xl
                                font-medium text-green-deep">
                         {{ $buchstabe }}
                     </h2>
@@ -178,7 +176,7 @@
                                  data-kuerzel="{{ GlossaryTerm::kompakt((string) $eintrag->kuerzel) }}"
                                  data-suchtext="{{ $eintrag->suchtext() }}"
                                  @unless ($eintrag->passt($suche)) hidden @endunless
-                                 class="grid scroll-mt-24 break-inside-avoid grid-cols-[5.5rem_1fr] gap-x-4 sm:grid-cols-[6.5rem_1fr]
+                                 class="grid break-inside-avoid grid-cols-[5.5rem_1fr] gap-x-4 sm:grid-cols-[6.5rem_1fr]
                                         border-b border-line py-2.5 target:bg-green-mist">
 
                                 @if ($eintrag->kuerzel)

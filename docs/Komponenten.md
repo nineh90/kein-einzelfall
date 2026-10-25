@@ -2581,3 +2581,13 @@ Anführungszeichen, die die Seite setzt; davor „Einfach übersetzt:“.
 
 Tests: `TypischeSaetzeTest`.
 
+**Sprungziele unter dem Kopf (25.10.2026, beim Bau gefunden).** Jedes
+Sprungziel hatte `scroll-mt-24` (96 px). Seit KEV-159 ist der Kopf ab 1280 px
+zweizeilig (127 px), angesprungene Überschriften lagen also halb dahinter.
+Jetzt gilt für die ganze Seite `scroll-padding-top` auf `html` (app.css):
+gemessene Kopfhöhe (`--kopfhoehe`, kopfhoehe.js) plus 1 rem, ohne Skript ein
+Rückfallwert je Breite. `scroll-mt-24` ist überall entfernt, bei neuen
+Sprungzielen nichts mehr setzen. „Auf dieser Seite“ (inhaltsverzeichnis.js)
+misst den Kopf ebenfalls, statt fest 140 px anzunehmen. Browser-Lauf:
+„Sprungziele unter dem Kopf“ (390, 1024, 1400 px, große Schrift, Verzeichnis).
+

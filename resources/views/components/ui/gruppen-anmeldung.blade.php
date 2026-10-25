@@ -30,7 +30,7 @@
     $ergebnis = $meins(session('versendet_von')) ? session('anmeldung_ergebnis') : null;
 @endphp
 
-<div id="formular-{{ $kennung }}" {{ $attributes->class(["scroll-mt-24"]) }}>
+<div id="formular-{{ $kennung }}" {{ $attributes }}>
     <p class="mb-6 text-ink-soft">
         {{ $sofort
             ? __('Melde dich hier an. Den Zugangslink zur Gruppe schicken wir dir direkt danach per E-Mail.')
