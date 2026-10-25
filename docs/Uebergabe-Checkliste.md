@@ -852,6 +852,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     uns etwas mitteilen?“.
 - [x] **Fristen (KEV-252):** grüne Überschrift „Damit aus einer Frist keine
   verpasste Chance wird!“ über der Einleitung, wie gewünscht.
+- [x] **Fristen (KEV-251):** Unterzeile „Fristen verstehen. Möglichkeiten
+  erkennen. Rechtzeitig handeln.“ unter dem Titel, wie gewünscht.
 - [ ] **Klartext statt Fachsprache (KEV-254), bitte ansehen.** Neuer Punkt
   unter „Wissen“ mit Taddis Text, einer Suche über alle sechs Kategorien
   (Begriffe und typische Sätze) und den Kategorien als Kacheln. Im Menü stehen

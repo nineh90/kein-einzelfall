@@ -104,9 +104,9 @@ class Titelbilder
         // KEV-151: Bild von Taddi („4. Formulare“), Formular mit Vereinslogo
         // und Füller. Ohne Unterzeile.
         'formulare' => null,
-        // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten. Ohne
-        // Unterzeile.
-        'fristen' => null,
+        // KEV-152: Bild von Taddi („5. Fristen“), Sanduhr vor Akten.
+        // Unterzeile seit KEV-251 aus dem Ticket.
+        'fristen' => 'Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.',
         // KEV-137: Bild von Taddi, aufgeschlagenes Fotoalbum mit Bildern von
         // Veranstaltungen. Ohne Unterzeile, ihre Einleitung steht darunter.
         'rueckblick' => null,

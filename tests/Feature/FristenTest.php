@@ -24,6 +24,19 @@ class FristenTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** KEV-251: Unterzeile unter dem Titel, auch auf Englisch. */
+    public function test_unterzeile_unter_dem_titel(): void
+    {
+        $this->assertStringContainsString('Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.', $this->get('/fristen')->getContent());
+
+        $seite = \App\Models\Page::where('slug', 'fristen')->where('locale', 'de')->sole();
+        $seite->update(['untertitel' => null]);
+        (require database_path('migrations/2026_10_25_220000_fristen_unterzeile.php'))->up();
+        $this->assertSame('Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.', $seite->fresh()->untertitel);
+        $this->seed(\Database\Seeders\UebersetzungenSeeder::class);
+        $this->assertStringContainsString('Understand deadlines. Recognise your options. Act in time.', $this->get('/en/fristen')->getContent());
+    }
+
     /** KEV-252: grüne Überschrift über der Einleitung, auch nachträglich. */
     public function test_ueberschrift_ueber_der_einleitung(): void
     {
