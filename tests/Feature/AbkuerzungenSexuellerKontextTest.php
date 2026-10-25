@@ -51,6 +51,43 @@ class AbkuerzungenSexuellerKontextTest extends TestCase
     }
 
     /** Bei Taddi steht „TRIGGERWARNUNG“ über der Liste; sie steht vor der Seite. */
+    /** KEV-256: Unterzeile und grüne Überschrift, „noch“ gestrichen. */
+    public function test_unterzeile_ueberschrift_und_korrektur(): void
+    {
+        $html = $this->get('/abkuerzungen-im-sexuellen-kontext')->getContent();
+
+        $this->assertStringContainsString('Kürzel verstehen, benennen und darüber sprechen.', $html);
+        $this->assertMatchesRegularExpression(
+            '/<h2[^>]*text-green[^>]*>\s*Was hinter den Abkürzungen in Sexarbeit und Beratung steckt\s*<\/h2>/u',
+            $html,
+        );
+        $this->assertStringContainsString('dessen Begriffe einem nicht vertraut sind.', $html);
+        $this->assertStringNotContainsString('noch nicht vertraut', $html);
+    }
+
+    /** Bestehende Datenbanken: nur der alte Wortlaut wird ersetzt. */
+    public function test_migration_ersetzt_nur_den_alten_wortlaut(): void
+    {
+        $seite = Page::where('slug', 'abkuerzungen-im-sexuellen-kontext')->where('locale', 'de')->sole();
+        $seite->update(['untertitel' => null]);
+        $einleitung = $seite->blocks()->where('typ', 'text')->sole();
+        $einleitung->update(['data' => ['absaetze' => AbkuerzungenSexuellerKontextSeeder::ABSAETZE_BIS_25_10]]);
+
+        $migration = require database_path('migrations/2026_10_25_180000_abkuerzungen_sexueller_kontext_texte.php');
+        $migration->up();
+
+        $this->assertSame(
+            ['titel' => AbkuerzungenSexuellerKontextSeeder::TEXT_TITEL, 'absaetze' => AbkuerzungenSexuellerKontextSeeder::ABSAETZE],
+            $einleitung->fresh()->data,
+        );
+        $this->assertSame('Kürzel verstehen, benennen und darüber sprechen.', $seite->fresh()->untertitel);
+
+        // Was der Verein geändert hat, bleibt.
+        $einleitung->update(['data' => ['titel' => 'Eigene', 'absaetze' => ['Eigener Text.']]]);
+        $migration->up();
+        $this->assertSame(['titel' => 'Eigene', 'absaetze' => ['Eigener Text.']], $einleitung->fresh()->data);
+    }
+
     public function test_triggerwarnung_vor_der_seite(): void
     {
         $seite = Page::where('slug', 'abkuerzungen-im-sexuellen-kontext')->where('locale', 'de')->firstOrFail();
@@ -120,6 +157,11 @@ class AbkuerzungenSexuellerKontextTest extends TestCase
     public function test_englische_fassung(): void
     {
         $this->seed(UebersetzungenSeeder::class);
+
+        $en = $this->get('/en/abkuerzungen-im-sexuellen-kontext')->getContent();
+        $this->assertStringContainsString('What lies behind the abbreviations in sex work and counselling', $en);
+        $this->assertStringContainsString('Understanding abbreviations, naming them and talking about them.', $en);
+        $this->assertStringContainsString('whose terms are not familiar to you.', $en);
 
         $html = $this->get('/en'.self::ADRESSE)->assertOk()->getContent();
 

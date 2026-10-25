@@ -17,6 +17,10 @@ namespace Database\Seeders;
  *   Glossar schon gibt (BBB, FF, KK, KV), bekommen die Auflösung ins
  *   Sprungziel: /abkuerzungen-im-sexuellen-kontext#ao-alles-ohne.
  * - „KE!N EINZELFALL e. V.“ → „e.V.“ wie überall auf der Website.
+ * - KEV-256: „… dessen Begriffe einem noch nicht vertraut sind“ ohne „noch“
+ *   (gab dem Satz eine andere Bedeutung), dazu Unterzeile und grüne
+ *   Überschrift aus dem Ticket. Bestehende Datenbanken: Migration
+ *   abkuerzungen_sexueller_kontext_texte.
  * - Über der Liste steht bei ihr „TRIGGERWARNUNG“ ohne Text. Die Warnung ist
  *   deshalb von uns, gebaut wie ihre vor „Raum für Ungesagtes“ (KEV-156), und
  *   steht vor der Seite (Feld `triggerwarnung`, App\Support\Bereichswarnung).
@@ -31,7 +35,23 @@ class AbkuerzungenSexuellerKontextSeeder extends GlossarSeite
 
     public const TITEL = 'Abkürzungen im sexuellen Kontext';
 
+    public const TEXT_TITEL = 'Was hinter den Abkürzungen in Sexarbeit und Beratung steckt';
+
     public const ABSAETZE = [
+        'Gerade im Bereich Sexdienstleistungen, Sexualität und BDSM begegnen einem viele Abkürzungen, '
+            .'Szenebegriffe und Bezeichnungen, deren Bedeutung nicht immer sofort verständlich ist.',
+        'Hier haben wir zahlreiche Begriffe gesammelt und kurz erklärt – von Bezeichnungen für Dienstleistungen '
+            .'und Praktiken bis hin zu medizinischen, rechtlichen und szenespezifischen Abkürzungen.',
+        'Uns ist wichtig, dabei nicht zu bewerten, sondern verständlich zu machen, was gemeint ist. Denn Sprache '
+            .'kann Orientierung geben – besonders dann, wenn man sich in einem Umfeld bewegt, dessen Begriffe '
+            .'einem nicht vertraut sind.',
+        'KE!N EINZELFALL e.V. unterstützt Menschen aus der Sexdienstleistungsbranche unabhängig davon, ob ihre '
+            .'Tätigkeit freiwillig und selbstbestimmt ausgeübt wird oder ob Zwang, Ausbeutung, Gewalt oder '
+            .'Abhängigkeiten eine Rolle spielen.',
+    ];
+
+    /** Der Wortlaut vor KEV-256, nur dort ersetzt die Migration. */
+    public const ABSAETZE_BIS_25_10 = [
         'Gerade im Bereich Sexdienstleistungen, Sexualität und BDSM begegnen einem viele Abkürzungen, '
             .'Szenebegriffe und Bezeichnungen, deren Bedeutung nicht immer sofort verständlich ist.',
         'Hier haben wir zahlreiche Begriffe gesammelt und kurz erklärt – von Bezeichnungen für Dienstleistungen '

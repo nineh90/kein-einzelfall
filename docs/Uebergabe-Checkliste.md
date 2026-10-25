@@ -740,12 +740,16 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Inhaltlich** sind es ihre Angaben. Die genannten Paragrafen (§§ 84, 87,
     88, 66, 151, 164, 173 SGG, §§ 25–27, 44 SGB X) passen zu dem, was dort
     steht; eine Rechtsprüfung ersetzt das nicht.
-- [ ] **Abkürzungen im sexuellen Kontext (KEV-154), bitte ansehen.** Drittes
-  Glossar als eigene Seite unter „Wissen“, im Menü zwischen „Glossar“ und
+- [ ] **Abkürzungen im sexuellen Kontext (KEV-154), bitte ansehen.** Seit
+  KEV-256: Triggerwarnung von Taddi bestätigt („genial“), Unterzeile „Kürzel
+  verstehen, benennen und darüber sprechen.“, grüne Überschrift „Was hinter den
+  Abkürzungen in Sexarbeit und Beratung steckt“, „noch“ aus „dessen Begriffe
+  einem noch nicht vertraut sind“ gestrichen.
+  Drittes Glossar als eigene Seite unter „Wissen“, im Menü zwischen „Glossar“ und
   „Behörden & Bescheide“ (Taddis Nummern 1, 2, 3): ihre Einleitung, alle 109
   Abkürzungen und ihr Bild (Buchstabenwürfel) aus dem Drive, rechts um Wand
   verlängert. Pflegen wie die anderen Glossare.
-  - **Triggerwarnung, Text von uns:** Bei Taddi steht über der Liste nur
+  - [x] **Triggerwarnung, Text von uns:** Bei Taddi steht über der Liste nur
     „TRIGGERWARNUNG“. Die Warnung kommt jetzt vor der Seite, gebaut wie die
     vor „Raum für Ungesagtes“ (einmal pro Besuch, weiter / Startseite /
     Notausgang): „Auf dieser Seite werden Abkürzungen und Begriffe aus
@@ -753,8 +757,7 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     beschreiben sexuelle Praktiken sehr direkt. Einzelne Begriffe können an
     sexualisierte Gewalt, Ausbeutung oder andere belastende Erfahrungen
     erinnern. Bitte achte auf dich und entscheide selbst, ob und wann du diese
-    Inhalte lesen möchtest.“ Bitte gegenlesen oder durch ihren Text ersetzen
-    (Seite → Abschnitt „Triggerwarnung für diesen Bereich“).
+    Inhalte lesen möchtest.“ **Von Taddi bestätigt (KEV-256).**
   - **Aufgeteilt:** Jede Zeile in Auflösung (neben der Abkürzung) und
     Erklärung (darunter), am ersten Doppelpunkt, sonst am Semikolon. Bei
     BulRum/RumBul und GF3 steht deshalb die Beschreibung als Auflösung.

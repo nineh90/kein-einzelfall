@@ -111,8 +111,9 @@ class Titelbilder
         // Veranstaltungen. Ohne Unterzeile, ihre Einleitung steht darunter.
         'rueckblick' => null,
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
-        // Buchstabenwürfel. Ohne Unterzeile.
-        'abkuerzungen-im-sexuellen-kontext' => null,
+        // Buchstabenwürfel.
+        // KEV-256: Unterzeile aus dem Ticket.
+        'abkuerzungen-im-sexuellen-kontext' => 'Kürzel verstehen, benennen und darüber sprechen.',
         // KEV-258: Bild von Taddi („Behörden und Bescheide“), Schreiben und
         // Holzstempel, statt Platzhalter. Unterzeile aus dem Ticket.
         'behoerden-und-bescheide' => 'Verstehen, was entschieden wurde',
