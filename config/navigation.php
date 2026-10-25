@@ -76,6 +76,10 @@ return [
             'schluessel' => 'bereich_wissen',
             'label' => 'Wissen',
             'url' => '/wissen',
+            // KEV-246: `vorn` = Taddis Kategorien (Drive „3. Wissen“: Atteste,
+            // Formulare, Fristen, Klartext). „Mehr zu „Wissen““ am Seitenende
+            // zeigt sie vor den Seiten der alten Website, die Reihenfolge im
+            // Menü bleibt.
             'children' => [
                 ['schluessel' => 'das_hilfesystem', 'label' => 'Das Hilfesystem',               'url' => '/das-hilfesystem'],
                 ['schluessel' => 'fsm_erweitertes_hilfesystem', 'label' => 'FSM – Erweitertes Hilfesystem', 'url' => '/fsm-erweitertes-hilfesystem'],
@@ -86,19 +90,19 @@ return [
                 ['schluessel' => 'unterstuetzung', 'label' => 'Unterstützung',                 'url' => '/unterstuetzung'],
                 // KEV-144: ohne Positionsangabe von Taddi, deshalb ans Ende,
                 // aber vor das Glossar, das als Nachschlagewerk zuletzt steht.
-                ['schluessel' => 'atteste', 'label' => 'Atteste',                       'url' => '/atteste'],
+                ['schluessel' => 'atteste', 'label' => 'Atteste',                       'url' => '/atteste', 'vorn' => true],
                 // KEV-150: Taddis „4. Formulare“, zwischen Atteste (1) und
                 // Fristen (5).
-                ['schluessel' => 'formulare', 'label' => 'Formulare', 'url' => '/formulare'],
+                ['schluessel' => 'formulare', 'label' => 'Formulare', 'url' => '/formulare', 'vorn' => true],
                 // KEV-152: Taddis „5. Fristen“, nach Atteste und vor den
                 // Glossaren, die als Nachschlagewerke zuletzt stehen.
-                ['schluessel' => 'fristen', 'label' => 'Fristen und Möglichkeiten', 'url' => '/fristen'],
+                ['schluessel' => 'fristen', 'label' => 'Fristen und Möglichkeiten', 'url' => '/fristen', 'vorn' => true],
                 // KEV-254: Taddis „Klartext statt Fachsprache“ mit ihren
                 // Kategorien 1 bis 6 (die 7, „Typische Sätze“, steckt in 3
                 // bis 6). Nicht im Menü aufgeklappt, sondern als Kacheln auf
                 // der Übersicht, darüber eine Suche über alle Kategorien.
                 // Nachschlagewerk, deshalb zuletzt.
-                ['schluessel' => 'klartext_statt_fachsprache', 'label' => 'Klartext statt Fachsprache', 'url' => '/klartext-statt-fachsprache', 'children' => [
+                ['schluessel' => 'klartext_statt_fachsprache', 'label' => 'Klartext statt Fachsprache', 'url' => '/klartext-statt-fachsprache', 'vorn' => true, 'children' => [
                     // KEV-153, seit KEV-254 mit Taddis Namen
                     ['schluessel' => 'glossar', 'label' => 'Abkürzungen im Sozialrecht', 'url' => '/glossar'],
                     // KEV-154

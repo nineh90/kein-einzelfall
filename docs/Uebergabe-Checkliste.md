@@ -887,6 +887,13 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     uns etwas mitteilen?“.
 - [x] **Fristen (KEV-252):** grüne Überschrift „Damit aus einer Frist keine
   verpasste Chance wird!“ über der Einleitung, wie gewünscht.
+- [ ] **Atteste / „Mehr zu ‚Wissen‘“ (KEV-246), Rückfrage offen.** Unten auf
+  den Wissen-Seiten stehen jetzt zuerst Taddis Kategorien (Atteste, Formulare,
+  Fristen, Klartext statt Fachsprache), danach die Seiten der alten Website.
+  Offen: Wie sollen die sechs alten Seiten (Das Hilfesystem, FSM,
+  Erwerbsminderungsrente, Bürokratie-Labyrinth, Traumafolgestörungen, Trauma
+  Bindung und Beziehung) im Menü „Wissen“ stehen: so wie jetzt, hinter ihren
+  Kategorien, unter einem eigenen Punkt oder gar nicht mehr?
 - [x] **Formulare (KEV-247):** grüne Überschrift „Die Formulare des KE!N
   EINZELFALL e.V.“ über der Einleitung, wie gewünscht.
 - [x] **Formulare (KEV-248):** Unterzeile „Übersichtlich an einem Ort“ unter
