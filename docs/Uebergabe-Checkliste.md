@@ -850,6 +850,8 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - /glossar sieht fast aus wie vorher, hat jetzt aber wie jede Seite die
     Brotkrumen mit „Wissen“ und am Ende „Mehr zu „Wissen““ und „Du möchtest
     uns etwas mitteilen?“.
+- [x] **Fristen (KEV-252):** grüne Überschrift „Damit aus einer Frist keine
+  verpasste Chance wird!“ über der Einleitung, wie gewünscht.
 - [ ] **Klartext statt Fachsprache (KEV-254), bitte ansehen.** Neuer Punkt
   unter „Wissen“ mit Taddis Text, einer Suche über alle sechs Kategorien
   (Begriffe und typische Sätze) und den Kategorien als Kacheln. Im Menü stehen

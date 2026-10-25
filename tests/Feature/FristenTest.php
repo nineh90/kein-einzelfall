@@ -24,6 +24,29 @@ class FristenTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** KEV-252: grüne Überschrift über der Einleitung, auch nachträglich. */
+    public function test_ueberschrift_ueber_der_einleitung(): void
+    {
+        $this->assertMatchesRegularExpression(
+            '/<h2[^>]*text-green[^>]*>\s*Damit aus einer Frist keine verpasste Chance wird!\s*<\/h2>\s*.*Fristen können schnell Druck machen/su',
+            $this->get('/fristen')->getContent(),
+        );
+
+        $this->seed(\Database\Seeders\UebersetzungenSeeder::class);
+        $this->assertStringContainsString('So that a deadline does not become a missed chance!', $this->get('/en/fristen')->getContent());
+
+        $block = \App\Models\Page::where('slug', 'fristen')->where('locale', 'de')->sole()->blocks()->orderBy('position')->first();
+        $block->update(['data' => ['absaetze' => FristenSeeder::EINLEITUNG]]);
+        $migration = require database_path('migrations/2026_10_25_210000_fristen_ueberschrift.php');
+        $migration->up();
+        $this->assertSame(['titel', 'absaetze'], array_keys($block->fresh()->data));
+
+        $block->update(['data' => ['titel' => 'Eigene', 'absaetze' => ['x']]]);
+        $migration->up();
+        $this->assertSame('Eigene', $block->fresh()->data['titel']);
+
+    }
+
     public function test_seite_unter_wissen_nach_atteste(): void
     {
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');

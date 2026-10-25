@@ -44,6 +44,9 @@ class FristenSeeder extends Seeder
         .'Fristverlängerung, Sachstandsanfrage und was du tun kannst, wenn du eine Frist bekommst. Von '
         .'KE!N EINZELFALL e.V.';
 
+    /** KEV-252: Taddis grüne Überschrift über der Einleitung. */
+    public const EINLEITUNG_TITEL = 'Damit aus einer Frist keine verpasste Chance wird!';
+
     public const EINLEITUNG = [
         'Fristen können schnell Druck machen – besonders dann, wenn du ohnehin belastet bist oder negative '
             .'Erfahrungen mit Behörden und Verfahren verbindest.',
@@ -156,7 +159,7 @@ class FristenSeeder extends Seeder
 
         if ($seite->wasRecentlyCreated) {
             $bausteine = [
-                ['typ' => 'text', 'data' => ['absaetze' => self::EINLEITUNG]],
+                ['typ' => 'text', 'data' => ['titel' => self::EINLEITUNG_TITEL, 'absaetze' => self::EINLEITUNG]],
                 ['typ' => 'quick_access', 'data' => ['titel' => self::KACHELN_TITEL, 'karten' => self::KACHELN]],
                 ['typ' => 'text', 'data' => [
                     'titel' => self::UEBERSICHT_TITEL,
