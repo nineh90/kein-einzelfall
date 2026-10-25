@@ -2638,3 +2638,35 @@ Bild statt Platzhalter, Unterzeile „Verstehen, was entschieden wurde“, grün
 das über `behoerden_und_bescheide_bild` (nur Platzhalter und Einleitung ohne
 Überschrift werden angefasst).
 
+
+## 44. Klartext statt Fachsprache (KEV-254, 25.10.2026)
+
+Taddis Übersicht „0. Klartext statt Fachsprache“: Ihre Kategorien 1 bis 6
+(die Glossare) stehen im Menü jetzt unter dem Punkt „Klartext statt
+Fachsprache“ im Bereich „Wissen“, nicht mehr einzeln. Wie bei
+„Öffentlichkeitsarbeit“ (KEV-238) klappt die dritte Ebene im Menü nicht auf.
+
+- **Übersicht** `/klartext-statt-fachsprache` (`KlartextStattFachspracheSeeder`):
+  Taddis Text (fünf Absätze statt sieben, damit nichts einklappt), dann der
+  neue Baustein `glossar_suche`, dann `unterseiten` mit den sechs Kategorien
+  (Bild und Unterzeile der jeweiligen Seite). Bild: Platzhalter, im Drive liegt
+  noch keins.
+- **Suche über alle Kategorien** (`App\Support\KlartextSuche`,
+  `components/blocks/glossar-suche.blade.php`): Glossar-Einträge und typische
+  Sätze aller Seiten unter dem Menüpunkt, gruppiert je Kategorie, jeder Treffer
+  mit Link auf seine Stelle (`#slug` bzw. `#typische-saetze`). Der Server sucht
+  (`?suche=`), nicht die Seite beim Tippen: Zusammen sind es über 700 Einträge.
+  Das Formular springt zu `#klartext-suche`.
+- **Kacheln:** Sind es mehr als vier und durch drei teilbar, stehen sie in
+  Dreierreihen (sechs = zwei Reihen statt vier und zwei).
+- **Brotkrumen** auf der dritten Ebene mit dem Hauptbereich davor:
+  Start › Wissen › Klartext statt Fachsprache › Gericht & Verfahren (gilt auch
+  für Presse, Petitionen, Ehrenamtsmessen).
+- **Kategorie 1** heißt wie bei Taddi „Abkürzungen im Sozialrecht“ statt
+  „Glossar“, die Adresse bleibt `/glossar`. Der Übersetzungsschlüssel
+  `navigation.glossar` ist weg, die englische Beschriftung kommt aus dem Titel
+  der englischen Seite.
+
+Tests: `KlartextStattFachspracheTest`, Browser-Lauf „Klartext statt
+Fachsprache“, Barrierefreiheit für Übersicht und Suchergebnis.
+

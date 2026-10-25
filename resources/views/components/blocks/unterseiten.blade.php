@@ -45,7 +45,13 @@
         {{-- Eine Spalte auf dem Handy, zwei ab „sm“, ab „lg“ alle vier in
              einer Reihe. minmax(0,1fr) und min-w-0 wie bei den
              Einstiegskarten: Kein langes Wort drückt eine Kachel breiter. --}}
-        <ul class="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {{-- Sechs Kacheln (KEV-254, Klartext statt Fachsprache) in zwei
+             Dreierreihen statt vier und zwei. --}}
+        <ul @class([
+            'grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2',
+            'lg:grid-cols-3' => count($kacheln) > 4 && count($kacheln) % 3 === 0,
+            'lg:grid-cols-4' => ! (count($kacheln) > 4 && count($kacheln) % 3 === 0),
+        ])>
             @foreach ($kacheln as $kachel)
                 @php
                     $bild = $kachel['bild'];

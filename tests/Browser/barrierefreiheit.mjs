@@ -86,6 +86,9 @@ const SEITEN = [
     ['Sozialrecht & Hilfesystem', '/sozialrecht-und-hilfesystem'],
     ['Medizinische Berichte & Gutachten', '/medizinische-berichte-und-gutachten'],
     ['Gericht & Verfahren', '/gericht-und-verfahren'],
+    // Übersicht mit Kacheln und Suche über alle Kategorien (KEV-254).
+    ['Klartext statt Fachsprache', '/klartext-statt-fachsprache'],
+    ['Klartext, Suchergebnis', '/klartext-statt-fachsprache?suche=GdB'],
     // Baustein „Dokumente“, hier mit 27 Vorlagen (KEV-144).
     ['Dokumentenliste', '/atteste'],
     // Wand mit Zettel, Knopf auf dem Bild und Zählstrichen (KEV-157).

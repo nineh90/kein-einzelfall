@@ -977,6 +977,29 @@ console.log('\nFristen und Möglichkeiten')
     await link.context().close()
 }
 
+// --- Klartext statt Fachsprache (KEV-254) -----------------------------------
+
+console.log('\nKlartext statt Fachsprache')
+{
+    for (const breite of [390, 1400]) {
+        const s = await oeffnen({ breite, pfad: '/klartext-statt-fachsprache' })
+        pruefe(`${breite}px: sechs Kacheln`, await s.locator('li.flex.min-w-0 > a').count() === 6)
+
+        await s.fill('#klartext-suchfeld', 'Widerspruch')
+        await s.press('#klartext-suchfeld', 'Enter')
+        await s.waitForLoadState('networkidle')
+        const status = (await s.locator('#klartext-suche [role="status"]').innerText()).trim()
+        pruefe(`${breite}px: Suche über alle Kategorien`, /^Treffer: \d+ \(in \d von 6 Kategorien\)/.test(status), status)
+        const kopf = await s.evaluate(() => [
+            document.querySelector('header.sticky').getBoundingClientRect().bottom,
+            document.getElementById('klartext-suche').getBoundingClientRect().top,
+        ])
+        pruefe(`${breite}px: springt zu den Treffern`, kopf[1] >= kopf[0] - 1 && kopf[1] < kopf[0] + 80, JSON.stringify(kopf))
+        pruefe(`${breite}px: nichts läuft über`, await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+        await s.context().close()
+    }
+}
+
 // --- Sprungziele unter dem klebenden Kopf (KEV-262) -------------------------
 
 // Ab 1280 px ist der Kopf zweizeilig (127 px) und wächst mit der Schrift.

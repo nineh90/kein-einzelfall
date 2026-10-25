@@ -22,8 +22,10 @@ class AbkuerzungenSexuellerKontextTest extends TestCase
 
     public function test_seite_unter_wissen_zwischen_den_glossaren(): void
     {
+        // Seit KEV-254 unter „Klartext statt Fachsprache“ im Bereich Wissen.
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $urls = array_column($wissen['children'], 'url');
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
+        $urls = array_column($klartext['children'], 'url');
         $hier = array_search(self::ADRESSE, $urls);
 
         $this->assertSame('/glossar', $urls[$hier - 1]);

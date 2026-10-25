@@ -112,6 +112,9 @@ class PageBlock extends Model
         // KEV-155: die Glossar-Einträge, die im Panel dieser Seite
         // zugeordnet sind, mit Suche und Buchstabenleiste.
         'glossar' => 'Glossar (Einträge dieser Seite)',
+        // KEV-254: Suche über alle Kategorien unter „Klartext statt
+        // Fachsprache“, Begriffe und typische Sätze.
+        'glossar_suche' => 'Suche in allen Kategorien (Klartext)',
         // KEV-262: Sätze aus Bescheiden, Urteilen und Gutachten mit ihrer
         // einfachen Übersetzung, unter dem Glossar ihrer Kategorie.
         'typische_saetze' => 'Typische Sätze – einfach übersetzt',
@@ -158,6 +161,7 @@ class PageBlock extends Model
         'unterseiten' => 'wechselnd',
         'glossar' => 'wechselnd',
         'typische_saetze' => 'wechselnd',
+        'glossar_suche' => 'wechselnd',
         'fristen' => 'wechselnd',
         'kalender' => 'wechselnd',
         'hinweis' => 'anschliessend',

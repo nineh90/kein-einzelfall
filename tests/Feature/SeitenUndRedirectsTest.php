@@ -162,9 +162,10 @@ class SeitenUndRedirectsTest extends TestCase
          * Ehrenamtsmessen, Petitionen und Presse.
          *
          * KEV-261: neu das Glossar „Sozialrecht & Hilfesystem“, KEV-260
-         * „Medizinische Berichte & Gutachten“, KEV-259 „Gericht & Verfahren“.
+         * „Medizinische Berichte & Gutachten“, KEV-259 „Gericht & Verfahren“,
+         * KEV-254 die Übersicht „Klartext statt Fachsprache“.
          */
-        $this->assertSame(61, Page::count());
+        $this->assertSame(62, Page::count());
         $this->assertSame(1, Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 

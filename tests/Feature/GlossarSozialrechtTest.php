@@ -206,13 +206,13 @@ class GlossarSozialrechtTest extends TestCase
         // Je Glossar-Seite (KEV-155); seit KEV-261 auch in „Sozialrecht &
         // Hilfesystem“.
         $this->assertSame([
-            ['titel' => 'Glossar', 'url' => '/glossar', 'anzahl' => 10],
+            ['titel' => 'Abkürzungen im Sozialrecht', 'url' => '/glossar', 'anzahl' => 10],
             ['titel' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem', 'anzahl' => 3],
         ], $ergebnis['im_glossar']);
 
         $html = $this->get('/suche?q=Krankenkasse')->getContent();
         $this->assertStringContainsString('href="/glossar?suche=Krankenkasse"', $html);
-        $this->assertStringContainsString('Alle 10 passenden Einträge in „Glossar“', $html);
+        $this->assertStringContainsString('Alle 10 passenden Einträge in „Abkürzungen im Sozialrecht“', $html);
     }
 
     public function test_glossar_steht_einmal_in_der_sitemap(): void
@@ -260,7 +260,7 @@ class GlossarSozialrechtTest extends TestCase
 
         $html = $this->get('/en/glossar')->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Glossary\s*<\/h1>/u', $html);
+        $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Abbreviations in social law\s*<\/h1>/u', $html);
         $this->assertStringContainsString('Understand abbreviations, see the connections, find your way through social compensation law (SER) with more confidence.', $html);
         $this->assertStringContainsString('So that letters carry meaning again.', $html);
         $this->assertStringContainsString('General local health insurance fund (Allgemeine Ortskrankenkasse)', $html);

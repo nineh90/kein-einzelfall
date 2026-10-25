@@ -21,8 +21,10 @@ class MedizinischeBerichteUndGutachtenTest extends TestCase
 
     public function test_eigene_seite_unter_wissen_vor_sozialrecht(): void
     {
+        // Seit KEV-254 unter „Klartext statt Fachsprache“ im Bereich Wissen.
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $urls = array_column($wissen['children'], 'url');
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
+        $urls = array_column($klartext['children'], 'url');
         // Taddis 5, zwischen ihrer 3 und 6 (ihre 4 kommt noch davor).
         $this->assertSame(array_search('/medizinische-berichte-und-gutachten', $urls) + 1, array_search('/sozialrecht-und-hilfesystem', $urls));
         $this->assertGreaterThan(array_search('/behoerden-und-bescheide', $urls), array_search('/medizinische-berichte-und-gutachten', $urls));

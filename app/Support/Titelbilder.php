@@ -177,6 +177,8 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
+        // KEV-254: Im Drive liegt für die Übersicht noch keins.
+        'klartext-statt-fachsprache',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';

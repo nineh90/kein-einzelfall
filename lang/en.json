@@ -549,5 +549,10 @@
     "Nächster Monat: :monat": "Next month: :monat",
     "In diesem Monat stehen keine weiteren Termine an.": "There are no more dates this month.",
     "Einfach übersetzt:": "In plain words:",
-    "Zu den typischen Sätzen": "To the typical sentences"
+    "Zu den typischen Sätzen": "To the typical sentences",
+    "In allen Kategorien suchen": "Search all categories",
+    "Abkürzung, Begriff oder Satz aus deinem Schreiben": "Abbreviation, term or sentence from your letter",
+    "Zu „:suche“ steht in keiner Kategorie etwas.": "There is nothing on “:suche” in any category.",
+    "Treffer: :anzahl (in :kategorien von :gesamt Kategorien)": "Results: :anzahl (in :kategorien of :gesamt categories)",
+    "Suche leeren": "Clear search"
 }

@@ -23,9 +23,11 @@ class BehoerdenUndBescheideTest extends TestCase
 
     public function test_eigene_seite_unter_wissen_neben_dem_glossar(): void
     {
+        // Seit KEV-254 unter „Klartext statt Fachsprache“ im Bereich Wissen.
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $urls = array_column($wissen['children'], 'url');
-        // Taddis Nummern: 1. Glossar, 2. sexueller Kontext (KEV-154), 3. diese.
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
+        $urls = array_column($klartext['children'], 'url');
+        // Taddis Nummern: 1. Abkürzungen Sozialrecht, 2. sexueller Kontext (KEV-154), 3. diese.
         $this->assertSame(array_search('/glossar', $urls) + 2, array_search('/behoerden-und-bescheide', $urls));
 
         $html = $this->get('/behoerden-und-bescheide')->assertOk()->getContent();
@@ -119,7 +121,7 @@ class BehoerdenUndBescheideTest extends TestCase
 
         $this->assertStringContainsString('Hier entsteht ein Verzeichnis', $this->get('/abkuerzungen-probe')->getContent());
         $this->assertSame(
-            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Gericht & Verfahren', 'Glossar',
+            ['Abkürzungen im sexuellen Kontext', 'Abkürzungen im Sozialrecht', 'Behörden & Bescheide', 'Gericht & Verfahren',
                 'Medizinische Berichte & Gutachten', 'Probe',
                 'Sozialrecht & Hilfesystem'],
             array_values(GlossaryTerm::seitenAuswahl()),

@@ -132,6 +132,18 @@ class Seitenkontext
             ->all();
     }
 
+    /** Der Hauptbereich über einem Unterbereich, sonst null. */
+    private function ueberbereich(array $bereich): ?array
+    {
+        foreach (Navigation::haupt() as $punkt) {
+            if (in_array($bereich['url'], array_column($punkt['children'] ?? [], 'url'), true)) {
+                return $punkt;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Rechtstexte bekommen keinen Kontakt-Aufruf am Seitenende.
      *
@@ -143,7 +155,13 @@ class Seitenkontext
         return in_array($this->slug, ['datenschutz', 'impressum', 'barrierefreiheit', 'satzung'], true);
     }
 
-    /** Brotkrumen: Start › Bereich › aktuelle Seite. */
+    /**
+     * Brotkrumen: Start › Bereich › aktuelle Seite.
+     *
+     * Eine Ebene tiefer mit dem Hauptbereich davor (KEV-254): Start › Wissen ›
+     * Klartext statt Fachsprache › Gericht & Verfahren. Sonst fehlte der Weg
+     * zurück zu „Wissen“.
+     */
     public function brotkrumen(string $seitentitel): array
     {
         $krumen = [[
@@ -152,7 +170,14 @@ class Seitenkontext
         ]];
 
         if ($bereich = $this->bereich()) {
+            if ($ueber = $this->ueberbereich($bereich)) {
+                $krumen[] = ['label' => $ueber['label'], 'url' => $ueber['url']];
+            }
+
             $krumen[] = ['label' => $bereich['label'], 'url' => $bereich['url']];
+        } elseif (($uebersicht = $this->istBereichsUebersicht()) && ($ueber = $this->ueberbereich($uebersicht))) {
+            // Die Übersicht der Unterebene selbst: Start › Wissen › Klartext …
+            $krumen[] = ['label' => $ueber['label'], 'url' => $ueber['url']];
         }
 
         $krumen[] = ['label' => $seitentitel, 'url' => null];

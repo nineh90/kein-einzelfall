@@ -21,8 +21,10 @@ class SozialrechtUndHilfesystemTest extends TestCase
 
     public function test_eigene_seite_unter_wissen_nach_medizinische_berichte(): void
     {
+        // Seit KEV-254 unter „Klartext statt Fachsprache“ im Bereich Wissen.
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $urls = array_column($wissen['children'], 'url');
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
+        $urls = array_column($klartext['children'], 'url');
         // Taddis 6, seit KEV-260 nach ihrer 5.
         $this->assertSame(array_search('/medizinische-berichte-und-gutachten', $urls) + 1, array_search('/sozialrecht-und-hilfesystem', $urls));
 

@@ -27,7 +27,6 @@ return [
     'gremium_ukfb' => 'UKFB committee',
 
     'gespeicherte_einstellungen' => 'Saved settings',
-    'glossar' => 'Glossary',
     'leiste_gruppen' => 'Groups',
     'leiste_anfrage' => 'Enquiry',
 ];

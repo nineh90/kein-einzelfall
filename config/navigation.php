@@ -93,19 +93,25 @@ return [
                 // KEV-152: Taddis „5. Fristen“, nach Atteste und vor den
                 // Glossaren, die als Nachschlagewerke zuletzt stehen.
                 ['schluessel' => 'fristen', 'label' => 'Fristen und Möglichkeiten', 'url' => '/fristen'],
-                ['schluessel' => 'glossar', 'label' => 'Glossar',                        'url' => '/glossar'],
-                // KEV-154: Taddis „2. Abkürzungen sexueller Kontext“, zwischen
-                // ihrer 1 (Glossar) und 3 (Behörden & Bescheide).
-                ['schluessel' => 'abkuerzungen_im_sexuellen_kontext', 'label' => 'Abkürzungen im sexuellen Kontext', 'url' => '/abkuerzungen-im-sexuellen-kontext'],
-                // KEV-155: zweites Glossar, Taddis Datei „3. Behörden und
-                // Bescheide“. Ohne Positionsangabe, deshalb neben das Glossar.
-                ['schluessel' => 'behoerden_und_bescheide', 'label' => 'Behörden & Bescheide', 'url' => '/behoerden-und-bescheide'],
-                // KEV-259: Taddis „4. Gericht und Verfahren“.
-                ['schluessel' => 'gericht_und_verfahren', 'label' => 'Gericht & Verfahren', 'url' => '/gericht-und-verfahren'],
-                // KEV-260: Taddis „5. Medizinische Berichte und Gutachten“.
-                ['schluessel' => 'medizinische_berichte_und_gutachten', 'label' => 'Medizinische Berichte & Gutachten', 'url' => '/medizinische-berichte-und-gutachten'],
-                // KEV-261: Taddis „6. Sozialrecht und Hilfesysteme“.
-                ['schluessel' => 'sozialrecht_und_hilfesystem', 'label' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem'],
+                // KEV-254: Taddis „Klartext statt Fachsprache“ mit ihren
+                // Kategorien 1 bis 6 (die 7, „Typische Sätze“, steckt in 3
+                // bis 6). Nicht im Menü aufgeklappt, sondern als Kacheln auf
+                // der Übersicht, darüber eine Suche über alle Kategorien.
+                // Nachschlagewerk, deshalb zuletzt.
+                ['schluessel' => 'klartext_statt_fachsprache', 'label' => 'Klartext statt Fachsprache', 'url' => '/klartext-statt-fachsprache', 'children' => [
+                    // KEV-153, seit KEV-254 mit Taddis Namen
+                    ['schluessel' => 'glossar', 'label' => 'Abkürzungen im Sozialrecht', 'url' => '/glossar'],
+                    // KEV-154
+                    ['schluessel' => 'abkuerzungen_im_sexuellen_kontext', 'label' => 'Abkürzungen im sexuellen Kontext', 'url' => '/abkuerzungen-im-sexuellen-kontext'],
+                    // KEV-155
+                    ['schluessel' => 'behoerden_und_bescheide', 'label' => 'Behörden & Bescheide', 'url' => '/behoerden-und-bescheide'],
+                    // KEV-259
+                    ['schluessel' => 'gericht_und_verfahren', 'label' => 'Gericht & Verfahren', 'url' => '/gericht-und-verfahren'],
+                    // KEV-260
+                    ['schluessel' => 'medizinische_berichte_und_gutachten', 'label' => 'Medizinische Berichte & Gutachten', 'url' => '/medizinische-berichte-und-gutachten'],
+                    // KEV-261
+                    ['schluessel' => 'sozialrecht_und_hilfesystem', 'label' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem'],
+                ]],
             ],
         ],
         /*

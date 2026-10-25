@@ -40,7 +40,10 @@ class GlossarSozialrechtSeeder extends Seeder
 {
     public const SLUG = 'glossar';
 
-    public const TITEL = 'Glossar';
+    /** Seit KEV-254 Taddis Name der Kategorie, vorher „Glossar“. */
+    public const TITEL = 'Abkürzungen im Sozialrecht';
+
+    public const TITEL_BIS_25_10 = 'Glossar';
 
     /** KEV-255: Taddis grüne Überschrift über der Einleitung. */
     public const UEBERSCHRIFT = 'Abkürzungen verstehen, Zusammenhänge erkennen, sicherer durch das SER finden.';

@@ -35,7 +35,8 @@ class WissenTest extends TestCase
         // „Mehr zu „Wissen““ nennt alle.
         $this->assertStringNotContainsString('Wir möchten informieren', $html);
         $this->assertStringNotContainsString('Zu den einzelnen Kategorien', $html);
-        foreach (['/atteste', '/formulare', '/fristen', '/glossar', '/behoerden-und-bescheide'] as $pfad) {
+        // Die Glossare seit KEV-254 gesammelt unter „Klartext statt Fachsprache“.
+        foreach (['/atteste', '/formulare', '/fristen', '/klartext-statt-fachsprache'] as $pfad) {
             $this->assertStringContainsString('href="'.$pfad.'"', $html, $pfad);
         }
     }

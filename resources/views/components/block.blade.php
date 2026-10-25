@@ -71,7 +71,7 @@
         // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite, das
         // Glossar (KEV-155) die Einträge dieser Seite. Beide müssen deshalb
         // wissen, wo sie stehen.
-        if (in_array($block->typ, ['unterseiten', 'glossar'], true)) {
+        if (in_array($block->typ, ['unterseiten', 'glossar', 'glossar_suche'], true)) {
             $attribute['seite'] = $block->page;
         }
 

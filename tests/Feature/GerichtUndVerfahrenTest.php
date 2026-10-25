@@ -21,8 +21,10 @@ class GerichtUndVerfahrenTest extends TestCase
 
     public function test_eigene_seite_unter_wissen_zwischen_behoerden_und_medizin(): void
     {
+        // Seit KEV-254 unter „Klartext statt Fachsprache“ im Bereich Wissen.
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $urls = array_column($wissen['children'], 'url');
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
+        $urls = array_column($klartext['children'], 'url');
         // Taddis 3, 4, 5, 6 hintereinander.
         $this->assertSame(
             ['/behoerden-und-bescheide', '/gericht-und-verfahren', '/medizinische-berichte-und-gutachten', '/sozialrecht-und-hilfesystem'],

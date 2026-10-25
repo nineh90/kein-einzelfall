@@ -279,6 +279,10 @@ class PageForm
                                     'glossar' => 'Zeigt alle Einträge unter „Glossar“, bei denen diese Seite unter '
                                         .'„Steht auf der Seite“ gewählt ist, mit Suchfeld und Buchstabenleiste. Neue '
                                         .'Begriffe dort anlegen.',
+                                    // KEV-254
+                                    'glossar_suche' => 'Ein Suchfeld über alle Seiten unter „Klartext statt '
+                                        .'Fachsprache“ im Menü: deren Glossar-Einträge und typische Sätze. Was '
+                                        .'durchsucht wird, folgt dem Menü.',
                                     // KEV-152
                                     'fristen' => 'Zeigt alle Einträge unter „Fristen“ mit Suchfeld, Buchstabenleiste '
                                         .'und aufklappbaren Karten. Neue Fristen dort anlegen.',
