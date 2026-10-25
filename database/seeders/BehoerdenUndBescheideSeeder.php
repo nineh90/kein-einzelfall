@@ -16,7 +16,10 @@ namespace Database\Seeders;
  * - Bei Taddi beginnt jede Erklärung mit „Einfach erklärt:“. Das steht 128-mal
  *   gleich da und ist weggelassen; die Einleitung sagt es einmal.
  * - Ihre Reihenfolge war fast alphabetisch, das Glossar sortiert selbst.
- * - Ein eigenes Bild gibt es noch nicht, bis dahin der Platzhalter.
+ * - Seit KEV-258 Taddis Bild (Schreiben mit Stempel), Unterzeile „Verstehen,
+ *   was entschieden wurde“ und die grüne Überschrift über der Einleitung
+ *   (beide aus dem Ticket). Bestehende Datenbanken: Migration
+ *   behoerden_und_bescheide_bild.
  * - Seit KEV-262 stehen darunter Taddis 47 typische Sätze aus Bescheiden mit
  *   ihrer einfachen Übersetzung (data/typische-saetze.json).
  *
@@ -27,6 +30,8 @@ class BehoerdenUndBescheideSeeder extends GlossarSeite
     public const SLUG = 'behoerden-und-bescheide';
 
     public const TITEL = 'Behörden & Bescheide';
+
+    public const TEXT_TITEL = 'Damit aus Behördensprache verständliche Information wird';
 
     public const ABSAETZE = [
         'Hier findest du typische Begriffe aus Bescheiden und Behördenschreiben – von *Anhörung* über '

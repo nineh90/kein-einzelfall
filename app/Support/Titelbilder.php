@@ -113,6 +113,9 @@ class Titelbilder
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel. Ohne Unterzeile.
         'abkuerzungen-im-sexuellen-kontext' => null,
+        // KEV-258: Bild von Taddi („Behörden und Bescheide“), Schreiben und
+        // Holzstempel, statt Platzhalter. Unterzeile aus dem Ticket.
+        'behoerden-und-bescheide' => 'Verstehen, was entschieden wurde',
         // KEV-259: Bild von Taddi („Gericht und Verfahren“), Richterhammer und
         // Akten. Unterzeile aus dem Ticket.
         'gericht-und-verfahren' => 'Damit juristische Begriffe verständlicher werden',
@@ -173,8 +176,6 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
-        // KEV-155: Im Drive-Ordner „3. Wissen“ liegt noch keins.
-        'behoerden-und-bescheide',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
@@ -243,6 +244,10 @@ class Titelbilder
      *  - Abkürzungen im sexuellen Kontext: Kiste mit Buchstabenwürfeln
      *    (KEV-154). Rechts um Wand verlängert, Kiste ab 15 %, Würfel bis 97 %
      *    der Höhe; ausgerichtet auf 85 %.
+     *  - Behörden & Bescheide: Schreiben mit Holzstempel (KEV-258). Rechts
+     *    um Fläche verlängert, Stempel ab 7 %, Blatt bis 93 % der Höhe;
+     *    Mit 10 % bleibt der Stempel bis 2560 px ganz, unten fällt dort ein
+     *    Teil des Blatts weg.
      *  - Gericht & Verfahren: Richterhammer auf Block, davor Akten (KEV-259).
      *    Rechts um Wand verlängert, Hammer ab 30 %, Akten bis 85 % der Höhe;
      *    Mit 60 % bleibt der Hammer auch bei 2560 px ganz.
@@ -308,6 +313,7 @@ class Titelbilder
         self::ORDNER.'/sozialrecht-und-hilfesystem.webp' => 40,
         self::ORDNER.'/medizinische-berichte-und-gutachten.webp' => 20,
         self::ORDNER.'/gericht-und-verfahren.webp' => 60,
+        self::ORDNER.'/behoerden-und-bescheide.webp' => 10,
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,

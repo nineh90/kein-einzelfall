@@ -33,7 +33,15 @@ class BehoerdenUndBescheideTest extends TestCase
         $this->assertStringContainsString('<title>Behörden &amp; Bescheide - Kein Einzelfall e.V.</title>', $html);
         $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Behörden &amp; Bescheide\s*<\/h1>/u', $html);
         $this->assertMatchesRegularExpression('/aria-label="Sie sind hier".*Wissen.*Behörden &amp; Bescheide/s', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
+        // KEV-258: Taddis Bild statt Platzhalter, Unterzeile und grüne
+        // Überschrift aus dem Ticket.
+        $this->assertStringContainsString('src="/img/titelbilder/behoerden-und-bescheide.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('Verstehen, was entschieden wurde', $html);
+        $this->assertMatchesRegularExpression(
+            '/<h2[^>]*text-green[^>]*>\s*Damit aus Behördensprache verständliche Information wird\s*<\/h2>/u',
+            $html,
+        );
         $this->assertStringContainsString('/behoerden-und-bescheide</loc>', $this->get('/sitemap.xml')->getContent());
     }
 
@@ -143,6 +151,32 @@ class BehoerdenUndBescheideTest extends TestCase
         $this->assertSame('Vom Verein geändert.', GlossaryTerm::where('slug', 'frist')->where('locale', 'de')->value('erklaerung'));
     }
 
+    /** KEV-258 auf einer Datenbank, die noch den Platzhalter hat. */
+    public function test_migration_setzt_bild_unterzeile_und_ueberschrift(): void
+    {
+        $seite = Page::where('slug', 'behoerden-und-bescheide')->where('locale', 'de')->sole();
+        $seite->update(['titelbild' => \App\Support\Titelbilder::PLATZHALTER, 'untertitel' => null]);
+        $einleitung = $seite->blocks()->where('typ', 'text')->sole();
+        $einleitung->update(['data' => ['absaetze' => BehoerdenUndBescheideSeeder::ABSAETZE]]);
+
+        $migration = require database_path('migrations/2026_10_25_170000_behoerden_und_bescheide_bild.php');
+        $migration->up();
+
+        $seite->refresh();
+        $this->assertSame('/img/titelbilder/behoerden-und-bescheide.webp', $seite->titelbild);
+        $this->assertSame('Verstehen, was entschieden wurde', $seite->untertitel);
+        $this->assertSame(['titel', 'absaetze'], array_keys($einleitung->fresh()->data));
+        $this->assertSame(BehoerdenUndBescheideSeeder::TEXT_TITEL, $einleitung->fresh()->data['titel']);
+
+        // Was der Verein gepflegt hat, bleibt.
+        $seite->update(['titelbild' => '/storage/medien/eigenes.webp']);
+        $einleitung->update(['data' => ['titel' => 'Eigene Überschrift', 'absaetze' => ['x']]]);
+        $migration->up();
+
+        $this->assertSame('/storage/medien/eigenes.webp', $seite->fresh()->titelbild);
+        $this->assertSame('Eigene Überschrift', $einleitung->fresh()->data['titel']);
+    }
+
     public function test_englische_fassung(): void
     {
         $this->seed(UebersetzungenSeeder::class);
@@ -150,6 +184,8 @@ class BehoerdenUndBescheideTest extends TestCase
         $html = $this->get('/en/behoerden-und-bescheide')->assertOk()->getContent();
 
         $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Authorities &amp; official notices\s*<\/h1>/u', $html);
+        $this->assertStringContainsString('Understanding what has been decided', $html);
+        $this->assertStringContainsString('Turning official language into information you can understand', $html);
         $this->assertStringContainsString('Here you will find typical terms from official notices', $html);
         $this->assertStringContainsString('Objection (Widerspruch)', $html);
         $this->assertStringContainsString('Search for a term', $html);

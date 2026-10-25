@@ -838,8 +838,10 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Weggelassen:** das „Einfach erklärt:“ vor jeder der 128 Erklärungen;
     die Einleitung sagt es einmal. Ebenso die Zeilen „1. Behördendeutsch“ und
     „TEXT:“ über der Einleitung (Arbeitsnotizen?).
-  - **Bild fehlt:** Im Drive-Ordner „3. Wissen“ liegt noch keins für diese
-    Seite, bis dahin der Platzhalter (leere Wand).
+  - **Bild, Unterzeile, grüne Überschrift (KEV-258):** Taddis Bild (Schreiben
+    mit Stempel, rechts verlängert), darunter „Verstehen, was entschieden
+    wurde“, über der Einleitung grün „Damit aus Behördensprache verständliche
+    Information wird“.
   - **Reihenfolge:** Die Liste sortiert selbst alphabetisch, Umlaute wie ihr
     Grundbuchstabe („Änderung“ unter A).
   - /glossar sieht fast aus wie vorher, hat jetzt aber wie jede Seite die

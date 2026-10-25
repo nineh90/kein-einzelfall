@@ -2631,3 +2631,10 @@ dich“ und Unterzeile „Damit juristische Begriffe verständlicher werden“ a
 Ticket. 21 schon vorhandene Begriffe (meist aus „Behörden & Bescheide“) haben
 das Sprungziel `…-gericht` (`#frist-gericht`). Tests: `GerichtUndVerfahrenTest`.
 
+**Seit KEV-258** sieht „Behörden & Bescheide“ aus wie die anderen drei: Taddis
+Bild statt Platzhalter, Unterzeile „Verstehen, was entschieden wurde“, grüne
+Überschrift „Damit aus Behördensprache verständliche Information wird“
+(`BehoerdenUndBescheideSeeder::TEXT_TITEL`). Bestehende Datenbanken bekommen
+das über `behoerden_und_bescheide_bild` (nur Platzhalter und Einleitung ohne
+Überschrift werden angefasst).
+
