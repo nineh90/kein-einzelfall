@@ -13,8 +13,11 @@ namespace Database\Seeders;
  * - Aus dem Ticket: die Unterzeile unter dem Titel („Damit juristische
  *   Begriffe verständlicher werden“, Titelbilder) und die grüne Überschrift
  *   über der Einleitung, beide ohne Punkt wie im Ticket.
- * - Ihre Einleitung hier ohne „Gemeinsam KE!N EINZELFALL“ und mit „Fehlt Dir
- *   hier ein Begriff?“ nicht fett; so steht es in ihrem Dokument.
+ * - Einleitung angeglichen an die anderen Glossare (Kevin, 25.10.2026: bei
+ *   Taddi vergessen): „Fehlt Dir hier ein Begriff?“ fett, dazu „Gemeinsam
+ *   KE!N EINZELFALL“ am Ende. Für bestehende Datenbanken die Migration
+ *   gericht_und_verfahren_angleichen.
+ * - „Gutachten nach § 109 SGG“ verweist auf die Projektseite (mehr_url).
  * - „Einfach erklärt:“ vor jeder Erklärung ist weggelassen wie in den anderen
  *   Glossaren.
  * - 21 Begriffe gibt es schon in anderen Glossaren, die meisten in „Behörden
@@ -34,6 +37,17 @@ class GerichtUndVerfahrenSeeder extends GlossarSeite
     public const TEXT_TITEL = 'Begriffe aus Widerspruchs-, Klage- und Gerichtsverfahren für dich';
 
     public const ABSAETZE = [
+        'Hier findest Du typische Begriffe aus Klage-, Gerichts- und Rechtsmittelverfahren – verständlich '
+            .'erklärt und mit Schwerpunkt auf Verfahren vor den Sozialgerichten.',
+        'Die Erklärungen sollen Dir helfen, Schreiben und Abläufe besser einzuordnen. Sie ersetzen keine '
+            .'individuelle Rechtsberatung.',
+        '*Fehlt Dir hier ein Begriff?* Dann schreib uns gern an *kontakt@kein-einzelfall.de*. Wir ergänzen die '
+            .'Liste und lassen sie gemeinsam mit euch weiter wachsen.',
+        '*Gemeinsam KE!N EINZELFALL*',
+    ];
+
+    /** Der Wortlaut vor der Angleichung, nur dort ersetzt die Migration. */
+    public const ABSAETZE_BIS_25_10 = [
         'Hier findest Du typische Begriffe aus Klage-, Gerichts- und Rechtsmittelverfahren – verständlich '
             .'erklärt und mit Schwerpunkt auf Verfahren vor den Sozialgerichten.',
         'Die Erklärungen sollen Dir helfen, Schreiben und Abläufe besser einzuordnen. Sie ersetzen keine '

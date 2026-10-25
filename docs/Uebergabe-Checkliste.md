@@ -769,16 +769,16 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Begriffe verständlicher werden“, grün „Begriffe aus Widerspruchs-, Klage- und
   Gerichtsverfahren für dich“, ihre Einleitung, 87 Begriffe und 53 typische
   Sätze.
-  - **Wie im Dokument gelassen:** Anders als in den anderen Glossaren fehlt
-    hier „Gemeinsam KE!N EINZELFALL“ am Ende der Einleitung, und „Fehlt Dir
-    hier ein Begriff?“ ist nicht fett. Soll das angeglichen werden?
+  - **Angeglichen** (Kevin, 25.10.2026): In ihrem Dokument fehlte am Ende der
+    Einleitung „Gemeinsam KE!N EINZELFALL“, und „Fehlt Dir hier ein Begriff?“
+    war nicht fett. Jetzt wie in den anderen Glossaren.
   - **Doppelt:** 21 Begriffe stehen auch in anderen Glossaren, die meisten in
     „Behörden & Bescheide“ (Akte, Antrag, Frist, Widerspruch, Zustellung …),
     hier mit der Erklärung fürs Gerichtsverfahren.
   - **Typische Sätze:** Kategorie eingesetzt als „aus *Klage-, Gerichts- und
     Rechtsmittelverfahren*“ (wie in ihrer Einleitung).
-  - **Vorschlag:** „Gutachten nach § 109 SGG“ könnte auf unsere Projektseite
-    „§ 109 SGG Gegengutachten“ verlinken (Feld „Mehr dazu“ am Eintrag). Gewünscht?
+  - **Von uns:** „Gutachten nach § 109 SGG“ verweist mit „Zu unserem Projekt
+    § 109 SGG“ auf die Projektseite (Felder „Mehr dazu“ am Eintrag).
 - [ ] **Medizinische Berichte & Gutachten (KEV-260), bitte ansehen.** Neues
   Glossar unter „Wissen“, im Menü vor „Sozialrecht & Hilfesystem“: Taddis Bild
   (Mappe mit Stethoskop, rechts verlängert), Unterzeile „Befunde verstehen.

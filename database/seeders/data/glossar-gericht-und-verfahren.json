@@ -177,7 +177,9 @@
   {
     "slug": "gutachten-nach-109-sgg",
     "begriff": "Gutachten nach § 109 SGG",
-    "erklaerung": "Bestimmte Berechtigte können im Sozialgerichtsverfahren beantragen, dass ein bestimmter Arzt gutachtlich gehört wird. Das Gericht kann die Anhörung davon abhängig machen, dass die Kosten zunächst vorgeschossen und möglicherweise endgültig getragen werden."
+    "erklaerung": "Bestimmte Berechtigte können im Sozialgerichtsverfahren beantragen, dass ein bestimmter Arzt gutachtlich gehört wird. Das Gericht kann die Anhörung davon abhängig machen, dass die Kosten zunächst vorgeschossen und möglicherweise endgültig getragen werden.",
+    "mehr_url": "/109-sgg-gegengutachten",
+    "mehr_label": "Zu unserem Projekt § 109 SGG"
   },
   {
     "slug": "klage",

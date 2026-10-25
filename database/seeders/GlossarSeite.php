@@ -49,7 +49,7 @@ abstract class GlossarSeite extends Seeder
         static::anlegen();
     }
 
-    /** @return list<array{slug: string, kuerzel?: string, begriff: string, erklaerung?: string}> */
+    /** @return list<array{slug: string, kuerzel?: string, begriff: string, erklaerung?: string, mehr_url?: string, mehr_label?: string}> */
     public static function eintraege(): array
     {
         return json_decode(file_get_contents(database_path('seeders/data/'.static::DATEI)), true);
@@ -87,6 +87,9 @@ abstract class GlossarSeite extends Seeder
                     'kuerzel' => $eintrag['kuerzel'] ?? null,
                     'begriff' => $eintrag['begriff'],
                     'erklaerung' => $eintrag['erklaerung'] ?? null,
+                    // KEV-259: Verweis auf eine eigene Seite („Mehr dazu“)
+                    'mehr_url' => $eintrag['mehr_url'] ?? null,
+                    'mehr_label' => $eintrag['mehr_label'] ?? null,
                     'seite_gruppe' => $seite->uebersetzungs_gruppe,
                     'published_at' => now(),
                 ],

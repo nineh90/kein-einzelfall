@@ -57,6 +57,45 @@ class GerichtUndVerfahrenTest extends TestCase
         $this->assertStringContainsString('mit Schwerpunkt auf Verfahren vor den Sozialgerichten.', $html);
         $this->assertStringContainsString('Sie ersetzen keine individuelle Rechtsberatung.', $html);
         $this->assertMatchesRegularExpression('/<strong[^>]*><a href="mailto:kontakt@kein-einzelfall\.de"/', $html);
+
+        // Wie in den anderen Glossaren (bei Taddi vergessen).
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Fehlt Dir hier ein Begriff\?<\/strong>/u', $html);
+        $this->assertMatchesRegularExpression('/<strong[^>]*>Gemeinsam KE!N EINZELFALL<\/strong>/u', $html);
+    }
+
+    /** Bestehende Datenbanken: nur der alte Wortlaut wird ersetzt. */
+    public function test_migration_gleicht_nur_den_alten_wortlaut_an(): void
+    {
+        $block = Page::where('slug', 'gericht-und-verfahren')->where('locale', 'de')->sole()
+            ->blocks()->where('typ', 'text')->sole();
+        $block->update(['data' => ['absaetze' => GerichtUndVerfahrenSeeder::ABSAETZE_BIS_25_10]]);
+        GlossaryTerm::where('slug', 'gutachten-nach-109-sgg')->update(['mehr_url' => null, 'mehr_label' => null]);
+
+        $migration = require database_path('migrations/2026_10_25_160000_gericht_und_verfahren_angleichen.php');
+        $migration->up();
+
+        $this->assertSame(GerichtUndVerfahrenSeeder::ABSAETZE, $block->fresh()->data['absaetze']);
+        $this->assertSame('/109-sgg-gegengutachten', GlossaryTerm::where('slug', 'gutachten-nach-109-sgg')->where('locale', 'de')->value('mehr_url'));
+
+        // Was der Verein geändert hat, bleibt.
+        $block->update(['data' => ['absaetze' => ['Vom Verein geändert.']]]);
+        GlossaryTerm::where('slug', 'gutachten-nach-109-sgg')->update(['mehr_url' => '/anderswo']);
+        $migration->up();
+
+        $this->assertSame(['Vom Verein geändert.'], $block->fresh()->data['absaetze']);
+        $this->assertSame('/anderswo', GlossaryTerm::where('slug', 'gutachten-nach-109-sgg')->where('locale', 'de')->value('mehr_url'));
+    }
+
+    /** Das Gutachten nach § 109 SGG führt zu unserem Projekt dazu. */
+    public function test_verweis_auf_das_projekt_109_sgg(): void
+    {
+        $html = $this->get('/gericht-und-verfahren')->getContent();
+
+        $this->assertMatchesRegularExpression(
+            '/id="gutachten-nach-109-sgg".*?<a href="\/109-sgg-gegengutachten"[^>]*>\s*Zu unserem Projekt § 109 SGG/su',
+            $html,
+        );
+        $this->get('/109-sgg-gegengutachten')->assertOk();
     }
 
     public function test_alle_begriffe_und_saetze(): void
