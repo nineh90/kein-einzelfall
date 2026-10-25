@@ -26,7 +26,16 @@ class GlossarSozialrechtTest extends TestCase
     {
         $html = $this->get('/glossar')->assertOk()->getContent();
 
-        $this->assertStringContainsString('Abkürzungen im Sozialen Entschädigungsrecht (SER)', $html);
+        // KEV-255: Unterzeile und grüne Überschrift aus dem Ticket.
+        $this->assertStringContainsString('Damit aus Buchstaben wieder Bedeutung wird.', $html);
+        $this->assertMatchesRegularExpression(
+            '/<h2[^>]*text-green[^>]*>\s*Abkürzungen verstehen, Zusammenhänge erkennen, sicherer durch das SER finden\.\s*<\/h2>/u',
+            $html,
+        );
+        $this->assertStringNotContainsString('Abkürzungen im Sozialen Entschädigungsrecht (SER)', $html);
+        // Suchmaske mit A–Z
+        $this->assertStringContainsString('id="glossar-suche"', $html);
+        $this->assertStringContainsString('aria-label="Nach Anfangsbuchstaben springen"', $html);
         $this->assertMatchesRegularExpression('/<strong[^>]*>Was soll das eigentlich alles heißen\?<\/strong>/u', $html);
         $this->assertMatchesRegularExpression('/<strong[^>]*>Denn verstehen sollte nicht schon an drei Buchstaben scheitern\.<\/strong>/u', $html);
         $this->assertStringContainsString('href="mailto:kontakt@kein-einzelfall.de"', $html);
@@ -34,6 +43,25 @@ class GlossarSozialrechtTest extends TestCase
         $this->assertStringNotContainsString('Weiterlesen', $html);
         $this->assertStringContainsString('src="/img/titelbilder/glossar.webp?v=', $html);
         $this->assertStringContainsString('object-position: 0% 90%', $html);
+    }
+
+    /** KEV-255 auf einer Datenbank mit der alten Überschrift. */
+    public function test_migration_ersetzt_nur_die_alte_ueberschrift(): void
+    {
+        $seite = Page::where('slug', 'glossar')->where('locale', 'de')->sole();
+        $seite->update(['untertitel' => null]);
+        $block = $seite->blocks()->where('typ', 'text')->sole();
+        $block->update(['data' => array_replace($block->data, ['titel' => GlossarSozialrechtSeeder::UEBERSCHRIFT_BIS_25_10])]);
+
+        $migration = require database_path('migrations/2026_10_25_190000_glossar_unterzeile_ueberschrift.php');
+        $migration->up();
+
+        $this->assertSame(GlossarSozialrechtSeeder::UEBERSCHRIFT, $block->fresh()->data['titel']);
+        $this->assertSame('Damit aus Buchstaben wieder Bedeutung wird.', $seite->fresh()->untertitel);
+
+        $block->update(['data' => array_replace($block->data, ['titel' => 'Eigene'])]);
+        $migration->up();
+        $this->assertSame('Eigene', $block->fresh()->data['titel']);
     }
 
     public function test_einleitung_und_titel_sind_im_panel_pflegbar(): void
@@ -233,7 +261,8 @@ class GlossarSozialrechtTest extends TestCase
         $html = $this->get('/en/glossar')->assertOk()->getContent();
 
         $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Glossary\s*<\/h1>/u', $html);
-        $this->assertStringContainsString('Abbreviations in social compensation law (SER)', $html);
+        $this->assertStringContainsString('Understand abbreviations, see the connections, find your way through social compensation law (SER) with more confidence.', $html);
+        $this->assertStringContainsString('So that letters carry meaning again.', $html);
         $this->assertStringContainsString('General local health insurance fund (Allgemeine Ortskrankenkasse)', $html);
         $this->assertStringContainsString('Search for an abbreviation or term', $html);
         $glossar = Page::where('slug', 'glossar')->where('locale', 'en')->firstOrFail();

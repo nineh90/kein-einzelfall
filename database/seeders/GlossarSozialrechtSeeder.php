@@ -30,6 +30,10 @@ use Illuminate\Support\Str;
  * werden damit sichtbar, unsere ungeprüfte Erklärung fällt weg. Was der
  * Verein an einem Eintrag schon geändert hat, bleibt.
  *
+ * Seit KEV-255 (Taddis „Abkürzungen Sozialrecht“): Unterzeile „Damit aus
+ * Buchstaben wieder Bedeutung wird.“ (Titelbilder) und neue grüne Überschrift
+ * über der Einleitung. Das Bild im Drive ist dasselbe wie seit KEV-153.
+ *
  * Legt nur an, was fehlt.
  */
 class GlossarSozialrechtSeeder extends Seeder
@@ -38,7 +42,11 @@ class GlossarSozialrechtSeeder extends Seeder
 
     public const TITEL = 'Glossar';
 
-    public const UEBERSCHRIFT = 'Abkürzungen im Sozialen Entschädigungsrecht (SER)';
+    /** KEV-255: Taddis grüne Überschrift über der Einleitung. */
+    public const UEBERSCHRIFT = 'Abkürzungen verstehen, Zusammenhänge erkennen, sicherer durch das SER finden.';
+
+    /** Die Überschrift bis KEV-255, nur sie ersetzt die Migration. */
+    public const UEBERSCHRIFT_BIS_25_10 = 'Abkürzungen im Sozialen Entschädigungsrecht (SER)';
 
     public const ABSAETZE = [
         'SGB XIV, OEG, GdS, BSA, AusglV … und Du fragst Dich irgendwann nur noch: '

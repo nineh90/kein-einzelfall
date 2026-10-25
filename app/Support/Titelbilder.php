@@ -99,8 +99,8 @@ class Titelbilder
         // mit Stempel. Ohne Unterzeile.
         'atteste' => null,
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
-        // SER“), Zettelkasten. Ohne Unterzeile.
-        'glossar' => null,
+        // SER“), Zettelkasten. Unterzeile seit KEV-255 aus dem Ticket.
+        'glossar' => 'Damit aus Buchstaben wieder Bedeutung wird.',
         // KEV-151: Bild von Taddi („4. Formulare“), Formular mit Vereinslogo
         // und Füller. Ohne Unterzeile.
         'formulare' => null,

@@ -850,6 +850,13 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - /glossar sieht fast aus wie vorher, hat jetzt aber wie jede Seite die
     Brotkrumen mit „Wissen“ und am Ende „Mehr zu „Wissen““ und „Du möchtest
     uns etwas mitteilen?“.
+- [ ] **Glossar / Abkürzungen Sozialrecht (KEV-255).** Unterzeile „Damit aus
+  Buchstaben wieder Bedeutung wird.“, grüne Überschrift „Abkürzungen verstehen,
+  Zusammenhänge erkennen, sicherer durch das SER finden.“ statt bisher
+  „Abkürzungen im Sozialen Entschädigungsrecht (SER)“. Bild und Suchmaske mit
+  A–Z waren schon da (das Bild im Drive ist dasselbe). **Frage:** Im Menü und
+  als Titel heißt die Seite weiter „Glossar“, bei Taddi „Abkürzungen im
+  Sozialrecht“. Umbenennen? Die Adresse /glossar bliebe.
 - [ ] **Glossar mit Taddis Abkürzungen (KEV-153).** /glossar zeigt ihre
   Einleitung („Abkürzungen im Sozialen Entschädigungsrecht (SER)“, Fettes wie
   im Dokument) und 195 Abkürzungen mit Auflösung, darüber ein Suchfeld, das
