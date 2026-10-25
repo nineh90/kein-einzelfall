@@ -112,6 +112,9 @@ class PageBlock extends Model
         // KEV-155: die Glossar-Einträge, die im Panel dieser Seite
         // zugeordnet sind, mit Suche und Buchstabenleiste.
         'glossar' => 'Glossar (Einträge dieser Seite)',
+        // KEV-262: Sätze aus Bescheiden, Urteilen und Gutachten mit ihrer
+        // einfachen Übersetzung, unter dem Glossar ihrer Kategorie.
+        'typische_saetze' => 'Typische Sätze – einfach übersetzt',
         // KEV-152: die Fristen aus dem Panel mit Suche, A–Z und
         // aufklappbaren Karten.
         'fristen' => 'Fristenübersicht (Suche, A–Z, aufklappbar)',
@@ -154,6 +157,7 @@ class PageBlock extends Model
         'wall_of_shame' => 'wechselnd',
         'unterseiten' => 'wechselnd',
         'glossar' => 'wechselnd',
+        'typische_saetze' => 'wechselnd',
         'fristen' => 'wechselnd',
         'kalender' => 'wechselnd',
         'hinweis' => 'anschliessend',

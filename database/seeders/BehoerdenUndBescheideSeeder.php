@@ -17,6 +17,8 @@ namespace Database\Seeders;
  *   gleich da und ist weggelassen; die Einleitung sagt es einmal.
  * - Ihre Reihenfolge war fast alphabetisch, das Glossar sortiert selbst.
  * - Ein eigenes Bild gibt es noch nicht, bis dahin der Platzhalter.
+ * - Seit KEV-262 stehen darunter Taddis 47 typische Sätze aus Bescheiden mit
+ *   ihrer einfachen Übersetzung (data/typische-saetze.json).
  *
  * Legt nur an, was fehlt (GlossarSeite).
  */
@@ -40,4 +42,6 @@ class BehoerdenUndBescheideSeeder extends GlossarSeite
         .'Anhörung bis Widerspruchsbescheid, einfach erklärt. Von KE!N EINZELFALL e.V.';
 
     public const DATEI = 'glossar-behoerden.json';
+
+    public const SAETZE_AUS = 'Bescheiden und Behördenschreiben';
 }

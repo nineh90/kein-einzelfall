@@ -33,6 +33,14 @@ abstract class GlossarSeite extends Seeder
     /** @var list<string> eigene Triggerwarnung vor der Seite, leer = keine */
     public const TRIGGERWARNUNG = [];
 
+    /**
+     * KEV-262: Woraus die typischen Sätze dieser Seite stammen, für Taddis
+     * Einleitung („Hier findest Du typische Formulierungen aus …“). Leer =
+     * keine Sätze. Die Sätze selbst stehen unter dem SLUG in
+     * data/typische-saetze.json.
+     */
+    public const SAETZE_AUS = '';
+
     public function run(): void
     {
         static::anlegen();
@@ -59,6 +67,7 @@ abstract class GlossarSeite extends Seeder
         if ($seite->wasRecentlyCreated) {
             $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => static::ABSAETZE]]);
             $seite->blocks()->create(['typ' => 'glossar', 'position' => 1, 'data' => []]);
+            static::saetzeAnlegen($seite);
 
             if (static::TRIGGERWARNUNG !== []) {
                 $seite->update(['triggerwarnung' => static::TRIGGERWARNUNG]);
@@ -80,5 +89,66 @@ abstract class GlossarSeite extends Seeder
 
         Titelbilder::setzen();
         Titelbilder::platzhalterSetzen();
+    }
+
+    /**
+     * KEV-262: Taddis „Typische Sätze – einfach übersetzt“ als Baustein unter
+     * dem Glossar. Nur, wenn die Seite noch keinen hat: Was der Verein daran
+     * geändert oder gelöscht hat, bleibt so.
+     */
+    public static function saetzeAnlegen(?Page $seite = null): void
+    {
+        $seite ??= Page::where('slug', static::SLUG)->where('locale', 'de')->first();
+        $saetze = static::saetze();
+
+        if (! $seite || $saetze === [] || $seite->blocks()->where('typ', 'typische_saetze')->exists()) {
+            return;
+        }
+
+        $seite->blocks()->create([
+            'typ' => 'typische_saetze',
+            'position' => (int) $seite->blocks()->max('position') + 1,
+            'data' => [
+                'titel' => 'Typische Sätze – einfach übersetzt',
+                'absaetze' => static::saetzeEinleitung(),
+                // fest, damit /behoerden-und-bescheide#typische-saetze in
+                // jeder Sprache trifft. Reihenfolge wie im Panel-Formular,
+                // sonst sähe das erste Speichern wie eine Änderung aus.
+                'anker' => 'typische-saetze',
+                'formulierungen' => $saetze,
+            ],
+        ]);
+    }
+
+    /** @return list<array{satz: string, bedeutung: string}> */
+    public static function saetze(): array
+    {
+        if (static::SAETZE_AUS === '') {
+            return [];
+        }
+
+        $alle = json_decode(file_get_contents(database_path('seeders/data/typische-saetze.json')), true);
+
+        return $alle[static::SLUG] ?? [];
+    }
+
+    /**
+     * Taddis Einleitung, für alle Kategorien gleich bis auf die Herkunft der
+     * Sätze. „Rechtsberatung da“ → „dar“.
+     *
+     * @return list<string>
+     */
+    public static function saetzeEinleitung(): array
+    {
+        return [
+            'Manchmal ist nicht ein einzelnes Fachwort das Problem, sondern ein ganzer Satz.',
+            'Hier findest Du typische Formulierungen aus *'.static::SAETZE_AUS.'* – übersetzt in '
+                .'verständlichere Sprache.',
+            'Die einfache Übersetzung soll Dir helfen, einen Satz besser einzuordnen. *Was er in Deinem '
+                .'konkreten Fall bedeutet, hängt immer vom Zusammenhang ab. Dies stellt keine Rechtsberatung dar.*',
+            '*Fehlt Dir hier eine Formulierung?* Dann schick uns gern eine Mail an *kontakt@kein-einzelfall.de*. '
+                .'Wir ergänzen die Liste und lassen sie gemeinsam mit euch weiter wachsen.',
+            '*Gemeinsam KE!N EINZELFALL*',
+        ];
     }
 }

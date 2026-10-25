@@ -3946,5 +3946,161 @@
   },
   "Assoziiertes Fachgremium": {
     "en": "Associated expert body"
+  },
+  "Typische Sätze – einfach übersetzt": {
+    "en": "Typical sentences – in plain words"
+  },
+  "Manchmal ist nicht ein einzelnes Fachwort das Problem, sondern ein ganzer Satz.": {
+    "en": "Sometimes the problem is not a single technical term but a whole sentence."
+  },
+  "Hier findest Du typische Formulierungen aus *Bescheiden und Behördenschreiben* – übersetzt in verständlichere Sprache.": {
+    "en": "Here you will find typical wording from *official notices and letters from authorities* – translated into plainer language. The sentences are quoted in German, the way they appear in your letter."
+  },
+  "Die einfache Übersetzung soll Dir helfen, einen Satz besser einzuordnen. *Was er in Deinem konkreten Fall bedeutet, hängt immer vom Zusammenhang ab. Dies stellt keine Rechtsberatung dar.*": {
+    "en": "The plain translation is meant to help you understand a sentence better. *What it means in your particular case always depends on the context. This is not legal advice.*"
+  },
+  "*Fehlt Dir hier eine Formulierung?* Dann schick uns gern eine Mail an *kontakt@kein-einzelfall.de*. Wir ergänzen die Liste und lassen sie gemeinsam mit euch weiter wachsen.": {
+    "en": "*Is a phrase missing?* Then send us an email at *kontakt@kein-einzelfall.de*. We will add to the list and let it keep growing together with you."
+  },
+  "Dein Antrag wurde ganz oder teilweise abgelehnt.": {
+    "en": "Your application was rejected in whole or in part."
+  },
+  "Die Behörde entscheidet, dass Du die beantragte Leistung oder Entscheidung ganz oder teilweise nicht bekommst.": {
+    "en": "The authority decides that you will not receive the requested benefit or decision, in whole or in part."
+  },
+  "Die Behörde meint, dass die vorgebrachten Gründe nicht ausreichen, um Deinem Antrag stattzugeben.": {
+    "en": "The authority believes that the reasons given are not sufficient to grant your application."
+  },
+  "Deinem Antrag wird ganz oder teilweise zugestimmt.": {
+    "en": "Your application is approved in whole or in part."
+  },
+  "Die Behörde hat entschieden, dass Du die beantragte Leistung ganz oder teilweise bekommst.": {
+    "en": "The authority has decided that you will receive the requested benefit in whole or in part."
+  },
+  "Du bekommst die Leistung nur bis zu dem angegebenen Zeitpunkt.": {
+    "en": "You will receive the benefit only until the date stated."
+  },
+  "Die Leistung wird zunächst ohne festes Enddatum gewährt. Sie kann später unter den gesetzlichen Voraussetzungen erneut geprüft oder verändert werden.": {
+    "en": "The benefit is granted for now without a fixed end date. It can be reviewed again or changed later under the legal requirements."
+  },
+  "Die Behörde meint, dass die Leistung nicht für einen früheren Zeitraum gezahlt oder anerkannt werden kann.": {
+    "en": "The authority believes that the benefit cannot be paid or recognised for an earlier period."
+  },
+  "Die Behörde ist zu dem Ergebnis gekommen, dass mindestens eine gesetzliche Voraussetzung nicht erfüllt ist.": {
+    "en": "The authority has concluded that at least one legal requirement is not met."
+  },
+  "Nach Auffassung der Behörde erfüllst Du die gesetzlichen Voraussetzungen für die beantragte Leistung nicht vollständig.": {
+    "en": "In the authority's view, you do not fully meet the legal requirements for the benefit you applied for."
+  },
+  "Die Behörde meint, dass Dein Anspruch ab dem genannten Zeitpunkt nicht mehr besteht.": {
+    "en": "The authority believes that your entitlement no longer exists from the date stated."
+  },
+  "Die Behörde ändert ihre bisherige Entscheidung ganz oder teilweise zu Deinen Gunsten.": {
+    "en": "The authority changes its previous decision in your favour, in whole or in part."
+  },
+  "Die Behörde gibt Dir in einem Teil Deines Widerspruchs recht, bleibt im Übrigen aber bei ihrer bisherigen Entscheidung.": {
+    "en": "The authority agrees with part of your objection but otherwise sticks to its previous decision."
+  },
+  "Die Behörde bleibt nach der erneuten Prüfung ganz oder teilweise bei ihrer bisherigen Entscheidung.": {
+    "en": "After reviewing it again, the authority sticks to its previous decision in whole or in part."
+  },
+  "Die Behörde ändert ihre frühere Entscheidung nicht.": {
+    "en": "The authority does not change its earlier decision."
+  },
+  "Nur die ausdrücklich genannten Punkte werden geändert. Der Rest des bisherigen Bescheids bleibt bestehen.": {
+    "en": "Only the points expressly named are changed. The rest of the previous notice still applies."
+  },
+  "Die Behörde stützt ihre Einschätzung auf die Informationen und Unterlagen, die ihr derzeit vorliegen.": {
+    "en": "The authority bases its assessment on the information and documents it currently has."
+  },
+  "Die Behörde hat mit den Informationen entschieden, die ihr bislang zur Verfügung standen.": {
+    "en": "The authority decided on the basis of the information it had available so far."
+  },
+  "Die Behörde meint, dass sie für ihre Entscheidung genügend Informationen gesammelt und geprüft hat.": {
+    "en": "The authority believes it has collected and reviewed enough information for its decision."
+  },
+  "Die Behörde meint, dass sie für ihre Entscheidung keine weiteren Ermittlungen benötigt.": {
+    "en": "The authority believes it does not need any further enquiries for its decision."
+  },
+  "Aus Sicht der Behörde muss der Sachverhalt nicht weiter untersucht werden.": {
+    "en": "In the authority's view, the facts do not need to be investigated any further."
+  },
+  "Die zusätzlichen Argumente oder Informationen haben die Behörde nicht dazu gebracht, ihre Einschätzung zu ändern.": {
+    "en": "The additional arguments or information have not led the authority to change its assessment."
+  },
+  "Die Behörde meint, dass noch Informationen oder Nachweise fehlen.": {
+    "en": "The authority believes that information or proof is still missing."
+  },
+  "Die Behörde möchte, dass Du noch etwas tust oder Informationen bzw. Unterlagen einreichst.": {
+    "en": "The authority would like you to do something more or to submit information or documents."
+  },
+  "Die Behörde benötigt noch die genannten Unterlagen von Dir.": {
+    "en": "The authority still needs the documents listed from you."
+  },
+  "Du bekommst die Möglichkeit, Deine Sicht zu erklären oder auf bestimmte Angaben zu reagieren.": {
+    "en": "You are given the opportunity to explain your view or to respond to certain statements."
+  },
+  "Die Behörde plant eine bestimmte Entscheidung, hat sie aber möglicherweise noch nicht endgültig getroffen.": {
+    "en": "The authority is planning a certain decision but may not have made it final yet."
+  },
+  "Bevor die Behörde entscheidet, kannst Du noch etwas dazu sagen.": {
+    "en": "Before the authority decides, you can still say something about it."
+  },
+  "Die Behörde meint, dass in diesem Fall keine vorherige Anhörung erforderlich war.": {
+    "en": "The authority believes that no prior hearing was necessary in this case."
+  },
+  "Die Entscheidung gilt zunächst, kann aber unter den genannten Voraussetzungen später überprüft oder verändert werden.": {
+    "en": "The decision applies for now, but it can be reviewed or changed later under the conditions stated."
+  },
+  "Du bekommst die Leistung zunächst, aber die endgültige Prüfung erfolgt später.": {
+    "en": "You will receive the benefit for now, but the final review will take place later."
+  },
+  "Eine frühere Entscheidung gilt ganz oder teilweise nicht mehr.": {
+    "en": "An earlier decision no longer applies, in whole or in part."
+  },
+  "Die bisherige Leistung soll ab dem genannten Zeitpunkt ganz oder teilweise beendet werden.": {
+    "en": "The previous benefit is to end, in whole or in part, from the date stated."
+  },
+  "Die Behörde meint, dass Du mehr Geld erhalten hast, als Dir ihrer Ansicht nach zustand.": {
+    "en": "The authority believes that you received more money than it thinks you were entitled to."
+  },
+  "Die Behörde verlangt das nach ihrer Berechnung zu viel gezahlte Geld zurück.": {
+    "en": "The authority is asking for the money it calculates was overpaid to be paid back."
+  },
+  "Die Behörde möchte einen Betrag, den sie von Dir fordert, mit Geld verrechnen, das Dir ansonsten ausgezahlt würde.": {
+    "en": "The authority wants to offset an amount it is claiming from you against money that would otherwise be paid out to you."
+  },
+  "Die normale Möglichkeit, sich gegen den Bescheid zu wehren, ist grundsätzlich vorbei. Ob trotzdem noch andere rechtliche Möglichkeiten bestehen, hängt vom Einzelfall ab.": {
+    "en": "The usual way of challenging the notice is generally over. Whether other legal options still exist depends on the individual case."
+  },
+  "Die Stelle will die Angelegenheit derzeit nicht weiterbearbeiten. Warum, ergibt sich aus dem Zusammenhang.": {
+    "en": "The office does not want to pursue the matter any further for now. The reason should be clear from the context."
+  },
+  "Die angeschriebene Stelle meint, dass sie für Dein Anliegen nicht zuständig ist.": {
+    "en": "The office you wrote to believes that it is not responsible for your request."
+  },
+  "Deine Unterlagen wurden an eine andere Stelle geschickt, die als zuständig angesehen wird.": {
+    "en": "Your documents were sent to another office that is considered responsible."
+  },
+  "Das Gesetz hat der Behörde mehrere mögliche Entscheidungen erlaubt und sie hat sich für eine davon entschieden.": {
+    "en": "The law allowed the authority several possible decisions, and it chose one of them."
+  },
+  "Die Behörde meint, dass das Gesetz ihr in diesem Punkt keinen Entscheidungsspielraum lässt.": {
+    "en": "The authority believes that the law leaves it no room for discretion on this point."
+  },
+  "Nach Auffassung der Behörde wird Dein Antrag so behandelt, als würdest Du ihn nicht weiterverfolgen. Aus dem Schreiben sollte hervorgehen, warum.": {
+    "en": "In the authority's view, your application is treated as if you were no longer pursuing it. The letter should explain why."
+  },
+  "Die Behörde meint, dass notwendige Mitwirkung fehlt und das Verfahren deshalb nicht weitergeführt werden kann.": {
+    "en": "The authority believes that necessary cooperation is missing and that the procedure therefore cannot continue."
+  },
+  "Obwohl Du Widerspruch eingelegt hast, kann die angegriffene Entscheidung grundsätzlich zunächst weiter umgesetzt werden.": {
+    "en": "Even though you have lodged an objection, the contested decision can generally still be carried out for now."
+  },
+  "Die Behörde möchte, dass die Entscheidung sofort umgesetzt wird, obwohl möglicherweise noch ein Rechtsbehelf läuft.": {
+    "en": "The authority wants the decision to be carried out immediately, even though a legal remedy may still be pending."
+  },
+  "Hier erklärt die Behörde, auf welcher rechtlichen Grundlage sie über Kosten entschieden hat.": {
+    "en": "Here the authority explains the legal basis on which it decided about costs."
   }
 }

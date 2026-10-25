@@ -341,7 +341,7 @@ class PageForm
                             Repeater::make('data.absaetze')
                                 ->label('Absätze')
                                 ->addActionLabel('Absatz hinzufügen')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media', 'typische_saetze'], true))
                                 ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen, '
                                     .'wie beim Fettschreiben in einer Nachricht. Er erscheint dann fett. '
                                     .'Eine Aufzählung: jede Zeile mit „- “ beginnen. '
@@ -357,7 +357,7 @@ class PageForm
                             // Überschrift und in jeder Sprache treffen.
                             TextInput::make('data.anker')
                                 ->label('Sprungziel (optional)')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'schritte', 'text_media'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'schritte', 'text_media', 'typische_saetze'], true))
                                 ->rules(['nullable', 'regex:/^[a-z0-9-]+$/'])
                                 ->helperText('Damit lässt sich direkt auf diesen Abschnitt verlinken, etwa '
                                     .'/fristen#moegliche-fristen. Nur Kleinbuchstaben, Ziffern und Bindestriche. '
@@ -425,6 +425,27 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'wall_of_shame')
                                 ->helperText('Steht fett auf dem Zettel, wenn alle Sätze gelesen sind, und unter '
                                     .'der Liste. Kann leer bleiben.'),
+
+                            // --- Typische Sätze (KEV-262) ---
+                            Repeater::make('data.formulierungen')
+                                ->label('Sätze')
+                                ->addActionLabel('Satz hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'typische_saetze')
+                                ->itemLabel(fn (array $state) => $state['satz'] ?? null)
+                                ->collapsible()
+                                ->collapsed()
+                                ->schema([
+                                    Textarea::make('satz')
+                                        ->label('Satz')
+                                        ->rows(2)
+                                        ->required()
+                                        ->helperText('Wie er im Schreiben steht, ohne Anführungszeichen (die setzt '
+                                            .'die Seite). Lücken mit … markieren.'),
+                                    Textarea::make('bedeutung')
+                                        ->label('Einfach übersetzt')
+                                        ->rows(3)
+                                        ->required(),
+                                ]),
 
                             // --- Unterseiten als Kacheln (KEV-156) ---
                             Toggle::make('data.aufrufe')

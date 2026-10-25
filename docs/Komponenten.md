@@ -2551,3 +2551,33 @@ mit Stand als Überzeile; neues Projekt = neuer Seeder mit Konstanten und
 `abschnitte()`). Alle Projekte tragen vorerst das Bild der Übersicht
 (`Titelbilder::DATEI` → `projekte.webp`, Kevin: „Nutze bei Projekte erst mal
 überall das gleiche Hero Bild“); ANUAS hatte bis dahin den Platzhalter.
+
+
+## 42. Typische Sätze – einfach übersetzt (KEV-262, 25.10.2026)
+
+Taddi hat ihre geplante Kategorie „7. Typische Sätze“ aufgelöst: Die Sätze
+stehen unter dem Glossar ihrer Kategorie (Blöcke 3 bis 6 in „Klartext statt
+Fachsprache“). Dafür der Baustein `typische_saetze`
+(`resources/views/components/blocks/typische-saetze.blade.php`): Überschrift,
+Einleitung (Absätze mit `*fett*`, klappt nicht ein) und `formulierungen`, eine
+Liste aus `satz` und `bedeutung`, als Karten in zwei Spalten. Der Satz steht in
+Anführungszeichen, die die Seite setzt; davor „Einfach übersetzt:“.
+
+- **Anlegen:** `GlossarSeite::saetzeAnlegen()` hängt den Baustein ans Ende einer
+  Glossar-Seite, wenn sie `SAETZE_AUS` setzt (Herkunft für Taddis Einleitung,
+  „Hier findest Du typische Formulierungen aus …“) und unter ihrem Slug Sätze
+  in `database/seeders/data/typische-saetze.json` stehen. Neue Glossar-Seiten
+  bekommen ihn beim Anlegen. Hat die Seite schon einen, passiert nichts.
+  Stand: „Behörden & Bescheide“ (47 Sätze); für Gericht & Verfahren,
+  Medizinische Berichte & Gutachten und Sozialrecht & Hilfesystem liegen die
+  Sätze in derselben Datei, die Seiten gibt es noch nicht.
+- **Sprung:** Das Glossar zeigt unter der Buchstabenleiste „Zu den typischen
+  Sätzen“, wenn die Seite den Baustein hat. Sprungziel fest `typische-saetze`.
+- **Englisch:** Übersetzt wird nur `bedeutung` (in `TEXT_FELDER` des
+  `UebersetzungenSeeder`); der Satz bleibt deutsch und trägt `lang="de"`.
+- **Suche:** Die Websuche findet die Sätze über den Fließtext der Bausteine.
+- **Pflege im Panel:** Einleitung als Absätze, Sätze als zugeklappte Liste
+  (Kopfzeile = Satz), je „Satz“ und „Einfach übersetzt“.
+
+Tests: `TypischeSaetzeTest`.
+

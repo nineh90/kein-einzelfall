@@ -77,7 +77,8 @@
 
         // Schritte und Text mit Bild mit Sprungziel, wie die Textabschnitte
         // (KEV-152: die Kachel „Frist bekommen – Was jetzt?“ springt dorthin).
-        if (in_array($block->typ, ['schritte', 'text_media'], true)) {
+        // Die typischen Sätze (KEV-262) springt das Glossar darüber an.
+        if (in_array($block->typ, ['schritte', 'text_media', 'typische_saetze'], true)) {
             $attribute['anker'] = $block->anker();
         }
     @endphp

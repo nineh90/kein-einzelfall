@@ -762,6 +762,25 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Zu klären:** Die Seite ist für Suchmaschinen offen wie die anderen
     Glossare. Damit kann sie auch bei Suchen nach Szenebegriffen auftauchen;
     falls das nicht gewollt ist, im Panel „Von Suchmaschinen ausschließen“.
+- [ ] **Typische Sätze (KEV-262), bitte ansehen.** Taddis „7. Typische Sätze –
+  einfach übersetzt“ ist keine eigene Seite, sondern steht wie gewünscht unter
+  dem Glossar der jeweiligen Kategorie. Auf /behoerden-und-bescheide jetzt
+  unter den 128 Begriffen: ihre Einleitung und 47 Sätze, je als Karte mit
+  „Einfach übersetzt:“. Unter der Buchstabenleiste führt „Zu den typischen
+  Sätzen“ dorthin, direkt verlinkbar als /behoerden-und-bescheide#typische-saetze.
+  Pflegen: unter „Seiten“ → „Behörden & Bescheide“, Baustein „Typische Sätze –
+  einfach übersetzt“ (Einleitung, Sätze einzeln).
+  - **Von uns eingesetzt:** Ihr Platzhalter „XXXX Kategorie einsetzen XXX“ heißt
+    hier „aus *Bescheiden und Behördenschreiben*“ (wie in der Einleitung der
+    Seite), fett wie bei ihr. Bitte bestätigen oder Wunschwort nennen.
+  - **Korrigiert:** „Dies stellt keine Rechtsberatung *da*“ → „*dar*“.
+  - **Du groß:** Die Sätze schreiben „Du/Dein“ groß wie Taddis Dokument, die
+    Einleitung der Seite darüber klein („du“). Soll das vereinheitlicht werden?
+  - **Englisch:** Der Satz bleibt deutsch (so steht er im Brief), übersetzt ist
+    nur die Erklärung; ein Satz in der Einleitung sagt das. Ungeprüft.
+  - Die Sätze für Gericht & Verfahren (53), Medizinische Berichte & Gutachten
+    (60) und Sozialrecht & Hilfesystem (61) liegen bereit und erscheinen, sobald
+    es diese Seiten gibt.
 - [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
   eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
   Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle

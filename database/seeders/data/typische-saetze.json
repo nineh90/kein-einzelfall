@@ -1,0 +1,894 @@
+{
+  "behoerden-und-bescheide": [
+    {
+      "satz": "Ihrem Antrag konnte nicht entsprochen werden.",
+      "bedeutung": "Dein Antrag wurde ganz oder teilweise abgelehnt."
+    },
+    {
+      "satz": "Der Antrag wird abgelehnt.",
+      "bedeutung": "Die Behörde entscheidet, dass Du die beantragte Leistung oder Entscheidung ganz oder teilweise nicht bekommst."
+    },
+    {
+      "satz": "Der Antrag wird als unbegründet abgelehnt.",
+      "bedeutung": "Die Behörde meint, dass die vorgebrachten Gründe nicht ausreichen, um Deinem Antrag stattzugeben."
+    },
+    {
+      "satz": "Dem Antrag wird stattgegeben.",
+      "bedeutung": "Deinem Antrag wird ganz oder teilweise zugestimmt."
+    },
+    {
+      "satz": "Die Leistung wird bewilligt.",
+      "bedeutung": "Die Behörde hat entschieden, dass Du die beantragte Leistung ganz oder teilweise bekommst."
+    },
+    {
+      "satz": "Die Leistung wird befristet gewährt.",
+      "bedeutung": "Du bekommst die Leistung nur bis zu dem angegebenen Zeitpunkt."
+    },
+    {
+      "satz": "Die Leistung wird bis auf Weiteres bewilligt.",
+      "bedeutung": "Die Leistung wird zunächst ohne festes Enddatum gewährt. Sie kann später unter den gesetzlichen Voraussetzungen erneut geprüft oder verändert werden."
+    },
+    {
+      "satz": "Eine rückwirkende Gewährung kommt nicht in Betracht.",
+      "bedeutung": "Die Behörde meint, dass die Leistung nicht für einen früheren Zeitraum gezahlt oder anerkannt werden kann."
+    },
+    {
+      "satz": "Die Voraussetzungen liegen nicht vor.",
+      "bedeutung": "Die Behörde ist zu dem Ergebnis gekommen, dass mindestens eine gesetzliche Voraussetzung nicht erfüllt ist."
+    },
+    {
+      "satz": "Die Anspruchsvoraussetzungen sind nicht erfüllt.",
+      "bedeutung": "Nach Auffassung der Behörde erfüllst Du die gesetzlichen Voraussetzungen für die beantragte Leistung nicht vollständig."
+    },
+    {
+      "satz": "Die Voraussetzungen sind ab dem … nicht mehr erfüllt.",
+      "bedeutung": "Die Behörde meint, dass Dein Anspruch ab dem genannten Zeitpunkt nicht mehr besteht."
+    },
+    {
+      "satz": "Dem Widerspruch wird abgeholfen.",
+      "bedeutung": "Die Behörde ändert ihre bisherige Entscheidung ganz oder teilweise zu Deinen Gunsten."
+    },
+    {
+      "satz": "Dem Widerspruch wird teilweise abgeholfen.",
+      "bedeutung": "Die Behörde gibt Dir in einem Teil Deines Widerspruchs recht, bleibt im Übrigen aber bei ihrer bisherigen Entscheidung."
+    },
+    {
+      "satz": "Der Widerspruch wird zurückgewiesen.",
+      "bedeutung": "Die Behörde bleibt nach der erneuten Prüfung ganz oder teilweise bei ihrer bisherigen Entscheidung."
+    },
+    {
+      "satz": "Es verbleibt bei der bisherigen Entscheidung.",
+      "bedeutung": "Die Behörde ändert ihre frühere Entscheidung nicht."
+    },
+    {
+      "satz": "Der Bescheid ergeht im Übrigen unverändert.",
+      "bedeutung": "Nur die ausdrücklich genannten Punkte werden geändert. Der Rest des bisherigen Bescheids bleibt bestehen."
+    },
+    {
+      "satz": "Nach Aktenlage …",
+      "bedeutung": "Die Behörde stützt ihre Einschätzung auf die Informationen und Unterlagen, die ihr derzeit vorliegen."
+    },
+    {
+      "satz": "Die Entscheidung beruht auf den vorliegenden Unterlagen.",
+      "bedeutung": "Die Behörde hat mit den Informationen entschieden, die ihr bislang zur Verfügung standen."
+    },
+    {
+      "satz": "Der Sachverhalt wurde abschließend geprüft.",
+      "bedeutung": "Die Behörde meint, dass sie für ihre Entscheidung genügend Informationen gesammelt und geprüft hat."
+    },
+    {
+      "satz": "Eine weitere Sachaufklärung ist nicht veranlasst.",
+      "bedeutung": "Die Behörde meint, dass sie für ihre Entscheidung keine weiteren Ermittlungen benötigt."
+    },
+    {
+      "satz": "Weitere Ermittlungen sind nicht veranlasst.",
+      "bedeutung": "Aus Sicht der Behörde muss der Sachverhalt nicht weiter untersucht werden."
+    },
+    {
+      "satz": "Die geltend gemachten Gründe führen zu keiner anderen Bewertung.",
+      "bedeutung": "Die zusätzlichen Argumente oder Informationen haben die Behörde nicht dazu gebracht, ihre Einschätzung zu ändern."
+    },
+    {
+      "satz": "Die Unterlagen reichen für eine Entscheidung nicht aus.",
+      "bedeutung": "Die Behörde meint, dass noch Informationen oder Nachweise fehlen."
+    },
+    {
+      "satz": "Es wird um Mitwirkung gebeten.",
+      "bedeutung": "Die Behörde möchte, dass Du noch etwas tust oder Informationen bzw. Unterlagen einreichst."
+    },
+    {
+      "satz": "Sie werden aufgefordert, folgende Unterlagen nachzureichen.",
+      "bedeutung": "Die Behörde benötigt noch die genannten Unterlagen von Dir."
+    },
+    {
+      "satz": "Bitte nehmen Sie hierzu Stellung.",
+      "bedeutung": "Du bekommst die Möglichkeit, Deine Sicht zu erklären oder auf bestimmte Angaben zu reagieren."
+    },
+    {
+      "satz": "Es ist beabsichtigt …",
+      "bedeutung": "Die Behörde plant eine bestimmte Entscheidung, hat sie aber möglicherweise noch nicht endgültig getroffen."
+    },
+    {
+      "satz": "Vor Erlass des Bescheides erhalten Sie Gelegenheit zur Stellungnahme.",
+      "bedeutung": "Bevor die Behörde entscheidet, kannst Du noch etwas dazu sagen."
+    },
+    {
+      "satz": "Von einer Anhörung konnte abgesehen werden.",
+      "bedeutung": "Die Behörde meint, dass in diesem Fall keine vorherige Anhörung erforderlich war."
+    },
+    {
+      "satz": "Die Entscheidung ergeht unter Vorbehalt.",
+      "bedeutung": "Die Entscheidung gilt zunächst, kann aber unter den genannten Voraussetzungen später überprüft oder verändert werden."
+    },
+    {
+      "satz": "Die Bewilligung erfolgt vorläufig.",
+      "bedeutung": "Du bekommst die Leistung zunächst, aber die endgültige Prüfung erfolgt später."
+    },
+    {
+      "satz": "Der Bescheid wird aufgehoben.",
+      "bedeutung": "Eine frühere Entscheidung gilt ganz oder teilweise nicht mehr."
+    },
+    {
+      "satz": "Die Leistung wird mit Wirkung zum … entzogen.",
+      "bedeutung": "Die bisherige Leistung soll ab dem genannten Zeitpunkt ganz oder teilweise beendet werden."
+    },
+    {
+      "satz": "Es besteht eine Überzahlung.",
+      "bedeutung": "Die Behörde meint, dass Du mehr Geld erhalten hast, als Dir ihrer Ansicht nach zustand."
+    },
+    {
+      "satz": "Der überzahlte Betrag ist zu erstatten.",
+      "bedeutung": "Die Behörde verlangt das nach ihrer Berechnung zu viel gezahlte Geld zurück."
+    },
+    {
+      "satz": "Die Forderung wird mit Ihren Ansprüchen verrechnet.",
+      "bedeutung": "Die Behörde möchte einen Betrag, den sie von Dir fordert, mit Geld verrechnen, das Dir ansonsten ausgezahlt würde."
+    },
+    {
+      "satz": "Der Bescheid ist bestandskräftig.",
+      "bedeutung": "Die normale Möglichkeit, sich gegen den Bescheid zu wehren, ist grundsätzlich vorbei. Ob trotzdem noch andere rechtliche Möglichkeiten bestehen, hängt vom Einzelfall ab."
+    },
+    {
+      "satz": "Von einer weiteren Bearbeitung wird abgesehen.",
+      "bedeutung": "Die Stelle will die Angelegenheit derzeit nicht weiterbearbeiten. Warum, ergibt sich aus dem Zusammenhang."
+    },
+    {
+      "satz": "Eine Zuständigkeit ist hier nicht gegeben.",
+      "bedeutung": "Die angeschriebene Stelle meint, dass sie für Dein Anliegen nicht zuständig ist."
+    },
+    {
+      "satz": "Der Vorgang wurde an die zuständige Stelle weitergeleitet.",
+      "bedeutung": "Deine Unterlagen wurden an eine andere Stelle geschickt, die als zuständig angesehen wird."
+    },
+    {
+      "satz": "Von dem eingeräumten Ermessen wurde Gebrauch gemacht.",
+      "bedeutung": "Das Gesetz hat der Behörde mehrere mögliche Entscheidungen erlaubt und sie hat sich für eine davon entschieden."
+    },
+    {
+      "satz": "Eine Ermessensentscheidung war nicht zu treffen.",
+      "bedeutung": "Die Behörde meint, dass das Gesetz ihr in diesem Punkt keinen Entscheidungsspielraum lässt."
+    },
+    {
+      "satz": "Der Antrag gilt als zurückgenommen.",
+      "bedeutung": "Nach Auffassung der Behörde wird Dein Antrag so behandelt, als würdest Du ihn nicht weiterverfolgen. Aus dem Schreiben sollte hervorgehen, warum."
+    },
+    {
+      "satz": "Das Verfahren wird wegen fehlender Mitwirkung beendet.",
+      "bedeutung": "Die Behörde meint, dass notwendige Mitwirkung fehlt und das Verfahren deshalb nicht weitergeführt werden kann."
+    },
+    {
+      "satz": "Der Widerspruch hat keine aufschiebende Wirkung.",
+      "bedeutung": "Obwohl Du Widerspruch eingelegt hast, kann die angegriffene Entscheidung grundsätzlich zunächst weiter umgesetzt werden."
+    },
+    {
+      "satz": "Die sofortige Vollziehung wird angeordnet.",
+      "bedeutung": "Die Behörde möchte, dass die Entscheidung sofort umgesetzt wird, obwohl möglicherweise noch ein Rechtsbehelf läuft."
+    },
+    {
+      "satz": "Die Kostenentscheidung beruht auf …",
+      "bedeutung": "Hier erklärt die Behörde, auf welcher rechtlichen Grundlage sie über Kosten entschieden hat."
+    }
+  ],
+  "gericht-und-verfahren": [
+    {
+      "satz": "Die Klage ist zulässig.",
+      "bedeutung": "Die formalen Voraussetzungen dafür, dass das Gericht die Klage prüfen kann, sind erfüllt."
+    },
+    {
+      "satz": "Die Klage ist unzulässig.",
+      "bedeutung": "Das Gericht prüft die Sache nicht vollständig inhaltlich, weil eine Voraussetzung für das gerichtliche Verfahren fehlt."
+    },
+    {
+      "satz": "Die Klage ist begründet.",
+      "bedeutung": "Das Gericht hält die Klage inhaltlich ganz oder teilweise für berechtigt."
+    },
+    {
+      "satz": "Die Klage ist zulässig, aber unbegründet.",
+      "bedeutung": "Die Klage durfte so erhoben werden, aber das Gericht hält den geltend gemachten Anspruch inhaltlich nicht für gegeben."
+    },
+    {
+      "satz": "Die Klage wird abgewiesen.",
+      "bedeutung": "Das Gericht gibt der Klage nicht oder nicht vollständig statt."
+    },
+    {
+      "satz": "Der Klage wird stattgegeben.",
+      "bedeutung": "Das Gericht entscheidet ganz oder teilweise im Sinne der klagenden Person."
+    },
+    {
+      "satz": "Die Berufung ist zulässig und begründet.",
+      "bedeutung": "Die Berufung durfte eingelegt werden und hat auch inhaltlich ganz oder teilweise Erfolg."
+    },
+    {
+      "satz": "Die Berufung wird zurückgewiesen.",
+      "bedeutung": "Das nächsthöhere Gericht ändert die angegriffene Entscheidung aufgrund der Berufung nicht."
+    },
+    {
+      "satz": "Die Revision wird zurückgewiesen.",
+      "bedeutung": "Das Revisionsgericht sieht keinen ausreichenden Grund, die angegriffene Entscheidung entsprechend dem Revisionsantrag zu ändern."
+    },
+    {
+      "satz": "Die Berufung wird zugelassen.",
+      "bedeutung": "Die Entscheidung kann unter den gesetzlichen Voraussetzungen vom nächsthöheren Gericht überprüft werden."
+    },
+    {
+      "satz": "Die Revision wird zugelassen.",
+      "bedeutung": "Die Entscheidung kann unter den gesetzlichen Voraussetzungen vom Bundessozialgericht überprüft werden."
+    },
+    {
+      "satz": "Die Revision wird nicht zugelassen.",
+      "bedeutung": "Das Gericht eröffnet mit seiner Entscheidung nicht unmittelbar den Weg zur Revision."
+    },
+    {
+      "satz": "Die Revision wird wegen grundsätzlicher Bedeutung zugelassen.",
+      "bedeutung": "Das Gericht meint, dass die Rechtssache eine grundsätzlich wichtige Rechtsfrage enthält, die höchstrichterlich geklärt werden kann."
+    },
+    {
+      "satz": "Die Beschwerde ist unzulässig.",
+      "bedeutung": "Die Voraussetzungen dafür, dass das Gericht die Beschwerde inhaltlich prüft, sind nicht erfüllt."
+    },
+    {
+      "satz": "Die Beschwerde ist unbegründet.",
+      "bedeutung": "Die Beschwerde durfte geprüft werden, hat inhaltlich aber keinen Erfolg."
+    },
+    {
+      "satz": "Die Sache ist entscheidungsreif.",
+      "bedeutung": "Das Gericht meint, dass genügend Informationen vorliegen, um eine Entscheidung treffen zu können."
+    },
+    {
+      "satz": "Der Sachverhalt ist aufgeklärt.",
+      "bedeutung": "Das Gericht meint, dass die für seine Entscheidung notwendigen Tatsachen ausreichend geklärt sind."
+    },
+    {
+      "satz": "Weitere Ermittlungen von Amts wegen sind nicht erforderlich.",
+      "bedeutung": "Das Gericht meint, dass es den Sachverhalt nicht weiter aufklären muss."
+    },
+    {
+      "satz": "Die Sache weist keine besonderen tatsächlichen oder rechtlichen Schwierigkeiten auf.",
+      "bedeutung": "Das Gericht hält den Fall weder bei den Tatsachen noch bei den rechtlichen Fragen für besonders schwierig."
+    },
+    {
+      "satz": "Das Gericht entscheidet durch Gerichtsbescheid.",
+      "bedeutung": "Das Sozialgericht entscheidet unter den gesetzlichen Voraussetzungen ohne mündliche Verhandlung durch Gerichtsbescheid."
+    },
+    {
+      "satz": "Es wird Gelegenheit zur Stellungnahme gegeben.",
+      "bedeutung": "Du kannst Dich noch zu bestimmten Unterlagen, Aussagen oder rechtlichen Fragen äußern."
+    },
+    {
+      "satz": "Die Beteiligten werden hierzu angehört.",
+      "bedeutung": "Bevor das Gericht weiter entscheidet, können die Beteiligten ihre Sicht dazu mitteilen."
+    },
+    {
+      "satz": "Es wird Beweis erhoben durch …",
+      "bedeutung": "Das Gericht möchte eine offene Frage mithilfe des genannten Beweismittels klären, zum Beispiel durch ein Gutachten oder eine Zeugenaussage."
+    },
+    {
+      "satz": "Der Beweisantrag wird abgelehnt.",
+      "bedeutung": "Das Gericht folgt dem Antrag, einen bestimmten Beweis zu erheben, nicht."
+    },
+    {
+      "satz": "Das Gericht sieht von einer weiteren Beweiserhebung ab.",
+      "bedeutung": "Das Gericht meint, dass keine weiteren Beweise benötigt werden."
+    },
+    {
+      "satz": "Nach Überzeugung des Gerichts …",
+      "bedeutung": "Das Gericht ist nach seiner Bewertung der vorliegenden Informationen und Beweise zu diesem Ergebnis gekommen."
+    },
+    {
+      "satz": "Die Kammer folgt den Ausführungen des Sachverständigen.",
+      "bedeutung": "Das Gericht hält die fachliche Einschätzung des Gutachtens für überzeugend und berücksichtigt sie bei seiner Entscheidung."
+    },
+    {
+      "satz": "Das Gutachten ist schlüssig und nachvollziehbar.",
+      "bedeutung": "Das Gericht hält Aufbau, Begründung und Schlussfolgerungen des Gutachtens für verständlich und widerspruchsfrei."
+    },
+    {
+      "satz": "Von einer persönlichen Anhörung wird abgesehen.",
+      "bedeutung": "Das Gericht möchte derzeit weiterverfahren oder entscheiden, ohne Dich persönlich anzuhören."
+    },
+    {
+      "satz": "Das persönliche Erscheinen wird angeordnet.",
+      "bedeutung": "Das Gericht verlangt, dass Du zu dem genannten Termin persönlich erscheinst, sofern die Anordnung nicht aufgehoben oder geändert wird."
+    },
+    {
+      "satz": "Die Sache wird vertagt.",
+      "bedeutung": "Die Verhandlung oder Entscheidung wird auf einen späteren Zeitpunkt verschoben."
+    },
+    {
+      "satz": "Das Verfahren ruht.",
+      "bedeutung": "Das Verfahren wird vorübergehend nicht weiterbetrieben, soll aber nicht endgültig beendet werden."
+    },
+    {
+      "satz": "Das Verfahren wird ausgesetzt.",
+      "bedeutung": "Das Gericht unterbricht das Verfahren vorübergehend, zum Beispiel weil zunächst eine andere Frage geklärt werden muss."
+    },
+    {
+      "satz": "Das Verfahren wird eingestellt.",
+      "bedeutung": "Das gerichtliche Verfahren wird beendet, ohne dass zwingend noch eine inhaltliche Entscheidung über die ursprüngliche Streitfrage getroffen wird."
+    },
+    {
+      "satz": "Der Rechtsstreit ist erledigt.",
+      "bedeutung": "Über die ursprüngliche Streitfrage muss das Gericht nicht mehr weiterentscheiden."
+    },
+    {
+      "satz": "Die Hauptsache ist erledigt.",
+      "bedeutung": "Der eigentliche Streitgegenstand besteht nicht mehr oder muss nicht mehr entschieden werden."
+    },
+    {
+      "satz": "Die Klage wird zurückgenommen.",
+      "bedeutung": "Die klagende Person erklärt, dass sie die Klage nicht weiterführen möchte."
+    },
+    {
+      "satz": "Das Anerkenntnis wird angenommen.",
+      "bedeutung": "Die Gegenseite hat einen Anspruch anerkannt und die klagende Person nimmt dieses Anerkenntnis an."
+    },
+    {
+      "satz": "Der Vergleich erledigt den Rechtsstreit.",
+      "bedeutung": "Die Beteiligten haben sich geeinigt. Über die dadurch erledigten Streitpunkte muss das Gericht nicht mehr entscheiden."
+    },
+    {
+      "satz": "Der Antrag auf einstweiligen Rechtsschutz wird abgelehnt.",
+      "bedeutung": "Das Gericht trifft die beantragte vorläufige Entscheidung nicht."
+    },
+    {
+      "satz": "Der Antrag auf Erlass einer einstweiligen Anordnung ist begründet.",
+      "bedeutung": "Das Gericht hält die Voraussetzungen für die beantragte vorläufige Regelung für erfüllt."
+    },
+    {
+      "satz": "Ein Anordnungsanspruch ist glaubhaft gemacht.",
+      "bedeutung": "Das Gericht hält es im Eilverfahren für ausreichend wahrscheinlich, dass der geltend gemachte Anspruch bestehen könnte."
+    },
+    {
+      "satz": "Ein Anordnungsgrund ist glaubhaft gemacht.",
+      "bedeutung": "Das Gericht hält es für ausreichend glaubhaft, dass eine schnelle gerichtliche Entscheidung notwendig ist."
+    },
+    {
+      "satz": "Ein Anordnungsgrund ist nicht glaubhaft gemacht.",
+      "bedeutung": "Das Gericht sieht die besondere Dringlichkeit für eine vorläufige Entscheidung nicht ausreichend belegt."
+    },
+    {
+      "satz": "Die aufschiebende Wirkung wird angeordnet.",
+      "bedeutung": "Die angegriffene Entscheidung darf vorläufig grundsätzlich nicht weiter umgesetzt werden."
+    },
+    {
+      "satz": "Die aufschiebende Wirkung wird wiederhergestellt.",
+      "bedeutung": "Eine zuvor entfallene oder beseitigte aufschiebende Wirkung wird durch das Gericht wieder hergestellt."
+    },
+    {
+      "satz": "Die Kosten des Verfahrens trägt …",
+      "bedeutung": "Das Gericht legt fest, wer die Kosten des Verfahrens tragen muss."
+    },
+    {
+      "satz": "Außergerichtliche Kosten sind nicht zu erstatten.",
+      "bedeutung": "Die Beteiligten bekommen ihre eigenen außerhalb des Gerichts entstandenen Kosten grundsätzlich nicht von der Gegenseite ersetzt."
+    },
+    {
+      "satz": "Die Beteiligten tragen ihre außergerichtlichen Kosten selbst.",
+      "bedeutung": "Jede Seite bezahlt ihre eigenen entsprechenden Kosten."
+    },
+    {
+      "satz": "Die Kosten werden gegeneinander aufgehoben.",
+      "bedeutung": "Grundsätzlich trägt jede Seite ihre eigenen Kosten; die genaue Wirkung hängt von der gerichtlichen Kostenentscheidung ab."
+    },
+    {
+      "satz": "Der Streitwert wird festgesetzt auf …",
+      "bedeutung": "Das Gericht legt den Geldwert fest, der für bestimmte Kostenberechnungen des Verfahrens maßgeblich ist."
+    },
+    {
+      "satz": "Die Entscheidung bleibt dem Schlussurteil vorbehalten.",
+      "bedeutung": "Über diesen Punkt entscheidet das Gericht noch nicht endgültig, sondern erst mit einer späteren abschließenden Entscheidung."
+    },
+    {
+      "satz": "Das Urteil ist vorläufig vollstreckbar.",
+      "bedeutung": "Die Entscheidung kann unter den genannten Voraussetzungen bereits umgesetzt werden, obwohl sie möglicherweise noch nicht rechtskräftig ist."
+    }
+  ],
+  "medizinische-berichte-und-gutachten": [
+    {
+      "satz": "Der Allgemeinzustand ist reduziert.",
+      "bedeutung": "Die behandelnde oder untersuchende Person beschreibt den allgemeinen körperlichen Zustand als beeinträchtigt. Wie stark und wodurch, muss aus dem übrigen Bericht hervorgehen."
+    },
+    {
+      "satz": "Es besteht ein unauffälliger Befund.",
+      "bedeutung": "Bei dieser Untersuchung wurde keine auffällige Abweichung festgestellt."
+    },
+    {
+      "satz": "Kein pathologischer Befund.",
+      "bedeutung": "Bei der beschriebenen Untersuchung wurde kein krankhafter Befund festgestellt."
+    },
+    {
+      "satz": "Es besteht kein Anhalt für …",
+      "bedeutung": "Die untersuchende Person hat keine ausreichenden Hinweise auf die genannte Erkrankung oder Auffälligkeit gefunden."
+    },
+    {
+      "satz": "Es ergeben sich Hinweise auf …",
+      "bedeutung": "Bestimmte Informationen oder Befunde sprechen dafür, dass die genannte Erkrankung oder Auffälligkeit vorliegen könnte."
+    },
+    {
+      "satz": "Es ergeben sich keine Hinweise auf …",
+      "bedeutung": "Bei der Untersuchung wurden keine ausreichenden Anzeichen für die genannte Erkrankung oder Auffälligkeit gefunden."
+    },
+    {
+      "satz": "Ein Ausschluss ist nicht möglich.",
+      "bedeutung": "Die genannte Erkrankung oder Ursache kann anhand der bisherigen Informationen nicht sicher ausgeschlossen werden."
+    },
+    {
+      "satz": "Differentialdiagnostisch ist … zu berücksichtigen.",
+      "bedeutung": "Neben der bisherigen Einschätzung kommt auch eine andere mögliche Ursache oder Diagnose infrage und sollte mitgedacht werden."
+    },
+    {
+      "satz": "Die Diagnose ist gesichert.",
+      "bedeutung": "Die behandelnde oder begutachtende Person hält die Diagnose aufgrund der vorliegenden medizinischen Informationen für bestätigt."
+    },
+    {
+      "satz": "Die Diagnose kann nicht bestätigt werden.",
+      "bedeutung": "Die vorhandenen Informationen reichen aus Sicht der untersuchenden Person nicht aus, um die bisher vermutete Diagnose zu bestätigen."
+    },
+    {
+      "satz": "Es besteht der Verdacht auf …",
+      "bedeutung": "Die genannte Erkrankung wird vermutet, ist aber noch nicht abschließend bestätigt."
+    },
+    {
+      "satz": "Anamnestisch berichtet die Patientin / der Patient …",
+      "bedeutung": "Das Folgende beruht auf dem, was die untersuchte Person selbst über ihre Krankengeschichte oder Beschwerden berichtet hat."
+    },
+    {
+      "satz": "Fremdanamnestisch wird berichtet …",
+      "bedeutung": "Die Information stammt nicht von der untersuchten Person selbst, sondern aus einer anderen Quelle."
+    },
+    {
+      "satz": "Die Beschwerden sind subjektiv.",
+      "bedeutung": "Die Beschwerden werden von der betroffenen Person selbst wahrgenommen und beschrieben. Der Begriff allein bedeutet nicht, dass die Beschwerden nicht bestehen."
+    },
+    {
+      "satz": "Die Beschwerden sind nicht objektivierbar.",
+      "bedeutung": "Mit den eingesetzten Untersuchungsmethoden konnte für die beschriebenen Beschwerden kein entsprechender messbarer oder feststellbarer Befund erhoben werden. Das bedeutet nicht automatisch, dass keine Beschwerden bestehen."
+    },
+    {
+      "satz": "Die Beschwerden sind glaubhaft geschildert.",
+      "bedeutung": "Die untersuchende Person hält die Beschreibung der Beschwerden für nachvollziehbar."
+    },
+    {
+      "satz": "Die Beschwerden lassen sich durch die Befunde nur teilweise erklären.",
+      "bedeutung": "Die festgestellten medizinischen Befunde erklären aus Sicht der untersuchenden Person nicht alle beschriebenen Beschwerden vollständig."
+    },
+    {
+      "satz": "Die Befunde korrelieren mit den angegebenen Beschwerden.",
+      "bedeutung": "Die festgestellten Befunde passen aus medizinischer Sicht zu den beschriebenen Beschwerden."
+    },
+    {
+      "satz": "Es besteht eine Diskrepanz zwischen Befund und Beschwerdeangaben.",
+      "bedeutung": "Die festgestellten Befunde und die beschriebenen Beschwerden passen aus Sicht der untersuchenden Person nicht vollständig zusammen."
+    },
+    {
+      "satz": "Die Angaben sind plausibel.",
+      "bedeutung": "Die Angaben erscheinen der untersuchenden Person nachvollziehbar."
+    },
+    {
+      "satz": "Die Angaben sind konsistent.",
+      "bedeutung": "Verschiedene Angaben, Beobachtungen und Befunde passen aus Sicht der begutachtenden Person weitgehend zusammen."
+    },
+    {
+      "satz": "Die Symptomatik ist chronifiziert.",
+      "bedeutung": "Die Beschwerden bestehen bereits länger und haben sich zu einem länger andauernden Krankheitsbild entwickelt."
+    },
+    {
+      "satz": "Die Beschwerden bestehen seit …",
+      "bedeutung": "Die Beschwerden werden seit dem genannten Zeitpunkt beschrieben oder dokumentiert."
+    },
+    {
+      "satz": "Der Befund ist unverändert.",
+      "bedeutung": "Im Vergleich zu einer früheren Untersuchung wurde keine wesentliche Veränderung festgestellt."
+    },
+    {
+      "satz": "Es zeigt sich eine Verschlechterung.",
+      "bedeutung": "Beschwerden oder Befunde haben sich im Vergleich zu früher ungünstig entwickelt."
+    },
+    {
+      "satz": "Es zeigt sich eine Besserung.",
+      "bedeutung": "Beschwerden oder Befunde haben sich im Vergleich zu früher günstig entwickelt."
+    },
+    {
+      "satz": "Es besteht weiterer Behandlungsbedarf.",
+      "bedeutung": "Aus medizinischer Sicht wird weitere Behandlung für erforderlich gehalten."
+    },
+    {
+      "satz": "Eine weitere fachärztliche Abklärung wird empfohlen.",
+      "bedeutung": "Die behandelnde oder untersuchende Person empfiehlt, die Beschwerden oder Befunde noch durch eine entsprechende Fachärztin oder einen Facharzt untersuchen zu lassen."
+    },
+    {
+      "satz": "Eine stationäre Behandlung wird empfohlen.",
+      "bedeutung": "Aus fachlicher Sicht wird eine Behandlung in einer Klinik oder anderen stationären Einrichtung empfohlen."
+    },
+    {
+      "satz": "Die Erkrankung ist derzeit nicht ausreichend stabil.",
+      "bedeutung": "Der gesundheitliche Zustand wird momentan noch als zu schwankend oder beeinträchtigt eingeschätzt."
+    },
+    {
+      "satz": "Das Leistungsvermögen ist eingeschränkt.",
+      "bedeutung": "Aus medizinischer oder sozialmedizinischer Sicht können bestimmte Tätigkeiten oder Belastungen nicht mehr uneingeschränkt ausgeführt werden."
+    },
+    {
+      "satz": "Die Leistungsfähigkeit ist aufgehoben.",
+      "bedeutung": "Im jeweils beschriebenen Bereich wird aktuell keine ausreichende Leistungsfähigkeit mehr gesehen."
+    },
+    {
+      "satz": "Die Leistungsfähigkeit ist teilweise erhalten.",
+      "bedeutung": "Bestimmte Tätigkeiten oder Belastungen sind noch möglich, andere dagegen eingeschränkt."
+    },
+    {
+      "satz": "Leichte Tätigkeiten sind möglich.",
+      "bedeutung": "Die begutachtende Person hält bestimmte körperlich weniger belastende Tätigkeiten grundsätzlich für möglich. Welche Einschränkungen zusätzlich gelten, muss aus dem vollständigen Leistungsbild hervorgehen."
+    },
+    {
+      "satz": "Eine Tätigkeit ist sechs Stunden und mehr möglich.",
+      "bedeutung": "Im betreffenden sozialmedizinischen Bewertungssystem wird eingeschätzt, dass die beschriebene Tätigkeit unter den genannten Bedingungen mindestens sechs Stunden täglich möglich ist."
+    },
+    {
+      "satz": "Das quantitative Leistungsvermögen beträgt …",
+      "bedeutung": "Hier wird eingeschätzt, wie viele Stunden pro Tag eine Tätigkeit aus gesundheitlicher Sicht möglich ist."
+    },
+    {
+      "satz": "Qualitative Leistungseinschränkungen bestehen hinsichtlich …",
+      "bedeutung": "Bestimmte Arten von Tätigkeiten, Belastungen oder Arbeitsbedingungen sind aus gesundheitlicher Sicht eingeschränkt."
+    },
+    {
+      "satz": "Es bestehen erhebliche qualitative Leistungseinschränkungen.",
+      "bedeutung": "Es gibt mehrere oder deutliche gesundheitliche Einschränkungen hinsichtlich der Art von Tätigkeiten oder Belastungen."
+    },
+    {
+      "satz": "Das positive Leistungsvermögen umfasst …",
+      "bedeutung": "Hier wird beschrieben, welche Tätigkeiten und Belastungen aus gesundheitlicher Sicht noch möglich sind."
+    },
+    {
+      "satz": "Das negative Leistungsvermögen umfasst …",
+      "bedeutung": "Hier wird beschrieben, welche Tätigkeiten oder Belastungen aus gesundheitlicher Sicht vermieden werden sollten oder nicht mehr möglich sind."
+    },
+    {
+      "satz": "Das Restleistungsvermögen beträgt …",
+      "bedeutung": "Hier wird beschrieben, in welchem Umfang aus sozialmedizinischer Sicht noch Leistungsfähigkeit besteht."
+    },
+    {
+      "satz": "Eine Tätigkeit unter Zeitdruck ist nicht zumutbar.",
+      "bedeutung": "Tätigkeiten mit starkem oder dauerhaftem Zeitdruck werden aus gesundheitlicher Sicht nicht empfohlen bzw. nicht als zumutbar eingeschätzt."
+    },
+    {
+      "satz": "Nachtschicht ist nicht zumutbar.",
+      "bedeutung": "Aus gesundheitlicher Sicht soll keine Arbeit in Nachtschicht erfolgen."
+    },
+    {
+      "satz": "Publikumsverkehr ist nur eingeschränkt möglich.",
+      "bedeutung": "Tätigkeiten mit regelmäßigem Kontakt zu vielen Menschen werden nur eingeschränkt als möglich eingeschätzt."
+    },
+    {
+      "satz": "Die Wegefähigkeit ist erhalten.",
+      "bedeutung": "Die begutachtende Person hält die für den jeweiligen Bewertungszusammenhang erforderlichen Wege grundsätzlich für bewältigbar."
+    },
+    {
+      "satz": "Die Prognose ist günstig.",
+      "bedeutung": "Die fachliche Einschätzung geht davon aus, dass eine Verbesserung oder ein günstiger Verlauf möglich bzw. wahrscheinlich erscheint. Eine Prognose ist keine Garantie."
+    },
+    {
+      "satz": "Die Prognose ist ungünstig.",
+      "bedeutung": "Die fachliche Einschätzung erwartet eher keine günstige Entwicklung oder nur begrenzte Verbesserungsmöglichkeiten."
+    },
+    {
+      "satz": "Die Prognose ist ungewiss.",
+      "bedeutung": "Es lässt sich derzeit nicht zuverlässig einschätzen, wie sich die Erkrankung oder Einschränkung entwickeln wird."
+    },
+    {
+      "satz": "Eine wesentliche Besserung ist nicht zu erwarten.",
+      "bedeutung": "Die begutachtende Person erwartet derzeit keine deutliche gesundheitliche Verbesserung."
+    },
+    {
+      "satz": "Eine Rehabilitationsbedürftigkeit besteht.",
+      "bedeutung": "Aus sozialmedizinischer Sicht wird eine Rehabilitation als erforderlich angesehen."
+    },
+    {
+      "satz": "Eine Rehabilitationsfähigkeit besteht.",
+      "bedeutung": "Die Person wird aus medizinischer Sicht grundsätzlich als ausreichend belastbar eingeschätzt, um an einer geeigneten Rehabilitationsmaßnahme teilzunehmen."
+    },
+    {
+      "satz": "Es besteht keine ausreichende Rehabilitationsprognose.",
+      "bedeutung": "Die begutachtende Stelle erwartet derzeit nicht mit ausreichender Wahrscheinlichkeit, dass die vorgesehenen Rehabilitationsziele erreicht werden können."
+    },
+    {
+      "satz": "Aus gutachterlicher Sicht …",
+      "bedeutung": "Das Folgende ist die fachliche Bewertung der begutachtenden Person."
+    },
+    {
+      "satz": "Die erhobenen Befunde sprechen für …",
+      "bedeutung": "Die Untersuchungsergebnisse unterstützen aus fachlicher Sicht die genannte Einschätzung oder Diagnose."
+    },
+    {
+      "satz": "Die erhobenen Befunde sprechen gegen …",
+      "bedeutung": "Die Untersuchungsergebnisse passen aus fachlicher Sicht eher nicht zu der genannten Einschätzung oder Diagnose."
+    },
+    {
+      "satz": "Ein kausaler Zusammenhang ist nicht hinreichend wahrscheinlich.",
+      "bedeutung": "Die begutachtende Person hält den notwendigen Zusammenhang zwischen dem Ereignis und der Gesundheitsstörung nach dem für das Verfahren geltenden Maßstab nicht für ausreichend belegt."
+    },
+    {
+      "satz": "Ein Zusammenhang kann nicht ausgeschlossen werden.",
+      "bedeutung": "Ein Zusammenhang ist möglich, wurde mit diesem Satz allein aber noch nicht als nachgewiesen oder ausreichend wahrscheinlich bewertet."
+    },
+    {
+      "satz": "Der Zusammenhang ist wahrscheinlich.",
+      "bedeutung": "Aus fachlicher Sicht sprechen mehr Gründe für als gegen den angenommenen Zusammenhang – welche rechtliche Bedeutung das hat, hängt vom jeweiligen Verfahren ab."
+    },
+    {
+      "satz": "Der Zusammenhang ist nicht feststellbar.",
+      "bedeutung": "Nach den vorliegenden Informationen kann keine ausreichend sichere Aussage über einen Zusammenhang getroffen werden."
+    },
+    {
+      "satz": "Ein Vollbeweis kann nicht geführt werden.",
+      "bedeutung": "Die zu beweisende Tatsache kann nach Auffassung der begutachtenden oder entscheidenden Stelle mit dem hierfür geforderten Beweismaß nicht festgestellt werden."
+    }
+  ],
+  "sozialrecht-und-hilfesystem": [
+    {
+      "satz": "Ein Anspruch auf die beantragte Leistung besteht nicht.",
+      "bedeutung": "Der Leistungsträger meint, dass die gesetzlichen Voraussetzungen für die beantragte Leistung nicht erfüllt sind."
+    },
+    {
+      "satz": "Die Leistung wird dem Grunde nach anerkannt.",
+      "bedeutung": "Grundsätzlich wird anerkannt, dass ein Anspruch besteht. Umfang oder Höhe können noch gesondert festgelegt werden."
+    },
+    {
+      "satz": "Die Leistung wird als Sachleistung erbracht.",
+      "bedeutung": "Du bekommst nicht einfach Geld ausgezahlt, sondern die benötigte Leistung wird unmittelbar bereitgestellt oder über einen Leistungserbringer erbracht."
+    },
+    {
+      "satz": "Die Leistung wird als Geldleistung erbracht.",
+      "bedeutung": "Die bewilligte Sozialleistung wird als Geldbetrag ausgezahlt."
+    },
+    {
+      "satz": "Eine Geldleistung ist nicht vorgesehen.",
+      "bedeutung": "Die betreffende Leistung soll nach dem dafür geltenden Recht nicht als Geldzahlung erbracht werden."
+    },
+    {
+      "satz": "Die Kostenübernahme wird abgelehnt.",
+      "bedeutung": "Der Leistungsträger übernimmt die beantragten Kosten nicht."
+    },
+    {
+      "satz": "Eine Kostenübernahme erfolgt nur im Rahmen der gesetzlichen Voraussetzungen.",
+      "bedeutung": "Kosten werden nur übernommen, wenn die dafür geltenden gesetzlichen Bedingungen erfüllt sind."
+    },
+    {
+      "satz": "Die Leistung ist zweckgebunden.",
+      "bedeutung": "Das Geld oder die Leistung darf nur für den vorgesehenen Zweck verwendet werden."
+    },
+    {
+      "satz": "Die Leistung ist einkommens- und vermögensabhängig.",
+      "bedeutung": "Einkommen und/oder Vermögen können Einfluss darauf haben, ob oder in welcher Höhe die Leistung gewährt wird."
+    },
+    {
+      "satz": "Einkommen und Vermögen sind zu berücksichtigen.",
+      "bedeutung": "Bei der Entscheidung werden nach den jeweiligen gesetzlichen Regeln Einkommen und Vermögen geprüft."
+    },
+    {
+      "satz": "Ein Eigenanteil ist zu leisten.",
+      "bedeutung": "Einen Teil der Kosten musst Du nach den geltenden Regeln selbst tragen."
+    },
+    {
+      "satz": "Ein vorrangiger Leistungsträger ist zuständig.",
+      "bedeutung": "Die Stelle meint, dass zunächst eine andere Behörde oder ein anderes Sozialleistungssystem für die Leistung verantwortlich ist."
+    },
+    {
+      "satz": "Die Leistung ist vorrangig durch einen anderen Träger zu erbringen.",
+      "bedeutung": "Nach Auffassung der Stelle muss zunächst ein anderer Leistungsträger die Leistung prüfen oder erbringen."
+    },
+    {
+      "satz": "Die Leistung ist nachrangig.",
+      "bedeutung": "Diese Leistung kommt grundsätzlich erst in Betracht, wenn vorrangige Ansprüche oder andere zuständige Leistungssysteme nicht greifen."
+    },
+    {
+      "satz": "Es wird auf vorrangige Leistungen verwiesen.",
+      "bedeutung": "Du sollst nach Auffassung der Stelle zunächst prüfen oder beantragen, ob eine andere Sozialleistung zuständig ist."
+    },
+    {
+      "satz": "Der Antrag wurde an den zuständigen Rehabilitationsträger weitergeleitet.",
+      "bedeutung": "Die zuerst angeschriebene Stelle hält einen anderen Rehabilitationsträger für zuständig und hat Deinen Antrag dorthin weitergegeben."
+    },
+    {
+      "satz": "Der Rehabilitationsbedarf wird umfassend festgestellt.",
+      "bedeutung": "Es soll geprüft werden, welche Rehabilitations- und Teilhabeleistungen Du insgesamt benötigst."
+    },
+    {
+      "satz": "Mehrere Rehabilitationsträger sind beteiligt.",
+      "bedeutung": "Für unterschiedliche Teile Deines Unterstützungsbedarfs können mehrere Leistungsträger zuständig sein."
+    },
+    {
+      "satz": "Ein Teilhabeplanverfahren wird durchgeführt.",
+      "bedeutung": "Die erforderlichen Leistungen und beteiligten Rehabilitationsträger werden koordiniert und in einem Teilhabeplan zusammengeführt."
+    },
+    {
+      "satz": "Ein Teilhabeplan ist zu erstellen.",
+      "bedeutung": "Mehrere notwendige Leistungen oder beteiligte Rehabilitationsträger müssen koordiniert und dokumentiert werden."
+    },
+    {
+      "satz": "Eine Teilhabeplankonferenz ist nicht erforderlich.",
+      "bedeutung": "Die zuständige Stelle meint, dass die Abstimmung ohne eine gemeinsame Konferenz erfolgen kann."
+    },
+    {
+      "satz": "Eine Gesamtplankonferenz wird durchgeführt.",
+      "bedeutung": "Im Bereich der Eingliederungshilfe werden der Bedarf, die Wünsche und mögliche Leistungen gemeinsam mit den beteiligten Stellen besprochen."
+    },
+    {
+      "satz": "Der individuelle Bedarf ist festzustellen.",
+      "bedeutung": "Es muss konkret geprüft werden, welche Unterstützung Du persönlich benötigst."
+    },
+    {
+      "satz": "Der festgestellte Bedarf ist durch die bewilligten Leistungen gedeckt.",
+      "bedeutung": "Die zuständige Stelle meint, dass die bereits bewilligte Unterstützung ausreicht."
+    },
+    {
+      "satz": "Ein darüber hinausgehender Bedarf ist nicht nachgewiesen.",
+      "bedeutung": "Die Stelle meint, dass zusätzlicher Unterstützungsbedarf bislang nicht ausreichend belegt wurde."
+    },
+    {
+      "satz": "Es besteht kein weiterer Hilfebedarf.",
+      "bedeutung": "Die Stelle meint, dass über die bereits berücksichtigte Unterstützung hinaus kein zusätzlicher Bedarf besteht."
+    },
+    {
+      "satz": "Die Teilhabe ist wesentlich beeinträchtigt.",
+      "bedeutung": "Die gesundheitliche Situation führt nach der jeweiligen fachlichen oder rechtlichen Bewertung zu deutlichen Einschränkungen in wichtigen Lebensbereichen."
+    },
+    {
+      "satz": "Es besteht Anspruch auf Leistungen zur Teilhabe.",
+      "bedeutung": "Die zuständige Stelle hat festgestellt, dass die gesetzlichen Voraussetzungen für entsprechende Teilhabeleistungen erfüllt sind. Welche Leistungen genau bewilligt werden, kann gesondert geprüft werden."
+    },
+    {
+      "satz": "Die Voraussetzungen für Eingliederungshilfe liegen vor.",
+      "bedeutung": "Die zuständige Stelle meint, dass die gesetzlichen Voraussetzungen für Leistungen der Eingliederungshilfe erfüllt sind."
+    },
+    {
+      "satz": "Die Voraussetzungen für Eingliederungshilfe liegen nicht vor.",
+      "bedeutung": "Die zuständige Stelle meint, dass die gesetzlichen Voraussetzungen für Eingliederungshilfe nicht erfüllt sind."
+    },
+    {
+      "satz": "Leistungen zur Sozialen Teilhabe sind erforderlich.",
+      "bedeutung": "Die zuständige Stelle sieht Unterstützungsbedarf, damit gesellschaftliche Teilhabe ermöglicht oder erleichtert werden kann."
+    },
+    {
+      "satz": "Leistungen zur Sozialen Teilhabe kommen nicht in Betracht.",
+      "bedeutung": "Der Leistungsträger meint, dass die gesetzlichen Voraussetzungen für diese Leistungen nicht erfüllt sind."
+    },
+    {
+      "satz": "Die beantragte Assistenz ist nicht erforderlich.",
+      "bedeutung": "Die zuständige Stelle meint, dass die beantragte Assistenz für den festgestellten Bedarf nicht notwendig ist."
+    },
+    {
+      "satz": "Der Bedarf kann durch andere Leistungen gedeckt werden.",
+      "bedeutung": "Die Stelle meint, dass eine andere Leistung oder Unterstützungsform ausreicht."
+    },
+    {
+      "satz": "Das Wunsch- und Wahlrecht wurde berücksichtigt.",
+      "bedeutung": "Die zuständige Stelle erklärt, dass sie Deine Wünsche bei ihrer Entscheidung einbezogen hat."
+    },
+    {
+      "satz": "Dem Wunsch kann nicht entsprochen werden.",
+      "bedeutung": "Die zuständige Stelle will Deinem geäußerten Wunsch nicht folgen. Die Gründe dafür sollten aus der Entscheidung hervorgehen."
+    },
+    {
+      "satz": "Der Wunsch ist nicht angemessen.",
+      "bedeutung": "Die Stelle meint, dass der gewünschte Weg nach den für sie geltenden gesetzlichen Kriterien nicht berücksichtigt werden muss. Ob diese Einschätzung richtig ist, hängt vom konkreten Fall ab."
+    },
+    {
+      "satz": "Dem Wunsch kann aus wirtschaftlichen Gründen nicht entsprochen werden.",
+      "bedeutung": "Die Stelle lehnt die gewünschte Ausgestaltung unter Hinweis auf die Kosten oder Wirtschaftlichkeit ab."
+    },
+    {
+      "satz": "Das Persönliche Budget wird als Geldleistung ausgeführt.",
+      "bedeutung": "Die vom Persönlichen Budget umfassten Leistungen werden Dir grundsätzlich als Geldbetrag zur selbstbestimmten Organisation zur Verfügung gestellt."
+    },
+    {
+      "satz": "Das Persönliche Budget ist bedarfsdeckend zu bemessen.",
+      "bedeutung": "Das Budget soll so festgelegt werden, dass der festgestellte und vom Budget umfasste Bedarf damit gedeckt werden kann."
+    },
+    {
+      "satz": "Das Persönliche Budget wird bedarfsdeckend bemessen.",
+      "bedeutung": "Die zuständige Stelle erklärt, dass sie die Höhe des Budgets am festgestellten Bedarf ausgerichtet hat."
+    },
+    {
+      "satz": "Die Voraussetzungen für einen Pflegegrad liegen nicht vor.",
+      "bedeutung": "Nach Begutachtung und Entscheidung wurden die gesetzlichen Voraussetzungen für mindestens Pflegegrad 1 nicht als erfüllt angesehen."
+    },
+    {
+      "satz": "Es liegt Pflegegrad 2 vor.",
+      "bedeutung": "Die Pflegekasse hat eine erhebliche Beeinträchtigung der Selbstständigkeit oder Fähigkeiten im Sinne der Pflegeversicherung festgestellt."
+    },
+    {
+      "satz": "Der Pflegegrad wird auf … festgesetzt.",
+      "bedeutung": "Die Pflegekasse hat den genannten Pflegegrad festgestellt."
+    },
+    {
+      "satz": "Eine erhebliche Beeinträchtigung der Selbstständigkeit liegt vor.",
+      "bedeutung": "Nach der Pflegebegutachtung bestehen Beeinträchtigungen der Selbstständigkeit oder Fähigkeiten in einem Umfang, der nach den gesetzlichen Kriterien entsprechend bewertet wurde."
+    },
+    {
+      "satz": "Eine Höherstufung ist nicht gerechtfertigt.",
+      "bedeutung": "Die Pflegekasse meint, dass die Voraussetzungen für einen höheren Pflegegrad nicht erfüllt sind."
+    },
+    {
+      "satz": "Eine Höherstufung ist nicht angezeigt.",
+      "bedeutung": "Nach der fachlichen Einschätzung wird derzeit kein höherer Pflegegrad empfohlen."
+    },
+    {
+      "satz": "Eine Wiederholungsbegutachtung wird empfohlen.",
+      "bedeutung": "Zu einem späteren Zeitpunkt soll erneut geprüft werden, ob sich die Pflegebedürftigkeit verändert hat."
+    },
+    {
+      "satz": "Die Pflege ist sichergestellt.",
+      "bedeutung": "Die zuständige Stelle geht davon aus, dass die notwendige Pflege in der vorgesehenen Form gewährleistet werden kann."
+    },
+    {
+      "satz": "Die Pflegeperson ist verhindert.",
+      "bedeutung": "Die Person, die normalerweise pflegt, kann die Pflege vorübergehend nicht übernehmen."
+    },
+    {
+      "satz": "Kurzzeitpflege kommt in Betracht.",
+      "bedeutung": "Eine zeitlich begrenzte stationäre Pflege könnte unter den gesetzlichen Voraussetzungen eine mögliche Unterstützung sein."
+    },
+    {
+      "satz": "Eine vollstationäre Versorgung ist erforderlich.",
+      "bedeutung": "Nach der jeweiligen Einschätzung kann die notwendige Versorgung nicht ausreichend im häuslichen oder teilstationären Bereich sichergestellt werden."
+    },
+    {
+      "satz": "Der GdB beträgt 40.",
+      "bedeutung": "Die zuständige Behörde hat die Auswirkungen der Behinderungen auf die Teilhabe insgesamt mit einem Grad der Behinderung von 40 bewertet."
+    },
+    {
+      "satz": "Die Voraussetzungen für die Schwerbehinderteneigenschaft liegen nicht vor.",
+      "bedeutung": "Es wurde kein GdB von mindestens 50 festgestellt."
+    },
+    {
+      "satz": "Ein GdS von 30 wird festgestellt.",
+      "bedeutung": "Im Sozialen Entschädigungsrecht wurden die anerkannten Schädigungsfolgen insgesamt mit einem Grad der Schädigungsfolgen von 30 bewertet."
+    },
+    {
+      "satz": "Die Gesundheitsstörung ist als Schädigungsfolge anzuerkennen.",
+      "bedeutung": "Die zuständige Stelle erkennt die betreffende Gesundheitsstörung als Folge des schädigenden Ereignisses an."
+    },
+    {
+      "satz": "Die Gesundheitsstörung ist nicht als Schädigungsfolge anzuerkennen.",
+      "bedeutung": "Die zuständige Stelle meint, dass die Voraussetzungen für die Anerkennung dieser Gesundheitsstörung als Schädigungsfolge nicht erfüllt sind."
+    },
+    {
+      "satz": "Ein schädigendes Ereignis ist nicht nachgewiesen.",
+      "bedeutung": "Die zuständige Stelle meint, dass das Ereignis, auf das sich der Antrag stützt, nach dem erforderlichen Beweismaß nicht festgestellt werden kann."
+    },
+    {
+      "satz": "Die Voraussetzungen für Leistungen der Sozialen Entschädigung liegen vor.",
+      "bedeutung": "Die zuständige Stelle erkennt an, dass die gesetzlichen Voraussetzungen für Leistungen nach dem Sozialen Entschädigungsrecht erfüllt sind."
+    },
+    {
+      "satz": "Schnelle Hilfen werden gewährt.",
+      "bedeutung": "Die Voraussetzungen für entsprechende schnelle Unterstützungsleistungen nach dem Sozialen Entschädigungsrecht wurden als erfüllt angesehen."
+    },
+    {
+      "satz": "Fallmanagement wird angeboten.",
+      "bedeutung": "Dir wird eine koordinierende Begleitung durch das Verfahren und zu möglichen Leistungen angeboten."
+    }
+  ]
+}

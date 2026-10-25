@@ -42,6 +42,10 @@
     $hier = request()->getPathInfo();
     $suchPfad = $sprache->pfad('/suche');
     $anker = fn (string $buchstabe) => 'buchstabe-'.($buchstabe === '#' ? 'zeichen' : Str::lower($buchstabe));
+
+    // KEV-262: Stehen unter dem Glossar typische Sätze, führt ein Sprung
+    // dorthin. Sonst lägen sie hinter 128 Begriffen, und niemand fände sie.
+    $saetze = $seite?->blocks->firstWhere('typ', 'typische_saetze');
 @endphp
 
 {{--
@@ -141,6 +145,14 @@
                         </li>
                     @endforeach
                 </ul>
+
+                @if ($saetze?->anker())
+                    <p class="mt-4">
+                        <a href="#{{ $saetze->anker() }}" class="text-green-deep underline">
+                            {{ __('Zu den typischen Sätzen') }}
+                        </a>
+                    </p>
+                @endif
             </nav>
 
             @foreach ($gruppen as $buchstabe => $eintraege)
