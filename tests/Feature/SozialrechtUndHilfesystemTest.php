@@ -19,11 +19,12 @@ class SozialrechtUndHilfesystemTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_eigene_seite_unter_wissen_nach_behoerden_und_bescheide(): void
+    public function test_eigene_seite_unter_wissen_nach_medizinische_berichte(): void
     {
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
         $urls = array_column($wissen['children'], 'url');
-        $this->assertSame(array_search('/behoerden-und-bescheide', $urls) + 1, array_search('/sozialrecht-und-hilfesystem', $urls));
+        // Taddis 6, seit KEV-260 nach ihrer 5.
+        $this->assertSame(array_search('/medizinische-berichte-und-gutachten', $urls) + 1, array_search('/sozialrecht-und-hilfesystem', $urls));
 
         $html = $this->get('/sozialrecht-und-hilfesystem')->assertOk()->getContent();
 

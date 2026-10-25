@@ -762,6 +762,19 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   - **Zu klären:** Die Seite ist für Suchmaschinen offen wie die anderen
     Glossare. Damit kann sie auch bei Suchen nach Szenebegriffen auftauchen;
     falls das nicht gewollt ist, im Panel „Von Suchmaschinen ausschließen“.
+- [ ] **Medizinische Berichte & Gutachten (KEV-260), bitte ansehen.** Neues
+  Glossar unter „Wissen“, im Menü vor „Sozialrecht & Hilfesystem“: Taddis Bild
+  (Mappe mit Stethoskop, rechts verlängert), Unterzeile „Befunde verstehen.
+  Gutachten besser einordnen.“, grün „Was medizinische Berichte wirklich
+  sagen“, ihre Einleitung, 115 Begriffe und 60 typische Sätze.
+  - **Weggelassen:** „Einfach erklärt:“ und die Zeile „3. Medizinische Berichte
+    und Gutachten“ über dem Text. „Narkoseprotokoll“ stand bei ihr am Ende,
+    die Liste sortiert selbst.
+  - **Doppelt:** Erwerbsfähigkeit, Erwerbsminderung, Medizinischer Dienst,
+    Rehabilitationsbedarf, Stellungnahme und Teilhabe stehen auch in anderen
+    Glossaren, hier mit ihrer Erklärung für dieses Thema.
+  - **Typische Sätze:** Kategorie eingesetzt als „aus *Arztbriefen,
+    Befundberichten und Gutachten*“. Bitte bestätigen.
 - [ ] **Sozialrecht & Hilfesystem (KEV-261), bitte ansehen.** Neues Glossar
   unter „Wissen“, im Menü nach „Behörden & Bescheide“: Taddis Bild (Kasten mit
   Registern, rechts um Wand verlängert), darunter die Unterzeile „Leistungen
@@ -793,9 +806,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     Einleitung der Seite darüber klein („du“). Soll das vereinheitlicht werden?
   - **Englisch:** Der Satz bleibt deutsch (so steht er im Brief), übersetzt ist
     nur die Erklärung; ein Satz in der Einleitung sagt das. Ungeprüft.
-  - Die Sätze für Gericht & Verfahren (53) und Medizinische Berichte &
-    Gutachten (60) liegen bereit und erscheinen, sobald es diese Seiten gibt.
-    Sozialrecht & Hilfesystem (61) siehe KEV-261.
+  - Die Sätze für Gericht & Verfahren (53) liegen bereit und erscheinen,
+    sobald es die Seite gibt. Sozialrecht & Hilfesystem (61) siehe KEV-261,
+    Medizinische Berichte & Gutachten (60) siehe KEV-260.
 - [ ] **Behörden & Bescheide (KEV-155), bitte ansehen.** Zweites Glossar als
   eigene Seite unter „Wissen“, im Menü direkt nach „Glossar“: Taddis
   Einleitung (Fettes wie im Dokument, die Adresse als Mailto-Link) und alle

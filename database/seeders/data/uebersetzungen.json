@@ -4315,5 +4315,209 @@
   },
   "Dir wird eine koordinierende Begleitung durch das Verfahren und zu möglichen Leistungen angeboten.": {
     "en": "You are offered coordinating support through the procedure and with possible benefits."
+  },
+  "Medizinische Berichte & Gutachten": {
+    "en": "Medical reports & expert opinions"
+  },
+  "Medizinische Berichte & Gutachten - Kein Einzelfall e.V.": {
+    "en": "Medical reports & expert opinions - Kein Einzelfall e.V."
+  },
+  "Medizinische Berichte & Gutachten: Begriffe aus Arztbriefen, Befundberichten, Gutachten und Reha-Berichten, einfach erklärt. Von KE!N EINZELFALL e.V.": {
+    "en": "Medical reports & expert opinions: terms from doctor's letters, findings reports, expert opinions and rehabilitation reports, simply explained. By KE!N EINZELFALL e.V."
+  },
+  "Befunde verstehen. Gutachten besser einordnen.": {
+    "en": "Understand findings. Make better sense of expert opinions."
+  },
+  "Was medizinische Berichte wirklich sagen": {
+    "en": "What medical reports really say"
+  },
+  "Hier findest Du typische Begriffe aus *Arztbriefen, Befundberichten, medizinischen Gutachten, Reha-Berichten und sozialmedizinischen Einschätzungen*.": {
+    "en": "Here you will find typical terms from *doctor's letters, findings reports, medical expert opinions, rehabilitation reports and social medicine assessments*."
+  },
+  "Die Erklärungen helfen Dir dabei, medizinische Formulierungen besser zu verstehen und einzuordnen. Sie ersetzen keine ärztliche Bewertung eines konkreten Befundes und keine individuelle Rechtsberatung.": {
+    "en": "The explanations help you to understand and place medical wording better. They do not replace a doctor's evaluation of a specific finding or individual legal advice."
+  },
+  "Hier findest Du typische Formulierungen aus *Arztbriefen, Befundberichten und Gutachten* – übersetzt in verständlichere Sprache.": {
+    "en": "Here you will find typical wording from *doctor's letters, findings reports and expert opinions* – translated into plainer language. The sentences are quoted in German, the way they appear in your letter."
+  },
+  "Die behandelnde oder untersuchende Person beschreibt den allgemeinen körperlichen Zustand als beeinträchtigt. Wie stark und wodurch, muss aus dem übrigen Bericht hervorgehen.": {
+    "en": "The treating or examining person describes the general physical condition as impaired. How severely and why should be clear from the rest of the report."
+  },
+  "Bei dieser Untersuchung wurde keine auffällige Abweichung festgestellt.": {
+    "en": "No noticeable deviation was found in this examination."
+  },
+  "Bei der beschriebenen Untersuchung wurde kein krankhafter Befund festgestellt.": {
+    "en": "No pathological finding was made in the examination described."
+  },
+  "Die untersuchende Person hat keine ausreichenden Hinweise auf die genannte Erkrankung oder Auffälligkeit gefunden.": {
+    "en": "The examining person did not find sufficient signs of the illness or anomaly named."
+  },
+  "Bestimmte Informationen oder Befunde sprechen dafür, dass die genannte Erkrankung oder Auffälligkeit vorliegen könnte.": {
+    "en": "Certain information or findings suggest that the illness or anomaly named could be present."
+  },
+  "Bei der Untersuchung wurden keine ausreichenden Anzeichen für die genannte Erkrankung oder Auffälligkeit gefunden.": {
+    "en": "No sufficient signs of the illness or anomaly named were found in the examination."
+  },
+  "Die genannte Erkrankung oder Ursache kann anhand der bisherigen Informationen nicht sicher ausgeschlossen werden.": {
+    "en": "On the basis of the information so far, the illness or cause named cannot be ruled out with certainty."
+  },
+  "Neben der bisherigen Einschätzung kommt auch eine andere mögliche Ursache oder Diagnose infrage und sollte mitgedacht werden.": {
+    "en": "Besides the current assessment, another possible cause or diagnosis also comes into question and should be kept in mind."
+  },
+  "Die behandelnde oder begutachtende Person hält die Diagnose aufgrund der vorliegenden medizinischen Informationen für bestätigt.": {
+    "en": "The treating or assessing person considers the diagnosis confirmed on the basis of the available medical information."
+  },
+  "Die vorhandenen Informationen reichen aus Sicht der untersuchenden Person nicht aus, um die bisher vermutete Diagnose zu bestätigen.": {
+    "en": "In the examining person's view, the available information is not enough to confirm the diagnosis suspected so far."
+  },
+  "Die genannte Erkrankung wird vermutet, ist aber noch nicht abschließend bestätigt.": {
+    "en": "The illness named is suspected but has not yet been finally confirmed."
+  },
+  "Das Folgende beruht auf dem, was die untersuchte Person selbst über ihre Krankengeschichte oder Beschwerden berichtet hat.": {
+    "en": "What follows is based on what the examined person said about their medical history or complaints."
+  },
+  "Die Information stammt nicht von der untersuchten Person selbst, sondern aus einer anderen Quelle.": {
+    "en": "The information does not come from the examined person but from another source."
+  },
+  "Die Beschwerden werden von der betroffenen Person selbst wahrgenommen und beschrieben. Der Begriff allein bedeutet nicht, dass die Beschwerden nicht bestehen.": {
+    "en": "The complaints are perceived and described by the person concerned. The term alone does not mean that the complaints do not exist."
+  },
+  "Mit den eingesetzten Untersuchungsmethoden konnte für die beschriebenen Beschwerden kein entsprechender messbarer oder feststellbarer Befund erhoben werden. Das bedeutet nicht automatisch, dass keine Beschwerden bestehen.": {
+    "en": "The examination methods used could not establish a corresponding measurable or detectable finding for the complaints described. This does not automatically mean that there are no complaints."
+  },
+  "Die untersuchende Person hält die Beschreibung der Beschwerden für nachvollziehbar.": {
+    "en": "The examining person considers the description of the complaints comprehensible."
+  },
+  "Die festgestellten medizinischen Befunde erklären aus Sicht der untersuchenden Person nicht alle beschriebenen Beschwerden vollständig.": {
+    "en": "In the examining person's view, the medical findings do not fully explain all the complaints described."
+  },
+  "Die festgestellten Befunde passen aus medizinischer Sicht zu den beschriebenen Beschwerden.": {
+    "en": "From a medical point of view, the findings match the complaints described."
+  },
+  "Die festgestellten Befunde und die beschriebenen Beschwerden passen aus Sicht der untersuchenden Person nicht vollständig zusammen.": {
+    "en": "In the examining person's view, the findings and the complaints described do not fully match."
+  },
+  "Die Angaben erscheinen der untersuchenden Person nachvollziehbar.": {
+    "en": "The statements appear comprehensible to the examining person."
+  },
+  "Verschiedene Angaben, Beobachtungen und Befunde passen aus Sicht der begutachtenden Person weitgehend zusammen.": {
+    "en": "In the assessing person's view, different statements, observations and findings largely fit together."
+  },
+  "Die Beschwerden bestehen bereits länger und haben sich zu einem länger andauernden Krankheitsbild entwickelt.": {
+    "en": "The complaints have existed for some time and have developed into a long-lasting illness."
+  },
+  "Die Beschwerden werden seit dem genannten Zeitpunkt beschrieben oder dokumentiert.": {
+    "en": "The complaints have been described or documented since the date stated."
+  },
+  "Im Vergleich zu einer früheren Untersuchung wurde keine wesentliche Veränderung festgestellt.": {
+    "en": "Compared with an earlier examination, no significant change was found."
+  },
+  "Beschwerden oder Befunde haben sich im Vergleich zu früher ungünstig entwickelt.": {
+    "en": "Complaints or findings have developed unfavourably compared with before."
+  },
+  "Beschwerden oder Befunde haben sich im Vergleich zu früher günstig entwickelt.": {
+    "en": "Complaints or findings have developed favourably compared with before."
+  },
+  "Aus medizinischer Sicht wird weitere Behandlung für erforderlich gehalten.": {
+    "en": "From a medical point of view, further treatment is considered necessary."
+  },
+  "Die behandelnde oder untersuchende Person empfiehlt, die Beschwerden oder Befunde noch durch eine entsprechende Fachärztin oder einen Facharzt untersuchen zu lassen.": {
+    "en": "The treating or examining person recommends having the complaints or findings examined by a relevant specialist."
+  },
+  "Aus fachlicher Sicht wird eine Behandlung in einer Klinik oder anderen stationären Einrichtung empfohlen.": {
+    "en": "From a professional point of view, treatment in a clinic or another inpatient facility is recommended."
+  },
+  "Der gesundheitliche Zustand wird momentan noch als zu schwankend oder beeinträchtigt eingeschätzt.": {
+    "en": "The state of health is currently still considered too unstable or impaired."
+  },
+  "Aus medizinischer oder sozialmedizinischer Sicht können bestimmte Tätigkeiten oder Belastungen nicht mehr uneingeschränkt ausgeführt werden.": {
+    "en": "From a medical or social medicine point of view, certain activities or demands can no longer be carried out without restriction."
+  },
+  "Im jeweils beschriebenen Bereich wird aktuell keine ausreichende Leistungsfähigkeit mehr gesehen.": {
+    "en": "In the area described, sufficient capacity is currently no longer seen."
+  },
+  "Bestimmte Tätigkeiten oder Belastungen sind noch möglich, andere dagegen eingeschränkt.": {
+    "en": "Certain activities or demands are still possible, others are limited."
+  },
+  "Die begutachtende Person hält bestimmte körperlich weniger belastende Tätigkeiten grundsätzlich für möglich. Welche Einschränkungen zusätzlich gelten, muss aus dem vollständigen Leistungsbild hervorgehen.": {
+    "en": "The assessing person considers certain physically less demanding activities possible in principle. Which additional limitations apply should be clear from the full capacity profile."
+  },
+  "Im betreffenden sozialmedizinischen Bewertungssystem wird eingeschätzt, dass die beschriebene Tätigkeit unter den genannten Bedingungen mindestens sechs Stunden täglich möglich ist.": {
+    "en": "In the social medicine assessment system concerned, it is estimated that the activity described is possible for at least six hours a day under the conditions stated."
+  },
+  "Hier wird eingeschätzt, wie viele Stunden pro Tag eine Tätigkeit aus gesundheitlicher Sicht möglich ist.": {
+    "en": "This estimates how many hours a day an activity is possible from a health point of view."
+  },
+  "Bestimmte Arten von Tätigkeiten, Belastungen oder Arbeitsbedingungen sind aus gesundheitlicher Sicht eingeschränkt.": {
+    "en": "Certain kinds of activities, demands or working conditions are limited from a health point of view."
+  },
+  "Es gibt mehrere oder deutliche gesundheitliche Einschränkungen hinsichtlich der Art von Tätigkeiten oder Belastungen.": {
+    "en": "There are several or significant health limitations regarding the kind of activities or demands."
+  },
+  "Hier wird beschrieben, welche Tätigkeiten und Belastungen aus gesundheitlicher Sicht noch möglich sind.": {
+    "en": "This describes which activities and demands are still possible from a health point of view."
+  },
+  "Hier wird beschrieben, welche Tätigkeiten oder Belastungen aus gesundheitlicher Sicht vermieden werden sollten oder nicht mehr möglich sind.": {
+    "en": "This describes which activities or demands should be avoided or are no longer possible from a health point of view."
+  },
+  "Hier wird beschrieben, in welchem Umfang aus sozialmedizinischer Sicht noch Leistungsfähigkeit besteht.": {
+    "en": "This describes to what extent capacity still exists from a social medicine point of view."
+  },
+  "Tätigkeiten mit starkem oder dauerhaftem Zeitdruck werden aus gesundheitlicher Sicht nicht empfohlen bzw. nicht als zumutbar eingeschätzt.": {
+    "en": "Activities with heavy or constant time pressure are not recommended or not considered reasonable from a health point of view."
+  },
+  "Aus gesundheitlicher Sicht soll keine Arbeit in Nachtschicht erfolgen.": {
+    "en": "From a health point of view, there should be no night shift work."
+  },
+  "Tätigkeiten mit regelmäßigem Kontakt zu vielen Menschen werden nur eingeschränkt als möglich eingeschätzt.": {
+    "en": "Activities with regular contact with many people are considered possible only to a limited extent."
+  },
+  "Die begutachtende Person hält die für den jeweiligen Bewertungszusammenhang erforderlichen Wege grundsätzlich für bewältigbar.": {
+    "en": "The assessing person considers the distances required in the relevant context manageable in principle."
+  },
+  "Die fachliche Einschätzung geht davon aus, dass eine Verbesserung oder ein günstiger Verlauf möglich bzw. wahrscheinlich erscheint. Eine Prognose ist keine Garantie.": {
+    "en": "The professional assessment assumes that an improvement or a favourable course seems possible or likely. A prognosis is not a guarantee."
+  },
+  "Die fachliche Einschätzung erwartet eher keine günstige Entwicklung oder nur begrenzte Verbesserungsmöglichkeiten.": {
+    "en": "The professional assessment expects a favourable development to be unlikely, or only limited possibilities for improvement."
+  },
+  "Es lässt sich derzeit nicht zuverlässig einschätzen, wie sich die Erkrankung oder Einschränkung entwickeln wird.": {
+    "en": "It is currently not possible to reliably estimate how the illness or limitation will develop."
+  },
+  "Die begutachtende Person erwartet derzeit keine deutliche gesundheitliche Verbesserung.": {
+    "en": "The assessing person does not currently expect a clear improvement in health."
+  },
+  "Aus sozialmedizinischer Sicht wird eine Rehabilitation als erforderlich angesehen.": {
+    "en": "From a social medicine point of view, rehabilitation is considered necessary."
+  },
+  "Die Person wird aus medizinischer Sicht grundsätzlich als ausreichend belastbar eingeschätzt, um an einer geeigneten Rehabilitationsmaßnahme teilzunehmen.": {
+    "en": "From a medical point of view, the person is considered resilient enough in principle to take part in a suitable rehabilitation measure."
+  },
+  "Die begutachtende Stelle erwartet derzeit nicht mit ausreichender Wahrscheinlichkeit, dass die vorgesehenen Rehabilitationsziele erreicht werden können.": {
+    "en": "The assessing body does not currently expect, with sufficient probability, that the intended rehabilitation goals can be achieved."
+  },
+  "Das Folgende ist die fachliche Bewertung der begutachtenden Person.": {
+    "en": "What follows is the professional evaluation of the assessing person."
+  },
+  "Die Untersuchungsergebnisse unterstützen aus fachlicher Sicht die genannte Einschätzung oder Diagnose.": {
+    "en": "From a professional point of view, the examination results support the assessment or diagnosis named."
+  },
+  "Die Untersuchungsergebnisse passen aus fachlicher Sicht eher nicht zu der genannten Einschätzung oder Diagnose.": {
+    "en": "From a professional point of view, the examination results tend not to fit the assessment or diagnosis named."
+  },
+  "Die begutachtende Person hält den notwendigen Zusammenhang zwischen dem Ereignis und der Gesundheitsstörung nach dem für das Verfahren geltenden Maßstab nicht für ausreichend belegt.": {
+    "en": "The assessing person does not consider the necessary connection between the event and the health disorder sufficiently established by the standard that applies to the procedure."
+  },
+  "Ein Zusammenhang ist möglich, wurde mit diesem Satz allein aber noch nicht als nachgewiesen oder ausreichend wahrscheinlich bewertet.": {
+    "en": "A connection is possible, but this sentence alone does not assess it as proven or sufficiently likely."
+  },
+  "Aus fachlicher Sicht sprechen mehr Gründe für als gegen den angenommenen Zusammenhang – welche rechtliche Bedeutung das hat, hängt vom jeweiligen Verfahren ab.": {
+    "en": "From a professional point of view, there are more reasons for than against the assumed connection – what this means legally depends on the procedure."
+  },
+  "Nach den vorliegenden Informationen kann keine ausreichend sichere Aussage über einen Zusammenhang getroffen werden.": {
+    "en": "On the basis of the available information, no sufficiently certain statement can be made about a connection."
+  },
+  "Die zu beweisende Tatsache kann nach Auffassung der begutachtenden oder entscheidenden Stelle mit dem hierfür geforderten Beweismaß nicht festgestellt werden.": {
+    "en": "In the view of the assessing or deciding body, the fact to be proven cannot be established with the standard of proof required for it."
   }
 }

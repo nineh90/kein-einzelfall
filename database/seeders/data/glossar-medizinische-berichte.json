@@ -1,0 +1,577 @@
+[
+  {
+    "slug": "aktenlage",
+    "begriff": "Aktenlage",
+    "erklaerung": "Eine Einschätzung wird auf Grundlage der vorhandenen Unterlagen getroffen. Ob zusätzlich eine persönliche Untersuchung erforderlich ist, hängt vom jeweiligen Auftrag und Verfahren ab."
+  },
+  {
+    "slug": "aktenstudium",
+    "begriff": "Aktenstudium",
+    "erklaerung": "Vorhandene medizinische und andere für die Fragestellung relevante Unterlagen werden gelesen und ausgewertet."
+  },
+  {
+    "slug": "aktivitaeten",
+    "begriff": "Aktivitäten",
+    "erklaerung": "Damit sind Handlungen und Aufgaben gemeint, die ein Mensch im Alltag ausführt. In sozialmedizinischen Beurteilungen kann betrachtet werden, ob und wodurch diese Aktivitäten eingeschränkt sind."
+  },
+  {
+    "slug": "aktivitaeten-des-taeglichen-lebens",
+    "begriff": "Aktivitäten des täglichen Lebens",
+    "erklaerung": "Dazu gehören alltägliche Tätigkeiten wie Körperpflege, Anziehen, Essen, Fortbewegung oder andere Aufgaben der täglichen Selbstversorgung. Welche Bereiche betrachtet werden, hängt vom jeweiligen Verfahren ab."
+  },
+  {
+    "slug": "allgemeinzustand",
+    "begriff": "Allgemeinzustand",
+    "erklaerung": "Damit wird der allgemeine körperliche Eindruck einer Person beschrieben. Die genaue Bedeutung ergibt sich aus dem medizinischen Zusammenhang."
+  },
+  {
+    "slug": "anamnese",
+    "begriff": "Anamnese",
+    "erklaerung": "Das ist die Krankengeschichte. Dazu können aktuelle Beschwerden, frühere Erkrankungen, Behandlungen, Medikamente sowie psychische und soziale Faktoren gehören. Patientenakten enthalten regelmäßig Angaben zur Anamnese."
+  },
+  {
+    "slug": "arbeitsanamnese-berufsanamnese",
+    "begriff": "Arbeitsanamnese / Berufsanamnese",
+    "erklaerung": "Angaben zur bisherigen beruflichen Tätigkeit, zum Arbeitsplatz und zu den tatsächlichen körperlichen oder psychischen Anforderungen der Arbeit."
+  },
+  {
+    "slug": "arbeitsfaehigkeit",
+    "begriff": "Arbeitsfähigkeit",
+    "erklaerung": "Damit wird beurteilt, ob eine Person ihre konkrete berufliche Tätigkeit aktuell trotz einer Erkrankung ausüben kann. Arbeitsfähigkeit ist nicht dasselbe wie Erwerbsfähigkeit oder Erwerbsminderung."
+  },
+  {
+    "slug": "arbeitsunfaehigkeit",
+    "begriff": "Arbeitsunfähigkeit",
+    "erklaerung": "Eine Person kann ihre zuletzt ausgeübte Tätigkeit wegen einer Erkrankung aktuell nicht oder nur unter der Gefahr einer Verschlimmerung ausüben. Arbeitsunfähigkeit bedeutet nicht automatisch, dass dauerhaft keine Erwerbstätigkeit mehr möglich ist."
+  },
+  {
+    "slug": "arztbrief",
+    "begriff": "Arztbrief",
+    "erklaerung": "Ein Arztbrief fasst wichtige Informationen zur Behandlung zusammen, zum Beispiel Krankengeschichte, Diagnosen, Befunde, Behandlungen, Medikamente und Empfehlungen."
+  },
+  {
+    "slug": "attest",
+    "begriff": "Attest",
+    "erklaerung": "Eine ärztliche Bescheinigung zu einer bestimmten medizinischen Tatsache oder Fragestellung. Ein Attest ist in der Regel kürzer und weniger umfassend als ein Befundbericht oder Gutachten."
+  },
+  {
+    "slug": "ausschlussdiagnose",
+    "begriff": "Ausschlussdiagnose",
+    "erklaerung": "Eine mögliche Erkrankung wird gezielt geprüft, um festzustellen, ob sie als Ursache der Beschwerden ausgeschlossen werden kann."
+  },
+  {
+    "slug": "begleiterkrankung",
+    "begriff": "Begleiterkrankung",
+    "erklaerung": "Eine weitere Erkrankung oder Gesundheitsstörung, die zusätzlich zu einer anderen Erkrankung besteht."
+  },
+  {
+    "slug": "begutachtung",
+    "begriff": "Begutachtung",
+    "erklaerung": "Eine sachverständige Person untersucht und bewertet medizinische oder sozialmedizinische Fragen für einen bestimmten Auftrag. Der Umfang richtet sich nach der konkreten Fragestellung."
+  },
+  {
+    "slug": "begutachtungsauftrag",
+    "begriff": "Begutachtungsauftrag",
+    "erklaerung": "Darin wird festgelegt, welche medizinischen oder sozialmedizinischen Fragen ein Gutachten beantworten soll."
+  },
+  {
+    "slug": "behandlungsbeduerftigkeit",
+    "begriff": "Behandlungsbedürftigkeit",
+    "erklaerung": "Damit wird beschrieben, ob aus medizinischer Sicht eine Behandlung erforderlich ist. Welche Behandlung sinnvoll ist, hängt von der konkreten Erkrankung und Situation ab."
+  },
+  {
+    "slug": "behandlungsdokumentation",
+    "begriff": "Behandlungsdokumentation",
+    "erklaerung": "Die Aufzeichnungen über Diagnosen, Befunde, Untersuchungen, Therapien, Medikamente und den Behandlungsverlauf. Solche Angaben gehören regelmäßig zur Patientenakte."
+  },
+  {
+    "slug": "behandlungsverlauf",
+    "begriff": "Behandlungsverlauf",
+    "erklaerung": "Damit wird beschrieben, wie sich Beschwerden, Erkrankung und Behandlung über einen bestimmten Zeitraum entwickelt haben."
+  },
+  {
+    "slug": "befund",
+    "begriff": "Befund",
+    "erklaerung": "Ein Befund beschreibt ein Ergebnis einer medizinischen Untersuchung oder Beobachtung, zum Beispiel einer körperlichen Untersuchung, Bildgebung, Laboruntersuchung oder psychischen Befunderhebung."
+  },
+  {
+    "slug": "befundbericht",
+    "begriff": "Befundbericht",
+    "erklaerung": "Ein medizinischer Bericht, in dem erhobene Befunde und weitere relevante Informationen zusammengefasst werden."
+  },
+  {
+    "slug": "befundmitteilung",
+    "begriff": "Befundmitteilung",
+    "erklaerung": "Eine kurze Mitteilung über ein Untersuchungsergebnis."
+  },
+  {
+    "slug": "befundtatsache",
+    "begriff": "Befundtatsache",
+    "erklaerung": "Eine bei einer Untersuchung oder anhand von Unterlagen festgestellte medizinische Tatsache."
+  },
+  {
+    "slug": "belastbarkeit",
+    "begriff": "Belastbarkeit",
+    "erklaerung": "Damit wird beschrieben, welche körperlichen oder psychischen Anforderungen eine Person bewältigen kann."
+  },
+  {
+    "slug": "beurteilung",
+    "begriff": "Beurteilung",
+    "erklaerung": "Hier werden die vorliegenden Informationen, Beschwerden und Befunde medizinisch oder sozialmedizinisch eingeordnet."
+  },
+  {
+    "slug": "dauerdiagnose",
+    "begriff": "Dauerdiagnose",
+    "erklaerung": "Eine Diagnose, die über einen längeren Zeitraum als relevant dokumentiert wird. Daraus allein lässt sich nicht ableiten, wie stark die Erkrankung aktuell ausgeprägt ist."
+  },
+  {
+    "slug": "diagnose",
+    "begriff": "Diagnose",
+    "erklaerung": "Die medizinische Feststellung einer Erkrankung oder Gesundheitsstörung auf Grundlage der erhobenen Informationen und Befunde."
+  },
+  {
+    "slug": "differentialdiagnose",
+    "begriff": "Differentialdiagnose",
+    "erklaerung": "Es werden verschiedene Erkrankungen oder Ursachen geprüft, die zu den Beschwerden oder Befunden passen könnten."
+  },
+  {
+    "slug": "eigenangaben",
+    "begriff": "Eigenangaben",
+    "erklaerung": "Angaben, die die untersuchte Person selbst zu Beschwerden, Einschränkungen und ihrer Lebenssituation macht."
+  },
+  {
+    "slug": "eigenanamnese",
+    "begriff": "Eigenanamnese",
+    "erklaerung": "Angaben, die eine Person selbst zu ihrer Krankengeschichte, ihren Beschwerden und Behandlungen macht."
+  },
+  {
+    "slug": "einschraenkung",
+    "begriff": "Einschränkung",
+    "erklaerung": "Damit wird beschrieben, dass eine körperliche, psychische oder geistige Fähigkeit nicht oder nur eingeschränkt vorhanden ist."
+  },
+  {
+    "slug": "empfehlung",
+    "begriff": "Empfehlung",
+    "erklaerung": "Eine fachliche Einschätzung dazu, welche weitere Untersuchung, Behandlung, Rehabilitation oder Unterstützung sinnvoll sein könnte. Eine medizinische Empfehlung ist nicht automatisch eine rechtliche Leistungsentscheidung."
+  },
+  {
+    "slug": "entlassungsbericht-entlassbrief",
+    "begriff": "Entlassungsbericht / Entlassbrief",
+    "erklaerung": "Ein Bericht nach einer stationären Behandlung oder Rehabilitation. Darin können Diagnosen, Befunde, Behandlungen, Verlauf, Medikamente und Empfehlungen festgehalten werden. Arztbriefe enthalten typischerweise solche Angaben."
+  },
+  {
+    "slug": "epikrise-epikritische-beurteilung",
+    "begriff": "Epikrise / epikritische Beurteilung",
+    "erklaerung": "Eine zusammenfassende medizinische Bewertung des Krankheits- und Behandlungsverlaufs sowie der erhobenen Befunde."
+  },
+  {
+    "slug": "erwerbsfaehigkeit-medizin",
+    "begriff": "Erwerbsfähigkeit",
+    "erklaerung": "Ein sozialrechtlicher Begriff, der sich darauf bezieht, in welchem Umfang eine Person unter den jeweiligen gesetzlichen Voraussetzungen noch einer Erwerbstätigkeit nachgehen kann."
+  },
+  {
+    "slug": "erwerbsminderung-medizin",
+    "begriff": "Erwerbsminderung",
+    "erklaerung": "Ein rechtlicher Begriff insbesondere aus der gesetzlichen Rentenversicherung. Ob eine Erwerbsminderung im rechtlichen Sinn vorliegt, entscheidet der zuständige Rentenversicherungsträger anhand der gesetzlichen Voraussetzungen und der medizinischen Beurteilung."
+  },
+  {
+    "slug": "faehigkeitsstoerung-faehigkeitsbeeintraechtigung",
+    "begriff": "Fähigkeitsstörung / Fähigkeitsbeeinträchtigung",
+    "erklaerung": "Eine Einschränkung bei bestimmten Fähigkeiten oder Handlungen, zum Beispiel Konzentration, Mobilität oder Belastbarkeit."
+  },
+  {
+    "slug": "fachaerztliche-stellungnahme",
+    "begriff": "Fachärztliche Stellungnahme",
+    "erklaerung": "Eine medizinische Einschätzung einer Fachärztin oder eines Facharztes zu einer bestimmten Fragestellung."
+  },
+  {
+    "slug": "finalitaetsgutachten",
+    "begriff": "Finalitätsgutachten",
+    "erklaerung": "Bei einer finalen Betrachtungsweise steht vor allem der aktuelle Gesundheitszustand und dessen Auswirkungen im Mittelpunkt. Ob dieser Begriff im konkreten Verfahren verwendet wird, hängt vom jeweiligen Begutachtungsbereich ab."
+  },
+  {
+    "slug": "fremdanamnese",
+    "begriff": "Fremdanamnese",
+    "erklaerung": "Informationen zur Krankengeschichte oder Situation, die aus anderen Quellen als von der untersuchten Person selbst stammen, etwa von Angehörigen oder aus Unterlagen."
+  },
+  {
+    "slug": "fremdbefund",
+    "begriff": "Fremdbefund",
+    "erklaerung": "Ein Befund, der von einer anderen behandelnden oder untersuchenden Stelle erhoben wurde."
+  },
+  {
+    "slug": "funktionsbeeintraechtigung",
+    "begriff": "Funktionsbeeinträchtigung",
+    "erklaerung": "Eine Einschränkung körperlicher, psychischer oder geistiger Funktionen."
+  },
+  {
+    "slug": "funktionsbefund",
+    "begriff": "Funktionsbefund",
+    "erklaerung": "Eine Beschreibung konkreter funktioneller Fähigkeiten oder Einschränkungen."
+  },
+  {
+    "slug": "funktionsfaehigkeit",
+    "begriff": "Funktionsfähigkeit",
+    "erklaerung": "Beschreibt, welche körperlichen, psychischen oder geistigen Funktionen und Aktivitäten einer Person möglich sind."
+  },
+  {
+    "slug": "gesundheitsstoerung",
+    "begriff": "Gesundheitsstörung",
+    "erklaerung": "Ein übergeordneter Begriff für eine Beeinträchtigung der körperlichen oder psychischen Gesundheit."
+  },
+  {
+    "slug": "gutachten",
+    "begriff": "Gutachten",
+    "erklaerung": "Eine fachliche Beurteilung zu einer konkreten Fragestellung. Es enthält regelmäßig eine Auswertung der vorliegenden Informationen, Befunde und eine nachvollziehbare medizinische oder sozialmedizinische Bewertung."
+  },
+  {
+    "slug": "gutachter-gutachterin",
+    "begriff": "Gutachter / Gutachterin",
+    "erklaerung": "Eine sachverständige Person, die mit einer medizinischen oder sozialmedizinischen Begutachtung beauftragt wurde."
+  },
+  {
+    "slug": "gutachtliche-stellungnahme",
+    "begriff": "Gutachtliche Stellungnahme",
+    "erklaerung": "Eine fachliche Einschätzung zu einer konkreten Fragestellung. Umfang und Inhalt richten sich nach dem jeweiligen Auftrag."
+  },
+  {
+    "slug": "gutachtenauftrag",
+    "begriff": "Gutachtenauftrag",
+    "erklaerung": "Die Fragestellung, die die begutachtende Person beantworten soll. Für den Inhalt eines Gutachtens ist der konkrete Auftrag maßgeblich."
+  },
+  {
+    "slug": "icd-code",
+    "begriff": "ICD-Code",
+    "erklaerung": "Eine verschlüsselte Kennzeichnung für Diagnosen nach der Internationalen Klassifikation der Krankheiten. Der Code allein sagt nicht automatisch aus, wie stark eine Erkrankung im individuellen Fall ausgeprägt ist."
+  },
+  {
+    "slug": "indikation",
+    "begriff": "Indikation",
+    "erklaerung": "Der medizinische Grund dafür, eine bestimmte Untersuchung, Behandlung oder Maßnahme durchzuführen."
+  },
+  {
+    "slug": "kausalitaet-kausalzusammenhang",
+    "begriff": "Kausalität / Kausalzusammenhang",
+    "erklaerung": "Dabei wird geprüft, ob zwischen einem Ereignis oder einer Ursache und einer Gesundheitsstörung ein ursächlicher Zusammenhang besteht. Welche Anforderungen an diesen Zusammenhang gestellt werden, hängt vom jeweiligen Verfahren ab."
+  },
+  {
+    "slug": "kausalitaetsgutachten",
+    "begriff": "Kausalitätsgutachten",
+    "erklaerung": "Ein Gutachten, bei dem insbesondere geprüft wird, ob ein bestimmtes Ereignis oder eine bestimmte Einwirkung ursächlich für einen Gesundheitsschaden oder dessen Folgen ist."
+  },
+  {
+    "slug": "klinischer-befund",
+    "begriff": "Klinischer Befund",
+    "erklaerung": "Ergebnisse, die bei einer medizinischen Untersuchung festgestellt werden."
+  },
+  {
+    "slug": "komorbiditaet",
+    "begriff": "Komorbidität",
+    "erklaerung": "Eine oder mehrere Erkrankungen, die zusätzlich zu einer anderen Erkrankung bestehen."
+  },
+  {
+    "slug": "konsistenz",
+    "begriff": "Konsistenz",
+    "erklaerung": "In einer Begutachtung kann geprüft werden, ob Angaben, Beobachtungen und Befunde miteinander vereinbar erscheinen. Eine einzelne Auffälligkeit erlaubt für sich allein noch keine abschließende Bewertung."
+  },
+  {
+    "slug": "kontextfaktoren",
+    "begriff": "Kontextfaktoren",
+    "erklaerung": "Persönliche und umweltbezogene Faktoren, die beeinflussen können, wie sich eine Erkrankung oder Behinderung im Alltag und bei der Teilhabe auswirkt. Solche Faktoren werden in sozialmedizinischen Beurteilungen berücksichtigt."
+  },
+  {
+    "slug": "leistungsbeurteilung",
+    "begriff": "Leistungsbeurteilung",
+    "erklaerung": "Eine medizinische oder sozialmedizinische Einschätzung dazu, welche Tätigkeiten und Belastungen einer Person gesundheitlich möglich sind."
+  },
+  {
+    "slug": "leistungsbild",
+    "begriff": "Leistungsbild",
+    "erklaerung": "Eine zusammenfassende Beschreibung der vorhandenen Leistungsfähigkeit und der gesundheitlich bedingten Einschränkungen."
+  },
+  {
+    "slug": "leistungsfaehigkeit",
+    "begriff": "Leistungsfähigkeit",
+    "erklaerung": "Beschreibt, welche körperlichen oder psychischen Anforderungen eine Person aus medizinischer Sicht bewältigen kann. Die sozialmedizinische Begutachtung der Deutschen Rentenversicherung betrachtet ausdrücklich die Leistungsfähigkeit im Erwerbsleben."
+  },
+  {
+    "slug": "leistungsvermoegen",
+    "begriff": "Leistungsvermögen",
+    "erklaerung": "Beschreibt, welche Tätigkeiten eine Person unter gesundheitlichen Gesichtspunkten noch ausüben kann und unter welchen Bedingungen."
+  },
+  {
+    "slug": "qualitatives-leistungsvermoegen",
+    "begriff": "Qualitatives Leistungsvermögen",
+    "erklaerung": "Beschreibt, welche Arten von Tätigkeiten, Belastungen und Arbeitsbedingungen gesundheitlich noch möglich oder eingeschränkt sind. In Reha-Berichten wird die qualitative Leistungsfähigkeit ausdrücklich beurteilt."
+  },
+  {
+    "slug": "quantitatives-leistungsvermoegen",
+    "begriff": "Quantitatives Leistungsvermögen",
+    "erklaerung": "Beschreibt den zeitlichen Umfang, in dem eine Tätigkeit aus sozialmedizinischer Sicht ausgeübt werden kann. In der Rentenversicherung wird dies unter anderem für die zuletzt ausgeübte Tätigkeit und den allgemeinen Arbeitsmarkt beurteilt."
+  },
+  {
+    "slug": "positives-leistungsbild-positives-leistungsvermoegen",
+    "begriff": "Positives Leistungsbild / positives Leistungsvermögen",
+    "erklaerung": "Beschreibt, welche Tätigkeiten und Belastungen gesundheitlich noch möglich sind."
+  },
+  {
+    "slug": "negatives-leistungsbild-leistungseinschraenkungen",
+    "begriff": "Negatives Leistungsbild / Leistungseinschränkungen",
+    "erklaerung": "Beschreibt Tätigkeiten, Belastungen oder Arbeitsbedingungen, die gesundheitlich nicht oder nur eingeschränkt möglich sind."
+  },
+  {
+    "slug": "medikation",
+    "begriff": "Medikation",
+    "erklaerung": "Die Arzneimittel, die verordnet wurden oder eingenommen werden."
+  },
+  {
+    "slug": "medizinischer-dienst-md-medizin",
+    "begriff": "Medizinischer Dienst (MD)",
+    "erklaerung": "Der Medizinische Dienst unterstützt die gesetzlichen Kranken- und Pflegekassen in gesetzlich vorgesehenen Fällen mit medizinischen und sozialmedizinischen Begutachtungen und Stellungnahmen."
+  },
+  {
+    "slug": "mitbehandlung",
+    "begriff": "Mitbehandlung",
+    "erklaerung": "Eine weitere Ärztin, ein weiterer Arzt oder eine andere Fachperson ist zusätzlich an der Behandlung beteiligt."
+  },
+  {
+    "slug": "nachuntersuchung",
+    "begriff": "Nachuntersuchung",
+    "erklaerung": "Eine erneute Untersuchung zu einem späteren Zeitpunkt, um die weitere Entwicklung zu beurteilen."
+  },
+  {
+    "slug": "nebenbefund",
+    "begriff": "Nebenbefund",
+    "erklaerung": "Ein zusätzlicher Befund, der bei einer Untersuchung festgestellt wurde und nicht unbedingt der ursprüngliche Untersuchungsgrund war."
+  },
+  {
+    "slug": "objektivierbarer-befund",
+    "begriff": "Objektivierbarer Befund",
+    "erklaerung": "Ein Befund, der mit medizinischen Untersuchungsmethoden nachvollziehbar festgestellt oder dokumentiert werden kann. Dass Beschwerden nicht objektivierbar sind, bedeutet nicht automatisch, dass sie nicht bestehen."
+  },
+  {
+    "slug": "operationsbericht",
+    "begriff": "Operationsbericht",
+    "erklaerung": "Dokumentation eines operativen Eingriffs. Operationsberichte gehören zu den Informationen, die Bestandteil einer Patientenakte sein können."
+  },
+  {
+    "slug": "patientenakte",
+    "begriff": "Patientenakte",
+    "erklaerung": "Darin werden wesentliche Informationen zur Behandlung dokumentiert, zum Beispiel Anamnese, Diagnosen, Untersuchungen, Befunde, Therapien, Medikamente, Arztbriefe und gegebenenfalls Operationsberichte."
+  },
+  {
+    "slug": "pathologisch",
+    "begriff": "Pathologisch",
+    "erklaerung": "Medizinischer Begriff für einen krankhaften oder von der medizinischen Norm abweichenden Befund. Welche Bedeutung die Abweichung hat, muss im jeweiligen Zusammenhang beurteilt werden."
+  },
+  {
+    "slug": "plausibilitaet",
+    "begriff": "Plausibilität",
+    "erklaerung": "Damit wird beurteilt, ob Angaben, Befunde und medizinische Zusammenhänge nachvollziehbar erscheinen."
+  },
+  {
+    "slug": "primaerschaden",
+    "begriff": "Primärschaden",
+    "erklaerung": "In Kausalitätsbeurteilungen kann damit ein unmittelbar durch ein bestimmtes Ereignis oder eine Einwirkung verursachter Gesundheitsschaden bezeichnet werden. Die genaue Verwendung hängt vom jeweiligen Rechtsgebiet ab."
+  },
+  {
+    "slug": "prognose",
+    "begriff": "Prognose",
+    "erklaerung": "Eine fachliche Einschätzung dazu, wie sich eine Erkrankung, Funktionsbeeinträchtigung oder Leistungsfähigkeit voraussichtlich entwickeln könnte. Sie ist eine Einschätzung und keine sichere Vorhersage."
+  },
+  {
+    "slug": "psychischer-befund-psychopathologischer-befund",
+    "begriff": "Psychischer Befund / psychopathologischer Befund",
+    "erklaerung": "Eine strukturierte Beschreibung des aktuellen psychischen Zustands, zum Beispiel hinsichtlich Stimmung, Denken, Wahrnehmung, Orientierung und Antrieb."
+  },
+  {
+    "slug": "rehabilitationsbedarf-medizin",
+    "begriff": "Rehabilitationsbedarf",
+    "erklaerung": "Damit wird geprüft, ob Leistungen zur Rehabilitation erforderlich sein können."
+  },
+  {
+    "slug": "rehabilitationsbeduerftigkeit",
+    "begriff": "Rehabilitationsbedürftigkeit",
+    "erklaerung": "In der sozialmedizinischen Beurteilung wird geprüft, ob aufgrund gesundheitlicher Beeinträchtigungen eine Rehabilitationsleistung erforderlich ist, um Teilhabe oder Leistungsfähigkeit zu erhalten oder zu verbessern. Sie ist ein eigenständiges Prüfkriterium."
+  },
+  {
+    "slug": "rehabilitationsfaehigkeit",
+    "begriff": "Rehabilitationsfähigkeit",
+    "erklaerung": "Damit wird beurteilt, ob die körperliche und psychische Belastbarkeit eine aktive Teilnahme an einer geeigneten Rehabilitationsmaßnahme zulässt."
+  },
+  {
+    "slug": "rehabilitationsprognose",
+    "begriff": "Rehabilitationsprognose",
+    "erklaerung": "Eine medizinisch begründete Einschätzung darüber, ob die mit der Rehabilitation angestrebten Ziele voraussichtlich erreicht werden können."
+  },
+  {
+    "slug": "rehabilitationspotential",
+    "begriff": "Rehabilitationspotential",
+    "erklaerung": "Damit können vorhandene Möglichkeiten und Ressourcen beschrieben werden, die durch Rehabilitation genutzt oder verbessert werden können. Der Begriff wird im Zusammenhang mit der Rehabilitationsprognose verwendet."
+  },
+  {
+    "slug": "rehabilitationsziel",
+    "begriff": "Rehabilitationsziel",
+    "erklaerung": "Das Ziel, das mit einer Rehabilitationsmaßnahme erreicht werden soll, zum Beispiel eine Verbesserung der Teilhabe oder des Leistungsvermögens."
+  },
+  {
+    "slug": "remission",
+    "begriff": "Remission",
+    "erklaerung": "Krankheitszeichen oder Beschwerden sind deutlich zurückgegangen oder zeitweise nicht mehr vorhanden. Eine Remission bedeutet nicht automatisch eine dauerhafte Heilung."
+  },
+  {
+    "slug": "reservekapazitaet",
+    "begriff": "Reservekapazität",
+    "erklaerung": "Ein sozialmedizinischer Begriff, der beschreiben kann, ob noch gesundheitliche oder funktionelle Möglichkeiten vorhanden sind, die durch Behandlung oder Rehabilitation genutzt werden können."
+  },
+  {
+    "slug": "schaedigung",
+    "begriff": "Schädigung",
+    "erklaerung": "In sozialmedizinischen Zusammenhängen können damit Beeinträchtigungen von Körperfunktionen oder Körperstrukturen bezeichnet werden."
+  },
+  {
+    "slug": "sekundaerschaden-folgeschaden",
+    "begriff": "Sekundärschaden / Folgeschaden",
+    "erklaerung": "Ein Gesundheitsschaden, der sich als Folge eines anderen Gesundheitsschadens oder Ereignisses entwickelt haben kann. Ob ein solcher Zusammenhang tatsächlich besteht, muss im jeweiligen Verfahren geprüft werden."
+  },
+  {
+    "slug": "somatischer-befund",
+    "begriff": "Somatischer Befund",
+    "erklaerung": "Ein Befund, der sich auf den körperlichen Gesundheitszustand bezieht."
+  },
+  {
+    "slug": "sozialanamnese",
+    "begriff": "Sozialanamnese",
+    "erklaerung": "Informationen über Lebensumstände, Arbeit, Wohnen, Familie, Unterstützung und andere soziale Faktoren, soweit sie für die medizinische oder sozialmedizinische Beurteilung relevant sind."
+  },
+  {
+    "slug": "sozialmedizinische-begutachtung",
+    "begriff": "Sozialmedizinische Begutachtung",
+    "erklaerung": "Eine Begutachtung, bei der gesundheitliche Beeinträchtigungen im Zusammenhang mit Leistungsfähigkeit, Rehabilitation, Teilhabe oder sozialrechtlichen Fragestellungen bewertet werden. Die Deutsche Rentenversicherung beschreibt unter anderem die Beurteilung von Leistungsfähigkeit und Rehabilitationsbedürftigkeit als zentrale Aufgaben."
+  },
+  {
+    "slug": "sozialmedizinische-leistungsbeurteilung",
+    "begriff": "Sozialmedizinische Leistungsbeurteilung",
+    "erklaerung": "Eine zusammenfassende fachliche Einschätzung dazu, welche Tätigkeiten und Belastungen einer Person unter Berücksichtigung ihrer gesundheitlichen Einschränkungen noch möglich sind."
+  },
+  {
+    "slug": "sozialmedizinische-stellungnahme",
+    "begriff": "Sozialmedizinische Stellungnahme",
+    "erklaerung": "Eine fachliche sozialmedizinische Einschätzung zu einer bestimmten Fragestellung. Bei Gutachten der Rentenversicherung gehört eine abschließende sozialmedizinische Stellungnahme zum Begutachtungsprozess."
+  },
+  {
+    "slug": "stellungnahme-medizin",
+    "begriff": "Stellungnahme",
+    "erklaerung": "Eine fachliche Einschätzung zu einer bestimmten medizinischen oder sozialmedizinischen Frage."
+  },
+  {
+    "slug": "subjektive-angaben-subjektive-beschwerden",
+    "begriff": "Subjektive Angaben / subjektive Beschwerden",
+    "erklaerung": "Beschwerden oder Einschränkungen, die eine Person selbst beschreibt. Diese Angaben sind Teil der medizinischen Beurteilung und können mit weiteren Befunden zusammen betrachtet werden."
+  },
+  {
+    "slug": "teilhabe-medizin",
+    "begriff": "Teilhabe",
+    "erklaerung": "Damit ist die Einbezogenheit eines Menschen in unterschiedliche Lebensbereiche gemeint, zum Beispiel Arbeit, soziale Beziehungen oder gesellschaftliches Leben."
+  },
+  {
+    "slug": "teilhabebeeintraechtigung",
+    "begriff": "Teilhabebeeinträchtigung",
+    "erklaerung": "Eine gesundheitlich bedingte Einschränkung der Teilhabe an einem oder mehreren Lebensbereichen."
+  },
+  {
+    "slug": "therapieansprechen",
+    "begriff": "Therapieansprechen",
+    "erklaerung": "Damit wird beschrieben, ob und wie eine Behandlung Wirkung gezeigt hat."
+  },
+  {
+    "slug": "therapieempfehlung",
+    "begriff": "Therapieempfehlung",
+    "erklaerung": "Eine fachliche Empfehlung dazu, welche weitere Behandlung oder medizinische Maßnahme sinnvoll sein könnte."
+  },
+  {
+    "slug": "therapieerfolg",
+    "begriff": "Therapieerfolg",
+    "erklaerung": "Damit wird beschrieben, welche Veränderungen durch eine Behandlung erreicht wurden."
+  },
+  {
+    "slug": "therapieverlauf",
+    "begriff": "Therapieverlauf",
+    "erklaerung": "Beschreibung der durchgeführten Behandlung und der Entwicklung von Beschwerden und Befunden während dieser Zeit."
+  },
+  {
+    "slug": "untersuchungsbefund",
+    "begriff": "Untersuchungsbefund",
+    "erklaerung": "Das Ergebnis einer medizinischen Untersuchung."
+  },
+  {
+    "slug": "untersuchungsergebnis",
+    "begriff": "Untersuchungsergebnis",
+    "erklaerung": "Die bei einer Untersuchung festgestellten Ergebnisse."
+  },
+  {
+    "slug": "vegetative-anamnese",
+    "begriff": "Vegetative Anamnese",
+    "erklaerung": "Angaben zum Beispiel zu Schlaf, Appetit, Gewicht, Ausscheidung oder anderen körperlichen Grundfunktionen. Solche Angaben können Bestandteil einer ausführlichen Begutachtung sein."
+  },
+  {
+    "slug": "verdachtsdiagnose",
+    "begriff": "Verdachtsdiagnose",
+    "erklaerung": "Eine Erkrankung wird aufgrund der bisherigen Informationen vermutet, ist aber noch nicht abschließend bestätigt."
+  },
+  {
+    "slug": "verlauf",
+    "begriff": "Verlauf",
+    "erklaerung": "Damit wird beschrieben, wie sich Beschwerden, Erkrankung, Befunde oder Behandlung im Laufe der Zeit entwickelt haben."
+  },
+  {
+    "slug": "verlaufskontrolle",
+    "begriff": "Verlaufskontrolle",
+    "erklaerung": "Eine spätere Untersuchung oder Beurteilung, mit der Veränderungen im Krankheits- oder Behandlungsverlauf überprüft werden."
+  },
+  {
+    "slug": "vorerkrankung",
+    "begriff": "Vorerkrankung",
+    "erklaerung": "Eine Erkrankung, die bereits vor dem aktuell betrachteten Ereignis oder Zeitraum bestanden hat."
+  },
+  {
+    "slug": "vorbefund",
+    "begriff": "Vorbefund",
+    "erklaerung": "Ein früher erhobener Befund, der bei der aktuellen Beurteilung berücksichtigt oder mit neuen Befunden verglichen werden kann."
+  },
+  {
+    "slug": "vorgutachten",
+    "begriff": "Vorgutachten",
+    "erklaerung": "Ein früher erstelltes Gutachten, das bei einer späteren Begutachtung als Unterlage berücksichtigt werden kann."
+  },
+  {
+    "slug": "wechselwirkung",
+    "begriff": "Wechselwirkung",
+    "erklaerung": "Verschiedene Erkrankungen, Beschwerden, Medikamente oder andere Faktoren beeinflussen sich gegenseitig."
+  },
+  {
+    "slug": "zusatzbefund",
+    "begriff": "Zusatzbefund",
+    "erklaerung": "Ein zusätzlicher medizinischer Befund, der im Rahmen einer Untersuchung oder ergänzenden Diagnostik festgestellt wird."
+  },
+  {
+    "slug": "zusatzdiagnostik",
+    "begriff": "Zusatzdiagnostik",
+    "erklaerung": "Zusätzliche Untersuchungen, die zur Beantwortung einer medizinischen oder gutachtlichen Fragestellung notwendig sein können. Die Deutsche Rentenversicherung berücksichtigt erforderliche Zusatzdiagnostik ausdrücklich im Begutachtungsprozess."
+  },
+  {
+    "slug": "zusammenfassende-beurteilung",
+    "begriff": "Zusammenfassende Beurteilung",
+    "erklaerung": "Am Ende eines Berichts oder Gutachtens werden die wichtigsten Befunde, Zusammenhänge und fachlichen Einschätzungen zusammengeführt."
+  },
+  {
+    "slug": "zustand-nach-z-n",
+    "begriff": "Zustand nach … / Z. n. …",
+    "erklaerung": "Bedeutet, dass ein bestimmtes Ereignis, eine Erkrankung oder Behandlung in der Vergangenheit stattgefunden hat, zum Beispiel „Zustand nach Operation“."
+  },
+  {
+    "slug": "narkoseprotokoll",
+    "begriff": "Narkoseprotokoll",
+    "erklaerung": "Dokumentation einer Narkose im Zusammenhang mit einem Eingriff. Narkoseprotokolle können Bestandteil der Patientenakte sein."
+  }
+]

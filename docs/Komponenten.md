@@ -2569,8 +2569,9 @@ Anführungszeichen, die die Seite setzt; davor „Einfach übersetzt:“.
   in `database/seeders/data/typische-saetze.json` stehen. Neue Glossar-Seiten
   bekommen ihn beim Anlegen. Hat die Seite schon einen, passiert nichts.
   Stand: „Behörden & Bescheide“ (47 Sätze), „Sozialrecht & Hilfesystem“
-  (61, KEV-261); für Gericht & Verfahren und Medizinische Berichte &
-  Gutachten liegen die Sätze in derselben Datei, die Seiten gibt es noch nicht.
+  (61, KEV-261), „Medizinische Berichte & Gutachten“ (60, KEV-260); für
+  Gericht & Verfahren liegen die Sätze in derselben Datei, die Seite gibt es
+  noch nicht.
 - **Sprung:** Das Glossar zeigt unter der Buchstabenleiste „Zu den typischen
   Sätzen“, wenn die Seite den Baustein hat. Sprungziel fest `typische-saetze`.
 - **Englisch:** Übersetzt wird nur `bedeutung` (in `TEXT_FELDER` des
@@ -2613,4 +2614,12 @@ typischen Sätze (§ 42).
   wie „Behörden & Bescheide“.
 
 Tests: `SozialrechtUndHilfesystemTest`, Barrierefreiheits-Lauf.
+
+**Seit KEV-260** nach demselben Muster `/medizinische-berichte-und-gutachten`
+(`MedizinischeBerichteUndGutachtenSeeder`, Taddis 5, im Menü vor ihrer 6):
+115 Begriffe (`data/glossar-medizinische-berichte.json`), 60 typische Sätze,
+grüne Überschrift „Was medizinische Berichte wirklich sagen“ und Unterzeile
+„Befunde verstehen. Gutachten besser einordnen.“ aus dem Ticket. Sechs schon
+vorhandene Begriffe haben das Sprungziel `…-medizin` (`#teilhabe-medizin`).
+Tests: `MedizinischeBerichteUndGutachtenTest`.
 

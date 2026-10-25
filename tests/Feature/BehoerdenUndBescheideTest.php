@@ -111,7 +111,8 @@ class BehoerdenUndBescheideTest extends TestCase
 
         $this->assertStringContainsString('Hier entsteht ein Verzeichnis', $this->get('/abkuerzungen-probe')->getContent());
         $this->assertSame(
-            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Glossar', 'Probe', 'Sozialrecht & Hilfesystem'],
+            ['Abkürzungen im sexuellen Kontext', 'Behörden & Bescheide', 'Glossar', 'Medizinische Berichte & Gutachten', 'Probe',
+                'Sozialrecht & Hilfesystem'],
             array_values(GlossaryTerm::seitenAuswahl()),
         );
 

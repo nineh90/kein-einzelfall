@@ -113,6 +113,9 @@ class Titelbilder
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel. Ohne Unterzeile.
         'abkuerzungen-im-sexuellen-kontext' => null,
+        // KEV-260: Bild von Taddi („Medizinische Berichte & Gutachten“), Mappe
+        // mit Stethoskop. Unterzeile aus dem Ticket.
+        'medizinische-berichte-und-gutachten' => 'Befunde verstehen. Gutachten besser einordnen.',
         // KEV-261: Bild von Taddi („Sozialrecht & Hilfesystem“), Kasten mit
         // Registermappen. Unterzeile aus dem Ticket.
         'sozialrecht-und-hilfesystem' => 'Leistungen verstehen. Zuständigkeiten einordnen. Unterstützung finden.',
@@ -237,6 +240,10 @@ class Titelbilder
      *  - Abkürzungen im sexuellen Kontext: Kiste mit Buchstabenwürfeln
      *    (KEV-154). Rechts um Wand verlängert, Kiste ab 15 %, Würfel bis 97 %
      *    der Höhe; ausgerichtet auf 85 %.
+     *  - Medizinische Berichte & Gutachten: Mappe mit Stethoskop (KEV-260).
+     *    Rechts um Fläche verlängert, Stethoskop ab 11 %, Mappe bis 95 % der
+     *    Höhe. Mit 20 % bleibt das Stethoskop auch bei 2560 px ganz, unten
+     *    fällt dort die Mappe weg.
      *  - Sozialrecht & Hilfesystem: Kasten mit Registermappen (KEV-261).
      *    Rechts um Wand verlängert, Register ab 26 % der Höhe, der Kasten
      *    läuft unten aus dem Bild. Mit 40 % bleiben die oberen Register
@@ -293,6 +300,7 @@ class Titelbilder
         self::ORDNER.'/wort-fuer-wort.webp' => 80,
         self::ORDNER.'/abkuerzungen-im-sexuellen-kontext.webp' => 85,
         self::ORDNER.'/sozialrecht-und-hilfesystem.webp' => 40,
+        self::ORDNER.'/medizinische-berichte-und-gutachten.webp' => 20,
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,

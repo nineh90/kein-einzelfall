@@ -3196,5 +3196,695 @@
     "kuerzel": null,
     "erklaerung": "For rehabilitation and participation benefits, once an application has been received it must be clarified which rehabilitation provider is responsible for processing it.",
     "mehr_label": null
+  },
+  "aktenlage": {
+    "begriff": "File basis (Aktenlage)",
+    "kuerzel": null,
+    "erklaerung": "An assessment is made on the basis of the existing documents. Whether a personal examination is also needed depends on the assignment and the procedure.",
+    "mehr_label": null
+  },
+  "aktenstudium": {
+    "begriff": "File review (Aktenstudium)",
+    "kuerzel": null,
+    "erklaerung": "Existing medical and other documents relevant to the question are read and evaluated.",
+    "mehr_label": null
+  },
+  "aktivitaeten": {
+    "begriff": "Activities (Aktivitäten)",
+    "kuerzel": null,
+    "erklaerung": "This means actions and tasks a person carries out in everyday life. Social medicine assessments can look at whether and by what these activities are limited.",
+    "mehr_label": null
+  },
+  "aktivitaeten-des-taeglichen-lebens": {
+    "begriff": "Activities of daily living (Aktivitäten des täglichen Lebens)",
+    "kuerzel": null,
+    "erklaerung": "These include everyday activities such as personal hygiene, dressing, eating, getting around or other tasks of daily self-care. Which areas are looked at depends on the procedure.",
+    "mehr_label": null
+  },
+  "allgemeinzustand": {
+    "begriff": "General condition (Allgemeinzustand)",
+    "kuerzel": null,
+    "erklaerung": "This describes a person's overall physical impression. The exact meaning follows from the medical context.",
+    "mehr_label": null
+  },
+  "anamnese": {
+    "begriff": "Medical history (Anamnese)",
+    "kuerzel": null,
+    "erklaerung": "This is the history of an illness. It can include current complaints, previous illnesses, treatments, medication and psychological and social factors. Patient records regularly contain information on the medical history.",
+    "mehr_label": null
+  },
+  "arbeitsanamnese-berufsanamnese": {
+    "begriff": "Work history / occupational history (Arbeitsanamnese / Berufsanamnese)",
+    "kuerzel": null,
+    "erklaerung": "Information on previous work, the workplace and the actual physical or psychological demands of the job.",
+    "mehr_label": null
+  },
+  "arbeitsfaehigkeit": {
+    "begriff": "Fitness for work (Arbeitsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This assesses whether a person can currently do their specific job despite an illness. Fitness for work is not the same as earning capacity or reduced earning capacity.",
+    "mehr_label": null
+  },
+  "arbeitsunfaehigkeit": {
+    "begriff": "Incapacity for work (Arbeitsunfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "Because of an illness, a person currently cannot do their most recent job, or only at the risk of getting worse. Incapacity for work does not automatically mean that no gainful work will ever be possible again.",
+    "mehr_label": null
+  },
+  "arztbrief": {
+    "begriff": "Doctor's letter (Arztbrief)",
+    "kuerzel": null,
+    "erklaerung": "A doctor's letter summarises important information about treatment, for example medical history, diagnoses, findings, treatments, medication and recommendations.",
+    "mehr_label": null
+  },
+  "attest": {
+    "begriff": "Medical certificate (Attest)",
+    "kuerzel": null,
+    "erklaerung": "A doctor's certificate on a particular medical fact or question. A certificate is usually shorter and less comprehensive than a findings report or an expert opinion.",
+    "mehr_label": null
+  },
+  "ausschlussdiagnose": {
+    "begriff": "Diagnosis of exclusion (Ausschlussdiagnose)",
+    "kuerzel": null,
+    "erklaerung": "A possible illness is specifically examined to establish whether it can be ruled out as the cause of the complaints.",
+    "mehr_label": null
+  },
+  "begleiterkrankung": {
+    "begriff": "Concomitant illness (Begleiterkrankung)",
+    "kuerzel": null,
+    "erklaerung": "A further illness or health disorder that exists in addition to another illness.",
+    "mehr_label": null
+  },
+  "begutachtung": {
+    "begriff": "Assessment (Begutachtung)",
+    "kuerzel": null,
+    "erklaerung": "An expert examines and evaluates medical or social medicine questions for a particular assignment. The scope depends on the specific question.",
+    "mehr_label": null
+  },
+  "begutachtungsauftrag": {
+    "begriff": "Assessment assignment (Begutachtungsauftrag)",
+    "kuerzel": null,
+    "erklaerung": "This sets out which medical or social medicine questions an expert opinion is to answer.",
+    "mehr_label": null
+  },
+  "behandlungsbeduerftigkeit": {
+    "begriff": "Need for treatment (Behandlungsbedürftigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This describes whether treatment is necessary from a medical point of view. Which treatment makes sense depends on the specific illness and situation.",
+    "mehr_label": null
+  },
+  "behandlungsdokumentation": {
+    "begriff": "Treatment records (Behandlungsdokumentation)",
+    "kuerzel": null,
+    "erklaerung": "The records of diagnoses, findings, examinations, therapies, medication and the course of treatment. Such information is regularly part of the patient record.",
+    "mehr_label": null
+  },
+  "behandlungsverlauf": {
+    "begriff": "Course of treatment (Behandlungsverlauf)",
+    "kuerzel": null,
+    "erklaerung": "This describes how complaints, illness and treatment have developed over a certain period.",
+    "mehr_label": null
+  },
+  "befund": {
+    "begriff": "Finding (Befund)",
+    "kuerzel": null,
+    "erklaerung": "A finding describes a result of a medical examination or observation, for example a physical examination, imaging, laboratory test or mental status examination.",
+    "mehr_label": null
+  },
+  "befundbericht": {
+    "begriff": "Findings report (Befundbericht)",
+    "kuerzel": null,
+    "erklaerung": "A medical report summarising the findings and other relevant information.",
+    "mehr_label": null
+  },
+  "befundmitteilung": {
+    "begriff": "Notification of findings (Befundmitteilung)",
+    "kuerzel": null,
+    "erklaerung": "A short notice about the result of an examination.",
+    "mehr_label": null
+  },
+  "befundtatsache": {
+    "begriff": "Established finding (Befundtatsache)",
+    "kuerzel": null,
+    "erklaerung": "A medical fact established during an examination or from documents.",
+    "mehr_label": null
+  },
+  "belastbarkeit": {
+    "begriff": "Resilience (Belastbarkeit)",
+    "kuerzel": null,
+    "erklaerung": "This describes which physical or psychological demands a person can cope with.",
+    "mehr_label": null
+  },
+  "beurteilung": {
+    "begriff": "Assessment (Beurteilung)",
+    "kuerzel": null,
+    "erklaerung": "Here the available information, complaints and findings are placed in a medical or social medicine context.",
+    "mehr_label": null
+  },
+  "dauerdiagnose": {
+    "begriff": "Permanent diagnosis (Dauerdiagnose)",
+    "kuerzel": null,
+    "erklaerung": "A diagnosis that is recorded as relevant over a longer period. This alone does not show how severe the illness currently is.",
+    "mehr_label": null
+  },
+  "diagnose": {
+    "begriff": "Diagnosis (Diagnose)",
+    "kuerzel": null,
+    "erklaerung": "The medical determination of an illness or health disorder based on the information and findings gathered.",
+    "mehr_label": null
+  },
+  "differentialdiagnose": {
+    "begriff": "Differential diagnosis (Differentialdiagnose)",
+    "kuerzel": null,
+    "erklaerung": "Different illnesses or causes that could fit the complaints or findings are examined.",
+    "mehr_label": null
+  },
+  "eigenangaben": {
+    "begriff": "Own statements (Eigenangaben)",
+    "kuerzel": null,
+    "erklaerung": "Information that the examined person gives about their complaints, limitations and life situation.",
+    "mehr_label": null
+  },
+  "eigenanamnese": {
+    "begriff": "Self-reported history (Eigenanamnese)",
+    "kuerzel": null,
+    "erklaerung": "Information a person gives about their own medical history, complaints and treatments.",
+    "mehr_label": null
+  },
+  "einschraenkung": {
+    "begriff": "Limitation (Einschränkung)",
+    "kuerzel": null,
+    "erklaerung": "This describes that a physical, psychological or mental ability is not present or only to a limited extent.",
+    "mehr_label": null
+  },
+  "empfehlung": {
+    "begriff": "Recommendation (Empfehlung)",
+    "kuerzel": null,
+    "erklaerung": "A professional assessment of which further examination, treatment, rehabilitation or support might make sense. A medical recommendation is not automatically a legal decision on benefits.",
+    "mehr_label": null
+  },
+  "entlassungsbericht-entlassbrief": {
+    "begriff": "Discharge report / discharge letter (Entlassungsbericht / Entlassbrief)",
+    "kuerzel": null,
+    "erklaerung": "A report after inpatient treatment or rehabilitation. It can record diagnoses, findings, treatments, course, medication and recommendations. Doctor's letters typically contain such information.",
+    "mehr_label": null
+  },
+  "epikrise-epikritische-beurteilung": {
+    "begriff": "Epicrisis / summarising assessment (Epikrise / epikritische Beurteilung)",
+    "kuerzel": null,
+    "erklaerung": "A summarising medical evaluation of the course of illness and treatment and of the findings.",
+    "mehr_label": null
+  },
+  "erwerbsfaehigkeit-medizin": {
+    "begriff": "Earning capacity (Erwerbsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "A social law term referring to the extent to which a person can still do gainful work under the relevant legal requirements.",
+    "mehr_label": null
+  },
+  "erwerbsminderung-medizin": {
+    "begriff": "Reduced earning capacity (Erwerbsminderung)",
+    "kuerzel": null,
+    "erklaerung": "A legal term used mainly in the statutory pension insurance. Whether there is reduced earning capacity in the legal sense is decided by the responsible pension insurance provider on the basis of the legal requirements and the medical assessment.",
+    "mehr_label": null
+  },
+  "faehigkeitsstoerung-faehigkeitsbeeintraechtigung": {
+    "begriff": "Impairment of abilities (Fähigkeitsstörung / Fähigkeitsbeeinträchtigung)",
+    "kuerzel": null,
+    "erklaerung": "A limitation in certain abilities or actions, for example concentration, mobility or resilience.",
+    "mehr_label": null
+  },
+  "fachaerztliche-stellungnahme": {
+    "begriff": "Specialist's statement (Fachärztliche Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "A medical assessment by a specialist doctor on a particular question.",
+    "mehr_label": null
+  },
+  "finalitaetsgutachten": {
+    "begriff": "Finality assessment (Finalitätsgutachten)",
+    "kuerzel": null,
+    "erklaerung": "A final perspective focuses mainly on the current state of health and its effects. Whether this term is used in a specific procedure depends on the area of assessment.",
+    "mehr_label": null
+  },
+  "fremdanamnese": {
+    "begriff": "History from third parties (Fremdanamnese)",
+    "kuerzel": null,
+    "erklaerung": "Information on the medical history or situation that comes from sources other than the examined person, for example relatives or documents.",
+    "mehr_label": null
+  },
+  "fremdbefund": {
+    "begriff": "External finding (Fremdbefund)",
+    "kuerzel": null,
+    "erklaerung": "A finding made by another treating or examining body.",
+    "mehr_label": null
+  },
+  "funktionsbeeintraechtigung": {
+    "begriff": "Functional impairment (Funktionsbeeinträchtigung)",
+    "kuerzel": null,
+    "erklaerung": "A limitation of physical, psychological or mental functions.",
+    "mehr_label": null
+  },
+  "funktionsbefund": {
+    "begriff": "Functional finding (Funktionsbefund)",
+    "kuerzel": null,
+    "erklaerung": "A description of specific functional abilities or limitations.",
+    "mehr_label": null
+  },
+  "funktionsfaehigkeit": {
+    "begriff": "Functioning (Funktionsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "Describes which physical, psychological or mental functions and activities are possible for a person.",
+    "mehr_label": null
+  },
+  "gesundheitsstoerung": {
+    "begriff": "Health disorder (Gesundheitsstörung)",
+    "kuerzel": null,
+    "erklaerung": "An umbrella term for an impairment of physical or mental health.",
+    "mehr_label": null
+  },
+  "gutachten": {
+    "begriff": "Expert opinion (Gutachten)",
+    "kuerzel": null,
+    "erklaerung": "A professional assessment of a specific question. It regularly contains an evaluation of the available information and findings and a comprehensible medical or social medicine assessment.",
+    "mehr_label": null
+  },
+  "gutachter-gutachterin": {
+    "begriff": "Expert assessor (Gutachter / Gutachterin)",
+    "kuerzel": null,
+    "erklaerung": "An expert who has been commissioned with a medical or social medicine assessment.",
+    "mehr_label": null
+  },
+  "gutachtliche-stellungnahme": {
+    "begriff": "Expert statement (Gutachtliche Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "A professional assessment of a specific question. Scope and content depend on the assignment.",
+    "mehr_label": null
+  },
+  "gutachtenauftrag": {
+    "begriff": "Expert opinion assignment (Gutachtenauftrag)",
+    "kuerzel": null,
+    "erklaerung": "The question the expert assessor is to answer. The specific assignment is decisive for the content of an expert opinion.",
+    "mehr_label": null
+  },
+  "icd-code": {
+    "begriff": "ICD code (ICD-Code)",
+    "kuerzel": null,
+    "erklaerung": "A coded label for diagnoses under the International Classification of Diseases. The code alone does not automatically say how severe an illness is in the individual case.",
+    "mehr_label": null
+  },
+  "indikation": {
+    "begriff": "Indication (Indikation)",
+    "kuerzel": null,
+    "erklaerung": "The medical reason for carrying out a particular examination, treatment or measure.",
+    "mehr_label": null
+  },
+  "kausalitaet-kausalzusammenhang": {
+    "begriff": "Causality / causal link (Kausalität / Kausalzusammenhang)",
+    "kuerzel": null,
+    "erklaerung": "This examines whether there is a causal connection between an event or cause and a health disorder. What is required of this connection depends on the procedure.",
+    "mehr_label": null
+  },
+  "kausalitaetsgutachten": {
+    "begriff": "Causality assessment (Kausalitätsgutachten)",
+    "kuerzel": null,
+    "erklaerung": "An expert opinion that examines in particular whether a certain event or influence caused a health damage or its consequences.",
+    "mehr_label": null
+  },
+  "klinischer-befund": {
+    "begriff": "Clinical finding (Klinischer Befund)",
+    "kuerzel": null,
+    "erklaerung": "Results found during a medical examination.",
+    "mehr_label": null
+  },
+  "komorbiditaet": {
+    "begriff": "Comorbidity (Komorbidität)",
+    "kuerzel": null,
+    "erklaerung": "One or more illnesses that exist in addition to another illness.",
+    "mehr_label": null
+  },
+  "konsistenz": {
+    "begriff": "Consistency (Konsistenz)",
+    "kuerzel": null,
+    "erklaerung": "An assessment can examine whether statements, observations and findings appear compatible with one another. A single anomaly does not on its own allow a final evaluation.",
+    "mehr_label": null
+  },
+  "kontextfaktoren": {
+    "begriff": "Contextual factors (Kontextfaktoren)",
+    "kuerzel": null,
+    "erklaerung": "Personal and environmental factors that can influence how an illness or disability affects everyday life and participation. Such factors are taken into account in social medicine assessments.",
+    "mehr_label": null
+  },
+  "leistungsbeurteilung": {
+    "begriff": "Assessment of capacity (Leistungsbeurteilung)",
+    "kuerzel": null,
+    "erklaerung": "A medical or social medicine assessment of which activities and demands are possible for a person from a health point of view.",
+    "mehr_label": null
+  },
+  "leistungsbild": {
+    "begriff": "Capacity profile (Leistungsbild)",
+    "kuerzel": null,
+    "erklaerung": "A summarising description of the existing capacity and the health-related limitations.",
+    "mehr_label": null
+  },
+  "leistungsfaehigkeit": {
+    "begriff": "Capacity (Leistungsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "Describes which physical or psychological demands a person can cope with from a medical point of view. The social medicine assessment of the German Pension Insurance explicitly considers capacity in working life.",
+    "mehr_label": null
+  },
+  "leistungsvermoegen": {
+    "begriff": "Working capacity (Leistungsvermögen)",
+    "kuerzel": null,
+    "erklaerung": "Describes which activities a person can still carry out from a health point of view, and under what conditions.",
+    "mehr_label": null
+  },
+  "qualitatives-leistungsvermoegen": {
+    "begriff": "Qualitative working capacity (Qualitatives Leistungsvermögen)",
+    "kuerzel": null,
+    "erklaerung": "Describes which kinds of activities, demands and working conditions are still possible or limited from a health point of view. Rehabilitation reports explicitly assess qualitative capacity.",
+    "mehr_label": null
+  },
+  "quantitatives-leistungsvermoegen": {
+    "begriff": "Quantitative working capacity (Quantitatives Leistungsvermögen)",
+    "kuerzel": null,
+    "erklaerung": "Describes the amount of time for which an activity can be carried out from a social medicine point of view. In the pension insurance this is assessed, among other things, for the most recent job and the general labour market.",
+    "mehr_label": null
+  },
+  "positives-leistungsbild-positives-leistungsvermoegen": {
+    "begriff": "Positive capacity profile (Positives Leistungsbild / positives Leistungsvermögen)",
+    "kuerzel": null,
+    "erklaerung": "Describes which activities and demands are still possible from a health point of view.",
+    "mehr_label": null
+  },
+  "negatives-leistungsbild-leistungseinschraenkungen": {
+    "begriff": "Negative capacity profile / limitations (Negatives Leistungsbild / Leistungseinschränkungen)",
+    "kuerzel": null,
+    "erklaerung": "Describes activities, demands or working conditions that are not possible, or only to a limited extent, from a health point of view.",
+    "mehr_label": null
+  },
+  "medikation": {
+    "begriff": "Medication (Medikation)",
+    "kuerzel": null,
+    "erklaerung": "The medicines that have been prescribed or are being taken.",
+    "mehr_label": null
+  },
+  "medizinischer-dienst-md-medizin": {
+    "begriff": "Medical Service – MD (Medizinischer Dienst)",
+    "kuerzel": null,
+    "erklaerung": "In cases provided for by law, the Medical Service supports the statutory health and long-term care insurance funds with medical and social medicine assessments and statements.",
+    "mehr_label": null
+  },
+  "mitbehandlung": {
+    "begriff": "Co-treatment (Mitbehandlung)",
+    "kuerzel": null,
+    "erklaerung": "Another doctor or other professional is also involved in the treatment.",
+    "mehr_label": null
+  },
+  "nachuntersuchung": {
+    "begriff": "Follow-up examination (Nachuntersuchung)",
+    "kuerzel": null,
+    "erklaerung": "A further examination at a later date to assess further development.",
+    "mehr_label": null
+  },
+  "nebenbefund": {
+    "begriff": "Incidental finding (Nebenbefund)",
+    "kuerzel": null,
+    "erklaerung": "An additional finding made during an examination that was not necessarily the original reason for it.",
+    "mehr_label": null
+  },
+  "objektivierbarer-befund": {
+    "begriff": "Objectifiable finding (Objektivierbarer Befund)",
+    "kuerzel": null,
+    "erklaerung": "A finding that can be established or documented in a comprehensible way using medical examination methods. If complaints cannot be objectified, this does not automatically mean that they do not exist.",
+    "mehr_label": null
+  },
+  "operationsbericht": {
+    "begriff": "Surgical report (Operationsbericht)",
+    "kuerzel": null,
+    "erklaerung": "Documentation of a surgical procedure. Surgical reports are among the information that can be part of a patient record.",
+    "mehr_label": null
+  },
+  "patientenakte": {
+    "begriff": "Patient record (Patientenakte)",
+    "kuerzel": null,
+    "erklaerung": "Essential information on treatment is documented here, for example medical history, diagnoses, examinations, findings, therapies, medication, doctor's letters and, where applicable, surgical reports.",
+    "mehr_label": null
+  },
+  "pathologisch": {
+    "begriff": "Pathological (Pathologisch)",
+    "kuerzel": null,
+    "erklaerung": "Medical term for a finding that is diseased or deviates from the medical norm. What the deviation means must be assessed in context.",
+    "mehr_label": null
+  },
+  "plausibilitaet": {
+    "begriff": "Plausibility (Plausibilität)",
+    "kuerzel": null,
+    "erklaerung": "This assesses whether statements, findings and medical connections appear comprehensible.",
+    "mehr_label": null
+  },
+  "primaerschaden": {
+    "begriff": "Primary damage (Primärschaden)",
+    "kuerzel": null,
+    "erklaerung": "In causality assessments, this can refer to damage to health caused directly by a particular event or influence. The exact use depends on the area of law.",
+    "mehr_label": null
+  },
+  "prognose": {
+    "begriff": "Prognosis (Prognose)",
+    "kuerzel": null,
+    "erklaerung": "A professional assessment of how an illness, functional impairment or capacity is likely to develop. It is an estimate, not a certain prediction.",
+    "mehr_label": null
+  },
+  "psychischer-befund-psychopathologischer-befund": {
+    "begriff": "Mental status / psychopathological findings (Psychischer Befund / psychopathologischer Befund)",
+    "kuerzel": null,
+    "erklaerung": "A structured description of the current mental state, for example with regard to mood, thinking, perception, orientation and drive.",
+    "mehr_label": null
+  },
+  "rehabilitationsbedarf-medizin": {
+    "begriff": "Rehabilitation need (Rehabilitationsbedarf)",
+    "kuerzel": null,
+    "erklaerung": "This examines whether rehabilitation benefits may be necessary.",
+    "mehr_label": null
+  },
+  "rehabilitationsbeduerftigkeit": {
+    "begriff": "Need for rehabilitation (Rehabilitationsbedürftigkeit)",
+    "kuerzel": null,
+    "erklaerung": "The social medicine assessment examines whether, because of health impairments, a rehabilitation benefit is necessary to maintain or improve participation or capacity. It is a separate criterion.",
+    "mehr_label": null
+  },
+  "rehabilitationsfaehigkeit": {
+    "begriff": "Ability to undergo rehabilitation (Rehabilitationsfähigkeit)",
+    "kuerzel": null,
+    "erklaerung": "This assesses whether physical and psychological resilience allow active participation in a suitable rehabilitation measure.",
+    "mehr_label": null
+  },
+  "rehabilitationsprognose": {
+    "begriff": "Rehabilitation prognosis (Rehabilitationsprognose)",
+    "kuerzel": null,
+    "erklaerung": "A medically founded assessment of whether the goals of the rehabilitation are likely to be achieved.",
+    "mehr_label": null
+  },
+  "rehabilitationspotential": {
+    "begriff": "Rehabilitation potential (Rehabilitationspotential)",
+    "kuerzel": null,
+    "erklaerung": "This can describe existing possibilities and resources that can be used or improved through rehabilitation. The term is used in connection with the rehabilitation prognosis.",
+    "mehr_label": null
+  },
+  "rehabilitationsziel": {
+    "begriff": "Rehabilitation goal (Rehabilitationsziel)",
+    "kuerzel": null,
+    "erklaerung": "The goal a rehabilitation measure is meant to achieve, for example improved participation or working capacity.",
+    "mehr_label": null
+  },
+  "remission": {
+    "begriff": "Remission (Remission)",
+    "kuerzel": null,
+    "erklaerung": "Signs of illness or complaints have clearly decreased or are temporarily no longer present. Remission does not automatically mean a permanent cure.",
+    "mehr_label": null
+  },
+  "reservekapazitaet": {
+    "begriff": "Reserve capacity (Reservekapazität)",
+    "kuerzel": null,
+    "erklaerung": "A social medicine term that can describe whether there are still health or functional possibilities that can be used through treatment or rehabilitation.",
+    "mehr_label": null
+  },
+  "schaedigung": {
+    "begriff": "Impairment (Schädigung)",
+    "kuerzel": null,
+    "erklaerung": "In social medicine contexts, this can refer to impairments of body functions or body structures.",
+    "mehr_label": null
+  },
+  "sekundaerschaden-folgeschaden": {
+    "begriff": "Secondary damage / consequential damage (Sekundärschaden / Folgeschaden)",
+    "kuerzel": null,
+    "erklaerung": "Damage to health that may have developed as a result of other damage to health or an event. Whether such a connection actually exists must be examined in the procedure.",
+    "mehr_label": null
+  },
+  "somatischer-befund": {
+    "begriff": "Somatic finding (Somatischer Befund)",
+    "kuerzel": null,
+    "erklaerung": "A finding relating to the state of physical health.",
+    "mehr_label": null
+  },
+  "sozialanamnese": {
+    "begriff": "Social history (Sozialanamnese)",
+    "kuerzel": null,
+    "erklaerung": "Information on living circumstances, work, housing, family, support and other social factors, insofar as they are relevant to the medical or social medicine assessment.",
+    "mehr_label": null
+  },
+  "sozialmedizinische-begutachtung": {
+    "begriff": "Social medicine assessment (Sozialmedizinische Begutachtung)",
+    "kuerzel": null,
+    "erklaerung": "An assessment in which health impairments are evaluated in connection with capacity, rehabilitation, participation or social law questions. The German Pension Insurance describes the assessment of capacity and need for rehabilitation, among other things, as central tasks.",
+    "mehr_label": null
+  },
+  "sozialmedizinische-leistungsbeurteilung": {
+    "begriff": "Social medicine assessment of capacity (Sozialmedizinische Leistungsbeurteilung)",
+    "kuerzel": null,
+    "erklaerung": "A summarising professional assessment of which activities and demands are still possible for a person, taking their health limitations into account.",
+    "mehr_label": null
+  },
+  "sozialmedizinische-stellungnahme": {
+    "begriff": "Social medicine statement (Sozialmedizinische Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "A professional social medicine assessment of a particular question. In pension insurance assessments, a final social medicine statement is part of the process.",
+    "mehr_label": null
+  },
+  "stellungnahme-medizin": {
+    "begriff": "Statement (Stellungnahme)",
+    "kuerzel": null,
+    "erklaerung": "A professional assessment of a particular medical or social medicine question.",
+    "mehr_label": null
+  },
+  "subjektive-angaben-subjektive-beschwerden": {
+    "begriff": "Subjective statements / subjective complaints (Subjektive Angaben / subjektive Beschwerden)",
+    "kuerzel": null,
+    "erklaerung": "Complaints or limitations that a person describes themselves. These statements are part of the medical assessment and can be considered together with other findings.",
+    "mehr_label": null
+  },
+  "teilhabe-medizin": {
+    "begriff": "Participation (Teilhabe)",
+    "kuerzel": null,
+    "erklaerung": "This means a person being involved in different areas of life, for example work, social relationships or social life.",
+    "mehr_label": null
+  },
+  "teilhabebeeintraechtigung": {
+    "begriff": "Impaired participation (Teilhabebeeinträchtigung)",
+    "kuerzel": null,
+    "erklaerung": "A health-related limitation of participation in one or more areas of life.",
+    "mehr_label": null
+  },
+  "therapieansprechen": {
+    "begriff": "Response to therapy (Therapieansprechen)",
+    "kuerzel": null,
+    "erklaerung": "This describes whether and how a treatment has had an effect.",
+    "mehr_label": null
+  },
+  "therapieempfehlung": {
+    "begriff": "Therapy recommendation (Therapieempfehlung)",
+    "kuerzel": null,
+    "erklaerung": "A professional recommendation on which further treatment or medical measure might make sense.",
+    "mehr_label": null
+  },
+  "therapieerfolg": {
+    "begriff": "Therapy success (Therapieerfolg)",
+    "kuerzel": null,
+    "erklaerung": "This describes which changes a treatment has achieved.",
+    "mehr_label": null
+  },
+  "therapieverlauf": {
+    "begriff": "Course of therapy (Therapieverlauf)",
+    "kuerzel": null,
+    "erklaerung": "Description of the treatment carried out and of how complaints and findings developed during that time.",
+    "mehr_label": null
+  },
+  "untersuchungsbefund": {
+    "begriff": "Examination finding (Untersuchungsbefund)",
+    "kuerzel": null,
+    "erklaerung": "The result of a medical examination.",
+    "mehr_label": null
+  },
+  "untersuchungsergebnis": {
+    "begriff": "Examination result (Untersuchungsergebnis)",
+    "kuerzel": null,
+    "erklaerung": "The results found during an examination.",
+    "mehr_label": null
+  },
+  "vegetative-anamnese": {
+    "begriff": "Autonomic history (Vegetative Anamnese)",
+    "kuerzel": null,
+    "erklaerung": "Information on, for example, sleep, appetite, weight, excretion or other basic bodily functions. Such information can be part of a detailed assessment.",
+    "mehr_label": null
+  },
+  "verdachtsdiagnose": {
+    "begriff": "Suspected diagnosis (Verdachtsdiagnose)",
+    "kuerzel": null,
+    "erklaerung": "An illness is suspected on the basis of the information so far but has not yet been finally confirmed.",
+    "mehr_label": null
+  },
+  "verlauf": {
+    "begriff": "Course (Verlauf)",
+    "kuerzel": null,
+    "erklaerung": "This describes how complaints, illness, findings or treatment have developed over time.",
+    "mehr_label": null
+  },
+  "verlaufskontrolle": {
+    "begriff": "Follow-up check (Verlaufskontrolle)",
+    "kuerzel": null,
+    "erklaerung": "A later examination or assessment that checks for changes in the course of illness or treatment.",
+    "mehr_label": null
+  },
+  "vorerkrankung": {
+    "begriff": "Pre-existing condition (Vorerkrankung)",
+    "kuerzel": null,
+    "erklaerung": "An illness that already existed before the event or period currently being considered.",
+    "mehr_label": null
+  },
+  "vorbefund": {
+    "begriff": "Previous finding (Vorbefund)",
+    "kuerzel": null,
+    "erklaerung": "A finding made earlier that can be taken into account in the current assessment or compared with new findings.",
+    "mehr_label": null
+  },
+  "vorgutachten": {
+    "begriff": "Previous expert opinion (Vorgutachten)",
+    "kuerzel": null,
+    "erklaerung": "An expert opinion prepared earlier that can be taken into account as a document in a later assessment.",
+    "mehr_label": null
+  },
+  "wechselwirkung": {
+    "begriff": "Interaction (Wechselwirkung)",
+    "kuerzel": null,
+    "erklaerung": "Different illnesses, complaints, medicines or other factors influence one another.",
+    "mehr_label": null
+  },
+  "zusatzbefund": {
+    "begriff": "Additional finding (Zusatzbefund)",
+    "kuerzel": null,
+    "erklaerung": "An additional medical finding made during an examination or supplementary diagnostics.",
+    "mehr_label": null
+  },
+  "zusatzdiagnostik": {
+    "begriff": "Supplementary diagnostics (Zusatzdiagnostik)",
+    "kuerzel": null,
+    "erklaerung": "Additional examinations that may be necessary to answer a medical or assessment question. The German Pension Insurance explicitly takes necessary supplementary diagnostics into account in the assessment process.",
+    "mehr_label": null
+  },
+  "zusammenfassende-beurteilung": {
+    "begriff": "Summarising assessment (Zusammenfassende Beurteilung)",
+    "kuerzel": null,
+    "erklaerung": "At the end of a report or expert opinion, the most important findings, connections and professional assessments are brought together.",
+    "mehr_label": null
+  },
+  "zustand-nach-z-n": {
+    "begriff": "Status after … (Zustand nach … / Z. n. …)",
+    "kuerzel": null,
+    "erklaerung": "Means that a certain event, illness or treatment took place in the past, for example „Zustand nach Operation“ (status after surgery).",
+    "mehr_label": null
+  },
+  "narkoseprotokoll": {
+    "begriff": "Anaesthesia record (Narkoseprotokoll)",
+    "kuerzel": null,
+    "erklaerung": "Documentation of anaesthesia in connection with a procedure. Anaesthesia records can be part of the patient record.",
+    "mehr_label": null
   }
 }

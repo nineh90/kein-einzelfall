@@ -100,8 +100,10 @@ return [
                 // KEV-155: zweites Glossar, Taddis Datei „3. Behörden und
                 // Bescheide“. Ohne Positionsangabe, deshalb neben das Glossar.
                 ['schluessel' => 'behoerden_und_bescheide', 'label' => 'Behörden & Bescheide', 'url' => '/behoerden-und-bescheide'],
-                // KEV-261: Taddis „6. Sozialrecht und Hilfesysteme“. 4 und 5
-                // (Gericht, Medizinische Berichte) kommen davor.
+                // KEV-260: Taddis „5. Medizinische Berichte und Gutachten“.
+                ['schluessel' => 'medizinische_berichte_und_gutachten', 'label' => 'Medizinische Berichte & Gutachten', 'url' => '/medizinische-berichte-und-gutachten'],
+                // KEV-261: Taddis „6. Sozialrecht und Hilfesysteme“. Ihre 4
+                // (Gericht & Verfahren) kommt vor die 5.
                 ['schluessel' => 'sozialrecht_und_hilfesystem', 'label' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem'],
             ],
         ],
