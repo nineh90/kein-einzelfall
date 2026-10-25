@@ -567,6 +567,41 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
     und Anträge selbst.
   - Die Unterzeile auf dem Bild („Rechte, Anträge und Hilfesysteme
     verständlich erklärt.“) ist weiter von uns.
+- [ ] **Formulare (KEV-250), bitte ansehen und drei Fragen klären.** Taddis
+  Formulare aus dem Drive stehen auf /formulare in vier Listen (Mitgliedschaft;
+  Vollmacht und Schweigepflichtentbindung; Freigaben; Gruppen und
+  Veranstaltungen). Die acht Formulare zum Ausfüllen haben echte Felder
+  bekommen: am PC ausfüllen (Acrobat Reader oder Browser), speichern,
+  schicken; ausgedruckt sehen sie aus wie bisher. Darüber ein Abschnitt von
+  uns, „So nutzt du die Formulare“ (am PC, auf Papier, Unterschrift, wohin).
+  - **Wohin schicken?** Wir nennen kontakt@kein-einzelfall.de und die Post.
+    Soll der Mitgliedsantrag an verwaltung@ gehen?
+  - **Unterschrift:** Für Vollmacht und Schweigepflichtentbindung raten wir
+    zu einer eigenhändigen Unterschrift (ausdrucken, unterschreiben, Scan oder
+    Foto schicken), weil Behörden und Ärzte eine getippte oft nicht annehmen.
+    Bei den Freigaben und dem Mitgliedsantrag reicht laut Text der Name im
+    Feld. Bitte bestätigen.
+  - **E-Mail und Gesundheitsdaten:** Die Formulare enthalten oft
+    Gesundheitsdaten; der Text sagt deshalb, dass E-Mail unverschlüsselt ist,
+    und bietet die Post an. Eine sichere Upload-Möglichkeit wäre ein eigenes
+    Ticket.
+  - **Nicht ausfüllbar, weil zum Lesen:** Gruppenregeln, Leitfäden,
+    Ausfüllhilfe, Mitglieds- und Beitragsordnung, und die zwei Teilnahme- und
+    Verschwiegenheitserklärungen. Letztere enden mit „Empfohlene Pflichtfelder
+    bei der Online-Anmeldung“, sie werden also bei der Anmeldung bestätigt.
+    Sollen sie auch zum Unterschreiben sein, fehlen Unterschriftszeilen.
+  - **Satzung:** In der Liste steht die von der Seite „Satzung“. Die
+    „Satzung II.pdf“ im Drive weicht davon ab (u. a. § 3.2 „Notwendige
+    finanzielle Mittel …“ neu, im Namen fehlt „– Opferhilfe für soziale
+    Gerechtigkeit“). Welche gilt?
+  - **Im Dokument aufgefallen:** Die „Vollmacht“ (ohne
+    Schweigepflichtentbindung) schließt mit „Ich erteile diese
+    Schweigepflichtentbindung und Einwilligung …“. Vermutlich aus der
+    kombinierten Fassung kopiert, bitte im Original korrigieren.
+  - Die Word-Fassungen aus dem Drive sind nicht online (PDF reicht für beides).
+    Ersetzt der Verein ein Formular im Panel durch ein neues PDF aus Google
+    Docs, hat das keine Felder mehr; wir machen es mit `bin/formular-ausfuellbar`
+    wieder ausfüllbar.
 - [ ] **Formulare (KEV-150).** Neue Seite /formulare unter „Wissen“ zwischen
   Atteste und Fristen mit Taddis Text. Die Formulare selbst fehlen noch:
   Pflegen unter „Seiten“ → „Formulare“, im Baustein „Dokumente“ („Formulare

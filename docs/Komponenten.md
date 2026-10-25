@@ -2674,3 +2674,27 @@ Fachsprache“ im Bereich „Wissen“, nicht mehr einzeln. Wie bei
 Tests: `KlartextStattFachspracheTest`, Browser-Lauf „Klartext statt
 Fachsprache“, Barrierefreiheit für Übersicht und Suchergebnis.
 
+
+## 45. Formulare zum Ausfüllen (KEV-250, 25.10.2026)
+
+Taddis Formulare (Drive „Documente“ › „3. Wissen“ › „Formulare Download“)
+liegen unter `public/dokumente/2026/10/` und stehen auf `/formulare` in vier
+Dokumentenlisten (`FormulareSeeder::listen()`), darüber der Abschnitt „So
+nutzt du die Formulare“.
+
+**Ausfüllbar am PC:** Taddis PDFs aus Google Docs haben keine Formularfelder.
+`bin/formular-ausfuellbar` sucht Unterstrich-Zeilen, gezeichnete Schreiblinien,
+„[ ]“ und gezeichnete Kästchen und legt unsichtbare Felder darüber (Text bzw.
+Kreuz, Beschriftung als Tooltip für Vorlesehilfen). Gedruckt sieht das PDF
+aus wie vorher. Python mit `pypdf`, `pdfplumber`, `reportlab` (Aufruf im Kopf
+des Skripts). Danach jedes PDF ausgefüllt ansehen. Der Mitgliedsantrag hat
+Tabellenzellen ohne Linie und bekommt die Option `mitgliedsantrag`.
+
+Nicht ausfüllbar: Dokumente zum Lesen (Gruppenregeln, Leitfäden,
+Ausfüllhilfe, Beitragsordnung, Teilnahmeerklärungen, Satzung). Die
+Word-Fassungen sind nicht online. Metadaten der PDFs: Titel und Verein als
+Autor, keine Namen aus dem Drive.
+
+Tests: `FormulareTest` (alle Dateien da, „ausfüllbar“ nur bei PDFs mit
+Feldern, Migration nur auf leerer Liste).
+

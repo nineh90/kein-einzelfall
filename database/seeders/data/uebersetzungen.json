@@ -4762,5 +4762,71 @@
   },
   "Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.": {
     "en": "Understand deadlines. Recognise your options. Act in time."
+  },
+  "So nutzt du die Formulare": {
+    "en": "How to use the forms"
+  },
+  "*Am PC ausfüllen:* Lade das Formular herunter und öffne es mit einem PDF-Programm, zum Beispiel dem kostenlosen Adobe Acrobat Reader, oder direkt im Browser. Formulare mit dem Zusatz „ausfüllbar“ haben Felder zum Hineinschreiben und Kästchen zum Ankreuzen. Speichere das ausgefüllte Formular und schick es uns.": {
+    "en": "*Filling in on a computer:* Download the form and open it with a PDF program, for example the free Adobe Acrobat Reader, or directly in your browser. Forms marked “fillable” have fields to type into and boxes to tick. Save the completed form and send it to us. The forms are in German."
+  },
+  "*Auf Papier ausfüllen:* Jedes Formular lässt sich auch ausdrucken und von Hand ausfüllen.": {
+    "en": "*Filling in on paper:* Every form can also be printed out and filled in by hand."
+  },
+  "*Unterschrift:* Vollmacht und Schweigepflichtentbindung brauchen deine eigenhändige Unterschrift, sonst nehmen Behörden, Ärztinnen und Ärzte sie oft nicht an. Fülle sie am PC aus, drucke sie aus, unterschreibe und schick uns einen Scan oder ein Foto.": {
+    "en": "*Signature:* The power of attorney and the release from confidentiality need your handwritten signature, otherwise authorities and doctors often do not accept them. Fill them in on the computer, print them out, sign them and send us a scan or a photo."
+  },
+  "*Schicken:* per E-Mail an *kontakt@kein-einzelfall.de* oder per Post an KE!N EINZELFALL e.V., Schiffbeker Höhe 30, 22119 Hamburg. In den Formularen stehen oft Gesundheitsdaten, und eine E-Mail ist nicht verschlüsselt. Wenn dir das lieber ist, nimm die Post.": {
+    "en": "*Sending:* by email to *kontakt@kein-einzelfall.de* or by post to KE!N EINZELFALL e.V., Schiffbeker Höhe 30, 22119 Hamburg, Germany. The forms often contain health data, and an email is not encrypted. If you prefer, use the post."
+  },
+  "Antrag auf Mitgliedschaft (ausfüllbar)": {
+    "en": "Membership application (fillable, German)"
+  },
+  "Ausfüllhilfe zum Mitgliedsantrag": {
+    "en": "Help with the membership application (German)"
+  },
+  "Mitglieds- und Beitragsordnung": {
+    "en": "Membership and fee rules (German)"
+  },
+  "Vollmacht und Schweigepflichtentbindung": {
+    "en": "Power of attorney and release from confidentiality"
+  },
+  "Vollmacht und Schweigepflichtentbindung in einem (ausfüllbar)": {
+    "en": "Power of attorney and release from confidentiality in one (fillable, German)"
+  },
+  "Vollmacht (ausfüllbar)": {
+    "en": "Power of attorney (fillable, German)"
+  },
+  "Schweigepflichtentbindung (ausfüllbar)": {
+    "en": "Release from confidentiality (fillable, German)"
+  },
+  "Freigaben für Bilder, Texte und Tonaufnahmen": {
+    "en": "Consent forms for images, texts and audio recordings"
+  },
+  "Freigabe für Bilder (ausfüllbar)": {
+    "en": "Consent for images (fillable, German)"
+  },
+  "Freigabe für Texte (ausfüllbar)": {
+    "en": "Consent for texts (fillable, German)"
+  },
+  "Freigabe für Tonaufnahmen (ausfüllbar)": {
+    "en": "Consent for audio recordings (fillable, German)"
+  },
+  "Freigabe zur Verarbeitung und Speicherung deiner Unterlagen (ausfüllbar)": {
+    "en": "Consent to processing and storing your documents (fillable, German)"
+  },
+  "Gruppen und Veranstaltungen": {
+    "en": "Groups and events"
+  },
+  "Teilnahme- und Verschwiegenheitserklärung": {
+    "en": "Declaration of participation and confidentiality (German)"
+  },
+  "Teilnahme- und Verschwiegenheitserklärung für Selbsthilfegruppen": {
+    "en": "Declaration of participation and confidentiality for self-help groups (German)"
+  },
+  "Leitfaden für Selbsthilfegruppen": {
+    "en": "Guide for self-help groups (German)"
+  },
+  "Leitfaden für Arbeitsgruppen": {
+    "en": "Guide for working groups (German)"
   }
 }

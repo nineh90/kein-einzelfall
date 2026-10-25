@@ -1,0 +1,223 @@
+#!/usr/bin/env python3
+"""
+Macht die Formulare des Vereins am PC ausfüllbar (KEV-250).
+
+    python3 -m venv /tmp/pdf && /tmp/pdf/bin/pip install pypdf pdfplumber reportlab
+    /tmp/pdf/bin/python bin/formular-ausfuellbar <quelle.pdf> <ziel.pdf> "<Titel>" [mitgliedsantrag]
+
+Taddis PDFs (aus Google Docs) haben keine Formularfelder, nur Unterstriche,
+„[ ]“ und gezeichnete Kästchen. Das Skript sucht diese Stellen und legt
+unsichtbare Felder darüber: Text auf Linien und Unterstrichen, Kreuz in
+Kästchen. Ausgedruckt sieht das PDF aus wie vorher, am PC lässt es sich
+ausfüllen und speichern. Danach immer ansehen (ausfüllen, z. B. im Browser).
+
+Der Mitgliedsantrag hat Tabellenzellen ohne Linie; dafür das vierte Argument
+„mitgliedsantrag“, das die Felder rechts neben den Zellbeschriftungen und
+vor „Euro“ (höherer Beitrag) setzt.
+"""
+import io, re, sys, unicodedata
+import pdfplumber
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import NameObject, BooleanObject, ArrayObject, DictionaryObject, TextStringObject
+from reportlab.pdfgen import canvas
+from reportlab.lib.colors import transparent, black
+
+RECHTS_RAND = 516
+NULLBREIT = re.compile(r'[\u200b]')
+
+def sauber(t):
+    return NULLBREIT.sub('', t).strip(' :')
+
+def mitte(w):
+    return (w['top'] + w['bottom']) / 2
+
+def beschriftung(words, x0, x1, top, bottom):
+    links = sorted([w for w in words if w['x1'] <= x0 + 2 and abs(mitte(w) - (top + bottom) / 2) < 7
+                    and '__' not in w['text'] and w['text'] not in ('[', ']', '_')], key=lambda w: w['x0'])
+    teil = []
+    for w in reversed(links):
+        if teil and teil[0]['x0'] - w['x1'] > 25:
+            break
+        teil.insert(0, w)
+    text = sauber(' '.join(w['text'] for w in teil))
+    if not text:
+        oben = [w for w in words if 0 < top - w['bottom'] < 22 and w['x1'] > x0 - 3 and w['x0'] < x1 - 10
+                and '__' not in w['text']]
+        text = sauber(' '.join(w['text'] for w in sorted(oben, key=lambda w: w['x0'])))
+    return text
+
+def satz_rechts(words, x1, top, bottom):
+    rechts = sorted([w for w in words if w['x0'] >= x1 - 1 and abs(mitte(w) - (top + bottom) / 2) < 7
+                     and '__' not in w['text']], key=lambda w: w['x0'])
+    return sauber(' '.join(w['text'] for w in rechts[:10]))
+
+def finden(pfad, rechts_von=(), links_von=(), linien=True):
+    seiten = []
+    with pdfplumber.open(pfad) as pdf:
+        for page in pdf.pages:
+            words = page.extract_words(x_tolerance=1.5)
+            felder = []
+
+            def text(x0, x1, unten, label, hoehe=15):
+                felder.append({'art': 'text', 'x0': x0, 'x1': x1, 'top': unten - hoehe, 'bottom': unten, 'label': label})
+
+            # Unterstriche in einem Wort, auch mitten im Wort („zum: ____“)
+            for w in words:
+                for m in re.finditer(r'_{4,}', w['text']):
+                    a = m.start() / len(w['text']); b = m.end() / len(w['text'])
+                    x0 = w['x0'] + (w['x1'] - w['x0']) * a
+                    x1 = w['x0'] + (w['x1'] - w['x0']) * b
+                    label = beschriftung(words, x0, x1, w['top'], w['bottom'])
+                    if m.start() > 0:
+                        label = sauber(label + ' ' + w['text'][:m.start()])
+                    text(x0, x1, w['bottom'] + 1, label)
+
+            # Gesperrte Unterstriche „_ _ _ _“ (IBAN, BIC)
+            zeile = sorted([w for w in words if set(w['text']) == {'_'}], key=lambda w: (round(w['top']), w['x0']))
+            gruppe = []
+            for w in zeile + [None]:
+                if w and gruppe and abs(w['top'] - gruppe[-1]['top']) < 2 and w['x0'] - gruppe[-1]['x1'] < 22:
+                    gruppe.append(w); continue
+                if len(gruppe) >= 6:
+                    g0, g1 = gruppe[0], gruppe[-1]
+                    text(g0['x0'], g1['x1'], g0['bottom'] + 1, beschriftung(words, g0['x0'], g1['x1'], g0['top'], g0['bottom']))
+                gruppe = [w] if w else []
+
+            # Gezeichnete Schreiblinien im Inhalt (nicht Kopf- und Fußlinie),
+            # das Feld liegt auf der Linie
+            if linien:
+                for l in page.lines:
+                    if abs(l['top'] - l['bottom']) < 1 and l['x1'] - l['x0'] > 100 and 120 < l['top'] < 700:
+                        # Beschriftung: die Zeile direkt über der Linie
+                        ueber = [w for w in words if l['top'] - 24 < w['bottom'] <= l['top'] and w['x0'] < l['x1']]
+                        if ueber:
+                            unterste = max(w['bottom'] for w in ueber)
+                            ueber = [w for w in ueber if abs(w['bottom'] - unterste) < 3]
+                        label = sauber(' '.join(w['text'] for w in sorted(ueber, key=lambda w: w['x0'])
+                                                if w['text'] not in ('[', ']', '[]')))
+                        text(l['x0'], l['x1'], l['top'] - 1, label, hoehe=16)
+
+            # [ ] als Wörter
+            for i, w in enumerate(words):
+                if w['text'].startswith('[') and 'X' not in w['text']:
+                    zu = next((v for v in words[i:i + 3] if v['text'].endswith(']') and abs(v['top'] - w['top']) < 3
+                               and 0 <= v['x0'] - w['x0'] < 16), None)
+                    if zu:
+                        felder.append({'art': 'box', 'x0': w['x0'], 'x1': zu['x1'], 'top': w['top'], 'bottom': w['bottom'],
+                                       'label': satz_rechts(words, zu['x1'], w['top'], w['bottom'])})
+
+            # Gezeichnete Kästchen, jedes nur einmal
+            gesehen = set()
+            for r in page.rects:
+                if 6 < r['width'] < 16 and 6 < r['height'] < 16 and abs(r['width'] - r['height']) < 3:
+                    k = (round(r['x0']), round(r['top']))
+                    if any(abs(k[0] - g[0]) < 3 and abs(k[1] - g[1]) < 3 for g in gesehen):
+                        continue
+                    gesehen.add(k)
+                    felder.append({'art': 'box', 'x0': r['x0'], 'x1': r['x1'], 'top': r['top'], 'bottom': r['bottom'],
+                                   'label': satz_rechts(words, r['x1'], r['top'], r['bottom'])})
+
+            # Felder rechts neben einer Beschriftung (Zellen ohne Linie)
+            for anfang in rechts_von:
+                teile = anfang.split()
+                for i, w in enumerate(words):
+                    folge = words[i:i + len(teile)]
+                    if [NULLBREIT.sub('', v['text']) for v in folge] != teile:
+                        continue
+                    letzte = folge[-1]
+                    weiter = sorted([v for v in words if v['x0'] > letzte['x1'] + 2 and abs(mitte(v) - mitte(letzte)) < 5],
+                                    key=lambda v: v['x0'])
+                    x1 = (weiter[0]['x0'] - 10) if weiter else RECHTS_RAND
+                    # Folgt gleich Text (Fließtext wie „Kontoinhaber: KE!N …“), ist es keine Zelle.
+                    if x1 - letzte['x1'] > 50:
+                        text(letzte['x1'] + 8, x1, letzte['bottom'] + 2, sauber(anfang))
+
+            # Felder links neben einem Wort (Betrag vor „Euro“), Wort per Spalte
+            for wort, spalte_ab in links_von:
+                for w in words:
+                    if sauber(w['text']) == wort and w['x0'] >= spalte_ab:
+                        text(w['x0'] - 70, w['x0'] - 4, w['bottom'] + 1,
+                             'Höherer Jahresbeitrag in Euro, ' + satz_rechts(words, 60, w['top'], w['bottom']).split(' ')[0])
+            seiten.append({'hoehe': page.height, 'breite': page.width, 'felder': felder})
+    return seiten
+def slug(t):
+    t = unicodedata.normalize('NFKD', t.replace('ß', 'ss')).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', '_', t).strip('_')[:40] or 'feld'
+
+def overlay(seiten):
+    puffer = io.BytesIO()
+    c = canvas.Canvas(puffer)
+    namen = set()
+    for n, seite in enumerate(seiten):
+        H = seite['hoehe']
+        c.setPageSize((seite['breite'], H))
+        for i, f in enumerate(seite['felder']):
+            name = f"s{n+1}_{i+1:02d}_{slug(f['label'])}"
+            assert name not in namen; namen.add(name)
+            if f['art'] == 'text':
+                breite = f['x1'] - f['x0']
+                if breite < 25:
+                    continue
+                c.acroForm.textfield(name=name, tooltip=f['label'] or 'Eingabe', x=f['x0'], y=H - f['bottom'],
+                                     width=breite, height=f['bottom'] - f['top'], fontName='Helvetica', fontSize=10,
+                                     borderWidth=0, borderColor=transparent, fillColor=transparent, textColor=black,
+                                     forceBorder=False)
+            else:
+                g = min(f['x1'] - f['x0'], f['bottom'] - f['top'], 12)
+                mx = (f['x0'] + f['x1']) / 2; my = (f['top'] + f['bottom']) / 2
+                c.acroForm.checkbox(name=name, tooltip=f['label'] or 'Ankreuzen', x=mx - g / 2, y=H - my - g / 2, size=g,
+                                    buttonStyle='cross', borderWidth=0, borderColor=transparent, fillColor=transparent,
+                                    textColor=black, forceBorder=False)
+        c.showPage()
+    c.save()
+    puffer.seek(0)
+    return PdfReader(puffer)
+
+def bauen(quelle, ziel, titel, rechts_von=(), links_von=(), linien=True):
+    seiten = finden(quelle, rechts_von, links_von, linien)
+    vorlage = overlay(seiten)
+    w = PdfWriter(clone_from=quelle)
+    felder = ArrayObject()
+    for n, seite in enumerate(w.pages):
+        annots = vorlage.pages[n].get('/Annots')
+        if not annots:
+            continue
+        neu = seite.get('/Annots') or ArrayObject()
+        for a in annots:
+            # Tief kopieren, samt Erscheinungsbild der Kästchen
+            kopie = a.get_object().clone(w, ignore_fields=('/P', '/Parent'))
+            kopie[NameObject('/P')] = seite.indirect_reference
+            neu.append(kopie.indirect_reference)
+            felder.append(kopie.indirect_reference)
+        seite[NameObject('/Annots')] = neu
+    # Schrift und Felder für das Formular
+    dr = vorlage.trailer['/Root']['/AcroForm'].get('/DR')
+    acro = DictionaryObject({
+        NameObject('/Fields'): felder,
+        NameObject('/NeedAppearances'): BooleanObject(True),
+        NameObject('/DA'): TextStringObject('/Helv 10 Tf 0 g'),
+    })
+    if dr is not None:
+        acro[NameObject('/DR')] = dr.get_object().clone(w)
+    w._root_object[NameObject('/AcroForm')] = w._add_object(acro)
+    w.metadata = None
+    w.add_metadata({'/Title': titel, '/Author': 'KE!N EINZELFALL e.V.'})
+    w._root_object[NameObject('/Lang')] = TextStringObject('de-DE')
+    with open(ziel, 'wb') as fh:
+        w.write(fh)
+    return sum(1 for s in seiten for f in s['felder'])
+
+MITGLIEDSANTRAG = {
+    'rechts_von': ['Ort/Datum:', 'Unterschrift Antragsteller/in:', 'Name/Vorname:', 'Unterschrift:', 'Ort, Datum:',
+                   'Paypal-Name:', 'Kreditinstituts:', 'Kontoinhaber/in:', 'Kontoinhaber:'],
+    'links_von': [('Euro', 420)],
+    'linien': False,
+}
+
+if __name__ == '__main__':
+    if len(sys.argv) < 4:
+        sys.exit(__doc__)
+    extra = MITGLIEDSANTRAG if sys.argv[4:5] == ['mitgliedsantrag'] else {}
+    n = bauen(sys.argv[1], sys.argv[2], sys.argv[3], extra.get('rechts_von', ()), extra.get('links_von', ()),
+              extra.get('linien', True))
+    print(f'{n} Felder: {sys.argv[2]}')
