@@ -81,4 +81,36 @@ class VereinsseiteTest extends TestCase
         $migration->up();
         $this->assertSame(['Eigener Text.'], $block->fresh()->data['absaetze']);
     }
+
+    /** KEV-174: Selbsthilfe- und Arbeitsgruppen mit Bild rechts neben dem Text. */
+    public function test_gruppen_stehen_als_karten_neben_dem_text(): void
+    {
+        foreach (['selbsthilfegruppen', 'arbeitsgruppen'] as $slug) {
+            Page::where('slug', $slug)->update(['titelbild' => Titelbilder::datei($slug), 'published_at' => now()]);
+        }
+
+        $html = $this->get('/verein')->assertOk()->getContent();
+
+        // Im selben Abschnitt wie der Text, nach ihm: Text links, Karten rechts.
+        $abschnitt = substr($html, strpos($html, 'wurde 2024 aus persönlicher Betroffenheit'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+        $this->assertMatchesRegularExpression('#<a href="/selbsthilfegruppen"[^>]*>.*?selbsthilfegruppen[^"]*\.webp.*?Selbsthilfegruppen#s', $abschnitt);
+        $this->assertMatchesRegularExpression('#<a href="/arbeitsgruppen"[^>]*>.*?arbeitsgruppen[^"]*\.webp.*?Arbeitsgruppen#s', $abschnitt);
+    }
+
+    /** KEV-174: Die Migration hängt die Karten genau einmal hinter den Text. */
+    public function test_migration_haengt_die_karten_einmal_an(): void
+    {
+        $seite = Page::where('slug', 'verein')->where('locale', 'de')->first();
+        $seite->blocks()->where('typ', 'seitenkarten')->delete();
+
+        $migration = require database_path('migrations/2026_10_26_140000_verein_gruppen_daneben.php');
+        $migration->up();
+        $migration->up();
+
+        $typen = $seite->blocks()->orderBy('position')->pluck('typ')->all();
+        $this->assertSame(1, count(array_keys($typen, 'seitenkarten', true)));
+        $this->assertSame('seitenkarten', $typen[array_search('text', $typen, true) + 1]);
+        $this->assertSame(VereinsseiteSeeder::KARTEN, $seite->blocks()->where('typ', 'seitenkarten')->value('data'));
+    }
 }

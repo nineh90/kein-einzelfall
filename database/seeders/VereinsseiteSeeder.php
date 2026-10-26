@@ -71,6 +71,12 @@ class VereinsseiteSeeder extends Seeder
      */
     public const HAND = 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung. Gemeinsam KE!N EINZELFALL.';
 
+    /** KEV-174: rechts neben dem Text, mit Bild und Unterzeile der Seiten. */
+    public const KARTEN = [
+        'seiten' => ['selbsthilfegruppen', 'arbeitsgruppen'],
+        'neben_text' => true,
+    ];
+
     public function run(): void
     {
         self::fuellen();
@@ -85,6 +91,7 @@ class VereinsseiteSeeder extends Seeder
         }
 
         self::textErneuern($seite);
+        self::gruppenDaneben($seite);
     }
 
     private static function seite(): ?Page
@@ -94,6 +101,29 @@ class VereinsseiteSeeder extends Seeder
             ->where('locale', Language::standardCode())
             ->where('fassung', Page::FASSUNG_STANDARD)
             ->first();
+    }
+
+    /**
+     * KEV-174: Selbsthilfe- und Arbeitsgruppen als Karten neben dem Text.
+     * Direkt hinter den ersten Textbaustein, nur einmal.
+     */
+    private static function gruppenDaneben(Page $seite): void
+    {
+        $bloecke = $seite->blocks()->orderBy('position')->get();
+        $text = $bloecke->firstWhere('typ', 'text');
+
+        if (! $text || $bloecke->contains('typ', 'seitenkarten')) {
+            return;
+        }
+
+        $bloecke->where('position', '>', $text->position)
+            ->each(fn ($b) => $b->update(['position' => $b->position + 1]));
+
+        $seite->blocks()->create([
+            'typ' => 'seitenkarten',
+            'position' => $text->position + 1,
+            'data' => self::KARTEN,
+        ]);
     }
 
     /** KEV-173: Taddis neuer Text, nur wo noch der der Altseite steht. */

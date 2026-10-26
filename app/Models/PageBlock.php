@@ -124,6 +124,9 @@ class PageBlock extends Model
         // KEV-224: Veranstaltungen und Gruppentreffen eines Monats, aus
         // denselben Daten wie /veranstaltungen (App\Support\Termine).
         'kalender' => 'Termin-Kalender (Veranstaltungen und Gruppentreffen)',
+        // KEV-174: ausgewählte Seiten mit Titelbild und Unterzeile, etwa
+        // Selbsthilfe- und Arbeitsgruppen neben dem Text der Vereinsseite.
+        'seitenkarten' => 'Ausgewählte Seiten als Karten (mit Bild)',
     ];
 
     /**
@@ -164,6 +167,7 @@ class PageBlock extends Model
         'glossar_suche' => 'wechselnd',
         'fristen' => 'wechselnd',
         'kalender' => 'wechselnd',
+        'seitenkarten' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre
@@ -200,8 +204,8 @@ class PageBlock extends Model
         return $flaechen;
     }
 
-    /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224). */
-    public const DANEBEN = ['download_list', 'kalender'];
+    /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224, KEV-174). */
+    public const DANEBEN = ['download_list', 'kalender', 'seitenkarten'];
 
     /**
      * Die Bausteine einer Seite als Abschnitte: Aufeinanderfolgende

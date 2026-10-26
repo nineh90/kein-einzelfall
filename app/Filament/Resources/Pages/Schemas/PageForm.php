@@ -470,6 +470,26 @@ class PageForm
                                     .'erscheinen, steht im Menü; Bild und Text darunter sind Titelbild und '
                                     .'Unterzeile der jeweiligen Seite.'),
 
+                            // --- Ausgewählte Seiten als Karten (KEV-174) ---
+                            Repeater::make('data.seiten')
+                                ->label('Seiten')
+                                ->addActionLabel('Seite hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'seitenkarten')
+                                ->simple(
+                                    Select::make('slug')
+                                        ->label('Seite')
+                                        ->options(fn () => Page::query()
+                                            ->where('locale', Language::standardCode())
+                                            ->where('fassung', Page::FASSUNG_STANDARD)
+                                            ->orderBy('titel')
+                                            ->pluck('titel', 'slug'))
+                                        ->searchable()
+                                        ->required(),
+                                )
+                                ->reorderable()
+                                ->helperText('Bild und Text der Karte sind Titelbild und Unterzeile der jeweiligen '
+                                    .'Seite. Es erscheinen nur Seiten, die im Menü stehen.'),
+
                             // --- Ablauf in Schritten ---
                             Repeater::make('data.schritte')
                                 ->label('Schritte')

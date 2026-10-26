@@ -39,6 +39,10 @@
         {{-- Seit KEV-224 auch der Termin-Kalender (PageBlock::DANEBEN). --}}
         @if ($dokumente->typ === 'kalender')
             <x-blocks.kalender :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null" />
+        @elseif ($dokumente->typ === 'seitenkarten')
+            {{-- KEV-174: Selbsthilfe- und Arbeitsgruppen neben dem Vereinstext. --}}
+            <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
+                :seiten="$dok['seiten'] ?? []" />
         @else
             <x-blocks.download-list :rahmen="false" :auf="$auf"
                 :titel="$dok['titel'] ?? null"
