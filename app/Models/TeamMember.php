@@ -12,12 +12,12 @@ class TeamMember extends Model
     use Uebersetzbar;
 
     protected $fillable = [
-        'name', 'rolle', 'untertitel', 'kurzprofil', 'profil',
+        'name', 'rolle', 'untertitel', 'kurzprofil', 'profil', 'signatur',
         'foto_pfad', 'foto_alt', 'bereich', 'position', 'published_at', 'uebersetzungen',
     ];
 
     /** Sprachfassungen (Uebersetzbar). Nicht `bereich`: danach wird gefiltert. */
-    protected array $uebersetzbar = ['rolle', 'untertitel', 'kurzprofil', 'profil', 'foto_alt'];
+    protected array $uebersetzbar = ['rolle', 'untertitel', 'kurzprofil', 'profil', 'signatur', 'foto_alt'];
 
     protected function casts(): array
     {
@@ -173,6 +173,16 @@ class TeamMember extends Model
         $mehrere = preg_match('/\s(und|&)\s/u', $name);
 
         return $anrede || $mehrere ? $name : Str::before($name, ' ');
+    }
+
+    /**
+     * Die Zeile rechtsbündig unter dem Text (KEV-183): der Name, oder was im
+     * Panel unter „Unterschrift“ steht. Den Gedankenstrich davor setzt die
+     * Seite.
+     */
+    public function unterschrift(): string
+    {
+        return filled($this->signatur) ? trim($this->signatur) : $this->name;
     }
 
     /** Sprungziel, damit sich einzelne Profile verlinken lassen. */

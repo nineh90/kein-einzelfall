@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Page;
+use App\Models\TeamMember;
 use App\Support\Titelbilder;
 use Database\Seeders\AltseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -46,5 +47,18 @@ class UeberUnsSeiteTest extends TestCase
         $satzung = $this->get('/satzung')->assertOk()->getContent();
         $this->assertStringNotContainsString('Über uns – Vorstand und Team', $satzung);
         $this->assertMatchesRegularExpression('#href="/ueber-uns-vorstand-und-team"[^>]*>\s*Vorstand und Team\s*<#', $satzung);
+    }
+
+    /** KEV-183: Unter jedem Text rechtsbündig „– Name“, oder die eigene Unterschrift aus dem Panel. */
+    public function test_unterschrift_unter_jedem_text(): void
+    {
+        $html = $this->get(self::PFAD)->assertOk()->getContent();
+
+        foreach (TeamMember::veroeffentlicht()->where('signatur', null)->pluck('name') as $name) {
+            $this->assertStringContainsString('<p class="text-right text-sm text-ink">– '.e($name).'</p>', $html, $name);
+        }
+
+        TeamMember::where('name', 'Tatjana Belmar')->update(['signatur' => 'Eure Tatjana']);
+        $this->get(self::PFAD)->assertSee('– Eure Tatjana</p>', false)->assertDontSee('– Tatjana Belmar</p>', false);
     }
 }

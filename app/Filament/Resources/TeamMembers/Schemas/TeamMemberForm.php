@@ -45,6 +45,11 @@ class TeamMemberForm
                     // die Gliederung der Seite durcheinanderbringen.
                     ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'undo', 'redo'])
                     ->helperText('Wird über „Mehr lesen“ aufgeklappt. Kann lang sein.'),
+
+                // KEV-183
+                TextInput::make('signatur')->label('Unterschrift')->maxLength(255)
+                    ->helperText('Steht rechtsbündig mit Gedankenstrich unter dem Text. Leer lassen, '
+                        .'dann steht dort der Name.'),
             ]),
 
             Section::make('Foto und Sichtbarkeit')->columns(2)->schema([

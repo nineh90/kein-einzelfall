@@ -109,6 +109,12 @@
                                         {{ $person->kurzprofil }}
                                     </p>
                                 @endif
+
+                                {{-- Ohne ausführlichen Text endet er hier. --}}
+                                @unless ($person->hatProfil())
+                                    <x-ui.unterschrift :person="$person"
+                                        class="col-span-2 sm:col-span-1 sm:col-start-2" />
+                                @endunless
                             </div>
 
                             @if ($person->hatProfil())
@@ -132,6 +138,8 @@
                                                 [&_p]:mb-3 [&_p:last-child]:mb-0">
                                         {{-- Ab dort, wo das Kurzprofil aufhört (KEV-63). --}}
                                         {!! $person->profilFortsetzung() !!}
+
+                                        <x-ui.unterschrift :person="$person" />
                                     </div>
                                 </details>
                             @endif
