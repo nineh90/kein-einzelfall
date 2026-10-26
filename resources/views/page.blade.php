@@ -184,6 +184,7 @@
     <x-layout.weiterlesen
         :seiten="$geschwister"
         :spalten="$kontext->istBereichsUebersicht()['spalten'] ?? 3"
+        :spaltenweise="isset(($kontext->istBereichsUebersicht() ?? $kontext->bereich())['kacheln'])"
         :auf="$weiterlesenAuf"
         :titel="$kontext->istVereinsbereich() ? __('rahmen.weiterlesen.mehr_ueber_verein') : null"
         :bereich="$kontext->istBereichsUebersicht() ? $page->titel : $kontext->bereichName()" />

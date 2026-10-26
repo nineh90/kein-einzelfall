@@ -6,7 +6,18 @@
     // Spalten ab lg. 2 auf der Übersicht „Gruppen & Veranstaltungen“ (KEV-225,
     // `spalten` am Bereich in config/navigation.php).
     'spalten' => 3,
+    // Ab lg spaltenweise lesen: erst die linke Spalte von oben nach unten,
+    // dann die mittlere (KEV-176, `kacheln` am Bereich). In dieser Reihenfolge
+    // stehen die Kacheln auch im Quelltext und auf dem Handy.
+    'spaltenweise' => false,
 ])
+
+@php
+    // Zeilen für das spaltenweise Raster. Wörtlich, Tailwind kennt nur
+    // Klassen, die in den Vorlagen stehen.
+    $zeilen = (int) ceil(count($seiten) / 3);
+    $zeilenKlasse = [1 => 'lg:grid-rows-1', 2 => 'lg:grid-rows-2', 3 => 'lg:grid-rows-3', 4 => 'lg:grid-rows-4'][$zeilen] ?? null;
+@endphp
 
 @if (count($seiten) > 0)
     {{--
@@ -29,7 +40,11 @@
                     : __('rahmen.weiterlesen.auch_interessant')) }}
             </h2>
 
-            <ul @class(['grid gap-3 sm:grid-cols-2', 'lg:grid-cols-3' => $spalten !== 2])>
+            <ul @class([
+                'grid gap-3 sm:grid-cols-2',
+                'lg:grid-cols-3' => $spalten !== 2,
+                'lg:grid-flow-col '.$zeilenKlasse => $spaltenweise && $spalten !== 2 && $zeilenKlasse,
+            ])>
                 @foreach ($seiten as $seite)
                     <li class="flex">
                         {{-- Die Karten stehen auf der jeweils anderen Fläche,

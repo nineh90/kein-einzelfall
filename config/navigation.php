@@ -18,6 +18,18 @@ return [
             'schluessel' => 'bereich_verein',
             'label' => 'Verein',
             'url' => '/verein',
+            /*
+             * KEV-176: Die Kacheln „Mehr über KE!N EINZELFALL e.V.“ in
+             * eigener Reihenfolge, als 3 × 3 spaltenweise gelesen (Taddi:
+             * linker, mittlerer, rechter Block). Ohne Gremium UKFB, das steht
+             * nur im Menü (KEV-178). Was hier fehlt, erscheint nicht als
+             * Kachel.
+             */
+            'kacheln' => [
+                'ueber_uns_vorstand_und_team', 'satzung', 'mitgliedschaft',
+                'kinderkodex', 'istanbul_konvention', 'schutz_und_wertekonzept',
+                'red_flags', 'beschwerdemanagement', 'taetigkeits_und_jahresberichte',
+            ],
             'children' => [
                 ['schluessel' => 'ueber_uns_vorstand_und_team', 'label' => 'Über uns – Vorstand und Team', 'url' => '/ueber-uns-vorstand-und-team'],
                 ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],

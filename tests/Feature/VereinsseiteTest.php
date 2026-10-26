@@ -141,4 +141,30 @@ class VereinsseiteTest extends TestCase
         UnterstuetzungsbandSeeder::anhaengen();
         $this->assertFalse($seite->blocks()->where('typ', 'cta_band')->exists());
     }
+
+    /**
+     * KEV-176: Die Kacheln „Mehr über …“ als 3 × 3, spaltenweise in Taddis
+     * Reihenfolge, ohne Gremium UKFB.
+     */
+    public function test_kacheln_in_taddis_reihenfolge_ohne_ukfb(): void
+    {
+        $html = $this->get('/verein')->assertOk()->getContent();
+        $aside = substr($html, strpos($html, 'id="weiterlesen-titel"'));
+        $aside = substr($aside, 0, strpos($aside, '</aside>'));
+
+        preg_match_all('#<a href="(/[^"]+)"#', $aside, $treffer);
+        $this->assertSame([
+            '/ueber-uns-vorstand-und-team', '/satzung', '/mitgliedschaft',
+            '/kinderkodex', '/istanbul-konvention', '/schutz-und-wertekonzept',
+            '/red-flags', '/beschwerdemanagement', '/taetigkeits-und-jahresberichte',
+        ], $treffer[1]);
+        $this->assertStringContainsString('lg:grid-flow-col lg:grid-rows-3', $aside);
+
+        // Auch auf den Unterseiten keine Kachel zum Gremium.
+        $html = $this->get('/satzung')->assertOk()->getContent();
+        $aside = substr($html, strpos($html, 'id="weiterlesen-titel"'));
+        $aside = substr($aside, 0, strpos($aside, '</aside>'));
+        $this->assertStringContainsString('href="/mitgliedschaft"', $aside);
+        $this->assertStringNotContainsString('/gremium-ukfb', $aside);
+    }
 }

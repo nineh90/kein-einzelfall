@@ -121,7 +121,15 @@ class Seitenkontext
             return [];
         }
 
-        return collect($bereich['children'] ?? [])
+        // Eigene Reihenfolge der Kacheln (KEV-176), sonst die des Menüs.
+        $kinder = collect($bereich['children'] ?? []);
+
+        if (isset($bereich['kacheln'])) {
+            $kinder = $kinder->keyBy('schluessel');
+            $kinder = collect($bereich['kacheln'])->map(fn ($s) => $kinder[$s] ?? null)->filter();
+        }
+
+        return $kinder
             ->reject(fn ($kind) => $kind['url'] === $this->eigeneAdresse())
             // Die Übersichtsseite des Bereichs steht schon in den Brotkrumen
             ->reject(fn ($kind) => $kind['url'] === $bereich['url'])
