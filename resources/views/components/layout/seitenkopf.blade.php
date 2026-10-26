@@ -9,6 +9,10 @@
     'bild_alt' => null,
     // Kurzer Satz unter dem Titel, nur auf dem Titelbild (dort statt des Vorspanns).
     'untertitel' => null,
+    // Vereinsname groß, Seitentitel in der grünen Zeile darüber, nur auf dem
+    // Titelbild. Für die Vereinsseite (KEV-172, Taddi): oben klein
+    // „Gemeinnütziger Verein“, darunter groß „KE!N EINZELFALL e.V.“.
+    'name_gross' => false,
 ])
 
 {{--
@@ -75,6 +79,11 @@
             : null;
 
         $zeile = $bereich && $bereich !== $titel ? $bereich : 'KE!N EINZELFALL e.V.';
+        $gross = $titel;
+
+        if ($name_gross) {
+            [$zeile, $gross] = [$titel, 'KE!N EINZELFALL e.V.'];
+        }
 
         // Ausgerichtet wird links unten, dort sitzt laut Bildvorgabe das
         // Motiv. Ausnahmen mit ihrer Höhe stehen in Titelbilder::FOKUS.
@@ -163,7 +172,7 @@
                              brachen in der halben Spalte sonst ohne Trennstrich
                              mitten im Wort um. Die Seite trägt lang="de". --}}
                         <h1 class="text-balance hyphens-auto break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[1.875rem] lg:text-[2.375rem] xl:text-[2.75rem]">
-                            {{ $titel }}
+                            {{ $gross }}
                         </h1>
 
                         @if ($untertitel)

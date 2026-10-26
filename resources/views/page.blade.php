@@ -165,6 +165,7 @@
         :untertitel="$page->titelbild ? $page->untertitel : null"
         :bild="$page->titelbild"
         :bild_alt="$page->titelbild_alt"
+        :name_gross="$kontext->istBereichsUebersicht() && $kontext->istVereinsbereich()"
         :auf="$ersteFlaeche" />
 
     @if (count($sprungpunkte) >= 4)
