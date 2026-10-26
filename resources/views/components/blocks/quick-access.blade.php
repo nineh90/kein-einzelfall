@@ -63,7 +63,9 @@
                         <span class="mb-3 text-green">
                             <x-ui.icon :name="$karte['icon']" :size="28" />
                         </span>
-                        <span class="font-display text-base font-semibold text-ink group-hover:underline">
+                        {{-- Im Vereinsgrün wie die Überschriften der Seite
+                             (KEV-165, Wunsch von Taddi). --}}
+                        <span class="font-display text-base font-semibold text-green group-hover:underline">
                             {{ $karte['titel'] }}
                         </span>
                         {{-- Jede Zeile im Panel ein eigener Absatz, wie im Aufmacher
