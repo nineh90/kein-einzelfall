@@ -204,6 +204,15 @@ class PageBlock extends Model
         return $flaechen;
     }
 
+    /**
+     * Symbole, die rechts neben einem Textabschnitt stehen können (KEV-184,
+     * KEV-185). Schlüssel ist der Name in x-ui.icon.
+     */
+    public const SYMBOLE = [
+        'circle-users' => 'Menschen im Kreis (Team)',
+        'circle-help' => 'Fragezeichen im Kreis',
+    ];
+
     /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224, KEV-174). */
     public const DANEBEN = ['download_list', 'kalender', 'seitenkarten'];
 

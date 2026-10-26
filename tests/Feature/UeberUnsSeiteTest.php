@@ -61,4 +61,22 @@ class UeberUnsSeiteTest extends TestCase
         TeamMember::where('name', 'Tatjana Belmar')->update(['signatur' => 'Eure Tatjana']);
         $this->get(self::PFAD)->assertSee('– Eure Tatjana</p>', false)->assertDontSee('– Tatjana Belmar</p>', false);
     }
+
+    /** KEV-184: Rechts neben „Team“ das Symbol mit den Menschen im Kreis, auch per Migration. */
+    public function test_symbol_neben_team(): void
+    {
+        $html = $this->get(self::PFAD)->assertOk()->getContent();
+        $this->assertMatchesRegularExpression(
+            '#<h2[^>]*>\s*Team\s*</h2>(?:(?!</section>).)*<circle cx="17" cy="10.4" r="1.8"/>#s', $html);
+
+        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
+        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Team');
+        $daten = $block->data;
+        unset($daten['symbol']);
+        $block->update(['data' => $daten]);
+
+        $migration = require database_path('migrations/2026_10_26_170000_team_symbol.php');
+        $migration->up();
+        $this->assertSame('circle-users', $block->fresh()->data['symbol']);
+    }
 }

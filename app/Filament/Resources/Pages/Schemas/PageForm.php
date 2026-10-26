@@ -378,6 +378,16 @@ class PageForm
                                 ->helperText('Überschrift und Absätze stehen zentriert. Für kurze '
                                     .'Abschnitte; lange Texte liest man linksbündig leichter.'),
 
+                            // KEV-184, KEV-185
+                            Select::make('data.symbol')
+                                ->label('Symbol rechts daneben')
+                                ->options(PageBlock::SYMBOLE)
+                                ->placeholder('Keins')
+                                ->native(false)
+                                ->visible(fn ($get) => $get('typ') === 'text')
+                                ->helperText('Ein großes Symbol auf der freien Fläche rechts neben dem Text. '
+                                    .'Auf dem Handy nicht zu sehen.'),
+
                             // KEV-173
                             Toggle::make('data.alles_zeigen')
                                 ->label('Alle Absätze zeigen')

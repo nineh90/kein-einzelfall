@@ -332,7 +332,9 @@ class TeamUndGruppenSeeder extends Seeder
                         default => null,
                     };
                     $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]]
-                        + ($hintergrund ? ['mittig' => true] : []);
+                        + ($hintergrund ? ['mittig' => true] : [])
+                        // KEV-184: rechts neben „Team“ das Symbol mit den Menschen im Kreis.
+                        + ($titel === 'Team' ? ['symbol' => 'circle-users'] : []);
                     $neu[] = ['typ' => 'text', 'data' => $data];
                 }
             }
