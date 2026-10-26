@@ -920,15 +920,18 @@ class SeitengestaltungTest extends TestCase
 
     public function test_rechtstexte_bekommen_keinen_kontakt_aufruf(): void
     {
-        // „Du möchtest uns etwas mitteilen?" unter einer Datenschutzerklärung
-        // wäre deplatziert.
-        $this->get('/datenschutz')->assertDontSee('Du möchtest uns etwas mitteilen?');
-        $this->get('/impressum')->assertDontSee('Du möchtest uns etwas mitteilen?');
+        // Der Kontakt-Aufruf unter einer Datenschutzerklärung wäre deplatziert.
+        $this->get('/datenschutz')->assertDontSee('id="kontakt-titel"', false);
+        $this->get('/impressum')->assertDontSee('id="kontakt-titel"', false);
 
-        // Inhaltsseiten dagegen schon, mit Taddis Text (KEV-71)
+        // Inhaltsseiten dagegen schon, mit Taddis Text (KEV-71, seit KEV-177
+        // der neue mit Links auf Gruppen, Projekte und Ungesagtes).
         $this->get('/erwerbsminderungsrente')
-            ->assertSee('Du möchtest uns etwas mitteilen?')
-            ->assertSee('oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?')
+            ->assertSee('Du möchtest uns etwas mitteilen, Dich einbringen oder einfach Teil von KE!N EINZELFALL sein?')
+            ->assertSee('<a href="/selbsthilfegruppen" class="text-green-deep underline">Selbsthilfegruppe</a>', false)
+            ->assertSee('<a href="/raum-fuer-ungesagtes" class="text-green-deep underline">Ungesagtes</a>', false)
+            ->assertSee('<p>Du musst keinen fertigen Plan mitbringen.', false)
+            ->assertDontSee('oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?')
             ->assertDontSee('Fragen zu diesem Thema');
     }
 

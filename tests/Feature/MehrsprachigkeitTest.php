@@ -352,7 +352,9 @@ class MehrsprachigkeitTest extends TestCase
         $this->get('/en/verein')
             ->assertDontSee('NOT A SINGLE CASE')
             ->assertSee('Non-profit association')
-            ->assertSee('Would you like to tell us something?')
+            // Seit KEV-177 Taddis neuer Text, die Links mit englischen Adressen.
+            ->assertSee('Would you like to tell us something, get involved or simply be part of KE!N EINZELFALL?')
+            ->assertSee('<a href="/en/arbeitsgruppen" class="text-green-deep underline">working group</a>', false)
             ->assertDontSee('Du möchtest uns etwas mitteilen');
     }
 

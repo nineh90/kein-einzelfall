@@ -217,7 +217,7 @@ class AnfrageTest extends TestCase
         $this->assertStringNotContainsString('Formular auf anderen Seiten', $html);
 
         // Kein „Anfrage stellen“ am Seitenende, das auf dieselbe Seite zeigt.
-        $this->assertStringNotContainsString('Du möchtest uns etwas mitteilen?', $html);
+        $this->assertStringNotContainsString('id="kontakt-titel"', $html);
     }
 
     /**

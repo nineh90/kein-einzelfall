@@ -195,14 +195,26 @@
          deplatziert.
 
          Überschrift und Text seit KEV-71 von Taddi (vorher „Fragen zu diesem
-         Thema?“, ohne die Projektideen). --}}
+         Thema?“, ohne die Projektideen), seit KEV-177 ihr neuer Text mit
+         Links auf die Gruppen, Projekte und „Raum für Ungesagtes“. Jede
+         Zeile wird ein Absatz. --}}
     {{-- Und nicht unter dem Kontaktformular selbst: Dort zeigte „Anfrage
          stellen“ auf dieselbe Seite. --}}
     @unless ($kontext->istRechtstext() || $page->blocks->contains('typ', 'contact_form'))
+        @php
+            // Ein Übersetzungsschlüssel, die Absätze durch Zeilenumbrüche
+            // getrennt (lang/en.json).
+            $kontaktText = __(implode("\n", [
+                'Vielleicht hast Du eine Idee für eine [Arbeitsgruppe](/arbeitsgruppen), [Selbsthilfegruppe](/selbsthilfegruppen) oder ein [Projekt](/projekte). Vielleicht möchtest Du etwas zu [Ungesagtes](/raum-fuer-ungesagtes) beitragen.',
+                'Vielleicht möchtest Du Dich auch einfach mit Deinem Wissen oder Deiner Erfahrung, Deiner Kreativität oder dem Wunsch etwas zu verändern einbringen.',
+                'Du musst keinen fertigen Plan mitbringen. Manchmal beginnt etwas einfach damit, dass jemand sagt: Ich habe da eine Idee. Ich möchte etwas beitragen. Ich brauche Unterstützung. Oder: Ich möchte einfach dabei sein.',
+                'Auch wenn Du Fragen zum Sozialen Entschädigungsrecht (OEG/SGB XIV), zum Schwerbehindertenausweis, zum Pflegegrad oder zu anderen Hilfesystemen hast oder Dir einen persönlichen Austausch wünschst, kannst Du Dich gern an uns wenden.',
+            ]));
+        @endphp
         <x-blocks.contact-close
             :auf="$kontaktAuf"
-            :titel="__('Du möchtest uns etwas mitteilen?')"
-            :text="__('Du wünschst einen persönlichen Austausch in Bezug auf das Soziale Entschädigungsrecht (OEG/SGB XIV), den Schwerbehindertenausweis und/oder den Pflegegrad, oder hast Fragen zu anderen Hilfesystemen, oder hast Ideen für Projekte, oder möchtest uns etwas mitteilen?')"
+            :titel="__('Du möchtest uns etwas mitteilen, Dich einbringen oder einfach Teil von KE!N EINZELFALL sein?')"
+            :text="$kontaktText"
             :ctas="[
                 ['label' => __('Anfrage stellen'), 'url' => \App\Models\Language::aktuell()->pfad('/anfragen'), 'variant' => 'primary'],
                 ['label' => __('Kontakt'), 'url' => \App\Models\Language::aktuell()->pfad('/kontakt'), 'variant' => 'ghost'],

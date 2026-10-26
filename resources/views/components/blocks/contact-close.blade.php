@@ -22,12 +22,18 @@
             <x-ui.icon name="heart" :size="24" />
         </span>
 
-        <h2 id="kontakt-titel" class="font-display text-[1.3125rem] font-medium text-green lg:text-[1.75rem]">
+        <h2 id="kontakt-titel" class="text-balance font-display text-[1.3125rem] font-medium leading-snug text-green lg:text-[1.75rem]">
             {{ $titel }}
         </h2>
 
+        {{-- Jede Zeile ein Absatz, Links als [Text](/adresse) wie in den
+             Textbausteinen (KEV-177). --}}
         @if ($text)
-            <p class="mx-auto mt-3 max-w-prose text-ink-soft">{{ $text }}</p>
+            <div class="mx-auto mt-3 flex max-w-prose flex-col gap-3 text-ink-soft">
+                @foreach (preg_split('/\R+/u', trim($text)) as $absatz)
+                    <p>{{ hervorheben($absatz) }}</p>
+                @endforeach
+            </div>
         @endif
 
         @if ($knoepfe)
