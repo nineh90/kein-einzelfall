@@ -79,4 +79,24 @@ class UeberUnsSeiteTest extends TestCase
         $migration->up();
         $this->assertSame('circle-users', $block->fresh()->data['symbol']);
     }
+
+    /** KEV-185: „Herr und Frau Unbekannt“ linksbündig, rechts das Fragezeichen im Kreis. */
+    public function test_unbekannt_linksbuendig_mit_fragezeichen(): void
+    {
+        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
+        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Herr und Frau Unbekannt');
+        $this->assertSame('circle-help', $block->data['symbol']);
+        $this->assertArrayNotHasKey('mittig', $block->data);
+
+        $this->assertMatchesRegularExpression(
+            '#<h2[^>]*>\s*Herr und Frau Unbekannt\s*</h2>(?:(?!</section>).)*<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>#s',
+            $this->get(self::PFAD)->assertOk()->getContent());
+
+        // Stand davor: mittig, ohne Symbol.
+        $block->update(['data' => array_diff_key($block->data, ['symbol' => 1]) + ['mittig' => true]]);
+        $migration = require database_path('migrations/2026_10_26_180000_unbekannt_symbol.php');
+        $migration->up();
+        $this->assertSame('circle-help', $block->fresh()->data['symbol']);
+        $this->assertArrayNotHasKey('mittig', $block->fresh()->data);
+    }
 }

@@ -331,10 +331,16 @@ class TeamUndGruppenSeeder extends Seeder
                         $hintergrund => self::HINTERGRUND_UEBERSCHRIFT,
                         default => null,
                     };
+                    // Symbole rechts daneben: bei „Team“ die Menschen im Kreis
+                    // (KEV-184), bei den Menschen im Hintergrund das Fragezeichen
+                    // (KEV-185). Seitdem steht deren Abschnitt nicht mehr mittig
+                    // wie seit KEV-68, nur die Karte darunter.
                     $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]]
-                        + ($hintergrund ? ['mittig' => true] : [])
-                        // KEV-184: rechts neben „Team“ das Symbol mit den Menschen im Kreis.
-                        + ($titel === 'Team' ? ['symbol' => 'circle-users'] : []);
+                        + match (true) {
+                            $hintergrund => ['symbol' => 'circle-help'],
+                            $titel === 'Team' => ['symbol' => 'circle-users'],
+                            default => [],
+                        };
                     $neu[] = ['typ' => 'text', 'data' => $data];
                 }
             }
