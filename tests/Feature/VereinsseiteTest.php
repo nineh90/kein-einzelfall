@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Page;
 use App\Support\Titelbilder;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\UnterstuetzungsbandSeeder;
 use Database\Seeders\VereinsseiteSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -112,5 +113,32 @@ class VereinsseiteTest extends TestCase
         $this->assertSame(1, count(array_keys($typen, 'seitenkarten', true)));
         $this->assertSame('seitenkarten', $typen[array_search('text', $typen, true) + 1]);
         $this->assertSame(VereinsseiteSeeder::KARTEN, $seite->blocks()->where('typ', 'seitenkarten')->value('data'));
+    }
+
+    /** KEV-175: statt des grünen Bands der Spendenkasten der Startseite, ohne Strich. */
+    public function test_spendenkasten_statt_gruenem_band(): void
+    {
+        $seite = Page::where('slug', 'verein')->where('locale', 'de')->first();
+        $this->assertSame(['text', 'seitenkarten', 'donation_options'], $seite->blocks()->orderBy('position')->pluck('typ')->all());
+
+        $html = $this->get('/verein')->assertOk()->getContent();
+        $this->assertStringContainsString('IBAN kopieren', $html);
+        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', $html);
+
+        $abschnitt = substr($html, strpos($html, 'id="spenden"'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+        $this->assertStringNotContainsString('bg-green-brand', $abschnitt);
+
+        // Stand davor: das Band am Ende. Die Migration tauscht es an derselben Stelle.
+        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $seite->blocks()->create(['typ' => 'cta_band', 'position' => 2, 'data' => UnterstuetzungsbandSeeder::BAND]);
+        $migration = require database_path('migrations/2026_10_26_150000_verein_spendenkasten.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(['text', 'seitenkarten', 'donation_options'], $seite->blocks()->orderBy('position')->pluck('typ')->all());
+
+        // Ein neuer Lauf des Bands hängt keins mehr an.
+        UnterstuetzungsbandSeeder::anhaengen();
+        $this->assertFalse($seite->blocks()->where('typ', 'cta_band')->exists());
     }
 }

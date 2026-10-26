@@ -73,7 +73,9 @@
         // Der kurze Strich markiert auf den Unterseiten jeden Abschnittsanfang.
         // Auf der Startseite tragen die Abschnitte keinen, „Jetzt spenden“
         // stand damit allein da und sah nach Versehen aus (KEV-170, Taddi).
-        if ($block->typ === 'donation_options' && $block->page?->slug === Page::STARTSEITE_SLUG) {
+        // Auf der Vereinsseite genauso (KEV-175): derselbe Kasten wie auf
+        // der Startseite, und auch dort hat sonst kein Abschnitt einen Strich.
+        if ($block->typ === 'donation_options' && in_array($block->page?->slug, [Page::STARTSEITE_SLUG, 'verein'], true)) {
             $attribute['strich'] = false;
         }
 

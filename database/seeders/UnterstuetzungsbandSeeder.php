@@ -34,17 +34,18 @@ class UnterstuetzungsbandSeeder extends Seeder
      * Seite der Veranstaltungsreihe.
      */
     public const SEITEN = [
-        'verein',
         'ueber-uns-vorstand-und-team',
         'kein-einzelfall-im-dialog',
     ];
 
     /**
      * Seiten mit dem Spendenkasten der Startseite („Jetzt spenden“, kompakt)
-     * statt des Bands (KEV-219, Taddis Wunsch).
+     * statt des Bands (KEV-219, Taddis Wunsch). Seit KEV-175 auch die
+     * Vereinsseite: Das grüne Band war dort „wieder ein ganz anderes Design“.
      */
     public const SPENDEN_STATT_BAND = [
         'taetigkeits-und-jahresberichte',
+        'verein',
     ];
 
     public const BAND = [
