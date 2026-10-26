@@ -139,4 +139,30 @@ class UeberUnsSeiteTest extends TestCase
         $migration->up();
         $this->assertSame($richtig, $tanja->fresh()->kurzprofil);
     }
+
+    /** KEV-188: Taddis Text mit Absätzen und „– DANKE! Herr und Frau Unbekannt“, auch per Migration. */
+    public function test_unbekannt_mit_absaetzen_und_dank(): void
+    {
+        $person = TeamMember::where('name', 'Herr und Frau Unbekannt')->first();
+        $this->assertSame(count(TeamUndGruppenSeeder::UNBEKANNT_ABSAETZE), substr_count($person->profil, '<p>'));
+
+        $html = $this->get(self::PFAD)->assertOk()->getContent();
+        $this->assertStringContainsString('– DANKE! Herr und Frau Unbekannt</p>', $html);
+        $this->assertStringContainsString('<p>Für mehr Sichtbarkeit, Gehör und Unterstützung.</p>', $html);
+
+        // Stand davor: ein Absatz, ohne Unterschrift.
+        $person->update([
+            'profil' => '<p>'.implode(' ', TeamUndGruppenSeeder::UNBEKANNT_ABSAETZE).'</p>',
+            'signatur' => null,
+            'uebersetzungen' => ['en' => ['profil' => '<p>Old.</p>']],
+        ]);
+        $migration = require database_path('migrations/2026_10_26_210000_unbekannt_absaetze_und_unterschrift.php');
+        $migration->up();
+
+        $person = $person->fresh();
+        $this->assertSame(TeamUndGruppenSeeder::UNBEKANNT_SIGNATUR, $person->signatur);
+        $this->assertStringEndsWith('nicht anders zulässt.', $person->kurzprofil);
+        $this->assertSame('THANK YOU! Mr and Mrs Anonymous', $person->uebersetzungen['en']['signatur']);
+        $this->assertStringStartsWith('<p>The voices of courage', $person->uebersetzungen['en']['profil']);
+    }
 }

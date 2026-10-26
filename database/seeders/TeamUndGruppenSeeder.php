@@ -8,6 +8,7 @@ use App\Models\TeamMember;
 use App\Support\Bild;
 use App\Support\Textpflege;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
@@ -55,6 +56,12 @@ class TeamUndGruppenSeeder extends Seeder
             // Beim Import gingen Zeilenumbrüche verloren („mehr.Ich wollte“).
             $person['absaetze'] = array_map(fn ($a) => Textpflege::text($a), $person['absaetze']);
 
+            // KEV-188: Taddis Text mit Absätzen und eigener Unterschrift.
+            $unbekannt = $person['name'] === 'Herr und Frau Unbekannt';
+            if ($unbekannt) {
+                $person['absaetze'] = self::UNBEKANNT_ABSAETZE;
+            }
+
             // Nur Fotos, die tatsächlich geholt wurden (`bilder:holen`). Ein
             // Pfad ins Leere zeigte ein kaputtes Bild statt der Initialen.
             $foto = isset($person['bild']['src']) ? Bild::lokal($person['bild']['src']) : null;
@@ -77,7 +84,13 @@ class TeamUndGruppenSeeder extends Seeder
                 'bereich' => $person['bereich'],
                 'position' => $i,
                 'published_at' => now(),
-            ]);
+            ] + (
+                // Ältere Migrationen rufen das hier auf, bevor es die Spalte
+                // gibt (2026_10_26_160000). Dann setzt sie die von KEV-188.
+                Schema::hasColumn('team_members', 'signatur')
+                    ? ['signatur' => $unbekannt ? self::UNBEKANNT_SIGNATUR : null]
+                    : []
+            ));
         }
 
         foreach (self::NEU_IM_TEAM as $j => $person) {
@@ -247,6 +260,29 @@ class TeamUndGruppenSeeder extends Seeder
 
         return ['personen' => $personen, 'zwischentexte' => $zwischentexte];
     }
+
+    /**
+     * „Herr und Frau Unbekannt“ mit Taddis Absätzen (KEV-188). Auf der
+     * Altseite stand alles in einem Absatz. Neu: „im Verborgenen“ statt
+     * „verborgen“. Ein Zeilenumbruch mitten im ersten Satz („denn / es gibt“)
+     * ist zusammengezogen.
+     */
+    public const UNBEKANNT_ABSAETZE = [
+        'Die Stimmen mit Mut im Hintergrund und im Verborgenen, denn es gibt Menschen, die täglich für den KE!N EINZELFALL e.V. wirken – und doch unsichtbar bleiben müssen. Nicht aus Zurückhaltung. Nicht aus Distanz. Sondern, weil ihre Realität es nicht anders zulässt.',
+        'Sie leben mit Schutzmechanismen, die ihr Leben bestimmen: mit Auskunftssperren, mit Sicherheitsauflagen, mit der Angst, entdeckt zu werden, mit der stillen, aber allgegenwärtigen Notwendigkeit, sich selbst und ihre Liebsten zu schützen.',
+        'Viele von ihnen haben Gewalt erlebt, haben ausgesagt, haben sich widersetzt – und tragen bis heute die Konsequenzen. Sichtbar zu sein, ist für sie kein Recht. Es ist ein Risiko.',
+        'Und trotzdem entscheiden sie sich, da zu sein. Zu helfen. Zu kämpfen. Im Stillen und ohne Applaus. Ihre Sichtbarkeit liegt im Verborgenen – und ist ein unverzichtbarer Teil mit unermesslicher Bedeutung dessen, was wir sichtbar machen.',
+        'Ihr Engagement ist kein öffentliches Statement – es ist eine tägliche Entscheidung gegen Angst und für andere Betroffene.',
+        'Jede Unterstützung, jede Handlung erfordert Kraft und eine innere Größe, die man nicht oft genug würdigen kann.',
+        'Jeder Beitrag, jede Entscheidung dieser Menschen ist von Mut getragen. Von einem Mut, der nicht laut ist – sondern tief. Still. Unerschütterlich.',
+        'Ihnen gilt unser tiefster Respekt. Unser aufrichtigster Dank. Für ihren Mut. Für ihre Ausdauer. Für alles, was sie tragen, ohne gesehen zu werden.',
+        'Dass ihre Namen hier nicht stehen, ist kein Fehlen. Es ist ein Schutz. Ein notwendiger. Ein ernstzunehmender. Und vielleicht auch der eindrücklichste Beweis dafür, wie viel auf dem Spiel steht.',
+        'Und vielleicht ist genau das die größte Wahrheit: Dass die stärksten Kräfte oft die sind, die man nicht sehen kann, dennoch werden wir nicht aufgeben, dem Dunkelfeld die Chance zu geben, sichtbarer zu werden – Schritt für Schritt, Stimme für Stimme.',
+        'Für mehr Sichtbarkeit, Gehör und Unterstützung.',
+    ];
+
+    /** Ihre Unterschrift unter dem Text (KEV-188), sonst stünde dort der Name (KEV-183). */
+    public const UNBEKANNT_SIGNATUR = 'DANKE! Herr und Frau Unbekannt';
 
     public const UNBEKANNT_UEBERSCHRIFT = 'Gemeinsam KE!N EINZELFALL';
 
