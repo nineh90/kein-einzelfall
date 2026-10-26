@@ -243,7 +243,8 @@ class SeitengestaltungTest extends TestCase
 
         $antrag = strpos($html, 'Antrag auf Mitgliedschaft');
         $ordnung = strpos($html, 'id="abschnitt-beitrags-und-mitgliederordnung"');
-        $dokumente = strpos($html, 'Dokumente zum Herunterladen');
+        // Die Überschrift selbst, nicht ihr Eintrag im Verzeichnis (KEV-193).
+        $dokumente = strpos($html, 'id="dl-dokumente-zum-herunterladen"');
 
         $this->assertNotFalse($ordnung);
         $this->assertTrue($antrag < $ordnung && $ordnung < $dokumente, 'Reihenfolge stimmt nicht');

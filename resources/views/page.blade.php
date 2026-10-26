@@ -83,12 +83,18 @@
     // kann oder will.
     //
     // Dazu der Spendenblock: Er trägt mit id="spenden" ein festes Sprungziel.
+    //
+    // Und Dokumentenlisten mit Überschrift (KEV-193, Taddi auf /satzung: „kann
+    // da noch Satzung downloaden hin“). Ihre Überschrift trägt das Ziel
+    // „dl-…“. Nicht die neben einem Text: Die stehen im Abschnitt darüber.
     $sprungpunkte = $bloecke
         ->map(fn ($b) => match (true) {
             $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null)
                 => ['anker' => $b->anker(), 'titel' => $b->data['titel']],
             $b->typ === 'donation_options'
                 => ['anker' => 'spenden', 'titel' => $b->data['titel'] ?? 'Jetzt spenden'],
+            $b->typ === 'download_list' && ($b->data['titel'] ?? null) && empty($b->data['neben_text'])
+                => ['anker' => 'dl-'.\Illuminate\Support\Str::slug($b->data['titel']), 'titel' => $b->data['titel']],
             default => null,
         })
         ->filter()
