@@ -170,8 +170,11 @@
 
                         {{-- hyphens-auto: Lange Fachbegriffe („Opferentschädigungsgesetz“)
                              brachen in der halben Spalte sonst ohne Trennstrich
-                             mitten im Wort um. Die Seite trägt lang="de". --}}
-                        <h1 class="text-balance hyphens-auto break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[1.875rem] lg:text-[2.375rem] xl:text-[2.75rem]">
+                             mitten im Wort um. Die Seite trägt lang="de".
+                             Nur Wörter ab 14 Buchstaben: Firefox trennte sonst,
+                             um die Zeilen auszugleichen (text-balance), auch
+                             „Vor-stand“, obwohl Platz war (Kevin, 26.10.2026). --}}
+                        <h1 class="text-balance hyphens-auto [hyphenate-limit-chars:14_6_6] break-words font-display text-[1.75rem] font-medium leading-tight text-green md:text-[1.875rem] lg:text-[2.375rem] xl:text-[2.75rem]">
                             {{ $gross }}
                         </h1>
 
