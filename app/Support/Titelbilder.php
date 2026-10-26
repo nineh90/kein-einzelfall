@@ -92,9 +92,9 @@ class Titelbilder
         'taetigkeits-und-jahresberichte' => null,
         // Bilder von Taddi aus ihrem Drive-Ordner „1. Verein“ statt
         // Platzhalter: Schutz- und Wertekonzept KEV-145, Red Flags KEV-146.
-        // Ohne Unterzeile.
+        // Ohne Unterzeile, Red Flags seit KEV-210 mit Taddis zweiter Zeile.
         'schutz-und-wertekonzept' => null,
-        'red-flags' => null,
+        'red-flags' => 'Red Flags & Green Lights',
         // KEV-144: Bild von Taddi (Drive-Ordner „3. Wissen“), Papierstapel
         // mit Stempel. Ohne Unterzeile.
         'atteste' => null,
@@ -383,9 +383,23 @@ class Titelbilder
     }
 
     /** Für object-position: links, in der Höhe nach FOKUS. */
+    /**
+     * Waagerechter Ausschnitt in Prozent, wo nicht der linke Rand (0 %). Wirkt
+     * nur, wo das Bild breiter ist als der Kopf, also auf Handy und Tablet.
+     *
+     * Red Flags (KEV-210): Das Bild ist links um Wand verlängert, damit die
+     * Türen auf dem Desktop weiter rechts stehen (Taddi: „der helle Bereich ist
+     * sehr groß“). Auf dem Handy zeigte der linke Rand dann nur noch die Wand.
+     *
+     * @var array<string, int>
+     */
+    public const FOKUS_X = [
+        self::ORDNER.'/red-flags.webp' => 40,
+    ];
+
     public static function fokus(?string $bild): string
     {
-        return '0% '.(self::FOKUS[$bild] ?? 100).'%';
+        return (self::FOKUS_X[$bild] ?? 0).'% '.(self::FOKUS[$bild] ?? 100).'%';
     }
 
     /**

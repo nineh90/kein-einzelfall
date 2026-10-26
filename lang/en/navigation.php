@@ -27,6 +27,8 @@ return [
     'gremium_ukfb' => 'UKFB committee',
     // KEV-179: im Menü kurz, der Seitentitel bleibt „About us – board and team“.
     'ueber_uns_vorstand_und_team' => 'Board and team',
+    // KEV-206/210: Seitentitel „Guide to working together“, im Menü kurz.
+    'red_flags' => 'Red flags',
 
     'gespeicherte_einstellungen' => 'Saved settings',
     'leiste_gruppen' => 'Groups',

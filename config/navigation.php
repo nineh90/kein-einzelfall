@@ -39,7 +39,10 @@ return [
                 ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],
                 ['schluessel' => 'mitgliedschaft', 'label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
                 ['schluessel' => 'schutz_und_wertekonzept', 'label' => 'Schutz- und Wertekonzept', 'url' => '/schutz-und-wertekonzept'],
-                ['schluessel' => 'red_flags', 'label' => 'Red Flags',                    'url' => '/red-flags'],
+                // KEV-206/210: Die Seite heißt „Leitfaden für die Zusammenarbeit“,
+                // darunter „Red Flags & Green Lights“; „nur hier“ (Taddi), im
+                // Menü, in Kacheln und Brotkrumen bleibt es „Red Flags“.
+                ['schluessel' => 'red_flags', 'label' => 'Red Flags',                    'url' => '/red-flags', 'kurz_in_brotkrumen' => true],
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
                 ['schluessel' => 'istanbul_konvention', 'label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
                 ['schluessel' => 'gremium_ukfb', 'label' => 'Gremium UKFB',                 'url' => '/gremium-ukfb'],

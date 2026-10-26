@@ -502,7 +502,8 @@ class SeitengestaltungTest extends TestCase
 
         $html = $this->get('/red-flags')->assertOk()->getContent();
         $this->assertStringContainsString('Gemeinsam gelingt Zusammenarbeit am besten', $html);
-        $this->assertStringContainsString('Leitfaden herunterladen', $html);
+        // Seit KEV-209 „Leitfaden für die Zusammenarbeit herunterladen“.
+        $this->assertStringContainsString('Leitfaden für die Zusammenarbeit herunterladen', $html);
         $this->assertStringContainsString('6.1.2.-Must-haves-u.-Red-Flaggs-fuer-Betroffene.pdf', $html);
 
         // Der leere Entwurf ist gefüllt, nicht verdoppelt.
@@ -684,16 +685,18 @@ class SeitengestaltungTest extends TestCase
      * KEV-145 und KEV-146: Taddis Bilder aus ihrem Drive-Ordner „1. Verein“
      * statt Platzhalter (die Seiten stammen aus KEV-97). Red Flags rechts um
      * Wand verlängert wie die Jahresberichte, Schutzkonzept unverändert 16 : 9.
+     * Red Flags seit KEV-210 auch links um Wand verlängert, mit eigenem
+     * waagerechtem Ausschnitt (40 %).
      */
     public function test_schutz_und_wertekonzept_und_red_flags_haben_eigene_titelbilder(): void
     {
-        foreach (['schutz-und-wertekonzept' => [65, [2000, 1126]], 'red-flags' => [30, [2000, 776]]] as $slug => [$fokus, $masse]) {
+        foreach (['schutz-und-wertekonzept' => ['0% 65', [2000, 1126]], 'red-flags' => ['40% 30', [2000, 675]]] as $slug => [$fokus, $masse]) {
             $html = $this->get('/'.$slug)->assertOk()->getContent();
 
             $this->assertStringContainsString('src="/img/titelbilder/'.$slug.'.webp?v=', $html);
             $this->assertStringContainsString('/img/titelbilder/'.$slug.'-1000.webp?v=', $html);
             $this->assertStringNotContainsString('platzhalter.webp', $html);
-            $this->assertStringContainsString('object-position: 0% '.$fokus.'%', $html);
+            $this->assertStringContainsString('object-position: '.$fokus.'%', $html);
             $this->assertNotContains($slug, \App\Support\Titelbilder::PLATZHALTER_SEITEN);
             $this->assertSame($masse, array_slice(getimagesize(public_path('img/titelbilder/'.$slug.'.webp')), 0, 2));
         }

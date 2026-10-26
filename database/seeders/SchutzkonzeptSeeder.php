@@ -70,6 +70,14 @@ class SchutzkonzeptSeeder extends Seeder
 
     public const RED_FLAGS_TITEL = 'Red Flags';
 
+    /*
+     * KEV-206 und KEV-210 (Taddi): Die Überschrift der Seite ist „Leitfaden
+     * für die Zusammenarbeit“, darunter „Red Flags & Green Lights“ (die
+     * Unterzeile steht in Titelbilder::SEITEN). Browser-Tab und Menü bleiben
+     * „Red Flags“.
+     */
+    public const RED_FLAGS_UEBERSCHRIFT = 'Leitfaden für die Zusammenarbeit';
+
     public const RED_FLAGS_ABSAETZE = [
         'Gemeinsam gelingt Zusammenarbeit am besten, wenn sie auf gegenseitigem Respekt, Vertrauen und klaren '
             .'Grenzen basiert. In diesem Leitfaden erfährst du, welche Grundsätze uns im Umgang miteinander wichtig '
@@ -84,7 +92,8 @@ class SchutzkonzeptSeeder extends Seeder
         .'No-Gos für eine respektvolle Zusammenarbeit mit unseren ehrenamtlichen Mitarbeitenden. Zum Herunterladen.';
 
     public const RED_FLAGS_DOKUMENTE = [
-        'titel' => 'Leitfaden herunterladen',
+        // KEV-209, Wunsch von Taddi (vorher „Leitfaden herunterladen“).
+        'titel' => 'Leitfaden für die Zusammenarbeit herunterladen',
         'dokumente' => [[
             'titel' => 'Leitfaden für die Zusammenarbeit: Grenzen, Red Flags und No-Gos',
             'url' => '/dokumente/2026/07/6.1.2.-Must-haves-u.-Red-Flaggs-fuer-Betroffene.pdf',
@@ -141,6 +150,27 @@ class SchutzkonzeptSeeder extends Seeder
     public static function nachtragen(): void
     {
         self::konzeptVerlinken();
+        self::redFlagsUeberschrift();
+        self::redFlagsDownloadTitel();
+    }
+
+    /** KEV-209: nur solange die Liste noch „Leitfaden herunterladen“ heißt. */
+    private static function redFlagsDownloadTitel(): void
+    {
+        $seite = Page::where('slug', self::RED_FLAGS_SLUG)->where('locale', 'de')->first();
+
+        foreach ($seite?->blocks()->where('typ', 'download_list')->get() ?? [] as $block) {
+            if (($block->data['titel'] ?? null) === 'Leitfaden herunterladen') {
+                $block->update(['data' => array_replace($block->data, ['titel' => self::RED_FLAGS_DOKUMENTE['titel']])]);
+            }
+        }
+    }
+
+    /** KEV-206/210: nur solange die Seite noch „Red Flags“ heißt. */
+    private static function redFlagsUeberschrift(): void
+    {
+        Page::where('slug', self::RED_FLAGS_SLUG)->where('locale', 'de')->where('titel', self::RED_FLAGS_TITEL)
+            ->update(['titel' => self::RED_FLAGS_UEBERSCHRIFT]);
     }
 
     /** KEV-204: Knopf zum PDF und Dokumentenliste. */
