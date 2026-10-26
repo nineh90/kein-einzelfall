@@ -217,13 +217,15 @@ class StartseiteSeeder extends Seeder
     /*
      * Text von Taddi, 27.09.2026 (KEV-52), *fett* wie von ihr markiert. Bis
      * KEV-116 war auch der letzte Satz fett, auf ihren Wunsch nicht mehr.
-     * Der fette Satz seit KEV-112 als eigener Absatz.
+     * Der fette Satz seit KEV-112 als eigener Absatz. Seit KEV-166 ohne das
+     * doppelte „ermöglichen“, der Dank als eigener Absatz.
      */
     public const SPENDEN_KARTE_TEXT = "*Deine Spende macht unsere Arbeit möglich.*\n"
         .'Sie hilft uns, Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und '
-        .'Austausch zu ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, '
-        .'dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu '
-        .'bewegen.';
+        .'Austausch zu gestalten und Projekte umzusetzen, die Betroffene stärken und ihre '
+        ."Selbstwirksamkeit fördern.\n"
+        .'Danke, dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam '
+        .'etwas zu bewegen.';
 
     /*
      * Text von Taddi (KEV-115, vorher KEV-51): der Satz aus ihren

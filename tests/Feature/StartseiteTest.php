@@ -534,7 +534,7 @@ class StartseiteTest extends TestCase
     {
         $this->get('/')
             ->assertSee('<strong class="font-semibold text-ink">Deine Spende macht unsere Arbeit möglich.</strong>', false)
-            ->assertSee('Danke, dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.', false)
+            ->assertSee('<span>Danke, dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu bewegen.</span>', false)
             ->assertDontSee('<strong class="font-semibold text-ink">Jeder Beitrag', false)
             ->assertDontSee('*Deine Spende', false)
             ->assertDontSee('*Jeder Beitrag', false);
@@ -558,6 +558,42 @@ class StartseiteTest extends TestCase
 
         $this->assertSame(StartseiteSeeder::SPENDEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
         $this->assertStringEndsWith('to make a difference together.',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::SPENDEN_KARTE_TEXT]['en']);
+    }
+
+    /** KEV-166: „möglich“ nur noch einmal, kein „ermöglichen“ gleich dahinter, der Dank als eigener Absatz. */
+    public function test_spendenkarte_ohne_doppeltes_ermoeglichen(): void
+    {
+        $karten = array_column($this->startseite()->blocks()->where('typ', 'quick_access')->first()->data['karten'], 'text', 'url');
+
+        $this->assertSame(1, mb_substr_count($karten['/spenden'], 'möglich'));
+        $this->get('/')->assertSeeInOrder([
+            '<span><strong class="font-semibold text-ink">Deine Spende macht unsere Arbeit möglich.</strong></span>',
+            '<span>Sie hilft uns, Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und Austausch zu gestalten und Projekte umzusetzen, die Betroffene stärken und ihre Selbstwirksamkeit fördern.</span>',
+            '<span>Danke, dass Du dabei bist.',
+        ], false);
+    }
+
+    /** KEV-166: Bestehende Startseiten bekommen den neuen Text, Englisch mit. */
+    public function test_bestehende_spendenkarte_bekommt_den_text_von_kev_166(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'quick_access')->first();
+        $data = $block->data;
+        $i = array_search('/spenden', array_column($data['karten'], 'url'), true);
+        // Der Text seit KEV-112, mit dem doppelten „ermöglichen“.
+        $data['karten'][$i]['text'] = "*Deine Spende macht unsere Arbeit möglich.*\n"
+            .'Sie hilft uns, Informationen und Wissen kostenfrei zugänglich zu machen, Selbsthilfe und '
+            .'Austausch zu ermöglichen und Projekte umzusetzen, die Betroffenen eine Stimme geben. Danke, '
+            .'dass Du dabei bist. Jeder Beitrag hilft uns, unabhängig zu arbeiten und gemeinsam etwas zu '
+            .'bewegen.';
+        $block->update(['data' => $data]);
+
+        $migration = require database_path('migrations/2026_10_26_100000_spendenkarte_ohne_doppeltes_ermoeglichen.php');
+        $migration->up();
+
+        $this->assertSame(StartseiteSeeder::SPENDEN_KARTE_TEXT, $block->fresh()->data['karten'][$i]['text']);
+        $this->assertStringContainsString('foster their self-efficacy.',
             json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
                 [StartseiteSeeder::SPENDEN_KARTE_TEXT]['en']);
     }
