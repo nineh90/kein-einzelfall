@@ -116,4 +116,27 @@ class UeberUnsSeiteTest extends TestCase
         $migration->up();
         $this->assertSame([TeamUndGruppenSeeder::HINTERGRUND_TEXT], $block->fresh()->data['absaetze']);
     }
+
+    /** KEV-187: Die Kurzfassungen enden nach einem ganzen Satz, nicht mitten im Wort. */
+    public function test_kurzfassung_endet_nach_ganzem_satz(): void
+    {
+        foreach (TeamMember::all() as $person) {
+            $this->assertDoesNotMatchRegularExpression('/\p{L}(\.\.\.|…)$/u', (string) $person->kurzprofil, $person->name);
+        }
+
+        $unbekannt = TeamMember::where('name', 'Herr und Frau Unbekannt')->first();
+        $this->assertStringEndsWith('weil ihre Realität es nicht anders zulässt.', $unbekannt->kurzprofil);
+        $this->assertStringStartsWith('<p>Sie leben mit Schutzmechanismen', $unbekannt->profilFortsetzung());
+
+        // Zu langer erster Satz: an der Wortgrenze, mit „…“.
+        $this->assertSame('Ein sehr langer Satz ohne Ende…', TeamUndGruppenSeeder::kurzfassung('Ein sehr langer Satz ohne Ende und mehr', 31));
+
+        // Die Migration kürzt einen alten, mitten im Wort abgeschnittenen Stand neu.
+        $tanja = TeamMember::where('name', 'Tanja Häfner')->first();
+        $richtig = $tanja->kurzprofil;
+        $tanja->update(['kurzprofil' => mb_substr($richtig, 0, 120).'...']);
+        $migration = require database_path('migrations/2026_10_26_200000_team_kurzfassung_ganze_saetze.php');
+        $migration->up();
+        $this->assertSame($richtig, $tanja->fresh()->kurzprofil);
+    }
 }

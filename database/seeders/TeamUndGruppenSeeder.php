@@ -68,9 +68,8 @@ class TeamUndGruppenSeeder extends Seeder
                 // wie „Betroffene in verschiedenen Kontexten", mit dem
                 // Franziska Künstlers Vorstellung auf der Altseite beginnt.
                 // Stichpunkte enden ohne Satzzeichen.
-                'kurzprofil' => Str::limit(
+                'kurzprofil' => self::kurzfassung(
                     collect($person['absaetze'])->first(fn ($a) => preg_match('/[.!?…“"]$/u', $a)) ?? $person['absaetze'][0],
-                    260
                 ),
                 'profil' => collect($person['absaetze'])
                     ->map(fn ($a) => '<p>'.e($a).'</p>')
@@ -90,6 +89,30 @@ class TeamUndGruppenSeeder extends Seeder
         }
 
         $this->command?->info(count($personen).' Personen übernommen.');
+    }
+
+    /**
+     * Die Kurzfassung: höchstens 260 Zeichen, geschnitten nach dem letzten
+     * ganzen Satz (KEV-187). Vorher schnitt Str::limit mitten im Wort („Sie
+     * l…“, „entste…“), und „Mehr über … lesen“ begann mit dem Rest des
+     * Wortes. Nur wenn schon der erste Satz zu lang ist, endet sie mit „…“,
+     * dann an einer Wortgrenze. Öffentlich für die Migration.
+     */
+    public static function kurzfassung(string $text, int $hoechstens = 260): string
+    {
+        $text = trim($text);
+
+        if (mb_strlen($text) <= $hoechstens) {
+            return $text;
+        }
+
+        $anfang = mb_substr($text, 0, $hoechstens + 1);
+
+        if (preg_match('/^(.*[.!?])\s/su', $anfang, $treffer)) {
+            return $treffer[1];
+        }
+
+        return rtrim(Str::beforeLast(mb_substr($text, 0, $hoechstens), ' '), ' ,;:–-').'…';
     }
 
     /**
