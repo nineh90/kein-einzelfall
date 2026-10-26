@@ -364,14 +364,17 @@ class SeitengestaltungTest extends TestCase
         $this->assertSame($neu, $block->fresh()->data['absaetze']);
     }
 
-    /** KEV-94: neuer Text von Taddi unter „Antrag auf Mitgliedschaft“. */
+    /**
+     * KEV-94: neuer Text von Taddi unter „Antrag auf Mitgliedschaft“. Seit
+     * KEV-199 heißt der Abschnitt „Mitglied werden“, mit ihrem Text aus dem
+     * Drive (MitgliedschaftsseiteTest).
+     */
     public function test_mitgliedschaft_antrag_hat_den_neuen_text(): void
     {
         $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
 
-        $this->assertStringContainsString('Dann beginnt dein Weg genau hier mit dem Mitgliedsantrag.', $html);
-        $this->assertStringContainsString('Weiter unten haben wir dir auch eine Ausfüllhilfe zur Verfügung gestellt.', $html);
-        $this->assertStringContainsString('Wir freuen uns, wenn du Teil von KE!N EINZELFALL wirst.', $html);
+        $this->assertStringContainsString('Dann beginnt dein Weg genau hier mit unserem Mitgliedsantrag.', $html);
+        $this->assertStringContainsString('Weiter unten findest du außerdem eine Ausfüllhilfe', $html);
         $this->assertStringNotContainsString('Für alle zukünftigen Mitglieder und Interessierten', $html);
     }
 
