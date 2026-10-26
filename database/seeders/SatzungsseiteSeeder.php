@@ -48,6 +48,17 @@ class SatzungsseiteSeeder extends Seeder
         }
 
         self::lesenErneuern($seite);
+        self::downloadUeberschrift($seite);
+    }
+
+    /** KEV-195: „Unsere Satzung zum Downloaden“ statt der Überschrift von KEV-90. */
+    private static function downloadUeberschrift(Page $seite): void
+    {
+        foreach ($seite->blocks()->where('typ', 'download_list')->get() as $block) {
+            if (($block->data['titel'] ?? null) === 'Aktuelle Satzung zum Herunterladen') {
+                $block->update(['data' => array_replace($block->data, ['titel' => AltseiteSeeder::DOKUMENTE_TITEL['satzung']])]);
+            }
+        }
     }
 
     /**

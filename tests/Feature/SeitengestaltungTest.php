@@ -281,16 +281,16 @@ class SeitengestaltungTest extends TestCase
         $this->assertMatchesRegularExpression('#href="/dokumente/2026/05/26\.04\.02\.-Satzung-II\.pdf"[^>]*>\s*Satzung lesen \(PDF\)#', $html);
     }
 
-    /** KEV-90: Über dem PDF steht „Aktuelle Satzung zum Herunterladen“. */
+    /** KEV-90: Über dem PDF eine eigene Überschrift, seit KEV-195 „Unsere Satzung zum Downloaden“. */
     public function test_satzung_download_hat_eigene_ueberschrift(): void
     {
         $html = $this->get('/satzung')->assertOk()->getContent();
 
-        $this->assertStringContainsString('Aktuelle Satzung zum Herunterladen', $html);
+        $this->assertStringContainsString('Unsere Satzung zum Downloaden', $html);
         $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
 
         $this->seed(UebersetzungenSeeder::class);
-        $this->assertStringContainsString('Download the current Articles of Association', $this->get('/en/satzung')->getContent());
+        $this->assertStringContainsString('Download our Articles of Association', $this->get('/en/satzung')->getContent());
     }
 
     /** KEV-90: Die Migration tauscht nur den alten Wortlaut. */
@@ -303,7 +303,8 @@ class SeitengestaltungTest extends TestCase
         $migration = require database_path('migrations/2026_10_13_100000_satzung_download_ueberschrift.php');
         $migration->up();
 
-        $this->assertSame('Aktuelle Satzung zum Herunterladen', $block->fresh()->data['titel']);
+        // Seit KEV-195 gleich die heutige Überschrift.
+        $this->assertSame(AltseiteSeeder::DOKUMENTE_TITEL['satzung'], $block->fresh()->data['titel']);
     }
 
     /** KEV-93: neuer Text von Taddi unter „Wir brauchen dich!“. */

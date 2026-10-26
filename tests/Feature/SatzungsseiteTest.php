@@ -67,4 +67,18 @@ class SatzungsseiteTest extends TestCase
         $this->assertSame(SatzungsseiteSeeder::LESEN_ABSAETZE, $data['absaetze']);
         $this->assertSame('Satzung lesen (PDF)', $data['cta']['label']);
     }
+
+    /** KEV-195: „Unsere Satzung zum Downloaden“, auch im Verzeichnis. Auch per Migration. */
+    public function test_download_heisst_unsere_satzung_zum_downloaden(): void
+    {
+        $this->assertMatchesRegularExpression('#<h2 id="dl-unsere-satzung-zum-downloaden"[^>]*>\s*Unsere Satzung zum Downloaden\s*</h2>#',
+            $this->get('/satzung')->assertOk()->getContent());
+        $this->assertStringContainsString('href="#dl-unsere-satzung-zum-downloaden"', $this->verzeichnis());
+
+        $block = Page::where('slug', 'satzung')->where('locale', 'de')->first()->blocks()->where('typ', 'download_list')->first();
+        $block->update(['data' => array_replace($block->data, ['titel' => 'Aktuelle Satzung zum Herunterladen'])]);
+        $migration = require database_path('migrations/2026_10_26_240000_satzung_download_ueberschrift.php');
+        $migration->up();
+        $this->assertSame('Unsere Satzung zum Downloaden', $block->fresh()->data['titel']);
+    }
 }
