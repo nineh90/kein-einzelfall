@@ -152,6 +152,18 @@ class SchutzkonzeptSeeder extends Seeder
         self::konzeptVerlinken();
         self::redFlagsUeberschrift();
         self::redFlagsDownloadTitel();
+        self::redFlagsSymbole();
+    }
+
+    /** KEV-208: rechts neben dem Text Flagge & Häkchen, wo noch kein Symbol steht. */
+    private static function redFlagsSymbole(): void
+    {
+        $text = Page::where('slug', self::RED_FLAGS_SLUG)->where('locale', 'de')->first()
+            ?->blocks()->where('typ', 'text')->orderBy('position')->first();
+
+        if ($text && empty($text->data['symbol'])) {
+            $text->update(['data' => $text->data + ['symbol' => 'red-flag-und-haken']]);
+        }
     }
 
     /** KEV-209: nur solange die Liste noch „Leitfaden herunterladen“ heißt. */

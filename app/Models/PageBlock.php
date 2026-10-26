@@ -212,6 +212,9 @@ class PageBlock extends Model
         'circle-users' => 'Menschen im Kreis (Team)',
         'circle-help' => 'Fragezeichen im Kreis',
         'circle-id-card' => 'Ausweis im Kreis (Mitgliedschaft)',
+        // KEV-208: zwei Symbole mit „&“ dazwischen, wie die Unterzeile
+        // „Red Flags & Green Lights“.
+        'red-flag-und-haken' => 'Rote Flagge & grünes Häkchen (Red Flags)',
     ];
 
     /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224, KEV-174). */

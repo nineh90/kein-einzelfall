@@ -86,4 +86,18 @@ class SchutzUndRedFlagsTest extends TestCase
         $this->assertSame('40% 30%', Titelbilder::fokus(Titelbilder::datei('red-flags')));
         $this->assertSame('0% 100%', Titelbilder::fokus('/img/titelbilder/gibt-es-nicht.webp'));
     }
+
+    /** KEV-208: Rechts neben dem Text Flagge & Häkchen, auch per Migration. */
+    public function test_red_flags_symbole(): void
+    {
+        $html = $this->get('/red-flags')->assertOk()->getContent();
+        $this->assertStringContainsString('fill="#D41417"', $html);
+        $this->assertMatchesRegularExpression('#fill="\#D41417".*?&amp;</span>.*?stroke="\#fff"#s', $html);
+
+        $text = $this->seite('red-flags')->blocks()->where('typ', 'text')->first();
+        $text->update(['data' => array_diff_key($text->data, ['symbol' => 1])]);
+        $migration = require database_path('migrations/2026_10_26_310000_red_flags_symbole.php');
+        $migration->up();
+        $this->assertSame('red-flag-und-haken', $text->fresh()->data['symbol']);
+    }
 }
