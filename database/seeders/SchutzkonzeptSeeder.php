@@ -44,6 +44,25 @@ class SchutzkonzeptSeeder extends Seeder
         'Hier kannst du unser vollständiges Schutz- und Wertekonzept einsehen.',
     ];
 
+    /*
+     * KEV-204: das vollständige Konzept als PDF, aus Taddis Drive („Documente“
+     * › „1. Verein“ › „Schutzkonzept.pdf“, Version 1.0 vom 20.08.2026). Laut
+     * eigenem Abschnitt 13 öffentlich. Knopf unter dem Satz, der es ankündigt,
+     * und eine Dokumentenliste darunter, wie bei der Satzung.
+     */
+    public const PDF = '/dokumente/2026/10/Schutz-und-Wertekonzept.pdf';
+
+    public const KNOPF = ['label' => 'Schutz- und Wertekonzept lesen (PDF)', 'url' => self::PDF, 'variant' => 'primary'];
+
+    public const DOKUMENTE = [
+        'titel' => 'Unser Schutz- und Wertekonzept zum Downloaden',
+        'dokumente' => [[
+            'titel' => 'Schutz- und Wertekonzept',
+            'url' => self::PDF,
+            'bytes' => 183967,
+        ]],
+    ];
+
     public const META_DESCRIPTION = 'Das Schutz- und Wertekonzept von KE!N EINZELFALL e.V.: welche Werte und '
         .'Grenzen bei uns gelten und wie wir mit Beschwerden, Grenzverletzungen und Schutzbedarfen umgehen.';
 
@@ -113,6 +132,40 @@ class SchutzkonzeptSeeder extends Seeder
             'meta_description' => $seite->meta_description ?: self::META_DESCRIPTION,
             'published_at' => $seite->published_at ?? now(),
         ])->save();
+    }
+
+    /**
+     * Was nach dem Anlegen dazukam, für bestehende Seiten. Aufgerufen aus den
+     * Migrationen ab KEV-204. Ändert nur, was noch fehlt.
+     */
+    public static function nachtragen(): void
+    {
+        self::konzeptVerlinken();
+    }
+
+    /** KEV-204: Knopf zum PDF und Dokumentenliste. */
+    private static function konzeptVerlinken(): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+
+        if (! $seite) {
+            return;
+        }
+
+        $text = $seite->blocks()->where('typ', 'text')->get()
+            ->first(fn ($b) => in_array('Hier kannst du unser vollständiges Schutz- und Wertekonzept einsehen.', $b->data['absaetze'] ?? [], true));
+
+        if ($text && empty($text->data['cta'])) {
+            $text->update(['data' => $text->data + ['cta' => self::KNOPF]]);
+        }
+
+        if (! $seite->blocks()->where('typ', 'download_list')->exists()) {
+            $seite->blocks()->create([
+                'typ' => 'download_list',
+                'position' => (int) $seite->blocks()->max('position') + 1,
+                'data' => self::DOKUMENTE,
+            ]);
+        }
     }
 
     private static function redFlags(): void
