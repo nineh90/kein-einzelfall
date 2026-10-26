@@ -482,8 +482,10 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('ufb.org"', $html);
         $this->assertStringNotContainsString('ukf.org', $html);
 
+        // Im Menü seit KEV-178 hinter der Istanbul-Konvention.
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
-        $this->assertSame('/gremium-ukfb', end($verein['children'])['url']);
+        $urls = array_column($verein['children'], 'url');
+        $this->assertSame(array_search('/istanbul-konvention', $urls) + 1, array_search('/gremium-ukfb', $urls));
     }
 
     /** KEV-97: Schutz- und Wertekonzept und Red Flags, im Menü „Verein“ an Position 4 und 5. */
@@ -586,10 +588,9 @@ class SeitengestaltungTest extends TestCase
         // Seit KEV-147 Taddis Bild statt Platzhalter
         $this->assertStringContainsString('src="/img/titelbilder/taetigkeits-und-jahresberichte.webp?v=', $html);
 
-        // Hinter dem Kinderkodex (seit KEV-105 steht das Gremium UKFB dahinter).
+        // Seit KEV-178 ganz am Ende des Menüs.
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
-        $urls = array_column($verein['children'], 'url');
-        $this->assertSame(array_search('/kinderkodex', $urls) + 1, array_search('/taetigkeits-und-jahresberichte', $urls));
+        $this->assertSame('/taetigkeits-und-jahresberichte', end($verein['children'])['url']);
     }
 
     /**

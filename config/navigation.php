@@ -31,21 +31,18 @@ return [
                 'red_flags', 'beschwerdemanagement', 'taetigkeits_und_jahresberichte',
             ],
             'children' => [
+                // Reihenfolge seit KEV-178 (Taddi). Gremium UKFB steht nur hier
+                // im Menü, nicht bei den Kacheln (`kacheln` oben, KEV-176).
                 ['schluessel' => 'ueber_uns_vorstand_und_team', 'label' => 'Über uns – Vorstand und Team', 'url' => '/ueber-uns-vorstand-und-team'],
                 ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],
                 ['schluessel' => 'mitgliedschaft', 'label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
-                // KEV-97: an Position 4 und 5, Wunsch von Taddi. Seitdem steht
-                // Beschwerdemanagement (KEV-98, vorher Position 5) an Position 7.
                 ['schluessel' => 'schutz_und_wertekonzept', 'label' => 'Schutz- und Wertekonzept', 'url' => '/schutz-und-wertekonzept'],
                 ['schluessel' => 'red_flags', 'label' => 'Red Flags',                    'url' => '/red-flags'],
-                ['schluessel' => 'istanbul_konvention', 'label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
-                // KEV-98: an Position 5, Wunsch von Taddi (seit KEV-97 an 7).
-                ['schluessel' => 'beschwerdemanagement', 'label' => 'Beschwerdemanagement',         'url' => '/beschwerdemanagement'],
                 ['schluessel' => 'kinderkodex', 'label' => 'Kinderkodex',                  'url' => '/kinderkodex'],
-                // KEV-103: ohne Positionsangabe von Taddi, deshalb ans Ende.
-                ['schluessel' => 'taetigkeits_und_jahresberichte', 'label' => 'Tätigkeits- und Jahresberichte', 'url' => '/taetigkeits-und-jahresberichte'],
-                // KEV-105: Platz nicht genannt, deshalb ans Ende.
+                ['schluessel' => 'istanbul_konvention', 'label' => 'Istanbul-Konvention',          'url' => '/istanbul-konvention'],
                 ['schluessel' => 'gremium_ukfb', 'label' => 'Gremium UKFB',                 'url' => '/gremium-ukfb'],
+                ['schluessel' => 'beschwerdemanagement', 'label' => 'Beschwerdemanagement',         'url' => '/beschwerdemanagement'],
+                ['schluessel' => 'taetigkeits_und_jahresberichte', 'label' => 'Tätigkeits- und Jahresberichte', 'url' => '/taetigkeits-und-jahresberichte'],
             ],
         ],
         /*

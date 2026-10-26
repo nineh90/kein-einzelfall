@@ -74,11 +74,12 @@ class BeschwerdemanagementTest extends TestCase
     }
 
     /** KEV-98 wollte Position 5, seit KEV-97 stehen davor Schutzkonzept und Red Flags. */
-    public function test_steht_im_menue_verein_an_position_sieben(): void
+    /** Seit KEV-178 an Position neun, hinter dem Gremium UKFB. */
+    public function test_steht_im_menue_verein_an_position_neun(): void
     {
         $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
 
-        $this->assertSame('/beschwerdemanagement', $verein['children'][6]['url']);
+        $this->assertSame('/beschwerdemanagement', $verein['children'][8]['url']);
     }
 
     public function test_ohne_auswahl_wird_nichts_verschickt(): void

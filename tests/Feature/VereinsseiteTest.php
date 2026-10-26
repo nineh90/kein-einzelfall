@@ -167,4 +167,19 @@ class VereinsseiteTest extends TestCase
         $this->assertStringContainsString('href="/mitgliedschaft"', $aside);
         $this->assertStringNotContainsString('/gremium-ukfb', $aside);
     }
+
+    /** KEV-178: Taddis Reihenfolge im Menü „Verein“, mit Gremium UKFB. */
+    public function test_menue_verein_in_taddis_reihenfolge(): void
+    {
+        $verein = collect(config('navigation.main'))->firstWhere('url', '/verein');
+
+        $this->assertSame([
+            '/ueber-uns-vorstand-und-team', '/satzung', '/mitgliedschaft', '/schutz-und-wertekonzept',
+            '/red-flags', '/kinderkodex', '/istanbul-konvention', '/gremium-ukfb',
+            '/beschwerdemanagement', '/taetigkeits-und-jahresberichte',
+        ], array_column($verein['children'], 'url'));
+
+        $this->get('/verein')->assertOk()->assertSeeInOrder(
+            ['Schutz- und Wertekonzept', 'Red Flags', 'Kinderkodex', 'Istanbul-Konvention', 'Gremium UKFB', 'Beschwerdemanagement'], false);
+    }
 }
