@@ -7,6 +7,7 @@
 ])
 
 @php
+    use App\Models\Page;
     use App\Models\PageBlock;
 
     // Nur bekannte Typen rendern. Ein Blocktyp aus der Datenbank darf niemals
@@ -66,6 +67,13 @@
         // die Vertrauenssignale schon (KEV-30).
         if ($block->typ === 'contact_close' && $block->page?->blocks->contains('typ', 'hero')) {
             $attribute['vertrauen'] = false;
+        }
+
+        // Der kurze Strich markiert auf den Unterseiten jeden Abschnittsanfang.
+        // Auf der Startseite tragen die Abschnitte keinen, „Jetzt spenden“
+        // stand damit allein da und sah nach Versehen aus (KEV-170, Taddi).
+        if ($block->typ === 'donation_options' && $block->page?->slug === Page::STARTSEITE_SLUG) {
+            $attribute['strich'] = false;
         }
 
         // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite, das

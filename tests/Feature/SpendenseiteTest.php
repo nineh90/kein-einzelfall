@@ -54,6 +54,14 @@ class SpendenseiteTest extends TestCase
         $this->assertStringContainsString('verwaltung@kein-einzelfall.de', $html, 'Spendenbescheinigung fehlt');
     }
 
+    /** KEV-170: Auf der Spendenseite bleibt der Strich über „Jetzt spenden“, wie über jedem Abschnitt dort. */
+    public function test_auf_der_spendenseite_steht_der_strich_ueber_jetzt_spenden(): void
+    {
+        $this->assertMatchesRegularExpression(
+            '/<span aria-hidden="true" class="[^"]*bg-green-brand[^"]*"><\/span>\s*<h2 id="spenden-titel"/',
+            $this->get('/spenden')->getContent());
+    }
+
     public function test_der_textblock_der_altseite_ist_durch_den_baustein_ersetzt(): void
     {
         // Nicht zusätzlich, sondern statt: Sonst stünde die IBAN zweimal da.

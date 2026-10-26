@@ -21,6 +21,9 @@
      */
     'kompakt' => false,
     'auf' => 'cream',      // cream | card
+    // Der kurze Strich über der Überschrift. Auf der Startseite aus, dort hat
+    // ihn sonst kein Abschnitt (KEV-170), siehe block.blade.php.
+    'strich' => true,
 ])
 
 @php
@@ -56,7 +59,7 @@
                      übereinander sahen nach Versehen aus (KEV-56). --}}
                 @if ($eyebrow)
                     <x-ui.eyebrow class="mb-3">{{ $eyebrow }}</x-ui.eyebrow>
-                @else
+                @elseif ($strich)
                     {{-- Derselbe kurze Strich wie über jeder Abschnittsüberschrift. --}}
                     <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
                 @endif

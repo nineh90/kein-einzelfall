@@ -337,9 +337,10 @@ class StartseiteTest extends TestCase
     }
 
     /**
-     * KEV-56: Text von Taddi mit Leitsatz in Handschrift, nur ein grüner
-     * Strich über „Jetzt spenden“, und nicht mehr derselbe Satz wie auf der
-     * Einstiegskarte „Spenden“ darüber.
+     * KEV-56: Text von Taddi mit Leitsatz in Handschrift, und nicht mehr
+     * derselbe Satz wie auf der Einstiegskarte „Spenden“ darüber. Seit KEV-170
+     * kein grüner Strich mehr über „Jetzt spenden“: Auf der Startseite hat ihn
+     * sonst kein Abschnitt.
      */
     public function test_spendenabschnitt_hat_eigenen_text_und_leitsatz(): void
     {
@@ -349,7 +350,7 @@ class StartseiteTest extends TestCase
 
         $this->assertStringContainsString('Deine Spende hilft uns, Projekte umzusetzen', $abschnitt);
         $this->assertStringNotContainsString('Mit Deiner Spende hilfst Du uns', $abschnitt);
-        $this->assertSame(1, substr_count($abschnitt, 'bg-green-brand'), 'zwei Striche über der Überschrift');
+        $this->assertSame(0, substr_count($abschnitt, 'bg-green-brand'), 'Strich über der Überschrift');
 
         // KEV-119: „Deinen Rückenwind“, und der Leitsatz schliesst den Absatz
         // ab, statt unter der Überschrift zu stehen.
