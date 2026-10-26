@@ -64,9 +64,20 @@
         @endforeach
     </div>
 
-    <p class="mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-green/30 pt-4 text-sm text-ink">
-        <span>{{ __('Bei unmittelbarer Gefahr:') }}</span>
+    {{-- In zwei Spalten im selben Raster wie die Nummern darüber: Die zweite
+         Notrufnummer steht dann bündig unter der rechten Spalte (KEV-169,
+         Wunsch von Taddi). Deshalb stehen der Satz und die erste Nummer
+         zusammen in der linken Zelle. Auf dem Handy und in der ausführlichen
+         Fassung bleibt es eine Zeile, die bei Bedarf umbricht. --}}
+    <p @class([
+        'mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-green/30 pt-4 text-sm text-ink',
+        'md:grid md:grid-cols-2 md:gap-x-10' => count($spalten) > 1,
+    ])>
         @foreach ($notrufe as $notruf)
+            @if ($loop->first)
+                <span class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                    <span>{{ __('Bei unmittelbarer Gefahr:') }}</span>
+            @endif
             <span>
                 <a href="tel:{{ $notruf['tel'] }}"
                    class="font-display text-lg font-medium text-alert no-underline hover:underline">
@@ -74,6 +85,9 @@
                 </a>
                 <span class="text-ink-soft [overflow-wrap:anywhere]">{{ __($notruf['name']) }}</span>
             </span>
+            @if ($loop->first)
+                </span>
+            @endif
         @endforeach
     </p>
 </section>

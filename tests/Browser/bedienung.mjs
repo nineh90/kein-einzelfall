@@ -326,6 +326,18 @@ console.log('\nTrigger-Warnung: passt auf den Laptop-Bildschirm')
     pruefe('auf dem Handy beginnt er oben', oben === 0, `scrollTop ${oben}`)
 }
 
+console.log('\nHilfe-Box: Notrufe im Raster der Nummern')
+{
+    // Taddis Wunsch (KEV-169): Die 112 steht bündig unter der rechten Spalte.
+    const seite = await oeffnen()
+    const x = async (tel) => (await seite.locator(`section[aria-labelledby="hilfe-titel"] a[href="tel:${tel}"]`).boundingBox()).x
+    const rechts = await x('+49116006')
+    const notruf = await x('112')
+
+    pruefe('die 112 steht bündig unter der 116 006', Math.abs(rechts - notruf) < 1,
+        `116 006 bei ${Math.round(rechts)} px, 112 bei ${Math.round(notruf)} px`)
+}
+
 console.log('\nTrigger-Warnung ohne JavaScript')
 {
     // Der wichtigste Fall überhaupt: Ein Overlay, das erst JavaScript aufbaut,
