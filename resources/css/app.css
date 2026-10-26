@@ -309,6 +309,21 @@ button:not(:disabled),
   padding: 2rem 1rem;
 }
 
+/* Der Hinweis vor der ganzen Seite (KEV-164): weniger Rand, damit er auf dem
+   Laptop ganz in den Bildschirm passt. Passt er, steht er mittig; die
+   automatischen Aussenabstaende fallen auf null, sobald er laenger ist als
+   das Fenster, dann beginnt er wie bisher oben und scrollt. Mit
+   align-items: center ginge genau das schief, siehe oben. */
+#trigger-warnung:modal {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+}
+
+#trigger-warnung:modal > * {
+  margin-block: auto;
+}
+
 #trigger-warnung::backdrop {
   background: rgb(44 38 32 / 0.75);
 }
@@ -382,10 +397,22 @@ html.ke-speicher-bereit [data-speicher-ohne-js] {
 .trigger-warnung-inhalt p {
   color: var(--color-ink);
 }
+/* Anderthalbfacher Zeilenabstand statt des etwas luftigeren der Seite und
+   etwas weniger Luft zwischen den Absaetzen (KEV-164): 1,5 ist der Wert, den
+   WCAG 1.4.8 als gut lesbar nennt, und zusammen holt das bei Taddis Text gut
+   zwei Zeilen Hoehe heraus. */
+.trigger-warnung-inhalt .leading-relaxed {
+  line-height: 1.5;
+  row-gap: 0.75rem;
+}
 /* Die Begrenzung der Zeilenlaenge (max-w-prose) bleibt bewusst stehen: Sie ist
    keine Layoutzier, sondern eine Lesehilfe — und gilt im Dialog genauso. Seit
-   KEV-41 steht der ganze Dialog mittig, also auch dieser Block. */
+   KEV-41 steht der ganze Dialog mittig, also auch dieser Block.
+   Etwas weiter als auf der Seite (KEV-164): 75 Zeichen liegen noch im
+   ueblichen Lesebereich und sparen bei Taddis Text drei Zeilen, damit der
+   Hinweis auf dem Laptop ganz zu sehen ist. */
 .trigger-warnung-inhalt .max-w-prose {
+  max-width: 75ch;
   margin-inline: auto;
 }
 

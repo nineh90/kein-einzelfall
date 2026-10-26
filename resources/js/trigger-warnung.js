@@ -84,5 +84,10 @@ export function triggerWarnungVerdrahten() {
     if (typeof dialog.showModal === 'function') {
         dialog.removeAttribute('open')
         dialog.showModal()
+
+        // showModal() setzt den Fokus auf das Kästchen unten und scrollt den
+        // Dialog dorthin. Auf dem Handy, wo er länger ist als der Bildschirm,
+        // fehlte dann der Anfang (KEV-164). Der Fokus bleibt, wo er ist.
+        dialog.scrollTop = 0
     }
 }

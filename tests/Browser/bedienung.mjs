@@ -46,10 +46,10 @@ const meldungen = []
  * modaler Dialog, hält den Fokus fest und läge sonst vor jedem Knopf, um den
  * es in diesem Test geht. Die Warnung selbst wird weiter unten eigens geprüft.
  */
-async function oeffnen({ js = true, breite = 1400, pfad = '/', trigger = false, bereich = false } = {}) {
+async function oeffnen({ js = true, breite = 1400, hoehe = 900, pfad = '/', trigger = false, bereich = false } = {}) {
     const kontext = await browser.newContext({
         javaScriptEnabled: js,
-        viewport: { width: breite, height: 900 },
+        viewport: { width: breite, height: hoehe },
     })
 
     if (!trigger && js) {
@@ -299,6 +299,31 @@ console.log('\nTrigger-Warnung: Aussehen der Bedienelemente')
         `${Math.round(mWeiter.width)} px vs. ${Math.round(mExit.width)} px`)
 
     pruefe('mobil stehen sie untereinander', mExit.y > mWeiter.y + mWeiter.height - 1)
+}
+
+console.log('\nTrigger-Warnung: passt auf den Laptop-Bildschirm')
+{
+    /*
+     * Taddis Rückmeldung (KEV-164): Der Hinweis reichte über den Bildschirm
+     * hinaus, oben fehlte die Überschrift, unten lagen die Knöpfe unter der
+     * Kante. 1366 × 650 ist ein gängiger Laptop mit Browserleisten.
+     */
+    const seite = await oeffnen({ trigger: true, breite: 1366, hoehe: 650 })
+    const masse = await seite.evaluate(() => {
+        const d = document.getElementById('trigger-warnung')
+        return { inhalt: d.scrollHeight, fenster: d.clientHeight }
+    })
+
+    pruefe('der ganze Hinweis ist ohne Scrollen zu sehen',
+        masse.inhalt <= masse.fenster,
+        `${masse.inhalt} px Inhalt, ${masse.fenster} px Fenster`)
+
+    // Auf dem Handy passt er nicht ganz hinein. Dann soll er oben beginnen,
+    // nicht beim Kästchen, auf das showModal() den Fokus setzt.
+    const mobil = await oeffnen({ trigger: true, breite: 390, hoehe: 750 })
+    const oben = await mobil.evaluate(() => document.getElementById('trigger-warnung').scrollTop)
+
+    pruefe('auf dem Handy beginnt er oben', oben === 0, `scrollTop ${oben}`)
 }
 
 console.log('\nTrigger-Warnung ohne JavaScript')

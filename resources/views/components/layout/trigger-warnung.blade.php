@@ -34,10 +34,16 @@
         @if ($ersatzsprache) lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}" @endif>
 
     {{-- Alles mittig (KEV-41, Kevin): Links ausgerichtet blieb rechts neben
-         Text und Knöpfen viel leere Fläche. --}}
-    <div class="mx-auto w-full max-w-2xl rounded-card border border-line bg-card p-6 text-center lg:p-8">
+         Text und Knöpfen viel leere Fläche.
 
-        <p class="mb-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft">
+         Knapp gehalten (KEV-164, Taddi): Auf dem Laptop reichte der Hinweis
+         über den Bildschirm hinaus, die Knöpfe lagen unter der Kante. Breiter
+         und mit weniger Luft dazwischen passt er ganz hinein. Die Schrift
+         bleibt so gross wie auf der Seite, kleiner wäre für Leute, die gerade
+         belastet sind, die schlechtere Wahl. --}}
+    <div class="mx-auto w-full max-w-3xl rounded-card border border-line bg-card p-6 text-center lg:px-10">
+
+        <p class="mb-1 font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft">
             {{ __('rahmen.trigger.eyebrow') }}
         </p>
 
@@ -56,12 +62,12 @@
              Titel der Seite darunter wird zur Unterzeile, kleiner, damit nicht
              zwei gleich große Zeilen untereinander stehen. --}}
         <p id="trigger-warnung-ueberschrift"
-           class="mb-2 font-display text-3xl font-medium leading-tight text-green lg:text-4xl">
+           class="mb-1 font-display text-3xl font-medium leading-tight text-green">
             {{ __('rahmen.trigger.ueberschrift') }}
         </p>
 
         <p id="trigger-warnung-titel"
-           class="mb-4 font-display text-xl font-medium text-ink lg:text-2xl">
+           class="mb-2 font-display text-xl font-medium text-ink lg:text-2xl">
             {{ $seite->titel }}
         </p>
 
@@ -103,8 +109,9 @@
              Plaketten, keine Knöpfe: Der Weg hinaus steht unten als echter
              Knopf, und die Darstellung liesse sich hinter dem offenen Dialog
              gar nicht bedienen. Bedientexte, kein Seiteninhalt: Taddis Text im
-             Panel bleibt, wie er ist. --}}
-        <ul class="mx-auto mt-6 flex w-fit max-w-full flex-col gap-3 text-left text-[0.9375rem] leading-snug text-ink-soft">
+             Panel bleibt, wie er ist.
+             Ab „sm“ in zwei Spalten nebeneinander, das spart Höhe (KEV-164). --}}
+        <ul class="mx-auto mt-5 flex w-fit max-w-full flex-col gap-3 text-left text-[0.9375rem] leading-snug text-ink-soft sm:grid sm:w-full sm:grid-cols-2 sm:gap-6">
             <li class="flex items-center gap-3">
                 <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green text-on-green">
                     <x-ui.icon name="exit" :size="18" />
@@ -119,7 +126,7 @@
             </li>
         </ul>
 
-        <div class="mt-8 border-t border-line pt-6">
+        <div class="mt-5 border-t border-line pt-4">
 
             {{-- „Nicht mehr anzeigen“ ist ein Kontrollkästchen und kein Knopf.
 
@@ -139,7 +146,7 @@
                  Fenster steht. Das Kästchen ist nur so breit wie sein Text,
                  damit die anklickbare Fläche nicht bis an die Ränder reicht. --}}
             <div class="sm:mx-auto sm:w-fit">
-            <label class="mx-auto mb-6 flex w-fit cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-soft"
+            <label class="mx-auto mb-4 flex w-fit cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-soft"
                    data-trigger-braucht-js>
                 {{-- Natives <input>: Tastaturbedienung, Vorlesehilfe und der
                      Zustand „ausgewählt“ kommen vom Browser. Ein nachgebautes
