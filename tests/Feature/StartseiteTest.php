@@ -419,6 +419,34 @@ class StartseiteTest extends TestCase
         $this->assertSame('Spenden', $block->fresh()->data['eyebrow']);
     }
 
+    /** KEV-167: Der Vereinsname im Mitglieder-Text ist fett, auch auf Englisch. */
+    public function test_vereinsname_im_mitgliedertext_ist_fett(): void
+    {
+        $this->get('/')
+            ->assertSee('dass Du hinter <strong class="font-semibold text-ink">KE!N EINZELFALL</strong> und unserer Arbeit stehst.', false)
+            ->assertDontSee('*KE!N EINZELFALL*', false);
+    }
+
+    /** KEV-167: Bestehende Startseiten bekommen den fetten Namen, Englisch mit. */
+    public function test_bestehender_mitgliedertext_bekommt_den_fetten_vereinsnamen(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/mitgliedschaft');
+        $fett = $block->data['absaetze'][0];
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [str_replace('*', '', $fett)]])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_26_110000_mitglieder_vereinsname_fett.php');
+        $migration->up();
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame([$fett], $data['absaetze']);
+        $this->assertSame($schluessel, array_keys($data));
+        $this->assertStringContainsString('behind *KE!N EINZELFALL* and our work',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)[$fett]['en']);
+    }
+
     /** KEV-55: neuer Mitglieder-Text von Taddi, Leitsatz und Knopf bleiben. */
     public function test_bestehende_startseite_bekommt_den_neuen_mitgliedertext(): void
     {

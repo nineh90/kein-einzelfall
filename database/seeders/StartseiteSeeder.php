@@ -324,9 +324,10 @@ class StartseiteSeeder extends Seeder
                 'data' => [
                     'titel' => 'Mitglieder',
                     'absaetze' => [
-                        // Text von Taddi, 27.09.2026 (KEV-55).
+                        // Text von Taddi, 27.09.2026 (KEV-55), der Vereinsname
+                        // auf ihren Wunsch fett (KEV-167).
                         'Du fühlst Dich mit unserer Vision verbunden? Mit Deiner Mitgliedschaft '
-                        .'kannst Du zeigen, dass Du hinter KE!N EINZELFALL und unserer Arbeit '
+                        .'kannst Du zeigen, dass Du hinter *KE!N EINZELFALL* und unserer Arbeit '
                         .'stehst. Wie viel Du Dich darüber hinaus einbringen möchtest, entscheidest '
                         .'Du ganz für Dich – eine Mitgliedschaft braucht kein aktives Engagement. '
                         .'Dein Mitgliedsbeitrag hilft uns gleichzeitig, unsere Arbeit verlässlich zu '
