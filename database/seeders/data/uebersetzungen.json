@@ -4909,5 +4909,20 @@
   },
   "Mitgliedsantrag (PDF)": {
     "en": "Membership application form (PDF)"
+  },
+  "Du möchtest Mitglied bei *KE!N EINZELFALL* werden, bist dir beim Ausfüllen des Antrags aber an manchen Stellen unsicher?": {
+    "en": "Would you like to become a member of *KE!N EINZELFALL*, but you are unsure about some parts of the application form?"
+  },
+  "Das ist völlig in Ordnung. Unsere Ausfüllhilfe begleitet dich Schritt für Schritt durch den Mitgliedsantrag und erklärt dir verständlich, was wo eingetragen, angekreuzt oder unterschrieben werden muss.": {
+    "en": "That is completely fine. Our guide takes you through the membership application step by step and explains clearly what needs to be filled in, ticked or signed where."
+  },
+  "Du musst dich nicht allein durch das Formular arbeiten. Wenn etwas unklar bleibt oder du beim Ausfüllen Unterstützung brauchst, melde dich gerne bei uns unter kontakt@kein-einzelfall.de.": {
+    "en": "You don't have to work through the form on your own. If anything remains unclear or you need support filling it in, feel free to contact us at kontakt@kein-einzelfall.de."
+  },
+  "Wir möchten, dass dein Weg zur Mitgliedschaft so einfach und verständlich wie möglich ist.": {
+    "en": "We want your path to membership to be as simple and clear as possible."
+  },
+  "Ausfüllhilfe (PDF)": {
+    "en": "Guide to filling it in (PDF)"
   }
 }

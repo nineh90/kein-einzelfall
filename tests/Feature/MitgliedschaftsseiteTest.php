@@ -54,4 +54,34 @@ class MitgliedschaftsseiteTest extends TestCase
         $this->assertSame(MitgliedschaftsseiteSeeder::ANTRAG_ABSAETZE, $data['absaetze']);
         $this->assertTrue($data['alles_zeigen']);
     }
+
+    /**
+     * KEV-198 mit KEV-196, KEV-197 und KEV-201: Ausfüllhilfe als eigener Abschnitt; Reihenfolge
+     * und Verzeichnis „Wir brauchen dich, Mitglied werden, Ausfüllhilfe, Beitrags- und
+     * Mitgliederordnung, Dokumente“.
+     */
+    public function test_ausfuellhilfe_und_reihenfolge(): void
+    {
+        $titel = $this->seite()->blocks()->orderBy('position')->get()->map(fn ($b) => $b->data['titel'] ?? null)->all();
+        $this->assertSame(['Wir brauchen dich!', 'Mitglied werden', 'Ausfüllhilfe zum Mitgliedsantrag',
+            'Beitrags- und Mitgliederordnung', 'Dokumente zum Herunterladen'], $titel);
+
+        $html = $this->get('/mitgliedschaft')->assertOk()->getContent();
+        $nav = substr($html, strpos($html, 'data-verzeichnis'));
+        $nav = substr($nav, 0, strpos($nav, '</nav>'));
+        preg_match_all('#href="\#([^"]+)"#', $nav, $treffer);
+        $this->assertSame(['abschnitt-wir-brauchen-dich', 'abschnitt-mitglied-werden', 'abschnitt-ausfullhilfe-zum-mitgliedsantrag',
+            'abschnitt-beitrags-und-mitgliederordnung', 'dl-dokumente-zum-herunterladen'], $treffer[1]);
+
+        $this->assertMatchesRegularExpression('#href="'.preg_quote(MitgliedschaftsseiteSeeder::AUSFUELLHILFE_PDF, '#').'"[^>]*>\s*Ausfüllhilfe \(PDF\)#', $html);
+
+        // Die Migration fügt sie nur einmal ein.
+        $this->abschnitt('Ausfüllhilfe zum Mitgliedsantrag')->delete();
+        $migration = require database_path('migrations/2026_10_26_260000_mitgliedschaft_ausfuellhilfe.php');
+        $migration->up();
+        $migration->up();
+        $titel = $this->seite()->blocks()->orderBy('position')->get()->map(fn ($b) => $b->data['titel'] ?? null)->all();
+        $this->assertSame('Ausfüllhilfe zum Mitgliedsantrag', $titel[2]);
+        $this->assertCount(5, $titel);
+    }
 }

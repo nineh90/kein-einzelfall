@@ -18,6 +18,8 @@ class MitgliedschaftsseiteSeeder extends Seeder
     /** Die PDFs der Seite, wie sie unter „Dokumente zum Herunterladen“ stehen. */
     public const ANTRAG_PDF = '/dokumente/2026/03/1.5.1.-MA-0126.pdf';
 
+    public const AUSFUELLHILFE_PDF = '/dokumente/2026/03/1.5.1.1.-MA-AH-0126.pdf';
+
     /*
      * KEV-199: Taddis Text aus dem Drive, mit der anonymen Mitgliedschaft.
      * Ihre erste Zeile „Mitglied werden“ ist die Überschrift, jede weitere
@@ -54,6 +56,26 @@ class MitgliedschaftsseiteSeeder extends Seeder
 
     public const ANTRAG_KNOPF = ['label' => 'Mitgliedsantrag (PDF)', 'url' => self::ANTRAG_PDF, 'variant' => 'primary'];
 
+    /*
+     * KEV-198: Taddis Ankündigung der Ausfüllhilfe als eigener Abschnitt,
+     * direkt nach „Mitglied werden“ (KEV-197: Wir brauchen dich, Antrag,
+     * Ausfüllhilfe, Beitrags- und Mitgliederordnung). Mit Knopf zum PDF.
+     */
+    public const AUSFUELLHILFE = [
+        'titel' => 'Ausfüllhilfe zum Mitgliedsantrag',
+        'absaetze' => [
+            'Du möchtest Mitglied bei *KE!N EINZELFALL* werden, bist dir beim Ausfüllen des Antrags aber an '
+                .'manchen Stellen unsicher?',
+            'Das ist völlig in Ordnung. Unsere Ausfüllhilfe begleitet dich Schritt für Schritt durch den '
+                .'Mitgliedsantrag und erklärt dir verständlich, was wo eingetragen, angekreuzt oder unterschrieben '
+                .'werden muss.',
+            'Du musst dich nicht allein durch das Formular arbeiten. Wenn etwas unklar bleibt oder du beim '
+                .'Ausfüllen Unterstützung brauchst, melde dich gerne bei uns unter kontakt@kein-einzelfall.de.',
+            'Wir möchten, dass dein Weg zur Mitgliedschaft so einfach und verständlich wie möglich ist.',
+        ],
+        'cta' => ['label' => 'Ausfüllhilfe (PDF)', 'url' => self::AUSFUELLHILFE_PDF, 'variant' => 'primary'],
+    ];
+
     public function run(): void
     {
         self::fuellen();
@@ -72,6 +94,27 @@ class MitgliedschaftsseiteSeeder extends Seeder
         }
 
         self::antragErneuern($seite);
+        self::ausfuellhilfeEinfuegen($seite);
+    }
+
+    /** KEV-198: direkt hinter „Mitglied werden“, nur einmal. */
+    private static function ausfuellhilfeEinfuegen(Page $seite): void
+    {
+        $bloecke = $seite->blocks()->orderBy('position')->get();
+        $antrag = $bloecke->first(fn ($b) => $b->typ === 'text' && ($b->data['titel'] ?? null) === self::ANTRAG_TITEL);
+
+        if (! $antrag || $bloecke->contains(fn ($b) => ($b->data['titel'] ?? null) === self::AUSFUELLHILFE['titel'])) {
+            return;
+        }
+
+        $bloecke->where('position', '>', $antrag->position)
+            ->each(fn ($b) => $b->update(['position' => $b->position + 1]));
+
+        $seite->blocks()->create([
+            'typ' => 'text',
+            'position' => $antrag->position + 1,
+            'data' => self::AUSFUELLHILFE,
+        ]);
     }
 
     /**
