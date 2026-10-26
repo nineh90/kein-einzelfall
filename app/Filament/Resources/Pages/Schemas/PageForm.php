@@ -378,6 +378,14 @@ class PageForm
                                 ->helperText('Überschrift und Absätze stehen zentriert. Für kurze '
                                     .'Abschnitte; lange Texte liest man linksbündig leichter.'),
 
+                            // KEV-173
+                            Toggle::make('data.alles_zeigen')
+                                ->label('Alle Absätze zeigen')
+                                ->visible(fn ($get) => $get('typ') === 'text')
+                                ->dehydrated(fn ($state) => (bool) $state)
+                                ->helperText('Sonst werden lange Texte nach dem vierten Absatz eingeklappt, '
+                                    .'darunter steht „Weiterlesen“.'),
+
                             // --- Text mit Bild ---
                             Medien::bild('data.bild')
                                 ->label('Bild')

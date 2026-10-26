@@ -300,7 +300,7 @@ class SeitenUndRedirectsTest extends TestCase
     public function test_inhalte_stammen_woertlich_von_der_altseite(): void
     {
         // Stichproben aus verschiedenen Seiten — nichts davon ist von uns formuliert.
-        $this->get('/verein')->assertSee('aus einer persönlichen Betroffenheit heraus', false);
+        // /verein nicht mehr: Dort steht seit KEV-173 Taddis neuer Text.
         $this->get('/wissen')->assertOk();
         $this->get('/erwerbsminderungsrente')->assertSee('Infoblatt', false);
     }

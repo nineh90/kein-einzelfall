@@ -940,7 +940,8 @@ class SeitengestaltungTest extends TestCase
         $ersterAbsatz = $seite->blocks->first()->data['absaetze'][0] ?? null;
         $this->assertNotNull($ersterAbsatz);
 
-        $this->get('/verein')->assertSee(mb_substr($ersterAbsatz, 0, 60), false);
+        // Ohne die *Sternchen*: Sie werden zu Fettschrift (KEV-173).
+        $this->get('/verein')->assertSeeText(mb_substr(str_replace('*', '', $ersterAbsatz), 0, 60));
     }
 
     public function test_uebersichtsseiten_verwenden_einheitliche_breiten(): void

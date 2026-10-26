@@ -278,6 +278,10 @@ class PageBlock extends Model
             'hand' => $data['hand'] ?? null,
             'cta' => knoepfe([$data['cta'] ?? null])[0] ?? null,
             'mittig' => (bool) ($data['mittig'] ?? false),
+            // Ab dem wievielten Absatz eingeklappt wird. „Alles zeigen“
+            // (KEV-173): Taddis Vereinstext endet mit den Sätzen, auf die es
+            // ankommt, die sollen nicht hinter „Weiterlesen“ verschwinden.
+            'ab_absatz' => empty($data['alles_zeigen']) ? 4 : 999,
         ];
     }
 

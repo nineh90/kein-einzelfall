@@ -617,6 +617,10 @@ class AltseiteSeeder extends Seeder
         // Migration dafür lief, bevor es diese Seiten gab.
         $this->call(UnterstuetzungsbandSeeder::class);
 
+        // Die Vereinsseite nach Taddis Tickets (KEV-173 ff.). Die Migration
+        // dafür lief, bevor es die Seite gab.
+        $this->call(VereinsseiteSeeder::class);
+
         // Sprungziel #dokumente auf der FSM-Seite, auf das der Rückblick
         // verlinkt (KEV-141). Die Migration dafür fand die Seite noch nicht.
         RueckblickSeeder::sprungzielDokumente();

@@ -39,6 +39,7 @@
         :absaetze="$data['absaetze'] ?? []"
         :hand="$data['hand'] ?? null"
         :mittig="(bool) ($data['mittig'] ?? false)"
+        :ab_absatz="$block->textAngaben()['ab_absatz']"
         :cta="$cta" />
 
 @elseif ($block->typ === 'hilfe_box')

@@ -33,6 +33,7 @@
             :anker="$text->anker()"
             :absaetze="$d['absaetze'] ?? []"
             :hand="$d['hand'] ?? null"
+            :ab_absatz="$text->textAngaben()['ab_absatz']"
             :mittig="(bool) ($d['mittig'] ?? false)" />
 
         {{-- Seit KEV-224 auch der Termin-Kalender (PageBlock::DANEBEN). --}}
