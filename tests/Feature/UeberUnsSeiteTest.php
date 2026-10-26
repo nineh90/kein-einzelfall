@@ -7,6 +7,7 @@ use App\Models\TeamMember;
 use App\Support\Titelbilder;
 use Database\Seeders\AltseiteSeeder;
 use Database\Seeders\TeamUndGruppenSeeder;
+use Database\Seeders\UnterstuetzungsbandSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -164,5 +165,23 @@ class UeberUnsSeiteTest extends TestCase
         $this->assertStringEndsWith('nicht anders zulässt.', $person->kurzprofil);
         $this->assertSame('THANK YOU! Mr and Mrs Anonymous', $person->uebersetzungen['en']['signatur']);
         $this->assertStringStartsWith('<p>The voices of courage', $person->uebersetzungen['en']['profil']);
+    }
+
+    /** KEV-189: Spendenkasten der Startseite statt des grünen Bands, auch per Migration. */
+    public function test_spendenkasten_statt_band(): void
+    {
+        $html = $this->get(self::PFAD)->assertOk()->getContent();
+        $this->assertStringContainsString('IBAN kopieren', $html);
+        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', $html);
+
+        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
+        $position = $seite->blocks()->where('typ', 'donation_options')->value('position');
+        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $seite->blocks()->create(['typ' => 'cta_band', 'position' => $position, 'data' => UnterstuetzungsbandSeeder::BAND]);
+
+        $migration = require database_path('migrations/2026_10_26_220000_team_spendenkasten.php');
+        $migration->up();
+        $this->assertSame('donation_options', $seite->blocks()->get()->sortBy('position')->last()->typ);
+        $this->assertFalse($seite->blocks()->where('typ', 'cta_band')->exists());
     }
 }

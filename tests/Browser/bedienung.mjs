@@ -600,14 +600,15 @@ console.log('\nSpendenhinweis wartet auf die Trigger-Warnung')
 //
 // Der Text ist im Panel pflegbar. Wer ihn verlaengert, soll es hier merken.
 //
-// Geprueft auf „Vorstand und Team“: Seit KEV-120 steht das Band nicht mehr
-// auf der Startseite, sondern auf einzelnen Unterseiten
-// (UnterstuetzungsbandSeeder), seit KEV-175 nicht mehr auf /verein.
+// Geprueft auf „KE!N EINZELFALL im Dialog“: Seit KEV-120 steht das Band
+// nicht mehr auf der Startseite, sondern auf einzelnen Unterseiten
+// (UnterstuetzungsbandSeeder), seit KEV-175 und KEV-189 nicht mehr auf
+// /verein und Vorstand und Team.
 
 console.log('\nVereinsname im Hinweisband')
 {
     for (const breite of [320, 390, 768, 1400]) {
-        const seite = await oeffnen({ breite, pfad: '/ueber-uns-vorstand-und-team' })
+        const seite = await oeffnen({ breite, pfad: '/kein-einzelfall-im-dialog' })
 
         const mass = await seite.evaluate(() => {
             const schrift = document.querySelector('[data-wasserzeichen]')
