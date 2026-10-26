@@ -105,6 +105,17 @@ class MitgliedschaftsseiteSeeder extends Seeder
         self::antragErneuern($seite);
         self::ausfuellhilfeEinfuegen($seite);
         self::ordnungVerlinken($seite);
+        self::symbolBeiDokumenten($seite);
+    }
+
+    /** KEV-203: rechts neben den Dokumenten der Ausweis im Kreis (Taddi: „IdCard mit Kreis“). */
+    private static function symbolBeiDokumenten(Page $seite): void
+    {
+        foreach ($seite->blocks()->where('typ', 'download_list')->get() as $block) {
+            if (empty($block->data['symbol']) && empty($block->data['neben_text'])) {
+                $block->update(['data' => $block->data + ['symbol' => 'circle-id-card']]);
+            }
+        }
     }
 
     /** KEV-200: Knopf zur Beitrags- und Mitgliederordnung, wo noch keiner steht. */

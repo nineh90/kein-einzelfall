@@ -211,6 +211,7 @@ class PageBlock extends Model
     public const SYMBOLE = [
         'circle-users' => 'Menschen im Kreis (Team)',
         'circle-help' => 'Fragezeichen im Kreis',
+        'circle-id-card' => 'Ausweis im Kreis (Mitgliedschaft)',
     ];
 
     /** Bausteine, die rechts neben einem Textabschnitt stehen können (KEV-226, KEV-224, KEV-174). */

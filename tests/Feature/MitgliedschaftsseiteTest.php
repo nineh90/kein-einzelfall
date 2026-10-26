@@ -97,4 +97,18 @@ class MitgliedschaftsseiteTest extends TestCase
         $migration->up();
         $this->assertSame(MitgliedschaftsseiteSeeder::ORDNUNG_KNOPF, $block->fresh()->data['cta']);
     }
+
+    /** KEV-203: Rechts neben den Dokumenten das Ausweis-Symbol im Kreis, auch per Migration. */
+    public function test_ausweis_symbol_neben_den_dokumenten(): void
+    {
+        $this->assertMatchesRegularExpression(
+            '#aria-labelledby="dl-dokumente-zum-herunterladen"(?:(?!</section>).)*<rect x="10.8" y="6.4" width="2.4"#s',
+            $this->get('/mitgliedschaft')->assertOk()->getContent());
+
+        $block = $this->seite()->blocks()->where('typ', 'download_list')->first();
+        $block->update(['data' => array_diff_key($block->data, ['symbol' => 1])]);
+        $migration = require database_path('migrations/2026_10_26_280000_mitgliedschaft_symbol.php');
+        $migration->up();
+        $this->assertSame('circle-id-card', $block->fresh()->data['symbol']);
+    }
 }

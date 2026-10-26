@@ -5,6 +5,8 @@
     // Ohne eigenes Band und Satzspiegel, als Spalte neben einem Text
     // (x-blocks.text-mit-dokumenten, KEV-226).
     'rahmen' => true,
+    // Großes Symbol rechts neben der Liste, siehe PageBlock::SYMBOLE (KEV-203).
+    'symbol' => null,
 ])
 
 @php
@@ -99,7 +101,14 @@
     'bg-card border-y border-line' => $rahmen && $auf === 'card',
 ])
          @if ($titel) aria-labelledby="dl-{{ Str::slug($titel) }}" @else aria-label="{{ __('rahmen.dokumente.bereich') }}" @endif>
-    <div @class(['mx-auto max-w-6xl' => $rahmen])>
+    @php
+        // Nur neben einer einspaltigen Liste mit eigenem Rahmen ist rechts Platz.
+        $symbol = $rahmen && ! $zweispaltig && array_key_exists((string) $symbol, \App\Models\PageBlock::SYMBOLE) ? $symbol : null;
+    @endphp
+    <div @class([
+        'mx-auto max-w-6xl' => $rahmen,
+        'md:grid md:grid-cols-[minmax(0,65ch)_minmax(0,1fr)] md:items-center md:gap-10' => $symbol,
+    ])>
         {{-- Lange Listen (Atteste: 27) auf großen Bildschirmen in zwei
              Spalten (KEV-245), sonst bliebe rechts die halbe Seite leer. --}}
         <div @class(['max-w-prose' => $rahmen && ! $zweispaltig])>
@@ -203,5 +212,10 @@
                 <p class="mt-3 text-sm text-ink-soft">{{ __('rahmen.dokumente.warum_extern') }}</p>
             @endif
         </div>
+
+        {{-- KEV-203: auf Mitgliedschaft der Ausweis im Kreis. --}}
+        @if ($symbol)
+            <x-ui.symbol-daneben :name="$symbol" />
+        @endif
     </div>
 </section>

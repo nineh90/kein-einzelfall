@@ -384,8 +384,8 @@ class PageForm
                                 ->options(PageBlock::SYMBOLE)
                                 ->placeholder('Keins')
                                 ->native(false)
-                                ->visible(fn ($get) => $get('typ') === 'text')
-                                ->helperText('Ein großes Symbol auf der freien Fläche rechts neben dem Text. '
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'download_list'], true))
+                                ->helperText('Ein großes Symbol auf der freien Fläche rechts daneben. '
                                     .'Auf dem Handy nicht zu sehen.'),
 
                             // KEV-173

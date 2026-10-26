@@ -36,14 +36,10 @@
             {{ $slot }}
         </x-blocks.text-inhalt>
 
-        {{-- Schmuck, auf der freien Fläche rechts (KEV-184, KEV-185: Taddi
-             wollte neben „Team“ und „Herr und Frau Unbekannt“ je ein
-             Symbol). Auf dem Handy weg: Dort stünde es nur zwischen Text
-             und Karten. --}}
+        {{-- KEV-184, KEV-185: Taddi wollte neben „Team“ und „Herr und Frau
+             Unbekannt“ je ein Symbol. --}}
         @if ($symbol)
-            <div class="hidden justify-center text-green-brand md:flex">
-                <x-ui.icon :name="$symbol" :size="160" class="h-32 w-32 [stroke-width:0.8] lg:h-40 lg:w-40" />
-            </div>
+            <x-ui.symbol-daneben :name="$symbol" />
         @endif
     </div>
 </section>
