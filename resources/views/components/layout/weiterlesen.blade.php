@@ -47,6 +47,15 @@
             ])>
                 @foreach ($seiten as $seite)
                     <li class="flex">
+                        @if (! empty($seite['aktuell']))
+                            {{-- Die Seite, auf der man ist (KEV-190): an ihrem
+                                 Platz im Raster, aber kein Link auf sich selbst. --}}
+                            <span aria-current="page"
+                                  class="flex flex-1 items-center gap-3 rounded-card border border-green bg-green-mist px-4 py-3.5">
+                                <span class="flex-1 text-[0.9375rem] font-medium text-green-deep">{{ $seite['label'] }}</span>
+                                <span class="shrink-0 text-xs text-green-deep">{{ __('Du bist hier') }}</span>
+                            </span>
+                        @else
                         {{-- Die Karten stehen auf der jeweils anderen Fläche,
                              sonst verschwämmen sie mit dem Hintergrund. --}}
                         <a href="{{ $seite['url'] }}"
@@ -60,6 +69,7 @@
                             <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5"
                                   aria-hidden="true">→</span>
                         </a>
+                        @endif
                     </li>
                 @endforeach
             </ul>

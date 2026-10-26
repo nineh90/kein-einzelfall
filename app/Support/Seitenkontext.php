@@ -126,7 +126,17 @@ class Seitenkontext
 
         if (isset($bereich['kacheln'])) {
             $kinder = $kinder->keyBy('schluessel');
-            $kinder = collect($bereich['kacheln'])->map(fn ($s) => $kinder[$s] ?? null)->filter();
+
+            // Auf jeder Seite des Bereichs dasselbe Raster wie auf der
+            // Übersicht (KEV-190, Taddi: „so wie auf der Startseite“). Die
+            // eigene Seite steht an ihrem Platz, als „aktuell“ markiert statt
+            // weggelassen; sonst rückten alle anderen Kacheln nach.
+            return collect($bereich['kacheln'])
+                ->map(fn ($s) => $kinder[$s] ?? null)
+                ->filter()
+                ->map(fn ($kind) => $kind + ['aktuell' => $kind['url'] === $this->eigeneAdresse()])
+                ->values()
+                ->all();
         }
 
         return $kinder

@@ -184,4 +184,18 @@ class UeberUnsSeiteTest extends TestCase
         $this->assertSame('donation_options', $seite->blocks()->get()->sortBy('position')->last()->typ);
         $this->assertFalse($seite->blocks()->where('typ', 'cta_band')->exists());
     }
+
+    /** KEV-190: Unten dasselbe 3 × 3 wie auf der Vereinsseite, die eigene Seite markiert statt verlinkt. */
+    public function test_kacheln_wie_auf_der_vereinsseite(): void
+    {
+        $html = $this->get(self::PFAD)->assertOk()->getContent();
+        $aside = substr($html, strpos($html, 'id="weiterlesen-titel"'));
+        $aside = substr($aside, 0, strpos($aside, '</aside>'));
+
+        $this->assertSame(9, substr_count($aside, '<li class="flex">'));
+        $this->assertStringContainsString('lg:grid-flow-col lg:grid-rows-3', $aside);
+        $this->assertMatchesRegularExpression('#<span aria-current="page"[^>]*>\s*<span[^>]*>Vorstand und Team</span>#', $aside);
+        $this->assertStringNotContainsString('href="/ueber-uns-vorstand-und-team"', $aside);
+        $this->assertStringContainsString('href="/satzung"', $aside);
+    }
 }
