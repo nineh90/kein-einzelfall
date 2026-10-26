@@ -267,12 +267,12 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringNotContainsString('Unser Fundament', $html);
     }
 
-    /** KEV-89: Unter „Satzung lesen“ steht ein Knopf zum PDF, nicht nur die Überschrift. */
+    /** KEV-89: Unter „Satzung lesen“ (seit KEV-194 „Die Satzung lesen“) steht ein Knopf zum PDF. */
     public function test_satzung_lesen_hat_einen_knopf_zum_pdf(): void
     {
         $html = $this->get('/satzung')->assertOk()->getContent();
 
-        $abschnitt = strpos($html, 'id="abschnitt-satzung-lesen"');
+        $abschnitt = strpos($html, 'id="abschnitt-die-satzung-lesen"');
         $knopf = strpos($html, 'Satzung lesen (PDF)');
 
         $this->assertNotFalse($abschnitt);
