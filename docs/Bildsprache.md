@@ -70,7 +70,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Seite | Motiv |
 |---|---|
 | Verein | warmes, unscharfes Licht von Taddi (KEV-75), das echte Logo liegt als eigenes Element darauf (`Titelbilder::LOGO_DARAUF`, siehe unten) |
-| Über uns – Vorstand und Team | Vereinslogo auf leerer Wand mit Fensterlicht, wie Verein (KEV-62, statt zwei Keramikschalen) |
+| Über uns – Vorstand und Team | Leere Wand mit Fensterlicht, das Vereinslogo legt der Seitenkopf darüber wie bei Verein (KEV-62, seit KEV-181 aus dem Bild herausgerechnet) |
 | Startseite (Aufmacher) | leere Wand mit goldenen Lichtstrahlen und Blätterschatten, ohne Motiv; davor das Logo. Nach KEV-29 kurz ohne Blätter, auf Wunsch des Vereins wieder mit (28.09.2026) |
 | Mitgliedschaft | Mitgliedsantrag mit Stift, von Taddi geliefert (KEV-61); Kleingedrucktes weich gezeichnet, ausgerichtet auf 35 %, auf dem Handy Text unten (KEV-91, siehe unten) |
 | Spenden | Keramikschale mit Samen, Gräser, Leinen |
