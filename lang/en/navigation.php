@@ -25,6 +25,8 @@ return [
     // KEV-220: Die Seite heißt jetzt nach dem Kuratorium (deutscher Name mit
     // Übersetzung in Klammern); im Menü bleibt es kurz wie auf Deutsch.
     'gremium_ukfb' => 'UKFB committee',
+    // KEV-179: im Menü kurz, der Seitentitel bleibt „About us – board and team“.
+    'ueber_uns_vorstand_und_team' => 'Board and team',
 
     'gespeicherte_einstellungen' => 'Saved settings',
     'leiste_gruppen' => 'Groups',

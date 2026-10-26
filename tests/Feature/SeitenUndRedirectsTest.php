@@ -418,10 +418,12 @@ class SeitenUndRedirectsTest extends TestCase
          * keine Kleinigkeit — deshalb geprüft und nicht bloss angenommen.
          */
         $menue = [];
-        $sammeln = function (array $eintraege) use (&$sammeln, &$menue): void {
+        $kurz = [];
+        $sammeln = function (array $eintraege) use (&$sammeln, &$menue, &$kurz): void {
             foreach ($eintraege as $eintrag) {
                 if (! empty($eintrag['url'])) {
                     $menue[trim($eintrag['url'], '/')] = $eintrag['label'] ?? null;
+                    $kurz[trim($eintrag['url'], '/')] = ! empty($eintrag['kurz_in_brotkrumen']);
                 }
 
                 $sammeln($eintrag['children'] ?? []);
@@ -440,6 +442,15 @@ class SeitenUndRedirectsTest extends TestCase
         foreach ($titel as $slug => $ausgeschrieben) {
             if (! isset($menue[$slug])) {
                 continue;   // nicht jede Seite hängt im Hauptmenü
+            }
+
+            // Ausdrücklich gekürzt (KEV-179, Taddi): Der Menüpunkt ist das
+            // Ende des Titels, „Vorstand und Team“ in „Über uns – Vorstand
+            // und Team“. Wer klickt, findet die Worte in der Überschrift wieder.
+            if ($kurz[$slug]) {
+                $this->assertStringEndsWith($menue[$slug], $ausgeschrieben, "/{$slug}");
+
+                continue;
             }
 
             $this->assertSame(

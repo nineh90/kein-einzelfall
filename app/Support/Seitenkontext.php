@@ -193,7 +193,10 @@ class Seitenkontext
             $krumen[] = ['label' => $ueber['label'], 'url' => $ueber['url']];
         }
 
-        $krumen[] = ['label' => $seitentitel, 'url' => null];
+        // Wie im Menü, wo die Seite das will (KEV-179: „Vorstand und Team“
+        // statt „Über uns – Vorstand und Team“). Sonst der Seitentitel.
+        $eintrag = collect($this->bereich()['children'] ?? [])->firstWhere('url', $this->eigeneAdresse());
+        $krumen[] = ['label' => ! empty($eintrag['kurz_in_brotkrumen']) ? $eintrag['label'] : $seitentitel, 'url' => null];
 
         return $krumen;
     }

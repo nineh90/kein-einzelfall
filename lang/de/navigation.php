@@ -44,7 +44,7 @@ return [
     'selbsthilfegruppen' => 'Selbsthilfegruppen',
     'trauma_bindung_und_beziehung' => 'Trauma, Bindung und Beziehung',
     'traumafolgestoerungen_verstehen' => 'Traumafolgestörungen verstehen',
-    'ueber_uns_vorstand_und_team' => 'Über uns – Vorstand und Team',
+    'ueber_uns_vorstand_und_team' => 'Vorstand und Team',
     'unterstuetzung' => 'Unterstützung',
     'veranstaltungen' => 'Veranstaltungen',
 ];
