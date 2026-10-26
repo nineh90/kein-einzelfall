@@ -467,13 +467,38 @@ class StartseiteTest extends TestCase
         $this->assertSame($schluessel, array_keys($data));
     }
 
-    /** KEV-54: „Verein“ statt „Vereinsarbeit“, erster Satz fett, neuer Leitsatz. */
+    /**
+     * KEV-54: „Verein“ statt „Vereinsarbeit“, neuer Leitsatz. Fett seit
+     * KEV-168 nur noch der Vereinsname, nicht der ganze erste Satz.
+     */
     public function test_vereinsabschnitt_zeigt_taddis_text(): void
     {
         $this->get('/')
-            ->assertSee('<strong class="font-semibold text-ink">KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.</strong>', false)
+            ->assertSee('<p><strong class="font-semibold text-ink">KE!N EINZELFALL e.V.</strong> wurde 2024 aus persönlicher Betroffenheit heraus gegründet. Aus Erfahrung', false)
             ->assertSee('Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.')
             ->assertDontSee('Vereinsarbeit');
+    }
+
+    /** KEV-168: Bestehende Startseiten verlieren den fetten Satz, nur der Name bleibt fett. Englisch mit. */
+    public function test_bestehender_vereinsabschnitt_hat_nur_den_namen_fett(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/verein');
+        $neu = $block->data['absaetze'];
+        $alt = $neu;
+        $alt[0] = str_replace(['e.V.* wurde', 'gegründet.'], ['e.V. wurde', 'gegründet.*'], $neu[0]);
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $alt])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_26_120000_verein_nur_name_fett.php');
+        $migration->up();
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame($neu, $data['absaetze']);
+        $this->assertSame($schluessel, array_keys($data));
+        $this->assertStringStartsWith('*KE!N EINZELFALL e.V.* was founded in 2024 out of personal experience. Experience',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)[$neu[0]]['en']);
     }
 
     /** KEV-117: zweiter Absatz am Ende des Abschnitts „Verein“. */
@@ -491,7 +516,10 @@ class StartseiteTest extends TestCase
     {
         $block = $this->startseite()->blocks()->where('typ', 'text')->get()
             ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/verein');
-        $erster = $block->data['absaetze'][0];
+        // Der erste Absatz so, wie er damals stand: bis KEV-168 der ganze Satz fett.
+        $erster = '*KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.* Aus '
+            .'Erfahrung wurde Wissen und aus Wissen wurde Betroffenenexpertise. Heute schaffen wir Räume '
+            .'für Austausch, teilen Wissen und machen sichtbar, was Betroffene bewegt.';
         $block->update(['data' => array_replace($block->data, ['absaetze' => [$erster]])]);
         $schluessel = array_keys($block->fresh()->data);
 

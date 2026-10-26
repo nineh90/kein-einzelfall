@@ -304,12 +304,13 @@ class StartseiteSeeder extends Seeder
             [
                 'typ' => 'text',
                 'data' => [
-                    // Titel, Text und Leitsatz von Taddi, 27.09.2026 (KEV-54). Der
-                    // erste Satz steht in *Sternchen* und wird damit fett.
+                    // Titel, Text und Leitsatz von Taddi, 27.09.2026 (KEV-54). Fett
+                    // in *Sternchen*: bis KEV-168 der ganze erste Satz, seitdem
+                    // auf Taddis Wunsch nur noch der Vereinsname.
                     'titel' => 'Verein',
                     'absaetze' => [
-                        '*KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus '
-                        .'gegründet.* Aus Erfahrung wurde Wissen und aus Wissen wurde '
+                        '*KE!N EINZELFALL e.V.* wurde 2024 aus persönlicher Betroffenheit heraus '
+                        .'gegründet. Aus Erfahrung wurde Wissen und aus Wissen wurde '
                         .'Betroffenenexpertise. Heute schaffen wir Räume für Austausch, teilen '
                         .'Wissen und machen sichtbar, was Betroffene bewegt.',
                         self::VEREIN_ZWEITER_ABSATZ,

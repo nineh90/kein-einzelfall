@@ -22,8 +22,9 @@ class ContentTreueTest extends TestCase
         'Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform',
         'Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe.',
         'Opferhilfe für soziale Gerechtigkeit',
-        // Seit KEV-54 ein neuer Text von Taddi statt des Altseiten-Satzes.
-        'KE!N EINZELFALL e.V. wurde 2024 aus persönlicher Betroffenheit heraus gegründet.',
+        // Seit KEV-54 ein neuer Text von Taddi statt des Altseiten-Satzes. Seit
+        // KEV-168 ist nur der Name davor fett, der Rest steht hinter dem </strong>.
+        'KE!N EINZELFALL e.V.</strong> wurde 2024 aus persönlicher Betroffenheit heraus gegründet.',
         // Seit KEV-55 ein neuer Text von Taddi statt des Altseiten-Satzes.
         'Du fühlst Dich mit unserer Vision verbunden?',
         // Seit KEV-48 ein neuer Text von Taddi statt des Altseiten-Satzes.
