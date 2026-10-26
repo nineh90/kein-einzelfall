@@ -35,7 +35,10 @@
              Seit KEV-123 dieselben Nummern wie in der Box der Startseite, in
              denselben zwei Spalten, aber ohne Polizei und Feuerwehr (Taddi).
              Auf dem dunkelgrünen Grund in der hellen Schrift der Fusszeile,
-             nicht im Warnrot: Das hätte hier keinen Kontrast. --}}
+             nicht im Warnrot: Das hätte hier keinen Kontrast.
+             Ab „lg“ mehr Abstand zwischen den beiden Spalten (KEV-171, Taddi):
+             Mit 24 px lasen sich die Namen links und die Nummern rechts wie
+             eine Zeile. --}}
         @php
             $alle = config('hilfe.nummern');
             $spalten = array_map(
@@ -46,7 +49,7 @@
         <section aria-labelledby="sofort-hilfe-titel"
                  class="mb-8 flex flex-col gap-2 border-y border-on-green-line py-4 text-sm lg:flex-row lg:items-baseline lg:gap-6">
             <h2 id="sofort-hilfe-titel" class="shrink-0 font-display text-base">{{ __('rahmen.fusszeile.sofort_hilfe') }}:</h2>
-            <div class="grid gap-x-6 gap-y-1 sm:grid-cols-2">
+            <div class="grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:gap-x-16 xl:gap-x-24">
                 @foreach ($spalten as $nummern)
                     <ul class="flex flex-col gap-1">
                         @foreach ($nummern as $n)
