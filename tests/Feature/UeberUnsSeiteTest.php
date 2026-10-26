@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\TeamMember;
 use App\Support\Titelbilder;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\TeamUndGruppenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -98,5 +99,21 @@ class UeberUnsSeiteTest extends TestCase
         $migration->up();
         $this->assertSame('circle-help', $block->fresh()->data['symbol']);
         $this->assertArrayNotHasKey('mittig', $block->fresh()->data);
+    }
+
+    /** KEV-186: Taddis neuer Text bei „Herr und Frau Unbekannt“, auch per Migration. */
+    public function test_neuer_text_bei_unbekannt(): void
+    {
+        $this->get(self::PFAD)->assertOk()
+            ->assertSee('Auch wenn sie im Hintergrund wirken, sind sie ein wichtiger Teil unserer Arbeit')
+            ->assertDontSee('Zusätzlich arbeiten im Hintergrund');
+
+        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
+        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Herr und Frau Unbekannt');
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [TeamUndGruppenSeeder::HINTERGRUND_TEXT_ALT]])]);
+
+        $migration = require database_path('migrations/2026_10_26_190000_unbekannt_neuer_text.php');
+        $migration->up();
+        $this->assertSame([TeamUndGruppenSeeder::HINTERGRUND_TEXT], $block->fresh()->data['absaetze']);
     }
 }

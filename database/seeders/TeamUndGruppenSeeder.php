@@ -240,6 +240,17 @@ class TeamUndGruppenSeeder extends Seeder
      */
     public const HINTERGRUND_UEBERSCHRIFT = 'Herr und Frau Unbekannt';
 
+    /** Text darunter seit KEV-186 von Taddi, statt des Satzes der Altseite. */
+    public const HINTERGRUND_TEXT = 'Hinter *KE!N EINZELFALL* engagieren sich viele weitere Ehrenamtliche, die aus ganz '
+        .'unterschiedlichen Gründen nicht auf unserer Website genannt werden können. Auch wenn sie im Hintergrund '
+        .'wirken, sind sie ein wichtiger Teil unserer Arbeit – denn sie tragen dazu bei, dass unsere Angebote, unser '
+        .'Wissen und unsere Unterstützung wachsen und sichtbar werden.';
+
+    /** Der Satz der Altseite, bis KEV-186. */
+    public const HINTERGRUND_TEXT_ALT = 'Zusätzlich arbeiten im Hintergrund viele Ehrenamtliche, die aus den '
+        .'verschiedensten Gründen nicht auf der Website genannt werden können. Dennoch engagieren sie sich zum '
+        .'Beispiel in Arbeitsgruppen oder in der Öffentlichkeitsarbeit und der Vernetzung.';
+
     /**
      * Vorstand ist, wer ein Vorstandsamt trägt. Alle anderen — Landesstellen,
      * Beauftragte, Ehrenamtliche — sind „Team": Die Altseite trennt genau so,
@@ -335,7 +346,8 @@ class TeamUndGruppenSeeder extends Seeder
                     // (KEV-184), bei den Menschen im Hintergrund das Fragezeichen
                     // (KEV-185). Seitdem steht deren Abschnitt nicht mehr mittig
                     // wie seit KEV-68, nur die Karte darunter.
-                    $data = ($titel ? ['titel' => $titel] : []) + ['absaetze' => [$absatz]]
+                    $data = ($titel ? ['titel' => $titel] : [])
+                        + ['absaetze' => [$hintergrund ? self::HINTERGRUND_TEXT : $absatz]]
                         + match (true) {
                             $hintergrund => ['symbol' => 'circle-help'],
                             $titel === 'Team' => ['symbol' => 'circle-users'],
