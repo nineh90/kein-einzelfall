@@ -20,6 +20,15 @@ class MitgliedschaftsseiteSeeder extends Seeder
 
     public const AUSFUELLHILFE_PDF = '/dokumente/2026/03/1.5.1.1.-MA-AH-0126.pdf';
 
+    public const ORDNUNG_PDF = '/dokumente/2026/05/1.3.1.-B-M-O-0126.pdf';
+
+    /*
+     * KEV-200: Unter „Hier kannst du die Beitrags- und Mitgliederordnung
+     * vollständig einsehen.“ fehlte der Link. Taddi ließ die Wahl, Satz raus
+     * oder Ordnung rein: Der Satz bleibt, darunter der Knopf zum PDF.
+     */
+    public const ORDNUNG_KNOPF = ['label' => 'Beitrags- und Mitgliederordnung (PDF)', 'url' => self::ORDNUNG_PDF, 'variant' => 'primary'];
+
     /*
      * KEV-199: Taddis Text aus dem Drive, mit der anonymen Mitgliedschaft.
      * Ihre erste Zeile „Mitglied werden“ ist die Überschrift, jede weitere
@@ -95,6 +104,18 @@ class MitgliedschaftsseiteSeeder extends Seeder
 
         self::antragErneuern($seite);
         self::ausfuellhilfeEinfuegen($seite);
+        self::ordnungVerlinken($seite);
+    }
+
+    /** KEV-200: Knopf zur Beitrags- und Mitgliederordnung, wo noch keiner steht. */
+    private static function ordnungVerlinken(Page $seite): void
+    {
+        $block = $seite->blocks()->where('typ', 'text')->get()
+            ->first(fn ($b) => ($b->data['titel'] ?? null) === 'Beitrags- und Mitgliederordnung');
+
+        if ($block && empty($block->data['cta'])) {
+            $block->update(['data' => $block->data + ['cta' => self::ORDNUNG_KNOPF]]);
+        }
     }
 
     /** KEV-198: direkt hinter „Mitglied werden“, nur einmal. */

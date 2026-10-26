@@ -84,4 +84,17 @@ class MitgliedschaftsseiteTest extends TestCase
         $this->assertSame('Ausfüllhilfe zum Mitgliedsantrag', $titel[2]);
         $this->assertCount(5, $titel);
     }
+
+    /** KEV-200: Unter der Beitrags- und Mitgliederordnung ein Knopf zum PDF. */
+    public function test_ordnung_hat_einen_knopf(): void
+    {
+        $this->assertMatchesRegularExpression('#href="'.preg_quote(MitgliedschaftsseiteSeeder::ORDNUNG_PDF, '#').'"[^>]*>\s*Beitrags- und Mitgliederordnung \(PDF\)#',
+            $this->get('/mitgliedschaft')->assertOk()->getContent());
+
+        $block = $this->abschnitt('Beitrags- und Mitgliederordnung');
+        $block->update(['data' => array_diff_key($block->data, ['cta' => 1])]);
+        $migration = require database_path('migrations/2026_10_26_270000_mitgliedschaft_ordnung_knopf.php');
+        $migration->up();
+        $this->assertSame(MitgliedschaftsseiteSeeder::ORDNUNG_KNOPF, $block->fresh()->data['cta']);
+    }
 }
