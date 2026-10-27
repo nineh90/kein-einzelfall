@@ -27,13 +27,25 @@ class AttesteSeeder extends Seeder
 
     public const TITEL = 'Atteste';
 
+    /** KEV-244: Taddis grüne Überschrift über der Einleitung. */
+    public const EINLEITUNG_TITEL = 'Attestmöglichkeiten von KE!N EINZELFALL e.V.';
+
     public const ABSAETZE = [
         'Manchmal fehlen die Worte, um zu erklären, warum etwas nicht geht, anders gehen muss oder besondere '
             .'Unterstützung notwendig ist. Ein Attest kann dabei helfen, genau das verständlich zu machen – ohne '
             .'sich immer wieder selbst erklären zu müssen.',
         'Hier findest Du verschiedene Attestvorlagen und Formulierungshilfen für unterschiedliche Situationen '
             .'und Bedarfe, die individuell mit den behandelnden Fachpersonen abgestimmt werden können.',
+        // KEV-244
+        'Wenn Dir hier ein Attest fehlt oder Du Fragen hast, schreib uns gerne an kontakt@kein-einzelfall.de.',
         '*Damit Du nicht jedes „Warum“ selbst erklären musst.*',
+    ];
+
+    /** Die Absätze vor KEV-244, für die Migration. */
+    public const ABSAETZE_VOR_KEV_244 = [
+        self::ABSAETZE[0],
+        self::ABSAETZE[1],
+        self::ABSAETZE[3],
     ];
 
     public const META_DESCRIPTION = 'Attestvorlagen und Formulierungshilfen von KE!N EINZELFALL e.V. für '
@@ -90,11 +102,39 @@ class AttesteSeeder extends Seeder
         );
 
         if ($seite->wasRecentlyCreated) {
-            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::ABSAETZE]]);
+            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['titel' => self::EINLEITUNG_TITEL, 'absaetze' => self::ABSAETZE]]);
             $seite->blocks()->create(['typ' => 'download_list', 'position' => 1, 'data' => self::dokumente()]);
         }
 
         Titelbilder::setzen();
+    }
+
+    /**
+     * KEV-244 auf einer schon angelegten Seite: Überschrift über die
+     * Einleitung, wenn sie noch keine hat, und der neue Absatz, wenn dort
+     * noch Taddis alter Text steht. Was der Verein geändert hat, bleibt.
+     */
+    public static function nachtragen(): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+        $einleitung = $seite?->blocks()->orderBy('position')->first();
+
+        if ($einleitung?->typ !== 'text') {
+            return;
+        }
+
+        $data = $einleitung->data ?? [];
+
+        if (($data['absaetze'] ?? null) === self::ABSAETZE_VOR_KEV_244) {
+            $data['absaetze'] = self::ABSAETZE;
+        }
+
+        if (blank($data['titel'] ?? null)) {
+            // Überschrift vor den Absätzen, in der Reihenfolge des Formulars
+            $data = ['titel' => self::EINLEITUNG_TITEL] + $data;
+        }
+
+        $einleitung->update(['data' => $data]);
     }
 
     /**

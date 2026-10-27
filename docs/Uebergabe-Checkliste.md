@@ -897,6 +897,10 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   Erwerbsminderungsrente, Bürokratie-Labyrinth, Traumafolgestörungen, Trauma
   Bindung und Beziehung) im Menü „Wissen“ stehen: so wie jetzt, hinter ihren
   Kategorien, unter einem eigenen Punkt oder gar nicht mehr?
+- [x] **Atteste (KEV-243):** Unterzeile „Wenn Worte allein nicht reichen“.
+- [x] **Atteste (KEV-244):** grüne Überschrift „Attestmöglichkeiten von KE!N
+  EINZELFALL e.V.“ und der Absatz mit kontakt@kein-einzelfall.de vor dem
+  fetten Schlusssatz.
 - [x] **Formulare (KEV-247):** grüne Überschrift „Die Formulare des KE!N
   EINZELFALL e.V.“ über der Einleitung, wie gewünscht.
 - [x] **Formulare (KEV-248):** Unterzeile „Übersichtlich an einem Ort“ unter

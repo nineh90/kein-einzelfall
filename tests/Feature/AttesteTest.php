@@ -36,6 +36,39 @@ class AttesteTest extends TestCase
         $this->assertStringNotContainsString('*Damit', $html);
     }
 
+    /** KEV-243, KEV-244: Unterzeile, grüne Überschrift, Absatz mit Adresse. */
+    public function test_unterzeile_ueberschrift_und_kontaktadresse(): void
+    {
+        $html = $this->get('/atteste')->getContent();
+
+        $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Atteste\s*<\/h1>\s*(?:\{\{--.*?--\}\}\s*)?<p[^>]*>Wenn Worte allein nicht reichen<\/p>/su', $html);
+        // Vereinsname am Stück, wie bei den Formularen (KEV-247).
+        $this->assertMatchesRegularExpression('/<h2[^>]*text-green[^>]*>\s*Attestmöglichkeiten von<br><span class="inline-block">KE!N EINZELFALL e\.V\.<\/span>\s*<\/h2>/u', $html);
+        $this->assertStringContainsString('Wenn Dir hier ein Attest fehlt oder Du Fragen hast, schreib uns gerne an', $html);
+        $this->assertStringContainsString('href="mailto:kontakt@kein-einzelfall.de"', $html);
+
+        // Der neue Absatz steht vor dem fetten Schlusssatz.
+        $this->assertLessThan(strpos($html, 'Damit Du nicht jedes'), strpos($html, 'Wenn Dir hier ein Attest fehlt'));
+    }
+
+    /** Bestehende Seiten bekommen KEV-244 per Migration, Eigenes bleibt. */
+    public function test_nachtragen_nur_auf_taddis_altem_text(): void
+    {
+        $einleitung = Page::where('slug', 'atteste')->where('locale', 'de')->sole()->blocks()->orderBy('position')->first();
+
+        $einleitung->update(['data' => ['absaetze' => AttesteSeeder::ABSAETZE_VOR_KEV_244]]);
+        AttesteSeeder::nachtragen();
+        AttesteSeeder::nachtragen();
+        $this->assertSame(
+            ['titel' => AttesteSeeder::EINLEITUNG_TITEL, 'absaetze' => AttesteSeeder::ABSAETZE],
+            $einleitung->fresh()->data,
+        );
+
+        $einleitung->update(['data' => ['titel' => 'Eigene', 'absaetze' => ['Vom Verein.']]]);
+        AttesteSeeder::nachtragen();
+        $this->assertSame(['titel' => 'Eigene', 'absaetze' => ['Vom Verein.']], $einleitung->fresh()->data);
+    }
+
     public function test_alle_27_vorlagen_zum_herunterladen(): void
     {
         $html = $this->get('/atteste')->getContent();

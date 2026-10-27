@@ -97,8 +97,8 @@ class Titelbilder
         'schutz-und-wertekonzept' => null,
         'red-flags' => 'Red Flags & Green Lights',
         // KEV-144: Bild von Taddi (Drive-Ordner „3. Wissen“), Papierstapel
-        // mit Stempel. Ohne Unterzeile.
-        'atteste' => null,
+        // mit Stempel. Unterzeile seit KEV-243 aus dem Ticket.
+        'atteste' => 'Wenn Worte allein nicht reichen',                                           // KEV-243
         // KEV-153: Bild von Taddi (Drive-Ordner „3. Wissen“, „Abkürzungen
         // SER“), Zettelkasten. Unterzeile seit KEV-255 aus dem Ticket.
         'glossar' => 'Damit aus Buchstaben wieder Bedeutung wird.',
