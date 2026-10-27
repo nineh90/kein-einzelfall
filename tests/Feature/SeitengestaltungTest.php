@@ -420,7 +420,8 @@ class SeitengestaltungTest extends TestCase
             // Kurze Zeilen werden nicht eingeklappt.
             ->assertDontSee('weitere Absätze');
 
-        $this->get('/wissen')->assertSee('href="/fsm-erweitertes-hilfesystem"', false);
+        // FSM stand bis KEV-239 im Menü „Wissen“, seitdem verlinkt es der Rückblick.
+        $this->get('/rueckblick')->assertSee('href="/fsm-erweitertes-hilfesystem#dokumente"', false);
         $this->get('/kein-einzelfall-im-dialog')->assertSee('href="/das-hilfesystem"', false);
         $this->get('/veranstaltungen')
             ->assertDontSee('TEILNAHMEVEREINBARUNG')

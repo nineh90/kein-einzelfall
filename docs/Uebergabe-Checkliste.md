@@ -890,13 +890,25 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 - [x] **Atteste (KEV-245):** Die 27 Vorlagen stehen auf großen Bildschirmen
   in zwei Spalten. Ein Klick auf den Titel öffnet das PDF im Browser, daneben
   „Herunterladen“. Gilt für alle Dokumentenlisten der Website.
-- [ ] **Atteste / „Mehr zu ‚Wissen‘“ (KEV-246), Rückfrage offen.** Unten auf
-  den Wissen-Seiten stehen jetzt zuerst Taddis Kategorien (Atteste, Formulare,
-  Fristen, Klartext statt Fachsprache), danach die Seiten der alten Website.
-  Offen: Wie sollen die sechs alten Seiten (Das Hilfesystem, FSM,
-  Erwerbsminderungsrente, Bürokratie-Labyrinth, Traumafolgestörungen, Trauma
-  Bindung und Beziehung) im Menü „Wissen“ stehen: so wie jetzt, hinter ihren
-  Kategorien, unter einem eigenen Punkt oder gar nicht mehr?
+- [x] **Atteste / „Mehr zu ‚Wissen‘“ (KEV-246):** beantwortet mit KEV-239,
+  siehe unten.
+- [ ] **Wissen (KEV-239), Rückfrage offen.** Im Menü stehen nur noch Taddis
+  Kategorien in ihrer Reihenfolge: Atteste, Formulare und Download, Fristen in
+  Anträgen und Verfahren, Klartext statt Fachsprache. „Vorlagen/Schreiben“
+  kommt dazu, sobald es die Seite gibt. Die sieben alten Seiten sind **nicht
+  mehr im Menü, aber noch online**: Das Hilfesystem, Trauma, Bindung und
+  Beziehung, Traumafolgestörungen verstehen und Bürokratie-Labyrinth sind die
+  Abende von „KE!N EINZELFALL im Dialog“ und dort verlinkt (25.11.2026 mit
+  Anmeldung), auf FSM verweist der Rückblick wegen der Widerspruchsvorlagen.
+  Offen: Sollen Erwerbsminderungsrente und Unterstützung ganz offline? Und
+  sollen die vier Abende unter „Projekte“ hängen? Offline nehmen geht im
+  Panel über „Veröffentlicht am“ leeren.
+- [x] **Wissen (KEV-241):** Kasten „Urteile zum Schwerbehindertenrecht“
+  (REHADAT) von `/wissen` entfernt, siehe A12.
+- [x] **Wissen (KEV-242):** Die Kategorien stehen als Knöpfe rechts neben dem
+  Text (Baustein „Ausgewählte Seiten“, Darstellung „Knöpfe“). Unten auf
+  `/wissen` steht deshalb kein „Mehr zu ‚Wissen‘“ mehr. KEV-240 („was rechts
+  hinkommt“) bleibt laut Taddi offen.
 - [x] **Atteste (KEV-243):** Unterzeile „Wenn Worte allein nicht reichen“.
 - [x] **Atteste (KEV-244):** grüne Überschrift „Attestmöglichkeiten von KE!N
   EINZELFALL e.V.“ und der Absatz mit kontakt@kein-einzelfall.de vor dem
@@ -1004,7 +1016,11 @@ Titel sind die einzige Ausnahme, weil die Altseite schlicht keine hergibt. Bitte
 einmal durchsehen. Ändern lässt sich jeder im Panel im Feld „Titel"; was dort
 steht, wird von keinem Update überschrieben.
 
-### A12 · Verweis auf REHADAT (Text von uns)
+### A12 · Verweis auf REHADAT (Text von uns) — erledigt
+
+**Seit KEV-241 (27.10.2026) entfernt**, Taddi: „Das gehört da nicht hin.“ Der
+Verweis auf der Seite „Grad der Behinderung“ bleibt.
+
 
 Auf `/wissen` steht seit dem 22.09.2026 ein Hinweis-Kasten „Urteile zum
 Schwerbehindertenrecht" mit Verweis auf REHADAT-Recht. Hintergrund in

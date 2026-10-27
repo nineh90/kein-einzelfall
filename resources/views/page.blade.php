@@ -124,7 +124,16 @@
 
     // Zeigt die Seite ihre Unterseiten schon als Kacheln (KEV-156), wäre die
     // Liste am Ende dieselben Links noch einmal.
-    $geschwister = $page->blocks->contains('typ', 'unterseiten') ? [] : $kontext->geschwister();
+    // Genauso, was „Ausgewählte Seiten“ schon zeigt (KEV-242: auf /wissen
+    // stehen Taddis Kategorien rechts neben dem Text).
+    $schonGezeigt = $page->blocks->where('typ', 'seitenkarten')
+        ->flatMap(fn ($b) => \App\Support\Unterseiten::seiten(array_values(array_filter((array) ($b->data['seiten'] ?? [])))))
+        ->pluck('url')
+        ->all();
+    $geschwister = $page->blocks->contains('typ', 'unterseiten') ? [] : array_values(array_filter(
+        $kontext->geschwister(),
+        fn ($s) => ! in_array($s['url'], $schonGezeigt, true),
+    ));
     $weiterlesenAuf = PageBlock::gegenflaeche($zuletzt);
     $kontaktAuf = PageBlock::gegenflaeche(count($geschwister) > 0 ? $weiterlesenAuf : $zuletzt);
 @endphp

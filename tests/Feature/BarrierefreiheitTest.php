@@ -43,7 +43,7 @@ class BarrierefreiheitTest extends TestCase
         }
         // Auch die Unterpunkte, nicht nur die Hauptebene
         $r->assertSee('Satzung');
-        $r->assertSee('Erwerbsminderungsrente');
+        $r->assertSee('Klartext statt Fachsprache');
     }
 
     /**

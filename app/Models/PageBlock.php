@@ -126,7 +126,7 @@ class PageBlock extends Model
         'kalender' => 'Termin-Kalender (Veranstaltungen und Gruppentreffen)',
         // KEV-174: ausgewählte Seiten mit Titelbild und Unterzeile, etwa
         // Selbsthilfe- und Arbeitsgruppen neben dem Text der Vereinsseite.
-        'seitenkarten' => 'Ausgewählte Seiten als Karten (mit Bild)',
+        'seitenkarten' => 'Ausgewählte Seiten (Karten mit Bild oder Knöpfe)',
     ];
 
     /**

@@ -274,6 +274,34 @@ class AltseiteSeeder extends Seeder
     public const DOKUMENTE_NEBEN_TEXT = ['kinderkodex', 'istanbul-konvention'];
 
     /** Den Schalter „neben_text“ auf den Seiten in DOKUMENTE_NEBEN_TEXT setzen, wo er noch fehlt. */
+    /** KEV-242: Taddis Kategorien als Knöpfe rechts neben dem Text auf /wissen. */
+    public const WISSEN_KNOEPFE = [
+        'seiten' => ['atteste', 'formulare', 'fristen', 'klartext-statt-fachsprache'],
+        'neben_text' => true,
+        'darstellung' => 'knoepfe',
+    ];
+
+    /** Direkt hinter den ersten Textbaustein von /wissen, nur einmal. */
+    public static function wissenKnoepfeDaneben(): void
+    {
+        $seite = Page::where('slug', 'wissen')->where('locale', 'de')->where('fassung', Page::FASSUNG_STANDARD)->first();
+        $bloecke = $seite?->blocks()->orderBy('position')->get() ?? collect();
+        $text = $bloecke->firstWhere('typ', 'text');
+
+        if (! $text || $bloecke->contains('typ', 'seitenkarten')) {
+            return;
+        }
+
+        $bloecke->where('position', '>', $text->position)
+            ->each(fn ($b) => $b->update(['position' => $b->position + 1]));
+
+        $seite->blocks()->create([
+            'typ' => 'seitenkarten',
+            'position' => $text->position + 1,
+            'data' => self::WISSEN_KNOEPFE,
+        ]);
+    }
+
     public static function dokumenteNebenText(): void
     {
         foreach (Page::whereIn('slug', self::DOKUMENTE_NEBEN_TEXT)->where('locale', 'de')->get() as $seite) {
@@ -630,6 +658,9 @@ class AltseiteSeeder extends Seeder
         // Sprungziel #dokumente auf der FSM-Seite, auf das der Rückblick
         // verlinkt (KEV-141). Die Migration dafür fand die Seite noch nicht.
         RueckblickSeeder::sprungzielDokumente();
+
+        // KEV-242: Taddis Kategorien als Knöpfe neben dem Wissen-Text.
+        self::wissenKnoepfeDaneben();
 
         // Titelbilder im Seitenkopf. Die Migration dafür lief schon, als die
         // Datenbank noch leer war, und hat nichts gefunden.

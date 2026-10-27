@@ -5,6 +5,9 @@
     // Ohne eigenes Band, wenn er neben einem Textabschnitt steht
     // (text-mit-dokumenten).
     'rahmen' => true,
+    // karten | knoepfe. Knöpfe nur mit dem Namen, wie „Mehr zu …“ am
+    // Seitenende (KEV-242, rechts neben dem Text auf /wissen).
+    'darstellung' => 'karten',
 ])
 
 @php
@@ -39,17 +42,35 @@
             <h2 class="mb-4 font-display text-xl font-medium text-green">{{ $titel }}</h2>
         @endif
 
-        <ul @class([
-            'grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2',
-            'lg:grid-cols-1' => ! $rahmen,
-            'lg:grid-cols-3' => $rahmen && count($kacheln) >= 3,
-        ])>
-            @foreach ($kacheln as $kachel)
-                <li class="flex min-w-0">
-                    <x-ui.seitenkachel :kachel="$kachel" :innen="$innen" :format="$rahmen ? 'aspect-[3/2]' : 'aspect-[2/1]'" />
-                </li>
-            @endforeach
-        </ul>
+        @if ($darstellung === 'knoepfe')
+            <ul @class([
+                'grid grid-cols-[minmax(0,1fr)] gap-3',
+                'sm:grid-cols-2 lg:grid-cols-3' => $rahmen,
+            ])>
+                @foreach ($kacheln as $kachel)
+                    <li class="flex min-w-0">
+                        <a href="{{ $kachel['url'] }}"
+                           class="group flex flex-1 items-center gap-3 rounded-card border border-line px-4 py-3.5 no-underline hover:border-green {{ $innen }}">
+                            <span class="flex-1 text-[0.9375rem] text-ink group-hover:underline">{{ $kachel['label'] }}</span>
+                            <span class="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5"
+                                  aria-hidden="true">→</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <ul @class([
+                'grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2',
+                'lg:grid-cols-1' => ! $rahmen,
+                'lg:grid-cols-3' => $rahmen && count($kacheln) >= 3,
+            ])>
+                @foreach ($kacheln as $kachel)
+                    <li class="flex min-w-0">
+                        <x-ui.seitenkachel :kachel="$kachel" :innen="$innen" :format="$rahmen ? 'aspect-[3/2]' : 'aspect-[2/1]'" />
+                    </li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 
     @if ($rahmen)

@@ -285,6 +285,21 @@ class SeitenUndRedirectsTest extends TestCase
         $this->get('/verein')->assertSee('<link rel="canonical"', false);
     }
 
+    /**
+     * Die Altseite führte „/das-hilfesystem/“ auf „/das-hilfesystem“. Setzt
+     * der Verein die Seite auf Entwurf, zeigte die Regel auf sich selbst
+     * (beim Bau von KEV-239 aufgefallen).
+     */
+    public function test_weiterleitung_auf_einen_entwurf_dreht_sich_nicht_im_kreis(): void
+    {
+        $this->assertNotNull(Redirect::where('von', 'das-hilfesystem/')->first());
+        Page::where('slug', 'das-hilfesystem')->update(['published_at' => null]);
+
+        $this->get('/das-hilfesystem')->assertNotFound();
+        $this->get('/das-hilfesystem/')->assertNotFound();
+        $this->get('/fsm-erweitertes-hilfesystem')->assertOk();
+    }
+
     public function test_jede_seite_hat_genau_eine_h1(): void
     {
         foreach (Page::all() as $seite) {

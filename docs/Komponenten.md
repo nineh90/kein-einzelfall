@@ -2716,3 +2716,22 @@ eigenes Band zwei Spalten ab „md“ (Atteste, FSM, Erwerbsminderungsrente);
 Trennlinien an den Einträgen, damit eine ungerade letzte Zelle leer bleibt.
 Fremde Adressen unverändert.
 
+## 46. Wissen nur mit Taddis Kategorien (KEV-239, KEV-242, 27.10.2026)
+
+Das Menü „Wissen“ zeigt nur noch Atteste, Formulare und Download, Fristen in
+Anträgen und Verfahren und Klartext statt Fachsprache. Das Kennzeichen `vorn`
+aus KEV-246 ist damit überflüssig und wieder raus. Die Seiten der alten
+Website bleiben veröffentlicht, weil „KE!N EINZELFALL im Dialog“ und der
+Rückblick sie verlinken. Ob sie ganz offline gehen, ist eine Rückfrage an den
+Verein (Checkliste).
+
+Auf `/wissen` stehen die Kategorien rechts neben dem Text. Dafür kann der
+Baustein `seitenkarten` jetzt auch schlichte Knöpfe zeigen (`darstellung:
+knoepfe`, im Panel „Darstellung“), im Stil von „Mehr zu …“. Was ein solcher
+Baustein schon verlinkt, fällt aus „Mehr zu …“ am Seitenende heraus; auf
+`/wissen` bleibt davon nichts, der Kasten entfällt.
+
+Beim Bauen aufgefallen: Die Weiterleitungen der Altseite führen „/x/“ auf
+„/x“. Setzt der Verein so eine Seite auf Entwurf, zeigte die Regel auf sich
+selbst, der Browser drehte sich im Kreis. `PageController` antwortet dann mit
+404.

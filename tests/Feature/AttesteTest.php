@@ -124,27 +124,16 @@ class AttesteTest extends TestCase
     }
 
     /**
-     * KEV-246: „Mehr zu „Wissen““ zeigt zuerst Taddis Kategorien (Atteste,
-     * Formulare, Fristen, Klartext), dann die Seiten der alten Website. Das
-     * Menü behält seine Reihenfolge.
+     * KEV-246 zeigte Taddis Kategorien vor den Seiten der alten Website. Seit
+     * KEV-239 gibt es unter „Wissen“ nur noch ihre Kategorien.
      */
-    public function test_mehr_zu_wissen_zeigt_taddis_kategorien_zuerst(): void
+    public function test_mehr_zu_wissen_zeigt_die_anderen_kategorien(): void
     {
-        $links = function (string $pfad): array {
-            $html = $this->get($pfad)->getContent();
-            preg_match('/id="weiterlesen-titel".*?<\/ul>/s', $html, $teil);
-            preg_match_all('/href="([^"]+)"/', $teil[0] ?? '', $treffer);
+        $html = $this->get('/atteste')->getContent();
+        preg_match('/id="weiterlesen-titel".*?<\/ul>/s', $html, $teil);
+        preg_match_all('/href="([^"]+)"/', $teil[0] ?? '', $treffer);
 
-            return $treffer[1];
-        };
-
-        $this->assertSame(['/formulare', '/fristen', '/klartext-statt-fachsprache', '/das-hilfesystem',
-            '/fsm-erweitertes-hilfesystem', '/erwerbsminderungsrente'], $links('/atteste'));
-        $this->assertSame(['/atteste', '/formulare', '/fristen', '/klartext-statt-fachsprache'],
-            array_slice($links('/das-hilfesystem'), 0, 4));
-
-        $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $this->assertSame('/das-hilfesystem', $wissen['children'][0]['url']);
+        $this->assertSame(['/formulare', '/fristen', '/klartext-statt-fachsprache'], $treffer[1]);
     }
 
     /**

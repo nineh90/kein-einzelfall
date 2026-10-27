@@ -504,6 +504,17 @@ class PageForm
                                 ->helperText('Bild und Text der Karte sind Titelbild und Unterzeile der jeweiligen '
                                     .'Seite. Es erscheinen nur Seiten, die im Menü stehen.'),
 
+                            // KEV-242: als schlichte Knöpfe, wie rechts auf /wissen
+                            Select::make('data.darstellung')
+                                ->label('Darstellung')
+                                ->visible(fn ($get) => $get('typ') === 'seitenkarten')
+                                ->options([
+                                    'karten' => 'Karten mit Bild und Unterzeile',
+                                    'knoepfe' => 'Knöpfe, nur mit dem Namen',
+                                ])
+                                ->default('karten')
+                                ->selectablePlaceholder(false),
+
                             // --- Ablauf in Schritten ---
                             Repeater::make('data.schritte')
                                 ->label('Schritte')

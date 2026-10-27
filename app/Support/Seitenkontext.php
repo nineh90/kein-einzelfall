@@ -145,12 +145,7 @@ class Seitenkontext
             ->reject(fn ($kind) => $kind['url'] === $bereich['url'])
             // Auf der Übersicht selbst alle: Sie ist der Weg zu den
             // Unterseiten, „Gruppen & Veranstaltungen“ hat sieben (KEV-72).
-            // Sonst zuerst die Seiten mit `vorn` (KEV-246: unter „Wissen“
-            // Taddis eigene Kategorien vor den Seiten der alten Website),
-            // im Übrigen in der Reihenfolge des Menüs.
-            ->when(! $this->istBereichsUebersicht(), fn ($kinder) => $kinder
-                ->sortBy(fn ($kind, $i) => [empty($kind['vorn']) ? 1 : 0, $i])
-                ->take($hoechstens))
+            ->when(! $this->istBereichsUebersicht(), fn ($kinder) => $kinder->take($hoechstens))
             ->values()
             ->all();
     }

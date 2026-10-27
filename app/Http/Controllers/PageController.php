@@ -136,7 +136,10 @@ class PageController extends Controller
     {
         $regel = Redirect::whereIn('von', [$pfad, $pfad.'/'])->first();
 
-        if (! $regel) {
+        // Die Regeln der Altseite führen „/x/“ auf „/x“. Ist die Seite dort
+        // nicht (mehr) veröffentlicht, etwa die alten Wissen-Seiten seit
+        // KEV-239, zeigte die Weiterleitung auf sich selbst: eine Schleife.
+        if (! $regel || trim($regel->nach, '/') === trim($pfad, '/')) {
             throw new NotFoundHttpException;
         }
 

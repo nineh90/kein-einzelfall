@@ -41,8 +41,9 @@
             <x-blocks.kalender :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null" />
         @elseif ($dokumente->typ === 'seitenkarten')
             {{-- KEV-174: Selbsthilfe- und Arbeitsgruppen neben dem Vereinstext. --}}
+            {{-- KEV-242: auf /wissen Taddis Kategorien als Knöpfe. --}}
             <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
-                :seiten="$dok['seiten'] ?? []" />
+                :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'" />
         @else
             <x-blocks.download-list :rahmen="false" :auf="$auf"
                 :titel="$dok['titel'] ?? null"
