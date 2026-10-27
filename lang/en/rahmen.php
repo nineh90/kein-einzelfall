@@ -57,8 +57,6 @@ return [
         'herunterladen' => 'Download',
         'bereich' => 'Documents to download',
         'extern' => 'Opens :quelle',
-        'warum_extern' => 'We link applications and forms at the responsible authority rather '
-            .'than hosting them here, so you always get the current version.',
     ],
 
     'partner' => [

@@ -205,12 +205,6 @@
                 @endforeach
             </ul>
 
-            {{-- Ein Satz unter der Liste statt eines Hinweises je Eintrag: Die
-                 Begründung gilt für alle fremden Verweise gleichermaßen, und in
-                 jeder Zeile wiederholt wäre sie nur Rauschen. --}}
-            @if (collect($dokumente)->contains($istExtern))
-                <p class="mt-3 text-sm text-ink-soft">{{ __('rahmen.dokumente.warum_extern') }}</p>
-            @endif
         </div>
 
         {{-- KEV-203: auf Mitgliedschaft der Ausweis im Kreis. --}}

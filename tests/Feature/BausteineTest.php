@@ -237,7 +237,8 @@ class BausteineTest extends TestCase
         ]);
 
         $this->assertStringContainsString('Öffnet Deutsche Rentenversicherung', $html);
-        $this->assertStringContainsString('Anträge und Formulare verlinken wir', $html);
+        // Den Satz darunter gibt es seit KEV-212 nicht mehr.
+        $this->assertStringNotContainsString('Anträge und Formulare verlinken wir', $html);
 
         // Die eigene Datei bleibt ein Download und behält ihre Größenangabe.
         $this->assertStringContainsString('PDF-Datei, 100 KB', $html);

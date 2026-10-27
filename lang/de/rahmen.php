@@ -85,8 +85,6 @@ return [
         'herunterladen' => 'Herunterladen',
         'bereich' => 'Dokumente zum Herunterladen',
         'extern' => 'Öffnet :quelle',
-        'warum_extern' => 'Anträge und Formulare verlinken wir bei der zuständigen Stelle, '
-            .'statt sie hier abzulegen. So bekommst du immer die aktuelle Fassung.',
     ],
 
     'partner' => [

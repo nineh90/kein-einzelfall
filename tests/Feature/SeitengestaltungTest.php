@@ -233,6 +233,9 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Zum Nachlesen', $html);
         $this->assertStringNotContainsString('Dokumente zum Herunterladen', $html);
 
+        // KEV-212: kein Satz über Anträge und Formulare unter der Liste.
+        $this->assertStringNotContainsString('Anträge und Formulare verlinken wir', $html);
+
         $this->assertStringContainsString('content="Warum KE!N EINZELFALL e.V. die Istanbul-Konvention anerkennt', $html);
     }
 

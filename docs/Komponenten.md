@@ -1247,8 +1247,9 @@ und wer einen veralteten Antrag einreicht, verliert Zeit, die er oft nicht hat.
 Ein externer Eintrag bekommt statt „PDF-Datei, 180 KB" die **Herkunft** in den
 Linktext („Öffnet Deutsche Rentenversicherung") und kein `download`-Attribut —
 der Browser ignoriert das bei fremder Herkunft ohnehin, es verspricht nur etwas.
-Unter der Liste steht einmal, warum verlinkt statt abgelegt wird; je Zeile
-wiederholt wäre es Rauschen.
+Unter der Liste stand einmal, warum verlinkt statt abgelegt wird. Seit KEV-212
+(27.10.2026) nicht mehr: Taddi wollte den Satz auf der Istanbul-Seite weg, und
+dort ist der Verweis gar kein Antrag. Andere fremde Verweise gab es nicht.
 
 ### 17.4 Baustein `partner_logos`
 
