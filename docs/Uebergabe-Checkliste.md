@@ -931,6 +931,11 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   „Krisendienste“ noch als leere Überschrift aus der Altseite.
   **Rückfrage:** Im Drive liegt für „Anfragen & Austausch“ ein neues Bild
   (Sprechblasen). Soll es das Briefumschlag-Bild ersetzen?
+- [x] **Raum für Ungesagtes (KEV-263):** Taddis neue Triggerwarnung,
+  wörtlich. In ihrem Dokument ist sie durchgehend fett, deshalb ohne
+  einzelne Hervorhebungen.
+- [x] **Raum für Ungesagtes (KEV-264):** „Für alles, was zu lange keinen
+  Platz hatte“ als grüne Überschrift über dem Text.
 - [x] **Kontaktformular (KEV-277):** Taddis Text über dem Formular,
   „(erforderlich)“ statt „(muss ausgefüllt werden)“, auch im
   Beschwerde- und im Anmeldeformular.

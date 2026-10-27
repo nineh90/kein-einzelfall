@@ -106,7 +106,8 @@ class RaumFuerUngesagtesTest extends TestCase
         $this->assertStringContainsString('/raum-fuer-ungesagtes</loc>', $this->get('/sitemap.xml')->getContent());
 
         $this->assertStringContainsString('Deine Stimme', $html);
-        $this->assertStringContainsString('Für alles, was zu lange keinen Platz hatte.', $html);
+        // KEV-264: als grüne Überschrift über dem Text.
+        $this->assertMatchesRegularExpression('/<h2[^>]*text-green[^>]*>\s*Für alles, was zu lange keinen Platz hatte\s*<\/h2>/u', $html);
         $this->assertStringContainsString('Manches, weil niemand hinsieht.', $html);
         $this->assertStringContainsString('Texte, Gedichte, Briefe, Bilder, Lieder etc.', $html);
         $this->assertStringContainsString('viel zu oft einfach stehen gelassen wird.', $html);
@@ -162,9 +163,11 @@ class RaumFuerUngesagtesTest extends TestCase
 
             $this->assertStringContainsString('<dialog id="bereichswarnung"', $html, $slug);
             $this->assertStringContainsString('data-bereich="raum-fuer-ungesagtes"', $html, $slug);
-            $this->assertStringContainsString('Auf dieser Seite kommen Inhalte vor, die sich mit sexualisierter Gewalt, Missbrauch', $html, $slug);
-            $this->assertStringContainsString('können sehr direkt, emotional oder bildhaft sein.', $html, $slug);
-            $this->assertStringContainsString('ob und wann du diese Inhalte lesen, ansehen oder anhören möchtest.', $html, $slug);
+            // KEV-263: Taddis neue Fassung.
+            $this->assertStringContainsString('Manche Erfahrungen sind so schmerzhaft, dass es kaum Worte dafür gibt.', $html, $slug);
+            $this->assertStringContainsString('<p>Bitte achte gut auf dich.</p>', $html, $slug);
+            $this->assertStringContainsString('<p>Deine Grenzen zählen. Auch hier.</p>', $html, $slug);
+            $this->assertStringNotContainsString('sexualisierter Gewalt, Missbrauch', $html, $slug);
 
             // Ohne JavaScript ein Block vor dem Inhalt, nicht dahinter.
             $this->assertLessThan(strpos($html, '<h1'), strpos($html, '<dialog id="bereichswarnung"'), $slug);
@@ -182,6 +185,28 @@ class RaumFuerUngesagtesTest extends TestCase
         foreach (['/wissen', '/verein', '/atteste'] as $adresse) {
             $this->assertStringNotContainsString('id="bereichswarnung"', $this->get($adresse)->getContent(), $adresse);
         }
+    }
+
+    /** KEV-263, KEV-264 per Migration: nur Taddis alter Wortlaut wird ersetzt. */
+    public function test_nachtragen_ersetzt_nur_den_alten_wortlaut(): void
+    {
+        $seite = Page::where('slug', 'raum-fuer-ungesagtes')->where('locale', 'de')->sole();
+        $text = $seite->blocks()->orderBy('position')->first();
+        $seite->update(['triggerwarnung' => RaumFuerUngesagtesSeeder::TRIGGERWARNUNG_BIS_KEV_263]);
+        $text->update(['data' => ['absaetze' => ['Für alles, was zu lange keinen Platz hatte.', ...RaumFuerUngesagtesSeeder::BEREICH_ABSAETZE]]]);
+
+        RaumFuerUngesagtesSeeder::nachtragen();
+        RaumFuerUngesagtesSeeder::nachtragen();
+
+        $this->assertSame(RaumFuerUngesagtesSeeder::TRIGGERWARNUNG, $seite->fresh()->triggerwarnung);
+        $this->assertSame(
+            ['titel' => RaumFuerUngesagtesSeeder::BEREICH_TITEL_TEXT, 'absaetze' => RaumFuerUngesagtesSeeder::BEREICH_ABSAETZE],
+            $text->fresh()->data,
+        );
+
+        $seite->update(['triggerwarnung' => ['Vom Verein.']]);
+        RaumFuerUngesagtesSeeder::nachtragen();
+        $this->assertSame(['Vom Verein.'], $seite->fresh()->triggerwarnung);
     }
 
     /** Der Verein pflegt die Warnung an der Seite; ohne Absätze keine Warnung. */
@@ -291,14 +316,14 @@ class RaumFuerUngesagtesTest extends TestCase
         // KEV-156: Übersicht, Warnung und Kacheln
         $html = $this->get('/en/raum-fuer-ungesagtes')->assertOk()->getContent();
         $this->assertStringContainsString('Your voice', $html);
-        $this->assertStringContainsString('For everything that went without a place for too long.', $html);
-        $this->assertStringContainsString('This section contains content dealing with sexualised violence', $this->dialog($html));
+        $this->assertStringContainsString('For everything that went without a place for too long', $html);
+        $this->assertStringContainsString('Some experiences are so painful that there are hardly any words for them.', $this->dialog($html));
         $this->assertStringContainsString('Understood – continue', $this->dialog($html));
         $this->assertStringContainsString('href="/en/wort-fuer-wort"', $this->kacheln($html));
         $this->assertStringContainsString('Word by word', $this->kacheln($html));
 
         // Die Warnung kommt auch auf den englischen Unterseiten, aus der englischen Übersicht.
-        $this->assertStringContainsString('This section contains content', $this->dialog($this->get('/en/blickwinkel')->getContent()));
+        $this->assertStringContainsString('Some experiences are so painful', $this->dialog($this->get('/en/blickwinkel')->getContent()));
     }
 
     /** Der Abschnitt mit den Kacheln. */

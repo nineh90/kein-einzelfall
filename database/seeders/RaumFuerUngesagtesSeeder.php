@@ -97,8 +97,10 @@ class RaumFuerUngesagtesSeeder extends Seeder
      * Textbaustein nach vier Absätzen eingeklappt, und gerade Adresse und
      * Schlusssatz lägen hinter „Weiterlesen“. Die Reihenfolge ist ihre.
      */
+    /** KEV-264: der erste Satz als grüne Überschrift über dem Text. */
+    public const BEREICH_TITEL_TEXT = 'Für alles, was zu lange keinen Platz hatte';
+
     public const BEREICH_ABSAETZE = [
-        'Für alles, was zu lange keinen Platz hatte.',
         'Manches bleibt verborgen, weil die richtigen Worte fehlen. Manches, weil niemand hinsieht. Und '
             .'manches, weil es lange keinen Ort gab, an dem es sein durfte.',
         'Texte, Gedichte, Briefe, Bilder, Lieder etc.',
@@ -121,8 +123,23 @@ class RaumFuerUngesagtesSeeder extends Seeder
     /** Überschrift über den Kacheln. Von uns. */
     public const KACHELN_TITEL = 'Was du hier findest';
 
-    /** KEV-156: Taddis Triggerwarnung für den Bereich, wörtlich. */
+    /**
+     * KEV-263: Taddis neue Triggerwarnung, wörtlich. In ihrem Dokument ist
+     * sie durchgehend fett, einzelne Sätze hebt sie also nicht hervor.
+     */
     public const TRIGGERWARNUNG = [
+        'Manche Erfahrungen sind so schmerzhaft, dass es kaum Worte dafür gibt. Hier bekommen auch diese '
+            .'Erfahrungen einen Raum.',
+        'Auf dieser Seite teilen Menschen sehr persönliche und teilweise erschütternde Erlebnisse. Ihre Berichte '
+            .'können sehr direkt und emotional sein und belastende Erinnerungen oder Gefühle auslösen.',
+        'Bitte achte gut auf dich.',
+        'Du entscheidest selbst, ob und wann du diese Erfahrungen lesen, ansehen oder anhören möchtest. Du '
+            .'darfst jederzeit innehalten, eine Pause machen oder die Seite verlassen.',
+        'Deine Grenzen zählen. Auch hier.',
+    ];
+
+    /** KEV-156: die erste Fassung, bis KEV-263. */
+    public const TRIGGERWARNUNG_BIS_KEV_263 = [
         'Auf dieser Seite kommen Inhalte vor, die sich mit sexualisierter Gewalt, Missbrauch, Gewalt, Trauma, '
             .'psychischer Belastung, Suizidalität, Selbstverletzung oder anderen belastenden Erfahrungen '
             .'beschäftigen.',
@@ -178,7 +195,10 @@ class RaumFuerUngesagtesSeeder extends Seeder
         }
 
         if ($bereich->blocks()->doesntExist()) {
-            $bereich->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::BEREICH_ABSAETZE]]);
+            $bereich->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => [
+                'titel' => self::BEREICH_TITEL_TEXT,
+                'absaetze' => self::BEREICH_ABSAETZE,
+            ]]);
             $bereich->blocks()->create(['typ' => 'unterseiten', 'position' => 1, 'data' => [
                 'titel' => self::KACHELN_TITEL,
                 'aufrufe' => true,
@@ -200,6 +220,37 @@ class RaumFuerUngesagtesSeeder extends Seeder
         }
 
         Titelbilder::setzen();
+    }
+
+    /**
+     * KEV-263, KEV-264 auf einer schon eingerichteten Übersicht: neue
+     * Warnung und grüne Überschrift, beides nur, wo noch Taddis alter
+     * Wortlaut steht.
+     */
+    public static function nachtragen(): void
+    {
+        $bereich = Page::query()
+            ->where('slug', self::BEREICH_SLUG)
+            ->where('locale', 'de')
+            ->where('fassung', Page::FASSUNG_STANDARD)
+            ->first();
+
+        if (! $bereich) {
+            return;
+        }
+
+        if ($bereich->triggerwarnung === self::TRIGGERWARNUNG_BIS_KEV_263) {
+            $bereich->update(['triggerwarnung' => self::TRIGGERWARNUNG]);
+        }
+
+        $text = $bereich->blocks()->orderBy('position')->first();
+        $absaetze = $text?->data['absaetze'] ?? [];
+
+        if ($text?->typ === 'text' && blank($text->data['titel'] ?? null)
+            && ($absaetze[0] ?? null) === 'Für alles, was zu lange keinen Platz hatte.') {
+            $text->update(['data' => ['titel' => self::BEREICH_TITEL_TEXT, 'absaetze' => array_slice($absaetze, 1)]
+                + $text->data]);
+        }
     }
 
     /** @param  list<string>  $absaetze  leer = ohne Textbaustein, bis der Verein Text schickt */
