@@ -178,10 +178,12 @@
                             {{ $gross }}
                         </h1>
 
+                        {{-- whitespace-pre-line: Ein Zeilenumbruch aus dem Panel
+                             bleibt stehen („…hilft uns,⏎besser zu werden.“,
+                             KEV-213). --}}
                         @if ($untertitel)
-                            <p class="mt-4 max-w-md text-pretty text-lg leading-snug text-ink lg:text-xl">
-                                {{ $untertitel }}
-                            </p>
+                            {{-- Text ohne Umbruch drumherum, den hielte pre-line sonst auch. --}}
+                            <p class="mt-4 max-w-md whitespace-pre-line text-pretty text-lg leading-snug text-ink lg:text-xl">{{ $untertitel }}</p>
                         @endif
                     </div>
                 </div>

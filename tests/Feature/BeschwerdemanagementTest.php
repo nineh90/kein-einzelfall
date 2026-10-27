@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Mail\NachrichtAnOmbudsstelle;
 use App\Models\Inquiry;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\BeschwerdemanagementSeeder;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -45,7 +46,9 @@ class BeschwerdemanagementTest extends TestCase
 
         $this->assertStringContainsString('Externe Kritik', $html);
         $this->assertStringContainsString('Interne Beschwerde', $html);
-        $this->assertStringContainsString('mailto:kritik@kein-einzelfall.de', $html);
+        // KEV-214: Kritik geht an kontakt@, nicht mehr an kritik@.
+        $this->assertStringContainsString('mailto:kontakt@kein-einzelfall.de', $html);
+        $this->assertStringNotContainsString('kritik@', $html);
         // Taddis Tippfehler „beschwedemanagement“ ist korrigiert.
         $this->assertStringContainsString('mailto:beschwerdemanagement@kein-einzelfall.de', $html);
         $this->assertStringNotContainsString('beschwedemanagement', $html);
@@ -63,6 +66,45 @@ class BeschwerdemanagementTest extends TestCase
         // Die Knöpfe unter den Texten springen zum Formular und wählen vor.
         $this->assertStringContainsString('href="?weg=anfrage#formular-beschwerde"', $html);
         $this->assertStringContainsString('href="?weg=ombudsstelle#formular-beschwerde"', $html);
+    }
+
+    /** KEV-213 bis KEV-216: Taddis Feinschliff. */
+    public function test_gruener_satz_rechts_umbruch_oben_und_taddis_formulartexte(): void
+    {
+        $html = $this->get('/beschwerdemanagement')->getContent();
+
+        // Grüner Satz unter beiden Spalten.
+        $this->assertStringContainsString('Du bist nicht allein. Gemeinsam KE!N EINZELFALL!', $html);
+        $this->assertMatchesRegularExpression('/font-hand[^>]*>\s*Deine Rückmeldung hilft uns, besser zu werden\./u', $html);
+
+        // Unterzeile mit Umbruch nach dem Komma.
+        $this->assertStringContainsString('whitespace-pre-line', $html);
+        $this->assertStringContainsString("Deine Rückmeldung hilft uns,\nbesser zu werden.", $html);
+
+        $this->assertStringContainsString('wenn du lieber anonym bleiben möchtest.', $html);
+        $this->assertStringContainsString('Schreib so viel oder so wenig, wie sich für dich richtig anfühlt.', $html);
+        $this->assertStringContainsString('Geht an die unabhängige Ombudsstelle.', $html);
+        $this->assertStringNotContainsString('Geht direkt an', $html);
+    }
+
+    /** Bestehende Seiten bekommen KEV-214 per Migration, Eigenes bleibt. */
+    public function test_nachtragen_tauscht_nur_den_alten_wortlaut(): void
+    {
+        $block = \App\Models\Page::where('slug', 'beschwerdemanagement')->where('locale', 'de')->sole()
+            ->blocks()->where('typ', 'formular_spalten')->sole();
+        $data = $block->data;
+        $data['spalten'][0]['absaetze'][4] = 'Wenn du Unterstützung brauchst, melde dich bei uns: kritik@kein-einzelfall.de';
+        unset($data['spalten'][1]['hand']);
+        $data['spalten'][0]['hand'] = 'Vom Verein geändert.';
+        $block->update(['data' => $data]);
+
+        BeschwerdemanagementSeeder::nachtragen();
+        BeschwerdemanagementSeeder::nachtragen();
+
+        $spalten = $block->fresh()->data['spalten'];
+        $this->assertSame('Wenn du Unterstützung brauchst, melde dich bei uns: kontakt@kein-einzelfall.de', $spalten[0]['absaetze'][4]);
+        $this->assertSame('Vom Verein geändert.', $spalten[0]['hand']);
+        $this->assertSame('Deine Rückmeldung hilft uns, besser zu werden.', $spalten[1]['hand']);
     }
 
     public function test_knopf_waehlt_den_weg_vor(): void

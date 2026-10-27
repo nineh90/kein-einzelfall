@@ -1874,6 +1874,9 @@
   "Deine Rückmeldung hilft uns, besser zu werden.": {
     "en": "Your feedback helps us get better."
   },
+  "Deine Rückmeldung hilft uns,\nbesser zu werden.": {
+    "en": "Your feedback helps us\nget better."
+  },
   "Beschwerdemanagement - Kein Einzelfall e.V.": {
     "en": "Complaints procedure - Kein Einzelfall e.V."
   },
@@ -1895,8 +1898,8 @@
   "Wichtig ist uns: Deine Kritik darf gehört werden.": {
     "en": "What matters to us: your criticism deserves to be heard."
   },
-  "Wenn du Unterstützung brauchst, melde dich bei uns: kritik@kein-einzelfall.de": {
-    "en": "If you need support, get in touch with us: kritik@kein-einzelfall.de"
+  "Wenn du Unterstützung brauchst, melde dich bei uns: kontakt@kein-einzelfall.de": {
+    "en": "If you need support, get in touch with us: kontakt@kein-einzelfall.de"
   },
   "Du bist nicht allein. Gemeinsam KE!N EINZELFALL!": {
     "en": "You are not alone. Together: KE!N EINZELFALL!"

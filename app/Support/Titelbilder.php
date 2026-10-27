@@ -62,7 +62,8 @@ class Titelbilder
         'traumafolgestoerungen-verstehen' => 'Was eine Traumafolgestörung ist – und wie man passende Hilfe findet.', // von uns
         'trauma-bindung-und-beziehung' => 'Warum ein Trauma Beziehungen verändert – und was dabei hilft.', // von uns
         // KEV-80, Bild von Taddi. Die Seite ist noch Entwurf, bis der Text kommt.
-        'beschwerdemanagement' => 'Deine Rückmeldung hilft uns, besser zu werden.',                // von uns
+        // KEV-213: Umbruch nach dem Komma, Wunsch von Taddi.
+        'beschwerdemanagement' => "Deine Rückmeldung hilft uns,\nbesser zu werden.",              // von uns
         // KEV-81, Bild von Taddi. Seit KEV-105 mit Text; die Unterzeile ist
         // der ausgeschriebene Name.
         // KEV-220: Der Name steht seitdem groß als Titel, darunter Taddis Zusatz.

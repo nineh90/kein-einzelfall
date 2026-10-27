@@ -252,6 +252,15 @@ Antwortadresse ist die der Person. Mit `MAIL_MAILER=log` verweigert der Server
 `storage/logs`. Die Seite sagt dann ehrlich, dass es nicht ging, lässt den Text
 im Feld und nennt die Adresse.
 
+Feinschliff von Taddi (27.10.2026, KEV-213 bis KEV-216): Kritik geht an
+kontakt@ statt kritik@, rechts steht wie links ein grüner Leitsatz („Deine
+Rückmeldung hilft uns, besser zu werden.“), im Formular Taddis längere
+Einleitung (nur mit Wegen, das Kontaktformular behält seine) und bei der
+Ombudsstelle nur noch „Geht an die unabhängige Ombudsstelle.“. Die
+Unterzeile im Seitenkopf darf seitdem Zeilenumbrüche tragen
+(`whitespace-pre-line`, im Panel ein mehrzeiliges Feld); hier bricht sie
+nach dem Komma.
+
 ## 7. Sicherheits-Header und Einbettungen (27.07.2026)
 
 ### Kein Zustimmungsbanner nötig — und das ist ein Ergebnis, keine Nachlässigkeit

@@ -56,9 +56,19 @@
       - Pflichtfelder sind im Text benannt, nicht nur durch ein Sternchen
 --}}
 <div {{ $attributes }}>
-    <p class="mb-6 text-ink-soft">
-        {{ __('Du entscheidest, was du schreibst. Pflicht sind nur Betreff und Nachricht — deinen Namen und deine E-Mail-Adresse kannst du weglassen.') }}
-    </p>
+    {{-- Beim Beschwerdeformular Taddis längere Fassung (KEV-215). --}}
+    @if ($auswahl)
+        <p class="text-ink-soft">
+            {{ __('Du entscheidest selbst, was du uns mitteilen möchtest und wie viel du von dir preisgibst. Pflicht sind nur Betreff und Nachricht. Deinen Namen und deine E-Mail-Adresse kannst du weglassen, wenn du lieber anonym bleiben möchtest.') }}
+        </p>
+        <p class="mb-6 mt-3 text-ink-soft">
+            {{ __('Schreib so viel oder so wenig, wie sich für dich richtig anfühlt.') }}
+        </p>
+    @else
+        <p class="mb-6 text-ink-soft">
+            {{ __('Du entscheidest, was du schreibst. Pflicht sind nur Betreff und Nachricht — deinen Namen und deine E-Mail-Adresse kannst du weglassen.') }}
+        </p>
+    @endif
 
     @if (session('anfrage_versendet') && $meins(session('versendet_von')))
         {{-- role="status" statt "alert": die Meldung ist eine Bestätigung,
@@ -147,7 +157,8 @@
                                 <span class="block font-medium text-ink">{{ $weg['titel'] }}</span>
                                 <span class="mt-0.5 block text-sm text-ink-soft">
                                     @if ($weg['wert'] === 'ombudsstelle')
-                                        {{ __('Geht direkt an die unabhängige Ombudsstelle. Der Verein sieht sie nicht, die Website speichert sie nicht.') }}
+                                        {{-- KEV-216: kurz, Taddis Wortlaut. --}}
+                                        {{ __('Geht an die unabhängige Ombudsstelle.') }}
                                     @else
                                         {{ __('Geht an unser Team und wird verschlüsselt gespeichert.') }}
                                     @endif

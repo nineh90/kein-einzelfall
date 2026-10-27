@@ -194,12 +194,16 @@ class PageForm
                             .'Ruhige Stillleben in Sand- und Cremetönen passen am besten '
                             .'(Bildvorgabe in docs/Bildsprache.md).'),
 
-                    TextInput::make('untertitel')
+                    // Mehrzeilig, damit der Verein einen Umbruch selbst setzen
+                    // kann (KEV-213).
+                    Textarea::make('untertitel')
                         ->label('Unterzeile')
                         ->maxLength(90)
+                        ->rows(2)
                         ->columnSpanFull()
                         ->helperText('Steht auf dem Bild unter dem Titel. Ein kurzer Satz, '
-                            .'höchstens zwei Zeilen — wie „Raum für deine Geschichte – ohne Druck oder Bewertung“.'),
+                            .'höchstens zwei Zeilen — wie „Raum für deine Geschichte – ohne Druck oder Bewertung“. '
+                            .'Mit der Eingabetaste setzt du einen Zeilenumbruch.'),
 
                     TextInput::make('titelbild_alt')
                         ->label('Bildbeschreibung')
