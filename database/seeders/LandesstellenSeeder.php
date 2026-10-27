@@ -16,8 +16,9 @@ use Illuminate\Database\Seeder;
  *
  * Je Landesstelle ein Abschnitt: Bundesland als Überzeile, „Landesstelle …“
  * als Überschrift, so wie bei Taddi. Absätze von uns gesetzt. Der erste Satz
- * („nicht nur an einem Ort zuhause“) ist die Unterzeile auf dem Bild und fällt
- * deshalb im Text darunter weg (page.blade.php).
+ * („nicht nur an einem Ort zuhause“) war bis KEV-273 die Unterzeile auf dem
+ * Bild und fiel deshalb im Text darunter weg (page.blade.php). Seitdem heißt
+ * die Unterzeile „Gemeinsam stark – an vielen Orten“.
  *
  * Abweichung: „Elke Redeker“ statt „Reedeker“ (Kevin, 07.10.2026; so auch in
  * der Adresse redeker@ auf der Kontaktseite).

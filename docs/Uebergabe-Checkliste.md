@@ -913,6 +913,27 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
 - [x] **Atteste (KEV-244):** grüne Überschrift „Attestmöglichkeiten von KE!N
   EINZELFALL e.V.“ und der Absatz mit kontakt@kein-einzelfall.de vor dem
   fetten Schlusssatz.
+- [x] **Kontakt (KEV-266 bis KEV-272):** Taddis Bild (Notizbuch, Stift, Handy),
+  Überschrift „Kontaktmöglichkeiten“ mit ihrem Text aus „Aufbau Kontakt“
+  statt der Anschrift (die steht weiter unten), Kassenwartin unter
+  finanzen@, Sachgebiete in ihrer Reihenfolge. Listen aus kurzen Zeilen
+  (Vorstand, Landesstellen, Sachgebiete) heben die erste Zeile nicht mehr
+  hervor, auf allen Seiten.
+- [x] **Landesstellen (KEV-273):** Unterzeile „Gemeinsam stark – an vielen
+  Orten“. Der bisherige Satz „KE!N EINZELFALL ist nicht nur an einem Ort
+  zuhause.“ steht dadurch wieder als erster Satz im Text.
+- [x] **Anfragen & Austausch (KEV-274 bis KEV-276):** Titel „Anfragen &
+  Austausch“, Unterzeile „Was dich bewegt, bewegt auch uns.“, Taddis Texte.
+  Die „48 Stunden“ sind raus. „per E-Mail an kontakt@…“: das „an“ von uns
+  ergänzt. Die „Freigabe zur Verarbeitung und Speicherung übermittelter
+  Unterlagen“ steht unter dem Ablauf (dieselbe PDF wie unter Formulare), die
+  Krisendienste mit den Nummern vor dem Formular. Auf der Demo stand
+  „Krisendienste“ noch als leere Überschrift aus der Altseite.
+  **Rückfrage:** Im Drive liegt für „Anfragen & Austausch“ ein neues Bild
+  (Sprechblasen). Soll es das Briefumschlag-Bild ersetzen?
+- [x] **Kontaktformular (KEV-277):** Taddis Text über dem Formular,
+  „(erforderlich)“ statt „(muss ausgefüllt werden)“, auch im
+  Beschwerde- und im Anmeldeformular.
 - [x] **Formulare (KEV-247):** grüne Überschrift „Die Formulare des KE!N
   EINZELFALL e.V.“ über der Einleitung, wie gewünscht.
 - [x] **Formulare (KEV-248):** Unterzeile „Übersichtlich an einem Ort“ unter

@@ -655,6 +655,10 @@ class AltseiteSeeder extends Seeder
         // Die Mitgliedschaft nach Taddis Tickets (KEV-196 ff.).
         $this->call(MitgliedschaftsseiteSeeder::class);
 
+        // Kontakt und Anfragen nach Taddis Tickets (KEV-267 ff.).
+        $this->call(KontaktSeiteSeeder::class);
+        AnfragenSeiteSeeder::feinschliff();
+
         // Sprungziel #dokumente auf der FSM-Seite, auf das der Rückblick
         // verlinkt (KEV-141). Die Migration dafür fand die Seite noch nicht.
         RueckblickSeeder::sprungzielDokumente();

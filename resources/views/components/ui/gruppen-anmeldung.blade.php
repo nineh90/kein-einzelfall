@@ -97,7 +97,7 @@
 
         <div>
             <label for="{{ $id('email') }}" class="mb-1.5 block font-medium text-ink">
-                {{ __('Deine E-Mail-Adresse') }} <span class="font-normal text-ink-soft">{{ __('(muss ausgefüllt werden)') }}</span>
+                {{ __('Deine E-Mail-Adresse') }} <span class="font-normal text-ink-soft">{{ __('(erforderlich)') }}</span>
             </label>
             <input type="email" name="email" id="{{ $id('email') }}" value="{{ $alt('email') }}"
                    required autocomplete="email" maxlength="180"

@@ -336,7 +336,7 @@ class MehrsprachigkeitTest extends TestCase
         $html = $this->get('/en/anfragen')->assertOk()->getContent();
 
         foreach (['Send message', 'Your name', 'In immediate danger:', 'Violence Against Women Support Hotline',
-            'A note on the content of this website', 'Personal exchange on'] as $text) {
+            'A note on the content of this website', 'What matters to you matters to us too.'] as $text) {
             $this->assertStringContainsString($text, $html, $text);
         }
         foreach (['Nachricht senden', 'Dein Name', 'Bei unmittelbarer Gefahr', 'Hinweis zu den Inhalten',

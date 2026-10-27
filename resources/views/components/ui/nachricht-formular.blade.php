@@ -65,8 +65,12 @@
             {{ __('Schreib so viel oder so wenig, wie sich für dich richtig anfühlt.') }}
         </p>
     @else
-        <p class="mb-6 text-ink-soft">
-            {{ __('Du entscheidest, was du schreibst. Pflicht sind nur Betreff und Nachricht — deinen Namen und deine E-Mail-Adresse kannst du weglassen.') }}
+        {{-- KEV-277, Taddis Text aus „Aufbau Kontakt“. --}}
+        <p class="text-ink-soft">
+            {{ __('Du darfst uns schreiben, was dich bewegt – in deinen Worten und nur so viel, wie du möchtest. Du entscheidest, was du von dir preisgibst. Nur Betreff und Nachricht sind Pflicht. Dein Name und deine E-Mail-Adresse sind freiwillig. Bitte bedenke: Ohne E-Mail können wir nicht antworten.') }}
+        </p>
+        <p class="mb-6 mt-3 text-ink-soft">
+            {{ __('Dein Anliegen zählt. Auch anonym.') }}
         </p>
     @endif
 
@@ -209,7 +213,7 @@
 
         <div>
             <label for="{{ $id('betreff') }}" class="mb-1.5 block font-medium text-ink">
-                {{ __('Betreff') }} <span class="font-normal text-ink-soft">{{ __('(muss ausgefüllt werden)') }}</span>
+                {{ __('Betreff') }} <span class="font-normal text-ink-soft">{{ __('(erforderlich)') }}</span>
             </label>
             <input type="text" name="betreff" id="{{ $id('betreff') }}" value="{{ $alt('betreff') }}"
                    required maxlength="200"
@@ -222,7 +226,7 @@
 
         <div>
             <label for="{{ $id('nachricht') }}" class="mb-1.5 block font-medium text-ink">
-                {{ __('Deine Nachricht') }} <span class="font-normal text-ink-soft">{{ __('(muss ausgefüllt werden)') }}</span>
+                {{ __('Deine Nachricht') }} <span class="font-normal text-ink-soft">{{ __('(erforderlich)') }}</span>
             </label>
             <textarea name="nachricht" id="{{ $id('nachricht') }}" rows="8" required maxlength="8000"
                       @class($feldKlassen('nachricht'))

@@ -63,10 +63,13 @@
         </div>
     @endif
 
-    <div class="flex flex-col gap-4 leading-relaxed text-ink-soft
-                [&_a]:text-green-deep [&_a]:underline
-                [&_li]:mb-1 [&_ul]:list-disc [&_ul]:pl-5
-                [&>p:first-child]:text-[1.0625rem] [&>p:first-child]:text-ink">
+    {{-- Der erste Absatz als Vorspann etwas dunkler, nicht aber in Listen
+         aus kurzen Zeilen: Dort hob sich sonst eine Zeile ab, etwa die
+         1. Vorsitzende vor den anderen (KEV-268, KEV-269). --}}
+    <div @class(['flex flex-col gap-4 leading-relaxed text-ink-soft',
+                 '[&_a]:text-green-deep [&_a]:underline',
+                 '[&_li]:mb-1 [&_ul]:list-disc [&_ul]:pl-5',
+                 '[&>p:first-child]:text-[1.0625rem] [&>p:first-child]:text-ink' => ! ($liste && filled($absaetze))])>
         @forelse ($sichtbar as $absatz)
             {{ absatz($absatz) }}
         @empty

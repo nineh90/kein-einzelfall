@@ -44,7 +44,8 @@ class Titelbilder
         'unterstuetzung' => 'Wichtiges über Rechte, Anträge und unsere Arbeit.',                  // von uns
         'selbsthilfegruppen' => 'Raum für deine Geschichte – ohne Druck oder Bewertung',
         'arbeitsgruppen' => 'Du möchtest nicht nur zuschauen, sondern etwas mitgestalten?',
-        'anfragen' => 'Persönlicher Austausch zu Entschädigung, Schwerbehinderung und Pflegegrad.', // von uns
+        // KEV-274: Taddis Unterzeile
+        'anfragen' => 'Was dich bewegt, bewegt auch uns.',
         'kontakt' => 'Alle Ansprechpartner, Landesstellen und Zuständigkeiten auf einen Blick',
         'wissen' => 'Rechte, Anträge und Hilfesysteme verständlich erklärt.',                     // von uns
         'publikationen' => 'Umfragen und Veröffentlichungen des Vereins.',                         // von uns
@@ -68,9 +69,10 @@ class Titelbilder
         // der ausgeschriebene Name.
         // KEV-220: Der Name steht seitdem groß als Titel, darunter Taddis Zusatz.
         'gremium-ukfb' => 'Assoziiertes Fachgremium',
-        // KEV-78, Bild von Taddi. Seit KEV-104 mit Text; die Unterzeile ist
-        // dessen erster Satz.
-        'landesstellen' => 'KE!N EINZELFALL ist nicht nur an einem Ort zuhause.',
+        // KEV-78, Bild von Taddi. Seit KEV-104 mit Text, die Unterzeile war
+        // dessen erster Satz. Seit KEV-273 Taddis eigene Unterzeile, der Satz
+        // steht wieder im Text.
+        'landesstellen' => 'Gemeinsam stark – an vielen Orten',
         // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
         // Unterzeile, der Verein hat keine geschickt.
         'istanbul-konvention' => null,

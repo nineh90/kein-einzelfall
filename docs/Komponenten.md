@@ -2735,3 +2735,14 @@ Beim Bauen aufgefallen: Die Weiterleitungen der Altseite führen „/x/“ auf
 „/x“. Setzt der Verein so eine Seite auf Entwurf, zeigte die Regel auf sich
 selbst, der Browser drehte sich im Kreis. `PageController` antwortet dann mit
 404.
+
+## 47. Kontaktbereich nach Taddis Tickets (KEV-266 bis KEV-277, 27.10.2026)
+
+Texte aus Taddis Dokument „Aufbau Kontakt“ (Drive, „7. Kontakt & Austausch“).
+`KontaktSeiteSeeder::aktualisieren()` und `AnfragenSeiteSeeder::feinschliff()`
+laufen im AltseiteSeeder und per Migration; beide tauschen nur alten Wortlaut.
+
+Der erste Absatz eines Textabschnitts ist sonst als Vorspann etwas dunkler.
+Bei Listen aus lauter kurzen Zeilen (`$liste` in `text-inhalt`, schon für das
+Einklappen da) entfällt das: Dort hob sich die erste Zeile ab, als wäre sie
+wichtiger (1. Vorsitzende, Bayern, Verwaltung).

@@ -50,6 +50,45 @@
   "Anfragen & Austausch": {
     "en": "Requests & Exchange"
   },
+  "Anfragen & Austausch - Kein Einzelfall e.V.": {
+    "en": "Requests & Exchange - Kein Einzelfall e.V."
+  },
+  "Was dich bewegt, bewegt auch uns.": {
+    "en": "What matters to you matters to us too."
+  },
+  "Opferhilfe für soziale Gerechtigkeit bedeutet für uns auch, zuzuhören, Wissen zu teilen und miteinander neue Wege zu finden.": {
+    "en": "For us, victim support for social justice also means listening, sharing knowledge and finding new ways together."
+  },
+  "Du wünschst dir einen persönlichen Austausch zum Sozialen Entschädigungsrecht (SER), zum Schwerbehindertenausweis, zum Pflegegrad oder zu anderen Hilfesystemen?": {
+    "en": "Would you like a personal exchange about the Social Compensation Act (SER), the severely disabled pass, the care level or other support systems?"
+  },
+  "Dann bist du hier richtig! Ein wichtiger Hinweis: Wenn du uns persönliche Unterlagen zusenden möchtest, bitten wir dich, vorher die unten aufgeführte „Freigabe zur Verarbeitung und Speicherung übermittelter Unterlagen“ auszufüllen und mit zu übermitteln. Ohne diese Freigabe können wir deine Unterlagen aus Datenschutzgründen leider nicht entgegennehmen oder bearbeiten.": {
+    "en": "Then you've come to the right place! An important note: if you would like to send us personal documents, please first fill in the “Consent to the processing and storage of submitted documents” listed below and send it along. Without this consent we unfortunately cannot accept or process your documents for data protection reasons."
+  },
+  "Auch deine Ideen sind bei uns willkommen! Vielleicht hast du Anregungen, die unsere Homepage wachsen lassen, möchtest dein Wissen oder deine Kreativität einbringen oder hast einfach den Wunsch, gemeinsam mit uns etwas zu bewegen. Wir freuen uns über Menschen, die mitdenken, mitgestalten und neue Perspektiven eröffnen.": {
+    "en": "Your ideas are welcome too! Perhaps you have suggestions that will help our website grow, would like to contribute your knowledge or creativity, or simply want to make a difference together with us. We are glad about people who think along, help shape things and open up new perspectives."
+  },
+  "Ganz gleich, ob du Unterstützung suchst, Fragen stellst oder etwas verändern möchtest – wir freuen uns auf den kostenfreien und nicht an eine Mitgliedschaft gebundenen Austausch mit dir.": {
+    "en": "Whether you are looking for support, have questions or want to change something – we look forward to exchanging with you, free of charge and without any membership."
+  },
+  "Du beschreibst uns dein Anliegen kurz per E-Mail an kontakt@kein-einzelfall.de oder über das untenstehende Formular. So können wir deine Nachricht an die passende Ansprechperson in unserem Team weiterleiten.": {
+    "en": "Briefly describe your concern by e-mail to kontakt@kein-einzelfall.de or using the form below. This way we can forward your message to the right person in our team."
+  },
+  "Bitte denke daran: Wenn du uns persönliche Unterlagen übermittelst, benötigen wir die unten aufgeführte „Freigabe zur Verarbeitung und Speicherung übermittelter Unterlagen“. Ohne diese können wir deine Unterlagen leider nicht entgegennehmen oder bearbeiten.": {
+    "en": "Please remember: if you send us personal documents, we need the “Consent to the processing and storage of submitted documents” listed below. Without it we unfortunately cannot accept or process your documents."
+  },
+  "Wir melden uns bei dir, sobald es uns möglich ist. Bitte hab Verständnis dafür, dass eine Antwort manchmal etwas Zeit braucht. Unser Team besteht fast ausschließlich aus Menschen, die selbst von belastenden Erfahrungen betroffen sind und neben ihrem Engagement eigene Herausforderungen bewältigen.": {
+    "en": "We will get back to you as soon as we can. Please understand that a reply sometimes takes a little time. Our team consists almost entirely of people who have themselves been affected by distressing experiences and who manage their own challenges alongside their commitment."
+  },
+  "Jedes Anliegen ist uns wichtig, und wir nehmen uns die Zeit, die es verdient.": {
+    "en": "Every concern matters to us, and we take the time it deserves."
+  },
+  "Freigabe für deine Unterlagen": {
+    "en": "Consent for your documents"
+  },
+  "Freigabe zur Verarbeitung und Speicherung übermittelter Unterlagen (ausfüllbar)": {
+    "en": "Consent to the processing and storage of submitted documents (fillable)"
+  },
   "Selbsthilfegruppen": {
     "en": "Self-help groups"
   },
@@ -1745,14 +1784,29 @@
   "Kontaktmöglichkeiten des KE!N EINZELFALL e.V.": {
     "en": "How to contact KE!N EINZELFALL e.V."
   },
+  "Kontaktmöglichkeiten": {
+    "en": "Ways to contact us"
+  },
+  "Bei *KE!N EINZELFALL e.V.* möchten wir dir diesen Weg so einfach wie möglich machen. Deshalb findest du hier eine Übersicht unserer Vorstandsebene, Landesstellen und der Sachgebietsaufteilung mit den jeweiligen Ansprechpersonen und Kontaktmöglichkeiten.": {
+    "en": "At *KE!N EINZELFALL e.V.* we want to make this step as easy as possible for you. That is why you will find an overview of our board, our regional offices and our areas of responsibility here, with the people to contact and how to reach them."
+  },
+  "Ganz gleich, ob du Unterstützung suchst, Fragen hast, dich engagieren möchtest oder mit uns zusammenarbeiten willst – hier findest du den passenden Kontakt.": {
+    "en": "Whether you are looking for support, have questions, want to get involved or would like to work with us – here you will find the right contact."
+  },
+  "*Und wenn du nicht weißt, an wen du dich wenden sollst, ist das auch kein Problem.* Melde dich einfach bei uns unter kontakt@kein-einzelfall.de. Wir helfen dir, die richtige Ansprechperson zu finden.": {
+    "en": "*And if you don't know who to turn to, that's no problem either.* Simply get in touch with us at kontakt@kein-einzelfall.de. We will help you find the right person."
+  },
+  "*Du bist bei uns willkommen – mit allem, was dich bewegt.*": {
+    "en": "*You are welcome here – with everything that is on your mind.*"
+  },
   "1. Vorsitzende: Tatjana Belmar, belmar@kein-einzelfall.de": {
     "en": "Chair: Tatjana Belmar, belmar@kein-einzelfall.de"
   },
   "2. Vorsitzende: Franziska Künstler, kuenstler@kein-einzelfall.de": {
     "en": "Deputy Chair: Franziska Künstler, kuenstler@kein-einzelfall.de"
   },
-  "Kassenwartin: Petra Hildebrandt, hildebrandt@kein-einzelfall.de": {
-    "en": "Treasurer: Petra Hildebrandt, hildebrandt@kein-einzelfall.de"
+  "Kassenwartin: Petra Hildebrandt, finanzen@kein-einzelfall.de": {
+    "en": "Treasurer: Petra Hildebrandt, finanzen@kein-einzelfall.de"
   },
   "Kontakt & Geschäftssitz": {
     "en": "Contact & registered office"
@@ -1957,6 +2011,9 @@
   },
   "KE!N EINZELFALL ist nicht nur an einem Ort zuhause.": {
     "en": "KE!N EINZELFALL is at home in more than one place."
+  },
+  "Gemeinsam stark – an vielen Orten": {
+    "en": "Strong together – in many places"
   },
   "Landesstellen - Kein Einzelfall e.V.": {
     "en": "State offices - Kein Einzelfall e.V."
