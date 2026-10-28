@@ -2659,8 +2659,11 @@ Fachsprache“ im Bereich „Wissen“, nicht mehr einzeln. Wie bei
 - **Übersicht** `/klartext-statt-fachsprache` (`KlartextStattFachspracheSeeder`):
   Taddis Text (fünf Absätze statt sieben, damit nichts einklappt), dann der
   neue Baustein `glossar_suche`, dann `unterseiten` mit den sechs Kategorien
-  (Bild und Unterzeile der jeweiligen Seite). Bild: Platzhalter, im Drive liegt
-  noch keins.
+  (Bild und Unterzeile der jeweiligen Seite). Seit KEV-278 Taddis Bild statt
+  Platzhalter, Unterzeile „Verstehen statt verzweifeln“ und die grüne
+  Überschrift „Damit du weißt, was über dich entschieden wird.“
+  (`KlartextStattFachspracheSeeder::TEXT_TITEL`); bestehende Datenbanken über
+  `klartext_statt_fachsprache_bild` (nur Platzhalter und Text ohne Überschrift).
 - **Suche über alle Kategorien** (`App\Support\KlartextSuche`,
   `components/blocks/glossar-suche.blade.php`): Glossar-Einträge und typische
   Sätze aller Seiten unter dem Menüpunkt, gruppiert je Kategorie, jeder Treffer

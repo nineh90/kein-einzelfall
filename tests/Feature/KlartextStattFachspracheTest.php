@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Page;
 use App\Support\KlartextSuche;
+use App\Support\Titelbilder;
 use Database\Seeders\GlossarSozialrechtSeeder;
 use Database\Seeders\KlartextStattFachspracheSeeder;
 use Database\Seeders\UebersetzungenSeeder;
@@ -45,7 +46,15 @@ class KlartextStattFachspracheTest extends TestCase
         $html = $this->get('/klartext-statt-fachsprache')->assertOk()->getContent();
 
         $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Klartext statt Fachsprache\s*<\/h1>/u', $html);
-        $this->assertStringContainsString('src="/img/titelbilder/platzhalter.webp?v=', $html);
+        // KEV-278: Taddis Bild statt Platzhalter, Unterzeile und grüne
+        // Überschrift aus dem Ticket.
+        $this->assertStringContainsString('src="/img/titelbilder/klartext-statt-fachsprache.webp?v=', $html);
+        $this->assertStringNotContainsString('platzhalter.webp', $html);
+        $this->assertStringContainsString('Verstehen statt verzweifeln', $html);
+        $this->assertMatchesRegularExpression(
+            '/<h2[^>]*text-green[^>]*>\s*Damit du weißt, was über dich entschieden wird.\s*<\/h2>/u',
+            $html,
+        );
         $this->assertStringContainsString('Genau deshalb machen wir hier Fachsprache verständlich.', $html);
         $this->assertMatchesRegularExpression('/<strong[^>]*>Denn du bist ein Teil davon!<\/strong>/u', $html);
         // Fünf Absätze, nichts eingeklappt
@@ -107,12 +116,40 @@ class KlartextStattFachspracheTest extends TestCase
         $this->assertSame(1, Page::where('slug', KlartextStattFachspracheSeeder::SLUG)->where('locale', 'de')->count());
     }
 
+    /** KEV-278 auf einer Datenbank, die noch den Platzhalter hat. */
+    public function test_migration_setzt_bild_unterzeile_und_ueberschrift(): void
+    {
+        $seite = Page::where('slug', KlartextStattFachspracheSeeder::SLUG)->where('locale', 'de')->sole();
+        $seite->update(['titelbild' => Titelbilder::PLATZHALTER, 'untertitel' => null]);
+        $text = $seite->blocks()->where('typ', 'text')->sole();
+        $text->update(['data' => ['absaetze' => KlartextStattFachspracheSeeder::ABSAETZE]]);
+
+        $migration = require database_path('migrations/2026_10_28_120000_klartext_statt_fachsprache_bild.php');
+        $migration->up();
+
+        $seite->refresh();
+        $this->assertSame('/img/titelbilder/klartext-statt-fachsprache.webp', $seite->titelbild);
+        $this->assertSame('Verstehen statt verzweifeln', $seite->untertitel);
+        $this->assertSame(['titel', 'absaetze'], array_keys($text->fresh()->data));
+        $this->assertSame(KlartextStattFachspracheSeeder::TEXT_TITEL, $text->fresh()->data['titel']);
+
+        // Was der Verein gepflegt hat, bleibt.
+        $seite->update(['titelbild' => '/storage/medien/eigenes.webp']);
+        $text->update(['data' => ['titel' => 'Eigene Überschrift', 'absaetze' => ['x']]]);
+        $migration->up();
+
+        $this->assertSame('/storage/medien/eigenes.webp', $seite->fresh()->titelbild);
+        $this->assertSame('Eigene Überschrift', $text->fresh()->data['titel']);
+    }
+
     public function test_englische_fassung(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
         $html = $this->get('/en/klartext-statt-fachsprache')->assertOk()->getContent();
         $this->assertMatchesRegularExpression('/<h1[^>]*>\s*Plain language instead of jargon\s*<\/h1>/u', $html);
+        $this->assertStringContainsString('Understanding instead of despairing', $html);
+        $this->assertStringContainsString('So that you know what is being decided about you.', $html);
         $this->assertStringContainsString('Search all categories', $html);
         $this->assertStringContainsString('Abbreviations in social law', $html);
 

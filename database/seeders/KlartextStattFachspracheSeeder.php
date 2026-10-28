@@ -23,7 +23,10 @@ use Illuminate\Database\Seeder;
  *   den Rest unter „Weiterlesen“ ein, das träfe hier den Gruß. Zusammengezogen
  *   sind „Genau deshalb …“ mit dem Satz danach und „Denn du bist ein Teil
  *   davon!“ mit dem Absatz davor. „du“ klein wie bei ihr.
- * - Ein Bild gibt es im Drive noch nicht, bis dahin der Platzhalter.
+ * - Ein Bild gab es im Drive noch nicht, bis dahin der Platzhalter. Seit
+ *   KEV-278 Taddis Bild, Unterzeile „Verstehen statt verzweifeln“ und die
+ *   grüne Überschrift über ihrem Text (beide aus dem Ticket). Bestehende
+ *   Datenbanken: Migration klartext_statt_fachsprache_bild.
  * - Die Kategorie 1 heißt jetzt wie bei ihr „Abkürzungen im Sozialrecht“
  *   (vorher „Glossar“), Adresse /glossar bleibt.
  *
@@ -34,6 +37,9 @@ class KlartextStattFachspracheSeeder extends Seeder
     public const SLUG = KlartextSuche::SLUG;
 
     public const TITEL = 'Klartext statt Fachsprache';
+
+    /** KEV-278: Taddis grüne Überschrift über dem Text. */
+    public const TEXT_TITEL = 'Damit du weißt, was über dich entschieden wird.';
 
     public const ABSAETZE = [
         'Wenn andere über deine Gesundheit, deine Unterstützung, deine Leistungen oder sogar über wichtige Teile '
@@ -74,11 +80,11 @@ class KlartextStattFachspracheSeeder extends Seeder
         );
 
         if ($seite->wasRecentlyCreated) {
-            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['absaetze' => self::ABSAETZE]]);
+            $seite->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['titel' => self::TEXT_TITEL, 'absaetze' => self::ABSAETZE]]);
             $seite->blocks()->create(['typ' => 'glossar_suche', 'position' => 1, 'data' => []]);
             $seite->blocks()->create(['typ' => 'unterseiten', 'position' => 2, 'data' => []]);
         }
 
-        Titelbilder::platzhalterSetzen();
+        Titelbilder::setzen();
     }
 }

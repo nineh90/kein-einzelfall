@@ -129,6 +129,9 @@ class Titelbilder
         // KEV-261: Bild von Taddi („Sozialrecht & Hilfesystem“), Kasten mit
         // Registermappen. Unterzeile aus dem Ticket.
         'sozialrecht-und-hilfesystem' => 'Leistungen verstehen. Zuständigkeiten einordnen. Unterstützung finden.',
+        // KEV-278: Bild von Taddi für die Übersicht der Glossare, statt
+        // Platzhalter. Unterzeile aus dem Ticket.
+        'klartext-statt-fachsprache' => 'Verstehen statt verzweifeln',
         // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
         // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar.
         //
@@ -180,8 +183,6 @@ class Titelbilder
         'erwerbsminderungsrente', 'fsm-erweitertes-hilfesystem', 'grad-der-behinderung',
         'impressum', 'opferentschaedigungsgesetz',
         'persoenliches-budget', 'pflegegrad',
-        // KEV-254: Im Drive liegt für die Übersicht noch keins.
-        'klartext-statt-fachsprache',
     ];
 
     public const PLATZHALTER = self::ORDNER.'/platzhalter.webp';
@@ -265,6 +266,9 @@ class Titelbilder
      *    Rechts um Wand verlängert, Register ab 26 % der Höhe, der Kasten
      *    läuft unten aus dem Bild. Mit 40 % bleiben die oberen Register
      *    auch bei 2560 px ganz, unten fällt dort nur Kasten weg.
+     *  - Klartext statt Fachsprache: zerknülltes Papier neben einem glatten
+     *    Blatt auf Holztisch (KEV-278). Rechts um Tischfläche verlängert,
+     *    Motiv zwischen 34 und 73 % der Höhe; mit 55 % bleibt es ganz.
      *  - Fristen: Sanduhr vor Aktenstapel (KEV-152). Rechts um Wand
      *    verlängert, Sanduhr zwischen 18 und 86 % der Höhe; 65 %.
      *  - Wissen: Bücherstapel und aufgeschlagenes Buch (KEV-143, Bild von
@@ -320,6 +324,7 @@ class Titelbilder
         self::ORDNER.'/medizinische-berichte-und-gutachten.webp' => 20,
         self::ORDNER.'/gericht-und-verfahren.webp' => 60,
         self::ORDNER.'/behoerden-und-bescheide.webp' => 10,
+        self::ORDNER.'/klartext-statt-fachsprache.webp' => 55,
         self::ORDNER.'/fristen.webp' => 65,
         self::ORDNER.'/formulare.webp' => 40,
         self::ORDNER.'/wissen.webp' => 60,

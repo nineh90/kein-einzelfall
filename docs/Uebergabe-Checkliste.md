@@ -949,8 +949,9 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   unter „Wissen“ mit Taddis Text, einer Suche über alle sechs Kategorien
   (Begriffe und typische Sätze) und den Kategorien als Kacheln. Im Menü stehen
   die sechs Glossare jetzt darunter statt einzeln unter „Wissen“.
-  - **Bild fehlt:** Im Drive liegt für die Übersicht noch keins, bis dahin der
-    Platzhalter.
+  - **Bild, Unterzeile, grüne Überschrift (KEV-278):** Taddis Bild statt
+    Platzhalter, darunter „Verstehen statt verzweifeln“, über ihrem Text grün
+    „Damit du weißt, was über dich entschieden wird.“
   - **Umbenannt:** Die Kategorie 1 heißt wie in Taddis Dokument
     „Abkürzungen im Sozialrecht“ statt „Glossar“ (Adresse /glossar bleibt).
   - **Text:** in fünf statt sieben Absätzen (sonst klappte der Gruß unter
