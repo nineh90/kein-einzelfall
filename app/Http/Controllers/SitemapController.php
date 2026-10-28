@@ -87,8 +87,10 @@ class SitemapController extends Controller
     /**
      * Feste Übersichten ohne eigenen Datensatz.
      *
-     * Sie existieren in jeder freigeschalteten Sprache, weil die Route sie in
-     * jeder Sprache ausliefert — auch wenn die Inhalte darunter noch deutsch sind.
+     * Nur auf Deutsch (SEO-Prüfung 28.10.2026): Die Route liefert sie zwar in
+     * jeder Sprache aus, die anderen sind aber maschinell übersetzt und tragen
+     * noindex (layouts/app), wie die übrigen englischen Seiten. Und Aktuelles
+     * erst, wenn es Beiträge gibt; eine leere Liste ist kein Suchtreffer.
      *
      * Die Startseite steht hier nicht mehr: Sie ist ein Datensatz und kommt
      * über `seiten()`. Beides zusammen ergäbe denselben Eintrag zweimal. Ihre
@@ -97,17 +99,16 @@ class SitemapController extends Controller
      */
     private function uebersichten(): array
     {
-        $sprachen = Language::aktive();
+        $standard = Language::standardCode();
 
         return collect(['blog.index', 'events.index'])
-            ->map(fn (string $route) => $sprachen->map(fn (Language $s) => [
-                'url' => url(sprachlink($route, [], $s->code)),
+            ->reject(fn (string $route) => $route === 'blog.index' && ! Post::veroeffentlicht()->exists())
+            ->map(fn (string $route) => [
+                'url' => url(sprachlink($route, [], $standard)),
                 'geaendert' => null,
-                'alternativen' => $sprachen
-                    ->mapWithKeys(fn (Language $a) => [$a->code => url(sprachlink($route, [], $a->code))])
-                    ->all(),
-            ])->all())
-            ->flatten(1)
+                'alternativen' => [],
+            ])
+            ->values()
             ->all();
     }
 

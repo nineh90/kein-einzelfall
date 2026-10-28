@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title', $gruppe->name.' – '.__('Selbsthilfegruppe'))
-@section('description', trim($gruppe->name.': '.$gruppe->teaser, ': '))
+{{-- Name und Kurzbeschreibung allein waren oft unter 50 Zeichen (SEO-Prüfung
+     28.10.2026). Kostenfrei steht fest auf der Seite, online je Gruppe. --}}
+@section('description', \Illuminate\Support\Str::limit(rtrim(trim($gruppe->name.': '.$gruppe->teaser, ': '), '.').'. '
+    .__($gruppe->online ? 'Selbsthilfegruppe von KE!N EINZELFALL e.V., online und kostenfrei.' : 'Selbsthilfegruppe von KE!N EINZELFALL e.V., kostenfrei.'), 155))
+@section('og_bild', $gruppe->titelbild ?? '')
 
 @php
     $offen = $gruppe->istOffen();

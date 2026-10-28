@@ -58,7 +58,11 @@ class KlartextStattFachspracheSeeder extends Seeder
         '*Gemeinsam KE!N EINZELFALL*',
     ];
 
-    public const META_DESCRIPTION = 'Klartext statt Fachsprache: Abkürzungen, Begriffe und typische Sätze aus '
+    // Seit der SEO-Prüfung (28.10.2026) unter 160 Zeichen, vorher 212
+    public const META_DESCRIPTION = 'Abkürzungen, Begriffe und typische Sätze aus Bescheiden, Gerichtsverfahren, '
+        .'Gutachten und dem Sozialrecht verständlich erklärt, mit Suche über alles.';
+
+    public const META_DESCRIPTION_BIS_28_10 = 'Klartext statt Fachsprache: Abkürzungen, Begriffe und typische Sätze aus '
         .'Bescheiden, Gerichtsverfahren, Gutachten und dem Sozialrecht verständlich erklärt, mit Suche über alle '
         .'Kategorien. Von KE!N EINZELFALL e.V.';
 

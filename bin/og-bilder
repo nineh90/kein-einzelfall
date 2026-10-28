@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""
+Erzeugt die Vorschaubilder für geteilte Links (og:image) aus den Titelbildern.
+
+    bin/og-bilder
+
+Je public/img/titelbilder/<name>.webp ein public/img/og/<name>.jpg in
+1200 × 630, ohne Metadaten. Ausschnitt wie im Seitenkopf: links (dort sitzt
+das Motiv), in der Höhe nach Titelbilder::FOKUS. Auf die Bilder aus
+Titelbilder::LOGO_DARAUF kommt das Vereinslogo, sonst wäre das Vereinsbild
+leer. Nach neuen Titelbildern noch einmal laufen lassen; vorhandene werden
+überschrieben. Braucht Pillow mit WebP.
+"""
+import re
+from pathlib import Path
+from PIL import Image
+
+WURZEL = Path(__file__).resolve().parent.parent
+QUELLE = WURZEL / 'public/img/titelbilder'
+ZIEL = WURZEL / 'public/img/og'
+B, H = 1200, 630
+
+php = (WURZEL / 'app/Support/Titelbilder.php').read_text()
+fokus = {m[0]: int(m[1]) for m in re.findall(r"self::ORDNER\.'/([\w-]+\.webp)' => (\d+),", php.split('const FOKUS =')[1].split('];')[0])}
+logo_darauf = re.findall(r"self::ORDNER\.'/([\w-]+\.webp)'", php.split('const LOGO_DARAUF =')[1].split('];')[0])
+logo = Image.open(WURZEL / 'public/img/logo-gross.webp').convert('RGBA')
+
+ZIEL.mkdir(exist_ok=True)
+for datei in sorted(QUELLE.glob('*.webp')):
+    if datei.stem.endswith('-1000') or datei.stem == 'platzhalter':
+        continue
+    bild = Image.open(datei).convert('RGB')
+    faktor = max(B / bild.width, H / bild.height)
+    bild = bild.resize((round(bild.width * faktor), round(bild.height * faktor)), Image.LANCZOS)
+    oben = round((bild.height - H) * fokus.get(datei.name, 100) / 100)
+    bild = bild.crop((0, oben, B, oben + H))
+    if datei.name in logo_darauf:
+        l = logo.resize((round(logo.width * 420 / logo.height), 420), Image.LANCZOS)
+        bild.paste(l, (160, (H - l.height) // 2), l)
+    bild.save(ZIEL / f'{datei.stem}.jpg', 'JPEG', quality=82, optimize=True, progressive=True)
+    print(f'public/img/og/{datei.stem}.jpg')

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\SchraegstrichEntfernen;
+use App\Http\Middleware\Suchmaschinenregeln;
 use App\Support\Formularbremse;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
@@ -20,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Muss ganz vorne laufen: /verein/ und /verein sind für Laravel dieselbe
         // Route, für Suchmaschinen aber doppelter Inhalt.
         $middleware->prepend(SchraegstrichEntfernen::class);
+
+        // /index.php/… umleiten, Panel aus dem Index (SEO-Prüfung 28.10.2026)
+        $middleware->prepend(Suchmaschinenregeln::class);
 
         // Setzt die Sicherheits-Header und stellt das CSP-Nonce für die
         // Inline-Skripte bereit. Muss vor dem Rendern laufen.

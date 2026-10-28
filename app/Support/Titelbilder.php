@@ -405,6 +405,38 @@ class Titelbilder
         self::ORDNER.'/red-flags.webp' => 40,
     ];
 
+    /** Vorschaubilder für geteilte Links, erzeugt von bin/og-bilder. */
+    public const OG_ORDNER = '/img/og';
+
+    /** Ohne eigenes Bild: das Vereinsbild mit Logo. */
+    public const OG_STANDARD = self::OG_ORDNER.'/verein.jpg';
+
+    /**
+     * Das Vorschaubild (og:image) zu einem Titelbild.
+     *
+     * Facebook, WhatsApp und LinkedIn wollen etwa 1200 × 630, und nicht jede
+     * Plattform zeigt WebP. Für die Titelbilder liegen deshalb JPEGs in
+     * OG_ORDNER (bin/og-bilder). Ein im Panel hochgeladenes Bild hat keins,
+     * dann gilt es selbst; ohne Bild das Vereinsbild.
+     *
+     * @return array{pfad: string, breite: ?int, hoehe: ?int}
+     */
+    public static function vorschaubild(?string $bild): array
+    {
+        if ($bild && $bild !== self::PLATZHALTER && str_starts_with($bild, self::ORDNER.'/')) {
+            $jpeg = self::OG_ORDNER.'/'.pathinfo($bild, PATHINFO_FILENAME).'.jpg';
+            if (is_file(public_path($jpeg))) {
+                return ['pfad' => $jpeg, 'breite' => 1200, 'hoehe' => 630];
+            }
+        }
+
+        if ($bild && $bild !== self::PLATZHALTER && ! str_starts_with($bild, self::ORDNER.'/')) {
+            return ['pfad' => $bild, 'breite' => null, 'hoehe' => null];
+        }
+
+        return ['pfad' => self::OG_STANDARD, 'breite' => 1200, 'hoehe' => 630];
+    }
+
     public static function fokus(?string $bild): string
     {
         return (self::FOKUS_X[$bild] ?? 0).'% '.(self::FOKUS[$bild] ?? 100).'%';

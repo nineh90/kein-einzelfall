@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('title', $gruppe->name.' – '.__('Arbeitsgruppe'))
-@section('description', trim($gruppe->name.': '.$gruppe->teaser, ': '))
+{{-- Wie bei den Selbsthilfegruppen um eine Zeile ergänzt (SEO-Prüfung 28.10.2026) --}}
+@section('description', \Illuminate\Support\Str::limit(rtrim(trim($gruppe->name.': '.$gruppe->teaser, ': '), '.').'. '
+    .__($gruppe->online ? 'Arbeitsgruppe von KE!N EINZELFALL e.V., online und kostenfrei.' : 'Arbeitsgruppe von KE!N EINZELFALL e.V., kostenfrei.'), 155))
 
 @php
     $offen = $gruppe->istOffen();
@@ -21,6 +23,8 @@
     $bild = $gruppe->titelbild ?: \App\Models\Page::where('slug', 'arbeitsgruppen')
         ->where('locale', \App\Models\Language::standardCode())->value('titelbild');
 @endphp
+
+@section('og_bild', $bild ?? '')
 
 @section('content')
 {{--

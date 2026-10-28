@@ -945,6 +945,24 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   dem Titel, wie gewünscht.
 - [x] **Fristen (KEV-251):** Unterzeile „Fristen verstehen. Möglichkeiten
   erkennen. Rechtzeitig handeln.“ unter dem Titel, wie gewünscht.
+- [ ] **Beschreibungen fürs Suchergebnis (SEO-Prüfung 28.10.2026), von uns.**
+  Die alten waren zu kurz („Antrag auf Mitgliedschaft“) oder zu lang. Neu,
+  bitte gegenlesen (im Panel unter „Seiten“ → Feld „Beschreibung“):
+  - Verein: „KE!N EINZELFALL e.V. ist ein gemeinnütziger Verein aus Hamburg,
+    2024 aus Betroffenheit gegründet: Austausch, Wissen und
+    Betroffenenexpertise.“
+  - Mitgliedschaft: „Mitglied werden bei KE!N EINZELFALL e.V.: warum es sich
+    lohnt, Ausfüllhilfe zum Antrag, Beitrags- und Mitgliederordnung,
+    Dokumente zum Herunterladen.“
+  - Klartext statt Fachsprache: „Abkürzungen, Begriffe und typische Sätze aus
+    Bescheiden, Gerichtsverfahren, Gutachten und dem Sozialrecht verständlich
+    erklärt, mit Suche über alles.“
+  - Gruppen und Arbeitsgruppen: ihre Kurzbeschreibung plus „Selbsthilfegruppe
+    (bzw. Arbeitsgruppe) von KE!N EINZELFALL e.V., online und kostenfrei.“
+  - Zu lang (über 160 Zeichen, Google kürzt sie ab) sind noch die von
+    Schutz- und Wertekonzept, Arbeitsgruppen, Rückblick, Red Flags,
+    Unüberhörbar, Fristen, ANUAS, § 109 SGG, Petitionen und Sozialrecht &
+    Hilfesystem. Schaden tut das nicht; wer mag, kürzt sie im Panel.
 - [ ] **Klartext statt Fachsprache (KEV-254), bitte ansehen.** Neuer Punkt
   unter „Wissen“ mit Taddis Text, einer Suche über alle sechs Kategorien
   (Begriffe und typische Sätze) und den Kategorien als Kacheln. Im Menü stehen
@@ -1180,6 +1198,27 @@ Seite im Panel unter „Titelbild“ ändern.
 - [ ] Google-Business-Eintrag aktualisieren
 - [ ] 2–4 Wochen engmaschig auf Crawling-Fehler schauen
 - [ ] **Alte Seite erst abschalten, wenn die Weiterleitungen live und geprüft sind**
+
+### B3 · SEO auf dem Server (Nils, aus der SEO-Prüfung vom 28.10.2026)
+
+Was im Code geht, ist erledigt (`docs/Komponenten.md`, Abschnitt 48). Das hier
+geht nur auf dem Server oder mit Zugängen:
+
+- [ ] **`APP_URL` auf `https://kein-einzelfall.de`** (ohne Schrägstrich am Ende).
+      Daraus bauen canonical, hreflang, Sitemap, og:image und die strukturierten
+      Daten ihre Adressen. Steht dort die Demo-Adresse, zeigt jede Seite auf die
+      Demo.
+- [ ] **Nur eine Adresse:** `http://` und `www.` per 301 auf
+      `https://kein-einzelfall.de` (im Webserver, nicht in Laravel).
+- [ ] **Demo nicht in den Index:** Solange die Demo hinter dem Passwort liegt,
+      passt es. Fällt das Passwort weg, `X-Robots-Tag: noindex` für die
+      Demo-Adresse setzen.
+- [ ] **Search Console:** Zugang sichern, Ausgangswerte der Altseite sichern
+      (siehe A9), nach dem Launch `sitemap.xml` einreichen (siehe B2).
+- [ ] **Komprimierung und Zwischenspeicher:** gzip/brotli für HTML, CSS, JS;
+      lange `Cache-Control` für `/build/`, `/fonts/`, `/img/` (die Dateien
+      tragen Versionen im Namen bzw. `?v=`). Danach einmal PageSpeed Insights
+      auf der echten Adresse laufen lassen.
 
 ---
 

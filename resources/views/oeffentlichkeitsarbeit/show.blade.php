@@ -2,6 +2,7 @@
 
 @section('title', $eintrag->titel)
 @section('description', \Illuminate\Support\Str::limit($eintrag->anriss(), 155))
+@section('og_bild', $eintrag->titelfoto()['bild'] ?? '')
 
 @php
     use App\Support\Medien;

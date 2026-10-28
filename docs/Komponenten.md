@@ -2749,3 +2749,42 @@ Der erste Absatz eines Textabschnitts ist sonst als Vorspann etwas dunkler.
 Bei Listen aus lauter kurzen Zeilen (`$liste` in `text-inhalt`, schon für das
 Einklappen da) entfällt das: Dort hob sich die erste Zeile ab, als wäre sie
 wichtiger (1. Vorsitzende, Bayern, Verwaltung).
+
+## 48. SEO-Grundprüfung (28.10.2026)
+
+Ein Crawler ist über Sitemap und alle internen Links gelaufen (155 Seiten).
+In Ordnung waren schon: keine kaputten Links, genau eine h1 je Seite, keine
+Bilder ohne alt, canonical und Titel überall, Schrägstrich am Ende per 301.
+Geändert:
+
+- **Englisch ohne Seitendatensatz** (Gruppen, Arbeitsgruppen,
+  Öffentlichkeitsarbeit, Aktuelles, Veranstaltungen): standen als einzige
+  englische Seiten im Index, ohne Vermerk. Jetzt `noindex, follow` und der
+  Vermerk „maschinell übersetzt“ (`$maschinellOhneSeite` in layouts/app).
+- **hreflang** nur zwischen Fassungen, die in den Index dürfen
+  (`Sprachfassungen::indexierbar()`), wie in der Sitemap. Vorher verwies jede
+  deutsche Seite auf ihre englische mit noindex. Gibt der Verein eine
+  englische Seite frei (noindex aus), kommt der Verweis von selbst. Der
+  Sprachumschalter zeigt weiter alle Sprachen.
+- **Sitemap:** feste Übersichten nur noch auf Deutsch, Aktuelles erst mit
+  Beiträgen (ohne Beiträge auch `noindex`).
+- **`/index.php/…`** lieferte jede Seite ein zweites Mal mit 200. Jetzt 301
+  (`Suchmaschinenregeln`, global vorgeschaltet), dort auch
+  `X-Robots-Tag: noindex` fürs Panel (/admin).
+- **Vorschaubild für geteilte Links:** `og:image` (1200 × 630) und
+  `twitter:card`. Zu jedem Titelbild liegt ein JPEG in `public/img/og`
+  (`bin/og-bilder`, nach neuen Titelbildern noch einmal laufen lassen; der
+  Test meldet fehlende). Gruppen nehmen ihr Bild, Beiträge der
+  Öffentlichkeitsarbeit ihr erstes Foto (Abschnitt `og_bild`), ohne Bild das
+  Vereinsbild mit Logo. Im Panel hochgeladene Bilder gehen unverändert raus.
+- **Strukturierte Daten:** auf der Startseite der Verein als `NGO` (Name,
+  Logo, Adresse wie im Fuß, E-Mail, soziale Netzwerke), auf jeder Seite mit
+  Brotkrumen eine `BreadcrumbList` (`x-ui.brotkrumen`).
+- **Beschreibungen:** Verein, Mitgliedschaft und Klartext neu (Migration
+  `seo_beschreibungen`, nur auf dem alten Wortlaut), bei Gruppen und
+  Arbeitsgruppen um eine Zeile ergänzt. Gegenlesen: Checkliste A10.
+
+Bewusst nicht geändert: Lange Titel (Gruppen, Petitionen) behalten das Muster
+der Altseite „… - Kein Einzelfall e.V.“; Google kürzt sie im Ergebnis.
+Was nur auf dem Server geht: Checkliste B3. Tests: `SeoGrundlagenTest`.
+

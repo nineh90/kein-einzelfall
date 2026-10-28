@@ -3,6 +3,15 @@
 @section('title', $aktiveKategorie?->name ?? __('Aktuelles'))
 @section('description', __('Neuigkeiten und Beiträge des KE!N EINZELFALL e.V.'))
 
+{{-- Ohne Beiträge nicht in den Index (SEO-Prüfung 28.10.2026): Eine Seite,
+     auf der nur „Noch keine Beiträge“ steht, ist kein Suchtreffer. Auf
+     Englisch setzt das Layout ohnehin noindex. --}}
+@if ($beitraege->isEmpty() && \App\Models\Language::aktuell()->istStandard())
+    @push('head')
+        <meta name="robots" content="noindex, follow">
+    @endpush
+@endif
+
 @section('content')
 <div class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
     <div class="mx-auto max-w-6xl">

@@ -10,6 +10,26 @@
     // ??= statt =: Fehlerseiten setzen die Liste bewusst auf leer. hreflang auf
     // einer 404 zeigte auf Adressen, die es in keiner Sprache gibt.
     $fassungen ??= Sprachfassungen::fuer(request(), $page ?? null)->adressen();
+
+    // hreflang nur zwischen Fassungen, die in den Index dürfen, wie in der
+    // Sitemap (SEO-Prüfung 28.10.2026). Vorher verwies jede deutsche Seite
+    // auf ihre englische, die als ungeprüft noindex trägt; Google meldet das
+    // als Fehler. Der Sprachumschalter zeigt weiter alle ($fassungen).
+    $hreflang = $fassungen === [] ? [] : Sprachfassungen::fuer(request(), $page ?? null)->indexierbar();
+
+    // Seiten ohne Datensatz in der Seitentabelle (Gruppen, Arbeitsgruppen,
+    // Öffentlichkeitsarbeit, Aktuelles, Veranstaltungen) gibt es auf Englisch
+    // nur maschinell übersetzt. Sie bekommen wie die übrigen englischen Seiten
+    // noindex und den Vermerk; vorher standen sie als einzige im Index.
+    $maschinellOhneSeite = ! isset($page) && ! $sprache->istStandard() && ! ($istFehlerseite ?? false);
+
+    // Vorschaubild für geteilte Links (og:image): das Titelbild der Seite,
+    // sonst das einer Gruppe oder eines Beitrags (Abschnitt og_bild), sonst
+    // das Vereinsbild mit Logo. Zu den Titelbildern gibt es JPEGs in
+    // 1200 × 630 (bin/og-bilder), die jede Plattform anzeigt.
+    $ogBild = \App\Support\Titelbilder::vorschaubild(
+        View::hasSection('og_bild') ? trim(View::getSection('og_bild')) : ($page->titelbild ?? null)
+    );
 @endphp
 <!DOCTYPE html>
 {{-- dir wird von Anfang an mitgeführt, obwohl DE/EN/RU alle ltr sind: für einen
@@ -65,13 +85,17 @@
 
          x-default zeigt auf die Standardsprache: Sie gilt für alle, deren
          Sprache wir nicht anbieten. --}}
-    @if (count($fassungen) > 1)
-        @foreach ($fassungen as $code => $adresse)
+    @if (count($hreflang) > 1)
+        @foreach ($hreflang as $code => $adresse)
             <link rel="alternate" hreflang="{{ $code }}" href="{{ url($adresse) }}">
         @endforeach
-        @isset($fassungen[Language::standardCode()])
-            <link rel="alternate" hreflang="x-default" href="{{ url($fassungen[Language::standardCode()]) }}">
+        @isset($hreflang[Language::standardCode()])
+            <link rel="alternate" hreflang="x-default" href="{{ url($hreflang[Language::standardCode()]) }}">
         @endisset
+    @endif
+
+    @if ($maschinellOhneSeite)
+        <meta name="robots" content="noindex, follow">
     @endif
 
     <meta property="og:type" content="website">
@@ -80,6 +104,12 @@
     <meta property="og:title" content="@yield('title', 'Startseite')">
     <meta property="og:description" content="@yield('description', 'Austausch- und Informationsplattform für Opfer und Mit-Opfer von Straftaten, Angehörige und Fachpersonen.')">
     <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ url($ogBild['pfad']) }}">
+    @if ($ogBild['breite'])
+        <meta property="og:image:width" content="{{ $ogBild['breite'] }}">
+        <meta property="og:image:height" content="{{ $ogBild['hoehe'] }}">
+    @endif
+    <meta name="twitter:card" content="summary_large_image">
 
     {{-- Notausgang zuerst: muss auch dann funktionieren, wenn alles Weitere scheitert. --}}
     <x-layout.exit-script />
@@ -241,6 +271,10 @@
           @if (! empty($ersatzsprache))
               lang="{{ $ersatzsprache->code }}" dir="{{ $ersatzsprache->richtung }}"
           @endif>
+        {{-- Derselbe Vermerk wie auf den übersetzten Inhaltsseiten --}}
+        @if ($maschinellOhneSeite)
+            <x-layout.entwurfsvermerk :page="(object) ['ungeprueft' => true, 'locale' => $sprache->code]" />
+        @endif
         {{ $slot ?? '' }}
         @yield('content')
     </main>

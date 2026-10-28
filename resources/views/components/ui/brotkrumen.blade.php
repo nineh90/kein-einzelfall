@@ -25,4 +25,23 @@
             @endforeach
         </ol>
     </nav>
+
+    {{-- Dieselben Krumen für Suchmaschinen (SEO-Prüfung 28.10.2026): Google
+         zeigt dann „Start › Wissen › …“ statt der nackten Adresse. Der letzte
+         Eintrag ist die Seite selbst. --}}
+    @php
+        $liste = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => collect($krumen)->values()->map(fn ($krume, $i) => [
+                '@type' => 'ListItem',
+                'position' => $i + 1,
+                'name' => $krume['label'],
+                'item' => $krume['url'] && $i < count($krumen) - 1 ? url($krume['url']) : url()->current(),
+            ])->all(),
+        ];
+    @endphp
+    <script type="application/ld+json" @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
+        {!! json_encode($liste, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}
+    </script>
 @endif

@@ -422,6 +422,18 @@ class AltseiteSeeder extends Seeder
         // Arbeitsgruppen“) und passte nicht mehr zu Taddis Text aus KEV-99.
         'kinderkodex' => 'Der Kinderkodex von KE!N EINZELFALL e.V.: wie wir Kinder und Jugendliche '
             .'schützen, Risiken vorbeugen und verantwortungsvoll handeln. Zum Herunterladen.',
+        // SEO-Prüfung 28.10.2026: Die alten waren mit 56 und 25 Zeichen zu
+        // kurz für das Suchergebnis. Inhalt aus Taddis Texten auf den Seiten.
+        'verein' => 'KE!N EINZELFALL e.V. ist ein gemeinnütziger Verein aus Hamburg, 2024 aus Betroffenheit '
+            .'gegründet: Austausch, Wissen und Betroffenenexpertise.',
+        'mitgliedschaft' => 'Mitglied werden bei KE!N EINZELFALL e.V.: warum es sich lohnt, Ausfüllhilfe zum Antrag, '
+            .'Beitrags- und Mitgliederordnung, Dokumente zum Herunterladen.',
+    ];
+
+    /** Die Beschreibungen der Altseite, die die SEO-Prüfung ersetzt hat. */
+    public const BESCHREIBUNGEN_BIS_28_10 = [
+        'verein' => 'Auf den folgenden Seiten stellen wir unseren Verein vor.',
+        'mitgliedschaft' => 'Antrag auf Mitgliedschaft',
     ];
 
     public const VORGABE_TITEL = [

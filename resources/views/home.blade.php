@@ -36,6 +36,35 @@
     @endpush
 @endif
 
+{{-- Strukturierte Daten zum Verein (SEO-Prüfung 28.10.2026): Name, Logo,
+     Adresse und Kontakt wie im Fuß jeder Seite, dazu die Profile in sozialen
+     Netzwerken aus config/navigation.php. Google zeigt daraus u. a. das
+     Logo im Suchergebnis. --}}
+@push('head')
+    @php
+        $verein = [
+            '@context' => 'https://schema.org',
+            '@type' => 'NGO',
+            'name' => 'KE!N EINZELFALL e.V.',
+            'alternateName' => 'Kein Einzelfall e.V.',
+            'url' => url('/'),
+            'logo' => url('/img/logo-gross.webp'),
+            'email' => 'kontakt@kein-einzelfall.de',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => 'Schiffbeker Höhe 30',
+                'postalCode' => '22119',
+                'addressLocality' => 'Hamburg',
+                'addressCountry' => 'DE',
+            ],
+            'sameAs' => array_column(config('navigation.footer.social', []), 'url'),
+        ];
+    @endphp
+    <script type="application/ld+json" @isset($cspNonce) nonce="{{ $cspNonce }}" @endisset>
+        {!! json_encode($verein, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}
+    </script>
+@endpush
+
 @section('content')
 
     {{-- Steht ganz oben und nicht am Seitenende: Wer die Sprache nicht

@@ -61,6 +61,30 @@ class Sprachfassungen
         return $adressen;
     }
 
+    /**
+     * Wie adressen(), aber nur Fassungen, die in den Index dürfen: Für die
+     * hreflang-Angaben, damit sie zur Sitemap passen (die lässt noindex weg).
+     *
+     * Mit Seite zählt die übersetzte Seite selbst (veröffentlicht, ohne
+     * noindex). Feste Adressen ohne Seite gibt es nur auf Deutsch geprüft,
+     * die übrigen Sprachen tragen dort noindex (layouts/app).
+     *
+     * @return array<string, string> Sprachcode => Pfad
+     */
+    public function indexierbar(): array
+    {
+        return array_filter($this->adressen(), function (string $code) {
+            if (! $this->page) {
+                return $code === Language::standardCode();
+            }
+
+            // inSprache() liefert nur Veröffentlichtes
+            $fassung = $this->page->inSprache($code);
+
+            return $fassung && ! $fassung->noindex;
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
     private function adresseIn(Language $sprache): ?string
     {
         if ($this->page) {
