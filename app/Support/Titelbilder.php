@@ -405,6 +405,21 @@ class Titelbilder
         self::ORDNER.'/red-flags.webp' => 40,
     ];
 
+    /**
+     * Die kleine Fassung eines Titelbilds (<name>-1000.webp), wo es eine gibt.
+     * Für Vorschauen im Menü, die nie breiter als ein paar hundert Pixel sind.
+     */
+    public static function klein(?string $bild): ?string
+    {
+        if (! $bild || $bild === self::PLATZHALTER) {
+            return null;
+        }
+
+        $klein = preg_replace('/\.webp$/', '-1000.webp', $bild);
+
+        return $klein !== $bild && is_file(public_path($klein)) ? $klein : $bild;
+    }
+
     /** Vorschaubilder für geteilte Links, erzeugt von bin/og-bilder. */
     public const OG_ORDNER = '/img/og';
 

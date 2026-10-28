@@ -824,11 +824,56 @@ console.log('\nKopfzeile mit sieben Bereichen')
         await s.locator('details[data-megamenue][open] a[href="/kontakt"]').count() === 1)
     await s.context().close()
 
+    // Scrollen schliesst wie ein Klick daneben (Taddi), aber nur echte Gesten
+    const z = await oeffnen({ breite: 1440, pfad: '/wissen' })
+    const zBereich = (name) => z.locator('[data-kopf-menue] summary', { hasText: name })
+    const zOffen = () => z.locator('details[data-megamenue][open]').count()
+    await zBereich('Verein').click()
+    await z.mouse.move(700, 800)
+    await z.mouse.wheel(0, 300); await z.waitForTimeout(150)
+    pruefe('Mausrad schliesst das Feld', await zOffen() === 0)
+    await zBereich('Wissen').click()
+    await z.locator('details[data-megamenue][open] a', { hasText: 'Atteste' }).focus()
+    await z.evaluate(() => window.scrollBy(0, 300)); await z.waitForTimeout(150)
+    pruefe('Scrollen ohne Geste (Tastatur, Vorlesehilfe) lässt es offen', await zOffen() === 1)
+    await z.keyboard.press('Escape')
+    await zBereich('Verein').click(); await z.mouse.click(700, 850)
+    await z.keyboard.press('PageDown'); await z.waitForTimeout(150)
+    pruefe('Bild-ab schliesst', await zOffen() === 0)
+    await z.context().close()
+
     const ohne = await oeffnen({ js: false, breite: 1440, pfad: '/wissen' })
     await ohne.locator('[data-kopf-menue] summary', { hasText: 'Verein' }).click()
     pruefe('ohne JavaScript: Klick öffnet trotzdem',
         await ohne.locator('details[data-megamenue][open] a[href="/satzung"]').isVisible())
     await ohne.context().close()
+}
+
+// --- Handy-Menü (Mega-Menü-Entwurf) -----------------------------------------
+{
+    console.log('\nHandy-Menü')
+    const s = await oeffnen({ breite: 390, hoehe: 844, pfad: '/satzung' })
+    const burger = s.locator('[data-kopf-burger] > summary')
+    await burger.click()
+    const menue = s.locator('nav[aria-label="Hauptnavigation (mobil)"]')
+    pruefe('Burger öffnet das Menü, Symbol wird zum Schliessen', await menue.isVisible()
+        && await s.locator('[data-kopf-burger] > summary svg:visible').count() === 1)
+    pruefe('aktueller Bereich (Verein) ist offen', await s.locator('details[name=mobilmenue][open] > summary', { hasText: 'Verein' }).count() === 1)
+    pruefe('jeder Bereich mit Vorschaubild', await menue.locator(':scope > ul > li img:first-of-type').count() >= 6)
+    await s.locator('details[name=mobilmenue] > summary', { hasText: 'Raum für Ungesagtes' }).click()
+    pruefe('nur ein Bereich offen', await s.locator('details[name=mobilmenue][open]').count() === 1)
+    const leiste = s.locator('details[name=mobilmenue][open] ul.snap-x')
+    pruefe('Raum für Ungesagtes: vier Kacheln zum Wischen', await leiste.locator('li').count() === 4
+        && await leiste.evaluate((u) => u.scrollWidth > u.clientWidth))
+    const rand = await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)
+    pruefe('nichts läuft seitlich über', rand)
+    await menue.evaluate((n) => n.scrollTo(0, 9999))
+    const unten = await s.locator('nav[aria-label="Hauptnavigation (mobil)"] > ul > li').last().boundingBox()
+    const bar = await s.locator('nav').filter({ has: s.locator('a', { hasText: 'Anfrage' }) }).last().boundingBox()
+    pruefe('Ende des Menüs liegt über der unteren Leiste', unten.y + unten.height <= bar.y, `${unten.y + unten.height} > ${bar.y}`)
+    await s.keyboard.press('Escape')
+    pruefe('Esc schliesst das Menü', !(await menue.isVisible()))
+    await s.context().close()
 }
 
 // --- Wall of Shame (KEV-157) ----------------------------------------------

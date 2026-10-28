@@ -59,13 +59,15 @@ class BarrierefreiheitTest extends TestCase
         // Vier Bereiche mit Unterseiten, seit KEV-159 fünf (Raum für Ungesagtes),
         // seit KEV-162 sechs (Projekte mit ANUAS).
         $this->assertSame(6, substr_count($start, '<details name="mobilmenue"'));
-        $this->assertDoesNotMatchRegularExpression('#name="mobilmenue"[^>]*\bopen\b#', $start);
+        // Das Attribut, nicht die Klasse open:bg-cream
+        $this->assertDoesNotMatchRegularExpression('#name="mobilmenue"[^>]*\sopen[\s>]#', $start);
         $this->assertStringContainsString('<a href="/wissen"', $start);
         $this->assertStringContainsString('Übersicht', $start);
 
         $hier = $mobil($this->get('/veranstaltungen')->getContent());
-        $this->assertSame(1, preg_match_all('#name="mobilmenue"[^>]*\bopen\b#', $hier));
-        $this->assertMatchesRegularExpression('#name="mobilmenue"[^>]*\bopen\s*>\s*<summary[^>]*>\s*Gruppen &amp; Veranstaltungen#', $hier);
+        $this->assertSame(1, preg_match_all('#name="mobilmenue"[^>]*\sopen[\s>]#', $hier));
+        // Seit dem Mega-Menü-Entwurf steht im Knopf zuerst das Vorschaubild
+        $this->assertMatchesRegularExpression('#name="mobilmenue"\s+open[\s>][^>]*>\s*<summary(?:(?!</summary>).)*Gruppen &amp; Veranstaltungen#s', $hier);
         $this->assertMatchesRegularExpression('#<a href="/veranstaltungen"\s+aria-current="page"#', $hier);
     }
 

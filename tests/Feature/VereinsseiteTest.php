@@ -123,7 +123,8 @@ class VereinsseiteTest extends TestCase
 
         $html = $this->get('/verein')->assertOk()->getContent();
         $this->assertStringContainsString('IBAN kopieren', $html);
-        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', $html);
+        // Ohne Kopf: Im Handy-Menü steht derselbe Satz als Unterzeile von „Spenden“.
+        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', substr($html, strpos($html, '<main')));
 
         $abschnitt = substr($html, strpos($html, 'id="spenden"'));
         $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));

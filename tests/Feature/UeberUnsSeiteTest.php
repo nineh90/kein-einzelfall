@@ -172,7 +172,8 @@ class UeberUnsSeiteTest extends TestCase
     {
         $html = $this->get(self::PFAD)->assertOk()->getContent();
         $this->assertStringContainsString('IBAN kopieren', $html);
-        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', $html);
+        // Ohne Kopf: Im Handy-Menü steht derselbe Satz als Unterzeile von „Spenden“.
+        $this->assertStringNotContainsString('Sei Du dabei, jede Unterstützung zählt', substr($html, strpos($html, '<main')));
 
         $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
         $position = $seite->blocks()->where('typ', 'donation_options')->value('position');

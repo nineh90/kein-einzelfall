@@ -47,7 +47,8 @@ class UnterstuetzungsbandTest extends TestCase
         foreach ([Page::STARTSEITE_SLUG, 'selbsthilfegruppen', 'anfragen', 'spenden', 'mitgliedschaft', 'veranstaltungen'] as $slug) {
             $this->assertFalse($this->seite($slug)->blocks()->where('typ', 'cta_band')->exists(), $slug);
         }
-        $this->get('/')->assertDontSee(self::ZITAT);
+        // Ohne Kopf: Im Handy-Menü steht derselbe Satz als Unterzeile von „Spenden“.
+        $this->assertStringNotContainsString(self::ZITAT, $this->inhalt('/'));
     }
 
     public function test_ein_zweiter_lauf_haengt_kein_zweites_band_an(): void
@@ -80,7 +81,7 @@ class UnterstuetzungsbandTest extends TestCase
             $this->get('/en/'.$slug)->assertOk()
                 ->assertSee('Be part of it – every bit of support counts, no matter how small!');
         }
-        $this->get('/en')->assertOk()->assertDontSee('every bit of support counts');
+        $this->assertStringNotContainsString('every bit of support counts', $this->inhalt('/en'));
     }
 
     /**
@@ -94,8 +95,8 @@ class UnterstuetzungsbandTest extends TestCase
         $this->assertTrue((bool) $seite->blocks()->where('typ', 'donation_options')->value('data')['kompakt']);
         $this->get('/taetigkeits-und-jahresberichte')->assertOk()
             ->assertSee('Jetzt spenden')
-            ->assertSee('IBAN kopieren')
-            ->assertDontSee(self::ZITAT);
+            ->assertSee('IBAN kopieren');
+        $this->assertStringNotContainsString(self::ZITAT, $this->inhalt('/taetigkeits-und-jahresberichte'));
 
         // Stand davor: das Band am Ende. Die Migration tauscht es an derselben Stelle.
         $seite->blocks()->where('typ', 'donation_options')->delete();
@@ -115,5 +116,13 @@ class UnterstuetzungsbandTest extends TestCase
     private function seite(string $slug): Page
     {
         return Page::where('locale', 'de')->where('slug', $slug)->firstOrFail();
+    }
+
+    /** Der Seiteninhalt ohne Kopf (dort steht die Unterzeile von „Spenden“ im Menü). */
+    private function inhalt(string $pfad): string
+    {
+        $html = $this->get($pfad)->assertOk()->getContent();
+
+        return substr($html, strpos($html, '<main'));
     }
 }

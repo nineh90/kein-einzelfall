@@ -91,10 +91,7 @@
                         @else
                             @php
                                 $bild = $item['bild'];
-                                $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
-                                if ($klein && ! is_file(public_path($klein))) {
-                                    $klein = $bild;
-                                }
+                                $klein = \App\Support\Titelbilder::klein($bild);
                                 $uebersichtDrin = in_array($item['url'], array_column($item['children'], 'url'), true);
                             @endphp
                             <details name="megamenue" data-megamenue class="group/mega">
@@ -107,11 +104,15 @@
                                     'font-medium text-green' => $aktiv,
                                 ])>
                                     {{ $item['label'] }}
+                                    {{-- aria-current am <summary> gibt Chrome nicht an
+                                         Vorlesehilfen weiter (geprüft im Barrierefreiheitsbaum),
+                                         deshalb zusätzlich als Text. --}}
+                                    @if ($aktiv)<span class="sr-only">, {{ __('aktueller Bereich') }}</span>@endif
                                     <x-ui.icon name="chevron-down" :size="14"
                                                class="transition-transform group-open/mega:rotate-180" />
                                 </summary>
 
-                                <div class="absolute inset-x-0 top-full z-50 border-y border-line bg-card shadow-[0_18px_40px_-24px_rgb(44_38_32/0.35)]">
+                                <div class="absolute inset-x-0 top-full z-50 border-y border-line bg-card shadow-[0_18px_40px_-24px_rgb(44_38_32/0.35)] motion-safe:animate-[menue-ein_.18s_ease-out]">
                                     <div @class(['mx-auto grid max-w-7xl gap-12 px-10 py-8', 'grid-cols-[17rem_1fr]' => ! $uebersichtDrin])>
                                         {{-- Der Bereich selbst: Bild, Unterzeile, Weg zur Übersicht.
                                              Nicht, wo die Übersicht selbst ein Unterpunkt ist (Kontakt),
@@ -150,10 +151,7 @@
                                                 @foreach ($item['spalten'][0]['eintraege'] as $child)
                                                     @php
                                                         $kb = $child['bild'];
-                                                        $kk = $kb ? preg_replace('/\.webp$/', '-1000.webp', $kb) : null;
-                                                        if ($kk && ! is_file(public_path($kk))) {
-                                                            $kk = $kb;
-                                                        }
+                                                        $kk = \App\Support\Titelbilder::klein($kb);
                                                     @endphp
                                                     <li>
                                                         <a href="{{ $child['url'] }}"
@@ -178,13 +176,16 @@
                                         {{-- Die Unterpunkte in Gruppen --}}
                                         <div class="grid auto-cols-fr grid-flow-col gap-8">
                                             @foreach ($item['spalten'] as $spalte)
+                                                @php $gruppenId = 'mega-'.($item['schluessel'] ?? $loop->parent->index).'-'.$loop->index; @endphp
                                                 <div>
+                                                    {{-- Die Liste trägt den Gruppennamen als Namen: Vorlesehilfen
+                                                         sagen „Liste, Über uns, 4 Einträge“. --}}
                                                     @if ($spalte['titel'])
-                                                        <p class="border-b border-line pb-2 text-xs font-medium uppercase tracking-[0.12em] text-green">
+                                                        <p id="{{ $gruppenId }}" class="border-b border-line pb-2 text-xs font-medium uppercase tracking-[0.12em] text-green">
                                                             {{ $spalte['titel'] }}
                                                         </p>
                                                     @endif
-                                                    <ul @class(['mt-2' => $spalte['titel']])>
+                                                    <ul @class(['mt-2' => $spalte['titel']]) @if ($spalte['titel']) aria-labelledby="{{ $gruppenId }}" @endif>
                                                         @foreach ($spalte['eintraege'] as $child)
                                                             <li>
                                                                 <a href="{{ $child['url'] }}"
@@ -288,85 +289,159 @@
                 ganze Breite bekommt und die Zeile darüber nicht auseinanderzieht.
                 Als Bezug dient <header>: position:sticky zählt als positioniert.
             --}}
-            <details data-kopf-burger class="xl:hidden">
+            <details data-kopf-burger class="group/burger xl:hidden">
                 <summary
                     class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full
-                           border border-line bg-card text-ink
+                           border border-line bg-card text-ink group-open/burger:border-green group-open/burger:text-green
                            [&::-webkit-details-marker]:hidden">
+                    {{-- „Menü“ bleibt die Beschriftung, ob auf oder zu sagt
+                         <details> selbst (erweitert / reduziert). --}}
                     <span class="sr-only">{{ __('rahmen.menue') }}</span>
-                    <x-ui.icon name="menu" :size="20" />
+                    <x-ui.icon name="menu" :size="20" class="group-open/burger:hidden" />
+                    <x-ui.icon name="close" :size="20" class="hidden group-open/burger:block" />
                 </summary>
 
-                <nav aria-label="{{ __('rahmen.hauptnavigation_mobil') }}"
-                     class="absolute inset-x-0 top-full max-h-[70vh] overflow-y-auto border-t border-line
-                            bg-card px-4 py-3">
-                    {{-- Bereiche als Akkordeon (03.10.2026, Wunsch des Vereins):
-                         Alle Unterpunkte offen waren über 25 Zeilen, das Menü
-                         wirkte riesig. Jetzt ist nur der Bereich offen, in dem
-                         man gerade ist. Wieder natives <details>, ohne
-                         JavaScript; `name` macht daraus ein echtes Akkordeon,
-                         der Browser schliesst beim Öffnen den vorigen Bereich.
-                         Ältere Browser ohne `name` lassen mehrere offen, mehr
-                         passiert nicht.
+                {{-- Handy und Tablet (Mega-Menü-Entwurf, 28.10.2026, Wunsch von
+                     Taddi: „im Vergleich ziemlich langweilig“). Jeder Bereich
+                     ist eine Karte mit Bild und Unterzeile, aufgeklappt
+                     dieselben Gruppen wie am Desktop; Bereiche ohne Gruppen
+                     zeigen ihre Seiten als Bildkacheln zum Wischen.
 
-                         Die Zeile des Bereichs klappt auf, sie führt nicht
-                         mehr auf seine Seite. Deshalb steht die (/verein,
-                         /wissen, …) als „Übersicht“ oben in der Liste, wenn sie
-                         nicht ohnehin dort steht (Kontakt). --}}
-                    <ul class="flex flex-col gap-1">
-                        @foreach ($nav as $item)
+                     Wieder natives <details>, `name` lässt nur einen Bereich
+                     offen (Akkordeon, Wunsch des Vereins vom 03.10.2026). Das
+                     Feld reicht bis zum unteren Fensterrand und scrollt in
+                     sich (overscroll-contain: am Ende scrollt nicht die Seite
+                     dahinter weiter). Unten Luft für die Leiste mit Notausgang,
+                     die auf dem Handy über allem liegt. --}}
+                <nav aria-label="{{ __('rahmen.hauptnavigation_mobil') }}"
+                     class="absolute inset-x-0 top-full max-h-[calc(100dvh-var(--kopfhoehe,4rem))] overflow-y-auto overscroll-contain
+                            border-t border-line bg-card px-4 pb-24 pt-4 shadow-[0_18px_40px_-24px_rgb(44_38_32/0.35)]
+                            motion-safe:animate-[menue-ein_.18s_ease-out]">
+                    <ul class="mx-auto flex max-w-2xl flex-col gap-2.5">
+                        @foreach ($bereiche as $item)
+                            @php
+                                $aktiv = $istAktiv($item);
+                                $daumen = \App\Support\Titelbilder::klein($item['bild']);
+                            @endphp
                             <li>
                                 @if (empty($item['children']))
                                     <a href="{{ $item['url'] }}"
-                                       @if ($istAktiv($item)) aria-current="page" @endif
-                                       class="block rounded-lg px-3 py-2.5 font-medium no-underline text-ink
-                                              aria-[current=page]:bg-green-mist aria-[current=page]:text-green">
-                                        {{ $item['label'] }}
+                                       @if ($aktiv) aria-current="page" @endif
+                                       class="flex items-center gap-3 rounded-2xl border border-line bg-cream/60 p-2 pr-4 no-underline
+                                              aria-[current=page]:border-green">
+                                        @include('components.layout.menue-daumen', ['daumen' => $daumen, 'bild' => $item['bild']])
+                                        <span class="min-w-0 flex-1">
+                                            <span class="block font-medium text-ink">{{ $item['label'] }}</span>
+                                            @if ($item['unterzeile'])
+                                                <span class="block truncate text-sm text-ink-soft">{{ $item['unterzeile'] }}</span>
+                                            @endif
+                                        </span>
+                                        <x-ui.icon name="arrow-right" :size="18" class="shrink-0 text-green" />
                                     </a>
                                 @else
                                     @php
-                                        $aktiv = $istAktiv($item);
-                                        $kinder = in_array($item['url'], array_column($item['children'], 'url'), true)
-                                            ? $item['children']
-                                            : [['label' => __('rahmen.uebersicht'), 'url' => $item['url']], ...$item['children']];
+                                        $uebersichtDrin = in_array($item['url'], array_column($item['children'], 'url'), true);
+                                        $kacheln = count($item['spalten']) === 1 && ! $item['spalten'][0]['titel'];
                                     @endphp
-                                    <details name="mobilmenue" class="group/bereich" @if ($aktiv) open @endif>
-                                        {{-- aria-current="true": Hier ist man gerade, aber der Bereich
-                                     ist kein Link auf die Seite (die steht als „Übersicht“ im Feld). --}}
-                                <summary @if ($aktiv) aria-current="true" @endif @class([
-                                            'flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-3 py-2.5 font-medium [&::-webkit-details-marker]:hidden',
-                                            'text-ink' => ! $aktiv,
-                                            'bg-green-mist text-green' => $aktiv,
-                                        ])>
-                                            {{ $item['label'] }}
+                                    <details name="mobilmenue" @if ($aktiv) open @endif
+                                             class="group/bereich rounded-2xl border border-line bg-cream/60 open:border-green/40 open:bg-cream">
+                                        <summary @if ($aktiv) aria-current="true" @endif
+                                                 class="flex cursor-pointer list-none items-center gap-3 p-2 pr-4 [&::-webkit-details-marker]:hidden">
+                                            @include('components.layout.menue-daumen', ['daumen' => $daumen, 'bild' => $item['bild']])
+                                            <span class="min-w-0 flex-1">
+                                                <span @class(['block font-medium', 'text-ink' => ! $aktiv, 'text-green' => $aktiv])>{{ $item['label'] }}@if ($aktiv)<span class="sr-only">, {{ __('aktueller Bereich') }}</span>@endif</span>
+                                                {{-- Für Vorlesehilfen nicht Teil des Knopfnamens:
+                                                     „Wissen, Schaltfläche“ statt des ganzen Satzes. --}}
+                                                @if ($item['unterzeile'])
+                                                    <span aria-hidden="true" class="block truncate text-sm text-ink-soft">{{ $item['unterzeile'] }}</span>
+                                                @endif
+                                            </span>
                                             <x-ui.icon name="chevron-down" :size="18"
-                                                       class="shrink-0 transition-transform group-open/bereich:rotate-180" />
+                                                       class="shrink-0 text-ink-soft transition-transform group-open/bereich:rotate-180" />
                                         </summary>
-                                        <ul class="mb-2 ml-3 mt-1 border-l border-line pl-3">
-                                            @foreach ($kinder as $child)
-                                                @php $hier = request()->is(ltrim($child['url'], '/')); @endphp
-                                                <li>
-                                                    <a href="{{ $child['url'] }}"
-                                                       @if ($hier) aria-current="page" @endif
-                                                       class="block py-2 text-sm no-underline text-ink-soft
-                                                              aria-[current=page]:font-medium aria-[current=page]:text-green">
-                                                        {{ $child['label'] }}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+
+                                        <div class="px-3 pb-4 pt-1 motion-safe:animate-[menue-ein_.18s_ease-out]">
+                                            @unless ($uebersichtDrin)
+                                                <a href="{{ $item['url'] }}"
+                                                   @if (request()->is(ltrim($item['url'], '/'))) aria-current="page" @endif
+                                                   class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-green px-4 py-2 text-sm font-medium text-on-green no-underline">
+                                                    {{ __('rahmen.uebersicht') }}: {{ $item['label'] }}
+                                                    <x-ui.icon name="arrow-right" :size="16" />
+                                                </a>
+                                            @endunless
+
+                                            @if ($kacheln)
+                                                {{-- Zum Wischen, am Rand angeschnitten, damit man sieht,
+                                                     dass es weitergeht. Für Tastatur und Vorlesehilfe ist
+                                                     es eine normale Liste von Links. --}}
+                                                <ul class="-mx-3 flex snap-x snap-mandatory scroll-px-3 gap-3 overflow-x-auto px-3 pb-2 [scrollbar-width:none]">
+                                                    @foreach ($item['spalten'][0]['eintraege'] as $child)
+                                                        @php $kk = \App\Support\Titelbilder::klein($child['bild']); @endphp
+                                                        <li class="w-36 shrink-0 snap-start sm:w-44">
+                                                            <a href="{{ $child['url'] }}"
+                                                               @if (request()->is(ltrim($child['url'], '/'))) aria-current="page" @endif
+                                                               class="group/kachel block no-underline">
+                                                                @if ($kk)
+                                                                    <img src="{{ bildadresse($kk) }}" alt="" loading="lazy"
+                                                                         class="aspect-[16/10] w-full rounded-xl border border-line object-cover"
+                                                                         style="object-position: {{ \App\Support\Titelbilder::fokus($child['bild']) }}">
+                                                                @endif
+                                                                <span class="mt-2 block text-sm font-medium text-ink group-aria-[current=page]/kachel:text-green">{{ $child['label'] }}</span>
+                                                                @if ($child['unterzeile'])
+                                                                    <span class="mt-0.5 line-clamp-2 block text-xs text-ink-soft">{{ $child['unterzeile'] }}</span>
+                                                                @endif
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                @foreach ($item['spalten'] as $spalte)
+                                                    @php $gruppenId = 'mobil-'.($item['schluessel'] ?? $loop->parent->index).'-'.$loop->index; @endphp
+                                                    @if ($spalte['titel'])
+                                                        <p id="{{ $gruppenId }}" class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-green first:mt-0">{{ $spalte['titel'] }}</p>
+                                                    @endif
+                                                    <ul class="mt-1" @if ($spalte['titel']) aria-labelledby="{{ $gruppenId }}" @endif>
+                                                        @foreach ($spalte['eintraege'] as $child)
+                                                            @php $enkelkinder = array_filter($child['children'] ?? [], fn ($e) => empty($e['nicht_im_menue'])); @endphp
+                                                            <li>
+                                                                <a href="{{ $child['url'] }}"
+                                                                   @if (request()->is(ltrim($child['url'], '/'))) aria-current="page" @endif
+                                                                   class="flex items-center justify-between gap-3 border-b border-line/70 py-2.5 text-[0.9375rem] no-underline text-ink
+                                                                          aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                                                    {{ $child['label'] }}
+                                                                    <x-ui.icon name="arrow-right" :size="16" class="shrink-0 text-ink-soft" />
+                                                                </a>
+                                                                @if ($enkelkinder)
+                                                                    <ul class="ml-1 border-l border-line py-1 pl-3">
+                                                                        @foreach ($enkelkinder as $enkel)
+                                                                            <li>
+                                                                                <a href="{{ $enkel['url'] }}"
+                                                                                   @if (request()->is(ltrim($enkel['url'], '/'))) aria-current="page" @endif
+                                                                                   class="block py-1.5 text-sm no-underline text-ink-soft
+                                                                                          aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                                                                    {{ $enkel['label'] }}
+                                                                                </a>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </details>
                                 @endif
                             </li>
                         @endforeach
                     </ul>
 
-                    {{-- Der Notausgang steht jetzt dauerhaft im Kopf (siehe oben)
-                         und in der unteren Leiste — hier im Menü wäre er ein
-                         dritter, versteckter Ort. Die Sprachwahl bleibt: In der
-                         Kopfzeile ist sie erst ab „sm“ sichtbar, unterhalb also
-                         nur hier. --}}
-                    <div class="mt-3 border-t border-line pt-3 sm:hidden">
+                    {{-- Der Notausgang steht dauerhaft im Kopf und in der unteren
+                         Leiste — hier im Menü wäre er ein dritter, versteckter Ort.
+                         Die Sprachwahl bleibt: In der Kopfzeile ist sie erst ab
+                         „sm“ sichtbar, unterhalb also nur hier. --}}
+                    <div class="mx-auto mt-4 max-w-2xl border-t border-line pt-3 sm:hidden">
                         <x-layout.sprachumschalter :fassungen="$fassungen ?? []" variant="menue" />
                     </div>
                 </nav>

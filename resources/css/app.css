@@ -254,6 +254,10 @@ button:not(:disabled),
 }
 @keyframes wand-strich { to { stroke-dashoffset: 0; } }
 
+/* Menü (Mega-Menü und Handy-Menü) blendet kurz ein. Nur mit motion-safe:
+   Wer im System weniger Bewegung eingestellt hat, sieht es sofort. */
+@keyframes menue-ein { from { opacity: 0; transform: translateY(-6px); } }
+
 /* Nutzerpraeferenzen des Betriebssystems von Haus aus respektieren */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

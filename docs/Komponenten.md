@@ -2788,7 +2788,7 @@ Bewusst nicht geändert: Lange Titel (Gruppen, Petitionen) behalten das Muster
 der Altseite „… - Kein Einzelfall e.V.“; Google kürzt sie im Ergebnis.
 Was nur auf dem Server geht: Checkliste B3. Tests: `SeoGrundlagenTest`.
 
-## 49. Mega-Menü (Entwurf, 28.10.2026, Branch `entwurf/mega-menue`)
+## 49. Mega-Menü (28.10.2026, Wunsch von Taddi)
 
 Idee von Kevin und Nils: Das Menü war lang (bei „Verein“ zehn Punkte als
 schmale Liste) und klappte schon beim Drüberfahren auf. Jetzt öffnet ab „xl“
@@ -2806,6 +2806,30 @@ ein Klick auf einen Bereich ein Feld über die ganze Breite des Kopfs:
 
 Natives `<details name="megamenue">`, ohne JavaScript bedienbar;
 `resources/js/megamenue.js` schliesst bei Klick daneben und bei Esc (Fokus
-zurück auf den Bereich). Der aktive Bereich trägt `aria-current="true"`.
-Daten: `Navigation::bereiche()`. Unter „xl“ unverändert das Burger-Menü.
-Tests: Browser-Lauf „Mega-Menü“.
+zurück auf den Bereich). Daten: `Navigation::bereiche()`.
+
+**Schliessen beim Scrollen** (Taddi: „wie wenn man irgendwo hin klickt“):
+nur bei Gesten der Person selbst (Mausrad, Wischen, Bild-ab, Leertaste
+ausserhalb des Menüs), nicht beim Ereignis `scroll`. Das feuert auch, wenn
+der Browser einen fokussierten Link ins Bild holt oder eine Vorlesehilfe
+die Seite verschiebt; wer mit Tastatur oder Screenreader im Menü ist,
+verlöre es sonst.
+
+**Handy und Tablet** (unter „xl“, Burger): jeder Bereich eine Karte mit
+Vorschaubild (`menue-daumen`, beim Vereinsbild mit Logo) und Unterzeile,
+aufgeklappt dieselben Gruppen wie am Desktop und ein Knopf „Übersicht“.
+Bereiche ohne Gruppen als Bildkacheln zum Wischen (die dritte schaut am Rand
+heraus). Akkordeon wie bisher (`name="mobilmenue"`), das Feld reicht bis zum
+Fensterrand und scrollt in sich, unten Platz für die Leiste mit Notausgang.
+Burger wird beim Öffnen zum Schliessen-Symbol.
+
+**Vorlesehilfen** (geprüft im Barrierefreiheitsbaum von Chrome): Jeder
+Bereich ist ein Knopf mit Zustand („Verein, Schaltfläche, reduziert“). Den
+aktuellen Bereich gibt `aria-current` am `<summary>` nicht weiter, deshalb
+der Zusatz „, aktueller Bereich“ als sr-only. Die Gruppenlisten tragen ihren
+Namen (`aria-labelledby`, „Liste, Über uns“). Die Unterzeile im Handy-Menü
+ist `aria-hidden`, sonst hiesse der Knopf „Wissen Rechte, Anträge und …“.
+Bilder sind Schmuck (`alt=""`). Mit echtem NVDA/VoiceOver einmal von Hand
+gegenhören, bevor es live geht.
+
+Tests: Browser-Läufe „Mega-Menü“ und „Handy-Menü“.
