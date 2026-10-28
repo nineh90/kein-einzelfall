@@ -31,11 +31,15 @@ import { triggerWarnungVerdrahten } from './trigger-warnung'
 import { bereichswarnungVerdrahten } from './bereichswarnung'
 import { kopfhoeheVerdrahten } from './kopfhoehe'
 import { kopfzeileVerdrahten } from './kopfzeile'
+import { megamenueVerdrahten } from './megamenue'
 
 // Zuerst: Der Aufmacher braucht die Höhe, bevor irgendetwas anderes zeichnet.
 kopfhoeheVerdrahten()
 // Gleich danach: ob die Kopfzeile in die Breite passt (Notausgang im Bild).
 kopfzeileVerdrahten()
+
+// Das Mega-Menü geht auch ohne, das hier schliesst nur bei Klick daneben und Esc.
+megamenueVerdrahten()
 
 toolbarVerdrahten()
 leselinieVerdrahten()

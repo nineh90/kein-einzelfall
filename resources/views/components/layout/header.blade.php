@@ -54,52 +54,173 @@
             </span>
         </a>
 
-        {{-- Desktop-Navigation.
-             Die Untermenüs öffnen per :hover UND :focus-within — dadurch sind sie
-             ohne eine Zeile JavaScript per Tastatur bedienbar.
+        {{-- Desktop-Navigation als Mega-Menü (Entwurf, 28.10.2026).
 
-             Sichtbar erst ab „xl“, nicht ab „lg“. Gemessen bei 1024 px: die
-             Reihe braucht 1115 px (deutsch) bzw. 1105 px (russisch). Vorher fiel
-             das nicht auf, weil „Gruppen & Termine“ still umbrach und die
-             Kopfzeile auf 133 px auszog — auf Russisch wurde daraus ein
-             dreizeiliger Menüpunkt. Mit dem Sprachumschalter ist die Reihe
-             dauerhaft voller, deshalb bekommt sie erst dort Platz, wo sie
-             wirklich passt. Zwischen 1024 und 1280 greift das Burger-Menü,
-             das ohnehin vollständig bedienbar ist. --}}
+             Vorher klappte je Bereich eine schmale Liste beim Drüberfahren
+             auf, bei „Verein“ zehn Punkte untereinander. Jetzt öffnet ein
+             Klick ein Feld über die ganze Breite: links Bild, Unterzeile und
+             Übersicht des Bereichs, rechts die Unterpunkte in Gruppen
+             (config/navigation.php, `gruppen`), Unterseiten darunter
+             eingerückt (Klartext, Öffentlichkeitsarbeit).
+
+             Per Klick statt beim Drüberfahren: Nichts klappt auf, nur weil die
+             Maus vorbeikommt, und Tastatur und Touch-Laptop bedienen es gleich.
+             Natives <details> wie im Handy-Menü, also ohne JavaScript bedienbar;
+             `name` lässt immer nur einen Bereich offen. megamenue.js schliesst
+             zusätzlich bei Klick daneben und bei Esc.
+
+             Das Feld liegt absolut unter dem ganzen Kopf (Bezug: <header>,
+             sticky zählt als positioniert), deshalb ist das <li> nicht relativ.
+
+             Sichtbar erst ab „xl“, darunter das Burger-Menü (Gründe siehe
+             Versionsgeschichte, die Reihe braucht über 1100 px). --}}
+        @php $bereiche = \App\Support\Navigation::bereiche(); @endphp
         <nav data-kopf-menue aria-label="{{ __('rahmen.hauptnavigation') }}" class="hidden xl:order-3 xl:block xl:basis-full">
             <ul class="flex items-center gap-5">
-                @foreach ($nav as $item)
-                    <li class="group relative">
-                        <a href="{{ $item['url'] }}"
-                           @if ($istAktiv($item)) aria-current="page" @endif
-                           class="flex items-center gap-1 whitespace-nowrap py-2 text-[0.9375rem] no-underline
-                                  text-ink-soft hover:text-ink
-                                  aria-[current=page]:font-medium aria-[current=page]:text-green">
-                            {{ $item['label'] }}
-                            @isset($item['children'])
-                                <x-ui.icon name="chevron-down" :size="14"
-                                           class="transition-transform group-hover:rotate-180" />
-                            @endisset
-                        </a>
+                @foreach ($bereiche as $item)
+                    @php $aktiv = $istAktiv($item); @endphp
+                    <li>
+                        @if (empty($item['children']))
+                            <a href="{{ $item['url'] }}"
+                               @if ($aktiv) aria-current="page" @endif
+                               class="flex items-center gap-1 whitespace-nowrap py-2 text-[0.9375rem] no-underline
+                                      text-ink-soft hover:text-ink
+                                      aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                {{ $item['label'] }}
+                            </a>
+                        @else
+                            @php
+                                $bild = $item['bild'];
+                                $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
+                                if ($klein && ! is_file(public_path($klein))) {
+                                    $klein = $bild;
+                                }
+                                $uebersichtDrin = in_array($item['url'], array_column($item['children'], 'url'), true);
+                            @endphp
+                            <details name="megamenue" data-megamenue class="group/mega">
+                                {{-- aria-current="true": Hier ist man gerade, aber der Bereich
+                                     ist kein Link auf die Seite (die steht als „Übersicht“ im Feld). --}}
+                                <summary @if ($aktiv) aria-current="true" @endif @class([
+                                    'flex cursor-pointer list-none items-center gap-1 whitespace-nowrap py-2 text-[0.9375rem]',
+                                    '[&::-webkit-details-marker]:hidden hover:text-ink group-open/mega:text-ink',
+                                    'text-ink-soft' => ! $aktiv,
+                                    'font-medium text-green' => $aktiv,
+                                ])>
+                                    {{ $item['label'] }}
+                                    <x-ui.icon name="chevron-down" :size="14"
+                                               class="transition-transform group-open/mega:rotate-180" />
+                                </summary>
 
-                        @isset($item['children'])
-                            <ul class="invisible absolute left-0 top-full z-50 min-w-64 rounded-card border
-                                       border-line bg-card py-2 opacity-0 shadow-sm transition-[opacity,visibility]
-                                       group-hover:visible group-hover:opacity-100
-                                       group-focus-within:visible group-focus-within:opacity-100">
-                                @foreach ($item['children'] as $child)
-                                    <li>
-                                        <a href="{{ $child['url'] }}"
-                                           @if (request()->is(ltrim($child['url'], '/'))) aria-current="page" @endif
-                                           class="block px-4 py-2 text-sm no-underline text-ink-soft
-                                                  hover:bg-green-mist hover:text-ink
-                                                  aria-[current=page]:font-medium aria-[current=page]:text-green">
-                                            {{ $child['label'] }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endisset
+                                <div class="absolute inset-x-0 top-full z-50 border-y border-line bg-card shadow-[0_18px_40px_-24px_rgb(44_38_32/0.35)]">
+                                    <div @class(['mx-auto grid max-w-7xl gap-12 px-10 py-8', 'grid-cols-[17rem_1fr]' => ! $uebersichtDrin])>
+                                        {{-- Der Bereich selbst: Bild, Unterzeile, Weg zur Übersicht.
+                                             Nicht, wo die Übersicht selbst ein Unterpunkt ist (Kontakt),
+                                             sonst stünde sie zweimal da. --}}
+                                        @unless ($uebersichtDrin)
+                                        <div>
+                                            @if ($klein)
+                                                <div class="relative">
+                                                    <img src="{{ bildadresse($klein) }}" alt="" loading="lazy"
+                                                         class="aspect-[16/10] w-full rounded-card border border-line object-cover"
+                                                         style="object-position: {{ \App\Support\Titelbilder::fokus($bild) }}">
+                                                    {{-- Wie im Seitenkopf: Beim Vereinsbild liegt das Logo obenauf (KEV-75). --}}
+                                                    @if (\App\Support\Titelbilder::logoDarauf($bild))
+                                                        <img src="{{ bildadresse('/img/logo-gross.webp') }}" alt="" loading="lazy"
+                                                             class="absolute inset-0 m-auto h-3/5 w-auto">
+                                                    @endif
+                                                </div>
+                                            @endif
+                                            <p class="mt-4 font-display text-xl text-green">{{ $item['label'] }}</p>
+                                            @if ($item['unterzeile'])
+                                                <p class="mt-1 text-sm text-ink-soft">{{ $item['unterzeile'] }}</p>
+                                            @endif
+                                            <a href="{{ $item['url'] }}"
+                                               @if (request()->is(ltrim($item['url'], '/'))) aria-current="page" @endif
+                                               class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-green no-underline hover:underline">
+                                                {{ __('rahmen.uebersicht') }}
+                                                <x-ui.icon name="arrow-right" :size="16" />
+                                            </a>
+                                        </div>
+                                        @endunless
+
+                                        {{-- Ohne Gruppen (Raum für Ungesagtes, Projekte, Kontakt):
+                                             die Unterpunkte als Kacheln mit Bild und Unterzeile. --}}
+                                        @if (count($item['spalten']) === 1 && ! $item['spalten'][0]['titel'])
+                                            <ul class="grid grid-cols-4 gap-5">
+                                                @foreach ($item['spalten'][0]['eintraege'] as $child)
+                                                    @php
+                                                        $kb = $child['bild'];
+                                                        $kk = $kb ? preg_replace('/\.webp$/', '-1000.webp', $kb) : null;
+                                                        if ($kk && ! is_file(public_path($kk))) {
+                                                            $kk = $kb;
+                                                        }
+                                                    @endphp
+                                                    <li>
+                                                        <a href="{{ $child['url'] }}"
+                                                           @if (request()->is(ltrim($child['url'], '/'))) aria-current="page" @endif
+                                                           class="group/kachel block rounded-card no-underline">
+                                                            @if ($kk)
+                                                                <img src="{{ bildadresse($kk) }}" alt="" loading="lazy"
+                                                                     class="aspect-[16/10] w-full rounded-card border border-line object-cover transition-opacity group-hover/kachel:opacity-90"
+                                                                     style="object-position: {{ \App\Support\Titelbilder::fokus($kb) }}">
+                                                            @endif
+                                                            <span class="mt-3 block text-[0.9375rem] font-medium text-ink group-hover/kachel:text-green group-aria-[current=page]/kachel:text-green">
+                                                                {{ $child['label'] }}
+                                                            </span>
+                                                            @if ($child['unterzeile'])
+                                                                <span class="mt-0.5 block text-sm text-ink-soft">{{ $child['unterzeile'] }}</span>
+                                                            @endif
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                        {{-- Die Unterpunkte in Gruppen --}}
+                                        <div class="grid auto-cols-fr grid-flow-col gap-8">
+                                            @foreach ($item['spalten'] as $spalte)
+                                                <div>
+                                                    @if ($spalte['titel'])
+                                                        <p class="border-b border-line pb-2 text-xs font-medium uppercase tracking-[0.12em] text-green">
+                                                            {{ $spalte['titel'] }}
+                                                        </p>
+                                                    @endif
+                                                    <ul @class(['mt-2' => $spalte['titel']])>
+                                                        @foreach ($spalte['eintraege'] as $child)
+                                                            <li>
+                                                                <a href="{{ $child['url'] }}"
+                                                                   @if (request()->is(ltrim($child['url'], '/'))) aria-current="page" @endif
+                                                                   class="-mx-3 block rounded-lg px-3 py-2 text-[0.9375rem] no-underline text-ink
+                                                                          hover:bg-green-mist
+                                                                          aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                                                    {{ $child['label'] }}
+                                                                </a>
+                                                                @php $enkelkinder = array_filter($child['children'] ?? [], fn ($e) => empty($e['nicht_im_menue'])); @endphp
+                                                                @if ($enkelkinder)
+                                                                    <ul class="mb-1 ml-1 border-l border-line pl-3">
+                                                                        @foreach ($enkelkinder as $enkel)
+                                                                            <li>
+                                                                                <a href="{{ $enkel['url'] }}"
+                                                                                   @if (request()->is(ltrim($enkel['url'], '/'))) aria-current="page" @endif
+                                                                                   class="block rounded-lg px-2 py-1 text-sm no-underline text-ink-soft
+                                                                                          hover:bg-green-mist hover:text-ink
+                                                                                          aria-[current=page]:font-medium aria-[current=page]:text-green">
+                                                                                    {{ $enkel['label'] }}
+                                                                                </a>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </details>
+                        @endif
                     </li>
                 @endforeach
             </ul>
@@ -210,7 +331,9 @@
                                             : [['label' => __('rahmen.uebersicht'), 'url' => $item['url']], ...$item['children']];
                                     @endphp
                                     <details name="mobilmenue" class="group/bereich" @if ($aktiv) open @endif>
-                                        <summary @class([
+                                        {{-- aria-current="true": Hier ist man gerade, aber der Bereich
+                                     ist kein Link auf die Seite (die steht als „Übersicht“ im Feld). --}}
+                                <summary @if ($aktiv) aria-current="true" @endif @class([
                                             'flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-3 py-2.5 font-medium [&::-webkit-details-marker]:hidden',
                                             'text-ink' => ! $aktiv,
                                             'bg-green-mist text-green' => $aktiv,

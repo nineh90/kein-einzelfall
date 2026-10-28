@@ -34,6 +34,80 @@ class Navigation
         return self::aufloesen(config('navigation.main'));
     }
 
+    /**
+     * Die Hauptnavigation fürs Mega-Menü (Entwurf, 28.10.2026): je Bereich
+     * zusätzlich sein Titelbild, seine Unterzeile und die Unterpunkte in
+     * Spalten (`gruppen` aus der Config, sonst eine Spalte ohne Titel).
+     *
+     * Bild und Unterzeile kommen von der Seite des Bereichs bzw. Unterpunkts,
+     * also so, wie der Verein sie im Panel pflegt. Ein Unterpunkt, den keine Gruppe nennt,
+     * landet in einer letzten Spalte ohne Titel, statt still zu fehlen.
+     */
+    public static function bereiche(): array
+    {
+        $roh = config('navigation.main');
+        $slugs = collect($roh)->flatMap(fn (array $b) => [$b['url'], ...array_column($b['children'] ?? [], 'url')])
+            ->map(fn (string $url) => trim($url, '/'))->unique()->values()->all();
+        $koepfe = self::bereichsKoepfe($slugs);
+        $kopf = fn (array $eintrag, string $url) => $eintrag + [
+            'bild' => $koepfe[trim($url, '/')]['bild'] ?? null,
+            'unterzeile' => $koepfe[trim($url, '/')]['unterzeile'] ?? null,
+        ];
+
+        return array_map(function (array $bereich, array $config) use ($kopf) {
+            $bereich = $kopf($bereich, $config['url']);
+
+            // Bild und Unterzeile auch je Unterpunkt: Bereiche ohne Gruppen
+            // zeigen ihre Unterpunkte als Kacheln.
+            $urls = array_column($config['children'] ?? [], 'url', 'schluessel');
+            $kinder = collect($bereich['children'] ?? [])
+                ->map(fn (array $kind) => $kopf($kind, $urls[$kind['schluessel']] ?? $kind['url']))
+                ->keyBy('schluessel');
+            $spalten = [];
+
+            foreach ($config['gruppen'] ?? [] as $gruppe) {
+                $eintraege = collect($gruppe['eintraege'])->map(fn ($s) => $kinder->pull($s))->filter()->values()->all();
+                if ($eintraege) {
+                    $spalten[] = ['titel' => __($gruppe['titel']), 'eintraege' => $eintraege];
+                }
+            }
+
+            if ($kinder->isNotEmpty()) {
+                $spalten[] = ['titel' => null, 'eintraege' => $kinder->values()->all()];
+            }
+
+            $bereich['spalten'] = $spalten;
+
+            return $bereich;
+        }, self::haupt(), $roh);
+    }
+
+    /**
+     * Titelbild und Unterzeile der Bereichsseiten und ihrer Unterpunkte, die
+     * Unterzeile in der aktuellen Sprache. Zwei Abfragen für alle zusammen.
+     *
+     * @param  list<string>  $slugs
+     * @return array<string, array{bild: ?string, unterzeile: ?string}>
+     */
+    private static function bereichsKoepfe(array $slugs): array
+    {
+        $seiten = Page::query()->standardfassung()
+            ->where('locale', Language::standardCode())
+            ->whereIn('slug', $slugs)
+            ->get(['slug', 'titelbild', 'untertitel', 'uebersetzungs_gruppe']);
+
+        $sprache = Language::aktuell();
+        $uebersetzt = $sprache->istStandard() ? collect() : Page::query()->standardfassung()
+            ->where('locale', $sprache->code)
+            ->whereIn('uebersetzungs_gruppe', $seiten->pluck('uebersetzungs_gruppe')->filter())
+            ->pluck('untertitel', 'uebersetzungs_gruppe');
+
+        return $seiten->mapWithKeys(fn (Page $seite) => [$seite->slug => [
+            'bild' => $seite->titelbild,
+            'unterzeile' => $sprache->istStandard() ? $seite->untertitel : $uebersetzt->get($seite->uebersetzungs_gruppe),
+        ]])->all();
+    }
+
     public static function fusszeile(): array
     {
         return collect(config('navigation.footer'))

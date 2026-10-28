@@ -30,6 +30,17 @@ return [
                 'kinderkodex', 'istanbul_konvention', 'schutz_und_wertekonzept',
                 'red_flags', 'beschwerdemanagement', 'taetigkeits_und_jahresberichte',
             ],
+            /*
+             * Entwurf Mega-Menü (28.10.2026): Im Menü stehen die Unterpunkte
+             * eines Bereichs in Gruppen nebeneinander statt als lange Liste.
+             * Die Namen der Gruppen sind von uns, noch nicht vom Verein.
+             * Bereiche ohne `gruppen` zeigen ihre Unterpunkte in einer Spalte.
+             */
+            'gruppen' => [
+                ['titel' => 'Über uns', 'eintraege' => ['ueber_uns_vorstand_und_team', 'satzung', 'mitgliedschaft', 'taetigkeits_und_jahresberichte']],
+                ['titel' => 'Haltung & Schutz', 'eintraege' => ['schutz_und_wertekonzept', 'red_flags', 'kinderkodex', 'istanbul_konvention']],
+                ['titel' => 'Mitwirken & Beschwerde', 'eintraege' => ['gremium_ukfb', 'beschwerdemanagement']],
+            ],
             'children' => [
                 // Reihenfolge seit KEV-178 (Taddi). Gremium UKFB steht nur hier
                 // im Menü, nicht bei den Kacheln (`kacheln` oben, KEV-176).
@@ -65,6 +76,12 @@ return [
             // drei Paare (Gruppen, Veranstaltungen und Öffentlichkeitsarbeit,
             // Aktuelles und Rückblick).
             'spalten' => 2,
+            // Mega-Menü: Taddis drei Paare von der Übersicht (KEV-225)
+            'gruppen' => [
+                ['titel' => 'Mitmachen', 'eintraege' => ['selbsthilfegruppen', 'arbeitsgruppen']],
+                ['titel' => 'Termine & Öffentlichkeit', 'eintraege' => ['veranstaltungen', 'oeffentlichkeitsarbeit']],
+                ['titel' => 'Neuigkeiten', 'eintraege' => ['aktuelles', 'rueckblick']],
+            ],
             'children' => [
                 ['schluessel' => 'selbsthilfegruppen', 'label' => 'Selbsthilfegruppen',        'url' => '/selbsthilfegruppen'],
                 ['schluessel' => 'arbeitsgruppen', 'label' => 'Arbeitsgruppen',            'url' => '/arbeitsgruppen'],
@@ -72,7 +89,8 @@ return [
                 // in den Kacheln. Als Veranstaltungsreihe hängt die Seite
                 // unter „Veranstaltungen“ und behält so Brotkrumen.
                 ['schluessel' => 'veranstaltungen', 'label' => 'Veranstaltungen',           'url' => '/veranstaltungen', 'children' => [
-                    ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog'],
+                    // Mega-Menü: hier nicht zeigen, KEV-225 hat sie aus dem Menü genommen
+                    ['schluessel' => 'kein_einzelfall_im_dialog', 'label' => 'KE!N EINZELFALL im Dialog', 'url' => '/kein-einzelfall-im-dialog', 'nicht_im_menue' => true],
                 ]],
                 // KEV-238: die drei Themen als eigene Seiten, nicht im Menü
                 // aufgeklappt, sondern als Kacheln auf der Übersicht.
@@ -90,6 +108,11 @@ return [
             'schluessel' => 'bereich_wissen',
             'label' => 'Wissen',
             'url' => '/wissen',
+            // Mega-Menü: Klartext mit seinen sechs Kategorien in eigener Spalte
+            'gruppen' => [
+                ['titel' => 'Anträge & Nachweise', 'eintraege' => ['atteste', 'formulare', 'fristen']],
+                ['titel' => 'Fachsprache verstehen', 'eintraege' => ['klartext_statt_fachsprache']],
+            ],
             // KEV-239: nur noch Taddis Kategorien, in der Reihenfolge ihres
             // Drive-Ordners „3. Wissen“ (1. Atteste bis 4. Klartext; 5.
             // Vorlagen/Schreiben folgt, sobald es die Seite gibt). Die Seiten

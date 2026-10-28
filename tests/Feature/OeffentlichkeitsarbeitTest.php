@@ -608,7 +608,8 @@ class OeffentlichkeitsarbeitTest extends TestCase
             $this->assertMatchesRegularExpression('#href="/oeffentlichkeitsarbeit"[^>]*>\s*Öffentlichkeitsarbeit#u', $seite);
             $this->assertStringContainsString('Mehr zu „Öffentlichkeitsarbeit“', $seite);
             // Im Menü ist „Gruppen & Veranstaltungen“ markiert
-            $this->assertMatchesRegularExpression('/aria-current="page"[^>]*>\s*Gruppen &amp; Veranstaltungen/u', $seite);
+            // (Mega-Menü: der Bereich ist ein <summary> mit aria-current="true")
+            $this->assertMatchesRegularExpression('/<summary\s+aria-current="true"[^>]*>\s*Gruppen &amp; Veranstaltungen/u', $seite);
         }
         $this->assertStringNotContainsString('id="oa-', $html);
 

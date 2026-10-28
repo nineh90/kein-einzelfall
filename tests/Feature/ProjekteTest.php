@@ -156,6 +156,8 @@ class ProjekteTest extends TestCase
         $this->assertStringContainsString('href="mailto:arbeitsgruppe@kein-einzelfall.de"', $html);
         $this->assertStringContainsString('What we are working on.', $html);
         // Der Menüpunkt heißt wie die englische Seite.
-        $this->assertMatchesRegularExpression('/href="\/en\/projekte"[^>]*>\s*Projects\s*</', $html);
+        // Mega-Menü: der Bereich als <summary>, die Seite als „Overview“ im Feld.
+        $this->assertMatchesRegularExpression('/<summary[^>]*>\s*Projects\s*</', $html);
+        $this->assertMatchesRegularExpression('/href="\/en\/projekte"[^>]*>\s*Overview\s*</', $html);
     }
 }

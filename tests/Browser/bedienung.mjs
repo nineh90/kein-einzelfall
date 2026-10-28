@@ -781,6 +781,56 @@ console.log('\nKopfzeile mit sieben Bereichen')
     }
 }
 
+// --- Mega-Menü (Entwurf, 28.10.2026) ----------------------------------------
+// Klick öffnet ein Feld über die ganze Breite, immer nur einen Bereich. Zu
+// geht es mit Klick daneben, Esc (Fokus zurück auf den Bereich) und ohne
+// JavaScript wenigstens per Klick auf den Bereich.
+{
+    console.log('\nMega-Menü')
+    const s = await oeffnen({ breite: 1440, pfad: '/wissen' })
+    const bereich = (name) => s.locator('[data-kopf-menue] summary', { hasText: name })
+    const offen = () => s.locator('details[data-megamenue][open]').count()
+
+    pruefe('anfangs alles zu', await offen() === 0)
+    await bereich('Verein').hover()
+    pruefe('Drüberfahren öffnet nichts', await offen() === 0)
+
+    await bereich('Verein').click()
+    const feld = s.locator('details[data-megamenue][open] > div')
+    const rahmen = await feld.boundingBox()
+    pruefe('Klick öffnet das Feld über die ganze Breite', rahmen && rahmen.width === 1440, JSON.stringify(rahmen))
+    pruefe('Gruppen mit Überschrift', (await feld.innerText()).includes('HALTUNG & SCHUTZ') || (await feld.innerText()).includes('Haltung & Schutz'))
+    pruefe('alle zehn Vereinsseiten verlinkt', await feld.locator('ul a').count() === 10)
+
+    await bereich('Wissen').click()
+    pruefe('ein zweiter Bereich schliesst den ersten', await offen() === 1
+        && await s.locator('details[data-megamenue][open] summary').innerText().then((t) => t.includes('Wissen')))
+    pruefe('Klartext-Kategorien im Feld', await s.locator('details[data-megamenue][open] a[href="/gericht-und-verfahren"]').isVisible())
+
+    await s.mouse.click(700, 850)
+    pruefe('Klick daneben schliesst', await offen() === 0)
+
+    await bereich('Raum für Ungesagtes').focus()
+    await s.keyboard.press('Enter')
+    pruefe('Enter auf dem Bereich öffnet', await offen() === 1)
+    pruefe('ohne Gruppen: Unterpunkte als Kacheln mit Bild',
+        await s.locator('details[data-megamenue][open] ul.grid li img').count() === 4)
+    await s.keyboard.press('Escape')
+    pruefe('Esc schliesst und lässt den Fokus auf dem Bereich', await offen() === 0
+        && await s.evaluate(() => document.activeElement?.textContent.includes('Raum für Ungesagtes')))
+
+    await bereich('Kontakt').click()
+    pruefe('Kontakt nicht doppelt (Übersicht ist selbst ein Unterpunkt)',
+        await s.locator('details[data-megamenue][open] a[href="/kontakt"]').count() === 1)
+    await s.context().close()
+
+    const ohne = await oeffnen({ js: false, breite: 1440, pfad: '/wissen' })
+    await ohne.locator('[data-kopf-menue] summary', { hasText: 'Verein' }).click()
+    pruefe('ohne JavaScript: Klick öffnet trotzdem',
+        await ohne.locator('details[data-megamenue][open] a[href="/satzung"]').isVisible())
+    await ohne.context().close()
+}
+
 // --- Wall of Shame (KEV-157) ----------------------------------------------
 
 console.log('\nWall of Shame')

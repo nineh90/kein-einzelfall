@@ -2788,3 +2788,24 @@ Bewusst nicht geändert: Lange Titel (Gruppen, Petitionen) behalten das Muster
 der Altseite „… - Kein Einzelfall e.V.“; Google kürzt sie im Ergebnis.
 Was nur auf dem Server geht: Checkliste B3. Tests: `SeoGrundlagenTest`.
 
+## 49. Mega-Menü (Entwurf, 28.10.2026, Branch `entwurf/mega-menue`)
+
+Idee von Kevin und Nils: Das Menü war lang (bei „Verein“ zehn Punkte als
+schmale Liste) und klappte schon beim Drüberfahren auf. Jetzt öffnet ab „xl“
+ein Klick auf einen Bereich ein Feld über die ganze Breite des Kopfs:
+
+- **Links** Titelbild, Name und Unterzeile des Bereichs, darunter „Übersicht“
+  (kommt von der Seite des Bereichs, also wie im Panel gepflegt). Fehlt, wo die
+  Übersicht selbst ein Unterpunkt ist (Kontakt).
+- **Rechts** die Unterpunkte in Gruppen (`gruppen` je Bereich in
+  `config/navigation.php`, Namen von uns, vom Verein noch nicht abgesegnet),
+  Unterseiten eingerückt darunter (Klartext, Öffentlichkeitsarbeit). Einträge
+  mit `nicht_im_menue` fehlen (KE!N EINZELFALL im Dialog, KEV-225).
+- **Ohne Gruppen** (Raum für Ungesagtes, Projekte, Kontakt) stehen die
+  Unterpunkte als Kacheln mit Bild und Unterzeile.
+
+Natives `<details name="megamenue">`, ohne JavaScript bedienbar;
+`resources/js/megamenue.js` schliesst bei Klick daneben und bei Esc (Fokus
+zurück auf den Bereich). Der aktive Bereich trägt `aria-current="true"`.
+Daten: `Navigation::bereiche()`. Unter „xl“ unverändert das Burger-Menü.
+Tests: Browser-Lauf „Mega-Menü“.
