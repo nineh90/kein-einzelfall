@@ -14,18 +14,21 @@ use Illuminate\Support\Collection;
  * Dieselben Quellen wie /veranstaltungen (EventController). Die Gruppentreffen
  * werden berechnet, nicht gespeichert, und sind damit nie veraltet. Gepflegt
  * wird nichts zusätzlich.
+ *
+ * Mit Gruppe nur deren Treffen: der Kalender auf jeder Gruppenseite
+ * (KEV-227, KEV-281).
  */
 class Termine
 {
     /**
      * @return Collection<int, array{zeit: CarbonImmutable, titel: string, url: string, art: string, ganztaegig: bool}>
      */
-    public static function imMonat(CarbonImmutable $monat): Collection
+    public static function imMonat(CarbonImmutable $monat, ?Group $gruppe = null): Collection
     {
         $start = $monat->startOfMonth();
         $ende = $monat->endOfMonth();
 
-        $veranstaltungen = Event::veroeffentlicht()
+        $veranstaltungen = $gruppe ? collect() : Event::veroeffentlicht()
             ->whereBetween('beginnt_am', [$start, $ende])
             ->orderBy('beginnt_am')
             ->get()
@@ -37,10 +40,11 @@ class Termine
                 'ganztaegig' => (bool) $e->ganztaegig,
             ]);
 
-        $gruppentreffen = Group::veroeffentlicht()
-            ->where('status', 'offen')
-            ->whereNot('wiederholung', 'keine')
-            ->get()
+        $gruppen = $gruppe
+            ? collect([$gruppe])->filter(fn (Group $g) => $g->istOffen())
+            : Group::veroeffentlicht()->where('status', 'offen')->whereNot('wiederholung', 'keine')->get();
+
+        $gruppentreffen = $gruppen
             // Berechnete Treffen nur ab jetzt: Ob eins vorige Woche wirklich
             // stattfand, weiß die Rechnung nicht (Skillin me Softly startet
             // erst im November, KEV-230).
@@ -55,5 +59,24 @@ class Termine
                 ]));
 
         return $veranstaltungen->concat($gruppentreffen)->sortBy('zeit')->values();
+    }
+
+    /**
+     * Der erste Monat ab heute, in dem noch ein Termin ansteht, höchstens elf
+     * Monate voraus wie im Kalender. Null, wenn nichts ansteht.
+     */
+    public static function monatMitNaechstemTermin(?Group $gruppe = null): ?CarbonImmutable
+    {
+        $jetzt = CarbonImmutable::now();
+
+        for ($i = 0; $i <= 11; $i++) {
+            $monat = $jetzt->startOfMonth()->addMonths($i);
+
+            if (self::imMonat($monat, $gruppe)->contains(fn ($t) => $t['zeit']->gte($jetzt->startOfDay()))) {
+                return $monat;
+            }
+        }
+
+        return null;
     }
 }

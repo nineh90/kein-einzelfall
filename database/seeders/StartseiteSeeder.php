@@ -30,6 +30,9 @@ use Illuminate\Database\Seeder;
  */
 class StartseiteSeeder extends Seeder
 {
+    /** KEV-281: der allgemeine Termin-Kalender auf der Startseite. */
+    public const KALENDER = ['titel' => 'Unsere nächsten Termine', 'neben_text' => false];
+
     public function run(): void
     {
         // Muss vorher laufen: Eine Seite ohne Sprache gibt es nicht, und ohne
@@ -151,6 +154,25 @@ class StartseiteSeeder extends Seeder
      *
      * @return array<string, mixed>
      */
+    /**
+     * Den Termin-Kalender auf einer bestehenden Startseite nachtragen (KEV-281),
+     * vor den Hilfe-Kasten wie in bausteine(). Nur einmal.
+     */
+    public static function kalenderEinfuegen(): void
+    {
+        $seite = Page::where('slug', Page::STARTSEITE_SLUG)->where('locale', Language::standardCode())->first();
+
+        if (! $seite || $seite->blocks()->where('typ', 'kalender')->exists()) {
+            return;
+        }
+
+        $hilfe = $seite->blocks()->where('typ', 'hilfe_box')->min('position');
+        $position = $hilfe ?? (int) $seite->blocks()->max('position') + 1;
+
+        $seite->blocks()->where('position', '>=', $position)->increment('position');
+        $seite->blocks()->create(['typ' => 'kalender', 'position' => $position, 'data' => self::KALENDER]);
+    }
+
     public static function spendenBaustein(): array
     {
         return [
@@ -345,6 +367,13 @@ class StartseiteSeeder extends Seeder
             // Mitglied werden). Auch unter „Mitglieder“ rief die Startseite
             // damit zweimal kurz hintereinander zum Spenden auf. Es steht
             // jetzt auf einzelnen Unterseiten, siehe UnterstuetzungsbandSeeder.
+
+            // KEV-281 (Nils): alle Termine des Vereins gebündelt, Raster und
+            // Liste nebeneinander. Siehe kalenderEinfuegen().
+            [
+                'typ' => 'kalender',
+                'data' => self::KALENDER,
+            ],
 
             // Siehe spendenAnhaengen(): dieselbe Stelle, dieselben Daten.
             // Von Kevin beauftragt, nicht im Altbestand. Stand bis 27.09.2026

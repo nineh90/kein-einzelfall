@@ -161,6 +161,15 @@
             <p @class(['max-w-prose font-hand text-2xl leading-snug text-green', 'mt-6' => $loop->first, 'mt-2' => ! $loop->first])>{{ $satz }}</p>
         @endforeach
 
+        {{-- Die nächsten Treffen als Kalender (KEV-227, KEV-281, Nils:
+             „auf den Unterseiten die nächsten Termine in Kalenderform“).
+             Nur mit festem Rhythmus; geplante Gruppen haben noch keine. --}}
+        @if ($offen && $naechster)
+            <div class="mt-12">
+                <x-blocks.kalender :gruppe="$gruppe" :rahmen="false" />
+            </div>
+        @endif
+
         {{-- Anmeldung über die Website (KEV-226). Der Knopf oben springt
              hierher. --}}
         @if ($gruppe->anmeldungMoeglich())

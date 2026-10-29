@@ -79,6 +79,10 @@
         if ($block->typ === 'donation_options' && in_array($block->page?->slug, [Page::STARTSEITE_SLUG, 'verein'], true)) {
             $attribute['strich'] = false;
         }
+        // Ebenso der Termin-Kalender auf der Startseite (KEV-281).
+        if ($block->typ === 'kalender' && $block->page?->slug === Page::STARTSEITE_SLUG) {
+            $attribute['strich'] = false;
+        }
 
         // Die Kacheln (KEV-156) zeigen die Seiten unter dieser Seite, das
         // Glossar (KEV-155) die Einträge dieser Seite. Beide müssen deshalb

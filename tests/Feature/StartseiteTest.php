@@ -210,7 +210,8 @@ class StartseiteTest extends TestCase
     {
         $typen = $this->startseite()->blocks()->orderBy('position')->pluck('typ')->all();
 
-        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options'], $typen);
+        // Seit KEV-281 der Termin-Kalender vor dem Hilfe-Kasten.
+        $this->assertSame(['hero', 'quick_access', 'text', 'text', 'kalender', 'hilfe_box', 'donation_options'], $typen);
         $this->get('/')->assertDontSee('Sei Du dabei, jede Unterstützung zählt');
     }
 
@@ -229,8 +230,10 @@ class StartseiteTest extends TestCase
 
     public function test_kontaktabschluss_verschwindet_von_bestehenden_startseiten(): void
     {
-        // Stand vor KEV-121, in beiden Sprachfassungen.
+        // Stand vor KEV-121, in beiden Sprachfassungen (also auch ohne den
+        // Kalender aus KEV-281).
         $de = $this->startseite();
+        $de->blocks()->where('typ', 'kalender')->delete();
         $de->blocks()->create(['typ' => 'contact_close', 'position' => 99, 'data' => ['titel' => 'Anfragen & Austausch']]);
         $en = $de->replicate()->fill(['locale' => 'en', 'uebersetzungs_gruppe' => $de->uebersetzungs_gruppe]);
         $en->save();
@@ -254,6 +257,7 @@ class StartseiteTest extends TestCase
         // Seit KEV-120 gibt es das Band auf der Startseite nicht mehr, darum
         // legt der Test es selbst an.
         $seite = $this->startseite();
+        $seite->blocks()->where('typ', 'kalender')->delete(); // erst seit KEV-281
         $reihenfolge = ['hero', 'quick_access', 'text', 'text', 'hilfe_box', 'donation_options', 'cta_band'];
         $seite->blocks()->create(['typ' => 'cta_band', 'position' => 99, 'data' => ['zitat' => 'Band']]);
 
@@ -279,7 +283,7 @@ class StartseiteTest extends TestCase
          * Migration muss es tun, und zwar an derselben Stelle wie der Seeder.
          */
         $seite = $this->startseite();
-        $seite->blocks()->where('typ', 'donation_options')->delete();
+        $seite->blocks()->whereIn('typ', ['donation_options', 'kalender'])->delete(); // Kalender erst seit KEV-281
         $this->get('/')->assertDontSee('DE79 8306', false);
 
         $this->spendenMigration()->up();
@@ -731,6 +735,7 @@ class StartseiteTest extends TestCase
     {
         // Stand vor KEV-45: der Kasten direkt unter dem Aufmacher.
         $seite = $this->startseite();
+        $seite->blocks()->where('typ', 'kalender')->delete(); // erst seit KEV-281
         $bloecke = $seite->blocks()->orderBy('position')->get()->all();
         $kasten = array_values(array_filter($bloecke, fn ($b) => $b->typ === 'hilfe_box'))[0];
         $bloecke = array_values(array_filter($bloecke, fn ($b) => $b->typ !== 'hilfe_box'));

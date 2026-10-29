@@ -2834,3 +2834,28 @@ Bilder sind Schmuck (`alt=""`). Mit echtem NVDA/VoiceOver einmal von Hand
 gegenhören, bevor es live geht.
 
 Tests: Browser-Läufe „Mega-Menü“ und „Handy-Menü“.
+
+## 50. Termin-Kalender auf Gruppenseiten, Startseite und /veranstaltungen (KEV-227, KEV-281, 29.10.2026)
+
+Nils' Vorgabe: Jede Selbsthilfegruppe zeigt auf ihrer Seite die nächsten
+Termine in Kalenderform, gebündelt stehen alle Termine unter
+Veranstaltungen und auf der Startseite.
+
+`x-blocks.kalender` (seit KEV-224 neben der Einleitung von
+/gruppen-und-veranstaltungen) kann dafür mehr:
+
+- `gruppe`: nur die Treffen dieser Gruppe (`Termine::imMonat($monat, $gruppe)`),
+  darunter ihre nächsten drei Termine ab dem gezeigten Monat, ohne Link auf
+  die Seite selbst. Auf `gruppen/show` zwischen Beschreibung und Anmeldung,
+  nur bei offenen Gruppen mit festem Rhythmus.
+- `breit`: Raster und Liste nebeneinander. Als eigenes Band (Startseite,
+  Baustein „Termin-Kalender“ vor dem Hilfe-Kasten) immer; auf
+  /veranstaltungen über den Listen, ohne die Links darunter (`links`).
+- `strich`: auf der Startseite ohne, wie alle Abschnitte dort (KEV-170).
+
+Ohne `?monat=` öffnet der Kalender den ersten Monat mit einem anstehenden
+Termin (`Termine::monatMitNaechstemTermin`). Am Monatsende stand sonst ein
+leerer Monat da. Gepflegt wird nichts zusätzlich: Die Treffen rechnen sich
+aus dem Rhythmus der Gruppe, Veranstaltungen kommen aus dem Panel.
+
+Tests: KalenderTest.

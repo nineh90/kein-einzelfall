@@ -96,4 +96,74 @@ class KalenderTest extends TestCase
             ->assertSee('Add dates to your own calendar')
             ->assertSee('Self-help group');
     }
+
+    /** KEV-227, KEV-281 (Nils): Jede Selbsthilfegruppe hat ihren eigenen Kalender. */
+    public function test_kalender_auf_der_gruppenseite_nur_mit_ihren_terminen(): void
+    {
+        $gruppe = Group::where('slug', 'wir-sind-nicht-mehr-stumm')->firstOrFail();
+
+        $termine = Termine::imMonat(CarbonImmutable::parse('2026-11-01'), $gruppe);
+        $this->assertSame(['Wir sind nicht mehr stumm'], $termine->pluck('titel')->unique()->all());
+
+        $html = $this->get($gruppe->url())->assertOk()->getContent();
+        preg_match('#<section id="kalender".*?</section>#s', $html, $kalender);
+        $this->assertStringContainsString('Nächste Termine', $kalender[0]);
+        // Die nächsten drei Treffen am 2. Mittwoch, ohne Link auf die Seite selbst
+        foreach (['2026-11-11', '2026-12-09', '2027-01-13'] as $tag) {
+            $this->assertStringContainsString('datetime="'.$tag.'T19:00:00+01:00"', $kalender[0]);
+        }
+        $this->assertStringNotContainsString('Bürokratie-Labyrinth', $kalender[0]);
+        $this->assertStringNotContainsString('href="'.$gruppe->url().'"', $kalender[0]);
+        $this->assertStringContainsString('Alle Termine des Vereins', $kalender[0]);
+        // Vor der Anmeldung
+        $this->assertLessThan(strpos($html, 'id="anmeldung"'), strpos($html, 'id="kalender"'));
+
+        // Geplante Gruppen haben noch keine Termine und keinen Kalender
+        $geplant = Group::where('slug', 'seelenfarben')->firstOrFail();
+        $this->get($geplant->url())->assertOk()->assertDontSee('id="kalender"', false);
+    }
+
+    /** Ohne gewählten Monat öffnet der Kalender den Monat mit dem nächsten Termin. */
+    public function test_ohne_wahl_der_monat_mit_dem_naechsten_termin(): void
+    {
+        // Am 29.10. steht im Oktober nichts mehr an (letztes Treffen am 28.)
+        $this->travelTo(CarbonImmutable::parse('2026-10-29 12:00', 'Europe/Berlin'));
+
+        $this->assertSame('2026-11', Termine::monatMitNaechstemTermin()->format('Y-m'));
+        $this->get('/gruppen-und-veranstaltungen')->assertSee('November 2026')->assertDontSee('In diesem Monat stehen keine weiteren Termine an.');
+
+        // Gewählt bleibt gewählt
+        $this->get('/gruppen-und-veranstaltungen?monat=2026-10')->assertSee('Oktober 2026');
+    }
+
+    /** KEV-281 (Nils): Auf der Startseite und unter Veranstaltungen alle Termine gebündelt. */
+    public function test_alle_termine_auf_startseite_und_veranstaltungen(): void
+    {
+        $startseite = Page::where('slug', Page::STARTSEITE_SLUG)->where('locale', 'de')->firstOrFail();
+        $typen = $startseite->blocks()->orderBy('position')->pluck('typ')->all();
+        $this->assertSame(array_search('hilfe_box', $typen) - 1, array_search('kalender', $typen));
+
+        foreach (['/', '/veranstaltungen'] as $pfad) {
+            $html = $this->get($pfad)->assertOk()->getContent();
+            preg_match('#<section id="kalender".*?</section>#s', $html, $kalender);
+            $this->assertNotEmpty($kalender, $pfad);
+            // Raster und Liste nebeneinander, mit allen Gruppen
+            $this->assertStringContainsString('lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]', $kalender[0], $pfad);
+            $this->assertStringContainsString('Bürokratie-Labyrinth', $kalender[0], $pfad);
+        }
+
+        // Auf der Startseite ohne Strich, wie alle Abschnitte dort (KEV-170)
+        $this->assertStringContainsString('Unsere nächsten Termine', $this->get('/')->getContent());
+        // Bei den vergangenen Veranstaltungen kein Kalender
+        $this->get('/veranstaltungen?zeitraum=vergangen')->assertDontSee('id="kalender"', false);
+
+        // Bestehende Startseiten bekommen ihn per Migration, einmal
+        $startseite->blocks()->where('typ', 'kalender')->delete();
+        $migration = require database_path('migrations/2026_10_29_150000_startseite_termin_kalender.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(1, $startseite->blocks()->where('typ', 'kalender')->count());
+        $typen = $startseite->blocks()->orderBy('position')->pluck('typ')->all();
+        $this->assertSame(array_search('hilfe_box', $typen) - 1, array_search('kalender', $typen));
+    }
 }

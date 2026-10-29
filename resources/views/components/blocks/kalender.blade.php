@@ -4,6 +4,15 @@
     // Ohne eigenes Band, als Spalte neben einem Text (KEV-224, wie die
     // Dokumente neben der SHG-Einleitung)
     'rahmen' => true,
+    // Raster und Liste nebeneinander statt untereinander. Als eigenes Band
+    // immer (Startseite, KEV-281), ohne Band auf /veranstaltungen.
+    'breit' => null,
+    // Nur die Treffen dieser Gruppe, auf ihrer Seite (KEV-227, KEV-281)
+    'gruppe' => null,
+    // „Alle Veranstaltungen“ und iCal darunter; /veranstaltungen hat beides
+    'links' => true,
+    // Strich über der Überschrift; auf der Startseite ohne, wie dort alle
+    'strich' => true,
     'neben_text' => false, // Schalter aus dem Panel, hier nur aufgefangen
 ])
 
@@ -17,22 +26,34 @@
     Monate voraus. Das Raster ist die Übersicht fürs Auge und für
     Vorlesehilfen ausgeblendet; die Liste darunter trägt dieselben Termine als
     Text mit Links.
+
+    Seit KEV-281 (Nils): auf jeder Gruppenseite mit den Treffen nur dieser
+    Gruppe, darunter ihre nächsten drei Termine; auf der Startseite und
+    /veranstaltungen alle Termine gebündelt, Raster und Liste nebeneinander.
 --}}
 @php
     use Carbon\CarbonImmutable;
 
     $heute = CarbonImmutable::now()->startOfDay();
     $erster = $heute->startOfMonth();
+    // Ohne Wahl der Monat mit dem nächsten Termin: Am Monatsende stand sonst
+    // ein leerer Monat da, obwohl es bald weitergeht.
     $gewaehlt = preg_match('/^\d{4}-\d{2}$/', (string) request()->query('monat'))
         ? CarbonImmutable::createFromFormat('!Y-m', request()->query('monat'))
-        : $erster;
+        : \App\Support\Termine::monatMitNaechstemTermin($gruppe) ?? $erster;
     $monat = $gewaehlt->lt($erster) ? $erster : ($gewaehlt->gt($erster->addMonths(11)) ? $erster->addMonths(11) : $gewaehlt);
     $sprache = app()->getLocale();
 
-    $termine = \App\Support\Termine::imMonat($monat);
+    $breit ??= $rahmen;
+
+    $termine = \App\Support\Termine::imMonat($monat, $gruppe);
     $tageMitTermin = $termine->map(fn ($t) => $t['zeit']->day)->unique()->all();
-    // In der Liste nur, was noch kommt
-    $liste = $termine->filter(fn ($t) => $t['zeit']->gte($heute))->values();
+    // In der Liste nur, was noch kommt. Bei einer Gruppe die nächsten drei
+    // Treffen ab dem gezeigten Monat: einmal im Monat stünde sonst nur eins da.
+    $liste = $gruppe
+        ? $gruppe->naechsteTermine(3, $monat->max(CarbonImmutable::now())->subSecond())
+            ->map(fn ($zeit) => ['zeit' => $zeit, 'titel' => null, 'url' => null, 'art' => null, 'ganztaegig' => false])
+        : $termine->filter(fn ($t) => $t['zeit']->gte($heute))->values();
 
     // Raster ab Montag: leere Felder vor dem Ersten
     $versatz = $monat->dayOfWeekIso - 1;
@@ -56,14 +77,17 @@
     'bg-card border-y border-line' => $rahmen && $auf === 'card',
 ])>
     <div @class(['mx-auto max-w-6xl' => $rahmen])>
-        <div @class(['max-w-md' => $rahmen])>
-            <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+        <div @class(['max-w-md' => ! $breit])>
+            @if ($strich)
+                <span aria-hidden="true" class="mb-4 block h-0.5 w-10 rounded-full bg-green-brand"></span>
+            @endif
             <h2 id="kalender-titel" @class([
                 'mb-4 font-display font-medium text-green',
                 'text-2xl lg:text-3xl' => $rahmen,
                 'text-xl lg:text-2xl' => ! $rahmen,
-            ])>{{ $titel ?: __('Termine') }}</h2>
+            ])>{{ $titel ?: ($gruppe ? __('Nächste Termine') : __('Termine')) }}</h2>
 
+            <div @class(['lg:grid lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-start lg:gap-12' => $breit])>
             <div class="rounded-card border border-line {{ $innen }} p-4 sm:p-5">
                 <div class="mb-3 flex items-center justify-between gap-2">
                     @if ($vorher)
@@ -111,30 +135,41 @@
                 </div>
             </div>
 
+            <div @class(['lg:max-w-xl' => $breit])>
             @if ($liste->isEmpty())
-                <p class="mt-4 text-sm text-ink-soft">{{ __('In diesem Monat stehen keine weiteren Termine an.') }}</p>
+                <p @class(['mt-4 text-sm text-ink-soft', 'lg:mt-0' => $breit])>{{ __('In diesem Monat stehen keine weiteren Termine an.') }}</p>
             @else
-                <ul class="mt-4 flex flex-col divide-y divide-line">
+                <ul @class(['mt-4 flex flex-col divide-y divide-line', 'lg:-mt-2.5' => $breit])>
                     @foreach ($liste as $termin)
+                        @php
+                            $wann = $termin['ganztaegig']
+                                ? $termin['zeit']->locale($sprache)->isoFormat('dd, D. MMMM')
+                                : __(':zeit Uhr', ['zeit' => $termin['zeit']->locale($sprache)->isoFormat($sprache === 'en' ? 'ddd, D MMMM, h:mm a' : 'dd, D. MMMM, HH:mm')]);
+                        @endphp
                         <li class="py-2.5">
-                            <a href="{{ $termin['url'] }}" class="group block no-underline">
-                                <time datetime="{{ $termin['zeit']->toIso8601String() }}" class="block text-sm text-ink-soft">
-                                    {{ $termin['ganztaegig']
-                                        ? $termin['zeit']->locale($sprache)->isoFormat('dd, D. MMMM')
-                                        : __(':zeit Uhr', ['zeit' => $termin['zeit']->locale($sprache)->isoFormat($sprache === 'en' ? 'ddd, D MMMM, h:mm a' : 'dd, D. MMMM, HH:mm')]) }}
-                                </time>
-                                <span class="block font-medium text-ink group-hover:underline">{{ $termin['titel'] }}</span>
-                                <span class="block text-xs text-ink-soft">{{ $art($termin['art']) }}</span>
-                            </a>
+                            @if ($gruppe)
+                                {{-- Auf der eigenen Seite: nur das Datum, kein Link auf sich selbst --}}
+                                <time datetime="{{ $termin['zeit']->toIso8601String() }}" class="block text-ink">{{ $wann }}</time>
+                            @else
+                                <a href="{{ $termin['url'] }}" class="group block no-underline">
+                                    <time datetime="{{ $termin['zeit']->toIso8601String() }}" class="block text-sm text-ink-soft">{{ $wann }}</time>
+                                    <span class="block font-medium text-ink group-hover:underline">{{ $termin['titel'] }}</span>
+                                    <span class="block text-xs text-ink-soft">{{ $art($termin['art']) }}</span>
+                                </a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
             @endif
 
-            <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                <a href="{{ sprachlink('events.index') }}" class="text-green-deep underline">{{ __('Alle Veranstaltungen') }}</a>
-                <a href="{{ sprachlink('events.ical') }}" class="text-green-deep underline">{{ __('Termine in den eigenen Kalender') }}</a>
-            </p>
+            @if ($links)
+                <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    <a href="{{ sprachlink('events.index') }}" class="text-green-deep underline">{{ $gruppe ? __('Alle Termine des Vereins') : __('Alle Veranstaltungen') }}</a>
+                    <a href="{{ sprachlink('events.ical') }}" class="text-green-deep underline">{{ __('Termine in den eigenen Kalender') }}</a>
+                </p>
+            @endif
+            </div>
+            </div>
         </div>
     </div>
 </section>

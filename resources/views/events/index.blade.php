@@ -54,6 +54,15 @@
     <div @class(['px-4 md:px-8 py-8 lg:px-10 lg:py-12', 'bg-card border-y border-line' => $listeAuf === 'card'])>
         <div class="mx-auto max-w-6xl">
 
+            {{-- Alle Termine gebündelt als Kalender (KEV-281, Nils), darunter
+                 die Listen. Links zu dieser Seite und zum iCal-Abo stehen
+                 hier schon, der Kalender braucht sie nicht noch einmal. --}}
+            @unless ($zeigeVergangene)
+                <div class="mb-12">
+                    <x-blocks.kalender :rahmen="false" :breit="true" :links="false" :auf="$listeAuf" />
+                </div>
+            @endunless
+
             <div class="flex flex-wrap items-center justify-between gap-4">
                 @if ($anzahlVergangen > 0)
                     <nav aria-label="{{ __('Zeitraum') }}">
