@@ -19,14 +19,33 @@
     Gleicher Aufbau in jeder Karte: Merkmale, Name, Kurzbeschreibung, dann
     unten Termin und Knopf. mt-auto schiebt den Fuß ans Kartenende, damit
     Termine und Knöpfe benachbarter Karten auf einer Linie stehen.
+
+    Seit KEV-280 (Nils) oben das Bild der Gruppenseite, randlos wie bei den
+    Seitenkacheln und ausgerichtet wie im Seitenkopf. Schmuck: Der Name
+    steht darunter.
 --}}
-@php $offen = $gruppe->istOffen(); @endphp
+@php
+    $offen = $gruppe->istOffen();
+    $bild = $gruppe->titelbild;
+    $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
+    $klein = $klein && $klein !== $bild && \App\Support\Medien::vorhanden($klein) ? $klein : $bild;
+@endphp
 
 <article id="{{ $gruppe->slug }}" @class([
-    'flex h-full flex-col rounded-card border border-line p-5 lg:p-6',
+    'flex h-full flex-col overflow-hidden rounded-card border border-line',
     'bg-card' => $auf !== 'card',
     'bg-cream' => $auf === 'card',
 ])>
+    @if ($bild)
+        <span class="block aspect-[2/1] overflow-hidden border-b border-line">
+            <img src="{{ bildadresse($klein) }}" alt="" loading="lazy" decoding="async"
+                 width="1000" height="563"
+                 class="h-full w-full object-cover"
+                 style="object-position: {{ \App\Support\Titelbilder::fokus($bild) }}">
+        </span>
+    @endif
+
+    <div class="flex flex-1 flex-col p-5 lg:p-6">
     @if ($gruppe->kuerzel || $gruppe->online)
         <div class="mb-3 flex flex-wrap items-center gap-2">
             @if ($gruppe->kuerzel)
@@ -111,5 +130,6 @@
                 <span class="sr-only">– {{ $gruppe->name }}</span>
             </x-ui.button>
         </div>
+    </div>
     </div>
 </article>
