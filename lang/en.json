@@ -465,7 +465,7 @@
     "Zurücksetzen": "Reset",
     "{0}Keine Beiträge für „:suche“|{1}Ein Beitrag für „:suche“|[2,*]:count Beiträge für „:suche“": "{0}No posts for “:suche”|{1}One post for “:suche”|[2,*]:count posts for “:suche”",
     "{0}Noch keine Beiträge|{1}Ein Beitrag|[2,*]:count Beiträge": "{0}No posts yet|{1}One post|[2,*]:count posts",
-    "{1}:count Treffer für „:anfrage\"|[2,*]:count Treffer für „:anfrage\"": "{1}:count result for “:anfrage”|[2,*]:count results for “:anfrage”",
+    "{1}:count Treffer für „:anfrage“|[2,*]:count Treffer für „:anfrage“": "{1}:count result for “:anfrage”|[2,*]:count results for “:anfrage”",
     "Messe": "Fair",
     "Petition": "Petition",
     "Presseartikel": "Press article",

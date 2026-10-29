@@ -53,12 +53,17 @@
 
             {{-- action ohne Parameter, Methode GET: Der Browser hängt `q` selbst
                  an. Kein JavaScript beteiligt. --}}
-            <form role="search" method="get" action="{{ url(\App\Models\Language::aktuell()->pfad('/suche')) }}" class="max-w-prose">
+            {{-- Breiter als die Lesespalte (max-w-prose), sonst blieb neben dem
+                 Feld der halbe Bildschirm leer und der Knopf brach „Such-en“ um
+                 (29.10.2026). --}}
+            <form role="search" method="get" action="{{ url(\App\Models\Language::aktuell()->pfad('/suche')) }}" class="max-w-3xl">
                 <label for="suchfeld" class="mb-2 block font-display text-lg text-ink">
                     {{ __('Wonach suchst du?') }}
                 </label>
 
                 <div class="flex flex-col gap-3 sm:flex-row">
+                    <div class="relative flex-1">
+                    <x-ui.icon name="search" :size="20" class="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-ink-soft" />
                     <input type="search"
                            id="suchfeld"
                            name="q"
@@ -67,10 +72,13 @@
                            autocomplete="off"
                            spellcheck="false"
                            aria-describedby="suchhilfe"
-                           class="w-full rounded-full border border-line bg-card px-5 py-3 text-ink
+                           class="w-full rounded-full border border-line bg-card py-3.5 pl-13 pr-5 text-lg text-ink
                                   placeholder:text-ink-soft focus:border-green focus:outline-none">
+                    </div>
 
-                    <x-ui.button type="submit" variant="primary">{{ __('Suchen') }}</x-ui.button>
+                    {{-- shrink-0 wie bei Glossar und Fristen: Sonst drückt das Feld
+                         den Knopf zusammen, bis „Suchen“ umbricht. --}}
+                    <x-ui.button type="submit" variant="primary" class="shrink-0 sm:px-8">{{ __('Suchen') }}</x-ui.button>
                 </div>
 
                 <p id="suchhilfe" class="mt-2 text-sm text-ink-soft">
@@ -152,7 +160,7 @@
 
             @else
                 <h2 id="trefferzahl" aria-live="polite" class="mb-5 font-display text-xl text-green">
-                    {{ trans_choice('{1}:count Treffer für „:anfrage"|[2,*]:count Treffer für „:anfrage"', count($treffer), ['count' => count($treffer), 'anfrage' => $anfrage]) }}
+                    {{ trans_choice('{1}:count Treffer für „:anfrage“|[2,*]:count Treffer für „:anfrage“', count($treffer), ['count' => count($treffer), 'anfrage' => $anfrage]) }}
                 </h2>
 
                 {{-- <ol> und nicht <ul>: Die Reihenfolge trägt Bedeutung, der
