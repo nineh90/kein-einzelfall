@@ -59,7 +59,7 @@ class SchutzkonzeptSeeder extends Seeder
         'dokumente' => [[
             'titel' => 'Schutz- und Wertekonzept',
             'url' => self::PDF,
-            'bytes' => 183967,
+            'bytes' => 184687,
         ]],
     ];
 
