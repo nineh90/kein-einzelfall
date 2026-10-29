@@ -2853,6 +2853,11 @@ Veranstaltungen und auf der Startseite.
   /veranstaltungen über den Listen, ohne die Links darunter (`links`).
 - `strich`: auf der Startseite ohne, wie alle Abschnitte dort (KEV-170).
 
+Blättern: `resources/js/kalender.js` tauscht nur den Abschnitt aus, die Seite
+bleibt stehen (vorher lud sie neu und sprang zum Kalender). Adresse mit
+`?monat=`, Fokus bleibt auf dem Pfeil, eine Live-Region sagt den Monat an.
+Ohne JavaScript bleiben es Links.
+
 Ohne `?monat=` öffnet der Kalender den ersten Monat mit einem anstehenden
 Termin (`Termine::monatMitNaechstemTermin`). Am Monatsende stand sonst ein
 leerer Monat da. Gepflegt wird nichts zusätzlich: Die Treffen rechnen sich

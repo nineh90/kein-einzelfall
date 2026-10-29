@@ -23,7 +23,8 @@
     nichts zusätzlich.
 
     Ohne JavaScript: Vor und zurück sind Links (?monat=2026-11), höchstens elf
-    Monate voraus. Das Raster ist die Übersicht fürs Auge und für
+    Monate voraus. Mit JavaScript tauscht kalender.js nur diesen Abschnitt aus,
+    die Seite bleibt stehen (vorher sprang sie beim Blättern nach oben). Das Raster ist die Übersicht fürs Auge und für
     Vorlesehilfen ausgeblendet; die Liste darunter trägt dieselben Termine als
     Text mit Links.
 
@@ -91,18 +92,18 @@
             <div class="rounded-card border border-line {{ $innen }} p-4 sm:p-5">
                 <div class="mb-3 flex items-center justify-between gap-2">
                     @if ($vorher)
-                        <a href="{{ $link($vorher) }}" class="rounded-full px-3 py-1.5 text-green-deep no-underline hover:bg-green-mist"
+                        <a href="{{ $link($vorher) }}" data-monat="zurueck" class="rounded-full px-3 py-1.5 text-green-deep no-underline hover:bg-green-mist"
                            aria-label="{{ __('Vorheriger Monat: :monat', ['monat' => $vorher->locale($sprache)->isoFormat('MMMM YYYY')]) }}">‹</a>
                     @else
                         <span class="px-3 py-1.5" aria-hidden="true"></span>
                     @endif
 
-                    <h3 class="font-display text-lg font-medium text-ink" aria-live="polite">
+                    <h3 class="font-display text-lg font-medium text-ink" tabindex="-1" data-kalender-monat>
                         {{ $monat->locale($sprache)->isoFormat('MMMM YYYY') }}
                     </h3>
 
                     @if ($nachher)
-                        <a href="{{ $link($nachher) }}" class="rounded-full px-3 py-1.5 text-green-deep no-underline hover:bg-green-mist"
+                        <a href="{{ $link($nachher) }}" data-monat="vor" class="rounded-full px-3 py-1.5 text-green-deep no-underline hover:bg-green-mist"
                            aria-label="{{ __('Nächster Monat: :monat', ['monat' => $nachher->locale($sprache)->isoFormat('MMMM YYYY')]) }}">›</a>
                     @else
                         <span class="px-3 py-1.5" aria-hidden="true"></span>

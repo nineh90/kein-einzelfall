@@ -32,6 +32,7 @@ import { bereichswarnungVerdrahten } from './bereichswarnung'
 import { kopfhoeheVerdrahten } from './kopfhoehe'
 import { kopfzeileVerdrahten } from './kopfzeile'
 import { megamenueVerdrahten } from './megamenue'
+import { kalenderVerdrahten } from './kalender'
 
 // Zuerst: Der Aufmacher braucht die Höhe, bevor irgendetwas anderes zeichnet.
 kopfhoeheVerdrahten()
@@ -55,6 +56,9 @@ inhaltsverzeichnisVerdrahten()
 
 // Nur auf der Seite einer Messe o. Ä. mit Fotos (KEV-132).
 galerieVerdrahten()
+
+// Nur wo ein Termin-Kalender steht: blättern, ohne dass die Seite springt.
+kalenderVerdrahten()
 
 // Im Glossar und in der Fristenübersicht: Filtern beim Tippen (KEV-153, KEV-152).
 glossarVerdrahten()

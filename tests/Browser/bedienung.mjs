@@ -1194,6 +1194,43 @@ console.log('\nSprungziele unter dem Kopf')
     await artikel.context().close()
 }
 
+// --- Termin-Kalender: blättern ohne Sprung (KEV-281) -------------------------
+// Vorher lud jeder Pfeil die ganze Seite neu und sprang zum Kalender, der
+// stand danach oben statt dort, wo man geklickt hatte (Kevin, 29.10.2026).
+{
+    console.log('\nTermin-Kalender')
+    const s = await oeffnen({ pfad: '/selbsthilfegruppen/wir-sind-nicht-mehr-stumm' })
+    let neuGeladen = 0
+    s.on('load', () => neuGeladen++)
+
+    const monat = () => s.locator('[data-kalender-monat]').innerText()
+    const vor = s.locator('#kalender a[data-monat="vor"]')
+    await vor.scrollIntoViewIfNeeded()
+    await s.evaluate(() => window.scrollBy(0, -250))
+    const vorher = await monat()
+    const oben = await vor.evaluate((e) => Math.round(e.getBoundingClientRect().top))
+
+    await vor.click()
+    await s.waitForFunction((m) => document.querySelector('[data-kalender-monat]')?.textContent.trim() !== m, vorher)
+    const danach = await s.locator('#kalender a[data-monat="vor"]').evaluate((e) => Math.round(e.getBoundingClientRect().top))
+
+    pruefe('Monat gewechselt', await monat() !== vorher, await monat())
+    pruefe('Seite springt nicht', danach === oben, `vorher ${oben}, danach ${danach}`)
+    pruefe('ohne Neuladen', neuGeladen === 0)
+    pruefe('Monat in der Adresse', /[?&]monat=\d{4}-\d{2}$/.test(s.url()), s.url())
+    pruefe('Fokus bleibt auf dem Pfeil', await s.evaluate(() => document.activeElement?.dataset.monat) === 'vor')
+    pruefe('Vorlesehilfe hört den Monat', (await s.locator('#kalender [aria-live]').innerText()) === await monat())
+    await s.context().close()
+
+    // Ohne JavaScript bleibt es ein Link, der den Monat zeigt.
+    const ohne = await oeffnen({ js: false, pfad: '/selbsthilfegruppen/wir-sind-nicht-mehr-stumm' })
+    const erster = await ohne.locator('[data-kalender-monat]').innerText()
+    await ohne.locator('#kalender a[data-monat="vor"]').click()
+    await ohne.waitForLoadState('load')
+    pruefe('ohne JavaScript: Link blättert', (await ohne.locator('[data-kalender-monat]').innerText()) !== erster)
+    await ohne.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')
