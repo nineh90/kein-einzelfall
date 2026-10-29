@@ -137,7 +137,7 @@ class UebersetzungenSeeder extends Seeder
 
     private function uebersetzung(Page $deutsch, string $locale): void
     {
-        $seite = Page::create([
+        $felder = [
             'locale' => $locale,
             // Dieselbe Übersetzungsgruppe: darüber finden Umschalter, hreflang
             // und Menü die Fassungen zusammen.
@@ -162,7 +162,15 @@ class UebersetzungenSeeder extends Seeder
             'ungeprueft' => true,
             'noindex' => true,
             'published_at' => now(),
-        ]);
+        ];
+
+        // Die Spalte gibt es erst seit 23.10.2026; ältere Inhalts-Migrationen
+        // rufen diesen Seeder vorher auf (Nils' Review).
+        if (! Schema::hasColumn('pages', 'triggerwarnung')) {
+            unset($felder['triggerwarnung']);
+        }
+
+        $seite = Page::create($felder);
 
         foreach ($deutsch->blocks as $block) {
             $seite->blocks()->create([
@@ -237,11 +245,16 @@ class UebersetzungenSeeder extends Seeder
         // Inhalts-Migrationen rufen diesen Seeder vorher auf.
         $mitSeite = Schema::hasColumn('glossary_terms', 'seite_gruppe');
 
+        // Ohne Erklärung geht es erst seit 22.10.2026 (Abkürzungen). Davor
+        // bleibt so ein Begriff liegen, ein späterer Lauf legt ihn an.
+        $erklaerungPflicht = ! (collect(Schema::getColumns('glossary_terms'))->firstWhere('name', 'erklaerung')['nullable'] ?? true);
+
         foreach (\App\Models\GlossaryTerm::where('locale', Language::standardCode())->get() as $begriff) {
             $en = $daten[$begriff->slug] ?? null;
 
-            if (! $en || \App\Models\GlossaryTerm::where('locale', 'en')
-                ->where('uebersetzungs_gruppe', $begriff->uebersetzungs_gruppe)->exists()) {
+            if (! $en || ($erklaerungPflicht && blank($en['erklaerung'] ?? null))
+                || \App\Models\GlossaryTerm::where('locale', 'en')
+                    ->where('uebersetzungs_gruppe', $begriff->uebersetzungs_gruppe)->exists()) {
                 continue;
             }
 
