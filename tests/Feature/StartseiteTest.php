@@ -43,6 +43,17 @@ class StartseiteTest extends TestCase
         $this->get('/')->assertOk();
     }
 
+    /**
+     * KEV-284: Auf dem Handy und Tablet rechts ausgerichtet, sonst schnitt
+     * der Ausschnitt die Blätterschatten weg. Am Computer links wie bisher.
+     */
+    public function test_hintergrundbild_unter_lg_rechts_ausgerichtet(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('#<img[^>]*titelbilder/startseite[^>]*class="[^"]*object-\[85%_100%\] lg:object-\[0%_100%\]#s', $html);
+    }
+
     public function test_verein_kann_die_ueberschrift_im_panel_aendern(): void
     {
         /*

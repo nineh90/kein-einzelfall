@@ -68,12 +68,15 @@
          28.09.2026 war es ein Steinstapel; der Verein will auf der Startseite
          aber das Logo statt der Steine (KEV-36, noch einmal bestätigt).
          Ein leichter Schleier von links hält den Text lesbar, auf dem Handy
-         steht er über dem ganzen Bild. Schmuck: alt="". --}}
+         steht er über dem ganzen Bild. Schmuck: alt="".
+         Unter lg rechts ausgerichtet (KEV-284): Hochkant passt nur ein
+         Viertel der Breite hinein, links ausgerichtet war das die leere
+         Wand, die Blätterschatten rechts fielen weg. --}}
     @if ($bild)
         <div class="absolute inset-0 -z-10">
             <img src="{{ bildadresse($bild) }}" @if ($srcset) srcset="{{ $srcset }}" sizes="100vw" @endif
                  alt="" width="2000" height="1116" fetchpriority="high"
-                 class="h-full w-full object-cover object-[0%_100%]">
+                 class="h-full w-full object-cover object-[85%_100%] lg:object-[0%_100%]">
             <div aria-hidden="true" class="absolute inset-0 bg-cream/60 md:hidden"></div>
             <div aria-hidden="true"
                  class="absolute inset-0 hidden bg-linear-to-r from-cream/80 from-10% via-cream/50 via-50% to-transparent md:block"></div>
