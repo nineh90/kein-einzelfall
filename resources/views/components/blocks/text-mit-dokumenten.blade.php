@@ -45,9 +45,13 @@
             <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
                 :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'" />
         @else
-            <x-blocks.download-list :rahmen="false" :auf="$auf"
-                :titel="$dok['titel'] ?? null"
-                :dokumente="$dok['dokumente'] ?? []" />
+            {{-- Neben langem Text in der Mitte der Höhe statt oben, sonst
+                 bleibt darunter viel Leere (KEV-226, Nils' Review). --}}
+            <div class="lg:self-center">
+                <x-blocks.download-list :rahmen="false" :auf="$auf"
+                    :titel="$dok['titel'] ?? null"
+                    :dokumente="$dok['dokumente'] ?? []" />
+            </div>
         @endif
     </div>
 </section>
