@@ -68,8 +68,12 @@ class VereinsseiteSeeder extends Seeder
     /*
      * Die beiden Schlusszeilen als Leitsatz in Handschrift, wie „Für
      * Sichtbarkeit. Für eine Stimme. Für Unterstützung.“ auf der Startseite.
+     * Seit Nils' Review zu KEV-173 auf zwei Zeilen, wie in Taddis Vorlage.
      */
-    public const HAND = 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung. Gemeinsam KE!N EINZELFALL.';
+    public const HAND = "Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.\nGemeinsam KE!N EINZELFALL.";
+
+    /** Der Leitsatz bis dahin, in einer Zeile. */
+    public const HAND_EINZEILIG = 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung. Gemeinsam KE!N EINZELFALL.';
 
     /** KEV-174: rechts neben dem Text, mit Bild und Unterzeile der Seiten. */
     public const KARTEN = [
@@ -124,6 +128,19 @@ class VereinsseiteSeeder extends Seeder
             'position' => $text->position + 1,
             'data' => self::KARTEN,
         ]);
+    }
+
+    /**
+     * KEV-173, Nils' Review: „Gemeinsam KE!N EINZELFALL.“ in eine eigene
+     * Zeile. Nur wo der Leitsatz noch einzeilig so dasteht.
+     */
+    public static function leitsatzZweizeilig(): void
+    {
+        $seite = self::seite();
+
+        $seite?->blocks()->where('typ', 'text')->get()
+            ->filter(fn ($b) => ($b->data['hand'] ?? null) === self::HAND_EINZEILIG)
+            ->each(fn ($b) => $b->update(['data' => array_replace($b->data, ['hand' => self::HAND])]));
     }
 
     /** KEV-173: Taddis neuer Text, nur wo noch der der Altseite steht. */

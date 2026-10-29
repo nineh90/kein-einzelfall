@@ -54,7 +54,26 @@ class VereinsseiteTest extends TestCase
         // Alle sechs Absätze offen, nichts hinter „Weiterlesen“.
         $this->assertStringNotContainsString('weitere Absätze', $html);
         $this->assertMatchesRegularExpression(
-            '#<p class="[^"]*font-hand[^"]*">Für Sichtbarkeit\. Für eine Stimme\. Für Unterstützung\. Gemeinsam KE!N EINZELFALL\.</p>#', $html);
+            '#<p class="[^"]*whitespace-pre-line[^"]*font-hand[^"]*">Für Sichtbarkeit\. Für eine Stimme\. Für Unterstützung\.\nGemeinsam KE!N EINZELFALL\.</p>#', $html);
+    }
+
+    /** KEV-173, Nils' Review: „Gemeinsam KE!N EINZELFALL.“ in einer eigenen Zeile, auch per Migration. */
+    public function test_migration_setzt_den_leitsatz_zweizeilig(): void
+    {
+        $block = Page::where('slug', 'verein')->where('locale', 'de')->first()->blocks()->where('typ', 'text')->first();
+        $block->update(['data' => array_replace($block->data, ['hand' => VereinsseiteSeeder::HAND_EINZEILIG])]);
+
+        $migration = require database_path('migrations/2026_10_29_120000_verein_leitsatz_zweizeilig.php');
+        $migration->up();
+        $this->assertSame(VereinsseiteSeeder::HAND, $block->fresh()->data['hand']);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $this->assertSame("For visibility. For a voice. For support.\nTogether, KE!N EINZELFALL.", $woerterbuch[VereinsseiteSeeder::HAND]['en']);
+
+        // Ein im Panel geänderter Leitsatz bleibt.
+        $block->update(['data' => array_replace($block->data, ['hand' => 'Eigener Leitsatz.'])]);
+        $migration->up();
+        $this->assertSame('Eigener Leitsatz.', $block->fresh()->data['hand']);
     }
 
     /** KEV-173: Bestehende Seiten bekommen den Text per Migration, Englisch mit. */

@@ -612,11 +612,13 @@ class PageForm
                                 ]),
 
                             // --- Aufmacher ---
-                            TextInput::make('data.hand')
+                            Textarea::make('data.hand')
                                 ->label('Handschriftlicher Zusatz')
+                                ->rows(2)
                                 ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'donation_options'], true))
                                 ->helperText('Ein kurzer Leitsatz, der wie mit der Hand '
-                                    .'danebengeschrieben aussieht. Kann leer bleiben.'),
+                                    .'danebengeschrieben aussieht. Mit der Eingabetaste setzt du '
+                                    .'einen Zeilenumbruch. Kann leer bleiben.'),
 
                             // Unterzeile teilen sich Einstiegskarten und
                             // Themenliste — beide zeigen sie unter der Überschrift.

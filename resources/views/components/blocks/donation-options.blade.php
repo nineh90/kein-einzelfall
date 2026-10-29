@@ -78,7 +78,7 @@
                      unter der Einleitung statt unter der Überschrift, als
                      Schlusssatz (Taddi). --}}
                 @if ($hand)
-                    <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
+                    <p class="mt-4 whitespace-pre-line font-hand text-2xl text-green">{{ $hand }}</p>
                 @endif
 
                 @if ($mehr)

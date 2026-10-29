@@ -113,10 +113,12 @@
     {{-- Nebeneinander rücken Leitsatz und Knopf zusammen an das untere Ende
          der Spalte. So stehen in benachbarten Spalten beide auf einer Höhe,
          auch wenn die Absätze darüber verschieden lang sind (KEV-32). --}}
+    {{-- whitespace-pre-line: Ein Zeilenumbruch aus dem Panel bleibt stehen
+         („…Für Unterstützung.⏎Gemeinsam KE!N EINZELFALL.“, KEV-173). --}}
     @if ($hand || $cta)
         <div @class(['mt-auto pt-4' => $fuellen])>
             @if ($hand)
-                <p class="mt-4 font-hand text-2xl text-green">{{ $hand }}</p>
+                <p class="mt-4 whitespace-pre-line font-hand text-2xl text-green">{{ $hand }}</p>
             @endif
 
             @if ($cta)

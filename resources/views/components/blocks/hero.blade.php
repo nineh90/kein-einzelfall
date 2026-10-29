@@ -143,9 +143,8 @@
             </div>
 
             @if ($hand)
-                <p class="mt-3 text-center font-hand text-2xl text-green lg:text-[1.6875rem]">
-                    {{ $hand }}
-                </p>
+                {{-- Text ohne Umbruch drumherum, den hielte pre-line sonst auch. --}}
+                <p class="mt-3 whitespace-pre-line text-center font-hand text-2xl text-green lg:text-[1.6875rem]">{{ $hand }}</p>
             @endif
         </div>
     </div>
