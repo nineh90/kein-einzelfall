@@ -139,6 +139,13 @@ class UeberUnsSeiteTest extends TestCase
         $migration = require database_path('migrations/2026_10_26_200000_team_kurzfassung_ganze_saetze.php');
         $migration->up();
         $this->assertSame($richtig, $tanja->fresh()->kurzprofil);
+
+        // Auch die englischen Ausgangsdaten: Eine frisch aufgesetzte Datenbank
+        // bekommt sie ohne die Migration (Nils' Review).
+        $englisch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen-team.json')), true);
+        foreach ($englisch as $name => $felder) {
+            $this->assertDoesNotMatchRegularExpression('/\p{L}(\.\.\.|…)$/u', (string) ($felder['kurzprofil'] ?? ''), "{$name} (en)");
+        }
     }
 
     /** KEV-188: Taddis Text mit Absätzen und „– DANKE! Herr und Frau Unbekannt“, auch per Migration. */
