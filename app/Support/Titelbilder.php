@@ -294,6 +294,9 @@ class Titelbilder
      *    die obersten Unterschriften.
      *  - Bürokratie-Labyrinth (Gruppe, KEV-228): Labyrinth aus Papier links,
      *    zwischen 17 und 75 % der Höhe; mit 45 % bleibt es ganz.
+     *  - Schreibwerkstatt (Gruppe, KEV-282): offenes Notizbuch mit „Was heißt
+     *    Nebel rückwärts“ bei 42 % der Höhe, Füller daneben; mit 50 % bleiben
+     *    Satz und Füllerspitze von 1024 bis 2560 px zu sehen.
      *  - Seelenfarben (Gruppe, KEV-229): Pinsel und Aquarell-Kreis oben links,
      *    der Kreis zwischen 12 und 75 % der Höhe. Unten ausgerichtet fehlte
      *    ab 1400 px sein oberer Rand.
@@ -336,6 +339,7 @@ class Titelbilder
         self::ORDNER.'/projekte.webp' => 40,
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
         self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
+        self::ORDNER.'/gruppe-schreibwerkstatt.webp' => 50,
         self::ORDNER.'/ehrenamtsmessen.webp' => 55,
         self::ORDNER.'/kontakt.webp' => 60,
         self::ORDNER.'/petitionen.webp' => 40,

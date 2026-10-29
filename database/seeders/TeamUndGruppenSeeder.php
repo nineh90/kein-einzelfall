@@ -529,6 +529,8 @@ class TeamUndGruppenSeeder extends Seeder
         ],
         [
             'slug' => 'schreibwerkstatt', 'status' => 'geplant',
+            // KEV-282: Bild von Taddi (offenes Notizbuch mit Füller)
+            'titelbild' => '/img/titelbilder/gruppe-schreibwerkstatt.webp',
             'name' => 'Zwischen den Zeilen',
             'teaser' => 'Die Schreibwerkstatt',
             'absaetze' => [
