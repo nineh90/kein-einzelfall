@@ -9,10 +9,16 @@
 
     $istKopf = $variant === 'kopf';
     $suchId = 'sprachsuche-'.$variant;
+
+    // Suchen lohnt erst bei einer langen Liste. Bei Deutsch und Englisch
+    // stand über zwei Einträgen ein Suchfeld (Kevin, 29.10.2026: „Blödsinn
+    // bei 2 Sprachen“). Ab sieben passt die Liste nicht mehr auf einen Blick.
+    $mitSuche = $aktiv->count() >= 7;
 @endphp
 
 {{--
-    Sprachumschalter — Weltkugel-Knopf mit aufklappbarer, durchsuchbarer Liste.
+    Sprachumschalter — Weltkugel-Knopf mit aufklappbarer Liste, ab sieben
+    Sprachen mit Suchfeld darüber.
 
     Vorbild ist der Umschalter von jw.org: ein Knopf mit Weltkugel, der ein Panel
     mit allen Sprachen öffnet. Die alte Linkliste (》DE EN RU《) sah nicht nur
@@ -66,13 +72,15 @@
                 {{-- Gemeinsamer Inhalt beider Varianten: Suche · Liste · Leermeldung. --}}
 
                 {{-- hidden = ohne JavaScript unsichtbar. Das Skript blendet es ein. --}}
-                <div hidden data-sprachsuche-wrap class="mb-2 px-1">
-                    <label class="sr-only" for="{{ $suchId }}">{{ __('rahmen.sprache.suchen') }}</label>
-                    <input id="{{ $suchId }}" type="search" data-sprachsuche autocomplete="off"
-                           placeholder="{{ __('rahmen.sprache.suchen') }}"
-                           class="w-full rounded-full border border-line bg-cream px-4 py-2 text-sm
-                                  text-ink placeholder:text-ink-soft focus-visible:border-green" />
-                </div>
+                @if ($mitSuche)
+                    <div hidden data-sprachsuche-wrap class="mb-2 px-1">
+                        <label class="sr-only" for="{{ $suchId }}">{{ __('rahmen.sprache.suchen') }}</label>
+                        <input id="{{ $suchId }}" type="search" data-sprachsuche autocomplete="off"
+                               placeholder="{{ __('rahmen.sprache.suchen') }}"
+                               class="w-full rounded-full border border-line bg-cream px-4 py-2 text-sm
+                                      text-ink placeholder:text-ink-soft focus-visible:border-green" />
+                    </div>
+                @endif
 
                 <ul data-sprachliste class="max-h-72 overflow-y-auto">
                     @foreach ($aktiv as $sprache)
@@ -116,9 +124,11 @@
                 </ul>
 
                 {{-- Nur die Suche kann sie zeigen; ohne Treffer bleibt das Panel sonst leer. --}}
-                <p hidden data-keine-treffer class="px-3 py-3 text-sm text-ink-soft">
-                    {{ __('rahmen.sprache.keine_treffer') }}
-                </p>
+                @if ($mitSuche)
+                    <p hidden data-keine-treffer class="px-3 py-3 text-sm text-ink-soft">
+                        {{ __('rahmen.sprache.keine_treffer') }}
+                    </p>
+                @endif
 
         @if ($istKopf)
                 </div>
