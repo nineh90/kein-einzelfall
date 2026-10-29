@@ -191,6 +191,11 @@ class UeberUnsSeiteTest extends TestCase
         $migration->up();
         $this->assertSame('donation_options', $seite->blocks()->get()->sortBy('position')->last()->typ);
         $this->assertFalse($seite->blocks()->where('typ', 'cta_band')->exists());
+
+        // Läuft der Team-Seeder nach dem Band-Seeder noch einmal, baut er die
+        // Seite neu auf. Der Kasten muss danach wieder da sein (Nils' Review).
+        $this->seed(TeamUndGruppenSeeder::class);
+        $this->assertSame('donation_options', $seite->blocks()->get()->sortBy('position')->last()->typ);
     }
 
     /** KEV-190: Unten dasselbe 3 × 3 wie auf der Vereinsseite, die eigene Seite markiert statt verlinkt. */

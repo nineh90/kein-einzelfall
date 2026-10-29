@@ -969,6 +969,9 @@ class TeamUndGruppenSeeder extends Seeder
         // Seite nach der Gliederung der Altseite zusammensetzen.
         $this->seiteUmbauen('ueber-uns-vorstand-und-team', 'team_grid', []);
         $this->teamseiteAufbauen();
+        // teamseiteAufbauen() löscht alle Blöcke, auch den Spendenkasten
+        // (KEV-189). Nicht dort selbst, weil alte Migrationen es aufrufen.
+        UnterstuetzungsbandSeeder::spendenStattBand();
 
         $this->seiteUmbauen('selbsthilfegruppen', 'group_list', [
             'titel' => 'Unsere Selbsthilfegruppen',
