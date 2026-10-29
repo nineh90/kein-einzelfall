@@ -84,7 +84,7 @@ ansehen, bei 1024, 1440 und 1920 px. Jedes Bild liegt zweimal vor:
 | Beschwerdemanagement | Briefschlitz mit Umschlag an heller Putzwand; von Taddi geliefert (KEV-80), ausgerichtet auf 35 % |
 | Arbeitsgruppen | Holztisch mit Mappe, Karten und zwei Stiften, Stühle; von Taddi geliefert (KEV-83, statt Papier, Vase, Leinen), mittig ausgerichtet (`Titelbilder::FOKUS`, 50 %). Steht auch auf jeder AG-Seite, solange die AG im Panel kein eigenes Titelbild hat |
 | Anfragen | Briefumschlag auf Holztisch |
-| Kontakt | zwei Becher nebeneinander am langen Tisch |
+| Kontakt | Notizbuch mit Stift und Handy auf Stein, Licht durch Blätter; von Taddi geliefert (KEV-266, Drive-Ordner „7. Kontakt & Austausch“). Rechts um Wand verlängert (2,58 : 1, Nils' Review: am Computer fehlten Stift und Handy), Motiv zwischen 40 und 80 % der Höhe, ausgerichtet auf 60 % |
 | Wissen | Bücherstapel vor abblätternder Wand, davor ein aufgeschlagenes Buch; von Taddi geliefert (KEV-143, vorher unser Bücherstapel mit Leinenband). Rechts um Wand verlängert (2,58 : 1), Bücher zwischen 25 und 84 % der Höhe, ausgerichtet auf 60 % |
 | Raum für Ungesagtes | offene Holztür in einem dunklen Raum, dahinter helles Licht; von Taddi geliefert (KEV-159, Drive-Ordner „4. Raum für Ungesagtes“, „0 Deine Stimme – Raum für ungesagtes“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 25 %, damit die Tür vom Rahmen bis zur Schwelle zu sehen ist |
 | Unüberhörbar | Tonbandgerät mit zwei Spulen, davor eine Kassette; von Taddi geliefert (KEV-159, „4. Unüberhörbar“). Rechts um Wand verlängert (2,58 : 1), ausgerichtet auf 60 % |

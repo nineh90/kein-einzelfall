@@ -255,6 +255,10 @@ class Titelbilder
      *    um Fläche verlängert, Stempel ab 7 %, Blatt bis 93 % der Höhe;
      *    Mit 10 % bleibt der Stempel bis 2560 px ganz, unten fällt dort ein
      *    Teil des Blatts weg.
+     *  - Kontakt: Notizbuch, Stift und Handy (KEV-266). Rechts um Wand
+     *    verlängert, Motiv zwischen 40 und 80 % der Höhe; mit 60 % bleibt
+     *    alles von 1024 bis 2560 px ganz. Vorher in 16:9 fehlten am
+     *    Computer Stift und Handy (Nils' Review).
      *  - Gericht & Verfahren: Richterhammer auf Block, davor Akten (KEV-259).
      *    Rechts um Wand verlängert, Hammer ab 30 %, Akten bis 85 % der Höhe;
      *    Mit 60 % bleibt der Hammer auch bei 2560 px ganz.
@@ -333,6 +337,7 @@ class Titelbilder
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
         self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
         self::ORDNER.'/ehrenamtsmessen.webp' => 55,
+        self::ORDNER.'/kontakt.webp' => 60,
         self::ORDNER.'/petitionen.webp' => 40,
         self::ORDNER.'/presse.webp' => 40,
     ];

@@ -29,8 +29,10 @@ class KontaktbereichTest extends TestCase
         // Ab <main: Die Meta-Beschreibung im Kopf nennt den alten Titel noch.
         $html = strstr($this->get('/kontakt')->assertOk()->getContent(), '<main');
 
-        // KEV-266: Taddis Bild (Notizbuch, Stift, Handy) unter demselben Namen.
-        $this->assertSame([2000, 1126], array_slice(getimagesize(public_path('img/titelbilder/kontakt.webp')), 0, 2));
+        // KEV-266: Taddis Bild (Notizbuch, Stift, Handy) unter demselben Namen,
+        // seit Nils' Review rechts auf 2,58 : 1 verlängert wie die anderen.
+        $this->assertSame([2000, 775], array_slice(getimagesize(public_path('img/titelbilder/kontakt.webp')), 0, 2));
+        $this->assertSame(60, \App\Support\Titelbilder::FOKUS[\App\Support\Titelbilder::ORDNER.'/kontakt.webp'] ?? null);
 
         // KEV-271, KEV-272: kurze Überschrift, Taddis Text statt der Anschrift.
         $this->assertMatchesRegularExpression('/<h2[^>]*>\s*Kontaktmöglichkeiten\s*<\/h2>/u', $html);
