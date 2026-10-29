@@ -154,6 +154,13 @@ class Seitenkontext
     private function ueberbereich(array $bereich): ?array
     {
         foreach (Navigation::haupt() as $punkt) {
+            // Nicht der Bereich selbst: „Kontakt“ führt eine Unterseite mit
+            // seiner eigenen Adresse (KEV-267, Nils' Review: „Start › Kontakt ›
+            // Kontakt › Landesstellen“).
+            if ($punkt === $bereich) {
+                continue;
+            }
+
             if (in_array($bereich['url'], array_column($punkt['children'] ?? [], 'url'), true)) {
                 return $punkt;
             }
@@ -192,7 +199,11 @@ class Seitenkontext
                 $krumen[] = ['label' => $ueber['label'], 'url' => $ueber['url']];
             }
 
-            $krumen[] = ['label' => $bereich['label'], 'url' => $bereich['url']];
+            // Auf /kontakt ist der Bereich die Seite selbst, sie steht als
+            // aktuelle Seite am Ende.
+            if ($bereich['url'] !== $this->eigeneAdresse()) {
+                $krumen[] = ['label' => $bereich['label'], 'url' => $bereich['url']];
+            }
         } elseif (($uebersicht = $this->istBereichsUebersicht()) && ($ueber = $this->ueberbereich($uebersicht))) {
             // Die Übersicht der Unterebene selbst: Start › Wissen › Klartext …
             $krumen[] = ['label' => $ueber['label'], 'url' => $ueber['url']];

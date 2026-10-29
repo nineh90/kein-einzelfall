@@ -151,4 +151,24 @@ class KontaktbereichTest extends TestCase
         $this->assertStringNotContainsString('muss ausgefüllt werden', $html);
         $this->assertStringNotContainsString('Du entscheidest, was du schreibst', $html);
     }
+
+    /** KEV-267, Nils' Review: „Kontakt“ nur einmal in den Brotkrumen, auch für Suchmaschinen. */
+    public function test_brotkrumen_ohne_doppeltes_kontakt(): void
+    {
+        $erwartet = [
+            '/kontakt' => ['Start', 'Kontakt'],
+            '/landesstellen' => ['Start', 'Kontakt', 'Landesstellen'],
+            '/anfragen' => ['Start', 'Kontakt', 'Anfragen & Austausch'],
+        ];
+
+        foreach ($erwartet as $pfad => $namen) {
+            $html = $this->get($pfad)->assertOk()->getContent();
+
+            preg_match('#<script type="application/ld\+json"[^>]*>\s*(\{"@context":"https://schema.org","@type":"BreadcrumbList".*?)\s*</script>#s', $html, $treffer);
+            $this->assertSame($namen, array_column(json_decode($treffer[1], true)['itemListElement'], 'name'), $pfad);
+
+            preg_match('#<nav aria-label="Sie sind hier".*?</nav>#s', $html, $nav);
+            $this->assertSame(1, substr_count(strip_tags($nav[0]), 'Kontakt'), $pfad);
+        }
+    }
 }
