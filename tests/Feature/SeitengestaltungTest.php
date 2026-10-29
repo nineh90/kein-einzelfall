@@ -254,8 +254,19 @@ class SeitengestaltungTest extends TestCase
         $this->assertStringContainsString('Unsere Beitrags- und Mitgliederordnung ergänzt die Satzung', $html);
         $this->assertStringContainsString('worauf sich eine Mitgliedschaft bei KE!N EINZELFALL e.V. stützt.', $html);
 
-        $this->assertStringContainsString('Hilfe zum Ausfüllen', $html);
+        // Nils' Review zu KEV-203: in der Liste wie im Abschnitt darüber.
+        $this->assertMatchesRegularExpression('#id="dl-dokumente-zum-herunterladen".*Ausfüllhilfe zum Mitgliedsantrag#s', $html);
+        $this->assertStringNotContainsString('Hilfe zum Ausfüllen', $html);
         $this->assertStringNotContainsString('Hlfe', $html);
+
+        // Bestehende Datenbanken per Migration.
+        $block = Page::where('slug', 'mitgliedschaft')->where('locale', 'de')->first()->blocks()->where('typ', 'download_list')->first();
+        $data = $block->data;
+        $data['dokumente'][1]['titel'] = 'Hilfe zum Ausfüllen';
+        $block->update(['data' => $data]);
+        $migration = require database_path('migrations/2026_10_29_130000_mitgliedschaft_ausfuellhilfe_einheitlich.php');
+        $migration->up();
+        $this->assertSame('Ausfüllhilfe zum Mitgliedsantrag', $block->fresh()->data['dokumente'][1]['titel']);
     }
 
     /** KEV-88: neuer Text von Taddi im ersten Abschnitt der Satzung. */

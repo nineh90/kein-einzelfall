@@ -404,7 +404,9 @@ class AltseiteSeeder extends Seeder
 
     /** Tippfehler in Linktexten der Altseite. */
     public const DOKUMENT_KORREKTUREN = [
-        'Hlfe zum Ausfüllen' => 'Hilfe zum Ausfüllen', // KEV-95, Mitgliedschaft
+        // KEV-95, Mitgliedschaft. Seit Nils' Review zu KEV-203 so wie der
+        // Abschnitt darüber und /formulare (vorher „Hilfe zum Ausfüllen“).
+        'Hlfe zum Ausfüllen' => 'Ausfüllhilfe zum Mitgliedsantrag',
         // /veranstaltungen: Elementor-Knöpfe in Grossbuchstaben
         'TEILNAHMEVEREINBARUNG' => 'Teilnahmevereinbarung',
         'GRUPPENREGELN' => 'Gruppenregeln',
