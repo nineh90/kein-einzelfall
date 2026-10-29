@@ -41,10 +41,8 @@
                 <input type="hidden" name="kategorie" value="{{ $aktiveKategorie->slug }}">
             @endif
 
-            <button type="submit"
-                    class="rounded-full bg-green px-5 py-2.5 font-medium text-on-green hover:bg-green-deep">
-                {{ __('Suchen') }}
-            </button>
+            {{-- Wie alle Knöpfe umrandet, gefüllt nur der Notausgang (KEV-44) --}}
+            <x-ui.button type="submit" variant="primary" class="shrink-0">{{ __('Suchen') }}</x-ui.button>
 
             @if ($suchbegriff || $aktiveKategorie)
                 <a href="{{ sprachlink('blog.index') }}"

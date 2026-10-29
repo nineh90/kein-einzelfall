@@ -262,11 +262,8 @@
         </div>
 
         <div>
-            <button type="submit"
-                    class="inline-flex items-center justify-center gap-2 rounded-full bg-green
-                           px-6 py-3 font-medium text-on-green transition-colors hover:bg-green-deep">
-                {{ __('Nachricht senden') }}
-            </button>
+            {{-- Wie alle Knöpfe umrandet, gefüllt nur der Notausgang (KEV-44) --}}
+            <x-ui.button type="submit" variant="primary">{{ __('Nachricht senden') }}</x-ui.button>
         </div>
 
         <ul class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-soft">

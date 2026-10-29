@@ -364,7 +364,8 @@
                                             @unless ($uebersichtDrin)
                                                 <a href="{{ $item['url'] }}"
                                                    @if (request()->is(ltrim($item['url'], '/'))) aria-current="page" @endif
-                                                   class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-green px-4 py-2 text-sm font-medium text-on-green no-underline">
+                                                   class="mb-3 inline-flex items-center gap-1.5 rounded-full border border-green px-4 py-2 text-sm font-medium text-green no-underline
+                                                          hover:bg-green hover:text-on-green focus-visible:bg-green focus-visible:text-on-green">
                                                     {{ __('rahmen.uebersicht') }}: {{ $item['label'] }}
                                                     <x-ui.icon name="arrow-right" :size="16" />
                                                 </a>
