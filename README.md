@@ -36,7 +36,6 @@ PORT=8080 bin/start    # anderer Port
 | `/glossar` | Abkürzungen und Fachbegriffe, im Panel pflegbar |
 | `/trigger-warnung` | der Hinweis, der auf jeder Seite vorgeschaltet erscheint |
 | `/admin` | Verwaltung (Filament) |
-| `/module-demo` | Vorschau der Inhaltsmodule (`noindex`, fliegt später raus) |
 
 ### Verwaltung
 

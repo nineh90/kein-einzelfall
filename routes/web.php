@@ -175,32 +175,6 @@ Route::prefix('{locale}')
     ->group($oeffentlicheRouten);
 
 /*
- * Interne Vorschau der Inhaltsmodule. Nicht Teil der Website, per noindex
- * ausgenommen. Wird entfernt, sobald die echten Seiten stehen.
- * Bewusst nur auf Deutsch — kein Kundeninhalt.
- */
-Route::get('/module-demo', function () {
-    $manifest = json_decode(file_get_contents(base_path('docs/dokumente-manifest.json')), true);
-
-    $dokumente = collect($manifest)
-        ->filter(fn ($d) => in_array('/erwerbsminderungsrente/', $d['verlinkt_auf']))
-        ->sortBy('titel')
-        // Wie der AltseiteSeeder: die eigene Kopie unter /dokumente, nicht
-        // mehr die Altseite. Mit der externen Adresse zeigte die Vorschau
-        // „von kein-einzelfall.de“ statt Dateityp und Grösse — also nicht
-        // das, was auf den echten Seiten steht.
-        ->map(fn ($d) => [
-            'titel' => $d['titel'],
-            'url' => Dokument::pfad($d['alt_url']),
-            'bytes' => Dokument::groesse($d['alt_url']) ?? $d['bytes'],
-        ])
-        ->values()
-        ->all();
-
-    return view('module-demo', compact('dokumente'));
-});
-
-/*
  * Dokument-Adressen der WordPress-Altseite.
  *
  * Sie sind indexiert, extern verlinkt und stehen in PDFs, die der Verein

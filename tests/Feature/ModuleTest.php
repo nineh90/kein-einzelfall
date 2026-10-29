@@ -2,15 +2,20 @@
 
 namespace Tests\Feature;
 
+use App\Support\Dokument;
 use Tests\TestCase;
 
+/**
+ * Die Inhaltsmodule, direkt gezeichnet. Bis 29.10.2026 liefen diese Tests
+ * über die interne Vorschau /module-demo, die vor dem Go-Live entfernt wurde;
+ * die Fusszeile wird seitdem auf echten Seiten geprüft.
+ */
 class ModuleTest extends TestCase
 {
     public function test_hilfe_box_zeigt_anrufbare_notfallnummern(): void
     {
-        $r = $this->get('/module-demo');
+        $r = $this->blade('<x-blocks.hilfe-box />');
 
-        $r->assertOk();
         // tel:-Links, damit mobil ein Tipp genügt — dafür existiert die Box.
         foreach (config('hilfe.nummern') as $n) {
             $r->assertSee('tel:'.$n['tel'], false);
@@ -23,9 +28,7 @@ class ModuleTest extends TestCase
     /** KEV-46: Kurzfassung in zwei Spalten, so wie Taddi sie aufgeteilt hat. */
     public function test_kurzfassung_der_hilfe_box_hat_zwei_spalten(): void
     {
-        $html = $this->get('/module-demo')->getContent();
-        $kurz = substr($html, strpos($html, 'Sofort jemanden erreichen'));
-        $kurz = substr($kurz, 0, strpos($kurz, '</section>'));
+        $kurz = (string) $this->blade('<x-blocks.hilfe-box titel="Sofort jemanden erreichen" :kompakt="true" />');
 
         $this->assertStringContainsString('md:grid-cols-2', $kurz);
         $this->assertMatchesRegularExpression(
@@ -37,7 +40,8 @@ class ModuleTest extends TestCase
     public function test_inhaltshinweis_und_leichte_sprache_brauchen_kein_javascript(): void
     {
         // Natives <details>: funktioniert ohne JS, Screenreader kennen das Muster.
-        $html = $this->get('/module-demo')->getContent();
+        $html = $this->blade('<x-blocks.inhalts-hinweis thema="Gewalt und Traumafolgen"><p>Text</p></x-blocks.inhalts-hinweis>')
+            .$this->blade('<x-blocks.leichte-sprache><p>Wir sind ein Verein.</p></x-blocks.leichte-sprache>');
 
         $this->assertStringContainsString('<details', $html);
         $this->assertStringContainsString('Hinweis zum Inhalt', $html);
@@ -46,7 +50,14 @@ class ModuleTest extends TestCase
 
     public function test_downloads_zeigen_titel_statt_dateiname_und_nennen_groesse(): void
     {
-        $html = $this->get('/module-demo')->getContent();
+        // Die Dokumente der Seite Erwerbsminderungsrente, wie der AltseiteSeeder sie anlegt.
+        $manifest = json_decode(file_get_contents(base_path('docs/dokumente-manifest.json')), true);
+        $dokumente = collect($manifest)
+            ->filter(fn ($d) => in_array('/erwerbsminderungsrente/', $d['verlinkt_auf']))
+            ->map(fn ($d) => ['titel' => $d['titel'], 'url' => Dokument::pfad($d['alt_url']), 'bytes' => Dokument::groesse($d['alt_url']) ?? $d['bytes']])
+            ->values()->all();
+
+        $html = (string) $this->blade('<x-blocks.download-list titel="Erwerbsminderungsrente" :dokumente="$dokumente" />', ['dokumente' => $dokumente]);
 
         // Lesbarer Titel aus dem Linktext der Altseite ...
         $this->assertStringContainsString('Infoblatt', $html);
@@ -95,7 +106,7 @@ class ModuleTest extends TestCase
      */
     public function test_notfallnummern_stehen_in_der_fusszeile_jeder_seite(): void
     {
-        foreach (['/module-demo', '/suche', '/gibt-es-nicht'] as $pfad) {
+        foreach (['/suche', '/gibt-es-nicht'] as $pfad) {
             $html = $this->get($pfad)->getContent();
             $fuss = substr($html, strpos($html, '<footer'));
 
@@ -112,7 +123,7 @@ class ModuleTest extends TestCase
      */
     public function test_fusszeile_zeigt_das_motto_unter_dem_namen(): void
     {
-        $html = $this->get('/module-demo')->getContent();
+        $html = $this->get('/suche')->getContent();
         $fuss = substr($html, strpos($html, '<footer'));
 
         $this->assertMatchesRegularExpression(
@@ -132,7 +143,7 @@ class ModuleTest extends TestCase
      */
     public function test_fusszeile_nennt_unter_kontakt_die_postfaecher(): void
     {
-        $html = $this->get('/module-demo')->getContent();
+        $html = $this->get('/suche')->getContent();
         $fuss = substr($html, strpos($html, '<footer'));
         $fuss = substr($fuss, 0, strpos($fuss, '</footer>'));
 
