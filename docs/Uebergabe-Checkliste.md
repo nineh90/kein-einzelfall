@@ -1204,10 +1204,14 @@ Seite im Panel unter „Titelbild“ ändern.
 Was im Code geht, ist erledigt (`docs/Komponenten.md`, Abschnitt 48). Das hier
 geht nur auf dem Server oder mit Zugängen:
 
-- [ ] **`APP_URL` auf `https://kein-einzelfall.de`** (ohne Schrägstrich am Ende).
-      Daraus bauen canonical, hreflang, Sitemap, og:image und die strukturierten
-      Daten ihre Adressen. Steht dort die Demo-Adresse, zeigt jede Seite auf die
-      Demo.
+- [ ] **Richtige Adresse in canonical, hreflang, Sitemap und og:image.**
+      Laravel baut diese Adressen aus Host und Schema der jeweiligen Anfrage
+      (es gibt kein `URL::forceRootUrl`). Hinter dem Proxy muss deshalb der
+      öffentliche Host ankommen und `https` erkannt werden (`X-Forwarded-Proto`,
+      TrustProxies). Sonst stehen dort interne Adressen oder `http://`. Zum
+      Prüfen nach dem Umzug: Quelltext einer Seite, `<link rel="canonical">`
+      muss mit `https://kein-einzelfall.de/` beginnen. `APP_URL` trotzdem auf
+      `https://kein-einzelfall.de` setzen (Mails, Befehle ohne Anfrage).
 - [ ] **Nur eine Adresse:** `http://` und `www.` per 301 auf
       `https://kein-einzelfall.de` (im Webserver, nicht in Laravel).
 - [ ] **Demo nicht in den Index:** Solange die Demo hinter dem Passwort liegt,

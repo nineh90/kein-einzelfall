@@ -2786,7 +2786,8 @@ Geändert:
 
 Bewusst nicht geändert: Lange Titel (Gruppen, Petitionen) behalten das Muster
 der Altseite „… - Kein Einzelfall e.V.“; Google kürzt sie im Ergebnis.
-Was nur auf dem Server geht: Checkliste B3. Tests: `SeoGrundlagenTest`.
+Die Adressen darin baut Laravel aus der Anfrage (Host, Schema), siehe
+Checkliste B3. Tests: `SeoGrundlagenTest`.
 
 ## 49. Mega-Menü (28.10.2026, Wunsch von Taddi)
 
