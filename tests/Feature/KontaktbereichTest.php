@@ -96,12 +96,13 @@ class KontaktbereichTest extends TestCase
         // Die Freigabe, auf die beide Texte verweisen, unter dem Ablauf.
         $this->assertMatchesRegularExpression('#Wie funktioniert der Service\?.*?href="/dokumente/2026/10/Freigabe-Verarbeitung-und-Speicherung\.pdf"#s', $html);
 
-        // Krisendienste mit den Nummern, vor dem Formular.
+        // Krisendienste mit den Nummern, vor dem Formular. An den Sprungzielen
+        // gemessen: Seit KEV-275 stehen beide Namen auch im Verzeichnis oben.
         $html = strstr($html, '<main');
-        $krisen = strpos($html, 'Krisendienste');
+        $krisen = strpos($html, 'id="hilfe-titel"');
         $this->assertNotFalse($krisen);
-        $this->assertLessThan(strpos($html, 'Kontaktformular'), $krisen);
-        $this->assertLessThan(strpos($html, 'Kontaktformular'), strpos($html, '116 016'));
+        $this->assertLessThan(strpos($html, 'id="formular-titel"'), $krisen);
+        $this->assertLessThan(strpos($html, 'id="formular-titel"'), strpos($html, '116 016', $krisen));
         $this->assertStringNotContainsString('Für den Notfall', $html);
     }
 
@@ -170,5 +171,17 @@ class KontaktbereichTest extends TestCase
             preg_match('#<nav aria-label="Sie sind hier".*?</nav>#s', $html, $nav);
             $this->assertSame(1, substr_count(strip_tags($nav[0]), 'Kontakt'), $pfad);
         }
+    }
+
+    /** KEV-275, Nils' Review: Krisendienste und Kontaktformular stehen auch im Verzeichnis „Auf dieser Seite“. */
+    public function test_verzeichnis_mit_krisendiensten_und_formular(): void
+    {
+        $html = $this->get('/anfragen')->assertOk()->getContent();
+
+        preg_match('#<nav aria-label="Auf dieser Seite" class="hidden lg:block" data-verzeichnis>.*?</nav>#s', $html, $nav);
+        preg_match_all('#href="\#([^"]+)"#', $nav[0], $ziele);
+        $this->assertSame(['hilfe-titel', 'formular-titel'], array_slice($ziele[1], -2));
+        $this->assertStringContainsString('id="hilfe-titel"', $html);
+        $this->assertStringContainsString('id="formular-titel"', $html);
     }
 }

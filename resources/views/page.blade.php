@@ -87,6 +87,9 @@
     // Und Dokumentenlisten mit Überschrift (KEV-193, Taddi auf /satzung: „kann
     // da noch Satzung downloaden hin“). Ihre Überschrift trägt das Ziel
     // „dl-…“. Nicht die neben einem Text: Die stehen im Abschnitt darüber.
+    //
+    // Krisendienste und Kontaktformular mit ihren festen Zielen (KEV-275,
+    // Taddi auf /anfragen: Krisendienste sollen unter „Krisendienste“ stehen).
     $sprungpunkte = $bloecke
         ->map(fn ($b) => match (true) {
             $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null)
@@ -95,6 +98,10 @@
                 => ['anker' => 'spenden', 'titel' => $b->data['titel'] ?? 'Jetzt spenden'],
             $b->typ === 'download_list' && ($b->data['titel'] ?? null) && empty($b->data['neben_text'])
                 => ['anker' => 'dl-'.\Illuminate\Support\Str::slug($b->data['titel']), 'titel' => $b->data['titel']],
+            $b->typ === 'hilfe_box' && ($b->data['titel'] ?? null)
+                => ['anker' => 'hilfe-titel', 'titel' => $b->data['titel']],
+            $b->typ === 'contact_form' && ($b->data['titel'] ?? null)
+                => ['anker' => 'formular-titel', 'titel' => $b->data['titel']],
             default => null,
         })
         ->filter()
