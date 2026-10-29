@@ -35,11 +35,15 @@ return [
              * eines Bereichs in Gruppen nebeneinander statt als lange Liste.
              * Die Namen der Gruppen sind von uns, noch nicht vom Verein.
              * Bereiche ohne `gruppen` zeigen ihre Unterpunkte in einer Spalte.
+             *
+             * Von links nach rechts gelesen dieselbe Reihenfolge wie in
+             * `children` (KEV-178, Nils' Review: „Tätigkeitsberichte“ stand
+             * unter „Über uns“ an vierter statt an letzter Stelle).
              */
             'gruppen' => [
-                ['titel' => 'Über uns', 'eintraege' => ['ueber_uns_vorstand_und_team', 'satzung', 'mitgliedschaft', 'taetigkeits_und_jahresberichte']],
+                ['titel' => 'Über uns', 'eintraege' => ['ueber_uns_vorstand_und_team', 'satzung', 'mitgliedschaft']],
                 ['titel' => 'Haltung & Schutz', 'eintraege' => ['schutz_und_wertekonzept', 'red_flags', 'kinderkodex', 'istanbul_konvention']],
-                ['titel' => 'Mitwirken & Beschwerde', 'eintraege' => ['gremium_ukfb', 'beschwerdemanagement']],
+                ['titel' => 'Mitwirken & Transparenz', 'eintraege' => ['gremium_ukfb', 'beschwerdemanagement', 'taetigkeits_und_jahresberichte']],
             ],
             'children' => [
                 // Reihenfolge seit KEV-178 (Taddi). Gremium UKFB steht nur hier

@@ -188,6 +188,27 @@ class VereinsseiteTest extends TestCase
         $this->assertStringNotContainsString('/gremium-ukfb', $aside);
     }
 
+    /**
+     * KEV-178, Nils' Review: Im Mega-Menü ergeben die Gruppen von links nach
+     * rechts gelesen dieselbe Reihenfolge wie das Menü, in jedem Bereich.
+     */
+    public function test_mega_menue_gruppen_in_menue_reihenfolge(): void
+    {
+        foreach (config('navigation.main') as $bereich) {
+            if (empty($bereich['gruppen'])) {
+                continue;
+            }
+
+            $gruppen = collect($bereich['gruppen'])->flatMap(fn ($g) => $g['eintraege'])->all();
+            $menue = array_values(array_intersect(array_column($bereich['children'], 'schluessel'), $gruppen));
+            $this->assertSame($menue, $gruppen, $bereich['label']);
+        }
+
+        $verein = collect(\App\Support\Navigation::bereiche())->firstWhere('url', '/verein');
+        $letzte = collect(end($verein['spalten'])['eintraege'])->last();
+        $this->assertSame('/taetigkeits-und-jahresberichte', $letzte['url']);
+    }
+
     /** KEV-178: Taddis Reihenfolge im Menü „Verein“, mit Gremium UKFB. */
     public function test_menue_verein_in_taddis_reihenfolge(): void
     {
