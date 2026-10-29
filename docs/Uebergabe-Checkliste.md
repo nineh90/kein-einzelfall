@@ -1139,46 +1139,87 @@ Seite im Panel unter „Titelbild“ ändern.
 
 ## B. Technisch vor dem Go-Live (Kevin)
 
+### B0 · Stand der Prüfung vom 29.10.2026
+
+Jeder Punkt aus B1 ist gegen Code und Demo geprüft (Demo nur lesend). Was
+erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
+
+- [ ] **Wohin geht die Live-Seite?** Die Demo läuft auf Nils' Server. Die
+      Domain kein-einzelfall.de zeigt noch auf all-inkl (85.13.168.30, alte
+      WordPress-Seite). Entscheidung bei Nils und dem Verein.
+- [ ] **Beim Umstellen nur den Web-Eintrag ändern.** Die Postfächer des
+      Vereins liegen ebenfalls bei all-inkl (MX `w0212ffe.kasserver.com`).
+      Nur die A-Einträge für `kein-einzelfall.de` und `www` umstellen, MX und
+      alle Mail-Einträge (SPF, DKIM) bleiben. Sonst kommen keine Mails mehr an.
+- [ ] **Echter Mailversand.** Auf der Demo steht `MAIL_MAILER=log`: Es geht
+      keine Mail raus. Davon hängen Kontakt- und Beschwerdeformular und die
+      SHG-Anmeldung mit Zugangslink ab (KEV-107, KEV-279, KEV-283). Vorschlag:
+      ein Postfach `noreply@kein-einzelfall.de` bei all-inkl als Absender per
+      SMTP. Für KEV-283 will Nils vorher einen Call, wohin welches Formular geht.
+- [ ] **Datenbank-Sicherung** auf dem Live-Server, täglich, mit Aufbewahrung
+      ausserhalb des Servers. Ohne `APP_KEY` (siehe unten) ist eine Sicherung
+      der verschlüsselten Anfragen wertlos, beides gehört zusammen.
+- [ ] **Zugangslinks der Selbsthilfegruppen** im Panel eintragen (Verein).
+      Auf der Demo hat keine der drei offenen Gruppen einen. Ohne Link
+      bekommt nach der Anmeldung niemand einen Zugang.
+- [ ] **Englisch: so live oder abschalten?** Alle englischen Seiten sind als
+      „ungeprüft“ gekennzeichnet und auf `noindex`. Entweder so veröffentlichen
+      oder Englisch im Panel deaktivieren, bis jemand gegengelesen hat (A6).
+- [ ] **Rechtstexte:** Entwürfe für Hosting, E-Mail, Microsoft Teams und den
+      Bildnachweis liegen in `docs/Entwurf-Rechtstexte-GoLive.md` (siehe die
+      beiden Punkte zu Impressum und Datenschutz unten).
+
 ### B1 · Muss
-- [ ] **Hochladen im Panel: Ablage muss einen Deploy überleben.** Bilder und
+- [x] **Hochladen im Panel: Ablage muss einen Deploy überleben.**
+      *Geprüft 29.10.2026: Auf der Demo ist `/var/www/html/storage` ein
+      Docker-Volume (`kein-einzelfall_ke_storage`). Auf dem Live-Server
+      genauso einrichten.* Bilder und
       Dokumente, die der Verein hochlädt, liegen in `storage/app/public/medien`
       (seit 21.10.2026). Der Deploy baut das Image neu und tauscht die
       Container (`/docker/kein-einzelfall/deploy.sh`). Ist `storage/app/public`
       dort kein Volume, sind nach dem nächsten Deploy alle hochgeladenen Dateien
       weg. Bitte auf dem Server prüfen und sonst ein Volume einrichten. Zum
       Prüfen: ein Bild hochladen, deployen, Bild noch da?
-- [ ] **PHP-Grenzen fürs Hochladen:** `upload_max_filesize` mindestens `20M`,
+- [x] *Demo 29.10.2026: 100M / 100M.* **PHP-Grenzen fürs Hochladen:** `upload_max_filesize` mindestens `20M`,
       `post_max_size` mindestens `25M`. Die Vorgabe von PHP (2 MB) lässt die
       meisten PDFs scheitern. Bilder verkleinert schon der Browser, die kommen
       auch so durch. Die Verknüpfung `php artisan storage:link` ist nicht nötig:
       Fehlt sie, liefert eine Route die Dateien aus (schneller ist sie aber).
 - [ ] **`APP_KEY` sichern.** Die Verschlüsselung der Anfragen hängt daran. Geht der
       Schlüssel verloren, sind alle Anfragen unwiederbringlich weg.
-- [ ] **`SESSION_SECURE_COOKIE=true`** setzen. Steht derzeit auf `NULL`, damit ginge
+- [ ] **`SESSION_SECURE_COOKIE=true`** setzen. *Fehlt auch auf der Demo (29.10.2026).* Steht derzeit auf `NULL`, damit ginge
       das Session-Cookie auch über HTTP raus.
-- [ ] **Admin-Konto von Hand anlegen.** Lokal legt `bin/start` per `AdminSeeder`
+- [x] *Demo hat ein Konto (29.10.2026).* **Admin-Konto von Hand anlegen.** Lokal legt `bin/start` per `AdminSeeder`
       `admin@kein-einzelfall.test` / `kein-einzelfall` an. Der Seeder überspringt
       sich in Produktion selbst — dort also `php artisan make:filament-user` und
       anschliessend `panel_zugang` setzen (siehe README).
-- [ ] **Beispieldaten löschen:** aktuell zwei Termine. Blogbeiträge und Anfragen
+- [x] *29.10.2026: keine Termine mehr im Bestand.* **Beispieldaten löschen:** aktuell zwei Termine. Blogbeiträge und Anfragen
       sind derzeit keine im Bestand — vor dem Go-Live gegenprüfen.
-- [ ] **`/module-demo` entfernen** (interne Vorschau).
-- [ ] **`MAIL_ANFRAGEN_AN`** setzen, sonst kommt keine Benachrichtigung an.
-- [ ] **Scheduler einrichten** (`* * * * * php artisan schedule:run`), sonst laufen
+- [x] **`/module-demo` entfernen** (interne Vorschau). *Entfernt am 29.10.2026.*
+- [x] **`MAIL_ANFRAGEN_AN`** setzen, sonst kommt keine Benachrichtigung an.
+      *Auf der Demo gesetzt (29.10.2026). Ankommen wird erst etwas mit echtem
+      Mailversand, siehe B0.*
+- [x] *Demo: Container `kein-einzelfall-scheduler` (29.10.2026).* **Scheduler einrichten** (`* * * * * php artisan schedule:run`), sonst laufen
       die Löschfristen nie.
-- [ ] **Aufzählungen der Altseite nachtragen.** Der Importer hat bis 20.09.2026
+- [x] *29.10.2026: Die Listen stehen auf /datenschutz, /spenden, /anfragen
+      und /veranstaltungen.* **Aufzählungen der Altseite nachtragen.** Der Importer hat bis 20.09.2026
       keine `<li>` gelesen (siehe `docs/Komponenten.md`, Abschnitt 24). Auf neun
       Seiten fehlen deshalb Listen — unter anderem die Notfallnummern auf
       `/anfragen`, Referent/Datum/Ort auf den Veranstaltungsseiten, die
       „Warum spenden"-Punkte, die Betroffenenrechte im Datenschutz. Der frische
       Abzug enthält sie; nachgetragen wird pro Seite von Hand, nicht per
       Neu-Import, weil die Seiten inzwischen bearbeitet sind. Eigenes Ticket.
-- [ ] **Impressum und Datenschutz gegenlesen.** Beim Übernehmen aus Elementor sind
+- [ ] **Impressum und Datenschutz gegenlesen.** *29.10.2026: Im Impressum steht
+      als Bildnachweis noch „Shutterstock“, kein Bild der neuen Seite stammt
+      von dort. Entwurf in `docs/Entwurf-Rechtstexte-GoLive.md`.* Beim Übernehmen aus Elementor sind
       aus 21 Roh-Blöcken 13 geworden (der Rest waren Layout-Reste ohne Text). Beim
       Impressum sind es 8 Blöcke mit zusammen nur 40 Wörtern — sieht nach
       zerstückelten Zeilen aus. Bei beiden Seiten ist Vollständigkeit rechtlich
       relevant.
-- [ ] **Datenschutzerklärung neu schreiben.** Die übernommene stammt von der
+- [ ] **Datenschutzerklärung neu schreiben.** *29.10.2026: teilweise erledigt
+      (Cookies, Browser-Speicher, betterplace, Kontaktformular, SHG-Anmeldung).
+      Offen: Als Hoster steht noch all-inkl.com, Microsoft Teams fehlt ganz.
+      Entwürfe in `docs/Entwurf-Rechtstexte-GoLive.md`.* Die übernommene stammt von der
       Altseite und beschreibt deren Tools (OneTap, hu-manity-Banner, Google Fonts) —
       nichts davon setzen wir ein. Was wir tatsächlich verarbeiten, steht in
       `docs/Komponenten.md` Abschnitt 6 und 7.
