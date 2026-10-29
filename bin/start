@@ -25,7 +25,9 @@ PORT="${PORT:-8000}"
 WATCH=false
 [[ "${1:-}" == "--watch" ]] && WATCH=true
 
-env_wert() { grep -E "^$1=" .env 2>/dev/null | tail -1 | cut -d= -f2- | tr -d '"' | tr -d "'"; }
+# Fehlt der Schlüssel, liefert grep 1, und mit pipefail bräche das Skript
+# ohne Meldung ab (bei SQLite fehlt DB_PORT meist). Leer heißt: Standardwert.
+env_wert() { { grep -E "^$1=" .env 2>/dev/null || true; } | tail -1 | cut -d= -f2- | tr -d '"' | tr -d "'"; }
 
 # --- PHP-Erweiterungen -----------------------------------------------------
 # Nur was die laufende Anwendung wirklich braucht. `zip` steht bewusst nicht
