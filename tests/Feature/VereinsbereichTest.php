@@ -13,11 +13,13 @@ use App\Notifications\NeueAnfrage;
 use App\Notifications\NeueGruppenAnmeldung;
 use Database\Seeders\AltseiteSeeder;
 use Database\Seeders\VereinskontoSeeder;
+use Filament\Auth\Pages\EditProfile;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -240,5 +242,27 @@ class VereinsbereichTest extends TestCase
         // Nicht mehr online: Link bleibt gespeichert, wird aber nicht gezeigt
         $termin->update(['online' => false]);
         $this->get('/veranstaltungen/infoabend-online')->assertDontSee('Über Microsoft Teams teilnehmen');
+    }
+
+    public function test_verein_aendert_sein_passwort_selbst(): void
+    {
+        $konto = User::factory()->verein()->create(['password' => 'startpasswort-123']);
+        Filament::setCurrentPanel(Filament::getPanel('verein'));
+        $this->actingAs($konto)->get('/intern/profile')->assertOk();
+
+        // Ohne das alte Passwort geht es nicht
+        Livewire::test(EditProfile::class)
+            ->fillForm(['password' => 'Neues-Passwort-2026', 'passwordConfirmation' => 'Neues-Passwort-2026', 'currentPassword' => 'falsch'])
+            ->call('save')
+            ->assertHasFormErrors(['currentPassword']);
+        $this->assertTrue(Hash::check('startpasswort-123', $konto->fresh()->password));
+
+        Livewire::test(EditProfile::class)
+            ->fillForm(['password' => 'Neues-Passwort-2026', 'passwordConfirmation' => 'Neues-Passwort-2026', 'currentPassword' => 'startpasswort-123'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+        $this->assertTrue(Hash::check('Neues-Passwort-2026', $konto->fresh()->password));
+        $this->assertTrue($konto->fresh()->vereinsbereich);
+        $this->assertFalse($konto->fresh()->panel_zugang);
     }
 }

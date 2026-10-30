@@ -74,7 +74,9 @@ Selbsthilfegruppen und Anfragen. Kein Zugang zu Seiten, Menüs oder Texten.
 | Passwort | `kein-einzelfall` |
 
 In Produktion: `php artisan verein:konto <email> <name>` (Passwort wird
-erzeugt und einmal angezeigt; erneut aufrufen setzt es neu).
+erzeugt und einmal angezeigt; erneut aufrufen setzt es neu). Passwort und
+E-Mail ändert der Verein danach selbst unter `/intern/profile` (oben rechts
+auf das Kürzel klicken, „Profil“).
 
 ### Voraussetzungen
 

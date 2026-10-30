@@ -32,6 +32,9 @@ class VereinPanelProvider extends PanelProvider
             ->id('verein')
             ->path('intern')
             ->login()
+            // Passwort und E-Mail selbst ändern, nur mit dem alten Passwort
+            // (Kevin, 30.10.2026: Taddi bekommt ein Startpasswort von ihm).
+            ->profile(isSimple: false)
             ->brandName('KE!N EINZELFALL')
             ->favicon(asset('img/logo.png'))
             ->colors([
