@@ -10,15 +10,20 @@ alte Seite). Anrede „du“ wie auf der übrigen Website.
 
 ## Vor der Freigabe noch offen
 
-Diese Stellen stehen im Text als **[…]**:
+Keine offenen Stellen mehr im Text. Zwei Dinge sollte der Verein in der Praxis
+so handhaben, wie es jetzt in Abschnitt 11 steht:
 
-1. **Bestätigen:** Werden wirklich nur Veranstaltungen aufgezeichnet und nie
-   die Treffen der Selbsthilfe- und Arbeitsgruppen? (So steht es jetzt im Text.)
-2. **Aufzeichnungen:** Wofür werden sie genutzt (nur intern, für Teilnehmende
-   zum Nachschauen, veröffentlicht z. B. auf YouTube)? Wer kann sie sehen? Wie
-   lange werden sie aufbewahrt? Wird vor Beginn darauf hingewiesen? Werden
-   Aufzeichnungen veröffentlicht, auf denen Teilnehmende zu sehen oder zu hören
-   sind, braucht es deren ausdrückliche Einwilligung, am besten schriftlich.
+1. **Vor jeder Aufzeichnung darauf hinweisen**, mündlich zu Beginn und am
+   besten auch in der Einladung.
+2. **Ausschnitte bei Veranstaltungen zeigen:** Ist darauf jemand zu sehen oder
+   zu hören, vorher dessen Einwilligung einholen, am besten schriftlich
+   (per E-Mail reicht). Das Zeigen vor anderem Publikum ist eine Weitergabe,
+   die das „Kamera an“ in der Aufzeichnung nicht abdeckt.
+
+Aufzeichnungen geklärt mit Taddi am 30.10.2026: Alles kann aufgezeichnet
+werden, nur die Selbsthilfegruppen nie. Genutzt fürs Protokoll und, wenn es
+passt, um bei Veranstaltungen Videos zu zeigen. Teams löscht Aufnahmen nach
+90 Tagen.
 
 Geklärt am 30.10.2026 im Kundenbereich und im KAS (nur nachgesehen, nichts
 geändert): Der Vertrag über Auftragsverarbeitung mit all-inkl besteht seit
@@ -254,19 +259,25 @@ etwas über deine Gesundheit verraten. Diese Angaben verarbeiten wir auf
 Grundlage deiner Einwilligung, die du bei der Anmeldung gegeben hast (Art. 9
 Abs. 2 lit. a DSGVO).
 
-**Aufzeichnungen:** Die Treffen der Selbsthilfegruppen und Arbeitsgruppen
-zeichnen wir nicht auf. Veranstaltungen zeichnen wir auf. Darauf weisen wir
-vor Beginn hin. Aufgezeichnet werden Bild, Ton und Chat, soweit du sie
-einschaltest. Wenn du nicht in der Aufzeichnung erscheinen möchtest, lass
-Kamera und Mikrofon aus, wähle einen anderen Namen und stell Fragen über den
-Chat **[oder nur per privater Nachricht an die Moderation]**. Die Aufzeichnung
-speichern wir in unserem Microsoft-365-Konto und nutzen sie
-**[Zweck, z. B. für Teilnehmende, die nicht live dabei sein konnten, oder zur
-Veröffentlichung]**. Wir löschen sie nach **[Speicherdauer]**.
+**Aufzeichnungen:** Die Treffen der Selbsthilfegruppen zeichnen wir nie auf.
+Veranstaltungen und Treffen der Arbeitsgruppen können wir aufzeichnen. Darauf
+weisen wir vor Beginn hin. Aufgezeichnet werden Bild, Ton und Chat, soweit du
+sie einschaltest. Wenn du nicht in der Aufzeichnung erscheinen möchtest, lass
+Kamera und Mikrofon aus und wähle einen anderen Namen.
+
+Wir nutzen Aufzeichnungen, um ein Protokoll zu schreiben. Wenn es passt,
+zeigen wir Ausschnitte bei späteren Veranstaltungen. Bist du darin zu sehen
+oder zu hören, fragen wir dich vorher. Die Aufzeichnung liegt in unserem
+Microsoft-365-Konto und wird dort nach 90 Tagen automatisch gelöscht.
+Ausschnitte, die wir mit deiner Einwilligung zeigen, bewahren wir auf, bis du
+widerrufst oder wir sie nicht mehr brauchen.
+
 Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du
 gibst, indem du nach dem Hinweis mit eingeschalteter Kamera oder Mikrofon
-teilnimmst. Du kannst sie jederzeit widerrufen. Dann entfernen wir deine
-Beiträge aus der Aufzeichnung, soweit das möglich ist.
+teilnimmst, und für das Zeigen von Ausschnitten deine gesonderte Einwilligung.
+Du kannst sie jederzeit widerrufen. Dann entfernen wir deine Beiträge aus der
+Aufzeichnung, soweit das möglich ist, und zeigen keine Ausschnitte mehr mit
+dir.
 
 Microsoft kann Daten auch in den USA verarbeiten. Microsoft ist nach dem
 EU-US Data Privacy Framework zertifiziert, für das die EU-Kommission ein
