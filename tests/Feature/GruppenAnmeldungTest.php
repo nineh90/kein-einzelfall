@@ -79,7 +79,7 @@ class GruppenAnmeldungTest extends TestCase
         $this->assertStringNotContainsString('Per E-Mail anmelden', $html);
 
         // In Planung: kein Formular, die Mail bleibt
-        $this->get('/selbsthilfegruppen/seelenfarben')->assertOk()
+        $this->get('/selbsthilfegruppen/schreibwerkstatt')->assertOk()
             ->assertDontSee('id="anmeldung"', false)->assertSee('Per E-Mail nachfragen');
         // Arbeitsgruppen melden sich weiter per Mail an
         $this->get('/arbeitsgruppen/ag-01-ser')->assertOk()->assertDontSee('id="anmeldung"', false);
@@ -142,7 +142,7 @@ class GruppenAnmeldungTest extends TestCase
 
     public function test_gruppe_in_planung_nimmt_keine_anmeldung(): void
     {
-        $this->post('/selbsthilfegruppen/seelenfarben/anmeldung', $this->daten(['herkunft' => 'selbsthilfegruppen/seelenfarben']))
+        $this->post('/selbsthilfegruppen/schreibwerkstatt/anmeldung', $this->daten(['herkunft' => 'selbsthilfegruppen/schreibwerkstatt']))
             ->assertRedirect();
         $this->post('/selbsthilfegruppen/gibt-es-nicht/anmeldung', $this->daten())->assertNotFound();
 

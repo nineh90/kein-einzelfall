@@ -73,7 +73,7 @@ class KalenderTest extends TestCase
 
         $termine = Termine::imMonat(CarbonImmutable::parse('2026-11-01'));
         $this->assertSame(
-            ['Infoabend', 'Wir sind nicht mehr stumm', 'Skillin me Softly', 'Bürokratie-Labyrinth'],
+            ['Infoabend', 'Seelenfarben', 'Wir sind nicht mehr stumm', 'Skillin me Softly', 'Bürokratie-Labyrinth'],
             $termine->pluck('titel')->all(),
         );
         $this->assertSame('veranstaltung', $termine->first()['art']);
@@ -83,7 +83,7 @@ class KalenderTest extends TestCase
         $oktober = Termine::imMonat(CarbonImmutable::parse('2026-10-01'));
         $this->assertFalse($oktober->contains(fn ($t) => $t['zeit']->lt(now())));
         // Gruppen in Planung erscheinen nicht
-        $this->assertFalse($termine->contains('titel', 'Seelenfarben'));
+        $this->assertFalse($termine->contains('titel', 'Zwischen den Zeilen'));
     }
 
     public function test_englisch(): void
@@ -119,7 +119,7 @@ class KalenderTest extends TestCase
         $this->assertLessThan(strpos($html, 'id="anmeldung"'), strpos($html, 'id="kalender"'));
 
         // Geplante Gruppen haben noch keine Termine und keinen Kalender
-        $geplant = Group::where('slug', 'seelenfarben')->firstOrFail();
+        $geplant = Group::where('slug', 'schreibwerkstatt')->firstOrFail();
         $this->get($geplant->url())->assertOk()->assertDontSee('id="kalender"', false);
     }
 

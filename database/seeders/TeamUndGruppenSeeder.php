@@ -455,8 +455,9 @@ class TeamUndGruppenSeeder extends Seeder
     /**
      * Die Selbsthilfegruppen, wie Taddi sie am 29.09.2026 geschickt hat (KEV-73).
      *
-     * Offen sind nur die ersten beiden. Die übrigen sind „grad inaktiv und
-     * müssen erst später wieder freigeschaltet werden“: Status „geplant“,
+     * Offen waren anfangs nur die ersten beiden, seit KEV-230 auch „Skillin
+     * me Softly“, seit KEV-287 „Seelenfarben“. Die übrigen sind „grad inaktiv
+     * und müssen erst später wieder freigeschaltet werden“: Status „geplant“,
      * damit sie ohne Termine im Kalender und ohne Anmeldung dastehen. Zum
      * Freischalten im Panel auf „offen“ stellen.
      *
@@ -497,7 +498,8 @@ class TeamUndGruppenSeeder extends Seeder
             'wochentag' => 3, 'woche_im_monat' => 4, 'beginn_zeit' => '19:00',
         ],
         [
-            'slug' => 'seelenfarben', 'status' => 'geplant',
+            // KEV-287: von Taddi bestätigt, läuft jeden 1. Freitag
+            'slug' => 'seelenfarben', 'status' => 'offen',
             'name' => 'Seelenfarben',
             // KEV-229: Bild von Taddi (Pinsel und Aquarell-Kreis)
             'titelbild' => '/img/titelbilder/gruppe-seelenfarben.webp',
