@@ -1177,9 +1177,9 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
       Ausgabe, auf sicherem Weg an Taddi geben. Anmeldung unter `/intern`.
       Auf der Demo gibt es seit 30.10.2026 `verwaltung@kein-einzelfall.de`
       (Startpasswort bei Kevin). Taddi ändert es unter „Profil“.
-- [ ] **Englisch: so live oder abschalten?** Alle englischen Seiten sind als
-      „ungeprüft“ gekennzeichnet und auf `noindex`. Entweder so veröffentlichen
-      oder Englisch im Panel deaktivieren, bis jemand gegengelesen hat (A6).
+- [x] **Englisch: so live oder abschalten?** *Entschieden 30.10.2026 (Kevin):
+      maschinelle Übersetzung bleibt sichtbar als „ungeprüft“ gekennzeichnet,
+      ist aber für Google freigegeben (Commit dab9f12).*
 - [ ] **Rechtstexte freigeben (Taddi).** Datenschutz und Impressum sind seit
       30.10.2026 neu geschrieben online (`RechtstexteSeeder`, Entwurf in
       `docs/Entwurf-Rechtstexte-GoLive.md`). Taddi liest gegen. Angenommen ist
@@ -1226,14 +1226,14 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
       „Warum spenden"-Punkte, die Betroffenenrechte im Datenschutz. Der frische
       Abzug enthält sie; nachgetragen wird pro Seite von Hand, nicht per
       Neu-Import, weil die Seiten inzwischen bearbeitet sind. Eigenes Ticket.
-- [ ] **Impressum und Datenschutz gegenlesen.** *29.10.2026: Im Impressum steht
+- [ ] **Impressum und Datenschutz gegenlesen.** *30.10.2026: beide neu geschrieben, Bildnachweis korrigiert; fehlt nur Taddis Freigabe (B0).* *29.10.2026: Im Impressum steht
       als Bildnachweis noch „Shutterstock“, kein Bild der neuen Seite stammt
       von dort. Entwurf in `docs/Entwurf-Rechtstexte-GoLive.md`.* Beim Übernehmen aus Elementor sind
       aus 21 Roh-Blöcken 13 geworden (der Rest waren Layout-Reste ohne Text). Beim
       Impressum sind es 8 Blöcke mit zusammen nur 40 Wörtern — sieht nach
       zerstückelten Zeilen aus. Bei beiden Seiten ist Vollständigkeit rechtlich
       relevant.
-- [ ] **Datenschutzerklärung neu schreiben.** *29.10.2026: teilweise erledigt
+- [x] **Datenschutzerklärung neu schreiben.** *30.10.2026: neu geschrieben und online (RechtstexteSeeder), Freigabe durch Taddi siehe B0.* *29.10.2026: teilweise erledigt
       (Cookies, Browser-Speicher, betterplace, Kontaktformular, SHG-Anmeldung).
       Offen: Als Hoster steht noch all-inkl.com, Microsoft Teams fehlt ganz.
       Entwürfe in `docs/Entwurf-Rechtstexte-GoLive.md`.* Die übernommene stammt von der
