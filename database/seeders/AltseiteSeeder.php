@@ -608,10 +608,10 @@ class AltseiteSeeder extends Seeder
                 AnfragenSeiteSeeder::umbauen($page);
             }
 
-            // Cookies, Browser-Speicher, betterplace, Kontaktformular: wie die
-            // Website heute arbeitet, nicht die Altseite (DatenschutzSeeder).
-            if ($slug === DatenschutzSeeder::SLUG) {
-                DatenschutzSeeder::umbauen($page);
+            // Datenschutz und Impressum: neu geschrieben für diese Website
+            // (RechtstexteSeeder, 30.10.2026), nicht mehr der Text der Altseite.
+            if (in_array($slug, [RechtstexteSeeder::DATENSCHUTZ_SLUG, RechtstexteSeeder::IMPRESSUM_SLUG], true)) {
+                RechtstexteSeeder::setzen($page);
             }
 
             // WordPress liefert jede Seite mit Schrägstrich am Ende aus.

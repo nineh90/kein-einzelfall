@@ -1176,9 +1176,11 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
 - [ ] **Englisch: so live oder abschalten?** Alle englischen Seiten sind als
       „ungeprüft“ gekennzeichnet und auf `noindex`. Entweder so veröffentlichen
       oder Englisch im Panel deaktivieren, bis jemand gegengelesen hat (A6).
-- [ ] **Rechtstexte:** Entwürfe für Hosting, E-Mail, Microsoft Teams und den
-      Bildnachweis liegen in `docs/Entwurf-Rechtstexte-GoLive.md` (siehe die
-      beiden Punkte zu Impressum und Datenschutz unten).
+- [ ] **Rechtstexte freigeben (Taddi).** Datenschutz und Impressum sind seit
+      30.10.2026 neu geschrieben online (`RechtstexteSeeder`, Entwurf in
+      `docs/Entwurf-Rechtstexte-GoLive.md`). Taddi liest gegen. Angenommen ist
+      Hosting bei all-inkl: Läuft die Seite woanders, muss der Abschnitt
+      „Hosting und Server-Logfiles“ angepasst werden.
 
 ### B1 · Muss
 - [x] **Hochladen im Panel: Ablage muss einen Deploy überleben.**

@@ -5,6 +5,10 @@ Website tatsächlich tut. Keine Rechtsberatung.** Der Verein prüft den Text,
 übernimmt ihn als seine eigene Erklärung und ist für ihn verantwortlich. Erst
 nach seiner Freigabe ersetzt er die Seiten „Datenschutz“ und „Impressum“.
 
+**Seit 30.10.2026 online** (Kevin: Taddi liest es auf der Website gegen).
+Der Text steht in `database/seeders/RechtstexteSeeder.php`. Änderungen dort
+und hier nachziehen.
+
 Angenommen ist, dass die Website bei all-inkl bleibt (Tarif Premium, wie die
 alte Seite). Anrede „du“ wie auf der übrigen Website.
 
