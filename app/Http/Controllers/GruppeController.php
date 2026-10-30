@@ -21,7 +21,8 @@ class GruppeController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        return view('gruppen.show', ['gruppe' => $gruppe]);
+        // Name und Text sind übersetzt: auch auf Englisch in den Index (layouts/app)
+        return view('gruppen.show', ['gruppe' => $gruppe, 'uebersetzt' => true]);
     }
 
     public function arbeitsgruppe(string $slug)
@@ -31,6 +32,6 @@ class GruppeController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        return view('gruppen.arbeitsgruppe', ['gruppe' => $gruppe]);
+        return view('gruppen.arbeitsgruppe', ['gruppe' => $gruppe, 'uebersetzt' => true]);
     }
 }

@@ -29,42 +29,77 @@ class SeoGrundlagenTest extends TestCase
         $this->get('/verein')->assertHeaderMissing('X-Robots-Tag');
     }
 
-    /** Englische Seiten sind ungeprüft und noindex: kein hreflang dorthin, keine Sitemap. */
+    /**
+     * Seit 30.10.2026 stehen die maschinellen Übersetzungen im Index (Kevin):
+     * hreflang und Sitemap nennen sie, solange die deutsche Fassung selbst in
+     * den Index darf.
+     */
     public function test_hreflang_und_sitemap_nur_mit_indexierbaren_fassungen(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
         // (Altseiten wie /verein gibt es in der Test-Datenbank nicht.)
         $html = $this->get('/klartext-statt-fachsprache')->getContent();
-        $this->assertStringNotContainsString('<link rel="alternate"', $html);
-        // Der Sprachumschalter bietet Englisch trotzdem an
-        $this->assertStringContainsString('href="/en/klartext-statt-fachsprache"', $html);
+        $this->assertStringContainsString('<link rel="alternate" hreflang="en" href="http://localhost/en/klartext-statt-fachsprache">', $html);
+        $this->assertStringContainsString('<link rel="alternate" hreflang="x-default" href="http://localhost/klartext-statt-fachsprache">', $html);
 
         $sitemap = $this->get('/sitemap.xml')->getContent();
-        $this->assertStringNotContainsString('/en', $sitemap);
+        $this->assertStringContainsString('/en/klartext-statt-fachsprache</loc>', $sitemap);
         $this->assertStringContainsString('/veranstaltungen</loc>', $sitemap);
+        // Veranstaltungen sind nicht übersetzt (keine Seite, keine Termine): nur deutsch
+        $this->assertStringNotContainsString('/en/veranstaltungen</loc>', $sitemap);
         // Aktuelles erst mit Beiträgen
         $this->assertStringNotContainsString('/aktuelles</loc>', $sitemap);
 
-        // Gibt der Verein die englische Seite frei, kommt hreflang wieder
-        Page::where('locale', 'en')->whereIn('uebersetzungs_gruppe',
+        // Darf die deutsche Fassung nicht in den Index, die englische auch nicht
+        Page::whereIn('uebersetzungs_gruppe',
             Page::where('slug', 'klartext-statt-fachsprache')->where('locale', 'de')->pluck('uebersetzungs_gruppe'))
-            ->update(['noindex' => false]);
+            ->where('locale', 'en')->update(['noindex' => true]);
         $html = $this->get('/klartext-statt-fachsprache')->getContent();
-        $this->assertStringContainsString('<link rel="alternate" hreflang="en" href="http://localhost/en/klartext-statt-fachsprache">', $html);
-        $this->assertStringContainsString('<link rel="alternate" hreflang="x-default" href="http://localhost/klartext-statt-fachsprache">', $html);
+        $this->assertStringNotContainsString('<link rel="alternate"', $html);
+        // Der Sprachumschalter bietet Englisch trotzdem an
+        $this->assertStringContainsString('href="/en/klartext-statt-fachsprache"', $html);
     }
 
-    /** Gruppen, Beiträge und Übersichten ohne Seitendatensatz, auf Englisch */
+    /** Die Übersetzung übernimmt das noindex der deutschen Seite, auch per Migration. */
+    public function test_englisch_folgt_dem_noindex_der_deutschen_fassung(): void
+    {
+        $de = Page::where('slug', 'klartext-statt-fachsprache')->where('locale', 'de')->firstOrFail();
+        $de->update(['noindex' => true]);
+        $this->seed(UebersetzungenSeeder::class);
+        $en = Page::where('uebersetzungs_gruppe', $de->uebersetzungs_gruppe)->where('locale', 'en')->firstOrFail();
+        $this->assertTrue($en->noindex);
+        $this->assertTrue($en->ungeprueft);
+
+        $de->update(['noindex' => false]);
+        $en->update(['noindex' => true]);
+        (require database_path('migrations/2026_10_30_100000_englisch_in_den_index.php'))->up();
+        $this->assertFalse($en->fresh()->noindex);
+    }
+
+    /**
+     * Ohne Seitendatensatz, auf Englisch: immer mit Vermerk. Gruppen sind
+     * übersetzt und dürfen in den Index (mit hreflang und in der Sitemap),
+     * Übersichten ohne übersetzten Inhalt nicht.
+     */
     public function test_englische_seiten_ohne_datensatz_noindex_mit_vermerk(): void
     {
         $this->seed(UebersetzungenSeeder::class);
 
-        foreach (['/en/selbsthilfegruppen/seelenfarben', '/en/arbeitsgruppen/ag-01-ser', '/en/veranstaltungen'] as $pfad) {
+        foreach (['/en/selbsthilfegruppen/seelenfarben', '/en/arbeitsgruppen/ag-01-ser'] as $pfad) {
             $html = $this->get($pfad)->assertOk()->getContent();
-            $this->assertStringContainsString('<meta name="robots" content="noindex, follow">', $html, $pfad);
+            $this->assertStringNotContainsString('name="robots"', $html, $pfad);
             $this->assertStringContainsString('role="status"', $html, $pfad);
+            $this->assertStringContainsString('hreflang="de"', $html, $pfad);
         }
+
+        $html = $this->get('/en/veranstaltungen')->assertOk()->getContent();
+        $this->assertStringContainsString('<meta name="robots" content="noindex, follow">', $html);
+        $this->assertStringContainsString('role="status"', $html);
+
+        $sitemap = $this->get('/sitemap.xml')->getContent();
+        $this->assertStringContainsString('/en/selbsthilfegruppen/seelenfarben</loc>', $sitemap);
+        $this->assertStringContainsString('/selbsthilfegruppen/seelenfarben</loc>', $sitemap);
 
         $deutsch = $this->get('/selbsthilfegruppen/seelenfarben')->getContent();
         $this->assertStringNotContainsString('name="robots"', $deutsch);

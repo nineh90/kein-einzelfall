@@ -157,10 +157,12 @@ class UebersetzungenSeeder extends Seeder
             'triggerwarnung' => $deutsch->triggerwarnung
                 ? array_map(fn ($absatz) => $this->tr($absatz, $locale), $deutsch->triggerwarnung)
                 : null,
-            // Maschinell übersetzt: sichtbar als ungeprüft gekennzeichnet und
-            // nicht in Suchmaschinen, bis der Verein gegengelesen hat.
+            // Maschinell übersetzt: sichtbar als ungeprüft gekennzeichnet. Seit
+            // 30.10.2026 in Suchmaschinen wie die deutsche Fassung (Kevin: beim
+            // Verein liest niemand gegen, die Maschine ist besser als nichts).
+            // ungeprueft bleibt, damit dieser Seeder die Seite weiter neu baut.
             'ungeprueft' => true,
-            'noindex' => true,
+            'noindex' => $deutsch->noindex,
             'published_at' => now(),
         ];
 

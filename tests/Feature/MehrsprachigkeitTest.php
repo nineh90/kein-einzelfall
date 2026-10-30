@@ -344,9 +344,10 @@ class MehrsprachigkeitTest extends TestCase
             $this->assertStringNotContainsString($text, $html, $text);
         }
 
-        // Maschinell übersetzt: sichtbar gekennzeichnet und nicht in Suchmaschinen.
+        // Maschinell übersetzt: sichtbar gekennzeichnet, seit 30.10.2026 aber
+        // in Suchmaschinen wie die deutsche Fassung.
         $this->assertStringContainsString('Machine translation', $html);
-        $this->assertStringContainsString('<meta name="robots" content="noindex', $html);
+        $this->assertStringNotContainsString('<meta name="robots" content="noindex', $html);
 
         $this->get('/en')->assertSee('“I had no idea!”', false)->assertSee('Machine translation');
         $this->get('/en/verein')

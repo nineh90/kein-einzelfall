@@ -15,12 +15,18 @@
     // Sitemap (SEO-Prüfung 28.10.2026). Vorher verwies jede deutsche Seite
     // auf ihre englische, die als ungeprüft noindex trägt; Google meldet das
     // als Fehler. Der Sprachumschalter zeigt weiter alle ($fassungen).
-    $hreflang = $fassungen === [] ? [] : Sprachfassungen::fuer(request(), $page ?? null)->indexierbar();
+    //
+    // $uebersetzt setzen Ansichten ohne Seitendatensatz, deren Inhalt
+    // übersetzt ist (Gruppen, Öffentlichkeitsarbeit). Seit 30.10.2026 dürfen
+    // die maschinellen Übersetzungen in den Index (Kevin: niemand beim Verein
+    // liest gegen, die Maschine ist besser als nichts).
+    $uebersetzt ??= false;
+    $hreflang = $fassungen === [] ? [] : Sprachfassungen::fuer(request(), $page ?? null)->indexierbar($uebersetzt);
 
     // Seiten ohne Datensatz in der Seitentabelle (Gruppen, Arbeitsgruppen,
     // Öffentlichkeitsarbeit, Aktuelles, Veranstaltungen) gibt es auf Englisch
-    // nur maschinell übersetzt. Sie bekommen wie die übrigen englischen Seiten
-    // noindex und den Vermerk; vorher standen sie als einzige im Index.
+    // nur maschinell übersetzt: immer mit Vermerk. noindex nur, wo der Inhalt
+    // selbst gar nicht übersetzt ist (Termine, Beiträge).
     $maschinellOhneSeite = ! isset($page) && ! $sprache->istStandard() && ! ($istFehlerseite ?? false);
 
     // Vorschaubild für geteilte Links (og:image): das Titelbild der Seite,
@@ -94,7 +100,7 @@
         @endisset
     @endif
 
-    @if ($maschinellOhneSeite)
+    @if ($maschinellOhneSeite && ! $uebersetzt)
         <meta name="robots" content="noindex, follow">
     @endif
 

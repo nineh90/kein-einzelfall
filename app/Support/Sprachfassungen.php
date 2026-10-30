@@ -66,16 +66,17 @@ class Sprachfassungen
      * hreflang-Angaben, damit sie zur Sitemap passen (die lässt noindex weg).
      *
      * Mit Seite zählt die übersetzte Seite selbst (veröffentlicht, ohne
-     * noindex). Feste Adressen ohne Seite gibt es nur auf Deutsch geprüft,
-     * die übrigen Sprachen tragen dort noindex (layouts/app).
+     * noindex). Feste Adressen ohne Seite zählen in allen Sprachen, wenn ihr
+     * Inhalt übersetzt ist (Gruppen, Öffentlichkeitsarbeit), sonst nur auf
+     * Deutsch; die übrigen tragen noindex (layouts/app).
      *
      * @return array<string, string> Sprachcode => Pfad
      */
-    public function indexierbar(): array
+    public function indexierbar(bool $uebersetzt = false): array
     {
-        return array_filter($this->adressen(), function (string $code) {
+        return array_filter($this->adressen(), function (string $code) use ($uebersetzt) {
             if (! $this->page) {
-                return $code === Language::standardCode();
+                return $uebersetzt || $code === Language::standardCode();
             }
 
             // inSprache() liefert nur Veröffentlichtes

@@ -24,6 +24,7 @@ class OeffentlichkeitsarbeitController extends Controller
             ->limit(5)
             ->get();
 
-        return view('oeffentlichkeitsarbeit.show', compact('eintrag', 'weitere'));
+        // Übersetzt wie die Gruppen: auch auf Englisch in den Index (layouts/app)
+        return view('oeffentlichkeitsarbeit.show', compact('eintrag', 'weitere') + ['uebersetzt' => true]);
     }
 }

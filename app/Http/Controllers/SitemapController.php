@@ -139,26 +139,34 @@ class SitemapController extends Controller
     /** Die Seiten der Selbsthilfegruppen (KEV-73) und Arbeitsgruppen (KEV-84). */
     private function gruppen(): array
     {
-        return Group::veroeffentlicht()
-            ->get()
-            ->map(fn (Group $gruppe) => [
-                'url' => url($gruppe->url(Language::standardCode())),
-                'geaendert' => $gruppe->updated_at?->toAtomString(),
-                'alternativen' => [],
-            ])
-            ->all();
+        return $this->inAllenSprachen(Group::veroeffentlicht()->get());
     }
 
     /** Die Seiten der Messen, Petitionen, Presseartikel (KEV-134). */
     private function oeffentlichkeitsarbeit(): array
     {
-        return OutreachItem::veroeffentlicht()
-            ->get()
-            ->map(fn (OutreachItem $eintrag) => [
-                'url' => url($eintrag->url(Language::standardCode())),
+        return $this->inAllenSprachen(OutreachItem::veroeffentlicht()->get());
+    }
+
+    /**
+     * Gruppen und Öffentlichkeitsarbeit sind übersetzt und stehen seit
+     * 30.10.2026 in jeder Sprache im Index: je Sprache ein Eintrag, alle mit
+     * denselben alternate-Verweisen.
+     *
+     * @param  \Illuminate\Support\Collection<int, Group|OutreachItem>  $eintraege
+     */
+    private function inAllenSprachen($eintraege): array
+    {
+        $sprachen = Language::aktive()->pluck('code');
+
+        return $eintraege->flatMap(function ($eintrag) use ($sprachen) {
+            $alternativen = $sprachen->mapWithKeys(fn (string $code) => [$code => url($eintrag->url($code))])->all();
+
+            return collect($alternativen)->map(fn (string $url) => [
+                'url' => $url,
                 'geaendert' => $eintrag->updated_at?->toAtomString(),
-                'alternativen' => [],
-            ])
-            ->all();
+                'alternativen' => count($alternativen) > 1 ? $alternativen : [],
+            ])->values();
+        })->all();
     }
 }

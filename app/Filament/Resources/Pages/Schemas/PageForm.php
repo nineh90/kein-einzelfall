@@ -174,8 +174,10 @@ class PageForm
                     /*
                      * Für Seiten, deren Text von uns vorbereitet wurde. Sie
                      * tragen dann ganz oben einen sichtbaren Vermerk. Nach dem
-                     * Gegenlesen hier das Häkchen entfernen — und gleich mit
-                     * „Von Suchmaschinen ausschließen" darüber.
+                     * Gegenlesen hier das Häkchen entfernen. Maschinelle
+                     * Übersetzungen stehen seit 30.10.2026 trotzdem im Index;
+                     * solange das Häkchen gesetzt ist, baut der
+                     * UebersetzungenSeeder sie bei Änderungen neu auf.
                      */
                     Toggle::make('ungeprueft')
                         ->label('Noch nicht vom Verein geprüft')
