@@ -7,7 +7,9 @@ werden muss. Sortiert nach Dringlichkeit.
 
 ## A. Fragen an den Verein (Tatjana)
 
-### A1 · Notfallnummern gegenprüfen — vor Go-Live
+### A1 · Notfallnummern gegenprüfen — erledigt
+*Vom Verein bestätigt am 30.10.2026 (Taddi: „stimmt alles“), keine Nummer fehlt.*
+
 In `config/hilfe.php` stehen sechs Nummern. Sie erscheinen auf der Startseite,
 in der Fusszeile, auf der Fehlerseite und seit 08.10.2026 auch auf `/anfragen`
 (dort stand vorher eine eigene Liste der Altseite):
@@ -28,7 +30,11 @@ Fehlt ein Dienst, den ihr regelmäßig empfehlt? Die Altseite nannte auf
 Krisendienst **Bayern**, regional, deshalb steht er nicht mehr dabei. Soll er
 wieder rein, dann mit „(Bayern)“.
 
-### A2 · Aufbewahrungsfristen für Anfragen — juristisch klären
+### A2 · Aufbewahrungsfristen für Anfragen — bestätigt
+*Vom Verein bestätigt am 30.10.2026 (Taddi: „das passt“), auch die Fristen der
+Gruppenanmeldungen (30/90 Tage). Der Verein hat keine Anwälte; eine juristische
+Prüfung gibt es also nicht.*
+
 Vorschlag steht in `config/anfragen.php`: erledigte Anfragen 90 Tage nach
 Abschluss, unbearbeitete 365 Tage nach Eingang.
 

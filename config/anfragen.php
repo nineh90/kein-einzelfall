@@ -3,9 +3,8 @@
 /*
  * Aufbewahrungsfristen für Kontaktanfragen.
  *
- * ⚠️ Diese Werte sind ein Vorschlag und müssen vor dem Go-Live mit dem Verein
- * abgestimmt werden. Der Verein stellt dafür ausdrücklich eigene Anwälte zur
- * Verfügung — das ist der richtige Weg, statt hier zu raten.
+ * Vom Verein bestätigt am 30.10.2026 (Taddi: „das passt“). Eine
+ * juristische Prüfung gab es nicht, der Verein hat keine Anwälte.
  *
  * Abzuwägen ist:
  *  - kurz genug, um Art. 5 Abs. 1 lit. e DSGVO gerecht zu werden

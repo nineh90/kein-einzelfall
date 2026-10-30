@@ -3,8 +3,8 @@
 /*
  * Anmeldungen zu Selbsthilfegruppen (KEV-226): Aufbewahrung.
  *
- * ⚠️ Ein Vorschlag wie bei den Anfragen (config/anfragen.php), vor dem
- * Livegang mit dem Verein abzustimmen. Abzuwägen: Eine Anmeldung ist eine
+ * Vom Verein bestätigt am 30.10.2026 (Taddi: „das passt“), wie die Fristen
+ * der Anfragen (config/anfragen.php). Abgewogen: Eine Anmeldung ist eine
  * Gesundheitsangabe (Art. 9 DSGVO) und gehört so kurz wie möglich
  * gespeichert. Nach der Freigabe braucht der Verein sie nur noch, falls
  * jemand nachfragt („habt ihr meine Anmeldung bekommen?“) oder um die
