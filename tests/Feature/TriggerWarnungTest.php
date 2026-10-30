@@ -67,8 +67,9 @@ class TriggerWarnungTest extends TestCase
         $this->assertStringNotContainsString('{darstellung}', $dialog);
         $this->assertSeeInOrderText($dialog, [
             'Auf dieser Homepage geht es um die Folgeschäden',
-            'Links am Rand findest du einen Button',
+            // KEV-285: erst der Hinweis auf belastende Inhalte, dann der Knopf
             'Einige Inhalte können belastend sein.',
+            'Links am Rand findest du einen Button',
             'Wenn du gerade Hilfe brauchst: Notfallnummern und Hilfsangebote findest du weiter unten.',
         ]);
         $this->assertStringNotContainsString('Auf dieser Website geht es um Straftaten', $dialog);
@@ -96,7 +97,29 @@ class TriggerWarnungTest extends TestCase
         foreach (TriggerWarnungSeeder::ABSAETZE as $absatz) {
             $this->assertArrayHasKey($absatz, $woerterbuch);
         }
-        $this->assertStringContainsString('{darstellung}', $woerterbuch[TriggerWarnungSeeder::ABSAETZE[1]]['en']);
+        $this->assertStringContainsString('{darstellung}', $woerterbuch[TriggerWarnungSeeder::ABSAETZE[2]]['en']);
+
+        // Im Panel umgeschrieben: bleibt.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text.']])]);
+        $migration->up();
+        $this->assertSame(['Eigener Text.'], $block->fresh()->data['absaetze']);
+    }
+
+    /** KEV-285: Eine Warnung in der alten Reihenfolge wird umgestellt. */
+    public function test_bestehende_warnung_bekommt_die_neue_reihenfolge(): void
+    {
+        $neu = TriggerWarnungSeeder::ABSAETZE;
+        $alt = [$neu[0], $neu[2], $neu[1], $neu[3]];
+        $block = $this->warnung()->blocks()->where('typ', 'text')->firstOrFail();
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $alt])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_30_140000_trigger_warnung_reihenfolge.php');
+        $migration->up();
+        $migration->up();
+
+        $this->assertSame($neu, $block->fresh()->data['absaetze']);
+        $this->assertSame($schluessel, array_keys($block->fresh()->data));
 
         // Im Panel umgeschrieben: bleibt.
         $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text.']])]);

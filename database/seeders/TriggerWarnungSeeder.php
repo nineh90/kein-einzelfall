@@ -27,16 +27,19 @@ class TriggerWarnungSeeder extends Seeder
      * mit Doppelpunkt, sonst fehlt dem Satz das Verb an zweiter Stelle.
      * {darstellung} wird das Symbol des Knopfs (Taddi: „vielleicht kann man
      * den hier grafisch einfügen“).
+     *
+     * Seit KEV-285 kommt „Einige Inhalte können belastend sein“ vor dem
+     * Absatz zum Darstellungs-Knopf, vorher dahinter.
      */
     public const ABSAETZE = [
         'Auf dieser Homepage geht es um die Folgeschäden von physischen, psychischen, digitalen und '
             .'sexuellen Gewalttaten und die oft schwierigen Wege durch Hilfe-, Versorgungs- und '
             .'Entschädigungssysteme.',
-        'Links am Rand findest du einen Button {darstellung}, mit dem du die Darstellung der Seite '
-            .'(Schriftgröße/Kontrast etc.) verändern kannst.',
         'Einige Inhalte können belastend sein. Du entscheidest, was du wann liest. Du kannst die Seite '
             .'jederzeit über den Button unten rechts, den Notausgang oben rechts oder durch dreimaliges '
             .'Drücken der Esc-Taste verlassen.',
+        'Links am Rand findest du einen Button {darstellung}, mit dem du die Darstellung der Seite '
+            .'(Schriftgröße/Kontrast etc.) verändern kannst.',
         'Wenn du gerade Hilfe brauchst: Notfallnummern und Hilfsangebote findest du weiter unten. Die '
             .'TelefonSeelsorge (116 123) ist rund um die Uhr erreichbar.',
     ];
