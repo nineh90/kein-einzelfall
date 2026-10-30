@@ -6,7 +6,7 @@
 {!! __('Dein Zugang (Microsoft Teams):') !!}
 {!! $gruppe->zugangslink !!}
 
-{!! __('Bitte gib den Link nicht weiter, er ist nur für dich.') !!}
+{!! __('Bitte gib den Link nicht weiter, damit die Gruppe ein geschützter Raum bleibt.') !!}
 
 @include('mail._gruppe-termin', ['gruppe' => $gruppe])
 
