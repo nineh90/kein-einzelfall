@@ -517,15 +517,44 @@ class StartseiteTest extends TestCase
             json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)[$neu[0]]['en']);
     }
 
-    /** KEV-117: zweiter Absatz am Ende des Abschnitts „Verein“. */
+    /** KEV-117, seit KEV-288 mit neuem Text: zweiter Absatz am Ende des Abschnitts „Verein“. */
     public function test_vereinsabschnitt_hat_den_zweiten_absatz(): void
     {
         $this->get('/')->assertSeeInOrder([
             'was Betroffene bewegt.</p>',
-            '<p>Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und Interessierten und fördern '
-                .'den Austausch auf Augenhöhe mit Fachpersonen.</p>',
+            '<p>Betroffene sind mehr als Aktenzeichen, Diagnosen und Hilfebedürftigkeit. Ihre Erfahrungen '
+                .'und Ressourcen verdienen Sichtbarkeit.</p>',
             'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung.',
         ], false);
+        $this->get('/')->assertDontSee('Wir schaffen Verbindungen zwischen Betroffenen');
+    }
+
+    /** KEV-288: Bestehende Startseiten bekommen den neuen zweiten Absatz. */
+    public function test_bestehende_startseite_bekommt_den_neuen_zweiten_vereinsabsatz(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'text')->get()
+            ->first(fn ($block) => ($block->data['cta']['url'] ?? null) === '/verein');
+        $erster = $block->data['absaetze'][0];
+        $alt = 'Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und Interessierten und fördern '
+            .'den Austausch auf Augenhöhe mit Fachpersonen.';
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [$erster, $alt]])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_30_150000_verein_zweiter_absatz_neu.php');
+        $migration->up();
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame([$erster, StartseiteSeeder::VEREIN_ZWEITER_ABSATZ], $data['absaetze']);
+        $this->assertSame($schluessel, array_keys($data));
+        $this->assertStringStartsWith('Those affected are more than case numbers',
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::VEREIN_ZWEITER_ABSATZ]['en']);
+
+        // Ein im Panel umgeschriebener Abschnitt bleibt, wie er ist.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => [$erster, 'Eigener Text.']])]);
+        $migration->up();
+        $this->assertSame([$erster, 'Eigener Text.'], $block->fresh()->data['absaetze']);
     }
 
     public function test_bestehende_startseite_bekommt_den_zweiten_vereinsabsatz(): void

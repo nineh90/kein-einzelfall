@@ -132,9 +132,12 @@ class StartseiteSeeder extends Seeder
      */
     public const KARTEN_UEBERSCHRIFT = "Was wir gemeinsam bewegen\u{00A0}…";
 
-    /** Abschnitt „Verein“: zweiter Absatz von Taddi (KEV-117). */
-    public const VEREIN_ZWEITER_ABSATZ = 'Wir schaffen Verbindungen zwischen Betroffenen, Angehörigen und '
-        .'Interessierten und fördern den Austausch auf Augenhöhe mit Fachpersonen.';
+    /**
+     * Abschnitt „Verein“: zweiter Absatz von Taddi (KEV-288). Vorher „Wir
+     * schaffen Verbindungen zwischen Betroffenen …“ (KEV-117).
+     */
+    public const VEREIN_ZWEITER_ABSATZ = 'Betroffene sind mehr als Aktenzeichen, Diagnosen und '
+        .'Hilfebedürftigkeit. Ihre Erfahrungen und Ressourcen verdienen Sichtbarkeit.';
 
     /**
      * Leitsatz in Handschrift, seit KEV-119 unter dem Absatz statt unter der
