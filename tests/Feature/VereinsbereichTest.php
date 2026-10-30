@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Filament\Resources\Events\Pages\CreateEvent;
 use App\Filament\Resources\GroupRegistrations\Pages\ListGroupRegistrations;
 use App\Filament\Verein\Resources\TeamsLinks\Pages\ListTeamsLinks;
-use App\Models\Event;
 use App\Models\Group;
 use App\Models\Inquiry;
 use App\Models\User;
@@ -208,40 +206,6 @@ class VereinsbereichTest extends TestCase
         // Löschen oder neue Gruppen gibt es hier nicht
         $seite->assertTableActionDoesNotExist('delete');
         $this->get('/intern/teams-links/create')->assertNotFound();
-    }
-
-    public function test_veranstaltung_mit_oeffentlichem_teams_link(): void
-    {
-        Filament::setCurrentPanel(Filament::getPanel('verein'));
-        $formular = [
-            'titel' => 'Infoabend online', 'slug' => 'infoabend-online', 'beginnt_am' => now()->addWeek()->setTime(18, 30),
-            'online' => true, 'published_at' => now(),
-        ];
-
-        Livewire::actingAs(User::factory()->verein()->create())
-            ->test(CreateEvent::class)
-            ->fillForm($formular + ['teams_link' => 'https://zoom.us/j/123'])
-            ->call('create')
-            ->assertHasFormErrors(['teams_link'])
-            ->fillForm($formular + ['teams_link' => 'https://teams.microsoft.com/meet/987?p=xyz'])
-            ->call('create')
-            ->assertHasNoFormErrors();
-
-        $termin = Event::where('slug', 'infoabend-online')->sole();
-        $this->get('/veranstaltungen/infoabend-online')->assertOk()
-            ->assertSee('Über Microsoft Teams teilnehmen')
-            ->assertSee('href="https://teams.microsoft.com/meet/987?p=xyz"', false);
-
-        // Ohne Ende: bis vier Stunden nach Beginn, danach nicht mehr
-        $this->travelTo($termin->beginnt_am->copy()->addHours(3));
-        $this->assertTrue($termin->fresh()->teamsLinkZeigen());
-        $this->travelTo($termin->beginnt_am->copy()->addHours(5));
-        $this->assertFalse($termin->fresh()->teamsLinkZeigen());
-        $this->travelBack();
-
-        // Nicht mehr online: Link bleibt gespeichert, wird aber nicht gezeigt
-        $termin->update(['online' => false]);
-        $this->get('/veranstaltungen/infoabend-online')->assertDontSee('Über Microsoft Teams teilnehmen');
     }
 
     public function test_verein_aendert_sein_passwort_selbst(): void

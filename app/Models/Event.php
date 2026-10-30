@@ -10,7 +10,7 @@ class Event extends Model
     protected $fillable = [
         'slug', 'titel', 'teaser', 'beschreibung',
         'beginnt_am', 'endet_am', 'ganztaegig', 'art',
-        'ort', 'adresse', 'online', 'teams_link', 'anmeldung_url', 'anmeldung_hinweis',
+        'ort', 'adresse', 'online', 'anmeldung_url', 'anmeldung_hinweis',
         'published_at',
     ];
 
@@ -51,24 +51,6 @@ class Event extends Model
             $q->where('endet_am', '<', now())
                 ->orWhere(fn ($q2) => $q2->whereNull('endet_am')->where('beginnt_am', '<', now()));
         });
-    }
-
-    /**
-     * Den Teams-Link zeigen, solange die Veranstaltung nicht vorbei ist. Ohne
-     * Ende gilt: bis vier Stunden nach Beginn, ganztägig bis Tagesende. Nach
-     * scopeKommend wäre sie schon ab Beginn „vergangen“, dann fehlte der Link
-     * genau dann, wenn man ihn braucht.
-     */
-    public function teamsLinkZeigen(): bool
-    {
-        if (! $this->online || blank($this->teams_link)) {
-            return false;
-        }
-
-        $ende = $this->endet_am
-            ?? ($this->ganztaegig ? $this->beginnt_am->copy()->endOfDay() : $this->beginnt_am->copy()->addHours(4));
-
-        return $ende->isFuture();
     }
 
     public function laeuftGerade(): bool

@@ -205,13 +205,15 @@ Bereich nicht von selbst dort auftaucht. Pfad `/intern`, weil `/verein` die
   Das Passwort wird erzeugt und nur einmal angezeigt.
 - Die Hinweismails an den Verein (neue Anmeldung, neue Anfrage) verlinken nach
   `/intern`.
-- Teams-Links: Der Verein pflegt sie selbst (Kevin, 30.10.2026). Bei
-  Selbsthilfegruppen unter „Teams-Links“ (`App\Filament\Verein\Resources\TeamsLinks`,
-  nur Link und „sofort verschicken“, verschlüsselt, nie öffentlich). Bei
-  Online-Veranstaltungen im Formular (`events.teams_link`), öffentlich als Knopf
-  „Über Microsoft Teams teilnehmen“ bis zum Ende (ohne Ende: 4 Stunden nach
-  Beginn). Beide Felder nehmen nur `https://teams.microsoft.com/…` bzw.
-  `teams.live.com`. Die Links stehen nie im Code oder in Seedern.
+- Teams-Links der Selbsthilfegruppen pflegt der Verein selbst (Kevin,
+  30.10.2026) unter „Teams-Links“ (`App\Filament\Verein\Resources\TeamsLinks`,
+  nur Link und „sofort verschicken“, verschlüsselt, nie öffentlich, nur
+  `https://teams.microsoft.com/…` bzw. `teams.live.com`). Die Links stehen nie
+  im Code oder in Seedern.
+- Bei Veranstaltungen gibt es bewusst **kein** Teams-Feld: Laut Text auf
+  /veranstaltungen meldet man sich per E-Mail an und bekommt den Link danach
+  persönlich. Ein öffentliches Feld war kurz eingebaut und ist wieder raus
+  (Migration `drop_teams_link_from_events_table`).
 
 ## 6. Kontaktformular und Anfragen (27.07.2026)
 

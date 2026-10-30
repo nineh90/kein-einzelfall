@@ -49,17 +49,6 @@ class EventForm
             Section::make('Wo')->columns(2)->schema([
                 Toggle::make('online')->label('Findet online statt')->live(),
 
-                // Öffentlich auf der Veranstaltungsseite (Kevin, 30.10.2026).
-                // Nur Teams-Adressen, damit kein falscher Link durchrutscht.
-                TextInput::make('teams_link')->label('Teams-Link')
-                    ->url()->maxLength(2048)
-                    ->rule('regex:#^https://teams\.(microsoft|live)\.com/#')
-                    ->validationMessages(['regex' => 'Bitte den Link aus der Teams-Einladung einfügen (beginnt mit https://teams.microsoft.com/).'])
-                    ->placeholder('https://teams.microsoft.com/…')
-                    ->helperText('Steht öffentlich auf der Veranstaltungsseite. Jede und jeder kann damit teilnehmen.')
-                    ->visible(fn ($get) => (bool) $get('online'))
-                    ->columnSpanFull(),
-
                 TextInput::make('ort')->label('Ort')
                     ->visible(fn ($get) => ! $get('online'))
                     ->helperText('z.B. „Vereinsräume Hamburg“'),
