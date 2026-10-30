@@ -109,10 +109,12 @@ class GruppenAnmeldungTest extends TestCase
 
         // Der Verein erfährt nur, dass etwas da ist: ohne Name und Adresse
         Notification::assertSentOnDemand(NeueGruppenAnmeldung::class, function ($hinweis, $kanaele, $empfaenger) {
-            $text = implode("\n", $hinweis->toMail($empfaenger)->introLines);
+            $text = (string) $hinweis->toMail($empfaenger)->render();
 
             return $empfaenger->routes['mail'] === 'selbsthilfe@kein-einzelfall.de'
                 && str_contains($text, 'Wir sind nicht mehr stumm')
+                && str_contains($text, '„Freigeben und Link senden“')
+                && ! str_contains($text, 'Alle Rechte vorbehalten')
                 && ! str_contains($text, 'kim@beispiel.de') && ! str_contains($text, 'Kim');
         });
 
@@ -197,6 +199,23 @@ class GruppenAnmeldungTest extends TestCase
             ->test(ListGroupRegistrations::class)
             ->assertTableActionDisabled('freigeben', $dritte);
         $this->assertSame('offen', $dritte->fresh()->status);
+    }
+
+    /** Durchlauf 30.10.2026: Die Startseite des Panels zeigt, was wartet, statt Filament-Kästen. */
+    public function test_startseite_des_verwaltungsbereichs_zeigt_was_wartet(): void
+    {
+        $this->actingAs(User::factory()->redaktion()->create());
+
+        $leer = $this->get('/admin')->assertOk()->getContent();
+        $this->assertStringContainsString('Keine neuen Anmeldungen.', $leer);
+        $this->assertStringNotContainsString('filamentphp.com', $leer);
+        $this->assertStringNotContainsString('Dashboard', $leer);
+
+        $this->gruppe()->anmeldungen()->create(['email' => 'a@beispiel.de', 'zugestimmt_at' => now()]);
+        $this->get('/admin')->assertOk()
+            ->assertSee('1 neue Anmeldung wartet auf deine Freigabe.')
+            ->assertSee('Anmeldungen ansehen')
+            ->assertSee('/admin/group-registrations', false);
     }
 
     public function test_aufbewahrungsfrist(): void

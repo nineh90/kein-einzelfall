@@ -34,17 +34,13 @@ class NeueAnfrage extends Notification
 
     public function toMail(object $notifiable): MailMessage
     {
+        // Reiner Text wie die Mails an die Besucherinnen, ohne Laravels
+        // Standardvorlage (Durchlauf 30.10.2026).
         return (new MailMessage)
             ->subject('Neue Anfrage über die Website')
-            ->greeting('Hallo,')
-            ->line('über das Kontaktformular ist eine neue Anfrage eingegangen.')
-            ->line('Eingegangen am '.$this->anfrage->created_at->format('d.m.Y').
-                   ' um '.$this->anfrage->created_at->format('H:i').' Uhr.')
-            ->action('Anfrage im Verwaltungsbereich öffnen',
-                url('/admin/inquiries/'.$this->anfrage->id.'/edit'))
-            ->line('Der Inhalt der Anfrage steht bewusst nicht in dieser E-Mail: '
-                  .'E-Mails werden unverschlüsselt übertragen. Die Nachricht liegt '
-                  .'verschlüsselt in der Datenbank und ist nur nach Anmeldung einsehbar.')
-            ->salutation('Viele Grüße');
+            ->view(['text' => 'mail.hinweis-neue-anfrage'], [
+                'zeit' => $this->anfrage->created_at,
+                'url' => url('/admin/inquiries/'.$this->anfrage->id.'/edit'),
+            ]);
     }
 }

@@ -31,20 +31,16 @@ class NeueGruppenAnmeldung extends Notification
         $gruppe = $this->anmeldung->group?->getRawOriginal('name') ?? 'eine Selbsthilfegruppe';
         $zeit = $this->anmeldung->created_at;
 
-        $mail = (new MailMessage)
+        // Reiner Text wie die Mails an die Besucherinnen. Laravels Vorlage
+        // zeigte oben „KEIN EINZELFALL: http://…“ und unten „Alle Rechte
+        // vorbehalten“ (Durchlauf 30.10.2026).
+        return (new MailMessage)
             ->subject('Neue Anmeldung: '.$gruppe)
-            ->greeting('Hallo,')
-            ->line('über die Website ist eine Anmeldung zur Selbsthilfegruppe „'.$gruppe.'“ eingegangen.')
-            ->line('Eingegangen am '.$zeit->format('d.m.Y').' um '.$zeit->format('H:i').' Uhr.');
-
-        $mail = $this->anmeldung->status === 'freigegeben'
-            ? $mail->line('Der Zugangslink ist automatisch verschickt worden (Einstellung der Gruppe).')
-            : $mail->line('Bitte gib die Anmeldung im Verwaltungsbereich frei, dann geht der Zugangslink raus.');
-
-        return $mail
-            ->action('Anmeldungen öffnen', url('/admin/group-registrations'))
-            ->line('Name und E-Mail-Adresse stehen bewusst nicht in dieser E-Mail: Schon die Anmeldung '
-                .'ist eine Gesundheitsangabe. Sie liegen verschlüsselt im Verwaltungsbereich.')
-            ->salutation('Viele Grüße');
+            ->view(['text' => 'mail.hinweis-neue-anmeldung'], [
+                'gruppe' => $gruppe,
+                'zeit' => $zeit,
+                'freigegeben' => $this->anmeldung->status === 'freigegeben',
+                'url' => url('/admin/group-registrations'),
+            ]);
     }
 }

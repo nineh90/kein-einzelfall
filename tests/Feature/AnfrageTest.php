@@ -106,7 +106,10 @@ class AnfrageTest extends TestCase
         ]));
 
         Notification::assertSentOnDemand(NeueAnfrage::class, function ($notification, $channels, $notifiable) {
-            $inhalt = json_encode($notification->toMail($notifiable)->toArray());
+            $inhalt = (string) $notification->toMail($notifiable)->render();
+            $this->assertStringContainsString('Anfrage öffnen: http', $inhalt);
+            // Reiner Text ohne Laravels Standardvorlage
+            $this->assertStringNotContainsString('Alle Rechte vorbehalten', $inhalt);
 
             foreach (['Maria Muster', 'maria@example.org', 'Sehr persönliches Anliegen',
                 'Vertrauliche Schilderung'] as $geheim) {
