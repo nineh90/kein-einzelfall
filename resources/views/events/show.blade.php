@@ -89,6 +89,13 @@
                 {{ __('In meinen Kalender eintragen') }}
             </x-ui.button>
 
+            {{-- Teams-Link öffentlich (Kevin, 30.10.2026), nur bis zum Ende --}}
+            @if ($termin->teamsLinkZeigen())
+                <x-ui.button :href="$termin->teams_link" variant="primary" size="sm" rel="noopener">
+                    {{ __('Über Microsoft Teams teilnehmen') }}
+                </x-ui.button>
+            @endif
+
             @if ($termin->anmeldung_url)
                 <x-ui.button :href="$termin->anmeldung_url" variant="primary" size="sm">
                     {{ __('Zur Anmeldung') }}

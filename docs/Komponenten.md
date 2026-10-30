@@ -205,9 +205,13 @@ Bereich nicht von selbst dort auftaucht. Pfad `/intern`, weil `/verein` die
   Das Passwort wird erzeugt und nur einmal angezeigt.
 - Die Hinweismails an den Verein (neue Anmeldung, neue Anfrage) verlinken nach
   `/intern`.
-- Teams-Links der Gruppen trägt weiter die Technik in `/admin` ein (Gruppen →
-  Teilnahme). Fehlt einer, sagt der Freigabe-Knopf im Vereinsbereich „Bitte bei
-  der Technik melden“.
+- Teams-Links: Der Verein pflegt sie selbst (Kevin, 30.10.2026). Bei
+  Selbsthilfegruppen unter „Teams-Links“ (`App\Filament\Verein\Resources\TeamsLinks`,
+  nur Link und „sofort verschicken“, verschlüsselt, nie öffentlich). Bei
+  Online-Veranstaltungen im Formular (`events.teams_link`), öffentlich als Knopf
+  „Über Microsoft Teams teilnehmen“ bis zum Ende (ohne Ende: 4 Stunden nach
+  Beginn). Beide Felder nehmen nur `https://teams.microsoft.com/…` bzw.
+  `teams.live.com`. Die Links stehen nie im Code oder in Seedern.
 
 ## 6. Kontaktformular und Anfragen (27.07.2026)
 

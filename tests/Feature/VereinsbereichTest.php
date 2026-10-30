@@ -2,7 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Filament\Resources\Events\Pages\CreateEvent;
 use App\Filament\Resources\GroupRegistrations\Pages\ListGroupRegistrations;
+use App\Filament\Verein\Resources\TeamsLinks\Pages\ListTeamsLinks;
+use App\Models\Event;
 use App\Models\Group;
 use App\Models\Inquiry;
 use App\Models\User;
@@ -14,6 +17,7 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -44,7 +48,8 @@ class VereinsbereichTest extends TestCase
         $verein = User::factory()->verein()->create();
 
         $this->actingAs($verein);
-        foreach (['/intern', '/intern/events', '/intern/events/create', '/intern/group-registrations', '/intern/inquiries'] as $pfad) {
+        foreach (['/intern', '/intern/events', '/intern/events/create', '/intern/group-registrations', '/intern/inquiries',
+            '/intern/teams-links'] as $pfad) {
             $this->get($pfad)->assertOk("{$pfad} lädt nicht");
         }
 
@@ -77,7 +82,7 @@ class VereinsbereichTest extends TestCase
         }
 
         $this->assertSame(
-            ['events', 'group-registrations', 'inquiries'],
+            ['events', 'group-registrations', 'inquiries', 'teams-links'],
             collect(Filament::getPanel('verein')->getResources())
                 ->map(fn ($resource) => $resource::getSlug())->sort()->values()->all(),
         );
@@ -111,7 +116,7 @@ class VereinsbereichTest extends TestCase
         $this->assertStringNotContainsString('/admin', $text);
     }
 
-    public function test_ohne_teams_link_nennt_der_hinweis_die_technik(): void
+    public function test_ohne_teams_link_zeigt_der_hinweis_auf_teams_links(): void
     {
         // Im Vereinsbereich gibt es keine Gruppen-Seite, also auch nicht den
         // Weg „Gruppen → Teilnahme“ aus der Verwaltung.
@@ -124,7 +129,7 @@ class VereinsbereichTest extends TestCase
         Livewire::actingAs(User::factory()->verein()->create())
             ->test(ListGroupRegistrations::class)
             ->assertTableActionDisabled('freigeben', $anmeldung)
-            ->assertSee('Bitte bei der Technik melden.');
+            ->assertSee('Bei der Gruppe ist noch kein Teams-Link eingetragen');
     }
 
     public function test_konto_befehl_legt_vereinskonto_an(): void
@@ -167,5 +172,73 @@ class VereinsbereichTest extends TestCase
         $this->assertSame('d.m.Y, H:i:s', DateTimePicker::make('mit-sekunden')->getDisplayFormat());
         $this->assertSame('d.m.Y', DateTimePicker::make('tag')->time(false)->getDisplayFormat());
         $this->assertSame('j. F', DateTimePicker::make('eigen')->displayFormat('j. F')->getDisplayFormat());
+    }
+
+    public function test_teams_links_der_selbsthilfegruppen_pflegt_der_verein(): void
+    {
+        $gruppe = Group::where('slug', 'seelenfarben')->firstOrFail();
+        $gruppe->update(['zugangslink' => null]);
+        $nameVorher = $gruppe->getRawOriginal('name');
+        $arbeitsgruppe = Group::where('typ', '!=', 'selbsthilfe')->firstOrFail();
+
+        Filament::setCurrentPanel(Filament::getPanel('verein'));
+        $this->actingAs(User::factory()->verein()->create());
+        $seite = Livewire::test(ListTeamsLinks::class)
+            ->assertCanSeeTableRecords([$gruppe])
+            ->assertCanNotSeeTableRecords([$arbeitsgruppe]);
+
+        // Nur Teams-Adressen
+        $seite->callTableAction('edit', $gruppe, ['zugangslink' => 'https://beispiel.de/treffen', 'link_automatisch' => false])
+            ->assertHasTableActionErrors(['zugangslink']);
+        $this->assertNull($gruppe->fresh()->zugangslink);
+
+        $seite = Livewire::test(ListTeamsLinks::class)->callTableAction('edit', $gruppe, [
+            'zugangslink' => 'https://teams.microsoft.com/meet/123?p=abc', 'link_automatisch' => true,
+        ])->assertHasNoTableActionErrors();
+
+        $gruppe->refresh();
+        $this->assertSame('https://teams.microsoft.com/meet/123?p=abc', $gruppe->zugangslink);
+        $this->assertTrue($gruppe->link_automatisch);
+        $this->assertSame($nameVorher, $gruppe->getRawOriginal('name'));
+        // Verschlüsselt gespeichert, wie in der Verwaltung
+        $this->assertStringNotContainsString('teams.microsoft.com', (string) DB::table('groups')->where('id', $gruppe->id)->value('zugangslink'));
+
+        // Löschen oder neue Gruppen gibt es hier nicht
+        $seite->assertTableActionDoesNotExist('delete');
+        $this->get('/intern/teams-links/create')->assertNotFound();
+    }
+
+    public function test_veranstaltung_mit_oeffentlichem_teams_link(): void
+    {
+        Filament::setCurrentPanel(Filament::getPanel('verein'));
+        $formular = [
+            'titel' => 'Infoabend online', 'slug' => 'infoabend-online', 'beginnt_am' => now()->addWeek()->setTime(18, 30),
+            'online' => true, 'published_at' => now(),
+        ];
+
+        Livewire::actingAs(User::factory()->verein()->create())
+            ->test(CreateEvent::class)
+            ->fillForm($formular + ['teams_link' => 'https://zoom.us/j/123'])
+            ->call('create')
+            ->assertHasFormErrors(['teams_link'])
+            ->fillForm($formular + ['teams_link' => 'https://teams.microsoft.com/meet/987?p=xyz'])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $termin = Event::where('slug', 'infoabend-online')->sole();
+        $this->get('/veranstaltungen/infoabend-online')->assertOk()
+            ->assertSee('Über Microsoft Teams teilnehmen')
+            ->assertSee('href="https://teams.microsoft.com/meet/987?p=xyz"', false);
+
+        // Ohne Ende: bis vier Stunden nach Beginn, danach nicht mehr
+        $this->travelTo($termin->beginnt_am->copy()->addHours(3));
+        $this->assertTrue($termin->fresh()->teamsLinkZeigen());
+        $this->travelTo($termin->beginnt_am->copy()->addHours(5));
+        $this->assertFalse($termin->fresh()->teamsLinkZeigen());
+        $this->travelBack();
+
+        // Nicht mehr online: Link bleibt gespeichert, wird aber nicht gezeigt
+        $termin->update(['online' => false]);
+        $this->get('/veranstaltungen/infoabend-online')->assertDontSee('Über Microsoft Teams teilnehmen');
     }
 }

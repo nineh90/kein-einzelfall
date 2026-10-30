@@ -65,11 +65,11 @@ class GroupRegistrationsTable
                     ->modalDescription(fn ($record) => 'Der Zugangslink zu „'.$record->group?->getRawOriginal('name')
                         .'“ geht per E-Mail an '.$record->email.'.')
                     ->disabled(fn ($record) => blank($record->group?->zugangslink))
-                    // Im Vereinsbereich gibt es keine Gruppen-Seite, dort trägt
-                    // die Technik den Link ein.
+                    // Im Vereinsbereich gibt es keine Gruppen-Seite, dort steht
+                    // der Link unter „Teams-Links“.
                     ->tooltip(fn ($record) => match (true) {
                         filled($record->group?->zugangslink) => null,
-                        Filament::getCurrentPanel()?->getId() === 'verein' => 'Bei der Gruppe ist noch kein Teams-Link eingetragen. Bitte bei der Technik melden.',
+                        Filament::getCurrentPanel()?->getId() === 'verein' => 'Bei der Gruppe ist noch kein Teams-Link eingetragen (links unter „Teams-Links“).',
                         default => 'Bei der Gruppe ist noch kein Zugangslink eingetragen (Gruppen → Teilnahme).',
                     })
                     ->action(function (GroupRegistration $record) {

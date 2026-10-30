@@ -1165,11 +1165,12 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
 - [ ] **Datenbank-Sicherung** auf dem Live-Server, täglich, mit Aufbewahrung
       ausserhalb des Servers. Ohne `APP_KEY` (siehe unten) ist eine Sicherung
       der verschlüsselten Anfragen wertlos, beides gehört zusammen.
-- [ ] **Zugangslinks der Selbsthilfegruppen** in `/admin` eintragen (Technik,
-      aus Taddis Liste im Drive unter „Selbsthilfegruppen“). Auf der Demo hat
-      keine der drei offenen Gruppen einen. Ohne Link bekommt nach der
-      Anmeldung niemand einen Zugang. Der Verein selbst kommt seit 30.10.2026
-      nur in den Vereinsbereich `/intern` und kann die Links dort nicht ändern.
+- [ ] **Teams-Links der Selbsthilfegruppen** auf dem Live-Server eintragen.
+      Seit 30.10.2026 pflegt der Verein sie selbst in `/intern` unter
+      „Teams-Links“. Vier stehen in Taddis Drive („2. Gruppen & Veranstaltungen“
+      › „1. Selbsthillfegruppen“ › „NEU Zugangslinks.docx“): Wir sind nicht mehr
+      stumm, Bürokratie-Labyrinth, Seelenfarben, Skillin me Softly. Ein fünfter
+      Link dort hat keinen Namen (Zwischen den Zeilen?), Rückfrage an Taddi.
 - [ ] **Konto für den Verein** auf dem Live-Server anlegen:
       `php artisan verein:konto <email> <name>`. Das Passwort steht nur in der
       Ausgabe, auf sicherem Weg an Taddi geben. Anmeldung unter `/intern`.
