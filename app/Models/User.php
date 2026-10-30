@@ -25,6 +25,7 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'panel_zugang',
+        'vereinsbereich',
     ];
 
     /**
@@ -46,6 +47,7 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $attributes = [
         'panel_zugang' => false,
+        'vereinsbereich' => false,
     ];
 
     /**
@@ -59,6 +61,7 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'panel_zugang' => 'boolean',
+            'vereinsbereich' => 'boolean',
         ];
     }
 
@@ -69,9 +72,15 @@ class User extends Authenticatable implements FilamentUser
      * angemeldeten Konto den Zugang verweigern oder gewähren, je nach Version.
      * Beides wollen wir nicht dem Zufall überlassen: Sobald Vereinsmitglieder
      * eigene Konten bekommen, liegen sie in derselben Tabelle wie die Redaktion.
+     *
+     * Der Vereinsbereich (/intern) hat ein eigenes Kennzeichen. Wer in die
+     * Verwaltung darf, darf auch dorthin, umgekehrt nicht.
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->panel_zugang === true;
+        return match ($panel->getId()) {
+            'verein' => $this->vereinsbereich === true || $this->panel_zugang === true,
+            default => $this->panel_zugang === true,
+        };
     }
 }

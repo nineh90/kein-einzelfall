@@ -9,12 +9,12 @@ Hallo,
 Der Zugangslink ist schon automatisch verschickt worden (Einstellung der Gruppe). Ihr müsst nichts tun.
 @else
 So gebt ihr sie frei:
-1. Verwaltungsbereich öffnen: {!! $url !!}
+1. Vereinsbereich öffnen: {!! $url !!}
 2. Bei der Anmeldung auf „Freigeben und Link senden“ klicken.
 3. „Bestätigen“ klicken. Die Person bekommt den Teams-Link per E-Mail.
 @endif
 
-Name und E-Mail-Adresse stehen bewusst nicht in dieser E-Mail: Schon die Anmeldung ist eine Gesundheitsangabe. Sie liegen verschlüsselt im Verwaltungsbereich.
+Name und E-Mail-Adresse stehen bewusst nicht in dieser E-Mail: Schon die Anmeldung ist eine Gesundheitsangabe. Sie liegen verschlüsselt im Vereinsbereich.
 
 Viele Grüße
 Eure Website

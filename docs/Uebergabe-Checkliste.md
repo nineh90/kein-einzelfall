@@ -1165,9 +1165,14 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
 - [ ] **Datenbank-Sicherung** auf dem Live-Server, täglich, mit Aufbewahrung
       ausserhalb des Servers. Ohne `APP_KEY` (siehe unten) ist eine Sicherung
       der verschlüsselten Anfragen wertlos, beides gehört zusammen.
-- [ ] **Zugangslinks der Selbsthilfegruppen** im Panel eintragen (Verein).
-      Auf der Demo hat keine der drei offenen Gruppen einen. Ohne Link
-      bekommt nach der Anmeldung niemand einen Zugang.
+- [ ] **Zugangslinks der Selbsthilfegruppen** in `/admin` eintragen (Technik,
+      aus Taddis Liste im Drive unter „Selbsthilfegruppen“). Auf der Demo hat
+      keine der drei offenen Gruppen einen. Ohne Link bekommt nach der
+      Anmeldung niemand einen Zugang. Der Verein selbst kommt seit 30.10.2026
+      nur in den Vereinsbereich `/intern` und kann die Links dort nicht ändern.
+- [ ] **Konto für den Verein** auf dem Live-Server anlegen:
+      `php artisan verein:konto <email> <name>`. Das Passwort steht nur in der
+      Ausgabe, auf sicherem Weg an Taddi geben. Anmeldung unter `/intern`.
 - [ ] **Englisch: so live oder abschalten?** Alle englischen Seiten sind als
       „ungeprüft“ gekennzeichnet und auf `noindex`. Entweder so veröffentlichen
       oder Englisch im Panel deaktivieren, bis jemand gegengelesen hat (A6).

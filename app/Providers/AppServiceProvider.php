@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Language;
 use App\Support\SitzungOhneSpuren;
 use App\Support\Triggerwarnung;
+use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +28,20 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->triggerwarnungBereitstellen();
         $this->sitzungenOhneSpuren();
+        $this->datumsfelderDeutsch();
+    }
+
+    /**
+     * Datumsfelder im Panel in deutscher Schreibweise: „18.11.2026, 18:30“
+     * statt Filaments „Nov 18, 2026 18:30“ (aufgefallen beim Vorführvideo,
+     * 30.10.2026). Ein Feld mit eigenem Format behält es.
+     */
+    private function datumsfelderDeutsch(): void
+    {
+        DateTimePicker::configureUsing(fn (DateTimePicker $feld) => $feld
+            ->defaultDateDisplayFormat('d.m.Y')
+            ->defaultDateTimeDisplayFormat('d.m.Y, H:i')
+            ->defaultDateTimeWithSecondsDisplayFormat('d.m.Y, H:i:s'));
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Start;
+use App\Http\Middleware\PanelSicherheitsHeader;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -38,27 +40,38 @@ class AdminPanelProvider extends PanelProvider
             // Eigene Startseite „Start“ statt Filaments „Dashboard“
             // (App\Filament\Pages\Start, Durchlauf 30.10.2026).
             ->pages([
-                \App\Filament\Pages\Start::class,
+                Start::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             // Ohne „Willkommen“ und Filament-Werbung: Die Startseite zeigt
             // nur, was wartet. Abmelden geht über das Kürzel oben rechts.
             ->widgets([])
-            ->middleware([
-                // Header fürs Panel (Prüfung der Firma, 08.10.2026)
-                \App\Http\Middleware\PanelSicherheitsHeader::class,
-                EncryptCookies::class,
-                AddQueuedCookiesToResponse::class,
-                StartSession::class,
-                AuthenticateSession::class,
-                ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
-                SubstituteBindings::class,
-                DisableBladeIconComponents::class,
-                DispatchServingFilamentEvent::class,
-            ])
+            ->middleware(self::middleware())
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    /**
+     * Gilt auch für den Vereinsbereich (VereinPanelProvider), damit beide
+     * Panels dieselben Sicherheitsheader und Sitzungsregeln haben.
+     *
+     * @return list<class-string>
+     */
+    public static function middleware(): array
+    {
+        return [
+            // Header fürs Panel (Prüfung der Firma, 08.10.2026)
+            PanelSicherheitsHeader::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            AuthenticateSession::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
+            DisableBladeIconComponents::class,
+            DispatchServingFilamentEvent::class,
+        ];
     }
 }

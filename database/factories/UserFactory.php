@@ -53,4 +53,12 @@ class UserFactory extends Factory
     {
         return $this->state(fn () => ['panel_zugang' => true]);
     }
+
+    /**
+     * Konto nur für den Vereinsbereich (/intern), ohne Verwaltung.
+     */
+    public function verein(): static
+    {
+        return $this->state(fn () => ['vereinsbereich' => true]);
+    }
 }

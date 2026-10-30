@@ -40,7 +40,7 @@ class NeueAnfrage extends Notification
             ->subject('Neue Anfrage über die Website')
             ->view(['text' => 'mail.hinweis-neue-anfrage'], [
                 'zeit' => $this->anfrage->created_at,
-                'url' => url('/admin/inquiries/'.$this->anfrage->id.'/edit'),
+                'url' => url('/intern/inquiries/'.$this->anfrage->id.'/edit'),
             ]);
     }
 }

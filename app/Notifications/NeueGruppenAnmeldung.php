@@ -40,7 +40,7 @@ class NeueGruppenAnmeldung extends Notification
                 'gruppe' => $gruppe,
                 'zeit' => $zeit,
                 'freigegeben' => $this->anmeldung->status === 'freigegeben',
-                'url' => url('/admin/group-registrations'),
+                'url' => url('/intern/group-registrations'),
             ]);
     }
 }

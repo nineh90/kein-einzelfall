@@ -189,6 +189,26 @@ Berechtigungsprüfungen in Tests auffallen.
 | Weiterleitungen | ✅ inkl. Trefferzähler — nach dem Go-Live die wichtigste Spalte: eine Regel mit 0 Aufrufen ist überflüssig oder falsch geschrieben |
 | Anfragen | ✅ Zähler offener Anfragen in der Navigation, Inhalte schreibgeschützt, Status setzt automatisch den Abschlusszeitpunkt (= Beginn der Aufbewahrungsfrist) |
 
+### Vereinsbereich `/intern` (30.10.2026)
+
+Kevin und Nils: Der Verein bekommt **keinen Zugang zu `/admin`**, sonst könnte
+er Seiten, Menüs und Texte der Website ändern. Stattdessen ein zweites Panel
+(`VereinPanelProvider`, id `verein`) mit genau drei Bereichen: Veranstaltungen,
+Anmeldungen zu den Selbsthilfegruppen und Anfragen, dazu die Startseite „Was
+wartet“. Die Bereiche sind einzeln aufgezählt statt gesucht, damit ein neuer
+Bereich nicht von selbst dort auftaucht. Pfad `/intern`, weil `/verein` die
+öffentliche Vereinsseite ist.
+
+- Zugang über `users.vereinsbereich`. Wer `panel_zugang` hat, darf auch nach
+  `/intern`, umgekehrt nicht.
+- Konto anlegen oder Passwort neu setzen: `php artisan verein:konto <email> [name]`.
+  Das Passwort wird erzeugt und nur einmal angezeigt.
+- Die Hinweismails an den Verein (neue Anmeldung, neue Anfrage) verlinken nach
+  `/intern`.
+- Teams-Links der Gruppen trägt weiter die Technik in `/admin` ein (Gruppen →
+  Teilnahme). Fehlt einer, sagt der Freigabe-Knopf im Vereinsbereich „Bitte bei
+  der Technik melden“.
+
 ## 6. Kontaktformular und Anfragen (27.07.2026)
 
 Angebotsposition 4. Der Teil mit dem größten DSGVO-Gewicht — Menschen schreiben
@@ -2770,7 +2790,7 @@ Geändert:
   Beiträgen (ohne Beiträge auch `noindex`).
 - **`/index.php/…`** lieferte jede Seite ein zweites Mal mit 200. Jetzt 301
   (`Suchmaschinenregeln`, global vorgeschaltet), dort auch
-  `X-Robots-Tag: noindex` fürs Panel (/admin).
+  `X-Robots-Tag: noindex` fürs Panel (/admin, seit 30.10.2026 auch /intern).
 - **Vorschaubild für geteilte Links:** `og:image` (1200 × 630) und
   `twitter:card`. Zu jedem Titelbild liegt ein JPEG in `public/img/og`
   (`bin/og-bilder`, nach neuen Titelbildern noch einmal laufen lassen; der

@@ -62,6 +62,20 @@ Der Zugang muss ausdrücklich erteilt werden. Sobald Vereinsmitglieder eigene
 Konten bekommen, liegen sie in derselben Tabelle wie die Redaktion — ohne diesen
 Riegel käme jedes Mitglied an die Anfragen.
 
+### Vereinsbereich
+
+`/intern` — der Bereich für den Verein: Veranstaltungen, Anmeldungen zu den
+Selbsthilfegruppen und Anfragen. Kein Zugang zu Seiten, Menüs oder Texten.
+`bin/start` legt lokal ein Konto an:
+
+| | |
+|---|---|
+| E-Mail | `verein@kein-einzelfall.test` |
+| Passwort | `kein-einzelfall` |
+
+In Produktion: `php artisan verein:konto <email> <name>` (Passwort wird
+erzeugt und einmal angezeigt; erneut aufrufen setzt es neu).
+
 ### Voraussetzungen
 
 PHP **8.2 bis 8.4** mit den Erweiterungen `intl`, `mbstring`, `pdo_mysql`,

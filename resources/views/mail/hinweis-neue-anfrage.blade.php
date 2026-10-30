@@ -7,7 +7,7 @@ Hallo,
 
 Anfrage öffnen: {!! $url !!}
 
-Der Inhalt steht bewusst nicht in dieser E-Mail: E-Mails werden unverschlüsselt übertragen. Die Nachricht liegt verschlüsselt im Verwaltungsbereich und ist nur nach Anmeldung zu lesen.
+Der Inhalt steht bewusst nicht in dieser E-Mail: E-Mails werden unverschlüsselt übertragen. Die Nachricht liegt verschlüsselt im Vereinsbereich und ist nur nach Anmeldung zu lesen.
 
 Viele Grüße
 Eure Website

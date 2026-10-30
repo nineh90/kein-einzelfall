@@ -155,6 +155,7 @@ fi
 # Ohne Konto kommt niemand in die Verwaltung. Das Konto wurde früher von Hand
 # angelegt — und existierte damit auf genau einem Rechner.
 php artisan db:seed --class=AdminSeeder --force 2>&1 | grep -i 'konto' || true
+php artisan db:seed --class=VereinskontoSeeder --force 2>&1 | grep -i 'konto' || true
 
 # --- Assets ----------------------------------------------------------------
 if $WATCH; then

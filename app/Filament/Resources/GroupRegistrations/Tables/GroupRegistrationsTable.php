@@ -10,6 +10,7 @@ use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -64,9 +65,13 @@ class GroupRegistrationsTable
                     ->modalDescription(fn ($record) => 'Der Zugangslink zu „'.$record->group?->getRawOriginal('name')
                         .'“ geht per E-Mail an '.$record->email.'.')
                     ->disabled(fn ($record) => blank($record->group?->zugangslink))
-                    ->tooltip(fn ($record) => blank($record->group?->zugangslink)
-                        ? 'Bei der Gruppe ist noch kein Zugangslink eingetragen (Gruppen → Teilnahme).'
-                        : null)
+                    // Im Vereinsbereich gibt es keine Gruppen-Seite, dort trägt
+                    // die Technik den Link ein.
+                    ->tooltip(fn ($record) => match (true) {
+                        filled($record->group?->zugangslink) => null,
+                        Filament::getCurrentPanel()?->getId() === 'verein' => 'Bei der Gruppe ist noch kein Teams-Link eingetragen. Bitte bei der Technik melden.',
+                        default => 'Bei der Gruppe ist noch kein Zugangslink eingetragen (Gruppen → Teilnahme).',
+                    })
                     ->action(function (GroupRegistration $record) {
                         if (GruppenAnmeldung::zugangSenden($record)) {
                             Notification::make()->title('Zugangslink verschickt')->success()->send();

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *    und einer eigenen kanonischen Adresse. Das ist doppelter Inhalt wie beim
  *    Schrägstrich am Ende (SchraegstrichEntfernen). Jetzt 301 auf die
  *    Adresse ohne /index.php.
- *  - Das Panel (/admin) gehört nicht in den Index. Die Anmeldeseite war
+ *  - Die Panels (/admin, /intern) gehören nicht in den Index. Die Anmeldeseite war
  *    indexierbar. Per Header statt robots.txt: Eine gesperrte Adresse kann
  *    Google trotzdem listen, nur ohne zu sehen, dass sie es nicht soll.
  */
@@ -35,7 +35,7 @@ class Suchmaschinenregeln
 
         $antwort = $next($request);
 
-        if ($request->is('admin', 'admin/*')) {
+        if ($request->is('admin', 'admin/*', 'intern', 'intern/*')) {
             $antwort->headers->set('X-Robots-Tag', 'noindex, nofollow');
         }
 
