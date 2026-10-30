@@ -15,17 +15,16 @@ Diese Stellen stehen im Text als **[…]**:
 1. **Teams:** Über welches Konto laufen die Treffen (eigenes Microsoft 365 des
    Vereins oder ein privates Konto)? Werden Treffen aufgezeichnet? Laufen auch
    die Arbeitsgruppen über Teams (auf der Website steht dort nur „online“)?
-2. **Protokolle bei all-inkl:** Im KAS unter Statistik/Logfiles einstellen,
-   dass IP-Adressen gekürzt gespeichert werden, und die Speicherdauer bei
-   all-inkl erfragen. Davon hängt der Abschnitt „Server-Logfiles“ ab.
-3. **Datenschutzbeauftragter:** Pflicht, wenn in der Regel mindestens 20
+2. **Datenschutzbeauftragter:** Pflicht, wenn in der Regel mindestens 20
    Personen ständig mit der automatisierten Verarbeitung personenbezogener
    Daten beschäftigt sind (§ 38 BDSG), oder wenn die Kerntätigkeit in der
    umfangreichen Verarbeitung von Gesundheitsdaten besteht (Art. 37 DSGVO).
    Bitte einschätzen. Der Entwurf geht davon aus, dass keiner benannt ist.
-4. **AVV mit all-inkl:** Laut all-inkl seit 2022 Teil jeder neuen Bestellung,
-   der Vertrag ist von Januar 2026. Im Kundenbereich unter
-   „Stammdaten/Auftragsverarbeitung“ kurz nachsehen.
+
+Geklärt am 30.10.2026 im Kundenbereich und im KAS (nur nachgesehen, nichts
+geändert): Der Vertrag über Auftragsverarbeitung mit all-inkl besteht seit
+31.01.2026. Zugriffsprotokolle sind abgeschaltet („Es werden keine Logs
+erzeugt“), Statistiken ebenfalls.
 
 ---
 
@@ -78,16 +77,13 @@ Diese Website liegt bei ALL-INKL.COM – Neue Medien Münnich, Hauptstraße 68,
 02742 Friedersdorf. Die Server stehen in Deutschland. Mit all-inkl haben wir
 einen Vertrag über Auftragsverarbeitung (Art. 28 DSGVO) geschlossen.
 
-Wenn du die Website aufrufst, speichert der Server technisch notwendige Daten
-in Protokolldateien: die aufgerufene Adresse, Datum und Uhrzeit, die
-übertragene Datenmenge, den Browser und das Betriebssystem sowie die
-IP-Adresse **[gekürzt, siehe offene Punkte]**. Diese Daten brauchen wir, um
-die Website sicher und stabil bereitzustellen und Angriffe zu erkennen. Wir
-führen sie nicht mit anderen Daten zusammen. Sie werden nach
-**[Speicherdauer laut all-inkl]** gelöscht.
+Zugriffsprotokolle (Logfiles) mit IP-Adressen haben wir bei all-inkl
+abgeschaltet, ebenso Zugriffsstatistiken. Beim Aufruf der Website verarbeitet
+der Server deine IP-Adresse nur, um dir die Seite auszuliefern, und speichert
+sie nicht.
 
-Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren,
-funktionierenden Website (Art. 6 Abs. 1 lit. f DSGVO).
+Rechtsgrundlage ist unser berechtigtes Interesse, die Website bereitzustellen
+(Art. 6 Abs. 1 lit. f DSGVO).
 
 Die Verbindung zur Website ist verschlüsselt (HTTPS). Daran erkennst du es
 am Schloss-Symbol in der Adresszeile deines Browsers.
