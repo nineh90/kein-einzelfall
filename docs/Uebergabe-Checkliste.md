@@ -1169,11 +1169,14 @@ erledigt ist, steht unten abgehakt mit Beleg. Neu dazugekommen:
       Seit 30.10.2026 pflegt der Verein sie selbst in `/intern` unter
       „Teams-Links“. Vier stehen in Taddis Drive („2. Gruppen & Veranstaltungen“
       › „1. Selbsthillfegruppen“ › „NEU Zugangslinks.docx“): Wir sind nicht mehr
-      stumm, Bürokratie-Labyrinth, Seelenfarben, Skillin me Softly. Ein fünfter
-      Link dort hat keinen Namen (Zwischen den Zeilen?), Rückfrage an Taddi.
+      stumm, Bürokratie-Labyrinth, Seelenfarben, Skillin me Softly, dazu ein
+      fünfter ohne Namen = Zwischen den Zeilen (einzige Gruppe ohne Link).
+      Auf der Demo am 30.10.2026 alle fünf eingetragen.
 - [ ] **Konto für den Verein** auf dem Live-Server anlegen:
       `php artisan verein:konto <email> <name>`. Das Passwort steht nur in der
       Ausgabe, auf sicherem Weg an Taddi geben. Anmeldung unter `/intern`.
+      Auf der Demo gibt es seit 30.10.2026 `verwaltung@kein-einzelfall.de`
+      (Startpasswort bei Kevin). Taddi ändert es unter „Profil“.
 - [ ] **Englisch: so live oder abschalten?** Alle englischen Seiten sind als
       „ungeprüft“ gekennzeichnet und auf `noindex`. Entweder so veröffentlichen
       oder Englisch im Panel deaktivieren, bis jemand gegengelesen hat (A6).
