@@ -6,12 +6,9 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -38,14 +35,15 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth('full')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            // Eigene Startseite „Start“ statt Filaments „Dashboard“
+            // (App\Filament\Pages\Start, Durchlauf 30.10.2026).
             ->pages([
-                Dashboard::class,
+                \App\Filament\Pages\Start::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            // Ohne „Willkommen“ und Filament-Werbung: Die Startseite zeigt
+            // nur, was wartet. Abmelden geht über das Kürzel oben rechts.
+            ->widgets([])
             ->middleware([
                 // Header fürs Panel (Prüfung der Firma, 08.10.2026)
                 \App\Http\Middleware\PanelSicherheitsHeader::class,
