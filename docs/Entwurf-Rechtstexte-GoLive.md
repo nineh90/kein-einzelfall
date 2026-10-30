@@ -15,16 +15,13 @@ Diese Stellen stehen im Text als **[…]**:
 1. **Teams:** Über welches Konto laufen die Treffen (eigenes Microsoft 365 des
    Vereins oder ein privates Konto)? Werden Treffen aufgezeichnet? Laufen auch
    die Arbeitsgruppen über Teams (auf der Website steht dort nur „online“)?
-2. **Datenschutzbeauftragter:** Pflicht, wenn in der Regel mindestens 20
-   Personen ständig mit der automatisierten Verarbeitung personenbezogener
-   Daten beschäftigt sind (§ 38 BDSG), oder wenn die Kerntätigkeit in der
-   umfangreichen Verarbeitung von Gesundheitsdaten besteht (Art. 37 DSGVO).
-   Bitte einschätzen. Der Entwurf geht davon aus, dass keiner benannt ist.
 
 Geklärt am 30.10.2026 im Kundenbereich und im KAS (nur nachgesehen, nichts
 geändert): Der Vertrag über Auftragsverarbeitung mit all-inkl besteht seit
 31.01.2026. Zugriffsprotokolle sind abgeschaltet („Es werden keine Logs
-erzeugt“), Statistiken ebenfalls.
+erzeugt“), Statistiken ebenfalls. Datenschutzbeauftragte ist Tanja Häfner
+(Taddi, 30.10.2026). Tipp: Die Benennung muss der Verein der Hamburger
+Aufsichtsbehörde melden (Art. 37 Abs. 7 DSGVO), falls noch nicht geschehen.
 
 ---
 
@@ -46,8 +43,11 @@ E-Mail: kontakt@kein-einzelfall.de
 
 Vertreten durch den Vorstand: Tatjana Belmar und Franziska Künstler.
 
-Einen Datenschutzbeauftragten haben wir nicht benannt, weil wir dazu nicht
-verpflichtet sind. Fragen zum Datenschutz richtest du an
+**Unsere Datenschutzbeauftragte:**  
+Tanja Häfner  
+E-Mail: haefner@kein-einzelfall.de
+
+Fragen zum Datenschutz kannst du direkt an sie richten oder an
 datenschutz@kein-einzelfall.de.
 
 ## 2. Deine Rechte
@@ -64,7 +64,8 @@ Du hast jederzeit das Recht,
 - eine erteilte **Einwilligung zu widerrufen**, mit Wirkung für die Zukunft
   (Art. 7 Abs. 3 DSGVO).
 
-Schreib uns dafür einfach an datenschutz@kein-einzelfall.de.
+Schreib uns dafür einfach an datenschutz@kein-einzelfall.de oder an unsere
+Datenschutzbeauftragte (haefner@kein-einzelfall.de).
 
 Du kannst dich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren.
 Für uns zuständig ist:  
