@@ -18,6 +18,7 @@
  */
 
 import { chromium } from 'playwright'
+import { execFileSync } from 'node:child_process'
 
 const BASIS = process.env.BASIS || 'http://localhost:8000'
 
@@ -1005,6 +1006,14 @@ console.log('\nAnmeldung zu einer Selbsthilfegruppe')
         && s.url().endsWith('#formular-anmeldung')
         && await s.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
     await s.context().close()
+
+    // Die Test-Anmeldung wieder entfernen. Sonst blieb bei jedem Lauf eine im
+    // Verwaltungsbereich stehen, am 30.10.2026 waren es 68. Nur gegen den
+    // eigenen lokalen Server, dessen Datenbank artisan erreicht.
+    if (/\/\/(localhost|127\.0\.0\.1)[:/]/.test(BASIS)) {
+        execFileSync('php', ['artisan', 'tinker', '--execute',
+            'App\\Models\\GroupRegistration::all()->filter(fn ($a) => $a->email === "browsertest@beispiel.de")->each->delete();'])
+    }
 }
 
 // --- Suche im Glossar (KEV-153) --------------------------------------------
