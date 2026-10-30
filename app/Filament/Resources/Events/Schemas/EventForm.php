@@ -76,9 +76,13 @@ class EventForm
                 TextInput::make('anmeldung_hinweis')->label('Hinweis zur Anmeldung')
                     ->helperText('z.B. „Bitte bis eine Woche vorher melden.“'),
 
+                // Beim Anlegen schon „jetzt“: Leer hieß Entwurf, und wer das
+                // übersah, legte eine Veranstaltung an, die niemand sah
+                // (Vorführvideo, 30.10.2026).
                 DateTimePicker::make('published_at')->label('Veröffentlichen am')
                     ->seconds(false)->native(false)
-                    ->helperText('Leer = Entwurf, für Besucher nicht sichtbar.'),
+                    ->default(fn () => now())
+                    ->helperText('Ab dann auf der Website zu sehen. Leer = Entwurf, für Besucher nicht sichtbar.'),
             ]),
         ]);
     }

@@ -200,4 +200,21 @@ class EventTest extends TestCase
         ]);
         $this->assertStringNotContainsString('Uhr', $ganztag->zeitraum());
     }
+
+    /** Vorführvideo 30.10.2026: Beim Anlegen ist die Veranstaltung schon veröffentlicht, nicht stillschweigend ein Entwurf. */
+    public function test_neue_veranstaltung_ist_im_panel_schon_veroeffentlicht(): void
+    {
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-30 18:00'));
+
+        \Livewire\Livewire::actingAs(\App\Models\User::factory()->redaktion()->create())
+            ->test(\App\Filament\Resources\Events\Pages\CreateEvent::class)
+            // Ohne „Veröffentlichen am“: das Formular bringt es selbst mit
+            ->fillForm(['titel' => 'Infoabend', 'slug' => 'infoabend', 'beginnt_am' => '2026-11-18 18:30'])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $termin = Event::where('slug', 'infoabend')->firstOrFail();
+        $this->assertTrue($termin->published_at->lte(now()));
+        $this->get('/veranstaltungen')->assertSee('Infoabend');
+    }
 }
