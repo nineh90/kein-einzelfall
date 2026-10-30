@@ -208,13 +208,15 @@ return [
         /*
          * Die Postfächer des Vereins (KEV-124). „Anfragen & Austausch“ stand
          * bis dahin hier, ist aber über das Menü unter Kontakt erreichbar.
-         * Arbeitsgruppen in der Einzahl, wie in jedem AG-Text (Group::AG_ADRESSE).
+         * Seit KEV-289 verwaltung@ und finanzen@ statt selbsthilfe@ und
+         * arbeitsgruppe@ (Wunsch von Taddi). Die beiden stehen weiter auf den
+         * Seiten der Selbsthilfe- und Arbeitsgruppen.
          */
         'kontakt' => [
-            ['label' => 'kontakt@kein-einzelfall.de',       'url' => 'mailto:kontakt@kein-einzelfall.de'],
-            ['label' => 'selbsthilfe@kein-einzelfall.de',   'url' => 'mailto:selbsthilfe@kein-einzelfall.de'],
-            ['label' => 'arbeitsgruppe@kein-einzelfall.de', 'url' => 'mailto:arbeitsgruppe@kein-einzelfall.de'],
-            ['label' => 'presse@kein-einzelfall.de',        'url' => 'mailto:presse@kein-einzelfall.de'],
+            ['label' => 'kontakt@kein-einzelfall.de',    'url' => 'mailto:kontakt@kein-einzelfall.de'],
+            ['label' => 'verwaltung@kein-einzelfall.de', 'url' => 'mailto:verwaltung@kein-einzelfall.de'],
+            ['label' => 'finanzen@kein-einzelfall.de',   'url' => 'mailto:finanzen@kein-einzelfall.de'],
+            ['label' => 'presse@kein-einzelfall.de',     'url' => 'mailto:presse@kein-einzelfall.de'],
         ],
         'informationen' => [
             ['schluessel' => 'impressum', 'label' => 'Impressum',   'url' => '/impressum'],

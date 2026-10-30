@@ -139,6 +139,7 @@ class ModuleTest extends TestCase
 
     /**
      * KEV-124: Unter Kontakt die vier Postfächer statt „Anfragen & Austausch“.
+     * Seit KEV-289 verwaltung@ und finanzen@ statt selbsthilfe@ und arbeitsgruppe@.
      * Bricht eine Adresse um, dann nach dem @, nie am Bindestrich der Domain.
      */
     public function test_fusszeile_nennt_unter_kontakt_die_postfaecher(): void
@@ -147,10 +148,13 @@ class ModuleTest extends TestCase
         $fuss = substr($html, strpos($html, '<footer'));
         $fuss = substr($fuss, 0, strpos($fuss, '</footer>'));
 
-        foreach (['kontakt', 'selbsthilfe', 'arbeitsgruppe', 'presse'] as $postfach) {
+        foreach (['kontakt', 'verwaltung', 'finanzen', 'presse'] as $postfach) {
             $this->assertStringContainsString('href="mailto:'.$postfach.'@kein-einzelfall.de"', $fuss);
             $this->assertStringContainsString(
                 $postfach.'@<wbr><span class="whitespace-nowrap">kein-einzelfall.de</span>', $fuss);
+        }
+        foreach (['selbsthilfe', 'arbeitsgruppe'] as $postfach) {
+            $this->assertStringNotContainsString($postfach.'@', $fuss);
         }
         $this->assertStringNotContainsString('href="/anfragen"', $fuss);
         $this->assertStringNotContainsString('Anfragen &amp; Austausch', $fuss);
