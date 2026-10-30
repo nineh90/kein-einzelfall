@@ -562,7 +562,9 @@ class PageForm
                                 ->label(fn ($get) => $get('typ') === 'hinweis' ? 'Text des Hinweises' : 'Text')
                                 ->rows(3)
                                 ->helperText(fn ($get) => $get('typ') === 'hero'
-                                    ? 'Jede Zeile wird ein eigener Absatz.' : null)
+                                    ? 'Jede Zeile wird ein eigener Absatz. Eine Zeile in grüner '
+                                        .'Handschrift: ganz in *Sternchen* setzen, zum Beispiel *Von Betroffenen.*'
+                                    : null)
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
                                     ['hinweis', 'hero', 'contact_close', 'donation_options'],

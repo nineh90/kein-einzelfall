@@ -824,6 +824,44 @@ class StartseiteTest extends TestCase
         $this->assertMatchesRegularExpression('#href="/arbeitsgruppen"[^>]*>\s*Arbeitsgruppen\s*</a>#', $html);
     }
 
+    /** KEV-286: „Von Betroffenen.“ als eigene Zeile in grüner Handschrift, ohne Sternchen. */
+    public function test_aufmacher_hat_von_betroffenen_in_handschrift(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        $this->assertMatchesRegularExpression('#<p class="font-hand[^"]*text-green[^"]*">Von Betroffenen\.</p>#', $html);
+        $this->assertStringNotContainsString('*Von Betroffenen.*', $html);
+        $this->get('/')->assertSeeInOrder([
+            'Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe.',
+            'Von Betroffenen.',
+            'Für Opfer und Mit-Opfer',
+        ]);
+    }
+
+    public function test_bestehender_aufmacher_bekommt_von_betroffenen(): void
+    {
+        $block = $this->startseite()->blocks()->where('typ', 'hero')->first();
+        $alt = str_replace("*Von Betroffenen.*\n", '', StartseiteSeeder::AUFMACHER_TEXT);
+        $block->update(['data' => array_replace($block->data, ['text' => $alt])]);
+        $schluessel = array_keys($block->fresh()->data);
+
+        $migration = require database_path('migrations/2026_10_30_160000_aufmacher_von_betroffenen.php');
+        $migration->up();
+        $migration->up();
+
+        $data = $block->fresh()->data;
+        $this->assertSame(StartseiteSeeder::AUFMACHER_TEXT, $data['text']);
+        $this->assertSame($schluessel, array_keys($data));
+        $this->assertStringContainsString("*By those affected.*\n",
+            json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true)
+                [StartseiteSeeder::AUFMACHER_TEXT]['en']);
+
+        // Im Panel umgeschrieben: bleibt.
+        $block->update(['data' => array_replace($block->data, ['text' => 'Eigener Text.'])]);
+        $migration->up();
+        $this->assertSame('Eigener Text.', $block->fresh()->data['text']);
+    }
+
     /**
      * KEV-86: Die Migration bricht den Text nur um, wo er noch in einem Stück
      * steht. Die Knöpfe bringt seit KEV-113 dessen Migration in Ordnung: Die

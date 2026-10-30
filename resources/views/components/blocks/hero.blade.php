@@ -113,11 +113,20 @@
             </h1>
 
             {{-- Jede Zeile im Panel ein eigener Absatz (KEV-86, Wunsch des
-                 Vereins: ein Satz je Zeile statt eines Blocks). --}}
+                 Vereins: ein Satz je Zeile statt eines Blocks).
+
+                 Eine Zeile ganz in *Sternchen* steht in der grünen Handschrift,
+                 wie das Zitat in der Überschrift (KEV-286: „Von Betroffenen.“).
+                 Dasselbe Zeichen wie dort, damit der Verein sich nur eines
+                 merken muss. --}}
             @if ($text)
                 <div class="mt-4 flex max-w-prose flex-col gap-2 text-[0.9375rem] leading-relaxed text-ink-soft lg:text-lg">
                     @foreach (preg_split('/\R+/u', trim($text)) as $zeile)
-                        <p>{{ $zeile }}</p>
+                        @if (preg_match('/^\*([^*]+)\*$/u', trim($zeile), $handschrift))
+                            <p class="font-hand text-2xl leading-snug text-green lg:text-[1.75rem]">{{ $handschrift[1] }}</p>
+                        @else
+                            <p>{{ $zeile }}</p>
+                        @endif
                     @endforeach
                 </div>
             @endif

@@ -201,9 +201,15 @@ class StartseiteSeeder extends Seeder
      *
      * @return array<int, array{typ: string, data: array<string, mixed>}>
      */
+    /*
+     * Seit KEV-286 mit „Von Betroffenen.“ in grüner Handschrift (Taddi: „ich
+     * glaube das sollten wir uns wert sein“). Bei ihr stand „Von Betroffen.“,
+     * gemeint ist wie im Satz davor „von Betroffenen“.
+     */
     public const AUFMACHER_TEXT = "Du bist auf der Informations-, Austausch- und Selbstwirksamkeitsplattform "
         ."von KE!N EINZELFALL e.V.\n"
         ."Ein zentrales Netzwerk aus Fach- und Betroffenenexpertise auf Augenhöhe.\n"
+        ."*Von Betroffenen.*\n"
         ."Für Opfer und Mit-Opfer, Angehörige, Interessierte und Fachpersonen.\n"
         .'Für mehr Sichtbarkeit, Gehör und Unterstützung!';
 
