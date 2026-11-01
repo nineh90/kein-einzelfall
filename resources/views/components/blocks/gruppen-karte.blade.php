@@ -113,10 +113,11 @@
                  Zwischenüberschrift darüber, deshalb steht hier ein
                  einheitlicher Satz für alle. --}}
             <p class="border-t border-line pt-3 text-sm text-ink-soft">
+                {{-- KEV-307: „Zurzeit“ statt „Noch“ (Taddi). --}}
                 @unless ($status_sichtbar)
-                    {{ __(':status – noch keine Anmeldung möglich', ['status' => __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status)]) }}
+                    {{ __(':status – zurzeit keine Anmeldung möglich', ['status' => __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status)]) }}
                 @else
-                    {{ __('Noch keine Anmeldung möglich') }}
+                    {{ __('Zurzeit keine Anmeldung möglich') }}
                 @endunless
             </p>
         @endunless
