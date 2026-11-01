@@ -39,7 +39,8 @@ class VereinsseiteSeeder extends Seeder
     /*
      * Text von Taddi (KEV-173). Der Vereinsname fett wie auf der Startseite
      * (KEV-168), „e. V.“ ohne Leerzeichen wie überall auf der Seite, ein
-     * doppeltes Leerzeichen vor „sie sind auch“ entfernt.
+     * doppeltes Leerzeichen vor „sie sind auch“ entfernt. Der Absatz
+     * SELBSTWIRKSAMKEIT ist seit KEV-292 raus.
      */
     public const ABSAETZE = [
         '*KE!N EINZELFALL e.V.* wurde 2024 aus persönlicher Betroffenheit heraus gegründet. Aus Erfahrung wurde '
@@ -55,15 +56,17 @@ class VereinsseiteSeeder extends Seeder
             .'schaffen Raum für Austausch, gegenseitige Unterstützung und aktive Mitgestaltung. Denn Selbsthilfe '
             .'bedeutet für uns nicht nur, mit Belastungen umzugehen, sondern auch eigene Ressourcen zu entdecken, '
             .'Wissen zu teilen und wieder mehr Einfluss auf das eigene Leben zu gewinnen.',
-        'Wir möchten Selbstwirksamkeit stärken: durch verständliche Informationen, durch Beteiligung, durch '
-            .'Austausch und durch die Erfahrung, mit dem eigenen Wissen und den eigenen Fähigkeiten etwas bewegen '
-            .'zu können.',
         'Gleichzeitig wollen wir den Blick verändern: Betroffene dürfen nicht nur über ihre '
             .'Traumafolgestörungen, ihre Hilfebedürftigkeit, Diagnosen oder Akten wahrgenommen werden. Sie sind '
             .'mehr – sie sind auch Menschen mit Ressourcen, Fähigkeiten, Wissen, Erfahrungen und eigenen Stärken. '
             .'Denn viel zu oft rückt die Hilfebedürftigkeit mit ihren Diagnosen in den Vordergrund, während der '
             .'Blick auf vorhandene Ressourcen und Stärken verloren geht.',
     ];
+
+    /** KEV-292: Diesen Absatz wollte Taddi wieder weg haben. */
+    public const SELBSTWIRKSAMKEIT = 'Wir möchten Selbstwirksamkeit stärken: durch verständliche Informationen, '
+        .'durch Beteiligung, durch Austausch und durch die Erfahrung, mit dem eigenen Wissen und den eigenen '
+        .'Fähigkeiten etwas bewegen zu können.';
 
     /*
      * Die beiden Schlusszeilen als Leitsatz in Handschrift, wie „Für
@@ -141,6 +144,21 @@ class VereinsseiteSeeder extends Seeder
         $seite?->blocks()->where('typ', 'text')->get()
             ->filter(fn ($b) => ($b->data['hand'] ?? null) === self::HAND_EINZEILIG)
             ->each(fn ($b) => $b->update(['data' => array_replace($b->data, ['hand' => self::HAND])]));
+    }
+
+    /**
+     * KEV-292: Den Absatz SELBSTWIRKSAMKEIT streichen, wo er noch genau so
+     * dasteht. Die übrigen Absätze bleiben, wie sie sind.
+     */
+    public static function selbstwirksamkeitStreichen(): void
+    {
+        $seite = self::seite();
+
+        $seite?->blocks()->where('typ', 'text')->get()
+            ->filter(fn ($b) => in_array(self::SELBSTWIRKSAMKEIT, $b->data['absaetze'] ?? [], true))
+            ->each(fn ($b) => $b->update(['data' => array_replace($b->data, [
+                'absaetze' => array_values(array_filter($b->data['absaetze'], fn ($a) => $a !== self::SELBSTWIRKSAMKEIT)),
+            ])]));
     }
 
     /** KEV-173: Taddis neuer Text, nur wo noch der der Altseite steht. */

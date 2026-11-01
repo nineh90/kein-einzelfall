@@ -51,7 +51,7 @@ class VereinsseiteTest extends TestCase
             '<strong class="font-semibold text-ink">KE!N EINZELFALL e.V.</strong> wurde 2024 aus persönlicher Betroffenheit', $html);
         $this->assertStringContainsString('während der Blick auf vorhandene Ressourcen und Stärken verloren geht.', $html);
         $this->assertStringNotContainsString('Unsere Aufgabe: Wir schaffen', $html);
-        // Alle sechs Absätze offen, nichts hinter „Weiterlesen“.
+        // Alle Absätze offen, nichts hinter „Weiterlesen“.
         $this->assertStringNotContainsString('weitere Absätze', $html);
         $this->assertMatchesRegularExpression(
             '#<p class="[^"]*whitespace-pre-line[^"]*font-hand[^"]*">Für Sichtbarkeit\. Für eine Stimme\. Für Unterstützung\.\nGemeinsam KE!N EINZELFALL\.</p>#', $html);
@@ -74,6 +74,29 @@ class VereinsseiteTest extends TestCase
         $block->update(['data' => array_replace($block->data, ['hand' => 'Eigener Leitsatz.'])]);
         $migration->up();
         $this->assertSame('Eigener Leitsatz.', $block->fresh()->data['hand']);
+    }
+
+    /** KEV-292: Der Absatz „Wir möchten Selbstwirksamkeit stärken …“ ist weg, auf frischer DB und per Migration. */
+    public function test_absatz_selbstwirksamkeit_ist_weg(): void
+    {
+        $this->get('/verein')->assertOk()->assertDontSee('Wir möchten Selbstwirksamkeit stärken');
+
+        $block = Page::where('slug', 'verein')->where('locale', 'de')->first()->blocks()->where('typ', 'text')->first();
+        $mit = VereinsseiteSeeder::ABSAETZE;
+        array_splice($mit, 4, 0, [VereinsseiteSeeder::SELBSTWIRKSAMKEIT]);
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $mit])]);
+
+        $migration = require database_path('migrations/2026_11_01_100000_verein_ohne_selbstwirksamkeit.php');
+        $migration->up();
+        $migration->up();
+        $this->assertSame(VereinsseiteSeeder::ABSAETZE, $block->fresh()->data['absaetze']);
+        $this->get('/verein')->assertOk()->assertDontSee('Wir möchten Selbstwirksamkeit stärken')
+            ->assertSee('Gleichzeitig wollen wir den Blick verändern');
+
+        // Im Panel geänderte Absätze bleiben.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text.']])]);
+        $migration->up();
+        $this->assertSame(['Eigener Text.'], $block->fresh()->data['absaetze']);
     }
 
     /** KEV-173: Bestehende Seiten bekommen den Text per Migration, Englisch mit. */
