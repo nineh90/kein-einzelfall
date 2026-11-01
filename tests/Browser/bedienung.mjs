@@ -1249,13 +1249,19 @@ console.log('\nSprungziele unter dem Kopf')
     const spalte = s.locator('[data-mitlaufen]').first()
     pruefe('Dokumente laufen mit', await spalte.evaluate((e) => e.classList.contains('ist-mitlaufend')))
 
+    // Die Strecke, auf der es mitlaufen kann: so viel, wie der Text links
+    // länger ist. Darin zweimal nachsehen.
     const kopf = await s.evaluate(() => document.querySelector('header.sticky').offsetHeight)
-    const start = await spalte.evaluate((e) => e.closest('section').getBoundingClientRect().top + scrollY)
-    for (const weiter of [300, 600]) {
-        await s.evaluate((y) => window.scrollTo(0, y), start + weiter)
+    const { start, strecke } = await spalte.evaluate((e) => ({
+        start: e.getBoundingClientRect().top + scrollY,
+        strecke: e.parentElement.offsetHeight - e.offsetHeight,
+    }))
+    pruefe('Strecke zum Mitlaufen', strecke > 100, `${strecke} px`)
+    for (const anteil of [0.3, 0.8]) {
+        await s.evaluate((y) => window.scrollTo(0, y), start - kopf - 24 + strecke * anteil)
         await s.waitForTimeout(150)
         const oben = await spalte.evaluate((e) => Math.round(e.getBoundingClientRect().top))
-        pruefe(`nach ${weiter} px unter der Kopfzeile`, oben >= kopf && oben <= kopf + 40, `oben ${oben}, Kopf ${kopf}`)
+        pruefe(`bei ${anteil * 100} % der Strecke unter der Kopfzeile`, oben >= kopf && oben <= kopf + 40, `oben ${oben}, Kopf ${kopf}`)
     }
     await s.context().close()
 
