@@ -2,6 +2,10 @@
     'titel' => null,
     'einleitung' => null,
     'bereich' => null,      // nur einen Bereich zeigen (z.B. "Vorstand")
+    // KEV-295: Die Personen dieses Bereichs folgen im selben Raster, jede
+    // mittig in eigener Zeile („Herr und Frau Unbekannt gehören ja auch zum
+    // Team“, Taddi).
+    'anhaengen' => null,
     'auf' => 'cream',
 ])
 
@@ -11,6 +15,13 @@
         ->orderBy('position')
         ->orderBy('name')
         ->get();
+
+    $mittig = $anhaengen && $anhaengen !== $bereich
+        ? \App\Models\TeamMember::veroeffentlicht()->where('bereich', $anhaengen)
+            ->orderBy('position')->orderBy('name')->get()
+        : collect();
+    $mittigIds = $mittig->pluck('id')->all();
+    $personen = $bereich ? $personen->concat($mittig) : $personen;
 @endphp
 
 @if ($personen->isNotEmpty())
@@ -54,7 +65,10 @@
                  halber Abstand). --}}
             <ul class="team-raster grid gap-5 md:grid-cols-2">
                 @foreach ($personen as $person)
-                    <li class="flex md:odd:last:col-span-2 md:odd:last:w-[calc(50%-0.625rem)] md:odd:last:justify-self-center">
+                    <li @class([
+                        'flex md:odd:last:col-span-2 md:odd:last:w-[calc(50%-0.625rem)] md:odd:last:justify-self-center',
+                        'md:col-span-2 md:w-[calc(50%-0.625rem)] md:justify-self-center' => in_array($person->id, $mittigIds, true),
+                    ])>
                         <article id="{{ $person->anker() }}"
                                  class="flex flex-1 flex-col overflow-hidden rounded-card
                                         border border-line bg-cream">

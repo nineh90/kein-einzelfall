@@ -110,7 +110,18 @@
                 'titel' => ($b->data['verzeichnis_titel'] ?? null) ?: $b->data['titel']],
         default => null,
     };
-    $sprungpunkte = $bloecke->map($sprungpunkt)->filter()->values()->all();
+    // KEV-295: Wer im Team-Raster angehängt ist (Herr und Frau Unbekannt),
+    // hat keine eigene Überschrift mehr, bleibt aber im Verzeichnis, mit
+    // seiner Karte als Ziel.
+    $punkteVon = fn ($b) => array_values(array_filter([
+        $sprungpunkt($b),
+        ...($b->typ === 'team_grid' && filled($b->data['anhaengen'] ?? null)
+            ? \App\Models\TeamMember::veroeffentlicht()->where('bereich', $b->data['anhaengen'])
+                ->orderBy('position')->orderBy('name')->get()
+                ->map(fn ($person) => ['anker' => $person->anker(), 'titel' => $person->name])->all()
+            : []),
+    ]));
+    $sprungpunkte = $bloecke->flatMap($punkteVon)->values()->all();
 
     // KEV-294: Steht „Auf dieser Seite“ rechts neben einem Text (Schalter am
     // Textbaustein), zählt es die Abschnitte nach diesem Text auf, ohne den
@@ -120,7 +131,7 @@
     $nebenText = $bloecke->values()->search(fn ($b) => $b->typ === 'text' && ! empty($b->data['verzeichnis_daneben']));
     $verzeichnisDaneben = $nebenText === false ? [] : $bloecke->values()->slice($nebenText + 1)
         ->reject(fn ($b) => $b->typ === 'donation_options')
-        ->map($sprungpunkt)->filter()->values()->all();
+        ->flatMap($punkteVon)->values()->all();
 
     // Flächenwechsel von Abschnitt zu Abschnitt. Ohne ihn laufen zehn
     // Abschnitte optisch ununterscheidbar ineinander; der Wechsel gibt der

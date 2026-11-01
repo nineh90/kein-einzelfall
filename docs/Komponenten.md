@@ -2937,3 +2937,23 @@ Vision“ (vorher „Unser Team – …“) und ein Schlusssatz unter der Einlei
   verliert also nichts.
 
 Tests: TeamseiteTest.
+
+## 53. Teamseite ohne Zwischentexte (KEV-295, 01.11.2026)
+
+Taddi: Die Symbole bei „Team“ und „Herr und Frau Unbekannt“ (KEV-184/185)
+passen nicht zur Seite, die Texte dort sollen weg. Stattdessen „Team“ als
+Überschrift wie „Vorstandsebene“, Herr und Frau Unbekannt mittig unter dem
+Team („gehören ja auch zum Team“). Titel „Über uns – Vorstand & Team“.
+
+- `team_grid` hat `anhaengen` (Panel: „Danach im selben Raster, mittig“):
+  Die Personen dieses Bereichs folgen im selben Raster, jede mittig in einer
+  eigenen Zeile, und stehen im Verzeichnis mit ihrer Karte als Ziel
+  (`person-…`). Die Teamseite ist damit Einleitung, Vorstandsebene, Team.
+- `TeamseiteSeeder::teamZusammenfassen()`: Titel, Texte und Raster
+  umbauen. Läuft im AltseiteSeeder, per Migration
+  `2026_11_01_130000_teamseite_ohne_zwischentexte` und am Ende von
+  `TeamUndGruppenSeeder::seitenNeuAufbauen()` (sonst brächte ein Neuaufbau
+  die alten Texte zurück).
+- In Menü und Brotkrumen bleibt es „Vorstand und Team“ (KEV-179).
+
+Tests: TeamseiteTest, TeamUndGruppenTest, UeberUnsSeiteTest.

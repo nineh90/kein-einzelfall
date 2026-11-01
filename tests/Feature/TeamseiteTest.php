@@ -49,7 +49,9 @@ class TeamseiteTest extends TestCase
         // Nach dem Text, im selben Abschnitt: genau die drei, ohne Spenden.
         $nav = substr($abschnitt, strpos($abschnitt, '<nav aria-label="Auf dieser Seite"'));
         preg_match_all('#<a href="\#([^"]+)"[^>]*>\s*([^<]+?)\s*</a>#', $nav, $treffer);
-        $this->assertSame(['team-vorstand-titel', 'abschnitt-team', 'abschnitt-herr-und-frau-unbekannt'], $treffer[1]);
+        // Seit KEV-295 ist „Team“ das Raster selbst, Herr und Frau Unbekannt
+        // ihre Karte darin.
+        $this->assertSame(['team-vorstand-titel', 'team-team-titel', 'person-herr-und-frau-unbekannt'], $treffer[1]);
         $this->assertSame(['Vorstand', 'Team', 'Herr und Frau Unbekannt'], $treffer[2]);
         $this->assertGreaterThan(strpos($abschnitt, TeamseiteSeeder::SCHLUSS), strpos($abschnitt, '<nav'));
 
@@ -117,5 +119,43 @@ class TeamseiteTest extends TestCase
         $abschnitt = $this->einleitung($html);
         $this->assertMatchesRegularExpression('#<nav aria-label="Auf dieser Seite".*?href="\#team-vorstand-titel"[^>]*>\s*Vorstand\s*</a>#s', $abschnitt);
         $this->assertStringContainsString(TeamseiteSeeder::SCHLUSS, $html);
+    }
+
+    /** KEV-295: „&“ im Titel, keine Zwischentexte, Herr und Frau Unbekannt mittig im Team. Auch per Migration. */
+    public function test_team_ohne_zwischentexte_mit_unbekannt_mittig(): void
+    {
+        $html = $this->get('/'.TeamseiteSeeder::SLUG)->assertOk()->getContent();
+        $this->assertMatchesRegularExpression('#<h1[^>]*>\s*Über uns – Vorstand &amp; Team\s*</h1>#', $html);
+
+        // Im Team-Abschnitt erst die vier, dann Herr und Frau Unbekannt mittig.
+        $team = substr($html, strpos($html, 'id="team-team-titel"'));
+        $team = substr($team, 0, strpos($team, '</section>'));
+        $this->assertMatchesRegularExpression('#Nils-Digital.*md:col-span-2 md:w-\[calc\(50%-0\.625rem\)\] md:justify-self-center">\s*<article id="person-herr-und-frau-unbekannt"#s', $team);
+        $this->assertStringNotContainsString('Darüber hinaus gibt es viele Menschen', $html);
+        $this->assertStringNotContainsString('engagieren sich viele weitere Ehrenamtliche', $html);
+
+        // Alter Stand: Texte mit Symbolen und eigenes Raster für den Hintergrund.
+        $seite = $this->seite();
+        $seite->update(['titel' => TeamseiteSeeder::ALTER_SEITENTITEL]);
+        $team = $seite->blocks()->where('typ', 'team_grid')->get()->first(fn ($b) => ($b->data['bereich'] ?? null) === 'Team');
+        $team->update(['data' => ['bereich' => 'Team'], 'position' => 3]);
+        $seite->blocks()->create(['typ' => 'text', 'position' => 2, 'data' => ['titel' => 'Team', 'absaetze' => ['Darüber hinaus …'], 'symbol' => 'circle-users']]);
+        $seite->blocks()->create(['typ' => 'text', 'position' => 4, 'data' => ['titel' => 'Herr und Frau Unbekannt', 'absaetze' => ['Hinter …'], 'symbol' => 'circle-help']]);
+        $seite->blocks()->create(['typ' => 'team_grid', 'position' => 5, 'data' => ['bereich' => 'Im Hintergrund']]);
+        $seite->blocks()->where('typ', 'donation_options')->update(['position' => 6]);
+
+        $migration = require database_path('migrations/2026_11_01_130000_teamseite_ohne_zwischentexte.php');
+        $migration->up();
+        $migration->up();
+
+        $seite->refresh();
+        $this->assertSame(TeamseiteSeeder::SEITENTITEL, $seite->titel);
+        $bloecke = $seite->blocks()->orderBy('position')->get();
+        $this->assertSame(['text', 'team_grid', 'team_grid', 'donation_options'], $bloecke->pluck('typ')->all());
+        $this->assertSame([0, 1, 2, 3], $bloecke->pluck('position')->all());
+        $this->assertSame(['bereich' => 'Team', 'titel' => 'Team', 'anhaengen' => 'Im Hintergrund'], $team->fresh()->data);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $this->assertArrayHasKey(TeamseiteSeeder::SEITENTITEL, $woerterbuch);
     }
 }

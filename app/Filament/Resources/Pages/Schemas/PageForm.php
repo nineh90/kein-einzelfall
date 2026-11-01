@@ -885,6 +885,21 @@ class PageForm
                                 ->helperText('Leer = alle. Sonst nur der gewählte Bereich, z.B. Vorstand. '
                                     .'Die Personen selbst pflegst du unter „Vorstand & Team“.'),
 
+                            // KEV-295: Herr und Frau Unbekannt mittig unter dem Team
+                            Select::make('data.anhaengen')
+                                ->label('Danach im selben Raster, mittig (optional)')
+                                ->options(fn () => TeamMember::query()
+                                    ->whereNotNull('bereich')
+                                    ->distinct()
+                                    ->orderBy('bereich')
+                                    ->pluck('bereich', 'bereich')
+                                    ->all())
+                                ->native(false)
+                                ->placeholder('Niemand')
+                                ->visible(fn ($get) => $get('typ') === 'team_grid')
+                                ->helperText('Die Personen dieses Bereichs stehen unter den anderen, jede mittig in '
+                                    .'einer eigenen Zeile, und im Verzeichnis „Auf dieser Seite“.'),
+
                             // KEV-294: „Vorstand“ statt „Vorstandsebene“ im Verzeichnis
                             TextInput::make('data.verzeichnis_titel')
                                 ->label('Name in „Auf dieser Seite“ (optional)')

@@ -41,13 +41,14 @@ class UeberUnsSeiteTest extends TestCase
     {
         $html = $this->get(self::PFAD)->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('#<h1[^>]*>\s*Über uns – Vorstand und Team\s*</h1>#u', $html);
+        // Seit KEV-295 mit „&“.
+        $this->assertMatchesRegularExpression('#<h1[^>]*>\s*Über uns – Vorstand &amp; Team\s*</h1>#u', $html);
         $this->assertStringContainsString('aria-current="page" class="text-ink">Vorstand und Team<', $html);
-        $this->assertSame(1, substr_count(preg_replace('#<head>.*</head>#s', '', $html), 'Über uns – Vorstand und Team'));
+        $this->assertSame(1, substr_count(preg_replace('#<head>.*</head>#s', '', $html), 'Über uns – Vorstand &amp; Team'));
 
         // Im Menü und in den Kacheln anderer Seiten kurz.
         $satzung = $this->get('/satzung')->assertOk()->getContent();
-        $this->assertStringNotContainsString('Über uns – Vorstand und Team', $satzung);
+        $this->assertStringNotContainsString('Über uns – Vorstand', $satzung);
         $this->assertMatchesRegularExpression('#href="/ueber-uns-vorstand-und-team"[^>]*>\s*Vorstand und Team\s*<#', $satzung);
     }
 
@@ -64,58 +65,22 @@ class UeberUnsSeiteTest extends TestCase
         $this->get(self::PFAD)->assertSee('– Eure Tatjana</p>', false)->assertDontSee('– Tatjana Belmar</p>', false);
     }
 
-    /** KEV-184: Rechts neben „Team“ das Symbol mit den Menschen im Kreis, auch per Migration. */
-    public function test_symbol_neben_team(): void
-    {
-        $html = $this->get(self::PFAD)->assertOk()->getContent();
-        $this->assertMatchesRegularExpression(
-            '#<h2[^>]*>\s*Team\s*</h2>(?:(?!</section>).)*<circle cx="17" cy="10.4" r="1.8"/>#s', $html);
-
-        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
-        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Team');
-        $daten = $block->data;
-        unset($daten['symbol']);
-        $block->update(['data' => $daten]);
-
-        $migration = require database_path('migrations/2026_10_26_170000_team_symbol.php');
-        $migration->up();
-        $this->assertSame('circle-users', $block->fresh()->data['symbol']);
-    }
-
-    /** KEV-185: „Herr und Frau Unbekannt“ linksbündig, rechts das Fragezeichen im Kreis. */
-    public function test_unbekannt_linksbuendig_mit_fragezeichen(): void
+    /**
+     * KEV-184/185/186 sind mit KEV-295 überholt: Die Texte bei „Team“ und
+     * „Herr und Frau Unbekannt“ samt Symbolen sind weg. Ihre alten
+     * Migrationen dürfen auf der neuen Seite nichts mehr anrichten.
+     */
+    public function test_alte_migrationen_zu_team_und_unbekannt_laufen_ins_leere(): void
     {
         $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
-        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Herr und Frau Unbekannt');
-        $this->assertSame('circle-help', $block->data['symbol']);
-        $this->assertArrayNotHasKey('mittig', $block->data);
+        $vorher = $seite->blocks()->orderBy('position')->get(['typ', 'data'])->toArray();
 
-        $this->assertMatchesRegularExpression(
-            '#<h2[^>]*>\s*Herr und Frau Unbekannt\s*</h2>(?:(?!</section>).)*<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>#s',
-            $this->get(self::PFAD)->assertOk()->getContent());
+        foreach (['2026_10_26_170000_team_symbol', '2026_10_26_180000_unbekannt_symbol', '2026_10_26_190000_unbekannt_neuer_text'] as $datei) {
+            (require database_path("migrations/{$datei}.php"))->up();
+        }
 
-        // Stand davor: mittig, ohne Symbol.
-        $block->update(['data' => array_diff_key($block->data, ['symbol' => 1]) + ['mittig' => true]]);
-        $migration = require database_path('migrations/2026_10_26_180000_unbekannt_symbol.php');
-        $migration->up();
-        $this->assertSame('circle-help', $block->fresh()->data['symbol']);
-        $this->assertArrayNotHasKey('mittig', $block->fresh()->data);
-    }
-
-    /** KEV-186: Taddis neuer Text bei „Herr und Frau Unbekannt“, auch per Migration. */
-    public function test_neuer_text_bei_unbekannt(): void
-    {
-        $this->get(self::PFAD)->assertOk()
-            ->assertSee('Auch wenn sie im Hintergrund wirken, sind sie ein wichtiger Teil unserer Arbeit')
-            ->assertDontSee('Zusätzlich arbeiten im Hintergrund');
-
-        $seite = Page::where('slug', 'ueber-uns-vorstand-und-team')->where('locale', 'de')->first();
-        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Herr und Frau Unbekannt');
-        $block->update(['data' => array_replace($block->data, ['absaetze' => [TeamUndGruppenSeeder::HINTERGRUND_TEXT_ALT]])]);
-
-        $migration = require database_path('migrations/2026_10_26_190000_unbekannt_neuer_text.php');
-        $migration->up();
-        $this->assertSame([TeamUndGruppenSeeder::HINTERGRUND_TEXT], $block->fresh()->data['absaetze']);
+        $this->assertSame($vorher, $seite->blocks()->orderBy('position')->get(['typ', 'data'])->toArray());
+        $this->assertStringNotContainsString('<circle cx="17" cy="10.4" r="1.8"/>', $this->get(self::PFAD)->getContent());
     }
 
     /** KEV-187: Die Kurzfassungen enden nach einem ganzen Satz, nicht mitten im Wort. */

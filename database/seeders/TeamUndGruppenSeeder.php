@@ -977,6 +977,11 @@ class TeamUndGruppenSeeder extends Seeder
         // teamseiteAufbauen() löscht alle Blöcke, auch den Spendenkasten
         // (KEV-189). Nicht dort selbst, weil alte Migrationen es aufrufen.
         UnterstuetzungsbandSeeder::spendenStattBand();
+        // Und Taddis Aufbau seit KEV-294/295 (Einleitung mit Verzeichnis,
+        // Herr und Frau Unbekannt im Team). Sonst brächte ein Neuaufbau die
+        // alten Zwischentexte zurück.
+        TeamseiteSeeder::fuellen();
+        TeamseiteSeeder::teamZusammenfassen();
 
         $this->seiteUmbauen('selbsthilfegruppen', 'group_list', [
             'titel' => 'Unsere Selbsthilfegruppen',
