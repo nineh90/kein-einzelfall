@@ -1240,6 +1240,36 @@ console.log('\nSprungziele unter dem Kopf')
     await ohne.context().close()
 }
 
+// --- Neben dem Text mitlaufen (KEV-304) -------------------------------------
+// Was rechts neben einem Text steht, bleibt beim Scrollen unter der
+// Kopfzeile stehen, aber nur, wenn es ins Fenster passt.
+{
+    console.log('\nMitlaufen neben dem Text')
+    const s = await oeffnen({ pfad: '/selbsthilfegruppen', breite: 1440, hoehe: 900 })
+    const spalte = s.locator('[data-mitlaufen]').first()
+    pruefe('Dokumente laufen mit', await spalte.evaluate((e) => e.classList.contains('ist-mitlaufend')))
+
+    const kopf = await s.evaluate(() => document.querySelector('header.sticky').offsetHeight)
+    const start = await spalte.evaluate((e) => e.closest('section').getBoundingClientRect().top + scrollY)
+    for (const weiter of [300, 600]) {
+        await s.evaluate((y) => window.scrollTo(0, y), start + weiter)
+        await s.waitForTimeout(150)
+        const oben = await spalte.evaluate((e) => Math.round(e.getBoundingClientRect().top))
+        pruefe(`nach ${weiter} px unter der Kopfzeile`, oben >= kopf && oben <= kopf + 40, `oben ${oben}, Kopf ${kopf}`)
+    }
+    await s.context().close()
+
+    // Zu hoch fürs Fenster: bleibt stehen statt unten abgeschnitten zu kleben.
+    const klein = await oeffnen({ pfad: '/verein', breite: 1280, hoehe: 720 })
+    pruefe('zu hoch: läuft nicht mit', !(await klein.locator('[data-mitlaufen]').first().evaluate((e) => e.classList.contains('ist-mitlaufend'))))
+    await klein.context().close()
+
+    // Auf dem Handy nie.
+    const handy = await oeffnen({ pfad: '/selbsthilfegruppen', breite: 390, hoehe: 844 })
+    pruefe('Handy: nicht klebend', await handy.locator('[data-mitlaufen]').first().evaluate((e) => getComputedStyle(e).position) !== 'sticky')
+    await handy.context().close()
+}
+
 // --- Auswertung -------------------------------------------------------------
 
 console.log('\nBrowser-Meldungen')

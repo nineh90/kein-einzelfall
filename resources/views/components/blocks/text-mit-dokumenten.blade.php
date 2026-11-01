@@ -36,23 +36,27 @@
             :ab_absatz="$text->textAngaben()['ab_absatz']"
             :mittig="(bool) ($d['mittig'] ?? false)" />
 
-        {{-- Seit KEV-224 auch der Termin-Kalender (PageBlock::DANEBEN). --}}
-        @if ($dokumente->typ === 'kalender')
-            <x-blocks.kalender :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null" />
-        @elseif ($dokumente->typ === 'seitenkarten')
-            {{-- KEV-174: Selbsthilfe- und Arbeitsgruppen neben dem Vereinstext. --}}
-            {{-- KEV-242: auf /wissen Taddis Kategorien als Knöpfe. --}}
-            <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
-                :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'"
-                :unterzeilen="$dok['unterzeilen'] ?? []" />
-        @else
-            {{-- Neben langem Text in der Mitte der Höhe statt oben, sonst
-                 bleibt darunter viel Leere (KEV-226, Nils' Review). --}}
-            <div class="lg:self-center">
+        {{-- KEV-304 (Taddi auf /selbsthilfegruppen, von Kevin für alle
+             Seiten gewünscht): Was neben dem Text steht, beginnt oben und
+             läuft beim Scrollen unter der Kopfzeile mit, bis der Text zu
+             Ende ist. Dann bleibt neben langem Text keine leere Fläche
+             (vorher stand die Dokumentenliste dafür in der Mitte der Höhe,
+             KEV-226). Nur wenn es ins Fenster passt, siehe mitlaufen.js. --}}
+        <div class="lg:self-start" data-mitlaufen>
+            {{-- Seit KEV-224 auch der Termin-Kalender (PageBlock::DANEBEN). --}}
+            @if ($dokumente->typ === 'kalender')
+                <x-blocks.kalender :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null" />
+            @elseif ($dokumente->typ === 'seitenkarten')
+                {{-- KEV-174: Selbsthilfe- und Arbeitsgruppen neben dem Vereinstext. --}}
+                {{-- KEV-242: auf /wissen Taddis Kategorien als Knöpfe. --}}
+                <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
+                    :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'"
+                    :unterzeilen="$dok['unterzeilen'] ?? []" />
+            @else
                 <x-blocks.download-list :rahmen="false" :auf="$auf"
                     :titel="$dok['titel'] ?? null"
                     :dokumente="$dok['dokumente'] ?? []" />
-            </div>
-        @endif
+            @endif
+        </div>
     </div>
 </section>

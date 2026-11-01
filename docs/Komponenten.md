@@ -2957,3 +2957,29 @@ Team („gehören ja auch zum Team“). Titel „Über uns – Vorstand & Team�
 - In Menü und Brotkrumen bleibt es „Vorstand und Team“ (KEV-179).
 
 Tests: TeamseiteTest, TeamUndGruppenTest, UeberUnsSeiteTest.
+
+## 54. Neben dem Text mitlaufen (KEV-304, 01.11.2026)
+
+Taddi auf /selbsthilfegruppen: Die Dokumente rechts sollen höher stehen und
+fest bleiben, während man links den langen Text liest. Kevin: so auf allen
+Seiten, damit es einheitlich ist.
+
+- Alles, was rechts neben einem Text steht, beginnt oben und läuft ab `lg`
+  beim Scrollen unter der Kopfzeile mit, bis der Abschnitt endet: die
+  Spalte in `text-mit-dokumenten` (Dokumente, Termin-Kalender, Karten,
+  Knöpfe) und „Auf dieser Seite“ in `text-mit-verzeichnis`. Markiert mit
+  `data-mitlaufen`, die Regel steht in `app.css` (`.ist-mitlaufend`, `top:
+  --kopfhoehe + 1.5rem`).
+- `resources/js/mitlaufen.js` setzt die Klasse nur, wenn das Element ganz
+  ins Fenster passt (Fensterhöhe minus Kopfzeile minus 48 px), und prüft
+  bei jeder Größenänderung neu. Sonst klebte etwas Hohes oben fest, und
+  sein Ende käme erst am Schluss in Sicht. Stand 01.11.2026 sind die
+  Gruppenkarten auf /verein und der Kalender auf /gruppen-und-veranstaltungen
+  dafür zu hoch, sie stehen oben und bleiben stehen.
+- Die Dokumentenliste stand vorher in der Mitte der Höhe (Nils' Review zu
+  KEV-226, gegen die Leere darunter). Das löst jetzt das Mitlaufen.
+- Die Seitenleiste „Auf dieser Seite“ im Artikel hält denselben Abstand
+  zur Kopfzeile (vorher fest `top-28`, der Kopf ist ab 1280 px 127 px hoch).
+- Ohne JavaScript und auf dem Handy: oben, ohne Mitlaufen.
+
+Tests: TeamUndGruppenTest, Browser „Mitlaufen neben dem Text“.

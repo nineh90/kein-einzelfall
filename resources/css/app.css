@@ -99,6 +99,17 @@ html {
   html { scroll-padding-top: calc(var(--kopfhoehe, 8rem) + 1rem); }
 }
 
+/* KEV-304: Was rechts neben einem Text steht (Dokumente, Kalender, Karten,
+   „Auf dieser Seite“), läuft ab lg beim Scrollen unter der Kopfzeile mit.
+   Die Klasse setzt mitlaufen.js nur, wenn es ganz ins Fenster passt; ein
+   höheres Element bliebe sonst unten abgeschnitten stehen. */
+@media (min-width: 64rem) {
+  [data-mitlaufen].ist-mitlaufend {
+    position: sticky;
+    top: calc(var(--kopfhoehe, 8rem) + 1.5rem);
+  }
+}
+
 body {
   background-color: var(--color-cream);
   color: var(--color-ink);

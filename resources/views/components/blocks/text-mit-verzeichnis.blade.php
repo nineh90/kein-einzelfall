@@ -26,7 +26,8 @@
             :absaetze="$t['absaetze']" :hand="$t['hand']" :cta="$t['cta']" :mittig="$t['mittig']"
             :ab_absatz="$t['ab_absatz']" />
 
-        <div class="lg:self-start lg:pt-2">
+        {{-- Läuft mit wie alles neben einem Text (KEV-304, mitlaufen.js). --}}
+        <div class="lg:self-start lg:pt-2" data-mitlaufen>
             <x-ui.sprungmarken :punkte="$punkte" :mindestens="1" />
         </div>
     </div>

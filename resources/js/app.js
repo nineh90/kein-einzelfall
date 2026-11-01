@@ -33,6 +33,7 @@ import { kopfhoeheVerdrahten } from './kopfhoehe'
 import { kopfzeileVerdrahten } from './kopfzeile'
 import { megamenueVerdrahten } from './megamenue'
 import { kalenderVerdrahten } from './kalender'
+import { mitlaufenVerdrahten } from './mitlaufen'
 
 // Zuerst: Der Aufmacher braucht die Höhe, bevor irgendetwas anderes zeichnet.
 kopfhoeheVerdrahten()
@@ -43,6 +44,8 @@ kopfzeileVerdrahten()
 megamenueVerdrahten()
 
 toolbarVerdrahten()
+// Neben dem Text mitlaufen, wo es ins Fenster passt (KEV-304).
+mitlaufenVerdrahten()
 leselinieVerdrahten()
 
 // Nur auf /barrierefreiheit vorhanden; steigt sonst sofort wieder aus.

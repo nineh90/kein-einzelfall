@@ -35,7 +35,10 @@
 
         @if ($verzeichnis)
             <nav aria-label="{{ __('rahmen.auf_dieser_seite') }}" class="hidden lg:block" data-verzeichnis>
-                <div class="sticky top-28">
+                {{-- Abstand zur Kopfzeile wie bei allem, was neben einem Text
+                     mitläuft (KEV-304). Vorher fest top-28, der Kopf ist ab
+                     1280 px aber 127 px hoch. --}}
+                <div class="sticky top-[calc(var(--kopfhoehe,8rem)+1.5rem)]">
                     <p class="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-green">
                         {{ __('rahmen.auf_dieser_seite') }}
                     </p>
