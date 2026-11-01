@@ -155,6 +155,30 @@ class SchutzkonzeptSeeder extends Seeder
         self::redFlagsSymbole();
     }
 
+    /**
+     * KEV-298: Die Dokumentenliste rechts neben den Text, „dann ist die
+     * Leere gefüllt“ (Taddi). Nur wo sie direkt hinter dem Text steht.
+     */
+    public static function konzeptNebenDenText(): void
+    {
+        self::listeNebenDenText(self::SLUG);
+    }
+
+    /** Die Dokumentenliste direkt hinter dem ersten Text daneben stellen. */
+    private static function listeNebenDenText(string $slug): void
+    {
+        $bloecke = Page::where('slug', $slug)->where('locale', 'de')->first()
+            ?->blocks()->orderBy('position')->get()->values() ?? collect();
+
+        foreach ($bloecke as $i => $block) {
+            $davor = $bloecke[$i - 1] ?? null;
+
+            if ($block->typ === 'download_list' && $davor?->typ === 'text' && empty($block->data['neben_text'])) {
+                $block->update(['data' => $block->data + ['neben_text' => true]]);
+            }
+        }
+    }
+
     /** KEV-208: rechts neben dem Text Flagge & Häkchen, wo noch kein Symbol steht. */
     private static function redFlagsSymbole(): void
     {

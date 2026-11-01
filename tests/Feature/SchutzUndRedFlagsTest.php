@@ -100,4 +100,20 @@ class SchutzUndRedFlagsTest extends TestCase
         $migration->up();
         $this->assertSame('red-flag-und-haken', $text->fresh()->data['symbol']);
     }
+
+    /** KEV-298: Die Dokumentenliste steht rechts neben dem Text, auch per Migration. */
+    public function test_schutzkonzept_download_neben_dem_text(): void
+    {
+        $html = $this->get('/schutz-und-wertekonzept')->assertOk()->getContent();
+        $abschnitt = substr($html, strpos($html, 'Schutz, Würde und Selbstbestimmung'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+        $this->assertStringContainsString('Unser Schutz- und Wertekonzept zum Downloaden', $abschnitt);
+        $this->assertStringContainsString('lg:grid-cols-[minmax(0,65ch)_minmax(0,1fr)]', substr($html, strrpos(substr($html, 0, strpos($html, 'Schutz, Würde und Selbstbestimmung')), '<section')));
+
+        $liste = $this->seite('schutz-und-wertekonzept')->blocks()->where('typ', 'download_list')->first();
+        $liste->update(['data' => array_diff_key($liste->data, ['neben_text' => 1])]);
+        $migration = require database_path('migrations/2026_11_01_150000_schutzkonzept_download_daneben.php');
+        $migration->up();
+        $this->assertTrue($liste->fresh()->data['neben_text']);
+    }
 }
