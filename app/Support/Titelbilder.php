@@ -78,7 +78,8 @@ class Titelbilder
         // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
         // Unterzeile, der Verein hat keine geschickt.
         'istanbul-konvention' => null,
-        'kinderkodex' => null,
+        // KEV-300: Taddis Unterzeile.
+        'kinderkodex' => 'Schutz braucht Haltung',
         // KEV-77: Bild von Taddi statt Platzhalter. Ohne Unterzeile, der
         // Verein hat keine geschickt.
         'satzung' => null,
