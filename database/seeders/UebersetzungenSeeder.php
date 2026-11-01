@@ -63,6 +63,8 @@ class UebersetzungenSeeder extends Seeder
         'knopf', 'frage', 'antwort', 'name', 'rolle', 'beschreibung', 'teaser', 'quelle',
         // KEV-157: Schlusssatz der Wall of Shame.
         'schluss',
+        // KEV-294: kurzer Name eines Team-Rasters in „Auf dieser Seite“.
+        'verzeichnis_titel',
         // KEV-262: die einfache Übersetzung typischer Sätze. Der Satz selbst
         // bleibt deutsch, so steht er im Brief.
         'bedeutung',

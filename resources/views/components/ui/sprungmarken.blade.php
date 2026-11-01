@@ -1,8 +1,13 @@
-@props(['punkte' => [], 'titel' => null])
+@props([
+    'punkte' => [],
+    'titel' => null,
+    // Neben einer Einleitung (KEV-294) auch mit weniger Punkten.
+    'mindestens' => 4,
+])
 
 @php $titel ??= __('rahmen.auf_dieser_seite'); @endphp
 
-@if (count($punkte) >= 4)
+@if (count($punkte) >= $mindestens && count($punkte) > 0)
     {{--
         Inhaltsverzeichnis für lange Seiten.
 

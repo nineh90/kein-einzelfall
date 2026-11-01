@@ -384,6 +384,16 @@ class PageForm
                                 ->helperText('Überschrift und Absätze stehen zentriert. Für kurze '
                                     .'Abschnitte; lange Texte liest man linksbündig leichter.'),
 
+                            // KEV-294: „Auf dieser Seite“ neben der Einleitung
+                            // der Teamseite statt als Kasten über dem Inhalt.
+                            Toggle::make('data.verzeichnis_daneben')
+                                ->label('„Auf dieser Seite“ rechts daneben')
+                                ->visible(fn ($get) => $get('typ') === 'text')
+                                ->dehydrated(fn ($state) => (bool) $state)
+                                ->helperText('Das Verzeichnis steht rechts neben diesem Abschnitt und nennt die '
+                                    .'Abschnitte danach (ohne Spendenkasten). Der Kasten über dem Inhalt '
+                                    .'entfällt dann. Nur bei einem Abschnitt der Seite einschalten.'),
+
                             // KEV-184, KEV-185
                             Select::make('data.symbol')
                                 ->label('Symbol rechts daneben')
@@ -874,6 +884,13 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'team_grid')
                                 ->helperText('Leer = alle. Sonst nur der gewählte Bereich, z.B. Vorstand. '
                                     .'Die Personen selbst pflegst du unter „Vorstand & Team“.'),
+
+                            // KEV-294: „Vorstand“ statt „Vorstandsebene“ im Verzeichnis
+                            TextInput::make('data.verzeichnis_titel')
+                                ->label('Name in „Auf dieser Seite“ (optional)')
+                                ->visible(fn ($get) => $get('typ') === 'team_grid')
+                                ->helperText('Mit Überschrift steht das Raster im Verzeichnis der Seite. '
+                                    .'Leer = die Überschrift.'),
 
                             // --- Gruppen-Übersicht ---
                             // Zieht die Gruppen aus der Verwaltung „Gruppen“.

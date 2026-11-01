@@ -5,6 +5,9 @@
     'art' => 'artikel',
     // Punkte für „Auf dieser Seite“; bekommt nur der erste Artikel der Seite
     'verzeichnis' => [],
+    // KEV-294: „Auf dieser Seite“ rechts neben dem Text, der das wünscht
+    // (Schalter am Textbaustein). Punkte wie bei $verzeichnis.
+    'verzeichnisDaneben' => [],
 ])
 
 {{--
@@ -22,6 +25,10 @@
 
     @if (count($bloecke) === 1 && isset($abschnitt['daneben']))
         <x-blocks.text-mit-dokumenten :text="$bloecke[0]" :dokumente="$abschnitt['daneben']" :auf="$abschnitt['flaeche']" />
+
+    @elseif (count($bloecke) === 1 && $verzeichnisDaneben && $bloecke[0]->typ === 'text'
+             && ! empty($bloecke[0]->data['verzeichnis_daneben']))
+        <x-blocks.text-mit-verzeichnis :text="$bloecke[0]" :punkte="$verzeichnisDaneben" :auf="$abschnitt['flaeche']" />
 
     @elseif (count($bloecke) === 1)
         <x-block :block="$bloecke[0]" :flaeche="$abschnitt['flaeche']" />

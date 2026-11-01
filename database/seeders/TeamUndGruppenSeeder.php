@@ -379,7 +379,8 @@ class TeamUndGruppenSeeder extends Seeder
             // „Vorstandsebene“ über den Vorstandskarten (KEV-65). Das Team hat
             // seine Überschrift in der Überleitung davor (KEV-66).
             $neu[] = ['typ' => 'team_grid', 'data' => $bereich === self::BEREICH_VORSTAND
-                ? ['titel' => 'Vorstandsebene', 'bereich' => $bereich]
+                // KEV-294: im Verzeichnis kurz „Vorstand“ (TeamseiteSeeder).
+                ? ['titel' => 'Vorstandsebene', 'bereich' => $bereich, 'verzeichnis_titel' => TeamseiteSeeder::VORSTAND_IM_VERZEICHNIS]
                 : ['bereich' => $bereich]];
 
             foreach ($mitglieder as $person) {

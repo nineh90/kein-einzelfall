@@ -90,23 +90,37 @@
     //
     // Krisendienste und Kontaktformular mit ihren festen Zielen (KEV-275,
     // Taddi auf /anfragen: Krisendienste sollen unter „Krisendienste“ stehen).
-    $sprungpunkte = $bloecke
-        ->map(fn ($b) => match (true) {
-            $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null)
-                => ['anker' => $b->anker(), 'titel' => $b->data['titel']],
-            $b->typ === 'donation_options'
-                => ['anker' => 'spenden', 'titel' => $b->data['titel'] ?? 'Jetzt spenden'],
-            $b->typ === 'download_list' && ($b->data['titel'] ?? null) && empty($b->data['neben_text'])
-                => ['anker' => 'dl-'.\Illuminate\Support\Str::slug($b->data['titel']), 'titel' => $b->data['titel']],
-            $b->typ === 'hilfe_box' && ($b->data['titel'] ?? null)
-                => ['anker' => 'hilfe-titel', 'titel' => $b->data['titel']],
-            $b->typ === 'contact_form' && ($b->data['titel'] ?? null)
-                => ['anker' => 'formular-titel', 'titel' => $b->data['titel']],
-            default => null,
-        })
-        ->filter()
-        ->values()
-        ->all();
+    //
+    // Und Team-Raster mit Überschrift (KEV-294, „Vorstand“ auf der
+    // Teamseite), mit dem Ziel, das team-grid seiner Überschrift gibt. Im
+    // Verzeichnis darf es kürzer heißen (verzeichnis_titel).
+    $sprungpunkt = fn ($b) => match (true) {
+        $b->typ === 'text' && $b->anker() && ($b->data['titel'] ?? null)
+            => ['anker' => $b->anker(), 'titel' => $b->data['titel']],
+        $b->typ === 'donation_options'
+            => ['anker' => 'spenden', 'titel' => $b->data['titel'] ?? 'Jetzt spenden'],
+        $b->typ === 'download_list' && ($b->data['titel'] ?? null) && empty($b->data['neben_text'])
+            => ['anker' => 'dl-'.\Illuminate\Support\Str::slug($b->data['titel']), 'titel' => $b->data['titel']],
+        $b->typ === 'hilfe_box' && ($b->data['titel'] ?? null)
+            => ['anker' => 'hilfe-titel', 'titel' => $b->data['titel']],
+        $b->typ === 'contact_form' && ($b->data['titel'] ?? null)
+            => ['anker' => 'formular-titel', 'titel' => $b->data['titel']],
+        $b->typ === 'team_grid' && ($b->data['titel'] ?? null)
+            => ['anker' => 'team-'.\Illuminate\Support\Str::slug(($b->data['bereich'] ?? null) ?: 'alle').'-titel',
+                'titel' => ($b->data['verzeichnis_titel'] ?? null) ?: $b->data['titel']],
+        default => null,
+    };
+    $sprungpunkte = $bloecke->map($sprungpunkt)->filter()->values()->all();
+
+    // KEV-294: Steht „Auf dieser Seite“ rechts neben einem Text (Schalter am
+    // Textbaustein), zählt es die Abschnitte nach diesem Text auf, ohne den
+    // Spendenkasten: Taddi nennt auf der Teamseite nur Vorstand, Team und
+    // Herr und Frau Unbekannt. Der Kasten oben und die Seitenleiste
+    // entfallen dann.
+    $nebenText = $bloecke->values()->search(fn ($b) => $b->typ === 'text' && ! empty($b->data['verzeichnis_daneben']));
+    $verzeichnisDaneben = $nebenText === false ? [] : $bloecke->values()->slice($nebenText + 1)
+        ->reject(fn ($b) => $b->typ === 'donation_options')
+        ->map($sprungpunkt)->filter()->values()->all();
 
     // Flächenwechsel von Abschnitt zu Abschnitt. Ohne ihn laufen zehn
     // Abschnitte optisch ununterscheidbar ineinander; der Wechsel gibt der
@@ -126,7 +140,7 @@
 
     // Steht ein Artikel mit Seitenleiste auf der Seite, trägt die ab „lg“ das
     // Verzeichnis. Der Kasten oben wäre dort doppelt.
-    $mitSeitenleiste = count($sprungpunkte) >= 2
+    $mitSeitenleiste = count($sprungpunkte) >= 2 && ! $verzeichnisDaneben
         && collect($abschnitte)->contains(fn ($a) => count($a['bloecke']) > 1);
 
     // Zeigt die Seite ihre Unterseiten schon als Kacheln (KEV-156), wäre die
@@ -190,7 +204,7 @@
         :name_gross="$kontext->istBereichsUebersicht() && $kontext->istVereinsbereich()"
         :auf="$ersteFlaeche" />
 
-    @if (count($sprungpunkte) >= 4)
+    @if (count($sprungpunkte) >= 4 && ! $verzeichnisDaneben)
         <div @class(['px-4 md:px-8 pt-8 lg:px-10', 'lg:hidden' => $mitSeitenleiste, 'bg-card' => $ersteFlaeche === 'card'])>
             <div class="mx-auto max-w-6xl">
                 <div class="max-w-prose">
@@ -201,7 +215,8 @@
     @endif
 
     <x-bloecke :abschnitte="$abschnitte" art="artikel"
-               :verzeichnis="$mitSeitenleiste ? $sprungpunkte : []" />
+               :verzeichnis="$mitSeitenleiste ? $sprungpunkte : []"
+               :verzeichnis-daneben="$verzeichnisDaneben" />
 
     <x-layout.weiterlesen
         :seiten="$geschwister"

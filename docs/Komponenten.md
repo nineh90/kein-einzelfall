@@ -2911,3 +2911,29 @@ eigener Text.
   noch wie seit KEV-174 aussieht). Englisch über das Feld `text`.
 
 Tests: VereinsseiteTest.
+
+## 52. Teamseite: „Auf dieser Seite“ neben der Einleitung (KEV-294, 01.11.2026)
+
+Taddi: Auf /ueber-uns-vorstand-und-team soll „Auf dieser Seite“ rechts
+stehen, die Einleitung links daneben, mit den Punkten Vorstand, Team und
+Herr und Frau Unbekannt. Dazu die Überschrift „WIR – mit Herz, Haltung und
+Vision“ (vorher „Unser Team – …“) und ein Schlusssatz unter der Einleitung.
+
+- Textbaustein mit Schalter `verzeichnis_daneben` (Panel: „„Auf dieser
+  Seite“ rechts daneben“) wird `x-blocks.text-mit-verzeichnis`: Text links
+  in Lesebreite, Kasten rechts, unter `lg` darunter. Der Kasten nennt die
+  Abschnitte nach diesem Text, ohne den Spendenkasten. Kasten über dem
+  Inhalt und Seitenleiste entfallen dann (`page.blade.php`).
+- `x-ui.sprungmarken` hat `mindestens` (sonst 4); daneben reicht einer.
+- `team_grid` mit Überschrift ist jetzt ein Sprungziel
+  (`team-<bereich>-titel`, wie im Raster selbst). Im Verzeichnis darf es
+  kürzer heißen: `verzeichnis_titel` (Panel: „Name in „Auf dieser Seite““),
+  beim Vorstand „Vorstand“ statt „Vorstandsebene“. Übersetzt über das
+  Wörterbuch (`UebersetzungenSeeder::TEXT_FELDER`).
+- Inhalt in `TeamseiteSeeder` (AltseiteSeeder und Migration
+  `2026_11_01_120000_teamseite_verzeichnis_daneben`, nur wo die alte
+  Überschrift steht). `TeamUndGruppenSeeder::teamseiteAufbauen()` übernimmt
+  die Einleitung und setzt `verzeichnis_titel` selbst, ein Neuaufbau
+  verliert also nichts.
+
+Tests: TeamseiteTest.
