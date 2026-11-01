@@ -45,4 +45,10 @@ class UnterzeilenTest extends TestCase
     {
         $this->pruefen('kinderkodex', 'Schutz braucht Haltung', 'Protection needs a stance', '2026_11_01_170000_kinderkodex_unterzeile');
     }
+
+    /** KEV-301 */
+    public function test_istanbul_konvention(): void
+    {
+        $this->pruefen('istanbul-konvention', 'Schutz vor Gewalt ist kein Privileg', 'Protection from violence is not a privilege', '2026_11_01_180000_istanbul_konvention_unterzeile');
+    }
 }

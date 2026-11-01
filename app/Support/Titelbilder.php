@@ -75,9 +75,9 @@ class Titelbilder
         // dessen erster Satz. Seit KEV-273 Taddis eigene Unterzeile, der Satz
         // steht wieder im Text.
         'landesstellen' => 'Gemeinsam stark – an vielen Orten',
-        // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo. Ohne
-        // Unterzeile, der Verein hat keine geschickt.
-        'istanbul-konvention' => null,
+        // KEV-79: ein Bild von Taddi für beide, Ordner mit Vereinslogo.
+        // KEV-301: Taddis Unterzeile („Privleg“ im Ticket korrigiert).
+        'istanbul-konvention' => 'Schutz vor Gewalt ist kein Privileg',
         // KEV-300: Taddis Unterzeile.
         'kinderkodex' => 'Schutz braucht Haltung',
         // KEV-77: Bild von Taddi statt Platzhalter. Ohne Unterzeile, der
