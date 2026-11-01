@@ -36,20 +36,20 @@ class UeberUnsSeiteTest extends TestCase
         $this->get(self::PFAD)->assertOk()->assertSee('data-kopf-logo', false);
     }
 
-    /** KEV-179: Der Titel der Seite bleibt lang, überall sonst „Vorstand und Team“. */
+    /** KEV-179: Der Titel der Seite bleibt lang, überall sonst „Vorstand & Team“ (seit KEV-295 mit „&“). */
     public function test_ueberall_ausser_im_titel_vorstand_und_team(): void
     {
         $html = $this->get(self::PFAD)->assertOk()->getContent();
 
         // Seit KEV-295 mit „&“.
         $this->assertMatchesRegularExpression('#<h1[^>]*>\s*Über uns – Vorstand &amp; Team\s*</h1>#u', $html);
-        $this->assertStringContainsString('aria-current="page" class="text-ink">Vorstand und Team<', $html);
+        $this->assertStringContainsString('aria-current="page" class="text-ink">Vorstand &amp; Team<', $html);
         $this->assertSame(1, substr_count(preg_replace('#<head>.*</head>#s', '', $html), 'Über uns – Vorstand &amp; Team'));
 
         // Im Menü und in den Kacheln anderer Seiten kurz.
         $satzung = $this->get('/satzung')->assertOk()->getContent();
         $this->assertStringNotContainsString('Über uns – Vorstand', $satzung);
-        $this->assertMatchesRegularExpression('#href="/ueber-uns-vorstand-und-team"[^>]*>\s*Vorstand und Team\s*<#', $satzung);
+        $this->assertMatchesRegularExpression('#href="/ueber-uns-vorstand-und-team"[^>]*>\s*Vorstand &amp; Team\s*<#', $satzung);
     }
 
     /** KEV-183: Unter jedem Text rechtsbündig „– Name“, oder die eigene Unterschrift aus dem Panel. */
@@ -172,7 +172,7 @@ class UeberUnsSeiteTest extends TestCase
 
         $this->assertSame(9, substr_count($aside, '<li class="flex">'));
         $this->assertStringContainsString('lg:grid-flow-col lg:grid-rows-3', $aside);
-        $this->assertMatchesRegularExpression('#<span aria-current="page"[^>]*>\s*<span[^>]*>Vorstand und Team</span>#', $aside);
+        $this->assertMatchesRegularExpression('#<span aria-current="page"[^>]*>\s*<span[^>]*>Vorstand &amp; Team</span>#', $aside);
         $this->assertStringNotContainsString('href="/ueber-uns-vorstand-und-team"', $aside);
         $this->assertStringContainsString('href="/satzung"', $aside);
     }

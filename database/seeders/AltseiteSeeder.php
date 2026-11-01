@@ -52,7 +52,7 @@ class AltseiteSeeder extends Seeder
      * Navigation, damit Menüpunkt und Überschrift zusammenpassen.
      */
     private const TITEL = [
-        'ueber-uns-vorstand-und-team' => 'Über uns – Vorstand und Team',
+        'ueber-uns-vorstand-und-team' => 'Über uns – Vorstand & Team', // KEV-295
         'buerokratie-labyrinth' => 'Das Bürokratie-Labyrinth',
         'traumafolgestoerungen-verstehen' => 'Traumafolgestörungen verstehen',
         'unterstuetzung' => 'Unterstützung',

@@ -499,7 +499,7 @@ class BausteineTest extends TestCase
         }
 
         $this->assertSame(
-            'Über uns – Vorstand und Team',
+            'Über uns – Vorstand & Team', // seit KEV-295 mit „&“
             Page::where('slug', 'ueber-uns-vorstand-und-team')->value('titel')
         );
     }

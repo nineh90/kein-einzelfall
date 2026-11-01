@@ -49,8 +49,9 @@ return [
                 // Reihenfolge seit KEV-178 (Taddi). Gremium UKFB steht nur hier
                 // im Menü, nicht bei den Kacheln (`kacheln` oben, KEV-176).
                 // KEV-179: Überall kurz, nur der Titel der Seite selbst heißt
-                // „Über uns – Vorstand und Team“ (auch in den Brotkrumen kurz).
-                ['schluessel' => 'ueber_uns_vorstand_und_team', 'label' => 'Vorstand und Team', 'url' => '/ueber-uns-vorstand-und-team', 'kurz_in_brotkrumen' => true],
+                // „Über uns – Vorstand & Team“ (auch in den Brotkrumen kurz).
+                // Seit KEV-295 mit „&“ wie der Titel.
+                ['schluessel' => 'ueber_uns_vorstand_und_team', 'label' => 'Vorstand & Team', 'url' => '/ueber-uns-vorstand-und-team', 'kurz_in_brotkrumen' => true],
                 ['schluessel' => 'satzung', 'label' => 'Satzung',                      'url' => '/satzung'],
                 ['schluessel' => 'mitgliedschaft', 'label' => 'Mitgliedschaft',               'url' => '/mitgliedschaft'],
                 ['schluessel' => 'schutz_und_wertekonzept', 'label' => 'Schutz- und Wertekonzept', 'url' => '/schutz-und-wertekonzept'],
