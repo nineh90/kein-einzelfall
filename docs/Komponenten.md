@@ -2983,3 +2983,17 @@ Seiten, damit es einheitlich ist.
 - Ohne JavaScript und auf dem Handy: oben, ohne Mitlaufen.
 
 Tests: TeamUndGruppenTest, Browser „Mitlaufen neben dem Text“.
+
+## 55. Kasten unter dem Text (KEV-290, 01.11.2026)
+
+Taddi auf /gruppen-und-veranstaltungen: neben dem Kalender war unter dem
+Text viel Platz, dort soll „Deine Ideen sind gefragt!“ hin. Textbausteine
+haben dafür `kasten` (`['titel' => …, 'absaetze' => […]]`, Panel: „Kasten
+unter dem Text“). `x-blocks.text-inhalt` zeigt ihn nach Leitsatz und Knopf
+als abgesetzten Kasten, in jeder Darstellung eines Textbausteins (einzeln,
+Artikel, neben Dokumenten oder Verzeichnis). Inhalt in
+`GruppenUndVeranstaltungenSeeder::IDEEN`, Migration
+`2026_11_01_210000_gruppen_und_veranstaltungen_ideen`; Englisch über
+`titel`/`absaetze` im Wörterbuch.
+
+Tests: GruppenUndVeranstaltungenTest.

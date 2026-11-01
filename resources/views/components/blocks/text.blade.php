@@ -7,6 +7,7 @@
     'absaetze' => [],      // wenn gesetzt, wird ab einer Länge eingeklappt
     'ab_absatz' => 4,      // ab dem wievielten Absatz eingeklappt wird
     'hand' => null,        // handschriftlicher Nachsatz, z. B. ein Leitsatz
+    'kasten' => null,      // Kasten unter dem Text (KEV-290), siehe text-inhalt
     'mittig' => false,     // zentriert, siehe text-inhalt
     // Großes Symbol rechts neben dem Text, siehe PageBlock::SYMBOLE (KEV-184).
     'symbol' => null,
@@ -32,7 +33,7 @@
     ])>
         <x-blocks.text-inhalt class="max-w-prose"
             :eyebrow="$eyebrow" :titel="$titel" :cta="$cta" :anker="$anker"
-            :absaetze="$absaetze" :ab_absatz="$ab_absatz" :hand="$hand" :mittig="$mittig">
+            :absaetze="$absaetze" :ab_absatz="$ab_absatz" :hand="$hand" :kasten="$kasten" :mittig="$mittig">
             {{ $slot }}
         </x-blocks.text-inhalt>
 

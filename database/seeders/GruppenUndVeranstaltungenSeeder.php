@@ -32,6 +32,15 @@ class GruppenUndVeranstaltungenSeeder extends Seeder
         'hand' => 'Das Team von KE!N EINZELFALL e.V.',
     ];
 
+    /** KEV-290: Taddis Aufruf im Kasten unter dem Text der Übersicht. */
+    public const IDEEN = [
+        'titel' => 'Deine Ideen sind gefragt!',
+        'absaetze' => [
+            'Du vermisst eine Selbsthilfegruppe, wünschst dir eine Veranstaltung zu einem bestimmten Thema? Dann schreib uns an kontakt@kein-einzelfall.de.',
+            'Es braucht keinen fertigen Plan. Eine Idee genügt – gemeinsam schauen wir, was sich daraus machen lässt.',
+        ],
+    ];
+
     /**
      * @return array<int, array{slug: string, titel: string, meta_description: ?string, noindex: bool, bloecke: array<int, array>}>
      */
@@ -91,6 +100,21 @@ class GruppenUndVeranstaltungenSeeder extends Seeder
 
         Titelbilder::platzhalterSetzen();
         self::kalenderNebenEinleitung();
+    }
+
+    /**
+     * KEV-290: „Deine Ideen sind gefragt!“ als Kasten unter die Einleitung
+     * der Übersicht, wo neben dem Kalender Platz frei war. Nur wo dort noch
+     * kein Kasten steht.
+     */
+    public static function ideenKasten(): void
+    {
+        $einleitung = Page::where('slug', 'gruppen-und-veranstaltungen')->where('locale', 'de')->first()
+            ?->blocks()->where('typ', 'text')->orderBy('position')->first();
+
+        if ($einleitung && empty($einleitung->data['kasten'])) {
+            $einleitung->update(['data' => $einleitung->data + ['kasten' => self::IDEEN]]);
+        }
     }
 
     /**

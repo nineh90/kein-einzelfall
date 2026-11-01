@@ -657,6 +657,19 @@ class PageForm
                                     .'danebengeschrieben aussieht. Mit der Eingabetaste setzt du '
                                     .'einen Zeilenumbruch. Kann leer bleiben.'),
 
+                            // KEV-290: Kasten unter dem Text („Deine Ideen sind gefragt!“)
+                            TextInput::make('data.kasten.titel')
+                                ->label('Kasten unter dem Text: Überschrift (optional)')
+                                ->visible(fn ($get) => $get('typ') === 'text'),
+                            Repeater::make('data.kasten.absaetze')
+                                ->label('Kasten unter dem Text: Absätze')
+                                ->addActionLabel('Absatz hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'text')
+                                ->defaultItems(0)
+                                ->helperText('Ein abgesetzter Kasten unter dem Text, etwa ein Aufruf. '
+                                    .'E-Mail-Adressen werden von selbst zum Link. Leer = kein Kasten.')
+                                ->simple(Textarea::make('absatz')->label('')->rows(3)->required()),
+
                             // Unterzeile teilen sich Einstiegskarten und
                             // Themenliste — beide zeigen sie unter der Überschrift.
                             TextInput::make('data.sub')

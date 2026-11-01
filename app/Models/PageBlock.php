@@ -293,6 +293,7 @@ class PageBlock extends Model
             'anker' => $this->anker(),
             'absaetze' => $data['absaetze'] ?? [],
             'hand' => $data['hand'] ?? null,
+            'kasten' => $data['kasten'] ?? null,
             'cta' => knoepfe([$data['cta'] ?? null])[0] ?? null,
             'mittig' => (bool) ($data['mittig'] ?? false),
             // Ab dem wievielten Absatz eingeklappt wird. „Alles zeigen“

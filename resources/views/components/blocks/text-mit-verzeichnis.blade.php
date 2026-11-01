@@ -23,7 +23,7 @@
     <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,65ch)_minmax(0,1fr)] lg:gap-14">
         <x-blocks.text-inhalt class="max-w-prose"
             :eyebrow="$t['eyebrow']" :titel="$t['titel']" :anker="$t['anker']"
-            :absaetze="$t['absaetze']" :hand="$t['hand']" :cta="$t['cta']" :mittig="$t['mittig']"
+            :absaetze="$t['absaetze']" :hand="$t['hand']" :kasten="$t['kasten']" :cta="$t['cta']" :mittig="$t['mittig']"
             :ab_absatz="$t['ab_absatz']" />
 
         {{-- Läuft mit wie alles neben einem Text (KEV-304, mitlaufen.js). --}}

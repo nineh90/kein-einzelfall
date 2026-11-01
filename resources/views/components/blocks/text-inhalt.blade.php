@@ -12,6 +12,9 @@
     'absaetze' => [],      // wenn gesetzt, wird ab einer Länge eingeklappt
     'ab_absatz' => 4,      // ab dem wievielten Absatz eingeklappt wird
     'hand' => null,        // handschriftlicher Nachsatz, z. B. ein Leitsatz
+    // KEV-290: ein Kasten unter dem Text, ['titel' =>, 'absaetze' => [...]],
+    // etwa „Deine Ideen sind gefragt!“ auf /gruppen-und-veranstaltungen.
+    'kasten' => null,
     // Nebeneinander (Startseite): Der Knopf rückt an das untere Ende der
     // Spalte, damit die Knöpfe benachbarter Spalten auf einer Linie stehen.
     'fuellen' => false,
@@ -128,6 +131,23 @@
                     </x-ui.button>
                 </div>
             @endif
+        </div>
+    @endif
+
+    {{-- KEV-290: Taddi wollte unter dem Text der Übersicht noch einen
+         Aufruf, wo neben dem Kalender viel Platz frei war. Ein Kasten statt
+         weiterer Absätze: Er steht für sich und gehört nicht mehr zum
+         Brief, den „Das Team von …“ abschließt. --}}
+    @if (filled($kasten['titel'] ?? null) || filled($kasten['absaetze'] ?? []))
+        <div class="mt-8 rounded-card border border-line bg-card p-5 lg:p-6">
+            @if (filled($kasten['titel'] ?? null))
+                <h3 class="font-display text-xl font-medium text-green">{{ $kasten['titel'] }}</h3>
+            @endif
+            <div class="mt-3 flex flex-col gap-3 leading-relaxed text-ink-soft [&_a]:text-green-deep [&_a]:underline">
+                @foreach (array_filter((array) ($kasten['absaetze'] ?? [])) as $absatz)
+                    {{ absatz($absatz) }}
+                @endforeach
+            </div>
         </div>
     @endif
 </div>
