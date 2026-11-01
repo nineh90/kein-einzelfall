@@ -21,8 +21,8 @@
     Termine und Knöpfe benachbarter Karten auf einer Linie stehen.
 
     Seit KEV-280 (Nils) oben das Bild der Gruppenseite, randlos wie bei den
-    Seitenkacheln und ausgerichtet wie im Seitenkopf. Schmuck: Der Name
-    steht darunter.
+    Seitenkacheln und ausgerichtet wie im Seitenkopf. Seit KEV-305 steht der
+    Name im Bild.
 --}}
 @php
     $offen = $gruppe->istOffen();
@@ -36,12 +36,20 @@
     'bg-card' => $auf !== 'card',
     'bg-cream' => $auf === 'card',
 ])>
+    {{-- KEV-305 (Taddi): Der Name steht im Bild, rechts im hellen Teil, wie
+         bei den Karten auf /verein (KEV-293). Ein heller Verlauf dahinter
+         hält ihn lesbar, auch wo das Bild rechts nicht ganz ausläuft
+         (Skillin me Softly). Ohne Bild bleibt er unter dem Bild-Platz. --}}
     @if ($bild)
-        <span class="block aspect-[2/1] overflow-hidden border-b border-line">
+        <span class="relative block aspect-[2/1] overflow-hidden border-b border-line">
             <img src="{{ bildadresse($klein) }}" alt="" loading="lazy" decoding="async"
                  width="1000" height="563"
                  class="h-full w-full object-cover"
                  style="object-position: {{ \App\Support\Titelbilder::fokus($bild) }}">
+            <span aria-hidden="true" class="absolute inset-y-0 right-0 w-3/5 bg-gradient-to-l from-cream/85 via-cream/50 to-transparent"></span>
+            <span class="absolute inset-y-0 right-0 flex w-3/5 items-center justify-end p-4 text-right lg:p-5">
+                <{{ $ebene }} class="hyphens-auto [hyphenate-limit-chars:14_6_6] font-display text-xl font-semibold leading-tight text-ink">{{ $gruppe->name }}</{{ $ebene }}>
+            </span>
         </span>
     @endif
 
@@ -62,7 +70,9 @@
         </div>
     @endif
 
-    <{{ $ebene }} class="font-display text-lg font-semibold leading-snug text-ink">{{ $gruppe->name }}</{{ $ebene }}>
+    @unless ($bild)
+        <{{ $ebene }} class="font-display text-lg font-semibold leading-snug text-ink">{{ $gruppe->name }}</{{ $ebene }}>
+    @endunless
 
     @if ($gruppe->teaser)
         <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>

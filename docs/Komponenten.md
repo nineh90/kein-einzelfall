@@ -3013,3 +3013,12 @@ Nebenbei: Dokumententitel trennen jetzt mit Strich (`hyphens-auto`),
 „Verschwiegenheitsvereinbarung“ brach auf dem Handy ohne Strich um.
 
 Tests: TeamUndGruppenTest.
+
+## 57. Gruppenkarten: Name im Bild (KEV-305, 01.11.2026)
+
+Wie bei den Karten auf /verein (KEV-293) steht der Name einer Gruppe jetzt
+rechts im Bild ihrer Karte (`x-blocks.gruppen-karte`), mit einem hellen
+Verlauf dahinter, damit er auch auf unruhigen Bildern lesbar bleibt. Die
+Überschrift (h3/h4) wandert dafür ins Bild. Ohne Bild steht sie wie bisher
+im Kartentext. Gilt für Selbsthilfe- und Arbeitsgruppen; die AGs haben bis
+jetzt keine Bilder.
