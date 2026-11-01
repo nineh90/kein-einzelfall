@@ -3035,3 +3035,24 @@ und bei Arbeitsgruppen bleibt „Online“. Taddis Zuordnung in
 `TeamUndGruppenSeeder::ZIELGRUPPEN` (nicht in `gruppenliste()`, ältere
 Migrationen kennen die Spalte nicht), Migration
 `2026_11_01_230000_add_zielgruppe_to_groups_table`.
+
+## 59. Selbsthilfegruppen ohne „In Planung“, DISkret unter uns (KEV-309, 01.11.2026)
+
+Taddi: „In Planung“ soll weg. Lieber wirkt eine Gruppe, als sei die
+Anmeldung gerade nicht möglich, als dass sie noch nicht gestartet ist.
+
+- `group_list` hat `ohne_status` (Panel: „Nicht nach Status gliedern“):
+  keine Zwischenüberschriften, eine durchgehende Liste (offene zuerst),
+  die Karte nennt den Status nicht (`status_nennen`), nur „Zurzeit keine
+  Anmeldung möglich“. Gesetzt auf /selbsthilfegruppen
+  (`TeamUndGruppenSeeder::selbsthilfeOhneStatus()`), /arbeitsgruppen bleibt
+  gegliedert.
+- Die Seite einer Selbsthilfegruppe zeigt kein Status-Schild mehr, unter
+  „Stand“ steht „Zurzeit keine Anmeldung möglich“.
+- Sechste Gruppe „DISkret unter uns“ (`diskret-unter-uns`, geplant, für
+  Betroffene), Text aus Taddis Doc „1. Selbsthilfegruppen“, Bild „SHG 6
+  DISkret unter uns“ als `gruppe-diskret-unter-uns(.webp|-1000.webp)`
+  ohne Metadaten. In `SELBSTHILFEGRUPPEN`, für bestehende Datenbanken
+  `diskretNachtragen()` (legt nur an, überschreibt nichts). Englisch in
+  `uebersetzungen-gruppen.json`. Migration
+  `2026_11_01_240000_selbsthilfegruppen_ohne_planung_und_diskret`.

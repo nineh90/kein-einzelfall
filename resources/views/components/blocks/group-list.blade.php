@@ -3,6 +3,10 @@
     'einleitung' => null,
     'typ' => 'selbsthilfe',   // selbsthilfe | arbeits
     'auf' => 'cream',
+    // KEV-309 (Taddi auf /selbsthilfegruppen): nicht nach „offen“ und „in
+    // Planung“ gliedern. Lieber wirkt eine Gruppe, als sei die Anmeldung
+    // gerade zu, als dass sie noch nicht gestartet ist.
+    'ohne_status' => false,
 ])
 
 @php
@@ -17,7 +21,7 @@
 
     // Zwischenüberschriften nur, wenn es beides gibt. Sonst stünde über
     // allen Karten ein Satz, der nichts unterscheidet.
-    $geteilt = $offene->isNotEmpty() && $spaetere->isNotEmpty();
+    $geteilt = ! $ohne_status && $offene->isNotEmpty() && $spaetere->isNotEmpty();
 
     $spaeterTitel = $spaetere->every(fn ($g) => $g->status === 'geplant')
         ? __(\App\Models\Group::STATUS['geplant'])
@@ -50,7 +54,15 @@
                 <p class="mb-8 max-w-prose leading-relaxed text-ink-soft">{{ $einleitung }}</p>
             @endif
 
-            @foreach ([[$offene, __(\App\Models\Group::STATUS['offen'])], [$spaetere, $spaeterTitel]] as [$liste, $zwischentitel])
+            {{-- Ohne Gliederung (KEV-309) eine durchgehende Liste, offene
+                 zuerst. Sonst bliebe vor den späteren Gruppen eine Lücke in
+                 der letzten Reihe. --}}
+            @php
+                $listen = $ohne_status
+                    ? [[$offene->concat($spaetere), null]]
+                    : [[$offene, __(\App\Models\Group::STATUS['offen'])], [$spaetere, $spaeterTitel]];
+            @endphp
+            @foreach ($listen as [$liste, $zwischentitel])
                 @continue($liste->isEmpty())
 
                 @if ($geteilt)
@@ -71,7 +83,8 @@
                 <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     @foreach ($liste as $gruppe)
                         <li>
-                            <x-blocks.gruppen-karte :gruppe="$gruppe" :auf="$auf" :ebene="$geteilt ? 'h4' : 'h3'" :status_sichtbar="$geteilt" />
+                            <x-blocks.gruppen-karte :gruppe="$gruppe" :auf="$auf" :ebene="$geteilt ? 'h4' : 'h3'" :status_sichtbar="$geteilt"
+                                :status_nennen="! $ohne_status" />
                         </li>
                     @endforeach
                 </ul>

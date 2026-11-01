@@ -5,6 +5,8 @@
     // Steht der Status schon als Zwischenüberschrift darüber, sagt die Karte
     // ihn nicht noch einmal.
     'status_sichtbar' => false,
+    // KEV-309: Den Status gar nicht nennen, nur dass die Anmeldung zu ist.
+    'status_nennen' => true,
 ])
 
 {{--
@@ -125,11 +127,11 @@
                  einheitlicher Satz für alle. --}}
             <p class="border-t border-line pt-3 text-sm text-ink-soft">
                 {{-- KEV-307: „Zurzeit“ statt „Noch“ (Taddi). --}}
-                @unless ($status_sichtbar)
+                @if (! $status_sichtbar && $status_nennen)
                     {{ __(':status – zurzeit keine Anmeldung möglich', ['status' => __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status)]) }}
                 @else
                     {{ __('Zurzeit keine Anmeldung möglich') }}
-                @endunless
+                @endif
             </p>
         @endunless
 

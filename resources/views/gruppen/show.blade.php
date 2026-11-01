@@ -71,11 +71,9 @@
                     <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
                 @endif
             @endforelse
-            @unless ($offen)
-                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">
-                    {{ __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status) }}
-                </span>
-            @endunless
+            {{-- KEV-309: Kein „In Planung“ mehr. Taddi: lieber so, als ob die
+                 Anmeldung gerade nicht möglich ist, als dass die Gruppe noch
+                 nicht gestartet ist. Unten bei „Stand“ steht genau das. --}}
         </div>
 
         @unless ($gruppe->titelbild)
@@ -114,7 +112,7 @@
             @else
                 <div class="flex flex-wrap gap-x-3">
                     <dt class="w-36 shrink-0 text-sm text-ink-soft">{{ __('Stand') }}</dt>
-                    <dd class="text-ink">{{ __('Startet später, noch keine Anmeldung möglich') }}</dd>
+                    <dd class="text-ink">{{ __('Zurzeit keine Anmeldung möglich') }}</dd>
                 </div>
             @endif
 

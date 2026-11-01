@@ -938,6 +938,14 @@ class PageForm
                                 ->visible(fn ($get) => $get('typ') === 'group_list')
                                 ->helperText('Die Gruppen selbst pflegst du unter „Gruppen“.'),
 
+                            // KEV-309
+                            Toggle::make('data.ohne_status')
+                                ->label('Nicht nach Status gliedern')
+                                ->visible(fn ($get) => $get('typ') === 'group_list')
+                                ->dehydrated(fn ($state) => (bool) $state)
+                                ->helperText('Ohne Zwischenüberschriften „Offen für neue Teilnehmende“ und '
+                                    .'„In Planung“. Gruppen ohne Anmeldung zeigen nur „Zurzeit keine Anmeldung möglich“.'),
+
                             // --- Eingebetteter Inhalt (Zwei-Klick) ---
                             TextInput::make('data.anbieter')
                                 ->label('Anbieter')

@@ -468,7 +468,46 @@ class TeamUndGruppenSeeder extends Seeder
         'seelenfarben' => 'alle',
         'skillin-me-softly' => 'betroffene',
         'schreibwerkstatt' => 'alle',
+        'diskret-unter-uns' => 'betroffene',
     ];
+
+    /**
+     * KEV-309: „DISkret unter uns“ nachtragen, wo es sie noch nicht gibt,
+     * hinter den übrigen Selbsthilfegruppen. Wie fehlende_gruppen_nachtragen:
+     * nur anlegen, nie eine bestehende überschreiben.
+     */
+    public static function diskretNachtragen(): void
+    {
+        $quelle = collect(self::SELBSTHILFEGRUPPEN)->firstWhere('slug', 'diskret-unter-uns');
+
+        // Ältere Migrationen (fehlende_gruppen_nachtragen) legen sie auf
+        // frischer Datenbank schon an, nur ohne Bild.
+        if (Group::where('slug', 'diskret-unter-uns')->exists()) {
+            Group::where('slug', 'diskret-unter-uns')->whereNull('titelbild')->update(['titelbild' => $quelle['titelbild']]);
+
+            return;
+        }
+
+        $daten = collect(self::gruppenliste())->firstWhere('slug', 'diskret-unter-uns');
+
+        Group::create($daten + [
+            'titelbild' => $quelle['titelbild'],
+            'position' => (int) Group::where('typ', 'selbsthilfe')->max('position') + 1,
+            'published_at' => now(),
+        ]);
+    }
+
+    /**
+     * KEV-309: Auf /selbsthilfegruppen die Gruppen nicht nach Status
+     * gliedern, nur wo der Schalter noch nicht gesetzt ist.
+     */
+    public static function selbsthilfeOhneStatus(): void
+    {
+        Page::where('slug', 'selbsthilfegruppen')->where('locale', 'de')->first()
+            ?->blocks()->where('typ', 'group_list')->get()
+            ->filter(fn ($b) => ($b->data['typ'] ?? null) === 'selbsthilfe' && ! array_key_exists('ohne_status', $b->data))
+            ->each(fn ($b) => $b->update(['data' => $b->data + ['ohne_status' => true]]));
+    }
 
     public static function zielgruppenSetzen(): void
     {
@@ -573,6 +612,20 @@ class TeamUndGruppenSeeder extends Seeder
             // KEV-231: Taddis letzter Satz als zweite Zeile.
             'schlusssatz' => "Das Wichtigste steht nicht immer in den großen Worten – sondern oft zwischen den Zeilen.\n"
                 .'Manches lässt sich nicht sagen, aber vielleicht schreiben.',
+        ],
+        [
+            // KEV-309: Taddis sechste Gruppe, Text aus „1. Selbsthilfegruppen“
+            // im Drive, Bild „SHG 6 DISkret unter uns“. Noch ohne Termin.
+            'slug' => 'diskret-unter-uns', 'status' => 'geplant',
+            'titelbild' => '/img/titelbilder/gruppe-diskret-unter-uns.webp',
+            'name' => 'DISkret unter uns',
+            'teaser' => 'Viele Perspektiven, ein Austausch',
+            'absaetze' => [
+                'Dissoziative Identitätsstörung (DIS) und andere dissoziative Störungen können den Alltag auf vielfältige Weise beeinflussen. Erinnerungslücken, innere Wechsel, unterschiedliche Wahrnehmungen und das Gefühl, sich selbst manchmal fremd zu sein, gehören für viele Betroffene zur Lebensrealität. Hinzu kommen häufig Vorurteile, Unverständnis und die Schwierigkeit, mit den eigenen Erfahrungen ernst genommen zu werden.',
+                'In unserer Selbsthilfegruppe „DISkret unter uns“ möchten wir einen geschützten Raum schaffen, in dem all das Platz haben darf. Wir möchten Erfahrungen austauschen, voneinander lernen, uns gegenseitig stärken und gemeinsam Wege finden, mit den Herausforderungen des Alltags umzugehen. Dabei sollen nicht nur Belastungen, sondern auch Fähigkeiten, Ressourcen und die Vielfalt innerer Lebenswelten sichtbar werden.',
+                'Die Gruppe ist ausschließlich für Betroffene gedacht und dient dem Erfahrungsaustausch auf Augenhöhe. Niemand muss mehr erzählen, als sich gerade richtig anfühlt – auch Zuhören ist völlig in Ordnung.',
+            ],
+            'schlusssatz' => 'Viele Perspektiven, unterschiedliche Erfahrungen – und ein gemeinsamer Raum für Verständnis und Austausch.',
         ],
     ];
 
@@ -1078,6 +1131,7 @@ class TeamUndGruppenSeeder extends Seeder
         self::selbsthilfeseiteAufbauen();
         self::gruppenseitenVervollstaendigen();
         self::selbsthilfeRahmenZuDokumenten();
+        self::selbsthilfeOhneStatus();
     }
 
     private function seiteUmbauen(string $slug, string $typ, array $daten): void

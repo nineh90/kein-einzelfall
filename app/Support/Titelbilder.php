@@ -343,6 +343,8 @@ class Titelbilder
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
         self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
         self::ORDNER.'/gruppe-schreibwerkstatt.webp' => 50,
+        // KEV-309: Glaskugel in der Mitte der Höhe
+        self::ORDNER.'/gruppe-diskret-unter-uns.webp' => 55,
         self::ORDNER.'/ehrenamtsmessen.webp' => 55,
         self::ORDNER.'/kontakt.webp' => 60,
         self::ORDNER.'/petitionen.webp' => 40,
