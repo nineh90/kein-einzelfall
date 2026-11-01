@@ -1128,7 +1128,7 @@ stammen von uns:
 
 | Seite | Unterzeile |
 |---|---|
-| `/ueber-uns-vorstand-und-team` | Die Menschen hinter unserer Arbeit. |
+| ~~`/ueber-uns-vorstand-und-team`~~ | erledigt: seit KEV-296 Taddis „Die Menschen hinter KE!N EINZELFALL e.V.“ |
 | `/unterstuetzung` | Wichtiges über Rechte, Anträge und unsere Arbeit. |
 | `/anfragen` | Persönlicher Austausch zu Entschädigung, Schwerbehinderung und Pflegegrad. |
 | `/wissen` | Rechte, Anträge und Hilfesysteme verständlich erklärt. |

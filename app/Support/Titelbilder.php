@@ -38,7 +38,9 @@ class Titelbilder
     /** @var array<string, ?string> */
     public const SEITEN = [
         'verein' => 'Opferhilfe für soziale Gerechtigkeit!',
-        'ueber-uns-vorstand-und-team' => 'Die Menschen hinter unserer Arbeit.',                    // von uns
+        // KEV-296: Taddis Unterzeile (vorher von uns: „Die Menschen hinter
+        // unserer Arbeit.“)
+        'ueber-uns-vorstand-und-team' => 'Die Menschen hinter KE!N EINZELFALL e.V.',
         'mitgliedschaft' => 'Werde Teil unseres Netzwerks!',
         'spenden' => 'Sei Du dabei, jede Unterstützung zählt, egal wie gering!',
         'unterstuetzung' => 'Wichtiges über Rechte, Anträge und unsere Arbeit.',                  // von uns

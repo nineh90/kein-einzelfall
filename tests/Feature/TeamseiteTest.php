@@ -158,4 +158,25 @@ class TeamseiteTest extends TestCase
         $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
         $this->assertArrayHasKey(TeamseiteSeeder::SEITENTITEL, $woerterbuch);
     }
+
+    /** KEV-296: Unterzeile „Die Menschen hinter KE!N EINZELFALL e.V.“, auch per Migration, Englisch mit. */
+    public function test_unterzeile_mit_vereinsnamen(): void
+    {
+        $seite = $this->seite();
+        $seite->update(['titelbild' => \App\Support\Titelbilder::datei(TeamseiteSeeder::SLUG), 'untertitel' => 'Die Menschen hinter unserer Arbeit.']);
+
+        $migration = require database_path('migrations/2026_11_01_140000_teamseite_unterzeile.php');
+        $migration->up();
+        $this->assertSame('Die Menschen hinter KE!N EINZELFALL e.V.', $seite->fresh()->untertitel);
+        $this->get('/'.TeamseiteSeeder::SLUG)->assertSee('Die Menschen hinter KE!N EINZELFALL e.V.')
+            ->assertDontSee('Die Menschen hinter unserer Arbeit.');
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $this->assertSame('The people behind KE!N EINZELFALL e.V.', $woerterbuch['Die Menschen hinter KE!N EINZELFALL e.V.']['en']);
+
+        // Eine eigene Unterzeile bleibt.
+        $seite->update(['untertitel' => 'Eigene Zeile']);
+        $migration->up();
+        $this->assertSame('Eigene Zeile', $seite->fresh()->untertitel);
+    }
 }
