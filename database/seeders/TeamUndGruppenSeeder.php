@@ -560,13 +560,67 @@ class TeamUndGruppenSeeder extends Seeder
             'Manchmal tut es gut, mit Menschen zusammenzukommen, bei denen man sich nicht erst erklären muss, weil ähnliche Erfahrungen verbinden. Unsere Selbsthilfegruppen bieten Raum für Austausch, gegenseitiges Verständnis und neue Perspektiven.',
             'Du entscheidest selbst, wie viel du erzählen möchtest – auch einfach nur zuzuhören ist vollkommen in Ordnung, egal ob mit oder ohne Bild. Du kannst dich über den Chat oder dein Mikro beteiligen. Die Gruppen werden gemeinsam von den Teilnehmenden gestaltet und finden online über Microsoft Teams statt. Die Teilnahme ist kostenfrei und nicht an eine Vereinsmitgliedschaft gebunden.',
             'Wir sprechen offen über sensible Themen. Für die Teilnahme setzen wir Therapieerfahrung und eine gute Selbstfürsorge voraus – insbesondere, falls du getriggert wirst. Alles geschieht in eigener Verantwortung.',
-            'Für einen sicheren und respektvollen Rahmen gibt es Teilnahmebedingungen und Gruppenregeln. Du findest beides weiter unten auf dieser Seite. Bitte lies sie dir vor deiner ersten Teilnahme durch – mit dem Beitritt zur Gruppe akzeptierst du diese. Unsere Selbsthilfegruppen ersetzen keine Therapie, medizinische oder rechtliche Beratung. Bei sensiblen Themen ist es wichtig, gut auf die eigenen Grenzen zu achten und selbst zu entscheiden, was gerade möglich ist.',
+            // Der Absatz zu Regeln und Grenzen steht seit KEV-291 bei den
+            // Dokumenten (SELBSTHILFE_DOKUMENTE).
             'Du hast Fragen oder Interesse? Oder eine Idee für eine neue Selbsthilfegruppe? Schreib uns eine kurze E-Mail an selbsthilfe@kein-einzelfall.de. Wir melden uns umgehend bei dir.',
         ],
         'hand' => 'Das Team von KE!N EINZELFALL e.V.',
         // So heisst das PDF „Tu.V-SHG“ bei Taddi
         'dokument_umbenennen' => ['Teilnahmebedingungen' => 'Teilnahme- und Verschwiegenheitsvereinbarung'],
     ];
+
+    /**
+     * KEV-291: Der Absatz zu Teilnahmebedingungen und Grenzen stand bis dahin
+     * im Text. Taddi teilt ihn: der erste Teil über die Dokumente rechts, der
+     * zweite darunter. „Du findest beides weiter unten“ fällt weg, die
+     * Dokumente stehen ja daneben.
+     */
+    public const SELBSTHILFE_ABSATZ_BIS_KEV_291 = 'Für einen sicheren und respektvollen Rahmen gibt es '
+        .'Teilnahmebedingungen und Gruppenregeln. Du findest beides weiter unten auf dieser Seite. Bitte lies sie '
+        .'dir vor deiner ersten Teilnahme durch – mit dem Beitritt zur Gruppe akzeptierst du diese. Unsere '
+        .'Selbsthilfegruppen ersetzen keine Therapie, medizinische oder rechtliche Beratung. Bei sensiblen Themen '
+        .'ist es wichtig, gut auf die eigenen Grenzen zu achten und selbst zu entscheiden, was gerade möglich ist.';
+
+    public const SELBSTHILFE_DOKUMENTE = [
+        'einleitung' => 'Für einen sicheren und respektvollen Rahmen gibt es Teilnahmebedingungen und '
+            .'Gruppenregeln. Bitte lies sie dir vor deiner ersten Teilnahme durch – mit dem Beitritt zur Gruppe '
+            .'akzeptierst du diese.',
+        'nachsatz' => 'Unsere Selbsthilfegruppen ersetzen keine Therapie, medizinische oder rechtliche Beratung. '
+            .'Bei sensiblen Themen ist es wichtig, gut auf die eigenen Grenzen zu achten und selbst zu entscheiden, '
+            .'was gerade möglich ist.',
+    ];
+
+    /**
+     * KEV-291: den Absatz aus dem Text nehmen (nur wo er noch genau so
+     * dasteht) und seine beiden Teile über und unter die Dokumentenliste
+     * neben dem Text setzen (nur wo dort noch nichts steht).
+     */
+    public static function selbsthilfeRahmenZuDokumenten(): void
+    {
+        $seite = Page::where('slug', 'selbsthilfegruppen')->where('locale', 'de')->first();
+
+        if (! $seite) {
+            return;
+        }
+
+        $seite->blocks()->where('typ', 'text')->get()
+            ->filter(fn ($b) => in_array(self::SELBSTHILFE_ABSATZ_BIS_KEV_291, $b->data['absaetze'] ?? [], true))
+            ->each(fn ($b) => $b->update(['data' => array_replace($b->data, [
+                'absaetze' => array_values(array_filter($b->data['absaetze'], fn ($a) => $a !== self::SELBSTHILFE_ABSATZ_BIS_KEV_291)),
+            ])]));
+
+        $seite->blocks()->where('typ', 'download_list')->get()
+            ->filter(fn ($b) => ! empty($b->data['neben_text']))
+            ->each(function ($b) {
+                $data = $b->data;
+                foreach (self::SELBSTHILFE_DOKUMENTE as $feld => $text) {
+                    if (blank($data[$feld] ?? null)) {
+                        $data[$feld] = $text;
+                    }
+                }
+                $b->update(['data' => $data]);
+            });
+    }
 
     /** Woran die Selbsthilfe-Seite der Altseite zu erkennen ist. */
     public const SELBSTHILFE_ALT = [
@@ -995,6 +1049,7 @@ class TeamUndGruppenSeeder extends Seeder
         self::arbeitsgruppenseiteAufbauen(['de' => self::ARBEITSGRUPPEN_ALT + ['seite' => self::ARBEITSGRUPPEN_SEITE]]);
         self::selbsthilfeseiteAufbauen();
         self::gruppenseitenVervollstaendigen();
+        self::selbsthilfeRahmenZuDokumenten();
     }
 
     private function seiteUmbauen(string $slug, string $typ, array $daten): void

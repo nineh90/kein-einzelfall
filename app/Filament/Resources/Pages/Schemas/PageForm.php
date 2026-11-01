@@ -339,7 +339,7 @@ class PageForm
                                 ->visible(fn ($get) => in_array(
                                     $get('typ'),
                                     ['schritte', 'accordion', 'team_grid', 'group_list', 'partner_logos',
-                                        'speicher_uebersicht', 'oeffentlichkeitsarbeit'],
+                                        'speicher_uebersicht', 'oeffentlichkeitsarbeit', 'download_list'],
                                     true,
                                 ))
                                 ->helperText(fn ($get) => $get('typ') === 'speicher_uebersicht'
@@ -603,6 +603,13 @@ class PageForm
                                     ['hinweis', 'hero', 'contact_close', 'donation_options'],
                                     true,
                                 )),
+
+                            // KEV-291: Text unter der Dokumentenliste
+                            Textarea::make('data.nachsatz')
+                                ->label('Text unter der Liste')
+                                ->rows(2)
+                                ->visible(fn ($get) => $get('typ') === 'download_list')
+                                ->helperText('Kurzer Hinweis unter den Dokumenten. Kann leer bleiben.'),
 
                             // KEV-226: Taddis Wunsch auf /selbsthilfegruppen.
                             Toggle::make('data.neben_text')

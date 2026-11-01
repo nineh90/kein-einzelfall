@@ -65,6 +65,8 @@ class UebersetzungenSeeder extends Seeder
         'schluss',
         // KEV-294: kurzer Name eines Team-Rasters in „Auf dieser Seite“.
         'verzeichnis_titel',
+        // KEV-291: Hinweis unter einer Dokumentenliste.
+        'nachsatz',
         // KEV-262: die einfache Übersetzung typischer Sätze. Der Satz selbst
         // bleibt deutsch, so steht er im Brief.
         'bedeutung',

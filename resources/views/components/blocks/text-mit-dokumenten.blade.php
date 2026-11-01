@@ -56,6 +56,8 @@
             @else
                 <x-blocks.download-list :rahmen="false" :auf="$auf"
                     :titel="$dok['titel'] ?? null"
+                    :einleitung="$dok['einleitung'] ?? null"
+                    :nachsatz="$dok['nachsatz'] ?? null"
                     :dokumente="$dok['dokumente'] ?? []" />
             @endif
         </div>

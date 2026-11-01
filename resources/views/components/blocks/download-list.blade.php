@@ -7,6 +7,10 @@
     'rahmen' => true,
     // Großes Symbol rechts neben der Liste, siehe PageBlock::SYMBOLE (KEV-203).
     'symbol' => null,
+    // KEV-291: kurzer Text über und unter der Liste, etwa „Bitte lies sie
+    // dir vor deiner ersten Teilnahme durch …“ auf /selbsthilfegruppen.
+    'einleitung' => null,
+    'nachsatz' => null,
 ])
 
 @php
@@ -123,6 +127,12 @@
                 </h2>
             @endif
 
+            @if (filled($einleitung))
+                <div class="mb-4 leading-relaxed text-ink-soft [&_a]:text-green-deep [&_a]:underline">
+                    {{ absatz($einleitung) }}
+                </div>
+            @endif
+
             {{-- Als abgesetzte Karte statt randloser Liste — sonst wirkt der
                  Abschnitt wie ein loses Anhängsel unter dem Fließtext. --}}
             <ul @class([
@@ -179,8 +189,10 @@
                         @endif
                     </span>
 
-                    <span class="flex-1">
-                        <span class="block text-[0.9375rem] text-ink group-hover:underline">{{ $dok['titel'] }}</span>
+                    {{-- min-w-0 + Silbentrennung: „Verschwiegenheitsvereinbarung“ brach
+                         auf dem Handy sonst ohne Strich vor dem letzten „ng“ um. --}}
+                    <span class="min-w-0 flex-1">
+                        <span class="block hyphens-auto [hyphenate-limit-chars:14_6_6] text-[0.9375rem] text-ink group-hover:underline">{{ $dok['titel'] }}</span>
                         <span class="mt-0.5 block text-xs text-ink-soft">{{ $meta }}</span>
                     </span>
 
@@ -204,6 +216,12 @@
             </li>
                 @endforeach
             </ul>
+
+            @if (filled($nachsatz))
+                <div class="mt-4 text-sm leading-relaxed text-ink-soft [&_a]:text-green-deep [&_a]:underline">
+                    {{ absatz($nachsatz) }}
+                </div>
+            @endif
 
         </div>
 

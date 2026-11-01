@@ -2997,3 +2997,19 @@ Artikel, neben Dokumenten oder Verzeichnis). Inhalt in
 `titel`/`absaetze` im Wörterbuch.
 
 Tests: GruppenUndVeranstaltungenTest.
+
+## 56. Text über und unter der Dokumentenliste (KEV-291, 01.11.2026)
+
+Taddi auf /selbsthilfegruppen: Der Absatz zu Teilnahmebedingungen und
+Grenzen soll aus dem Text links raus, der erste Teil über die Dokumente
+rechts, der zweite darunter. `download_list` hat dafür `einleitung` (Panel:
+„Einleitung“, wie bei anderen Listen) und `nachsatz` (Panel: „Text unter
+der Liste“, etwas kleiner gesetzt). Beides geht in jeder Darstellung der
+Liste. Inhalt in `TeamUndGruppenSeeder::SELBSTHILFE_DOKUMENTE`, gesetzt von
+`selbsthilfeRahmenZuDokumenten()` (Neuaufbau und Migration
+`2026_11_01_220000_selbsthilfegruppen_rahmen_bei_dokumenten`).
+
+Nebenbei: Dokumententitel trennen jetzt mit Strich (`hyphens-auto`),
+„Verschwiegenheitsvereinbarung“ brach auf dem Handy ohne Strich um.
+
+Tests: TeamUndGruppenTest.
