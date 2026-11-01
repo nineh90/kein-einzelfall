@@ -3022,3 +3022,16 @@ Verlauf dahinter, damit er auch auf unruhigen Bildern lesbar bleibt. Die
 Überschrift (h3/h4) wandert dafür ins Bild. Ohne Bild steht sie wie bisher
 im Kartentext. Gilt für Selbsthilfe- und Arbeitsgruppen; die AGs haben bis
 jetzt keine Bilder.
+
+## 58. Selbsthilfegruppen: für wen statt „Online“ (KEV-308, 01.11.2026)
+
+Taddi: Das Schild „Online“ kann weg, im Text steht, dass alle Gruppen
+online sind. Stattdessen zwei Schilder: „Für Betroffene“ und „Offen für
+alle“. Neue Spalte `groups.zielgruppe` (`betroffene` | `alle`, Panel bei
+Selbsthilfegruppen: „Für wen“). `Group::zielgruppenSchilder()`: bei
+„alle“ beide Schilder, wie Taddi es schreibt („für Betroffene und offen für
+alle“). Karte und Seite der Gruppe zeigen sie statt „Online“; ohne Angabe
+und bei Arbeitsgruppen bleibt „Online“. Taddis Zuordnung in
+`TeamUndGruppenSeeder::ZIELGRUPPEN` (nicht in `gruppenliste()`, ältere
+Migrationen kennen die Spalte nicht), Migration
+`2026_11_01_230000_add_zielgruppe_to_groups_table`.

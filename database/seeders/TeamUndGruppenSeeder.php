@@ -450,7 +450,35 @@ class TeamUndGruppenSeeder extends Seeder
             }
         }
 
+        self::zielgruppenSetzen();
+
         $this->command?->info(count(self::gruppenliste()).' Gruppen übernommen.');
+    }
+
+    /**
+     * Für wen die Selbsthilfegruppen sind (KEV-308, Taddi): „Wir sind nicht
+     * mehr stumm“ und „Skillin me Softly“ nur für Betroffene, die anderen
+     * offen für alle. Nicht in gruppenliste(): Ältere Migrationen legen
+     * Gruppen darüber an, als es die Spalte noch nicht gab. Nur wo noch
+     * nichts steht.
+     */
+    public const ZIELGRUPPEN = [
+        'wir-sind-nicht-mehr-stumm' => 'betroffene',
+        'buerokratie-labyrinth' => 'alle',
+        'seelenfarben' => 'alle',
+        'skillin-me-softly' => 'betroffene',
+        'schreibwerkstatt' => 'alle',
+    ];
+
+    public static function zielgruppenSetzen(): void
+    {
+        if (! \Illuminate\Support\Facades\Schema::hasColumn('groups', 'zielgruppe')) {
+            return;
+        }
+
+        foreach (self::ZIELGRUPPEN as $slug => $zielgruppe) {
+            Group::where('slug', $slug)->whereNull('zielgruppe')->update(['zielgruppe' => $zielgruppe]);
+        }
     }
 
     /**

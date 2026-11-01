@@ -38,6 +38,12 @@ class GroupForm
                     ->helperText('z.B. „AG Nr. 1“. Nur bei Arbeitsgruppen üblich.'),
 
                 TextInput::make('position')->label('Reihenfolge')->numeric()->default(0),
+
+                // KEV-308
+                Select::make('zielgruppe')->label('Für wen')
+                    ->options(Group::ZIELGRUPPEN)->placeholder('Keine Angabe')->native(false)
+                    ->visible(fn ($get) => $get('typ') === 'selbsthilfe')
+                    ->helperText('Steht als Schild auf Karte und Seite. „Offen für alle“ zeigt dazu „Für Betroffene“.'),
             ]),
 
             Section::make('Beschreibung')->schema([

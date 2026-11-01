@@ -54,7 +54,13 @@
     @endif
 
     <div class="flex flex-1 flex-col p-5 lg:p-6">
-    @if ($gruppe->kuerzel || $gruppe->online)
+    @php
+        // KEV-308 (Taddi): Bei Selbsthilfegruppen statt „Online“ (steht im
+        // Text der Seite) für wen die Gruppe ist. Arbeitsgruppen wie bisher.
+        $schilder = $gruppe->typ === 'selbsthilfe' ? $gruppe->zielgruppenSchilder() : [];
+        $onlineSchild = $gruppe->online && $gruppe->typ !== 'selbsthilfe';
+    @endphp
+    @if ($gruppe->kuerzel || $onlineSchild || $schilder)
         <div class="mb-3 flex flex-wrap items-center gap-2">
             @if ($gruppe->kuerzel)
                 <span class="rounded-full bg-green-mist px-2.5 py-0.5
@@ -63,10 +69,15 @@
                 </span>
             @endif
 
-            @if ($gruppe->online)
+            @if ($onlineSchild)
                 <span class="rounded-full border border-line px-2.5 py-0.5
                              text-[0.6875rem] text-ink-soft">{{ __('Online') }}</span>
             @endif
+
+            @foreach ($schilder as $schild)
+                <span class="rounded-full border border-line px-2.5 py-0.5
+                             text-[0.6875rem] text-ink-soft">{{ __($schild) }}</span>
+            @endforeach
         </div>
     @endif
 

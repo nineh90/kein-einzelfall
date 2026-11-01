@@ -41,6 +41,15 @@ class Group extends Model
         'geschlossen' => 'Zurzeit geschlossen',
     ];
 
+    /**
+     * Für wen eine Selbsthilfegruppe ist (KEV-308). „Offen für alle“ heißt
+     * bei Taddi auch für Betroffene, deshalb zeigt es beide Schilder.
+     */
+    public const ZIELGRUPPEN = [
+        'betroffene' => 'Für Betroffene',
+        'alle' => 'Offen für alle',
+    ];
+
     public const WIEDERHOLUNGEN = [
         'keine' => 'Kein fester Rhythmus',
         'woechentlich' => 'Wöchentlich',
@@ -54,7 +63,7 @@ class Group extends Model
 
     protected $fillable = [
         'slug', 'name', 'kuerzel', 'typ', 'teaser', 'beschreibung', 'schlusssatz', 'titelbild',
-        'rhythmus', 'uhrzeit', 'ort', 'online', 'status',
+        'rhythmus', 'uhrzeit', 'ort', 'online', 'zielgruppe', 'status',
         'anmeldung_hinweis', 'zugangslink', 'link_automatisch', 'position', 'published_at',
         'wiederholung', 'wochentag', 'woche_im_monat', 'beginn_zeit', 'dauer_minuten',
         'uebersetzungen',
@@ -123,6 +132,21 @@ class Group extends Model
     public function schlusssaetze(): array
     {
         return array_values(array_filter(array_map('trim', preg_split('/\R/u', (string) $this->schlusssatz))));
+    }
+
+    /**
+     * Die Schilder für die Zielgruppe, deutsch (KEV-308): „Für Betroffene“,
+     * bei „Offen für alle“ dazu dieses.
+     *
+     * @return list<string>
+     */
+    public function zielgruppenSchilder(): array
+    {
+        return match ($this->zielgruppe) {
+            'betroffene' => [self::ZIELGRUPPEN['betroffene']],
+            'alle' => [self::ZIELGRUPPEN['betroffene'], self::ZIELGRUPPEN['alle']],
+            default => [],
+        };
     }
 
     public function istOffen(): bool

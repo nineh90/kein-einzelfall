@@ -62,9 +62,15 @@
             @unless ($gruppe->titelbild)
                 <span class="rounded-full bg-green-mist px-3 py-1 text-xs text-green-deep">{{ __('Selbsthilfegruppe') }}</span>
             @endunless
-            @if ($gruppe->online)
-                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
-            @endif
+            {{-- KEV-308: für wen statt „Online“, wie auf der Karte. Ohne
+                 Angabe bleibt „Online“. --}}
+            @forelse ($gruppe->zielgruppenSchilder() as $schild)
+                <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __($schild) }}</span>
+            @empty
+                @if ($gruppe->online)
+                    <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">{{ __('Online') }}</span>
+                @endif
+            @endforelse
             @unless ($offen)
                 <span class="rounded-full border border-line px-3 py-1 text-xs text-ink-soft">
                     {{ __(\App\Models\Group::STATUS[$gruppe->status] ?? $gruppe->status) }}
