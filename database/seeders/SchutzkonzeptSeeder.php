@@ -164,6 +164,20 @@ class SchutzkonzeptSeeder extends Seeder
         self::listeNebenDenText(self::SLUG);
     }
 
+    /**
+     * KEV-299: Flagge & Häkchen (KEV-208) wieder weg, stattdessen der
+     * Leitfaden zum Herunterladen rechts neben dem Text.
+     */
+    public static function leitfadenNebenDenText(): void
+    {
+        Page::where('slug', self::RED_FLAGS_SLUG)->where('locale', 'de')->first()
+            ?->blocks()->where('typ', 'text')->get()
+            ->filter(fn ($b) => ($b->data['symbol'] ?? null) === 'red-flag-und-haken')
+            ->each(fn ($b) => $b->update(['data' => array_diff_key($b->data, ['symbol' => true])]));
+
+        self::listeNebenDenText(self::RED_FLAGS_SLUG);
+    }
+
     /** Die Dokumentenliste direkt hinter dem ersten Text daneben stellen. */
     private static function listeNebenDenText(string $slug): void
     {
@@ -179,7 +193,11 @@ class SchutzkonzeptSeeder extends Seeder
         }
     }
 
-    /** KEV-208: rechts neben dem Text Flagge & Häkchen, wo noch kein Symbol steht. */
+    /**
+     * KEV-208: rechts neben dem Text Flagge & Häkchen, wo noch kein Symbol
+     * steht. Seit KEV-299 nimmt leitfadenNebenDenText() sie wieder weg; die
+     * Migrationen, die das hier aufrufen, laufen davor.
+     */
     private static function redFlagsSymbole(): void
     {
         $text = Page::where('slug', self::RED_FLAGS_SLUG)->where('locale', 'de')->first()

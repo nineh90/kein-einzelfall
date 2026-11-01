@@ -87,18 +87,31 @@ class SchutzUndRedFlagsTest extends TestCase
         $this->assertSame('0% 100%', Titelbilder::fokus('/img/titelbilder/gibt-es-nicht.webp'));
     }
 
-    /** KEV-208: Rechts neben dem Text Flagge & Häkchen, auch per Migration. */
-    public function test_red_flags_symbole(): void
+    /** KEV-299: Flagge & Häkchen (KEV-208) wieder weg, der Leitfaden steht rechts neben dem Text. Auch per Migration. */
+    public function test_red_flags_leitfaden_statt_symbole(): void
     {
         $html = $this->get('/red-flags')->assertOk()->getContent();
-        $this->assertStringContainsString('fill="#D41417"', $html);
-        $this->assertMatchesRegularExpression('#fill="\#D41417".*?&amp;</span>.*?stroke="\#fff"#s', $html);
+        $this->assertStringNotContainsString('fill="#D41417"', $html);
+        $abschnitt = substr($html, strpos($html, 'Gemeinsam gelingt Zusammenarbeit am besten'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+        $this->assertStringContainsString('Leitfaden für die Zusammenarbeit herunterladen', $abschnitt);
 
+        // Stand nach KEV-208: Symbol am Text, Liste darunter für sich.
         $text = $this->seite('red-flags')->blocks()->where('typ', 'text')->first();
-        $text->update(['data' => array_diff_key($text->data, ['symbol' => 1])]);
-        $migration = require database_path('migrations/2026_10_26_310000_red_flags_symbole.php');
+        $liste = $this->seite('red-flags')->blocks()->where('typ', 'download_list')->first();
+        $text->update(['data' => $text->data + ['symbol' => 'red-flag-und-haken']]);
+        $liste->update(['data' => array_diff_key($liste->data, ['neben_text' => 1])]);
+
+        $migration = require database_path('migrations/2026_11_01_160000_red_flags_leitfaden_daneben.php');
         $migration->up();
-        $this->assertSame('red-flag-und-haken', $text->fresh()->data['symbol']);
+        $migration->up();
+        $this->assertArrayNotHasKey('symbol', $text->fresh()->data);
+        $this->assertTrue($liste->fresh()->data['neben_text']);
+
+        // Ein anderes Symbol, im Panel gewählt, bleibt.
+        $text->update(['data' => $text->fresh()->data + ['symbol' => 'circle-help']]);
+        $migration->up();
+        $this->assertSame('circle-help', $text->fresh()->data['symbol']);
     }
 
     /** KEV-298: Die Dokumentenliste steht rechts neben dem Text, auch per Migration. */
