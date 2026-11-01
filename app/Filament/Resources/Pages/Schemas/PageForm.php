@@ -506,6 +506,29 @@ class PageForm
                                 ->helperText('Bild und Text der Karte sind Titelbild und Unterzeile der jeweiligen '
                                     .'Seite. Es erscheinen nur Seiten, die im Menü stehen.'),
 
+                            // KEV-293: eigener Text unter dem Bild statt der
+                            // Unterzeile der Seite, etwa auf der Vereinsseite.
+                            Repeater::make('data.unterzeilen')
+                                ->label('Eigener Text unter dem Bild (optional)')
+                                ->addActionLabel('Text hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'seitenkarten'
+                                    && ($get('data.darstellung') ?? 'karten') === 'karten')
+                                ->schema([
+                                    Select::make('slug')
+                                        ->label('Für die Seite')
+                                        ->options(fn () => Page::query()
+                                            ->where('locale', Language::standardCode())
+                                            ->where('fassung', Page::FASSUNG_STANDARD)
+                                            ->orderBy('titel')
+                                            ->pluck('titel', 'slug'))
+                                        ->searchable()
+                                        ->required(),
+                                    TextInput::make('text')->label('Text')->required(),
+                                ])
+                                ->columns(2)
+                                ->defaultItems(0)
+                                ->helperText('Ohne Eintrag steht unter dem Bild die Unterzeile der Seite.'),
+
                             // KEV-242: als schlichte Knöpfe, wie rechts auf /wissen
                             Select::make('data.darstellung')
                                 ->label('Darstellung')

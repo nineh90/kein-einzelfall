@@ -8,10 +8,18 @@
     // karten | knoepfe. Knöpfe nur mit dem Namen, wie „Mehr zu …“ am
     // Seitenende (KEV-242, rechts neben dem Text auf /wissen).
     'darstellung' => 'karten',
+    // KEV-293: eigener Text unter dem Bild statt der Unterzeile der Seite,
+    // [['slug' => …, 'text' => …], …]
+    'unterzeilen' => [],
 ])
 
 @php
     $kacheln = \App\Support\Unterseiten::seiten(array_values(array_filter((array) $seiten)));
+
+    $eigene = collect((array) $unterzeilen)
+        ->filter(fn ($z) => is_array($z) && filled($z['slug'] ?? null) && filled($z['text'] ?? null))
+        ->pluck('text', 'slug');
+    $kacheln = array_map(fn ($k) => isset($eigene[$k['slug']]) ? ['text' => $eigene[$k['slug']]] + $k : $k, $kacheln);
 
     // Kacheln stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
     // mit dem Hintergrund.
@@ -66,7 +74,10 @@
             ])>
                 @foreach ($kacheln as $kachel)
                     <li class="flex min-w-0">
-                        <x-ui.seitenkachel :kachel="$kachel" :innen="$innen" :format="$rahmen ? 'aspect-[3/2]' : 'aspect-[2/1]'" />
+                        {{-- Neben dem Text steht der Name im hellen rechten
+                             Teil des Bildes (KEV-293, Taddi). --}}
+                        <x-ui.seitenkachel :kachel="$kachel" :innen="$innen" :format="$rahmen ? 'aspect-[3/2]' : 'aspect-[2/1]'"
+                            :titel-im-bild="! $rahmen" />
                     </li>
                 @endforeach
             </ul>

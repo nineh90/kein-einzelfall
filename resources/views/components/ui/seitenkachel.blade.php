@@ -5,6 +5,9 @@
     // Bildausschnitt. Neben einem Text (KEV-174) flacher, sonst stehen zwei
     // Kacheln untereinander höher als der Text daneben.
     'format' => 'aspect-[3/2]',
+    // KEV-293: Name im Bild statt darunter. Taddis Bilder laufen rechts
+    // hell aus, dort steht er. Nur mit Bild.
+    'titelImBild' => false,
 ])
 
 {{-- Eine Seite als Kachel mit Titelbild, Name und Unterzeile. Für die
@@ -17,6 +20,7 @@
     $bild = $kachel['bild'];
     $klein = $bild ? preg_replace('/\.webp$/', '-1000.webp', $bild) : null;
     $klein = $klein && $klein !== $bild && \App\Support\Medien::vorhanden($klein) ? $klein : $bild;
+    $imBild = $titelImBild && $bild;
 @endphp
 
 {{-- Die ganze Kachel ist der Link: ein Tab-Stopp, große
@@ -25,25 +29,37 @@
    class="group flex min-w-0 flex-1 flex-col overflow-hidden rounded-card border border-line {{ $innen }}
           hyphens-auto break-words [hyphenate-limit-chars:14_6_6] no-underline hover:border-green">
     @if ($bild)
-        {{-- Schmuck: Der Name der Seite steht darunter.
+        {{-- Schmuck: Der Name der Seite steht darunter (mit $titelImBild im Bild).
              Links ausgerichtet, denn Taddis Bilder sind
              rechts um Wand verlängert und tragen ihr Motiv
              links; die Höhe wie im Seitenkopf. --}}
-        <span class="block {{ $format }} overflow-hidden border-b border-line">
+        <span class="relative block {{ $format }} overflow-hidden border-b border-line">
             <img src="{{ bildadresse($klein) }}" alt="" loading="lazy" decoding="async"
                  width="1000" height="388"
                  class="h-full w-full object-cover"
                  style="object-position: {{ Titelbilder::fokus($bild) }}">
+            @if ($imBild)
+                <span class="absolute inset-y-0 right-0 flex w-1/2 items-center justify-end p-4 text-right lg:p-5">
+                    <span class="font-display text-xl font-semibold leading-tight text-ink group-hover:underline sm:text-2xl">
+                        {{ $kachel['label'] }}
+                    </span>
+                </span>
+            @endif
         </span>
     @endif
 
     <span class="flex flex-1 flex-col p-4 lg:p-5">
-        <span class="font-display text-lg font-semibold text-ink group-hover:underline">
-            {{ $kachel['label'] }}
-        </span>
+        @unless ($imBild)
+            <span class="font-display text-lg font-semibold text-ink group-hover:underline">
+                {{ $kachel['label'] }}
+            </span>
+        @endunless
 
         @if (filled($kachel['text']))
-            <span class="mt-1 text-[0.875rem] leading-relaxed text-ink-soft">
+            <span @class([
+                'text-[0.875rem] leading-relaxed text-ink-soft',
+                'mt-1' => ! $imBild,
+            ])>
                 {{ $kachel['text'] }}
             </span>
         @endif

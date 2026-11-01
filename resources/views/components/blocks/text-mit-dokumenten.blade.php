@@ -43,7 +43,8 @@
             {{-- KEV-174: Selbsthilfe- und Arbeitsgruppen neben dem Vereinstext. --}}
             {{-- KEV-242: auf /wissen Taddis Kategorien als Knöpfe. --}}
             <x-blocks.seitenkarten :rahmen="false" :auf="$auf" :titel="$dok['titel'] ?? null"
-                :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'" />
+                :seiten="$dok['seiten'] ?? []" :darstellung="$dok['darstellung'] ?? 'karten'"
+                :unterzeilen="$dok['unterzeilen'] ?? []" />
         @else
             {{-- Neben langem Text in der Mitte der Höhe statt oben, sonst
                  bleibt darunter viel Leere (KEV-226, Nils' Review). --}}

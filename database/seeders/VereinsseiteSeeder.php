@@ -79,9 +79,20 @@ class VereinsseiteSeeder extends Seeder
     public const HAND_EINZEILIG = 'Für Sichtbarkeit. Für eine Stimme. Für Unterstützung. Gemeinsam KE!N EINZELFALL.';
 
     /** KEV-174: rechts neben dem Text, mit Bild und Unterzeile der Seiten. */
-    public const KARTEN = [
+    public const KARTEN_BIS_KEV_293 = [
         'seiten' => ['selbsthilfegruppen', 'arbeitsgruppen'],
         'neben_text' => true,
+    ];
+
+    /**
+     * KEV-293: Der Name steht jetzt im Bild, darunter Taddis eigener Text
+     * statt der Unterzeile der Seiten (die bleibt im Kopf der Seiten).
+     */
+    public const KARTEN = self::KARTEN_BIS_KEV_293 + [
+        'unterzeilen' => [
+            ['slug' => 'selbsthilfegruppen', 'text' => 'Raum für dich, ohne Druck oder Bewertung'],
+            ['slug' => 'arbeitsgruppen', 'text' => 'Du möchtest etwas mitgestalten?'],
+        ],
     ];
 
     public function run(): void
@@ -144,6 +155,19 @@ class VereinsseiteSeeder extends Seeder
         $seite?->blocks()->where('typ', 'text')->get()
             ->filter(fn ($b) => ($b->data['hand'] ?? null) === self::HAND_EINZEILIG)
             ->each(fn ($b) => $b->update(['data' => array_replace($b->data, ['hand' => self::HAND])]));
+    }
+
+    /**
+     * KEV-293: Taddis Texte unter die Karten, nur wo der Baustein noch so
+     * dasteht wie seit KEV-174.
+     */
+    public static function kartenMitEigenemText(): void
+    {
+        $seite = self::seite();
+
+        $seite?->blocks()->where('typ', 'seitenkarten')->get()
+            ->filter(fn ($b) => $b->data == self::KARTEN_BIS_KEV_293)
+            ->each(fn ($b) => $b->update(['data' => self::KARTEN]));
     }
 
     /**

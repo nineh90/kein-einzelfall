@@ -2890,3 +2890,24 @@ leerer Monat da. Gepflegt wird nichts zusätzlich: Die Treffen rechnen sich
 aus dem Rhythmus der Gruppe, Veranstaltungen kommen aus dem Panel.
 
 Tests: KalenderTest.
+
+## 51. Vereinsseite: Name im Bild der Karten (KEV-293, 01.11.2026)
+
+Taddi: Die Bilder der Karten Selbsthilfe- und Arbeitsgruppen neben dem
+Vereinstext laufen rechts hell aus, dort soll der Name stehen, darunter ein
+eigener Text.
+
+- `x-ui.seitenkachel` hat `titelImBild`: Der Name steht rechts im Bild
+  (rechte Hälfte, rechtsbündig, Schrift `ink`), unter dem Bild nur noch der
+  Text. `x-blocks.seitenkarten` schaltet das ein, wenn die Karten neben
+  einem Text stehen (`rahmen = false`). Ohne Bild bleibt der Name darunter.
+- Baustein `seitenkarten` hat `unterzeilen` (`[['slug', 'text'], …]`, im
+  Panel „Eigener Text unter dem Bild“). Ohne Eintrag bleibt es die
+  Unterzeile der Seite. Absichtlich nicht die Unterzeile der Seite
+  geändert: Die steht auch im Kopf von /selbsthilfegruppen.
+- `Unterseiten::seiten()` liefert dafür je Karte den deutschen `slug` mit.
+- Daten in `VereinsseiteSeeder::KARTEN`, Migration
+  `2026_11_01_110000_verein_karten_mit_eigenem_text` (nur wo der Baustein
+  noch wie seit KEV-174 aussieht). Englisch über das Feld `text`.
+
+Tests: VereinsseiteTest.

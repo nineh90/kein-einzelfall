@@ -93,6 +93,9 @@ class Unterseiten
                 $fassung = $deutsch ? ($fassungen[$deutsch->uebersetzungs_gruppe] ?? $deutsch) : null;
 
                 return [
+                    // Der deutsche Slug, über den ein Baustein die Karte
+                    // ansprechen kann (KEV-293: eigene Unterzeile).
+                    'slug' => $slugs[$kind['schluessel']] ?? null,
                     'label' => $kind['label'],
                     'url' => $kind['url'],
                     'bild' => $fassung?->titelbild,

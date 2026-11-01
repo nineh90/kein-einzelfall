@@ -141,6 +141,47 @@ class VereinsseiteTest extends TestCase
         $this->assertMatchesRegularExpression('#<a href="/arbeitsgruppen"[^>]*>.*?arbeitsgruppen[^"]*\.webp.*?Arbeitsgruppen#s', $abschnitt);
     }
 
+    /** KEV-293: Name im Bild, darunter Taddis Text statt der Unterzeile der Seiten, auch per Migration. */
+    public function test_karten_mit_namen_im_bild_und_eigenem_text(): void
+    {
+        foreach (['selbsthilfegruppen', 'arbeitsgruppen'] as $slug) {
+            Page::where('slug', $slug)->update(['titelbild' => Titelbilder::datei($slug), 'published_at' => now()]);
+        }
+        $seite = Page::where('slug', 'verein')->where('locale', 'de')->first();
+        $karten = $seite->blocks()->where('typ', 'seitenkarten')->first();
+        $this->assertSame(VereinsseiteSeeder::KARTEN, $karten->data);
+
+        $html = $this->get('/verein')->assertOk()->getContent();
+        $abschnitt = substr($html, strpos($html, 'wurde 2024 aus persönlicher Betroffenheit'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+
+        // Der Name steht im Bild (über dem Rand unter dem Bild), der Text darunter.
+        $this->assertMatchesRegularExpression(
+            '#href="/selbsthilfegruppen".*?<img[^>]*selbsthilfegruppen.*?absolute[^"]*right-0.*?Selbsthilfegruppen\s*</span>\s*</span>\s*</span>.*?Raum für dich, ohne Druck oder Bewertung#s', $abschnitt);
+        $this->assertStringContainsString('Du möchtest etwas mitgestalten?', $abschnitt);
+        $this->assertStringNotContainsString('Raum für deine Geschichte', $abschnitt);
+
+        // Der Kopf von /selbsthilfegruppen behält seine Unterzeile.
+        $this->assertSame('Raum für deine Geschichte – ohne Druck oder Bewertung',
+            Page::where('slug', 'selbsthilfegruppen')->where('locale', 'de')->value('untertitel'));
+
+        // Bestehende Seiten bekommen es per Migration, Englisch mit.
+        $karten->update(['data' => VereinsseiteSeeder::KARTEN_BIS_KEV_293]);
+        $migration = require database_path('migrations/2026_11_01_110000_verein_karten_mit_eigenem_text.php');
+        $migration->up();
+        $this->assertSame(VereinsseiteSeeder::KARTEN, $karten->fresh()->data);
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        foreach (VereinsseiteSeeder::KARTEN['unterzeilen'] as $zeile) {
+            $this->assertArrayHasKey($zeile['text'], $woerterbuch);
+        }
+
+        // Im Panel geänderte Karten bleiben.
+        $karten->update(['data' => ['seiten' => ['arbeitsgruppen'], 'neben_text' => true]]);
+        $migration->up();
+        $this->assertSame(['seiten' => ['arbeitsgruppen'], 'neben_text' => true], $karten->fresh()->data);
+    }
+
     /** KEV-174: Die Migration hängt die Karten genau einmal hinter den Text. */
     public function test_migration_haengt_die_karten_einmal_an(): void
     {
