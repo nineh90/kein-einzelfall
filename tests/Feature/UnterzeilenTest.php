@@ -51,4 +51,10 @@ class UnterzeilenTest extends TestCase
     {
         $this->pruefen('istanbul-konvention', 'Schutz vor Gewalt ist kein Privileg', 'Protection from violence is not a privilege', '2026_11_01_180000_istanbul_konvention_unterzeile');
     }
+
+    /** KEV-303 */
+    public function test_gruppen_und_veranstaltungen(): void
+    {
+        $this->pruefen('gruppen-und-veranstaltungen', 'Austausch verbindet. Wissen stärkt.', 'Connection through exchange. Strength through knowledge.', '2026_11_01_190000_gruppen_und_veranstaltungen_unterzeile');
+    }
 }

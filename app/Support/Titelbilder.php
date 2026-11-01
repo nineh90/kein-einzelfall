@@ -84,8 +84,8 @@ class Titelbilder
         // Verein hat keine geschickt.
         'satzung' => null,
         // KEV-127: Bild von Taddi statt Platzhalter, Laptop mit Videotreffen.
-        // Ohne Unterzeile, der Verein hat keine geschickt.
-        'gruppen-und-veranstaltungen' => null,
+        // KEV-303: Taddis Unterzeile.
+        'gruppen-und-veranstaltungen' => 'Austausch verbindet. Wissen stärkt.',
         // KEV-149: Bild von Taddi statt Platzhalter, Megafon auf Holztisch.
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'oeffentlichkeitsarbeit' => null,
