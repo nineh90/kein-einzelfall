@@ -78,4 +78,10 @@ class UnterzeilenTest extends TestCase
     {
         $this->pruefen('ehrenamtsmessen', 'Engagement zeigen. Mitstreiter gewinnen.', 'Showing commitment. Winning people over.', '2026_11_02_140000_ehrenamtsmessen_unterzeile');
     }
+
+    /** KEV-319 */
+    public function test_petitionen(): void
+    {
+        $this->pruefen('petitionen', 'Gemeinsam Forderungen Gehör verschaffen.', 'Making demands heard, together.', '2026_11_02_150000_petitionen_unterzeile');
+    }
 }
