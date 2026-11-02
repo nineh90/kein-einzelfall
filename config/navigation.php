@@ -117,10 +117,12 @@ return [
             'gruppen' => [
                 ['titel' => 'Anträge & Nachweise', 'eintraege' => ['atteste', 'formulare', 'fristen']],
                 ['titel' => 'Fachsprache verstehen', 'eintraege' => ['klartext_statt_fachsprache']],
+                // KEV-323: Taddis dritte Spalte, Name der Gruppe von uns
+                ['titel' => 'Selbst aktiv werden', 'eintraege' => ['vorlagen_und_schreiben']],
             ],
             // KEV-239: nur noch Taddis Kategorien, in der Reihenfolge ihres
-            // Drive-Ordners „3. Wissen“ (1. Atteste bis 4. Klartext; 5.
-            // Vorlagen/Schreiben folgt, sobald es die Seite gibt). Die Seiten
+            // Drive-Ordners „3. Wissen“ (1. Atteste bis 4. Klartext, seit
+            // KEV-323 auch 5. Vorlagen/Schreiben). Die Seiten
             // der alten Website stehen nicht mehr im Menü, sind aber weiter
             // veröffentlicht: Vier davon sind die Abende von „KE!N EINZELFALL
             // im Dialog“ und dort verlinkt, auf FSM verweist der Rückblick.
@@ -148,6 +150,23 @@ return [
                     ['schluessel' => 'medizinische_berichte_und_gutachten', 'label' => 'Medizinische Berichte & Gutachten', 'url' => '/medizinische-berichte-und-gutachten'],
                     // KEV-261
                     ['schluessel' => 'sozialrecht_und_hilfesystem', 'label' => 'Sozialrecht & Hilfesystem', 'url' => '/sozialrecht-und-hilfesystem'],
+                ]],
+                // KEV-323/324: Taddis „5. Vorlagen/Schreiben“ mit ihren zwölf
+                // Kategorien, Reihenfolge wie ihre Ordner. Jede Kategorie ist
+                // eine Seite mit den Musterschreiben als Word-Dateien.
+                ['schluessel' => 'vorlagen_und_schreiben', 'label' => 'Vorlagen & Schreiben', 'url' => '/vorlagen-und-schreiben', 'children' => [
+                    ['schluessel' => 'vorlagen_behoerdenschreiben', 'label' => 'Allgemeine Behörden-Schreiben', 'url' => '/vorlagen-behoerdenschreiben'],
+                    ['schluessel' => 'vorlagen_kommunikation_und_schutz', 'label' => 'Kommunikation & Schutz', 'url' => '/vorlagen-kommunikation-und-schutz'],
+                    ['schluessel' => 'vorlagen_medizin_und_behandlung', 'label' => 'Medizin & Behandlung', 'url' => '/vorlagen-medizin-und-behandlung'],
+                    ['schluessel' => 'vorlagen_schwerbehinderung_und_gdb', 'label' => 'Schwerbehinderung / GdB', 'url' => '/vorlagen-schwerbehinderung-und-gdb'],
+                    ['schluessel' => 'vorlagen_pflegegrad_und_pflegeversicherung', 'label' => 'Pflegegrad & Pflegeversicherung', 'url' => '/vorlagen-pflegegrad-und-pflegeversicherung'],
+                    ['schluessel' => 'vorlagen_eingliederungshilfe_und_teilhabe', 'label' => 'Eingliederungshilfe & Teilhabe', 'url' => '/vorlagen-eingliederungshilfe-und-teilhabe'],
+                    ['schluessel' => 'vorlagen_persoenliches_budget', 'label' => 'Persönliches Budget', 'url' => '/vorlagen-persoenliches-budget'],
+                    ['schluessel' => 'vorlagen_reha_und_erwerbsminderung', 'label' => 'Reha & Erwerbsminderung', 'url' => '/vorlagen-reha-und-erwerbsminderung'],
+                    ['schluessel' => 'vorlagen_soziale_entschaedigung', 'label' => 'Soziale Entschädigung / SGB XIV', 'url' => '/vorlagen-soziale-entschaedigung'],
+                    ['schluessel' => 'vorlagen_widerspruch_und_bescheide', 'label' => 'Widerspruch & Bescheide', 'url' => '/vorlagen-widerspruch-und-bescheide'],
+                    ['schluessel' => 'vorlagen_gericht_und_verfahren', 'label' => 'Gericht & Verfahren', 'url' => '/vorlagen-gericht-und-verfahren'],
+                    ['schluessel' => 'vorlagen_datenschutz_und_akten', 'label' => 'Datenschutz & Akten', 'url' => '/vorlagen-datenschutz-und-akten'],
                 ]],
             ],
         ],

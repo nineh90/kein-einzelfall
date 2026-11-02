@@ -113,8 +113,13 @@
     // KEV-295: Wer im Team-Raster angehängt ist (Herr und Frau Unbekannt),
     // hat keine eigene Überschrift mehr, bleibt aber im Verzeichnis, mit
     // seiner Karte als Ziel.
+    // KEV-323: Gruppen einer Dokumentenliste (Vorlagen & Schreiben) je ein Ziel.
     $punkteVon = fn ($b) => array_values(array_filter([
         $sprungpunkt($b),
+        ...($b->typ === 'download_list' && filled($b->data['gruppen'] ?? null)
+            ? collect($b->data['gruppen'])->filter(fn ($g) => filled($g['anker'] ?? null) && filled($g['titel'] ?? null))
+                ->map(fn ($g) => ['anker' => $g['anker'], 'titel' => $g['titel']])->values()->all()
+            : []),
         ...($b->typ === 'team_grid' && filled($b->data['anhaengen'] ?? null)
             ? \App\Models\TeamMember::veroeffentlicht()->where('bereich', $b->data['anhaengen'])
                 ->orderBy('position')->orderBy('name')->get()

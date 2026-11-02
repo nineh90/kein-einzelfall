@@ -11,7 +11,30 @@
     // dir vor deiner ersten Teilnahme durch …“ auf /selbsthilfegruppen.
     'einleitung' => null,
     'nachsatz' => null,
+    // KEV-323: mehrere Listen mit eigener Überschrift in einem Abschnitt,
+    // zwei Spalten ab lg: [['titel' =>, 'anker' =>, 'dokumente' => [...]], ...]
+    // (Vorlagen & Schreiben). Dann gelten `titel` und `dokumente` nicht.
+    'gruppen' => [],
 ])
+
+@if (filled($gruppen))
+    {{-- Je Gruppe eine eigene Liste, ohne Band, nebeneinander. Die Spalten
+         laufen getrennt (columns), damit eine kurze Gruppe keine Lücke neben
+         einer langen lässt. --}}
+    <section @class([
+        'px-4 md:px-8 py-8 lg:px-10 lg:py-12',
+        'bg-card border-y border-line' => $auf === 'card',
+    ]) aria-label="{{ __('rahmen.dokumente.bereich') }}">
+        <div class="mx-auto max-w-6xl gap-x-10 lg:columns-2">
+            @foreach ($gruppen as $gruppe)
+                <div class="mb-10 break-inside-avoid scroll-mt-32" @if (filled($gruppe['anker'] ?? null)) id="{{ $gruppe['anker'] }}" @endif>
+                    <x-blocks.download-list :rahmen="false" :auf="$auf"
+                        :titel="$gruppe['titel'] ?? null" :dokumente="$gruppe['dokumente'] ?? []" />
+                </div>
+            @endforeach
+        </div>
+    </section>
+@else
 
 @php
     // Kästen stehen auf der jeweils anderen Fläche, sonst verschwämmen sie
@@ -231,3 +254,4 @@
         @endif
     </div>
 </section>
+@endif

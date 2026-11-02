@@ -5431,5 +5431,275 @@
   },
   "Präsentationen vom Fachtag von aus-unserer-sicht e.V. am 30.11.2024": {
     "en": "Presentations from the aus-unserer-sicht e.V. conference day on 30 November 2024"
+  },
+  "Vorlagen & Schreiben": {
+    "en": "Templates & letters"
+  },
+  "Vorlagen & Schreiben - Kein Einzelfall e.V.": {
+    "en": "Templates & letters - Kein Einzelfall e.V."
+  },
+  "Orientierung für Deine nächsten Schritte.": {
+    "en": "Guidance for your next steps."
+  },
+  "Damit aus deinem Anliegen ein klares Schreiben wird.": {
+    "en": "Turning your concern into a clear letter."
+  },
+  "Manchmal weiß man genau, was man sagen möchte – aber nicht, wie man es formulieren soll.": {
+    "en": "Sometimes you know exactly what you want to say – but not how to put it."
+  },
+  "Gerade im Kontakt mit Behörden, Versicherungen, Gerichten oder medizinischen Stellen können Schreiben schnell kompliziert wirken. Fachbegriffe, Fristen und formale Anforderungen machen es oft zusätzlich schwer.": {
+    "en": "Especially when dealing with authorities, insurers, courts or medical services, letters can quickly seem complicated. Technical terms, deadlines and formal requirements often make it even harder."
+  },
+  "Hier findest Du deshalb Vorlagen und Beispielschreiben für viele typische Situationen – von der Sachstandsanfrage über Widersprüche bis hin zu Schreiben rund um Pflege, GdB, Teilhabe, Soziale Entschädigung, Medizin und Datenschutz.": {
+    "en": "That is why you will find templates and sample letters here for many typical situations – from asking about the status of your case and objections to letters on care, degree of disability, participation, social compensation, medicine and data protection."
+  },
+  "Unsere Vorlagen sollen Dir dabei helfen, Dein Anliegen klar, verständlich und strukturiert zu formulieren. Du kannst sie an Deine persönliche Situation anpassen und als Orientierung für Dein eigenes Schreiben nutzen.": {
+    "en": "Our templates are meant to help you put your concern clearly, understandably and in a structured way. You can adapt them to your personal situation and use them as a guide for your own letter."
+  },
+  "Denn Wissen bedeutet nicht nur zu verstehen, was passiert – sondern auch zu wissen, wie Du selbst handeln kannst. Wenn Du Hilfe oder Unterstützung bei einem Schreiben brauchst, melde Dich gern bei uns unter *kontakt@kein-einzelfall.de*.": {
+    "en": "Because knowledge means not only understanding what is happening – but also knowing how you can act yourself. If you need help or support with a letter, feel free to contact us at *kontakt@kein-einzelfall.de*."
+  },
+  "Damit aus Unsicherheit ein nächster Schritt werden kann.": {
+    "en": "So that uncertainty can turn into a next step."
+  },
+  "Musterschreiben zum Anpassen": {
+    "en": "Sample letters to adapt"
+  },
+  "Jede Vorlage erklärt kurz, worum es geht und wann das Schreiben sinnvoll ist, und enthält einen Beispieltext. Lade sie als Word-Datei herunter, ersetze die Angaben in eckigen Klammern und passe den Text an Deine Situation an.": {
+    "en": "Each template briefly explains what it is about and when the letter makes sense, and contains a sample text. Download it as a Word file, replace the details in square brackets and adapt the text to your situation. The templates are in German."
+  },
+  "Unser Informationsmaterial dient ausschließlich der Aufklärung. Es ersetzt keine Rechtsberatung, keine Therapie und keine medizinische Beratung.": {
+    "en": "Our information material is for information purposes only. It is not a substitute for legal advice, therapy or medical advice."
+  },
+  "Wenn Du Hilfe bei einem Schreiben brauchst, melde Dich gern bei uns unter *kontakt@kein-einzelfall.de*.": {
+    "en": "If you need help with a letter, feel free to contact us at *kontakt@kein-einzelfall.de*."
+  },
+  "Allgemeine Behörden-Schreiben": {
+    "en": "General letters to authorities"
+  },
+  "Kommunikation & Schutz": {
+    "en": "Communication & protection"
+  },
+  "Medizin & Behandlung": {
+    "en": "Medicine & treatment"
+  },
+  "Schwerbehinderung / GdB": {
+    "en": "Severe disability / degree of disability"
+  },
+  "Pflegegrad & Pflegeversicherung": {
+    "en": "Care level & long-term care insurance"
+  },
+  "Eingliederungshilfe & Teilhabe": {
+    "en": "Integration assistance & participation"
+  },
+  "Reha & Erwerbsminderung": {
+    "en": "Rehab & reduced earning capacity"
+  },
+  "Soziale Entschädigung / SGB XIV": {
+    "en": "Social compensation / SGB XIV"
+  },
+  "Widerspruch & Bescheide": {
+    "en": "Objections & decisions"
+  },
+  "Datenschutz & Akten": {
+    "en": "Data protection & files"
+  },
+  "Antrag, Eingang & Zuständigkeit": {
+    "en": "Application, receipt & responsibility"
+  },
+  "Bearbeitungsstand & Entscheidung": {
+    "en": "Processing status & decision"
+  },
+  "Fristen & Kommunikation": {
+    "en": "Deadlines & communication"
+  },
+  "Akteneinsicht & Unterlagen": {
+    "en": "Access to files & documents"
+  },
+  "Anhörung & Korrekturen": {
+    "en": "Hearing & corrections"
+  },
+  "Datenauskunft": {
+    "en": "Information about your data"
+  },
+  "Kommunikationsform": {
+    "en": "Form of communication"
+  },
+  "Unterstützung bei Gesprächen": {
+    "en": "Support in conversations"
+  },
+  "Traumasensible Rahmenbedingungen": {
+    "en": "Trauma-sensitive conditions"
+  },
+  "Barrierearme Kommunikation": {
+    "en": "Low-barrier communication"
+  },
+  "Unterlagen anfordern": {
+    "en": "Requesting documents"
+  },
+  "Medizinische Unterstützung für Verfahren": {
+    "en": "Medical support for proceedings"
+  },
+  "Fehler korrigieren": {
+    "en": "Correcting errors"
+  },
+  "Schweigepflicht & Datenweitergabe": {
+    "en": "Confidentiality & passing on data"
+  },
+  "Antrag": {
+    "en": "Application"
+  },
+  "Akteneinsicht & Prüfung": {
+    "en": "Access to files & review"
+  },
+  "Änderung bestehender Feststellungen": {
+    "en": "Changing existing findings"
+  },
+  "Widerspruch": {
+    "en": "Objection"
+  },
+  "Arbeitsleben": {
+    "en": "Working life"
+  },
+  "Pflegegrad beantragen": {
+    "en": "Applying for a care level"
+  },
+  "Gutachten & Unterlagen": {
+    "en": "Assessments & documents"
+  },
+  "Bearbeitungsstand": {
+    "en": "Processing status"
+  },
+  "Änderungen des Pflegegrades": {
+    "en": "Changes to the care level"
+  },
+  "Weitere Pflegeleistungen": {
+    "en": "Further care benefits"
+  },
+  "Bedarf darstellen": {
+    "en": "Describing your needs"
+  },
+  "Bedarfsermittlung & Planung": {
+    "en": "Needs assessment & planning"
+  },
+  "Selbstbestimmung": {
+    "en": "Self-determination"
+  },
+  "Antrag & Bedarf": {
+    "en": "Application & needs"
+  },
+  "Budgetkonferenz": {
+    "en": "Budget conference"
+  },
+  "Budgethöhe & Änderung": {
+    "en": "Budget amount & changes"
+  },
+  "Rehabilitation": {
+    "en": "Rehabilitation"
+  },
+  "Reha-Berichte": {
+    "en": "Rehab reports"
+  },
+  "Antrag & erste Unterstützung": {
+    "en": "Application & first support"
+  },
+  "Unterlagen & Akteneinsicht": {
+    "en": "Documents & access to files"
+  },
+  "Schädigungsfolgen": {
+    "en": "Consequences of the harm"
+  },
+  "Gutachten": {
+    "en": "Assessments"
+  },
+  "GdS & Widerspruch": {
+    "en": "Degree of harm & objection"
+  },
+  "Widerspruch einlegen": {
+    "en": "Lodging an objection"
+  },
+  "Akteneinsicht": {
+    "en": "Access to files"
+  },
+  "Widerspruch begründen": {
+    "en": "Giving reasons for an objection"
+  },
+  "Prüfung & Bearbeitungsstand": {
+    "en": "Review & processing status"
+  },
+  "Abgeschlossene Bescheide": {
+    "en": "Final decisions"
+  },
+  "Klage einreichen": {
+    "en": "Filing a lawsuit"
+  },
+  "Akteneinsicht & Fristen": {
+    "en": "Access to files & deadlines"
+  },
+  "Eilverfahren": {
+    "en": "Urgent proceedings"
+  },
+  "Kosten": {
+    "en": "Costs"
+  },
+  "Beweise & Sachverständige": {
+    "en": "Evidence & experts"
+  },
+  "Stellungnahmen": {
+    "en": "Statements"
+  },
+  "Mündliche Verhandlung & Termine": {
+    "en": "Oral hearing & dates"
+  },
+  "Auskunft & Unterlagen": {
+    "en": "Information & documents"
+  },
+  "Fehlerhafte Daten": {
+    "en": "Incorrect data"
+  },
+  "Verarbeitung von Daten": {
+    "en": "Processing of data"
+  },
+  "Beschwerde": {
+    "en": "Complaint"
+  },
+  "Allgemeine Behörden-Schreiben - Kein Einzelfall e.V.": {
+    "en": "General letters to authorities - Kein Einzelfall e.V."
+  },
+  "Kommunikation & Schutz - Kein Einzelfall e.V.": {
+    "en": "Communication & protection - Kein Einzelfall e.V."
+  },
+  "Medizin & Behandlung - Kein Einzelfall e.V.": {
+    "en": "Medicine & treatment - Kein Einzelfall e.V."
+  },
+  "Schwerbehinderung / GdB - Kein Einzelfall e.V.": {
+    "en": "Severe disability / degree of disability - Kein Einzelfall e.V."
+  },
+  "Pflegegrad & Pflegeversicherung - Kein Einzelfall e.V.": {
+    "en": "Care level & long-term care insurance - Kein Einzelfall e.V."
+  },
+  "Eingliederungshilfe & Teilhabe - Kein Einzelfall e.V.": {
+    "en": "Integration assistance & participation - Kein Einzelfall e.V."
+  },
+  "Reha & Erwerbsminderung - Kein Einzelfall e.V.": {
+    "en": "Rehab & reduced earning capacity - Kein Einzelfall e.V."
+  },
+  "Soziale Entschädigung / SGB XIV - Kein Einzelfall e.V.": {
+    "en": "Social compensation / SGB XIV - Kein Einzelfall e.V."
+  },
+  "Widerspruch & Bescheide - Kein Einzelfall e.V.": {
+    "en": "Objections & decisions - Kein Einzelfall e.V."
+  },
+  "Datenschutz & Akten - Kein Einzelfall e.V.": {
+    "en": "Data protection & files - Kein Einzelfall e.V."
+  },
+  "Bereits abgeschlossene Bescheide": {
+    "en": "Decisions already final"
+  },
+  "Änderung des Pflegegrades": {
+    "en": "Changing the care level"
+  },
+  "Verarbeitung begrenzen oder beenden": {
+    "en": "Restricting or stopping processing"
   }
 }

@@ -51,7 +51,9 @@ class WissenTest extends TestCase
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
         $this->assertSame(
             [['Atteste', '/atteste'], ['Formulare und Download', '/formulare'],
-                ['Fristen in Anträgen und Verfahren', '/fristen'], ['Klartext statt Fachsprache', '/klartext-statt-fachsprache']],
+                ['Fristen in Anträgen und Verfahren', '/fristen'], ['Klartext statt Fachsprache', '/klartext-statt-fachsprache'],
+                // KEV-323
+                ['Vorlagen & Schreiben', '/vorlagen-und-schreiben']],
             array_map(fn ($k) => [$k['label'], $k['url']], $wissen['children']),
         );
 

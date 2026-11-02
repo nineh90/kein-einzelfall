@@ -3138,3 +3138,29 @@ Inhalt: `OeffentlichkeitsarbeitSeeder::PETITION_VERSORGUNG` (Text) und
 `PETITION_MATERIALIEN` (Bild, drei PDFs unter /dokumente/2026/11/,
 Schluss), `petitionErgaenzen()` per Migration `2026_11_02_200000_…`, nur
 was leer ist oder noch wie bis KEV-320 dasteht.
+
+## 65. Vorlagen & Schreiben (KEV-323/324, 02.11.2026)
+
+Taddis Drive „3. Wissen › 5. Vorlagen/Schreiben“: zwölf Kategorien mit
+Unterordnern und 145 Musterschreiben (Google-Docs), dazu ein Bild je
+Kategorie und ein Übersichtsbild.
+
+- Menü Wissen: dritte Spalte „Selbst aktiv werden“ (Name von uns, wie
+  „Anträge & Nachweise“ und „Fachsprache verstehen“) mit „Vorlagen &
+  Schreiben“ und den zwölf Kategorien. Auf /wissen der fünfte Knopf
+  (KEV-324, `AltseiteSeeder::WISSEN_KNOEPFE`).
+- /vorlagen-und-schreiben: Taddis Text (Doc „0. Vorlagen u. Schreiben“),
+  Unterzeile, darunter die Kategorien als Kacheln. /vorlagen-<kategorie>:
+  Einleitung (von uns) mit „Auf dieser Seite“ daneben, darunter alle
+  Gruppen in einem Abschnitt, zwei Spalten (`download_list` mit `gruppen`,
+  je Gruppe `titel`, `anker`, `dokumente`; Sprungziele im Verzeichnis).
+- Dateien: die Docs als Word (`public/dokumente/vorlagen/<kategorie>/…docx`),
+  weil man die Angaben in eckigen Klammern selbst ersetzt. Titel aus der
+  Zeile „Thema:“ jeder Vorlage, Reihenfolge nach den Nummern im Drive,
+  Gruppen nach Taddis Doc „Alle Kategorien“. Daten in
+  `database/seeders/data/vorlagen.json` (`VorlagenSeeder`).
+- Die Suche gibt den Kategorieseiten halbe Punkte, sonst stünde
+  „Persönliches Budget“ (Vorlagen) vor der Infoseite.
+- Offen (Checkliste A16): „Antrag auf Teilnahme per Video“ fehlt, die
+  Datei im Drive ist ein Video ohne Inhalt; Einleitung der Kategorien von
+  uns; die Vorlagen selbst sind deutsch.

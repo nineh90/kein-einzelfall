@@ -276,10 +276,14 @@ class AltseiteSeeder extends Seeder
     /** Den Schalter „neben_text“ auf den Seiten in DOKUMENTE_NEBEN_TEXT setzen, wo er noch fehlt. */
     /** KEV-242: Taddis Kategorien als Knöpfe rechts neben dem Text auf /wissen. */
     public const WISSEN_KNOEPFE = [
-        'seiten' => ['atteste', 'formulare', 'fristen', 'klartext-statt-fachsprache'],
+        // KEV-324: Taddis fehlende Kategorie „Vorlagen & Schreiben“
+        'seiten' => ['atteste', 'formulare', 'fristen', 'klartext-statt-fachsprache', 'vorlagen-und-schreiben'],
         'neben_text' => true,
         'darstellung' => 'knoepfe',
     ];
+
+    /** Die Knöpfe auf /wissen bis KEV-324. */
+    public const WISSEN_KNOEPFE_BIS_KEV_324 = ['atteste', 'formulare', 'fristen', 'klartext-statt-fachsprache'];
 
     /** Direkt hinter den ersten Textbaustein von /wissen, nur einmal. */
     public static function wissenKnoepfeDaneben(): void
@@ -668,6 +672,9 @@ class AltseiteSeeder extends Seeder
 
         // /veranstaltungen nach Taddis neuem Doc (KEV-317), mit den Terminen.
         $this->call(VeranstaltungenSeeder::class);
+
+        // Vorlagen & Schreiben unter Wissen (KEV-323/324).
+        $this->call(VorlagenSeeder::class);
 
         // Die Satzung nach Taddis Tickets (KEV-194 ff.).
         $this->call(SatzungsseiteSeeder::class);

@@ -379,6 +379,14 @@ class Suche
                 }
             }
 
+            // KEV-323: Die Kategorien von „Vorlagen & Schreiben“ heißen wie die
+            // Infoseiten („Persönliches Budget“) und nennen das Wort in jeder
+            // Vorlage. Wer danach sucht, will zuerst die Erklärung, dann das
+            // Musterschreiben: halbe Punkte.
+            if (str_starts_with($seite->slug, 'vorlagen-') && $seite->slug !== 'vorlagen-und-schreiben') {
+                $punkte = intdiv($punkte, 2);
+            }
+
             if ($punkte > 0) {
                 $treffer[] = [
                     'art' => 'seite',

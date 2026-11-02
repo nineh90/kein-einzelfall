@@ -138,6 +138,21 @@ class Titelbilder
         // KEV-278: Bild von Taddi für die Übersicht der Glossare, statt
         // Platzhalter. Unterzeile aus dem Ticket.
         'klartext-statt-fachsprache' => 'Verstehen statt verzweifeln',
+        // KEV-323: Taddis Bilder aus „5. Vorlagen/Schreiben“, Unterzeile nur
+        // auf der Übersicht (ihr Doc „0. Vorlagen u. Schreiben“).
+        'vorlagen-und-schreiben' => 'Orientierung für Deine nächsten Schritte.',
+        'vorlagen-behoerdenschreiben' => null,
+        'vorlagen-kommunikation-und-schutz' => null,
+        'vorlagen-medizin-und-behandlung' => null,
+        'vorlagen-schwerbehinderung-und-gdb' => null,
+        'vorlagen-pflegegrad-und-pflegeversicherung' => null,
+        'vorlagen-eingliederungshilfe-und-teilhabe' => null,
+        'vorlagen-persoenliches-budget' => null,
+        'vorlagen-reha-und-erwerbsminderung' => null,
+        'vorlagen-soziale-entschaedigung' => null,
+        'vorlagen-widerspruch-und-bescheide' => null,
+        'vorlagen-gericht-und-verfahren' => null,
+        'vorlagen-datenschutz-und-akten' => null,
         // KEV-159: Bilder von Taddi (Drive-Ordner „4. Raum für Ungesagtes“).
         // Offene Tür für den Bereich, Tonbandgerät für Unüberhörbar.
         //

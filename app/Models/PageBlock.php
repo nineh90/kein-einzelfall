@@ -322,7 +322,9 @@ class PageBlock extends Model
         // KEV-150: eine Dokumentenliste, in der noch nichts steht (die
         // Formulare kommen später). Sonst stünde ihre Überschrift über nichts.
         if ($this->typ === 'download_list') {
+            // KEV-323: mit Gruppen zählen deren Dokumente.
             return collect($this->data['dokumente'] ?? [])
+                ->concat(collect($this->data['gruppen'] ?? [])->pluck('dokumente')->flatten(1))
                 ->filter(fn ($d) => filled($d['datei'] ?? null) || filled($d['url'] ?? null))
                 ->isEmpty();
         }

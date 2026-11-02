@@ -1166,6 +1166,22 @@ die Termine mit Datum sind als Veranstaltungen angelegt. Offen:
   (nicht im Menü), mit Links auf die Seiten der Altseite. Löschen oder auf
   /veranstaltungen#reihe-dialog-wissen weiterleiten?
 
+### A16 · Vorlagen & Schreiben (KEV-323/324, 02.11.2026)
+
+Taddis 145 Musterschreiben stehen unter Wissen › Vorlagen & Schreiben, als
+Word-Dateien zum Anpassen. Offen:
+
+- **„Antrag auf Teilnahme per Video“** (Gericht & Verfahren › Mündliche
+  Verhandlung & Termine) steht in „Alle Kategorien“, im Drive liegt dafür
+  aber ein Video ohne Inhalt statt eines Docs. Bitte das Doc nachreichen.
+- **Einleitung jeder Kategorie** („Musterschreiben zum Anpassen“: Aufbau
+  der Vorlagen, Hinweis „ersetzt keine Rechtsberatung“, Kontakt) ist von
+  uns. Bitte gegenlesen.
+- **Name der Menüspalte** „Selbst aktiv werden“ ist von uns, wie die
+  beiden anderen Spalten.
+- **Englisch:** Seiten und Gruppen sind übersetzt, die Vorlagen selbst
+  bleiben deutsch (für deutsche Behörden).
+
 ## B. Technisch vor dem Go-Live (Kevin)
 
 ### B0 · Stand der Prüfung vom 29.10.2026
