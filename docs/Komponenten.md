@@ -3066,3 +3066,14 @@ Zeilen (Bild, Kopf, Termin oder Stand, Knöpfe) als Subgrid der Liste
 (`group-list`: `li` und `article` mit `row-span-4 grid-rows-subgrid`).
 Jede Zeile ist über die ganze Reihe so hoch wie die höchste, Striche und
 Knöpfe stehen auf einer Linie. Ohne Bild bleibt die erste Zeile leer.
+
+## 61. Leitsatz unter beiden Spalten (KEV-313, 02.11.2026)
+
+Taddi auf /arbeitsgruppen: Der handschriftliche Satz unter dem Text soll
+etwas größer sein und unter beiden Seiten stehen. In `text-mit-dokumenten`
+(Text links, Dokumente, Kalender oder Karten rechts) steht `hand` jetzt
+unter beiden Spalten über die ganze Breite, `text-[1.75rem]`, ab `lg`
+`text-4xl`. Gilt auf allen Seiten mit etwas neben dem Text: /verein,
+/arbeitsgruppen, /selbsthilfegruppen, /gruppen-und-veranstaltungen (dort
+unter dem Ideen-Kasten). Einzelne Textbausteine ohne Spalte daneben
+behalten ihren Leitsatz im Text.

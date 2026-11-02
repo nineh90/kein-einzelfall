@@ -32,7 +32,7 @@
             :cta="knoepfe([$d['cta'] ?? null])[0] ?? null"
             :anker="$text->anker()"
             :absaetze="$d['absaetze'] ?? []"
-            :hand="$d['hand'] ?? null"
+            :hand="null"
             :kasten="$d['kasten'] ?? null"
             :ab_absatz="$text->textAngaben()['ab_absatz']"
             :mittig="(bool) ($d['mittig'] ?? false)" />
@@ -62,4 +62,14 @@
             @endif
         </div>
     </div>
+
+    {{-- KEV-313 (Taddi auf /arbeitsgruppen): Der handschriftliche Satz
+         steht unter beiden Spalten und etwas größer. Neben einer Spalte
+         rechts wirkte er sonst wie eine Fußnote des Textes. Gleich auf
+         allen Seiten mit etwas neben dem Text (Verein, Gruppen, …). --}}
+    @if (filled($d['hand'] ?? null))
+        <div class="mx-auto mt-8 max-w-6xl lg:mt-10">
+            <p class="whitespace-pre-line font-hand text-[1.75rem] leading-snug text-green lg:text-4xl">{{ $d['hand'] }}</p>
+        </div>
+    @endif
 </section>

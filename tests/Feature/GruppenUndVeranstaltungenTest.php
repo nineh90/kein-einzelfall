@@ -26,11 +26,12 @@ class GruppenUndVeranstaltungenTest extends TestCase
     {
         $html = $this->get('/gruppen-und-veranstaltungen')->assertOk()->getContent();
         $abschnitt = substr($html, strrpos(substr($html, 0, strpos($html, 'Wo Menschen zusammenkommen')), '<section'));
-        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, '</section>'));
+        $abschnitt = substr($abschnitt, 0, strpos($abschnitt, 'Das Team von KE!N EINZELFALL e.V.') + 40);
 
-        // Nach dem Gruß, vor der rechten Spalte mit dem Kalender.
+        // Unter dem Text, vor der rechten Spalte mit dem Kalender. Der Gruß
+        // steht seit KEV-313 unter beiden Spalten.
         $this->assertMatchesRegularExpression(
-            '#Das Team von KE!N EINZELFALL e\.V\..*?<h3[^>]*>\s*Deine Ideen sind gefragt!\s*</h3>.*?href="mailto:kontakt@kein-einzelfall\.de".*?Eine Idee genügt.*?data-mitlaufen#s', $abschnitt);
+            '#Entdecke unsere Gruppen.*?<h3[^>]*>\s*Deine Ideen sind gefragt!\s*</h3>.*?href="mailto:kontakt@kein-einzelfall\.de".*?Eine Idee genügt.*?data-mitlaufen.*?font-hand[^>]*>Das Team von KE!N EINZELFALL e\.V\.#s', $abschnitt);
 
         $einleitung = Page::where('slug', 'gruppen-und-veranstaltungen')->where('locale', 'de')->first()
             ->blocks()->where('typ', 'text')->orderBy('position')->first();
