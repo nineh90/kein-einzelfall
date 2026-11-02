@@ -3077,3 +3077,20 @@ unter beiden Spalten über die ganze Breite, `text-[1.75rem]`, ab `lg`
 /arbeitsgruppen, /selbsthilfegruppen, /gruppen-und-veranstaltungen (dort
 unter dem Ideen-Kasten). Einzelne Textbausteine ohne Spalte daneben
 behalten ihren Leitsatz im Text.
+
+## 62. Arbeitsgruppen mit Bildern (KEV-314, 02.11.2026)
+
+Taddi: Die Arbeitsgruppen bitte so schön mit Bildern wie die
+Selbsthilfegruppen. Ihre Bilder „AG 1“ bis „AG 8“ (Drive, Bilder › 2.
+Gruppen & Veranstaltungen › 2. Arbeitsgruppen) liegen als
+`gruppe-ag-0X-….webp` (+ `-1000`, ohne Metadaten) in
+`public/img/titelbilder`, og-Bilder per `bin/og-bilder`. Karten und Seiten
+der AGs zeigen sie wie bei den Selbsthilfegruppen (Name im Bild, KEV-305).
+
+Zuordnung nach Motiv, nicht nach Dateinamen: In Taddis Doc „2.
+Arbeitsgruppen“ ist AG 7 die App und AG 8 das Gutachten, auf der Website
+umgekehrt (AG Nr. 7 Glaubhaftigkeitsgutachten, AG Nr. 8 App). „AG 7“ (Handy
+mit App) gehört deshalb zu `ag-08-app`, „AG 8“ (markierte Unterlagen) zu
+`ag-07-glaubhaftigkeitsgutachten`. `TeamUndGruppenSeeder::AG_TITELBILDER`,
+Migration `2026_11_02_100000_arbeitsgruppen_titelbilder` (nur wo noch kein
+Bild steht).

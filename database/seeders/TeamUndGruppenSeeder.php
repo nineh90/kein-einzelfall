@@ -449,6 +449,7 @@ class TeamUndGruppenSeeder extends Seeder
                 Group::where('slug', $g['slug'])->update(['titelbild' => $g['titelbild']]);
             }
         }
+        self::agTitelbilderSetzen();
 
         self::zielgruppenSetzen();
 
@@ -507,6 +508,32 @@ class TeamUndGruppenSeeder extends Seeder
             ?->blocks()->where('typ', 'group_list')->get()
             ->filter(fn ($b) => ($b->data['typ'] ?? null) === 'selbsthilfe' && ! array_key_exists('ohne_status', $b->data))
             ->each(fn ($b) => $b->update(['data' => $b->data + ['ohne_status' => true]]));
+    }
+
+    /**
+     * KEV-314: Taddis Bilder für die Arbeitsgruppen (Drive „2. Arbeitsgruppen“,
+     * „AG 1“ bis „AG 8“). Zugeordnet nach dem Motiv: In Taddis Doc ist AG 7
+     * die App und AG 8 das Gutachten, auf der Website umgekehrt (AG Nr. 7
+     * Glaubhaftigkeitsgutachten, AG Nr. 8 App). „AG 7“ zeigt ein Handy mit
+     * App, „AG 8“ markierte Unterlagen.
+     */
+    public const AG_TITELBILDER = [
+        'ag-01-ser' => '/img/titelbilder/gruppe-ag-01-ser.webp',
+        'ag-02-ifg' => '/img/titelbilder/gruppe-ag-02-ifg.webp',
+        'ag-03-online-veranstaltungen' => '/img/titelbilder/gruppe-ag-03-online-veranstaltungen.webp',
+        'ag-04-soziale-medien' => '/img/titelbilder/gruppe-ag-04-soziale-medien.webp',
+        'ag-05-oeffentlichkeitsarbeit' => '/img/titelbilder/gruppe-ag-05-oeffentlichkeitsarbeit.webp',
+        'ag-06-datenbanken' => '/img/titelbilder/gruppe-ag-06-datenbanken.webp',
+        'ag-07-glaubhaftigkeitsgutachten' => '/img/titelbilder/gruppe-ag-07-glaubhaftigkeitsgutachten.webp',
+        'ag-08-app' => '/img/titelbilder/gruppe-ag-08-app.webp',
+    ];
+
+    /** Nur wo eine AG noch kein Bild hat. */
+    public static function agTitelbilderSetzen(): void
+    {
+        foreach (self::AG_TITELBILDER as $slug => $bild) {
+            Group::where('slug', $slug)->whereNull('titelbild')->update(['titelbild' => $bild]);
+        }
     }
 
     public static function zielgruppenSetzen(): void

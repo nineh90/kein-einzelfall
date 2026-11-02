@@ -343,6 +343,15 @@ class Titelbilder
         self::ORDNER.'/gruppe-seelenfarben.webp' => 40,
         self::ORDNER.'/gruppe-buerokratie-labyrinth.webp' => 45,
         self::ORDNER.'/gruppe-schreibwerkstatt.webp' => 50,
+        // KEV-314: die Bilder der Arbeitsgruppen, Motiv in der Mitte der Höhe
+        self::ORDNER.'/gruppe-ag-01-ser.webp' => 50,
+        self::ORDNER.'/gruppe-ag-02-ifg.webp' => 45,
+        self::ORDNER.'/gruppe-ag-03-online-veranstaltungen.webp' => 40,
+        self::ORDNER.'/gruppe-ag-04-soziale-medien.webp' => 50,
+        self::ORDNER.'/gruppe-ag-05-oeffentlichkeitsarbeit.webp' => 60,
+        self::ORDNER.'/gruppe-ag-06-datenbanken.webp' => 40,
+        self::ORDNER.'/gruppe-ag-07-glaubhaftigkeitsgutachten.webp' => 50,
+        self::ORDNER.'/gruppe-ag-08-app.webp' => 50,
         // KEV-309: Glaskugel in der Mitte der Höhe
         self::ORDNER.'/gruppe-diskret-unter-uns.webp' => 55,
         self::ORDNER.'/ehrenamtsmessen.webp' => 55,
