@@ -91,7 +91,8 @@ class Titelbilder
         // Ohne Unterzeile, der Verein hat keine geschickt.
         'oeffentlichkeitsarbeit' => null,
         // KEV-238: Taddis Bilder der drei Themen, Motiv links, Fläche rechts
-        'ehrenamtsmessen' => null,
+        // KEV-318: Taddis Unterzeile.
+        'ehrenamtsmessen' => 'Engagement zeigen. Mitstreiter gewinnen.',
         'petitionen' => null,
         'presse' => null,
         // KEV-147: Bild von Taddi statt Platzhalter, Leinenbücher mit „2025“.

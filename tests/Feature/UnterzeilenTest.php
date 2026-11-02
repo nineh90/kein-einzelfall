@@ -72,4 +72,10 @@ class UnterzeilenTest extends TestCase
         $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
         $this->assertSame('Sharing knowledge. Broadening perspectives.', $woerterbuch[$neu]['en']);
     }
+
+    /** KEV-318 */
+    public function test_ehrenamtsmessen(): void
+    {
+        $this->pruefen('ehrenamtsmessen', 'Engagement zeigen. Mitstreiter gewinnen.', 'Showing commitment. Winning people over.', '2026_11_02_140000_ehrenamtsmessen_unterzeile');
+    }
 }
