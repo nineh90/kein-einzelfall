@@ -46,4 +46,11 @@ class KurzbeschreibungenTest extends TestCase
             'Aus einer Idee wird ein Termin – und aus einem Termin ein Raum für Austausch, Wissen und Begegnung.',
             'Aus Ideen werden Begegnungen.', '2026_11_02_110000_ag3_kurzbeschreibung');
     }
+
+    /** KEV-316 */
+    public function test_ag_4(): void
+    {
+        $this->pruefen('ag-04-soziale-medien', 'Sichtbarkeit entsteht nicht von allein.',
+            'Aus Ideen werden Beiträge, die Betroffene und ihre Anliegen sichtbar machen.', '2026_11_02_120000_ag4_kurzbeschreibung');
+    }
 }

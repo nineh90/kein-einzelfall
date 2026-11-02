@@ -946,7 +946,8 @@ class TeamUndGruppenSeeder extends Seeder
         [
             'slug' => 'ag-04-soziale-medien', 'kuerzel' => 'AG Nr. 4',
             'name' => 'Soziale Medien',
-            'teaser' => 'Sichtbarkeit entsteht nicht von allein.',
+            // KEV-316: Taddis neue Zeile unter der Überschrift
+            'teaser' => 'Aus Ideen werden Beiträge, die Betroffene und ihre Anliegen sichtbar machen.',
             'absaetze' => [
                 'In dieser Arbeitsgruppe entwickeln wir gemeinsam die Inhalte für unsere Social-Media-Kanäle. Wir überlegen, welche Themen wichtig sind, wie wir sie verständlich aufbereiten und wie wir Betroffenenperspektiven, Wissen, Vereinsarbeit und aktuelle Entwicklungen sichtbar machen können.',
                 'Dabei entstehen Beiträge, Reels, Storys und neue Formate zu Themen wie Trauma, Selbsthilfe, Soziales Entschädigungsrecht, Pflege, GdB, Veranstaltungen, Vereinsnews und „Deine Stimme“.',
