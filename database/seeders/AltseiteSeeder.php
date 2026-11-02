@@ -666,6 +666,9 @@ class AltseiteSeeder extends Seeder
         // Die Teamseite nach Taddis KEV-294. Ebenso.
         $this->call(TeamseiteSeeder::class);
 
+        // /veranstaltungen nach Taddis neuem Doc (KEV-317), mit den Terminen.
+        $this->call(VeranstaltungenSeeder::class);
+
         // Die Satzung nach Taddis Tickets (KEV-194 ff.).
         $this->call(SatzungsseiteSeeder::class);
 

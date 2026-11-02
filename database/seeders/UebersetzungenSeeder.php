@@ -67,6 +67,8 @@ class UebersetzungenSeeder extends Seeder
         'verzeichnis_titel',
         // KEV-291: Hinweis unter einer Dokumentenliste.
         'nachsatz',
+        // KEV-317: „Wann ungefähr“ bei geplanten Veranstaltungen einer Reihe.
+        'zeitraum',
         // KEV-262: die einfache Übersetzung typischer Sätze. Der Satz selbst
         // bleibt deutsch, so steht er im Brief.
         'bedeutung',

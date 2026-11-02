@@ -1143,6 +1143,29 @@ Seite im Panel unter „Titelbild“ ändern.
 
 ---
 
+### A15 · Veranstaltungen nach Taddis neuem Doc (KEV-317, 02.11.2026)
+
+/veranstaltungen ist nach Taddis Doc „3. Veranstaltungen“ neu aufgebaut,
+die Termine mit Datum sind als Veranstaltungen angelegt. Offen:
+
+- **Uhrzeit Bürokratie-Labyrinth (28.04.2027):** steht im Doc nicht.
+  Eingetragen wie die übrigen der Reihe, 18 bis 20 Uhr.
+- **Rostock (23./24.11.2026):** Im Doc steht für beide das Rathaus. Laut
+  Flyer ist der Vortrag am 23.11. um 14:30 Uhr im Festsaal des Rathauses,
+  der Workshop am 24.11. von 12 bis 14 Uhr in der Ökovilla, Hermannstraße
+  36. Eingetragen nach dem Flyer. Anmeldung und Teilnahmebeitrag laufen
+  über die Veranstalter, der Flyer steht als PDF dabei.
+- **Postfach veranstaltung@kein-einzelfall.de:** Anmeldungen gehen per Mail
+  dorthin, wie im Doc. Gibt es das Postfach?
+- **Teams-Links:** Die Links mit Passcode aus dem Doc stehen bewusst nicht
+  auf der Website. Den Zugangslink verschickt der Verein nach der Anmeldung.
+- **Trauma verstehen (1. Quartal 2027) und Gutachten (3. Quartal 2027):**
+  stehen als „geplant“ bei ihrer Reihe. Sobald es ein Datum gibt, als
+  Veranstaltung anlegen und bei der Reihe löschen.
+- **/kein-einzelfall-im-dialog:** Die alte Seite der Reihe gibt es noch
+  (nicht im Menü), mit Links auf die Seiten der Altseite. Löschen oder auf
+  /veranstaltungen#reihe-dialog-wissen weiterleiten?
+
 ## B. Technisch vor dem Go-Live (Kevin)
 
 ### B0 · Stand der Prüfung vom 29.10.2026

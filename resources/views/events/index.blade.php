@@ -48,9 +48,18 @@
         // 19:00 Uhr“, Englisch „Wednesday, 14 October 2026, 7:00 pm“.
         $sprache = app()->getLocale();
         $langesDatum = app()->isLocale('en') ? 'l, j F Y, g:i a' : 'l, j. F Y, H:i';
+
+        // KEV-317: Im neuen Aufbau (Kalender als Baustein, Termine bei ihren
+        // Reihen) stünden die Listen unten doppelt. Dann bleibt nur die
+        // Leiste mit „Vergangene“ und dem Kalender-Abo; die vergangenen
+        // Termine zeigt die Seite weiter als Liste.
+        $neuerAufbau = (bool) $einleitung?->blocks->contains('typ', 'kalender');
+        $listen = $zeigeVergangene || ! $neuerAufbau;
     @endphp
 
-    @if ($einleitung)
+    {{-- Bei den vergangenen Terminen im neuen Aufbau nur die Liste: Kalender
+         und Reihen zeigen das Kommende. --}}
+    @if ($einleitung && ! ($zeigeVergangene && $neuerAufbau))
         <x-bloecke :abschnitte="$abschnitte" art="artikel" />
     @endif
 
@@ -60,7 +69,9 @@
             {{-- Alle Termine gebündelt als Kalender (KEV-281, Nils), darunter
                  die Listen. Links zu dieser Seite und zum iCal-Abo stehen
                  hier schon, der Kalender braucht sie nicht noch einmal. --}}
-            @unless ($zeigeVergangene)
+            {{-- Seit KEV-317 steht der Kalender als Baustein in der Seite, gleich
+                 nach Taddis Einleitung. Dann hier nicht noch einmal. --}}
+            @unless ($zeigeVergangene || $einleitung?->blocks->contains('typ', 'kalender'))
                 <div class="mb-12">
                     <x-blocks.kalender :rahmen="false" :breit="true" :links="false" :auf="$listeAuf" />
                 </div>
@@ -110,7 +121,7 @@
 
             {{-- Regelmässige Gruppentreffen stehen vor den Einzelveranstaltungen:
                  Sie finden am häufigsten statt und werden am häufigsten gesucht. --}}
-            @if ($gruppentermine->isNotEmpty())
+            @if ($listen && $gruppentermine->isNotEmpty())
                 <section class="mt-8" aria-labelledby="gruppentermine-titel">
                     <h2 id="gruppentermine-titel" class="mb-1 font-display text-xl font-medium text-green">
                         {{ __('Regelmäßige Gruppentreffen') }}
@@ -174,6 +185,7 @@
                 </section>
             @endif
 
+            @if ($listen)
             <section class="mt-10" aria-labelledby="einzeltermine-titel">
                 <h2 id="einzeltermine-titel" class="mb-4 font-display text-xl font-medium text-green">
                     {{ $zeigeVergangene ? __('Vergangene Veranstaltungen') : __('Einzelne Veranstaltungen') }}
@@ -267,6 +279,7 @@
                     <div class="mt-8">{{ $termine->links() }}</div>
                 @endif
             </section>
+            @endif
         </div>
     </div>
 @endsection

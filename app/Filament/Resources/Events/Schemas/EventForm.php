@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\Events\Schemas;
 
+use App\Models\Event;
+use App\Support\Medien;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,6 +35,14 @@ class EventForm
                 TextInput::make('art')->label('Art')
                     ->datalist(['Selbsthilfegruppe', 'Arbeitsgruppe', 'Vortrag', 'Workshop', 'Austausch'])
                     ->helperText('Frei wählbar — die Vorschläge sind nur eine Hilfe.'),
+
+                // KEV-317
+                Select::make('reihe')->label('Reihe')
+                    ->options(Event::REIHEN)->placeholder('Keine')->native(false)
+                    ->helperText('Auf /veranstaltungen steht der Termin dann auch bei seiner Reihe.'),
+
+                Medien::bild('titelbild')->label('Bild')->columnSpanFull()
+                    ->helperText('Querformat 16:9. Steht auf der Seite des Termins und bei seiner Reihe.'),
             ]),
 
             Section::make('Wann')->columns(2)->schema([

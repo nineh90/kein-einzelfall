@@ -39,7 +39,17 @@
 @endpush
 
 @section('content')
-<article class="px-4 md:px-8 py-8 lg:px-10 lg:py-12">
+{{-- KEV-317: mit Bild der Seitenkopf wie bei den Gruppen, Titel und
+     Kurzfassung stehen darauf, die Reihe darüber. --}}
+@if ($termin->titelbild)
+    <x-layout.seitenkopf
+        :titel="$termin->titel"
+        :bereich="$termin->reihe ? __(\App\Models\Event::REIHEN[$termin->reihe] ?? $termin->reihe) : __('Veranstaltung')"
+        :untertitel="$termin->teaser"
+        :bild="$termin->titelbild" />
+@endif
+
+<article @class(['px-4 md:px-8 pb-8 lg:px-10 lg:pb-12', 'pt-8 lg:pt-12' => ! $termin->titelbild, 'pt-6' => $termin->titelbild])>
     <div class="mx-auto max-w-3xl">
 
         <x-ui.brotkrumen :krumen="[
@@ -59,9 +69,11 @@
             @endif
         </div>
 
-        <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
-            {{ $termin->titel }}
-        </h1>
+        @unless ($termin->titelbild)
+            <h1 class="mt-2 font-display text-[1.75rem] font-medium leading-tight text-green lg:text-4xl">
+                {{ $termin->titel }}
+            </h1>
+        @endunless
 
         <dl class="mt-6 flex flex-col gap-3 rounded-card border border-line bg-card px-5 py-4">
             <div class="flex flex-wrap gap-x-3">

@@ -127,6 +127,9 @@ class PageBlock extends Model
         // KEV-174: ausgewählte Seiten mit Titelbild und Unterzeile, etwa
         // Selbsthilfe- und Arbeitsgruppen neben dem Text der Vereinsseite.
         'seitenkarten' => 'Ausgewählte Seiten (Karten mit Bild oder Knöpfe)',
+        // KEV-317: eine Veranstaltungsreihe mit Text, Bild und ihren
+        // Terminen aus „Veranstaltungen“ (Feld „Reihe“).
+        'veranstaltungsreihe' => 'Veranstaltungsreihe (Text, Bild, Termine)',
     ];
 
     /**
@@ -168,6 +171,7 @@ class PageBlock extends Model
         'fristen' => 'wechselnd',
         'kalender' => 'wechselnd',
         'seitenkarten' => 'wechselnd',
+        'veranstaltungsreihe' => 'wechselnd',
         'hinweis' => 'anschliessend',
         // Der Aufmacher steht am Seitenanfang und bringt seinen eigenen
         // Verlauf mit; die Themenliste und der Kennzahlen-Streifen ihre

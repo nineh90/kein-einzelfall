@@ -7,8 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    /**
+     * Die Veranstaltungsreihen (KEV-317, Taddis Doc „3. Veranstaltungen“).
+     * Auf /veranstaltungen hat jede einen eigenen Abschnitt mit ihren
+     * Terminen (Baustein „veranstaltungsreihe“).
+     */
+    public const REIHEN = [
+        'dialog-wissen' => 'KE!N EINZELFALL im Dialog – Wissen trifft Erfahrung',
+        'dialog-frage' => 'KE!N EINZELFALL im Dialog – Frage trifft Antwort',
+        'zu-gast' => 'KE!N EINZELFALL zu Gast',
+    ];
+
     protected $fillable = [
-        'slug', 'titel', 'teaser', 'beschreibung',
+        'slug', 'titel', 'teaser', 'beschreibung', 'titelbild', 'reihe',
         'beginnt_am', 'endet_am', 'ganztaegig', 'art',
         'ort', 'adresse', 'online', 'anmeldung_url', 'anmeldung_hinweis',
         'published_at',

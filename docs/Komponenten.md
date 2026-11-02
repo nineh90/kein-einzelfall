@@ -3094,3 +3094,32 @@ mit App) gehört deshalb zu `ag-08-app`, „AG 8“ (markierte Unterlagen) zu
 `ag-07-glaubhaftigkeitsgutachten`. `TeamUndGruppenSeeder::AG_TITELBILDER`,
 Migration `2026_11_02_100000_arbeitsgruppen_titelbilder` (nur wo noch kein
 Bild steht).
+
+## 63. Veranstaltungen nach Taddis neuem Doc (KEV-317, 02.11.2026)
+
+Taddi: Die Seite ist „das alte System“, ihr neues Doc „3. Veranstaltungen“
+liegt im Drive; am liebsten auf der einen Seite ein Kalender, auf der
+anderen die nächsten Veranstaltungen.
+
+- `events` hat `reihe` (`Event::REIHEN`: `dialog-wissen`, `dialog-frage`,
+  `zu-gast`) und `titelbild` (Panel/intern: „Reihe“, „Bild“). Mit Bild hat
+  die Seite eines Termins den Seitenkopf wie die Gruppen.
+- Neuer Baustein `veranstaltungsreihe` (Panel: „Veranstaltungsreihe“):
+  Text und Bild der Reihe, darunter ihre kommenden Termine aus
+  „Veranstaltungen“ und unter „Geplant, noch ohne Datum“ was schon
+  feststeht (Titel, ungefähr wann, Kurzfassung, Bild). Karten per Subgrid
+  auf einer Linie. Sprungziel `#reihe-<schlüssel>`.
+- /veranstaltungen: Einleitung (Dokumente daneben), Baustein `kalender`
+  (Raster und nächste Termine nebeneinander, ohne Links darunter), drei
+  Reihen. Steht der Kalender als Baustein in der Seite, zeichnet
+  `events/index` keinen eigenen und lässt die Listen unten weg; die
+  Leiste mit „Vergangene“ und dem Kalender-Abo bleibt. Vergangene Termine
+  zeigen nur die Liste. Die Unterzeile kommt aus der Seite.
+- `VeranstaltungenSeeder`: Einleitung, Reihen, acht Termine (legt nur an,
+  was fehlt; baut die Seite nur um, solange sie den Aufbau der Altseite
+  hat). AltseiteSeeder und Migration `2026_11_02_170000_…`. Teams-Links aus
+  dem Doc bewusst nicht übernommen. Englisch für die Seite im Wörterbuch,
+  die Termine selbst bleiben deutsch wie alle Veranstaltungen.
+- Offene Rückfragen: Übergabe-Checkliste A15.
+
+Tests: VeranstaltungenTest, EventTest, KalenderTest.

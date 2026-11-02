@@ -43,13 +43,14 @@ class EventTest extends TestCase
         $englisch->blocks()->create(['typ' => 'text', 'position' => 0, 'data' => ['titel' => 'Sharing knowledge', 'absaetze' => ['Intro']]]);
 
         $this->get('/en/veranstaltungen')->assertOk()
-            ->assertSee('Sharing knowledge')->assertDontSee('Wissen teilen. Erfahrungen verbinden.');
+            ->assertSee('Sharing knowledge')->assertDontSee('Manche Themen brauchen mehr als einen kurzen Austausch.');
+        // Seit KEV-317 Taddis neue Einleitung.
         $this->get('/veranstaltungen')->assertOk()
-            ->assertSee('Wissen teilen. Erfahrungen verbinden.')->assertDontSee('Sharing knowledge');
+            ->assertSee('Manche Themen brauchen mehr als einen kurzen Austausch.')->assertDontSee('Sharing knowledge');
 
         $englisch->blocks()->delete();
         $englisch->delete();
-        $this->get('/en/veranstaltungen')->assertOk()->assertSee('Wissen teilen. Erfahrungen verbinden.');
+        $this->get('/en/veranstaltungen')->assertOk()->assertSee('Manche Themen brauchen mehr als einen kurzen Austausch.');
     }
 
     public function test_uebersicht_zeigt_kommende_termine(): void

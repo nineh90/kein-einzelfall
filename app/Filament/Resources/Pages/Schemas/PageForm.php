@@ -351,7 +351,7 @@ class PageForm
                             Repeater::make('data.absaetze')
                                 ->label('Absätze')
                                 ->addActionLabel('Absatz hinzufügen')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media', 'typische_saetze'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text', 'text_media', 'typische_saetze', 'veranstaltungsreihe'], true))
                                 ->helperText('Einen Satz hervorheben: *Sternchen* darum setzen, '
                                     .'wie beim Fettschreiben in einer Nachricht. Er erscheint dann fett. '
                                     .'Eine Aufzählung: jede Zeile mit „- “ beginnen. '
@@ -415,7 +415,7 @@ class PageForm
                             // --- Text mit Bild ---
                             Medien::bild('data.bild')
                                 ->label('Bild')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero', 'oeffentlichkeitsarbeit', 'wall_of_shame'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'hero', 'oeffentlichkeitsarbeit', 'wall_of_shame', 'veranstaltungsreihe'], true))
                                 ->helperText(fn ($get) => match ($get('typ')) {
                                     'hero' => 'Hintergrundbild hinter Text und Logo, am besten ohne Motiv '
                                         .'(ruhige Wand). Leer lassen zeigt die helle Fläche.',
@@ -428,7 +428,7 @@ class PageForm
 
                             TextInput::make('data.bild_alt')
                                 ->label('Bildbeschreibung')
-                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'oeffentlichkeitsarbeit'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['text_media', 'oeffentlichkeitsarbeit', 'veranstaltungsreihe'], true))
                                 ->helperText('Was auf dem Bild zu sehen ist — wird Menschen vorgelesen, '
                                     .'die es nicht sehen können. Bei rein schmückenden Bildern leer lassen.'),
 
@@ -659,10 +659,33 @@ class PageForm
                             Textarea::make('data.hand')
                                 ->label('Handschriftlicher Zusatz')
                                 ->rows(2)
-                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'donation_options'], true))
+                                ->visible(fn ($get) => in_array($get('typ'), ['hero', 'text', 'donation_options', 'veranstaltungsreihe'], true))
                                 ->helperText('Ein kurzer Leitsatz, der wie mit der Hand '
                                     .'danebengeschrieben aussieht. Mit der Eingabetaste setzt du '
                                     .'einen Zeilenumbruch. Kann leer bleiben.'),
+
+                            // --- Veranstaltungsreihe (KEV-317) ---
+                            Select::make('data.reihe')
+                                ->label('Welche Reihe')
+                                ->options(\App\Models\Event::REIHEN)
+                                ->native(false)
+                                ->required(fn ($get) => $get('typ') === 'veranstaltungsreihe')
+                                ->visible(fn ($get) => $get('typ') === 'veranstaltungsreihe')
+                                ->helperText('Darunter stehen die kommenden Termine dieser Reihe aus „Veranstaltungen“.'),
+                            Repeater::make('data.geplant')
+                                ->label('Geplant, noch ohne Datum')
+                                ->addActionLabel('Geplante Veranstaltung hinzufügen')
+                                ->visible(fn ($get) => $get('typ') === 'veranstaltungsreihe')
+                                ->defaultItems(0)
+                                ->collapsible()
+                                ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                                ->schema([
+                                    TextInput::make('titel')->label('Titel')->required(),
+                                    TextInput::make('zeitraum')->label('Wann ungefähr')->placeholder('1. Quartal 2027'),
+                                    Textarea::make('text')->label('Kurzfassung')->rows(2),
+                                    Medien::bild('bild')->label('Bild'),
+                                ])
+                                ->helperText('Sobald es ein Datum gibt, als Veranstaltung anlegen und hier löschen.'),
 
                             // KEV-290: Kasten unter dem Text („Deine Ideen sind gefragt!“)
                             TextInput::make('data.kasten.titel')
