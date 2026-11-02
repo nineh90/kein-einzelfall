@@ -112,6 +112,25 @@
             </div>
         @endif
 
+        {{-- KEV-320: Materialien zum Herunterladen (eigene Petition: Aufruf,
+             Unterschriftenliste, Infoblatt), danach der übrige Text. --}}
+        @if (filled($eintrag->dokumente))
+            <div class="mt-10">
+                <x-blocks.download-list :rahmen="false"
+                    :titel="$eintrag->dokumente_titel ?: __('Dokumente zum Herunterladen')"
+                    :einleitung="$eintrag->dokumente_einleitung"
+                    :dokumente="$eintrag->dokumente" />
+            </div>
+        @endif
+
+        @if (filled(strip_tags((string) $eintrag->nachtext)))
+            <div class="mt-8 max-w-prose text-[1.0625rem] leading-relaxed text-ink
+                        [&_a]:text-green-deep [&_a]:underline [&_p]:mb-4 [&_strong]:font-semibold
+                        [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+                {!! $eintrag->nachtext !!}
+            </div>
+        @endif
+
         @if ($fotos)
             {{-- Gleichmäßiges Raster aus Vorschaubildern (KEV-132): Mit sechs
                  Hochformaten untereinander wurde die Seite sehr lang. Die

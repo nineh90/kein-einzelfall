@@ -316,14 +316,90 @@ class OeffentlichkeitsarbeitSeeder extends Seeder
         'titel' => 'Erst Versorgung sichern – dann Pflegeleistungen verändern!',
         'datum' => '2026-10-05',
         'ort' => 'openPetition',
-        'beschreibung' => '<p>Mit dieser Petition setzen wir uns dafür ein, dass Veränderungen in der Pflege nicht '
-            .'zulasten der Menschen gehen, die auf Unterstützung angewiesen sind. Bevor Leistungen verändert oder '
-            .'eingeschränkt werden, muss eine verlässliche und bedarfsgerechte Versorgung sichergestellt sein.</p>'
-            .'<p>Wenn Du diese Forderung teilst, freuen wir uns, wenn Du die Petition mit Deiner Unterschrift '
-            .'unterstützt.</p>',
+        // KEV-320: Taddis ganzer Text aus „Unsere Petition“ (Drive); die
+        // Materialien und der Schluss stehen in PETITION_MATERIALIEN.
+        'beschreibung' => '<p><strong>Pflege muss in der Praxis funktionieren – nicht nur auf dem Papier.</strong></p>'
+            .'<p>Pflegebedürftige Menschen und ihre Angehörigen sind auf verlässliche Unterstützung angewiesen. Gleichzeitig stehen Pflegekräfte, Einrichtungen und Dienste schon heute unter enormem Druck. Personalmangel, steigende Kosten und zunehmende Bürokratie erschweren eine bedarfsgerechte Versorgung.</p>'
+            .'<p>Mit den geplanten Veränderungen im Rahmen der Pflegereform stellt sich eine entscheidende Frage: <strong>Was geschieht, wenn Leistungen verändert oder gestrichen werden, bevor funktionierende Alternativen zur Verfügung stehen?</strong></p>'
+            .'<p>Als gemeinnütziger Opferhilfeverein <strong>KE!N EINZELFALL e.V.</strong> möchten wir notwendige Reformen nicht verhindern. Wir fordern jedoch, dass die Versorgung pflegebedürftiger Menschen gesichert bleibt und Veränderungen nicht zulasten derjenigen gehen, die auf Unterstützung angewiesen sind oder diese täglich leisten.</p>'
+            .'<p>Mit unserer Petition <strong>„Erst Versorgung sichern – dann Pflegeleistungen verändern!“</strong> setzen wir uns dafür ein, dass die Erfahrungen von Betroffenen, Angehörigen und Fachkräften bei politischen Entscheidungen berücksichtigt werden.</p>'
+            .'<p><strong>Jetzt mitmachen – jede Unterschrift zählt!</strong></p>'
+            .'<p>Unterstütze unsere Petition, teile sie mit anderen oder sammle selbst Unterschriften. Auch Menschen ohne Internetzugang sollen die Möglichkeit haben, sich zu beteiligen.</p>',
         'link_url' => 'https://www.openpetition.de/petition/online/erst-versorgung-sichern-dann-pflegeleistungen-veraendern',
-        'link_text' => 'Petition unterschreiben',
+        'link_text' => 'Petition online unterzeichnen',
     ];
+
+    /** Der Text der eigenen Petition bis KEV-320 (KEV-135). */
+    public const PETITION_VERSORGUNG_BESCHREIBUNG_BIS_KEV_320 = '<p>Mit dieser Petition setzen wir uns dafür ein, dass Veränderungen in der Pflege nicht '
+        .'zulasten der Menschen gehen, die auf Unterstützung angewiesen sind. Bevor Leistungen verändert oder '
+        .'eingeschränkt werden, muss eine verlässliche und bedarfsgerechte Versorgung sichergestellt sein.</p>'
+        .'<p>Wenn Du diese Forderung teilst, freuen wir uns, wenn Du die Petition mit Deiner Unterschrift '
+        .'unterstützt.</p>';
+
+    /**
+     * KEV-320: Taddis Bild, ihre drei PDFs („Documente › 2. Gruppen &
+     * Veranstaltungen › Unsere Petition“) und der Schluss ihres Textes. Nicht
+     * in PETITION_VERSORGUNG: Die Spalten kamen erst mit KEV-320, die ältere
+     * Migration legt den Eintrag ohne sie an.
+     */
+    public const PETITION_MATERIALIEN = [
+        'fotos' => [['bild' => '/img/oeffentlichkeitsarbeit/petition-erst-versorgung-sichern.webp', 'alt' => '']],
+        'dokumente_titel' => 'Unsere Materialien zum Mitmachen',
+        'dokumente_einleitung' => 'Damit möglichst viele Menschen erreicht werden, stellen wir unsere Materialien zum Lesen, Ausdrucken und Weitergeben bereit.',
+        'dokumente' => [
+            ['titel' => 'Petitionsaufruf – unser Anliegen, die Hintergründe und unsere Forderung an die Pflegereform', 'url' => '/dokumente/2026/11/petition-pflege-aufruf.pdf'],
+            ['titel' => 'Unterschriftenliste – zum Ausdrucken, Auslegen und Sammeln von Unterschriften', 'url' => '/dokumente/2026/11/petition-pflege-unterschriftenliste.pdf'],
+            ['titel' => 'Infoblatt mit QR-Code – alles auf einen Blick, mit Zugang zur Online-Petition', 'url' => '/dokumente/2026/11/petition-pflege-infoblatt.pdf'],
+        ],
+        'nachtext' => '<p><strong>Deine Erfahrungen sind gefragt!</strong></p>'
+            .'<p>Welche Herausforderungen erlebst du in der Pflege oder Versorgung? Welche Auswirkungen könnten Veränderungen auf deinen Alltag, deine Angehörigen oder deine berufliche Arbeit haben?</p>'
+            .'<p>Wir möchten diese Erfahrungen und Einschätzungen sichtbar machen. Schreib uns an <a href="mailto:petition@kein-einzelfall.de">petition@kein-einzelfall.de</a>.</p>'
+            .'<p><strong>Denn eine gute Pflegereform muss bei den Menschen ankommen – nicht nur auf dem Papier.</strong></p>',
+    ];
+
+    /**
+     * KEV-320: die eigene Petition um Taddis Text, Bild, Materialien und
+     * Schluss ergänzen. Nur was noch leer ist oder wie bis KEV-320 dasteht.
+     */
+    public static function petitionErgaenzen(): void
+    {
+        $eintrag = OutreachItem::where('slug', self::PETITION_VERSORGUNG['slug'])->first();
+
+        if (! $eintrag) {
+            return;
+        }
+
+        $roh = fn (string $feld) => $eintrag->getRawOriginal($feld);
+
+        if ($roh('beschreibung') === self::PETITION_VERSORGUNG_BESCHREIBUNG_BIS_KEV_320) {
+            $eintrag->beschreibung = self::PETITION_VERSORGUNG['beschreibung'];
+        }
+        if ($roh('link_text') === 'Petition unterschreiben') {
+            $eintrag->link_text = self::PETITION_VERSORGUNG['link_text'];
+        }
+        foreach (self::PETITION_MATERIALIEN as $feld => $wert) {
+            if (blank($eintrag->getRawOriginal($feld))) {
+                $eintrag->{$feld} = $wert;
+            }
+        }
+
+        // Englisch: neu, wo noch der alte Text steht oder nichts.
+        $en = self::datei('uebersetzungen-oeffentlichkeitsarbeit.json')[$eintrag->slug] ?? [];
+        $u = $eintrag->uebersetzungen ?? [];
+        $altEn = '<p>With this petition we are calling for changes in care not to come at the expense of the people who depend on support.';
+        if (str_starts_with($u['en']['beschreibung'] ?? $altEn, $altEn)) {
+            $u['en'] = array_replace($u['en'] ?? [], $en);
+            $eintrag->uebersetzungen = $u;
+        }
+
+        $eintrag->save();
+    }
+
+    /** @return array<string, array<string, string>> */
+    private static function datei(string $name): array
+    {
+        return json_decode((string) file_get_contents(database_path('seeders/data/'.$name)), true) ?? [];
+    }
 
     /**
      * Petition des Tour41 e.V. zum Fonds Sexueller Missbrauch (KEV-135),

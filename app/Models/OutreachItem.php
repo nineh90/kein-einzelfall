@@ -20,7 +20,7 @@ class OutreachItem extends Model
     use Uebersetzbar;
 
     /** Sprachfassungen (Uebersetzbar). Nicht `art`: danach wird gefiltert. */
-    protected array $uebersetzbar = ['titel', 'teaser', 'beschreibung', 'ort', 'link_text'];
+    protected array $uebersetzbar = ['titel', 'teaser', 'beschreibung', 'ort', 'link_text', 'nachtext', 'dokumente_titel', 'dokumente_einleitung'];
 
     /**
      * Arten. Die Beschriftung steht als Schild auf der Seite und wird mit
@@ -40,6 +40,9 @@ class OutreachItem extends Model
     protected $fillable = [
         'slug', 'art', 'titel', 'datum', 'ort', 'teaser', 'beschreibung', 'fotos',
         'link_url', 'link_text', 'uebersetzungen', 'published_at',
+        // KEV-320: Dokumente zum Herunterladen (Abschnitt unter dem Knopf)
+        // und Text danach, etwa bei der eigenen Petition.
+        'dokumente_titel', 'dokumente_einleitung', 'dokumente', 'nachtext',
     ];
 
     protected function casts(): array
@@ -47,6 +50,7 @@ class OutreachItem extends Model
         return [
             'datum' => 'date',
             'fotos' => 'array',
+            'dokumente' => 'array',
             'uebersetzungen' => 'array',
             'published_at' => 'datetime',
         ];

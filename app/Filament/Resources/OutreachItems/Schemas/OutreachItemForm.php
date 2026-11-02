@@ -77,6 +77,32 @@ class OutreachItemForm
                         ]),
                 ]),
 
+            // KEV-320: Materialien zum Herunterladen und Text danach
+            Section::make('Dokumente zum Herunterladen')
+                ->description('Stehen auf der Seite unter dem Knopf, etwa Aufruf und Unterschriftenliste einer Petition.')
+                ->collapsible()
+                ->schema([
+                    TextInput::make('dokumente_titel')->label('Überschrift')
+                        ->placeholder('Unsere Materialien zum Mitmachen'),
+                    Textarea::make('dokumente_einleitung')->label('Einleitung')->rows(2),
+                    Repeater::make('dokumente')->label('')
+                        ->addActionLabel('Dokument hinzufügen')
+                        ->reorderable()
+                        ->defaultItems(0)
+                        ->itemLabel(fn (array $state) => $state['titel'] ?? null)
+                        ->schema([
+                            TextInput::make('titel')->label('Bezeichnung')->required()
+                                ->helperText('Was die Besucherin liest, nicht der Dateiname.'),
+                            Medien::dokument('datei')->label('Datei hochladen'),
+                            TextInput::make('url')->label('Oder Adresse')
+                                ->required(fn ($get) => blank($get('datei')))
+                                ->helperText('Eine Datei, die schon bei uns liegt (/dokumente/…), oder https://…'),
+                        ]),
+                    RichEditor::make('nachtext')->label('Text danach')
+                        ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
+                        ->helperText('Steht unter den Dokumenten. Kann leer bleiben.'),
+                ]),
+
             Section::make('Link und Sichtbarkeit')->columns(2)->schema([
                 TextInput::make('link_url')->label('Link')->url()
                     ->helperText('Zum Artikel, zur Petition, zum Video … Kann leer bleiben.'),

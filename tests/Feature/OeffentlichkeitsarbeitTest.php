@@ -396,13 +396,40 @@ class OeffentlichkeitsarbeitTest extends TestCase
             ->assertSee('Eigene Petition')
             ->assertSee('5. Oktober 2026')
             ->assertSee('href="https://www.openpetition.de/petition/online/erst-versorgung-sichern-dann-pflegeleistungen-veraendern"', false)
-            ->assertSee('Petition unterschreiben');
+            ->assertSee('Petition online unterzeichnen'); // seit KEV-320
 
         $this->get('/oeffentlichkeitsarbeit/petition-tour41-fonds-sexueller-missbrauch')->assertOk()
             ->assertSee('Unterstützte Petition')
             ->assertSee('Die Petition des Tour41 e. V. setzt sich für den Erhalt')
             ->assertSee('href="https://tour41.net/aktiv/aktuelle-petition-updates/"', false)
             ->assertSee('Zur Petition bei Tour41');
+    }
+
+    /** KEV-320: Taddis ganzer Text, Bild, drei Materialien und der Schluss, in ihrer Reihenfolge. Auch per Migration. */
+    public function test_eigene_petition_mit_materialien(): void
+    {
+        $html = $this->get('/oeffentlichkeitsarbeit/petition-erst-versorgung-sichern')->assertOk()->getContent();
+        $this->assertMatchesRegularExpression('#petition-erst-versorgung-sichern\.webp.*?Pflege muss in der Praxis funktionieren.*?Jetzt mitmachen.*?Petition online unterzeichnen.*?Unsere Materialien zum Mitmachen.*?petition-pflege-aufruf\.pdf.*?petition-pflege-unterschriftenliste\.pdf.*?petition-pflege-infoblatt\.pdf.*?Deine Erfahrungen sind gefragt!.*?mailto:petition@kein-einzelfall\.de#s', $html);
+        foreach (['aufruf', 'unterschriftenliste', 'infoblatt'] as $datei) {
+            $this->assertFileExists(public_path("dokumente/2026/11/petition-pflege-{$datei}.pdf"));
+        }
+
+        // Stand davor: kurzer Text, keine Materialien.
+        $eintrag = OutreachItem::where('slug', 'petition-erst-versorgung-sichern')->first();
+        $eintrag->forceFill([
+            'beschreibung' => \Database\Seeders\OeffentlichkeitsarbeitSeeder::PETITION_VERSORGUNG_BESCHREIBUNG_BIS_KEV_320,
+            'link_text' => 'Petition unterschreiben', 'dokumente' => null, 'nachtext' => null, 'fotos' => null,
+        ])->save();
+        \Database\Seeders\OeffentlichkeitsarbeitSeeder::petitionErgaenzen();
+        $eintrag->refresh();
+        $this->assertSame(3, count($eintrag->dokumente));
+        $this->assertStringStartsWith('<p><strong>Pflege muss in der Praxis', $eintrag->getRawOriginal('beschreibung'));
+        $this->assertSame('Petition online unterzeichnen', $eintrag->getRawOriginal('link_text'));
+
+        // Im Panel Geändertes bleibt.
+        $eintrag->forceFill(['beschreibung' => '<p>Eigener Text</p>'])->save();
+        \Database\Seeders\OeffentlichkeitsarbeitSeeder::petitionErgaenzen();
+        $this->assertSame('<p>Eigener Text</p>', $eintrag->fresh()->getRawOriginal('beschreibung'));
     }
 
     public function test_migration_petitionen_nur_einmal_und_hinter_messen(): void

@@ -3123,3 +3123,18 @@ anderen die nächsten Veranstaltungen.
 - Offene Rückfragen: Übergabe-Checkliste A15.
 
 Tests: VeranstaltungenTest, EventTest, KalenderTest.
+
+## 64. Eigene Petition mit Materialien (KEV-320, 02.11.2026)
+
+Taddi: Bei „Erst Versorgung sichern“ fehlten Text, Dokumente und Bild aus
+dem Drive („Unsere Petition“). Einträge der Öffentlichkeitsarbeit haben
+dafür `dokumente_titel`, `dokumente_einleitung`, `dokumente` (Liste wie bei
+der Dokumentenliste, Datei hochladen oder Adresse) und `nachtext` (Panel:
+Abschnitt „Dokumente zum Herunterladen“). Die Seite zeigt nach dem Knopf
+die Liste und danach den Text, in Taddis Reihenfolge. Übersetzbar wie die
+übrigen Felder (`uebersetzungen`).
+
+Inhalt: `OeffentlichkeitsarbeitSeeder::PETITION_VERSORGUNG` (Text) und
+`PETITION_MATERIALIEN` (Bild, drei PDFs unter /dokumente/2026/11/,
+Schluss), `petitionErgaenzen()` per Migration `2026_11_02_200000_…`, nur
+was leer ist oder noch wie bis KEV-320 dasteht.
