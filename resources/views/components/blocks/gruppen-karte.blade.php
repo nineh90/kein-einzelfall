@@ -33,8 +33,13 @@
     $klein = $klein && $klein !== $bild && \App\Support\Medien::vorhanden($klein) ? $klein : $bild;
 @endphp
 
+{{-- Vier Zeilen, die über die ganze Reihe der Liste gleich hoch sind
+     (Subgrid, group-list): Bild, Kopf, Termin oder Stand, Knöpfe. So
+     stehen die Trennstriche und Knöpfe benachbarter Karten auf einer
+     Linie, auch wenn die eine einen Termin über zwei Zeilen hat und die
+     andere nur „Zurzeit keine Anmeldung möglich“ (Kevin, 02.11.2026). --}}
 <article id="{{ $gruppe->slug }}" @class([
-    'flex h-full flex-col overflow-hidden rounded-card border border-line',
+    'row-span-4 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-card border border-line',
     'bg-card' => $auf !== 'card',
     'bg-cream' => $auf === 'card',
 ])>
@@ -53,9 +58,11 @@
                 <{{ $ebene }} class="hyphens-auto [hyphenate-limit-chars:14_6_6] font-display text-xl font-semibold leading-tight text-ink">{{ $gruppe->name }}</{{ $ebene }}>
             </span>
         </span>
+    @else
+        <span aria-hidden="true"></span>
     @endif
 
-    <div class="flex flex-1 flex-col p-5 lg:p-6">
+    <div class="px-5 pt-5 lg:px-6 lg:pt-6">
     @php
         // KEV-308 (Taddi): Bei Selbsthilfegruppen statt „Online“ (steht im
         // Text der Seite) für wen die Gruppe ist. Arbeitsgruppen wie bisher.
@@ -90,8 +97,9 @@
     @if ($gruppe->teaser)
         <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{{ $gruppe->teaser }}</p>
     @endif
+    </div>
 
-    <div class="mt-auto pt-4">
+    <div class="px-5 pt-4 lg:px-6">
         {{-- Ohne Zeit und Ort nicht nur „Termin: online“: Das sagt das
              Schild oben schon (die AGs haben keinen festen Termin). Gruppen,
              die noch nicht laufen, nennen keinen Rhythmus: Er läse sich wie
@@ -134,7 +142,9 @@
                 @endif
             </p>
         @endunless
+    </div>
 
+    <div class="self-end px-5 pb-5 lg:px-6 lg:pb-6">
         {{-- Jede Gruppe hat ihre eigene Seite, auch die in Planung: Taddis
              Text steht dort schon. Selbsthilfegruppen seit KEV-73,
              Arbeitsgruppen seit KEV-84; vorher klappte der AG-Text in der
@@ -154,6 +164,5 @@
                 <span class="sr-only">– {{ $gruppe->name }}</span>
             </x-ui.button>
         </div>
-    </div>
     </div>
 </article>

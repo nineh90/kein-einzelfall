@@ -82,7 +82,9 @@
                      in der Karte aufklappte; der steht jetzt auf eigenen Seiten. --}}
                 <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     @foreach ($liste as $gruppe)
-                        <li>
+                        {{-- Subgrid: Die vier Zeilen jeder Karte richten sich nach
+                             der ganzen Reihe (gruppen-karte). --}}
+                        <li class="row-span-4 grid grid-rows-subgrid gap-y-0">
                             <x-blocks.gruppen-karte :gruppe="$gruppe" :auf="$auf" :ebene="$geteilt ? 'h4' : 'h3'" :status_sichtbar="$geteilt"
                                 :status_nennen="! $ohne_status" />
                         </li>

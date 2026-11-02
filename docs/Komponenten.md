@@ -3056,3 +3056,13 @@ Anmeldung gerade nicht möglich, als dass sie noch nicht gestartet ist.
   `diskretNachtragen()` (legt nur an, überschreibt nichts). Englisch in
   `uebersetzungen-gruppen.json`. Migration
   `2026_11_01_240000_selbsthilfegruppen_ohne_planung_und_diskret`.
+
+## 60. Gruppenkarten auf einer Linie (02.11.2026, Kevin)
+
+Die Trennstriche in den Karten standen in einer Reihe verschieden hoch:
+Offene Gruppen haben Termin und nächsten Termin, die übrigen nur „Zurzeit
+keine Anmeldung möglich“. Jede Karte (`gruppen-karte`) hat jetzt vier
+Zeilen (Bild, Kopf, Termin oder Stand, Knöpfe) als Subgrid der Liste
+(`group-list`: `li` und `article` mit `row-span-4 grid-rows-subgrid`).
+Jede Zeile ist über die ganze Reihe so hoch wie die höchste, Striche und
+Knöpfe stehen auf einer Linie. Ohne Bild bleibt die erste Zeile leer.
