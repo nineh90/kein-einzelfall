@@ -71,6 +71,10 @@ class UnterzeilenTest extends TestCase
 
         $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
         $this->assertSame('Sharing knowledge. Broadening perspectives.', $woerterbuch[$neu]['en']);
+
+        // Die Übersicht kommt vom EventController und zeigt sie im Kopf.
+        $this->get('/veranstaltungen')->assertOk()->assertSee($neu)
+            ->assertDontSee('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.');
     }
 
     /** KEV-318 */

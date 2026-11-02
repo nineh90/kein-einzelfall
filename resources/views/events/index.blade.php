@@ -25,8 +25,11 @@
             ['label' => __('rahmen.start'), 'url' => \App\Models\Language::aktuell()->pfad('/')],
             ['label' => __('Veranstaltungen'), 'url' => null],
         ]"
-        :lead="__('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
-        :untertitel="__('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
+        {{-- KEV-317: die Unterzeile der Seite (Taddi: „Wissen teilen.
+             Perspektiven erweitern.“), im Panel pflegbar. Vorher fest im
+             Code, deshalb kam Taddis Zeile hier nie an. --}}
+        :lead="$einleitung?->untertitel ?: __('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
+        :untertitel="$einleitung?->untertitel ?: __('Termine unserer Selbsthilfe- und Arbeitsgruppen sowie einzelne Veranstaltungen.')"
         :bild="\App\Support\Titelbilder::fuer('veranstaltungen')" />
 
     {{-- Bestandstext der Altseite. Die Bausteine bringen ihren eigenen Rand
