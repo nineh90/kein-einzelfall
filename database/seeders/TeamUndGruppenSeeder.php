@@ -933,7 +933,8 @@ class TeamUndGruppenSeeder extends Seeder
         [
             'slug' => 'ag-03-online-veranstaltungen', 'kuerzel' => 'AG Nr. 3',
             'name' => 'Veranstaltungsplanung',
-            'teaser' => 'Aus einer Idee wird ein Termin – und aus einem Termin ein Raum für Austausch, Wissen und Begegnung.',
+            // KEV-315: Taddis neue Zeile unter der Überschrift
+            'teaser' => 'Aus Ideen werden Begegnungen.',
             'absaetze' => [
                 'In dieser Arbeitsgruppe planen und entwickeln wir die Veranstaltungen von KE!N EINZELFALL. Gemeinsam sammeln wir Themen, überlegen passende Formate, suchen Referentinnen und Referenten und kümmern uns um die vielen kleinen Schritte, die aus einer Idee eine gute Veranstaltung machen.',
                 'Ob Vortrag, Workshop, Gesprächsrunde, Infoabend oder neues Beteiligungsformat – hier darf mitgedacht, organisiert und ausprobiert werden. Dabei geht es nicht nur um den Ablauf, sondern auch darum, Veranstaltungen so zu gestalten, dass sie verständlich, zugänglich und möglichst angenehm für die Teilnehmenden sind.',
