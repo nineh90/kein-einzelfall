@@ -51,7 +51,8 @@ class Titelbilder
         'kontakt' => 'Alle Ansprechpartner, Landesstellen und Zuständigkeiten auf einen Blick',
         'wissen' => 'Rechte, Anträge und Hilfesysteme verständlich erklärt.',                     // von uns
         'publikationen' => 'Umfragen und Veröffentlichungen des Vereins.',                         // von uns
-        'veranstaltungen' => 'Wissen teilen. Erfahrungen verbinden. Gemeinsam Perspektiven schaffen.',
+        // KEV-317: Taddis neue, kürzere Unterzeile
+        'veranstaltungen' => 'Wissen teilen. Perspektiven erweitern.',
         // KEV-160: Bild von Taddi (Hand heftet Zettel an eine Wand) statt
         // unseres Holzhaus-Modells, gleicher Dateiname.
         'projekte' => 'Woran wir gerade arbeiten.',                                                // von uns

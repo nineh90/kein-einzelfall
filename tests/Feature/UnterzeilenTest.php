@@ -57,4 +57,19 @@ class UnterzeilenTest extends TestCase
     {
         $this->pruefen('gruppen-und-veranstaltungen', 'Austausch verbindet. Wissen stärkt.', 'Connection through exchange. Strength through knowledge.', '2026_11_01_190000_gruppen_und_veranstaltungen_unterzeile');
     }
+
+    /** KEV-317: ersetzt die längere Unterzeile, nur wo die noch steht. */
+    public function test_veranstaltungen(): void
+    {
+        $neu = 'Wissen teilen. Perspektiven erweitern.';
+        $alt = 'Wissen teilen. Erfahrungen verbinden. Gemeinsam Perspektiven schaffen.';
+        $this->assertSame($neu, Page::where('slug', 'veranstaltungen')->where('locale', 'de')->value('untertitel'));
+
+        Page::where('slug', 'veranstaltungen')->where('locale', 'de')->update(['untertitel' => $alt]);
+        (require database_path('migrations/2026_11_02_130000_veranstaltungen_unterzeile.php'))->up();
+        $this->assertSame($neu, Page::where('slug', 'veranstaltungen')->where('locale', 'de')->value('untertitel'));
+
+        $woerterbuch = json_decode(file_get_contents(database_path('seeders/data/uebersetzungen.json')), true);
+        $this->assertSame('Sharing knowledge. Broadening perspectives.', $woerterbuch[$neu]['en']);
+    }
 }
