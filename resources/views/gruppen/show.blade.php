@@ -24,10 +24,12 @@
     // 19:00 Uhr“, Englisch „Wednesday, 14 October 2026, 7:00 pm“.
     $langesDatum = app()->isLocale('en') ? 'l, j F Y, g:i a' : 'l, j. F Y, H:i';
 
+    // KEV-312 (Taddi): alle Gruppen, die eigene an ihrem Platz markiert
+    // („Du bist hier“, wie auf den Vereinsseiten seit KEV-190). Sonst fehlt
+    // in der Reihe eine, und die Liste sieht auf jeder Seite anders aus.
     $andere = \App\Models\Group::veroeffentlicht()->vomTyp('selbsthilfe')
-        ->whereKeyNot($gruppe->getKey())
         ->orderBy('position')->orderBy('name')->get()
-        ->map(fn ($g) => ['label' => $g->name, 'url' => $g->url()])
+        ->map(fn ($g) => ['label' => $g->name, 'url' => $g->url(), 'aktuell' => $g->is($gruppe)])
         ->all();
 @endphp
 

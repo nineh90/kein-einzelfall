@@ -12,10 +12,10 @@
 
     // Die anderen AGs als Weiterführung am Seitenende, mit Nummer: So findet
     // man „die AG 6“, von der jemand erzählt hat.
+    // Seit KEV-312 alle, die eigene markiert, wie bei den Selbsthilfegruppen.
     $andere = \App\Models\Group::veroeffentlicht()->vomTyp('arbeits')
-        ->whereKeyNot($gruppe->getKey())
         ->orderBy('position')->orderBy('name')->get()
-        ->map(fn ($g) => ['label' => trim($g->kuerzel.': '.$g->name, ': '), 'url' => $g->url()])
+        ->map(fn ($g) => ['label' => trim($g->kuerzel.': '.$g->name, ': '), 'url' => $g->url(), 'aktuell' => $g->is($gruppe)])
         ->all();
 
     // Titelbild: das eigene der AG, sonst das der Übersicht /arbeitsgruppen.
