@@ -88,4 +88,10 @@ class UnterzeilenTest extends TestCase
     {
         $this->pruefen('petitionen', 'Gemeinsam Forderungen Gehör verschaffen.', 'Making demands heard, together.', '2026_11_02_150000_petitionen_unterzeile');
     }
+
+    /** KEV-321 */
+    public function test_rueckblick(): void
+    {
+        $this->pruefen('rueckblick', 'Was war, wirkt weiter.', 'What has been lives on.', '2026_11_02_180000_rueckblick_unterzeile');
+    }
 }

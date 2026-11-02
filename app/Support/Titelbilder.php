@@ -117,8 +117,8 @@ class Titelbilder
         // Unterzeile seit KEV-251 aus dem Ticket.
         'fristen' => 'Fristen verstehen. Möglichkeiten erkennen. Rechtzeitig handeln.',
         // KEV-137: Bild von Taddi, aufgeschlagenes Fotoalbum mit Bildern von
-        // Veranstaltungen. Ohne Unterzeile, ihre Einleitung steht darunter.
-        'rueckblick' => null,
+        // Veranstaltungen. Seit KEV-321 mit Taddis Unterzeile.
+        'rueckblick' => 'Was war, wirkt weiter.',
         // KEV-154: Bild von Taddi („3. Abkürzungen sexueller Kontext“),
         // Buchstabenwürfel.
         // KEV-256: Unterzeile aus dem Ticket.
