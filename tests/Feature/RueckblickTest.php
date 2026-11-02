@@ -156,7 +156,8 @@ class RueckblickTest extends TestCase
         $this->assertStringContainsString('src="/img/rueckblick/aus-unserer-sicht.webp', $html);
 
         // Die zwei Präsentationen als PDF
-        $this->assertStringContainsString('Präsentationen vom Fachtag am 30.11.2024', $html);
+        // Seit KEV-322 mit dem Namen des Vereins.
+        $this->assertStringContainsString('Präsentationen vom Fachtag von aus-unserer-sicht e.V. am 30.11.2024', $html);
         foreach (['workshop-sgb-xiv', 'ag-ser'] as $name) {
             $pfad = '/dokumente/2026/10/aus-unserer-sicht-fachtag-2024-'.$name.'.pdf';
             $this->assertStringContainsString('href="'.$pfad, $html, $name);
@@ -282,5 +283,18 @@ class RueckblickTest extends TestCase
 
         $this->assertStringContainsString('Cooperation with aus-unserer-sicht on social compensation law', $html);
         $this->assertStringContainsString('Results of the SGB XIV/SER working group (5 slides, in German)', $html);
+    }
+
+    /** KEV-322: Die Liste nennt, wessen Fachtag es war, auch per Migration. */
+    public function test_fachtag_von_aus_unserer_sicht(): void
+    {
+        $liste = Page::where('slug', 'rueckblick')->where('locale', 'de')->first()
+            ->blocks()->where('typ', 'download_list')->get()
+            ->first(fn ($b) => str_starts_with($b->data['titel'] ?? '', 'Präsentationen vom Fachtag'));
+        $liste->update(['data' => array_replace($liste->data, ['titel' => \Database\Seeders\RueckblickSeeder::AUS_DOKUMENTE_TITEL_BIS_KEV_322])]);
+
+        (require database_path('migrations/2026_11_02_190000_rueckblick_fachtag_titel.php'))->up();
+        $this->assertSame(\Database\Seeders\RueckblickSeeder::AUS_DOKUMENTE_TITEL, $liste->fresh()->data['titel']);
+        $this->get('/rueckblick')->assertSee('Präsentationen vom Fachtag von aus-unserer-sicht e.V. am 30.11.2024');
     }
 }

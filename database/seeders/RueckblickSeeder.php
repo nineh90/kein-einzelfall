@@ -280,7 +280,10 @@ class RueckblickSeeder extends Seeder
     ];
 
     /** Die Präsentationen vom Fachtag, als PDF. Überschrift und Titel von uns. */
-    public const AUS_DOKUMENTE_TITEL = 'Präsentationen vom Fachtag am 30.11.2024';
+    // KEV-322 (Taddi): Der Fachtag war der von aus-unserer-sicht e.V.
+    public const AUS_DOKUMENTE_TITEL = 'Präsentationen vom Fachtag von aus-unserer-sicht e.V. am 30.11.2024';
+
+    public const AUS_DOKUMENTE_TITEL_BIS_KEV_322 = 'Präsentationen vom Fachtag am 30.11.2024';
 
     public const AUS_DOKUMENTE = [
         [

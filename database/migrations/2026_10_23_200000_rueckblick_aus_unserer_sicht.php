@@ -30,7 +30,7 @@ return new class extends Migration
     {
         Page::where('slug', RueckblickSeeder::SLUG)->each(function (Page $seite) {
             $seite->blocks->filter(fn ($b) => ($b->data['bild'] ?? null) === RueckblickSeeder::AUS_BILD
-                || ($b->data['titel'] ?? null) === RueckblickSeeder::AUS_DOKUMENTE_TITEL)
+                || in_array($b->data['titel'] ?? null, [RueckblickSeeder::AUS_DOKUMENTE_TITEL, RueckblickSeeder::AUS_DOKUMENTE_TITEL_BIS_KEV_322], true))
                 ->each->delete();
         });
     }
