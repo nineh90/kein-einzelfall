@@ -27,7 +27,7 @@ class KlartextStattFachspracheTest extends TestCase
     public function test_im_menue_unter_wissen_mit_den_sechs_kategorien(): void
     {
         $wissen = collect(config('navigation.main'))->firstWhere('url', '/wissen');
-        $klartext = collect($wissen['children'])->last();
+        $klartext = collect($wissen['children'])->firstWhere('url', '/klartext-statt-fachsprache');
 
         $this->assertSame('/klartext-statt-fachsprache', $klartext['url']);
         $this->assertSame(self::KATEGORIEN, array_column($klartext['children'], 'url'));

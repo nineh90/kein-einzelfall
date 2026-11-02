@@ -98,9 +98,10 @@ class AttesteTest extends TestCase
 
         // Seit KEV-150/152 Formulare und Fristen zwischen Atteste und den
         // Glossaren, die seit KEV-254 unter „Klartext statt Fachsprache“ stehen.
+        // Seit KEV-323 danach „Vorlagen & Schreiben“.
         $this->assertSame(
-            ['/atteste', '/formulare', '/fristen', '/klartext-statt-fachsprache'],
-            array_slice($urls, -4),
+            ['/atteste', '/formulare', '/fristen', '/klartext-statt-fachsprache', '/vorlagen-und-schreiben'],
+            array_slice($urls, -5),
         );
         $this->assertStringContainsString('href="/atteste"', $this->get('/wissen')->getContent());
     }
@@ -133,7 +134,7 @@ class AttesteTest extends TestCase
         preg_match('/id="weiterlesen-titel".*?<\/ul>/s', $html, $teil);
         preg_match_all('/href="([^"]+)"/', $teil[0] ?? '', $treffer);
 
-        $this->assertSame(['/formulare', '/fristen', '/klartext-statt-fachsprache'], $treffer[1]);
+        $this->assertSame(['/formulare', '/fristen', '/klartext-statt-fachsprache', '/vorlagen-und-schreiben'], $treffer[1]);
     }
 
     /**
