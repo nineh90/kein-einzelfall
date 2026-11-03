@@ -239,6 +239,7 @@
         :spalten="$kontext->istBereichsUebersicht()['spalten'] ?? 3"
         :spaltenweise="isset(($kontext->istBereichsUebersicht() ?? $kontext->bereich())['kacheln'])"
         :auf="$weiterlesenAuf"
+        :bilder="(bool) $kontext->istBereichsUebersicht()"
         :titel="$kontext->istVereinsbereich() ? __('rahmen.weiterlesen.mehr_ueber_verein') : null"
         :bereich="$kontext->istBereichsUebersicht() ? $page->titel : $kontext->bereichName()" />
 

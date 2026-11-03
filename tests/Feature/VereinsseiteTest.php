@@ -230,6 +230,22 @@ class VereinsseiteTest extends TestCase
      * KEV-176: Die Kacheln „Mehr über …“ als 3 × 3, spaltenweise in Taddis
      * Reihenfolge, ohne Gremium UKFB.
      */
+    /** KEV-265: Auf der Übersicht die Unterseiten als Bildkacheln (ab sm), auf den Unterseiten die Leiste. */
+    public function test_uebersicht_mit_bildkacheln(): void
+    {
+        $html = $this->get('/verein')->assertOk()->getContent();
+        $aside = substr($html, strpos($html, 'id="weiterlesen-titel"'));
+        $aside = substr($aside, 0, strpos($aside, '</aside>'));
+        $kacheln = substr($aside, strpos($aside, '<ul class="hidden gap-4 sm:grid'));
+        $kacheln = substr($kacheln, 0, strpos($kacheln, '</ul>'));
+        $this->assertSame(9, substr_count($kacheln, '<img '));
+        $this->assertStringContainsString('Die Menschen hinter KE!N EINZELFALL e.V.', $kacheln);
+
+        $satzung = $this->get('/satzung')->getContent();
+        $leiste = substr($satzung, strpos($satzung, 'id="weiterlesen-titel"'));
+        $this->assertStringNotContainsString('<ul class="hidden gap-4 sm:grid', substr($leiste, 0, strpos($leiste, '</aside>')));
+    }
+
     public function test_kacheln_in_taddis_reihenfolge_ohne_ukfb(): void
     {
         $html = $this->get('/verein')->assertOk()->getContent();
@@ -237,11 +253,13 @@ class VereinsseiteTest extends TestCase
         $aside = substr($aside, 0, strpos($aside, '</aside>'));
 
         preg_match_all('#<a href="(/[^"]+)"#', $aside, $treffer);
-        $this->assertSame([
+        $reihenfolge = [
             '/ueber-uns-vorstand-und-team', '/satzung', '/mitgliedschaft',
             '/kinderkodex', '/istanbul-konvention', '/schutz-und-wertekonzept',
             '/red-flags', '/beschwerdemanagement', '/taetigkeits-und-jahresberichte',
-        ], $treffer[1]);
+        ];
+        // Seit KEV-265 zweimal: Bildkacheln ab sm, Liste auf dem Handy.
+        $this->assertSame([...$reihenfolge, ...$reihenfolge], $treffer[1]);
         $this->assertStringContainsString('lg:grid-flow-col lg:grid-rows-3', $aside);
 
         // Auch auf den Unterseiten keine Kachel zum Gremium.

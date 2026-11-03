@@ -10,6 +10,10 @@
     // dann die mittlere (KEV-176, `kacheln` am Bereich). In dieser Reihenfolge
     // stehen die Kacheln auch im Quelltext und auf dem Handy.
     'spaltenweise' => false,
+    // KEV-265 (Taddi: „dass die Bilder als Kacheln zu sehen sind“): auf den
+    // Übersichten der Bereiche die Seiten mit Titelbild und Unterzeile, wie
+    // auf „Raum für Ungesagtes“. Unterseiten behalten die schlichte Leiste.
+    'bilder' => false,
 ])
 
 @php
@@ -40,8 +44,29 @@
                     : __('rahmen.weiterlesen.auch_interessant')) }}
             </h2>
 
+            @if ($bilder)
+                {{-- Reihenfolge und Spalten wie bei der Leiste (KEV-176
+                     spaltenweise 3 × 3, KEV-225 Paare). --}}
+                {{-- Auf dem Handy die kompakte Liste darunter: neun Bildkacheln
+                     untereinander wären über 3.000 px lang. --}}
+                @php($kacheln = \App\Support\Unterseiten::zuMenuepunkten($seiten))
+                <ul @class([
+                    'hidden gap-4 sm:grid sm:grid-cols-2',
+                    'lg:grid-cols-3' => $spalten !== 2,
+                    'lg:grid-flow-col '.$zeilenKlasse => $spaltenweise && $spalten !== 2 && $zeilenKlasse,
+                ])>
+                    @foreach ($kacheln as $kachel)
+                        <li class="flex min-w-0">
+                            {{-- In der Zweierreihe flacher, sonst wird jede Kachel so hoch wie der Bildschirm. --}}
+                            <x-ui.seitenkachel :kachel="$kachel" :innen="$auf === 'card' ? 'bg-cream' : 'bg-card'"
+                                :format="$spalten === 2 ? 'aspect-[5/2]' : 'aspect-[3/2]'" />
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             <ul @class([
                 'grid gap-3 sm:grid-cols-2',
+                'sm:hidden' => $bilder,
                 'lg:grid-cols-3' => $spalten !== 2,
                 'lg:grid-flow-col '.$zeilenKlasse => $spaltenweise && $spalten !== 2 && $zeilenKlasse,
             ])>

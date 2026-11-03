@@ -3164,3 +3164,20 @@ Kategorie und ein Übersichtsbild.
 - Offen (Checkliste A16): „Antrag auf Teilnahme per Video“ fehlt, die
   Datei im Drive ist ein Video ohne Inhalt; Einleitung der Kategorien von
   uns; die Vorlagen selbst sind deutsch.
+
+## 66. Bildkacheln auf den Bereichsübersichten (KEV-265, 03.11.2026)
+
+Taddi über „Raum für Ungesagtes“: „dass die Bilder als Kacheln zu sehen
+sind“, auch auf anderen Seiten. Die Weiterführung am Seitenende
+(`x-layout.weiterlesen`) zeigt auf Bereichsübersichten (`/verein`,
+`/gruppen-und-veranstaltungen`, `/kontakt`) die Seiten jetzt als
+`x-ui.seitenkachel` mit Titelbild und Unterzeile (`bilder`), in derselben
+Reihenfolge und Spaltenzahl wie die Leiste (Verein 3 × 3 spaltenweise,
+KEV-176; Gruppen & Veranstaltungen in Paaren, KEV-225, dort flacher
+`aspect-[5/2]`). Daten aus `Unterseiten::zuMenuepunkten()`; ohne eigenes
+Bild (/aktuelles) der Platzhalter.
+
+Auf dem Handy bleibt die kompakte Knopfliste (`sm:hidden`): neun
+Bildkacheln untereinander wären über 3.000 px lang. Unterseiten behalten
+die Leiste. Wissen hat Taddis Knöpfe neben dem Text (KEV-242), Raum für
+Ungesagtes, Projekte und Klartext ihre Kacheln schon als Baustein.

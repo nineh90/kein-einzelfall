@@ -55,6 +55,22 @@ class Unterseiten
             ->all());
     }
 
+    /**
+     * KEV-265: Kacheln zu Menüpunkten, die schon aufgelöst vorliegen (etwa
+     * aus Seitenkontext::geschwister()), in deren Reihenfolge.
+     *
+     * @param  list<array<string, mixed>>  $kinder
+     */
+    public static function zuMenuepunkten(array $kinder): array
+    {
+        // Ohne eigenes Bild (/aktuelles hat keinen Seitendatensatz) der
+        // Platzhalter: Sonst stünde eine Kachel ohne Bild zwischen den anderen.
+        return array_map(
+            fn ($k) => blank($k['bild'] ?? null) ? array_replace($k, ['bild' => Titelbilder::PLATZHALTER]) : $k,
+            self::kacheln(array_values(array_filter($kinder, fn ($k) => isset($k['schluessel'])))),
+        );
+    }
+
     /** @param  list<array<string, mixed>>  $kinder  aufgelöste Menüpunkte */
     private static function kacheln(array $kinder): array
     {
