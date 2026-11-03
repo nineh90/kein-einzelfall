@@ -374,6 +374,8 @@ class Titelbilder
         self::ORDNER.'/gruppe-diskret-unter-uns.webp' => 55,
         self::ORDNER.'/ehrenamtsmessen.webp' => 55,
         self::ORDNER.'/kontakt.webp' => 60,
+        // KEV-325: Taddis neues Bild, Münzstapel links zwischen 43 und 82 %
+        self::ORDNER.'/spenden.webp' => 65,
         self::ORDNER.'/petitionen.webp' => 40,
         self::ORDNER.'/presse.webp' => 40,
     ];
