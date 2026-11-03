@@ -186,4 +186,21 @@ class KontaktbereichTest extends TestCase
         $this->assertStringContainsString('id="hilfe-titel"', $html);
         $this->assertStringContainsString('id="formular-titel"', $html);
     }
+
+    /** KEV-267: Presse ist presse@, auch per Migration und auf Englisch. */
+    public function test_presse_adresse(): void
+    {
+        $html = $this->get('/kontakt')->assertOk()->getContent();
+        $this->assertStringContainsString('presse@kein-einzelfall.de', $html);
+        $this->assertStringNotContainsString('pressekontakt@', $html);
+
+        $seite = \App\Models\Page::where('slug', 'kontakt')->where('locale', 'de')->first();
+        $block = $seite->blocks()->where('typ', 'text')->get()->first(fn ($b) => ($b->data['titel'] ?? null) === 'Sachgebietsaufteilung');
+        $block->update(['data' => array_replace($block->data, ['absaetze' => array_map(
+            fn ($a) => $a === \Database\Seeders\KontaktSeiteSeeder::PRESSE ? \Database\Seeders\KontaktSeiteSeeder::PRESSE_ALT : $a, $block->data['absaetze'])])]);
+
+        (require database_path('migrations/2026_11_03_100000_kontakt_presse_adresse.php'))->up();
+        $this->assertContains(\Database\Seeders\KontaktSeiteSeeder::PRESSE, $block->fresh()->data['absaetze']);
+        $this->assertNotContains(\Database\Seeders\KontaktSeiteSeeder::PRESSE_ALT, $block->fresh()->data['absaetze']);
+    }
 }

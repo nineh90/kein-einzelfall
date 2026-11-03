@@ -52,6 +52,11 @@ class KontaktSeiteSeeder extends Seeder
     public const KASSENWARTIN = 'Kassenwartin: Petra Hildebrandt, finanzen@kein-einzelfall.de';
 
     /** KEV-270: Taddis Reihenfolge, Anfragen zuerst. */
+    /** Die Zeile der Altseite bis KEV-267. */
+    public const PRESSE_ALT = 'Presse & Öffentlichkeitsarbeit: pressekontakt@kein-einzelfall.de';
+
+    public const PRESSE = 'Presse & Öffentlichkeitsarbeit: presse@kein-einzelfall.de';
+
     public const SACHGEBIETE = [
         'Anfragen: kontakt@kein-einzelfall.de',
         'Verwaltung: verwaltung@kein-einzelfall.de',
@@ -60,7 +65,8 @@ class KontaktSeiteSeeder extends Seeder
         'Arbeitsgruppen: arbeitsgruppe@kein-einzelfall.de',
         'Veranstaltungen: veranstaltung@kein-einzelfall.de',
         'Akten & Dokumente: dokumente@kein-einzelfall.de',
-        'Presse & Öffentlichkeitsarbeit: pressekontakt@kein-einzelfall.de',
+        // KEV-267: Taddi bestätigt presse@, pressekontakt@ gibt es nicht.
+        'Presse & Öffentlichkeitsarbeit: presse@kein-einzelfall.de',
         'Datenschutz: datenschutz@kein-einzelfall.de',
         'Beschwerdemanagement: beschwerdemanagement@kein-einzelfall.de',
         'Opferbeauftragter: opferbeauftragter@kein-einzelfall.de',
@@ -96,6 +102,14 @@ class KontaktSeiteSeeder extends Seeder
                     fn ($a) => $a === self::KASSENWARTIN_ALT ? self::KASSENWARTIN : $a,
                     $absaetze,
                 );
+            }
+
+            // KEV-267: pressekontakt@ war falsch, überall in der Liste.
+            // Auf $data, nicht $absaetze: Oben kann schon die neue Einleitung
+            // gesetzt sein.
+            if (is_array($data['absaetze'] ?? null)) {
+                $data['absaetze'] = array_map(fn ($a) => $a === self::PRESSE_ALT ? self::PRESSE : $a, $data['absaetze']);
+                $absaetze = $data['absaetze'];
             }
 
             // Dieselben Zeilen in anderer Reihenfolge: nur dann umsortieren.
