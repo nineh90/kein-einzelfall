@@ -59,10 +59,36 @@ class FormulareSeeder extends Seeder
         '*Unterschrift:* Vollmacht und Schweigepflichtentbindung brauchen deine eigenhändige Unterschrift, sonst '
             .'nehmen Behörden, Ärztinnen und Ärzte sie oft nicht an. Fülle sie am PC aus, drucke sie aus, '
             .'unterschreibe und schick uns einen Scan oder ein Foto.',
-        '*Schicken:* per E-Mail an *kontakt@kein-einzelfall.de* oder per Post an KE!N EINZELFALL e.V., '
-            .'Schiffbeker Höhe 30, 22119 Hamburg. In den Formularen stehen oft Gesundheitsdaten, und eine E-Mail '
-            .'ist nicht verschlüsselt. Wenn dir das lieber ist, nimm die Post.',
+        self::SCHICKEN,
     ];
+
+    /*
+     * KEV-250: Den Mitgliedsantrag an verwaltung@ (Taddi, 04.11.2026), wie
+     * auf /mitgliedschaft. Bis dahin hieß es für alle Formulare kontakt@.
+     */
+    public const SCHICKEN = '*Schicken:* den Mitgliedsantrag per E-Mail an *verwaltung@kein-einzelfall.de*, '
+        .'alle anderen Formulare an *kontakt@kein-einzelfall.de*. Oder per Post an KE!N EINZELFALL e.V., '
+        .'Schiffbeker Höhe 30, 22119 Hamburg. In den Formularen stehen oft Gesundheitsdaten, und eine E-Mail '
+        .'ist nicht verschlüsselt. Wenn dir das lieber ist, nimm die Post.';
+
+    public const SCHICKEN_ALT = '*Schicken:* per E-Mail an *kontakt@kein-einzelfall.de* oder per Post an KE!N '
+        .'EINZELFALL e.V., Schiffbeker Höhe 30, 22119 Hamburg. In den Formularen stehen oft Gesundheitsdaten, '
+        .'und eine E-Mail ist nicht verschlüsselt. Wenn dir das lieber ist, nimm die Post.';
+
+    /** KEV-250: den alten Satz ersetzen, nur wenn er noch genau so dasteht. */
+    public static function schickenAktualisieren(): void
+    {
+        $seite = Page::where('slug', self::SLUG)->where('locale', 'de')->first();
+        $block = $seite?->blocks()->where('typ', 'text')->get()
+            ->first(fn ($b) => in_array(self::SCHICKEN_ALT, $b->data['absaetze'] ?? [], true));
+
+        if (! $block) {
+            return;
+        }
+
+        $absaetze = array_map(fn ($a) => $a === self::SCHICKEN_ALT ? self::SCHICKEN : $a, $block->data['absaetze']);
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $absaetze])]);
+    }
 
     /**
      * Die Listen. Taddis Dateien, im Ordner public/dokumente/2026/10. Die

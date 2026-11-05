@@ -61,6 +61,32 @@ class FormulareTest extends TestCase
         $this->assertStringContainsString('Jedes Formular lässt sich auch ausdrucken und von Hand ausfüllen.', $html);
         $this->assertStringContainsString('brauchen deine eigenhändige Unterschrift', $html);
         $this->assertStringContainsString('href="mailto:kontakt@kein-einzelfall.de"', $html);
+        // KEV-250: der Mitgliedsantrag an verwaltung@ (Taddi)
+        $this->assertStringContainsString('den Mitgliedsantrag per E-Mail an <strong class="font-semibold text-ink"><a href="mailto:verwaltung@kein-einzelfall.de"', $html);
+    }
+
+    /** KEV-250: bestehende Seite mit dem alten Satz (alles an kontakt@) bekommt den neuen, ein geänderter bleibt. */
+    public function test_mitgliedsantrag_an_verwaltung_nachtraeglich(): void
+    {
+        $block = Page::where('slug', 'formulare')->where('locale', 'de')->sole()
+            ->blocks()->get()->first(fn ($b) => in_array(FormulareSeeder::SCHICKEN, $b->data['absaetze'] ?? [], true));
+        $alt = array_map(fn ($a) => $a === FormulareSeeder::SCHICKEN ? FormulareSeeder::SCHICKEN_ALT : $a, $block->data['absaetze']);
+        $block->update(['data' => array_replace($block->data, ['absaetze' => $alt])]);
+        $this->seed(UebersetzungenSeeder::class);
+
+        $migration = require database_path('migrations/2026_11_05_110000_formulare_mitgliedsantrag_an_verwaltung.php');
+        $migration->up();
+
+        $this->assertContains(FormulareSeeder::SCHICKEN, $block->fresh()->data['absaetze']);
+        $this->assertNotContains(FormulareSeeder::SCHICKEN_ALT, $block->fresh()->data['absaetze']);
+        // Die englische Fassung baut die Migration nur mit Altseite neu; hier von Hand.
+        $this->seed(UebersetzungenSeeder::class);
+        $this->get('/en/formulare')->assertSee('the membership application by email to', false);
+
+        // Vom Verein geändert: bleibt.
+        $block->update(['data' => array_replace($block->data, ['absaetze' => ['Eigener Text']])]);
+        FormulareSeeder::schickenAktualisieren();
+        $this->assertSame(['Eigener Text'], $block->fresh()->data['absaetze']);
     }
 
     /** Die als ausfüllbar bezeichneten PDFs haben wirklich Formularfelder, die übrigen nicht. */
