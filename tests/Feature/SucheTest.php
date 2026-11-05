@@ -58,7 +58,8 @@ class SucheTest extends TestCase
             'Gruppe, umschrieben' => ['mit anderen reden', '/selbsthilfegruppen'],
             'Mitgliedschaft' => ['mitglied werden', '/mitgliedschaft'],
             'Spenden' => ['spenden', '/spenden'],
-            'Rente, umschrieben' => ['rente weil ich nicht arbeiten kann', '/erwerbsminderungsrente'],
+            // Bis KEV-246 /erwerbsminderungsrente, die ist offline.
+            'Rente, umschrieben' => ['rente weil ich nicht arbeiten kann', '/sozialrecht-und-hilfesystem#erwerbsminderung'],
             'FSM ausgeschrieben' => ['fonds sexueller missbrauch', '/fsm-erweitertes-hilfesystem'],
             'Kontakt, in Laienworten' => ['kontakt aufnehmen', '/anfragen'],
             'Istanbul-Konvention' => ['istanbul konvention', '/istanbul-konvention'],

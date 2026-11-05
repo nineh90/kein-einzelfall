@@ -5,7 +5,9 @@ namespace Tests\Feature;
 use App\Http\Middleware\SchraegstrichEntfernen;
 use App\Models\Page;
 use App\Models\Redirect;
+use Database\Seeders\AlteSeitenZurueckziehenSeeder;
 use Database\Seeders\AltseiteSeeder;
+use Database\Seeders\UebersetzungenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -82,7 +84,7 @@ class SeitenUndRedirectsTest extends TestCase
                 ->assertDontSee('Mehr zu „Gemeinnütziger Verein“');
         }
 
-        $this->get('/das-hilfesystem')->assertOk()->assertDontSee('Mehr über KE!N EINZELFALL e.V.');
+        $this->get('/fsm-erweitertes-hilfesystem')->assertOk()->assertDontSee('Mehr über KE!N EINZELFALL e.V.');
     }
 
     public function test_seiten_ohne_vollertitel_bekommen_einen_echten_titel(): void
@@ -166,9 +168,12 @@ class SeitenUndRedirectsTest extends TestCase
          * KEV-254 die Übersicht „Klartext statt Fachsprache“.
          *
          * KEV-323: neu „Vorlagen & Schreiben“ mit zwölf Kategorien.
+         *
+         * KEV-246: sechs alte Seiten zurückgezogen (Entwurf), siehe
+         * AlteSeitenZurueckziehenSeeder.
          */
         $this->assertSame(75, Page::count());
-        $this->assertSame(1, Page::whereNull('published_at')->count());
+        $this->assertSame(1 + count(AlteSeitenZurueckziehenSeeder::SEITEN), Page::whereNull('published_at')->count());
         $this->assertSame(5, Page::where('ungeprueft', true)->count());
 
         // Ungeprüfter Text gehört nicht in eine Suchmaschine: Wer ihn über
@@ -294,17 +299,54 @@ class SeitenUndRedirectsTest extends TestCase
      */
     public function test_weiterleitung_auf_einen_entwurf_dreht_sich_nicht_im_kreis(): void
     {
-        $this->assertNotNull(Redirect::where('von', 'das-hilfesystem/')->first());
-        Page::where('slug', 'das-hilfesystem')->update(['published_at' => null]);
+        // Seit KEV-246 das Beispiel FSM: /das-hilfesystem/ leitet jetzt weiter.
+        $this->assertSame('/fsm-erweitertes-hilfesystem', Redirect::where('von', 'fsm-erweitertes-hilfesystem/')->value('nach'));
+        Page::where('slug', 'fsm-erweitertes-hilfesystem')->update(['published_at' => null]);
 
-        $this->get('/das-hilfesystem')->assertNotFound();
-        $this->get('/das-hilfesystem/')->assertNotFound();
+        $this->get('/fsm-erweitertes-hilfesystem')->assertNotFound();
+        $this->get('/fsm-erweitertes-hilfesystem/')->assertNotFound();
+        $this->get('/erwerbsminderungsrente')->assertRedirect('/vorlagen-reha-und-erwerbsminderung');
+    }
+
+    /**
+     * KEV-246: Taddi will die alten Seiten unter „Wissen“ nicht mehr auf der
+     * Website. Offline, aber nicht gelöscht, und ihre Adressen führen weiter.
+     */
+    public function test_alte_seiten_sind_zurueckgezogen_und_leiten_weiter(): void
+    {
+        // Englisch freischalten; Übersetzungen entstehen nur für veröffentlichte Seiten.
+        $this->seed(UebersetzungenSeeder::class);
+        $this->assertFalse(Page::where('locale', 'en')->whereIn('slug', array_keys(AlteSeitenZurueckziehenSeeder::SEITEN))->exists());
+
+        foreach (AlteSeitenZurueckziehenSeeder::SEITEN as $slug => $ziel) {
+            $this->assertNotNull(Page::where('slug', $slug)->where('locale', 'de')->first(), $slug);
+            $this->assertFalse(Page::veroeffentlicht()->where('slug', $slug)->exists(), $slug);
+
+            $this->get('/'.$slug)->assertStatus(302)->assertRedirect($ziel);
+            $this->get('/'.$slug.'/')->assertStatus(302)->assertRedirect($ziel);
+            $this->get('/en/'.$slug)->assertRedirect('/en'.$ziel);
+        }
+
+        $this->assertSame('/veranstaltungen#reihe-dialog-wissen', AlteSeitenZurueckziehenSeeder::SEITEN['das-hilfesystem']);
+        $this->get('/veranstaltungen')->assertSee('id="reihe-dialog-wissen"', false);
+        $this->get('/vorlagen-reha-und-erwerbsminderung')->assertOk();
+
+        // Die FSM-Seite bleibt: Stellungnahmen des Vereins, der Rückblick verlinkt sie.
         $this->get('/fsm-erweitertes-hilfesystem')->assertOk();
+
+        // Nicht in der Sitemap.
+        $sitemap = $this->get('/sitemap.xml')->getContent();
+        $this->assertStringNotContainsString('/das-hilfesystem<', $sitemap);
+        $this->assertStringNotContainsString('/erwerbsminderungsrente<', $sitemap);
+
+        // Ein zweiter Lauf ändert nichts.
+        $this->assertSame(0, AlteSeitenZurueckziehenSeeder::zurueckziehen());
     }
 
     public function test_jede_seite_hat_genau_eine_h1(): void
     {
-        foreach (Page::all() as $seite) {
+        // Veröffentlichte: Zurückgezogene leiten seit KEV-246 weiter.
+        foreach (Page::veroeffentlicht()->get() as $seite) {
             $html = $this->get($seite->pfad())->getContent();
             $this->assertSame(
                 1,
@@ -319,16 +361,18 @@ class SeitenUndRedirectsTest extends TestCase
         // Stichproben aus verschiedenen Seiten — nichts davon ist von uns formuliert.
         // /verein nicht mehr: Dort steht seit KEV-173 Taddis neuer Text.
         $this->get('/wissen')->assertOk();
-        $this->get('/erwerbsminderungsrente')->assertSee('Infoblatt', false);
+        // Seit KEV-246 die FSM-Seite statt der Erwerbsminderungsrente.
+        $this->get('/fsm-erweitertes-hilfesystem')->assertSee('Infoblatt', false);
     }
 
     public function test_dokumente_werden_als_downloadliste_ausgegeben(): void
     {
-        // /erwerbsminderungsrente/ hat 12 verlinkte PDFs.
-        $html = $this->get('/erwerbsminderungsrente')->getContent();
+        // /fsm-erweitertes-hilfesystem/ hat 10 verlinkte PDFs (bis KEV-246
+        // hier /erwerbsminderungsrente mit 12).
+        $html = $this->get('/fsm-erweitertes-hilfesystem')->getContent();
 
         $this->assertStringContainsString('PDF-Datei', $html);
-        $this->assertGreaterThanOrEqual(12, substr_count($html, 'download'));
+        $this->assertGreaterThanOrEqual(10, substr_count($html, 'download'));
     }
 
     public function test_lange_seiten_bekommen_sprungmarken_kurze_nicht(): void

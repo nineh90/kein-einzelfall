@@ -605,11 +605,21 @@ console.log('\nSpendenhinweis wartet auf die Trigger-Warnung')
 // nicht mehr auf der Startseite, sondern auf einzelnen Unterseiten
 // (UnterstuetzungsbandSeeder), seit KEV-175 und KEV-189 nicht mehr auf
 // /verein und Vorstand und Team.
+//
+// Seit KEV-246 ist auch „im Dialog“ offline (leitet auf /veranstaltungen),
+// das Band steht damit auf keiner veröffentlichten Seite mehr. Die Prüfung
+// bleibt für den Tag, an dem es wieder eine bekommt; bis dahin übersprungen.
 
 console.log('\nVereinsname im Hinweisband')
 {
     for (const breite of [320, 390, 768, 1400]) {
         const seite = await oeffnen({ breite, pfad: '/kein-einzelfall-im-dialog' })
+
+        if (!new URL(seite.url()).pathname.endsWith('/kein-einzelfall-im-dialog')) {
+            console.log('  – übersprungen: Seite offline (KEV-246), Band auf keiner veröffentlichten Seite')
+            await seite.context().close()
+            break
+        }
 
         const mass = await seite.evaluate(() => {
             const schrift = document.querySelector('[data-wasserzeichen]')

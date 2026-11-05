@@ -676,6 +676,10 @@ class AltseiteSeeder extends Seeder
         // Vorlagen & Schreiben unter Wissen (KEV-323/324).
         $this->call(VorlagenSeeder::class);
 
+        // KEV-246: alte Seiten unter „Wissen“ und „im Dialog“ offline, mit
+        // Weiterleitung. Erst nach Veranstaltungen und Vorlagen, die Ziele.
+        AlteSeitenZurueckziehenSeeder::zurueckziehen();
+
         // Die Satzung nach Taddis Tickets (KEV-194 ff.).
         $this->call(SatzungsseiteSeeder::class);
 

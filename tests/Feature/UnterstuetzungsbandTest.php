@@ -24,6 +24,10 @@ class UnterstuetzungsbandTest extends TestCase
 
     public function test_ausgewaehlte_unterseiten_enden_mit_dem_band(): void
     {
+        // Die einzige Seite, „KE!N EINZELFALL im Dialog“, ist seit KEV-246
+        // offline. Das Band bleibt dort; geprüft wird, wie es aussähe.
+        Page::whereIn('slug', UnterstuetzungsbandSeeder::SEITEN)->update(['published_at' => now()]);
+
         foreach (UnterstuetzungsbandSeeder::SEITEN as $slug) {
             $typen = $this->seite($slug)->blocks()->orderBy('position')->pluck('typ')->all();
 
@@ -68,6 +72,8 @@ class UnterstuetzungsbandTest extends TestCase
         foreach (UnterstuetzungsbandSeeder::SEITEN as $slug) {
             $this->seite($slug)->blocks()->where('typ', 'cta_band')->delete();
         }
+        // Damals veröffentlicht, seit KEV-246 offline (siehe oben).
+        Page::whereIn('slug', UnterstuetzungsbandSeeder::SEITEN)->update(['published_at' => now()]);
 
         $migration = require database_path('migrations/2026_10_18_110000_unterstuetzungsband_auf_unterseiten.php');
         $migration->up();

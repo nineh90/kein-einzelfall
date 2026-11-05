@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Page;
 use App\Models\PageBlock;
+use Database\Seeders\AlteSeitenZurueckziehenSeeder;
 use Database\Seeders\AltseiteSeeder;
 use Database\Seeders\UebersetzungenSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -411,6 +412,10 @@ class SeitengestaltungTest extends TestCase
     /** Prüfung der Firma (08.10.2026): Beim Import verlorene Knöpfe, Links und Beschriftungen. */
     public function test_verlorene_inhalte_der_altseite_sind_wieder_da(): void
     {
+        // Die Abende von „im Dialog“ sind seit KEV-246 offline, ihr Inhalt
+        // bleibt für später (Taddi). Für die Prüfung wieder sichtbar.
+        Page::whereIn('slug', array_keys(AlteSeitenZurueckziehenSeeder::SEITEN))->update(['published_at' => now()]);
+
         $this->get('/das-hilfesystem')
             ->assertSee('href="https://events.teams.microsoft.com/event/e54c4ba0-16e3-495a-97af-6a56d0c521ee@f30279d7-3481-4b91-a979-f9430f7afde1"', false)
             ->assertSee('Jetzt anmelden')
@@ -949,7 +954,8 @@ class SeitengestaltungTest extends TestCase
 
         // Inhaltsseiten dagegen schon, mit Taddis Text (KEV-71, seit KEV-177
         // der neue mit Links auf Gruppen, Projekte und Ungesagtes).
-        $this->get('/erwerbsminderungsrente')
+        // Seit KEV-246 FSM statt der zurückgezogenen Erwerbsminderungsrente.
+        $this->get('/fsm-erweitertes-hilfesystem')
             ->assertSee('Du möchtest uns etwas mitteilen, Dich einbringen oder einfach Teil von KE!N EINZELFALL sein?')
             ->assertSee('<a href="/selbsthilfegruppen" class="text-green-deep underline">Selbsthilfegruppe</a>', false)
             ->assertSee('<a href="/raum-fuer-ungesagtes" class="text-green-deep underline">Ungesagtes</a>', false)

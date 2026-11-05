@@ -43,8 +43,8 @@ class WissenTest extends TestCase
     }
 
     /**
-     * KEV-239: Menü in Taddis Reihenfolge. Die alten Seiten bleiben
-     * erreichbar, vier davon verlinkt „KE!N EINZELFALL im Dialog“.
+     * KEV-239: Menü in Taddis Reihenfolge. Die alten Seiten sind seit
+     * KEV-246 offline (AlteSeitenZurueckziehenSeeder), bis auf FSM.
      */
     public function test_nur_noch_taddis_kategorien(): void
     {
@@ -57,9 +57,9 @@ class WissenTest extends TestCase
             array_map(fn ($k) => [$k['label'], $k['url']], $wissen['children']),
         );
 
-        $this->get('/kein-einzelfall-im-dialog')->assertSee('href="/das-hilfesystem"', false);
-        $this->get('/das-hilfesystem')->assertOk();
-        $this->get('/erwerbsminderungsrente')->assertOk();
+        $this->get('/das-hilfesystem')->assertRedirect('/veranstaltungen#reihe-dialog-wissen');
+        $this->get('/erwerbsminderungsrente')->assertRedirect('/vorlagen-reha-und-erwerbsminderung');
+        $this->get('/fsm-erweitertes-hilfesystem')->assertOk();
 
         $menue = $this->get('/wissen')->getContent();
         $this->assertStringNotContainsString('href="/erwerbsminderungsrente"', $menue);

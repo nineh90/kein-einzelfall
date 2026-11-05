@@ -898,17 +898,16 @@ Es läuft, aber an diesen Stellen fehlt eine Entscheidung des Vereins.
   „Herunterladen“. Gilt für alle Dokumentenlisten der Website.
 - [x] **Atteste / „Mehr zu ‚Wissen‘“ (KEV-246):** beantwortet mit KEV-239,
   siehe unten.
-- [ ] **Wissen (KEV-239), Rückfrage offen.** Im Menü stehen nur noch Taddis
-  Kategorien in ihrer Reihenfolge: Atteste, Formulare und Download, Fristen in
-  Anträgen und Verfahren, Klartext statt Fachsprache. „Vorlagen/Schreiben“
-  kommt dazu, sobald es die Seite gibt. Die sieben alten Seiten sind **nicht
-  mehr im Menü, aber noch online**: Das Hilfesystem, Trauma, Bindung und
-  Beziehung, Traumafolgestörungen verstehen und Bürokratie-Labyrinth sind die
-  Abende von „KE!N EINZELFALL im Dialog“ und dort verlinkt (25.11.2026 mit
-  Anmeldung), auf FSM verweist der Rückblick wegen der Widerspruchsvorlagen.
-  Offen: Sollen Erwerbsminderungsrente und Unterstützung ganz offline? Und
-  sollen die vier Abende unter „Projekte“ hängen? Offline nehmen geht im
-  Panel über „Veröffentlicht am“ leeren.
+- [x] **Wissen (KEV-239/246), beantwortet.** Im Menü stehen nur Taddis
+  Kategorien. Taddi am 04.11.2026 zu den alten Seiten: „die sollen garnicht
+  auf die seite […] wenn ich viel zeit habe, schau ich mir das an.“ Seit
+  05.11.2026 offline (Entwurf, im Panel weiter da): die vier Abende von „im
+  Dialog“ und die alte Übersicht der Reihe (führen auf
+  `/veranstaltungen#reihe-dialog-wissen`), Erwerbsminderungsrente (führt auf
+  „Reha & Erwerbsminderung“ unter Vorlagen). Weiterleitungen vorübergehend
+  (302), damit die Seiten zurückkommen können. Offen: FSM, siehe A17.
+  „Unterstützung“ (`/unterstuetzung`) war nicht Teil der Frage und ist noch
+  online.
 - [x] **Wissen (KEV-241):** Kasten „Urteile zum Schwerbehindertenrecht“
   (REHADAT) von `/wissen` entfernt, siehe A12.
 - [x] **Wissen (KEV-242):** Die Kategorien stehen als Knöpfe rechts neben dem
@@ -1162,9 +1161,8 @@ die Termine mit Datum sind als Veranstaltungen angelegt. Offen:
 - **Trauma verstehen (1. Quartal 2027) und Gutachten (3. Quartal 2027):**
   stehen als „geplant“ bei ihrer Reihe. Sobald es ein Datum gibt, als
   Veranstaltung anlegen und bei der Reihe löschen.
-- **/kein-einzelfall-im-dialog:** Die alte Seite der Reihe gibt es noch
-  (nicht im Menü), mit Links auf die Seiten der Altseite. Löschen oder auf
-  /veranstaltungen#reihe-dialog-wissen weiterleiten?
+- [x] **/kein-einzelfall-im-dialog:** seit KEV-246 offline, leitet auf
+  /veranstaltungen#reihe-dialog-wissen weiter.
 
 ### A16 · Vorlagen & Schreiben (KEV-323/324, 02.11.2026)
 
@@ -1181,6 +1179,17 @@ Word-Dateien zum Anpassen. Offen:
   beiden anderen Spalten.
 - **Englisch:** Seiten und Gruppen sind übersetzt, die Vorlagen selbst
   bleiben deutsch (für deutsche Behörden).
+
+### A17 · FSM-Seite (KEV-246, 05.11.2026)
+
+Taddi will die alten Seiten unter „Wissen“ nicht mehr auf der Website. Eine
+davon haben wir trotzdem stehen lassen: **„FSM – Erweitertes Hilfesystem“**
+(`/fsm-erweitertes-hilfesystem`). Dort stehen keine allgemeinen Infos,
+sondern die eigenen Stellungnahmen des Vereins, Musterwidersprüche und der
+Schriftwechsel mit dem Bundesministerium (10 PDFs). Der Rückblick verlinkt
+darauf („Ablehnungsbescheid bekommen?“). **Frage an Taddi:** Soll die Seite
+bleiben (nicht im Menü, nur über den Rückblick) oder auch offline? Dann
+bräuchte der Hinweis im Rückblick ein neues Ziel.
 
 ## B. Technisch vor dem Go-Live (Kevin)
 
